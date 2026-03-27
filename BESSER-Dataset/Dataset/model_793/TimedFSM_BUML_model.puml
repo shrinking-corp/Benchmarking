@@ -1,0 +1,21 @@
+@startuml
+class timedfsm::FSM {
+}
+class timedfsm::State {
+  + name : str
+  + waitingTime : int
+}
+class timedfsm::Transition {
+  + input : str
+  + output : str
+  + waitingTime : int
+}
+timedfsm::FSM "1..1" -- "1..9999" timedfsm::State : finalState3
+timedfsm::Transition "0..9999" -- "1..1" timedfsm::State : incomingTransition12
+timedfsm::State "1..1" -- "1..1" timedfsm::FSM : initialState2
+timedfsm::Transition "0..9999" --* "1..1" timedfsm::State : outgoingTransition9
+timedfsm::State "0..9999" --* "1..1" timedfsm::FSM : ownedState0
+timedfsm::FSM "1..1" -- "1..1" timedfsm::State : owningFSM6
+timedfsm::Transition "1..1" -- "1..1" timedfsm::State : source15
+timedfsm::State "1..1" -- "1..1" timedfsm::Transition : target18
+@enduml

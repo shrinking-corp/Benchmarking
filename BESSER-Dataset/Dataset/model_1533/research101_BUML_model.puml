@@ -1,0 +1,107 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class research101::Collaboration {
+  + ratio : int
+}
+abstract class research101::Counted {
+  + id : int
+}
+class research101::Keyword {
+  + description : str
+}
+class research101::KnowledgeManager {
+}
+abstract class research101::Labelled {
+  + lname : str
+}
+abstract class research101::Named {
+  + name : str
+}
+class research101::Paper {
+}
+class research101::PaperKeyword {
+  + weight : int
+}
+class research101::Paragraph {
+  + content : str
+}
+class research101::Phase {
+  + name : str
+}
+class research101::Position {
+  + description : str
+}
+class research101::Progress {
+  + percent : int
+}
+class research101::PublicationProcess {
+  + maxTime : int
+  + minTime : int
+}
+class research101::PublicationStructure {
+}
+class research101::PublicationSystem {
+}
+class research101::Researcher {
+  + forName : str
+  + name : str
+}
+class research101::Review {
+  + date : date
+}
+class research101::ReviewNote {
+  + content : str
+}
+class research101::Skill {
+  + description : str
+}
+class research101::Write {
+  + timeSpent : int
+}
+Counted <|-- research101::Paragraph
+Labelled <|-- research101::Progress
+Labelled <|-- research101::Review
+Labelled <|-- research101::Write
+Named <|-- research101::Keyword
+Named <|-- research101::KnowledgeManager
+Named <|-- research101::Paper
+Named <|-- research101::Paragraph
+Named <|-- research101::Position
+Named <|-- research101::PublicationProcess
+Named <|-- research101::PublicationStructure
+Named <|-- research101::PublicationSystem
+Named <|-- research101::ReviewNote
+research101::Keyword "0..9999" --* "1..1" research101::KnowledgeManager : allkeywords51
+research101::Researcher "0..9999" -- "1..1" research101::Paper : authors13
+research101::Paper "0..1" -- "1..1" research101::Paper : citedBy17
+research101::Paper "0..1" -- "1..1" research101::Collaboration : col_paper57
+research101::Researcher "1..1" *-- "0..9999" research101::Collaboration : collaborations9
+research101::Keyword "0..1" -- "1..1" research101::PaperKeyword : keyword54
+research101::PaperKeyword "0..9999" --* "1..1" research101::Paper : keywords14
+research101::PublicationStructure "1..1" *-- "0..1" research101::KnowledgeManager : knowledgeMan36
+research101::Paper "0..9999" -- "1..1" research101::Keyword : kpapers49
+research101::Paper "0..1" -- "1..1" research101::Progress : paper23
+research101::Paper "0..9999" --* "1..1" research101::PublicationStructure : papers33
+research101::Write "1..1" -- "0..1" research101::Paragraph : paragraph25
+research101::Paragraph "0..9999" --* "1..1" research101::Paper : paragraphs11
+research101::Position "1..1" -- "0..1" research101::Position : parent47
+research101::Phase "0..9999" --* "1..1" research101::PublicationProcess : phases0
+research101::PublicationSystem "1..1" *-- "0..9999" research101::Position : positions43
+research101::PublicationProcess "0..1" -- "1..1" research101::Progress : process21
+research101::PublicationProcess "0..1" --* "1..1" research101::PublicationSystem : processView38
+research101::Paper "1..1" *-- "0..9999" research101::Progress : progress12
+research101::Paper "0..9999" -- "1..1" research101::Researcher : res_papers4
+research101::Position "0..1" -- "1..1" research101::Researcher : res_position7
+research101::Researcher "0..9999" --* "1..1" research101::PublicationStructure : researchers31
+research101::ReviewNote "0..1" -- "1..1" research101::Review : reviewNote28
+research101::ReviewNote "0..9999" --* "1..1" research101::Paragraph : reviews19
+research101::Review "0..9999" --* "1..1" research101::Researcher : reviews2
+research101::Researcher "1..1" *-- "0..9999" research101::Skill : skills5
+research101::PublicationStructure "0..1" --* "1..1" research101::PublicationSystem : structuralView40
+research101::Write "0..9999" --* "1..1" research101::Researcher : writes1
+@enduml

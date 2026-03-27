@@ -1,0 +1,91 @@
+@startuml
+class Action {
+}
+class ActionsList {
+}
+class ContinuosAction {
+}
+class Ending {
+}
+class Event {
+}
+enum MOVE_DIRECTION {
+  BACKWARDS
+  FORWARDS
+}
+class RandomAction {
+}
+class RotorAction {
+}
+enum TURN_DIRECTION {
+  LEFT
+  RIGHT
+}
+abstract class model::Action {
+}
+abstract class model::ActionsList {
+}
+abstract class model::ContinuosAction {
+  + duration : float
+}
+abstract class model::Ending {
+}
+abstract class model::Event {
+}
+class model::EventListener {
+}
+class model::Main {
+}
+class model::Move {
+  + direction : str
+}
+class model::Obstacle {
+}
+abstract class model::RandomAction {
+  + isRandom : bool
+}
+class model::Repeat {
+}
+class model::RoboProse {
+}
+class model::Root {
+}
+abstract class model::RotorAction {
+}
+class model::StartOver {
+}
+class model::Stop {
+}
+class model::Tapped {
+}
+class model::Turn {
+  + degrees : float
+  + direction : str
+}
+class model::Wait {
+}
+Action <|-- model::ContinuosAction
+Action <|-- model::RandomAction
+Action <|-- model::RotorAction
+ActionsList <|-- model::EventListener
+ActionsList <|-- model::Main
+ContinuosAction <|-- model::Move
+ContinuosAction <|-- model::Stop
+ContinuosAction <|-- model::Turn
+Ending <|-- model::Repeat
+Ending <|-- model::StartOver
+Ending <|-- model::Wait
+Event <|-- model::Obstacle
+Event <|-- model::Tapped
+RandomAction <|-- model::Move
+RandomAction <|-- model::Turn
+RotorAction <|-- model::Move
+RotorAction <|-- model::Turn
+model::Action "1..9999" --* "1..1" model::ActionsList : actions10
+model::Ending "0..1" --* "1..1" model::ActionsList : ending11
+model::Event "1..1" --* "1..1" model::EventListener : event8
+model::EventListener "0..9999" --* "1..1" model::RoboProse : listeners3
+model::Main "0..1" --* "1..1" model::RoboProse : main1
+model::RoboProse "1..1" --* "1..1" model::Root : robot0
+model::EventListener "1..1" *-- "0..9999" model::EventListener : sublisteners6
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+enum ArcKind {
+  INPUT
+  OUTPUT
+}
+class Node {
+}
+class Transition {
+}
+class stochasticpetrinet::Arc {
+  + kind : str
+}
+class stochasticpetrinet::ImmediateTransition {
+}
+abstract class stochasticpetrinet::Node {
+}
+class stochasticpetrinet::PetriNet {
+}
+class stochasticpetrinet::Place {
+  + tokens : int
+}
+class stochasticpetrinet::TimedTransition {
+}
+abstract class stochasticpetrinet::Transition {
+}
+Node <|-- stochasticpetrinet::Place
+Node <|-- stochasticpetrinet::Transition
+Transition <|-- stochasticpetrinet::ImmediateTransition
+Transition <|-- stochasticpetrinet::TimedTransition
+stochasticpetrinet::Arc "1..9999" --* "1..1" stochasticpetrinet::Transition : arcs1
+stochasticpetrinet::PetriNet "1..1" *-- "0..9999" stochasticpetrinet::Node : nodes0
+stochasticpetrinet::PetriNet "1..1" -- "1..1" stochasticpetrinet::Node : petriNet4
+stochasticpetrinet::Place "1..1" -- "1..1" stochasticpetrinet::Arc : place3
+stochasticpetrinet::Arc "1..1" -- "1..1" stochasticpetrinet::Transition : transition2
+@enduml

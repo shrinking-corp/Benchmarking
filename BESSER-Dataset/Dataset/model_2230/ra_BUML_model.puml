@@ -1,0 +1,45 @@
+@startuml
+enum programmeCode {
+  Datateknologi2
+  Datateknologi5
+  Informatikk
+}
+class ra::Course {
+  + code : str
+  + name : str
+}
+class ra::Department {
+}
+class ra::MandatoryCourse {
+  + credit : float
+  + mandatory : bool
+}
+class ra::Programme {
+  + mCode : str
+  + name : str
+}
+class ra::Semester {
+  + semesterNumber : int
+  + totalPoints : float
+}
+class ra::Specialization {
+  + name : str
+}
+class ra::StudyPlan {
+}
+ra::Course "0..9999" --* "1..1" ra::Department : course1
+ra::MandatoryCourse "1..1" -- "0..1" ra::Course : course26
+ra::Course "0..9999" -- "1..1" ra::Semester : courseSlot20
+ra::MandatoryCourse "0..9999" --* "1..1" ra::StudyPlan : mandatoryCourse15
+ra::Semester "1..1" -- "0..9999" ra::MandatoryCourse : mandatoryCourse23
+ra::Course "1..1" -- "0..1" ra::MandatoryCourse : mandatoryCourse7
+ra::Programme "0..9999" --* "1..1" ra::Department : programme0
+ra::Programme "0..1" -- "1..1" ra::StudyPlan : programme9
+ra::StudyPlan "1..1" *-- "0..9999" ra::Semester : semester13
+ra::Semester "0..9999" --* "1..1" ra::Specialization : semester17
+ra::Semester "0..1" -- "1..1" ra::MandatoryCourse : semester25
+ra::Specialization "0..9999" --* "1..1" ra::StudyPlan : spesialization10
+ra::Specialization "0..1" --* "1..1" ra::Department : spesialization5
+ra::Department "1..1" *-- "0..1" ra::StudyPlan : studyPlan3
+ra::StudyPlan "0..1" --* "1..1" ra::Programme : studyPlan8
+@enduml

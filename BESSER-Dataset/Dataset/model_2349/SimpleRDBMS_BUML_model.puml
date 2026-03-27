@@ -1,0 +1,37 @@
+@startuml
+class RModelElement {
+}
+class simplerdbms::Column {
+  + type : str
+}
+class simplerdbms::ForeignKey {
+}
+class simplerdbms::Key {
+}
+abstract class simplerdbms::RModelElement {
+  + kind : str
+  + name : str
+}
+class simplerdbms::Schema {
+}
+class simplerdbms::Table {
+}
+RModelElement <|-- simplerdbms::Column
+RModelElement <|-- simplerdbms::ForeignKey
+RModelElement <|-- simplerdbms::Key
+RModelElement <|-- simplerdbms::Schema
+RModelElement <|-- simplerdbms::Table
+simplerdbms::Column "0..9999" -- "1..1" simplerdbms::Key : column13
+simplerdbms::Table "1..1" -- "0..9999" simplerdbms::Column : column17
+simplerdbms::Column "0..9999" -- "1..1" simplerdbms::ForeignKey : column6
+simplerdbms::Column "1..1" -- "0..9999" simplerdbms::ForeignKey : foreignKeys1
+simplerdbms::Key "0..9999" -- "1..1" simplerdbms::Column : key3
+simplerdbms::Table "1..1" -- "1..1" simplerdbms::Column : owner0
+simplerdbms::Table "1..1" -- "1..1" simplerdbms::Key : owner11
+simplerdbms::Table "1..1" -- "1..1" simplerdbms::ForeignKey : owner7
+simplerdbms::Key "1..1" -- "1..1" simplerdbms::ForeignKey : refersTo5
+simplerdbms::Table "1..1" -- "1..1" simplerdbms::Schema : schema19
+simplerdbms::Schema "1..1" -- "1..1" simplerdbms::ForeignKey : schema9
+simplerdbms::Table "0..9999" -- "1..1" simplerdbms::Schema : tables15
+simplerdbms::Key "0..9999" -- "1..1" simplerdbms::Table : theKey20
+@enduml

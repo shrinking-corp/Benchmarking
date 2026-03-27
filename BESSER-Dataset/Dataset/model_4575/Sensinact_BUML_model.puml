@@ -1,0 +1,202 @@
+@startuml
+class DSL::Expression {
+}
+class DSL::REF {
+}
+class sensinact::DSL::CEP::AFTER {
+}
+class sensinact::DSL::CEP::AVG {
+}
+class sensinact::DSL::CEP::BEFORE {
+}
+class sensinact::DSL::CEP::COINCIDE {
+}
+class sensinact::DSL::CEP::COUNT {
+}
+class sensinact::DSL::CEP::DURATION {
+}
+class sensinact::DSL::CEP::DURATION::MIN {
+  + min : str
+}
+class sensinact::DSL::CEP::DURATION::SEC {
+  + sec : str
+}
+class sensinact::DSL::CEP::MAX {
+}
+class sensinact::DSL::CEP::MIN {
+}
+class sensinact::DSL::CEP::STATEMENT {
+}
+class sensinact::DSL::CEP::SUM {
+}
+class sensinact::DSL::ECA::STATEMENT {
+}
+class sensinact::DSL::ElseDo {
+}
+class sensinact::DSL::ElseIfDo {
+}
+class sensinact::DSL::Expression {
+}
+class sensinact::DSL::Expression::And {
+}
+class sensinact::DSL::Expression::Diff {
+}
+class sensinact::DSL::Expression::Division {
+}
+class sensinact::DSL::Expression::Equal {
+}
+class sensinact::DSL::Expression::Larger {
+}
+class sensinact::DSL::Expression::Larger::Equal {
+}
+class sensinact::DSL::Expression::Minus {
+}
+class sensinact::DSL::Expression::Modulo {
+}
+class sensinact::DSL::Expression::Multiplication {
+}
+class sensinact::DSL::Expression::Negate {
+}
+class sensinact::DSL::Expression::Or {
+}
+class sensinact::DSL::Expression::Plus {
+}
+class sensinact::DSL::Expression::Smaller {
+}
+class sensinact::DSL::Expression::Smaller::Equal {
+}
+class sensinact::DSL::FLAG::AUTOSTART {
+  + activated : bool
+}
+class sensinact::DSL::IfDo {
+}
+class sensinact::DSL::ListActions {
+}
+class sensinact::DSL::ListParam {
+}
+class sensinact::DSL::Object::Boolean {
+  + value : bool
+}
+class sensinact::DSL::Object::Number {
+  + value : str
+}
+class sensinact::DSL::Object::Ref {
+}
+class sensinact::DSL::Object::String {
+  + value : str
+}
+class sensinact::DSL::On {
+}
+class sensinact::DSL::REF {
+  + name : str
+}
+class sensinact::DSL::REF::CONDITION {
+}
+class sensinact::DSL::Resource {
+  + deviceID : str
+  + gatewayID : str
+  + resourceID : str
+  + serviceID : str
+}
+class sensinact::DSL::ResourceAction {
+  + actiontype : str
+  + variable : str
+}
+class sensinact::DSL::SENSINACT {
+}
+class sensinact::EObject {
+}
+class sensinact::Sensinact {
+}
+DSL::Expression <|-- sensinact::DSL::Expression::And
+DSL::Expression <|-- sensinact::DSL::Expression::Diff
+DSL::Expression <|-- sensinact::DSL::Expression::Division
+DSL::Expression <|-- sensinact::DSL::Expression::Equal
+DSL::Expression <|-- sensinact::DSL::Expression::Larger
+DSL::Expression <|-- sensinact::DSL::Expression::Larger::Equal
+DSL::Expression <|-- sensinact::DSL::Expression::Minus
+DSL::Expression <|-- sensinact::DSL::Expression::Modulo
+DSL::Expression <|-- sensinact::DSL::Expression::Multiplication
+DSL::Expression <|-- sensinact::DSL::Expression::Negate
+DSL::Expression <|-- sensinact::DSL::Expression::Or
+DSL::Expression <|-- sensinact::DSL::Expression::Plus
+DSL::Expression <|-- sensinact::DSL::Expression::Smaller
+DSL::Expression <|-- sensinact::DSL::Expression::Smaller::Equal
+DSL::Expression <|-- sensinact::DSL::Object::Boolean
+DSL::Expression <|-- sensinact::DSL::Object::Number
+DSL::Expression <|-- sensinact::DSL::Object::Ref
+DSL::Expression <|-- sensinact::DSL::Object::String
+DSL::REF <|-- sensinact::DSL::CEP::STATEMENT
+DSL::REF <|-- sensinact::DSL::Resource
+sensinact::DSL::ListActions "1..1" *-- "0..9999" sensinact::DSL::ResourceAction : actionList93
+sensinact::DSL::IfDo "1..1" *-- "0..1" sensinact::DSL::ListActions : actions21
+sensinact::DSL::ListActions "0..1" --* "1..1" sensinact::DSL::ElseIfDo : actions26
+sensinact::DSL::ListActions "0..1" --* "1..1" sensinact::DSL::ElseDo : actions29
+sensinact::DSL::FLAG::AUTOSTART "0..1" --* "1..1" sensinact::DSL::SENSINACT : autostart1
+sensinact::DSL::SENSINACT "1..1" *-- "0..9999" sensinact::DSL::CEP::STATEMENT : cep5
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::IfDo : condition19
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::ElseIfDo : condition23
+sensinact::DSL::SENSINACT "0..1" --* "1..1" sensinact::Sensinact : eca0
+sensinact::DSL::ECA::STATEMENT "0..1" --* "1..1" sensinact::DSL::SENSINACT : eca9
+sensinact::DSL::ElseIfDo "0..9999" --* "1..1" sensinact::DSL::ECA::STATEMENT : elseIfdo15
+sensinact::DSL::ElseDo "0..1" --* "1..1" sensinact::DSL::ECA::STATEMENT : elsedo17
+sensinact::DSL::CEP::DURATION "0..1" --* "1..1" sensinact::DSL::CEP::AFTER : end43
+sensinact::DSL::CEP::DURATION "0..1" --* "1..1" sensinact::DSL::CEP::BEFORE : end54
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Negate : exp170
+sensinact::DSL::IfDo "0..1" --* "1..1" sensinact::DSL::ECA::STATEMENT : ifdo13
+sensinact::DSL::Expression::Or "1..1" *-- "0..1" sensinact::DSL::Expression : left103
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::And : left108
+sensinact::DSL::Expression::Diff "1..1" *-- "0..1" sensinact::DSL::Expression : left113
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Equal : left118
+sensinact::DSL::Expression::Larger "1..1" *-- "0..1" sensinact::DSL::Expression : left123
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Larger::Equal : left128
+sensinact::DSL::Expression::Smaller "1..1" *-- "0..1" sensinact::DSL::Expression : left133
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Smaller::Equal : left138
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Plus : left143
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Minus : left148
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Multiplication : left153
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Division : left158
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Modulo : left163
+sensinact::DSL::ListParam "0..1" --* "1..1" sensinact::DSL::ResourceAction : listParam98
+sensinact::DSL::On "0..1" --* "1..1" sensinact::DSL::SENSINACT : on7
+sensinact::EObject "0..1" --* "1..1" sensinact::DSL::CEP::STATEMENT : operation34
+sensinact::DSL::Expression "0..9999" --* "1..1" sensinact::DSL::ListParam : param100
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::AFTER : ref136
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::BEFORE : ref146
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::COINCIDE : ref157
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::AFTER : ref238
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::BEFORE : ref248
+sensinact::DSL::CEP::COINCIDE "1..1" *-- "0..1" sensinact::DSL::REF::CONDITION : ref259
+sensinact::DSL::REF::CONDITION "1..1" -- "0..1" sensinact::DSL::REF : ref32
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::MIN : ref65
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::MAX : ref70
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::AVG : ref75
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::SUM : ref80
+sensinact::DSL::REF::CONDITION "0..1" --* "1..1" sensinact::DSL::CEP::COUNT : ref85
+sensinact::DSL::REF "0..1" -- "1..1" sensinact::DSL::ResourceAction : ref95
+sensinact::DSL::Resource "0..9999" --* "1..1" sensinact::DSL::SENSINACT : resources3
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Or : right105
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::And : right110
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Diff : right115
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Equal : right120
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Larger : right125
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Larger::Equal : right130
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Smaller : right135
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Smaller::Equal : right140
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Plus : right145
+sensinact::DSL::Expression::Minus "1..1" *-- "0..1" sensinact::DSL::Expression : right150
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Multiplication : right155
+sensinact::DSL::Expression::Division "1..1" *-- "0..1" sensinact::DSL::Expression : right160
+sensinact::DSL::Expression "0..1" --* "1..1" sensinact::DSL::Expression::Modulo : right165
+sensinact::DSL::CEP::AFTER "1..1" *-- "0..1" sensinact::DSL::CEP::DURATION : start41
+sensinact::DSL::CEP::BEFORE "1..1" *-- "0..1" sensinact::DSL::CEP::DURATION : start51
+sensinact::DSL::REF::CONDITION "0..9999" --* "1..1" sensinact::DSL::On : triggers11
+sensinact::EObject "0..9999" --* "1..1" sensinact::DSL::CEP::DURATION : units90
+sensinact::DSL::REF "0..1" -- "1..1" sensinact::DSL::Object::Ref : value168
+sensinact::DSL::CEP::COINCIDE "1..1" *-- "0..1" sensinact::DSL::CEP::DURATION : window62
+sensinact::DSL::CEP::MIN "1..1" *-- "0..1" sensinact::DSL::CEP::DURATION : window67
+sensinact::DSL::CEP::DURATION "0..1" --* "1..1" sensinact::DSL::CEP::MAX : window72
+sensinact::DSL::CEP::AVG "1..1" *-- "0..1" sensinact::DSL::CEP::DURATION : window77
+sensinact::DSL::CEP::DURATION "0..1" --* "1..1" sensinact::DSL::CEP::SUM : window82
+sensinact::DSL::CEP::DURATION "0..1" --* "1..1" sensinact::DSL::CEP::COUNT : window87
+@enduml

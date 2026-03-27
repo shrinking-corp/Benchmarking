@@ -1,68 +1,93 @@
 from __future__ import annotations
 
-from typing import Optional
 
-
-class petrinet_Petrinet:
-    """Class petrinet::Petrinet."""
+class smalluml_NamedElement:
+    """smalluml::NamedElement"""
 
     def __init__(self, name: str) -> None:
-        self.name: str = name
+        self.name = name
 
 
-class petrinet_Arc:
-    """Class petrinet::Arc."""
-
-    def __init__(self, weight: int) -> None:
-        self.weight: int = weight
-
-
-class petrinet_Token:
-    """Class petrinet::Token."""
+class Type:
+    """Type"""
 
     def __init__(self) -> None:
         pass
 
 
-class petrinet_PTArc(Arc):
-    """Class petrinet::PTArc."""
-
-    def __init__(self) -> None:
-        super().__init__()
-
-
-class petrinet_Place:
-    """Class petrinet::Place."""
-
-    def __init__(self, name: str) -> None:
-        self.name: str = name
-
-    def getTokenNumber(self) -> int:
-        pass
-
-    def isAPart(self) -> bool:
-        pass
-
-
-class petrinet_Transition:
-    """Class petrinet::Transition."""
-
-    def __init__(self, name: str) -> None:
-        self.name: str = name
-
-    def isEnabled(self) -> bool:
-        pass
-
-
-class Arc:
-    """Class Arc."""
+class NamedElement:
+    """NamedElement"""
 
     def __init__(self) -> None:
         pass
 
 
-class petrinet_TPArc(Arc):
-    """Class petrinet::TPArc."""
+class smalluml_Class(Type):
+    """smalluml::Class"""
 
     def __init__(self) -> None:
-        super().__init__()
+        pass
+
+
+class smalluml_Operation(NamedElement):
+    """smalluml::Operation"""
+
+    def __init__(self) -> None:
+        pass
+
+
+class smalluml_Type(NamedElement):
+    """smalluml::Type"""
+
+    def __init__(self) -> None:
+        pass
+
+
+class smalluml_TypeString(Type):
+    """smalluml::TypeString"""
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class smalluml_TypeReal(Type):
+    """smalluml::TypeReal"""
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class smalluml_Property(NamedElement):
+    """smalluml::Property"""
+
+    def __init__(self, upperBound: int, lowerBound: int) -> None:
+        self.upperBound = upperBound
+        self.lowerBound = lowerBound
+
+
+class smalluml_TypeBoolean(Type):
+    """smalluml::TypeBoolean"""
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class smalluml_Root:
+    """smalluml::Root"""
+
+    def __init__(self) -> None:
+        pass
+
+
+class smalluml_TypeInteger(Type):
+    """smalluml::TypeInteger"""
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class smalluml_TypeUnlimitedNatural(Type):
+    """smalluml::TypeUnlimitedNatural"""
+
+    def __init__(self, value: str) -> None:
+        self.value = value

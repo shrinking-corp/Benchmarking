@@ -1,0 +1,209 @@
+@startuml
+enum Alignment {
+  BOTTOM
+  CENTER
+  LEFT
+  RIGHT
+  TOP
+}
+class Child {
+}
+class Container {
+}
+class Cursor {
+}
+class Figure {
+}
+enum GridAlignment {
+  BEGINNING
+  CENTER
+  END
+  FILL
+}
+enum Orientation {
+  EAST
+  NORTH
+  SOUTH
+  WEST
+}
+class Primitive {
+}
+class Shape {
+}
+enum SystemCursorType {
+  ARROW
+  HAND
+}
+class model::Arc {
+  + length : int
+  + start : int
+}
+class model::BorderChild {
+  + alignment : str
+}
+class model::BorderContainer {
+  + horizontalSpacing : int
+  + verticalSpacing : int
+}
+class model::Child {
+  + name : str
+}
+class model::Connection {
+}
+abstract class model::Container {
+}
+abstract class model::Cursor {
+}
+class model::Dimension {
+  + height : float
+  + width : float
+}
+class model::Ellipse {
+}
+abstract class model::Figure {
+  + backgroundColor : str
+  + border : str
+  + foregroundColor : str
+  + onClick : str
+  + onDoubleClick : str
+  + onMouseDrag : str
+  + onMouseHover : str
+  + onMouseIn : str
+  + onMouseMove : str
+  + onMouseOut : str
+  + opaque : str
+  + toolTip : str
+  + visible : bool
+}
+class model::FigureContainer {
+}
+class model::GridChild {
+  + grabHorizontalSpace : bool
+  + grabVerticalSpace : bool
+  + heightHint : str
+  + horizontalAlignment : str
+  + spanCols : int
+  + spanRows : str
+  + verticalAlignment : str
+  + widthHint : str
+}
+class model::GridContainer {
+  + columns : int
+  + equalWidth : bool
+  + horizontalSpacing : int
+  + marginHeight : int
+  + marginWidth : int
+  + verticalSpacing : int
+}
+class model::Image {
+  + imageAlignment : str
+  + uri : str
+}
+class model::Line {
+}
+class model::Polygon {
+}
+class model::Position {
+  + x : float
+  + y : float
+}
+abstract class model::Primitive {
+  + name : str
+}
+class model::Rectangle {
+}
+class model::RoundedRectangle {
+}
+abstract class model::Shape {
+  + alpha : str
+  + antialias : str
+  + fill : bool
+  + lineWidth : float
+  + outline : bool
+}
+class model::StackContainer {
+}
+class model::StringToStringMap {
+  + key : str
+  + value : str
+}
+class model::Symbol {
+  + backgroundColor : str
+  + backgroundImage : str
+  + onDispose : str
+  + onInit : str
+  + onUpdate : str
+  + scriptModules : str
+}
+class model::SymbolReference {
+  + onCreateProperties : str
+  + uri : str
+  + zoom : str
+}
+class model::SystemCursor {
+  + type : str
+}
+class model::Text {
+  + alpha : str
+  + fontBold : bool
+  + fontItalic : bool
+  + fontName : str
+  + fontSize : int
+  + iconAlignment : str
+  + labelAlignment : str
+  + text : str
+  + textAlignment : str
+  + textPlacement : str
+}
+class model::TimeTrigger {
+  + onTrigger : str
+  + period : str
+}
+class model::XYChild {
+}
+class model::XYContainer {
+}
+Child <|-- model::BorderChild
+Child <|-- model::GridChild
+Child <|-- model::XYChild
+Container <|-- model::BorderContainer
+Container <|-- model::GridContainer
+Container <|-- model::StackContainer
+Container <|-- model::XYContainer
+Cursor <|-- model::SystemCursor
+Figure <|-- model::FigureContainer
+Figure <|-- model::Image
+Figure <|-- model::Shape
+Figure <|-- model::Text
+Primitive <|-- model::Container
+Primitive <|-- model::Figure
+Primitive <|-- model::SymbolReference
+Shape <|-- model::Arc
+Shape <|-- model::Ellipse
+Shape <|-- model::Line
+Shape <|-- model::Polygon
+Shape <|-- model::Rectangle
+Shape <|-- model::RoundedRectangle
+model::XYChild "0..9999" --* "1..1" model::XYContainer : children17
+model::GridChild "0..9999" --* "1..1" model::GridContainer : children28
+model::BorderChild "0..9999" --* "1..1" model::BorderContainer : children29
+model::StackContainer "1..1" *-- "0..9999" model::Primitive : children38
+model::Connection "0..9999" --* "1..1" model::Symbol : connections7
+model::Primitive "0..1" --* "1..1" model::FigureContainer : content30
+model::RoundedRectangle "1..1" *-- "0..1" model::Dimension : corner42
+model::Cursor "0..1" -- "1..1" model::Figure : cursor23
+model::Cursor "0..1" --* "1..1" model::Symbol : cursors3
+model::Symbol "1..1" *-- "0..1" model::Dimension : designSize5
+model::Dimension "0..1" --* "1..1" model::XYChild : dimension14
+model::Primitive "0..1" --* "1..1" model::Child : element11
+model::Primitive "1..1" -- "1..1" model::Connection : end35
+model::Position "0..9999" --* "1..1" model::Line : points19
+model::Position "0..9999" --* "1..1" model::Polygon : points40
+model::Position "1..1" --* "1..1" model::XYChild : position13
+model::Symbol "1..1" *-- "0..9999" model::StringToStringMap : properties1
+model::SymbolReference "1..1" *-- "0..9999" model::StringToStringMap : properties26
+model::Primitive "0..1" --* "1..1" model::Symbol : root0
+model::Figure "1..1" *-- "0..1" model::Dimension : size21
+model::Primitive "1..1" -- "1..1" model::Connection : start32
+model::TimeTrigger "0..9999" --* "1..1" model::Symbol : timeTriggers9
+@enduml

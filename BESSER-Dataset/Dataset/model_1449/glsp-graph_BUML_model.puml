@@ -1,0 +1,143 @@
+@startuml
+class GAlignable {
+}
+class GBoundsAware {
+}
+class GEdgeLayoutable {
+}
+class GLayouting {
+}
+class GModelElement {
+}
+class GModelRoot {
+}
+enum GSeverity {
+  error
+  info
+  warning
+}
+class GShapeElement {
+}
+enum GSide {
+  bottom
+  left
+  on
+  right
+  top
+}
+class graph::GAlignable {
+}
+class graph::GBounds {
+  + height : float
+  + width : float
+  + x : float
+  + y : float
+}
+abstract class graph::GBoundsAware {
+}
+class graph::GButton {
+  + enabled : bool
+}
+class graph::GCompartment {
+}
+class graph::GDimension {
+  + height : float
+  + width : float
+}
+class graph::GEdge {
+  + sourceId : str
+  + targetId : str
+}
+abstract class graph::GEdgeLayoutable {
+}
+class graph::GEdgePlacement {
+  + offset : str
+  + position : str
+  + side : str
+}
+class graph::GGraph {
+}
+class graph::GHtmlRoot {
+  + classes : str
+}
+class graph::GIssue {
+  + message : str
+  + severity : str
+}
+class graph::GIssueMarker {
+}
+class graph::GLabel {
+  + text : str
+}
+class graph::GLayoutOptions {
+  + hAlign : str
+  + hGap : str
+  + minHeight : str
+  + minWidth : str
+  + paddingBottom : str
+  + paddingFactor : str
+  + paddingLeft : str
+  + paddingRight : str
+  + paddingTop : str
+  + resizeContainer : bool
+  + vAlign : str
+  + vGap : str
+}
+abstract class graph::GLayouting {
+  + layout : str
+}
+abstract class graph::GModelElement {
+  + cssClasses : str
+  + id : str
+  + trace : str
+  + type : str
+}
+class graph::GModelRoot {
+  + revision : int
+}
+class graph::GNode {
+}
+class graph::GPoint {
+  + x : float
+  + y : float
+}
+class graph::GPort {
+}
+class graph::GPreRenderedElement {
+  + code : str
+}
+abstract class graph::GShapeElement {
+}
+GAlignable <|-- graph::GLabel
+GBoundsAware <|-- graph::GGraph
+GBoundsAware <|-- graph::GShapeElement
+GEdgeLayoutable <|-- graph::GLabel
+GEdgeLayoutable <|-- graph::GNode
+GLayouting <|-- graph::GCompartment
+GLayouting <|-- graph::GNode
+GModelElement <|-- graph::GEdge
+GModelElement <|-- graph::GModelRoot
+GModelElement <|-- graph::GPreRenderedElement
+GModelElement <|-- graph::GShapeElement
+GModelRoot <|-- graph::GGraph
+GModelRoot <|-- graph::GHtmlRoot
+GShapeElement <|-- graph::GButton
+GShapeElement <|-- graph::GCompartment
+GShapeElement <|-- graph::GIssueMarker
+GShapeElement <|-- graph::GLabel
+GShapeElement <|-- graph::GNode
+GShapeElement <|-- graph::GPort
+graph::GPoint "0..1" --* "1..1" graph::GAlignable : alignment23
+graph::GBounds "0..1" --* "1..1" graph::GModelRoot : canvasBounds8
+graph::GModelElement "0..9999" --* "1..1" graph::GModelElement : children1
+graph::GEdgeLayoutable "1..1" *-- "0..1" graph::GEdgePlacement : edgePlacement20
+graph::GIssue "0..9999" --* "1..1" graph::GIssueMarker : issues15
+graph::GLayoutOptions "0..1" --* "1..1" graph::GLayouting : layoutOptions21
+graph::GGraph "1..1" *-- "0..1" graph::GLayoutOptions : layoutOptions7
+graph::GModelElement "0..1" -- "1..1" graph::GModelElement : parent4
+graph::GBoundsAware "1..1" *-- "0..1" graph::GPoint : position16
+graph::GPoint "0..9999" --* "1..1" graph::GEdge : routingPoints9
+graph::GDimension "0..1" --* "1..1" graph::GBoundsAware : size18
+graph::GModelElement "0..1" -- "1..1" graph::GEdge : source10
+graph::GModelElement "0..1" -- "1..1" graph::GEdge : target12
+@enduml

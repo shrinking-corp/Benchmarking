@@ -1,0 +1,167 @@
+@startuml
+enum CapacityType {
+  aggressivity
+  awareness
+  draft
+  escapeMechanics
+  experience
+  farm
+  leadership
+  metaGame
+  objectivePlay
+  pathing
+  patience
+  playmakingMechanics
+  positioning
+  splitPush
+  steal
+  stressManagement
+  teamPlay
+}
+enum GroupStageType {
+  allStarsGroup
+  league
+  msiGroup
+  msiPlayIn
+  riftRivalsGroup
+  worldsGroup
+  worldsPlayIn
+}
+enum MatchType {
+  final
+  group
+  quarterFinal
+  semiFinal
+  singleRoundElimination
+}
+class Person {
+}
+enum Position {
+  attackDamageCarry
+  jungle
+  midLane
+  support
+  topLane
+}
+enum Season {
+  spring
+  summer
+}
+enum TournamentType {
+  allStars
+  midSeasonInvitational
+  playOff
+  promotion
+  regionals
+  riftRivals
+  worlds
+}
+class eSport::Capacity {
+  + type : str
+  + value : int
+}
+class eSport::Coach {
+}
+class eSport::Country {
+  + name : str
+}
+class eSport::FinalStage {
+  + maxNbGames : int
+}
+class eSport::Group {
+}
+class eSport::GroupStage {
+  + maxNbGames : int
+  + meetingsInSameGroup : int
+  + meetingsWithOtherGroups : int
+  + type : str
+}
+class eSport::League {
+  + name : str
+  + season : str
+  + size : int
+  + year : int
+}
+class eSport::Match {
+  + loserWins : int
+  + type : str
+}
+abstract class eSport::Person {
+  + age : int
+  + description : str
+  + name : str
+}
+class eSport::Player {
+  + position : str
+}
+class eSport::Qualification {
+  + name : str
+}
+class eSport::Root {
+}
+class eSport::Team {
+  + championshipPoints : int
+  + name : str
+}
+class eSport::Tournament {
+  + name : str
+  + size : int
+  + type : str
+  + year : int
+}
+class eSport::Zone {
+  + name : str
+}
+Person <|-- eSport::Coach
+Person <|-- eSport::Player
+eSport::Tournament "1..1" -- "0..9999" eSport::Zone : allowedZones4
+eSport::Capacity "0..9999" --* "1..1" eSport::Person : capacities20
+eSport::Team "1..1" *-- "0..1" eSport::Coach : coach36
+eSport::Country "0..9999" --* "1..1" eSport::Zone : countries29
+eSport::Country "0..9999" -- "1..1" eSport::Tournament : countries3
+eSport::Country "0..9999" --* "1..1" eSport::Root : countries97
+eSport::Person "1..1" -- "0..1" eSport::Country : country18
+eSport::Match "1..1" -- "0..1" eSport::FinalStage : finalstage50
+eSport::FinalStage "0..9999" -- "1..1" eSport::Team : finalstages45
+eSport::FinalStage "0..9999" --* "1..1" eSport::Tournament : finalstages6
+eSport::Group "0..1" -- "1..1" eSport::Match : group48
+eSport::Group "0..9999" -- "1..1" eSport::Team : groups40
+eSport::GroupStage "1..1" *-- "0..9999" eSport::Group : groups64
+eSport::League "1..1" *-- "0..1" eSport::GroupStage : groupstage14
+eSport::GroupStage "0..1" -- "1..1" eSport::Group : groupstage57
+eSport::GroupStage "0..9999" --* "1..1" eSport::Tournament : groupstages7
+eSport::League "0..1" -- "1..1" eSport::GroupStage : league68
+eSport::League "0..1" -- "1..1" eSport::Qualification : leagueFrom82
+eSport::Zone "1..1" -- "0..9999" eSport::League : leagues28
+eSport::League "0..9999" --* "1..1" eSport::Root : leagues88
+eSport::Match "0..9999" --* "1..1" eSport::Group : matchs59
+eSport::Match "0..9999" --* "1..1" eSport::FinalStage : matchs71
+eSport::Match "0..9999" -- "1..1" eSport::Team : matchsLost43
+eSport::Match "0..9999" -- "1..1" eSport::Team : matchsWon42
+eSport::Person "0..9999" -- "1..1" eSport::Country : persons25
+eSport::Person "0..9999" --* "1..1" eSport::Root : persons92
+eSport::Player "0..9999" --* "1..1" eSport::Team : players35
+eSport::Root "1..1" *-- "0..9999" eSport::Qualification : qualifications95
+eSport::Qualification "0..9999" -- "1..1" eSport::League : qualifiesFor16
+eSport::Qualification "0..1" -- "1..1" eSport::Tournament : qualifiesFor9
+eSport::Tournament "1..1" -- "0..9999" eSport::Qualification : qualifiesFrom10
+eSport::Team "0..1" -- "1..1" eSport::Player : team0
+eSport::Team "0..1" -- "1..1" eSport::Coach : team1
+eSport::Team "0..1" -- "1..1" eSport::Match : teamLoser55
+eSport::Team "0..1" -- "1..1" eSport::Match : teamWinner53
+eSport::Team "0..9999" --* "1..1" eSport::Zone : teams32
+eSport::Team "0..9999" -- "1..1" eSport::Group : teams61
+eSport::Team "0..9999" -- "1..1" eSport::FinalStage : teams75
+eSport::Team "0..9999" --* "1..1" eSport::Root : teams90
+eSport::Tournament "0..1" -- "1..1" eSport::GroupStage : tournament66
+eSport::Tournament "0..1" -- "1..1" eSport::FinalStage : tournament73
+eSport::Qualification "1..1" -- "0..1" eSport::Tournament : tournamentFrom78
+eSport::Tournament "0..1" -- "1..1" eSport::Qualification : tournamentTo80
+eSport::Country "1..1" -- "0..9999" eSport::Tournament : tournaments21
+eSport::Tournament "0..9999" -- "1..1" eSport::Zone : tournaments26
+eSport::Root "1..1" *-- "0..9999" eSport::Tournament : tournaments86
+eSport::Zone "0..1" -- "1..1" eSport::League : zone12
+eSport::Zone "0..1" -- "1..1" eSport::Country : zone22
+eSport::Zone "0..1" -- "1..1" eSport::Team : zone38
+eSport::Zone "0..9999" --* "1..1" eSport::Root : zones85
+@enduml

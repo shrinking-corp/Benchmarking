@@ -1,0 +1,45 @@
+@startuml
+class NamedElement {
+}
+class RegularState {
+}
+class State {
+}
+class dfa::Dfa {
+}
+class dfa::FinalState {
+}
+class dfa::InitialState {
+}
+class dfa::Language {
+}
+abstract class dfa::NamedElement {
+  + name : str
+}
+class dfa::RegularState {
+}
+abstract class dfa::State {
+  + description : str
+}
+class dfa::Symbol {
+  + description : str
+  + direction : str
+  + literal : str
+}
+class dfa::Transition {
+}
+NamedElement <|-- dfa::Dfa
+NamedElement <|-- dfa::Language
+NamedElement <|-- dfa::State
+RegularState <|-- dfa::InitialState
+State <|-- dfa::FinalState
+State <|-- dfa::RegularState
+dfa::Dfa "1..1" *-- "0..9999" dfa::FinalState : finalStates5
+dfa::InitialState "1..1" --* "1..1" dfa::Dfa : initialState3
+dfa::Language "1..1" --* "1..1" dfa::Dfa : language0
+dfa::RegularState "0..9999" --* "1..1" dfa::Dfa : regularStates1
+dfa::Symbol "0..9999" --* "1..1" dfa::Language : symbols10
+dfa::Symbol "0..1" -- "1..1" dfa::Transition : symbols8
+dfa::Transition "1..1" -- "1..1" dfa::State : targetState7
+dfa::RegularState "1..1" *-- "1..9999" dfa::Transition : transitions13
+@enduml

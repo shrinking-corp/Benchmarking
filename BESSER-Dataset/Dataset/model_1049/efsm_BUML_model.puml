@@ -1,0 +1,53 @@
+@startuml
+class AbstractState {
+}
+abstract class efsm::AbstractState {
+  + name : str
+}
+class efsm::ContextVariable {
+  + name : str
+  + type : str
+}
+class efsm::EFSM {
+  + name : str
+}
+class efsm::Event {
+  + class : str
+  + name : str
+  + return : str
+}
+class efsm::InitialState {
+}
+class efsm::Input {
+  + name : str
+}
+class efsm::Param {
+  + argName : str
+  + argType : str
+}
+class efsm::State {
+}
+class efsm::Transition {
+  + action : str
+  + guard : str
+  + name : str
+  + output : str
+}
+class efsm::Variable {
+  + class : str
+  + name : str
+  + type : str
+}
+AbstractState <|-- efsm::InitialState
+AbstractState <|-- efsm::State
+efsm::Event "1..1" *-- "0..9999" efsm::Param : args18
+efsm::ContextVariable "0..9999" --* "1..1" efsm::EFSM : contextVariables5
+efsm::Event "0..1" --* "1..1" efsm::Transition : event14
+efsm::InitialState "1..1" --* "1..1" efsm::EFSM : initialstate1
+efsm::Input "1..1" --* "1..1" efsm::Transition : input12
+efsm::AbstractState "1..1" -- "1..1" efsm::Transition : source7
+efsm::EFSM "1..1" *-- "1..9999" efsm::State : states3
+efsm::Transition "1..1" -- "1..1" efsm::AbstractState : target9
+efsm::EFSM "1..1" *-- "1..9999" efsm::Transition : transitions0
+efsm::Variable "0..9999" --* "1..1" efsm::Input : variables16
+@enduml

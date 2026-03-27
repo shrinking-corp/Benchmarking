@@ -1,0 +1,70 @@
+@startuml
+class SrcClass {
+}
+class SrcNamedElement {
+}
+class SrcPackage {
+}
+class SrcProperty {
+}
+class TrgElement {
+}
+class TrgEntityType {
+}
+class TrgFeature {
+}
+class TrgReference {
+}
+class TrgStrongReference {
+}
+class jointPackage::UML2ER::JointMM {
+}
+class jointPackage::UML2ER::SrcClass {
+}
+abstract class jointPackage::UML2ER::SrcNamedElement {
+  + name : str
+}
+class jointPackage::UML2ER::SrcPackage {
+}
+class jointPackage::UML2ER::SrcProperty {
+  + isContainment : bool
+  + primitiveType : str
+}
+class jointPackage::UML2ER::TrgAttribute {
+  + type : str
+}
+class jointPackage::UML2ER::TrgERModel {
+}
+abstract class jointPackage::UML2ER::TrgElement {
+  + name : str
+}
+class jointPackage::UML2ER::TrgEntityType {
+}
+abstract class jointPackage::UML2ER::TrgFeature {
+}
+abstract class jointPackage::UML2ER::TrgReference {
+}
+class jointPackage::UML2ER::TrgStrongReference {
+}
+class jointPackage::UML2ER::TrgWeakReference {
+}
+SrcNamedElement <|-- jointPackage::UML2ER::SrcClass
+SrcNamedElement <|-- jointPackage::UML2ER::SrcPackage
+SrcNamedElement <|-- jointPackage::UML2ER::SrcProperty
+TrgElement <|-- jointPackage::UML2ER::TrgERModel
+TrgElement <|-- jointPackage::UML2ER::TrgEntityType
+TrgElement <|-- jointPackage::UML2ER::TrgFeature
+TrgFeature <|-- jointPackage::UML2ER::TrgAttribute
+TrgFeature <|-- jointPackage::UML2ER::TrgReference
+TrgReference <|-- jointPackage::UML2ER::TrgStrongReference
+TrgReference <|-- jointPackage::UML2ER::TrgWeakReference
+SrcClass "0..1" -- "1..1" jointPackage::UML2ER::SrcProperty : complexType8
+TrgEntityType "0..9999" --* "1..1" jointPackage::UML2ER::TrgERModel : entities10
+TrgFeature "0..9999" --* "1..1" jointPackage::UML2ER::TrgEntityType : features11
+SrcClass "0..9999" --* "1..1" jointPackage::UML2ER::SrcPackage : ownedElements3
+SrcProperty "0..9999" --* "1..1" jointPackage::UML2ER::SrcClass : ownedProperty4
+jointPackage::UML2ER::JointMM "1..1" *-- "1..1" SrcPackage : sourceRoot0
+jointPackage::UML2ER::SrcClass "1..1" -- "0..9999" SrcClass : superClasses5
+TrgStrongReference "1..1" --* "1..1" jointPackage::UML2ER::JointMM : targetRoot1
+jointPackage::UML2ER::TrgReference "1..1" -- "1..1" TrgEntityType : type12
+@enduml

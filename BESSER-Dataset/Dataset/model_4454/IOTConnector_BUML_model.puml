@@ -1,0 +1,139 @@
+@startuml
+class Expression {
+}
+class Function {
+}
+class iOTConnector::BitwiseOperator {
+  + value : str
+}
+class iOTConnector::Board {
+  + name : str
+}
+class iOTConnector::Config {
+  + name : str
+}
+class iOTConnector::Div {
+}
+class iOTConnector::Expression {
+}
+class iOTConnector::Filter {
+}
+class iOTConnector::FilterAction {
+  + number : int
+}
+class iOTConnector::FilterExp {
+  + number : int
+}
+class iOTConnector::FilterType {
+  + value : str
+}
+class iOTConnector::Function {
+}
+class iOTConnector::Minus {
+}
+class iOTConnector::Mult {
+}
+class iOTConnector::Num {
+  + value : int
+}
+class iOTConnector::Output {
+}
+class iOTConnector::Plus {
+}
+class iOTConnector::Process {
+}
+class iOTConnector::ProcessAction {
+}
+class iOTConnector::Program {
+}
+class iOTConnector::ReadingName {
+  + name : str
+}
+class iOTConnector::ReadingNameWithConfigScope {
+}
+class iOTConnector::RelationalOperator {
+  + value : str
+}
+class iOTConnector::Sample {
+}
+class iOTConnector::SampleAction {
+  + amountOfTime : int
+  + number : int
+}
+class iOTConnector::Send {
+}
+class iOTConnector::SendAction {
+  + number : int
+}
+class iOTConnector::Sensor {
+  + name : str
+  + type : str
+}
+class iOTConnector::SensorConfig {
+  + name : str
+  + pinIn : str
+  + pinOut : str
+}
+class iOTConnector::TimeUnit {
+  + value : str
+}
+class iOTConnector::Var {
+}
+class iOTConnector::Webserver {
+  + port : int
+  + url : str
+}
+class iOTConnector::Wifi {
+  + password : str
+  + ssid : str
+}
+Expression <|-- iOTConnector::Div
+Expression <|-- iOTConnector::Minus
+Expression <|-- iOTConnector::Mult
+Expression <|-- iOTConnector::Num
+Expression <|-- iOTConnector::Plus
+Expression <|-- iOTConnector::Var
+Function <|-- iOTConnector::Filter
+Function <|-- iOTConnector::Process
+Function <|-- iOTConnector::Sample
+iOTConnector::BitwiseOperator "0..1" --* "1..1" iOTConnector::FilterExp : bitwiseOperator46
+iOTConnector::Board "0..9999" --* "1..1" iOTConnector::Program : boards5
+iOTConnector::Config "0..1" -- "1..1" iOTConnector::Board : configName11
+iOTConnector::Program "1..1" *-- "0..9999" iOTConnector::Config : configs3
+iOTConnector::Expression "0..1" --* "1..1" iOTConnector::ProcessAction : exp55
+iOTConnector::Filter "1..1" *-- "0..9999" iOTConnector::FilterAction : filterActions32
+iOTConnector::FilterAction "1..1" *-- "0..1" iOTConnector::FilterExp : filterExp38
+iOTConnector::FilterExp "0..1" --* "1..1" iOTConnector::FilterExp : filterExp49
+iOTConnector::FilterType "0..1" --* "1..1" iOTConnector::FilterAction : filterType36
+iOTConnector::Function "0..9999" --* "1..1" iOTConnector::Sensor : functions16
+iOTConnector::Expression "0..1" --* "1..1" iOTConnector::Plus : left68
+iOTConnector::Expression "0..1" --* "1..1" iOTConnector::Minus : left73
+iOTConnector::Expression "0..1" --* "1..1" iOTConnector::Mult : left78
+iOTConnector::Expression "0..1" --* "1..1" iOTConnector::Div : left83
+iOTConnector::ReadingName "0..1" -- "1..1" iOTConnector::ReadingNameWithConfigScope : name65
+iOTConnector::Sensor "1..1" *-- "0..1" iOTConnector::Output : output14
+iOTConnector::ProcessAction "0..9999" --* "1..1" iOTConnector::Process : processActions51
+iOTConnector::ReadingName "0..1" -- "1..1" iOTConnector::SampleAction : readingName23
+iOTConnector::ReadingName "0..1" -- "1..1" iOTConnector::FilterAction : readingName33
+iOTConnector::ReadingNameWithConfigScope "0..1" --* "1..1" iOTConnector::FilterExp : readingName40
+iOTConnector::ProcessAction "1..1" -- "0..1" iOTConnector::ReadingName : readingName52
+iOTConnector::ReadingName "0..1" -- "1..1" iOTConnector::SendAction : readingName59
+iOTConnector::ReadingNameWithConfigScope "0..1" --* "1..1" iOTConnector::Var : readingName88
+iOTConnector::ReadingNameWithConfigScope "0..1" --* "1..1" iOTConnector::SampleAction : readingNameToCompare26
+iOTConnector::ReadingName "0..9999" --* "1..1" iOTConnector::Output : readingNames20
+iOTConnector::RelationalOperator "0..1" --* "1..1" iOTConnector::SampleAction : relationalOperator28
+iOTConnector::FilterExp "1..1" *-- "0..1" iOTConnector::RelationalOperator : relationalOperator43
+iOTConnector::SendAction "1..1" *-- "0..1" iOTConnector::RelationalOperator : relationalOperator62
+iOTConnector::Plus "1..1" *-- "0..1" iOTConnector::Expression : right70
+iOTConnector::Expression "0..1" --* "1..1" iOTConnector::Minus : right75
+iOTConnector::Mult "1..1" *-- "0..1" iOTConnector::Expression : right80
+iOTConnector::Div "1..1" *-- "0..1" iOTConnector::Expression : right85
+iOTConnector::Sample "1..1" *-- "0..9999" iOTConnector::SampleAction : sampleActions22
+iOTConnector::Send "0..1" --* "1..1" iOTConnector::Sensor : send18
+iOTConnector::SendAction "0..9999" --* "1..1" iOTConnector::Send : sendActions57
+iOTConnector::Board "1..1" *-- "0..9999" iOTConnector::SensorConfig : sensorConfigs9
+iOTConnector::Sensor "0..9999" --* "1..1" iOTConnector::Config : sensors7
+iOTConnector::TimeUnit "0..1" --* "1..1" iOTConnector::SampleAction : timeUnit30
+iOTConnector::Webserver "0..1" --* "1..1" iOTConnector::Program : webserver0
+iOTConnector::Wifi "0..9999" --* "1..1" iOTConnector::Program : wifis1
+@enduml

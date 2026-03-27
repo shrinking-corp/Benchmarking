@@ -1,0 +1,45 @@
+@startuml
+class State {
+}
+class StateMachineObject {
+}
+class statemachine103::Action {
+  + actionLabel : str
+  + actionStatement : str
+}
+class statemachine103::FinalState {
+}
+class statemachine103::InitialState {
+}
+class statemachine103::NormalState {
+}
+abstract class statemachine103::State {
+  + id : int
+}
+class statemachine103::StateMachine {
+  + label : str
+}
+abstract class statemachine103::StateMachineObject {
+  + label : str
+}
+class statemachine103::StateMachineVariable {
+  + name : str
+  + type : str
+}
+class statemachine103::Transition {
+  + guardExpression : str
+  + guardLabel : str
+}
+StateMachineObject <|-- statemachine103::State
+StateMachineObject <|-- statemachine103::Transition
+State <|-- statemachine103::FinalState
+State <|-- statemachine103::InitialState
+State <|-- statemachine103::NormalState
+statemachine103::StateMachineObject "0..9999" --* "1..1" statemachine103::StateMachine : machineObjects0
+statemachine103::StateMachine "1..1" *-- "0..9999" statemachine103::StateMachineVariable : machineVariables1
+statemachine103::Action "0..1" -- "1..1" statemachine103::Action : next10
+statemachine103::Action "0..9999" --* "1..1" statemachine103::NormalState : s_actions12
+statemachine103::Transition "1..1" -- "0..1" statemachine103::State : source3
+statemachine103::Action "0..9999" --* "1..1" statemachine103::Transition : t_actions7
+statemachine103::State "0..1" -- "1..1" statemachine103::Transition : target4
+@enduml

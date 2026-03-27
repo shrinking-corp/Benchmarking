@@ -1,0 +1,28 @@
+@startuml
+enum Category {
+  ALL
+  FICTION
+  POETRY
+  SCIENCE
+}
+class Library::Book {
+  + blurb : str
+  + category : str
+  + pages : int
+  + title : str
+}
+class Library::Library {
+  + id : int
+  + name : str
+}
+class Library::Writer {
+  + id : int
+  + name : str
+}
+Library::Library "1..1" *-- "0..9999" Library::Book : books3
+Library::Writer "1..1" -- "0..9999" Library::Book : books7
+Library::Library "1..1" -- "1..1" Library::Book : library1
+Library::Library "1..1" -- "1..1" Library::Writer : library9
+Library::Writer "1..1" -- "1..1" Library::Book : writer0
+Library::Writer "0..9999" --* "1..1" Library::Library : writers4
+@enduml

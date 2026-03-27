@@ -1,0 +1,122 @@
+@startuml
+enum Alignment {
+  BOTTOM
+  CENTER
+  LEFT
+  RIGHT
+  TOP
+}
+class Container {
+}
+class Line {
+}
+enum LineStyle {
+  DASH
+  DASHDOT
+  DASHDOTDOT
+  DOT
+  LINE_CUSTOM
+  SOLID
+}
+class Node {
+}
+enum RulerUnit {
+  CENTIMETERS
+  INCHES
+  PIXELS
+}
+class Shape {
+}
+class View {
+}
+class di::Comment {
+}
+class di::CommentLink {
+}
+class di::Connector {
+}
+abstract class di::Container {
+  + allLines : str
+  + allShapes : str
+}
+class di::Diagram {
+  + rulers : str
+  + snapToGeometry : bool
+  + snapToGrid : bool
+}
+class di::EObject {
+}
+class di::ElementEntry {
+  + value : str
+}
+class di::GradientShape {
+  + gradientColor : int
+  + usingGradient : bool
+  + verticalGradient : bool
+}
+class di::Grid {
+  + color : int
+  + spacing : int
+  + style : str
+}
+class di::Guide {
+  + position : int
+}
+abstract class di::Line {
+  + color : int
+  + lineDash : int
+  + sourceAnchor : str
+  + sourceNode : str
+  + style : str
+  + targetAnchor : str
+  + targetNode : str
+  + width : int
+}
+abstract class di::Node {
+  + allIncomingLines : str
+  + allOutgoingLines : str
+}
+class di::Ruler {
+  + unit : str
+}
+class di::Shape {
+  + background : int
+  + bounds : str
+  + foreground : int
+}
+abstract class di::View {
+  + id : str
+  + label : str
+}
+Container <|-- di::Diagram
+Container <|-- di::Shape
+Line <|-- di::CommentLink
+Line <|-- di::Connector
+Node <|-- di::Line
+Node <|-- di::Shape
+Shape <|-- di::Comment
+Shape <|-- di::GradientShape
+View <|-- di::Container
+View <|-- di::Node
+di::Shape "0..9999" --* "1..1" di::Container : children6
+di::Node "1..1" -- "0..9999" di::CommentLink : commentLinks1
+di::CommentLink "0..9999" --* "1..1" di::Diagram : commentLinks10
+di::Comment "0..9999" --* "1..1" di::Diagram : comments9
+di::EObject "0..1" -- "1..1" di::View : element0
+di::ElementEntry "0..9999" --* "1..1" di::Guide : elementMap32
+di::Grid "0..1" --* "1..1" di::Diagram : grid17
+di::Ruler "1..1" *-- "0..9999" di::Guide : guides30
+di::Ruler "0..1" --* "1..1" di::Diagram : horizontalRuler12
+di::Connector "0..9999" -- "1..1" di::Node : incomingLines4
+di::CommentLink "0..9999" -- "1..1" di::Comment : inputs24
+di::View "1..1" -- "1..1" di::ElementEntry : key33
+di::Container "1..1" *-- "0..9999" di::Line : lines7
+di::Connector "0..9999" -- "1..1" di::Node : outgoingLines2
+di::EObject "0..1" -- "1..1" di::Connector : reverseElement22
+di::Ruler "0..1" -- "1..1" di::Guide : ruler31
+di::Connector "1..1" -- "0..1" di::Node : source20
+di::CommentLink "1..1" -- "0..1" di::Node : source27
+di::Node "0..1" -- "1..1" di::Connector : target19
+di::Comment "0..1" -- "1..1" di::CommentLink : target29
+di::Diagram "1..1" *-- "0..1" di::Ruler : verticalRuler14
+@enduml

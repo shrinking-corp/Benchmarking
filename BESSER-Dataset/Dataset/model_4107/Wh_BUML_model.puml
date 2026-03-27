@@ -1,0 +1,71 @@
+@startuml
+class wh::Affect {
+}
+class wh::Command {
+}
+class wh::Commands {
+}
+class wh::Cons {
+}
+class wh::Definition {
+}
+class wh::EObject {
+}
+class wh::Expr {
+}
+class wh::ExprAnd {
+}
+class wh::ExprEq {
+}
+class wh::ExprNot {
+  + not : str
+}
+class wh::ExprOr {
+}
+class wh::ExprSimple {
+  + str : str
+}
+class wh::Exprs {
+}
+class wh::Input {
+  + vars : str
+}
+class wh::ListExpr {
+}
+class wh::Nop {
+  + nop : str
+}
+class wh::Output {
+  + vars : str
+}
+class wh::Program {
+  + name : str
+}
+class wh::Vars {
+  + vars : str
+}
+class wh::Wh {
+}
+wh::Command "1..1" *-- "0..1" wh::EObject : cmd11
+wh::Commands "0..1" --* "1..1" wh::Definition : command5
+wh::Command "0..9999" --* "1..1" wh::Commands : commands9
+wh::Cons "0..1" --* "1..1" wh::ExprSimple : cons21
+wh::Definition "0..1" --* "1..1" wh::Program : definition1
+wh::Program "0..9999" --* "1..1" wh::Wh : elements0
+wh::Exprs "0..1" --* "1..1" wh::Affect : exp14
+wh::Expr "1..1" *-- "0..1" wh::EObject : expr18
+wh::ExprEq "0..1" --* "1..1" wh::ExprNot : expr36
+wh::Expr "0..1" --* "1..1" wh::ExprEq : expr44
+wh::ExprNot "0..1" --* "1..1" wh::ExprOr : exprNot131
+wh::ExprNot "0..9999" --* "1..1" wh::ExprOr : exprNotX33
+wh::ExprOr "0..1" --* "1..1" wh::ExprAnd : exprOr127
+wh::ExprAnd "1..1" *-- "0..9999" wh::ExprOr : exprOrX28
+wh::ExprSimple "0..1" --* "1..1" wh::ExprEq : exprSimp138
+wh::ExprEq "1..1" *-- "0..1" wh::ExprSimple : exprSimp241
+wh::Expr "0..9999" --* "1..1" wh::Exprs : exprs16
+wh::Expr "0..9999" --* "1..1" wh::ListExpr : exprs24
+wh::Input "0..1" --* "1..1" wh::Definition : input3
+wh::ListExpr "0..1" --* "1..1" wh::Cons : list22
+wh::Definition "1..1" *-- "0..1" wh::Output : output7
+wh::Vars "0..1" --* "1..1" wh::Affect : vars13
+@enduml

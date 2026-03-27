@@ -1,0 +1,27 @@
+@startuml
+class Class::Attribute {
+  + multiValued : bool
+}
+class Class::Class {
+  + isAbstract : bool
+}
+abstract class Class::Classifier {
+}
+class Class::DataType {
+}
+abstract class Class::NamedElt {
+  + name : str
+}
+class Classifier {
+}
+class NamedElt {
+}
+Classifier <|-- Class::Class
+Classifier <|-- Class::DataType
+NamedElt <|-- Class::Attribute
+NamedElt <|-- Class::Classifier
+Class::Class "1..1" *-- "0..9999" Class::Attribute : attr2
+Class::Class "1..1" -- "1..1" Class::Attribute : owner4
+Class::Class "0..9999" -- "1..1" Class::Class : super1
+Class::Classifier "1..1" -- "1..1" Class::Attribute : type3
+@enduml

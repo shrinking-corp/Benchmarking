@@ -1,0 +1,34 @@
+@startuml
+class NamedElement {
+}
+class ktest400::Article {
+  + aid : str
+}
+class ktest400::Line {
+  + articleAid : str
+  + quant : int
+}
+abstract class ktest400::NamedElement {
+  + name : str
+}
+class ktest400::RelatedTo {
+  + since : str
+}
+class ktest400::Thing {
+  + id : int
+}
+class ktest400::World {
+}
+NamedElement <|-- ktest400::Article
+NamedElement <|-- ktest400::Line
+NamedElement <|-- ktest400::RelatedTo
+NamedElement <|-- ktest400::Thing
+ktest400::Line "0..9999" --* "1..1" ktest400::Thing : e0s4
+ktest400::World "1..1" *-- "0..9999" ktest400::Article : e1s1
+ktest400::Thing "0..1" -- "1..1" ktest400::RelatedTo : fromThing6
+ktest400::Thing "1..1" *-- "0..9999" ktest400::RelatedTo : relations3
+ktest400::Thing "0..1" -- "1..1" ktest400::Line : src9
+ktest400::Thing "0..9999" --* "1..1" ktest400::World : things0
+ktest400::Thing "0..1" -- "1..1" ktest400::RelatedTo : toThing7
+ktest400::Line "1..1" -- "0..1" ktest400::Article : trg12
+@enduml

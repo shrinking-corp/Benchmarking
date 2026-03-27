@@ -1,0 +1,36 @@
+@startuml
+class NamedElement {
+}
+class yyf::Alias {
+  + id : str
+}
+class yyf::Bar {
+  + id : str
+}
+class yyf::Base {
+  + id : int
+}
+class yyf::Foo {
+  + id : str
+}
+abstract class yyf::NamedElement {
+  + name : str
+}
+class yyf::Output {
+  + id : str
+}
+class yyf::Relation {
+  + since : str
+}
+NamedElement <|-- yyf::Base
+NamedElement <|-- yyf::Relation
+yyf::Alias "0..9999" --* "1..1" yyf::NamedElement : aliases4
+yyf::Bar "0..9999" --* "1..1" yyf::NamedElement : bars5
+yyf::Base "1..1" *-- "0..9999" yyf::Foo : foos1
+yyf::Base "0..1" -- "1..1" yyf::Relation : fromThing7
+yyf::Output "0..9999" --* "1..1" yyf::Base : ouputs2
+yyf::Output "0..1" -- "1..1" yyf::Bar : output13
+yyf::Relation "0..9999" --* "1..1" yyf::Base : relations0
+yyf::Relation "1..1" *-- "0..9999" yyf::Relation : subRelations11
+yyf::Base "0..1" -- "1..1" yyf::Relation : toThing8
+@enduml

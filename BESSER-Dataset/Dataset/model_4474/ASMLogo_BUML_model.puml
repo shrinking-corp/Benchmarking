@@ -1,0 +1,126 @@
+@startuml
+class BinaryExp {
+}
+class Block {
+}
+class ControlStructure {
+}
+class Expression {
+}
+class Instruction {
+}
+class Parameter {
+}
+class Primitive {
+}
+class ProcCall {
+}
+class ProcDeclaration {
+}
+class kmLogo::ASM::Back {
+}
+abstract class kmLogo::ASM::BinaryExp {
+}
+class kmLogo::ASM::Block {
+}
+class kmLogo::ASM::Clear {
+}
+class kmLogo::ASM::Constant {
+  + integerValue : str
+}
+class kmLogo::ASM::ControlStructure {
+}
+class kmLogo::ASM::Div {
+}
+class kmLogo::ASM::Equals {
+}
+abstract class kmLogo::ASM::Expression {
+}
+class kmLogo::ASM::Forward {
+}
+class kmLogo::ASM::Greater {
+}
+class kmLogo::ASM::If {
+}
+abstract class kmLogo::ASM::Instruction {
+}
+class kmLogo::ASM::Left {
+}
+class kmLogo::ASM::LogoProgram {
+}
+class kmLogo::ASM::Lower {
+}
+class kmLogo::ASM::Minus {
+}
+class kmLogo::ASM::Mult {
+}
+class kmLogo::ASM::Parameter {
+  + name : str
+}
+class kmLogo::ASM::ParameterCall {
+}
+class kmLogo::ASM::PenDown {
+}
+class kmLogo::ASM::PenUp {
+}
+class kmLogo::ASM::Plus {
+}
+abstract class kmLogo::ASM::Primitive {
+}
+class kmLogo::ASM::ProcCall {
+}
+class kmLogo::ASM::ProcDeclaration {
+  + name : str
+}
+class kmLogo::ASM::Repeat {
+}
+class kmLogo::ASM::Right {
+}
+class kmLogo::ASM::While {
+}
+BinaryExp <|-- kmLogo::ASM::Div
+BinaryExp <|-- kmLogo::ASM::Equals
+BinaryExp <|-- kmLogo::ASM::Greater
+BinaryExp <|-- kmLogo::ASM::Lower
+BinaryExp <|-- kmLogo::ASM::Minus
+BinaryExp <|-- kmLogo::ASM::Mult
+BinaryExp <|-- kmLogo::ASM::Plus
+ControlStructure <|-- kmLogo::ASM::If
+ControlStructure <|-- kmLogo::ASM::Repeat
+ControlStructure <|-- kmLogo::ASM::While
+Expression <|-- kmLogo::ASM::BinaryExp
+Expression <|-- kmLogo::ASM::Constant
+Expression <|-- kmLogo::ASM::ParameterCall
+Expression <|-- kmLogo::ASM::ProcCall
+Instruction <|-- kmLogo::ASM::Block
+Instruction <|-- kmLogo::ASM::ControlStructure
+Instruction <|-- kmLogo::ASM::Expression
+Instruction <|-- kmLogo::ASM::Primitive
+Instruction <|-- kmLogo::ASM::ProcDeclaration
+Primitive <|-- kmLogo::ASM::Back
+Primitive <|-- kmLogo::ASM::Clear
+Primitive <|-- kmLogo::ASM::Forward
+Primitive <|-- kmLogo::ASM::Left
+Primitive <|-- kmLogo::ASM::PenDown
+Primitive <|-- kmLogo::ASM::PenUp
+Primitive <|-- kmLogo::ASM::Right
+kmLogo::ASM::ProcCall "1..1" *-- "0..9999" Expression : actualArgs12
+Expression "0..1" --* "1..1" kmLogo::ASM::Left : angle3
+kmLogo::ASM::Right "1..1" *-- "0..1" Expression : angle5
+Parameter "0..9999" --* "1..1" kmLogo::ASM::ProcDeclaration : args15
+Block "1..1" --* "1..1" kmLogo::ASM::Repeat : block28
+Block "1..1" --* "1..1" kmLogo::ASM::While : block30
+Expression "0..1" --* "1..1" kmLogo::ASM::ControlStructure : condition26
+ProcDeclaration "1..1" -- "1..1" kmLogo::ASM::ProcCall : declaration14
+Block "0..1" --* "1..1" kmLogo::ASM::If : elsePart23
+Instruction "0..9999" --* "1..1" kmLogo::ASM::ProcDeclaration : instructions18
+Instruction "0..9999" --* "1..1" kmLogo::ASM::Block : instructions20
+Instruction "0..9999" --* "1..1" kmLogo::ASM::LogoProgram : instructions34
+Expression "1..1" --* "1..1" kmLogo::ASM::BinaryExp : lhs7
+kmLogo::ASM::ParameterCall "1..1" -- "1..1" Parameter : parameter32
+kmLogo::ASM::ProcDeclaration "1..1" -- "0..9999" ProcCall : procCall16
+Expression "1..1" --* "1..1" kmLogo::ASM::BinaryExp : rhs9
+Expression "1..1" --* "1..1" kmLogo::ASM::Back : steps0
+Expression "1..1" --* "1..1" kmLogo::ASM::Forward : steps1
+kmLogo::ASM::If "1..1" *-- "1..1" Block : thenPart22
+@enduml

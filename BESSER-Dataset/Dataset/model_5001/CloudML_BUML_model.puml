@@ -1,0 +1,127 @@
+@startuml
+class ArtefactPort {
+}
+class ArtefactPortInstance {
+}
+class CloudMLElement {
+}
+class NamedElement {
+}
+class WithProperties {
+}
+class cloudml::Artefact {
+}
+class cloudml::ArtefactInstance {
+}
+abstract class cloudml::ArtefactPort {
+  + isRemote : bool
+  + portNumber : int
+}
+class cloudml::ArtefactPortInstance {
+}
+class cloudml::Binding {
+}
+class cloudml::BindingInstance {
+}
+class cloudml::ClientPort {
+  + isOptional : bool
+}
+class cloudml::ClientPortInstance {
+}
+abstract class cloudml::CloudMLElement {
+}
+class cloudml::Composite {
+}
+class cloudml::DeploymentModel {
+}
+abstract class cloudml::NamedElement {
+  + name : str
+}
+class cloudml::Node {
+  + OS : str
+  + groupName : str
+  + imageID : str
+  + is64os : bool
+  + location : str
+  + minCore : int
+  + minDisk : int
+  + minRam : int
+  + privateKey : str
+  + securityGroup : str
+  + sshKey : str
+}
+class cloudml::NodeInstance {
+  + id : str
+  + publicAddress : str
+}
+class cloudml::Property {
+  + value : str
+}
+class cloudml::Provider {
+  + credentials : str
+}
+class cloudml::Resource {
+  + configurationCommand : str
+  + deployingCommand : str
+  + retrievingCommand : str
+  + startCommand : str
+  + stopCommand : str
+}
+class cloudml::ServerPort {
+}
+class cloudml::ServerPortInstance {
+}
+class cloudml::UploadCommand {
+  + source : str
+  + target : str
+}
+abstract class cloudml::WithProperties {
+}
+ArtefactPortInstance <|-- cloudml::ClientPortInstance
+ArtefactPortInstance <|-- cloudml::ServerPortInstance
+ArtefactPort <|-- cloudml::ClientPort
+ArtefactPort <|-- cloudml::ServerPort
+CloudMLElement <|-- cloudml::NamedElement
+NamedElement <|-- cloudml::Composite
+NamedElement <|-- cloudml::Property
+NamedElement <|-- cloudml::WithProperties
+WithProperties <|-- cloudml::Artefact
+WithProperties <|-- cloudml::ArtefactInstance
+WithProperties <|-- cloudml::ArtefactPort
+WithProperties <|-- cloudml::ArtefactPortInstance
+WithProperties <|-- cloudml::Binding
+WithProperties <|-- cloudml::BindingInstance
+WithProperties <|-- cloudml::DeploymentModel
+WithProperties <|-- cloudml::Node
+WithProperties <|-- cloudml::NodeInstance
+WithProperties <|-- cloudml::Provider
+WithProperties <|-- cloudml::Resource
+cloudml::ArtefactInstance "0..9999" --* "1..1" cloudml::DeploymentModel : artefactInstances9
+cloudml::Artefact "0..9999" --* "1..1" cloudml::DeploymentModel : artefactTypes3
+cloudml::DeploymentModel "1..1" *-- "0..9999" cloudml::BindingInstance : bindingInstances13
+cloudml::Binding "0..9999" --* "1..1" cloudml::DeploymentModel : bindingTypes7
+cloudml::Binding "1..1" -- "0..1" cloudml::ClientPort : client44
+cloudml::ClientPortInstance "0..1" -- "1..1" cloudml::BindingInstance : client59
+cloudml::Resource "0..1" --* "1..1" cloudml::Binding : clientResource50
+cloudml::Node "1..1" -- "1..1" cloudml::Provider : cloudProvider24
+cloudml::ArtefactInstance "0..9999" --* "1..1" cloudml::Composite : containedArtefacts42
+cloudml::ArtefactPort "0..1" -- "1..1" cloudml::Artefact : destination15
+cloudml::NodeInstance "0..1" -- "1..1" cloudml::ArtefactInstance : destination32
+cloudml::NodeInstance "0..9999" --* "1..1" cloudml::DeploymentModel : nodeInstances11
+cloudml::Node "0..9999" --* "1..1" cloudml::DeploymentModel : nodeTypes5
+cloudml::Property "0..9999" --* "1..1" cloudml::WithProperties : properties0
+cloudml::ServerPort "0..9999" --* "1..1" cloudml::Artefact : provided20
+cloudml::ArtefactInstance "1..1" *-- "0..9999" cloudml::ServerPortInstance : provided35
+cloudml::DeploymentModel "1..1" *-- "0..9999" cloudml::Provider : providers2
+cloudml::ClientPort "0..9999" --* "1..1" cloudml::Artefact : required22
+cloudml::ClientPortInstance "0..9999" --* "1..1" cloudml::ArtefactInstance : required37
+cloudml::Resource "0..1" --* "1..1" cloudml::Artefact : resource17
+cloudml::ServerPort "0..1" -- "1..1" cloudml::Binding : server47
+cloudml::ServerPortInstance "0..1" -- "1..1" cloudml::BindingInstance : server62
+cloudml::Resource "0..1" --* "1..1" cloudml::Binding : serverResource53
+cloudml::ArtefactPort "1..1" -- "1..1" cloudml::ArtefactPortInstance : type27
+cloudml::Artefact "1..1" -- "1..1" cloudml::ArtefactInstance : type29
+cloudml::Node "1..1" -- "1..1" cloudml::NodeInstance : type39
+cloudml::BindingInstance "1..1" -- "1..1" cloudml::Binding : type56
+cloudml::UploadCommand "0..9999" --* "1..1" cloudml::Resource : uploadCommand1
+@enduml

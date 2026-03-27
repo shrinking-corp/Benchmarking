@@ -1,0 +1,41 @@
+@startuml
+class NamedElement {
+}
+class Thing {
+}
+abstract class simple200::NamedElement {
+  + name : str
+}
+class simple200::RelatedTo {
+  + since : str
+}
+class simple200::State {
+  + activity : str
+  + label : str
+  + type : str
+}
+abstract class simple200::Thing {
+  + id : int
+}
+class simple200::Transition {
+  + expression : str
+}
+class simple200::Variable {
+  + type : str
+  + value : str
+}
+NamedElement <|-- simple200::RelatedTo
+NamedElement <|-- simple200::State
+NamedElement <|-- simple200::Thing
+NamedElement <|-- simple200::Transition
+Thing <|-- simple200::Variable
+simple200::Thing "0..1" -- "1..1" simple200::RelatedTo : fromThing1
+simple200::State "0..1" -- "1..1" simple200::State : parentstate9
+simple200::RelatedTo "0..9999" --* "1..1" simple200::Thing : relations0
+simple200::Transition "1..1" -- "0..1" simple200::State : source3
+simple200::State "0..9999" --* "1..1" simple200::State : substates6
+simple200::State "0..1" -- "1..1" simple200::Transition : target4
+simple200::RelatedTo "1..1" -- "0..1" simple200::Thing : toThing2
+simple200::Transition "0..9999" --* "1..1" simple200::State : transitions13
+simple200::Variable "0..9999" --* "1..1" simple200::State : variables11
+@enduml

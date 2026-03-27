@@ -1,0 +1,26 @@
+@startuml
+class Categorized {
+}
+class message::Language {
+  + code : str
+  + defaultLang : bool
+  + lang : str
+  + uid : str
+}
+class message::Message {
+  + name : str
+  + uid : str
+}
+class message::MessageLibrary {
+  + name : str
+  + uid : str
+}
+class message::Translation {
+  + translation : str
+  + uid : str
+}
+Categorized <|-- message::MessageLibrary
+message::Language "0..1" -- "1..1" message::Translation : lang3
+message::Message "0..9999" --* "1..1" message::MessageLibrary : messages0
+message::Translation "0..9999" --* "1..1" message::Message : translatioins1
+@enduml

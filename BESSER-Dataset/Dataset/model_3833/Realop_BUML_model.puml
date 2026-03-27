@@ -1,0 +1,45 @@
+@startuml
+class Expression {
+}
+class realop::AndExp {
+}
+class realop::Expression {
+}
+class realop::IsNegative {
+  + featureName : str
+}
+class realop::IsPositive {
+  + featureName : str
+}
+class realop::IsRealised {
+  + featureName : str
+}
+class realop::NotExp {
+}
+class realop::Operator {
+  + name : str
+}
+class realop::OrExp {
+}
+class realop::Realop {
+}
+class realop::XorExp {
+}
+Expression <|-- realop::AndExp
+Expression <|-- realop::IsNegative
+Expression <|-- realop::IsPositive
+Expression <|-- realop::IsRealised
+Expression <|-- realop::NotExp
+Expression <|-- realop::OrExp
+Expression <|-- realop::XorExp
+realop::Expression "0..1" --* "1..1" realop::NotExp : exp21
+realop::Expression "0..1" --* "1..1" realop::Operator : expPost3
+realop::Expression "0..1" --* "1..1" realop::Operator : expPre1
+realop::Expression "0..1" --* "1..1" realop::AndExp : left11
+realop::Expression "0..1" --* "1..1" realop::XorExp : left16
+realop::Expression "0..1" --* "1..1" realop::OrExp : left6
+realop::Realop "1..1" *-- "0..9999" realop::Operator : operators0
+realop::Expression "0..1" --* "1..1" realop::AndExp : right13
+realop::XorExp "1..1" *-- "0..1" realop::Expression : right18
+realop::OrExp "1..1" *-- "0..1" realop::Expression : right8
+@enduml

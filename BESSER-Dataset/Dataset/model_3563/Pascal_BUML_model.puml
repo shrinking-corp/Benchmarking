@@ -1,0 +1,62 @@
+@startuml
+class expression {
+}
+class pascal::EObject {
+}
+class pascal::Pascal {
+}
+class pascal::arit::expression {
+  + value : str
+}
+class pascal::atrib {
+  + var_id : str
+}
+class pascal::block {
+}
+class pascal::expression {
+}
+class pascal::program {
+  + name : str
+}
+class pascal::rel::expression {
+  + close : str
+  + first : str
+  + op : str
+  + open : str
+  + second : str
+}
+class pascal::repetitive::arit::expression {
+  + op : str
+  + value : str
+}
+class pascal::statement {
+}
+class pascal::var::block {
+}
+class pascal::var::decl {
+  + value : str
+  + var_id : str
+  + var_type : str
+}
+class pascal::var::list {
+  + var_id : str
+  + var_ids : str
+  + var_type : str
+}
+enum type {
+  BOOLEAN
+  INTEGER
+  STRING
+}
+expression <|-- pascal::arit::expression
+expression <|-- pascal::rel::expression
+pascal::atrib "0..9999" --* "1..1" pascal::statement : atrib_block9
+pascal::Pascal "1..1" *-- "0..9999" pascal::var::block : declarations1
+pascal::atrib "1..1" *-- "0..1" pascal::expression : exp11
+pascal::repetitive::arit::expression "0..9999" --* "1..1" pascal::arit::expression : exp13
+pascal::repetitive::arit::expression "0..9999" --* "1..1" pascal::repetitive::arit::expression : exp15
+pascal::program "0..1" --* "1..1" pascal::Pascal : head0
+pascal::Pascal "1..1" *-- "0..9999" pascal::block : scope3
+pascal::statement "0..9999" --* "1..1" pascal::block : statements7
+pascal::EObject "0..9999" --* "1..1" pascal::var::block : var_statements5
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+class RDBMSMM::Column {
+  + name : str
+  + type : str
+}
+class RDBMSMM::FKey {
+}
+class RDBMSMM::RDBMSModel {
+}
+class RDBMSMM::Table {
+  + name : str
+}
+RDBMSMM::Table "1..1" *-- "1..9999" RDBMSMM::Column : cols0
+RDBMSMM::Column "1..9999" -- "1..1" RDBMSMM::FKey : cols9
+RDBMSMM::FKey "0..9999" --* "1..1" RDBMSMM::Table : fkeys4
+RDBMSMM::Column "1..9999" -- "1..1" RDBMSMM::Table : pkey1
+RDBMSMM::FKey "1..1" -- "1..1" RDBMSMM::Table : references6
+RDBMSMM::Table "1..9999" --* "1..1" RDBMSMM::RDBMSModel : table12
+@enduml

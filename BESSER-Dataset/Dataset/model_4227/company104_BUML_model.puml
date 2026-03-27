@@ -1,0 +1,107 @@
+@startuml
+class Function {
+}
+enum Hierarchy {
+  Subordinate
+  Supervisor
+}
+class Interval {
+}
+class NamedElement {
+}
+enum ObjectiveNature {
+  Cost
+  Delay
+  Economical
+  Environmental
+  Human
+  Legal
+  None
+  Other
+  Performance
+  Quality
+}
+enum ObjectiveType {
+  None
+  Operational
+  Strategic
+  Tactic
+}
+enum RoleType {
+  Composite
+  Control
+  Decision
+  Transformation
+}
+class company104::Agency {
+  + Accronym : str
+  + Status : str
+}
+class company104::Company {
+}
+class company104::Department {
+}
+class company104::Employee {
+  + address : int
+  + fullName : str
+  + socialSecurityNumber : str
+}
+class company104::Flow {
+}
+abstract class company104::Function {
+}
+class company104::Goal {
+  + statement : str
+}
+class company104::HierarchyLink {
+  + hierarchy : str
+}
+abstract class company104::Interval {
+  + dateFrom : str
+  + dateTo : str
+}
+abstract class company104::NamedElement {
+  + name : str
+}
+class company104::Objective {
+  + nature : str
+  + type : str
+  + value : float
+}
+class company104::ObjectiveReach {
+  + statement : str
+  + value : float
+}
+class company104::Room {
+}
+class company104::Workstation {
+  + ProfileDescription : str
+}
+Function <|-- company104::Agency
+Function <|-- company104::Department
+Function <|-- company104::Room
+Interval <|-- company104::Goal
+NamedElement <|-- company104::Flow
+NamedElement <|-- company104::Function
+NamedElement <|-- company104::Workstation
+company104::Agency "0..9999" --* "1..1" company104::Company : agencies0
+company104::Agency "1..1" *-- "0..9999" company104::Department : departments27
+company104::Employee "0..9999" --* "1..1" company104::Agency : employees30
+company104::Flow "0..9999" --* "1..1" company104::Function : flows41
+company104::Employee "0..1" -- "1..1" company104::HierarchyLink : fromEmployee13
+company104::Function "0..1" -- "1..1" company104::Flow : fromFunction4
+company104::Company "1..1" *-- "0..9999" company104::Goal : goals1
+company104::HierarchyLink "0..9999" --* "1..1" company104::Employee : hierarchies8
+company104::Workstation "0..1" -- "1..1" company104::Employee : inChargeOf12
+company104::Objective "0..9999" --* "1..1" company104::Goal : objectives25
+company104::Employee "0..9999" -- "1..1" company104::Workstation : owners24
+company104::Room "1..1" -- "0..9999" company104::Room : parent20
+company104::ObjectiveReach "0..9999" --* "1..1" company104::Agency : reacheds33
+company104::Employee "1..1" -- "0..1" company104::Room : responsibleOf9
+company104::Room "0..9999" --* "1..1" company104::Department : rooms3
+company104::ObjectiveReach "1..1" -- "0..1" company104::Agency : srcAgency38
+company104::Employee "0..1" -- "1..1" company104::HierarchyLink : toEmployee16
+company104::Function "0..1" -- "1..1" company104::Flow : toFunction5
+company104::Objective "0..1" -- "1..1" company104::ObjectiveReach : trgObjective35
+company104::Workstation "0..9999" --* "1..1" company104::Room : workstations22
+@enduml

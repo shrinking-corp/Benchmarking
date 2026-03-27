@@ -1,0 +1,34 @@
+@startuml
+class IDElement {
+}
+enum StateKind {
+  DEFAULT
+  FINAL
+  INITIAL
+}
+class stateMachine::Event {
+}
+class stateMachine::IDElement {
+  + id : str
+}
+class stateMachine::State {
+  + kind : str
+}
+class stateMachine::StateMachine {
+}
+class stateMachine::Transition {
+}
+IDElement <|-- stateMachine::Event
+IDElement <|-- stateMachine::State
+IDElement <|-- stateMachine::StateMachine
+IDElement <|-- stateMachine::Transition
+stateMachine::Event "0..9999" -- "1..1" stateMachine::Transition : effect14
+stateMachine::Event "0..9999" --* "1..1" stateMachine::StateMachine : events3
+stateMachine::State "1..1" -- "0..9999" stateMachine::Transition : incoming6
+stateMachine::Transition "0..9999" -- "1..1" stateMachine::State : outgoing5
+stateMachine::Transition "1..1" -- "1..1" stateMachine::State : source8
+stateMachine::State "0..9999" --* "1..1" stateMachine::StateMachine : states0
+stateMachine::State "1..1" -- "1..1" stateMachine::Transition : target9
+stateMachine::Transition "0..9999" --* "1..1" stateMachine::StateMachine : transitions1
+stateMachine::Transition "1..1" -- "0..9999" stateMachine::Event : trigger11
+@enduml

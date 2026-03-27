@@ -1,0 +1,47 @@
+@startuml
+enum SemesterCode {
+  Autumn
+  Spring
+}
+class studies::Course {
+  + code : str
+  + name : str
+  + studyPoints : float
+}
+class studies::CourseInstance {
+  + instanceName : str
+  + semester : str
+  + year : int
+}
+class studies::Semester {
+  + studyYearSemester : str
+}
+class studies::Study {
+  + code : str
+  + name : str
+}
+class studies::StudyCourse {
+  + mandatory : bool
+}
+class studies::StudyInstance {
+  + year : int
+}
+class studies::StudyYear {
+  + programName : str
+}
+class studies::University {
+  + name : str
+}
+studies::Semester "0..1" --* "1..1" studies::StudyYear : autumnSemester13
+studies::Course "1..1" -- "1..1" studies::CourseInstance : course4
+studies::CourseInstance "1..1" -- "1..1" studies::StudyCourse : courseInstance16
+studies::CourseInstance "0..9999" --* "1..1" studies::Course : courseInstances3
+studies::Course "0..9999" --* "1..1" studies::University : courses0
+studies::Semester "1..1" -- "1..9999" studies::CourseInstance : courses17
+studies::StudyYear "0..9999" --* "1..1" studies::StudyYear : nextYear9
+studies::Semester "0..1" --* "1..1" studies::StudyYear : springSemester11
+studies::StudyYear "1..1" --* "1..1" studies::StudyInstance : startYear7
+studies::University "1..1" *-- "0..9999" studies::Study : studies1
+studies::StudyInstance "1..1" -- "1..1" studies::Study : study6
+studies::StudyInstance "0..9999" --* "1..1" studies::Study : studyInstances5
+@enduml

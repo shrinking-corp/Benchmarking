@@ -1,0 +1,41 @@
+@startuml
+class Field {
+}
+enum Type {
+  BOOLEAN
+  CHAR
+  DATE
+  FLOAT
+  NUMERIC
+  TIME
+  VARCHAR
+}
+class relational::Column {
+  + type : str
+}
+class relational::DataBase {
+  + port : int
+  + uri : str
+}
+abstract class relational::Field {
+  + name : str
+}
+class relational::ForeignKey {
+}
+class relational::PrimaryKey {
+  + id : str
+}
+class relational::Schema {
+  + name : str
+}
+class relational::Table {
+  + name : str
+}
+Field <|-- relational::Column
+Field <|-- relational::ForeignKey
+Field <|-- relational::PrimaryKey
+relational::Field "0..9999" --* "1..1" relational::Table : fields3
+relational::Table "1..1" -- "1..1" relational::ForeignKey : reference5
+relational::Schema "0..9999" --* "1..1" relational::DataBase : schemas0
+relational::Table "0..9999" --* "1..1" relational::Schema : tables1
+@enduml

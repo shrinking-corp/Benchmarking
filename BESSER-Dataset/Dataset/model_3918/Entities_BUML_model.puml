@@ -1,0 +1,36 @@
+@startuml
+class Property {
+}
+class Type {
+}
+class entities::Entity {
+}
+class entities::Import {
+  + importURI : str
+}
+class entities::Model {
+}
+class entities::Property {
+  + many : bool
+  + name : str
+}
+class entities::Reference {
+}
+class entities::SimpleProperty {
+}
+class entities::SimpleType {
+}
+class entities::Type {
+  + name : str
+}
+Property <|-- entities::Reference
+Property <|-- entities::SimpleProperty
+Type <|-- entities::Entity
+Type <|-- entities::SimpleType
+entities::Type "0..9999" --* "1..1" entities::Model : elements1
+entities::Entity "0..1" -- "1..1" entities::Entity : extends4
+entities::Import "0..9999" --* "1..1" entities::Model : imports0
+entities::Property "0..9999" --* "1..1" entities::Entity : properties5
+entities::SimpleProperty "1..1" -- "0..1" entities::SimpleType : type7
+entities::Entity "0..1" -- "1..1" entities::Reference : type8
+@enduml

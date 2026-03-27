@@ -1,0 +1,21 @@
+@startuml
+class fsm::FSM {
+  + name : str
+}
+class fsm::State {
+  + name : str
+}
+class fsm::Transition {
+  + input : str
+  + output : str
+}
+fsm::FSM "1..1" -- "1..1" fsm::State : containingFSM12
+fsm::FSM "0..1" -- "1..1" fsm::Transition : containingFSM21
+fsm::Transition "0..9999" -- "1..1" fsm::State : incomingTransitions9
+fsm::State "1..1" -- "1..1" fsm::FSM : initialState5
+fsm::Transition "0..9999" -- "1..1" fsm::State : outgoingTransitions6
+fsm::State "1..1" -- "1..1" fsm::Transition : source18
+fsm::State "0..9999" --* "1..1" fsm::FSM : states0
+fsm::Transition "1..1" -- "1..1" fsm::State : target15
+fsm::Transition "0..9999" --* "1..1" fsm::FSM : transitions2
+@enduml

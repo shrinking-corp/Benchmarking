@@ -1,0 +1,20 @@
+@startuml
+class edd::Block {
+  + name : str
+  + validate() : bool
+}
+class edd::Diagram {
+}
+class edd::Model {
+  + name : str
+}
+class edd::TreeElement {
+  + index : str
+  + name : str
+  + validate() : bool
+}
+edd::Block "0..9999" --* "1..1" edd::Model : blocks1
+edd::TreeElement "0..9999" --* "1..1" edd::Block : items5
+edd::TreeElement "1..1" -- "0..9999" edd::TreeElement : links4
+edd::Diagram "1..1" *-- "0..1" edd::Model : model0
+@enduml

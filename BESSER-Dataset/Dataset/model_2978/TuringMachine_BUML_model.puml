@@ -1,0 +1,50 @@
+@startuml
+class machine::Current {
+  + name : str
+}
+class machine::Final {
+  + name : str
+}
+class machine::Head {
+  + name : str
+}
+class machine::Initial {
+  + name : str
+}
+class machine::Machine {
+}
+class machine::State {
+  + name : str
+}
+class machine::Symbol {
+  + name : str
+  + position : str
+  + value : str
+}
+class machine::Tape {
+}
+class machine::Transition {
+  + moveTo : str
+  + name : str
+  + read : str
+  + write : str
+}
+class machine::TuringMachine {
+}
+machine::Current "0..1" --* "1..1" machine::Machine : current7
+machine::Machine "1..1" *-- "0..9999" machine::Final : finals5
+machine::Machine "1..1" *-- "0..1" machine::Head : head15
+machine::Initial "0..1" --* "1..1" machine::Machine : initial4
+machine::Machine "0..1" --* "1..1" machine::TuringMachine : machine24
+machine::Symbol "0..1" -- "1..1" machine::Symbol : next33
+machine::State "0..1" -- "1..1" machine::Transition : source0
+machine::State "0..1" -- "1..1" machine::Current : state17
+machine::State "0..1" -- "1..1" machine::Initial : state20
+machine::State "0..1" -- "1..1" machine::Final : state29
+machine::State "0..9999" --* "1..1" machine::Machine : states9
+machine::Head "1..1" -- "0..1" machine::Symbol : symbol35
+machine::Tape "1..1" *-- "0..9999" machine::Symbol : symbols23
+machine::Tape "0..1" --* "1..1" machine::TuringMachine : tape26
+machine::State "0..1" -- "1..1" machine::Transition : target1
+machine::Transition "0..9999" --* "1..1" machine::Machine : transitions12
+@enduml

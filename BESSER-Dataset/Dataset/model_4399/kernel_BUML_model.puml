@@ -1,0 +1,223 @@
+@startuml
+class Argument {
+}
+class DataItem {
+}
+class Definition {
+}
+class ElementReference {
+}
+class End {
+}
+class ExceptionHandlerStatement {
+}
+enum ExecutionOrder {
+  interleaved
+  l2r
+  r2l
+}
+class Expression {
+}
+class Jump {
+}
+class KernelRoot {
+}
+class LabellableElement {
+}
+class MainProcedure {
+}
+class Member {
+}
+class NamedElement {
+}
+class Parameter {
+}
+class ProcedureCall {
+}
+class ReferenceableElement {
+}
+class ReturnSite {
+}
+class Start {
+}
+class Statement {
+}
+class SubExpression {
+}
+class Usage {
+}
+class commons::LabellableElement {
+}
+class commons::Variable {
+}
+abstract class kernel::commons::NamedElement {
+  + name : str
+}
+class kernel::containers::CompilationUnit {
+}
+abstract class kernel::containers::KernelRoot {
+}
+class kernel::dataitems::DataItem {
+}
+class kernel::expressions::Affects {
+}
+class kernel::expressions::Defines {
+}
+abstract class kernel::expressions::Definition {
+}
+class kernel::expressions::Expression {
+  + getDefinedVariables() : str
+  + getUsedVariables() : str
+}
+abstract class kernel::expressions::SubExpression {
+}
+abstract class kernel::expressions::Usage {
+}
+class kernel::expressions::Uses {
+}
+abstract class kernel::members::Member {
+}
+class kernel::parameters::Parameter {
+  + byReference : bool
+  + correspondingArgument : str
+}
+class kernel::procedures::MainProcedure {
+}
+class kernel::procedures::Procedure {
+}
+class kernel::references::Argument {
+  + getCorrespondingParameter() : str
+}
+abstract class kernel::references::ElementReference {
+}
+abstract class kernel::references::Reference {
+}
+abstract class kernel::references::ReferenceableElement {
+}
+class kernel::statements::Abort {
+}
+class kernel::statements::Block {
+}
+class kernel::statements::Condition {
+}
+abstract class kernel::statements::Conditional {
+}
+class kernel::statements::ExceptionHandlerStatement {
+}
+class kernel::statements::ExpressionStatement {
+}
+class kernel::statements::Goto {
+}
+abstract class kernel::statements::Jump {
+}
+class kernel::statements::NonDeterministicBlock {
+}
+class kernel::statements::ParallelBlock {
+  + order : str
+}
+class kernel::statements::ProcedureCall {
+}
+class kernel::statements::Return {
+}
+class kernel::statements::Skip {
+}
+abstract class kernel::statements::Statement {
+}
+abstract class kernel::statements::StatementContainer {
+}
+abstract class kernel::statements::StatementListContainer {
+}
+class kernel::statements::StatementWithException {
+}
+class kernel::statements::WhileLoop {
+}
+class members::Member {
+}
+class procedures::Procedure {
+}
+class procedures::ProcedureCall {
+}
+class references::ElementReference {
+}
+class references::ReferenceableElement {
+}
+class statements::Conditional {
+}
+class statements::Statement {
+}
+class statements::StatementContainer {
+}
+class statements::StatementListContainer {
+}
+DataItem <|-- kernel::parameters::Parameter
+Definition <|-- kernel::expressions::Affects
+Definition <|-- kernel::expressions::Defines
+ElementReference <|-- kernel::expressions::SubExpression
+ElementReference <|-- kernel::references::Argument
+Jump <|-- kernel::statements::Goto
+KernelRoot <|-- kernel::containers::CompilationUnit
+LabellableElement <|-- kernel::containers::KernelRoot
+LabellableElement <|-- kernel::expressions::Expression
+LabellableElement <|-- kernel::procedures::MainProcedure
+NamedElement <|-- kernel::references::ReferenceableElement
+Statement <|-- kernel::statements::Abort
+Statement <|-- kernel::statements::ExpressionStatement
+Statement <|-- kernel::statements::Jump
+Statement <|-- kernel::statements::Return
+Statement <|-- kernel::statements::Skip
+SubExpression <|-- kernel::expressions::Definition
+SubExpression <|-- kernel::expressions::Usage
+Usage <|-- kernel::expressions::Uses
+commons::LabellableElement <|-- kernel::procedures::Procedure
+commons::LabellableElement <|-- kernel::statements::ExceptionHandlerStatement
+commons::LabellableElement <|-- kernel::statements::Statement
+commons::Variable <|-- kernel::dataitems::DataItem
+members::Member <|-- kernel::dataitems::DataItem
+members::Member <|-- kernel::procedures::Procedure
+members::Member <|-- kernel::statements::Statement
+procedures::ProcedureCall <|-- kernel::statements::ProcedureCall
+procedures::Procedure <|-- kernel::procedures::Procedure
+references::ElementReference <|-- kernel::statements::ProcedureCall
+references::ReferenceableElement <|-- kernel::dataitems::DataItem
+references::ReferenceableElement <|-- kernel::procedures::Procedure
+statements::Conditional <|-- kernel::statements::Condition
+statements::Conditional <|-- kernel::statements::WhileLoop
+statements::StatementContainer <|-- kernel::statements::Condition
+statements::StatementContainer <|-- kernel::statements::ExceptionHandlerStatement
+statements::StatementContainer <|-- kernel::statements::StatementWithException
+statements::StatementContainer <|-- kernel::statements::WhileLoop
+statements::StatementListContainer <|-- kernel::statements::Block
+statements::StatementListContainer <|-- kernel::statements::NonDeterministicBlock
+statements::StatementListContainer <|-- kernel::statements::ParallelBlock
+statements::Statement <|-- kernel::statements::Block
+statements::Statement <|-- kernel::statements::Condition
+statements::Statement <|-- kernel::statements::NonDeterministicBlock
+statements::Statement <|-- kernel::statements::ParallelBlock
+statements::Statement <|-- kernel::statements::ProcedureCall
+statements::Statement <|-- kernel::statements::StatementWithException
+statements::Statement <|-- kernel::statements::WhileLoop
+Argument "0..9999" --* "1..1" kernel::statements::ProcedureCall : arguments8
+ProcedureCall "0..9999" -- "1..1" kernel::procedures::Procedure : callers16
+SubExpression "0..9999" --* "1..1" kernel::expressions::Expression : children30
+Expression "1..1" --* "1..1" kernel::statements::Conditional : condition7
+kernel::containers::CompilationUnit "1..1" *-- "0..9999" Member : declarations33
+Statement "0..1" --* "1..1" kernel::statements::Condition : elseStatement3
+End "1..1" --* "1..1" kernel::procedures::Procedure : end20
+kernel::procedures::MainProcedure "1..1" *-- "1..1" End : end27
+End "1..1" --* "1..1" kernel::containers::CompilationUnit : end39
+ExceptionHandlerStatement "1..9999" --* "1..1" kernel::statements::StatementWithException : exceptionStatements6
+kernel::statements::ExpressionStatement "1..1" *-- "1..1" Expression : expression11
+MainProcedure "1..1" --* "1..1" kernel::containers::CompilationUnit : mainProcedure32
+Member "0..9999" --* "1..1" kernel::procedures::Procedure : members13
+Member "0..9999" --* "1..1" kernel::procedures::MainProcedure : members22
+Parameter "0..9999" --* "1..1" kernel::procedures::Procedure : parameters14
+kernel::expressions::Definition "1..1" -- "0..9999" Usage : reaches31
+ReturnSite "1..1" --* "1..1" kernel::statements::ProcedureCall : returnSite9
+kernel::procedures::Procedure "1..1" *-- "1..1" Start : start18
+Start "1..1" --* "1..1" kernel::procedures::MainProcedure : start24
+Start "1..1" --* "1..1" kernel::containers::CompilationUnit : start36
+Statement "1..1" --* "1..1" kernel::statements::StatementContainer : statement1
+kernel::statements::StatementListContainer "1..1" *-- "0..9999" Statement : statements0
+ReferenceableElement "1..1" -- "1..1" kernel::references::ElementReference : target42
+LabellableElement "1..1" -- "1..1" kernel::statements::Jump : target5
+@enduml

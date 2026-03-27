@@ -1,0 +1,191 @@
+@startuml
+class ApproximateNumericType {
+}
+class BitStringType {
+}
+class CharacterStringType {
+}
+abstract class DDL::ApproximateNumericType {
+}
+class DDL::Bit {
+}
+abstract class DDL::BitStringType {
+  + length : int
+}
+class DDL::BitVarying {
+}
+class DDL::Char {
+}
+class DDL::CharVarying {
+}
+class DDL::Character {
+}
+abstract class DDL::CharacterStringType {
+  + length : int
+}
+class DDL::CharacterVarying {
+}
+class DDL::Check {
+}
+class DDL::Ck {
+  + columnName : str
+}
+class DDL::Column {
+  + columnNull : bool
+}
+class DDL::DDLDefinition {
+}
+class DDL::Database {
+}
+class DDL::Date {
+}
+abstract class DDL::DatetimeType {
+}
+class DDL::Dec {
+  + precision : int
+  + scale : int
+}
+class DDL::Decimal {
+  + precision : int
+  + scale : int
+}
+class DDL::DoublePrecision {
+}
+abstract class DDL::ExactNumericType {
+}
+class DDL::Fk {
+  + columnName : str
+  + columnReference : str
+}
+class DDL::Float {
+  + precision : int
+}
+class DDL::Int {
+}
+class DDL::Integer {
+}
+class DDL::Interval {
+  + field1 : str
+  + field2 : str
+  + precision1 : int
+  + precision2 : int
+}
+class DDL::NChar {
+}
+class DDL::NCharVarying {
+}
+abstract class DDL::NamedElement {
+  + name : str
+}
+class DDL::NationalChar {
+}
+class DDL::NationalCharVarying {
+}
+class DDL::NationalCharacter {
+}
+abstract class DDL::NationalCharacterStringType {
+  + length : int
+}
+class DDL::NationalCharacterVarying {
+}
+class DDL::Numeric {
+  + precision : int
+  + scale : int
+}
+abstract class DDL::NumericType {
+}
+class DDL::Pk {
+  + columnName : str
+}
+class DDL::Real {
+}
+class DDL::Small {
+}
+abstract class DDL::Statement {
+}
+class DDL::Table {
+}
+class DDL::Time {
+  + precision : int
+  + withTimeZone : bool
+}
+class DDL::TimeStamp {
+  + precision : int
+  + withTimeZone : bool
+}
+abstract class DDL::Type {
+}
+class DDL::ValuesCheck {
+  + columnName : str
+  + comparator : str
+  + logConjuntion : str
+  + value : str
+}
+class DDL::Varchar {
+}
+class DatetimeType {
+}
+class ExactNumericType {
+}
+class NamedElement {
+}
+class NationalCharacterStringType {
+}
+class NumericType {
+}
+class Statement {
+}
+class Type {
+}
+ApproximateNumericType <|-- DDL::DoublePrecision
+ApproximateNumericType <|-- DDL::Float
+ApproximateNumericType <|-- DDL::Real
+BitStringType <|-- DDL::Bit
+BitStringType <|-- DDL::BitVarying
+CharacterStringType <|-- DDL::Char
+CharacterStringType <|-- DDL::CharVarying
+CharacterStringType <|-- DDL::Character
+CharacterStringType <|-- DDL::CharacterVarying
+CharacterStringType <|-- DDL::Varchar
+DatetimeType <|-- DDL::Date
+DatetimeType <|-- DDL::Time
+DatetimeType <|-- DDL::TimeStamp
+ExactNumericType <|-- DDL::Dec
+ExactNumericType <|-- DDL::Decimal
+ExactNumericType <|-- DDL::Int
+ExactNumericType <|-- DDL::Integer
+ExactNumericType <|-- DDL::Numeric
+ExactNumericType <|-- DDL::Small
+NamedElement <|-- DDL::Check
+NamedElement <|-- DDL::Ck
+NamedElement <|-- DDL::Column
+NamedElement <|-- DDL::Database
+NamedElement <|-- DDL::Fk
+NamedElement <|-- DDL::Pk
+NamedElement <|-- DDL::Table
+NationalCharacterStringType <|-- DDL::NChar
+NationalCharacterStringType <|-- DDL::NCharVarying
+NationalCharacterStringType <|-- DDL::NationalChar
+NationalCharacterStringType <|-- DDL::NationalCharVarying
+NationalCharacterStringType <|-- DDL::NationalCharacter
+NationalCharacterStringType <|-- DDL::NationalCharacterVarying
+NumericType <|-- DDL::ApproximateNumericType
+NumericType <|-- DDL::ExactNumericType
+Statement <|-- DDL::Database
+Statement <|-- DDL::Table
+Type <|-- DDL::BitStringType
+Type <|-- DDL::CharacterStringType
+Type <|-- DDL::DatetimeType
+Type <|-- DDL::Interval
+Type <|-- DDL::NationalCharacterStringType
+Type <|-- DDL::NumericType
+DDL::Check "0..9999" --* "1..1" DDL::Table : checks8
+DDL::Table "1..1" *-- "0..9999" DDL::Ck : cks4
+DDL::Column "0..9999" --* "1..1" DDL::Table : columns1
+DDL::Table "1..1" *-- "0..9999" DDL::Fk : fks6
+DDL::Pk "0..1" --* "1..1" DDL::Table : pks2
+DDL::Table "0..1" -- "1..1" DDL::Fk : references12
+DDL::Statement "0..9999" --* "1..1" DDL::DDLDefinition : statements0
+DDL::Type "1..1" --* "1..1" DDL::Column : type10
+DDL::ValuesCheck "0..9999" --* "1..1" DDL::Check : valuesCheck15
+@enduml

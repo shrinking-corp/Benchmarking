@@ -1,0 +1,26 @@
+@startuml
+class Node {
+}
+class PetriNet::Arc {
+  + weight : int
+}
+abstract class PetriNet::Node {
+  + name : str
+}
+class PetriNet::PetriNet {
+  + name : str
+}
+class PetriNet::Place {
+  + marking : int
+}
+class PetriNet::Transition {
+}
+Node <|-- PetriNet::Place
+Node <|-- PetriNet::Transition
+PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Arc : arcs1
+PetriNet::Arc "0..9999" -- "1..1" PetriNet::Node : ingoing4
+PetriNet::Node "0..9999" --* "1..1" PetriNet::PetriNet : nodes0
+PetriNet::Arc "0..9999" -- "1..1" PetriNet::Node : outgoing3
+PetriNet::Node "1..1" -- "1..1" PetriNet::Arc : source6
+PetriNet::Arc "1..1" -- "1..1" PetriNet::Node : target7
+@enduml

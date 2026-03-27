@@ -1,0 +1,100 @@
+@startuml
+class AbstractTask {
+}
+class IsInitSetter {
+}
+enum Language {
+  Java
+  Python
+}
+class NamedElement {
+}
+class Nsetter {
+}
+class Setter {
+}
+class SimpleTask {
+}
+class TaskInput {
+}
+enum TaskStatus {
+  FINISHED
+  NOT_PREPARED
+  PREPARED
+  PROCESSING
+}
+class TypedElement {
+}
+abstract class workflow::AbstractTask {
+  + status : str
+}
+class workflow::BaseTask {
+}
+class workflow::Connection {
+}
+class workflow::CustomTask {
+  + runner : str
+}
+class workflow::Input {
+}
+class workflow::IsInitSetter {
+}
+class workflow::IsNotInitSetter {
+}
+class workflow::LibraryFunction {
+  + function : str
+}
+class workflow::LibraryTask {
+}
+class workflow::NamedElement {
+  + name : str
+}
+class workflow::Nsetter {
+}
+class workflow::Output {
+}
+class workflow::Setter {
+}
+abstract class workflow::SimpleTask {
+}
+abstract class workflow::TaskInput {
+}
+class workflow::TaskOutput {
+}
+class workflow::TypedElement {
+  + typeAsString : str
+  + valueAsString : str
+}
+class workflow::Workflow {
+  + language : str
+}
+AbstractTask <|-- workflow::BaseTask
+AbstractTask <|-- workflow::SimpleTask
+IsInitSetter <|-- workflow::IsNotInitSetter
+NamedElement <|-- workflow::AbstractTask
+NamedElement <|-- workflow::Input
+NamedElement <|-- workflow::LibraryFunction
+NamedElement <|-- workflow::Output
+NamedElement <|-- workflow::TaskInput
+NamedElement <|-- workflow::TaskOutput
+NamedElement <|-- workflow::Workflow
+Nsetter <|-- workflow::IsInitSetter
+Setter <|-- workflow::Nsetter
+SimpleTask <|-- workflow::CustomTask
+SimpleTask <|-- workflow::LibraryTask
+TaskInput <|-- workflow::Connection
+TaskInput <|-- workflow::Setter
+TypedElement <|-- workflow::Input
+TypedElement <|-- workflow::Output
+TypedElement <|-- workflow::Setter
+TypedElement <|-- workflow::TaskOutput
+workflow::BaseTask "1..1" --* "1..1" workflow::Workflow : baseTask10
+workflow::AbstractTask "0..9999" --* "1..1" workflow::BaseTask : children3
+workflow::LibraryFunction "0..9999" --* "1..1" workflow::Workflow : functions12
+workflow::TaskInput "0..9999" --* "1..1" workflow::AbstractTask : inputs0
+workflow::LibraryFunction "1..1" *-- "0..9999" workflow::Input : inputs6
+workflow::LibraryFunction "1..1" -- "1..1" workflow::LibraryTask : libraryfunction8
+workflow::AbstractTask "1..1" *-- "0..9999" workflow::TaskOutput : outputs1
+workflow::Output "0..9999" --* "1..1" workflow::LibraryFunction : outputs5
+workflow::TaskOutput "0..1" -- "1..1" workflow::Connection : taskoutput15
+@enduml

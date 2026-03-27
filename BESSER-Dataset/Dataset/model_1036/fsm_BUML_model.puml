@@ -1,0 +1,146 @@
+@startuml
+class AbstractState {
+}
+enum ArithmeticOperator {
+  div
+  minus
+  mult
+  plus
+}
+class ConsoleOutput {
+}
+class Constraint {
+}
+class Expression {
+}
+class Literal {
+}
+enum PseudostateKind {
+  initial
+}
+enum RelationalOperator {
+  equals
+  greaterThan
+  greaterThanOrEqualTo
+  lessThan
+  lessThanOrEqualTo
+  notEqual
+}
+class State {
+}
+class Statement {
+}
+abstract class fsm::AbstractState {
+  + name : str
+}
+class fsm::ArithmeticExpression {
+  + operator : str
+}
+class fsm::Assignation {
+}
+class fsm::BoolLit {
+  + value : bool
+}
+class fsm::Conditional {
+}
+class fsm::ConsoleOutput {
+  + input : str
+}
+abstract class fsm::Constraint {
+}
+abstract class fsm::Expression {
+}
+class fsm::FinalState {
+}
+class fsm::IntegerLit {
+  + value : int
+}
+abstract class fsm::Literal {
+}
+class fsm::Loop {
+}
+class fsm::Print {
+}
+class fsm::Println {
+}
+class fsm::Program {
+}
+class fsm::Pseudostate {
+  + kind : str
+}
+class fsm::RelationalConstraint {
+}
+class fsm::RelationalExpression {
+  + operator : str
+}
+class fsm::State {
+}
+class fsm::StateMachine {
+  + name : str
+}
+abstract class fsm::Statement {
+}
+class fsm::StringLit {
+  + value : str
+}
+class fsm::Transition {
+}
+class fsm::Trigger {
+  + expression : str
+}
+class fsm::VarDecl {
+  + key : str
+}
+class fsm::VarReference {
+  + key : str
+}
+class fsm::Wait {
+  + miliseconds : str
+}
+AbstractState <|-- fsm::Pseudostate
+AbstractState <|-- fsm::State
+ConsoleOutput <|-- fsm::Print
+ConsoleOutput <|-- fsm::Println
+Constraint <|-- fsm::RelationalConstraint
+Expression <|-- fsm::ArithmeticExpression
+Expression <|-- fsm::Literal
+Expression <|-- fsm::RelationalExpression
+Expression <|-- fsm::VarReference
+Literal <|-- fsm::BoolLit
+Literal <|-- fsm::IntegerLit
+Literal <|-- fsm::StringLit
+State <|-- fsm::FinalState
+Statement <|-- fsm::Assignation
+Statement <|-- fsm::Conditional
+Statement <|-- fsm::ConsoleOutput
+Statement <|-- fsm::Loop
+Statement <|-- fsm::Program
+Statement <|-- fsm::VarDecl
+Statement <|-- fsm::Wait
+fsm::Loop "1..1" *-- "0..1" fsm::Program : body41
+fsm::Conditional "1..1" *-- "1..1" fsm::Expression : condition31
+fsm::Program "0..1" --* "1..1" fsm::State : doActivity8
+fsm::Statement "0..9999" --* "1..1" fsm::Transition : effect23
+fsm::Program "0..1" --* "1..1" fsm::Conditional : elseInstructions36
+fsm::Program "0..1" --* "1..1" fsm::State : entry9
+fsm::Program "0..1" --* "1..1" fsm::State : exit12
+fsm::Expression "1..1" --* "1..1" fsm::RelationalConstraint : expression27
+fsm::Expression "1..1" --* "1..1" fsm::VarDecl : expression44
+fsm::Expression "1..1" --* "1..1" fsm::Assignation : expression58
+fsm::Constraint "1..1" --* "1..1" fsm::Transition : guard25
+fsm::Expression "1..1" --* "1..1" fsm::Loop : guard39
+fsm::Transition "0..9999" -- "1..1" fsm::AbstractState : incoming3
+fsm::Expression "1..1" --* "1..1" fsm::ArithmeticExpression : left46
+fsm::Expression "1..1" --* "1..1" fsm::RelationalExpression : left51
+fsm::AbstractState "1..1" -- "0..9999" fsm::Transition : outgoing5
+fsm::ArithmeticExpression "1..1" *-- "1..1" fsm::Expression : right48
+fsm::Expression "1..1" --* "1..1" fsm::RelationalExpression : right53
+fsm::Transition "1..1" -- "1..1" fsm::AbstractState : source20
+fsm::Statement "0..9999" --* "1..1" fsm::Program : statements28
+fsm::AbstractState "0..9999" --* "1..1" fsm::StateMachine : subvertex0
+fsm::AbstractState "1..1" -- "1..1" fsm::Transition : target17
+fsm::Program "0..1" --* "1..1" fsm::Conditional : thenInstructions33
+fsm::StateMachine "1..1" *-- "0..9999" fsm::Transition : transitions1
+fsm::Transition "1..1" *-- "0..1" fsm::Trigger : trigger15
+fsm::VarDecl "1..1" -- "1..1" fsm::Assignation : varRef56
+@enduml

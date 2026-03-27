@@ -1,0 +1,49 @@
+@startuml
+class Arc {
+}
+class IdentifiableElement {
+}
+abstract class PetriNet::Arc {
+  + weight : int
+}
+abstract class PetriNet::IdentifiableElement {
+  + author : str
+  + name : str
+}
+class PetriNet::PetriNet {
+}
+class PetriNet::Place {
+}
+class PetriNet::PlaceToTransArc {
+}
+class PetriNet::PrimitiveAttribute {
+  + name : str
+  + primType : str
+}
+class PetriNet::Token {
+  + values : str
+}
+class PetriNet::TransToPlaceArc {
+}
+class PetriNet::Transition {
+}
+class PetriNet::Type {
+  + name : str
+}
+Arc <|-- PetriNet::PlaceToTransArc
+Arc <|-- PetriNet::TransToPlaceArc
+IdentifiableElement <|-- PetriNet::PetriNet
+IdentifiableElement <|-- PetriNet::Place
+IdentifiableElement <|-- PetriNet::Transition
+PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Arc : arcs3
+PetriNet::PrimitiveAttribute "0..9999" --* "1..1" PetriNet::Type : components7
+PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Place : places0
+PetriNet::PlaceToTransArc "1..1" -- "1..1" PetriNet::Place : source14
+PetriNet::Transition "1..1" -- "1..1" PetriNet::TransToPlaceArc : source19
+PetriNet::Transition "1..1" -- "1..1" PetriNet::PlaceToTransArc : target16
+PetriNet::Place "1..1" -- "1..1" PetriNet::TransToPlaceArc : target21
+PetriNet::Place "1..1" *-- "0..9999" PetriNet::Token : tokens9
+PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Transition : transitions1
+PetriNet::Type "1..1" -- "1..1" PetriNet::Place : type11
+PetriNet::Type "0..9999" --* "1..1" PetriNet::PetriNet : types5
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+class MT::::Element {
+}
+class MTpos::::Element {
+}
+class MTpos::::Person {
+}
+class MTpre::::Element {
+}
+class MTpre::::Person {
+}
+class ramRoot::GenericNode {
+}
+abstract class ramRoot::MT::::Element {
+  + MT__isProcessed : bool
+  + MT__label : str
+}
+class ramRoot::MTpos::::Classroom {
+  + id : str
+}
+abstract class ramRoot::MTpos::::Element {
+}
+class ramRoot::MTpos::::Man {
+}
+class ramRoot::MTpos::::Person {
+  + name : str
+}
+class ramRoot::MTpos::::Woman {
+}
+class ramRoot::MTpre::::Classroom {
+  + id : str
+}
+abstract class ramRoot::MTpre::::Element {
+  + MT__matchSubtype : bool
+}
+class ramRoot::MTpre::::Man {
+}
+class ramRoot::MTpre::::Person {
+  + name : str
+}
+class ramRoot::MTpre::::Woman {
+}
+MT::::Element <|-- ramRoot::GenericNode
+MT::::Element <|-- ramRoot::MTpos::::Element
+MT::::Element <|-- ramRoot::MTpre::::Element
+MTpos::::Element <|-- ramRoot::MTpos::::Classroom
+MTpos::::Element <|-- ramRoot::MTpos::::Person
+MTpos::::Person <|-- ramRoot::MTpos::::Man
+MTpos::::Person <|-- ramRoot::MTpos::::Woman
+MTpre::::Element <|-- ramRoot::MTpre::::Classroom
+MTpre::::Element <|-- ramRoot::MTpre::::Person
+MTpre::::Person <|-- ramRoot::MTpre::::Man
+MTpre::::Person <|-- ramRoot::MTpre::::Woman
+ramRoot::GenericNode "1..1" -- "0..9999" ramRoot::MT::::Element : GenericLink0
+ramRoot::MTpre::::Person "0..9999" -- "1..1" ramRoot::MTpre::::Person : friend_with10
+ramRoot::MTpos::::Person "1..1" -- "0..9999" ramRoot::MTpos::::Person : friend_with3
+ramRoot::MTpre::::Person "0..9999" --* "1..1" ramRoot::MTpre::::Classroom : person12
+ramRoot::MTpos::::Person "0..9999" --* "1..1" ramRoot::MTpos::::Classroom : person5
+ramRoot::MTpos::::Classroom "0..1" -- "1..1" ramRoot::MTpos::::Person : teacher_of1
+ramRoot::MTpre::::Classroom "0..1" -- "1..1" ramRoot::MTpre::::Person : teacher_of8
+@enduml

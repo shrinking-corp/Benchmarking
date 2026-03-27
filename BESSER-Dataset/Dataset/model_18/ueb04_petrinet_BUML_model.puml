@@ -1,0 +1,39 @@
+@startuml
+class Arc {
+}
+class petrinet::Arc {
+  + weight : int
+}
+class petrinet::PTArc {
+}
+class petrinet::Petrinet {
+  + name : str
+}
+class petrinet::Place {
+  + name : str
+  + getTokenNumber() : int
+  + isAPart() : bool
+}
+class petrinet::TPArc {
+}
+class petrinet::Token {
+}
+class petrinet::Transition {
+  + name : str
+  + isEnabled() : bool
+}
+Arc <|-- petrinet::PTArc
+Arc <|-- petrinet::TPArc
+petrinet::Arc "0..9999" --* "1..1" petrinet::Petrinet : arcs3
+petrinet::Place "1..1" -- "0..9999" petrinet::TPArc : in8
+petrinet::Transition "1..1" -- "0..9999" petrinet::PTArc : in9
+petrinet::TPArc "0..9999" -- "1..1" petrinet::Transition : out12
+petrinet::PTArc "0..9999" -- "1..1" petrinet::Place : out7
+petrinet::Petrinet "1..1" *-- "0..9999" petrinet::Place : places0
+petrinet::Place "0..9999" -- "1..1" petrinet::PTArc : src15
+petrinet::Transition "0..9999" -- "1..1" petrinet::TPArc : src17
+petrinet::Place "1..1" *-- "0..9999" petrinet::Token : tokens5
+petrinet::Transition "0..9999" --* "1..1" petrinet::Petrinet : transitions1
+petrinet::Transition "0..9999" -- "1..1" petrinet::PTArc : trg16
+petrinet::Place "0..9999" -- "1..1" petrinet::TPArc : trg20
+@enduml

@@ -1,0 +1,86 @@
+@startuml
+enum AttributeType {
+  Date
+  Integer
+  String
+}
+enum ButtonKind {
+  cancel
+  createEdit
+  delete
+}
+enum MultiplicityKind {
+  Multiple
+  Single
+}
+class Property {
+}
+class UIElement {
+}
+class Window {
+}
+class myDsl01::Attribute {
+  + optional : bool
+  + type : str
+}
+class myDsl01::Bounds {
+  + height : int
+  + width : int
+  + x : int
+  + y : int
+}
+class myDsl01::Button {
+  + kind : str
+  + text : str
+}
+class myDsl01::Entity {
+  + abstract : bool
+  + name : str
+}
+class myDsl01::EntryWindow {
+}
+class myDsl01::Field {
+}
+class myDsl01::Label {
+  + text : str
+}
+class myDsl01::ListWindow {
+}
+class myDsl01::Model {
+}
+class myDsl01::Property {
+  + name : str
+}
+class myDsl01::Reference {
+  + multiplicity : str
+}
+class myDsl01::Size {
+  + height : int
+  + width : int
+}
+class myDsl01::UIElement {
+  + name : str
+}
+class myDsl01::Window {
+  + name : str
+  + title : str
+}
+Property <|-- myDsl01::Attribute
+Property <|-- myDsl01::Reference
+UIElement <|-- myDsl01::Button
+UIElement <|-- myDsl01::Field
+UIElement <|-- myDsl01::Label
+Window <|-- myDsl01::EntryWindow
+Window <|-- myDsl01::ListWindow
+myDsl01::Bounds "0..1" --* "1..1" myDsl01::UIElement : bounds19
+myDsl01::EntryWindow "1..1" *-- "0..9999" myDsl01::UIElement : elements18
+myDsl01::Entity "0..9999" --* "1..1" myDsl01::Model : entities0
+myDsl01::Window "1..1" -- "0..1" myDsl01::Entity : entity13
+myDsl01::Reference "0..1" -- "1..1" myDsl01::Reference : opposite11
+myDsl01::Property "0..9999" --* "1..1" myDsl01::Entity : properties6
+myDsl01::Property "0..1" -- "1..1" myDsl01::Field : property21
+myDsl01::Size "0..1" --* "1..1" myDsl01::Window : size16
+myDsl01::Entity "1..1" -- "0..1" myDsl01::Entity : superType4
+myDsl01::Entity "0..1" -- "1..1" myDsl01::Reference : type8
+myDsl01::Window "0..9999" --* "1..1" myDsl01::Model : windows1
+@enduml

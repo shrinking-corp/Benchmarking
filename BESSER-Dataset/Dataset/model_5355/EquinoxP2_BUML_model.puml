@@ -1,0 +1,42 @@
+@startuml
+class Bundle {
+}
+class FeatureMetadata {
+}
+class LocatedElement {
+}
+class Tool {
+}
+class p2::Copyright {
+}
+class p2::Description {
+}
+class p2::DiscoverySite {
+}
+class p2::Feature {
+  + application : str
+}
+abstract class p2::FeatureMetadata {
+  + name : str
+  + text : str
+}
+class p2::License {
+}
+class p2::Plugin {
+}
+class p2::Vendor {
+}
+Bundle <|-- p2::Plugin
+FeatureMetadata <|-- p2::Copyright
+FeatureMetadata <|-- p2::Description
+FeatureMetadata <|-- p2::DiscoverySite
+FeatureMetadata <|-- p2::License
+LocatedElement <|-- p2::FeatureMetadata
+Tool <|-- p2::Feature
+p2::Copyright "0..1" --* "1..1" p2::Feature : copyright0
+p2::Description "0..1" --* "1..1" p2::Feature : description1
+p2::License "0..1" -- "1..1" p2::Feature : license5
+p2::Plugin "0..9999" --* "1..1" p2::Feature : plugins9
+p2::Feature "1..1" -- "0..1" p2::Vendor : provider7
+p2::DiscoverySite "0..9999" -- "1..1" p2::Feature : sites3
+@enduml

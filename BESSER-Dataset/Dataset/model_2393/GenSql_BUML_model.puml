@@ -1,0 +1,31 @@
+@startuml
+enum TIPO {
+  String
+  boolean
+  date
+  int
+  number
+  varchar
+}
+class genSql::Column {
+  + SQLType : str
+  + name : str
+}
+class genSql::DataBase {
+}
+class genSql::ForeignKey {
+}
+class genSql::PrimaryKey {
+}
+class genSql::Table {
+  + name : str
+}
+genSql::Column "0..9999" --* "1..1" genSql::Table : columns1
+genSql::Column "0..9999" -- "1..1" genSql::ForeignKey : columns10
+genSql::Column "0..9999" -- "1..1" genSql::PrimaryKey : columns7
+genSql::Column "0..9999" -- "1..1" genSql::ForeignKey : columnsRef16
+genSql::ForeignKey "0..9999" --* "1..1" genSql::Table : foreignkeys5
+genSql::PrimaryKey "0..1" --* "1..1" genSql::Table : primarykey3
+genSql::ForeignKey "1..1" -- "0..1" genSql::Table : tableRef13
+genSql::Table "0..9999" --* "1..1" genSql::DataBase : tables0
+@enduml

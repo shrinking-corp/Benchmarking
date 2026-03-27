@@ -1,0 +1,91 @@
+@startuml
+class Expression {
+}
+class PageElement {
+}
+class Type {
+}
+class Value {
+}
+class webGui::ActionElement {
+  + name : str
+}
+class webGui::Add {
+}
+class webGui::DataType {
+}
+class webGui::DisplayElement {
+}
+class webGui::Divide {
+}
+class webGui::DomainModel {
+}
+class webGui::DomainPath {
+}
+class webGui::DomainPathTail {
+}
+class webGui::Entity {
+}
+class webGui::Expression {
+}
+class webGui::Feature {
+  + multivalued : bool
+  + name : str
+}
+class webGui::Model {
+  + name : str
+}
+class webGui::Multiply {
+}
+class webGui::NumberLiteral {
+  + value : int
+}
+class webGui::Page {
+  + name : str
+  + title : str
+}
+class webGui::PageElement {
+}
+class webGui::Subtract {
+}
+class webGui::Type {
+  + name : str
+}
+class webGui::Value {
+}
+class webGui::WebModel {
+}
+Expression <|-- webGui::Add
+Expression <|-- webGui::Divide
+Expression <|-- webGui::Multiply
+Expression <|-- webGui::Subtract
+Expression <|-- webGui::Value
+PageElement <|-- webGui::ActionElement
+PageElement <|-- webGui::DisplayElement
+Type <|-- webGui::DataType
+Type <|-- webGui::Entity
+Value <|-- webGui::DomainPath
+Value <|-- webGui::NumberLiteral
+webGui::Page "1..1" *-- "0..9999" webGui::PageElement : contents16
+webGui::Model "1..1" *-- "0..1" webGui::DomainModel : domain0
+webGui::Entity "0..1" -- "1..1" webGui::Page : entity13
+webGui::Expression "0..1" --* "1..1" webGui::Feature : expression9
+webGui::Feature "0..1" -- "1..1" webGui::DomainPath : feature19
+webGui::DomainPathTail "1..1" -- "0..1" webGui::Feature : feature24
+webGui::Entity "1..1" *-- "0..9999" webGui::Feature : features5
+webGui::Expression "0..1" --* "1..1" webGui::Add : left30
+webGui::Subtract "1..1" *-- "0..1" webGui::Expression : left35
+webGui::Value "0..1" --* "1..1" webGui::Multiply : left40
+webGui::Value "0..1" --* "1..1" webGui::Divide : left44
+webGui::WebModel "1..1" *-- "0..9999" webGui::Page : pages11
+webGui::DisplayElement "1..1" *-- "0..1" webGui::DomainPath : reference18
+webGui::Expression "0..1" --* "1..1" webGui::Add : right32
+webGui::Subtract "1..1" *-- "0..1" webGui::Expression : right37
+webGui::Value "0..1" --* "1..1" webGui::Multiply : right41
+webGui::Value "0..1" --* "1..1" webGui::Divide : right46
+webGui::DomainPathTail "0..1" --* "1..1" webGui::DomainPath : tail22
+webGui::DomainPathTail "0..1" --* "1..1" webGui::DomainPathTail : tail28
+webGui::Type "0..1" -- "1..1" webGui::Feature : type6
+webGui::Type "0..9999" --* "1..1" webGui::DomainModel : types3
+webGui::WebModel "0..1" --* "1..1" webGui::Model : web1
+@enduml

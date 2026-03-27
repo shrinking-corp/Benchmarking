@@ -1,0 +1,90 @@
+@startuml
+class Arc {
+}
+class Node {
+}
+class OccurrenceNet {
+}
+enum Orientation {
+  anti
+  normal
+}
+enum Quantor {
+  existencial
+  universal
+}
+enum Temp {
+  cold
+  hot
+  without
+}
+class adaptiveSystem::AdaptiveProcess {
+}
+class adaptiveSystem::AdaptiveSystem {
+  + setWellformednessToOclets : bool
+}
+class adaptiveSystem::Arc {
+  + weight : int
+}
+class adaptiveSystem::ArcToCondition {
+}
+class adaptiveSystem::ArcToEvent {
+}
+class adaptiveSystem::Condition {
+  + marked : bool
+  + maximal : bool
+  + minimal : bool
+  + token : int
+}
+class adaptiveSystem::DoNet {
+}
+class adaptiveSystem::Event {
+  + enabled : bool
+  + saturated : bool
+}
+abstract class adaptiveSystem::Node {
+  + abstract : bool
+  + disabledByAntiOclet : bool
+  + disabledByConflict : bool
+  + name : str
+  + temp : str
+}
+abstract class adaptiveSystem::OccurrenceNet {
+  + name : str
+}
+class adaptiveSystem::Oclet {
+  + name : str
+  + orientation : str
+  + quantor : str
+  + wellFormed : bool
+}
+class adaptiveSystem::PreNet {
+}
+Arc <|-- adaptiveSystem::ArcToCondition
+Arc <|-- adaptiveSystem::ArcToEvent
+Node <|-- adaptiveSystem::Condition
+Node <|-- adaptiveSystem::Event
+OccurrenceNet <|-- adaptiveSystem::AdaptiveProcess
+OccurrenceNet <|-- adaptiveSystem::DoNet
+OccurrenceNet <|-- adaptiveSystem::PreNet
+adaptiveSystem::AdaptiveProcess "1..1" --* "1..1" adaptiveSystem::AdaptiveSystem : adaptiveProcess1
+adaptiveSystem::OccurrenceNet "1..1" *-- "0..9999" adaptiveSystem::Arc : arcs8
+adaptiveSystem::Event "0..1" -- "1..1" adaptiveSystem::ArcToEvent : destination31
+adaptiveSystem::Condition "0..1" -- "1..1" adaptiveSystem::ArcToCondition : destination36
+adaptiveSystem::Oclet "1..1" *-- "1..1" adaptiveSystem::DoNet : doNet5
+adaptiveSystem::Condition "1..1" -- "0..9999" adaptiveSystem::ArcToCondition : incoming18
+adaptiveSystem::ArcToEvent "0..9999" -- "1..1" adaptiveSystem::Event : incoming23
+adaptiveSystem::Condition "0..9999" -- "1..1" adaptiveSystem::PreNet : markedConditions10
+adaptiveSystem::AdaptiveProcess "1..1" -- "0..9999" adaptiveSystem::Condition : markedConditions12
+adaptiveSystem::Node "0..9999" --* "1..1" adaptiveSystem::OccurrenceNet : nodes7
+adaptiveSystem::Oclet "0..9999" --* "1..1" adaptiveSystem::AdaptiveSystem : oclets0
+adaptiveSystem::ArcToEvent "0..9999" -- "1..1" adaptiveSystem::Condition : outgoing19
+adaptiveSystem::ArcToCondition "0..9999" -- "1..1" adaptiveSystem::Event : outgoing26
+adaptiveSystem::Condition "0..9999" -- "1..1" adaptiveSystem::Event : postConditions21
+adaptiveSystem::Event "0..9999" -- "1..1" adaptiveSystem::Condition : postEvents16
+adaptiveSystem::Condition "0..9999" -- "1..1" adaptiveSystem::Event : preConditions20
+adaptiveSystem::Event "0..9999" -- "1..1" adaptiveSystem::Condition : preEvents15
+adaptiveSystem::PreNet "1..1" --* "1..1" adaptiveSystem::Oclet : preNet3
+adaptiveSystem::ArcToEvent "1..1" -- "0..1" adaptiveSystem::Condition : source29
+adaptiveSystem::Event "0..1" -- "1..1" adaptiveSystem::ArcToCondition : source33
+@enduml

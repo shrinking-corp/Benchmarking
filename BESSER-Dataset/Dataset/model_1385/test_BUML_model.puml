@@ -1,0 +1,26 @@
+@startuml
+enum Kind {
+  Nice
+  NotNice
+}
+class NamedElement {
+}
+abstract class test::NamedElement {
+}
+class test::State {
+  + kind : str
+}
+class test::StateMachine {
+  + name : str
+}
+class test::Transition {
+  + fire() : bool
+}
+NamedElement <|-- test::State
+NamedElement <|-- test::StateMachine
+NamedElement <|-- test::Transition
+test::Transition "1..1" -- "1..1" test::State : source3
+test::StateMachine "1..1" *-- "0..9999" test::State : states1
+test::State "1..1" -- "1..1" test::Transition : target6
+test::Transition "0..9999" --* "1..1" test::StateMachine : transitions0
+@enduml

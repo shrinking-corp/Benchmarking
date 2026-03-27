@@ -1,0 +1,56 @@
+@startuml
+class Block {
+}
+class EOLLibraryModule {
+}
+class Expression {
+}
+class eol::module::AnnotationBlock {
+}
+class eol::module::Block {
+}
+class eol::module::EOLLibraryModule {
+  + name : str
+}
+class eol::module::EOLModule {
+}
+abstract class eol::module::Expression {
+}
+class eol::module::ExpressionOrStatementBlock {
+}
+class eol::module::FormalParameterExpression {
+}
+class eol::module::Import {
+  + imported : str
+}
+class eol::module::ModelDeclarationStatement {
+}
+class eol::module::NameExpression {
+  + isType : bool
+  + name : str
+}
+class eol::module::OperationDefinition {
+}
+abstract class eol::module::Statement {
+}
+class eol::module::Type {
+}
+Block <|-- eol::module::AnnotationBlock
+EOLLibraryModule <|-- eol::module::EOLModule
+Expression <|-- eol::module::NameExpression
+eol::module::AnnotationBlock "0..1" --* "1..1" eol::module::OperationDefinition : annotationBlock23
+eol::module::ExpressionOrStatementBlock "1..1" *-- "0..1" eol::module::Block : block11
+eol::module::Block "0..1" --* "1..1" eol::module::EOLModule : block5
+eol::module::Block "0..1" --* "1..1" eol::module::OperationDefinition : body25
+eol::module::Expression "0..1" --* "1..1" eol::module::ExpressionOrStatementBlock : condition15
+eol::module::OperationDefinition "1..1" *-- "1..1" eol::module::Type : contextType18
+eol::module::Expression "0..1" --* "1..1" eol::module::ExpressionOrStatementBlock : expression13
+eol::module::EOLLibraryModule "1..1" --* "1..1" eol::module::Import : importedModule6
+eol::module::EOLLibraryModule "1..1" *-- "0..9999" eol::module::Import : imports0
+eol::module::ModelDeclarationStatement "0..9999" --* "1..1" eol::module::EOLLibraryModule : modelDeclarations1
+eol::module::NameExpression "1..1" --* "1..1" eol::module::OperationDefinition : name28
+eol::module::EOLLibraryModule "1..1" *-- "0..9999" eol::module::OperationDefinition : operations3
+eol::module::FormalParameterExpression "0..9999" --* "1..1" eol::module::OperationDefinition : parameters30
+eol::module::Type "1..1" --* "1..1" eol::module::OperationDefinition : returnType20
+eol::module::Statement "0..9999" --* "1..1" eol::module::Block : statements9
+@enduml

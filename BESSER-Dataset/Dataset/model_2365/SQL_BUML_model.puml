@@ -1,0 +1,72 @@
+@startuml
+enum Action {
+  Cascade
+  SetNull
+}
+enum Condition {
+  Delete
+  Update
+}
+class Key {
+}
+class ModelElement {
+}
+class NamedElement {
+}
+enum Property {
+  AutoIncrement
+  NotNull
+  Unique
+}
+class sql::Annotation {
+  + annotation : str
+}
+class sql::Column {
+  + properties : str
+  + type : str
+}
+class sql::Event {
+  + action : str
+  + condition : str
+}
+class sql::ForeignKey {
+}
+abstract class sql::Key {
+}
+abstract class sql::ModelElement {
+}
+abstract class sql::NamedElement {
+  + name : str
+}
+class sql::PrimaryKey {
+}
+class sql::Schema {
+}
+class sql::Table {
+}
+Key <|-- sql::ForeignKey
+Key <|-- sql::PrimaryKey
+ModelElement <|-- sql::Column
+ModelElement <|-- sql::Event
+ModelElement <|-- sql::Key
+ModelElement <|-- sql::NamedElement
+NamedElement <|-- sql::Column
+NamedElement <|-- sql::Schema
+NamedElement <|-- sql::Table
+sql::Column "1..1" -- "1..1" sql::Key : column10
+sql::Column "1..1" -- "0..9999" sql::Key : keys9
+sql::Annotation "0..9999" --* "1..1" sql::ModelElement : ownedAnnotations23
+sql::Table "1..1" *-- "1..9999" sql::Column : ownedColumns0
+sql::ForeignKey "1..1" *-- "0..9999" sql::Event : ownedEvents18
+sql::Table "1..1" *-- "0..9999" sql::ForeignKey : ownedForeignKeys3
+sql::PrimaryKey "0..1" --* "1..1" sql::Table : ownedPrimaryKey1
+sql::Schema "1..1" *-- "1..9999" sql::Table : ownedTables21
+sql::ForeignKey "1..1" -- "1..1" sql::Event : owningForeignKey19
+sql::ModelElement "1..1" -- "1..1" sql::Annotation : owningModelElement24
+sql::Schema "1..1" -- "1..1" sql::Table : owningSchema7
+sql::Table "1..1" -- "1..1" sql::PrimaryKey : owningTable12
+sql::Table "1..1" -- "1..1" sql::ForeignKey : owningTable16
+sql::Table "1..1" -- "1..1" sql::Column : owningTable8
+sql::Table "1..1" -- "1..1" sql::ForeignKey : referencedTable14
+sql::Table "1..1" -- "0..9999" sql::ForeignKey : referencingForeignKeys5
+@enduml

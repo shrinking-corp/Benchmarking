@@ -1,0 +1,63 @@
+@startuml
+class DynamicPage {
+}
+class Link {
+}
+class Page {
+}
+enum SWMLTypes {
+  Boolean
+  Email
+  Float
+  Integer
+  String
+}
+class swml::Attribute {
+  + name : str
+  + type : str
+}
+class swml::CLink {
+}
+class swml::Class {
+  + name : str
+}
+class swml::ContentLayer {
+}
+class swml::DetailsPage {
+}
+abstract class swml::DynamicPage {
+}
+class swml::HypertextLayer {
+}
+class swml::IndexPage {
+  + size : int
+}
+abstract class swml::Link {
+}
+class swml::NCLink {
+}
+abstract class swml::Page {
+  + name : str
+}
+class swml::StaticPage {
+}
+class swml::WebModel {
+  + name : str
+}
+DynamicPage <|-- swml::DetailsPage
+DynamicPage <|-- swml::IndexPage
+Link <|-- swml::CLink
+Link <|-- swml::NCLink
+Page <|-- swml::DynamicPage
+Page <|-- swml::StaticPage
+swml::Attribute "1..9999" --* "1..1" swml::Class : attributes10
+swml::Class "1..9999" --* "1..1" swml::ContentLayer : classes8
+swml::ContentLayer "1..1" --* "1..1" swml::WebModel : content1
+swml::Class "1..1" -- "1..1" swml::DynamicPage : displayedClass17
+swml::HypertextLayer "1..1" -- "1..1" swml::Page : homePage5
+swml::WebModel "1..1" *-- "1..1" swml::HypertextLayer : hypertext0
+swml::Page "1..1" *-- "0..9999" swml::Link : links15
+swml::Page "1..9999" --* "1..1" swml::HypertextLayer : pages3
+swml::Attribute "1..1" -- "1..1" swml::Class : representativeAttribute12
+swml::Page "1..1" -- "1..1" swml::Link : target19
+@enduml

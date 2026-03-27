@@ -1,0 +1,65 @@
+@startuml
+enum CourseType {
+  Elective
+  Obligatory
+}
+enum SemesterType {
+  Fall
+  Spring
+}
+class studyprogram::Course {
+  + code : str
+  + credits : str
+  + name : str
+  + semester : str
+}
+class studyprogram::Department {
+  + name : str
+}
+class studyprogram::ElectiveCourses {
+}
+class studyprogram::ObligatoryCourses {
+}
+class studyprogram::Program {
+  + name : str
+}
+class studyprogram::Semester {
+  + type : str
+}
+class studyprogram::SemesterCourse {
+  + name : str
+  + type : str
+}
+class studyprogram::StudyPlan {
+  + name : str
+}
+class studyprogram::University {
+  + name : str
+}
+class studyprogram::Year {
+  + value : int
+}
+studyprogram::Course "0..1" -- "1..1" studyprogram::SemesterCourse : course30
+studyprogram::Course "0..9999" --* "1..1" studyprogram::Department : courses2
+studyprogram::ElectiveCourses "1..1" -- "0..9999" studyprogram::Course : courses35
+studyprogram::Course "0..9999" -- "1..1" studyprogram::ObligatoryCourses : courses39
+studyprogram::Department "0..1" -- "1..1" studyprogram::Course : department31
+studyprogram::Department "0..1" -- "1..1" studyprogram::Program : department5
+studyprogram::Department "0..9999" --* "1..1" studyprogram::University : departments0
+studyprogram::Program "1..1" *-- "0..1" studyprogram::ElectiveCourses : electiveCourses8
+studyprogram::ObligatoryCourses "0..1" --* "1..1" studyprogram::Program : obligatoryCourses10
+studyprogram::StudyPlan "1..1" -- "0..1" studyprogram::Program : program13
+studyprogram::Program "0..1" -- "1..1" studyprogram::ElectiveCourses : program33
+studyprogram::Program "0..1" -- "1..1" studyprogram::ObligatoryCourses : program37
+studyprogram::Program "0..9999" --* "1..1" studyprogram::Department : programs3
+studyprogram::Department "1..1" -- "0..1" studyprogram::University : school1
+studyprogram::SemesterCourse "1..1" -- "0..1" studyprogram::Semester : semester28
+studyprogram::SemesterCourse "0..9999" --* "1..1" studyprogram::Semester : semesterCourses27
+studyprogram::Year "1..1" *-- "2..2" studyprogram::Semester : semesters22
+studyprogram::StudyPlan "0..9999" --* "1..1" studyprogram::StudyPlan : specialisations19
+studyprogram::StudyPlan "0..1" -- "1..1" studyprogram::StudyPlan : studyPlan16
+studyprogram::StudyPlan "0..1" -- "1..1" studyprogram::Year : studyPlan23
+studyprogram::StudyPlan "0..9999" --* "1..1" studyprogram::Program : studyPlans7
+studyprogram::Year "0..1" -- "1..1" studyprogram::Semester : year25
+studyprogram::Year "0..5" --* "1..1" studyprogram::StudyPlan : years12
+@enduml

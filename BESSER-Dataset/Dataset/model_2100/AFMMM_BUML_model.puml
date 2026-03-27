@@ -1,0 +1,63 @@
+@startuml
+class Domain {
+}
+class Relation {
+}
+class afmmm::Attribute {
+  + name : str
+}
+class afmmm::AttributedFeatureDiagram {
+}
+class afmmm::AttributedFeatureModel {
+}
+class afmmm::Boolean {
+}
+class afmmm::CrossTreeConstraint {
+}
+abstract class afmmm::Domain {
+}
+class afmmm::EClass0 {
+}
+class afmmm::Enum {
+  + literals : str
+}
+class afmmm::Feature {
+  + name : str
+}
+class afmmm::Integer {
+}
+class afmmm::Mandatory {
+}
+class afmmm::Mutex {
+}
+class afmmm::Optional {
+}
+class afmmm::Or {
+}
+class afmmm::Real {
+}
+abstract class afmmm::Relation {
+}
+class afmmm::XOr {
+}
+Domain <|-- afmmm::Boolean
+Domain <|-- afmmm::Enum
+Domain <|-- afmmm::Integer
+Domain <|-- afmmm::Real
+Relation <|-- afmmm::Mandatory
+Relation <|-- afmmm::Mutex
+Relation <|-- afmmm::Optional
+Relation <|-- afmmm::Or
+Relation <|-- afmmm::XOr
+afmmm::Feature "1..1" *-- "0..9999" afmmm::Attribute : attributes8
+afmmm::Feature "1..9999" -- "1..1" afmmm::Relation : children13
+afmmm::AttributedFeatureModel "1..1" *-- "0..1" afmmm::CrossTreeConstraint : constraint18
+afmmm::AttributedFeatureDiagram "1..1" --* "1..1" afmmm::AttributedFeatureModel : diagram16
+afmmm::Domain "1..1" -- "1..1" afmmm::Attribute : domain23
+afmmm::Domain "0..9999" --* "1..1" afmmm::AttributedFeatureModel : domains21
+afmmm::AttributedFeatureDiagram "1..1" *-- "1..9999" afmmm::Feature : features0
+afmmm::Feature "1..1" -- "1..1" afmmm::Relation : parent10
+afmmm::CrossTreeConstraint "0..9999" --* "1..1" afmmm::AttributedFeatureDiagram : readableConstraints4
+afmmm::Relation "0..9999" --* "1..1" afmmm::AttributedFeatureDiagram : relations6
+afmmm::Feature "1..1" -- "1..1" afmmm::AttributedFeatureDiagram : root1
+@enduml

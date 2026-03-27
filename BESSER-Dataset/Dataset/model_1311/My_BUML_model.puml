@@ -1,0 +1,27 @@
+@startuml
+class State {
+}
+class StateMachine::NamedState {
+  + name : str
+}
+abstract class StateMachine::State {
+}
+class StateMachine::Transition {
+  + action : str
+  + id : int
+  + name : str
+  + trigger : str
+}
+class StateMachine::UnNamedState {
+  + name : str
+}
+class StateMachine::WashingMachine {
+}
+State <|-- StateMachine::NamedState
+State <|-- StateMachine::UnNamedState
+StateMachine::Transition "0..9999" -- "1..1" StateMachine::State : outgoings0
+StateMachine::State "1..1" -- "1..1" StateMachine::Transition : source1
+StateMachine::State "0..9999" --* "1..1" StateMachine::WashingMachine : states7
+StateMachine::Transition "1..1" -- "1..1" StateMachine::State : target4
+StateMachine::Transition "0..9999" --* "1..1" StateMachine::WashingMachine : transitions9
+@enduml

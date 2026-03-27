@@ -1,0 +1,42 @@
+@startuml
+class Instruction {
+}
+class Turn {
+}
+class polybot::modelling::language::Catch {
+}
+class polybot::modelling::language::ComeHome {
+}
+abstract class polybot::modelling::language::Instruction {
+  + name : str
+  + nextInstruction : str
+  + nextInstructionFalse : str
+  + nextInstructionTrue : str
+}
+class polybot::modelling::language::MoveStraight {
+  + distance : int
+}
+class polybot::modelling::language::Release {
+}
+class polybot::modelling::language::Robot {
+  + debug : bool
+}
+class polybot::modelling::language::Scene {
+}
+abstract class polybot::modelling::language::Turn {
+  + angle : int
+}
+class polybot::modelling::language::TurnLeft {
+}
+class polybot::modelling::language::TurnRight {
+}
+Instruction <|-- polybot::modelling::language::Catch
+Instruction <|-- polybot::modelling::language::ComeHome
+Instruction <|-- polybot::modelling::language::MoveStraight
+Instruction <|-- polybot::modelling::language::Release
+Instruction <|-- polybot::modelling::language::Turn
+Turn <|-- polybot::modelling::language::TurnLeft
+Turn <|-- polybot::modelling::language::TurnRight
+polybot::modelling::language::Robot "1..1" *-- "0..9999" polybot::modelling::language::Instruction : instructions1
+polybot::modelling::language::Robot "1..1" --* "1..1" polybot::modelling::language::Scene : robot0
+@enduml

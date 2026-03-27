@@ -1,0 +1,84 @@
+@startuml
+class DataType {
+}
+class NamedElement {
+}
+class uml2CD::Association {
+  + isDerived : str
+}
+class uml2CD::Class {
+  + active : str
+}
+class uml2CD::Comment {
+  + value : str
+}
+class uml2CD::Constraint {
+  + specification : str
+}
+abstract class uml2CD::DataType {
+}
+class uml2CD::Enumeration {
+}
+class uml2CD::EnumerationLiteral {
+}
+class uml2CD::Generalization {
+  + isSubstitutable : bool
+}
+class uml2CD::GeneralizationSet {
+  + isCovering : str
+  + isDisjoint : str
+}
+abstract class uml2CD::NamedElement {
+  + name : str
+}
+class uml2CD::Operation {
+  + body : str
+  + isQuery : str
+  + visibility : str
+}
+class uml2CD::Package {
+}
+class uml2CD::Parameter {
+  + defaultValue : str
+  + kind : str
+}
+class uml2CD::PrimitiveType {
+}
+class uml2CD::Property {
+  + aggregation : str
+  + isDerived : str
+  + lower : str
+  + upper : str
+}
+class uml2CD::UMLModel {
+}
+DataType <|-- uml2CD::Enumeration
+DataType <|-- uml2CD::PrimitiveType
+NamedElement <|-- uml2CD::Association
+NamedElement <|-- uml2CD::Class
+NamedElement <|-- uml2CD::DataType
+NamedElement <|-- uml2CD::EnumerationLiteral
+NamedElement <|-- uml2CD::Operation
+NamedElement <|-- uml2CD::Package
+NamedElement <|-- uml2CD::Property
+uml2CD::Comment "0..1" --* "1..1" uml2CD::NamedElement : comments0
+uml2CD::Constraint "0..1" --* "1..1" uml2CD::NamedElement : constraints1
+uml2CD::Enumeration "0..1" -- "1..1" uml2CD::EnumerationLiteral : enumeration36
+uml2CD::Class "1..1" -- "1..1" uml2CD::Generalization : general13
+uml2CD::Generalization "0..9999" -- "1..1" uml2CD::GeneralizationSet : generalization37
+uml2CD::Generalization "1..1" -- "0..9999" uml2CD::GeneralizationSet : generalizationSet19
+uml2CD::Property "1..9999" -- "1..1" uml2CD::Association : memberEnd29
+uml2CD::Package "1..1" *-- "0..9999" uml2CD::Package : nestedPackage4
+uml2CD::Class "1..1" *-- "0..9999" uml2CD::Property : ownedAttribute27
+uml2CD::Property "0..9999" --* "1..1" uml2CD::Association : ownedEnd32
+uml2CD::EnumerationLiteral "0..9999" --* "1..1" uml2CD::Enumeration : ownedLiteral35
+uml2CD::Operation "0..9999" --* "1..1" uml2CD::Class : ownedOperation24
+uml2CD::Package "1..1" *-- "0..9999" uml2CD::Association : packagedAssoc9
+uml2CD::Class "0..9999" --* "1..1" uml2CD::Package : packagedClass5
+uml2CD::Generalization "0..9999" --* "1..1" uml2CD::Package : packagedGeneralizations11
+uml2CD::DataType "0..9999" --* "1..1" uml2CD::Package : packagedType7
+uml2CD::UMLModel "1..1" *-- "0..9999" uml2CD::Package : packages38
+uml2CD::Operation "0..9999" -- "1..1" uml2CD::Operation : redefinedOperation23
+uml2CD::Class "1..1" -- "1..1" uml2CD::Generalization : specific16
+uml2CD::DataType "0..1" -- "1..1" uml2CD::Parameter : type20
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+class NamedElement {
+}
+class petrinet::NamedElement {
+  + name : str
+}
+class petrinet::Net {
+}
+class petrinet::Place {
+  + tokens : int
+}
+class petrinet::Transition {
+}
+NamedElement <|-- petrinet::Net
+NamedElement <|-- petrinet::Place
+NamedElement <|-- petrinet::Transition
+petrinet::Net "1..1" -- "1..1" petrinet::Place : first3
+petrinet::Place "0..9999" -- "1..1" petrinet::Transition : input9
+petrinet::Transition "1..1" -- "0..9999" petrinet::Place : output12
+petrinet::Place "0..9999" --* "1..1" petrinet::Net : places0
+petrinet::Transition "0..1" -- "1..1" petrinet::Place : to6
+petrinet::Net "1..1" *-- "0..9999" petrinet::Transition : transitions1
+@enduml

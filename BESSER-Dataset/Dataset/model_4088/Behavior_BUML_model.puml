@@ -1,0 +1,32 @@
+@startuml
+class Behavior::Component {
+}
+class Behavior::Event {
+}
+abstract class Behavior::NamedElement {
+  + name : str
+}
+class Behavior::State {
+}
+class Behavior::System {
+}
+class Behavior::Transition {
+}
+class NamedElement {
+}
+NamedElement <|-- Behavior::Component
+NamedElement <|-- Behavior::Event
+NamedElement <|-- Behavior::State
+NamedElement <|-- Behavior::System
+NamedElement <|-- Behavior::Transition
+Behavior::System "1..1" *-- "0..9999" Behavior::Component : components0
+Behavior::Component "1..1" -- "0..1" Behavior::State : currentState7
+Behavior::Event "0..9999" --* "1..1" Behavior::System : events1
+Behavior::State "0..1" -- "1..1" Behavior::Transition : fromState10
+Behavior::Event "0..1" -- "1..1" Behavior::Transition : generatedEvent22
+Behavior::State "0..9999" -- "1..1" Behavior::Transition : guardStates16
+Behavior::State "0..9999" --* "1..1" Behavior::Component : states3
+Behavior::Transition "1..1" -- "0..1" Behavior::State : toState13
+Behavior::Transition "0..9999" --* "1..1" Behavior::Component : transitions5
+Behavior::Event "0..1" -- "1..1" Behavior::Transition : triggeringEvent19
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+class Classifier {
+}
+class KM3::Attribute {
+}
+class KM3::Class {
+  + isAbstract : str
+}
+class KM3::Classifier {
+}
+class KM3::DataType {
+}
+class KM3::EnumLiteral {
+}
+class KM3::Enumeration {
+}
+abstract class KM3::LocatedElement {
+  + location : str
+}
+class KM3::Metamodel {
+}
+abstract class KM3::ModelElement {
+  + name : str
+}
+class KM3::Operation {
+}
+class KM3::Package {
+}
+class KM3::Parameter {
+}
+class KM3::Reference {
+  + isContainer : str
+}
+class KM3::StructuralFeature {
+}
+class KM3::TemplateParameter {
+}
+class KM3::TypedElement {
+  + isOrdered : str
+  + isUnique : str
+  + lower : str
+  + upper : str
+}
+class LocatedElement {
+}
+class ModelElement {
+}
+class StructuralFeature {
+}
+class TypedElement {
+}
+Classifier <|-- KM3::Class
+Classifier <|-- KM3::DataType
+Classifier <|-- KM3::Enumeration
+Classifier <|-- KM3::TemplateParameter
+LocatedElement <|-- KM3::Metamodel
+LocatedElement <|-- KM3::ModelElement
+ModelElement <|-- KM3::Classifier
+ModelElement <|-- KM3::EnumLiteral
+ModelElement <|-- KM3::Package
+ModelElement <|-- KM3::TypedElement
+StructuralFeature <|-- KM3::Attribute
+StructuralFeature <|-- KM3::Reference
+TypedElement <|-- KM3::Operation
+TypedElement <|-- KM3::Parameter
+TypedElement <|-- KM3::StructuralFeature
+KM3::ModelElement "0..9999" --* "1..1" KM3::Package : contents25
+KM3::Metamodel "1..1" *-- "0..9999" KM3::Package : contents27
+KM3::StructuralFeature "0..9999" -- "1..1" KM3::StructuralFeature : derivedFrom15
+KM3::EnumLiteral "1..1" -- "1..1" KM3::Enumeration : enum1
+KM3::EnumLiteral "0..9999" --* "1..1" KM3::Enumeration : literals0
+KM3::Metamodel "1..1" -- "1..1" KM3::Package : metamodel26
+KM3::Operation "0..9999" --* "1..1" KM3::Class : operations7
+KM3::Reference "1..1" -- "0..1" KM3::Reference : opposite18
+KM3::Class "1..1" -- "1..1" KM3::StructuralFeature : owner10
+KM3::Class "1..1" -- "1..1" KM3::Operation : owner19
+KM3::Operation "1..1" -- "1..1" KM3::Parameter : owner23
+KM3::TemplateParameter "0..9999" --* "1..1" KM3::Class : parameters2
+KM3::Operation "1..1" *-- "0..9999" KM3::Parameter : parameters21
+KM3::StructuralFeature "0..9999" --* "1..1" KM3::Class : structuralFeatures6
+KM3::StructuralFeature "0..9999" -- "1..1" KM3::StructuralFeature : subsetOf12
+KM3::Class "0..9999" -- "1..1" KM3::Class : supertypes4
+KM3::TypedElement "1..1" -- "1..1" KM3::Classifier : type9
+@enduml

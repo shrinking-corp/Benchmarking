@@ -1,0 +1,109 @@
+@startuml
+class AABB {
+}
+class Capability {
+}
+class NamedElement {
+}
+class Region {
+}
+abstract class dronesStructure::AABB {
+}
+class dronesStructure::Capability {
+}
+class dronesStructure::Charger {
+}
+class dronesStructure::CooperativeAction {
+  + duration : float
+  + startTimeout : float
+}
+class dronesStructure::Dimension {
+  + depth : float
+  + height : float
+  + width : float
+}
+class dronesStructure::Drone {
+}
+class dronesStructure::DroneType {
+  + idleEneryConsumption : float
+  + maxBatteryCapacity : float
+  + weight : float
+}
+class dronesStructure::DronesStructure {
+}
+class dronesStructure::MovementCapability {
+}
+abstract class dronesStructure::NamedElement {
+  + name : str
+}
+class dronesStructure::Obstacle {
+}
+class dronesStructure::Position {
+  + x : float
+  + y : float
+  + z : float
+}
+class dronesStructure::ProvidedCapability {
+  + energyConsumptionPerValue : float
+  + maximalValue : float
+}
+class dronesStructure::Region {
+}
+class dronesStructure::RequiredCapability {
+  + minimalValue : float
+}
+class dronesStructure::Role {
+}
+class dronesStructure::ScanningCapability {
+}
+class dronesStructure::Scenario {
+  + maximumCommunicationDistance : float
+  + safeCommunicationDistance : float
+}
+class dronesStructure::ScenarioBounds {
+}
+class dronesStructure::Task {
+}
+AABB <|-- dronesStructure::Obstacle
+AABB <|-- dronesStructure::Region
+AABB <|-- dronesStructure::ScenarioBounds
+Capability <|-- dronesStructure::MovementCapability
+Capability <|-- dronesStructure::ScanningCapability
+NamedElement <|-- dronesStructure::Capability
+NamedElement <|-- dronesStructure::CooperativeAction
+NamedElement <|-- dronesStructure::Drone
+NamedElement <|-- dronesStructure::DroneType
+NamedElement <|-- dronesStructure::Obstacle
+NamedElement <|-- dronesStructure::Region
+NamedElement <|-- dronesStructure::Role
+NamedElement <|-- dronesStructure::Scenario
+NamedElement <|-- dronesStructure::Task
+Region <|-- dronesStructure::Charger
+dronesStructure::CooperativeAction "0..1" -- "1..1" dronesStructure::Task : actionToPerform48
+dronesStructure::ScenarioBounds "1..1" --* "1..1" dronesStructure::Scenario : allowedBounds9
+dronesStructure::DronesStructure "1..1" *-- "0..9999" dronesStructure::Capability : capabilities5
+dronesStructure::Capability "1..1" -- "1..1" dronesStructure::ProvidedCapability : capability25
+dronesStructure::RequiredCapability "1..1" -- "1..1" dronesStructure::Capability : capability32
+dronesStructure::CooperativeAction "1..1" -- "1..1" dronesStructure::Role : cooperativeAction31
+dronesStructure::CooperativeAction "0..9999" --* "1..1" dronesStructure::DronesStructure : cooperativeActions3
+dronesStructure::Dimension "1..1" --* "1..1" dronesStructure::DroneType : dimension20
+dronesStructure::AABB "1..1" *-- "1..1" dronesStructure::Dimension : dimension43
+dronesStructure::ProvidedCapability "1..1" -- "1..1" dronesStructure::DroneType : droneType28
+dronesStructure::DroneType "0..9999" --* "1..1" dronesStructure::DronesStructure : droneTypes1
+dronesStructure::Drone "0..9999" --* "1..1" dronesStructure::Scenario : drones7
+dronesStructure::DroneType "1..1" -- "1..1" dronesStructure::Drone : dronetype38
+dronesStructure::DroneType "1..1" -- "0..1" dronesStructure::ProvidedCapability : movementCapability18
+dronesStructure::Obstacle "0..9999" --* "1..1" dronesStructure::Scenario : obstacles11
+dronesStructure::Position "1..1" --* "1..1" dronesStructure::AABB : position41
+dronesStructure::ProvidedCapability "0..9999" --* "1..1" dronesStructure::DroneType : providedCapabilities17
+dronesStructure::Region "1..1" -- "1..1" dronesStructure::Task : region47
+dronesStructure::Scenario "1..1" *-- "0..9999" dronesStructure::Region : regions13
+dronesStructure::RequiredCapability "0..9999" --* "1..1" dronesStructure::Role : requiredCapabilities30
+dronesStructure::Role "1..1" -- "1..1" dronesStructure::RequiredCapability : role34
+dronesStructure::Role "1..9999" --* "1..1" dronesStructure::CooperativeAction : roles29
+dronesStructure::ProvidedCapability "0..1" -- "1..1" dronesStructure::DroneType : scanningCapability22
+dronesStructure::DronesStructure "1..1" *-- "0..9999" dronesStructure::Scenario : scenarios0
+dronesStructure::Drone "1..1" *-- "1..1" dronesStructure::Position : startPosition36
+dronesStructure::Task "0..9999" --* "1..1" dronesStructure::Scenario : tasks15
+dronesStructure::Task "0..9999" -- "1..1" dronesStructure::Region : tasks46
+@enduml

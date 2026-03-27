@@ -1,0 +1,202 @@
+@startuml
+class AbstractDeclaration {
+}
+enum BaseTypeEnum {
+  BOOLEAN
+  INTEGER
+}
+class Declaration {
+}
+class Expression {
+}
+class Instruction {
+}
+class NamedElement {
+}
+enum Severity {
+  ERROR
+  WARNING
+}
+class TransitionExpression {
+}
+class Type {
+}
+class altarica::ARBoolean {
+  + value : str
+}
+class altarica::ARNumber {
+  + value : float
+}
+class altarica::ARString {
+  + value : str
+}
+class altarica::AbstractDeclaration {
+}
+class altarica::Addition {
+  + op : str
+}
+class altarica::Assignment {
+}
+class altarica::Attribute {
+}
+class altarica::BaseType {
+  + name : str
+}
+class altarica::Block {
+}
+class altarica::CaseExpression {
+}
+class altarica::Conditional {
+}
+class altarica::Declaration {
+}
+class altarica::Domain {
+}
+class altarica::EObject {
+}
+class altarica::Equal {
+  + op : str
+}
+class altarica::Error {
+  + message : str
+  + severity : str
+}
+class altarica::Event {
+}
+class altarica::Expression {
+}
+class altarica::FunctionCall {
+  + name : str
+}
+class altarica::Instruction {
+}
+class altarica::LabeledTransition {
+}
+class altarica::LogicalAnd {
+  + op : str
+}
+class altarica::LogicalOr {
+  + op : str
+}
+class altarica::Minus {
+}
+class altarica::Model {
+}
+class altarica::Multiplication {
+  + op : str
+}
+class altarica::NameRef {
+}
+class altarica::NamedElement {
+  + name : str
+}
+class altarica::NamedType {
+}
+class altarica::Node {
+}
+class altarica::Not {
+}
+class altarica::Observer {
+}
+class altarica::Parameter {
+}
+class altarica::Skip {
+}
+class altarica::SwitchExpression {
+}
+class altarica::SymbolicConstant {
+}
+class altarica::Transition {
+}
+class altarica::TransitionAnd {
+}
+class altarica::TransitionExpression {
+}
+class altarica::TransitionOr {
+}
+class altarica::Type {
+}
+class altarica::Variable {
+}
+AbstractDeclaration <|-- altarica::NamedElement
+Declaration <|-- altarica::NamedElement
+Expression <|-- altarica::ARBoolean
+Expression <|-- altarica::ARNumber
+Expression <|-- altarica::ARString
+Expression <|-- altarica::Addition
+Expression <|-- altarica::Equal
+Expression <|-- altarica::FunctionCall
+Expression <|-- altarica::LogicalAnd
+Expression <|-- altarica::LogicalOr
+Expression <|-- altarica::Minus
+Expression <|-- altarica::Multiplication
+Expression <|-- altarica::NameRef
+Expression <|-- altarica::Not
+Expression <|-- altarica::SwitchExpression
+Instruction <|-- altarica::Assignment
+Instruction <|-- altarica::Block
+Instruction <|-- altarica::Conditional
+Instruction <|-- altarica::Skip
+NamedElement <|-- altarica::Attribute
+NamedElement <|-- altarica::Domain
+NamedElement <|-- altarica::Event
+NamedElement <|-- altarica::Node
+NamedElement <|-- altarica::Observer
+NamedElement <|-- altarica::Parameter
+NamedElement <|-- altarica::SymbolicConstant
+NamedElement <|-- altarica::Variable
+TransitionExpression <|-- altarica::Transition
+TransitionExpression <|-- altarica::TransitionAnd
+TransitionExpression <|-- altarica::TransitionOr
+Type <|-- altarica::BaseType
+Type <|-- altarica::NamedType
+altarica::Instruction "0..1" --* "1..1" altarica::Transition : action65
+altarica::Instruction "0..9999" --* "1..1" altarica::Node : assertions32
+altarica::NamedElement "0..9999" --* "1..1" altarica::Variable : attributes36
+altarica::NamedElement "0..9999" --* "1..1" altarica::Event : attributes41
+altarica::CaseExpression "1..1" *-- "0..1" altarica::Expression : case23
+altarica::SwitchExpression "1..1" *-- "0..9999" altarica::CaseExpression : cases16
+altarica::CaseExpression "0..9999" --* "1..1" altarica::Instruction : cases7
+altarica::Expression "0..1" --* "1..1" altarica::CaseExpression : condition20
+altarica::Expression "0..1" --* "1..1" altarica::Conditional : condition75
+altarica::NamedElement "0..9999" --* "1..1" altarica::Domain : constants26
+altarica::AbstractDeclaration "0..9999" --* "1..1" altarica::Model : declarations1
+altarica::Declaration "0..9999" --* "1..1" altarica::Node : declarations28
+altarica::Expression "0..1" --* "1..1" altarica::SwitchExpression : default18
+altarica::EObject "0..1" --* "1..1" altarica::Instruction : else8
+altarica::Error "0..9999" --* "1..1" altarica::Model : errors0
+altarica::NameRef "0..1" --* "1..1" altarica::LabeledTransition : event4
+altarica::Expression "0..1" --* "1..1" altarica::Not : expression105
+altarica::Expression "0..1" --* "1..1" altarica::Minus : expression107
+altarica::LabeledTransition "1..1" *-- "0..1" altarica::TransitionExpression : expression5
+altarica::Expression "0..1" --* "1..1" altarica::Transition : guard63
+altarica::Block "1..1" *-- "0..9999" altarica::Instruction : instructions73
+altarica::Expression "0..1" --* "1..1" altarica::Multiplication : left100
+altarica::TransitionExpression "0..1" --* "1..1" altarica::TransitionAnd : left53
+altarica::TransitionOr "1..1" *-- "0..1" altarica::TransitionExpression : left58
+altarica::Expression "0..1" --* "1..1" altarica::LogicalOr : left80
+altarica::Expression "0..1" --* "1..1" altarica::LogicalAnd : left85
+altarica::Equal "1..1" *-- "0..1" altarica::Expression : left90
+altarica::Expression "0..1" --* "1..1" altarica::Addition : left95
+altarica::NameRef "0..1" --* "1..1" altarica::NameRef : nested14
+altarica::FunctionCall "1..1" *-- "0..9999" altarica::Expression : parameters109
+altarica::NamedElement "0..1" -- "1..1" altarica::NamedType : ref3
+altarica::Expression "0..1" --* "1..1" altarica::Multiplication : right102
+altarica::TransitionExpression "0..1" --* "1..1" altarica::TransitionAnd : right55
+altarica::TransitionExpression "0..1" --* "1..1" altarica::TransitionOr : right60
+altarica::LogicalOr "1..1" *-- "0..1" altarica::Expression : right82
+altarica::Expression "0..1" --* "1..1" altarica::LogicalAnd : right87
+altarica::Expression "0..1" --* "1..1" altarica::Equal : right92
+altarica::Expression "0..1" --* "1..1" altarica::Addition : right97
+altarica::Instruction "0..1" --* "1..1" altarica::Conditional : then77
+altarica::LabeledTransition "0..9999" --* "1..1" altarica::Node : transitions29
+altarica::Type "0..1" --* "1..1" altarica::Variable : type35
+altarica::Parameter "1..1" *-- "0..1" altarica::Type : type43
+altarica::Observer "1..1" *-- "0..1" altarica::Type : type48
+altarica::Attribute "1..1" *-- "0..1" altarica::Expression : value39
+altarica::Expression "0..1" --* "1..1" altarica::Parameter : value45
+altarica::Expression "0..1" --* "1..1" altarica::Observer : value50
+altarica::Expression "0..1" --* "1..1" altarica::Assignment : value70
+altarica::NameRef "1..1" -- "0..1" altarica::NamedElement : variable10
+altarica::NameRef "0..1" --* "1..1" altarica::Assignment : variable68
+@enduml

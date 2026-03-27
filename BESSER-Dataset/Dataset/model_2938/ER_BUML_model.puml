@@ -1,0 +1,36 @@
+@startuml
+class ER::Attribute {
+  + type : str
+}
+class ER::ERModel {
+}
+abstract class ER::Element {
+  + name : str
+}
+class ER::EntityType {
+}
+abstract class ER::Feature {
+}
+abstract class ER::Reference {
+}
+class ER::StrongReference {
+}
+class ER::WeakReference {
+}
+class Element {
+}
+class Feature {
+}
+class Reference {
+}
+Element <|-- ER::ERModel
+Element <|-- ER::EntityType
+Element <|-- ER::Feature
+Feature <|-- ER::Attribute
+Feature <|-- ER::Reference
+Reference <|-- ER::StrongReference
+Reference <|-- ER::WeakReference
+ER::EntityType "0..9999" --* "1..1" ER::ERModel : entities0
+ER::EntityType "1..1" *-- "0..9999" ER::Feature : features1
+ER::EntityType "1..1" -- "1..1" ER::Reference : type3
+@enduml

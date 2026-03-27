@@ -1,0 +1,118 @@
+@startuml
+class CSElement {
+}
+enum CSFitType {
+  AUTO_EXPAND
+  FIT_TO_CHILDREN
+}
+class CSNode {
+}
+enum CSOrientation {
+  HORIZONTAL
+  VERTICAL
+}
+class ENamedElement {
+}
+class cs::CSColor {
+  + a : float
+  + b : float
+  + g : float
+  + r : float
+}
+class cs::CSConnection {
+}
+class cs::CSConnectionEnd {
+  + tipType : int
+}
+class cs::CSElement {
+  + draggable : bool
+  + maxZoom : str
+  + minZoom : str
+  + resizable : bool
+  + selectable : str
+  + templateRoot : bool
+}
+class cs::CSLayout {
+}
+class cs::CSNode {
+  + height : str
+  + heightRatioToParent : str
+  + horizontalAlign : str
+  + maxHeight : str
+  + maxWidth : str
+  + minHeight : str
+  + minWidth : str
+  + verticalAlign : str
+  + width : str
+  + widthRatioToParent : str
+  + x : str
+  + y : str
+}
+class cs::CSPoint {
+  + x : float
+  + y : float
+}
+class cs::CSRoot {
+}
+class cs::CSShape {
+  + closed : bool
+}
+class cs::CSStroke {
+  + cap : int
+  + dash : float
+  + dash_phase : float
+  + join : int
+  + miterlimit : float
+  + width : float
+}
+class cs::CSTemplateDescription {
+  + scale : float
+}
+class cs::CSText {
+  + text : str
+}
+class cs::CSTransform {
+  + m00 : float
+  + m01 : float
+  + m02 : float
+  + m10 : float
+  + m11 : float
+  + m12 : float
+  + m20 : float
+  + m21 : float
+  + m22 : float
+}
+class cs::EClass {
+}
+class cs::EObject {
+}
+class cs::EStructuralFeature {
+}
+CSElement <|-- cs::CSConnection
+CSElement <|-- cs::CSNode
+CSElement <|-- cs::CSRoot
+CSNode <|-- cs::CSTemplateDescription
+CSNode <|-- cs::CSText
+ENamedElement <|-- cs::CSElement
+ENamedElement <|-- cs::CSShape
+cs::CSColor "0..1" --* "1..1" cs::CSElement : background8
+cs::CSElement "0..9999" --* "1..1" cs::CSElement : children2
+cs::EStructuralFeature "0..1" -- "1..1" cs::CSConnectionEnd : connStructuralFeature39
+cs::CSConnection "1..1" *-- "2..9999" cs::CSConnectionEnd : connectionEnds22
+cs::CSConnection "0..9999" -- "1..1" cs::CSNode : connections21
+cs::EClass "0..1" -- "1..1" cs::CSTemplateDescription : containerClass26
+cs::CSTemplateDescription "1..1" -- "0..1" cs::EStructuralFeature : containerStructuralFeature30
+cs::EStructuralFeature "0..9999" -- "1..1" cs::CSElement : displayedStructuralFeatures17
+cs::CSElement "1..1" *-- "0..1" cs::CSColor : foreground6
+cs::CSLayout "0..1" -- "1..1" cs::CSElement : layout19
+cs::CSNode "0..1" -- "1..1" cs::CSConnectionEnd : node36
+cs::CSConnectionEnd "1..1" -- "0..1" cs::EStructuralFeature : nodeStructuralFeature42
+cs::EObject "0..1" -- "1..1" cs::CSElement : object15
+cs::CSElement "1..1" -- "0..1" cs::CSElement : parent4
+cs::CSPoint "0..9999" --* "1..1" cs::CSShape : points24
+cs::CSShape "0..1" --* "1..1" cs::CSElement : shape11
+cs::CSElement "1..1" *-- "0..1" cs::CSStroke : stroke0
+cs::CSElement "0..1" -- "1..1" cs::CSTemplateDescription : template33
+cs::EClass "0..1" -- "1..1" cs::CSTemplateDescription : theClass27
+cs::CSElement "1..1" *-- "0..1" cs::CSTransform : transform13
+@enduml

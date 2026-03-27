@@ -1,0 +1,78 @@
+@startuml
+class Address {
+}
+class Order {
+}
+class OrderDetail {
+}
+enum VAT {
+  vat0
+  vat15
+  vat7
+}
+class model1::Address {
+  + city : str
+  + name : str
+  + street : str
+}
+class model1::Category {
+  + name : str
+}
+class model1::Company {
+}
+class model1::Customer {
+}
+abstract class model1::Order {
+}
+class model1::OrderAddress {
+  + testAttribute : bool
+}
+class model1::OrderDetail {
+  + price : float
+}
+class model1::Product1 {
+  + description : str
+  + name : str
+  + otherVATs : str
+  + vat : str
+}
+class model1::ProductToOrder {
+}
+class model1::PurchaseOrder {
+  + date : date
+}
+class model1::SalesOrder {
+  + id : int
+}
+class model1::Supplier {
+  + preferred : bool
+}
+Address <|-- model1::Company
+Address <|-- model1::Customer
+Address <|-- model1::OrderAddress
+Address <|-- model1::Supplier
+OrderDetail <|-- model1::OrderAddress
+Order <|-- model1::OrderAddress
+Order <|-- model1::PurchaseOrder
+Order <|-- model1::SalesOrder
+model1::Company "1..1" *-- "0..9999" model1::Category : categories0
+model1::Category "0..9999" --* "1..1" model1::Category : categories26
+model1::SalesOrder "1..1" -- "1..1" model1::Customer : customer21
+model1::Customer "0..9999" --* "1..1" model1::Company : customers3
+model1::ProductToOrder "1..1" -- "0..1" model1::Product1 : key32
+model1::Order "1..1" -- "1..1" model1::OrderDetail : order14
+model1::Customer "1..1" *-- "0..9999" model1::ProductToOrder : orderByProduct11
+model1::OrderDetail "0..9999" --* "1..1" model1::Order : orderDetails13
+model1::Product1 "1..1" -- "0..9999" model1::OrderDetail : orderDetails30
+model1::Product1 "0..1" -- "1..1" model1::OrderDetail : product15
+model1::Product1 "0..9999" --* "1..1" model1::Category : products28
+model1::PurchaseOrder "0..9999" -- "1..1" model1::SalesOrder : purchaseOrders22
+model1::Company "1..1" *-- "0..9999" model1::PurchaseOrder : purchaseOrders5
+model1::PurchaseOrder "0..9999" -- "1..1" model1::Supplier : purchaseOrders9
+model1::SalesOrder "0..9999" -- "1..1" model1::Customer : salesOrders10
+model1::SalesOrder "0..9999" -- "1..1" model1::PurchaseOrder : salesOrders18
+model1::SalesOrder "0..9999" --* "1..1" model1::Company : salesOrders7
+model1::Supplier "1..1" -- "1..1" model1::PurchaseOrder : supplier17
+model1::Supplier "0..9999" --* "1..1" model1::Company : suppliers1
+model1::SalesOrder "0..1" -- "1..1" model1::ProductToOrder : value35
+@enduml

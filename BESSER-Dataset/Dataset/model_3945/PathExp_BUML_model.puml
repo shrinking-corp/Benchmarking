@@ -1,0 +1,50 @@
+@startuml
+class Element {
+}
+class Initial {
+}
+class PathExp {
+}
+class PathExp::Element {
+  + name : str
+}
+class PathExp::Final {
+  + bool_attr : bool
+}
+class PathExp::Initial {
+  + bool_attr : bool
+}
+class PathExp::InitialOne {
+}
+class PathExp::Initialtwo {
+}
+class PathExp::Internal {
+  + attr : int
+}
+class PathExp::NonReferencedClass {
+}
+class PathExp::PathExp {
+}
+class PathExp::State {
+}
+class PathExp::Transition {
+}
+class State {
+}
+class Transition {
+}
+Element <|-- PathExp::PathExp
+Element <|-- PathExp::Transition
+Initial <|-- PathExp::InitialOne
+Initial <|-- PathExp::Initialtwo
+State <|-- PathExp::Final
+State <|-- PathExp::Initial
+State <|-- PathExp::Internal
+Transition "0..9999" -- "1..1" PathExp::State : incoming3
+PathExp::State "1..1" -- "0..9999" Transition : outgoing4
+PathExp "1..1" -- "1..1" PathExp::State : owner7
+State "1..1" -- "1..1" PathExp::Transition : source8
+State "1..9999" --* "1..1" PathExp::PathExp : states0
+State "1..1" -- "1..1" PathExp::Transition : target11
+Transition "0..9999" --* "1..1" PathExp::PathExp : transitions1
+@enduml

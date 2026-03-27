@@ -1,0 +1,35 @@
+@startuml
+class PetriEdge {
+}
+class PetriModel {
+}
+class PetriNet::Arc {
+}
+class PetriNet::PetriEdge {
+}
+class PetriNet::PetriModel {
+  + description : str
+  + name : str
+}
+class PetriNet::PetriNode {
+}
+class PetriNet::Place {
+}
+class PetriNet::Token {
+}
+class PetriNet::Transition {
+}
+class PetriNode {
+}
+PetriEdge <|-- PetriNet::Arc
+PetriModel <|-- PetriNet::PetriEdge
+PetriModel <|-- PetriNet::PetriNode
+PetriNode <|-- PetriNet::Place
+PetriNode <|-- PetriNet::Token
+PetriNode <|-- PetriNet::Transition
+PetriNet::Arc "1..1" -- "0..1" PetriNet::PetriNode : petriFrom2
+PetriNet::PetriModel "0..9999" --* "1..1" PetriNet::PetriModel : petriModels8
+PetriNet::PetriNode "0..1" -- "1..1" PetriNet::Arc : petriTo4
+PetriNet::PetriNode "0..1" --* "1..1" PetriNet::Transition : test1
+PetriNet::Token "0..1" --* "1..1" PetriNet::Place : token0
+@enduml

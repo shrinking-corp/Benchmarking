@@ -1,0 +1,271 @@
+@startuml
+class Assignment {
+}
+enum BinaryBooleanOperatorKind {
+  Different
+  and
+  equal
+  inf
+  infOrEqual
+  or
+  sup
+  supOrEqual
+}
+class BinaryExpression {
+}
+enum BinaryIntegerOperatorKind {
+  div
+  max
+  min
+  minus
+  mul
+  plus
+  pourcent
+}
+class BooleanExpression {
+}
+class Constant {
+}
+class Control {
+}
+class Expression {
+}
+class InstantaneousInstruction {
+}
+class Instruction {
+}
+class IntegerExpression {
+}
+enum Library {
+  music
+  none
+  servo
+}
+class Module {
+}
+class ModuleGet {
+}
+class ModuleInstruction {
+}
+enum ModuleKind {
+  analog
+  digital
+}
+class NamedElement {
+}
+class Pin {
+}
+enum Time {
+  MicroSecond
+  MilliSecond
+}
+enum UnaryBooleanOperatorKind {
+  not
+}
+class UnaryExpression {
+}
+enum UnaryIntegerOperatorKind {
+  minus
+  squareRoot
+}
+class Utilities {
+}
+class Variable {
+}
+class arduino::Actuator {
+}
+class arduino::AnalogPin {
+}
+abstract class arduino::Assignment {
+}
+class arduino::BinaryBooleanExpression {
+  + operator : str
+}
+abstract class arduino::BinaryExpression {
+}
+class arduino::BinaryIntegerExpression {
+  + operator : str
+}
+class arduino::BooleanConstant {
+  + value : bool
+}
+abstract class arduino::BooleanExpression {
+}
+class arduino::BooleanModuleGet {
+}
+class arduino::BooleanVariable {
+  + initialValue : bool
+}
+class arduino::Connector {
+}
+abstract class arduino::Constant {
+}
+abstract class arduino::Control {
+  + evaluate() : bool
+}
+class arduino::Delay {
+  + unit : str
+  + value : int
+}
+class arduino::DigitalPin {
+}
+abstract class arduino::Expression {
+}
+class arduino::Hardware {
+}
+class arduino::If {
+}
+abstract class arduino::InstantaneousInstruction {
+}
+abstract class arduino::Instruction {
+  + execute() : void
+  + finalize() : void
+}
+class arduino::IntegerConstant {
+  + value : int
+}
+abstract class arduino::IntegerExpression {
+}
+class arduino::IntegerModuleGet {
+}
+class arduino::IntegerVariable {
+  + initialValue : int
+}
+abstract class arduino::Module {
+  + image : str
+  + kind : str
+  + level : bool
+  + library : str
+}
+class arduino::ModuleAssignment {
+}
+abstract class arduino::ModuleGet {
+}
+abstract class arduino::ModuleInstruction {
+}
+abstract class arduino::NamedElement {
+  + name : str
+}
+abstract class arduino::Pin {
+  + id : int
+  + level : int
+}
+class arduino::Platform {
+  + image : str
+}
+class arduino::Project {
+}
+class arduino::Repeat {
+  + iteration : int
+}
+class arduino::Sensor {
+}
+class arduino::Sketch {
+}
+class arduino::Synchro {
+}
+class arduino::UnaryBooleanExpression {
+  + operator : str
+}
+abstract class arduino::UnaryExpression {
+}
+class arduino::UnaryIntegerExpression {
+  + operator : str
+}
+abstract class arduino::Utilities {
+}
+abstract class arduino::Variable {
+}
+class arduino::VariableAssignment {
+}
+class arduino::VariableDeclaration {
+}
+class arduino::VariableRef {
+}
+class arduino::While {
+}
+Assignment <|-- arduino::ModuleAssignment
+Assignment <|-- arduino::VariableAssignment
+BinaryExpression <|-- arduino::BinaryBooleanExpression
+BinaryExpression <|-- arduino::BinaryIntegerExpression
+BooleanExpression <|-- arduino::BinaryBooleanExpression
+BooleanExpression <|-- arduino::BooleanConstant
+BooleanExpression <|-- arduino::BooleanModuleGet
+BooleanExpression <|-- arduino::BooleanVariable
+BooleanExpression <|-- arduino::UnaryBooleanExpression
+Constant <|-- arduino::BooleanConstant
+Constant <|-- arduino::IntegerConstant
+Control <|-- arduino::If
+Control <|-- arduino::Repeat
+Control <|-- arduino::While
+Expression <|-- arduino::BinaryExpression
+Expression <|-- arduino::BooleanExpression
+Expression <|-- arduino::Constant
+Expression <|-- arduino::IntegerExpression
+Expression <|-- arduino::ModuleGet
+Expression <|-- arduino::UnaryExpression
+Expression <|-- arduino::Variable
+Expression <|-- arduino::VariableRef
+InstantaneousInstruction <|-- arduino::Synchro
+Instruction <|-- arduino::Assignment
+Instruction <|-- arduino::Control
+Instruction <|-- arduino::InstantaneousInstruction
+Instruction <|-- arduino::ModuleInstruction
+Instruction <|-- arduino::Sketch
+Instruction <|-- arduino::Utilities
+Instruction <|-- arduino::VariableAssignment
+Instruction <|-- arduino::VariableDeclaration
+IntegerExpression <|-- arduino::BinaryIntegerExpression
+IntegerExpression <|-- arduino::IntegerConstant
+IntegerExpression <|-- arduino::IntegerModuleGet
+IntegerExpression <|-- arduino::IntegerVariable
+IntegerExpression <|-- arduino::UnaryIntegerExpression
+ModuleGet <|-- arduino::BooleanModuleGet
+ModuleGet <|-- arduino::IntegerModuleGet
+ModuleInstruction <|-- arduino::ModuleAssignment
+Module <|-- arduino::Actuator
+Module <|-- arduino::Sensor
+NamedElement <|-- arduino::Hardware
+NamedElement <|-- arduino::Instruction
+NamedElement <|-- arduino::Module
+NamedElement <|-- arduino::Platform
+NamedElement <|-- arduino::Sketch
+NamedElement <|-- arduino::Variable
+Pin <|-- arduino::AnalogPin
+Pin <|-- arduino::DigitalPin
+UnaryExpression <|-- arduino::UnaryBooleanExpression
+UnaryExpression <|-- arduino::UnaryIntegerExpression
+Utilities <|-- arduino::Delay
+Variable <|-- arduino::BooleanVariable
+Variable <|-- arduino::IntegerVariable
+arduino::AnalogPin "0..9999" --* "1..1" arduino::Platform : analogPins7
+arduino::Expression "1..1" --* "1..1" arduino::While : condition44
+arduino::If "1..1" *-- "1..1" arduino::Expression : condition51
+arduino::Connector "0..9999" --* "1..1" arduino::Hardware : connectors3
+arduino::Instruction "0..1" -- "1..1" arduino::Instruction : dependency31
+arduino::DigitalPin "0..9999" --* "1..1" arduino::Platform : digitalPins5
+arduino::Hardware "0..1" --* "1..1" arduino::Project : hardware13
+arduino::Sketch "1..1" -- "1..1" arduino::Hardware : hardware9
+arduino::Instruction "0..9999" --* "1..1" arduino::Sketch : instructions11
+arduino::Instruction "0..9999" --* "1..1" arduino::Control : instructions35
+arduino::Expression "1..1" --* "1..1" arduino::BinaryExpression : left45
+arduino::Module "1..1" -- "1..1" arduino::ModuleInstruction : module33
+arduino::Module "0..1" -- "1..1" arduino::Connector : module39
+arduino::Module "1..1" -- "1..1" arduino::ModuleGet : module42
+arduino::Hardware "1..1" -- "0..9999" arduino::Module : modules1
+arduino::Project "1..1" *-- "0..9999" arduino::Module : modules15
+arduino::Instruction "1..1" -- "0..1" arduino::Instruction : next28
+arduino::Expression "1..1" --* "1..1" arduino::Assignment : operand53
+arduino::Expression "1..1" --* "1..1" arduino::UnaryExpression : operand55
+arduino::Connector "1..1" -- "0..1" arduino::Pin : pin37
+arduino::Platform "0..9999" --* "1..1" arduino::Project : platform18
+arduino::Platform "1..9999" -- "1..1" arduino::Hardware : platforms0
+arduino::Instruction "0..1" -- "1..1" arduino::Instruction : previous25
+arduino::Expression "0..1" --* "1..1" arduino::BinaryExpression : right47
+arduino::Sketch "0..9999" --* "1..1" arduino::Project : sketchs21
+arduino::Synchro "0..9999" -- "1..1" arduino::Synchro : synchro62
+arduino::Synchro "1..1" -- "0..9999" arduino::Synchro : synchroeOpposite64
+arduino::VariableAssignment "1..1" -- "1..1" arduino::Variable : variable50
+arduino::VariableDeclaration "1..1" *-- "1..1" arduino::Variable : variable57
+arduino::Variable "1..1" -- "1..1" arduino::VariableRef : variable59
+@enduml

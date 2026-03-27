@@ -1,0 +1,81 @@
+@startuml
+enum EventProcessingContext {
+  CHRONICLE
+  IMMEDIATE
+  RECENT
+  STRICT_IMMEDIATE
+  UNRESTRICTED
+}
+enum NumericCompareOperator {
+  EQUALS
+  LESS_OR_EQUALS
+  LESS_THAN
+  MORE_OR_EQUALS
+  MORE_THAN
+}
+class State {
+}
+enum TimeConstraintType {
+  CHECK
+  START
+  STOP
+}
+class internalsm::AtomicEventPattern {
+}
+class internalsm::Event {
+}
+class internalsm::EventPattern {
+}
+class internalsm::EventToken {
+}
+class internalsm::FinalState {
+}
+class internalsm::Guard {
+}
+class internalsm::InitState {
+}
+class internalsm::InternalExecutionModel {
+  + context : str
+}
+class internalsm::State {
+  + label : str
+}
+class internalsm::StateMachine {
+  + context : str
+  + priority : int
+}
+class internalsm::TimeConstraint {
+  + type : str
+}
+class internalsm::TimeConstraintSpecification {
+  + expectedLength : str
+  + id : str
+  + startTimestamp : str
+  + stopTimestamp : str
+  + handleTimeConstraint() : void
+}
+class internalsm::Transition {
+}
+class internalsm::TrapState {
+}
+State <|-- internalsm::FinalState
+State <|-- internalsm::InitState
+State <|-- internalsm::TrapState
+internalsm::State "0..1" -- "1..1" internalsm::EventToken : currentState23
+internalsm::EventPattern "1..1" -- "1..1" internalsm::StateMachine : eventPattern15
+internalsm::InternalExecutionModel "1..1" *-- "0..9999" internalsm::EventToken : eventTokens21
+internalsm::EventToken "0..9999" -- "1..1" internalsm::State : eventTokens3
+internalsm::AtomicEventPattern "1..1" -- "1..1" internalsm::Guard : eventType11
+internalsm::Transition "1..1" *-- "0..1" internalsm::Guard : guard8
+internalsm::Transition "0..9999" -- "1..1" internalsm::State : inTransitions1
+internalsm::Event "0..1" -- "1..1" internalsm::State : lastProcessedEvent5
+internalsm::Event "0..1" --* "1..1" internalsm::InternalExecutionModel : latestEvent18
+internalsm::Transition "0..9999" --* "1..1" internalsm::State : outTransitions0
+internalsm::Transition "1..1" -- "1..1" internalsm::State : postState9
+internalsm::State "1..1" -- "1..1" internalsm::Transition : preState7
+internalsm::Event "0..9999" -- "1..1" internalsm::EventToken : recordedEvents25
+internalsm::InternalExecutionModel "1..1" *-- "0..9999" internalsm::StateMachine : stateMachines16
+internalsm::State "0..9999" --* "1..1" internalsm::StateMachine : states13
+internalsm::TimeConstraintSpecification "1..1" -- "1..1" internalsm::TimeConstraint : timeConstraintSpecification28
+internalsm::TimeConstraint "0..9999" --* "1..1" internalsm::State : timeConstraints4
+@enduml

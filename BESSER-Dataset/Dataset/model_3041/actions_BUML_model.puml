@@ -1,0 +1,63 @@
+@startuml
+class Action {
+}
+class ActionResult {
+}
+class AtomicProcess {
+}
+class CompositeProcess {
+}
+class Process {
+}
+abstract class actions::Action {
+}
+class actions::ActionResult {
+  + id : int
+  + version : int
+}
+class actions::ActionsCollection {
+  + id : int
+  + ns : str
+  + version : int
+}
+class actions::AtomicAction {
+}
+class actions::AtomicActionResult {
+  + hasDensity : float
+}
+class actions::CompositeAction {
+}
+class actions::Condition {
+}
+class actions::Distribution {
+  + datapoint : float
+  + density : float
+  + id : int
+  + version : int
+}
+class actions::Expression {
+}
+class actions::Parameter {
+}
+class actions::Participant {
+}
+class actions::Role {
+}
+ActionResult <|-- actions::AtomicActionResult
+Action <|-- actions::AtomicAction
+Action <|-- actions::CompositeAction
+AtomicProcess <|-- actions::AtomicAction
+CompositeProcess <|-- actions::CompositeAction
+Process <|-- actions::Action
+actions::Action "0..9999" --* "1..1" actions::ActionsCollection : actions16
+actions::Expression "0..9999" --* "1..1" actions::ActionResult : hasAddEffect3
+actions::AtomicAction "1..1" *-- "0..9999" actions::AtomicActionResult : hasAtomicActionResult1
+actions::Distribution "0..9999" --* "1..1" actions::AtomicActionResult : hasCostDistribution8
+actions::Expression "0..9999" --* "1..1" actions::ActionResult : hasDeleteEffect5
+actions::Distribution "0..9999" --* "1..1" actions::AtomicActionResult : hasDurationDistribution10
+actions::AtomicActionResult "1..1" *-- "0..9999" actions::Distribution : hasQualityDistribution13
+actions::Condition "0..9999" --* "1..1" actions::ActionResult : inCondition2
+actions::Parameter "0..9999" --* "1..1" actions::ActionsCollection : parameters20
+actions::Participant "0..9999" --* "1..1" actions::ActionsCollection : participants18
+actions::Role "0..9999" -- "1..1" actions::Action : performedByRole0
+@enduml

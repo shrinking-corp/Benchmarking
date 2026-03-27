@@ -1,0 +1,124 @@
+@startuml
+enum Brightness {
+  Dark
+  Default
+  Light
+}
+enum Color {
+  Black
+  Blue
+  Cyan
+  Default
+  Gray
+  Green
+  Orange
+  Red
+  White
+  Yellow
+}
+enum FontStyle {
+  Bold
+  Default
+  Italic
+}
+enum LayoutCompartment {
+  Free
+  List
+}
+class Link {
+}
+enum LinkFigure {
+  Arrow
+  ClosedArrow
+  Default
+  FilledClosedArrow
+  FilledRhomb
+  FilledSquare
+  None
+  Rhomb
+  Square
+}
+enum NodeFigure {
+  Default
+  Ellipse
+  Image
+  Polygon
+  Rectangle
+  Rounded
+  SVG
+}
+class PersonalizedElement {
+}
+enum Placement {
+  External
+  Internal
+  None
+}
+enum Texture {
+  Dash
+  Default
+  Dot
+  Solid
+}
+class cevinedit::AffixedEReferenceCont {
+}
+class cevinedit::CEViNEditRoot {
+  + sourceMM : str
+}
+class cevinedit::CompartmentEReferenceCont {
+  + collapsible : bool
+  + layout : str
+}
+class cevinedit::Diagram {
+  + modelExtension : str
+  + name : str
+}
+class cevinedit::LabelEAttribute {
+}
+abstract class cevinedit::Link {
+  + brightness : str
+  + color : str
+  + label : str
+  + labelFontStyle : str
+  + sourceDecoration : str
+  + targetDecoration : str
+  + texture : str
+  + width : int
+}
+class cevinedit::LinkEClass {
+  + source : str
+  + target : str
+}
+class cevinedit::LinkEReferenceNonCont {
+}
+class cevinedit::NodeEClass {
+  + backgroundColor : str
+  + borderColor : str
+  + borderTexture : str
+  + borderWidth : int
+  + brightness : str
+  + figure : str
+  + imagePath : str
+  + label : str
+  + labelFontStyle : str
+  + labelPlacement : str
+  + listPointsPolygon : str
+  + resizable : bool
+  + size : str
+}
+abstract class cevinedit::PersonalizedElement {
+  + icon : str
+  + name : str
+}
+Link <|-- cevinedit::LinkEClass
+Link <|-- cevinedit::LinkEReferenceNonCont
+PersonalizedElement <|-- cevinedit::AffixedEReferenceCont
+PersonalizedElement <|-- cevinedit::CompartmentEReferenceCont
+PersonalizedElement <|-- cevinedit::LabelEAttribute
+PersonalizedElement <|-- cevinedit::Link
+PersonalizedElement <|-- cevinedit::LinkEClass
+PersonalizedElement <|-- cevinedit::LinkEReferenceNonCont
+PersonalizedElement <|-- cevinedit::NodeEClass
+cevinedit::PersonalizedElement "0..9999" --* "1..1" cevinedit::Diagram : containsElem1
+cevinedit::Diagram "1..1" --* "1..1" cevinedit::CEViNEditRoot : diagram0
+@enduml

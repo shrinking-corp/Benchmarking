@@ -1,0 +1,47 @@
+@startuml
+class AllBase {
+}
+class Employee {
+}
+abstract class toe::AllBase {
+}
+class toe::AllHolder {
+}
+class toe::Contribution {
+  + description : str
+}
+class toe::Department {
+  + name : str
+  + allSubDepartments() : str
+}
+class toe::Employee {
+  + name : str
+  + salary : int
+}
+class toe::Manager {
+}
+class toe::Project {
+  + departmentWide : bool
+  + name : str
+}
+AllBase <|-- toe::Contribution
+AllBase <|-- toe::Department
+AllBase <|-- toe::Employee
+AllBase <|-- toe::Project
+Employee <|-- toe::Manager
+toe::AllHolder "1..1" *-- "0..9999" toe::AllBase : all0
+toe::Contribution "0..9999" -- "1..1" toe::Project : contributions25
+toe::Contribution "0..9999" -- "1..1" toe::Employee : contributions3
+toe::Employee "1..1" -- "0..1" toe::Department : department2
+toe::Employee "0..1" -- "1..1" toe::Contribution : employee8
+toe::Department "1..1" *-- "0..9999" toe::Employee : employees15
+toe::Manager "0..1" -- "1..1" toe::Project : lead23
+toe::Project "0..9999" -- "1..1" toe::Manager : leads4
+toe::Manager "1..1" -- "0..1" toe::Department : managedDepartment6
+toe::Manager "1..1" -- "1..1" toe::Department : manager20
+toe::Department "0..1" -- "1..1" toe::Department : parentDepartment18
+toe::Project "0..1" -- "1..1" toe::Contribution : project9
+toe::Employee "0..9999" -- "1..1" toe::Project : projectTeam21
+toe::Project "0..9999" -- "1..1" toe::Employee : projects1
+toe::Department "0..9999" --* "1..1" toe::Department : subDepartments13
+@enduml

@@ -1,0 +1,93 @@
+@startuml
+class Event {
+}
+enum ExecutionState {
+  finished
+  notStarted
+  running
+}
+class Process {
+}
+class ProcessElement {
+}
+class SPDLScenario {
+}
+class SPDLSimEvent {
+}
+class SPDLTrace {
+}
+class SimplePDLSemantics::DDMMSimplePDL::Guidance {
+  + text : str
+}
+class SimplePDLSemantics::DDMMSimplePDL::Process {
+  + name : str
+}
+abstract class SimplePDLSemantics::DDMMSimplePDL::ProcessElement {
+}
+class SimplePDLSemantics::DDMMSimplePDL::WorkDefinition {
+  + name : str
+}
+class SimplePDLSemantics::DDMMSimplePDL::WorkSequence {
+  + linkType : str
+}
+abstract class SimplePDLSemantics::EDMMSimplePDL::Event {
+}
+class SimplePDLSemantics::EDMMSimplePDL::FinishWD {
+}
+class SimplePDLSemantics::EDMMSimplePDL::StartWD {
+}
+abstract class SimplePDLSemantics::EDMMSimplePDL::WorkDefinitionEvent {
+}
+class SimplePDLSemantics::SDMMSimplePDL::DynamicWorkDefinition {
+  + state : str
+  + time : str
+  + timeElapsed : float
+}
+class SimplePDLSemantics::TM3SimplePDL::SPDLScenario {
+}
+class SimplePDLSemantics::TM3SimplePDL::SPDLSimEvent {
+  + date : int
+  + internal : bool
+  + name : str
+}
+class SimplePDLSemantics::TM3SimplePDL::SPDLTrace {
+}
+enum TimeState {
+  inTime
+  tooEarly
+  tooLate
+}
+class WorkDefinition {
+}
+class WorkDefinitionEvent {
+}
+class WorkSequence {
+}
+enum WorkSequenceType {
+  finishToFinish
+  finishToStart
+  startToFinish
+  startToStart
+}
+Event <|-- SimplePDLSemantics::EDMMSimplePDL::WorkDefinitionEvent
+ProcessElement <|-- SimplePDLSemantics::DDMMSimplePDL::Guidance
+ProcessElement <|-- SimplePDLSemantics::DDMMSimplePDL::WorkDefinition
+ProcessElement <|-- SimplePDLSemantics::DDMMSimplePDL::WorkSequence
+SPDLSimEvent <|-- SimplePDLSemantics::EDMMSimplePDL::Event
+WorkDefinitionEvent <|-- SimplePDLSemantics::EDMMSimplePDL::FinishWD
+WorkDefinitionEvent <|-- SimplePDLSemantics::EDMMSimplePDL::StartWD
+WorkDefinition <|-- SimplePDLSemantics::SDMMSimplePDL::DynamicWorkDefinition
+SimplePDLSemantics::DDMMSimplePDL::Guidance "1..1" -- "0..9999" ProcessElement : element19
+WorkDefinition "0..1" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::Process : from1
+WorkSequence "0..9999" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkDefinition : linksToPredecessors3
+WorkSequence "0..9999" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkDefinition : linksToSuccessors5
+SimplePDLSemantics::DDMMSimplePDL::ProcessElement "1..1" -- "1..1" Process : parent16
+WorkDefinition "1..1" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkSequence : predecessor10
+SimplePDLSemantics::DDMMSimplePDL::WorkDefinition "1..1" *-- "0..1" Process : process8
+ProcessElement "0..9999" --* "1..1" SimplePDLSemantics::DDMMSimplePDL::Process : processElements0
+SPDLScenario "1..1" -- "1..1" SimplePDLSemantics::TM3SimplePDL::SPDLTrace : scenario25
+SPDLSimEvent "0..9999" --* "1..1" SimplePDLSemantics::TM3SimplePDL::SPDLScenario : simEvents24
+WorkDefinition "1..1" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkSequence : successor13
+SPDLTrace "0..9999" -- "1..1" SimplePDLSemantics::TM3SimplePDL::SPDLScenario : traces23
+WorkDefinition "1..1" -- "1..1" SimplePDLSemantics::EDMMSimplePDL::WorkDefinitionEvent : workdefinition21
+@enduml

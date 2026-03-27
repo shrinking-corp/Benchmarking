@@ -1,0 +1,270 @@
+@startuml
+class Change {
+}
+enum ErrorCode {
+  configuration
+  hpProxy
+  inMaintenanceMode
+  internalProblem
+  invalidData
+  jira
+  methodNotAllowed
+  metrics
+  migration
+  nlp
+  noAuthorization
+  noSuchService
+  persistency
+  restService
+  scheduler
+  search
+  seralization
+  testgeneration
+  trello
+  userSession
+  validator
+}
+class HistoryEntry {
+}
+class IContainer {
+}
+class IContentElement {
+}
+class IModelConnection {
+}
+class IModelNode {
+}
+class INamed {
+}
+class ISpecmateModelObject {
+}
+class ISpecmatePositionableModelObject {
+}
+class ITracingElement {
+}
+enum NodeType {
+  AND
+  OR
+}
+class Operation {
+}
+enum OperationType {
+  CREATE
+  DELETE
+  UPDATE
+}
+class ParameterAssignment {
+}
+enum ParameterType {
+  INPUT
+  OUTPUT
+}
+class ProcessNode {
+}
+class TestParameter {
+}
+class base::IContainer {
+}
+class base::IContentElement {
+}
+class base::IDescribed {
+}
+class base::IExternal {
+}
+class base::IID {
+}
+class base::INamed {
+}
+class base::IPositionable {
+}
+class base::IRecycled {
+}
+class base::ISpecmateModelObject {
+}
+class base::ITracingElement {
+}
+class model::administration::ProblemDetail {
+  + detail : str
+  + ecode : str
+  + instance : str
+  + status : int
+}
+class model::administration::Status {
+  + value : str
+}
+class model::base::Folder {
+  + library : bool
+}
+abstract class model::base::IContainer {
+}
+abstract class model::base::IContentElement {
+}
+abstract class model::base::IDescribed {
+  + description : str
+}
+class model::base::IExternal {
+  + extId : str
+  + extId2 : str
+  + live : bool
+  + source : str
+}
+abstract class model::base::IID {
+  + id : str
+}
+class model::base::IModelConnection {
+}
+class model::base::IModelNode {
+}
+abstract class model::base::INamed {
+  + name : str
+}
+abstract class model::base::IPositionable {
+  + position : int
+}
+abstract class model::base::IRecycled {
+  + hasRecycledChildren : bool
+  + recycled : bool
+}
+abstract class model::base::ISpecmateModelObject {
+}
+abstract class model::base::ISpecmatePositionableModelObject {
+  + height : float
+  + width : float
+  + x : float
+  + y : float
+}
+class model::base::ITracingElement {
+}
+class model::batch::BatchOperation {
+}
+class model::batch::Operation {
+  + type : str
+}
+class model::export::Export {
+  + content : str
+  + type : str
+}
+class model::history::Change {
+  + feature : str
+  + isCreate : bool
+  + isDelete : bool
+  + newValue : str
+  + objectName : str
+  + objectType : str
+  + oldValue : str
+}
+class model::history::History {
+}
+class model::history::HistoryEntry {
+  + comment : str
+  + deletedObjects : str
+  + timestamp : str
+  + user : str
+}
+class model::processes::Process {
+}
+class model::processes::ProcessConnection {
+  + condition : str
+  + labelX : float
+  + labelY : float
+}
+class model::processes::ProcessDecision {
+}
+class model::processes::ProcessEnd {
+}
+abstract class model::processes::ProcessNode {
+}
+class model::processes::ProcessStart {
+}
+class model::processes::ProcessStep {
+  + expectedOutcome : str
+}
+class model::requirements::CEGConnection {
+  + negate : bool
+}
+class model::requirements::CEGModel {
+  + modelRequirements : str
+}
+class model::requirements::CEGNode {
+  + condition : str
+  + type : str
+  + variable : str
+}
+class model::requirements::Requirement {
+  + implementingBOTeam : str
+  + implementingITTeam : str
+  + implementingUnit : str
+  + isRegressionRequirement : bool
+  + numberOfTests : int
+  + plannedRelease : str
+  + platform : str
+  + status : str
+  + tac : str
+}
+class model::testspecification::ParameterAssignment {
+  + condition : str
+  + value : str
+}
+class model::testspecification::TestCase {
+  + consistent : bool
+}
+class model::testspecification::TestParameter {
+  + type : str
+}
+class model::testspecification::TestProcedure {
+  + isRegressionTest : bool
+}
+class model::testspecification::TestSpecification {
+}
+class model::testspecification::TestStep {
+  + expectedOutcome : str
+}
+IContainer <|-- model::processes::Process
+IContainer <|-- model::testspecification::TestSpecification
+IContentElement <|-- model::base::IContainer
+IContentElement <|-- model::testspecification::ParameterAssignment
+IContentElement <|-- model::testspecification::TestParameter
+IModelConnection <|-- model::processes::ProcessConnection
+IModelConnection <|-- model::requirements::CEGConnection
+IModelNode <|-- model::processes::ProcessNode
+IModelNode <|-- model::requirements::CEGNode
+INamed <|-- model::export::Export
+ISpecmateModelObject <|-- model::base::Folder
+ISpecmateModelObject <|-- model::base::IModelConnection
+ISpecmateModelObject <|-- model::base::ISpecmatePositionableModelObject
+ISpecmateModelObject <|-- model::requirements::CEGModel
+ISpecmatePositionableModelObject <|-- model::base::IModelNode
+ProcessNode <|-- model::processes::ProcessDecision
+ProcessNode <|-- model::processes::ProcessEnd
+ProcessNode <|-- model::processes::ProcessStart
+ProcessNode <|-- model::processes::ProcessStep
+base::IContainer <|-- model::base::ISpecmateModelObject
+base::IContainer <|-- model::testspecification::TestCase
+base::IContainer <|-- model::testspecification::TestProcedure
+base::IContentElement <|-- model::testspecification::TestStep
+base::IDescribed <|-- model::base::IContentElement
+base::IExternal <|-- model::requirements::Requirement
+base::IExternal <|-- model::testspecification::TestProcedure
+base::IID <|-- model::base::IContentElement
+base::INamed <|-- model::base::IContentElement
+base::IPositionable <|-- model::testspecification::TestCase
+base::IPositionable <|-- model::testspecification::TestStep
+base::IRecycled <|-- model::base::IContentElement
+base::ISpecmateModelObject <|-- model::requirements::Requirement
+base::ITracingElement <|-- model::base::ISpecmateModelObject
+ParameterAssignment "0..9999" -- "1..1" model::testspecification::TestParameter : assignments15
+Change "0..9999" --* "1..1" model::history::HistoryEntry : changes21
+IContentElement "0..9999" --* "1..1" model::base::IContainer : contents0
+HistoryEntry "0..9999" --* "1..1" model::history::History : entries20
+IModelConnection "0..9999" -- "1..1" model::base::IModelNode : incomingConnections7
+model::batch::BatchOperation "1..1" *-- "0..9999" Operation : operations22
+model::base::IModelNode "1..1" -- "0..9999" IModelConnection : outgoingConnections5
+model::testspecification::ParameterAssignment "1..1" -- "0..1" TestParameter : parameter16
+TestParameter "0..9999" -- "1..1" model::testspecification::TestStep : referencedTestParameters18
+IModelNode "0..1" -- "1..1" model::base::IModelConnection : source1
+IModelNode "0..1" -- "1..1" model::base::IModelConnection : target2
+IContentElement "0..1" -- "1..1" model::batch::Operation : target23
+ITracingElement "0..9999" -- "1..1" model::base::ITracingElement : tracesFrom12
+ITracingElement "0..9999" -- "1..1" model::base::ITracingElement : tracesTo10
+IContentElement "0..1" --* "1..1" model::batch::Operation : value25
+@enduml

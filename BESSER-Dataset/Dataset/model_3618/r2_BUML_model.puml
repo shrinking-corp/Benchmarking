@@ -1,0 +1,320 @@
+@startuml
+class ANY {
+}
+enum AddressPartType {
+  ADL
+  AL
+  BNN
+  BNR
+  BNS
+  CAR
+  CEN
+  CNT
+  CPA
+  CTY
+  DAL
+  DEL
+  DINST
+  DINSTA
+  DINSTQ
+  DIR
+  DMOD
+  DMODID
+  DPID
+  INT
+  POB
+  PRE
+  SAL
+  STA
+  STB
+  STR
+  STTYP
+  UNID
+  UNIT
+  ZIP
+}
+enum CalendarCycle {
+  CD
+  CH
+  CM
+  CN
+  CS
+  CW
+  CY
+  DM
+  DW
+  DY
+  HD
+  MY
+  NH
+  SN
+  WM
+  WY
+}
+enum Compression {
+  BZ
+  DF
+  GZ
+  Z
+  Z7
+  ZL
+}
+enum EntityNamePartQualifier {
+  AC
+  AD
+  BR
+  CL
+  HON
+  IN
+  LS
+  MID
+  NB
+  PFX
+  PR
+  SFX
+  SP
+}
+enum EntityNamePartType {
+  DEL
+  FAM
+  GIV
+  TITLE
+}
+enum EntityNameUse {
+  A
+  ABC
+  ANON
+  C
+  DN
+  I
+  IDE
+  M
+  OLD
+  OR
+  P
+  PHON
+  R
+  SRCH
+  SYL
+  T
+}
+class HXIT {
+}
+class IVL {
+}
+enum IntegrityCheckAlgorithm {
+  SHA1
+  SHA256
+}
+enum PostalAddressUse {
+  ABC
+  BAD
+  DIR
+  H
+  HP
+  HV
+  IDE
+  PHON
+  PHYS
+  PST
+  PUB
+  SNDX
+  SRCH
+  SYL
+  TMP
+  WP
+}
+class QSET {
+}
+class QTY {
+}
+enum TelecommunicationAddressUse {
+  AS
+  BAD
+  DIR
+  EC
+  H
+  HP
+  HV
+  MC
+  PG
+  PUB
+  TMP
+  WP
+}
+enum TelecommunicationCapability {
+  data
+  fax
+  sms
+  tty
+  voice
+}
+class XP {
+}
+class r2::AD {
+  + use : str
+}
+class r2::ADXP {
+  + type : str
+}
+abstract class r2::ANY {
+}
+class r2::BL {
+  + value : str
+}
+class r2::CD {
+  + code : str
+  + codeSystem : str
+  + codeSystemName : str
+  + codeSystemVersion : str
+  + valueSet : str
+  + valueSetVersion : str
+}
+class r2::CO {
+  + value : str
+}
+class r2::CS {
+  + code : str
+}
+class r2::ED {
+  + charset : str
+  + compression : str
+  + data : str
+  + integrityCheck : str
+  + integrityCheckAlgorithm : str
+  + language : str
+  + mediaType : str
+  + value : str
+}
+class r2::EN {
+  + use : str
+}
+class r2::ENXP {
+  + qualifier : str
+  + type : str
+}
+class r2::EObject {
+}
+abstract class r2::HXIT {
+}
+class r2::II {
+  + extension : str
+  + identifierName : str
+  + root : str
+}
+class r2::INT {
+  + value : str
+}
+class r2::IVL {
+}
+class r2::IVLCO {
+  + highClosed : str
+  + lowClosed : str
+}
+class r2::IVLINT {
+  + highClosed : str
+  + lowClosed : str
+}
+class r2::IVLPQ {
+  + highClosed : str
+  + lowClosed : str
+}
+class r2::IVLQTY {
+  + highClosed : str
+  + lowClosed : str
+}
+class r2::IVLREAL {
+  + highClosed : str
+  + lowClosed : str
+}
+class r2::IVLTS {
+  + highClosed : str
+  + lowClosed : str
+}
+class r2::PIVLTS {
+  + alignment : str
+  + isFlexible : str
+}
+class r2::PQ {
+  + unit : str
+  + value : str
+}
+abstract class r2::QSET {
+}
+abstract class r2::QTY {
+}
+class r2::REAL {
+  + value : str
+}
+class r2::RTO {
+}
+class r2::ST {
+  + value : str
+}
+class r2::TEL {
+  + capabilities : str
+  + use : str
+  + value : str
+}
+class r2::TS {
+  + value : str
+}
+class r2::XP {
+  + value : str
+}
+ANY <|-- r2::AD
+ANY <|-- r2::BL
+ANY <|-- r2::CD
+ANY <|-- r2::CS
+ANY <|-- r2::ED
+ANY <|-- r2::EN
+ANY <|-- r2::II
+ANY <|-- r2::QSET
+ANY <|-- r2::QTY
+ANY <|-- r2::ST
+ANY <|-- r2::TEL
+HXIT <|-- r2::ANY
+IVL <|-- r2::IVLCO
+IVL <|-- r2::IVLINT
+IVL <|-- r2::IVLPQ
+IVL <|-- r2::IVLQTY
+IVL <|-- r2::IVLREAL
+IVL <|-- r2::IVLTS
+QSET <|-- r2::IVL
+QTY <|-- r2::CO
+QTY <|-- r2::INT
+QTY <|-- r2::PIVLTS
+QTY <|-- r2::PQ
+QTY <|-- r2::REAL
+QTY <|-- r2::RTO
+QTY <|-- r2::TS
+XP <|-- r2::ADXP
+XP <|-- r2::ENXP
+r2::CD "0..1" --* "1..1" r2::CO : code8
+r2::INT "0..1" --* "1..1" r2::PIVLTS : count49
+r2::QTY "1..1" --* "1..1" r2::RTO : denominator55
+r2::ST "0..1" --* "1..1" r2::ED : description13
+r2::ST "0..1" --* "1..1" r2::CD : displayName1
+r2::RTO "0..1" --* "1..1" r2::PIVLTS : frequency47
+r2::CO "0..1" --* "1..1" r2::IVLCO : high19
+r2::IVLINT "1..1" *-- "0..1" r2::INT : high23
+r2::PQ "0..1" --* "1..1" r2::IVLPQ : high27
+r2::QTY "0..1" --* "1..1" r2::IVLQTY : high31
+r2::IVLREAL "1..1" *-- "0..1" r2::REAL : high35
+r2::TS "0..1" --* "1..1" r2::IVLTS : high39
+r2::IVLCO "1..1" *-- "0..1" r2::CO : low17
+r2::INT "0..1" --* "1..1" r2::IVLINT : low22
+r2::PQ "0..1" --* "1..1" r2::IVLPQ : low26
+r2::QTY "0..1" --* "1..1" r2::IVLQTY : low30
+r2::REAL "0..1" --* "1..1" r2::IVLREAL : low34
+r2::TS "0..1" --* "1..1" r2::IVLTS : low38
+r2::QTY "1..1" --* "1..1" r2::RTO : numerator52
+r2::ST "0..1" --* "1..1" r2::CD : originalText2
+r2::ADXP "1..9999" --* "1..1" r2::AD : part0
+r2::ENXP "1..9999" --* "1..1" r2::EN : part16
+r2::PIVLTS "1..1" *-- "0..1" r2::PQ : period44
+r2::IVLTS "0..1" --* "1..1" r2::PIVLTS : phase42
+r2::ED "1..1" *-- "0..1" r2::TEL : reference11
+r2::CD "1..1" *-- "0..9999" r2::CD : translation6
+r2::ED "1..1" *-- "0..1" r2::EObject : xml10
+@enduml

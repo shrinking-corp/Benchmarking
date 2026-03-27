@@ -1,0 +1,38 @@
+@startuml
+class State {
+}
+class statemachine::Composite {
+}
+class statemachine::Final {
+}
+class statemachine::Initial {
+}
+class statemachine::Need {
+}
+class statemachine::Resource {
+  + name : str
+}
+class statemachine::Simple {
+}
+abstract class statemachine::State {
+  + name : str
+}
+class statemachine::StateMachine {
+  + name : str
+}
+class statemachine::Transition {
+  + Id : int
+}
+State <|-- statemachine::Composite
+State <|-- statemachine::Final
+State <|-- statemachine::Initial
+State <|-- statemachine::Simple
+statemachine::Need "0..9999" --* "1..1" statemachine::StateMachine : needs5
+statemachine::Resource "0..9999" --* "1..1" statemachine::StateMachine : resources3
+statemachine::Transition "1..1" -- "1..1" statemachine::State : source7
+statemachine::State "1..1" -- "1..1" statemachine::Need : source_need16
+statemachine::State "0..9999" --* "1..1" statemachine::StateMachine : states0
+statemachine::State "1..1" -- "1..1" statemachine::Transition : target10
+statemachine::Resource "1..1" -- "1..1" statemachine::Need : target_need13
+statemachine::Transition "0..9999" --* "1..1" statemachine::StateMachine : transitions1
+@enduml

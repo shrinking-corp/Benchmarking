@@ -1,0 +1,77 @@
+@startuml
+class AbstractComponent {
+}
+class Interface {
+}
+abstract class fragdial::AbstractComponent {
+  + name : str
+}
+class fragdial::Attribute {
+  + name : str
+  + value : str
+}
+class fragdial::Attributes {
+  + signature : str
+}
+class fragdial::Binding {
+}
+class fragdial::Component {
+}
+class fragdial::Component1 {
+}
+class fragdial::Component2 {
+}
+class fragdial::Component3 {
+}
+class fragdial::Content {
+  + class : str
+  + language : str
+}
+class fragdial::Controller {
+  + descriptor : str
+  + language : str
+}
+class fragdial::Include {
+  + file : str
+}
+abstract class fragdial::Interface {
+  + cardinality : str
+  + contingency : str
+  + name : str
+  + signature : str
+  + startProperty : str
+}
+class fragdial::Ldflag {
+  + value : str
+}
+class fragdial::Output {
+  + format : str
+}
+class fragdial::Provided {
+}
+class fragdial::Required {
+}
+AbstractComponent <|-- fragdial::Component
+AbstractComponent <|-- fragdial::Component1
+AbstractComponent <|-- fragdial::Component2
+AbstractComponent <|-- fragdial::Component3
+Interface <|-- fragdial::Provided
+Interface <|-- fragdial::Required
+fragdial::Attributes "0..1" --* "1..1" fragdial::AbstractComponent : attributes1
+fragdial::Attribute "0..9999" --* "1..1" fragdial::Attributes : attributes25
+fragdial::Binding "0..9999" --* "1..1" fragdial::Interface : bindings11
+fragdial::Content "0..1" --* "1..1" fragdial::AbstractComponent : content0
+fragdial::AbstractComponent "1..1" -- "1..1" fragdial::Content : contentParent18
+fragdial::Controller "0..1" --* "1..1" fragdial::AbstractComponent : controller5
+fragdial::Binding "1..1" -- "0..1" fragdial::Interface : from12
+fragdial::Include "0..9999" --* "1..1" fragdial::Content : includes21
+fragdial::Content "1..1" *-- "0..9999" fragdial::Ldflag : ldflags23
+fragdial::Component "1..1" *-- "0..9999" fragdial::Component1 : nestedComponents127
+fragdial::Component2 "0..9999" --* "1..1" fragdial::Component1 : nestedComponents231
+fragdial::Component3 "0..9999" --* "1..1" fragdial::Component2 : nestedComponents333
+fragdial::AbstractComponent "1..1" *-- "0..1" fragdial::Output : output3
+fragdial::Provided "0..9999" --* "1..1" fragdial::AbstractComponent : providedInterfaces9
+fragdial::Required "0..9999" --* "1..1" fragdial::AbstractComponent : requiredInterfaces7
+fragdial::Component "0..9999" --* "1..1" fragdial::Component : subComponents29
+fragdial::Interface "0..1" -- "1..1" fragdial::Binding : to15
+@enduml

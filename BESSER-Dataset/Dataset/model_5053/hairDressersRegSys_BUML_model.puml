@@ -1,0 +1,96 @@
+@startuml
+class Person {
+}
+class Service {
+}
+class hairDressersRegSys::Appointment {
+  + Date : date
+  + EndTime : date
+  + StartTime : date
+  + AddAppointment() : void
+  + ViewSchedule() : void
+}
+class hairDressersRegSys::Customer {
+  + CustomerId : int
+  + AddNewCustomer() : void
+  + PlaceAppointment() : void
+}
+class hairDressersRegSys::Discounts {
+  + Description : str
+  + Name : str
+  + Percentage : int
+}
+class hairDressersRegSys::Haircuts {
+  + IsCut : bool
+  + IsShave : bool
+  + IsWash : bool
+}
+class hairDressersRegSys::Invoice {
+  + Date : str
+  + InvoiceNumber : int
+  + Total : str
+  + CalculateTotal() : void
+  + GetDiscount() : void
+}
+class hairDressersRegSys::Other {
+  + AdditionalInformation : str
+}
+class hairDressersRegSys::Payment {
+  + AmountPaid : str
+  + Date : date
+  + PaymentMethod : str
+  + MakePayment() : void
+}
+class hairDressersRegSys::Person {
+  + Address : str
+  + DateOfBirth : date
+  + FirstName : str
+  + LastName : str
+  + GetAge() : int
+}
+class hairDressersRegSys::Products {
+  + Description : str
+  + Name : str
+  + Price : str
+  + AddProduct() : void
+  + ViewTotalStock() : void
+}
+class hairDressersRegSys::Service {
+  + CostPerHour : str
+  + Description : str
+  + Name : str
+  + Time : date
+  + AddService() : void
+  + RemoveService() : void
+  + ViewAllServices() : void
+}
+class hairDressersRegSys::ServiceEmployee {
+  + EmployeeId : int
+  + Role : str
+  + AddNewEmployee() : void
+  + MakeAppointment() : void
+  + RemoveAppointment() : void
+  + ViewAllAvailableEmployees() : void
+  + ViewAppointments() : void
+}
+class hairDressersRegSys::Styling {
+  + IsWash : bool
+}
+Person <|-- hairDressersRegSys::Customer
+Person <|-- hairDressersRegSys::ServiceEmployee
+Service <|-- hairDressersRegSys::Haircuts
+Service <|-- hairDressersRegSys::Other
+Service <|-- hairDressersRegSys::Styling
+hairDressersRegSys::Appointment "1..9999" --* "1..1" hairDressersRegSys::Service : appointment0
+hairDressersRegSys::Appointment "1..9999" --* "1..1" hairDressersRegSys::Customer : appointment13
+hairDressersRegSys::ServiceEmployee "1..1" *-- "0..9999" hairDressersRegSys::Appointment : appointment17
+hairDressersRegSys::Customer "0..9999" -- "1..1" hairDressersRegSys::Discounts : customer9
+hairDressersRegSys::Discounts "0..1" -- "1..1" hairDressersRegSys::Customer : discounts15
+hairDressersRegSys::Discounts "0..1" -- "1..1" hairDressersRegSys::Invoice : discounts5
+hairDressersRegSys::Invoice "1..1" --* "1..1" hairDressersRegSys::Appointment : invoice1
+hairDressersRegSys::Discounts "1..1" -- "0..9999" hairDressersRegSys::Invoice : invoice10
+hairDressersRegSys::Invoice "1..9999" -- "1..1" hairDressersRegSys::Payment : invoice19
+hairDressersRegSys::Invoice "0..1" -- "1..1" hairDressersRegSys::Products : invoice3
+hairDressersRegSys::Invoice "1..1" -- "0..1" hairDressersRegSys::Payment : payment7
+hairDressersRegSys::Invoice "1..1" -- "0..1" hairDressersRegSys::Products : products4
+@enduml

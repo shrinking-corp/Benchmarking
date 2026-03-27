@@ -1,0 +1,38 @@
+@startuml
+class NamedElement {
+}
+class simpleparts::Element {
+}
+class simpleparts::Item {
+}
+abstract class simpleparts::NamedElement {
+  + name : str
+}
+class simpleparts::Part {
+}
+class simpleparts::Piece {
+}
+class simpleparts::RelatedTo {
+  + since : str
+}
+class simpleparts::Thing {
+  + id : int
+}
+class simpleparts::World {
+}
+NamedElement <|-- simpleparts::Element
+NamedElement <|-- simpleparts::Item
+NamedElement <|-- simpleparts::Part
+NamedElement <|-- simpleparts::Piece
+NamedElement <|-- simpleparts::RelatedTo
+NamedElement <|-- simpleparts::Thing
+simpleparts::Element "0..9999" --* "1..1" simpleparts::Thing : elements4
+simpleparts::Thing "0..1" -- "1..1" simpleparts::RelatedTo : fromThing10
+simpleparts::Item "0..9999" --* "1..1" simpleparts::Thing : items6
+simpleparts::Part "0..1" -- "1..1" simpleparts::Piece : part13
+simpleparts::Thing "1..1" *-- "0..9999" simpleparts::Part : parts2
+simpleparts::Piece "0..9999" --* "1..1" simpleparts::Thing : pieces8
+simpleparts::RelatedTo "0..9999" --* "1..1" simpleparts::Thing : relations1
+simpleparts::Thing "0..9999" --* "1..1" simpleparts::World : things0
+simpleparts::Thing "0..1" -- "1..1" simpleparts::RelatedTo : toThing11
+@enduml

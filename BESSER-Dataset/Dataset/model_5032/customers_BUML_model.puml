@@ -1,0 +1,54 @@
+@startuml
+class Address {
+}
+enum CanadaProvinces {
+  AB
+  BC
+  MB
+  NB
+  NL
+  NT
+  UNKNOWN
+}
+enum USStates {
+  AK
+  AL
+  AR
+  AS
+  AZ
+  CA
+  CO
+  UNKNOWN
+}
+class customers::Address {
+  + street : str
+  + town : str
+  + zipCode : str
+}
+class customers::CanadaAddress {
+  + province : str
+}
+class customers::CreditCard {
+  + ccNumber : str
+  + expiresDate : date
+  + type : str
+}
+class customers::Customer {
+  + comment : str
+  + dateOfBirth : date
+  + firstName : str
+  + lastName : str
+}
+class customers::CustomersDB {
+  + comment : str
+}
+class customers::USAddress {
+  + state : str
+}
+Address <|-- customers::CanadaAddress
+Address <|-- customers::USAddress
+customers::Address "1..1" --* "1..1" customers::Customer : address1
+customers::CreditCard "0..9999" --* "1..1" customers::Customer : creditCard0
+customers::Customer "0..9999" --* "1..1" customers::CustomersDB : customers3
+customers::Customer "1..1" -- "1..1" customers::CreditCard : holder2
+@enduml

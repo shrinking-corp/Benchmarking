@@ -1,0 +1,54 @@
+@startuml
+class NamedElement {
+}
+class mngr::ManagedElement {
+  + description : str
+}
+class mngr::Manager {
+}
+class mngr::ManagerParameter {
+  + LitteralBoolean : bool
+  + LitteralInteger : int
+  + LitteralString : str
+  + LitteralUnlimitedNatural : float
+  + isInput : bool
+}
+class mngr::ManagerState {
+  + Prob : float
+  + isEnd : bool
+  + isStart : bool
+}
+class mngr::ManagerTransition {
+  + Action : str
+  + Condition : str
+  + Event : str
+  + input : str
+  + output : str
+  + transProb : float
+  + transRate : float
+}
+class mngr::OpaqueExpression {
+}
+NamedElement <|-- mngr::ManagedElement
+NamedElement <|-- mngr::Manager
+NamedElement <|-- mngr::ManagerParameter
+NamedElement <|-- mngr::ManagerState
+NamedElement <|-- mngr::ManagerTransition
+mngr::ManagerState "1..1" -- "0..9999" mngr::ManagerParameter : contextParameters16
+mngr::ManagerParameter "0..9999" --* "1..1" mngr::Manager : contextParameters5
+mngr::ManagerState "0..9999" -- "1..1" mngr::Manager : finalState2
+mngr::ManagerTransition "0..9999" -- "1..1" mngr::ManagerState : incomingTransition14
+mngr::Manager "1..1" -- "1..1" mngr::ManagerState : initialState1
+mngr::ManagedElement "1..9999" --* "1..1" mngr::Manager : managedElement7
+mngr::OpaqueExpression "0..9999" --* "1..1" mngr::ManagerParameter : opaqueExpressions26
+mngr::ManagerTransition "0..9999" -- "1..1" mngr::ManagerState : outgoingTransition12
+mngr::ManagerState "0..9999" --* "1..1" mngr::Manager : ownedState0
+mngr::Manager "1..1" *-- "0..9999" mngr::ManagerTransition : ownedTransition9
+mngr::Manager "1..1" -- "1..1" mngr::ManagerState : owningManager11
+mngr::Manager "1..1" -- "1..1" mngr::ManagerTransition : owningManager18
+mngr::ManagerParameter "1..1" -- "1..1" mngr::Manager : owningManager27
+mngr::Manager "1..1" -- "1..1" mngr::ManagedElement : owningManager30
+mngr::ManagerState "1..1" -- "1..1" mngr::ManagerTransition : source20
+mngr::ManagerState "0..9999" -- "1..1" mngr::ManagerParameter : state24
+mngr::ManagerState "1..1" -- "1..1" mngr::ManagerTransition : target22
+@enduml

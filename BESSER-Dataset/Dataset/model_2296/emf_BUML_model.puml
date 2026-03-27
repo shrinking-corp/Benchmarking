@@ -1,0 +1,27 @@
+@startuml
+enum StateType {
+  FINAL
+  INITIAL
+  NONE
+}
+class emf::Action {
+  + event : str
+}
+class emf::State {
+  + name : str
+  + type : str
+}
+class emf::StateMachine {
+}
+class emf::Transition {
+  + action : str
+}
+class emf::TransitionToStateMapEntry {
+}
+emf::TransitionToStateMapEntry "1..1" -- "0..1" emf::Transition : key8
+emf::StateMachine "0..9999" -- "1..1" emf::State : nestedStateMachines0
+emf::State "0..9999" -- "1..1" emf::StateMachine : states1
+emf::Transition "1..1" -- "0..1" emf::State : targetState6
+emf::StateMachine "1..1" *-- "0..9999" emf::TransitionToStateMapEntry : transitionToSourceState4
+emf::State "0..1" -- "1..1" emf::TransitionToStateMapEntry : value11
+@enduml

@@ -1,0 +1,109 @@
+@startuml
+class AbstractClass {
+}
+class Association {
+}
+class ClassElement {
+}
+class EVisibility {
+}
+class ModelElement {
+}
+class NamedElement {
+}
+enum Visibility {
+  private
+  protected
+  public
+}
+abstract class dcmddandroid::AbstractClass {
+  + isAbstract : bool
+}
+class dcmddandroid::Agregation {
+}
+abstract class dcmddandroid::Association {
+  + maxMultiplicitySource : int
+  + maxMultiplicityTarget : int
+  + minMultiplicitySource : int
+  + minMultiplicityTarget : int
+  + rolSource : str
+  + rolTarget : str
+}
+class dcmddandroid::Attribute {
+  + defaultValue : str
+  + secured : str
+  + type : str
+}
+class dcmddandroid::Class {
+}
+abstract class dcmddandroid::ClassElement {
+  + final : bool
+  + static : bool
+}
+class dcmddandroid::Composition {
+}
+class dcmddandroid::CycleClass {
+}
+class dcmddandroid::Diagram {
+}
+class dcmddandroid::EVisibility {
+  + visibility : str
+}
+class dcmddandroid::Enum {
+}
+class dcmddandroid::EnumValue {
+  + intValue : int
+}
+class dcmddandroid::Implements {
+}
+class dcmddandroid::Interface {
+}
+class dcmddandroid::Method {
+  + isAbstract : bool
+  + returns : str
+}
+abstract class dcmddandroid::ModelElement {
+}
+abstract class dcmddandroid::NamedElement {
+  + name : str
+}
+class dcmddandroid::Parameter {
+  + type : str
+}
+class dcmddandroid::PersistentClass {
+}
+AbstractClass <|-- dcmddandroid::Class
+AbstractClass <|-- dcmddandroid::CycleClass
+AbstractClass <|-- dcmddandroid::PersistentClass
+Association <|-- dcmddandroid::Agregation
+Association <|-- dcmddandroid::Composition
+ClassElement <|-- dcmddandroid::Attribute
+ClassElement <|-- dcmddandroid::Method
+EVisibility <|-- dcmddandroid::AbstractClass
+EVisibility <|-- dcmddandroid::ClassElement
+EVisibility <|-- dcmddandroid::Interface
+ModelElement <|-- dcmddandroid::AbstractClass
+ModelElement <|-- dcmddandroid::Association
+ModelElement <|-- dcmddandroid::Enum
+ModelElement <|-- dcmddandroid::Implements
+ModelElement <|-- dcmddandroid::Interface
+NamedElement <|-- dcmddandroid::ClassElement
+NamedElement <|-- dcmddandroid::Diagram
+NamedElement <|-- dcmddandroid::EnumValue
+NamedElement <|-- dcmddandroid::ModelElement
+NamedElement <|-- dcmddandroid::Parameter
+dcmddandroid::Association "0..9999" -- "1..1" dcmddandroid::AbstractClass : associationAsSource4
+dcmddandroid::Association "0..9999" -- "1..1" dcmddandroid::AbstractClass : associationAsTarget5
+dcmddandroid::Attribute "0..9999" --* "1..1" dcmddandroid::AbstractClass : attributes1
+dcmddandroid::Interface "1..1" -- "1..1" dcmddandroid::Implements : implemented19
+dcmddandroid::Implements "0..9999" -- "1..1" dcmddandroid::AbstractClass : implements0
+dcmddandroid::AbstractClass "1..1" -- "1..1" dcmddandroid::Implements : implements21
+dcmddandroid::AbstractClass "1..1" *-- "0..9999" dcmddandroid::Method : methods2
+dcmddandroid::Method "0..9999" --* "1..1" dcmddandroid::Interface : methods9
+dcmddandroid::Diagram "1..1" *-- "0..9999" dcmddandroid::ModelElement : modelElements14
+dcmddandroid::Method "1..1" *-- "0..9999" dcmddandroid::Parameter : parameters12
+dcmddandroid::Association "1..1" -- "1..1" dcmddandroid::AbstractClass : source16
+dcmddandroid::Interface "0..9999" -- "1..1" dcmddandroid::Interface : superInterfaces8
+dcmddandroid::AbstractClass "1..1" -- "1..1" dcmddandroid::Association : target17
+dcmddandroid::EnumValue "0..9999" --* "1..1" dcmddandroid::Enum : values15
+@enduml

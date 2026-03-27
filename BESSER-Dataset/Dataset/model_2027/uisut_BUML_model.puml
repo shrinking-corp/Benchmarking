@@ -1,0 +1,85 @@
+@startuml
+class AbstractState {
+}
+class UISUTElement {
+}
+class UITrigger {
+}
+abstract class uisut::AbstractState {
+}
+class uisut::Action {
+}
+class uisut::ApplicationSystem {
+}
+class uisut::ComponentTrigger {
+}
+class uisut::FinalState {
+}
+class uisut::InitialState {
+}
+class uisut::UICondition {
+}
+class uisut::UIControl {
+  + valueExpression : str
+  + variableName : str
+}
+class uisut::UIDataVariable {
+  + constraintRE : str
+}
+class uisut::UISUT {
+}
+abstract class uisut::UISUTElement {
+  + description : str
+  + id : str
+  + name : str
+}
+class uisut::UIState {
+  + isInitial : bool
+  + pic : str
+}
+class uisut::UIStatemachine {
+}
+class uisut::UITransition {
+  + actionStr : str
+  + guardStr : str
+  + scriptStr : str
+  + triggerStr : str
+}
+abstract class uisut::UITrigger {
+}
+class uisut::UserTrigger {
+}
+AbstractState <|-- uisut::FinalState
+AbstractState <|-- uisut::InitialState
+AbstractState <|-- uisut::UIState
+UISUTElement <|-- uisut::AbstractState
+UISUTElement <|-- uisut::Action
+UISUTElement <|-- uisut::ApplicationSystem
+UISUTElement <|-- uisut::UICondition
+UISUTElement <|-- uisut::UIControl
+UISUTElement <|-- uisut::UIDataVariable
+UISUTElement <|-- uisut::UISUT
+UISUTElement <|-- uisut::UIStatemachine
+UISUTElement <|-- uisut::UITransition
+UISUTElement <|-- uisut::UITrigger
+UITrigger <|-- uisut::ComponentTrigger
+UITrigger <|-- uisut::UserTrigger
+uisut::UIState "1..1" -- "0..9999" uisut::UIDataVariable : addedDataVariable10
+uisut::UIDataVariable "0..9999" -- "1..1" uisut::UIState : deletedDataVariable13
+uisut::UIDataVariable "0..9999" -- "1..1" uisut::UITransition : guardedDataVariable25
+uisut::UITransition "1..1" *-- "0..1" uisut::Action : itsAction23
+uisut::UICondition "0..1" --* "1..1" uisut::UITransition : itsCondition21
+uisut::UIDataVariable "0..9999" --* "1..1" uisut::UIStatemachine : itsDataVariable7
+uisut::UITransition "0..9999" -- "1..1" uisut::AbstractState : itsInTransition34
+uisut::UIDataVariable "0..1" -- "1..1" uisut::UIControl : itsInputDaa28
+uisut::UITransition "0..9999" -- "1..1" uisut::AbstractState : itsOutTransition35
+uisut::UIControl "1..1" -- "0..1" uisut::UIDataVariable : itsOutputData31
+uisut::UISUT "1..1" *-- "0..1" uisut::UIStatemachine : itsSTM0
+uisut::AbstractState "1..1" -- "1..1" uisut::UITransition : itsSrcState17
+uisut::AbstractState "0..9999" --* "1..1" uisut::UIStatemachine : itsState3
+uisut::UITransition "0..9999" --* "1..1" uisut::UIStatemachine : itsTransition5
+uisut::AbstractState "1..1" -- "1..1" uisut::UITransition : itsTrgtState16
+uisut::UITransition "1..1" *-- "0..1" uisut::UITrigger : itsTrigger19
+uisut::UIControl "0..9999" --* "1..1" uisut::UIState : itsUIControl9
+uisut::ApplicationSystem "1..1" *-- "0..1" uisut::UISUT : itsUISUT1
+@enduml

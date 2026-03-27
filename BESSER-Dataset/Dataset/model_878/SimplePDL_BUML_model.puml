@@ -1,0 +1,55 @@
+@startuml
+class ProcessElement {
+}
+enum WorkSequenceType {
+  finishToFinish
+  finishToStart
+  startToFinish
+  startToStart
+}
+class simplepdl::Guidance {
+  + text : str
+}
+class simplepdl::Process {
+  + max_time : int
+  + min_time : int
+  + name : str
+}
+abstract class simplepdl::ProcessElement {
+}
+class simplepdl::RessourceConfig {
+  + name : str
+}
+class simplepdl::RessourceDefinition {
+  + name : str
+  + number : int
+}
+class simplepdl::RessourceInstance {
+  + instances : int
+}
+class simplepdl::WorkDefinition {
+  + max_time : int
+  + min_time : int
+  + name : str
+}
+class simplepdl::WorkSequence {
+  + linkType : str
+}
+ProcessElement <|-- simplepdl::Guidance
+ProcessElement <|-- simplepdl::RessourceConfig
+ProcessElement <|-- simplepdl::RessourceDefinition
+ProcessElement <|-- simplepdl::RessourceInstance
+ProcessElement <|-- simplepdl::WorkDefinition
+ProcessElement <|-- simplepdl::WorkSequence
+simplepdl::WorkDefinition "1..1" -- "1..1" simplepdl::RessourceConfig : activity13
+simplepdl::RessourceConfig "1..1" -- "1..1" simplepdl::RessourceInstance : config11
+simplepdl::ProcessElement "0..9999" -- "1..1" simplepdl::Guidance : element8
+simplepdl::WorkSequence "0..9999" -- "1..1" simplepdl::WorkDefinition : linksToPredecessors1
+simplepdl::RessourceConfig "0..9999" -- "1..1" simplepdl::WorkDefinition : linksToRessources4
+simplepdl::WorkSequence "0..9999" -- "1..1" simplepdl::WorkDefinition : linksToSuccessors2
+simplepdl::WorkSequence "1..1" -- "1..1" simplepdl::WorkDefinition : predecessor5
+simplepdl::Process "1..1" *-- "0..9999" simplepdl::ProcessElement : processElements0
+simplepdl::RessourceConfig "1..1" -- "0..9999" simplepdl::RessourceInstance : ressources15
+simplepdl::WorkDefinition "1..1" -- "1..1" simplepdl::WorkSequence : successor6
+simplepdl::RessourceInstance "1..1" -- "1..1" simplepdl::RessourceDefinition : type10
+@enduml

@@ -1,0 +1,58 @@
+@startuml
+class Arith {
+}
+class ArithOp {
+}
+class Stmt {
+}
+class simpleALEnv::ALVarRef {
+  + name : str
+}
+abstract class simpleALEnv::Arith {
+}
+class simpleALEnv::ArithLit {
+  + val : int
+}
+class simpleALEnv::ArithMinus {
+}
+abstract class simpleALEnv::ArithOp {
+}
+class simpleALEnv::ArithPlus {
+}
+class simpleALEnv::Assign {
+  + name : str
+}
+class simpleALEnv::Block {
+}
+class simpleALEnv::EqualityTest {
+}
+class simpleALEnv::IfStmt {
+}
+class simpleALEnv::Print {
+  + name : str
+}
+class simpleALEnv::RandRange {
+  + max : int
+  + min : int
+}
+abstract class simpleALEnv::Stmt {
+}
+ArithOp <|-- simpleALEnv::ArithMinus
+ArithOp <|-- simpleALEnv::ArithPlus
+Arith <|-- simpleALEnv::ALVarRef
+Arith <|-- simpleALEnv::ArithLit
+Arith <|-- simpleALEnv::ArithOp
+Arith <|-- simpleALEnv::RandRange
+Stmt <|-- simpleALEnv::Assign
+Stmt <|-- simpleALEnv::IfStmt
+Stmt <|-- simpleALEnv::Print
+simpleALEnv::IfStmt "1..1" *-- "0..1" simpleALEnv::Assign : elseBranch9
+simpleALEnv::Assign "1..1" --* "1..1" simpleALEnv::IfStmt : ifBranch7
+simpleALEnv::ArithOp "1..1" *-- "0..1" simpleALEnv::Arith : lhs1
+simpleALEnv::Arith "1..1" --* "1..1" simpleALEnv::EqualityTest : lhs14
+simpleALEnv::Arith "1..1" --* "1..1" simpleALEnv::EqualityTest : rhs17
+simpleALEnv::Arith "0..1" --* "1..1" simpleALEnv::ArithOp : rhs2
+simpleALEnv::Stmt "0..9999" --* "1..1" simpleALEnv::Block : stmts0
+simpleALEnv::EqualityTest "1..1" --* "1..1" simpleALEnv::IfStmt : test12
+simpleALEnv::Arith "1..1" --* "1..1" simpleALEnv::Assign : val5
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+class fsm::Constraint {
+  + name : str
+  + true : bool
+}
+class fsm::Language {
+  + name : str
+  + target : str
+}
+class fsm::Machine {
+}
+class fsm::Model {
+  + name : str
+}
+class fsm::State {
+  + final : bool
+  + initial : bool
+  + name : str
+}
+class fsm::Transition {
+  + event : str
+}
+fsm::Model "1..1" *-- "0..9999" fsm::Constraint : constraints0
+fsm::Transition "1..1" -- "0..1" fsm::State : from9
+fsm::Language "0..9999" --* "1..1" fsm::Model : languages1
+fsm::Machine "0..1" --* "1..1" fsm::Model : machine3
+fsm::Machine "1..1" *-- "0..9999" fsm::State : states5
+fsm::State "0..1" -- "1..1" fsm::Transition : to12
+fsm::Transition "0..9999" --* "1..1" fsm::Machine : transitions7
+@enduml

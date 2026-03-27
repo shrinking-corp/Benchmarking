@@ -1,0 +1,53 @@
+@startuml
+class Access {
+}
+class IdElement {
+}
+abstract class base::Access {
+}
+class base::AllInstancesAccess {
+  + ofKind : bool
+}
+class base::ElementAccess {
+}
+abstract class base::ExecutionTrace {
+}
+abstract class base::IdElement {
+  + id : str
+}
+class base::ModelElementTrace {
+  + uri : str
+}
+class base::ModelTrace {
+  + name : str
+}
+class base::ModelTypeTrace {
+  + name : str
+}
+abstract class base::ModuleTrace {
+  + source : str
+}
+class base::PropertyAccess {
+  + value : str
+}
+class base::PropertyTrace {
+  + name : str
+}
+Access <|-- base::AllInstancesAccess
+Access <|-- base::ElementAccess
+Access <|-- base::PropertyAccess
+IdElement <|-- base::Access
+IdElement <|-- base::ExecutionTrace
+IdElement <|-- base::ModelElementTrace
+IdElement <|-- base::ModelTrace
+IdElement <|-- base::ModelTypeTrace
+IdElement <|-- base::ModuleTrace
+IdElement <|-- base::PropertyTrace
+base::ExecutionTrace "1..1" -- "1..9999" base::Access : accesses0
+base::ModelElementTrace "1..1" -- "1..1" base::ElementAccess : element1
+base::ModelElementTrace "1..1" -- "1..1" base::PropertyTrace : element9
+base::ModelTrace "1..1" -- "1..1" base::ModelTypeTrace : model4
+base::ModelElementTrace "1..1" -- "1..1" base::ModelTrace : model6
+base::PropertyTrace "1..1" -- "1..1" base::PropertyAccess : property3
+base::AllInstancesAccess "1..1" -- "1..1" base::ModelTypeTrace : type2
+@enduml

@@ -1,0 +1,74 @@
+@startuml
+class ModelElement {
+}
+enum PseudostateKind {
+  fork
+  inital
+  join
+  junction
+}
+class State {
+}
+class StateMachine {
+}
+class StateVertex {
+}
+class minuml1::ActionState {
+  + isDynamic : bool
+}
+class minuml1::Activity {
+}
+class minuml1::BooleanExpression {
+  + body : str
+  + language : str
+}
+class minuml1::CompositeState {
+}
+class minuml1::FinalState {
+}
+class minuml1::Guard {
+}
+class minuml1::ModelElement {
+  + name : str
+}
+class minuml1::ObjectFlowState {
+}
+class minuml1::Partition {
+}
+class minuml1::Pseudostate {
+  + kind : str
+}
+class minuml1::State {
+}
+class minuml1::StateMachine {
+}
+abstract class minuml1::StateVertex {
+}
+class minuml1::Transition {
+}
+ModelElement <|-- minuml1::Guard
+ModelElement <|-- minuml1::Partition
+ModelElement <|-- minuml1::StateMachine
+ModelElement <|-- minuml1::StateVertex
+ModelElement <|-- minuml1::Transition
+StateMachine <|-- minuml1::Activity
+StateVertex <|-- minuml1::Pseudostate
+StateVertex <|-- minuml1::State
+State <|-- minuml1::ActionState
+State <|-- minuml1::CompositeState
+State <|-- minuml1::FinalState
+State <|-- minuml1::ObjectFlowState
+minuml1::ModelElement "0..9999" -- "1..1" minuml1::Partition : contents5
+minuml1::BooleanExpression "1..1" --* "1..1" minuml1::Guard : expression16
+minuml1::Transition "1..1" *-- "0..1" minuml1::Guard : guard14
+minuml1::Transition "0..9999" -- "1..1" minuml1::StateVertex : incoming7
+minuml1::StateVertex "1..1" -- "0..9999" minuml1::Transition : outgoing6
+minuml1::Partition "0..9999" --* "1..1" minuml1::Activity : parition4
+minuml1::ModelElement "1..1" -- "1..1" minuml1::Partition : partition0
+minuml1::Transition "1..1" -- "1..1" minuml1::StateVertex : source11
+minuml1::StateVertex "0..9999" --* "1..1" minuml1::CompositeState : subvertex9
+minuml1::StateVertex "1..1" -- "1..1" minuml1::Transition : target12
+minuml1::State "1..1" --* "1..1" minuml1::StateMachine : top1
+minuml1::StateMachine "1..1" *-- "0..9999" minuml1::Transition : transitions2
+minuml1::ModelElement "1..1" --* "1..1" minuml1::ObjectFlowState : type10
+@enduml

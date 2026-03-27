@@ -1,0 +1,139 @@
+@startuml
+class Adaptable {
+}
+class Attributable {
+}
+class Edge {
+}
+class Graph {
+}
+class Vertex {
+}
+class df::Action {
+}
+class df::Actor {
+  + fileName : str
+  + lineNumber : int
+  + name : str
+  + native : bool
+}
+class df::Argument {
+}
+class df::Connection {
+}
+class df::EObject {
+}
+class df::Entity {
+  + incomingPortMap : str
+  + name : str
+  + outgoingPortMap : str
+}
+class df::Expression {
+}
+class df::FSM {
+}
+class df::Instance {
+  + name : str
+}
+class df::MoC {
+}
+class df::Network {
+  + fileName : str
+  + name : str
+}
+class df::Pattern {
+}
+class df::Port {
+  + name : str
+  + numTokensConsumed : int
+  + numTokensProduced : int
+}
+class df::PortToEIntegerObjectMapEntry {
+  + value : str
+}
+class df::PortToVarMapEntry {
+}
+class df::Procedure {
+}
+class df::State {
+}
+class df::Tag {
+  + identifiers : str
+}
+class df::Transition {
+}
+class df::Type {
+}
+class df::Unit {
+  + fileName : str
+  + lineNumber : int
+  + name : str
+}
+class df::Var {
+}
+class df::VarToPortMapEntry {
+}
+class df::Vertex {
+}
+Adaptable <|-- df::Actor
+Adaptable <|-- df::Entity
+Adaptable <|-- df::Instance
+Adaptable <|-- df::Network
+Attributable <|-- df::Action
+Attributable <|-- df::Entity
+Attributable <|-- df::Unit
+Edge <|-- df::Connection
+Edge <|-- df::Transition
+Graph <|-- df::FSM
+Graph <|-- df::Network
+Vertex <|-- df::Actor
+Vertex <|-- df::Instance
+Vertex <|-- df::Port
+Vertex <|-- df::State
+df::Action "0..9999" --* "1..1" df::Actor : actions15
+df::Transition "1..1" -- "0..9999" df::Action : actions92
+df::Action "0..9999" -- "1..1" df::Actor : actionsOutsideFsm16
+df::Argument "0..9999" --* "1..1" df::Instance : arguments4
+df::Procedure "0..1" --* "1..1" df::Action : body62
+df::Vertex "0..9999" -- "1..1" df::Network : children41
+df::Unit "1..1" *-- "0..9999" df::Var : constants0
+df::Instance "1..1" -- "0..1" df::EObject : entity5
+df::FSM "0..1" --* "1..1" df::Actor : fsm19
+df::State "0..1" -- "1..1" df::FSM : initialState78
+df::Action "0..9999" --* "1..1" df::Actor : initializes21
+df::Action "1..1" *-- "0..1" df::Pattern : inputPattern65
+df::Port "0..9999" --* "1..1" df::Actor : inputs24
+df::Network "1..1" -- "0..9999" df::Port : inputs42
+df::Port "0..9999" -- "1..1" df::Entity : inputs7
+df::VarToPortMapEntry "1..1" -- "0..1" df::Var : key103
+df::Port "0..1" -- "1..1" df::PortToEIntegerObjectMapEntry : key94
+df::Port "0..1" -- "1..1" df::PortToVarMapEntry : key97
+df::MoC "0..1" --* "1..1" df::Actor : moC27
+df::MoC "0..1" --* "1..1" df::Network : moC45
+df::Pattern "1..1" *-- "0..9999" df::PortToEIntegerObjectMapEntry : numTokensMap80
+df::Pattern "0..1" --* "1..1" df::Action : outputPattern67
+df::Port "0..9999" --* "1..1" df::Actor : outputs29
+df::Port "0..9999" -- "1..1" df::Network : outputs48
+df::Entity "1..1" -- "0..9999" df::Port : outputs9
+df::Var "0..9999" -- "1..1" df::Entity : parameters12
+df::Var "0..9999" --* "1..1" df::Actor : parameters32
+df::Var "0..9999" --* "1..1" df::Network : parameters51
+df::Pattern "0..1" --* "1..1" df::Action : peekPattern70
+df::PortToVarMapEntry "0..9999" --* "1..1" df::Pattern : portToVarMap85
+df::Port "0..9999" -- "1..1" df::Pattern : ports82
+df::Procedure "0..9999" --* "1..1" df::Unit : procedures1
+df::Actor "1..1" *-- "0..9999" df::Procedure : procs35
+df::Procedure "0..1" --* "1..1" df::Action : scheduler73
+df::Port "0..1" -- "1..1" df::Connection : sourcePort57
+df::Actor "1..1" *-- "0..9999" df::Var : stateVars38
+df::Action "1..1" *-- "0..1" df::Tag : tag76
+df::Port "0..1" -- "1..1" df::Connection : targetPort59
+df::Type "0..1" --* "1..1" df::Port : type3
+df::Var "0..1" -- "1..1" df::PortToVarMapEntry : value100
+df::Port "0..1" -- "1..1" df::VarToPortMapEntry : value106
+df::Expression "0..1" --* "1..1" df::Argument : value109
+df::Pattern "1..1" *-- "0..9999" df::VarToPortMapEntry : varToPortMap90
+df::Var "0..1" -- "1..1" df::Argument : variable111
+df::Var "0..9999" --* "1..1" df::Network : variables54
+df::Var "0..9999" --* "1..1" df::Pattern : variables87
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+class scheduleOfCourse::Capacity {
+  + exam : int
+  + normal : int
+}
+class scheduleOfCourse::CourseLoad {
+  + totalQuantity : int
+  + type : str
+  + unitQuantity : int
+}
+class scheduleOfCourse::Lesson {
+  + end : str
+  + start : str
+}
+class scheduleOfCourse::LessonPeriod {
+  + end : str
+  + start : str
+}
+class scheduleOfCourse::Occupation {
+  + current : int
+  + max : int
+}
+class scheduleOfCourse::Room {
+  + description : str
+  + id : str
+  + name : str
+  + type : str
+}
+class scheduleOfCourse::Shift {
+  + name : str
+  + types : str
+}
+class scheduleOfCourse::TopLevelSpace {
+  + id : str
+  + name : str
+  + type : str
+}
+class scheduleOfCourse::scheduleOfCourse {
+}
+scheduleOfCourse::Capacity "0..1" --* "1..1" scheduleOfCourse::Room : capacity16
+scheduleOfCourse::scheduleOfCourse "1..1" *-- "1..9999" scheduleOfCourse::CourseLoad : courseLoads6
+scheduleOfCourse::LessonPeriod "1..9999" --* "1..1" scheduleOfCourse::scheduleOfCourse : lessonPeriods5
+scheduleOfCourse::Shift "1..1" *-- "1..9999" scheduleOfCourse::Lesson : lessons1
+scheduleOfCourse::Occupation "1..1" --* "1..1" scheduleOfCourse::Shift : occupation0
+scheduleOfCourse::Room "1..1" --* "1..1" scheduleOfCourse::Lesson : room11
+scheduleOfCourse::Room "1..9999" --* "1..1" scheduleOfCourse::Shift : rooms3
+scheduleOfCourse::scheduleOfCourse "1..1" *-- "1..9999" scheduleOfCourse::Shift : shifts8
+scheduleOfCourse::TopLevelSpace "1..1" --* "1..1" scheduleOfCourse::Room : topLevelSpace14
+@enduml

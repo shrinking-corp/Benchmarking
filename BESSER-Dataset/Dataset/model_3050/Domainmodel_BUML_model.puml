@@ -1,0 +1,48 @@
+@startuml
+class AbstractElement {
+}
+class Feature {
+}
+class domainmodel::AbstractElement {
+}
+class domainmodel::DomainModel {
+}
+class domainmodel::Entity {
+  + name : str
+}
+class domainmodel::Feature {
+  + name : str
+}
+class domainmodel::Import {
+  + importedNamespace : str
+}
+class domainmodel::JvmFormalParameter {
+}
+class domainmodel::JvmParameterizedTypeReference {
+}
+class domainmodel::JvmTypeReference {
+}
+class domainmodel::Operation {
+}
+class domainmodel::PackageDeclaration {
+  + name : str
+}
+class domainmodel::Property {
+}
+class domainmodel::XExpression {
+}
+AbstractElement <|-- domainmodel::Entity
+AbstractElement <|-- domainmodel::Import
+AbstractElement <|-- domainmodel::PackageDeclaration
+Feature <|-- domainmodel::Operation
+Feature <|-- domainmodel::Property
+domainmodel::XExpression "0..1" --* "1..1" domainmodel::Operation : body14
+domainmodel::AbstractElement "0..9999" --* "1..1" domainmodel::DomainModel : elements0
+domainmodel::AbstractElement "0..9999" --* "1..1" domainmodel::PackageDeclaration : elements1
+domainmodel::Feature "0..9999" --* "1..1" domainmodel::Entity : features3
+domainmodel::Property "1..1" -- "0..1" domainmodel::Property : mappedBy9
+domainmodel::JvmFormalParameter "0..9999" --* "1..1" domainmodel::Operation : params13
+domainmodel::Property "0..1" -- "1..1" domainmodel::Property : reflectsOn11
+domainmodel::Entity "1..1" *-- "0..1" domainmodel::JvmParameterizedTypeReference : superType4
+domainmodel::JvmTypeReference "0..1" --* "1..1" domainmodel::Feature : type6
+@enduml

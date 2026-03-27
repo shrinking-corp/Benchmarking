@@ -1,0 +1,40 @@
+@startuml
+class EObject {
+}
+class testmodel::StringToStringMap {
+  + key : str
+  + value : str
+}
+class testmodel::StringToTestElementMap {
+  + key : str
+}
+class testmodel::TestElement {
+  + description : str
+  + name : str
+  + strings : str
+}
+class testmodel::TestElementContainer {
+}
+class testmodel::TestElementToStringMap {
+  + value : str
+}
+class testmodel::TestElementToTestElementMap {
+}
+EObject <|-- testmodel::TestElement
+testmodel::TestElement "0..1" --* "1..1" testmodel::TestElement : containedElement9
+testmodel::TestElement "1..1" *-- "0..9999" testmodel::TestElement : containedElements215
+testmodel::TestElement "1..1" *-- "0..9999" testmodel::TestElement : containedElements3
+testmodel::TestElementContainer "0..1" -- "1..1" testmodel::TestElement : container17
+testmodel::TestElementToTestElementMap "0..9999" --* "1..1" testmodel::TestElement : elementMap18
+testmodel::TestElementToStringMap "0..9999" --* "1..1" testmodel::TestElement : elementToStringMap22
+testmodel::TestElement "0..9999" --* "1..1" testmodel::TestElementContainer : elements26
+testmodel::TestElement "0..1" -- "1..1" testmodel::TestElementToStringMap : key27
+testmodel::TestElement "0..1" -- "1..1" testmodel::TestElementToTestElementMap : key33
+testmodel::TestElement "0..1" -- "1..1" testmodel::TestElement : otherReference12
+testmodel::TestElement "0..1" -- "1..1" testmodel::TestElement : reference6
+testmodel::TestElement "0..9999" -- "1..1" testmodel::TestElement : references1
+testmodel::StringToTestElementMap "0..9999" --* "1..1" testmodel::TestElement : stringToElementMap24
+testmodel::TestElement "1..1" *-- "0..9999" testmodel::StringToStringMap : stringToStringMap20
+testmodel::TestElement "0..1" -- "1..1" testmodel::TestElementToTestElementMap : value30
+testmodel::TestElement "0..1" -- "1..1" testmodel::StringToTestElementMap : value36
+@enduml

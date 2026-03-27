@@ -1,0 +1,32 @@
+@startuml
+class MultiPopulationSIDiseaseModel {
+}
+class MultiPopulationSIRDiseaseModel {
+}
+class StandardDiseaseModel {
+}
+class multipopulation::DoubleValueList {
+}
+class multipopulation::DoubleValueMatrix {
+}
+class multipopulation::MultiPopulationSEIRDiseaseModel {
+}
+class multipopulation::MultiPopulationSIDiseaseModel {
+  + characteristicMixingDistance : float
+  + physicallyAdjacentInfectiousProportion : float
+  + roadNetworkInfectiousProportion : float
+}
+class multipopulation::MultiPopulationSIRDiseaseModel {
+}
+class multipopulation::StringValueList {
+}
+MultiPopulationSIDiseaseModel <|-- multipopulation::MultiPopulationSIRDiseaseModel
+MultiPopulationSIRDiseaseModel <|-- multipopulation::MultiPopulationSEIRDiseaseModel
+StandardDiseaseModel <|-- multipopulation::MultiPopulationSIDiseaseModel
+multipopulation::DoubleValueList "1..1" --* "1..1" multipopulation::MultiPopulationSIRDiseaseModel : immunityLossRate8
+multipopulation::DoubleValueList "1..1" --* "1..1" multipopulation::MultiPopulationSEIRDiseaseModel : incubationRate10
+multipopulation::MultiPopulationSIDiseaseModel "1..1" *-- "1..1" multipopulation::DoubleValueList : infectiousMortalityRate5
+multipopulation::MultiPopulationSIDiseaseModel "1..1" *-- "1..1" multipopulation::StringValueList : populationGroups0
+multipopulation::DoubleValueList "1..1" --* "1..1" multipopulation::MultiPopulationSIDiseaseModel : recoveryRate3
+multipopulation::DoubleValueMatrix "1..1" --* "1..1" multipopulation::MultiPopulationSIDiseaseModel : transmissionRate1
+@enduml

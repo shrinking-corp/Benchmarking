@@ -1,0 +1,30 @@
+@startuml
+enum Type {
+  bool
+  datetime
+  float
+  integer
+  string
+}
+class tables::Column {
+  + name : str
+  + type : str
+}
+class tables::Database {
+  + name : str
+}
+class tables::ForeignKey {
+  + name : str
+}
+class tables::Table {
+  + name : str
+}
+tables::Column "1..1" -- "1..1" tables::ForeignKey : column9
+tables::Column "0..9999" --* "1..1" tables::Table : columns1
+tables::Table "1..1" -- "1..1" tables::Database : database2
+tables::ForeignKey "0..1" --* "1..1" tables::Column : foreign_key6
+tables::Column "0..1" -- "1..1" tables::Table : primary_key3
+tables::Table "1..1" -- "1..1" tables::Column : table4
+tables::Table "0..9999" --* "1..1" tables::Database : tables0
+tables::ForeignKey "1..1" -- "1..1" tables::Table : target7
+@enduml

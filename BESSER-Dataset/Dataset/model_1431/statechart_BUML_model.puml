@@ -1,0 +1,99 @@
+@startuml
+class AbstractState {
+}
+enum LanguageTypes {
+  groovy
+  java
+  relogo
+}
+enum MessageCheckerTypes {
+  always
+  conditional
+  equals
+  unconditional
+}
+enum PseudoStateTypes {
+  choice
+  entry
+  initial
+}
+class State {
+}
+enum TriggerTypes {
+  always
+  condition
+  exponential
+  message
+  probability
+  timed
+}
+abstract class scmodel::AbstractState {
+  + id : str
+  + language : str
+  + onEnter : str
+  + onEnterImports : str
+  + onExit : str
+  + onExitImports : str
+  + uuid : str
+}
+class scmodel::CompositeState {
+}
+class scmodel::FinalState {
+}
+class scmodel::History {
+  + shallow : bool
+}
+class scmodel::PseudoState {
+  + type : str
+}
+class scmodel::State {
+}
+class scmodel::StateMachine {
+  + agentType : str
+  + className : str
+  + id : str
+  + language : str
+  + nextID : int
+  + package : str
+  + priority : float
+  + uuid : str
+}
+class scmodel::Transition {
+  + defaultTransition : bool
+  + guard : str
+  + guardImports : str
+  + id : str
+  + messageCheckerClass : str
+  + messageCheckerCode : str
+  + messageCheckerCodeImports : str
+  + messageCheckerConditionLanguage : str
+  + messageCheckerType : str
+  + onTransition : str
+  + onTransitionImports : str
+  + outOfBranch : bool
+  + priority : float
+  + selfTransition : bool
+  + triggerCodeLanguage : str
+  + triggerConditionCode : str
+  + triggerConditionCodeImports : str
+  + triggerExpRateCode : str
+  + triggerExpRateCodeImports : str
+  + triggerProbCode : str
+  + triggerProbCodeImports : str
+  + triggerTime : float
+  + triggerTimedCode : str
+  + triggerTimedCodeImports : str
+  + triggerType : str
+  + uuid : str
+}
+AbstractState <|-- scmodel::CompositeState
+AbstractState <|-- scmodel::PseudoState
+AbstractState <|-- scmodel::State
+State <|-- scmodel::FinalState
+State <|-- scmodel::History
+scmodel::AbstractState "0..9999" --* "1..1" scmodel::CompositeState : children9
+scmodel::AbstractState "1..1" -- "1..1" scmodel::Transition : from3
+scmodel::AbstractState "0..9999" --* "1..1" scmodel::StateMachine : states0
+scmodel::AbstractState "1..1" -- "1..1" scmodel::Transition : to6
+scmodel::StateMachine "1..1" *-- "0..9999" scmodel::Transition : transitions1
+@enduml

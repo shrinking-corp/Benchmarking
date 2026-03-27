@@ -1,0 +1,37 @@
+@startuml
+class rdbmsMM::Column {
+  + name : str
+  + type : str
+}
+class rdbmsMM::ForeignKey {
+  + name : str
+}
+class rdbmsMM::Key {
+  + name : str
+}
+class rdbmsMM::Schema {
+  + name : str
+}
+class rdbmsMM::Table {
+  + name : str
+}
+class rdbmsMM::dummy {
+}
+rdbmsMM::Column "1..9999" -- "1..1" rdbmsMM::Key : column20
+rdbmsMM::Column "1..9999" -- "1..1" rdbmsMM::ForeignKey : column31
+rdbmsMM::Column "0..9999" --* "1..1" rdbmsMM::Table : column4
+rdbmsMM::Schema "0..9999" --* "1..1" rdbmsMM::dummy : containsSchema34
+rdbmsMM::ForeignKey "0..9999" --* "1..1" rdbmsMM::Schema : foreignKey1
+rdbmsMM::ForeignKey "0..9999" -- "1..1" rdbmsMM::Column : hasForeignKey15
+rdbmsMM::ForeignKey "0..9999" -- "1..1" rdbmsMM::Table : hasForeignKey7
+rdbmsMM::Column "1..1" -- "0..9999" rdbmsMM::Key : hasKey12
+rdbmsMM::Key "0..1" --* "1..1" rdbmsMM::Table : hasKey5
+rdbmsMM::Table "1..1" -- "1..1" rdbmsMM::Column : owner10
+rdbmsMM::Key "1..1" -- "1..1" rdbmsMM::Table : owner18
+rdbmsMM::Table "1..1" -- "1..1" rdbmsMM::ForeignKey : owner29
+rdbmsMM::Key "1..1" -- "0..9999" rdbmsMM::ForeignKey : referredBy23
+rdbmsMM::ForeignKey "1..1" -- "1..1" rdbmsMM::Key : refersTo27
+rdbmsMM::Schema "1..1" -- "1..1" rdbmsMM::ForeignKey : schema25
+rdbmsMM::Table "1..1" -- "1..1" rdbmsMM::Schema : schema3
+rdbmsMM::Table "0..9999" --* "1..1" rdbmsMM::Schema : table0
+@enduml

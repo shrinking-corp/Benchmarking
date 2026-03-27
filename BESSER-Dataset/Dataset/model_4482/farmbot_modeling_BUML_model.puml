@@ -1,0 +1,123 @@
+@startuml
+class BooleanExpression {
+}
+class Command {
+}
+class Instruction {
+}
+class Move {
+}
+class SequenceCommand {
+}
+class SequenceInstruction {
+}
+abstract class farmbot::modeling::BooleanExpression {
+  + axe : str
+  + pinNumber : int
+  + value : int
+}
+abstract class farmbot::modeling::Command {
+}
+class farmbot::modeling::ExecuteSequence {
+  + id : int
+}
+class farmbot::modeling::Farmbot {
+}
+class farmbot::modeling::FindHome {
+  + axis : str
+}
+class farmbot::modeling::If {
+}
+abstract class farmbot::modeling::Instruction {
+}
+class farmbot::modeling::IsEqualTo {
+}
+class farmbot::modeling::IsGreaterThan {
+}
+class farmbot::modeling::IsLowerThan {
+}
+class farmbot::modeling::IsNotEqualTo {
+}
+class farmbot::modeling::ListScheduledEvents {
+}
+class farmbot::modeling::ListSequences {
+}
+abstract class farmbot::modeling::Move {
+  + speed : int
+  + x : int
+  + y : int
+  + z : int
+}
+class farmbot::modeling::MoveAbsolute {
+}
+class farmbot::modeling::MoveRelative {
+}
+class farmbot::modeling::RunFarmware {
+  + name : str
+}
+class farmbot::modeling::Schedule {
+  + endDate : str
+  + endTime : str
+  + repeat : bool
+  + repeatUnit : str
+  + sequence : int
+  + startDate : str
+  + startTime : str
+}
+class farmbot::modeling::SendMessage {
+  + message : str
+  + messageType : str
+}
+class farmbot::modeling::Sequence {
+  + name : str
+}
+abstract class farmbot::modeling::SequenceCommand {
+}
+abstract class farmbot::modeling::SequenceInstruction {
+}
+class farmbot::modeling::TakePhoto {
+}
+class farmbot::modeling::TurnOff {
+  + pin : int
+}
+class farmbot::modeling::TurnOnAnalog {
+  + pin : int
+  + value : int
+}
+class farmbot::modeling::TurnOnDigital {
+  + pin : int
+}
+class farmbot::modeling::Wait {
+  + duration : float
+}
+BooleanExpression <|-- farmbot::modeling::IsEqualTo
+BooleanExpression <|-- farmbot::modeling::IsGreaterThan
+BooleanExpression <|-- farmbot::modeling::IsLowerThan
+BooleanExpression <|-- farmbot::modeling::IsNotEqualTo
+Command <|-- farmbot::modeling::ListScheduledEvents
+Command <|-- farmbot::modeling::ListSequences
+Command <|-- farmbot::modeling::Schedule
+Command <|-- farmbot::modeling::SequenceCommand
+Instruction <|-- farmbot::modeling::Command
+Instruction <|-- farmbot::modeling::Sequence
+Instruction <|-- farmbot::modeling::SequenceInstruction
+Move <|-- farmbot::modeling::MoveAbsolute
+Move <|-- farmbot::modeling::MoveRelative
+SequenceCommand <|-- farmbot::modeling::ExecuteSequence
+SequenceCommand <|-- farmbot::modeling::FindHome
+SequenceCommand <|-- farmbot::modeling::Move
+SequenceCommand <|-- farmbot::modeling::RunFarmware
+SequenceCommand <|-- farmbot::modeling::SendMessage
+SequenceCommand <|-- farmbot::modeling::TakePhoto
+SequenceCommand <|-- farmbot::modeling::TurnOff
+SequenceCommand <|-- farmbot::modeling::TurnOnAnalog
+SequenceCommand <|-- farmbot::modeling::TurnOnDigital
+SequenceCommand <|-- farmbot::modeling::Wait
+SequenceInstruction <|-- farmbot::modeling::If
+SequenceInstruction <|-- farmbot::modeling::SequenceCommand
+farmbot::modeling::BooleanExpression "1..1" --* "1..1" farmbot::modeling::If : booleanExpression2
+farmbot::modeling::If "1..1" *-- "0..1" farmbot::modeling::ExecuteSequence : else5
+farmbot::modeling::Instruction "0..9999" --* "1..1" farmbot::modeling::Farmbot : instructions0
+farmbot::modeling::Sequence "1..1" *-- "0..9999" farmbot::modeling::SequenceInstruction : sequenceInstructions1
+farmbot::modeling::ExecuteSequence "0..1" --* "1..1" farmbot::modeling::If : then3
+@enduml

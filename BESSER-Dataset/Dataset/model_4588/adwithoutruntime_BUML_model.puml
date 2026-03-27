@@ -1,0 +1,156 @@
+@startuml
+class Action {
+}
+class ActivityEdge {
+}
+class ActivityNode {
+}
+enum BooleanBinaryOperator {
+  AND
+  OR
+}
+class BooleanExpression {
+}
+enum BooleanUnaryOperator {
+  NOT
+}
+class ControlNode {
+}
+class ExecutableNode {
+}
+class Expression {
+}
+class FinalNode {
+}
+enum IntegerCalculationOperator {
+  ADD
+  SUBRACT
+}
+enum IntegerComparisonOperator {
+  EQUALS
+  GREATER
+  GREATER_EQUALS
+  SMALLER
+  SMALLER_EQUALS
+}
+class IntegerExpression {
+}
+class NamedElement {
+}
+class Value {
+}
+class Variable {
+}
+abstract class adwithoutruntime::Action {
+}
+class adwithoutruntime::Activity {
+}
+abstract class adwithoutruntime::ActivityEdge {
+}
+class adwithoutruntime::ActivityFinalNode {
+}
+abstract class adwithoutruntime::ActivityNode {
+}
+class adwithoutruntime::BooleanBinaryExpression {
+  + operator : str
+}
+abstract class adwithoutruntime::BooleanExpression {
+}
+class adwithoutruntime::BooleanUnaryExpression {
+  + operator : str
+}
+class adwithoutruntime::BooleanValue {
+  + value : bool
+}
+class adwithoutruntime::BooleanVariable {
+}
+class adwithoutruntime::ControlFlow {
+}
+abstract class adwithoutruntime::ControlNode {
+}
+class adwithoutruntime::DecisionNode {
+}
+abstract class adwithoutruntime::ExecutableNode {
+}
+abstract class adwithoutruntime::Expression {
+}
+abstract class adwithoutruntime::FinalNode {
+}
+class adwithoutruntime::ForkNode {
+}
+class adwithoutruntime::InitialNode {
+}
+class adwithoutruntime::IntegerCalculationExpression {
+  + operator : str
+}
+class adwithoutruntime::IntegerComparisonExpression {
+  + operator : str
+}
+abstract class adwithoutruntime::IntegerExpression {
+}
+class adwithoutruntime::IntegerValue {
+  + value : int
+}
+class adwithoutruntime::IntegerVariable {
+}
+class adwithoutruntime::JoinNode {
+}
+class adwithoutruntime::MergeNode {
+}
+abstract class adwithoutruntime::NamedElement {
+  + name : str
+}
+class adwithoutruntime::OpaqueAction {
+}
+abstract class adwithoutruntime::Value {
+}
+abstract class adwithoutruntime::Variable {
+  + name : str
+}
+Action <|-- adwithoutruntime::OpaqueAction
+ActivityEdge <|-- adwithoutruntime::ControlFlow
+ActivityNode <|-- adwithoutruntime::ControlNode
+ActivityNode <|-- adwithoutruntime::ExecutableNode
+BooleanExpression <|-- adwithoutruntime::BooleanBinaryExpression
+BooleanExpression <|-- adwithoutruntime::BooleanUnaryExpression
+ControlNode <|-- adwithoutruntime::DecisionNode
+ControlNode <|-- adwithoutruntime::FinalNode
+ControlNode <|-- adwithoutruntime::ForkNode
+ControlNode <|-- adwithoutruntime::InitialNode
+ControlNode <|-- adwithoutruntime::JoinNode
+ControlNode <|-- adwithoutruntime::MergeNode
+ExecutableNode <|-- adwithoutruntime::Action
+Expression <|-- adwithoutruntime::BooleanExpression
+Expression <|-- adwithoutruntime::IntegerExpression
+FinalNode <|-- adwithoutruntime::ActivityFinalNode
+IntegerExpression <|-- adwithoutruntime::IntegerCalculationExpression
+IntegerExpression <|-- adwithoutruntime::IntegerComparisonExpression
+NamedElement <|-- adwithoutruntime::Activity
+NamedElement <|-- adwithoutruntime::ActivityEdge
+NamedElement <|-- adwithoutruntime::ActivityNode
+Value <|-- adwithoutruntime::BooleanValue
+Value <|-- adwithoutruntime::IntegerValue
+Variable <|-- adwithoutruntime::BooleanVariable
+Variable <|-- adwithoutruntime::IntegerVariable
+adwithoutruntime::Activity "1..1" -- "1..1" adwithoutruntime::ActivityNode : activity14
+adwithoutruntime::BooleanVariable "1..1" -- "1..1" adwithoutruntime::BooleanExpression : assignee34
+adwithoutruntime::IntegerCalculationExpression "1..1" -- "1..1" adwithoutruntime::IntegerVariable : assignee36
+adwithoutruntime::BooleanVariable "1..1" -- "1..1" adwithoutruntime::IntegerComparisonExpression : assignee38
+adwithoutruntime::Value "0..1" --* "1..1" adwithoutruntime::Variable : currentValue27
+adwithoutruntime::Activity "1..1" *-- "0..9999" adwithoutruntime::ActivityEdge : edges2
+adwithoutruntime::OpaqueAction "1..1" *-- "0..9999" adwithoutruntime::Expression : expressions24
+adwithoutruntime::BooleanVariable "0..1" -- "1..1" adwithoutruntime::ControlFlow : guard23
+adwithoutruntime::ActivityEdge "0..9999" -- "1..1" adwithoutruntime::ActivityNode : incoming11
+adwithoutruntime::Value "0..1" --* "1..1" adwithoutruntime::Variable : initialValue25
+adwithoutruntime::Activity "1..1" *-- "0..9999" adwithoutruntime::Variable : inputs5
+adwithoutruntime::Variable "0..9999" --* "1..1" adwithoutruntime::Activity : locals3
+adwithoutruntime::ActivityNode "0..9999" --* "1..1" adwithoutruntime::Activity : nodes0
+adwithoutruntime::IntegerVariable "0..1" -- "1..1" adwithoutruntime::IntegerExpression : operand131
+adwithoutruntime::BooleanVariable "1..1" -- "1..1" adwithoutruntime::BooleanBinaryExpression : operand142
+adwithoutruntime::IntegerVariable "0..1" -- "1..1" adwithoutruntime::IntegerExpression : operand230
+adwithoutruntime::BooleanBinaryExpression "1..1" -- "1..1" adwithoutruntime::BooleanVariable : operand244
+adwithoutruntime::BooleanVariable "1..1" -- "1..1" adwithoutruntime::BooleanUnaryExpression : operand40
+adwithoutruntime::ActivityEdge "0..9999" -- "1..1" adwithoutruntime::ActivityNode : outgoing8
+adwithoutruntime::ActivityNode "1..1" -- "1..1" adwithoutruntime::ActivityEdge : source17
+adwithoutruntime::ActivityEdge "1..1" -- "1..1" adwithoutruntime::ActivityNode : target20
+@enduml

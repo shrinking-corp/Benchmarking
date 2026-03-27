@@ -1,0 +1,26 @@
+@startuml
+class NamedElement {
+}
+class semlink::A {
+}
+class semlink::B {
+}
+class semlink::C {
+}
+class semlink::G {
+}
+class semlink::NamedElement {
+  + name : str
+}
+NamedElement <|-- semlink::A
+NamedElement <|-- semlink::B
+NamedElement <|-- semlink::C
+NamedElement <|-- semlink::G
+semlink::B "1..1" -- "0..1" semlink::A : a11
+semlink::A "0..9999" --* "1..1" semlink::G : as2
+semlink::B "0..9999" --* "1..1" semlink::A : bs9
+semlink::C "0..1" -- "1..1" semlink::B : c14
+semlink::C "0..9999" --* "1..1" semlink::G : cs4
+semlink::A "1..1" -- "0..9999" semlink::C : cs6
+semlink::G "0..9999" --* "1..1" semlink::G : subgs1
+@enduml

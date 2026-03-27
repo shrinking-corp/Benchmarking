@@ -1,0 +1,46 @@
+@startuml
+class ClassM::Attribute {
+  + multivalued : bool
+}
+class ClassM::Class {
+}
+class ClassM::Classifier {
+  + name : str
+}
+class ClassM::Model {
+}
+class ClassM::Operation {
+}
+class ClassM::Parameter {
+  + name : str
+}
+class ClassM::PrimitiveType {
+}
+class ClassM::StructuralFeature {
+  + name : str
+  + visibility : str
+}
+class ClassM::TypedElement {
+}
+class Classifier {
+}
+class StructuralFeature {
+}
+class TypedElement {
+}
+Classifier <|-- ClassM::Class
+Classifier <|-- ClassM::PrimitiveType
+StructuralFeature <|-- ClassM::Attribute
+StructuralFeature <|-- ClassM::Operation
+TypedElement <|-- ClassM::Parameter
+TypedElement <|-- ClassM::StructuralFeature
+ClassM::Class "0..9999" -- "1..1" ClassM::Class : children4
+ClassM::Model "1..1" *-- "0..9999" ClassM::Classifier : classifiers11
+ClassM::StructuralFeature "0..9999" --* "1..1" ClassM::Class : features0
+ClassM::Class "1..1" -- "1..1" ClassM::StructuralFeature : owner7
+ClassM::Operation "1..1" -- "1..1" ClassM::Parameter : paramOf10
+ClassM::Parameter "0..9999" -- "1..1" ClassM::Operation : params9
+ClassM::Class "0..9999" -- "1..1" ClassM::Class : parents2
+ClassM::Classifier "0..1" -- "1..1" ClassM::TypedElement : type8
+ClassM::Classifier "1..1" -- "0..9999" ClassM::TypedElement : typeOf6
+@enduml

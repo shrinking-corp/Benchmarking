@@ -1,0 +1,41 @@
+@startuml
+class Arc {
+}
+class ArcSortant {
+}
+class Element {
+}
+abstract class petrinet::Arc {
+  + nbJetons : int
+}
+class petrinet::ArcEntrant {
+}
+class petrinet::ArcSortant {
+}
+abstract class petrinet::Element {
+  + nom : str
+}
+class petrinet::Place {
+  + jetons : int
+}
+class petrinet::ReadArc {
+}
+class petrinet::Reseau {
+  + nom : str
+}
+class petrinet::Transition {
+}
+ArcSortant <|-- petrinet::ReadArc
+Arc <|-- petrinet::ArcEntrant
+Arc <|-- petrinet::ArcSortant
+Element <|-- petrinet::Place
+Element <|-- petrinet::Transition
+petrinet::Reseau "1..1" *-- "0..9999" petrinet::Arc : arcs9
+petrinet::Element "1..9999" --* "1..1" petrinet::Reseau : elements8
+petrinet::Place "1..1" -- "1..1" petrinet::ArcSortant : predecesseur3
+petrinet::Transition "1..1" -- "1..1" petrinet::ArcEntrant : predecesseur6
+petrinet::Transition "1..1" -- "1..9999" petrinet::ArcSortant : predecesseurs0
+petrinet::Transition "1..1" -- "1..1" petrinet::ArcSortant : successeur2
+petrinet::Place "1..1" -- "1..1" petrinet::ArcEntrant : successeur4
+petrinet::ArcEntrant "1..9999" -- "1..1" petrinet::Transition : successeurs1
+@enduml

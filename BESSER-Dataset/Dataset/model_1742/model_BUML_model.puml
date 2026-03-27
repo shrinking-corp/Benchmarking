@@ -1,0 +1,80 @@
+@startuml
+class model::BNode {
+  + id : int
+}
+class model::Book {
+  + data : str
+  + tags : str
+  + title : str
+}
+class model::BookBNode {
+  + title : str
+}
+class model::ETypes {
+  + eBigDecimal : str
+  + eBigInteger : str
+  + eBoolean : bool
+  + eByte : str
+  + eByteArray : str
+  + eChar : str
+  + eDate : date
+  + eDouble : float
+  + eFloat : float
+  + eInt : int
+  + eLong : str
+  + eShort : str
+  + eString : str
+  + uris : str
+}
+class model::Library {
+}
+class model::Location {
+  + address : str
+  + id : str
+}
+class model::MappedLibrary {
+  + books : str
+}
+class model::Person {
+  + name : str
+}
+class model::PersonBNode {
+  + name : str
+}
+class model::PrimaryObject {
+  + featureMapAttributeCollection : str
+  + featureMapAttributeType1 : str
+  + featureMapAttributeType2 : str
+  + featureMapReferenceCollection : str
+  + id : int
+  + name : str
+  + unsettableAttribute : str
+  + unsettableAttributeWithDefault : str
+}
+class model::TargetObject {
+  + arrayAttribute : str
+  + id : int
+  + singleAttribute : str
+}
+model::Book "1..1" -- "0..9999" model::Person : authors1
+model::PersonBNode "0..9999" -- "1..1" model::BookBNode : authors3
+model::Book "0..9999" -- "1..1" model::Person : books0
+model::PersonBNode "1..1" *-- "0..9999" model::BookBNode : books2
+model::Book "0..9999" --* "1..1" model::Library : books8
+model::BNode "0..9999" --* "1..1" model::BNode : child7
+model::TargetObject "0..9999" --* "1..1" model::PrimaryObject : featureMapReferenceType147
+model::PrimaryObject "1..1" *-- "0..9999" model::TargetObject : featureMapReferenceType244
+model::Book "0..1" -- "1..1" model::Location : featuredBook14
+model::Book "0..1" -- "1..1" model::Library : latestBook11
+model::MappedLibrary "1..1" *-- "0..1" model::Location : location17
+model::Location "0..1" --* "1..1" model::Library : location9
+model::TargetObject "0..9999" --* "1..1" model::PrimaryObject : multipleContainmentReferenceNoProxies35
+model::TargetObject "0..9999" --* "1..1" model::PrimaryObject : multipleContainmentReferenceProxies41
+model::TargetObject "0..9999" -- "1..1" model::PrimaryObject : multipleNonContainmentReference29
+model::Book "0..9999" --* "1..1" model::MappedLibrary : rareBooks19
+model::Book "0..9999" --* "1..1" model::MappedLibrary : regularBooks22
+model::TargetObject "0..1" --* "1..1" model::PrimaryObject : singleContainmentReferenceNoProxies32
+model::TargetObject "0..1" --* "1..1" model::PrimaryObject : singleContainmentReferenceProxies38
+model::TargetObject "0..1" -- "1..1" model::PrimaryObject : singleNonContainmentReference26
+model::TargetObject "0..1" -- "1..1" model::PrimaryObject : unsettableReference25
+@enduml

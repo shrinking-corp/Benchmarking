@@ -1,0 +1,111 @@
+@startuml
+class Function {
+}
+enum Hierarchy {
+  Subordinate
+  Supervisor
+}
+class Interval {
+}
+class NamedElement {
+}
+enum ObjectiveNature {
+  Cost
+  Delay
+  Economical
+  Environmental
+  Human
+  Legal
+  None
+  Quality
+}
+enum ObjectiveType {
+  None
+  Operational
+  Strategic
+  Tactic
+}
+enum RoleType {
+  Composite
+  Control
+  Decision
+  Transformation
+}
+class company106::Action {
+  + statement : str
+}
+class company106::Agency {
+  + acronym : str
+  + status : str
+}
+class company106::Company {
+}
+class company106::Department {
+}
+class company106::Employee {
+  + address : int
+  + fullName : str
+  + socialSecurityNumber : str
+}
+class company106::Flow {
+}
+abstract class company106::Function {
+}
+class company106::Goal {
+  + statement : str
+}
+class company106::HierarchyLink {
+  + hierarchy : str
+}
+abstract class company106::Interval {
+  + dateFrom : str
+  + dateTo : str
+}
+abstract class company106::NamedElement {
+  + name : str
+}
+class company106::Objective {
+  + nature : str
+  + type : str
+  + value : float
+}
+class company106::ObjectiveReach {
+  + statement : str
+  + value : float
+}
+class company106::Room {
+}
+class company106::Workstation {
+  + profileDescription : str
+}
+Function <|-- company106::Agency
+Function <|-- company106::Department
+Function <|-- company106::Room
+Interval <|-- company106::Goal
+NamedElement <|-- company106::Action
+NamedElement <|-- company106::Flow
+NamedElement <|-- company106::Function
+NamedElement <|-- company106::Workstation
+company106::ObjectiveReach "1..1" *-- "0..1" company106::Action : actions41
+company106::Agency "0..9999" --* "1..1" company106::Company : agencies0
+company106::Department "0..9999" --* "1..1" company106::Agency : departments27
+company106::Employee "0..9999" --* "1..1" company106::Agency : employees30
+company106::Flow "0..1" -- "1..1" company106::Action : flow46
+company106::Flow "0..9999" --* "1..1" company106::Function : flows43
+company106::HierarchyLink "1..1" -- "0..1" company106::Employee : fromEmployee13
+company106::Function "0..1" -- "1..1" company106::Flow : fromFunction4
+company106::Goal "0..9999" --* "1..1" company106::Company : goals1
+company106::HierarchyLink "0..9999" --* "1..1" company106::Employee : hierarchies8
+company106::Workstation "0..1" -- "1..1" company106::Employee : inChargeOf12
+company106::Objective "0..9999" --* "1..1" company106::Goal : objectives25
+company106::Employee "0..9999" -- "1..1" company106::Workstation : owners24
+company106::Room "0..9999" -- "1..1" company106::Room : parent20
+company106::Agency "1..1" *-- "0..9999" company106::ObjectiveReach : reacheds33
+company106::Room "0..1" -- "1..1" company106::Employee : responsibleOf9
+company106::Department "1..1" *-- "0..9999" company106::Room : rooms3
+company106::Agency "0..1" -- "1..1" company106::ObjectiveReach : srcAgency38
+company106::Employee "0..1" -- "1..1" company106::HierarchyLink : toEmployee16
+company106::Flow "1..1" -- "0..1" company106::Function : toFunction5
+company106::Objective "0..1" -- "1..1" company106::ObjectiveReach : trgObjective35
+company106::Room "1..1" *-- "0..9999" company106::Workstation : workstations22
+@enduml

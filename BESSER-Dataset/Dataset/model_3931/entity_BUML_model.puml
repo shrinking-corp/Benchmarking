@@ -1,0 +1,36 @@
+@startuml
+class Member {
+}
+class NamedElement {
+}
+class Type {
+}
+class entity::Entity {
+}
+class entity::Field {
+}
+abstract class entity::Member {
+}
+class entity::Method {
+  + isAbstract : bool
+}
+abstract class entity::NamedElement {
+  + name : str
+}
+class entity::Package {
+}
+class entity::Service {
+}
+abstract class entity::Type {
+}
+Member <|-- entity::Field
+Member <|-- entity::Method
+NamedElement <|-- entity::Member
+NamedElement <|-- entity::Package
+NamedElement <|-- entity::Type
+Type <|-- entity::Entity
+Type <|-- entity::Service
+entity::Member "0..9999" --* "1..1" entity::Entity : members1
+entity::Method "0..9999" --* "1..1" entity::Service : methods2
+entity::Package "1..1" *-- "0..9999" entity::Type : types0
+@enduml

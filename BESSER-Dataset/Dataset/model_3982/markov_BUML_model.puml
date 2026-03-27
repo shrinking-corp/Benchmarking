@@ -1,0 +1,34 @@
+@startuml
+class Entity {
+}
+enum StateType {
+  Default
+  Failure
+  Start
+  Success
+}
+class markov::Entity {
+  + Name : str
+}
+class markov::Label {
+  + key : str
+  + value : str
+}
+class markov::MarkovChain {
+}
+class markov::State {
+  + traces : str
+  + type : str
+}
+class markov::Transition {
+  + probability : float
+}
+Entity <|-- markov::MarkovChain
+Entity <|-- markov::State
+Entity <|-- markov::Transition
+markov::Transition "1..1" -- "1..1" markov::State : fromState1
+markov::Label "0..9999" --* "1..1" markov::State : labels0
+markov::State "0..9999" --* "1..1" markov::MarkovChain : states6
+markov::State "1..1" -- "1..1" markov::Transition : toState3
+markov::MarkovChain "1..1" *-- "0..9999" markov::Transition : transitions8
+@enduml

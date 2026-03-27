@@ -1,0 +1,69 @@
+@startuml
+class Cardinality {
+}
+class Constraints {
+}
+class Feature {
+}
+class Operator {
+}
+class OrFeature {
+}
+class fm::AndOperator {
+}
+class fm::Attribute {
+  + name : str
+  + value : str
+}
+class fm::BooleanConstraints {
+}
+class fm::CardExConstraint {
+}
+class fm::Cardinality {
+  + max : int
+  + min : int
+}
+class fm::Constraints {
+}
+class fm::Feature {
+  + name : str
+}
+class fm::FeatureCardinality {
+}
+class fm::FeatureModel {
+}
+class fm::GroupCardinality {
+}
+class fm::Operation {
+  + value : int
+}
+class fm::Operator {
+}
+class fm::OrFeature {
+}
+class fm::OrOperator {
+}
+class fm::XorFeature {
+}
+Cardinality <|-- fm::FeatureCardinality
+Cardinality <|-- fm::GroupCardinality
+Constraints <|-- fm::BooleanConstraints
+Constraints <|-- fm::CardExConstraint
+Feature <|-- fm::OrFeature
+Operator <|-- fm::AndOperator
+Operator <|-- fm::OrOperator
+OrFeature <|-- fm::XorFeature
+fm::Operation "1..1" --* "1..1" fm::CardExConstraint : action14
+fm::Attribute "0..9999" --* "1..1" fm::Feature : attributes8
+fm::CardExConstraint "1..1" *-- "1..9999" fm::Operation : condition15
+fm::Constraints "0..9999" --* "1..1" fm::FeatureModel : constraints1
+fm::Operation "1..1" -- "1..1" fm::Feature : feature20
+fm::FeatureCardinality "0..1" --* "1..1" fm::Feature : featureCardinality6
+fm::Feature "1..1" -- "1..1" fm::BooleanConstraints : from23
+fm::GroupCardinality "0..1" --* "1..1" fm::OrFeature : groupCardinality12
+fm::Operator "1..1" --* "1..1" fm::CardExConstraint : operator18
+fm::FeatureModel "1..1" *-- "1..1" fm::Feature : root0
+fm::Feature "1..1" *-- "0..9999" fm::Feature : subFeatures4
+fm::Feature "1..1" -- "1..1" fm::BooleanConstraints : to25
+fm::Feature "2..9999" --* "1..1" fm::OrFeature : variants10
+@enduml

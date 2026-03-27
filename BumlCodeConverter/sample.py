@@ -12,140 +12,136 @@ from besser.BUML.metamodel.structural import (
 )
 
 # Classes
-petrinet_Petrinet = Class(name="petrinet::Petrinet")
-petrinet_Arc = Class(name="petrinet::Arc")
-petrinet_Token = Class(name="petrinet::Token")
-petrinet_PTArc = Class(name="petrinet::PTArc")
-petrinet_Place = Class(name="petrinet::Place")
-petrinet_Transition = Class(name="petrinet::Transition")
-Arc = Class(name="Arc")
-petrinet_TPArc = Class(name="petrinet::TPArc")
+smalluml_Class = Class(name="smalluml::Class")
+Type = Class(name="Type")
+smalluml_Operation = Class(name="smalluml::Operation")
+NamedElement = Class(name="NamedElement")
+smalluml_Type = Class(name="smalluml::Type")
+smalluml_NamedElement = Class(name="smalluml::NamedElement", is_abstract=True)
+smalluml_TypeString = Class(name="smalluml::TypeString")
+smalluml_TypeReal = Class(name="smalluml::TypeReal")
+smalluml_Property = Class(name="smalluml::Property")
+smalluml_TypeBoolean = Class(name="smalluml::TypeBoolean")
+smalluml_Root = Class(name="smalluml::Root")
+smalluml_TypeInteger = Class(name="smalluml::TypeInteger")
+smalluml_TypeUnlimitedNatural = Class(name="smalluml::TypeUnlimitedNatural")
 
-# petrinet_Petrinet class attributes and methods
-petrinet_Petrinet_name: Property = Property(name="name", type=StringType)
-petrinet_Petrinet.attributes={petrinet_Petrinet_name}
+# smalluml_Class class attributes and methods
 
-# petrinet_Arc class attributes and methods
-petrinet_Arc_weight: Property = Property(name="weight", type=IntegerType)
-petrinet_Arc.attributes={petrinet_Arc_weight}
+# Type class attributes and methods
 
-# petrinet_Token class attributes and methods
+# smalluml_Operation class attributes and methods
 
-# petrinet_PTArc class attributes and methods
+# NamedElement class attributes and methods
 
-# petrinet_Place class attributes and methods
-petrinet_Place_name: Property = Property(name="name", type=StringType)
-petrinet_Place_m_getTokenNumber: Method = Method(name="getTokenNumber", parameters={}, type=IntegerType)
-petrinet_Place_m_isAPart: Method = Method(name="isAPart", parameters={}, type=BooleanType)
-petrinet_Place.attributes={petrinet_Place_name}
-petrinet_Place.methods={petrinet_Place_m_isAPart, petrinet_Place_m_getTokenNumber}
+# smalluml_Type class attributes and methods
 
-# petrinet_Transition class attributes and methods
-petrinet_Transition_name: Property = Property(name="name", type=StringType)
-petrinet_Transition_m_isEnabled: Method = Method(name="isEnabled", parameters={}, type=BooleanType)
-petrinet_Transition.attributes={petrinet_Transition_name}
-petrinet_Transition.methods={petrinet_Transition_m_isEnabled}
+# smalluml_NamedElement class attributes and methods
+smalluml_NamedElement_name: Property = Property(name="name", type=StringType)
+smalluml_NamedElement.attributes={smalluml_NamedElement_name}
 
-# Arc class attributes and methods
+# smalluml_TypeString class attributes and methods
+smalluml_TypeString_value: Property = Property(name="value", type=StringType)
+smalluml_TypeString.attributes={smalluml_TypeString_value}
 
-# petrinet_TPArc class attributes and methods
+# smalluml_TypeReal class attributes and methods
+smalluml_TypeReal_value: Property = Property(name="value", type=StringType)
+smalluml_TypeReal.attributes={smalluml_TypeReal_value}
+
+# smalluml_Property class attributes and methods
+smalluml_Property_upperBound: Property = Property(name="upperBound", type=IntegerType)
+smalluml_Property_lowerBound: Property = Property(name="lowerBound", type=IntegerType)
+smalluml_Property.attributes={smalluml_Property_upperBound, smalluml_Property_lowerBound}
+
+# smalluml_TypeBoolean class attributes and methods
+smalluml_TypeBoolean_value: Property = Property(name="value", type=StringType)
+smalluml_TypeBoolean.attributes={smalluml_TypeBoolean_value}
+
+# smalluml_Root class attributes and methods
+
+# smalluml_TypeInteger class attributes and methods
+smalluml_TypeInteger_value: Property = Property(name="value", type=StringType)
+smalluml_TypeInteger.attributes={smalluml_TypeInteger_value}
+
+# smalluml_TypeUnlimitedNatural class attributes and methods
+smalluml_TypeUnlimitedNatural_value: Property = Property(name="value", type=StringType)
+smalluml_TypeUnlimitedNatural.attributes={smalluml_TypeUnlimitedNatural_value}
 
 # Relationships
-transitions1: BinaryAssociation = BinaryAssociation(
-    name="transitions1",
+ownedOperations0: BinaryAssociation = BinaryAssociation(
+    name="ownedOperations0",
     ends={
-        Property(name="petrinet_Transition", type=petrinet_Petrinet, multiplicity=Multiplicity(1, 1)),
-        Property(name="petrinet_Petrinet2", type=petrinet_Transition, multiplicity=Multiplicity(0, 9999), is_composite=True)
+        Property(name="smalluml_Operation", type=smalluml_Class, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Class", type=smalluml_Operation, multiplicity=Multiplicity(0, 9999), is_composite=True)
     }
 )
-arcs3: BinaryAssociation = BinaryAssociation(
-    name="arcs3",
+resultType6: BinaryAssociation = BinaryAssociation(
+    name="resultType6",
     ends={
-        Property(name="petrinet_Arc", type=petrinet_Petrinet, multiplicity=Multiplicity(1, 1)),
-        Property(name="petrinet_Petrinet4", type=petrinet_Arc, multiplicity=Multiplicity(0, 9999), is_composite=True)
+        Property(name="smalluml_Type", type=smalluml_Operation, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Operation7", type=smalluml_Type, multiplicity=Multiplicity(0, 1))
     }
 )
-tokens5: BinaryAssociation = BinaryAssociation(
-    name="tokens5",
+params8: BinaryAssociation = BinaryAssociation(
+    name="params8",
     ends={
-        Property(name="petrinet_Token", type=petrinet_Place, multiplicity=Multiplicity(1, 1)),
-        Property(name="petrinet_Place6", type=petrinet_Token, multiplicity=Multiplicity(0, 9999), is_composite=True)
+        Property(name="smalluml_Type10", type=smalluml_Operation, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Operation9", type=smalluml_Type, multiplicity=Multiplicity(0, 9999))
     }
 )
-places0: BinaryAssociation = BinaryAssociation(
-    name="places0",
+type11: BinaryAssociation = BinaryAssociation(
+    name="type11",
     ends={
-        Property(name="petrinet_Place", type=petrinet_Petrinet, multiplicity=Multiplicity(1, 1)),
-        Property(name="petrinet_Petrinet", type=petrinet_Place, multiplicity=Multiplicity(0, 9999), is_composite=True)
+        Property(name="smalluml_Type13", type=smalluml_Property, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Property12", type=smalluml_Type, multiplicity=Multiplicity(1, 1))
     }
 )
-in9: BinaryAssociation = BinaryAssociation(
-    name="in9",
+superClass2: BinaryAssociation = BinaryAssociation(
+    name="superClass2",
     ends={
-        Property(name="PTArc11", type=petrinet_Transition, multiplicity=Multiplicity(1, 1)),
-        Property(name="trg10", type=petrinet_PTArc, multiplicity=Multiplicity(0, 9999))
+        Property(name="smalluml_Class3", type=smalluml_Class, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Class1", type=smalluml_Class, multiplicity=Multiplicity(0, 9999))
     }
 )
-out12: BinaryAssociation = BinaryAssociation(
-    name="out12",
+ownedProperties4: BinaryAssociation = BinaryAssociation(
+    name="ownedProperties4",
     ends={
-        Property(name="TPArc14", type=petrinet_Transition, multiplicity=Multiplicity(1, 1)),
-        Property(name="src13", type=petrinet_TPArc, multiplicity=Multiplicity(0, 9999))
+        Property(name="smalluml_Property", type=smalluml_Class, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Class5", type=smalluml_Property, multiplicity=Multiplicity(0, 9999), is_composite=True)
     }
 )
-src15: BinaryAssociation = BinaryAssociation(
-    name="src15",
+elements14: BinaryAssociation = BinaryAssociation(
+    name="elements14",
     ends={
-        Property(name="Place", type=petrinet_PTArc, multiplicity=Multiplicity(1, 1)),
-        Property(name="out", type=petrinet_Place, multiplicity=Multiplicity(0, 9999))
+        Property(name="smalluml_Class15", type=smalluml_Root, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Root", type=smalluml_Class, multiplicity=Multiplicity(0, 9999), is_composite=True)
     }
 )
-out7: BinaryAssociation = BinaryAssociation(
-    name="out7",
+primitiveTypes16: BinaryAssociation = BinaryAssociation(
+    name="primitiveTypes16",
     ends={
-        Property(name="PTArc", type=petrinet_Place, multiplicity=Multiplicity(1, 1)),
-        Property(name="src", type=petrinet_PTArc, multiplicity=Multiplicity(0, 9999))
-    }
-)
-in8: BinaryAssociation = BinaryAssociation(
-    name="in8",
-    ends={
-        Property(name="TPArc", type=petrinet_Place, multiplicity=Multiplicity(1, 1)),
-        Property(name="trg", type=petrinet_TPArc, multiplicity=Multiplicity(0, 9999))
-    }
-)
-trg20: BinaryAssociation = BinaryAssociation(
-    name="trg20",
-    ends={
-        Property(name="Place22", type=petrinet_TPArc, multiplicity=Multiplicity(1, 1)),
-        Property(name="in21", type=petrinet_Place, multiplicity=Multiplicity(0, 9999))
-    }
-)
-trg16: BinaryAssociation = BinaryAssociation(
-    name="trg16",
-    ends={
-        Property(name="Transition", type=petrinet_PTArc, multiplicity=Multiplicity(1, 1)),
-        Property(name="in", type=petrinet_Transition, multiplicity=Multiplicity(0, 9999))
-    }
-)
-src17: BinaryAssociation = BinaryAssociation(
-    name="src17",
-    ends={
-        Property(name="Transition19", type=petrinet_TPArc, multiplicity=Multiplicity(1, 1)),
-        Property(name="out18", type=petrinet_Transition, multiplicity=Multiplicity(0, 9999))
+        Property(name="smalluml_Type18", type=smalluml_Root, multiplicity=Multiplicity(1, 1)),
+        Property(name="smalluml_Root17", type=smalluml_Type, multiplicity=Multiplicity(0, 9999), is_composite=True)
     }
 )
 
 # Generalizations
-gen_petrinet_PTArc_Arc = Generalization(general=Arc, specific=petrinet_PTArc)
-gen_petrinet_TPArc_Arc = Generalization(general=Arc, specific=petrinet_TPArc)
+gen_smalluml_Class_Type = Generalization(general=Type, specific=smalluml_Class)
+gen_smalluml_Operation_NamedElement = Generalization(general=NamedElement, specific=smalluml_Operation)
+gen_smalluml_Property_NamedElement = Generalization(general=NamedElement, specific=smalluml_Property)
+gen_smalluml_Type_NamedElement = Generalization(general=NamedElement, specific=smalluml_Type)
+gen_smalluml_TypeString_Type = Generalization(general=Type, specific=smalluml_TypeString)
+gen_smalluml_TypeBoolean_Type = Generalization(general=Type, specific=smalluml_TypeBoolean)
+gen_smalluml_TypeReal_Type = Generalization(general=Type, specific=smalluml_TypeReal)
+gen_smalluml_TypeInteger_Type = Generalization(general=Type, specific=smalluml_TypeInteger)
+gen_smalluml_TypeUnlimitedNatural_Type = Generalization(general=Type, specific=smalluml_TypeUnlimitedNatural)
 
 # Domain Model
 domain_model = DomainModel(
-    name="petrinet",
-    types={petrinet_Petrinet, petrinet_Arc, petrinet_Token, petrinet_PTArc, petrinet_Place, petrinet_Transition, Arc, petrinet_TPArc},
-    associations={transitions1, arcs3, tokens5, places0, in9, out12, src15, out7, in8, trg20, trg16, src17},
-    generalizations={gen_petrinet_PTArc_Arc, gen_petrinet_TPArc_Arc},
+    name="smalluml",
+    types={smalluml_Class, Type, smalluml_Operation, NamedElement, smalluml_Type, smalluml_NamedElement, smalluml_TypeString, smalluml_TypeReal, smalluml_Property, smalluml_TypeBoolean, smalluml_Root, smalluml_TypeInteger, smalluml_TypeUnlimitedNatural},
+    associations={ownedOperations0, resultType6, params8, type11, superClass2, ownedProperties4, elements14, primitiveTypes16},
+    generalizations={gen_smalluml_Class_Type, gen_smalluml_Operation_NamedElement, gen_smalluml_Property_NamedElement, gen_smalluml_Type_NamedElement, gen_smalluml_TypeString_Type, gen_smalluml_TypeBoolean_Type, gen_smalluml_TypeReal_Type, gen_smalluml_TypeInteger_Type, gen_smalluml_TypeUnlimitedNatural_Type},
     metadata=None
 )
 

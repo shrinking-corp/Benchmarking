@@ -1,0 +1,126 @@
+@startuml
+class Command {
+}
+enum ComparisonOperator {
+  EQUAL
+  GREATER
+  GREATER_OR_EQUAL
+  LESS
+  LESS_OR_EQUAL
+  UNEQUAL
+}
+class Condition {
+}
+enum Direction {
+  BACKWARD
+  FORWARD
+  LEFT
+  RIGHT
+}
+class Expr {
+}
+enum ExprOperation {
+  DIVIDE
+  MINUS
+  MULTIPLY
+  PLUS
+}
+enum MotorPort {
+  A
+  B
+  C
+  D
+}
+enum MotorType {
+  LARGE
+  MEDIUM
+}
+enum SensorMode {
+  AMBIENT
+  COLOR_ID
+  RED
+}
+enum SensorPort {
+  S1
+  S2
+  S3
+  S4
+}
+enum SensorType {
+  COLOR
+}
+class robo::Motor {
+  + port : str
+  + reversed : bool
+  + speed : float
+  + type : str
+}
+class robo::Program {
+  + name : str
+}
+class robo::Robot {
+}
+class robo::Sensor {
+  + mode : str
+  + name : str
+  + port : str
+  + type : str
+}
+class robo::Setup {
+}
+class robo::command::Assignment {
+  + variable : str
+}
+class robo::command::Branch {
+}
+abstract class robo::command::Command {
+}
+class robo::command::Drive {
+  + direction : str
+}
+class robo::command::Loop {
+}
+class robo::condition::Comparison {
+  + operator : str
+}
+abstract class robo::condition::Condition {
+  + evaluate() : bool
+}
+abstract class robo::expression::Expr {
+  + evaluate() : float
+}
+class robo::expression::Literal {
+  + value : float
+}
+class robo::expression::Operation {
+  + operator : str
+}
+class robo::expression::Variable {
+  + name : str
+}
+Command <|-- robo::command::Assignment
+Command <|-- robo::command::Branch
+Command <|-- robo::command::Drive
+Command <|-- robo::command::Loop
+Condition <|-- robo::condition::Comparison
+Expr <|-- robo::expression::Literal
+Expr <|-- robo::expression::Operation
+Expr <|-- robo::expression::Variable
+Command "0..9999" --* "1..1" robo::Program : commands10
+Command "0..9999" --* "1..1" robo::command::Loop : commands17
+Command "0..9999" --* "1..1" robo::command::Branch : commands22
+Condition "1..1" --* "1..1" robo::command::Loop : condition15
+robo::command::Branch "1..1" *-- "1..1" Condition : condition20
+robo::command::Drive "1..1" *-- "0..1" Expr : distance12
+Expr "0..1" --* "1..1" robo::expression::Operation : left27
+Expr "1..1" --* "1..1" robo::condition::Comparison : left32
+robo::Setup "1..1" *-- "1..1" robo::Motor : leftMotor3
+robo::Program "0..9999" --* "1..1" robo::Robot : programms0
+robo::expression::Operation "1..1" *-- "1..1" Expr : right29
+Expr "1..1" --* "1..1" robo::condition::Comparison : right34
+robo::Motor "1..1" --* "1..1" robo::Setup : rightMotor5
+robo::Sensor "0..9999" --* "1..1" robo::Setup : sensors8
+robo::Setup "1..1" --* "1..1" robo::Robot : setup1
+Condition "0..1" --* "1..1" robo::command::Drive : until13
+Expr "1..1" --* "1..1" robo::command::Assignment : value25
+@enduml

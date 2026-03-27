@@ -1,0 +1,29 @@
+@startuml
+class AbstractState {
+}
+class NamedElement {
+}
+class hfsmReq::AbstractState {
+}
+class hfsmReq::NamedElement {
+  + name : str
+}
+class hfsmReq::Region {
+}
+class hfsmReq::State {
+}
+class hfsmReq::Transition {
+}
+AbstractState <|-- hfsmReq::State
+NamedElement <|-- hfsmReq::AbstractState
+NamedElement <|-- hfsmReq::Region
+NamedElement <|-- hfsmReq::Transition
+hfsmReq::Transition "0..9999" -- "1..1" hfsmReq::AbstractState : incoming6
+hfsmReq::Transition "0..9999" -- "1..1" hfsmReq::AbstractState : outgoing8
+hfsmReq::Region "0..9999" --* "1..1" hfsmReq::State : ownedRegions0
+hfsmReq::Region "1..1" -- "1..1" hfsmReq::AbstractState : ownerRegion11
+hfsmReq::Region "1..1" -- "0..1" hfsmReq::State : ownerState1
+hfsmReq::AbstractState "1..1" -- "1..1" hfsmReq::Transition : source17
+hfsmReq::AbstractState "0..9999" --* "1..1" hfsmReq::Region : subvertex4
+hfsmReq::Transition "1..1" -- "1..1" hfsmReq::AbstractState : target14
+@enduml

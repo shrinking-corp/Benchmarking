@@ -1,0 +1,180 @@
+@startuml
+class Attribute {
+}
+enum ButtonType {
+  button
+  reset
+  submit
+  workaround
+}
+class Controller {
+}
+class Event {
+}
+enum EventType {
+  onError
+  onLoad
+  onSubmit
+  workaround
+}
+class HTMLElement {
+}
+enum HTMLTag {
+  a
+  button
+  form
+  img
+  input
+  p
+  workaround
+}
+class Identifier {
+}
+class Input {
+}
+enum InputType {
+  checkbox
+  radio
+  text
+  workaround
+}
+class MVCClass {
+}
+class Method {
+}
+enum MethodType {
+  delete
+  get
+  head
+  patch
+  post
+  put
+  workaround
+}
+class Model {
+}
+class PHPMVC::coreMVC::Application {
+  + locale : str
+  + name : str
+  + routes : str
+  + type : str
+}
+class PHPMVC::coreMVC::Attribute {
+  + name : str
+}
+class PHPMVC::coreMVC::Controller {
+}
+class PHPMVC::coreMVC::Event {
+  + handler : str
+  + type : str
+}
+class PHPMVC::coreMVC::Identifier {
+  + isAutoincremental : bool
+}
+abstract class PHPMVC::coreMVC::MVCClass {
+  + name : str
+}
+class PHPMVC::coreMVC::Method {
+  + name : str
+}
+class PHPMVC::coreMVC::Model {
+}
+class PHPMVC::coreMVC::PackageController {
+  + name : str
+}
+class PHPMVC::coreMVC::PackageModel {
+  + name : str
+}
+class PHPMVC::coreMVC::PackageView {
+  + name : str
+}
+class PHPMVC::coreMVC::View {
+}
+abstract class PHPMVC::coreMVC::ViewComponent {
+  + name : str
+}
+class PHPMVC::extPHP::Anchor {
+  + content : str
+  + hypRef : str
+  + target : str
+}
+class PHPMVC::extPHP::Button {
+  + content : str
+  + disabled : bool
+  + type : str
+}
+class PHPMVC::extPHP::Checkbox {
+}
+class PHPMVC::extPHP::Form {
+  + action : str
+  + method : str
+  + target : str
+}
+abstract class PHPMVC::extPHP::HTMLElement {
+  + isEmpty : bool
+  + isPairedTag : bool
+  + tagName : str
+}
+class PHPMVC::extPHP::Image {
+  + source : str
+}
+abstract class PHPMVC::extPHP::Input {
+  + type : str
+  + value : str
+}
+class PHPMVC::extPHP::RadioButton {
+}
+class PHPMVC::extPHP::Text {
+  + content : str
+  + language : str
+}
+class PHPMVC::extPHP::TextField {
+}
+class PackageController {
+}
+class PackageModel {
+}
+class PackageView {
+}
+enum TargetType {
+  blank
+  framename
+  parent
+  self
+  top
+  workaround
+}
+class View {
+}
+class ViewComponent {
+}
+Attribute <|-- PHPMVC::coreMVC::Identifier
+HTMLElement <|-- PHPMVC::extPHP::Anchor
+HTMLElement <|-- PHPMVC::extPHP::Button
+HTMLElement <|-- PHPMVC::extPHP::Form
+HTMLElement <|-- PHPMVC::extPHP::Image
+HTMLElement <|-- PHPMVC::extPHP::Input
+HTMLElement <|-- PHPMVC::extPHP::Text
+Input <|-- PHPMVC::extPHP::Checkbox
+Input <|-- PHPMVC::extPHP::RadioButton
+Input <|-- PHPMVC::extPHP::TextField
+MVCClass <|-- PHPMVC::coreMVC::Controller
+MVCClass <|-- PHPMVC::coreMVC::Model
+MVCClass <|-- PHPMVC::coreMVC::View
+ViewComponent <|-- PHPMVC::extPHP::HTMLElement
+PackageController "0..1" --* "1..1" PHPMVC::coreMVC::Application : aPackageController3
+PHPMVC::coreMVC::Application "1..1" *-- "0..1" PackageModel : aPackageModel0
+PackageView "0..1" --* "1..1" PHPMVC::coreMVC::Application : aPackageView1
+PHPMVC::coreMVC::MVCClass "1..1" *-- "0..9999" Attribute : attributes8
+Controller "0..9999" --* "1..1" PHPMVC::coreMVC::PackageController : controllers7
+Event "0..9999" --* "1..1" PHPMVC::coreMVC::ViewComponent : events20
+HTMLElement "0..9999" --* "1..1" PHPMVC::extPHP::HTMLElement : htmlElements21
+PHPMVC::coreMVC::Method "1..1" *-- "0..9999" Attribute : inParameters15
+View "0..9999" --* "1..1" PHPMVC::coreMVC::View : innerViews11
+Method "0..9999" --* "1..1" PHPMVC::coreMVC::Controller : methods14
+Model "0..9999" --* "1..1" PHPMVC::coreMVC::PackageModel : models5
+Attribute "0..9999" --* "1..1" PHPMVC::coreMVC::Method : outParameters17
+PHPMVC::coreMVC::Model "1..1" *-- "1..9999" Identifier : primaryKeys9
+ViewComponent "0..9999" --* "1..1" PHPMVC::coreMVC::View : viewComponents10
+View "0..9999" --* "1..1" PHPMVC::coreMVC::PackageView : views6
+@enduml

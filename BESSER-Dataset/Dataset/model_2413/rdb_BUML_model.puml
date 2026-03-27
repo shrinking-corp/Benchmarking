@@ -1,0 +1,157 @@
+@startuml
+class CheckConstraint {
+}
+class Column {
+}
+class ColumnRefConstraint {
+}
+class Constraint {
+}
+class DataType {
+}
+class Domain {
+}
+class Element {
+}
+class ForeignKey {
+}
+class Index {
+}
+class IndexedColumn {
+}
+class NamedColumnSet {
+}
+class NamedElement {
+}
+class PrimaryKey {
+}
+class PrimitiveDataType {
+}
+class SchemaElement {
+}
+class UniqueConstraint {
+}
+class ViewAlias {
+}
+class ViewColumn {
+}
+class constraints::rdb::TableColumn {
+}
+class datatypes::PrimitiveDataType {
+}
+abstract class rdb::Column {
+}
+class rdb::Element {
+}
+class rdb::Model {
+  + server_id : str
+}
+abstract class rdb::NamedColumnSet {
+}
+abstract class rdb::NamedElement {
+  + name : str
+}
+class rdb::Schema {
+}
+abstract class rdb::SchemaElement {
+  + owner : str
+}
+class rdb::Table {
+}
+class rdb::TableColumn {
+  + isForeignKey : str
+  + isPrimaryKey : str
+}
+class rdb::constraints::CheckConstraint {
+  + expression : str
+}
+abstract class rdb::constraints::ColumnRefConstraint {
+}
+abstract class rdb::constraints::Constraint {
+}
+class rdb::constraints::ForeignKey {
+}
+class rdb::constraints::Index {
+}
+class rdb::constraints::IndexedColumn {
+  + ascending : bool
+}
+class rdb::constraints::PrimaryKey {
+}
+class rdb::constraints::UniqueConstraint {
+}
+abstract class rdb::datatypes::DataType {
+  + check : str
+  + decimalDigits : int
+  + default : str
+  + nullable : bool
+  + size : int
+  + var : str
+}
+class rdb::datatypes::Domain {
+}
+class rdb::datatypes::PrimitiveDataType {
+  + type : str
+}
+class rdb::view::ReferencedViewColumn {
+}
+class rdb::view::View {
+  + ddl : str
+}
+class rdb::view::ViewAlias {
+}
+abstract class rdb::view::ViewColumn {
+}
+class rdb::view::ViewExpressionColumn {
+  + expression : str
+}
+class view::rdb::Column {
+}
+class view::rdb::NamedColumnSet {
+}
+ColumnRefConstraint <|-- rdb::constraints::ForeignKey
+ColumnRefConstraint <|-- rdb::constraints::UniqueConstraint
+Column <|-- rdb::TableColumn
+Column <|-- rdb::view::ViewColumn
+Constraint <|-- rdb::constraints::CheckConstraint
+Constraint <|-- rdb::constraints::ColumnRefConstraint
+Constraint <|-- rdb::constraints::Index
+DataType <|-- rdb::datatypes::PrimitiveDataType
+Element <|-- rdb::NamedElement
+NamedColumnSet <|-- rdb::Table
+NamedColumnSet <|-- rdb::view::View
+NamedElement <|-- rdb::Column
+NamedElement <|-- rdb::Model
+NamedElement <|-- rdb::Schema
+NamedElement <|-- rdb::SchemaElement
+NamedElement <|-- rdb::constraints::Constraint
+NamedElement <|-- rdb::constraints::IndexedColumn
+NamedElement <|-- rdb::datatypes::DataType
+NamedElement <|-- rdb::view::ViewAlias
+SchemaElement <|-- rdb::NamedColumnSet
+SchemaElement <|-- rdb::datatypes::Domain
+UniqueConstraint <|-- rdb::constraints::PrimaryKey
+ViewColumn <|-- rdb::view::ReferencedViewColumn
+ViewColumn <|-- rdb::view::ViewExpressionColumn
+datatypes::PrimitiveDataType <|-- rdb::datatypes::Domain
+CheckConstraint "0..9999" --* "1..1" rdb::Table : checks14
+rdb::view::View "1..1" *-- "1..9999" ViewColumn : columns28
+rdb::TableColumn "1..9999" --* "1..1" rdb::Table : columns5
+Domain "0..1" -- "1..1" rdb::TableColumn : domain16
+rdb::Schema "1..1" *-- "0..9999" rdb::SchemaElement : elements3
+ForeignKey "0..9999" --* "1..1" rdb::Table : foreignKeys10
+constraints::rdb::TableColumn "1..9999" -- "1..1" rdb::constraints::ColumnRefConstraint : includedColumns20
+IndexedColumn "0..9999" --* "1..1" rdb::constraints::Index : indexedColumns23
+rdb::Table "1..1" *-- "0..9999" Index : indices12
+rdb::Element "0..1" -- "1..1" rdb::Element : parent1
+Domain "0..1" -- "1..1" rdb::datatypes::Domain : parentDomain26
+PrimaryKey "0..1" --* "1..1" rdb::Table : primaryKey6
+constraints::rdb::TableColumn "1..1" -- "1..1" rdb::constraints::IndexedColumn : refColumn24
+view::rdb::Column "1..1" -- "1..1" rdb::view::ReferencedViewColumn : refColumn32
+view::rdb::NamedColumnSet "1..1" -- "1..1" rdb::view::ViewAlias : referencedTableOrView31
+ViewAlias "0..9999" --* "1..1" rdb::view::View : referencedTablesAndViews29
+rdb::constraints::ForeignKey "1..1" -- "1..1" UniqueConstraint : referredUC21
+rdb::Schema "0..9999" --* "1..1" rdb::Model : schemas2
+rdb::TableColumn "1..1" *-- "0..1" PrimitiveDataType : type18
+UniqueConstraint "0..9999" --* "1..1" rdb::Table : uniqueConstraints8
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+class ArithmeticExpression {
+}
+class AtomicExpression {
+}
+class Expression {
+}
+class Statement {
+}
+class mpl::AddExpression {
+}
+class mpl::ArithmeticExpression {
+}
+class mpl::Assignment {
+}
+abstract class mpl::AtomicExpression {
+}
+abstract class mpl::Expression {
+}
+class mpl::ExpressionStatement {
+}
+class mpl::LiteralValue {
+  + rawValue : int
+}
+class mpl::Program {
+  + name : str
+}
+abstract class mpl::Statement {
+}
+class mpl::Variable {
+  + name : str
+}
+class mpl::VariableDeclaration {
+}
+class mpl::VariableRefrence {
+}
+ArithmeticExpression <|-- mpl::AddExpression
+AtomicExpression <|-- mpl::LiteralValue
+AtomicExpression <|-- mpl::VariableRefrence
+Expression <|-- mpl::ArithmeticExpression
+Expression <|-- mpl::AtomicExpression
+Statement <|-- mpl::Assignment
+Statement <|-- mpl::ExpressionStatement
+mpl::ExpressionStatement "1..1" *-- "1..1" mpl::Expression : expression8
+mpl::VariableRefrence "1..1" --* "1..1" mpl::Assignment : leftHandSide6
+mpl::Expression "1..1" --* "1..1" mpl::ArithmeticExpression : operand112
+mpl::ArithmeticExpression "1..1" *-- "1..1" mpl::Expression : operand210
+mpl::Expression "1..1" --* "1..1" mpl::Assignment : rightHandSide5
+mpl::Program "1..1" *-- "0..9999" mpl::Statement : statement1
+mpl::Variable "1..1" -- "1..1" mpl::VariableRefrence : variable15
+mpl::Variable "1..1" --* "1..1" mpl::VariableDeclaration : variable3
+mpl::VariableDeclaration "0..9999" --* "1..1" mpl::Program : variabledeclarations0
+@enduml

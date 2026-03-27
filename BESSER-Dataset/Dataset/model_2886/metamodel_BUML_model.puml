@@ -1,0 +1,68 @@
+@startuml
+class Feature {
+}
+class Relation {
+}
+class Type {
+}
+class metamodel::AssociationEntity {
+}
+class metamodel::DatabaseConnection {
+  + jdbcDriver : str
+  + jdbcPassword : str
+  + jdbcPrefix : str
+  + jdbcUrl : str
+  + jdbcUser : str
+  + persistenceUnit : str
+}
+class metamodel::Datatype {
+}
+class metamodel::Entity {
+}
+class metamodel::Feature {
+  + name : str
+  + nullable : bool
+  + xmltransient : bool
+}
+class metamodel::ManyToMany {
+}
+class metamodel::Model {
+  + name : str
+}
+class metamodel::OneToMany {
+}
+class metamodel::OneToOne {
+}
+abstract class metamodel::Relation {
+  + optional : bool
+  + unidirectional : bool
+}
+abstract class metamodel::Type {
+  + name : str
+}
+class metamodel::idFeature {
+  + generationType : str
+}
+Feature <|-- metamodel::idFeature
+Relation <|-- metamodel::ManyToMany
+Relation <|-- metamodel::OneToMany
+Relation <|-- metamodel::OneToOne
+Type <|-- metamodel::AssociationEntity
+Type <|-- metamodel::Datatype
+Type <|-- metamodel::Entity
+Type <|-- metamodel::Relation
+metamodel::Relation "1..1" -- "0..1" metamodel::AssociationEntity : associates21
+metamodel::Entity "1..1" -- "0..9999" metamodel::Entity : bequeathesTo12
+metamodel::Model "1..1" *-- "0..1" metamodel::DatabaseConnection : connector1
+metamodel::Feature "0..9999" --* "1..1" metamodel::AssociationEntity : features22
+metamodel::Feature "0..9999" --* "1..1" metamodel::Entity : features3
+metamodel::idFeature "1..1" --* "1..1" metamodel::Entity : featuresId7
+metamodel::Entity "0..1" -- "1..1" metamodel::Entity : inherits10
+metamodel::Relation "0..9999" -- "1..1" metamodel::Entity : ownedBy5
+metamodel::Entity "1..1" -- "1..1" metamodel::Relation : owner17
+metamodel::Relation "0..9999" -- "1..1" metamodel::Entity : owns4
+metamodel::Relation "1..1" -- "1..1" metamodel::AssociationEntity : relation24
+metamodel::Relation "1..1" -- "1..1" metamodel::Entity : slave19
+metamodel::Type "0..1" -- "1..1" metamodel::Feature : type14
+metamodel::Type "0..9999" --* "1..1" metamodel::Model : types0
+@enduml

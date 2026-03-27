@@ -1,0 +1,185 @@
+@startuml
+class ArithOp {
+}
+class BoolOp {
+}
+class CmpOp {
+}
+class EvalFunRes {
+}
+class EvalRes {
+}
+class Expr {
+}
+class TopLevelCmd {
+}
+class boa::App {
+}
+abstract class boa::ArithOp {
+}
+class boa::ArithOpDivide {
+}
+class boa::ArithOpMinus {
+}
+class boa::ArithOpPlus {
+}
+class boa::ArithOpRemainder {
+}
+class boa::ArithOpTimes {
+}
+class boa::Assign {
+  + name : str
+}
+class boa::BObject {
+}
+class boa::Bool {
+  + value : bool
+}
+abstract class boa::BoolOp {
+}
+class boa::BoolOpAnd {
+}
+class boa::BoolOpOr {
+}
+abstract class boa::CmpOp {
+}
+class boa::CmpOpEqual {
+}
+class boa::CmpOpLess {
+}
+class boa::CmpOpUnequal {
+}
+class boa::Copy {
+}
+class boa::Ctx {
+}
+class boa::Def {
+  + name : str
+}
+class boa::EvalBoolRes {
+  + value : bool
+}
+class boa::EvalBoundFunRes {
+}
+class boa::EvalFunRes {
+  + name : str
+}
+class boa::EvalIntRes {
+  + value : int
+}
+class boa::EvalMapRes {
+}
+abstract class boa::EvalRes {
+}
+abstract class boa::Expr {
+}
+class boa::Field {
+  + name : str
+}
+class boa::File {
+}
+class boa::Fun {
+  + name : str
+}
+class boa::If {
+}
+class boa::Int {
+  + value : int
+}
+class boa::Let {
+  + name : str
+}
+class boa::Not {
+}
+class boa::Project {
+  + name : str
+}
+class boa::Seq {
+}
+class boa::Skip {
+}
+class boa::StringToEvalResMap {
+  + key : str
+}
+class boa::This {
+}
+abstract class boa::TopLevelCmd {
+}
+class boa::Var {
+  + name : str
+}
+class boa::With {
+}
+ArithOp <|-- boa::ArithOpDivide
+ArithOp <|-- boa::ArithOpMinus
+ArithOp <|-- boa::ArithOpPlus
+ArithOp <|-- boa::ArithOpRemainder
+ArithOp <|-- boa::ArithOpTimes
+BoolOp <|-- boa::BoolOpAnd
+BoolOp <|-- boa::BoolOpOr
+CmpOp <|-- boa::CmpOpEqual
+CmpOp <|-- boa::CmpOpLess
+CmpOp <|-- boa::CmpOpUnequal
+EvalFunRes <|-- boa::EvalBoundFunRes
+EvalRes <|-- boa::EvalBoolRes
+EvalRes <|-- boa::EvalFunRes
+EvalRes <|-- boa::EvalIntRes
+EvalRes <|-- boa::EvalMapRes
+Expr <|-- boa::App
+Expr <|-- boa::ArithOp
+Expr <|-- boa::Assign
+Expr <|-- boa::BObject
+Expr <|-- boa::Bool
+Expr <|-- boa::BoolOp
+Expr <|-- boa::CmpOp
+Expr <|-- boa::Copy
+Expr <|-- boa::Fun
+Expr <|-- boa::If
+Expr <|-- boa::Int
+Expr <|-- boa::Let
+Expr <|-- boa::Not
+Expr <|-- boa::Project
+Expr <|-- boa::Seq
+Expr <|-- boa::Skip
+Expr <|-- boa::This
+Expr <|-- boa::Var
+Expr <|-- boa::With
+TopLevelCmd <|-- boa::Def
+TopLevelCmd <|-- boa::Expr
+boa::Expr "1..1" --* "1..1" boa::Fun : body45
+boa::TopLevelCmd "0..9999" --* "1..1" boa::File : commands0
+boa::If "1..1" *-- "1..1" boa::Expr : cond32
+boa::Expr "1..1" --* "1..1" boa::Copy : copy13
+boa::Ctx "1..1" -- "1..1" boa::EvalFunRes : ctx77
+boa::Expr "1..1" --* "1..1" boa::If : els37
+boa::StringToEvalResMap "0..9999" --* "1..1" boa::Ctx : env67
+boa::Expr "1..1" --* "1..1" boa::Project : exp7
+boa::Expr "1..1" -- "1..1" boa::EvalFunRes : exp75
+boa::Expr "1..1" --* "1..1" boa::Def : expr1
+boa::Field "0..9999" --* "1..1" boa::BObject : fields9
+boa::With "1..1" *-- "1..1" boa::Expr : lhs15
+boa::App "1..1" *-- "1..1" boa::Expr : lhs2
+boa::Expr "1..1" --* "1..1" boa::ArithOp : lhs20
+boa::Expr "1..1" --* "1..1" boa::CmpOp : lhs27
+boa::Let "1..1" *-- "1..1" boa::Expr : lhs40
+boa::Expr "1..1" --* "1..1" boa::Assign : lhs47
+boa::BoolOpAnd "1..1" *-- "1..1" boa::Expr : lhs52
+boa::Expr "1..1" --* "1..1" boa::BoolOpOr : lhs57
+boa::Expr "1..1" --* "1..1" boa::Seq : lhs62
+boa::Expr "1..1" --* "1..1" boa::With : rhs17
+boa::ArithOp "1..1" *-- "1..1" boa::Expr : rhs22
+boa::Expr "1..1" --* "1..1" boa::CmpOp : rhs29
+boa::Expr "1..1" --* "1..1" boa::App : rhs4
+boa::Expr "1..1" --* "1..1" boa::Let : rhs42
+boa::Expr "1..1" --* "1..1" boa::Assign : rhs49
+boa::Expr "1..1" --* "1..1" boa::BoolOpAnd : rhs54
+boa::Expr "1..1" --* "1..1" boa::BoolOpOr : rhs59
+boa::Seq "1..1" *-- "1..1" boa::Expr : rhs64
+boa::Ctx "1..1" *-- "0..9999" boa::StringToEvalResMap : th68
+boa::StringToEvalResMap "0..9999" --* "1..1" boa::EvalBoundFunRes : th80
+boa::Expr "1..1" --* "1..1" boa::If : thn34
+boa::Expr "1..1" --* "1..1" boa::Field : value10
+boa::Expr "1..1" --* "1..1" boa::Not : value25
+boa::EvalRes "1..1" -- "1..1" boa::StringToEvalResMap : value71
+boa::StringToEvalResMap "0..9999" --* "1..1" boa::EvalMapRes : values73
+@enduml

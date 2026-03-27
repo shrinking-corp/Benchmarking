@@ -1,0 +1,34 @@
+@startuml
+class Infrastructure {
+}
+class goatInfrastructure::Cluster {
+  + message_queue : str
+  + mid_assigner : str
+  + nodes : str
+  + registration : str
+}
+class goatInfrastructure::Infrastructure {
+  + name : str
+}
+class goatInfrastructure::Ring {
+  + mid_assigner : str
+  + nodes : str
+  + registration : str
+}
+class goatInfrastructure::SingleServer {
+  + server : str
+  + timeout : int
+}
+class goatInfrastructure::Tree {
+  + registration : str
+}
+class goatInfrastructure::TreeNode {
+  + address : str
+}
+Infrastructure <|-- goatInfrastructure::Cluster
+Infrastructure <|-- goatInfrastructure::Ring
+Infrastructure <|-- goatInfrastructure::SingleServer
+Infrastructure <|-- goatInfrastructure::Tree
+goatInfrastructure::TreeNode "1..1" *-- "0..9999" goatInfrastructure::TreeNode : children2
+goatInfrastructure::TreeNode "0..1" --* "1..1" goatInfrastructure::Tree : root0
+@enduml

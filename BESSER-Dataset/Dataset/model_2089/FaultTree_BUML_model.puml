@@ -1,0 +1,49 @@
+@startuml
+enum EventType {
+  Basic
+  External
+  Intermediate
+  Undeveloped
+}
+class FaultTree::EObject {
+}
+class FaultTree::Event {
+  + assignedProbability : float
+  + computedProbability : float
+  + k : int
+  + message : str
+  + name : str
+  + referenceCount : int
+  + sharedEvent : bool
+  + subEventLogic : str
+  + type : str
+  + getProbability() : float
+}
+class FaultTree::FaultTree {
+  + faultTreeType : str
+  + message : str
+  + name : str
+}
+enum FaultTreeType {
+  CompositeParts
+  FaultTrace
+  FaultTree
+  MinimalCutSet
+}
+enum LogicOperation {
+  And
+  Or
+  PriorityAnd
+  Xor
+  kOf
+  kOrless
+  kOrmore
+}
+FaultTree::FaultTree "1..1" *-- "0..9999" FaultTree::Event : events3
+FaultTree::EObject "0..1" -- "1..1" FaultTree::FaultTree : instanceRoot1
+FaultTree::Event "1..1" -- "0..1" FaultTree::EObject : relatedEMV2Object15
+FaultTree::EObject "0..1" -- "1..1" FaultTree::Event : relatedErrorType12
+FaultTree::Event "1..1" -- "0..1" FaultTree::EObject : relatedInstanceObject9
+FaultTree::Event "0..1" -- "1..1" FaultTree::FaultTree : root0
+FaultTree::Event "0..9999" -- "1..1" FaultTree::Event : subEvents7
+@enduml

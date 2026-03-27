@@ -1,0 +1,78 @@
+@startuml
+enum BooleanOperator {
+  IS
+  IS_NOT
+}
+class Condition {
+}
+enum DurationUnit {
+  MINUTE
+  SECOND
+}
+enum IntegerOperator {
+  EQUALS
+  INFERIOR
+  SUPERIOR
+}
+class Sensor {
+}
+class SensorType {
+}
+class smartHome::AnalogSensorType {
+}
+class smartHome::BooleanCondition {
+  + operand : bool
+  + operator : str
+}
+class smartHome::BooleanSensor {
+  + value : bool
+}
+class smartHome::BooleanSensorType {
+}
+abstract class smartHome::Condition {
+}
+class smartHome::Duration {
+  + unit : str
+  + value : int
+}
+class smartHome::Event {
+  + description : str
+}
+class smartHome::IntegerCondition {
+  + operand : int
+  + operator : str
+}
+class smartHome::IntegerSensor {
+  + value : int
+}
+class smartHome::Location {
+  + name : str
+}
+class smartHome::Rule {
+}
+abstract class smartHome::Sensor {
+  + dataFile : str
+  + name : str
+}
+class smartHome::SensorType {
+  + name : str
+}
+class smartHome::SmartHome {
+}
+Condition <|-- smartHome::BooleanCondition
+Condition <|-- smartHome::IntegerCondition
+SensorType <|-- smartHome::AnalogSensorType
+SensorType <|-- smartHome::BooleanSensorType
+Sensor <|-- smartHome::BooleanSensor
+Sensor <|-- smartHome::IntegerSensor
+smartHome::Condition "1..9999" --* "1..1" smartHome::Rule : conditions10
+smartHome::Rule "1..1" *-- "1..1" smartHome::Duration : duration14
+smartHome::Event "1..1" --* "1..1" smartHome::Rule : event12
+smartHome::Location "1..9999" --* "1..1" smartHome::SmartHome : locations3
+smartHome::Rule "1..9999" --* "1..1" smartHome::SmartHome : rules8
+smartHome::BooleanSensor "1..1" -- "1..1" smartHome::BooleanCondition : sensor16
+smartHome::IntegerCondition "1..1" -- "1..1" smartHome::IntegerSensor : sensor17
+smartHome::SensorType "1..1" -- "1..1" smartHome::Sensor : sensorType0
+smartHome::SmartHome "1..1" *-- "1..9999" smartHome::SensorType : sensorTypes5
+smartHome::Sensor "0..9999" --* "1..1" smartHome::Location : sensors1
+@enduml

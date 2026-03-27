@@ -1,0 +1,24 @@
+@startuml
+class Node {
+}
+class petrinet::Arc {
+  + weight : int
+}
+abstract class petrinet::Node {
+  + name : str
+}
+class petrinet::PetriNet {
+}
+class petrinet::Place {
+  + capacity : int
+  + tokens : int
+}
+class petrinet::Transition {
+}
+Node <|-- petrinet::Place
+Node <|-- petrinet::Transition
+petrinet::Arc "0..9999" --* "1..1" petrinet::PetriNet : arcs1
+petrinet::PetriNet "1..1" *-- "0..9999" petrinet::Node : nodes0
+petrinet::Node "1..1" -- "1..1" petrinet::Arc : src3
+petrinet::Arc "1..1" -- "1..1" petrinet::Node : tgt6
+@enduml

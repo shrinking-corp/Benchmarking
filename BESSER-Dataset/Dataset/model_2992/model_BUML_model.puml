@@ -1,0 +1,118 @@
+@startuml
+class Administrator {
+}
+class AutoConfirmedUser {
+}
+class Content {
+}
+class Internal {
+}
+class Node {
+}
+class RegisteredUser {
+}
+class Role {
+}
+class UnregisteredUser {
+}
+class model::Administrator {
+  + blockUser() : void
+  + deleteContent() : void
+}
+class model::Article {
+  + content : str
+  + typePrefix : str
+}
+class model::AutoConfirmedUser {
+  + createArticle() : void
+  + moveArticle() : void
+  + moveMedia() : void
+  + uploadMedia() : void
+}
+class model::Content {
+  + addDiscussionItem() : void
+  + createNewRevision() : str
+  + render() : void
+  + renderHTML() : void
+}
+class model::Discussion {
+  + discussions : str
+  + add() : void
+  + renderHTML() : void
+}
+class model::Internal {
+  + content : str
+  + typePrefix : str
+}
+class model::Media {
+  + typePrefix : str
+  + addContentToFileUsage() : void
+  + addMetaData() : void
+  + getFileUsage() : void
+  + getMetaData() : void
+  + removeContent() : void
+  + removeMetaData() : void
+}
+class model::MetaData {
+  + key : str
+  + value : str
+}
+abstract class model::Node {
+  + nodeName : str
+  + nodePrefix : str
+  + getTypePrefix() : str
+  + getURI() : str
+  + render() : void
+  + renderHTML() : str
+}
+class model::RegisteredUser {
+}
+class model::Revision {
+  + content : str
+  + creationDate : str
+}
+abstract class model::Role {
+}
+class model::SysOp {
+  + blockAdmin() : void
+  + makeAdmin() : void
+  + removeAdmin() : void
+}
+class model::Talk {
+}
+class model::UnregisteredUser {
+  + changeMode() : str
+}
+class model::User {
+  + isBlocked : str
+  + isEditor : str
+  + isReader : str
+  + typePrefix : str
+}
+class model::VersionHistory {
+  + renderHTML() : void
+}
+class model::WikiProject {
+}
+Administrator <|-- model::SysOp
+AutoConfirmedUser <|-- model::Administrator
+Content <|-- model::Article
+Content <|-- model::Internal
+Content <|-- model::Media
+Internal <|-- model::WikiProject
+Node <|-- model::Content
+Node <|-- model::User
+RegisteredUser <|-- model::AutoConfirmedUser
+Role <|-- model::UnregisteredUser
+UnregisteredUser <|-- model::RegisteredUser
+model::User "1..1" -- "1..1" model::Revision : author12
+model::Revision "1..1" -- "1..1" model::Content : currentRevision3
+model::Discussion "1..1" -- "1..1" model::Content : discussionPage1
+model::User "0..9999" -- "1..1" model::WikiProject : member16
+model::MetaData "0..9999" -- "1..1" model::Media : meta9
+model::Content "1..1" -- "1..9999" model::Revision : revisions0
+model::Role "0..1" -- "1..1" model::User : role11
+model::RegisteredUser "1..1" -- "0..1" model::Talk : talkPage15
+model::Article "1..9999" -- "1..1" model::Media : usage8
+model::Content "1..1" -- "1..1" model::VersionHistory : versionHistoryPage6
+@enduml

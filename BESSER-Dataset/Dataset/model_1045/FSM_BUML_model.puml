@@ -1,0 +1,25 @@
+@startuml
+class FAbstractState {
+}
+abstract class FSM::FAbstractState {
+  + name : str
+}
+class FSM::FInitialState {
+}
+class FSM::FRegularState {
+}
+class FSM::FStateMachine {
+  + name : str
+}
+class FSM::FTransition {
+  + label : str
+}
+FAbstractState <|-- FSM::FInitialState
+FAbstractState <|-- FSM::FRegularState
+FSM::FAbstractState "1..1" -- "1..1" FSM::FTransition : source4
+FSM::FStateMachine "0..1" -- "1..1" FSM::FTransition : stateMachine3
+FSM::FAbstractState "1..1" -- "0..1" FSM::FStateMachine : stateMachine8
+FSM::FAbstractState "0..9999" --* "1..1" FSM::FStateMachine : states1
+FSM::FTransition "1..1" -- "1..1" FSM::FAbstractState : target5
+FSM::FTransition "0..9999" --* "1..1" FSM::FStateMachine : transitions0
+@enduml

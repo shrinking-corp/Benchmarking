@@ -1,0 +1,74 @@
+@startuml
+class td1::Action {
+  + Body : str
+  + Name : str
+  + codeFiacre : str
+}
+class td1::Component {
+  + Name : str
+  + ProcessSize : int
+  + VarSize : int
+}
+class td1::DataType {
+  + Name : str
+}
+class td1::Guard {
+  + Body : str
+  + Name : str
+  + codeFiacre : str
+}
+class td1::Port {
+  + Name : str
+}
+class td1::Process {
+  + Name : str
+  + StateSize : int
+  + VarSize : int
+}
+class td1::Program {
+  + ComponentSize : int
+  + Name : str
+}
+class td1::State {
+  + Name : str
+}
+class td1::Transition {
+  + Name : str
+}
+class td1::Trigger {
+  + ArgSize : int
+  + Body : str
+  + Name : str
+  + codeFiacre : str
+}
+class td1::Variable {
+  + Name : str
+  + initVal : str
+}
+td1::Action "0..1" --* "1..1" td1::Transition : action22
+td1::Trigger "0..9999" --* "1..1" td1::Process : alluniqueTriggers11
+td1::Trigger "1..1" *-- "0..9999" td1::Variable : arguments47
+td1::Component "0..9999" -- "1..1" td1::Variable : components27
+td1::Program "1..1" *-- "1..9999" td1::Component : components36
+td1::Component "0..9999" -- "1..1" td1::Port : components50
+td1::DataType "1..1" -- "1..1" td1::Variable : datatype24
+td1::DataType "0..9999" --* "1..1" td1::Program : datatypes44
+td1::Guard "0..1" --* "1..1" td1::Transition : guard17
+td1::Transition "1..9999" -- "1..1" td1::State : inTransitions1
+td1::Process "1..1" -- "1..1" td1::State : initState8
+td1::Process "1..9999" --* "1..1" td1::Component : instances29
+td1::Port "0..1" --* "1..1" td1::Process : outPorts9
+td1::Transition "1..9999" -- "1..1" td1::State : outTransitions0
+td1::Port "0..9999" --* "1..1" td1::Component : ports33
+td1::State "1..1" -- "1..1" td1::Process : process3
+td1::Variable "1..1" -- "0..9999" td1::Process : processes25
+td1::Process "1..9999" --* "1..1" td1::Program : processes41
+td1::State "1..1" -- "1..1" td1::Transition : source13
+td1::State "1..9999" --* "1..1" td1::Process : states6
+td1::State "1..1" -- "1..1" td1::Transition : target15
+td1::Transition "1..9999" --* "1..1" td1::Process : transitions4
+td1::Transition "1..1" *-- "0..1" td1::Trigger : trigger19
+td1::Variable "0..9999" --* "1..1" td1::Program : variable38
+td1::Variable "0..9999" -- "1..1" td1::Component : variables31
+td1::Variable "0..9999" -- "1..1" td1::Process : variables5
+@enduml

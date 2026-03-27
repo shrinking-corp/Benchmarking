@@ -1,0 +1,60 @@
+@startuml
+class AbstractBehaviorModelGraph {
+}
+class AbstractUseCaseExecution {
+}
+abstract class behavior::AbstractBehaviorModelGraph {
+  + transactionType : str
+}
+abstract class behavior::AbstractUseCaseExecution {
+}
+class behavior::BehaviorMix {
+}
+class behavior::BehaviorMixEntry {
+  + behaviorModelName : str
+  + relativeFrequency : float
+}
+class behavior::BehaviorModelAbsolute {
+}
+class behavior::BehaviorModelRelative {
+}
+class behavior::ObservedUseCaseExecution {
+  + endTime : str
+  + startTime : str
+}
+class behavior::Session {
+  + endTime : str
+  + id : str
+  + startTime : str
+  + transactionType : str
+}
+class behavior::SessionRepository {
+}
+class behavior::Transition {
+  + thinkTimeParams : str
+  + timeDiffs : str
+  + value : float
+}
+class behavior::UseCase {
+  + id : str
+  + name : str
+}
+class behavior::UseCaseRepository {
+}
+class behavior::Vertex {
+}
+AbstractBehaviorModelGraph <|-- behavior::BehaviorModelAbsolute
+AbstractBehaviorModelGraph <|-- behavior::BehaviorModelRelative
+AbstractUseCaseExecution <|-- behavior::ObservedUseCaseExecution
+AbstractUseCaseExecution <|-- behavior::Vertex
+behavior::BehaviorModelRelative "1..1" -- "1..1" behavior::BehaviorMixEntry : behaviorModel16
+behavior::BehaviorMixEntry "1..9999" --* "1..1" behavior::BehaviorMix : entries15
+behavior::ObservedUseCaseExecution "0..9999" --* "1..1" behavior::Session : observedUseCaseExecutions2
+behavior::Transition "0..9999" --* "1..1" behavior::Vertex : outgoingTransitions7
+behavior::Session "0..9999" --* "1..1" behavior::SessionRepository : sessions1
+behavior::Vertex "1..1" -- "1..1" behavior::Transition : sourceVertex12
+behavior::Transition "1..1" -- "1..1" behavior::Vertex : targetVertex9
+behavior::AbstractUseCaseExecution "1..1" -- "1..1" behavior::UseCase : useCase4
+behavior::UseCase "0..9999" --* "1..1" behavior::UseCaseRepository : useCases0
+behavior::Vertex "0..9999" --* "1..1" behavior::AbstractBehaviorModelGraph : vertices6
+@enduml

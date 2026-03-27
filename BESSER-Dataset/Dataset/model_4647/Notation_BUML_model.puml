@@ -1,0 +1,65 @@
+@startuml
+class LayoutConstraint {
+}
+class Location {
+}
+class Node {
+}
+class NotationElement {
+}
+class View {
+}
+class notation::Bounds {
+  + height : int
+  + width : int
+}
+class notation::Diagram {
+  + name : str
+}
+class notation::EObject {
+}
+class notation::Edge {
+}
+abstract class notation::LayoutConstraint {
+}
+class notation::Location {
+  + x : int
+  + y : int
+}
+class notation::MindMapNode {
+  + expanded : bool
+  + hasChildren : bool
+  + side : int
+}
+class notation::Node {
+}
+abstract class notation::NotationElement {
+  + id : str
+  + idBeforeRemoval : str
+}
+class notation::Note {
+  + text : str
+}
+abstract class notation::View {
+  + viewDetails : str
+  + viewType : str
+  + getAllChildren() : str
+}
+LayoutConstraint <|-- notation::Location
+Location <|-- notation::Bounds
+Node <|-- notation::MindMapNode
+Node <|-- notation::Note
+NotationElement <|-- notation::Location
+NotationElement <|-- notation::View
+View <|-- notation::Diagram
+View <|-- notation::Edge
+View <|-- notation::Node
+notation::EObject "0..1" -- "1..1" notation::View : diagrammableElement1
+notation::Bounds "0..1" --* "1..1" notation::Node : layoutConstraint6
+notation::Node "0..9999" --* "1..1" notation::View : persistentChildren0
+notation::Edge "0..9999" --* "1..1" notation::Diagram : persistentEdges11
+notation::View "0..1" -- "1..1" notation::Edge : source8
+notation::View "1..1" -- "0..9999" notation::Edge : sourceEdges3
+notation::Edge "1..1" -- "0..1" notation::View : target9
+notation::Edge "0..9999" -- "1..1" notation::View : targetEdges4
+@enduml

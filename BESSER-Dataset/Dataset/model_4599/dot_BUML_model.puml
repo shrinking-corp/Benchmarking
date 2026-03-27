@@ -1,0 +1,61 @@
+@startuml
+class AttributedItem {
+}
+class Identifiable {
+}
+class Node {
+}
+enum SettingsType {
+  EDGE
+  GRAPH
+  NODE
+}
+class Statement {
+}
+class dot::Assignment {
+  + key : str
+  + value : str
+}
+abstract class dot::AttributedItem {
+}
+class dot::Edge {
+}
+class dot::Graph {
+}
+abstract class dot::Identifiable {
+  + id : str
+}
+class dot::InnerNode {
+}
+class dot::Node {
+}
+class dot::RecordNode {
+}
+class dot::Settings {
+  + type : str
+}
+abstract class dot::Statement {
+}
+class dot::StringToStringMapEntry {
+  + key : str
+  + value : str
+}
+AttributedItem <|-- dot::Edge
+AttributedItem <|-- dot::Node
+AttributedItem <|-- dot::Settings
+Identifiable <|-- dot::Graph
+Identifiable <|-- dot::Node
+Node <|-- dot::InnerNode
+Node <|-- dot::RecordNode
+Statement <|-- dot::Assignment
+Statement <|-- dot::Edge
+Statement <|-- dot::Graph
+Statement <|-- dot::Node
+Statement <|-- dot::Settings
+dot::StringToStringMapEntry "0..9999" --* "1..1" dot::AttributedItem : attributes6
+dot::RecordNode "1..1" *-- "0..9999" dot::InnerNode : innerNodes1
+dot::InnerNode "1..1" -- "1..1" dot::RecordNode : recordNode7
+dot::Node "1..1" -- "1..1" dot::Edge : source2
+dot::Statement "0..9999" --* "1..1" dot::Graph : statements0
+dot::Node "1..1" -- "1..1" dot::Edge : target3
+@enduml

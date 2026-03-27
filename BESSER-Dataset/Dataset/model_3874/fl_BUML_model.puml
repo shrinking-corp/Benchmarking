@@ -1,0 +1,52 @@
+@startuml
+class BinaryExp {
+}
+class Exp {
+}
+class fl::ApplyExp {
+}
+class fl::Argument {
+  + name : str
+}
+class fl::ArgumentExp {
+}
+abstract class fl::BinaryExp {
+}
+class fl::EqualExp {
+}
+abstract class fl::Exp {
+}
+class fl::Function {
+  + name : str
+}
+class fl::IfThenElseExp {
+}
+class fl::LiteralExp {
+  + value : int
+}
+class fl::MinusExp {
+}
+class fl::PlusExp {
+}
+class fl::Program {
+}
+BinaryExp <|-- fl::EqualExp
+BinaryExp <|-- fl::MinusExp
+BinaryExp <|-- fl::PlusExp
+Exp <|-- fl::ApplyExp
+Exp <|-- fl::ArgumentExp
+Exp <|-- fl::BinaryExp
+Exp <|-- fl::IfThenElseExp
+Exp <|-- fl::LiteralExp
+fl::Function "1..1" *-- "0..9999" fl::Argument : argument1
+fl::Exp "0..9999" --* "1..1" fl::ApplyExp : argument17
+fl::Argument "1..1" -- "1..1" fl::ArgumentExp : argument5
+fl::Function "1..1" *-- "1..1" fl::Exp : definition3
+fl::IfThenElseExp "1..1" *-- "1..1" fl::Exp : else12
+fl::Function "1..9999" --* "1..1" fl::Program : function0
+fl::Function "1..1" -- "1..1" fl::ApplyExp : function15
+fl::Exp "1..1" --* "1..1" fl::IfThenElseExp : if7
+fl::Exp "1..1" --* "1..1" fl::BinaryExp : left20
+fl::BinaryExp "1..1" *-- "1..1" fl::Exp : right22
+fl::Exp "1..1" --* "1..1" fl::IfThenElseExp : then9
+@enduml

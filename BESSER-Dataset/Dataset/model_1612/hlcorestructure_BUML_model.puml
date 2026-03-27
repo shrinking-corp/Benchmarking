@@ -1,0 +1,294 @@
+@startuml
+class Annotation {
+}
+enum CSS2Color {
+  AQUA
+  BLACK
+  BLUE
+  FUCHSIA
+  GRAY
+  GREEN
+  LIME
+  MAROON
+  NAVY
+  OLIVE
+  ORANGE
+  PURPLE
+  RED
+  SILVER
+  TEAL
+  WHITE
+  YELLOW
+}
+enum CSS2FontFamily {
+  ARIAL
+  GEORGIA
+  TIMES
+  TREBUCHET
+  VERDANA
+}
+enum CSS2FontSize {
+  LARGE
+  MEDIUM
+  SMALL
+  XLARGE
+  XSMALL
+  XXLARGE
+  XXSMALL
+}
+enum CSS2FontStyle {
+  ITALIC
+  NORMAL
+  OBLIQUE
+}
+enum CSS2FontWeight {
+  BOLD
+  BOLDER
+  LIGHTER
+  NORMAL
+}
+class Coordinate {
+}
+enum FontAlign {
+  CENTER
+  LEFT
+  RIGHT
+}
+enum FontDecoration {
+  LINETHROUGH
+  OVERLINE
+  UNDERLINE
+}
+enum Gradient {
+  DIAGONAL
+  HORIZONTAL
+  VERTICAL
+}
+class Graphics {
+}
+class HLCoreAnnotation {
+}
+class Label {
+}
+enum LineShape {
+  CURVE
+  LINE
+}
+enum LineStyle {
+  DASH
+  DOT
+  SOLID
+}
+class Node {
+}
+enum PNType {
+  COREMODEL
+  HLPN
+  PTNET
+  SYMNET
+}
+class PlaceNode {
+}
+class PnObject {
+}
+class TransitionNode {
+}
+abstract class hlcorestructure::Annotation {
+}
+class hlcorestructure::AnnotationGraphics {
+}
+abstract class hlcorestructure::AnyObject {
+}
+class hlcorestructure::Arc {
+}
+class hlcorestructure::ArcGraphics {
+}
+abstract class hlcorestructure::Attribute {
+}
+class hlcorestructure::Condition {
+}
+abstract class hlcorestructure::Coordinate {
+  + x : str
+  + y : str
+}
+class hlcorestructure::Declaration {
+}
+class hlcorestructure::Declarations {
+}
+class hlcorestructure::Dimension {
+}
+class hlcorestructure::Fill {
+  + color : str
+  + gradientcolor : str
+  + gradientrotation : str
+  + image : str
+}
+class hlcorestructure::Font {
+  + align : str
+  + decoration : str
+  + family : str
+  + rotation : str
+  + size : str
+  + style : str
+  + weight : str
+}
+abstract class hlcorestructure::Graphics {
+}
+class hlcorestructure::HLAnnotation {
+}
+abstract class hlcorestructure::HLCoreAnnotation {
+  + text : str
+}
+class hlcorestructure::HLMarking {
+}
+abstract class hlcorestructure::Label {
+}
+class hlcorestructure::Line {
+  + color : str
+  + shape : str
+  + style : str
+  + width : str
+}
+class hlcorestructure::Name {
+  + text : str
+}
+abstract class hlcorestructure::Node {
+}
+class hlcorestructure::NodeGraphics {
+}
+class hlcorestructure::Offset {
+}
+class hlcorestructure::Page {
+}
+class hlcorestructure::PetriNet {
+  + id : str
+  + type : str
+}
+class hlcorestructure::PetriNetDoc {
+  + xmlns : str
+}
+class hlcorestructure::Place {
+}
+abstract class hlcorestructure::PlaceNode {
+}
+abstract class hlcorestructure::PnObject {
+  + id : str
+}
+class hlcorestructure::Position {
+}
+class hlcorestructure::RefPlace {
+}
+class hlcorestructure::RefTransition {
+}
+class hlcorestructure::Sort {
+}
+class hlcorestructure::Term {
+}
+class hlcorestructure::ToolInfo {
+  + formattedXMLBuffer : str
+  + tool : str
+  + toolInfoGrammarURI : str
+  + version : str
+}
+class hlcorestructure::Transition {
+}
+abstract class hlcorestructure::TransitionNode {
+}
+class hlcorestructure::Type {
+}
+Annotation <|-- hlcorestructure::HLCoreAnnotation
+Annotation <|-- hlcorestructure::Name
+Coordinate <|-- hlcorestructure::Dimension
+Coordinate <|-- hlcorestructure::Offset
+Coordinate <|-- hlcorestructure::Position
+Graphics <|-- hlcorestructure::AnnotationGraphics
+Graphics <|-- hlcorestructure::ArcGraphics
+Graphics <|-- hlcorestructure::NodeGraphics
+HLCoreAnnotation <|-- hlcorestructure::Condition
+HLCoreAnnotation <|-- hlcorestructure::Declaration
+HLCoreAnnotation <|-- hlcorestructure::HLAnnotation
+HLCoreAnnotation <|-- hlcorestructure::HLMarking
+HLCoreAnnotation <|-- hlcorestructure::Type
+Label <|-- hlcorestructure::Annotation
+Label <|-- hlcorestructure::Attribute
+Node <|-- hlcorestructure::PlaceNode
+Node <|-- hlcorestructure::TransitionNode
+PlaceNode <|-- hlcorestructure::Place
+PlaceNode <|-- hlcorestructure::RefPlace
+PnObject <|-- hlcorestructure::Arc
+PnObject <|-- hlcorestructure::Node
+PnObject <|-- hlcorestructure::Page
+TransitionNode <|-- hlcorestructure::RefTransition
+TransitionNode <|-- hlcorestructure::Transition
+hlcorestructure::Arc "0..9999" -- "1..1" hlcorestructure::Node : InArcs87
+hlcorestructure::Node "1..1" -- "0..9999" hlcorestructure::Arc : OutArcs89
+hlcorestructure::AnnotationGraphics "0..1" --* "1..1" hlcorestructure::Annotation : annotationgraphics104
+hlcorestructure::ArcGraphics "0..1" --* "1..1" hlcorestructure::Arc : arcgraphics83
+hlcorestructure::Condition "0..1" --* "1..1" hlcorestructure::Transition : condition102
+hlcorestructure::Annotation "0..1" -- "1..1" hlcorestructure::AnnotationGraphics : containerAnnotation59
+hlcorestructure::AnnotationGraphics "0..1" -- "1..1" hlcorestructure::Offset : containerAnnotationGraphics47
+hlcorestructure::AnnotationGraphics "0..1" -- "1..1" hlcorestructure::Fill : containerAnnotationGraphics62
+hlcorestructure::AnnotationGraphics "0..1" -- "1..1" hlcorestructure::Line : containerAnnotationGraphics70
+hlcorestructure::AnnotationGraphics "0..1" -- "1..1" hlcorestructure::Font : containerAnnotationGraphics93
+hlcorestructure::HLAnnotation "1..1" -- "0..1" hlcorestructure::Arc : containerArc118
+hlcorestructure::ArcGraphics "1..1" -- "0..1" hlcorestructure::Arc : containerArc78
+hlcorestructure::ArcGraphics "0..1" -- "1..1" hlcorestructure::Position : containerArcGraphics44
+hlcorestructure::ArcGraphics "0..1" -- "1..1" hlcorestructure::Line : containerArcGraphics67
+hlcorestructure::Dimension "1..1" -- "0..1" hlcorestructure::NodeGraphics : containerDNodeGraphics48
+hlcorestructure::Page "0..1" -- "1..1" hlcorestructure::Declaration : containerDeclarationPage123
+hlcorestructure::PetriNet "0..1" -- "1..1" hlcorestructure::Declaration : containerDeclarationPetriNet121
+hlcorestructure::Label "0..1" -- "1..1" hlcorestructure::ToolInfo : containerLabel30
+hlcorestructure::Name "1..1" -- "0..1" hlcorestructure::PetriNet : containerNamePetriNet20
+hlcorestructure::PnObject "0..1" -- "1..1" hlcorestructure::Name : containerNamePnObject22
+hlcorestructure::Node "0..1" -- "1..1" hlcorestructure::NodeGraphics : containerNode40
+hlcorestructure::NodeGraphics "0..1" -- "1..1" hlcorestructure::Fill : containerNodeGraphics60
+hlcorestructure::Line "1..1" -- "0..1" hlcorestructure::NodeGraphics : containerNodeGraphics65
+hlcorestructure::NodeGraphics "0..1" -- "1..1" hlcorestructure::Position : containerPNodeGraphics45
+hlcorestructure::Page "0..1" -- "1..1" hlcorestructure::PnObject : containerPage18
+hlcorestructure::NodeGraphics "1..1" -- "0..1" hlcorestructure::Page : containerPage41
+hlcorestructure::PetriNet "0..1" -- "1..1" hlcorestructure::ToolInfo : containerPetriNet25
+hlcorestructure::PetriNet "0..1" -- "1..1" hlcorestructure::Page : containerPetriNet8
+hlcorestructure::PetriNet "1..1" -- "1..1" hlcorestructure::PetriNetDoc : containerPetriNetDoc5
+hlcorestructure::Place "0..1" -- "1..1" hlcorestructure::Type : containerPlace109
+hlcorestructure::HLMarking "1..1" -- "0..1" hlcorestructure::Place : containerPlace111
+hlcorestructure::PnObject "0..1" -- "1..1" hlcorestructure::ToolInfo : containerPnObject27
+hlcorestructure::AnyObject "1..1" -- "0..1" hlcorestructure::ToolInfo : containerToolInfo106
+hlcorestructure::Transition "0..1" -- "1..1" hlcorestructure::Condition : containerTransition115
+hlcorestructure::Declaration "0..9999" --* "1..1" hlcorestructure::Page : declaration12
+hlcorestructure::Declaration "0..9999" --* "1..1" hlcorestructure::PetriNet : declaration6
+hlcorestructure::Dimension "0..1" --* "1..1" hlcorestructure::NodeGraphics : dimension36
+hlcorestructure::NodeGraphics "1..1" *-- "0..1" hlcorestructure::Fill : fill37
+hlcorestructure::Fill "0..1" --* "1..1" hlcorestructure::AnnotationGraphics : fill51
+hlcorestructure::AnnotationGraphics "1..1" *-- "0..1" hlcorestructure::Font : font57
+hlcorestructure::HLMarking "0..1" --* "1..1" hlcorestructure::Place : hlinitialMarking99
+hlcorestructure::Arc "1..1" *-- "0..1" hlcorestructure::HLAnnotation : hlinscription85
+hlcorestructure::Line "0..1" --* "1..1" hlcorestructure::NodeGraphics : line38
+hlcorestructure::Line "0..1" --* "1..1" hlcorestructure::AnnotationGraphics : line54
+hlcorestructure::Line "0..1" --* "1..1" hlcorestructure::ArcGraphics : line75
+hlcorestructure::Name "0..1" --* "1..1" hlcorestructure::PnObject : name14
+hlcorestructure::Name "0..1" --* "1..1" hlcorestructure::PetriNet : name2
+hlcorestructure::PetriNet "1..9999" --* "1..1" hlcorestructure::PetriNetDoc : nets0
+hlcorestructure::NodeGraphics "0..1" --* "1..1" hlcorestructure::Page : nodegraphics10
+hlcorestructure::NodeGraphics "0..1" --* "1..1" hlcorestructure::Node : nodegraphics91
+hlcorestructure::PnObject "0..9999" --* "1..1" hlcorestructure::Page : objects7
+hlcorestructure::Offset "0..1" --* "1..1" hlcorestructure::AnnotationGraphics : offset50
+hlcorestructure::Page "1..9999" --* "1..1" hlcorestructure::PetriNet : pages1
+hlcorestructure::Position "0..1" --* "1..1" hlcorestructure::NodeGraphics : position35
+hlcorestructure::Position "0..9999" --* "1..1" hlcorestructure::ArcGraphics : positions73
+hlcorestructure::RefTransition "1..1" -- "1..1" hlcorestructure::TransitionNode : ref101
+hlcorestructure::PlaceNode "1..1" -- "1..1" hlcorestructure::RefPlace : ref103
+hlcorestructure::PlaceNode "1..1" -- "0..9999" hlcorestructure::RefPlace : referencingPlaces95
+hlcorestructure::RefTransition "0..9999" -- "1..1" hlcorestructure::TransitionNode : referencingTransitions96
+hlcorestructure::Node "1..1" -- "1..1" hlcorestructure::Arc : source79
+hlcorestructure::Sort "0..1" --* "1..1" hlcorestructure::Type : structure108
+hlcorestructure::Term "0..1" --* "1..1" hlcorestructure::HLMarking : structure110
+hlcorestructure::Term "0..1" --* "1..1" hlcorestructure::Condition : structure113
+hlcorestructure::Term "0..1" --* "1..1" hlcorestructure::HLAnnotation : structure116
+hlcorestructure::Declarations "0..1" --* "1..1" hlcorestructure::Declaration : structure120
+hlcorestructure::Node "1..1" -- "1..1" hlcorestructure::Arc : target81
+hlcorestructure::ToolInfo "1..1" *-- "0..1" hlcorestructure::AnyObject : toolInfoModel32
+hlcorestructure::PnObject "1..1" *-- "0..9999" hlcorestructure::ToolInfo : toolspecifics16
+hlcorestructure::PetriNet "1..1" *-- "0..9999" hlcorestructure::ToolInfo : toolspecifics3
+hlcorestructure::ToolInfo "0..9999" --* "1..1" hlcorestructure::Label : toolspecifics33
+hlcorestructure::Type "0..1" --* "1..1" hlcorestructure::Place : type98
+@enduml

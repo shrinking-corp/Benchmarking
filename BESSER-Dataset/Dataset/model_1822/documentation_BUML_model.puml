@@ -1,0 +1,51 @@
+@startuml
+class Documentation::Book {
+  + title : str
+}
+class Documentation::EmphasisValue {
+  + role : str
+}
+class Documentation::InformalTableValue {
+  + cols : int
+}
+class Documentation::InformalTableValueRow {
+}
+class Documentation::ItemizedListValue {
+}
+class Documentation::ItemizedListValueItem {
+}
+class Documentation::Paragraph {
+}
+abstract class Documentation::ParagraphValue {
+}
+class Documentation::Section {
+  + title : str
+}
+class Documentation::TextualValue {
+  + value : str
+}
+class Documentation::XRefValue {
+}
+class Paragraph {
+}
+class ParagraphValue {
+}
+class TextualValue {
+}
+Paragraph <|-- Documentation::ItemizedListValueItem
+ParagraphValue <|-- Documentation::EmphasisValue
+ParagraphValue <|-- Documentation::InformalTableValue
+ParagraphValue <|-- Documentation::ItemizedListValue
+ParagraphValue <|-- Documentation::TextualValue
+ParagraphValue <|-- Documentation::XRefValue
+TextualValue <|-- Documentation::EmphasisValue
+Documentation::InformalTableValueRow "0..9999" --* "1..1" Documentation::InformalTableValue : bodyRows11
+Documentation::Book "1..1" *-- "0..9999" Documentation::Section : content0
+Documentation::InformalTableValueRow "1..1" *-- "0..9999" Documentation::TextualValue : entry15
+Documentation::InformalTableValueRow "0..9999" --* "1..1" Documentation::InformalTableValue : headRows12
+Documentation::ItemizedListValueItem "0..9999" --* "1..1" Documentation::ItemizedListValue : items8
+Documentation::Section "1..1" -- "1..1" Documentation::XRefValue : linkend9
+Documentation::Paragraph "0..9999" --* "1..1" Documentation::Section : para5
+Documentation::Section "0..9999" --* "1..1" Documentation::Section : section3
+Documentation::ParagraphValue "0..9999" --* "1..1" Documentation::Paragraph : values1
+@enduml

@@ -1,0 +1,105 @@
+@startuml
+enum DefencePositionKind {
+  left_defence
+  right_defence
+}
+enum ForwardPositionKind {
+  center
+  left_wing
+  right_wing
+}
+enum HeightKind {
+  centimeters
+  inches
+}
+class HockeyleagueObject {
+}
+class Player {
+}
+enum ShotKind {
+  left
+  right
+}
+enum WeightKind {
+  kilograms
+  pounds
+}
+class hockeyleague::Arena {
+  + address : str
+  + capacity : int
+}
+class hockeyleague::Defence {
+  + position : str
+}
+class hockeyleague::Forward {
+  + position : str
+}
+class hockeyleague::Goalie {
+}
+class hockeyleague::GoalieStats {
+  + assists : int
+  + emptyNetGoals : int
+  + gamesPlayedIn : int
+  + goals : int
+  + goalsAgainst : int
+  + goalsAgainstAverage : float
+  + losses : int
+  + minutesPlayedIn : int
+  + penaltyMinutes : int
+  + points : int
+  + saves : int
+  + shutouts : int
+  + ties : int
+  + wins : int
+  + year : str
+}
+abstract class hockeyleague::HockeyleagueObject {
+  + name : str
+}
+class hockeyleague::League {
+  + headoffice : str
+}
+abstract class hockeyleague::Player {
+  + birthdate : str
+  + birthplace : str
+  + heightMesurement : str
+  + heightValue : int
+  + number : int
+  + shot : str
+  + weightMesurement : str
+  + weightValue : int
+}
+class hockeyleague::PlayerStats {
+  + assists : int
+  + gameWinningGoals : int
+  + gamesPlayedIn : int
+  + goals : int
+  + penaltyMinutes : int
+  + plusMinus : int
+  + points : int
+  + powerPlayGoals : int
+  + shortHandedGoals : int
+  + shotPercentage : float
+  + shots : int
+  + year : str
+}
+class hockeyleague::Team {
+}
+HockeyleagueObject <|-- hockeyleague::Arena
+HockeyleagueObject <|-- hockeyleague::League
+HockeyleagueObject <|-- hockeyleague::Player
+HockeyleagueObject <|-- hockeyleague::Team
+Player <|-- hockeyleague::Defence
+Player <|-- hockeyleague::Forward
+Player <|-- hockeyleague::Goalie
+hockeyleague::Arena "0..1" --* "1..1" hockeyleague::Team : arena20
+hockeyleague::Defence "0..9999" --* "1..1" hockeyleague::Team : defencemen14
+hockeyleague::Team "1..1" *-- "0..9999" hockeyleague::Forward : forwards11
+hockeyleague::GoalieStats "0..9999" --* "1..1" hockeyleague::Goalie : goalieStats3
+hockeyleague::Goalie "0..9999" --* "1..1" hockeyleague::Team : goalies17
+hockeyleague::PlayerStats "0..9999" --* "1..1" hockeyleague::Defence : playerStats0
+hockeyleague::Forward "1..1" *-- "0..9999" hockeyleague::PlayerStats : playerStats1
+hockeyleague::Team "0..1" -- "1..1" hockeyleague::GoalieStats : team4
+hockeyleague::Team "0..1" -- "1..1" hockeyleague::PlayerStats : team8
+hockeyleague::League "1..1" *-- "0..9999" hockeyleague::Team : teams6
+@enduml

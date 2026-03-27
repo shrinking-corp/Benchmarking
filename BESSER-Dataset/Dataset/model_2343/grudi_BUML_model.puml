@@ -1,0 +1,42 @@
+@startuml
+enum Gender {
+  female
+  male
+  unknown
+}
+enum TeamPersonKind {
+  captain
+  member
+}
+class grudi::Person {
+  + address : str
+  + email : str
+  + gender : str
+  + id : str
+  + name : str
+  + password : str
+  + phoneNumber : str
+  + username : str
+  + versionNumber : str
+}
+class grudi::PersonInfo {
+  + gender : str
+  + id : str
+  + name : str
+  + phoneNumber : str
+  + userName : str
+}
+class grudi::Team {
+  + id : str
+  + name : str
+  + versionNumber : str
+}
+class grudi::TeamLine {
+  + id : str
+  + kind : str
+  + versionNumber : str
+}
+grudi::TeamLine "0..9999" -- "1..1" grudi::Team : lines0
+grudi::TeamLine "1..1" -- "0..1" grudi::PersonInfo : person2
+grudi::TeamLine "1..1" -- "0..1" grudi::Team : team1
+@enduml

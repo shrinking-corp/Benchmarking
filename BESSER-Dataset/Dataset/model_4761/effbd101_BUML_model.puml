@@ -1,0 +1,66 @@
+@startuml
+class Port {
+}
+class ProcessNode {
+}
+class Sequence {
+}
+class SequenceNode {
+}
+class effbd101::And {
+}
+class effbd101::Description {
+  + content : str
+}
+class effbd101::Final {
+}
+class effbd101::Flow {
+}
+class effbd101::Function {
+}
+class effbd101::InputPort {
+}
+class effbd101::Item {
+  + name : str
+}
+class effbd101::Loop {
+}
+class effbd101::Or {
+}
+class effbd101::OutputPort {
+}
+abstract class effbd101::Port {
+  + id : str
+}
+abstract class effbd101::ProcessNode {
+  + label : str
+}
+abstract class effbd101::Sequence {
+}
+abstract class effbd101::SequenceNode {
+  + name : str
+}
+class effbd101::Start {
+}
+Port <|-- effbd101::InputPort
+Port <|-- effbd101::OutputPort
+ProcessNode <|-- effbd101::Flow
+ProcessNode <|-- effbd101::Function
+SequenceNode <|-- effbd101::Function
+SequenceNode <|-- effbd101::Sequence
+Sequence <|-- effbd101::And
+Sequence <|-- effbd101::Final
+Sequence <|-- effbd101::Loop
+Sequence <|-- effbd101::Or
+Sequence <|-- effbd101::Start
+effbd101::SequenceNode "0..9999" -- "1..1" effbd101::SequenceNode : controlFlowEdge13
+effbd101::Function "1..1" *-- "0..9999" effbd101::Function : decompositions1
+effbd101::Description "0..9999" --* "1..1" effbd101::Function : descriptions10
+effbd101::Flow "0..9999" --* "1..1" effbd101::Function : flows4
+effbd101::Function "1..1" *-- "0..9999" effbd101::InputPort : inputPorts8
+effbd101::InputPort "0..9999" -- "1..1" effbd101::Flow : inputflowEdge14
+effbd101::Flow "1..1" *-- "0..9999" effbd101::Item : items17
+effbd101::OutputPort "0..9999" --* "1..1" effbd101::Function : outputPorts6
+effbd101::Flow "0..9999" -- "1..1" effbd101::OutputPort : outputflowEdge19
+effbd101::Sequence "0..9999" --* "1..1" effbd101::Function : sequenceNodes2
+@enduml

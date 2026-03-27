@@ -1,0 +1,90 @@
+@startuml
+class NamedElement {
+}
+enum PseudoStateKind {
+  choice
+  deep
+  fork
+  initial
+  join
+  none
+  shallow
+  terminate
+}
+class State {
+}
+enum TransitionKind {
+  external
+  internal
+  local
+}
+class Vertex {
+}
+class state::Behaviour {
+  + body : str
+  + language : str
+}
+class state::Constraint {
+}
+class state::Event {
+  + body : str
+}
+class state::FinalState {
+}
+abstract class state::NamedElement {
+  + id : str
+  + name : str
+}
+class state::OpaqueExpression {
+  + body : str
+}
+class state::PseudoState {
+  + kind : str
+}
+class state::Region {
+}
+class state::State {
+  + isComposite : bool
+  + isSimple : bool
+}
+class state::StateMachine {
+}
+class state::StateModel {
+}
+class state::Transition {
+  + kind : str
+}
+class state::Trigger {
+}
+abstract class state::Vertex {
+}
+NamedElement <|-- state::Region
+NamedElement <|-- state::State
+NamedElement <|-- state::StateMachine
+NamedElement <|-- state::Transition
+NamedElement <|-- state::Trigger
+NamedElement <|-- state::Vertex
+State <|-- state::FinalState
+Vertex <|-- state::PseudoState
+Vertex <|-- state::State
+state::Trigger "1..9999" --* "1..1" state::State : defferableTrigger1
+state::State "1..1" *-- "0..1" state::Behaviour : doActivity3
+state::Transition "1..1" *-- "0..1" state::Behaviour : effect34
+state::State "1..1" *-- "0..1" state::Behaviour : entry5
+state::Event "1..1" --* "1..1" state::Trigger : event39
+state::Behaviour "0..1" --* "1..1" state::State : exit8
+state::Constraint "0..1" --* "1..1" state::Transition : guard32
+state::Vertex "1..1" -- "1..9999" state::Transition : incoming24
+state::Transition "1..9999" -- "1..1" state::Vertex : outgoing23
+state::NamedElement "1..1" --* "1..1" state::StateModel : packagedElment41
+state::Region "1..9999" --* "1..1" state::State : region0
+state::Region "1..9999" --* "1..1" state::StateMachine : region20
+state::Vertex "1..1" -- "1..1" state::Transition : source26
+state::OpaqueExpression "1..1" --* "1..1" state::Constraint : specification37
+state::State "0..1" -- "1..1" state::Region : state11
+state::Region "1..1" -- "0..1" state::StateMachine : stateMachine16
+state::Vertex "1..9999" --* "1..1" state::Region : subVertex14
+state::Vertex "1..1" -- "1..1" state::Transition : target27
+state::Transition "1..9999" --* "1..1" state::Region : transition18
+state::Trigger "1..1" --* "1..1" state::Transition : trigger29
+@enduml

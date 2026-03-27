@@ -1,0 +1,39 @@
+@startuml
+enum ConstraintOperation {
+  Equal
+  Greater
+  GreaterOrEqual
+  Less
+  LessOrEqual
+}
+enum ConstraintType {
+  Average
+  Maximum
+  Minimum
+}
+enum ResourceTypes {
+  bandwidth
+  cpu
+  memory
+  port
+  power
+}
+class profile::Constraint {
+  + bound : int
+  + isDerivation : bool
+  + operation : str
+  + type : str
+}
+class profile::PlatformProfile {
+  + name : str
+}
+class profile::Resource {
+  + name : str
+  + type : str
+}
+profile::Constraint "0..9999" --* "1..1" profile::PlatformProfile : constraints1
+profile::PlatformProfile "1..1" -- "1..1" profile::Resource : platform3
+profile::Constraint "1..1" -- "1..1" profile::PlatformProfile : platform4
+profile::Resource "1..1" -- "1..1" profile::Constraint : references6
+profile::Resource "0..9999" --* "1..1" profile::PlatformProfile : resources0
+@enduml

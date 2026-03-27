@@ -1,0 +1,47 @@
+@startuml
+class stm::Command {
+  + name : str
+}
+class stm::Event {
+  + name : str
+}
+class stm::Guard {
+  + name : str
+}
+class stm::GuardCall {
+  + parameters : str
+}
+class stm::Parameter {
+  + name : str
+  + type : str
+}
+class stm::SelfEvent {
+}
+class stm::State {
+  + name : str
+}
+class stm::Statemachine {
+}
+class stm::Transition {
+}
+stm::Command "0..1" -- "1..1" stm::Transition : action34
+stm::Command "0..1" -- "1..1" stm::SelfEvent : action43
+stm::Command "0..9999" --* "1..1" stm::Statemachine : commands1
+stm::Command "0..1" -- "1..1" stm::State : doAction10
+stm::Command "0..9999" -- "1..1" stm::State : entryActions7
+stm::Event "0..1" -- "1..1" stm::Transition : event26
+stm::Event "0..1" -- "1..1" stm::SelfEvent : event37
+stm::Event "0..9999" --* "1..1" stm::Statemachine : events0
+stm::Command "0..9999" -- "1..1" stm::State : exitActions23
+stm::Transition "1..1" *-- "0..1" stm::GuardCall : guard29
+stm::SelfEvent "1..1" *-- "0..1" stm::GuardCall : guard40
+stm::Guard "0..1" -- "1..1" stm::GuardCall : guard46
+stm::Statemachine "1..1" *-- "0..9999" stm::Guard : guards3
+stm::Guard "1..1" *-- "0..9999" stm::Parameter : parameters49
+stm::SelfEvent "0..9999" --* "1..1" stm::State : selfEvents19
+stm::State "0..1" -- "1..1" stm::Transition : state31
+stm::State "0..9999" --* "1..1" stm::State : states17
+stm::State "0..9999" --* "1..1" stm::Statemachine : states5
+stm::Command "0..1" -- "1..1" stm::State : stopAction13
+stm::Transition "0..9999" --* "1..1" stm::State : transitions21
+@enduml

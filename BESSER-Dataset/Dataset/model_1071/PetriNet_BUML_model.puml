@@ -1,0 +1,27 @@
+@startuml
+class Arc {
+}
+abstract class PetriNet::Arc {
+  + weight : int
+}
+class PetriNet::PetriNet {
+}
+class PetriNet::Place {
+  + tokens : int
+}
+class PetriNet::PlaceToTransArc {
+}
+class PetriNet::TransToPlaceArc {
+}
+class PetriNet::Transition {
+}
+Arc <|-- PetriNet::PlaceToTransArc
+Arc <|-- PetriNet::TransToPlaceArc
+PetriNet::Arc "0..9999" --* "1..1" PetriNet::PetriNet : arcs3
+PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Place : places0
+PetriNet::Transition "1..1" -- "1..1" PetriNet::TransToPlaceArc : source10
+PetriNet::Place "1..1" -- "1..1" PetriNet::PlaceToTransArc : source5
+PetriNet::Place "1..1" -- "1..1" PetriNet::TransToPlaceArc : target12
+PetriNet::PlaceToTransArc "1..1" -- "1..1" PetriNet::Transition : target7
+PetriNet::Transition "0..9999" --* "1..1" PetriNet::PetriNet : transitions1
+@enduml

@@ -1,0 +1,269 @@
+@startuml
+enum Behavior {
+  CASCADE
+  RESTRICT
+}
+enum Charset {
+  ARMSCII8
+  ASCII
+  BIG5
+  BINARY
+  CP1250
+  CP1251
+  CP1256
+  CP1257
+  CP850
+  CP852
+  CP866
+  CP932
+  DEC8
+  EUCJMPS
+  EUCKR
+  GB2312
+  GBK
+  GEOSTD8
+  GREEK
+  HEBREW
+  HP8
+  KEYBCS2
+  KOI8R
+  KOI8U
+  LATIN1
+  LATIN2
+  LATIN5
+  LATIN7
+  MACCE
+  MACROMAN
+  SJIS
+  SWE7
+  TIS620
+  UCS2
+  UJIS
+  UTF8
+}
+enum ColumnType {
+  BIGINT
+  BINARY
+  BIT
+  BLOB
+  CHAR
+  DATE
+  DATETIME
+  DECIMAL
+  DOUBLE
+  FLOAT
+  INTEGER
+  LONGBLOB
+  LONGTEXT
+  MEDIUMBLOB
+  MEDIUMINT
+  MEDIUMTEXT
+  NUMERIC
+  REAL
+  SMALLINT
+  TEXT
+  TIME
+  TIMESTAMP
+  TINYBLOB
+  TINYINT
+  TINYTEXT
+  VARBINARY
+  VARCHAR
+  YEAR
+}
+enum FormMethod {
+  GET
+  POST
+}
+enum InputType {
+  BUTTON
+  TEXT
+}
+class Instruction {
+}
+class Tag {
+}
+class webapp::Action {
+  + name : str
+  + returnType : str
+}
+class webapp::AppConfig {
+}
+class webapp::Attribute {
+  + name : str
+  + value : str
+}
+class webapp::BusinessObject {
+  + name : str
+  + package : str
+}
+class webapp::Check {
+  + expr : str
+}
+class webapp::Column {
+  + defaultValue : str
+  + isNotNull : bool
+  + name : str
+  + size : int
+  + type : str
+  + useZeroFill : bool
+}
+class webapp::Constraint {
+}
+class webapp::Controller {
+}
+class webapp::Detail {
+  + precision : int
+  + scale : int
+}
+class webapp::Field {
+  + defaultValue : str
+  + name : str
+  + type : str
+}
+class webapp::File {
+}
+class webapp::ForeignKey {
+}
+class webapp::Form {
+  + method : str
+}
+class webapp::Image {
+}
+class webapp::Input {
+  + type : str
+}
+class webapp::Instruction {
+}
+class webapp::Library {
+}
+class webapp::Mapping {
+  + left : str
+  + right : str
+}
+class webapp::Messages {
+}
+class webapp::Model {
+  + databaseName : str
+  + password : str
+  + url : str
+  + userName : str
+}
+class webapp::Navigation {
+  + message : str
+}
+class webapp::OnDelete {
+  + behavior : str
+}
+class webapp::OnUpdate {
+  + behavior : str
+}
+class webapp::Page {
+  + isMain : bool
+  + name : str
+}
+class webapp::PrimaryKey {
+}
+class webapp::Properties {
+  + name : str
+  + package : str
+}
+class webapp::Resource {
+}
+class webapp::Table {
+  + charset : str
+  + name : str
+}
+class webapp::TableHTML {
+}
+abstract class webapp::Tag {
+  + property : str
+}
+class webapp::Td {
+}
+class webapp::Text {
+  + content : str
+}
+class webapp::Th {
+}
+class webapp::Tr {
+}
+class webapp::Unique {
+}
+class webapp::Validator {
+  + name : str
+  + package : str
+}
+class webapp::View {
+}
+class webapp::WebApp {
+  + framework : str
+  + name : str
+}
+class webapp::WebConfig {
+  + displayName : str
+}
+Instruction <|-- webapp::Tag
+Instruction <|-- webapp::Text
+Tag <|-- webapp::Form
+Tag <|-- webapp::Input
+Tag <|-- webapp::Messages
+Tag <|-- webapp::TableHTML
+Tag <|-- webapp::Td
+Tag <|-- webapp::Th
+Tag <|-- webapp::Tr
+webapp::Action "0..9999" -- "1..1" webapp::BusinessObject : action107
+webapp::Action "1..9999" --* "1..1" webapp::Controller : action23
+webapp::Action "0..1" -- "1..1" webapp::Input : action83
+webapp::AppConfig "1..1" --* "1..1" webapp::WebApp : appConfig0
+webapp::Attribute "0..9999" --* "1..1" webapp::Tag : attribute81
+webapp::BusinessObject "1..1" -- "0..9999" webapp::BusinessObject : businessObject111
+webapp::BusinessObject "1..1" -- "1..1" webapp::Field : businessObject116
+webapp::Model "1..1" *-- "0..9999" webapp::BusinessObject : businessObject19
+webapp::Action "1..1" -- "0..1" webapp::BusinessObject : businessObject78
+webapp::Mapping "0..1" -- "1..1" webapp::Input : buttonValue88
+webapp::Check "0..9999" --* "1..1" webapp::Constraint : check43
+webapp::Column "1..9999" --* "1..1" webapp::Table : column33
+webapp::PrimaryKey "1..1" -- "1..9999" webapp::Column : column47
+webapp::Column "1..9999" -- "1..1" webapp::Unique : column63
+webapp::Constraint "0..1" --* "1..1" webapp::Table : constraint35
+webapp::Controller "1..1" --* "1..1" webapp::WebApp : controller9
+webapp::Detail "0..1" --* "1..1" webapp::Column : detail37
+webapp::Column "1..1" -- "1..1" webapp::ForeignKey : externalColumn50
+webapp::ForeignKey "1..1" -- "1..1" webapp::Table : externalTable57
+webapp::Field "0..9999" --* "1..1" webapp::BusinessObject : field104
+webapp::File "0..9999" --* "1..1" webapp::Resource : file27
+webapp::Constraint "1..1" *-- "0..9999" webapp::ForeignKey : foreignKey45
+webapp::Page "0..1" -- "1..1" webapp::Navigation : from119
+webapp::Resource "1..1" *-- "0..9999" webapp::Image : image25
+webapp::Instruction "0..9999" --* "1..1" webapp::Page : instruction75
+webapp::Column "1..1" -- "1..1" webapp::ForeignKey : internalColumn60
+webapp::Mapping "0..1" -- "1..1" webapp::Input : label85
+webapp::Library "0..9999" --* "1..1" webapp::WebApp : library3
+webapp::Mapping "0..9999" --* "1..1" webapp::Properties : mapping31
+webapp::Model "1..1" -- "1..1" webapp::BusinessObject : model113
+webapp::Model "1..1" --* "1..1" webapp::WebApp : model7
+webapp::Navigation "0..9999" --* "1..1" webapp::View : navigation15
+webapp::OnDelete "0..1" --* "1..1" webapp::ForeignKey : onDelete53
+webapp::OnUpdate "0..1" --* "1..1" webapp::ForeignKey : onUpdate55
+webapp::Page "1..9999" --* "1..1" webapp::View : page13
+webapp::Page "0..1" -- "1..1" webapp::Validator : page66
+webapp::PrimaryKey "0..1" --* "1..1" webapp::Constraint : primaryKey39
+webapp::Resource "1..1" *-- "0..9999" webapp::Properties : propertie29
+webapp::Properties "0..9999" -- "1..1" webapp::Page : properties69
+webapp::WebApp "1..1" *-- "0..1" webapp::Resource : resource11
+webapp::Table "0..9999" --* "1..1" webapp::Model : table17
+webapp::Tag "0..9999" --* "1..1" webapp::Td : tag101
+webapp::Form "1..1" *-- "1..9999" webapp::Tag : tag77
+webapp::Tr "1..1" *-- "0..9999" webapp::Td : td99
+webapp::Input "1..1" -- "0..1" webapp::Field : textValue91
+webapp::Th "0..9999" --* "1..1" webapp::Tr : th97
+webapp::Mapping "0..1" -- "1..1" webapp::Page : title72
+webapp::Navigation "1..1" -- "1..1" webapp::Page : to122
+webapp::Tr "0..9999" --* "1..1" webapp::TableHTML : tr96
+webapp::Unique "0..9999" --* "1..1" webapp::Constraint : unique41
+webapp::Validator "1..9999" --* "1..1" webapp::Controller : validator21
+webapp::Validator "0..1" -- "1..1" webapp::Input : validator93
+webapp::View "1..1" --* "1..1" webapp::WebApp : view5
+webapp::WebApp "1..1" *-- "1..1" webapp::WebConfig : webConfig1
+@enduml

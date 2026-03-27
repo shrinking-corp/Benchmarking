@@ -1,0 +1,43 @@
+@startuml
+class Classifier {
+}
+class PackageElement {
+}
+class UMLModelElement {
+}
+class umlMM::Association {
+}
+class umlMM::Attribute {
+}
+class umlMM::Class {
+}
+abstract class umlMM::Classifier {
+}
+class umlMM::Package {
+}
+abstract class umlMM::PackageElement {
+}
+class umlMM::PrimitiveDataType {
+}
+abstract class umlMM::UMLModelElement {
+  + kind : str
+  + name : str
+}
+Classifier <|-- umlMM::Class
+Classifier <|-- umlMM::PrimitiveDataType
+PackageElement <|-- umlMM::Association
+PackageElement <|-- umlMM::Classifier
+UMLModelElement <|-- umlMM::Attribute
+UMLModelElement <|-- umlMM::Package
+UMLModelElement <|-- umlMM::PackageElement
+umlMM::Attribute "0..9999" --* "1..1" umlMM::Class : attribute6
+umlMM::Class "1..1" -- "1..1" umlMM::Association : destination1
+umlMM::PackageElement "1..9999" --* "1..1" umlMM::Package : elements12
+umlMM::Class "1..1" -- "0..9999" umlMM::Association : forward9
+umlMM::Class "0..9999" -- "1..1" umlMM::Class : general8
+umlMM::Package "1..1" -- "1..1" umlMM::PackageElement : namespace13
+umlMM::Attribute "1..1" -- "1..1" umlMM::Class : owner3
+umlMM::Association "0..9999" -- "1..1" umlMM::Class : reverse10
+umlMM::Association "1..1" -- "1..1" umlMM::Class : source0
+umlMM::Classifier "1..1" -- "1..1" umlMM::Attribute : type5
+@enduml

@@ -1,0 +1,64 @@
+@startuml
+class whileLanguage::Affectation {
+  + affectations : str
+}
+class whileLanguage::Command {
+}
+class whileLanguage::Commands {
+}
+class whileLanguage::Definition {
+}
+class whileLanguage::EObject {
+}
+class whileLanguage::Expr {
+  + ope : str
+  + valeur : str
+}
+class whileLanguage::For {
+}
+class whileLanguage::Foreach {
+}
+class whileLanguage::Function {
+  + name : str
+}
+class whileLanguage::If {
+}
+class whileLanguage::Lexpr {
+}
+class whileLanguage::Nop {
+  + nop : str
+}
+class whileLanguage::Program {
+}
+class whileLanguage::Read {
+  + variable : str
+}
+class whileLanguage::While {
+}
+class whileLanguage::Write {
+  + variable : str
+}
+whileLanguage::Command "1..1" *-- "0..1" whileLanguage::EObject : command12
+whileLanguage::Command "0..9999" --* "1..1" whileLanguage::Commands : commands10
+whileLanguage::Commands "0..1" --* "1..1" whileLanguage::If : commands124
+whileLanguage::Commands "0..1" --* "1..1" whileLanguage::Foreach : commands19
+whileLanguage::If "1..1" *-- "0..1" whileLanguage::Commands : commands227
+whileLanguage::Commands "0..1" --* "1..1" whileLanguage::For : commands32
+whileLanguage::While "1..1" *-- "0..1" whileLanguage::Commands : commands37
+whileLanguage::Definition "1..1" *-- "0..1" whileLanguage::Commands : commands5
+whileLanguage::Definition "0..1" --* "1..1" whileLanguage::Function : definition1
+whileLanguage::Expr "0..1" --* "1..1" whileLanguage::Expr : ex146
+whileLanguage::Expr "0..1" --* "1..1" whileLanguage::Expr : ex249
+whileLanguage::Expr "0..1" --* "1..1" whileLanguage::Foreach : expr114
+whileLanguage::Foreach "1..1" *-- "0..1" whileLanguage::Expr : expr216
+whileLanguage::Expr "0..1" --* "1..1" whileLanguage::If : expr22
+whileLanguage::Expr "0..1" --* "1..1" whileLanguage::For : expr30
+whileLanguage::Expr "0..1" --* "1..1" whileLanguage::While : expr35
+whileLanguage::Expr "0..1" --* "1..1" whileLanguage::Expr : expr43
+whileLanguage::Lexpr "1..1" *-- "0..9999" whileLanguage::Expr : exprs51
+whileLanguage::Function "0..9999" --* "1..1" whileLanguage::Program : functions0
+whileLanguage::Lexpr "0..1" --* "1..1" whileLanguage::Expr : lexpr40
+whileLanguage::Read "0..1" --* "1..1" whileLanguage::Definition : read3
+whileLanguage::Affectation "1..1" *-- "0..9999" whileLanguage::Expr : valeurs9
+whileLanguage::Write "0..1" --* "1..1" whileLanguage::Definition : write7
+@enduml

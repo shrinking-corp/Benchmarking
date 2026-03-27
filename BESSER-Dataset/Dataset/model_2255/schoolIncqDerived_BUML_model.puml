@@ -1,0 +1,48 @@
+@startuml
+class Course {
+}
+class schoolIncqDerived::Course {
+  + subject : str
+  + weight : int
+}
+class schoolIncqDerived::School {
+  + address : str
+  + currentYear : int
+  + name : str
+  + numberOfTeachers : int
+}
+class schoolIncqDerived::SchoolClass {
+  + code : str
+}
+class schoolIncqDerived::SpecialisationCourse {
+  + specialisation : str
+}
+class schoolIncqDerived::Student {
+  + name : str
+}
+class schoolIncqDerived::Teacher {
+  + name : str
+}
+class schoolIncqDerived::Year {
+  + startingDate : int
+}
+Course <|-- schoolIncqDerived::SpecialisationCourse
+schoolIncqDerived::Course "0..9999" -- "1..1" schoolIncqDerived::SchoolClass : courses17
+schoolIncqDerived::Course "0..9999" -- "1..1" schoolIncqDerived::Teacher : courses26
+schoolIncqDerived::Course "0..9999" --* "1..1" schoolIncqDerived::School : courses9
+schoolIncqDerived::Teacher "0..1" -- "1..1" schoolIncqDerived::SchoolClass : homeroomTeacher20
+schoolIncqDerived::Teacher "1..1" -- "0..1" schoolIncqDerived::SchoolClass : homeroomedClass28
+schoolIncqDerived::Year "0..1" -- "1..1" schoolIncqDerived::School : lastYear12
+schoolIncqDerived::School "0..1" -- "1..1" schoolIncqDerived::Course : school0
+schoolIncqDerived::Teacher "1..1" -- "0..1" schoolIncqDerived::School : school24
+schoolIncqDerived::School "0..1" -- "1..1" schoolIncqDerived::Year : school31
+schoolIncqDerived::SchoolClass "0..1" -- "1..1" schoolIncqDerived::Student : schoolClass22
+schoolIncqDerived::SchoolClass "0..1" -- "1..1" schoolIncqDerived::Course : schoolClass3
+schoolIncqDerived::SchoolClass "0..9999" --* "1..1" schoolIncqDerived::Year : schoolClasses33
+schoolIncqDerived::SchoolClass "1..1" *-- "0..9999" schoolIncqDerived::Student : students16
+schoolIncqDerived::Teacher "0..1" -- "1..1" schoolIncqDerived::Course : teacher1
+schoolIncqDerived::Teacher "0..9999" --* "1..1" schoolIncqDerived::School : teachers6
+schoolIncqDerived::School "1..1" -- "0..9999" schoolIncqDerived::Teacher : teachersWithMostCourses11
+schoolIncqDerived::SchoolClass "1..1" -- "0..1" schoolIncqDerived::Year : year14
+schoolIncqDerived::School "1..1" *-- "0..9999" schoolIncqDerived::Year : years5
+@enduml

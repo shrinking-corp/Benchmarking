@@ -1,0 +1,211 @@
+@startuml
+class BooleanExpression {
+}
+class BooleanOperator {
+}
+class CompareOperator {
+}
+class NumberExpression {
+}
+class SimpleStatement {
+}
+class Value {
+}
+class VariableReference {
+}
+class arduinoDSL::And {
+}
+class arduinoDSL::AndOr {
+}
+class arduinoDSL::Assignment {
+}
+class arduinoDSL::Attribute {
+}
+class arduinoDSL::Board {
+  + b : str
+}
+class arduinoDSL::BooleanExpression {
+}
+class arduinoDSL::BooleanExpressionBlock {
+}
+class arduinoDSL::BooleanLiteral {
+  + value : bool
+}
+class arduinoDSL::BooleanOperator {
+}
+class arduinoDSL::Cast {
+  + castType : str
+}
+class arduinoDSL::CompareOperator {
+}
+class arduinoDSL::Comparison {
+}
+class arduinoDSL::Component {
+  + name : str
+}
+class arduinoDSL::ComponentBody {
+  + io : str
+  + pin : int
+  + type : str
+}
+class arduinoDSL::Delta {
+}
+class arduinoDSL::Div {
+}
+class arduinoDSL::EObject {
+}
+class arduinoDSL::ElseIfStatement {
+}
+class arduinoDSL::ElseStatement {
+}
+class arduinoDSL::Equals {
+}
+class arduinoDSL::Greater {
+}
+class arduinoDSL::GreaterThanEquals {
+}
+class arduinoDSL::IfStatement {
+}
+class arduinoDSL::Map {
+}
+class arduinoDSL::Minus {
+}
+class arduinoDSL::Mod {
+}
+class arduinoDSL::Mult {
+}
+class arduinoDSL::Node {
+  + name : str
+}
+class arduinoDSL::NodeDefinition {
+}
+class arduinoDSL::NotEquals {
+}
+class arduinoDSL::NumberExpression {
+}
+class arduinoDSL::NumberExpressionBlock {
+}
+class arduinoDSL::NumberLiteral {
+  + floatVal : str
+  + intVal : int
+}
+class arduinoDSL::Or {
+}
+class arduinoDSL::Plus {
+}
+class arduinoDSL::Program {
+}
+class arduinoDSL::Range {
+  + high : float
+  + low : float
+}
+class arduinoDSL::Rate {
+  + value : int
+}
+class arduinoDSL::Rule {
+  + type : str
+}
+class arduinoDSL::RuleBody {
+}
+class arduinoDSL::SimpleStatement {
+}
+class arduinoDSL::Smaller {
+}
+class arduinoDSL::SmallerThanEquals {
+}
+class arduinoDSL::Smoothing {
+  + value : float
+}
+class arduinoDSL::State {
+  + value : str
+}
+class arduinoDSL::Value {
+}
+class arduinoDSL::VarRef {
+}
+class arduinoDSL::VariableDeclaration {
+  + name : str
+  + type : str
+}
+class arduinoDSL::VariableReference {
+}
+BooleanExpression <|-- arduinoDSL::AndOr
+BooleanExpression <|-- arduinoDSL::BooleanExpressionBlock
+BooleanExpression <|-- arduinoDSL::Comparison
+BooleanOperator <|-- arduinoDSL::And
+BooleanOperator <|-- arduinoDSL::Or
+CompareOperator <|-- arduinoDSL::Equals
+CompareOperator <|-- arduinoDSL::Greater
+CompareOperator <|-- arduinoDSL::GreaterThanEquals
+CompareOperator <|-- arduinoDSL::NotEquals
+CompareOperator <|-- arduinoDSL::Smaller
+CompareOperator <|-- arduinoDSL::SmallerThanEquals
+NumberExpression <|-- arduinoDSL::Div
+NumberExpression <|-- arduinoDSL::Minus
+NumberExpression <|-- arduinoDSL::Mod
+NumberExpression <|-- arduinoDSL::Mult
+NumberExpression <|-- arduinoDSL::NumberExpressionBlock
+NumberExpression <|-- arduinoDSL::Plus
+NumberExpression <|-- arduinoDSL::Value
+SimpleStatement <|-- arduinoDSL::Assignment
+SimpleStatement <|-- arduinoDSL::ElseIfStatement
+SimpleStatement <|-- arduinoDSL::ElseStatement
+SimpleStatement <|-- arduinoDSL::IfStatement
+SimpleStatement <|-- arduinoDSL::VariableDeclaration
+SimpleStatement <|-- arduinoDSL::VariableReference
+Value <|-- arduinoDSL::Attribute
+Value <|-- arduinoDSL::Delta
+Value <|-- arduinoDSL::NumberLiteral
+Value <|-- arduinoDSL::VariableReference
+VariableReference <|-- arduinoDSL::VarRef
+arduinoDSL::Delta "1..1" *-- "0..1" arduinoDSL::Attribute : attr10
+arduinoDSL::Assignment "1..1" *-- "0..1" arduinoDSL::Attribute : attribute14
+arduinoDSL::BooleanExpressionBlock "1..1" *-- "0..1" arduinoDSL::BooleanExpression : block4
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::NumberExpressionBlock : block6
+arduinoDSL::NodeDefinition "1..1" *-- "0..1" arduinoDSL::Board : board23
+arduinoDSL::RuleBody "0..1" --* "1..1" arduinoDSL::Rule : body2
+arduinoDSL::Cast "0..1" --* "1..1" arduinoDSL::VarRef : cast108
+arduinoDSL::Cast "0..1" --* "1..1" arduinoDSL::VariableDeclaration : cast19
+arduinoDSL::Component "0..1" -- "1..1" arduinoDSL::Attribute : component8
+arduinoDSL::Component "0..9999" --* "1..1" arduinoDSL::Node : components27
+arduinoDSL::BooleanExpression "0..1" --* "1..1" arduinoDSL::Rule : condition1
+arduinoDSL::IfStatement "1..1" *-- "0..1" arduinoDSL::BooleanExpression : condition82
+arduinoDSL::ElseIfStatement "1..1" *-- "0..1" arduinoDSL::BooleanExpression : condition93
+arduinoDSL::SimpleStatement "0..1" --* "1..1" arduinoDSL::ElseIfStatement : else101
+arduinoDSL::SimpleStatement "0..1" --* "1..1" arduinoDSL::IfStatement : else90
+arduinoDSL::SimpleStatement "0..1" --* "1..1" arduinoDSL::IfStatement : elseif87
+arduinoDSL::SimpleStatement "0..1" --* "1..1" arduinoDSL::ElseIfStatement : elseif98
+arduinoDSL::Range "0..1" --* "1..1" arduinoDSL::Map : in38
+arduinoDSL::BooleanExpression "0..1" --* "1..1" arduinoDSL::AndOr : left43
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Comparison : left50
+arduinoDSL::Plus "1..1" *-- "0..1" arduinoDSL::NumberExpression : left57
+arduinoDSL::Minus "1..1" *-- "0..1" arduinoDSL::NumberExpression : left62
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Mult : left67
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Div : left72
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Mod : left77
+arduinoDSL::Map "0..1" --* "1..1" arduinoDSL::ComponentBody : map34
+arduinoDSL::Node "0..1" -- "1..1" arduinoDSL::Attribute : name7
+arduinoDSL::Node "0..1" --* "1..1" arduinoDSL::NodeDefinition : node24
+arduinoDSL::BooleanOperator "0..1" --* "1..1" arduinoDSL::AndOr : operator45
+arduinoDSL::CompareOperator "0..1" --* "1..1" arduinoDSL::Comparison : operator52
+arduinoDSL::Map "1..1" *-- "0..1" arduinoDSL::Range : out40
+arduinoDSL::EObject "0..9999" --* "1..1" arduinoDSL::Program : program0
+arduinoDSL::ComponentBody "0..1" --* "1..1" arduinoDSL::Component : properties30
+arduinoDSL::ComponentBody "1..1" *-- "0..1" arduinoDSL::Rate : rate32
+arduinoDSL::VariableDeclaration "0..1" -- "1..1" arduinoDSL::VarRef : ref106
+arduinoDSL::AndOr "1..1" *-- "0..1" arduinoDSL::BooleanExpression : right47
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Comparison : right54
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Plus : right59
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Minus : right64
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Mult : right69
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Div : right74
+arduinoDSL::NumberExpression "0..1" --* "1..1" arduinoDSL::Mod : right79
+arduinoDSL::Smoothing "0..1" --* "1..1" arduinoDSL::ComponentBody : smoothing36
+arduinoDSL::ElseStatement "1..1" *-- "0..9999" arduinoDSL::SimpleStatement : statements104
+arduinoDSL::SimpleStatement "0..9999" --* "1..1" arduinoDSL::RuleBody : statements12
+arduinoDSL::SimpleStatement "0..9999" --* "1..1" arduinoDSL::IfStatement : statements84
+arduinoDSL::SimpleStatement "0..9999" --* "1..1" arduinoDSL::ElseIfStatement : statements95
+arduinoDSL::VarRef "1..1" *-- "0..1" arduinoDSL::EObject : value111
+arduinoDSL::EObject "0..1" --* "1..1" arduinoDSL::Assignment : value16
+arduinoDSL::EObject "0..1" --* "1..1" arduinoDSL::VariableDeclaration : value20
+@enduml

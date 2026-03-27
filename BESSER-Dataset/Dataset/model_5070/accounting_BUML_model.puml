@@ -1,0 +1,53 @@
+@startuml
+class Account {
+}
+abstract class accounting::Account {
+  + name : str
+}
+class accounting::AccountGroup {
+  + name : str
+}
+class accounting::Accounting {
+  + name : str
+}
+class accounting::BalanceAccount {
+}
+class accounting::JournalGroup {
+  + name : str
+}
+class accounting::JournalStatement {
+  + amount : str
+  + date : str
+  + description : str
+}
+class accounting::PLAccount {
+}
+class accounting::Report {
+  + name : str
+}
+class accounting::ReportGroup {
+  + name : str
+}
+class accounting::Vat {
+  + name : str
+  + rate : str
+}
+Account <|-- accounting::BalanceAccount
+Account <|-- accounting::PLAccount
+accounting::Account "0..9999" --* "1..1" accounting::AccountGroup : account0
+accounting::BalanceAccount "0..9999" -- "1..1" accounting::ReportGroup : account34
+accounting::AccountGroup "0..9999" --* "1..1" accounting::Accounting : accountGroup1
+accounting::JournalStatement "1..1" -- "1..1" accounting::Account : creditAccount20
+accounting::Report "1..1" *-- "1..1" accounting::ReportGroup : creditReportGroup28
+accounting::JournalStatement "1..1" -- "1..1" accounting::Account : debitAccount17
+accounting::ReportGroup "1..1" --* "1..1" accounting::Report : debitReportGroup26
+accounting::JournalGroup "0..9999" --* "1..1" accounting::Accounting : journalGroup9
+accounting::JournalGroup "0..9999" --* "1..1" accounting::JournalGroup : journalGroups13
+accounting::JournalStatement "0..9999" --* "1..1" accounting::JournalGroup : journalStatements15
+accounting::ReportGroup "0..9999" -- "1..1" accounting::BalanceAccount : report11
+accounting::Report "0..1" --* "1..1" accounting::Accounting : report7
+accounting::ReportGroup "0..9999" --* "1..1" accounting::ReportGroup : reportGroup32
+accounting::Vat "0..1" -- "1..1" accounting::JournalStatement : vat23
+accounting::Accounting "1..1" *-- "0..9999" accounting::Vat : vat3
+accounting::BalanceAccount "0..1" -- "1..1" accounting::Accounting : vatAccount5
+@enduml

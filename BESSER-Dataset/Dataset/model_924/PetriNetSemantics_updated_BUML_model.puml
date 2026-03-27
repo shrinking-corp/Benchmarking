@@ -1,0 +1,85 @@
+@startuml
+class Arc {
+}
+enum ArcKind {
+  normal
+  read_arc
+}
+class Node {
+}
+class Node::dynamic {
+}
+class PNScenario {
+}
+class PNSimEvent {
+}
+class PNTrace {
+}
+class PetriNet {
+}
+class PetriNetEvent {
+}
+class Place {
+}
+class Transition {
+}
+class petrinetsemantics::DDMMPetriNet::Arc {
+  + kind : str
+  + weight : int
+}
+abstract class petrinetsemantics::DDMMPetriNet::Node {
+  + name : str
+}
+class petrinetsemantics::DDMMPetriNet::PetriNet {
+  + name : str
+}
+class petrinetsemantics::DDMMPetriNet::Place {
+  + initialMarking : int
+}
+class petrinetsemantics::DDMMPetriNet::Transition {
+  + max_time : int
+  + min_time : int
+}
+class petrinetsemantics::EDMMPetriNet::FireTransitionEvent {
+  + time : float
+}
+abstract class petrinetsemantics::EDMMPetriNet::PetriNetEvent {
+}
+abstract class petrinetsemantics::SDMMPetriNet::Node::dynamic {
+}
+class petrinetsemantics::SDMMPetriNet::PetriNet::dynamic {
+}
+class petrinetsemantics::SDMMPetriNet::Place::dynamic {
+  + marking : int
+}
+class petrinetsemantics::TM3PetriNet::PNScenario {
+}
+class petrinetsemantics::TM3PetriNet::PNSimEvent {
+  + date : int
+  + internal : bool
+  + name : str
+}
+class petrinetsemantics::TM3PetriNet::PNTrace {
+}
+Node::dynamic <|-- petrinetsemantics::SDMMPetriNet::Place::dynamic
+Node <|-- petrinetsemantics::DDMMPetriNet::Place
+Node <|-- petrinetsemantics::DDMMPetriNet::Transition
+PNSimEvent <|-- petrinetsemantics::EDMMPetriNet::PetriNetEvent
+PetriNetEvent <|-- petrinetsemantics::EDMMPetriNet::FireTransitionEvent
+petrinetsemantics::SDMMPetriNet::Node::dynamic "1..1" -- "1..1" Node : Node_static20
+PetriNet "1..1" -- "1..1" petrinetsemantics::SDMMPetriNet::PetriNet::dynamic : PetriNet_static24
+Place "1..1" -- "1..1" petrinetsemantics::SDMMPetriNet::Place::dynamic : Place_static22
+petrinetsemantics::DDMMPetriNet::PetriNet "1..1" *-- "0..9999" Arc : arcs1
+petrinetsemantics::EDMMPetriNet::FireTransitionEvent "1..1" -- "1..1" Transition : firedTransition27
+Arc "0..9999" -- "1..1" petrinetsemantics::DDMMPetriNet::Node : incomings8
+PetriNet "1..1" -- "1..1" petrinetsemantics::DDMMPetriNet::Arc : net17
+PetriNet "1..1" -- "1..1" petrinetsemantics::DDMMPetriNet::Node : net3
+Node "0..9999" --* "1..1" petrinetsemantics::DDMMPetriNet::PetriNet : nodes0
+Node::dynamic "0..9999" --* "1..1" petrinetsemantics::SDMMPetriNet::PetriNet::dynamic : nodes23
+Arc "0..9999" -- "1..1" petrinetsemantics::DDMMPetriNet::Node : outgoings5
+PNScenario "1..1" -- "1..1" petrinetsemantics::TM3PetriNet::PNTrace : scenario30
+PNSimEvent "0..9999" --* "1..1" petrinetsemantics::TM3PetriNet::PNScenario : simEvents29
+Node "1..1" -- "1..1" petrinetsemantics::DDMMPetriNet::Arc : source14
+petrinetsemantics::DDMMPetriNet::Arc "1..1" -- "1..1" Node : target11
+PNTrace "0..9999" -- "1..1" petrinetsemantics::TM3PetriNet::PNScenario : traces28
+@enduml

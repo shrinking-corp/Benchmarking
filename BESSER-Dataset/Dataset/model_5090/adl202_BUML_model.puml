@@ -1,0 +1,39 @@
+@startuml
+class Interface {
+}
+class adl202::Binding {
+  + name : str
+}
+class adl202::BindingAttributes {
+  + name : str
+  + value : str
+}
+class adl202::Component {
+  + name : str
+}
+class adl202::Content {
+  + expression : str
+  + language : str
+}
+abstract class adl202::Interface {
+  + name : str
+  + signature : str
+}
+class adl202::Provided {
+}
+class adl202::Required {
+}
+Interface <|-- adl202::Provided
+Interface <|-- adl202::Required
+adl202::Binding "1..1" *-- "0..9999" adl202::BindingAttributes : attributes13
+adl202::Binding "0..9999" -- "1..1" adl202::Provided : bindings21
+adl202::Component "1..1" *-- "0..9999" adl202::Binding : bindings5
+adl202::Content "0..1" --* "1..1" adl202::Component : content0
+adl202::Component "1..1" -- "1..1" adl202::Content : contentParent18
+adl202::Provided "0..1" -- "1..1" adl202::Binding : from15
+adl202::Provided "0..9999" --* "1..1" adl202::Component : providedInterfaces3
+adl202::Component "1..1" *-- "0..9999" adl202::Required : requiredInterfaces1
+adl202::Provided "1..1" -- "0..9999" adl202::Required : simpleBindings24
+adl202::Component "0..9999" --* "1..1" adl202::Component : subComponents8
+adl202::Required "0..1" -- "1..1" adl202::Binding : to10
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+class university::Certificate {
+  + note : int
+}
+class university::Course {
+  + gradeAverage : float
+  + name : str
+  + numberOfAttendants : int
+}
+class university::Professor {
+  + name : str
+}
+class university::Student {
+  + MNR : str
+  + semester : int
+}
+class university::University {
+  + averageLength : float
+  + name : str
+  + numberOfStudents : int
+}
+university::University "1..1" *-- "0..9999" university::Certificate : certificates8
+university::Course "0..1" -- "1..1" university::Certificate : course13
+university::Certificate "0..9999" -- "1..1" university::Course : courseCertificates1
+university::Course "0..9999" -- "1..1" university::Professor : courses2
+university::University "1..1" *-- "0..9999" university::Course : courses4
+university::Professor "0..1" -- "1..1" university::Course : professor0
+university::Professor "0..9999" --* "1..1" university::University : professors3
+university::Certificate "1..1" -- "0..1" university::Student : student12
+university::Certificate "0..9999" -- "1..1" university::Student : studentCertificates10
+university::Student "0..9999" --* "1..1" university::University : students6
+@enduml

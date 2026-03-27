@@ -1,0 +1,29 @@
+@startuml
+class OutPortB {
+}
+class PortB {
+}
+class typeB::BlockB {
+}
+class typeB::InPortB {
+  + name : str
+}
+class typeB::NonReferencedClass {
+}
+class typeB::NonReferencedClass2 {
+}
+class typeB::OutPortB {
+  + name : str
+}
+class typeB::OutType1 {
+}
+abstract class typeB::PortB {
+  + id : int
+}
+OutPortB <|-- typeB::OutType1
+PortB <|-- typeB::InPortB
+PortB <|-- typeB::OutPortB
+typeB::BlockB "1..1" -- "1..1" typeB::OutPortB : block3
+typeB::InPortB "1..9999" --* "1..1" typeB::BlockB : inputPorts0
+typeB::BlockB "1..1" *-- "1..9999" typeB::OutPortB : outputPorts1
+@enduml

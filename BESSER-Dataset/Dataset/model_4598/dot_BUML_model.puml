@@ -1,0 +1,127 @@
+@startuml
+class AbstractGraph {
+}
+class Attributable {
+}
+class Attribute {
+}
+class Commentable {
+}
+enum Compass {
+  APPROPRIATE
+  CENTER
+  EAST
+  NORTH
+  NORTH_EAST
+  NORTH_WEST
+  SOUTH
+  SOUTH_EAST
+  SOUTH_WEST
+  WEST
+}
+class Connectable {
+}
+class Identifiable {
+}
+class Statement {
+}
+class StrictIdentifiable {
+}
+class dot::AList {
+  + getAllAttributes() : str
+}
+abstract class dot::AbstractGraph {
+}
+class dot::AssignmentStatement {
+  + left : str
+  + right : str
+}
+abstract class dot::Attributable {
+  + getAllALists() : str
+}
+class dot::Attribute {
+  + key : str
+  + value : str
+}
+class dot::AttributeList {
+}
+class dot::AttributeStatement {
+  + context : str
+}
+abstract class dot::Commentable {
+  + comments : str
+}
+abstract class dot::Connectable {
+}
+class dot::EdgeStatement {
+}
+class dot::Graph {
+  + strict : str
+  + type : str
+  + getAllStatements() : Statement
+}
+abstract class dot::Identifiable {
+  + id : str
+}
+class dot::NodeID {
+}
+class dot::NodeStatement {
+}
+class dot::Port {
+  + compass : str
+}
+abstract class dot::Statement {
+}
+class dot::StatementList {
+}
+abstract class dot::StrictIdentifiable {
+  + id : str
+}
+class dot::Subgraph {
+  + type : str
+}
+class dot::Target {
+  + operation : str
+}
+AbstractGraph <|-- dot::Graph
+AbstractGraph <|-- dot::Subgraph
+Attributable <|-- dot::AttributeStatement
+Attributable <|-- dot::EdgeStatement
+Attributable <|-- dot::NodeStatement
+Attribute <|-- dot::NodeStatement
+Commentable <|-- dot::AList
+Commentable <|-- dot::AssignmentStatement
+Commentable <|-- dot::Attribute
+Commentable <|-- dot::AttributeList
+Commentable <|-- dot::AttributeStatement
+Commentable <|-- dot::EdgeStatement
+Commentable <|-- dot::Graph
+Commentable <|-- dot::NodeID
+Commentable <|-- dot::Port
+Commentable <|-- dot::StatementList
+Commentable <|-- dot::Subgraph
+Commentable <|-- dot::Target
+Connectable <|-- dot::NodeID
+Connectable <|-- dot::Subgraph
+Identifiable <|-- dot::AbstractGraph
+Identifiable <|-- dot::Port
+Statement <|-- dot::AssignmentStatement
+Statement <|-- dot::AttributeStatement
+Statement <|-- dot::EdgeStatement
+Statement <|-- dot::NodeStatement
+StrictIdentifiable <|-- dot::NodeID
+dot::AList "1..1" *-- "1..1" dot::Attribute : attribute1
+dot::Attributable "1..1" *-- "0..1" dot::AttributeList : attributes5
+dot::AList "1..1" --* "1..1" dot::AttributeList : list6
+dot::AttributeList "0..1" --* "1..1" dot::AttributeList : next10
+dot::Target "0..1" --* "1..1" dot::Target : next_target24
+dot::NodeID "1..1" --* "1..1" dot::NodeStatement : node_id15
+dot::Port "0..1" --* "1..1" dot::NodeID : port16
+dot::Connectable "1..1" -- "1..1" dot::EdgeStatement : source12
+dot::Statement "1..1" --* "1..1" dot::StatementList : statement18
+dot::StatementList "0..1" --* "1..1" dot::AbstractGraph : statements0
+dot::StatementList "1..1" *-- "0..1" dot::StatementList : tail21
+dot::AList "0..1" --* "1..1" dot::AList : tail3
+dot::Target "1..1" --* "1..1" dot::EdgeStatement : target13
+dot::Target "1..1" -- "1..1" dot::Connectable : target26
+@enduml

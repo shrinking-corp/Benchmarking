@@ -1,0 +1,71 @@
+@startuml
+class CommonBaseClass {
+}
+class NodeTargetB {
+}
+class samplemodel::Child {
+  + childLabel : str
+}
+class samplemodel::Child2 {
+  + childLabel : str
+}
+abstract class samplemodel::CommonBaseClass {
+}
+class samplemodel::Link2Link {
+}
+class samplemodel::LinkAtoA {
+}
+class samplemodel::LinkAtoC {
+}
+class samplemodel::LinkAtoC::Cardinality1 {
+}
+class samplemodel::LinkAtoC::Cardinality2 {
+}
+class samplemodel::LinkCrossLink {
+}
+class samplemodel::LinkFromLink {
+}
+class samplemodel::NodeSrcA {
+  + label : str
+}
+class samplemodel::NodeTargetB {
+  + title : str
+}
+class samplemodel::NodeTargetC {
+}
+class samplemodel::NodeTargetD {
+}
+class samplemodel::UltimateContainer {
+  + diagramAttribute : str
+}
+CommonBaseClass <|-- samplemodel::NodeSrcA
+CommonBaseClass <|-- samplemodel::NodeTargetB
+NodeTargetB <|-- samplemodel::NodeTargetC
+NodeTargetB <|-- samplemodel::NodeTargetD
+samplemodel::UltimateContainer "1..1" *-- "0..9999" samplemodel::CommonBaseClass : all0
+samplemodel::Child "0..9999" --* "1..1" samplemodel::NodeSrcA : children1OfA19
+samplemodel::NodeSrcA "1..1" *-- "0..9999" samplemodel::Child2 : children2OfA21
+samplemodel::Child "0..9999" --* "1..1" samplemodel::NodeTargetB : childrenOfB23
+samplemodel::LinkAtoC "1..1" *-- "0..5" samplemodel::LinkCrossLink : classLinkCrossLink40
+samplemodel::LinkFromLink "0..4" --* "1..1" samplemodel::LinkAtoC : classLinkFromLink38
+samplemodel::LinkAtoA "0..9999" --* "1..1" samplemodel::NodeSrcA : classLinkToA17
+samplemodel::NodeSrcA "1..1" *-- "0..9999" samplemodel::LinkAtoC : classLinkToC11
+samplemodel::LinkAtoC::Cardinality1 "0..1" --* "1..1" samplemodel::NodeSrcA : classLinkToC_Cardinality115
+samplemodel::LinkAtoC::Cardinality2 "0..2" --* "1..1" samplemodel::NodeSrcA : classLinkToC_Cardinality213
+samplemodel::NodeTargetD "1..1" *-- "0..3" samplemodel::Link2Link : classLinkToLink28
+samplemodel::Child "0..9999" --* "1..1" samplemodel::Child : innerChildrenOfBChild52
+samplemodel::LinkAtoC "0..5" -- "1..1" samplemodel::LinkAtoC : refLinkCrossLink34
+samplemodel::NodeTargetD "0..4" -- "1..1" samplemodel::LinkAtoC : refLinkFromLink30
+samplemodel::NodeSrcA "0..9999" -- "1..1" samplemodel::NodeSrcA : refLinkToA9
+samplemodel::NodeTargetB "0..9999" -- "1..1" samplemodel::NodeSrcA : refLinkToB1
+samplemodel::NodeTargetB "0..1" -- "1..1" samplemodel::NodeSrcA : refLinkToB_Cardinality15
+samplemodel::NodeTargetB "0..2" -- "1..1" samplemodel::NodeSrcA : refLinkToB_Cardinality22
+samplemodel::LinkAtoC "0..3" -- "1..1" samplemodel::NodeTargetD : refLinkToLink26
+samplemodel::NodeTargetC "0..1" -- "1..1" samplemodel::LinkAtoC : trg36
+samplemodel::NodeTargetC "0..9999" -- "1..1" samplemodel::LinkAtoC::Cardinality2 : trg42
+samplemodel::NodeTargetC "0..1" -- "1..1" samplemodel::LinkAtoC::Cardinality1 : trg45
+samplemodel::NodeSrcA "0..1" -- "1..1" samplemodel::LinkAtoA : trg48
+samplemodel::Link2Link "1..1" -- "0..1" samplemodel::LinkAtoC : trg54
+samplemodel::NodeTargetD "0..1" -- "1..1" samplemodel::LinkFromLink : trg57
+samplemodel::LinkAtoC "0..1" -- "1..1" samplemodel::LinkCrossLink : trg60
+@enduml

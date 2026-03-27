@@ -1,0 +1,154 @@
+@startuml
+enum AssignmentOperatorType {
+  ASSIGN
+  PLUS_ASSIGN
+}
+class CommentedElement {
+}
+class Expression {
+}
+enum InfixOperatorType {
+  CONDITIONAL_AND
+  CONDITIONAL_OR
+  EQUALS
+  NOT_EQUALS
+}
+class JavaSimplified::Assignment {
+  + operator : str
+}
+class JavaSimplified::CastExpression {
+}
+class JavaSimplified::ClassInstanceCreation {
+}
+class JavaSimplified::Comment {
+  + isJavadoc : bool
+}
+class JavaSimplified::CommentStatement {
+}
+abstract class JavaSimplified::CommentedElement {
+}
+abstract class JavaSimplified::Expression {
+}
+class JavaSimplified::ExpressionStatement {
+}
+class JavaSimplified::Field {
+  + visibility : str
+}
+class JavaSimplified::IfStatement {
+}
+class JavaSimplified::InfixExpression {
+  + operator : str
+}
+abstract class JavaSimplified::JavaClass {
+  + imports : str
+}
+class JavaSimplified::Literal {
+  + type : str
+  + value : str
+}
+class JavaSimplified::Method {
+  + exceptions : str
+}
+class JavaSimplified::MethodCall {
+}
+class JavaSimplified::MethodInvocation {
+}
+class JavaSimplified::Name {
+  + identifier : str
+}
+abstract class JavaSimplified::NamedElement {
+}
+class JavaSimplified::Parameter {
+}
+class JavaSimplified::ReturnStatement {
+}
+class JavaSimplified::Statement {
+}
+abstract class JavaSimplified::StringElement {
+  + strValue : str
+}
+class JavaSimplified::Type {
+  + type : str
+}
+abstract class JavaSimplified::TypedElement {
+}
+class JavaSimplified::VariableDeclarationStatement {
+}
+enum LiteralType {
+  BOOLEAN
+  INTEGER
+  NULL
+  STRING
+}
+class NamedElement {
+}
+class Statement {
+}
+class StringElement {
+}
+class TypedElement {
+}
+enum VisibilityType {
+  PACKAGE
+  PRIVATE
+  PROTECTED
+  PUBLIC
+}
+CommentedElement <|-- JavaSimplified::Field
+CommentedElement <|-- JavaSimplified::JavaClass
+CommentedElement <|-- JavaSimplified::Method
+Expression <|-- JavaSimplified::Assignment
+Expression <|-- JavaSimplified::CastExpression
+Expression <|-- JavaSimplified::ClassInstanceCreation
+Expression <|-- JavaSimplified::InfixExpression
+Expression <|-- JavaSimplified::Literal
+Expression <|-- JavaSimplified::MethodInvocation
+Expression <|-- JavaSimplified::Name
+NamedElement <|-- JavaSimplified::Field
+NamedElement <|-- JavaSimplified::JavaClass
+NamedElement <|-- JavaSimplified::Method
+NamedElement <|-- JavaSimplified::Parameter
+NamedElement <|-- JavaSimplified::VariableDeclarationStatement
+Statement <|-- JavaSimplified::CommentStatement
+Statement <|-- JavaSimplified::ExpressionStatement
+Statement <|-- JavaSimplified::IfStatement
+Statement <|-- JavaSimplified::ReturnStatement
+Statement <|-- JavaSimplified::VariableDeclarationStatement
+StringElement <|-- JavaSimplified::Comment
+StringElement <|-- JavaSimplified::Expression
+StringElement <|-- JavaSimplified::Field
+StringElement <|-- JavaSimplified::Method
+StringElement <|-- JavaSimplified::Statement
+TypedElement <|-- JavaSimplified::Field
+TypedElement <|-- JavaSimplified::Parameter
+TypedElement <|-- JavaSimplified::VariableDeclarationStatement
+JavaSimplified::Expression "0..9999" --* "1..1" JavaSimplified::MethodCall : arguments40
+JavaSimplified::Expression "0..9999" --* "1..1" JavaSimplified::ClassInstanceCreation : arguments59
+JavaSimplified::MethodCall "0..9999" --* "1..1" JavaSimplified::MethodCall : childCall44
+JavaSimplified::ClassInstanceCreation "1..1" -- "1..1" JavaSimplified::Type : className61
+JavaSimplified::Comment "1..1" --* "1..1" JavaSimplified::CommentStatement : comment15
+JavaSimplified::Comment "0..1" -- "1..1" JavaSimplified::CommentedElement : comment2
+JavaSimplified::Statement "0..9999" --* "1..1" JavaSimplified::IfStatement : elsest24
+JavaSimplified::InfixExpression "1..1" *-- "1..1" JavaSimplified::Expression : expr149
+JavaSimplified::Assignment "1..1" *-- "1..1" JavaSimplified::Expression : expr154
+JavaSimplified::ExpressionStatement "1..1" *-- "1..1" JavaSimplified::Expression : expr17
+JavaSimplified::Expression "1..1" --* "1..1" JavaSimplified::IfStatement : expr19
+JavaSimplified::Expression "1..1" --* "1..1" JavaSimplified::InfixExpression : expr251
+JavaSimplified::Expression "1..1" --* "1..1" JavaSimplified::Assignment : expr256
+JavaSimplified::Expression "0..1" --* "1..1" JavaSimplified::VariableDeclarationStatement : expr27
+JavaSimplified::Expression "1..1" --* "1..1" JavaSimplified::ReturnStatement : expr29
+JavaSimplified::Field "1..1" *-- "0..1" JavaSimplified::Expression : expr6
+JavaSimplified::Field "0..9999" --* "1..1" JavaSimplified::JavaClass : fields3
+JavaSimplified::IfStatement "1..1" *-- "1..9999" JavaSimplified::Statement : ifst21
+JavaSimplified::MethodInvocation "1..1" *-- "1..1" JavaSimplified::MethodCall : method38
+JavaSimplified::Name "1..1" --* "1..1" JavaSimplified::MethodCall : methodName46
+JavaSimplified::Method "0..9999" --* "1..1" JavaSimplified::JavaClass : methods4
+JavaSimplified::Name "1..1" --* "1..1" JavaSimplified::NamedElement : name0
+JavaSimplified::Name "0..1" --* "1..1" JavaSimplified::MethodInvocation : object36
+JavaSimplified::Parameter "0..9999" --* "1..1" JavaSimplified::Method : parameters8
+JavaSimplified::Type "0..1" -- "1..1" JavaSimplified::Method : returnType12
+JavaSimplified::Statement "0..9999" --* "1..1" JavaSimplified::Method : statements10
+JavaSimplified::Type "1..1" -- "1..1" JavaSimplified::TypedElement : type1
+JavaSimplified::Type "1..1" -- "1..1" JavaSimplified::CastExpression : type33
+JavaSimplified::Name "1..1" --* "1..1" JavaSimplified::CastExpression : var31
+@enduml

@@ -1,0 +1,113 @@
+@startuml
+class DataReaderWriter {
+}
+class DomainEntity {
+}
+class Entity {
+}
+class PublisherSubscriber {
+}
+class dcps::DataReader {
+}
+abstract class dcps::DataReaderWriter {
+  + copyFromTopicQos : bool
+}
+class dcps::DataWriter {
+}
+class dcps::DeadlineQosPolicy {
+}
+class dcps::DestinationOrderQosPolicy {
+}
+class dcps::Domain {
+  + domainId : str
+}
+class dcps::DomainParticipant {
+}
+class dcps::DurabilityQosPolicy {
+}
+class dcps::DurabilityServiceQosPolicy {
+}
+class dcps::EntityFactoryQosPolicy {
+}
+class dcps::GroupDataQosPolicy {
+}
+class dcps::HistoryQosPolicy {
+}
+class dcps::LatencyBudgetQosPolicy {
+}
+class dcps::LifespanQosPolicy {
+}
+class dcps::LivelinessQosPolicy {
+}
+class dcps::OwnershipQosPolicy {
+}
+class dcps::OwnershipStrengthQosPolicy {
+}
+class dcps::PartitionQosPolicy {
+}
+class dcps::PresentationQosPolicy {
+}
+class dcps::Publisher {
+}
+abstract class dcps::PublisherSubscriber {
+  + transportId : int
+}
+class dcps::ReaderDataLifecycleQosPolicy {
+}
+class dcps::ReliabilityQosPolicy {
+}
+class dcps::ResourceLimitsQosPolicy {
+}
+class dcps::Subscriber {
+}
+class dcps::TimeBasedFilterQosPolicy {
+}
+class dcps::Topic {
+}
+class dcps::TopicDescription {
+}
+class dcps::TransportPriorityQosPolicy {
+}
+class dcps::UserDataQosPolicy {
+}
+class dcps::WriterDataLifecycleQosPolicy {
+}
+DataReaderWriter <|-- dcps::DataReader
+DataReaderWriter <|-- dcps::DataWriter
+DomainEntity <|-- dcps::DataReaderWriter
+DomainEntity <|-- dcps::DomainParticipant
+DomainEntity <|-- dcps::PublisherSubscriber
+Entity <|-- dcps::Domain
+PublisherSubscriber <|-- dcps::Publisher
+PublisherSubscriber <|-- dcps::Subscriber
+dcps::DeadlineQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : deadline21
+dcps::DestinationOrderQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : destination_order22
+dcps::Domain "1..1" -- "1..1" dcps::DomainParticipant : domain0
+dcps::DurabilityQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : durability24
+dcps::DurabilityServiceQosPolicy "0..1" -- "1..1" dcps::DataWriter : durability_service47
+dcps::EntityFactoryQosPolicy "0..1" -- "1..1" dcps::DomainParticipant : entity_factory5
+dcps::EntityFactoryQosPolicy "0..1" -- "1..1" dcps::PublisherSubscriber : entity_factory9
+dcps::GroupDataQosPolicy "0..1" -- "1..1" dcps::PublisherSubscriber : group_data11
+dcps::DataReaderWriter "1..1" -- "0..1" dcps::HistoryQosPolicy : history26
+dcps::LatencyBudgetQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : latency_budget28
+dcps::LifespanQosPolicy "0..1" -- "1..1" dcps::DataWriter : lifespan55
+dcps::LivelinessQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : liveliness30
+dcps::OwnershipQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : ownership32
+dcps::OwnershipStrengthQosPolicy "0..1" -- "1..1" dcps::DataWriter : ownership_strength49
+dcps::PublisherSubscriber "1..1" -- "0..1" dcps::PartitionQosPolicy : partition15
+dcps::PresentationQosPolicy "0..1" -- "1..1" dcps::PublisherSubscriber : presentation13
+dcps::DomainParticipant "1..1" *-- "0..9999" dcps::Publisher : publishers1
+dcps::ReaderDataLifecycleQosPolicy "0..1" -- "1..1" dcps::DataReader : reader_data_lifecycle41
+dcps::DataReader "1..9999" --* "1..1" dcps::Subscriber : readers17
+dcps::DataReaderWriter "1..1" -- "0..1" dcps::ReliabilityQosPolicy : reliability34
+dcps::ResourceLimitsQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : resource_limits36
+dcps::Subscriber "0..9999" --* "1..1" dcps::DomainParticipant : subscribers3
+dcps::DataReader "1..1" -- "0..1" dcps::TimeBasedFilterQosPolicy : time_based_filter43
+dcps::TopicDescription "1..1" -- "1..1" dcps::DataReader : topic45
+dcps::Topic "1..1" -- "1..1" dcps::DataWriter : topic57
+dcps::DataWriter "1..1" -- "0..1" dcps::TransportPriorityQosPolicy : transport_priority51
+dcps::UserDataQosPolicy "0..1" -- "1..1" dcps::DataReaderWriter : user_data38
+dcps::DomainParticipant "1..1" -- "0..1" dcps::UserDataQosPolicy : user_data7
+dcps::WriterDataLifecycleQosPolicy "0..1" -- "1..1" dcps::DataWriter : writer_data_lifecycle53
+dcps::Publisher "1..1" *-- "1..9999" dcps::DataWriter : writers19
+@enduml

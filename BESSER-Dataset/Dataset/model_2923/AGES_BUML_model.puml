@@ -1,0 +1,37 @@
+@startuml
+class AbstractElement {
+}
+class Type {
+}
+class aGES::AbstractElement {
+}
+class aGES::DataType {
+}
+class aGES::Domainmodel {
+}
+class aGES::Entity {
+}
+class aGES::Feature {
+  + many : bool
+  + name : str
+}
+class aGES::Import {
+  + importedNamespace : str
+}
+class aGES::PackageDeclaration {
+  + name : str
+}
+class aGES::Type {
+  + name : str
+}
+AbstractElement <|-- aGES::Import
+AbstractElement <|-- aGES::PackageDeclaration
+AbstractElement <|-- aGES::Type
+Type <|-- aGES::DataType
+Type <|-- aGES::Entity
+aGES::Domainmodel "1..1" *-- "0..9999" aGES::AbstractElement : elements0
+aGES::AbstractElement "0..9999" --* "1..1" aGES::PackageDeclaration : elements1
+aGES::Feature "0..9999" --* "1..1" aGES::Entity : features5
+aGES::Entity "0..1" -- "1..1" aGES::Entity : superType4
+aGES::Type "0..1" -- "1..1" aGES::Feature : type7
+@enduml

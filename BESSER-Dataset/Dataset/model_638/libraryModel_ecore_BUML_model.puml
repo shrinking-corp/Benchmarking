@@ -1,0 +1,27 @@
+@startuml
+class NamedElement {
+}
+class libraryModel::ecore::Author {
+}
+class libraryModel::ecore::Book {
+}
+class libraryModel::ecore::LibraryModel {
+  + printLibrary() : void
+}
+class libraryModel::ecore::NamedElement {
+  + Name : str
+}
+class libraryModel::ecore::Picture {
+  + pageNumber : str
+}
+NamedElement <|-- libraryModel::ecore::Author
+NamedElement <|-- libraryModel::ecore::Book
+NamedElement <|-- libraryModel::ecore::Picture
+libraryModel::ecore::Author "0..9999" -- "1..1" libraryModel::ecore::Book : authors0
+libraryModel::ecore::LibraryModel "1..1" *-- "0..9999" libraryModel::ecore::Author : authors7
+libraryModel::ecore::Book "0..9999" --* "1..1" libraryModel::ecore::LibraryModel : book6
+libraryModel::ecore::Book "0..1" -- "1..1" libraryModel::ecore::Picture : book9
+libraryModel::ecore::Book "1..1" -- "0..1" libraryModel::ecore::LibraryModel : library1
+libraryModel::ecore::LibraryModel "0..1" -- "1..1" libraryModel::ecore::Author : library4
+libraryModel::ecore::Picture "0..9999" --* "1..1" libraryModel::ecore::Book : pictures2
+@enduml

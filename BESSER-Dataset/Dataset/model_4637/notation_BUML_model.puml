@@ -1,0 +1,86 @@
+@startuml
+enum Color {
+  BLACK
+  BLUE
+  GREEN
+  RED
+}
+class Figure {
+}
+class GraphicalElement {
+}
+class IdElement {
+}
+class NotationElement {
+}
+class TextualElement {
+}
+class Value {
+}
+class notation::AttributeValue {
+}
+class notation::Composite {
+}
+class notation::Definition {
+}
+class notation::EAttribute {
+}
+class notation::EReference {
+}
+abstract class notation::Figure {
+}
+abstract class notation::GraphicalElement {
+  + fill : str
+  + height : int
+  + stroke : str
+  + width : int
+  + x : int
+  + y : int
+}
+abstract class notation::IdElement {
+  + id : str
+}
+class notation::Keyword {
+}
+class notation::Label {
+}
+class notation::Line {
+}
+abstract class notation::NotationElement {
+}
+class notation::Rectangle {
+}
+class notation::ReferenceValue {
+}
+class notation::SyntaxOf {
+}
+class notation::TextualElement {
+  + fill : str
+}
+class notation::Token {
+}
+abstract class notation::Value {
+  + separator : str
+}
+Figure <|-- notation::Rectangle
+GraphicalElement <|-- notation::Figure
+GraphicalElement <|-- notation::Label
+GraphicalElement <|-- notation::Line
+IdElement <|-- notation::NotationElement
+NotationElement <|-- notation::Composite
+NotationElement <|-- notation::GraphicalElement
+NotationElement <|-- notation::SyntaxOf
+NotationElement <|-- notation::TextualElement
+TextualElement <|-- notation::Keyword
+TextualElement <|-- notation::Token
+TextualElement <|-- notation::Value
+Value <|-- notation::AttributeValue
+Value <|-- notation::ReferenceValue
+notation::EAttribute "1..1" -- "1..1" notation::Value : attribute1
+notation::NotationElement "0..9999" --* "1..1" notation::Definition : elements9
+notation::EReference "1..1" -- "1..1" notation::ReferenceValue : reference2
+notation::SyntaxOf "1..1" -- "1..1" notation::EReference : reference3
+notation::NotationElement "0..1" -- "1..1" notation::SyntaxOf : separator5
+notation::NotationElement "0..9999" --* "1..1" notation::Composite : subElements7
+notation::Label "1..1" *-- "1..1" notation::TextualElement : text0
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+enum DataType {
+  BOOL
+  CHAR
+  DATE
+  DECIMAL
+  FLOAT
+  INT
+  NUMERIC
+  TIME
+  VARCHAR
+  VARCHAR255
+}
+class sQL::DataBase {
+}
+class sQL::Table {
+  + name : str
+}
+class sQL::column {
+  + name : str
+  + type : str
+}
+class sQL::foreignKey {
+  + name : str
+}
+class sQL::primaryKey {
+  + name : str
+}
+sQL::DataBase "1..1" *-- "0..9999" sQL::Table : Tables0
+sQL::column "0..9999" --* "1..1" sQL::Table : columns1
+sQL::foreignKey "0..9999" --* "1..1" sQL::Table : foreignkeys5
+sQL::primaryKey "0..1" --* "1..1" sQL::Table : primaryKey3
+sQL::column "0..1" -- "1..1" sQL::foreignKey : ref10
+sQL::Table "0..1" -- "1..1" sQL::foreignKey : reftable7
+@enduml

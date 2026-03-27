@@ -1,0 +1,80 @@
+@startuml
+enum ConfigState {
+  UNDECIDED
+  USER_ELIMINATED
+  USER_SELECTED
+}
+enum FeatureGroupType {
+  ORGROUP
+  SIMPLEGROUP
+  XORGROUP
+}
+enum FeatureType {
+  MANDATORY
+  OPTIONAL
+  SIMPLE
+}
+class Node {
+}
+class Relation {
+}
+enum ValueType {
+  FEATURE
+  FLOAT
+  INTEGER
+  NONE
+  STRING
+}
+class specializationModel::Feature {
+  + name : str
+  + realName : str
+  + state : str
+  + valueType : str
+}
+class specializationModel::FeatureGroup {
+  + lowerBound : int
+  + type : str
+  + upperBound : int
+}
+class specializationModel::Node {
+}
+class specializationModel::Project {
+  + featureModelURI : str
+  + infiniteDomain : bool
+  + nameConfigFile : str
+  + nameConstraintsFile : str
+  + numberOfProducts : int
+  + userConstraintsState : bool
+}
+class specializationModel::Relation {
+}
+class specializationModel::RelationFG {
+}
+class specializationModel::RelationFeature {
+  + lowerBound : int
+  + type : str
+  + upperBound : int
+}
+class specializationModel::TypedValue {
+  + floatValue : str
+  + integerValue : str
+  + stringValue : str
+}
+Node <|-- specializationModel::Feature
+Node <|-- specializationModel::FeatureGroup
+Relation <|-- specializationModel::RelationFG
+Relation <|-- specializationModel::RelationFeature
+specializationModel::FeatureGroup "1..1" -- "0..9999" specializationModel::Feature : children16
+specializationModel::Node "0..9999" -- "1..1" specializationModel::Feature : children4
+specializationModel::Node "0..1" -- "1..1" specializationModel::Node : father19
+specializationModel::Feature "0..1" -- "1..1" specializationModel::TypedValue : featureValue9
+specializationModel::Node "0..9999" --* "1..1" specializationModel::Project : features12
+specializationModel::Feature "0..1" -- "1..1" specializationModel::Feature : references2
+specializationModel::Feature "1..1" -- "0..9999" specializationModel::Feature : referenciated7
+specializationModel::Project "1..1" *-- "0..9999" specializationModel::Relation : relations14
+specializationModel::Node "1..1" -- "1..1" specializationModel::RelationFG : source21
+specializationModel::RelationFeature "1..1" -- "1..1" specializationModel::Feature : source26
+specializationModel::Node "1..1" -- "1..1" specializationModel::RelationFG : target23
+specializationModel::Feature "1..1" -- "1..1" specializationModel::RelationFeature : target28
+specializationModel::TypedValue "0..1" --* "1..1" specializationModel::Feature : typedValue0
+@enduml

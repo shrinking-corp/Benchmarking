@@ -1,0 +1,37 @@
+@startuml
+class Constraint {
+}
+class SqlMetamodel::Column {
+  + name : str
+  + nullable : bool
+  + type : str
+}
+class SqlMetamodel::Constraint {
+  + name : str
+}
+class SqlMetamodel::ForeingKey {
+}
+class SqlMetamodel::PrimaryKey {
+}
+class SqlMetamodel::Schema {
+  + name : str
+}
+class SqlMetamodel::Table {
+  + name : str
+}
+enum TypeData {
+  BOOLEAN
+  DATE
+  DOUBLE
+  FLOAT
+  INT
+  STRING
+}
+Constraint <|-- SqlMetamodel::ForeingKey
+Constraint <|-- SqlMetamodel::PrimaryKey
+SqlMetamodel::Column "0..9999" --* "1..1" SqlMetamodel::Table : column1
+SqlMetamodel::Table "1..1" *-- "0..9999" SqlMetamodel::Constraint : constraint3
+SqlMetamodel::PrimaryKey "1..1" -- "1..1" SqlMetamodel::Table : primaryKey5
+SqlMetamodel::Table "1..1" -- "1..1" SqlMetamodel::ForeingKey : refTable7
+SqlMetamodel::Table "0..9999" --* "1..1" SqlMetamodel::Schema : table0
+@enduml

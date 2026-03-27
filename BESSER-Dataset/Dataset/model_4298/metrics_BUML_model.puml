@@ -1,0 +1,98 @@
+@startuml
+class DataKind {
+}
+enum KindHintType {
+  AVG
+  BH
+}
+class Mapping {
+}
+class MappingRecord {
+}
+enum ObjectKindType {
+  EQUIPMENT
+  FUNCTION
+  NODE
+  RELATIONSHIP
+}
+enum ValueKindType {
+  DATETIME
+  METRIC
+  NULL
+  PERIOD
+}
+class metrics::DataKind {
+}
+class metrics::DateTimeRange {
+}
+class metrics::IdentifierDataKind {
+  + objectKind : str
+  + objectProperty : str
+}
+class metrics::Mapping {
+}
+class metrics::MappingCSV {
+}
+class metrics::MappingRDBMS {
+}
+class metrics::MappingRecord {
+  + message : str
+}
+class metrics::MappingRecordXLS {
+  + column : str
+  + row : str
+}
+class metrics::MappingStatistic {
+  + message : str
+  + totalRecords : str
+}
+class metrics::MappingXLS {
+  + firstDataRow : str
+  + headerRow : str
+  + sheetNumber : str
+}
+class metrics::MappingXLSColumn {
+  + column : str
+}
+class metrics::Metric {
+  + description : str
+  + measurementKind : str
+  + measurementPoint : str
+  + metricCalculation : str
+  + name : str
+}
+class metrics::MetricSource {
+  + metricLocation : str
+  + name : str
+}
+class metrics::MetricValueRange {
+  + kindHint : str
+  + periodHint : str
+}
+class metrics::Unit {
+}
+class metrics::Value {
+}
+class metrics::ValueDataKind {
+  + kindHint : str
+  + valueKind : str
+}
+DataKind <|-- metrics::IdentifierDataKind
+DataKind <|-- metrics::ValueDataKind
+MappingRecord <|-- metrics::MappingRecordXLS
+Mapping <|-- metrics::MappingCSV
+Mapping <|-- metrics::MappingRDBMS
+Mapping <|-- metrics::MappingXLS
+metrics::DataKind "0..1" --* "1..1" metrics::MappingXLSColumn : dataType4
+metrics::MappingStatistic "1..1" *-- "0..9999" metrics::MappingRecord : failedRecords0
+metrics::MappingXLS "1..1" *-- "0..9999" metrics::MappingXLSColumn : mappingColumns3
+metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : mappingDuration1
+metrics::MetricSource "1..1" *-- "0..1" metrics::Mapping : metricMapping12
+metrics::Metric "0..1" -- "1..1" metrics::ValueDataKind : metricRef17
+metrics::Metric "0..9999" -- "1..1" metrics::MetricSource : metricRefs11
+metrics::MetricSource "0..1" -- "1..1" metrics::Metric : metricSourceRef8
+metrics::Value "0..9999" --* "1..1" metrics::MetricValueRange : metricValues16
+metrics::Metric "0..9999" --* "1..1" metrics::Metric : metrics7
+metrics::MappingStatistic "0..9999" --* "1..1" metrics::MetricSource : statistics13
+metrics::Unit "0..1" -- "1..1" metrics::Metric : unitRef9
+@enduml

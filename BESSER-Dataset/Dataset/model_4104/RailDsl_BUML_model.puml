@@ -1,0 +1,155 @@
+@startuml
+class Declaration {
+}
+class NamedElement {
+}
+enum Orientation {
+  Backwards
+  Forwards
+}
+enum PointKind {
+  DoublePoint
+  DoubleSlipPoint
+  FixedCrossing
+  SimplePoint
+  SingleSlipPoint
+}
+class RouteObject {
+}
+class SegmentObject {
+}
+enum Side {
+  Both
+  Left
+  Right
+}
+enum SpeedLimit {
+  Max
+  Speed120
+  Speed40
+  Speed80
+  Stop
+}
+class TrackObject {
+}
+enum TrainRouteKind {
+  Main
+  Shunting
+}
+class TrainRouteObject {
+}
+enum VertexKind {
+  InnerVertex
+  StationBorder
+  TrackEnd
+}
+abstract class railDsl::Declaration {
+}
+class railDsl::Derailer {
+  + active : bool
+}
+class railDsl::LevelCrossing {
+  + closed : bool
+  + length : float
+}
+abstract class railDsl::NamedElement {
+  + name : str
+}
+class railDsl::Platform {
+  + length : float
+}
+class railDsl::Point {
+  + kind : str
+  + locked : bool
+  + selectedInput : int
+  + selectedOutput : int
+}
+abstract class railDsl::RouteObject {
+  + error : bool
+  + speedLimit : str
+}
+class railDsl::Segment {
+}
+abstract class railDsl::SegmentObject {
+}
+class railDsl::SegmentPosition {
+  + atEnd : bool
+  + atStart : bool
+  + orientation : str
+  + position : float
+  + side : str
+}
+class railDsl::Signal {
+  + main : bool
+  + shunting : bool
+}
+class railDsl::Station {
+}
+class railDsl::Track {
+}
+abstract class railDsl::TrackObject {
+  + length : float
+}
+class railDsl::Train {
+  + acceleration : float
+  + length : float
+  + speed : float
+}
+class railDsl::TrainRoute {
+  + kind : str
+  + locked : bool
+}
+class railDsl::TrainRouteObject {
+  + speedLimit : str
+}
+class railDsl::TrainRoutePoint {
+  + selectedInput : int
+  + selectedOutput : int
+}
+class railDsl::TrainRouteSegment {
+}
+class railDsl::TrainSegment {
+  + length : float
+}
+class railDsl::Vertex {
+  + kind : str
+}
+Declaration <|-- railDsl::Track
+Declaration <|-- railDsl::TrackObject
+Declaration <|-- railDsl::Train
+Declaration <|-- railDsl::TrainRoute
+Declaration <|-- railDsl::Vertex
+NamedElement <|-- railDsl::Declaration
+NamedElement <|-- railDsl::SegmentObject
+NamedElement <|-- railDsl::Station
+RouteObject <|-- railDsl::SegmentObject
+RouteObject <|-- railDsl::TrackObject
+SegmentObject <|-- railDsl::Derailer
+SegmentObject <|-- railDsl::LevelCrossing
+SegmentObject <|-- railDsl::Platform
+SegmentObject <|-- railDsl::Signal
+TrackObject <|-- railDsl::Point
+TrackObject <|-- railDsl::Segment
+TrainRouteObject <|-- railDsl::TrainRoutePoint
+TrainRouteObject <|-- railDsl::TrainRouteSegment
+railDsl::TrainRoute "1..1" -- "0..9999" railDsl::TrainRoute : conflictingRoutes38
+railDsl::Declaration "0..9999" --* "1..1" railDsl::Station : declarations0
+railDsl::Signal "1..1" -- "0..1" railDsl::Signal : distantFor10
+railDsl::Track "1..1" -- "0..9999" railDsl::TrackObject : elements19
+railDsl::Vertex "0..1" -- "1..1" railDsl::Segment : end2
+railDsl::Signal "0..1" -- "1..1" railDsl::TrainRoute : endSignal31
+railDsl::Vertex "0..9999" -- "1..1" railDsl::Point : inputs14
+railDsl::SegmentObject "0..9999" --* "1..1" railDsl::Segment : objects5
+railDsl::Point "0..1" -- "1..1" railDsl::TrainRoutePoint : originalPoint40
+railDsl::Segment "0..1" -- "1..1" railDsl::TrainRouteSegment : originalSegment42
+railDsl::Vertex "0..9999" -- "1..1" railDsl::Point : outputs16
+railDsl::TrainRouteObject "0..9999" --* "1..1" railDsl::TrainRoute : path27
+railDsl::SegmentPosition "0..1" -- "1..1" railDsl::Train : position21
+railDsl::SegmentPosition "0..1" -- "1..1" railDsl::TrainSegment : position24
+railDsl::SegmentPosition "0..1" --* "1..1" railDsl::SegmentObject : position7
+railDsl::TrainRouteObject "0..9999" --* "1..1" railDsl::TrainRoute : protectionObjects34
+railDsl::Segment "0..1" -- "1..1" railDsl::SegmentPosition : segment11
+railDsl::Train "1..1" *-- "0..9999" railDsl::TrainSegment : segments20
+railDsl::Segment "1..1" -- "0..1" railDsl::Vertex : start1
+railDsl::Signal "0..1" -- "1..1" railDsl::TrainRoute : startSignal28
+@enduml

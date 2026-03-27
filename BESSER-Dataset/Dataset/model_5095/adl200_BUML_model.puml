@@ -1,0 +1,27 @@
+@startuml
+class Interface {
+}
+class adl200::Component {
+  + name : str
+}
+class adl200::Content {
+  + expression : str
+  + language : str
+}
+abstract class adl200::Interface {
+  + name : str
+  + signature : str
+}
+class adl200::Provided {
+}
+class adl200::Required {
+}
+Interface <|-- adl200::Provided
+Interface <|-- adl200::Required
+adl200::Required "0..9999" -- "1..1" adl200::Provided : bindings11
+adl200::Component "1..1" *-- "0..1" adl200::Content : content0
+adl200::Component "1..1" -- "1..1" adl200::Content : contentParent8
+adl200::Component "1..1" *-- "0..9999" adl200::Provided : providedInterfaces3
+adl200::Required "0..9999" --* "1..1" adl200::Component : requiredInterfaces1
+adl200::Component "0..9999" --* "1..1" adl200::Component : subComponents6
+@enduml

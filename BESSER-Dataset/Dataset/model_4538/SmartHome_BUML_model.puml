@@ -1,0 +1,87 @@
+@startuml
+class Activator {
+}
+class IotComponent {
+}
+class NamedElement {
+}
+enum Operator {
+  different
+  equal
+  inferior
+  superior
+}
+class Sensor {
+}
+abstract class SmartHome::Activator {
+  + activate() : str
+}
+class SmartHome::AnalValue {
+  + value : bool
+}
+class SmartHome::Clock {
+}
+class SmartHome::DigitValue {
+  + value : float
+}
+class SmartHome::Home {
+  + speed : float
+  + startDay : float
+}
+abstract class SmartHome::IotComponent {
+}
+class SmartHome::Light {
+  + intensity : float
+  + stateInit : bool
+}
+class SmartHome::LightSensor {
+}
+abstract class SmartHome::NamedElement {
+  + name : str
+}
+class SmartHome::PhysicalContext {
+  + lightIn : float
+  + lightOut : float
+}
+class SmartHome::Room {
+}
+class SmartHome::Rule {
+}
+class SmartHome::RuleComposant {
+  + operator : str
+}
+abstract class SmartHome::Sensor {
+}
+class SmartHome::Shutter {
+  + stateInit : bool
+}
+abstract class SmartHome::Value {
+}
+class Value {
+}
+Activator <|-- SmartHome::Light
+Activator <|-- SmartHome::Shutter
+IotComponent <|-- SmartHome::Activator
+IotComponent <|-- SmartHome::Sensor
+NamedElement <|-- SmartHome::Home
+NamedElement <|-- SmartHome::IotComponent
+NamedElement <|-- SmartHome::PhysicalContext
+NamedElement <|-- SmartHome::Room
+NamedElement <|-- SmartHome::Rule
+Sensor <|-- SmartHome::Clock
+Sensor <|-- SmartHome::LightSensor
+Value <|-- SmartHome::AnalValue
+Value <|-- SmartHome::DigitValue
+SmartHome::Clock "1..1" --* "1..1" SmartHome::Room : clock9
+SmartHome::RuleComposant "1..1" -- "1..1" SmartHome::IotComponent : iotcomponent23
+SmartHome::Room "1..1" *-- "0..9999" SmartHome::Light : light1
+SmartHome::LightSensor "0..9999" --* "1..1" SmartHome::Room : lightsensor0
+SmartHome::PhysicalContext "1..1" --* "1..1" SmartHome::Room : physicalcontext3
+SmartHome::Room "0..9999" --* "1..1" SmartHome::Home : room11
+SmartHome::RuleComposant "1..9999" --* "1..1" SmartHome::Rule : rulecondition16
+SmartHome::RuleComposant "1..9999" --* "1..1" SmartHome::Rule : ruleconsequence18
+SmartHome::Rule "0..9999" --* "1..1" SmartHome::Home : rules13
+SmartHome::Rule "0..9999" --* "1..1" SmartHome::Room : rules7
+SmartHome::Room "1..1" *-- "1..1" SmartHome::Shutter : shutters5
+SmartHome::Value "1..1" --* "1..1" SmartHome::RuleComposant : value21
+@enduml

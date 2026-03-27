@@ -1,0 +1,53 @@
+@startuml
+class Division {
+}
+class EvoCompany::Category {
+  + name : str
+}
+class EvoCompany::Client {
+}
+class EvoCompany::CompanyModel {
+}
+abstract class EvoCompany::Division {
+  + name : str
+}
+class EvoCompany::Employee {
+}
+class EvoCompany::Organisation {
+  + city : str
+  + completeAddress : str
+  + name : str
+}
+abstract class EvoCompany::Person {
+  + fullName : str
+}
+class EvoCompany::Project {
+  + budget : int
+  + name : str
+}
+class EvoCompany::ServiceLine {
+}
+class EvoCompany::Topic {
+  + id : str
+}
+class EvoCompany::Unit {
+}
+class Person {
+}
+Division <|-- EvoCompany::ServiceLine
+Division <|-- EvoCompany::Unit
+Person <|-- EvoCompany::Client
+Person <|-- EvoCompany::Employee
+EvoCompany::Project "0..9999" -- "1..1" EvoCompany::Person : assignedTo0
+EvoCompany::Category "0..9999" --* "1..1" EvoCompany::CompanyModel : categories16
+EvoCompany::Topic "1..1" -- "1..1" EvoCompany::Category : category13
+EvoCompany::Organisation "1..1" --* "1..1" EvoCompany::CompanyModel : company14
+EvoCompany::CompanyModel "1..1" *-- "0..9999" EvoCompany::Division : division21
+EvoCompany::Unit "0..1" -- "1..1" EvoCompany::Person : employed1
+EvoCompany::Division "0..9999" --* "1..1" EvoCompany::Organisation : lines8
+EvoCompany::Person "0..9999" --* "1..1" EvoCompany::Organisation : persons3
+EvoCompany::Organisation "1..1" *-- "0..9999" EvoCompany::Project : projects5
+EvoCompany::Topic "1..1" -- "1..1" EvoCompany::Project : related10
+EvoCompany::Topic "0..9999" -- "1..1" EvoCompany::Category : topics12
+EvoCompany::Topic "0..9999" --* "1..1" EvoCompany::CompanyModel : topics18
+@enduml

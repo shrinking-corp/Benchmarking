@@ -1,0 +1,30 @@
+@startuml
+class AbstractEvent {
+}
+abstract class martinfowlerdsl::AbstractEvent {
+  + code : str
+  + name : str
+}
+class martinfowlerdsl::Command {
+}
+class martinfowlerdsl::Event {
+  + resetting : bool
+}
+class martinfowlerdsl::State {
+  + name : str
+}
+class martinfowlerdsl::StateMachine {
+}
+class martinfowlerdsl::Transition {
+}
+AbstractEvent <|-- martinfowlerdsl::Command
+AbstractEvent <|-- martinfowlerdsl::Event
+martinfowlerdsl::Command "0..9999" -- "1..1" martinfowlerdsl::State : actions6
+martinfowlerdsl::AbstractEvent "0..9999" --* "1..1" martinfowlerdsl::StateMachine : events4
+martinfowlerdsl::State "1..1" -- "1..1" martinfowlerdsl::Transition : source9
+martinfowlerdsl::State "1..1" -- "1..1" martinfowlerdsl::StateMachine : start1
+martinfowlerdsl::StateMachine "1..1" *-- "1..9999" martinfowlerdsl::State : states0
+martinfowlerdsl::Transition "1..1" -- "1..1" martinfowlerdsl::State : target10
+martinfowlerdsl::Transition "0..9999" --* "1..1" martinfowlerdsl::State : transitions8
+martinfowlerdsl::Event "1..1" -- "1..1" martinfowlerdsl::Transition : trigger12
+@enduml

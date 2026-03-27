@@ -1,0 +1,34 @@
+@startuml
+enum ArcDirection {
+  P2T
+  T2P
+}
+class PetriElement {
+}
+class petriNet::Arc {
+  + Direction : str
+  + jetonsTransferes : int
+}
+abstract class petriNet::PetriElement {
+  + name : str
+}
+class petriNet::PetriNetwork {
+  + name : str
+}
+class petriNet::Place {
+  + nbJetons : int
+}
+class petriNet::Transition {
+  + newOperation1() : void
+}
+PetriElement <|-- petriNet::Arc
+PetriElement <|-- petriNet::Place
+PetriElement <|-- petriNet::Transition
+petriNet::Transition "1..1" -- "1..9999" petriNet::Arc : arcEntrants1
+petriNet::Arc "0..9999" -- "1..1" petriNet::Place : arcEntrants4
+petriNet::Transition "1..1" -- "1..9999" petriNet::Arc : arcSortants0
+petriNet::Arc "0..9999" -- "1..1" petriNet::Place : arcSortants6
+petriNet::PetriElement "0..9999" --* "1..1" petriNet::PetriNetwork : petrielement15
+petriNet::Place "1..1" -- "1..1" petriNet::Arc : place12
+petriNet::Transition "1..1" -- "1..1" petriNet::Arc : transition9
+@enduml

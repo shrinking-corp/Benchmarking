@@ -1,0 +1,285 @@
+@startuml
+class ColumnFull {
+}
+class OpFunctionArg {
+}
+class OpFunctionArgAgregate {
+}
+class OperandList {
+}
+class Operands {
+}
+class OrColumn {
+}
+class OrExpr {
+}
+class OrGroupByColumn {
+}
+class OrOrderByColumn {
+}
+class OrTable {
+}
+class Prms {
+}
+class SQLCaseWhens {
+}
+class SelectQuery {
+}
+class TableFull {
+}
+enum XFunction {
+  xbwn
+  xbwnc
+  xbwnl
+  xbwnr
+  xeq
+  xgt
+  xgtl
+  xin
+  xls
+  xlsr
+  xnoteq
+  xnotin
+}
+class sql::Between {
+  + opBetween : str
+}
+class sql::Col {
+}
+class sql::ColumnFull {
+}
+class sql::ColumnOperand {
+}
+class sql::ColumnOrAlias {
+  + alias : str
+  + allCols : str
+}
+class sql::Comparison {
+  + operator : str
+  + subOperator : str
+}
+class sql::Concat {
+}
+class sql::DbObjectName {
+  + dbname : str
+}
+class sql::DbObjectNameAll {
+  + dbname : str
+}
+class sql::Div {
+}
+class sql::ExpOperand {
+  + prm : str
+}
+class sql::ExprGroup {
+}
+class sql::FromTable {
+}
+class sql::FromTableJoin {
+  + join : str
+}
+class sql::FullExpression {
+  + c : str
+  + isnull : str
+  + notPrm : str
+}
+class sql::GroupByColumnFull {
+}
+class sql::InOper {
+  + op : str
+}
+class sql::JRParameter {
+  + jrprm : str
+}
+class sql::Like {
+  + opLike : str
+}
+class sql::LikeOperand {
+  + op2 : str
+}
+class sql::Minus {
+}
+class sql::Model {
+}
+class sql::OpFList {
+}
+class sql::OpFunction {
+  + fname : str
+}
+class sql::OpFunctionArg {
+}
+class sql::OpFunctionArgAgregate {
+}
+class sql::OpFunctionArgOperand {
+}
+class sql::OpFunctionCast {
+  + p : int
+  + p2 : int
+  + type : str
+}
+class sql::OpList {
+}
+class sql::Operand {
+}
+class sql::OperandList {
+}
+class sql::Operands {
+}
+class sql::OrColumn {
+}
+class sql::OrExpr {
+}
+class sql::OrGroupByColumn {
+}
+class sql::OrOrderByColumn {
+}
+class sql::OrTable {
+}
+class sql::OrderByColumnFull {
+  + colOrderInt : int
+  + direction : str
+}
+class sql::POperand {
+  + prm : str
+}
+class sql::Plus {
+}
+class sql::Prms {
+}
+class sql::SQLCaseOperand {
+}
+class sql::SQLCaseWhens {
+}
+class sql::ScalarOperand {
+  + sodate : date
+  + sodbl : str
+  + sodt : date
+  + soint : int
+  + sostr : str
+  + sotime : date
+}
+class sql::Select {
+  + select : str
+}
+class sql::SelectQuery {
+}
+class sql::SelectSubSet {
+  + all : str
+  + op : str
+}
+class sql::SqlCaseWhen {
+}
+class sql::Star {
+}
+class sql::SubQueryOperand {
+}
+class sql::TableFull {
+}
+class sql::TableOrAlias {
+  + alias : str
+}
+class sql::WhenList {
+}
+class sql::XExpr {
+  + xf : str
+}
+class sql::tbls {
+}
+ColumnFull <|-- sql::Col
+ColumnFull <|-- sql::DbObjectName
+OpFunctionArgAgregate <|-- sql::Operands
+OpFunctionArg <|-- sql::OpFList
+OpFunctionArg <|-- sql::OpFunctionArgOperand
+OperandList <|-- sql::OpList
+OperandList <|-- sql::ScalarOperand
+Operands <|-- sql::Concat
+Operands <|-- sql::Div
+Operands <|-- sql::Minus
+Operands <|-- sql::Plus
+Operands <|-- sql::Star
+OrColumn <|-- sql::ColumnOrAlias
+OrExpr <|-- sql::FullExpression
+OrGroupByColumn <|-- sql::GroupByColumnFull
+OrOrderByColumn <|-- sql::OrderByColumnFull
+OrTable <|-- sql::FromTable
+Prms <|-- sql::JRParameter
+SQLCaseWhens <|-- sql::SqlCaseWhen
+SQLCaseWhens <|-- sql::WhenList
+SelectQuery <|-- sql::Select
+TableFull <|-- sql::DbObjectName
+TableFull <|-- sql::tbls
+sql::OpFunctionArg "0..1" --* "1..1" sql::OpFunction : args137
+sql::Between "0..1" --* "1..1" sql::FullExpression : between71
+sql::Operands "0..1" --* "1..1" sql::ColumnOrAlias : ce20
+sql::ColumnFull "0..1" --* "1..1" sql::ColumnOperand : cfull143
+sql::Operands "0..1" --* "1..1" sql::XExpr : col80
+sql::DbObjectName "0..1" --* "1..1" sql::ColumnOrAlias : colAlias22
+sql::ColumnFull "0..1" --* "1..1" sql::GroupByColumnFull : colGrBy51
+sql::OrderByColumnFull "1..1" *-- "0..1" sql::ColumnFull : colOrder47
+sql::OrColumn "0..1" --* "1..1" sql::Select : cols7
+sql::ColumnOperand "0..1" --* "1..1" sql::Operand : column115
+sql::Comparison "0..1" --* "1..1" sql::FullExpression : comp75
+sql::ColumnOrAlias "1..1" *-- "0..1" sql::DbObjectNameAll : dbAllCols24
+sql::SqlCaseWhen "1..1" *-- "0..1" sql::Operands : eexp159
+sql::FullExpression "0..1" --* "1..1" sql::FullExpression : efrag57
+sql::DbObjectName "0..9999" --* "1..1" sql::Col : entries162
+sql::DbObjectName "0..9999" --* "1..1" sql::tbls : entries164
+sql::OpList "1..1" *-- "0..9999" sql::ScalarOperand : entries166
+sql::OpFunctionArgOperand "0..9999" --* "1..1" sql::OpFList : entries168
+sql::SqlCaseWhen "0..9999" --* "1..1" sql::WhenList : entries170
+sql::ColumnOrAlias "0..9999" --* "1..1" sql::OrColumn : entries18
+sql::FromTable "0..9999" --* "1..1" sql::OrTable : entries26
+sql::OrderByColumnFull "0..9999" --* "1..1" sql::OrOrderByColumn : entries45
+sql::GroupByColumnFull "0..9999" --* "1..1" sql::OrGroupByColumn : entries49
+sql::OrExpr "1..1" *-- "0..9999" sql::FullExpression : entries54
+sql::Prms "1..1" *-- "0..9999" sql::JRParameter : entries85
+sql::ExpOperand "0..1" --* "1..1" sql::Operand : eparam133
+sql::FullExpression "0..1" --* "1..1" sql::FullExpression : exp62
+sql::ExprGroup "0..1" --* "1..1" sql::FullExpression : expgroup59
+sql::OrExpr "0..1" --* "1..1" sql::SQLCaseOperand : expr149
+sql::SqlCaseWhen "1..1" *-- "0..1" sql::OrExpr : expr154
+sql::OrExpr "0..1" --* "1..1" sql::ExprGroup : expr77
+sql::Operand "1..1" *-- "0..1" sql::OpFunctionCast : fcast123
+sql::OpFunctionCast "0..1" --* "1..1" sql::LikeOperand : fcast94
+sql::FromTable "1..1" *-- "0..9999" sql::FromTableJoin : fjoin30
+sql::LikeOperand "1..1" *-- "0..1" sql::OpFunction : fop292
+sql::OpFunction "0..1" --* "1..1" sql::Operand : func126
+sql::OrGroupByColumn "0..1" --* "1..1" sql::Select : groupByEntry13
+sql::Select "1..1" *-- "0..1" sql::OrExpr : havingEntry15
+sql::InOper "0..1" --* "1..1" sql::FullExpression : in69
+sql::OrExpr "0..1" --* "1..1" sql::FromTableJoin : joinExpr35
+sql::Operands "0..1" --* "1..1" sql::Operands : left110
+sql::FullExpression "1..1" *-- "0..1" sql::Like : like73
+sql::TableOrAlias "0..1" --* "1..1" sql::FromTableJoin : onTable32
+sql::Operand "0..1" --* "1..1" sql::Operands : op1107
+sql::OpFunctionArgAgregate "0..1" --* "1..1" sql::OpFunctionArgOperand : op139
+sql::Operands "0..1" --* "1..1" sql::OpFunctionCast : op140
+sql::Operands "0..1" --* "1..1" sql::FullExpression : op166
+sql::Operands "0..1" --* "1..1" sql::Comparison : op287
+sql::LikeOperand "0..1" --* "1..1" sql::Like : op290
+sql::Operands "0..1" --* "1..1" sql::Between : op296
+sql::Operands "0..1" --* "1..1" sql::Between : op399
+sql::Select "1..1" *-- "0..9999" sql::SelectSubSet : op4
+sql::OperandList "0..1" --* "1..1" sql::InOper : opList105
+sql::Model "1..1" *-- "0..1" sql::OrOrderByColumn : orderByEntry1
+sql::POperand "0..1" --* "1..1" sql::Operand : param131
+sql::Prms "0..1" --* "1..1" sql::XExpr : prm83
+sql::SelectQuery "0..1" --* "1..1" sql::Model : query0
+sql::Select "0..1" --* "1..1" sql::SelectSubSet : query3
+sql::Operands "1..1" *-- "0..1" sql::Operand : right112
+sql::Operand "1..1" *-- "0..1" sql::ScalarOperand : scalar135
+sql::SelectQuery "0..1" --* "1..1" sql::SubQueryOperand : sel146
+sql::SubQueryOperand "0..1" --* "1..1" sql::TableOrAlias : sq40
+sql::Operand "1..1" *-- "0..1" sql::SQLCaseOperand : sqlcase129
+sql::SubQueryOperand "0..1" --* "1..1" sql::Operand : subq120
+sql::InOper "1..1" *-- "0..1" sql::SubQueryOperand : subquery102
+sql::TableOrAlias "0..1" --* "1..1" sql::FromTable : table28
+sql::OrTable "0..1" --* "1..1" sql::Select : tbl9
+sql::TableOrAlias "1..1" *-- "0..1" sql::DbObjectName : tblAlias42
+sql::Operands "0..1" --* "1..1" sql::SqlCaseWhen : texp156
+sql::TableFull "0..1" --* "1..1" sql::TableOrAlias : tfull38
+sql::SQLCaseWhens "0..1" --* "1..1" sql::SQLCaseOperand : when152
+sql::OrExpr "0..1" --* "1..1" sql::Select : whereExpression11
+sql::FullExpression "1..1" *-- "0..1" sql::XExpr : xexp64
+sql::Operand "0..1" --* "1..1" sql::Operand : xop118
+@enduml

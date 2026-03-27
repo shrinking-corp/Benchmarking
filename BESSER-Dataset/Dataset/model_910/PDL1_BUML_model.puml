@@ -1,0 +1,30 @@
+@startuml
+class ProcessElement {
+}
+enum WorkSequenceType {
+  finish2finish
+  finish2start
+  start2finish
+  start2start
+}
+class pDL1::Guidance {
+  + texte : str
+}
+class pDL1::Process {
+  + name : str
+}
+class pDL1::ProcessElement {
+}
+class pDL1::WorkDefinition {
+  + name : str
+}
+class pDL1::WorkSequence {
+  + linkType : str
+}
+ProcessElement <|-- pDL1::Guidance
+ProcessElement <|-- pDL1::WorkDefinition
+ProcessElement <|-- pDL1::WorkSequence
+pDL1::WorkSequence "1..1" -- "0..1" pDL1::WorkDefinition : predecessor1
+pDL1::ProcessElement "0..9999" --* "1..1" pDL1::Process : processElements0
+pDL1::WorkDefinition "0..1" -- "1..1" pDL1::WorkSequence : successor2
+@enduml

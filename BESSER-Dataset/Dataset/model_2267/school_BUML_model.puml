@@ -1,0 +1,69 @@
+@startuml
+enum SchoolElement {
+  Course
+  CourseOfStudy
+  Faculty
+  School
+  Student
+  Teacher
+}
+class school::BooleanExpr {
+  + lhs : str
+  + operator : str
+  + rhs : str
+}
+class school::Course {
+  + courseNumber : str
+  + name : str
+}
+class school::CourseOfStudy {
+  + name : str
+}
+class school::CourseResult {
+  + grade : str
+}
+class school::Faculty {
+  + name : str
+}
+class school::Query {
+  + type : str
+}
+class school::School {
+  + name : str
+}
+class school::SchoolDatabase {
+}
+class school::Student {
+  + name : str
+  + studentNumber : str
+}
+class school::Teacher {
+  + name : str
+}
+class school::Where {
+}
+school::BooleanExpr "0..1" --* "1..1" school::BooleanExpr : and36
+school::BooleanExpr "1..1" --* "1..1" school::Where : booleanexpr33
+school::Course "0..9999" -- "1..1" school::CourseOfStudy : course10
+school::Course "1..1" -- "1..1" school::CourseResult : course27
+school::Course "0..9999" --* "1..1" school::School : course3
+school::School "1..1" *-- "0..9999" school::CourseOfStudy : courseofstudy1
+school::Student "1..1" -- "1..1" school::CourseOfStudy : courseofstudy21
+school::CourseOfStudy "0..9999" -- "1..1" school::Faculty : courseofstudy9
+school::CourseResult "0..9999" --* "1..1" school::Course : courseresult19
+school::Course "0..9999" -- "1..1" school::Student : enrolledIn20
+school::Student "0..9999" -- "1..1" school::Course : enrolledStudent16
+school::Faculty "0..9999" --* "1..1" school::School : faculty0
+school::CourseOfStudy "1..1" -- "1..1" school::Faculty : faculty13
+school::BooleanExpr "0..1" --* "1..1" school::BooleanExpr : or39
+school::Query "0..9999" --* "1..1" school::SchoolDatabase : query43
+school::SchoolDatabase "1..1" *-- "1..1" school::School : school41
+school::Student "0..9999" -- "1..1" school::CourseOfStudy : student14
+school::Student "1..1" -- "1..1" school::CourseResult : student25
+school::Student "0..1" -- "1..1" school::Query : student29
+school::School "1..1" *-- "0..9999" school::Student : student5
+school::Teacher "1..1" -- "1..1" school::Course : taughtBy18
+school::Teacher "0..9999" --* "1..1" school::School : teacher7
+school::Course "0..9999" -- "1..1" school::Teacher : teaches23
+school::Query "1..1" *-- "0..1" school::Where : where31
+@enduml

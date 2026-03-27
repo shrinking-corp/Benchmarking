@@ -1,0 +1,38 @@
+@startuml
+class Arc {
+}
+class Element {
+}
+class Node {
+}
+abstract class Petrinet::Arc {
+}
+abstract class Petrinet::Element {
+  + name : str
+}
+class Petrinet::InputArc {
+}
+abstract class Petrinet::Node {
+}
+class Petrinet::OutputArc {
+}
+class Petrinet::Petrinet {
+}
+class Petrinet::Place {
+}
+class Petrinet::Transition {
+  + maxDelay : float
+  + minDelay : float
+}
+Arc <|-- Petrinet::InputArc
+Arc <|-- Petrinet::OutputArc
+Element <|-- Petrinet::Arc
+Element <|-- Petrinet::Node
+Node <|-- Petrinet::Place
+Node <|-- Petrinet::Transition
+Petrinet::OutputArc "1..1" -- "1..1" Petrinet::Place : dest2
+Petrinet::InputArc "1..1" -- "1..1" Petrinet::Transition : dest4
+Petrinet::Element "0..9999" --* "1..1" Petrinet::Petrinet : elements0
+Petrinet::OutputArc "1..1" -- "1..1" Petrinet::Transition : src1
+Petrinet::Place "1..1" -- "1..1" Petrinet::InputArc : src6
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+class NamedElement {
+}
+class simpleRDBMS::Column {
+}
+class simpleRDBMS::ForeignKey {
+}
+class simpleRDBMS::Key {
+}
+abstract class simpleRDBMS::NamedElement {
+  + name : str
+}
+class simpleRDBMS::RDBMSModel {
+}
+class simpleRDBMS::Schema {
+}
+class simpleRDBMS::Table {
+}
+NamedElement <|-- simpleRDBMS::Column
+NamedElement <|-- simpleRDBMS::ForeignKey
+NamedElement <|-- simpleRDBMS::Key
+NamedElement <|-- simpleRDBMS::Schema
+NamedElement <|-- simpleRDBMS::Table
+simpleRDBMS::Column "0..1" -- "1..1" simpleRDBMS::Key : column15
+simpleRDBMS::ForeignKey "1..1" -- "1..1" simpleRDBMS::Column : column7
+simpleRDBMS::Column "0..9999" --* "1..1" simpleRDBMS::Table : columns1
+simpleRDBMS::ForeignKey "0..9999" --* "1..1" simpleRDBMS::Table : foreignKeys3
+simpleRDBMS::Key "0..1" --* "1..1" simpleRDBMS::Table : key5
+simpleRDBMS::Key "1..1" -- "1..1" simpleRDBMS::ForeignKey : referTo10
+simpleRDBMS::Schema "0..9999" --* "1..1" simpleRDBMS::RDBMSModel : schemas13
+simpleRDBMS::Table "0..9999" --* "1..1" simpleRDBMS::Schema : tables0
+@enduml

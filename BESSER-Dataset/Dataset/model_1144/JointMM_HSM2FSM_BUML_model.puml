@@ -1,0 +1,84 @@
+@startuml
+class SrcAbstractState {
+}
+class SrcCompositeState {
+}
+class SrcRoot {
+}
+class SrcStateMachine {
+}
+class SrcTransition {
+}
+class TrgAbstractState {
+}
+class TrgCompositeState {
+}
+class TrgRoot {
+}
+class TrgStateMachine {
+}
+class TrgTransition {
+}
+class jointPackage::HSM2FSM::JointMM {
+}
+abstract class jointPackage::HSM2FSM::SrcAbstractState {
+  + name : str
+}
+class jointPackage::HSM2FSM::SrcCompositeState {
+}
+class jointPackage::HSM2FSM::SrcInitialState {
+}
+class jointPackage::HSM2FSM::SrcRegularState {
+}
+class jointPackage::HSM2FSM::SrcRoot {
+}
+class jointPackage::HSM2FSM::SrcStateMachine {
+  + name : str
+}
+class jointPackage::HSM2FSM::SrcTransition {
+  + label : str
+}
+abstract class jointPackage::HSM2FSM::TrgAbstractState {
+  + name : str
+}
+class jointPackage::HSM2FSM::TrgCompositeState {
+}
+class jointPackage::HSM2FSM::TrgInitialState {
+}
+class jointPackage::HSM2FSM::TrgRegularState {
+}
+class jointPackage::HSM2FSM::TrgRoot {
+}
+class jointPackage::HSM2FSM::TrgStateMachine {
+  + name : str
+}
+class jointPackage::HSM2FSM::TrgTransition {
+  + label : str
+}
+SrcAbstractState <|-- jointPackage::HSM2FSM::SrcCompositeState
+SrcAbstractState <|-- jointPackage::HSM2FSM::SrcInitialState
+SrcAbstractState <|-- jointPackage::HSM2FSM::SrcRegularState
+TrgAbstractState <|-- jointPackage::HSM2FSM::TrgCompositeState
+TrgAbstractState <|-- jointPackage::HSM2FSM::TrgInitialState
+TrgAbstractState <|-- jointPackage::HSM2FSM::TrgRegularState
+SrcCompositeState "0..1" -- "1..1" jointPackage::HSM2FSM::SrcAbstractState : compositeStates18
+jointPackage::HSM2FSM::TrgAbstractState "1..1" -- "0..1" TrgCompositeState : compositeStates41
+jointPackage::HSM2FSM::SrcTransition "1..1" -- "1..1" SrcAbstractState : source11
+TrgAbstractState "1..1" -- "1..1" jointPackage::HSM2FSM::TrgTransition : source34
+SrcRoot "1..1" --* "1..1" jointPackage::HSM2FSM::JointMM : sourceRoot0
+SrcStateMachine "1..1" -- "1..1" jointPackage::HSM2FSM::SrcAbstractState : stateMachine15
+jointPackage::HSM2FSM::TrgTransition "1..1" -- "1..1" TrgStateMachine : stateMachine31
+TrgStateMachine "1..1" -- "1..1" jointPackage::HSM2FSM::TrgAbstractState : stateMachine38
+SrcStateMachine "1..1" -- "1..1" jointPackage::HSM2FSM::SrcTransition : stateMachine8
+TrgStateMachine "0..9999" --* "1..1" jointPackage::HSM2FSM::TrgRoot : stateMachines24
+jointPackage::HSM2FSM::SrcRoot "1..1" *-- "0..9999" SrcStateMachine : statemachines3
+jointPackage::HSM2FSM::SrcCompositeState "1..1" -- "0..9999" SrcAbstractState : states21
+TrgAbstractState "0..9999" --* "1..1" jointPackage::HSM2FSM::TrgStateMachine : states28
+TrgAbstractState "0..9999" -- "1..1" jointPackage::HSM2FSM::TrgCompositeState : states44
+SrcAbstractState "0..9999" --* "1..1" jointPackage::HSM2FSM::SrcStateMachine : states5
+SrcAbstractState "1..1" -- "1..1" jointPackage::HSM2FSM::SrcTransition : target12
+TrgAbstractState "1..1" -- "1..1" jointPackage::HSM2FSM::TrgTransition : target35
+TrgRoot "1..1" --* "1..1" jointPackage::HSM2FSM::JointMM : targetRoot1
+TrgTransition "0..9999" --* "1..1" jointPackage::HSM2FSM::TrgStateMachine : transitions25
+SrcTransition "0..9999" --* "1..1" jointPackage::HSM2FSM::SrcStateMachine : transitions4
+@enduml

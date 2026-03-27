@@ -1,0 +1,196 @@
+@startuml
+class CheckConstraint {
+}
+class Column {
+}
+class ColumnRefConstraint {
+}
+class Constraint {
+}
+class DataType {
+}
+class Domain {
+}
+class Element {
+}
+class ForeignKey {
+}
+class Index {
+}
+class IndexedColumn {
+}
+class NamedColumnSet {
+}
+class NamedElement {
+}
+class PrimaryKey {
+}
+class PrimitiveDataType {
+}
+enum PrimitiveTypeCodes {
+  ARRAY
+  BIGINT
+  BINARY
+  BIT
+  BLOB
+  BOOLEAN
+  CHAR
+  CLOB
+  DATALINK
+  DATE
+  DECIMAL
+  DISTINCT
+  DOUBLE
+  FLOAT
+  INTEGER
+  JAVA_OBJECT
+  LONGNVARCHAR
+  LONGVARBINARY
+  LONGVARCHAR
+  NCHAR
+  NCLOB
+  NULL
+  NUMERIC
+  NVARCHAR
+  OTHER
+  REAL
+  REF
+  ROWID
+  SMALLINT
+  SQLXML
+  STRUCT
+  TIME
+  TIMESTAMP
+  TINYINT
+  VARBINARY
+  VARCHAR
+}
+class SchemaElement {
+}
+class UniqueConstraint {
+}
+class ViewAlias {
+}
+class ViewColumn {
+}
+class constraints::rdbmdl::TableColumn {
+}
+class datatypes::PrimitiveDataType {
+}
+abstract class rdbmdl::Column {
+}
+class rdbmdl::Element {
+}
+class rdbmdl::Model {
+  + server_id : str
+}
+abstract class rdbmdl::NamedColumnSet {
+}
+abstract class rdbmdl::NamedElement {
+  + name : str
+  + uid : str
+}
+class rdbmdl::Schema {
+}
+abstract class rdbmdl::SchemaElement {
+  + owner : str
+}
+class rdbmdl::Table {
+}
+class rdbmdl::TableColumn {
+  + isForeignKey : str
+  + isPrimaryKey : str
+}
+class rdbmdl::constraints::CheckConstraint {
+  + expression : str
+}
+abstract class rdbmdl::constraints::ColumnRefConstraint {
+}
+abstract class rdbmdl::constraints::Constraint {
+}
+class rdbmdl::constraints::ForeignKey {
+}
+class rdbmdl::constraints::Index {
+}
+class rdbmdl::constraints::IndexedColumn {
+  + ascending : bool
+}
+class rdbmdl::constraints::PrimaryKey {
+}
+class rdbmdl::constraints::UniqueConstraint {
+}
+abstract class rdbmdl::datatypes::DataType {
+  + check : str
+  + decimalDigits : int
+  + default : str
+  + nullable : bool
+  + size : int
+  + var : str
+}
+class rdbmdl::datatypes::Domain {
+}
+class rdbmdl::datatypes::PrimitiveDataType {
+  + type : str
+}
+class rdbmdl::view::ReferencedViewColumn {
+}
+class rdbmdl::view::View {
+  + ddl : str
+}
+class rdbmdl::view::ViewAlias {
+}
+abstract class rdbmdl::view::ViewColumn {
+}
+class rdbmdl::view::ViewExpressionColumn {
+  + expression : str
+}
+class view::rdbmdl::Column {
+}
+class view::rdbmdl::NamedColumnSet {
+}
+ColumnRefConstraint <|-- rdbmdl::constraints::ForeignKey
+ColumnRefConstraint <|-- rdbmdl::constraints::UniqueConstraint
+Column <|-- rdbmdl::TableColumn
+Column <|-- rdbmdl::view::ViewColumn
+Constraint <|-- rdbmdl::constraints::CheckConstraint
+Constraint <|-- rdbmdl::constraints::ColumnRefConstraint
+Constraint <|-- rdbmdl::constraints::Index
+DataType <|-- rdbmdl::datatypes::PrimitiveDataType
+Element <|-- rdbmdl::NamedElement
+NamedColumnSet <|-- rdbmdl::Table
+NamedColumnSet <|-- rdbmdl::view::View
+NamedElement <|-- rdbmdl::Column
+NamedElement <|-- rdbmdl::Model
+NamedElement <|-- rdbmdl::Schema
+NamedElement <|-- rdbmdl::SchemaElement
+NamedElement <|-- rdbmdl::constraints::Constraint
+NamedElement <|-- rdbmdl::constraints::IndexedColumn
+NamedElement <|-- rdbmdl::datatypes::DataType
+NamedElement <|-- rdbmdl::view::ViewAlias
+SchemaElement <|-- rdbmdl::NamedColumnSet
+SchemaElement <|-- rdbmdl::datatypes::Domain
+UniqueConstraint <|-- rdbmdl::constraints::PrimaryKey
+ViewColumn <|-- rdbmdl::view::ReferencedViewColumn
+ViewColumn <|-- rdbmdl::view::ViewExpressionColumn
+datatypes::PrimitiveDataType <|-- rdbmdl::datatypes::Domain
+rdbmdl::Table "1..1" *-- "0..9999" CheckConstraint : checks14
+ViewColumn "1..9999" --* "1..1" rdbmdl::view::View : columns28
+rdbmdl::Table "1..1" *-- "1..9999" rdbmdl::TableColumn : columns5
+Domain "0..1" -- "1..1" rdbmdl::TableColumn : domain16
+rdbmdl::SchemaElement "0..9999" --* "1..1" rdbmdl::Schema : elements3
+ForeignKey "0..9999" --* "1..1" rdbmdl::Table : foreignKeys10
+constraints::rdbmdl::TableColumn "1..9999" -- "1..1" rdbmdl::constraints::ColumnRefConstraint : includedColumns20
+rdbmdl::constraints::Index "1..1" *-- "0..9999" IndexedColumn : indexedColumns23
+Index "0..9999" --* "1..1" rdbmdl::Table : indices12
+rdbmdl::Element "1..1" -- "0..1" rdbmdl::Element : parent1
+Domain "0..1" -- "1..1" rdbmdl::datatypes::Domain : parentDomain26
+PrimaryKey "0..1" --* "1..1" rdbmdl::Table : primaryKey6
+constraints::rdbmdl::TableColumn "1..1" -- "1..1" rdbmdl::constraints::IndexedColumn : refColumn24
+view::rdbmdl::Column "1..1" -- "1..1" rdbmdl::view::ReferencedViewColumn : refColumn32
+view::rdbmdl::NamedColumnSet "1..1" -- "1..1" rdbmdl::view::ViewAlias : referencedTableOrView31
+rdbmdl::view::View "1..1" *-- "0..9999" ViewAlias : referencedTablesAndViews29
+UniqueConstraint "1..1" -- "1..1" rdbmdl::constraints::ForeignKey : referredUC21
+rdbmdl::Schema "0..9999" --* "1..1" rdbmdl::Model : schemas2
+PrimitiveDataType "0..1" --* "1..1" rdbmdl::TableColumn : type18
+rdbmdl::Table "1..1" *-- "0..9999" UniqueConstraint : uniqueConstraints8
+@enduml

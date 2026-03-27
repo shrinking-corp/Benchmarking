@@ -1,0 +1,36 @@
+@startuml
+class Region {
+}
+class State {
+}
+class trialStatemachine::Action {
+  + name : str
+}
+class trialStatemachine::ComplexState {
+}
+class trialStatemachine::LabeledTransition {
+  + id : str
+}
+class trialStatemachine::Region {
+  + history : str
+}
+class trialStatemachine::State {
+  + initialState : str
+  + name : str
+}
+class trialStatemachine::Statemachine {
+  + name : str
+}
+Region <|-- trialStatemachine::Statemachine
+State <|-- trialStatemachine::ComplexState
+trialStatemachine::Action "1..1" -- "1..1" trialStatemachine::LabeledTransition : action21
+trialStatemachine::Action "0..9999" --* "1..1" trialStatemachine::Statemachine : actions5
+trialStatemachine::Region "1..1" -- "0..1" trialStatemachine::State : defaultHistory6
+trialStatemachine::State "1..1" -- "1..1" trialStatemachine::Region : initial12
+trialStatemachine::LabeledTransition "0..9999" --* "1..1" trialStatemachine::State : outgoings0
+trialStatemachine::Region "0..1" --* "1..1" trialStatemachine::ComplexState : region3
+trialStatemachine::State "0..9999" --* "1..1" trialStatemachine::Region : states9
+trialStatemachine::Region "1..1" -- "1..1" trialStatemachine::State : super1
+trialStatemachine::Region "1..1" -- "0..1" trialStatemachine::ComplexState : super15
+trialStatemachine::State "1..1" -- "1..1" trialStatemachine::LabeledTransition : target18
+@enduml

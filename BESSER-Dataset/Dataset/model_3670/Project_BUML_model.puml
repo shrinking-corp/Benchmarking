@@ -1,0 +1,21 @@
+@startuml
+class Project::Department {
+  + budget : int
+  + location : str
+  + name : str
+}
+class Project::Employee {
+  + name : str
+  + salary : int
+}
+class Project::Project {
+  + budget : int
+  + name : str
+}
+Project::Department "1..1" -- "1..1" Project::Project : Controls_Department14
+Project::Department "1..1" -- "0..9999" Project::Project : Controls_Project8
+Project::Employee "1..1" -- "1..9999" Project::Department : WorksIn_Department0
+Project::Employee "0..9999" -- "1..1" Project::Department : WorksIn_Employee5
+Project::Employee "0..9999" -- "1..1" Project::Project : WorksOn_Employee11
+Project::Project "0..9999" -- "1..1" Project::Employee : WorksOn_Project2
+@enduml

@@ -1,0 +1,83 @@
+@startuml
+enum ConditionKind {
+  EQUALS
+  GREATER_THAN
+  LESSER_THAN
+  NOT_EQUALS
+}
+class Instruction {
+}
+class NamedElement {
+}
+class behaviour::Action {
+}
+class behaviour::Choice {
+}
+class behaviour::Condition {
+  + key : str
+  + operation : str
+  + value : str
+}
+class behaviour::Drone {
+}
+class behaviour::DroneBehaviour {
+  + canBeInterrupted : bool
+}
+class behaviour::FieldObject {
+}
+class behaviour::Instruct {
+}
+abstract class behaviour::Instruction {
+}
+class behaviour::Lift {
+}
+class behaviour::MovableObject {
+}
+class behaviour::MoveTo {
+}
+abstract class behaviour::NamedElement {
+  + name : str
+}
+class behaviour::Pause {
+  + duration : float
+}
+class behaviour::PerformAction {
+}
+class behaviour::PlaceObject {
+}
+class behaviour::SendMessage {
+  + messageType : str
+}
+class behaviour::WaitForMessage {
+  + timeout : float
+  + type : str
+}
+class behaviour::While {
+}
+Instruction <|-- behaviour::Choice
+Instruction <|-- behaviour::Instruct
+Instruction <|-- behaviour::Lift
+Instruction <|-- behaviour::MoveTo
+Instruction <|-- behaviour::Pause
+Instruction <|-- behaviour::PerformAction
+Instruction <|-- behaviour::PlaceObject
+Instruction <|-- behaviour::SendMessage
+Instruction <|-- behaviour::WaitForMessage
+Instruction <|-- behaviour::While
+NamedElement <|-- behaviour::DroneBehaviour
+behaviour::Action "1..1" -- "1..1" behaviour::PerformAction : action4
+behaviour::Condition "1..1" --* "1..1" behaviour::While : condition25
+behaviour::Condition "1..1" --* "1..1" behaviour::Choice : condition8
+behaviour::Drone "1..9999" -- "1..1" behaviour::DroneBehaviour : drones1
+behaviour::Instruction "0..9999" --* "1..1" behaviour::Choice : falseBranch12
+behaviour::Condition "1..1" -- "1..1" behaviour::FieldObject : fieldObject15
+behaviour::MoveTo "1..1" -- "1..1" behaviour::FieldObject : fieldObject3
+behaviour::Instruction "1..9999" --* "1..1" behaviour::DroneBehaviour : instructions0
+behaviour::While "1..1" *-- "1..9999" behaviour::Instruction : instructions23
+behaviour::Instruction "1..9999" --* "1..1" behaviour::Instruct : instructions28
+behaviour::MovableObject "1..1" -- "1..1" behaviour::Lift : target30
+behaviour::PerformAction "1..1" -- "1..1" behaviour::FieldObject : target5
+behaviour::Instruction "1..9999" --* "1..1" behaviour::Choice : trueBranch9
+behaviour::Instruction "1..9999" --* "1..1" behaviour::WaitForMessage : whenArrived18
+behaviour::Instruction "1..9999" --* "1..1" behaviour::WaitForMessage : whenLost20
+@enduml

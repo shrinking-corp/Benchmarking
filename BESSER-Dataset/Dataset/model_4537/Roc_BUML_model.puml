@@ -1,0 +1,66 @@
+@startuml
+enum DurationUnit {
+  MILLISECONDS
+  MINUTES
+  SECONDS
+}
+enum Intensity {
+  A
+  B
+  C
+  D
+  E
+}
+class roc::Action {
+  + intensity : str
+}
+class roc::CompleteAction {
+  + actionName : str
+}
+class roc::DirectedAction {
+}
+class roc::Direction {
+  + DOWN : str
+  + LEFT : str
+  + RIGHT : str
+  + UP : str
+}
+class roc::EObject {
+}
+class roc::FullDirectedAction {
+  + turnEyes : str
+  + turnHead : str
+}
+class roc::LeftRightDirectedAction {
+  + tiltHead : str
+}
+class roc::LeftRightDirection {
+  + left : str
+  + right : str
+}
+class roc::Motion {
+  + duration : str
+  + durationUnit : str
+}
+class roc::Movement {
+}
+class roc::Program {
+}
+class roc::SingleAction {
+  + actionName : str
+}
+class roc::Speed {
+  + FAST : str
+  + FULL : str
+  + NORMAL : str
+  + SLOW : str
+  + SLOWEST : str
+}
+roc::Action "0..1" --* "1..1" roc::Motion : action3
+roc::EObject "0..1" --* "1..1" roc::Action : actionHolder7
+roc::EObject "0..1" --* "1..1" roc::DirectedAction : actionName9
+roc::EObject "0..1" --* "1..1" roc::DirectedAction : direction11
+roc::Movement "1..1" *-- "0..9999" roc::Motion : motions1
+roc::Movement "0..9999" --* "1..1" roc::Program : movements0
+roc::Motion "1..1" *-- "0..1" roc::Speed : speed5
+@enduml

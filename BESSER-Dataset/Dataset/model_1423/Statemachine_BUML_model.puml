@@ -1,0 +1,65 @@
+@startuml
+class Guard {
+}
+class Value {
+}
+class statemachine::Command {
+  + code : int
+  + name : str
+}
+class statemachine::Constant {
+  + name : str
+}
+class statemachine::ConstantRef {
+}
+class statemachine::Event {
+  + code : int
+  + name : str
+}
+class statemachine::Guard {
+}
+class statemachine::IntLiteral {
+  + value : int
+}
+class statemachine::RangeGuard {
+}
+class statemachine::State {
+  + description : str
+  + name : str
+}
+class statemachine::Statemachine {
+  + name : str
+}
+class statemachine::Thing {
+  + name : str
+}
+class statemachine::Transition {
+}
+class statemachine::Value {
+}
+class statemachine::ValueGuard {
+}
+Guard <|-- statemachine::RangeGuard
+Guard <|-- statemachine::ValueGuard
+Value <|-- statemachine::ConstantRef
+Value <|-- statemachine::IntLiteral
+statemachine::Command "0..9999" -- "1..1" statemachine::State : actions26
+statemachine::Command "0..9999" --* "1..1" statemachine::Statemachine : commands4
+statemachine::Value "0..1" --* "1..1" statemachine::ValueGuard : cond12
+statemachine::Constant "0..1" -- "1..1" statemachine::ConstantRef : constant18
+statemachine::Constant "0..9999" --* "1..1" statemachine::Statemachine : constants6
+statemachine::Transition "1..1" -- "0..1" statemachine::Event : event33
+statemachine::Event "0..9999" --* "1..1" statemachine::Statemachine : events0
+statemachine::Event "1..1" *-- "0..1" statemachine::Guard : guard10
+statemachine::Command "1..1" *-- "0..1" statemachine::Guard : guard20
+statemachine::Guard "0..1" --* "1..1" statemachine::Transition : guard36
+statemachine::Guard "0..1" --* "1..1" statemachine::Thing : guard42
+statemachine::RangeGuard "1..1" *-- "0..1" statemachine::Value : max15
+statemachine::Value "0..1" --* "1..1" statemachine::RangeGuard : min13
+statemachine::Statemachine "1..1" -- "0..9999" statemachine::Event : resetEvents1
+statemachine::State "0..1" -- "1..1" statemachine::Transition : state39
+statemachine::State "0..9999" --* "1..1" statemachine::Statemachine : states8
+statemachine::Thing "0..9999" --* "1..1" statemachine::State : things31
+statemachine::Transition "0..9999" --* "1..1" statemachine::State : transitions29
+statemachine::Value "0..1" --* "1..1" statemachine::Constant : value23
+@enduml

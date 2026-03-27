@@ -1,0 +1,88 @@
+@startuml
+class DataKind {
+}
+enum KindHintType {
+  AVG
+  BH
+}
+class Mapping {
+}
+class MappingRecord {
+}
+enum ObjectNameType {
+  EQUIPMENT
+  FUNCTION
+  NODE
+}
+enum ValueKindType {
+  DATETIME
+  METRIC
+  NULL
+}
+class metrics::DataKind {
+}
+class metrics::DateTimeRange {
+}
+class metrics::IdentifierDataKind {
+  + objectAttribute : str
+  + objectName : str
+}
+class metrics::Mapping {
+}
+class metrics::MappingCSV {
+}
+class metrics::MappingRDBMS {
+}
+class metrics::MappingRecord {
+}
+class metrics::MappingRecordXLS {
+  + column : str
+  + row : str
+}
+class metrics::MappingStatistic {
+  + totalRecords : str
+}
+class metrics::MappingXLS {
+  + columnHeaders : str
+  + firstDataRow : str
+  + headerRow : str
+  + sheetNumber : str
+}
+class metrics::Metric {
+  + description : str
+  + measurementKind : str
+  + measurementPoint : str
+  + metricCalculation : str
+  + name : str
+  + unitRef : str
+}
+class metrics::MetricSource {
+  + metricLocation : str
+  + name : str
+}
+class metrics::MetricValueRange {
+  + kindHint : str
+  + name : str
+  + periodHint : str
+}
+class metrics::Value {
+}
+class metrics::ValueDataKind {
+  + valueKind : str
+}
+DataKind <|-- metrics::IdentifierDataKind
+DataKind <|-- metrics::ValueDataKind
+MappingRecord <|-- metrics::MappingRecordXLS
+Mapping <|-- metrics::MappingCSV
+Mapping <|-- metrics::MappingRDBMS
+Mapping <|-- metrics::MappingXLS
+metrics::DataKind "0..9999" --* "1..1" metrics::MappingXLS : columnDataKind3
+metrics::MappingRecord "0..9999" --* "1..1" metrics::MappingStatistic : failedRecords0
+metrics::MappingStatistic "1..1" *-- "1..1" metrics::DateTimeRange : mappingDuration1
+metrics::MetricSource "1..1" *-- "0..1" metrics::Mapping : metricMapping8
+metrics::Metric "0..9999" -- "1..1" metrics::MetricSource : metricRefs7
+metrics::MetricSource "0..1" -- "1..1" metrics::Metric : metricSourceRef6
+metrics::MetricValueRange "1..1" *-- "0..9999" metrics::Value : metricValues12
+metrics::Metric "0..9999" --* "1..1" metrics::Metric : metrics5
+metrics::MappingStatistic "0..9999" --* "1..1" metrics::MetricSource : statistics9
+@enduml

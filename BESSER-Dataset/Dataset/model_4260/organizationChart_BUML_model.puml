@@ -1,0 +1,43 @@
+@startuml
+enum StructureType {
+  businessUnit
+  department
+  division
+  service
+  team
+}
+class organizationchart::Employee {
+  + firstname : str
+  + lastname : str
+  + title : str
+  + trigraph : str
+}
+class organizationchart::Function {
+  + name : str
+}
+class organizationchart::Location {
+  + name : str
+}
+class organizationchart::Organization {
+  + name : str
+}
+class organizationchart::OrganizationalStructure {
+  + name : str
+  + type : str
+}
+organizationchart::OrganizationalStructure "0..1" -- "1..1" organizationchart::Employee : belongsTo2
+organizationchart::Employee "0..9999" --* "1..1" organizationchart::Organization : employees12
+organizationchart::OrganizationalStructure "1..1" -- "0..9999" organizationchart::Employee : employees17
+organizationchart::Employee "0..9999" -- "1..1" organizationchart::Location : employees26
+organizationchart::Employee "0..9999" -- "1..1" organizationchart::Function : isPerformedBy28
+organizationchart::OrganizationalStructure "0..9999" -- "1..1" organizationchart::Employee : leads9
+organizationchart::Location "0..1" -- "1..1" organizationchart::Employee : location3
+organizationchart::Location "0..9999" --* "1..1" organizationchart::Organization : locations15
+organizationchart::Employee "0..1" -- "1..1" organizationchart::OrganizationalStructure : manager24
+organizationchart::Employee "1..1" -- "0..1" organizationchart::Employee : manager6
+organizationchart::Employee "1..1" -- "0..9999" organizationchart::Employee : manages1
+organizationchart::Function "0..9999" --* "1..1" organizationchart::OrganizationalStructure : owns22
+organizationchart::Function "0..9999" -- "1..1" organizationchart::Employee : performs8
+organizationchart::Organization "1..1" *-- "0..9999" organizationchart::OrganizationalStructure : structures13
+organizationchart::OrganizationalStructure "1..1" *-- "0..9999" organizationchart::OrganizationalStructure : subStructures20
+@enduml

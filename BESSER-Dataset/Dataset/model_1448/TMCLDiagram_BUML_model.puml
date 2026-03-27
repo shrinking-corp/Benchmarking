@@ -1,0 +1,36 @@
+@startuml
+enum EdgeType {
+  AKO_TYPE
+  IS_A_TYPE
+  ROLE_CONSTRAINT_TYPE
+}
+class Node {
+}
+class model::AssociationNode {
+  + associationTypeConstraint : str
+}
+class model::BendPoint {
+  + posX : int
+  + posY : int
+}
+class model::Diagram {
+  + topicMapSchema : str
+}
+class model::Edge {
+  + type : str
+}
+class model::Node {
+  + posX : int
+  + posY : int
+}
+class model::TypeNode {
+  + topicType : str
+}
+Node <|-- model::AssociationNode
+Node <|-- model::TypeNode
+model::BendPoint "0..1" --* "1..1" model::Edge : bendpoints3
+model::Diagram "1..1" *-- "0..9999" model::Edge : edges1
+model::Node "0..9999" --* "1..1" model::Diagram : nodes0
+model::Edge "1..1" -- "1..1" model::Node : source5
+model::Node "1..1" -- "1..1" model::Edge : target8
+@enduml

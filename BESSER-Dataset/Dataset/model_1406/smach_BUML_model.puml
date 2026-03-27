@@ -1,0 +1,55 @@
+@startuml
+class ActionClient {
+}
+class Node {
+}
+enum SMACHGoalTypes {
+  static_goal
+  userdata_goal
+}
+class SMACHState {
+}
+enum SMACHStateOutcomes {
+  aborted
+  preempted
+  succeeded
+}
+class ServiceClient {
+}
+class smach::ActionState {
+}
+class smach::FinalState {
+  + type : str
+}
+class smach::InitActionState {
+}
+class smach::InitStraightState {
+}
+class smach::SMACHState {
+  + goal : str
+  + goal_type : str
+  + remap_overwrite : str
+}
+class smach::SMACHStateMachine {
+  + SkillInterface : bool
+}
+class smach::SMACHTransition {
+  + name : str
+}
+class smach::ServiceState {
+}
+ActionClient <|-- smach::ActionState
+Node <|-- smach::SMACHStateMachine
+SMACHState <|-- smach::ActionState
+SMACHState <|-- smach::FinalState
+SMACHState <|-- smach::InitActionState
+SMACHState <|-- smach::InitStraightState
+SMACHState <|-- smach::ServiceState
+ServiceClient <|-- smach::ServiceState
+smach::SMACHState "1..1" -- "1..1" smach::SMACHTransition : Source7
+smach::SMACHState "1..1" -- "1..1" smach::SMACHTransition : Target10
+smach::SMACHStateMachine "1..1" *-- "0..9999" smach::FinalState : finalStates3
+smach::InitActionState "0..9999" --* "1..1" smach::SMACHStateMachine : initialStates5
+smach::SMACHStateMachine "1..1" *-- "0..9999" smach::SMACHState : states0
+smach::SMACHTransition "0..9999" --* "1..1" smach::SMACHStateMachine : transitions1
+@enduml

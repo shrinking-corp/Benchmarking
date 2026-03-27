@@ -1,0 +1,59 @@
+@startuml
+class traceability::Category {
+  + name : str
+}
+class traceability::DiffCategory {
+  + modelIndex : int
+  + name : str
+  + unequal : bool
+}
+class traceability::EObject {
+}
+class traceability::LogEntry {
+  + comment : str
+  + message : str
+  + messageType : int
+  + severity : int
+}
+class traceability::Trace {
+  + comment : str
+  + description : str
+  + value : str
+}
+class traceability::TraceComment {
+  + column : str
+  + comment : str
+  + date : date
+  + username : str
+}
+class traceability::TraceDiff {
+  + comment : str
+}
+class traceability::TraceDiffs {
+}
+class traceability::Traces {
+  + comments : str
+  + date : date
+  + fullName : str
+  + location : str
+  + originalSourceURL : str
+  + uriMap : str
+  + username : str
+}
+traceability::Trace "0..9999" --* "1..1" traceability::Trace : children5
+traceability::TraceComment "0..9999" --* "1..1" traceability::LogEntry : comments13
+traceability::TraceComment "0..9999" --* "1..1" traceability::TraceDiff : comments26
+traceability::TraceComment "0..9999" --* "1..1" traceability::Trace : comments9
+traceability::Traces "0..9999" -- "1..1" traceability::TraceDiffs : comparedTraces31
+traceability::EObject "0..9999" --* "1..1" traceability::Category : contents33
+traceability::DiffCategory "1..1" *-- "0..9999" traceability::TraceDiff : diffs29
+traceability::EObject "0..1" -- "1..1" traceability::TraceComment : narrowDown35
+traceability::Trace "0..1" -- "1..1" traceability::Trace : parent7
+traceability::EObject "0..9999" -- "1..1" traceability::LogEntry : participants11
+traceability::EObject "0..9999" -- "1..1" traceability::TraceDiff : participants24
+traceability::EObject "0..9999" -- "1..1" traceability::Trace : source0
+traceability::EObject "0..1" -- "1..1" traceability::Traces : sourceModel16
+traceability::Trace "1..1" -- "0..9999" traceability::EObject : target1
+traceability::Traces "1..1" -- "0..1" traceability::EObject : targetModel18
+traceability::Traces "1..1" *-- "0..9999" traceability::EObject : traces21
+@enduml

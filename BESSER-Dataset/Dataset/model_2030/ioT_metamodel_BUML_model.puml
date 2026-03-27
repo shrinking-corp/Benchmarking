@@ -1,0 +1,243 @@
+@startuml
+class Active::Digital::Artifact {
+}
+class Actuator {
+}
+class Device {
+}
+class DeviceState {
+}
+class Digital::Artifact {
+}
+class Entity {
+}
+class Evaluators {
+}
+class InformationResource {
+}
+class Passive::Digital::Artifact {
+}
+class PhysicalThing {
+}
+class Sensor {
+}
+class User {
+}
+class ioT::metamodel::Action {
+  + Description : str
+}
+class ioT::metamodel::Active::Digital::Artifact {
+}
+class ioT::metamodel::Actuator {
+  + name : str
+}
+class ioT::metamodel::Analytics::Engine {
+}
+class ioT::metamodel::AtomicData {
+}
+abstract class ioT::metamodel::AtomicDataAttributes {
+  + DataEncoding : str
+  + DeviceID : str
+}
+abstract class ioT::metamodel::Attribute {
+  + Type : str
+  + name : str
+}
+class ioT::metamodel::Authorizor {
+}
+class ioT::metamodel::Cloud {
+}
+class ioT::metamodel::Communicator {
+  + Type : str
+  + ports_number : int
+}
+class ioT::metamodel::CompositeState {
+}
+class ioT::metamodel::Container {
+  + ID : str
+  + IP_address : str
+}
+abstract class ioT::metamodel::DataStreamAttributes {
+  + DataEncoding : str
+  + DataFormat : str
+  + Description : str
+  + DeviceID : str
+  + MaxBitrate : str
+  + MeanBitRate : str
+  + Timestamp : str
+}
+class ioT::metamodel::DataStreams {
+}
+class ioT::metamodel::Database {
+}
+class ioT::metamodel::Device {
+  + Technology : str
+}
+class ioT::metamodel::Device::Resource {
+}
+class ioT::metamodel::DeviceActuator {
+}
+class ioT::metamodel::DeviceSensor {
+}
+class ioT::metamodel::DeviceState {
+  + Enabled : bool
+}
+class ioT::metamodel::Digital::Artifact {
+}
+class ioT::metamodel::Entity {
+}
+abstract class ioT::metamodel::Evaluators {
+}
+class ioT::metamodel::ExternalActuator {
+}
+class ioT::metamodel::ExternalSensor {
+}
+class ioT::metamodel::Fog {
+}
+class ioT::metamodel::Fog::Services {
+}
+class ioT::metamodel::FogNode {
+}
+class ioT::metamodel::Human::User {
+}
+class ioT::metamodel::Information {
+}
+class ioT::metamodel::InformationResource {
+}
+class ioT::metamodel::JavaEvaluator {
+}
+class ioT::metamodel::Network::Resource {
+}
+class ioT::metamodel::On::Device::Resource {
+}
+class ioT::metamodel::Operations {
+}
+class ioT::metamodel::Passive::Digital::Artifact {
+}
+class ioT::metamodel::PhysicalThing {
+}
+class ioT::metamodel::Policy::Repository {
+}
+class ioT::metamodel::Port {
+}
+class ioT::metamodel::Property {
+  + changeable : bool
+}
+class ioT::metamodel::Reference::Monitor {
+}
+class ioT::metamodel::Rule {
+  + conditionLiteral : str
+  + conditionValue : float
+}
+class ioT::metamodel::ScriptEvaluator {
+}
+abstract class ioT::metamodel::Sensor {
+  + Name : str
+  + State : bool
+  + frequency : float
+}
+class ioT::metamodel::Service::Resource {
+}
+class ioT::metamodel::Tag {
+  + Name : str
+}
+class ioT::metamodel::Thing {
+  + name : str
+}
+class ioT::metamodel::Transition {
+}
+class ioT::metamodel::User {
+}
+class ioT::metamodel::VM {
+}
+class ioT::metamodel::VirtualThing {
+  + URI : str
+}
+Active::Digital::Artifact <|-- ioT::metamodel::VirtualThing
+Actuator <|-- ioT::metamodel::DeviceActuator
+Actuator <|-- ioT::metamodel::ExternalActuator
+DeviceState <|-- ioT::metamodel::CompositeState
+Device <|-- ioT::metamodel::Actuator
+Device <|-- ioT::metamodel::Sensor
+Device <|-- ioT::metamodel::Tag
+Digital::Artifact <|-- ioT::metamodel::Active::Digital::Artifact
+Digital::Artifact <|-- ioT::metamodel::Passive::Digital::Artifact
+Entity <|-- ioT::metamodel::Attribute
+Entity <|-- ioT::metamodel::Thing
+Entity <|-- ioT::metamodel::User
+Evaluators <|-- ioT::metamodel::JavaEvaluator
+Evaluators <|-- ioT::metamodel::ScriptEvaluator
+InformationResource <|-- ioT::metamodel::Network::Resource
+InformationResource <|-- ioT::metamodel::On::Device::Resource
+Passive::Digital::Artifact <|-- ioT::metamodel::VirtualThing
+PhysicalThing <|-- ioT::metamodel::Device
+Sensor <|-- ioT::metamodel::DeviceSensor
+Sensor <|-- ioT::metamodel::ExternalSensor
+User <|-- ioT::metamodel::Active::Digital::Artifact
+User <|-- ioT::metamodel::Human::User
+ioT::metamodel::Action "0..9999" --* "1..1" ioT::metamodel::Transition : action60
+ioT::metamodel::Actuator "1..1" -- "0..9999" ioT::metamodel::PhysicalThing : acts40
+ioT::metamodel::Action "0..9999" -- "1..1" ioT::metamodel::DeviceActuator : actuator_actions56
+ioT::metamodel::Action "0..9999" -- "1..1" ioT::metamodel::ExternalActuator : actuator_actions58
+ioT::metamodel::Analytics::Engine "1..1" --* "1..1" ioT::metamodel::FogNode : analytics_engine25
+ioT::metamodel::Fog::Services "1..9999" -- "1..1" ioT::metamodel::FogNode : associates_with27
+ioT::metamodel::Information "1..1" *-- "0..9999" ioT::metamodel::AtomicData : atomicdata100
+ioT::metamodel::Fog "1..1" -- "1..1" ioT::metamodel::Authorizor : connects_with98
+ioT::metamodel::AtomicData "1..9999" -- "1..1" ioT::metamodel::DataStreams : consists_of104
+ioT::metamodel::Device "0..9999" --* "1..1" ioT::metamodel::Device : contains31
+ioT::metamodel::Thing "0..9999" -- "1..1" ioT::metamodel::Thing : contains5
+ioT::metamodel::Authorizor "1..1" --* "1..1" ioT::metamodel::Policy::Repository : contains93
+ioT::metamodel::Device::Resource "0..9999" --* "1..1" ioT::metamodel::On::Device::Resource : contains_device_resource79
+ioT::metamodel::Device::Resource "0..9999" --* "1..1" ioT::metamodel::Network::Resource : contains_device_resource83
+ioT::metamodel::Service::Resource "0..9999" --* "1..1" ioT::metamodel::On::Device::Resource : contains_service_resource81
+ioT::metamodel::Network::Resource "1..1" *-- "0..9999" ioT::metamodel::Service::Resource : contains_service_resource85
+ioT::metamodel::Database "1..9999" --* "1..1" ioT::metamodel::Fog : database18
+ioT::metamodel::DataStreams "0..9999" --* "1..1" ioT::metamodel::Information : datastreams102
+ioT::metamodel::Fog "1..1" -- "1..1" ioT::metamodel::Authorizor : define_control_policies_to20
+ioT::metamodel::DeviceState "1..1" --* "1..1" ioT::metamodel::Device : devicestate34
+ioT::metamodel::Authorizor "0..9999" -- "1..1" ioT::metamodel::Reference::Monitor : enforces96
+ioT::metamodel::InformationResource "1..9999" -- "1..1" ioT::metamodel::Fog::Services : exposes119
+ioT::metamodel::Thing "1..1" -- "1..1" ioT::metamodel::Fog : fog1
+ioT::metamodel::FogNode "0..9999" --* "1..1" ioT::metamodel::Fog : fognode16
+ioT::metamodel::PhysicalThing "1..1" -- "0..9999" ioT::metamodel::Device : has14
+ioT::metamodel::InformationResource "1..1" *-- "1..9999" ioT::metamodel::Information : has75
+ioT::metamodel::AtomicDataAttributes "1..1" -- "1..1" ioT::metamodel::AtomicData : has_atomicdataattributes109
+ioT::metamodel::Attribute "0..9999" -- "1..1" ioT::metamodel::InformationResource : has_attributes77
+ioT::metamodel::Communicator "0..9999" --* "1..1" ioT::metamodel::Device : has_communicators36
+ioT::metamodel::DataStreamAttributes "1..1" -- "1..1" ioT::metamodel::DataStreams : has_datastreamattributes107
+ioT::metamodel::PhysicalThing "0..9999" -- "1..1" ioT::metamodel::InformationResource : has_information_about72
+ioT::metamodel::Port "0..9999" --* "1..1" ioT::metamodel::Communicator : has_ports70
+ioT::metamodel::Device "1..1" *-- "0..9999" ioT::metamodel::Rule : has_rules32
+ioT::metamodel::On::Device::Resource "0..9999" --* "1..1" ioT::metamodel::Device : hosts38
+ioT::metamodel::PhysicalThing "0..9999" -- "1..1" ioT::metamodel::Tag : identifies45
+ioT::metamodel::DeviceState "0..9999" -- "1..1" ioT::metamodel::Transition : incoming_states62
+ioT::metamodel::Reference::Monitor "1..1" -- "1..1" ioT::metamodel::Policy::Repository : interacts_with92
+ioT::metamodel::Operations "0..9999" --* "1..1" ioT::metamodel::Fog::Services : invokes114
+ioT::metamodel::Fog::Services "1..1" -- "0..9999" ioT::metamodel::Fog::Services : invokes_fog_services117
+ioT::metamodel::Rule "1..1" *-- "0..9999" ioT::metamodel::Action : involves52
+ioT::metamodel::InformationResource "0..9999" -- "1..1" ioT::metamodel::VirtualThing : is_associated_with12
+ioT::metamodel::PhysicalThing "0..9999" -- "1..1" ioT::metamodel::Device : is_attached_to29
+ioT::metamodel::VirtualThing "1..9999" -- "1..1" ioT::metamodel::Fog::Services : is_connected_with122
+ioT::metamodel::Sensor "1..1" -- "0..9999" ioT::metamodel::PhysicalThing : monitors47
+ioT::metamodel::DeviceState "0..1" -- "1..1" ioT::metamodel::Actuator : observes42
+ioT::metamodel::DeviceState "0..1" -- "1..1" ioT::metamodel::Sensor : observes49
+ioT::metamodel::Policy::Repository "1..1" -- "1..1" ioT::metamodel::Reference::Monitor : orchestrate_policies95
+ioT::metamodel::DeviceState "0..9999" -- "1..1" ioT::metamodel::Transition : outgoing_states65
+ioT::metamodel::PhysicalThing "0..1" --* "1..1" ioT::metamodel::Thing : physical_entity2
+ioT::metamodel::Evaluators "0..1" -- "1..1" ioT::metamodel::Operations : points_to_processing_logic125
+ioT::metamodel::Database "1..1" *-- "1..1" ioT::metamodel::Policy::Repository : policy_repository90
+ioT::metamodel::Property "0..9999" --* "1..1" ioT::metamodel::Thing : property7
+ioT::metamodel::PhysicalThing "1..1" -- "1..1" ioT::metamodel::VirtualThing : represents9
+ioT::metamodel::Cloud "1..9999" -- "1..1" ioT::metamodel::Fog : request_cloud_service17
+ioT::metamodel::Fog "1..1" -- "1..9999" ioT::metamodel::Thing : request_service15
+ioT::metamodel::Fog "1..9999" -- "1..1" ioT::metamodel::Cloud : respond_to_fog88
+ioT::metamodel::Container "1..1" -- "1..1" ioT::metamodel::Fog::Services : runs_in111
+ioT::metamodel::Operations "1..1" -- "0..1" ioT::metamodel::Container : runs_in127
+ioT::metamodel::FogNode "1..1" *-- "1..9999" ioT::metamodel::Container : runs_in_container23
+ioT::metamodel::VM "1..9999" --* "1..1" ioT::metamodel::FogNode : runs_on_vm21
+ioT::metamodel::Action "0..9999" -- "1..1" ioT::metamodel::DeviceSensor : sensor_actions133
+ioT::metamodel::Action "0..9999" -- "1..1" ioT::metamodel::ExternalSensor : sensor_actions54
+ioT::metamodel::Fog::Services "0..9999" -- "1..1" ioT::metamodel::User : subscribes_invokes68
+ioT::metamodel::Operations "1..1" -- "1..9999" ioT::metamodel::InformationResource : subscribes_to130
+ioT::metamodel::VirtualThing "1..1" --* "1..1" ioT::metamodel::Thing : virtual_entity0
+@enduml

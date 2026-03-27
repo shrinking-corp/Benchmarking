@@ -1,0 +1,43 @@
+@startuml
+enum Annotation {
+  Id
+  ManyToMany
+  ManyToManyMapped
+  ManyToOne
+  None
+  OneToMany
+  OneToOne
+}
+class Type {
+}
+class metamodel::Datatype {
+}
+class metamodel::Entity {
+}
+class metamodel::Feature {
+  + annotation : str
+  + mappedBy : str
+  + name : str
+}
+class metamodel::Model {
+}
+class metamodel::Query {
+  + methodName : str
+  + queryString : str
+}
+abstract class metamodel::Type {
+  + name : str
+}
+class metamodel::parameter {
+  + name : str
+}
+Type <|-- metamodel::Datatype
+Type <|-- metamodel::Entity
+metamodel::Entity "0..1" --* "1..1" metamodel::Query : EReference07
+metamodel::Feature "0..9999" --* "1..1" metamodel::Entity : features1
+metamodel::parameter "0..9999" --* "1..1" metamodel::Query : parameters10
+metamodel::Query "0..9999" --* "1..1" metamodel::Entity : queries2
+metamodel::parameter "1..1" -- "0..1" metamodel::Type : type12
+metamodel::Type "0..1" -- "1..1" metamodel::Feature : type4
+metamodel::Model "1..1" *-- "0..9999" metamodel::Type : types0
+@enduml

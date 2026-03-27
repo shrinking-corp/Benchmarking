@@ -1,0 +1,26 @@
+@startuml
+class source::Association {
+  + name : str
+}
+class source::Attribute {
+  + is_primary : bool
+  + name : str
+}
+class source::Class {
+  + name : str
+}
+class source::ClassDiagram {
+}
+class source::PrimitiveDataType {
+  + name : str
+}
+source::ClassDiagram "1..1" *-- "0..9999" source::Association : ass16
+source::Attribute "1..9999" --* "1..1" source::Class : attrs2
+source::Class "0..9999" --* "1..1" source::ClassDiagram : class14
+source::Class "1..1" -- "1..1" source::Association : dest6
+source::Class "0..1" -- "1..1" source::Class : parent1
+source::PrimitiveDataType "0..1" -- "1..1" source::Attribute : ptype12
+source::PrimitiveDataType "0..9999" --* "1..1" source::ClassDiagram : ptypes19
+source::Class "1..1" -- "1..1" source::Association : src4
+source::Class "0..1" -- "1..1" source::Attribute : type9
+@enduml

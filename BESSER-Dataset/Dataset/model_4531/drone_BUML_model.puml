@@ -1,0 +1,116 @@
+@startuml
+class NamedElement {
+}
+class PropertyValue {
+}
+class drone::AreaObject {
+}
+class drone::Battery {
+}
+class drone::Capability {
+}
+class drone::CapabilityProperties {
+}
+class drone::Coordinate {
+  + altitude : float
+  + latitude : float
+  + longitude : float
+}
+class drone::EObject {
+}
+class drone::Equipment {
+}
+class drone::MeasureConversion {
+  + rate : float
+}
+class drone::MeasureDimension {
+}
+class drone::MeasureValue {
+  + value : float
+}
+class drone::Mission {
+}
+abstract class drone::NamedElement {
+  + name : str
+}
+class drone::Position {
+}
+class drone::Property {
+}
+class drone::PropertyKey {
+}
+class drone::PropertyKeyContainer {
+}
+abstract class drone::PropertyValue {
+}
+class drone::Robot {
+}
+class drone::RobotMissionContainer {
+}
+class drone::Size {
+}
+class drone::StringValue {
+  + value : str
+}
+class drone::Task {
+}
+class drone::TaskDescriptor {
+}
+NamedElement <|-- drone::AreaObject
+NamedElement <|-- drone::Capability
+NamedElement <|-- drone::Equipment
+NamedElement <|-- drone::MeasureDimension
+NamedElement <|-- drone::Mission
+NamedElement <|-- drone::PropertyKey
+NamedElement <|-- drone::PropertyKeyContainer
+NamedElement <|-- drone::Robot
+NamedElement <|-- drone::Task
+PropertyValue <|-- drone::MeasureValue
+PropertyValue <|-- drone::StringValue
+drone::RobotMissionContainer "1..1" *-- "0..9999" drone::AreaObject : areaObjects91
+drone::Battery "0..9999" --* "1..1" drone::Robot : batteries29
+drone::Capability "0..9999" -- "1..1" drone::Robot : capabilities45
+drone::Capability "0..9999" --* "1..1" drone::RobotMissionContainer : capabilities94
+drone::CapabilityProperties "1..1" -- "1..1" drone::Capability : capability107
+drone::Robot "1..1" *-- "0..9999" drone::CapabilityProperties : capabilityProperties47
+drone::MeasureValue "1..1" --* "1..1" drone::Battery : capacity58
+drone::Robot "1..1" *-- "0..1" drone::MeasureValue : communicationRange38
+drone::MeasureDimension "1..1" *-- "0..9999" drone::MeasureConversion : conversions80
+drone::Coordinate "0..9999" --* "1..1" drone::Position : coordinates8
+drone::TaskDescriptor "1..1" --* "1..1" drone::Task : descriptor2
+drone::MeasureDimension "1..1" -- "1..1" drone::MeasureValue : dimension76
+drone::MeasureDimension "1..1" -- "1..1" drone::MeasureConversion : dimension78
+drone::Equipment "0..9999" --* "1..1" drone::Robot : equipments31
+drone::Equipment "1..1" -- "0..9999" drone::Capability : facilitate73
+drone::MeasureValue "1..1" --* "1..1" drone::Size : height52
+drone::PropertyKey "1..1" -- "1..1" drone::Property : key22
+drone::PropertyKeyContainer "1..1" *-- "0..9999" drone::PropertyKey : keys101
+drone::MeasureValue "1..1" --* "1..1" drone::Size : length55
+drone::MeasureDimension "0..9999" --* "1..1" drone::RobotMissionContainer : measureDimensions88
+drone::Task "1..1" -- "1..1" drone::Mission : mission1
+drone::Mission "0..1" -- "1..1" drone::Robot : mission43
+drone::Mission "0..9999" --* "1..1" drone::RobotMissionContainer : missions83
+drone::Robot "1..1" *-- "1..1" drone::Position : position24
+drone::AreaObject "1..1" *-- "0..9999" drone::Position : positions12
+drone::Property "0..9999" --* "1..1" drone::CapabilityProperties : properties104
+drone::Property "0..9999" --* "1..1" drone::AreaObject : properties17
+drone::Property "0..9999" --* "1..1" drone::Robot : properties35
+drone::Property "0..9999" --* "1..1" drone::TaskDescriptor : properties4
+drone::Property "0..9999" --* "1..1" drone::Battery : properties67
+drone::Property "0..9999" --* "1..1" drone::Equipment : properties70
+drone::Property "0..9999" --* "1..1" drone::Position : properties9
+drone::PropertyKeyContainer "0..1" --* "1..1" drone::RobotMissionContainer : propertyKeyContainer97
+drone::MeasureValue "1..1" --* "1..1" drone::Battery : rechargeTime64
+drone::Robot "0..9999" --* "1..1" drone::RobotMissionContainer : robots85
+drone::Size "0..1" --* "1..1" drone::AreaObject : size15
+drone::Size "1..1" --* "1..1" drone::Robot : size26
+drone::AreaObject "0..9999" -- "1..1" drone::TaskDescriptor : targets3
+drone::TaskDescriptor "1..1" -- "0..1" drone::Task : task6
+drone::Task "1..9999" --* "1..1" drone::Mission : tasks0
+drone::Robot "1..1" -- "0..9999" drone::Task : tasks33
+drone::EObject "0..9999" --* "1..1" drone::RobotMissionContainer : temporalElements99
+drone::PropertyValue "1..1" --* "1..1" drone::Property : value20
+drone::Battery "1..1" *-- "1..1" drone::MeasureValue : voltage61
+drone::MeasureValue "0..1" --* "1..1" drone::Robot : weight40
+drone::MeasureValue "1..1" --* "1..1" drone::Size : width49
+@enduml

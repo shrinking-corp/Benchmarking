@@ -1,0 +1,53 @@
+@startuml
+class RootIn {
+}
+class RootOut {
+}
+class Trace {
+}
+class traces::A {
+  + name : str
+}
+class traces::B {
+  + name : str
+}
+class traces::C {
+  + name : str
+}
+class traces::D {
+  + name : str
+}
+class traces::E {
+  + name : str
+}
+class traces::R1::Trace {
+}
+class traces::R2::Trace {
+}
+abstract class traces::RootIn {
+}
+abstract class traces::RootOut {
+}
+abstract class traces::Trace {
+}
+RootIn <|-- traces::A
+RootIn <|-- traces::B
+RootIn <|-- traces::C
+RootOut <|-- traces::D
+RootOut <|-- traces::E
+Trace <|-- traces::R1::Trace
+Trace <|-- traces::R2::Trace
+traces::Trace "1..1" -- "1..9999" traces::RootIn : from0
+traces::A "0..1" -- "1..1" traces::B : refA17
+traces::B "0..9999" -- "1..1" traces::A : refB12
+traces::C "0..9999" -- "1..1" traces::A : refC15
+traces::D "0..1" -- "1..1" traces::D : refD24
+traces::E "1..1" -- "0..1" traces::D : refD26
+traces::D "1..1" -- "0..9999" traces::E : refE20
+traces::A "1..1" -- "1..1" traces::R1::Trace : s3
+traces::B "1..1" -- "1..1" traces::R2::Trace : s9
+traces::E "1..1" -- "1..1" traces::R2::Trace : t10
+traces::R1::Trace "1..1" -- "1..1" traces::D : t14
+traces::R1::Trace "1..1" -- "1..1" traces::D : t26
+traces::RootOut "1..9999" -- "1..1" traces::Trace : to1
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+class Unit {
+}
+class units::av::Advice {
+}
+class units::av::BaseUnit {
+  + name : str
+}
+class units::av::EObject {
+}
+class units::av::GlobalScope {
+}
+class units::av::PerJoinPointScope {
+}
+class units::av::Unit {
+}
+class units::av::UnitCarryingElement {
+  + unitSpecification : str
+}
+class units::av::UnitLiteral {
+}
+class units::av::UnitMultiplication {
+}
+class units::av::UnitPower {
+  + exponent : int
+}
+class units::av::UnitRepository {
+}
+Unit <|-- units::av::UnitLiteral
+Unit <|-- units::av::UnitMultiplication
+Unit <|-- units::av::UnitPower
+units::av::UnitLiteral "1..1" -- "0..1" units::av::BaseUnit : baseUnit6
+units::av::EObject "0..9999" --* "1..1" units::av::Advice : children8
+units::av::EObject "1..1" -- "1..1" units::av::PerJoinPointScope : scopedObject11
+units::av::EObject "1..1" -- "1..1" units::av::GlobalScope : scopedObject9
+units::av::Unit "0..1" -- "1..1" units::av::UnitCarryingElement : unit0
+units::av::Unit "0..1" --* "1..1" units::av::UnitPower : unit4
+units::av::UnitRepository "1..1" *-- "0..9999" units::av::BaseUnit : units1
+units::av::UnitMultiplication "1..1" *-- "0..9999" units::av::Unit : units2
+@enduml

@@ -1,0 +1,146 @@
+@startuml
+class EventOccurrence {
+}
+class Events {
+}
+class Events::trace::EObject {
+}
+class Events::trace::GlobalState {
+}
+class Events::trace::Net {
+}
+class Events::trace::Transition {
+}
+class Net::mainEntryEventOccurrence {
+}
+class Net::mainExitEventOccurrence {
+}
+class Net::runEntryEventOccurrence {
+}
+class Net::runExitEventOccurrence {
+}
+class Place::addTokenEntryEventOccurrence {
+}
+class Place::addTokenExitEventOccurrence {
+}
+class Place::removeTokenEntryEventOccurrence {
+}
+class Place::removeTokenExitEventOccurrence {
+}
+class Place::tokens::State {
+}
+class States::trace::GlobalState {
+}
+class TracedObjects {
+}
+class Transition::fireEntryEventOccurrence {
+}
+class Transition::fireExitEventOccurrence {
+}
+class Transition::isEnabledEntryEventOccurrence {
+}
+class Transition::isEnabledExitEventOccurrence {
+}
+class petrinet::TracedPlace {
+}
+class petrinet::trace::Place {
+}
+abstract class trace::Events::EventOccurrence {
+}
+class trace::Events::Events {
+}
+class trace::Events::Net::mainEntryEventOccurrence {
+}
+class trace::Events::Net::mainExitEventOccurrence {
+}
+class trace::Events::Net::runEntryEventOccurrence {
+}
+class trace::Events::Net::runExitEventOccurrence {
+}
+class trace::Events::Place::addTokenEntryEventOccurrence {
+}
+class trace::Events::Place::addTokenExitEventOccurrence {
+}
+class trace::Events::Place::removeTokenEntryEventOccurrence {
+}
+class trace::Events::Place::removeTokenExitEventOccurrence {
+}
+class trace::Events::Transition::fireEntryEventOccurrence {
+}
+class trace::Events::Transition::fireExitEventOccurrence {
+}
+class trace::Events::Transition::isEnabledEntryEventOccurrence {
+}
+class trace::Events::Transition::isEnabledExitEventOccurrence {
+}
+class trace::GlobalState {
+}
+class trace::Net {
+}
+class trace::States::Place::tokens::State {
+  + tokens : int
+}
+class trace::StaticObjectsPools {
+}
+class trace::Trace {
+}
+class trace::Traced::TracedObjects {
+}
+class trace::Transition {
+}
+class trace::petrinet::TracedPlace {
+  + initialTokens : int
+  + name : str
+}
+EventOccurrence <|-- trace::Events::Net::mainEntryEventOccurrence
+EventOccurrence <|-- trace::Events::Net::mainExitEventOccurrence
+EventOccurrence <|-- trace::Events::Net::runEntryEventOccurrence
+EventOccurrence <|-- trace::Events::Net::runExitEventOccurrence
+EventOccurrence <|-- trace::Events::Place::addTokenEntryEventOccurrence
+EventOccurrence <|-- trace::Events::Place::addTokenExitEventOccurrence
+EventOccurrence <|-- trace::Events::Place::removeTokenEntryEventOccurrence
+EventOccurrence <|-- trace::Events::Place::removeTokenExitEventOccurrence
+EventOccurrence <|-- trace::Events::Transition::fireEntryEventOccurrence
+EventOccurrence <|-- trace::Events::Transition::fireExitEventOccurrence
+EventOccurrence <|-- trace::Events::Transition::isEnabledEntryEventOccurrence
+EventOccurrence <|-- trace::Events::Transition::isEnabledExitEventOccurrence
+Net::mainEntryEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Net_mainEntryEventOccurrence_Trace15
+Net::mainExitEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Net_mainExitEventOccurrence_Trace16
+Net::runEntryEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Net_runEntryEventOccurrence_Trace18
+Net::runExitEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Net_runExitEventOccurrence_Trace20
+Place::addTokenEntryEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Place_addTokenEntryEventOccurrence_Trace22
+Place::addTokenExitEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Place_addTokenExitEventOccurrence_Trace24
+Place::removeTokenEntryEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Place_removeTokenEntryEventOccurrence_Trace26
+trace::Events::Events "1..1" *-- "0..9999" Place::removeTokenExitEventOccurrence : Place_removeTokenExitEventOccurrence_Trace28
+trace::Events::Events "1..1" *-- "0..9999" Transition::fireEntryEventOccurrence : Transition_fireEntryEventOccurrence_Trace34
+Transition::fireExitEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Transition_fireExitEventOccurrence_Trace36
+Transition::isEnabledEntryEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Transition_isEnabledEntryEventOccurrence_Trace30
+Transition::isEnabledExitEventOccurrence "0..9999" --* "1..1" trace::Events::Events : Transition_isEnabledExitEventOccurrence_Trace32
+Net::mainEntryEventOccurrence "0..1" -- "1..1" trace::Events::Net::mainExitEventOccurrence : correspondingEntryEvent39
+trace::Events::Net::runExitEventOccurrence "1..1" -- "0..1" Net::runEntryEventOccurrence : correspondingEntryEvent43
+trace::Events::Place::addTokenExitEventOccurrence "1..1" -- "0..1" Place::addTokenEntryEventOccurrence : correspondingEntryEvent46
+trace::Events::Place::removeTokenExitEventOccurrence "1..1" -- "0..1" Place::removeTokenEntryEventOccurrence : correspondingEntryEvent50
+Transition::isEnabledEntryEventOccurrence "0..1" -- "1..1" trace::Events::Transition::isEnabledExitEventOccurrence : correspondingEntryEvent53
+Transition::fireEntryEventOccurrence "0..1" -- "1..1" trace::Events::Transition::fireExitEventOccurrence : correspondingEntryEvent59
+trace::Trace "1..1" *-- "1..1" Events : events1
+trace::GlobalState "1..1" -- "0..9999" EventOccurrence : eventsTriggeredDuringState7
+States::trace::GlobalState "1..9999" -- "1..1" trace::States::Place::tokens::State : globalStates62
+trace::GlobalState "0..9999" --* "1..1" trace::Trace : globalTrace0
+petrinet::trace::Place "0..1" -- "1..1" trace::petrinet::TracedPlace : originalObject66
+petrinet::TracedPlace "1..1" -- "1..1" trace::States::Place::tokens::State : parent61
+petrinet::TracedPlace "0..9999" --* "1..1" trace::Traced::TracedObjects : petrinet_tracedPlaces64
+trace::GlobalState "1..1" -- "0..9999" Place::tokens::State : place_tokens_States9
+trace::StaticObjectsPools "1..1" *-- "0..9999" trace::Net : pool_Nets12
+trace::Transition "0..9999" --* "1..1" trace::StaticObjectsPools : pool_Transitions10
+trace::Events::Transition::isEnabledExitEventOccurrence "1..1" -- "0..1" Events::trace::EObject : returnReturn55
+Events::trace::GlobalState "1..1" -- "1..1" trace::Events::EventOccurrence : stateDuringWhichTriggered14
+trace::StaticObjectsPools "1..1" --* "1..1" trace::Trace : staticObjectsPools5
+Events::trace::Net "0..1" -- "1..1" trace::Events::Net::mainEntryEventOccurrence : thisParam38
+Events::trace::Net "0..1" -- "1..1" trace::Events::Net::runEntryEventOccurrence : thisParam41
+petrinet::TracedPlace "0..1" -- "1..1" trace::Events::Place::addTokenEntryEventOccurrence : thisParam45
+petrinet::TracedPlace "0..1" -- "1..1" trace::Events::Place::removeTokenEntryEventOccurrence : thisParam48
+Events::trace::Transition "0..1" -- "1..1" trace::Events::Transition::isEnabledEntryEventOccurrence : thisParam52
+Events::trace::Transition "0..1" -- "1..1" trace::Events::Transition::fireEntryEventOccurrence : thisParam57
+trace::petrinet::TracedPlace "1..1" *-- "0..9999" Place::tokens::State : tokensTrace67
+TracedObjects "1..1" --* "1..1" trace::Trace : tracedObjects3
+@enduml

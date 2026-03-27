@@ -1,0 +1,18 @@
+@startuml
+class SimpleRDBMS::Column {
+  + id : int
+  + name : str
+  + type : str
+}
+class SimpleRDBMS::FKey {
+}
+class SimpleRDBMS::Table {
+  + id : int
+  + name : str
+}
+SimpleRDBMS::Table "1..1" *-- "0..9999" SimpleRDBMS::Column : cols3
+SimpleRDBMS::Column "0..9999" -- "1..1" SimpleRDBMS::FKey : cols9
+SimpleRDBMS::FKey "0..9999" --* "1..1" SimpleRDBMS::Table : fkeys0
+SimpleRDBMS::Column "0..9999" -- "1..1" SimpleRDBMS::Table : pkey1
+SimpleRDBMS::Table "1..1" -- "1..1" SimpleRDBMS::FKey : references6
+@enduml

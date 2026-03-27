@@ -1,0 +1,107 @@
+@startuml
+class Column {
+}
+enum ColumnType {
+  Boolean
+  Float
+  Integer
+  String
+  Text
+}
+class Content {
+}
+class DataSource {
+}
+class Entity {
+}
+class Field {
+}
+enum FieldType {
+  CheckBox
+  RadioButton
+  SubmitButton
+  TextBox
+}
+class Form {
+}
+class Link {
+}
+class Named {
+}
+class Page {
+}
+class RelatedEntity {
+}
+class webApplication::Named {
+  + name : str
+}
+class webApplication::WebApplicationModel {
+}
+class webApplication::content::CRUDForm {
+}
+abstract class webApplication::content::Content {
+}
+class webApplication::content::Field {
+  + type : str
+}
+class webApplication::content::Form {
+}
+class webApplication::content::Link {
+}
+class webApplication::content::Menu {
+  + itemName : str
+  + order : int
+  + url : str
+}
+class webApplication::content::MultipleContent {
+  + paginated : bool
+  + size : int
+}
+class webApplication::content::Page {
+}
+class webApplication::content::SingleContent {
+}
+class webApplication::data::Column {
+  + PK : bool
+  + lenght : int
+  + type : str
+}
+class webApplication::data::DataSource {
+}
+class webApplication::data::Entity {
+  + numberOfColumns : str
+  + getPK() : str
+  + getPKRelated() : str
+}
+class webApplication::data::RelatedEntity {
+}
+Content <|-- webApplication::content::Menu
+Content <|-- webApplication::content::MultipleContent
+Content <|-- webApplication::content::SingleContent
+Form <|-- webApplication::content::CRUDForm
+Named <|-- webApplication::WebApplicationModel
+Named <|-- webApplication::content::Content
+Named <|-- webApplication::content::Field
+Named <|-- webApplication::content::Form
+Named <|-- webApplication::content::Link
+Named <|-- webApplication::content::Page
+Named <|-- webApplication::data::Column
+Named <|-- webApplication::data::DataSource
+Named <|-- webApplication::data::Entity
+Named <|-- webApplication::data::RelatedEntity
+webApplication::data::Entity "1..1" *-- "1..9999" Column : columns7
+Content "0..9999" --* "1..1" webApplication::content::Page : contents15
+webApplication::content::Content "1..1" -- "1..1" DataSource : dataSource20
+webApplication::WebApplicationModel "1..1" *-- "0..9999" DataSource : dataSources1
+Entity "0..9999" --* "1..1" webApplication::WebApplicationModel : entities0
+Entity "1..1" -- "1..1" webApplication::data::DataSource : entity5
+Field "0..9999" --* "1..1" webApplication::content::CRUDForm : fields27
+Form "0..9999" --* "1..1" webApplication::content::Page : forms18
+Page "1..1" -- "1..1" webApplication::content::Link : from22
+Link "0..9999" --* "1..1" webApplication::content::Page : links16
+Page "0..9999" --* "1..1" webApplication::WebApplicationModel : pages3
+Entity "0..9999" -- "1..1" webApplication::data::Entity : relatedEntities10
+RelatedEntity "0..9999" --* "1..1" webApplication::data::Entity : relates8
+Entity "1..1" -- "1..1" webApplication::data::RelatedEntity : relatesTo13
+Page "1..1" -- "1..1" webApplication::content::Link : to24
+@enduml

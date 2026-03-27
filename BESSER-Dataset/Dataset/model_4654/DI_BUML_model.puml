@@ -1,0 +1,74 @@
+@startuml
+class DiagramElement {
+}
+class Edge {
+}
+class Node {
+}
+class Shape {
+}
+class mtm::di::Bounds {
+}
+abstract class mtm::di::Diagram {
+  + documentation : str
+  + id : str
+  + name : str
+  + resolution : str
+}
+abstract class mtm::di::DiagramElement {
+  + anyAttribute : str
+  + id : str
+}
+class mtm::di::DocumentRoot {
+  + mixed : str
+}
+class mtm::di::EStringToStringMapEntry {
+}
+abstract class mtm::di::Edge {
+}
+class mtm::di::ExtensionType {
+  + any : str
+}
+abstract class mtm::di::Label {
+}
+abstract class mtm::di::LabeledEdge {
+}
+abstract class mtm::di::LabeledShape {
+}
+abstract class mtm::di::Node {
+}
+abstract class mtm::di::Plane {
+  + diagramElementGroup : str
+}
+class mtm::di::Point {
+}
+abstract class mtm::di::Shape {
+}
+abstract class mtm::di::Style {
+  + id : str
+}
+DiagramElement <|-- mtm::di::Edge
+DiagramElement <|-- mtm::di::Node
+Edge <|-- mtm::di::LabeledEdge
+Node <|-- mtm::di::Label
+Node <|-- mtm::di::Plane
+Node <|-- mtm::di::Shape
+Shape <|-- mtm::di::LabeledShape
+mtm::di::Label "1..1" *-- "0..1" mtm::di::Bounds : bounds2
+mtm::di::Bounds "1..1" --* "1..1" mtm::di::Shape : bounds5
+mtm::di::Diagram "0..9999" --* "1..1" mtm::di::DocumentRoot : diagram14
+mtm::di::DiagramElement "0..9999" --* "1..1" mtm::di::DocumentRoot : diagramElement11
+mtm::di::DiagramElement "0..9999" --* "1..1" mtm::di::Plane : diagramElement3
+mtm::di::DocumentRoot "1..1" *-- "0..9999" mtm::di::Edge : edge16
+mtm::di::ExtensionType "0..1" --* "1..1" mtm::di::DiagramElement : extension0
+mtm::di::Label "0..9999" --* "1..1" mtm::di::DocumentRoot : label19
+mtm::di::DocumentRoot "1..1" *-- "0..9999" mtm::di::LabeledEdge : labeledEdge22
+mtm::di::LabeledShape "0..9999" --* "1..1" mtm::di::DocumentRoot : labeledShape24
+mtm::di::Node "0..9999" --* "1..1" mtm::di::DocumentRoot : node26
+mtm::di::Plane "0..9999" --* "1..1" mtm::di::DocumentRoot : plane28
+mtm::di::Shape "0..9999" --* "1..1" mtm::di::DocumentRoot : shape31
+mtm::di::DocumentRoot "1..1" *-- "0..9999" mtm::di::Style : style34
+mtm::di::Edge "1..1" *-- "2..9999" mtm::di::Point : waypoint1
+mtm::di::EStringToStringMapEntry "0..9999" --* "1..1" mtm::di::DocumentRoot : xMLNSPrefixMap7
+mtm::di::EStringToStringMapEntry "0..9999" --* "1..1" mtm::di::DocumentRoot : xSISchemaLocation8
+@enduml

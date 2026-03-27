@@ -1,0 +1,40 @@
+@startuml
+class Asset {
+}
+class Book {
+}
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class Library {
+}
+class libraryExample::Asset {
+  + value : float
+}
+class libraryExample::Book {
+  + category : str
+  + pages : int
+  + title : str
+}
+class libraryExample::Library {
+  + name : str
+}
+class libraryExample::SchoolBook {
+}
+class libraryExample::SchoolLibrary {
+  + location : str
+}
+class libraryExample::Writer {
+  + lastname : str
+  + name : str
+}
+Asset <|-- libraryExample::SchoolBook
+Book <|-- libraryExample::SchoolBook
+Library <|-- libraryExample::SchoolLibrary
+libraryExample::Book "0..9999" --* "1..1" libraryExample::Library : books0
+libraryExample::Book "0..9999" -- "1..1" libraryExample::Writer : books4
+libraryExample::Book "1..1" -- "1..1" libraryExample::Writer : writer3
+libraryExample::Writer "0..9999" --* "1..1" libraryExample::Library : writers1
+@enduml

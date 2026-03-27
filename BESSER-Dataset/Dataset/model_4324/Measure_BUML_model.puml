@@ -1,0 +1,56 @@
+@startuml
+enum ElementKind {
+  class
+  interface
+  metamodel
+  model
+  package
+}
+class Measure {
+}
+class Measure::Category {
+  + desc : str
+  + name : str
+}
+class Measure::DoubleMeasure {
+  + value : str
+}
+class Measure::IntegerMeasure {
+  + value : str
+}
+abstract class Measure::Measure {
+}
+class Measure::MeasureSet {
+  + elementName : str
+  + elementType : str
+}
+class Measure::Metric {
+  + desc : str
+  + name : str
+  + preferredValue : str
+}
+class Measure::PercentageMeasure {
+  + value : str
+}
+class Measure::RootMeasureSet {
+  + modelType : str
+}
+enum ModelKind {
+  KM3
+  UML2
+}
+Measure <|-- Measure::DoubleMeasure
+Measure <|-- Measure::IntegerMeasure
+Measure <|-- Measure::PercentageMeasure
+Measure::Category "1..9999" --* "1..1" Measure::RootMeasureSet : categories0
+Measure::Category "1..1" -- "1..1" Measure::Metric : category5
+Measure::RootMeasureSet "1..1" *-- "0..9999" Measure::MeasureSet : measureSets1
+Measure::Measure "0..9999" --* "1..1" Measure::MeasureSet : measures7
+Measure::Metric "1..1" -- "1..1" Measure::Measure : metric16
+Measure::Metric "1..9999" --* "1..1" Measure::Category : metrics3
+Measure::MeasureSet "1..1" -- "1..1" Measure::Measure : owner17
+Measure::MeasureSet "1..1" -- "0..1" Measure::MeasureSet : parent14
+Measure::Category "1..1" -- "1..1" Measure::RootMeasureSet : root4
+Measure::RootMeasureSet "0..1" -- "1..1" Measure::MeasureSet : root8
+Measure::MeasureSet "0..9999" --* "1..1" Measure::MeasureSet : subsets11
+@enduml

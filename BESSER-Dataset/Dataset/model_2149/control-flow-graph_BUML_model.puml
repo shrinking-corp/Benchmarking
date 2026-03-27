@@ -1,0 +1,43 @@
+@startuml
+class BodyVertex {
+}
+class ControlFlowVertex {
+}
+class StatementVertex {
+}
+abstract class cfgraph::BodyVertex {
+}
+class cfgraph::BranchingVertex {
+}
+class cfgraph::CallVertex {
+}
+class cfgraph::ControlFlowEdge {
+  + backward : bool
+}
+class cfgraph::ControlFlowGraph {
+}
+abstract class cfgraph::ControlFlowVertex {
+}
+class cfgraph::EndVertex {
+}
+class cfgraph::SimpleStatementVertex {
+}
+class cfgraph::StartVertex {
+}
+abstract class cfgraph::StatementVertex {
+}
+BodyVertex <|-- cfgraph::BranchingVertex
+BodyVertex <|-- cfgraph::EndVertex
+BodyVertex <|-- cfgraph::StatementVertex
+ControlFlowVertex <|-- cfgraph::BodyVertex
+ControlFlowVertex <|-- cfgraph::StartVertex
+StatementVertex <|-- cfgraph::CallVertex
+StatementVertex <|-- cfgraph::SimpleStatementVertex
+cfgraph::BranchingVertex "1..1" -- "2..9999" cfgraph::ControlFlowEdge : branches9
+cfgraph::StartVertex "1..1" -- "1..1" cfgraph::CallVertex : called7
+cfgraph::ControlFlowEdge "1..1" -- "1..1" cfgraph::BodyVertex : end1
+cfgraph::BodyVertex "1..1" -- "1..9999" cfgraph::ControlFlowEdge : incomingEdges4
+cfgraph::ControlFlowEdge "1..1" -- "1..1" cfgraph::StartVertex : next2
+cfgraph::ControlFlowEdge "1..1" -- "1..1" cfgraph::StatementVertex : next5
+cfgraph::StartVertex "0..9999" --* "1..1" cfgraph::ControlFlowGraph : startVertices0
+@enduml

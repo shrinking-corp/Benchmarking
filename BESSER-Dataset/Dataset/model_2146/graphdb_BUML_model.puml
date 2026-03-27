@@ -1,0 +1,49 @@
+@startuml
+enum DatabaseKind {
+  GREMLIN
+}
+class Element {
+}
+class GraphElement {
+}
+enum PrimitiveType {
+  Boolean
+  Integer
+  Object
+  String
+  UmlToNoSQLID
+}
+class graphdb::Edge {
+  + name : str
+  + type : str
+}
+abstract class graphdb::Element {
+}
+class graphdb::Graph {
+  + rawDatabase : str
+}
+abstract class graphdb::GraphElement {
+}
+class graphdb::Property {
+  + key : str
+  + type : str
+}
+class graphdb::Vertex {
+  + labels : str
+  + name : str
+}
+Element <|-- graphdb::GraphElement
+Element <|-- graphdb::Property
+GraphElement <|-- graphdb::Edge
+GraphElement <|-- graphdb::Vertex
+graphdb::Graph "1..1" *-- "0..9999" graphdb::Edge : edges1
+graphdb::Graph "0..1" -- "1..1" graphdb::Edge : graph13
+graphdb::Graph "0..1" -- "1..1" graphdb::Vertex : graph8
+graphdb::Edge "1..1" -- "0..1" graphdb::Vertex : head11
+graphdb::Vertex "1..1" -- "0..9999" graphdb::Edge : inEdges4
+graphdb::Edge "0..9999" -- "1..1" graphdb::Vertex : outEdges6
+graphdb::GraphElement "0..1" -- "1..1" graphdb::Property : owner15
+graphdb::Property "0..9999" --* "1..1" graphdb::GraphElement : properties3
+graphdb::Edge "1..1" -- "0..1" graphdb::Vertex : tail9
+graphdb::Vertex "0..9999" --* "1..1" graphdb::Graph : vertices0
+@enduml

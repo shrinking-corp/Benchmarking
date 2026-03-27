@@ -1,0 +1,83 @@
+@startuml
+enum Gender {
+  Female
+  Male
+}
+enum Nationality {
+  English
+  French
+  German
+  Spanish
+  other
+}
+enum OperatingSystem {
+  Linux_Unix
+  MacOS
+  Windows
+  other
+}
+class Person {
+}
+enum ProgrammingLanguage {
+  C_CPP
+  Java
+  Pascal_Delphi
+  other
+}
+enum Subject {
+  AppliedGeographics
+  BusinessEngineering
+  CES
+  ComputerScience
+  Mathematics
+  MechanicalEngineering
+  Physics
+}
+class VorkursModel::Address {
+  + city : str
+  + state : str
+  + street : str
+  + zip : str
+}
+class VorkursModel::Contact {
+  + Email : str
+  + phonenumber : str
+}
+class VorkursModel::Notebook {
+  + OperatingSystem : str
+  + hasWLAN : bool
+}
+abstract class VorkursModel::Person {
+  + firstname : str
+  + gender : str
+  + lastname : str
+  + subject : str
+}
+class VorkursModel::Qualification {
+  + Language : str
+  + hasPCExperience : bool
+  + hasProgrammingExperience : bool
+  + programminLanguage : str
+}
+class VorkursModel::RegistrationSystem {
+}
+class VorkursModel::Room {
+  + hasComputers : bool
+  + roomNr : int
+  + seats : int
+  + sockets : bool
+}
+class VorkursModel::Student {
+}
+class VorkursModel::TeachingAssistant {
+}
+Person <|-- VorkursModel::Student
+Person <|-- VorkursModel::TeachingAssistant
+VorkursModel::Address "0..1" --* "1..1" VorkursModel::Contact : address8
+VorkursModel::Contact "1..1" --* "1..1" VorkursModel::Person : contactinfo3
+VorkursModel::Person "1..1" *-- "0..1" VorkursModel::Notebook : notebook4
+VorkursModel::Qualification "1..1" --* "1..1" VorkursModel::Person : qualification6
+VorkursModel::Room "1..1" --* "1..1" VorkursModel::TeachingAssistant : room10
+VorkursModel::Student "0..9999" --* "1..1" VorkursModel::RegistrationSystem : students0
+VorkursModel::RegistrationSystem "1..1" *-- "0..9999" VorkursModel::TeachingAssistant : teachingAssistants1
+@enduml

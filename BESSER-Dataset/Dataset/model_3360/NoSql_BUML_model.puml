@@ -1,0 +1,65 @@
+@startuml
+class ColumnFamily {
+}
+enum Type {
+  ascii
+  bigint
+  blob
+  boolean
+  counter
+  decimal
+  double
+  float
+  int
+  text
+  timestamp
+  timeuuid
+  uuid
+  varchar
+  varint
+}
+class nosql::Cell {
+  + value : str
+}
+class nosql::Column {
+  + datatype : str
+  + name : str
+  + size : str
+}
+class nosql::ColumnFamily {
+  + comment : str
+  + name : str
+}
+class nosql::Index {
+  + name : str
+  + reference : str
+}
+class nosql::KeySpace {
+  + name : str
+}
+class nosql::Options {
+  + name : str
+  + value : str
+}
+class nosql::PK {
+}
+class nosql::Row {
+}
+ColumnFamily <|-- nosql::Row
+nosql::Options "0..1" -- "1..1" nosql::KeySpace : EReference03
+nosql::PK "1..1" --* "1..1" nosql::ColumnFamily : PK18
+nosql::Column "1..9999" --* "1..1" nosql::Row : additionalColumns34
+nosql::Index "1..1" *-- "0..1" nosql::Column : applyTo10
+nosql::Cell "1..9999" --* "1..1" nosql::Row : cells32
+nosql::Cell "1..1" -- "1..1" nosql::Column : column37
+nosql::ColumnFamily "0..1" -- "1..1" nosql::Column : columnFamily26
+nosql::Column "1..9999" --* "1..1" nosql::ColumnFamily : columns12
+nosql::Column "1..9999" -- "1..1" nosql::PK : columns29
+nosql::KeySpace "1..1" *-- "1..9999" nosql::ColumnFamily : families1
+nosql::KeySpace "1..1" *-- "0..9999" nosql::PK : hasPK8
+nosql::Index "0..9999" --* "1..1" nosql::KeySpace : idexes0
+nosql::KeySpace "1..1" --* "1..1" nosql::ColumnFamily : keyspace23
+nosql::Options "0..9999" --* "1..1" nosql::ColumnFamily : options15
+nosql::Options "0..9999" --* "1..1" nosql::KeySpace : options5
+nosql::Row "0..9999" -- "1..1" nosql::ColumnFamily : rows21
+@enduml

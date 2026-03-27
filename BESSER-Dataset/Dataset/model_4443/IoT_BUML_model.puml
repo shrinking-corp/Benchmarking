@@ -1,0 +1,83 @@
+@startuml
+class ioT::Destination {
+  + name : str
+}
+class ioT::DestinationType {
+  + name : str
+}
+class ioT::DestinationTypes {
+}
+class ioT::Device {
+  + name : str
+}
+class ioT::DeviceType {
+  + name : str
+}
+class ioT::DeviceTypes {
+}
+class ioT::EObject {
+}
+class ioT::FetchData {
+}
+class ioT::FetchDataCondition {
+  + condition : str
+}
+class ioT::FetchDataExpression {
+  + timeUnit : str
+}
+class ioT::Ip {
+  + ip : int
+}
+class ioT::Method {
+  + name : str
+  + parameters : str
+}
+class ioT::Portnumber {
+  + number : int
+}
+class ioT::Sensor {
+  + name : str
+}
+class ioT::SensorGetMethod {
+}
+class ioT::SensorGroup {
+  + name : str
+}
+class ioT::SensorType {
+  + name : str
+}
+class ioT::SensorTypes {
+}
+class ioT::Server {
+  + name : str
+}
+class ioT::ServerType {
+  + name : str
+}
+class ioT::ServerTypes {
+}
+class ioT::System {
+}
+class ioT::Time {
+  + time : int
+}
+ioT::FetchData "1..1" *-- "0..1" ioT::EObject : conExp31
+ioT::EObject "0..1" -- "1..1" ioT::FetchData : destination28
+ioT::Device "1..1" -- "0..1" ioT::EObject : devices13
+ioT::Time "0..1" --* "1..1" ioT::FetchDataExpression : duration34
+ioT::EObject "0..1" -- "1..1" ioT::FetchData : filter26
+ioT::Ip "0..1" --* "1..1" ioT::Server : ip19
+ioT::SensorGetMethod "1..1" *-- "0..1" ioT::Method : method6
+ioT::Portnumber "0..1" --* "1..1" ioT::Server : port21
+ioT::Sensor "0..9999" -- "1..1" ioT::SensorGroup : sensors4
+ioT::System "1..1" *-- "0..9999" ioT::EObject : system0
+ioT::DeviceType "0..1" -- "1..1" ioT::Device : type11
+ioT::Server "1..1" -- "0..1" ioT::ServerType : type17
+ioT::Sensor "1..1" -- "0..1" ioT::SensorType : type2
+ioT::DestinationType "0..1" -- "1..1" ioT::Destination : type24
+ioT::SensorType "0..1" -- "1..1" ioT::SensorGetMethod : type7
+ioT::SensorTypes "1..1" *-- "0..9999" ioT::SensorType : types1
+ioT::DeviceType "0..9999" --* "1..1" ioT::DeviceTypes : types10
+ioT::ServerType "0..9999" --* "1..1" ioT::ServerTypes : types16
+ioT::DestinationType "0..9999" --* "1..1" ioT::DestinationTypes : types23
+@enduml

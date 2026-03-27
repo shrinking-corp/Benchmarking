@@ -1,0 +1,75 @@
+@startuml
+class Action {
+}
+enum Color {
+  BLUE
+  GREEN
+  RED
+}
+class DriveAction {
+}
+enum Object {
+  LAKE
+  ROCK
+}
+enum Speed {
+  FAST
+  NORMAL
+  SLOW
+}
+class taskDSL::Action {
+}
+class taskDSL::Avoid {
+  + color : str
+  + object : str
+}
+class taskDSL::DSL {
+}
+class taskDSL::Detector {
+}
+class taskDSL::DriveAction {
+}
+class taskDSL::DriveUntil {
+  + color : str
+  + object : str
+  + speed : str
+}
+class taskDSL::FollowLine {
+  + distance : int
+}
+class taskDSL::Investigate {
+  + speed : str
+}
+class taskDSL::Mission {
+  + name : str
+}
+class taskDSL::MoveBack {
+  + meters : int
+}
+class taskDSL::Speak {
+  + text : str
+}
+class taskDSL::Task {
+  + name : str
+}
+class taskDSL::TurnLeft {
+  + degrees : int
+}
+class taskDSL::TurnRight {
+  + degrees : int
+}
+Action <|-- taskDSL::DriveUntil
+Action <|-- taskDSL::FollowLine
+Action <|-- taskDSL::Investigate
+Action <|-- taskDSL::Speak
+DriveAction <|-- taskDSL::MoveBack
+DriveAction <|-- taskDSL::TurnLeft
+DriveAction <|-- taskDSL::TurnRight
+taskDSL::Task "1..1" *-- "0..1" taskDSL::Action : action6
+taskDSL::Avoid "0..9999" --* "1..1" taskDSL::Detector : avoiders10
+taskDSL::Detector "0..1" --* "1..1" taskDSL::Task : detector8
+taskDSL::Avoid "1..1" *-- "0..9999" taskDSL::DriveAction : driveActions12
+taskDSL::DSL "1..1" *-- "0..9999" taskDSL::Mission : missions0
+taskDSL::Task "0..9999" --* "1..1" taskDSL::DSL : tasks1
+taskDSL::Task "0..9999" -- "1..1" taskDSL::Mission : tasks3
+@enduml

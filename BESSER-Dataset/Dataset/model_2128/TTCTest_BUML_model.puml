@@ -1,0 +1,155 @@
+@startuml
+class Assertion {
+}
+class Class::Element {
+}
+class Condition {
+}
+class Containment {
+}
+class Implementation {
+}
+class Propose::Refactoring {
+}
+class Refactoring {
+}
+class Refactoring::Instance {
+}
+class Test::Step::Element {
+}
+class tTCTest::Assert::False {
+}
+class tTCTest::Assert::True {
+}
+class tTCTest::Assertion {
+}
+class tTCTest::Class::Element {
+  + name : str
+}
+class tTCTest::Classes {
+  + name : str
+}
+class tTCTest::Compile {
+}
+class tTCTest::Condition {
+}
+class tTCTest::Containment {
+}
+class tTCTest::Contains {
+}
+class tTCTest::Contains::Not {
+}
+class tTCTest::Create::Superclass::Refactoring {
+}
+class tTCTest::Expect::False {
+}
+class tTCTest::Expect::True {
+}
+class tTCTest::Fields {
+  + name : str
+}
+class tTCTest::Implementation {
+}
+class tTCTest::Implements {
+}
+class tTCTest::Implements::Not {
+}
+class tTCTest::Java::Class {
+  + class_name : str
+  + name : str
+  + package : str
+}
+class tTCTest::Java::Field {
+  + field_name : str
+}
+class tTCTest::Java::Method {
+  + method_name : str
+}
+class tTCTest::Methods {
+  + name : str
+}
+class tTCTest::No::Refactoring {
+}
+class tTCTest::Propose::Create::Superclass::Refactoring {
+}
+class tTCTest::Propose::Pullup::Method::Refactoring {
+}
+class tTCTest::Propose::Refactoring {
+}
+class tTCTest::Pull::Up::Refactoring {
+}
+class tTCTest::Refactoring {
+}
+class tTCTest::Refactoring::Instance {
+  + name : str
+}
+class tTCTest::Synchronize {
+}
+class tTCTest::Test::Case {
+  + description : str
+  + java_program : str
+  + name : str
+}
+class tTCTest::Test::File {
+  + name : str
+}
+class tTCTest::Test::Flow {
+}
+class tTCTest::Test::Step {
+}
+class tTCTest::Test::Step::Element {
+}
+class tTCTest::Warning {
+  + message : str
+}
+Assertion <|-- tTCTest::Assert::False
+Assertion <|-- tTCTest::Assert::True
+Class::Element <|-- tTCTest::Java::Field
+Class::Element <|-- tTCTest::Java::Method
+Condition <|-- tTCTest::Expect::False
+Condition <|-- tTCTest::Expect::True
+Containment <|-- tTCTest::Contains
+Containment <|-- tTCTest::Contains::Not
+Implementation <|-- tTCTest::Implements
+Implementation <|-- tTCTest::Implements::Not
+Propose::Refactoring <|-- tTCTest::Propose::Create::Superclass::Refactoring
+Propose::Refactoring <|-- tTCTest::Propose::Pullup::Method::Refactoring
+Refactoring::Instance <|-- tTCTest::Create::Superclass::Refactoring
+Refactoring::Instance <|-- tTCTest::Pull::Up::Refactoring
+Refactoring <|-- tTCTest::No::Refactoring
+Refactoring <|-- tTCTest::Refactoring::Instance
+Test::Step::Element <|-- tTCTest::Assertion
+Test::Step::Element <|-- tTCTest::Compile
+Test::Step::Element <|-- tTCTest::Condition
+Test::Step::Element <|-- tTCTest::Containment
+Test::Step::Element <|-- tTCTest::Implementation
+Test::Step::Element <|-- tTCTest::Synchronize
+Test::Step::Element <|-- tTCTest::Test::Step
+tTCTest::Classes "0..1" -- "1..1" tTCTest::Create::Superclass::Refactoring : child28
+tTCTest::Implementation "1..1" -- "0..1" tTCTest::Java::Class : child54
+tTCTest::Java::Class "0..1" -- "1..1" tTCTest::Containment : class50
+tTCTest::Java::Class "0..9999" -- "1..1" tTCTest::Classes : classes9
+tTCTest::Class::Element "0..1" -- "1..1" tTCTest::Containment : contains52
+tTCTest::Test::Step "1..1" *-- "0..9999" tTCTest::Test::Step::Element : elements35
+tTCTest::Condition "1..1" *-- "0..9999" tTCTest::Test::Step::Element : false_steps45
+tTCTest::Java::Field "0..9999" -- "1..1" tTCTest::Fields : fields19
+tTCTest::Refactoring "0..1" -- "1..1" tTCTest::Assertion : input37
+tTCTest::Test::File "1..1" *-- "0..9999" tTCTest::Java::Class : java_class1
+tTCTest::Classes "0..9999" --* "1..1" tTCTest::Test::File : java_classes3
+tTCTest::Java::Method "0..9999" --* "1..1" tTCTest::Test::File : java_method5
+tTCTest::Pull::Up::Refactoring "1..1" -- "0..1" tTCTest::Java::Method : method25
+tTCTest::Java::Method "0..9999" -- "1..1" tTCTest::Methods : methods15
+tTCTest::Java::Class "0..9999" -- "1..1" tTCTest::Java::Method : params12
+tTCTest::Java::Class "0..1" -- "1..1" tTCTest::Pull::Up::Refactoring : parent23
+tTCTest::Java::Class "0..1" -- "1..1" tTCTest::Implementation : parent56
+tTCTest::Refactoring "0..1" -- "1..1" tTCTest::Condition : refactoring38
+tTCTest::Refactoring "0..1" --* "1..1" tTCTest::Propose::Refactoring : refactoring48
+tTCTest::Test::File "1..1" *-- "0..9999" tTCTest::Refactoring::Instance : refactorings7
+tTCTest::Test::Step::Element "0..9999" --* "1..1" tTCTest::Test::Flow : step33
+tTCTest::Java::Class "0..1" -- "1..1" tTCTest::Create::Superclass::Refactoring : target30
+tTCTest::Test::Case "0..9999" --* "1..1" tTCTest::Test::File : test_cases0
+tTCTest::Test::Case "1..1" *-- "0..1" tTCTest::Test::Flow : test_flow21
+tTCTest::Test::Step::Element "0..9999" --* "1..1" tTCTest::Condition : true_steps40
+tTCTest::Java::Class "0..1" -- "1..1" tTCTest::Java::Field : type17
+tTCTest::Warning "0..1" --* "1..1" tTCTest::Condition : warning43
+@enduml

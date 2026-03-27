@@ -1,0 +1,36 @@
+@startuml
+class State {
+}
+class StationaryState {
+}
+class TransactionalState {
+}
+class mdc::Chatbot {
+  + name : str
+  + token : str
+}
+abstract class mdc::State {
+  + input : str
+  + messages : str
+  + name : str
+  + entryPoint() : str
+}
+abstract class mdc::StationaryState {
+  + handler() : State
+  + sincTransitions() : void
+}
+class mdc::StationaryStateImpl {
+}
+abstract class mdc::TransactionalState {
+}
+class mdc::TransactionalStateImpl {
+}
+State <|-- mdc::StationaryState
+State <|-- mdc::TransactionalState
+StationaryState <|-- mdc::StationaryStateImpl
+TransactionalState <|-- mdc::TransactionalStateImpl
+mdc::StationaryState "1..1" -- "1..1" mdc::TransactionalState : errorState6
+mdc::StationaryState "1..1" -- "1..1" mdc::Chatbot : initState1
+mdc::State "1..9999" --* "1..1" mdc::Chatbot : states0
+mdc::StationaryState "1..1" -- "0..9999" mdc::State : transitions3
+@enduml

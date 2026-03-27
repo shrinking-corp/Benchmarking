@@ -1,0 +1,33 @@
+@startuml
+enum FeatureKind {
+  attribute
+  containment
+  reference
+}
+class NamedElement {
+}
+class Type {
+}
+class ube::DataType {
+}
+class ube::Entity {
+  + abstract : bool
+}
+class ube::EntityModel {
+}
+class ube::Feature {
+  + kind : str
+}
+abstract class ube::NamedElement {
+  + name : str
+}
+abstract class ube::Type {
+}
+NamedElement <|-- ube::Feature
+NamedElement <|-- ube::Type
+Type <|-- ube::DataType
+Type <|-- ube::Entity
+ube::Feature "0..9999" --* "1..1" ube::Entity : features0
+ube::Feature "1..1" -- "1..1" ube::Type : type2
+ube::Type "0..9999" --* "1..1" ube::EntityModel : types1
+@enduml

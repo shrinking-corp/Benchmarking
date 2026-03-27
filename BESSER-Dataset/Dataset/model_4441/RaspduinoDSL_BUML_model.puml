@@ -1,0 +1,44 @@
+@startuml
+class AbstractDevice {
+}
+class raspduinoDSL::AbstractDevice {
+  + name : str
+  + pin : str
+}
+class raspduinoDSL::Actuator {
+}
+class raspduinoDSL::ChangeActuator {
+  + ActuatorState : str
+}
+class raspduinoDSL::EventHandler {
+  + name : str
+}
+class raspduinoDSL::Model {
+  + hardware : str
+  + name : str
+}
+class raspduinoDSL::Sensor {
+}
+class raspduinoDSL::SensorListener {
+  + h : int
+  + l : int
+  + type : str
+}
+class raspduinoDSL::Timer {
+  + hours : int
+  + minutes : int
+  + repeattype : str
+  + secs : int
+}
+AbstractDevice <|-- raspduinoDSL::Actuator
+AbstractDevice <|-- raspduinoDSL::Sensor
+raspduinoDSL::ChangeActuator "1..1" -- "0..1" raspduinoDSL::Actuator : actuator9
+raspduinoDSL::ChangeActuator "0..9999" --* "1..1" raspduinoDSL::EventHandler : changeActuators7
+raspduinoDSL::AbstractDevice "0..9999" --* "1..1" raspduinoDSL::Model : devices0
+raspduinoDSL::EventHandler "0..1" -- "1..1" raspduinoDSL::SensorListener : eventHandler13
+raspduinoDSL::EventHandler "0..1" -- "1..1" raspduinoDSL::Timer : eventHandler16
+raspduinoDSL::Model "1..1" *-- "0..9999" raspduinoDSL::EventHandler : eventHandlers1
+raspduinoDSL::Sensor "0..1" -- "1..1" raspduinoDSL::SensorListener : sensor11
+raspduinoDSL::SensorListener "0..9999" --* "1..1" raspduinoDSL::Model : sensorListeners3
+raspduinoDSL::Timer "0..9999" --* "1..1" raspduinoDSL::Model : timers5
+@enduml

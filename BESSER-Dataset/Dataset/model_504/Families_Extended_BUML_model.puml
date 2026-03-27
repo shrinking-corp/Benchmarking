@@ -1,0 +1,59 @@
+@startuml
+class Member {
+}
+class NamedElement {
+}
+class families::Child {
+}
+class families::City {
+}
+class families::Company {
+}
+class families::Country {
+}
+class families::Family {
+  + lastName : str
+}
+abstract class families::Member {
+  + firstName : str
+}
+abstract class families::NamedElement {
+  + name : str
+}
+class families::Neighborhood {
+}
+class families::Parent {
+}
+class families::School {
+}
+class families::Service {
+}
+Member <|-- families::Child
+Member <|-- families::Parent
+NamedElement <|-- families::City
+NamedElement <|-- families::Company
+NamedElement <|-- families::Country
+NamedElement <|-- families::Neighborhood
+NamedElement <|-- families::School
+families::City "1..9999" --* "1..1" families::Country : cities1
+families::Company "0..9999" -- "1..1" families::City : companies20
+families::Country "1..1" *-- "0..9999" families::Company : companies3
+families::Family "1..9999" -- "1..1" families::Neighborhood : contains18
+families::Family "1..1" *-- "0..9999" families::Child : daughters10
+families::Parent "0..9999" -- "1..1" families::Company : employees31
+families::Family "1..9999" --* "1..1" families::Country : families0
+families::Family "1..1" -- "1..1" families::Member : family33
+families::Parent "0..2" --* "1..1" families::Family : fathers5
+families::Child "1..1" -- "1..1" families::School : goesTo17
+families::Company "1..1" -- "1..9999" families::City : isIn32
+families::City "1..1" -- "1..1" families::Member : livesIn35
+families::Parent "0..2" --* "1..1" families::Family : mothers7
+families::Neighborhood "1..9999" --* "1..1" families::City : neighborhoods22
+families::School "1..1" *-- "0..9999" families::Service : ordinary25
+families::Neighborhood "1..1" -- "1..1" families::Family : registeredIn15
+families::School "0..9999" --* "1..1" families::Neighborhood : schools19
+families::Child "0..9999" --* "1..1" families::Family : sons12
+families::Service "0..9999" --* "1..1" families::School : special27
+families::Child "0..9999" -- "1..1" families::School : students30
+families::Company "0..1" -- "1..1" families::Parent : worksIn16
+@enduml

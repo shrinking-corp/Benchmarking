@@ -1,0 +1,116 @@
+@startuml
+class ComplexType {
+}
+class DeclarationTypeReference {
+}
+enum EntityRelationshipKind {
+  MANY
+  UNIQUE
+}
+class Literal {
+}
+class NamedType {
+}
+enum PropertyStorageModifier {
+  TRANSIENT
+  VALUE
+  VARIABLE
+}
+class Type {
+}
+enum TypeStorageModifier {
+  EMBEDDABLE
+  STORABLE
+}
+class types::BooleanLiteral {
+  + value : bool
+}
+class types::CharLiteral {
+  + value : str
+}
+class types::CollectionType {
+  + size : int
+}
+class types::ComplexType {
+}
+class types::DeclarationTypeReference {
+}
+class types::EntityRelationship {
+  + kind : str
+}
+class types::EntityType {
+  + storageModifier : str
+}
+class types::EnumerationLiteral {
+  + name : str
+}
+class types::EnumerationType {
+}
+class types::Import {
+  + importedNamespace : str
+}
+class types::Literal {
+}
+class types::MapType {
+  + size : int
+}
+class types::MappedByReference {
+}
+class types::Model {
+  + name : str
+}
+class types::NamedType {
+  + name : str
+}
+class types::NumberLiteral {
+  + value : str
+}
+class types::PrimitiveType {
+}
+class types::Property {
+  + name : str
+  + storageModifier : str
+}
+class types::PropertyReference {
+}
+class types::StringLiteral {
+  + value : str
+}
+class types::Type {
+}
+class types::TypeReference {
+}
+ComplexType <|-- types::EntityType
+ComplexType <|-- types::EnumerationType
+DeclarationTypeReference <|-- types::CollectionType
+DeclarationTypeReference <|-- types::MapType
+DeclarationTypeReference <|-- types::TypeReference
+Literal <|-- types::BooleanLiteral
+Literal <|-- types::CharLiteral
+Literal <|-- types::NumberLiteral
+Literal <|-- types::PropertyReference
+Literal <|-- types::StringLiteral
+NamedType <|-- types::ComplexType
+NamedType <|-- types::PrimitiveType
+Type <|-- types::CollectionType
+Type <|-- types::MapType
+Type <|-- types::NamedType
+types::MappedByReference "1..1" -- "0..1" types::Property : base29
+types::Import "0..9999" --* "1..1" types::Model : imports0
+types::Literal "0..1" --* "1..1" types::Property : literal25
+types::EnumerationType "1..1" *-- "0..9999" types::EnumerationLiteral : literals14
+types::Property "1..1" *-- "0..1" types::PropertyReference : mapKey22
+types::TypeReference "0..1" --* "1..1" types::MapType : mapType6
+types::MappedByReference "0..1" --* "1..1" types::EntityRelationship : mappedBy27
+types::PropertyReference "0..1" --* "1..1" types::Property : orderBy20
+types::ComplexType "0..1" -- "1..1" types::ComplexType : parent12
+types::MappedByReference "0..1" --* "1..1" types::MappedByReference : path33
+types::Property "0..9999" --* "1..1" types::EntityType : properties15
+types::CollectionType "1..1" *-- "0..1" types::TypeReference : reference3
+types::Property "0..1" -- "1..1" types::PropertyReference : reference35
+types::MapType "1..1" *-- "0..1" types::TypeReference : reference4
+types::NamedType "0..1" -- "1..1" types::TypeReference : reference9
+types::Property "1..1" *-- "0..1" types::EntityRelationship : relationship18
+types::DeclarationTypeReference "0..1" --* "1..1" types::Property : type16
+types::ComplexType "0..9999" --* "1..1" types::Model : types1
+@enduml

@@ -1,0 +1,87 @@
+@startuml
+class Addressable {
+}
+class AudioVisualItem {
+}
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class CirculatingItem {
+}
+class Item {
+}
+class Lendable {
+}
+class Person {
+}
+abstract class extlibraryprofile::Addressable {
+  + address : str
+}
+abstract class extlibraryprofile::AudioVisualItem {
+  + damaged : str
+  + minutesLength : str
+}
+class extlibraryprofile::Book {
+  + category : str
+  + pages : str
+}
+class extlibraryprofile::BookOnTape {
+}
+class extlibraryprofile::Borrower {
+}
+class extlibraryprofile::Borrows {
+}
+abstract class extlibraryprofile::CirculatingItem {
+}
+class extlibraryprofile::Class {
+}
+class extlibraryprofile::Dependency {
+}
+class extlibraryprofile::Employee {
+}
+abstract class extlibraryprofile::Item {
+  + publicationDate : str
+  + title : str
+}
+abstract class extlibraryprofile::Lendable {
+  + copies : str
+}
+class extlibraryprofile::Library {
+  + name : str
+}
+class extlibraryprofile::Package {
+}
+class extlibraryprofile::Periodical {
+  + issuesPerYear : str
+}
+abstract class extlibraryprofile::Person {
+  + firstName : str
+  + lastName : str
+}
+class extlibraryprofile::VideoCassete {
+}
+class extlibraryprofile::Writer {
+  + name : str
+}
+Addressable <|-- extlibraryprofile::Library
+Addressable <|-- extlibraryprofile::Person
+AudioVisualItem <|-- extlibraryprofile::BookOnTape
+AudioVisualItem <|-- extlibraryprofile::VideoCassete
+CirculatingItem <|-- extlibraryprofile::AudioVisualItem
+CirculatingItem <|-- extlibraryprofile::Book
+Item <|-- extlibraryprofile::CirculatingItem
+Item <|-- extlibraryprofile::Periodical
+Lendable <|-- extlibraryprofile::CirculatingItem
+Person <|-- extlibraryprofile::Borrower
+Person <|-- extlibraryprofile::Employee
+Person <|-- extlibraryprofile::Writer
+extlibraryprofile::Class "1..1" -- "1..1" extlibraryprofile::Item : base_Class0
+extlibraryprofile::Class "1..1" -- "1..1" extlibraryprofile::Person : base_Class7
+extlibraryprofile::Borrows "1..1" -- "1..1" extlibraryprofile::Dependency : base_Dependency10
+extlibraryprofile::Package "1..1" -- "1..1" extlibraryprofile::Library : base_Package1
+extlibraryprofile::BookOnTape "1..1" -- "1..1" extlibraryprofile::Person : bookOnTape14
+extlibraryprofile::Writer "1..1" -- "1..1" extlibraryprofile::BookOnTape : bookOnTape2
+extlibraryprofile::VideoCassete "0..9999" -- "1..1" extlibraryprofile::Person : videoCassete3
+@enduml

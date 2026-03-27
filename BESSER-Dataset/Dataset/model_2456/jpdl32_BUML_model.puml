@@ -1,0 +1,389 @@
+@startuml
+enum BindingType {
+  early
+  late
+}
+enum BooleanType {
+  false
+  no
+  off
+  on
+  true
+  yes
+}
+enum ConfigType {
+  bean
+  configurationProperty
+  constructor
+  field
+}
+class Delegation {
+}
+enum PriorityTypeMember0 {
+  high
+  highest
+  low
+  lowest
+  normal
+}
+enum SignalType {
+  first
+  firstWait
+  last
+  lastWait
+  never
+  unsynchronized
+}
+enum TypeTypeMember1 {
+  afterSignal
+  beforeSignal
+  nodeEnter
+  nodeLeave
+  processEnd
+  processStart
+  subprocessCreated
+  subprocessEnd
+  superstateEnter
+  superstateLeave
+  taskAssign
+  taskCreate
+  taskEnd
+  taskStart
+  timerCreate
+}
+class jpdl32::ActionType {
+  + acceptPropagatedEvents : str
+  + any : str
+  + async : str
+  + class : str
+  + configType : str
+  + expression : str
+  + mixed : str
+  + name : str
+  + refName : str
+}
+class jpdl32::AssignmentType {
+  + actorId : str
+  + expression : str
+  + pooledActors : str
+}
+class jpdl32::CancelTimerType {
+  + name : str
+}
+class jpdl32::ConditionType {
+  + any : str
+  + expression : str
+  + group : str
+  + mixed : str
+}
+class jpdl32::CreateTimerType {
+  + duedate : str
+  + name : str
+  + repeat : str
+  + transition : str
+}
+class jpdl32::DecisionType {
+  + async : str
+  + description : str
+  + expression : str
+  + group : str
+  + name : str
+}
+class jpdl32::Delegation {
+  + any : str
+  + class : str
+  + configType : str
+  + mixed : str
+}
+class jpdl32::DocumentRoot {
+  + description : str
+  + mixed : str
+  + recipients : str
+  + subject : str
+  + template : str
+  + text : str
+  + to : str
+}
+class jpdl32::EStringToStringMapEntry {
+}
+class jpdl32::EndStateType {
+  + description : str
+  + endCompleteProcess : str
+  + group : str
+  + name : str
+}
+class jpdl32::EventType {
+  + actionElements : str
+  + type : str
+}
+class jpdl32::ExceptionHandlerType {
+  + exceptionClass : str
+  + group : str
+}
+class jpdl32::ForkType {
+  + async : str
+  + description : str
+  + group : str
+  + name : str
+}
+class jpdl32::JoinType {
+  + async : str
+  + description : str
+  + name : str
+  + nodeContentElements : str
+}
+class jpdl32::MailNodeType {
+  + actors : str
+  + async : str
+  + description : str
+  + group : str
+  + name : str
+  + subject : str
+  + subject1 : str
+  + template : str
+  + text : str
+  + text1 : str
+  + to : str
+}
+class jpdl32::MailType {
+  + actors : str
+  + async : str
+  + group : str
+  + name : str
+  + subject : str
+  + subject1 : str
+  + template : str
+  + text : str
+  + text1 : str
+  + to : str
+}
+class jpdl32::NodeType {
+  + async : str
+  + description : str
+  + name : str
+  + nodeContentElements : str
+}
+class jpdl32::ProcessDefinitionType {
+  + description : str
+  + group : str
+  + name : str
+}
+class jpdl32::ProcessStateType {
+  + async : str
+  + binding : str
+  + description : str
+  + group : str
+  + name : str
+}
+class jpdl32::ReminderType {
+  + duedate : str
+  + repeat : str
+}
+class jpdl32::ScriptType {
+  + acceptPropagatedEvents : str
+  + any : str
+  + mixed : str
+  + name : str
+}
+class jpdl32::StartStateType {
+  + description : str
+  + group : str
+  + name : str
+}
+class jpdl32::StateType {
+  + async : str
+  + description : str
+  + name : str
+  + nodeContentElements : str
+}
+class jpdl32::SubProcessType {
+  + binding : str
+  + name : str
+  + version : str
+}
+class jpdl32::SuperStateType {
+  + async : str
+  + description : str
+  + group : str
+  + name : str
+}
+class jpdl32::SwimlaneType {
+  + name : str
+}
+class jpdl32::TaskNodeType {
+  + async : str
+  + createTasks : str
+  + description : str
+  + endTasks : str
+  + group : str
+  + name : str
+  + signal : str
+}
+class jpdl32::TaskType {
+  + blocking : str
+  + description : str
+  + description1 : str
+  + duedate : str
+  + group : str
+  + name : str
+  + notify : str
+  + priority : str
+  + signalling : str
+  + swimlane : str
+}
+class jpdl32::TimerType {
+  + duedate : str
+  + name : str
+  + repeat : str
+  + transition : str
+}
+class jpdl32::TransitionType {
+  + description : str
+  + group : str
+  + name : str
+  + to : str
+}
+class jpdl32::VariableType {
+  + access : str
+  + any : str
+  + mappedName : str
+  + name : str
+}
+Delegation <|-- jpdl32::AssignmentType
+jpdl32::CreateTimerType "1..1" *-- "0..1" jpdl32::ActionType : action0
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::ActionType : action14
+jpdl32::ActionType "0..1" --* "1..1" jpdl32::NodeType : action140
+jpdl32::ProcessDefinitionType "1..1" *-- "0..9999" jpdl32::ActionType : action203
+jpdl32::ActionType "0..1" --* "1..1" jpdl32::TimerType : action342
+jpdl32::ActionType "0..9999" --* "1..1" jpdl32::TransitionType : action359
+jpdl32::ActionType "0..9999" --* "1..1" jpdl32::EventType : action80
+jpdl32::ActionType "0..9999" --* "1..1" jpdl32::ExceptionHandlerType : action95
+jpdl32::AssignmentType "0..9999" --* "1..1" jpdl32::DocumentRoot : assignment17
+jpdl32::SwimlaneType "1..1" *-- "0..1" jpdl32::AssignmentType : assignment310
+jpdl32::AssignmentType "0..9999" --* "1..1" jpdl32::TaskType : assignment328
+jpdl32::CancelTimerType "0..1" --* "1..1" jpdl32::NodeType : cancelTimer149
+jpdl32::CancelTimerType "0..9999" --* "1..1" jpdl32::DocumentRoot : cancelTimer19
+jpdl32::ProcessDefinitionType "1..1" *-- "0..9999" jpdl32::CancelTimerType : cancelTimer212
+jpdl32::CancelTimerType "0..1" --* "1..1" jpdl32::TimerType : cancelTimer351
+jpdl32::CancelTimerType "0..9999" --* "1..1" jpdl32::TransitionType : cancelTimer368
+jpdl32::EventType "1..1" *-- "0..9999" jpdl32::CancelTimerType : cancelTimer89
+jpdl32::ConditionType "0..9999" --* "1..1" jpdl32::TransitionType : condition357
+jpdl32::Delegation "0..9999" --* "1..1" jpdl32::DocumentRoot : controller21
+jpdl32::Delegation "0..9999" --* "1..1" jpdl32::TaskType : controller331
+jpdl32::NodeType "1..1" *-- "0..1" jpdl32::CreateTimerType : createTimer146
+jpdl32::CreateTimerType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : createTimer209
+jpdl32::CreateTimerType "0..9999" --* "1..1" jpdl32::DocumentRoot : createTimer24
+jpdl32::TimerType "1..1" *-- "0..1" jpdl32::CreateTimerType : createTimer348
+jpdl32::CreateTimerType "0..9999" --* "1..1" jpdl32::TransitionType : createTimer365
+jpdl32::CreateTimerType "0..9999" --* "1..1" jpdl32::EventType : createTimer86
+jpdl32::DecisionType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : decision194
+jpdl32::DecisionType "0..9999" --* "1..1" jpdl32::DocumentRoot : decision27
+jpdl32::SuperStateType "1..1" *-- "0..9999" jpdl32::DecisionType : decision289
+jpdl32::EndStateType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : endState197
+jpdl32::EndStateType "0..9999" --* "1..1" jpdl32::SuperStateType : endState292
+jpdl32::EndStateType "0..9999" --* "1..1" jpdl32::DocumentRoot : endState30
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::ForkType : event104
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::JoinType : event116
+jpdl32::MailNodeType "1..1" *-- "0..9999" jpdl32::EventType : event128
+jpdl32::NodeType "1..1" *-- "0..9999" jpdl32::EventType : event155
+jpdl32::ProcessDefinitionType "1..1" *-- "0..9999" jpdl32::EventType : event218
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::ProcessStateType : event232
+jpdl32::StartStateType "1..1" *-- "0..9999" jpdl32::EventType : event250
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::StateType : event256
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::SuperStateType : event298
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::TaskNodeType : event316
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::DocumentRoot : event32
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::TaskType : event334
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::DecisionType : event4
+jpdl32::EventType "0..9999" --* "1..1" jpdl32::EndStateType : event74
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::ForkType : exceptionHandler107
+jpdl32::JoinType "1..1" *-- "0..9999" jpdl32::ExceptionHandlerType : exceptionHandler119
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::MailNodeType : exceptionHandler131
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::NodeType : exceptionHandler158
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : exceptionHandler221
+jpdl32::ProcessStateType "1..1" *-- "0..9999" jpdl32::ExceptionHandlerType : exceptionHandler235
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::StartStateType : exceptionHandler253
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::StateType : exceptionHandler259
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::SuperStateType : exceptionHandler301
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::TaskNodeType : exceptionHandler319
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::ExceptionHandlerType : exceptionHandler35
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::TransitionType : exceptionHandler374
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::DecisionType : exceptionHandler6
+jpdl32::ExceptionHandlerType "0..9999" --* "1..1" jpdl32::EndStateType : exceptionHandler77
+jpdl32::ForkType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : fork188
+jpdl32::ForkType "0..9999" --* "1..1" jpdl32::SuperStateType : fork283
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::ForkType : fork38
+jpdl32::Delegation "0..9999" --* "1..1" jpdl32::DecisionType : handler3
+jpdl32::JoinType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : join191
+jpdl32::JoinType "0..9999" --* "1..1" jpdl32::SuperStateType : join286
+jpdl32::JoinType "0..9999" --* "1..1" jpdl32::DocumentRoot : join40
+jpdl32::MailType "0..1" --* "1..1" jpdl32::NodeType : mail152
+jpdl32::MailType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : mail215
+jpdl32::MailType "0..1" --* "1..1" jpdl32::TimerType : mail354
+jpdl32::TransitionType "1..1" *-- "0..9999" jpdl32::MailType : mail371
+jpdl32::MailType "0..9999" --* "1..1" jpdl32::DocumentRoot : mail42
+jpdl32::MailType "0..9999" --* "1..1" jpdl32::EventType : mail92
+jpdl32::ProcessDefinitionType "1..1" *-- "0..9999" jpdl32::MailNodeType : mailNode200
+jpdl32::MailNodeType "0..9999" --* "1..1" jpdl32::SuperStateType : mailNode295
+jpdl32::MailNodeType "0..9999" --* "1..1" jpdl32::DocumentRoot : mailNode44
+jpdl32::NodeType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : node173
+jpdl32::NodeType "0..9999" --* "1..1" jpdl32::SuperStateType : node268
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::NodeType : node46
+jpdl32::ProcessDefinitionType "0..9999" --* "1..1" jpdl32::DocumentRoot : processDefinition48
+jpdl32::ProcessStateType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : processState185
+jpdl32::ProcessStateType "0..9999" --* "1..1" jpdl32::SuperStateType : processState280
+jpdl32::ProcessStateType "0..9999" --* "1..1" jpdl32::DocumentRoot : processState50
+jpdl32::ReminderType "0..9999" --* "1..1" jpdl32::TaskType : reminder340
+jpdl32::ScriptType "0..1" --* "1..1" jpdl32::CreateTimerType : script1
+jpdl32::ForkType "1..1" *-- "0..9999" jpdl32::ScriptType : script101
+jpdl32::ScriptType "0..1" --* "1..1" jpdl32::NodeType : script143
+jpdl32::ScriptType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : script206
+jpdl32::TimerType "1..1" *-- "0..1" jpdl32::ScriptType : script345
+jpdl32::ScriptType "0..9999" --* "1..1" jpdl32::TransitionType : script362
+jpdl32::ScriptType "0..9999" --* "1..1" jpdl32::DocumentRoot : script52
+jpdl32::ScriptType "0..9999" --* "1..1" jpdl32::EventType : script83
+jpdl32::ScriptType "0..9999" --* "1..1" jpdl32::ExceptionHandlerType : script98
+jpdl32::ProcessDefinitionType "1..1" *-- "0..9999" jpdl32::StartStateType : startState170
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::StartStateType : startState55
+jpdl32::StateType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : state176
+jpdl32::StateType "0..9999" --* "1..1" jpdl32::SuperStateType : state271
+jpdl32::StateType "0..9999" --* "1..1" jpdl32::DocumentRoot : state57
+jpdl32::SubProcessType "0..9999" --* "1..1" jpdl32::ProcessStateType : subProcess227
+jpdl32::SuperStateType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : superState182
+jpdl32::SuperStateType "0..9999" --* "1..1" jpdl32::SuperStateType : superState278
+jpdl32::SuperStateType "0..9999" --* "1..1" jpdl32::DocumentRoot : superState59
+jpdl32::SwimlaneType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : swimlane167
+jpdl32::SwimlaneType "0..9999" --* "1..1" jpdl32::DocumentRoot : swimlane61
+jpdl32::TaskType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : task224
+jpdl32::TaskType "0..9999" --* "1..1" jpdl32::StartStateType : task244
+jpdl32::TaskNodeType "1..1" *-- "0..9999" jpdl32::TaskType : task313
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::TaskType : task63
+jpdl32::TaskNodeType "0..9999" --* "1..1" jpdl32::ProcessDefinitionType : taskNode179
+jpdl32::SuperStateType "1..1" *-- "0..9999" jpdl32::TaskNodeType : taskNode274
+jpdl32::TaskNodeType "0..9999" --* "1..1" jpdl32::DocumentRoot : taskNode65
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::ForkType : timer110
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::JoinType : timer122
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::MailNodeType : timer134
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::NodeType : timer161
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::ProcessStateType : timer238
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::StateType : timer262
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::SuperStateType : timer304
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::TaskNodeType : timer322
+jpdl32::TaskType "1..1" *-- "0..9999" jpdl32::TimerType : timer337
+jpdl32::TimerType "0..9999" --* "1..1" jpdl32::DocumentRoot : timer67
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::ForkType : transition113
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::JoinType : transition125
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::MailNodeType : transition137
+jpdl32::NodeType "1..1" *-- "0..9999" jpdl32::TransitionType : transition164
+jpdl32::ProcessStateType "1..1" *-- "0..9999" jpdl32::TransitionType : transition241
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::StartStateType : transition247
+jpdl32::StateType "1..1" *-- "0..9999" jpdl32::TransitionType : transition265
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::SuperStateType : transition307
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::TaskNodeType : transition325
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::DocumentRoot : transition69
+jpdl32::TransitionType "0..9999" --* "1..1" jpdl32::DecisionType : transition8
+jpdl32::VariableType "0..9999" --* "1..1" jpdl32::ProcessStateType : variable229
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::VariableType : variable72
+jpdl32::DocumentRoot "1..1" *-- "0..9999" jpdl32::EStringToStringMapEntry : xMLNSPrefixMap10
+jpdl32::EStringToStringMapEntry "0..9999" --* "1..1" jpdl32::DocumentRoot : xSISchemaLocation11
+@enduml

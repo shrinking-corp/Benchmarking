@@ -1,0 +1,48 @@
+@startuml
+enum Mensageiro {
+  TELEGRAM
+  WEB
+}
+enum NLUService {
+  OTHER
+  WIT
+}
+class State {
+}
+class StationaryState {
+}
+class TransactionalState {
+}
+class mdc::Chatbot {
+  + mensageiro : str
+  + name : str
+  + nluService : str
+  + token : str
+  + tokenNluService : str
+}
+abstract class mdc::State {
+  + input : str
+  + messages : str
+  + name : str
+  + entryPoint() : str
+  + sincMessages() : void
+}
+abstract class mdc::StationaryState {
+  + handler() : State
+  + sincTransitions() : void
+}
+class mdc::StationaryStateImpl {
+}
+abstract class mdc::TransactionalState {
+}
+class mdc::TransactionalStateImpl {
+}
+State <|-- mdc::StationaryState
+State <|-- mdc::TransactionalState
+StationaryState <|-- mdc::StationaryStateImpl
+TransactionalState <|-- mdc::TransactionalStateImpl
+mdc::TransactionalState "1..1" -- "1..1" mdc::StationaryState : errorState6
+mdc::StationaryState "1..1" -- "1..1" mdc::Chatbot : initState1
+mdc::State "1..9999" --* "1..1" mdc::Chatbot : states0
+mdc::State "0..9999" -- "1..1" mdc::StationaryState : transitions3
+@enduml

@@ -1,0 +1,97 @@
+@startuml
+class FromAttribute {
+}
+class FromAttributeOwner {
+}
+class PrimitiveToName {
+}
+class ToColumn {
+}
+class UmlToRdbmsModelElement {
+}
+class uml2rdbms::Association {
+}
+class uml2rdbms::AssociationToForeignKey {
+}
+class uml2rdbms::Attribute {
+}
+class uml2rdbms::AttributeToColumn {
+}
+class uml2rdbms::BooleanToBoolean {
+}
+class uml2rdbms::Class {
+}
+class uml2rdbms::ClassToTable {
+}
+class uml2rdbms::Column {
+}
+class uml2rdbms::ForeignKey {
+}
+abstract class uml2rdbms::FromAttribute {
+  + kind : str
+}
+abstract class uml2rdbms::FromAttributeOwner {
+}
+class uml2rdbms::IntegerToNumber {
+}
+class uml2rdbms::Key {
+}
+class uml2rdbms::NonLeafAttribute {
+}
+class uml2rdbms::Package {
+}
+class uml2rdbms::PackageToSchema {
+}
+class uml2rdbms::PrimitiveDataType {
+}
+abstract class uml2rdbms::PrimitiveToName {
+  + typeName : str
+}
+class uml2rdbms::Schema {
+}
+class uml2rdbms::StringToVarchar {
+}
+class uml2rdbms::Table {
+}
+abstract class uml2rdbms::ToColumn {
+}
+abstract class uml2rdbms::UmlToRdbmsModelElement {
+  + name : str
+}
+FromAttributeOwner <|-- uml2rdbms::ClassToTable
+FromAttributeOwner <|-- uml2rdbms::NonLeafAttribute
+FromAttribute <|-- uml2rdbms::AttributeToColumn
+FromAttribute <|-- uml2rdbms::NonLeafAttribute
+PrimitiveToName <|-- uml2rdbms::BooleanToBoolean
+PrimitiveToName <|-- uml2rdbms::IntegerToNumber
+PrimitiveToName <|-- uml2rdbms::StringToVarchar
+ToColumn <|-- uml2rdbms::AssociationToForeignKey
+ToColumn <|-- uml2rdbms::AttributeToColumn
+ToColumn <|-- uml2rdbms::ClassToTable
+UmlToRdbmsModelElement <|-- uml2rdbms::AssociationToForeignKey
+UmlToRdbmsModelElement <|-- uml2rdbms::ClassToTable
+UmlToRdbmsModelElement <|-- uml2rdbms::FromAttribute
+UmlToRdbmsModelElement <|-- uml2rdbms::PackageToSchema
+UmlToRdbmsModelElement <|-- uml2rdbms::PrimitiveToName
+uml2rdbms::Association "0..1" -- "1..1" uml2rdbms::AssociationToForeignKey : association1
+uml2rdbms::AssociationToForeignKey "0..9999" --* "1..1" uml2rdbms::ClassToTable : associationsToForeignKeys7
+uml2rdbms::Attribute "0..1" -- "1..1" uml2rdbms::FromAttribute : attribute15
+uml2rdbms::PackageToSchema "1..1" *-- "1..9999" uml2rdbms::ClassToTable : classesToTables22
+uml2rdbms::Column "1..1" -- "1..1" uml2rdbms::ToColumn : column34
+uml2rdbms::ForeignKey "0..1" -- "1..1" uml2rdbms::AssociationToForeignKey : foreignKey2
+uml2rdbms::FromAttribute "0..9999" --* "1..1" uml2rdbms::FromAttributeOwner : fromAttributes20
+uml2rdbms::AttributeToColumn "0..9999" -- "1..1" uml2rdbms::FromAttribute : leafs16
+uml2rdbms::FromAttribute "1..1" -- "1..1" uml2rdbms::FromAttributeOwner : owner19
+uml2rdbms::PackageToSchema "1..1" -- "1..1" uml2rdbms::PrimitiveToName : owner30
+uml2rdbms::ClassToTable "1..1" -- "1..1" uml2rdbms::AssociationToForeignKey : owner4
+uml2rdbms::PackageToSchema "1..1" -- "1..1" uml2rdbms::ClassToTable : owner8
+uml2rdbms::ClassToTable "1..1" -- "0..1" uml2rdbms::Key : primaryKey9
+uml2rdbms::PrimitiveDataType "1..1" -- "1..1" uml2rdbms::PrimitiveToName : primitive32
+uml2rdbms::PrimitiveToName "0..9999" --* "1..1" uml2rdbms::PackageToSchema : primitivesToNames25
+uml2rdbms::ClassToTable "0..1" -- "1..1" uml2rdbms::AssociationToForeignKey : referenced5
+uml2rdbms::Schema "1..1" -- "1..1" uml2rdbms::PackageToSchema : schema27
+uml2rdbms::Table "0..1" -- "1..1" uml2rdbms::ClassToTable : table11
+uml2rdbms::PrimitiveToName "0..1" -- "1..1" uml2rdbms::AttributeToColumn : type0
+uml2rdbms::Class "0..1" -- "1..1" uml2rdbms::ClassToTable : umlClass13
+uml2rdbms::PackageToSchema "1..1" -- "1..1" uml2rdbms::Package : umlPackage28
+@enduml

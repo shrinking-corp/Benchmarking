@@ -1,0 +1,49 @@
+@startuml
+class Arc {
+}
+class Element {
+}
+abstract class petrinet::metamodel::Arc {
+  + weight : int
+}
+abstract class petrinet::metamodel::Element {
+  + comments : str
+  + name : str
+}
+class petrinet::metamodel::PetriNet {
+}
+class petrinet::metamodel::Place {
+  + coordinates : int
+  + fill_colour : str
+  + radius : int
+}
+class petrinet::metamodel::PlaceToTransArc {
+}
+class petrinet::metamodel::Rectangle {
+  + start_end_coordinates : int
+}
+class petrinet::metamodel::TransToPlaceArc {
+}
+class petrinet::metamodel::Transition {
+}
+Arc <|-- petrinet::metamodel::PlaceToTransArc
+Arc <|-- petrinet::metamodel::TransToPlaceArc
+Element <|-- petrinet::metamodel::PetriNet
+Element <|-- petrinet::metamodel::Place
+Element <|-- petrinet::metamodel::Transition
+petrinet::metamodel::PetriNet "1..1" *-- "0..9999" petrinet::metamodel::Arc : arcs3
+petrinet::metamodel::Transition "0..1" -- "1..1" petrinet::metamodel::Rectangle : belongs_to26
+petrinet::metamodel::Place "1..1" -- "0..9999" petrinet::metamodel::TransToPlaceArc : incoming4
+petrinet::metamodel::Transition "1..1" -- "1..9999" petrinet::metamodel::PlaceToTransArc : incoming9
+petrinet::metamodel::TransToPlaceArc "1..9999" -- "1..1" petrinet::metamodel::Transition : outgoing12
+petrinet::metamodel::PlaceToTransArc "0..9999" -- "1..1" petrinet::metamodel::Place : outgoing5
+petrinet::metamodel::PetriNet "1..1" -- "1..1" petrinet::metamodel::Place : petrinet6
+petrinet::metamodel::PetriNet "0..1" -- "1..1" petrinet::metamodel::Transition : petrinet7
+petrinet::metamodel::Place "1..9999" --* "1..1" petrinet::metamodel::PetriNet : places0
+petrinet::metamodel::Rectangle "0..1" --* "1..1" petrinet::metamodel::Transition : rectangle15
+petrinet::metamodel::Place "1..1" -- "1..1" petrinet::metamodel::PlaceToTransArc : source16
+petrinet::metamodel::Transition "1..1" -- "1..1" petrinet::metamodel::TransToPlaceArc : source20
+petrinet::metamodel::PlaceToTransArc "1..1" -- "1..1" petrinet::metamodel::Transition : target18
+petrinet::metamodel::TransToPlaceArc "1..1" -- "1..1" petrinet::metamodel::Place : target23
+petrinet::metamodel::PetriNet "1..1" *-- "0..9999" petrinet::metamodel::Transition : transitions1
+@enduml

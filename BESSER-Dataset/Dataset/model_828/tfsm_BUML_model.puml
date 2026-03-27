@@ -1,0 +1,57 @@
+@startuml
+class Guard {
+}
+class NamedElement {
+}
+class tfsm::EventGuard {
+}
+class tfsm::FSMClock {
+}
+class tfsm::FSMEvent {
+}
+abstract class tfsm::Guard {
+}
+class tfsm::NamedElement {
+  + name : str
+}
+class tfsm::State {
+  + onEnter() : str
+  + onLeave() : str
+}
+class tfsm::System {
+}
+class tfsm::TFSM {
+}
+class tfsm::TemporalGuard {
+  + afterDuration : int
+}
+class tfsm::Transition {
+  + action : str
+  + fire() : str
+}
+Guard <|-- tfsm::EventGuard
+Guard <|-- tfsm::TemporalGuard
+NamedElement <|-- tfsm::FSMClock
+NamedElement <|-- tfsm::FSMEvent
+NamedElement <|-- tfsm::Guard
+NamedElement <|-- tfsm::State
+NamedElement <|-- tfsm::TFSM
+NamedElement <|-- tfsm::Transition
+tfsm::FSMEvent "0..9999" -- "1..1" tfsm::Transition : generatedEvents15
+tfsm::FSMClock "0..9999" --* "1..1" tfsm::System : globalClocks24
+tfsm::System "1..1" *-- "0..9999" tfsm::FSMEvent : globalEvent27
+tfsm::Transition "0..9999" -- "1..1" tfsm::State : incomingTransition8
+tfsm::State "1..1" -- "1..1" tfsm::TFSM : initialState1
+tfsm::TemporalGuard "1..1" -- "1..1" tfsm::FSMClock : onClock16
+tfsm::Transition "0..9999" --* "1..1" tfsm::State : outgoingTransition7
+tfsm::FSMClock "1..1" --* "1..1" tfsm::TFSM : ownedClock4
+tfsm::FSMEvent "0..9999" --* "1..1" tfsm::TFSM : ownedEvents2
+tfsm::Guard "1..1" --* "1..1" tfsm::Transition : ownedGuard14
+tfsm::State "0..9999" --* "1..1" tfsm::TFSM : ownedState0
+tfsm::TFSM "1..1" -- "1..1" tfsm::State : owningFSM6
+tfsm::Transition "0..9999" -- "1..1" tfsm::FSMEvent : sollicitingTransitions20
+tfsm::Transition "1..1" -- "1..1" tfsm::State : source10
+tfsm::State "1..1" -- "1..1" tfsm::Transition : target12
+tfsm::System "1..1" *-- "0..9999" tfsm::TFSM : tfsms22
+tfsm::FSMEvent "1..1" -- "1..1" tfsm::EventGuard : triggeringEvent18
+@enduml

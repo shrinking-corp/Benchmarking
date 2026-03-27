@@ -1,0 +1,108 @@
+@startuml
+enum BooleanPropertyAttributeType {
+  eventable
+  readable
+  writable
+}
+class ComplexPrimitivePropertyType {
+}
+enum ConstraintIntervalType {
+  default
+  max
+  mimetype
+  min
+  nullable
+  regex
+  scaling
+  strlen
+}
+enum EnumLiteralPropertyAttributeType {
+  measurementUnit
+}
+class Model {
+}
+enum PrimitiveType {
+  base64Binary
+  boolean
+  byte
+  datetime
+  double
+  float
+  int
+  long
+  short
+  string
+}
+class PropertyAttribute {
+}
+class PropertyType {
+}
+class Type {
+}
+class datatype::BooleanPropertyAttribute {
+  + type : str
+  + value : bool
+}
+class datatype::ComplexPrimitivePropertyType {
+}
+class datatype::Constraint {
+  + constraintValues : str
+  + type : str
+}
+class datatype::ConstraintRule {
+}
+class datatype::DictionaryPropertyType {
+}
+class datatype::Entity {
+}
+class datatype::Enum {
+}
+class datatype::EnumLiteral {
+  + description : str
+  + name : str
+}
+class datatype::EnumLiteralPropertyAttribute {
+  + type : str
+}
+class datatype::ObjectPropertyType {
+}
+class datatype::Presence {
+  + mandatory : bool
+}
+class datatype::PrimitivePropertyType {
+  + type : str
+}
+class datatype::Property {
+  + description : str
+  + extension : bool
+  + multiplicity : bool
+  + name : str
+}
+abstract class datatype::PropertyAttribute {
+}
+class datatype::PropertyType {
+}
+class datatype::Type {
+}
+ComplexPrimitivePropertyType <|-- datatype::DictionaryPropertyType
+Model <|-- datatype::Type
+PropertyAttribute <|-- datatype::BooleanPropertyAttribute
+PropertyAttribute <|-- datatype::EnumLiteralPropertyAttribute
+PropertyType <|-- datatype::ComplexPrimitivePropertyType
+PropertyType <|-- datatype::ObjectPropertyType
+PropertyType <|-- datatype::PrimitivePropertyType
+Type <|-- datatype::Entity
+Type <|-- datatype::Enum
+datatype::Constraint "0..9999" --* "1..1" datatype::ConstraintRule : Constraints16
+datatype::Property "1..1" *-- "0..1" datatype::ConstraintRule : constraintRule6
+datatype::EnumLiteral "0..9999" --* "1..1" datatype::Enum : enums13
+datatype::PropertyType "0..1" --* "1..1" datatype::DictionaryPropertyType : keyType18
+datatype::Presence "0..1" --* "1..1" datatype::Property : presence4
+datatype::Entity "1..1" *-- "0..9999" datatype::Property : properties2
+datatype::PropertyAttribute "0..9999" --* "1..1" datatype::Property : propertyAttributes10
+datatype::Entity "0..1" -- "1..1" datatype::Entity : superType1
+datatype::ObjectPropertyType "1..1" -- "0..1" datatype::Type : type12
+datatype::PropertyType "0..1" --* "1..1" datatype::Property : type8
+datatype::EnumLiteral "0..1" -- "1..1" datatype::EnumLiteralPropertyAttribute : value14
+datatype::DictionaryPropertyType "1..1" *-- "0..1" datatype::PropertyType : valueType20
+@enduml

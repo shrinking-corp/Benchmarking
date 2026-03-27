@@ -1,0 +1,62 @@
+@startuml
+class Arc {
+}
+class Element {
+}
+class LocatedElement {
+}
+class NamedElement {
+}
+class PetriNet {
+}
+class Place {
+}
+class PlaceToTransition {
+}
+class Transition {
+}
+class TransitionToPlace {
+}
+abstract class evoPetrinet::Arc {
+  + weight : str
+}
+abstract class evoPetrinet::Element {
+}
+abstract class evoPetrinet::LocatedElement {
+  + location : str
+}
+abstract class evoPetrinet::NamedElement {
+  + name : str
+}
+class evoPetrinet::PetriNet {
+}
+class evoPetrinet::PetriNetModel {
+}
+class evoPetrinet::Place {
+}
+class evoPetrinet::PlaceToTransition {
+}
+class evoPetrinet::Transition {
+}
+class evoPetrinet::TransitionToPlace {
+}
+Arc <|-- evoPetrinet::PlaceToTransition
+Arc <|-- evoPetrinet::TransitionToPlace
+Element <|-- evoPetrinet::Arc
+Element <|-- evoPetrinet::Place
+Element <|-- evoPetrinet::Transition
+LocatedElement <|-- evoPetrinet::NamedElement
+NamedElement <|-- evoPetrinet::Element
+NamedElement <|-- evoPetrinet::PetriNet
+evoPetrinet::PlaceToTransition "1..1" -- "1..1" Transition : dst20
+evoPetrinet::TransitionToPlace "1..1" -- "1..1" Place : dst26
+Element "0..9999" --* "1..1" evoPetrinet::PetriNet : elements1
+PlaceToTransition "1..9999" -- "1..1" evoPetrinet::Transition : incomingArc11
+TransitionToPlace "0..9999" -- "1..1" evoPetrinet::Place : incomingArc5
+PetriNet "1..1" -- "1..1" evoPetrinet::Element : net2
+evoPetrinet::PetriNetModel "1..1" *-- "0..9999" PetriNet : nets0
+evoPetrinet::Transition "1..1" -- "1..9999" TransitionToPlace : outgoingArc14
+evoPetrinet::Place "1..1" -- "0..9999" PlaceToTransition : outgoingArc8
+Place "1..1" -- "1..1" evoPetrinet::PlaceToTransition : src17
+Transition "1..1" -- "1..1" evoPetrinet::TransitionToPlace : src23
+@enduml

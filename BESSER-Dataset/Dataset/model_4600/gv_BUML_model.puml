@@ -1,0 +1,124 @@
+@startuml
+class AbstractGraph {
+}
+class Attributable {
+}
+class Attribute {
+}
+class Commentable {
+}
+enum Compass {
+  APPROPRIATE
+  CENTER
+  EAST
+  NORTH
+  NORTH_EAST
+  NORTH_WEST
+  SOUTH
+  SOUTH_EAST
+  SOUTH_WEST
+  WEST
+}
+class Connectable {
+}
+class Identifiable {
+}
+class Statement {
+}
+class StrictIdentifiable {
+}
+class gv::AList {
+}
+abstract class gv::AbstractGraph {
+}
+class gv::AssignmentStatement {
+  + left : str
+  + right : str
+}
+abstract class gv::Attributable {
+}
+class gv::Attribute {
+  + key : str
+  + value : str
+}
+class gv::AttributeList {
+}
+class gv::AttributeStatement {
+  + context : str
+}
+abstract class gv::Commentable {
+  + comments : str
+}
+abstract class gv::Connectable {
+}
+class gv::EdgeStatement {
+}
+class gv::Graph {
+  + strict : str
+  + type : str
+}
+abstract class gv::Identifiable {
+  + id : str
+}
+class gv::NodeID {
+}
+class gv::NodeStatement {
+}
+class gv::Port {
+  + compass : str
+}
+abstract class gv::Statement {
+}
+class gv::StatementList {
+}
+abstract class gv::StrictIdentifiable {
+  + id : str
+}
+class gv::Subgraph {
+  + type : str
+}
+class gv::Target {
+  + operation : str
+}
+AbstractGraph <|-- gv::Graph
+AbstractGraph <|-- gv::Subgraph
+Attributable <|-- gv::EdgeStatement
+Attributable <|-- gv::NodeStatement
+Attribute <|-- gv::NodeStatement
+Commentable <|-- gv::AList
+Commentable <|-- gv::AssignmentStatement
+Commentable <|-- gv::Attribute
+Commentable <|-- gv::AttributeList
+Commentable <|-- gv::AttributeStatement
+Commentable <|-- gv::EdgeStatement
+Commentable <|-- gv::Graph
+Commentable <|-- gv::NodeID
+Commentable <|-- gv::Port
+Commentable <|-- gv::StatementList
+Commentable <|-- gv::Subgraph
+Commentable <|-- gv::Target
+Connectable <|-- gv::NodeID
+Connectable <|-- gv::Subgraph
+Identifiable <|-- gv::AbstractGraph
+Identifiable <|-- gv::Port
+Statement <|-- gv::AssignmentStatement
+Statement <|-- gv::AttributeStatement
+Statement <|-- gv::EdgeStatement
+Statement <|-- gv::NodeStatement
+StrictIdentifiable <|-- gv::NodeID
+gv::Attribute "1..1" --* "1..1" gv::AList : attribute1
+gv::AttributeStatement "1..1" *-- "1..1" gv::AttributeList : attributes12
+gv::AttributeList "0..1" --* "1..1" gv::Attributable : attributes5
+gv::AList "1..1" --* "1..1" gv::AttributeList : list6
+gv::AttributeList "0..1" --* "1..1" gv::AttributeList : next10
+gv::Target "0..1" --* "1..1" gv::Target : next_target26
+gv::NodeID "1..1" --* "1..1" gv::NodeStatement : node_id17
+gv::Port "0..1" --* "1..1" gv::NodeID : port18
+gv::Connectable "1..1" --* "1..1" gv::EdgeStatement : source14
+gv::Statement "1..1" --* "1..1" gv::StatementList : statement20
+gv::AbstractGraph "1..1" *-- "0..1" gv::StatementList : statements0
+gv::StatementList "1..1" *-- "0..1" gv::StatementList : tail23
+gv::AList "0..1" --* "1..1" gv::AList : tail3
+gv::Target "1..1" --* "1..1" gv::EdgeStatement : target15
+gv::Connectable "1..1" --* "1..1" gv::Target : target28
+@enduml

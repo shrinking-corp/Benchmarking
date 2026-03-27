@@ -1,0 +1,65 @@
+@startuml
+class SolutionConstraint {
+}
+class test7::AttributeType {
+  + name : str
+}
+class test7::AttributeTypeElement {
+  + dataType : str
+  + name : str
+}
+class test7::Feature {
+  + name : str
+}
+class test7::FeatureAttribute {
+  + name : str
+}
+class test7::FeatureAttributeElement {
+  + value : str
+}
+class test7::FeatureAttributeReference {
+}
+class test7::FiniteDomainSC {
+}
+class test7::FiniteDomainSCValueReference {
+  + value : str
+}
+class test7::HardLimitSC {
+  + op1 : str
+  + op2 : str
+  + value1 : str
+  + value2 : str
+}
+class test7::Model {
+}
+class test7::OptimizationSC {
+  + funct : str
+}
+class test7::SelectionStateSC {
+  + state : str
+}
+class test7::SolutionConstraint {
+  + name : str
+  + type : str
+}
+SolutionConstraint <|-- test7::FiniteDomainSC
+SolutionConstraint <|-- test7::HardLimitSC
+SolutionConstraint <|-- test7::OptimizationSC
+SolutionConstraint <|-- test7::SelectionStateSC
+test7::AttributeType "0..1" -- "1..1" test7::FeatureAttribute : attrType12
+test7::AttributeType "0..1" -- "1..1" test7::OptimizationSC : attrType22
+test7::HardLimitSC "1..1" -- "0..1" test7::AttributeType : attrType24
+test7::AttributeType "0..9999" --* "1..1" test7::Model : attributeTypes0
+test7::Feature "1..1" *-- "0..9999" test7::FeatureAttributeReference : attributes19
+test7::AttributeTypeElement "0..9999" --* "1..1" test7::AttributeType : elements7
+test7::Feature "0..1" -- "1..1" test7::SelectionStateSC : feature26
+test7::Feature "0..1" -- "1..1" test7::FiniteDomainSC : feature28
+test7::FiniteDomainSC "1..1" -- "0..1" test7::FeatureAttribute : featureAttr30
+test7::FeatureAttribute "0..9999" --* "1..1" test7::Model : featureAttributes1
+test7::Model "1..1" *-- "0..9999" test7::Feature : features3
+test7::AttributeType "0..1" -- "1..1" test7::AttributeType : independentAttrType10
+test7::FeatureAttribute "0..1" -- "1..1" test7::FeatureAttributeReference : name17
+test7::SolutionConstraint "0..9999" --* "1..1" test7::Model : solutionConstraints5
+test7::FeatureAttribute "1..1" *-- "0..9999" test7::FeatureAttributeElement : values15
+test7::FiniteDomainSCValueReference "0..9999" --* "1..1" test7::FiniteDomainSC : values33
+@enduml

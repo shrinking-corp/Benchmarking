@@ -1,0 +1,130 @@
+@startuml
+class AreaCS {
+}
+class BottomPatternCS {
+}
+class CSTNode {
+}
+class DirectionCS {
+}
+class DomainCS {
+}
+class EnforcementOperationCS {
+}
+class GuardPatternCS {
+}
+class IdentifiedCS {
+}
+class IdentifierCS {
+}
+class MappingCS {
+}
+class OCLExpressionCS {
+}
+class OperationCallExpCS {
+}
+class ParamDeclarationCS {
+}
+class PathNameCS {
+}
+class PatternCS {
+}
+class QueryCS {
+}
+class RealizeableVariableCS {
+}
+class RealizedVariableCS {
+}
+class TransformationCS {
+}
+class TypeCS {
+}
+class UnrealizedVariableCS {
+}
+class cst::CSTNode {
+}
+class cst::IHasName {
+}
+abstract class qvtcore::cst::AreaCS {
+}
+class qvtcore::cst::AssignmentCS {
+  + default : bool
+}
+class qvtcore::cst::BottomPatternCS {
+}
+class qvtcore::cst::DirectionCS {
+}
+class qvtcore::cst::DomainCS {
+  + check : bool
+  + enforce : bool
+}
+class qvtcore::cst::EnforcementOperationCS {
+  + deletion : bool
+}
+class qvtcore::cst::GuardPatternCS {
+}
+class qvtcore::cst::MappingCS {
+}
+class qvtcore::cst::ParamDeclarationCS {
+}
+abstract class qvtcore::cst::PatternCS {
+}
+class qvtcore::cst::QueryCS {
+}
+abstract class qvtcore::cst::RealizeableVariableCS {
+}
+class qvtcore::cst::RealizedVariableCS {
+}
+class qvtcore::cst::TopLevelCS {
+}
+class qvtcore::cst::TransformationCS {
+}
+class qvtcore::cst::UnrealizedVariableCS {
+}
+AreaCS <|-- qvtcore::cst::DomainCS
+CSTNode <|-- qvtcore::cst::EnforcementOperationCS
+CSTNode <|-- qvtcore::cst::ParamDeclarationCS
+CSTNode <|-- qvtcore::cst::PatternCS
+CSTNode <|-- qvtcore::cst::TopLevelCS
+IdentifiedCS <|-- qvtcore::cst::AreaCS
+IdentifiedCS <|-- qvtcore::cst::DirectionCS
+IdentifiedCS <|-- qvtcore::cst::MappingCS
+IdentifiedCS <|-- qvtcore::cst::RealizeableVariableCS
+OCLExpressionCS <|-- qvtcore::cst::AssignmentCS
+PatternCS <|-- qvtcore::cst::BottomPatternCS
+PatternCS <|-- qvtcore::cst::GuardPatternCS
+RealizeableVariableCS <|-- qvtcore::cst::RealizedVariableCS
+RealizeableVariableCS <|-- qvtcore::cst::UnrealizedVariableCS
+cst::CSTNode <|-- qvtcore::cst::QueryCS
+cst::CSTNode <|-- qvtcore::cst::TransformationCS
+cst::IHasName <|-- qvtcore::cst::QueryCS
+cst::IHasName <|-- qvtcore::cst::TransformationCS
+BottomPatternCS "0..1" --* "1..1" qvtcore::cst::AreaCS : bottomPattern1
+qvtcore::cst::MappingCS "1..1" *-- "0..9999" MappingCS : composedMappings14
+OCLExpressionCS "0..9999" --* "1..1" qvtcore::cst::PatternCS : constraints30
+DirectionCS "0..9999" --* "1..1" qvtcore::cst::TransformationCS : directions52
+DomainCS "0..9999" --* "1..1" qvtcore::cst::MappingCS : domains15
+EnforcementOperationCS "0..9999" --* "1..1" qvtcore::cst::BottomPatternCS : enforcementOperations7
+GuardPatternCS "0..1" --* "1..1" qvtcore::cst::AreaCS : guardPattern0
+IdentifierCS "0..1" --* "1..1" qvtcore::cst::ParamDeclarationCS : identifier26
+qvtcore::cst::DirectionCS "1..1" *-- "0..9999" PathNameCS : imports10
+PathNameCS "0..1" --* "1..1" qvtcore::cst::MappingCS : in17
+qvtcore::cst::AssignmentCS "1..1" *-- "1..1" OCLExpressionCS : initialiser4
+ParamDeclarationCS "0..9999" --* "1..1" qvtcore::cst::QueryCS : inputParamDeclaration34
+qvtcore::cst::TopLevelCS "1..1" *-- "0..9999" MappingCS : mappings49
+DomainCS "1..1" --* "1..1" qvtcore::cst::MappingCS : middle20
+OCLExpressionCS "0..1" --* "1..1" qvtcore::cst::QueryCS : oclExpression35
+OperationCallExpCS "0..1" --* "1..1" qvtcore::cst::EnforcementOperationCS : operationCall13
+PathNameCS "0..1" --* "1..1" qvtcore::cst::QueryCS : pathName38
+PathNameCS "0..1" --* "1..1" qvtcore::cst::TransformationCS : pathName53
+QueryCS "0..9999" --* "1..1" qvtcore::cst::TopLevelCS : queries47
+RealizedVariableCS "0..9999" --* "1..1" qvtcore::cst::BottomPatternCS : realizedVariables8
+qvtcore::cst::MappingCS "1..1" *-- "0..9999" IdentifierCS : refines23
+OCLExpressionCS "1..1" --* "1..1" qvtcore::cst::AssignmentCS : target3
+TransformationCS "0..9999" --* "1..1" qvtcore::cst::TopLevelCS : transformations46
+TypeCS "0..1" --* "1..1" qvtcore::cst::ParamDeclarationCS : type28
+qvtcore::cst::QueryCS "1..1" *-- "0..1" TypeCS : type41
+TypeCS "0..1" --* "1..1" qvtcore::cst::RealizeableVariableCS : type44
+qvtcore::cst::PatternCS "1..1" *-- "0..9999" UnrealizedVariableCS : unrealizedVariables32
+IdentifierCS "0..9999" --* "1..1" qvtcore::cst::DirectionCS : uses11
+@enduml

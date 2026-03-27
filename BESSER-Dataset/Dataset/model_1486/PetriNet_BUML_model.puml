@@ -1,0 +1,35 @@
+@startuml
+class GenericPlace {
+}
+abstract class petriNet::GenericPlace {
+  + name : str
+  + numberOfTokens : int
+}
+class petriNet::InputArc {
+  + weight : int
+}
+class petriNet::OutputArc {
+  + weight : int
+}
+class petriNet::PetriNet {
+  + name : str
+}
+class petriNet::Place {
+  + capacity : int
+}
+class petriNet::Resource {
+}
+class petriNet::Transition {
+  + name : str
+}
+GenericPlace <|-- petriNet::Place
+GenericPlace <|-- petriNet::Resource
+petriNet::InputArc "1..1" -- "0..1" petriNet::GenericPlace : InputArcFromPlace7
+petriNet::Transition "0..1" -- "1..1" petriNet::InputArc : InputArcToTransition10
+petriNet::Transition "0..1" -- "1..1" petriNet::OutputArc : OutputArcFromTransition13
+petriNet::OutputArc "1..1" -- "0..1" petriNet::GenericPlace : OutputArcToPlace16
+petriNet::GenericPlace "0..9999" --* "1..1" petriNet::PetriNet : containsGenericPlaces0
+petriNet::InputArc "0..9999" --* "1..1" petriNet::PetriNet : containsInputArcs3
+petriNet::OutputArc "0..9999" --* "1..1" petriNet::PetriNet : containsOutputArcs5
+petriNet::PetriNet "1..1" *-- "0..9999" petriNet::Transition : containsTransitions1
+@enduml

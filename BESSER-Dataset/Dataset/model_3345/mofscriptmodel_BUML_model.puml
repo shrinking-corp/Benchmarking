@@ -1,0 +1,328 @@
+@startuml
+enum AccessLevel {
+  NONE
+  PRIVATE
+  PROTECTED
+  PUBLIC
+}
+enum AdviceOperator {
+  AFTER
+  AROUND
+  BEFORE
+}
+enum ArithmeticOperator {
+  DIV
+  MINUS
+  MULT
+  PLUS
+}
+enum AssignmentOperator {
+  EQ
+  PLUS_EQ
+}
+enum ComparisonOperator {
+  AND
+  EQ
+  GE
+  GT
+  LE
+  LT
+  NE
+  OR
+}
+class Expression {
+}
+enum ImportSemantics {
+  ACCESS
+  IMPORT
+}
+enum ImportType {
+  LIBRARY
+  TRANSFORMATION
+}
+enum LiteralType {
+  BOOLEAN
+  INTEGER
+  NULL
+  REAL
+  STRING
+}
+enum LogicalOperator {
+  AND
+  NONE
+  NOT
+  OR
+}
+class MOFScriptModel::Advice {
+  + code : str
+  + name : str
+  + operator : str
+  + pointCutRef : str
+}
+class MOFScriptModel::ArithmeticExpression {
+  + operator : str
+}
+class MOFScriptModel::BreakStatement {
+}
+class MOFScriptModel::ComparisonExpression {
+  + operator : str
+}
+class MOFScriptModel::CreateExpression {
+  + type : str
+}
+class MOFScriptModel::CreateExpressionParameter {
+  + name : str
+}
+class MOFScriptModel::CreateStatement {
+  + name : str
+  + type : str
+}
+class MOFScriptModel::DebugStatement {
+  + specification : str
+  + vars : str
+}
+abstract class MOFScriptModel::Expression {
+}
+class MOFScriptModel::FileStatement {
+  + append : bool
+  + fileReference : str
+  + use : bool
+}
+class MOFScriptModel::FunctionCall {
+  + isSuperCall : bool
+  + name : str
+  + transformationContext : str
+}
+class MOFScriptModel::FunctionCallStatement {
+}
+class MOFScriptModel::GeneralAssignment {
+  + name : str
+  + operator : str
+}
+class MOFScriptModel::IfStatement {
+}
+class MOFScriptModel::IteratorStatement {
+  + type : str
+  + variable : str
+}
+class MOFScriptModel::Literal {
+  + type : str
+  + value : str
+}
+class MOFScriptModel::LogicalExpression {
+  + operator : str
+}
+class MOFScriptModel::M2MTrace {
+  + id : str
+  + name : str
+}
+class MOFScriptModel::MOFScriptAspect {
+}
+class MOFScriptModel::MOFScriptComment {
+  + commentText : str
+  + docStyle : bool
+  + singleLine : bool
+}
+class MOFScriptModel::MOFScriptImport {
+  + importSemantics : str
+  + name : str
+  + type : str
+  + uri : str
+}
+abstract class MOFScriptModel::MOFScriptObject {
+  + column : int
+  + line : int
+}
+class MOFScriptModel::MOFScriptParameter {
+  + direction : str
+  + name : str
+  + type : str
+  + typePrefix : str
+}
+class MOFScriptModel::MOFScriptSpecification {
+}
+abstract class MOFScriptModel::MOFScriptStatement {
+}
+abstract class MOFScriptModel::MOFScriptStatementOwner {
+}
+class MOFScriptModel::MOFScriptTransformation {
+  + extendsName : str
+  + name : str
+}
+class MOFScriptModel::PointCut {
+  + name : str
+  + typeMatch : str
+}
+class MOFScriptModel::PointCutExpression {
+  + combinationOperator : str
+  + expressionString : str
+  + operator : str
+}
+class MOFScriptModel::PrintStatement {
+  + context : str
+  + printCommand : str
+}
+class MOFScriptModel::Reference {
+  + name : str
+}
+class MOFScriptModel::ResultAssignment {
+  + operator : str
+  + resultPart : str
+}
+class MOFScriptModel::ReturnStatement {
+}
+class MOFScriptModel::SelectExpression {
+  + type : str
+  + variable : str
+}
+class MOFScriptModel::SimpleExpression {
+}
+class MOFScriptModel::StatementBlock {
+  + id : str
+  + protected : bool
+  + reference : str
+}
+abstract class MOFScriptModel::Trace {
+}
+class MOFScriptModel::TransformationRule {
+  + accessLevel : str
+  + isAbstract : bool
+  + isEntryPoint : bool
+  + name : str
+  + return : str
+}
+class MOFScriptModel::ValueExpression {
+  + specification : str
+}
+class MOFScriptModel::VariableDeclaration {
+  + constant : bool
+  + name : str
+  + type : str
+}
+class MOFScriptModel::VariableDeclarationStatement {
+}
+class MOFScriptModel::WhileStatement {
+}
+class MOFScriptObject {
+}
+class MOFScriptStatement {
+}
+class MOFScriptStatementOwner {
+}
+class MOFScriptTransformation {
+}
+enum ParameterDirection {
+  IN
+  INOUT
+  OUT
+}
+enum PointCutCombinationOperator {
+  AND
+  NONE
+  OR
+  XOR
+}
+enum PointCutOperator {
+  CALL
+  EXECUTE
+  TARGET
+}
+class SimpleExpression {
+}
+class Trace {
+}
+class ValueExpression {
+}
+Expression <|-- MOFScriptModel::ComparisonExpression
+Expression <|-- MOFScriptModel::CreateExpression
+Expression <|-- MOFScriptModel::LogicalExpression
+Expression <|-- MOFScriptModel::ValueExpression
+MOFScriptObject <|-- MOFScriptModel::CreateExpressionParameter
+MOFScriptObject <|-- MOFScriptModel::Expression
+MOFScriptObject <|-- MOFScriptModel::MOFScriptComment
+MOFScriptObject <|-- MOFScriptModel::MOFScriptImport
+MOFScriptObject <|-- MOFScriptModel::MOFScriptParameter
+MOFScriptObject <|-- MOFScriptModel::MOFScriptSpecification
+MOFScriptObject <|-- MOFScriptModel::MOFScriptStatementOwner
+MOFScriptObject <|-- MOFScriptModel::MOFScriptTransformation
+MOFScriptObject <|-- MOFScriptModel::VariableDeclaration
+MOFScriptStatement <|-- MOFScriptModel::BreakStatement
+MOFScriptStatement <|-- MOFScriptModel::CreateStatement
+MOFScriptStatement <|-- MOFScriptModel::DebugStatement
+MOFScriptStatement <|-- MOFScriptModel::FileStatement
+MOFScriptStatement <|-- MOFScriptModel::FunctionCallStatement
+MOFScriptStatement <|-- MOFScriptModel::GeneralAssignment
+MOFScriptStatement <|-- MOFScriptModel::IfStatement
+MOFScriptStatement <|-- MOFScriptModel::IteratorStatement
+MOFScriptStatement <|-- MOFScriptModel::PrintStatement
+MOFScriptStatement <|-- MOFScriptModel::ResultAssignment
+MOFScriptStatement <|-- MOFScriptModel::ReturnStatement
+MOFScriptStatement <|-- MOFScriptModel::Trace
+MOFScriptStatement <|-- MOFScriptModel::VariableDeclarationStatement
+MOFScriptStatement <|-- MOFScriptModel::WhileStatement
+MOFScriptStatementOwner <|-- MOFScriptModel::Advice
+MOFScriptStatementOwner <|-- MOFScriptModel::MOFScriptStatement
+MOFScriptStatementOwner <|-- MOFScriptModel::TransformationRule
+MOFScriptTransformation <|-- MOFScriptModel::MOFScriptAspect
+SimpleExpression <|-- MOFScriptModel::FunctionCall
+SimpleExpression <|-- MOFScriptModel::Literal
+SimpleExpression <|-- MOFScriptModel::Reference
+Trace <|-- MOFScriptModel::M2MTrace
+ValueExpression <|-- MOFScriptModel::ArithmeticExpression
+ValueExpression <|-- MOFScriptModel::SelectExpression
+ValueExpression <|-- MOFScriptModel::SimpleExpression
+MOFScriptModel::SimpleExpression "0..9999" --* "1..1" MOFScriptModel::SimpleExpression : additionalExpressionPart49
+MOFScriptModel::Advice "0..9999" --* "1..1" MOFScriptModel::MOFScriptAspect : advice87
+MOFScriptModel::IteratorStatement "1..1" *-- "0..1" MOFScriptModel::ValueExpression : after40
+MOFScriptModel::SelectExpression "1..1" -- "0..1" MOFScriptModel::FunctionCall : appliedFunction103
+MOFScriptModel::ValueExpression "0..1" --* "1..1" MOFScriptModel::IteratorStatement : before35
+MOFScriptModel::ValueExpression "0..1" --* "1..1" MOFScriptModel::IteratorStatement : between37
+MOFScriptModel::StatementBlock "0..9999" --* "1..1" MOFScriptModel::MOFScriptStatementOwner : blocks10
+MOFScriptModel::PointCutExpression "0..9999" --* "1..1" MOFScriptModel::PointCutExpression : combinedExpression96
+MOFScriptModel::MOFScriptComment "0..9999" --* "1..1" MOFScriptModel::MOFScriptObject : comment12
+MOFScriptModel::Expression "1..1" --* "1..1" MOFScriptModel::WhileStatement : condition85
+MOFScriptModel::VariableDeclaration "0..9999" --* "1..1" MOFScriptModel::MOFScriptTransformation : constants20
+MOFScriptModel::MOFScriptParameter "0..1" --* "1..1" MOFScriptModel::TransformationRule : context5
+MOFScriptModel::IfStatement "1..1" *-- "0..9999" MOFScriptModel::IfStatement : elseBranch79
+MOFScriptModel::Expression "0..1" --* "1..1" MOFScriptModel::ReturnStatement : expression110
+MOFScriptModel::Expression "0..1" --* "1..1" MOFScriptModel::ResultAssignment : expression56
+MOFScriptModel::GeneralAssignment "1..1" *-- "0..1" MOFScriptModel::Expression : expression58
+MOFScriptModel::TransformationRule "1..1" -- "0..1" MOFScriptModel::TransformationRule : extends2
+MOFScriptModel::MOFScriptTransformation "1..1" -- "0..1" MOFScriptModel::MOFScriptTransformation : extends27
+MOFScriptModel::FileStatement "1..1" *-- "0..1" MOFScriptModel::ValueExpression : fileURI69
+MOFScriptModel::IteratorStatement "1..1" *-- "0..1" MOFScriptModel::Expression : filterExpression31
+MOFScriptModel::Expression "0..1" --* "1..1" MOFScriptModel::SelectExpression : filterExpression98
+MOFScriptModel::FunctionCall "0..1" --* "1..1" MOFScriptModel::FunctionCallStatement : function60
+MOFScriptModel::Expression "0..1" --* "1..1" MOFScriptModel::IfStatement : ifExpression76
+MOFScriptModel::MOFScriptImport "0..9999" --* "1..1" MOFScriptModel::MOFScriptSpecification : imports83
+MOFScriptModel::MOFScriptTransformation "0..1" -- "1..1" MOFScriptModel::TransformationRule : owner0
+MOFScriptModel::MOFScriptStatement "1..1" -- "0..1" MOFScriptModel::MOFScriptStatementOwner : owner13
+MOFScriptModel::CreateExpressionParameter "0..9999" --* "1..1" MOFScriptModel::CreateExpression : parameters106
+MOFScriptModel::MOFScriptParameter "0..9999" --* "1..1" MOFScriptModel::MOFScriptTransformation : parameters23
+MOFScriptModel::MOFScriptParameter "0..9999" --* "1..1" MOFScriptModel::TransformationRule : parameters3
+MOFScriptModel::ValueExpression "0..9999" --* "1..1" MOFScriptModel::FunctionCall : parameters51
+MOFScriptModel::Expression "0..1" --* "1..1" MOFScriptModel::LogicalExpression : part143
+MOFScriptModel::ValueExpression "0..1" --* "1..1" MOFScriptModel::ArithmeticExpression : part164
+MOFScriptModel::ValueExpression "0..1" --* "1..1" MOFScriptModel::ComparisonExpression : part173
+MOFScriptModel::Expression "0..1" --* "1..1" MOFScriptModel::LogicalExpression : part245
+MOFScriptModel::ValueExpression "0..1" --* "1..1" MOFScriptModel::ArithmeticExpression : part266
+MOFScriptModel::ValueExpression "0..1" --* "1..1" MOFScriptModel::ComparisonExpression : part271
+MOFScriptModel::PointCut "0..9999" --* "1..1" MOFScriptModel::MOFScriptAspect : pointcut88
+MOFScriptModel::PointCut "0..1" -- "1..1" MOFScriptModel::Advice : pointcut90
+MOFScriptModel::PointCut "1..1" *-- "1..1" MOFScriptModel::PointCutExpression : pointcutexpression93
+MOFScriptModel::PrintStatement "1..1" *-- "0..1" MOFScriptModel::ValueExpression : printBody62
+MOFScriptModel::M2MTrace "1..1" -- "0..1" MOFScriptModel::Reference : source114
+MOFScriptModel::SimpleExpression "0..1" --* "1..1" MOFScriptModel::IteratorStatement : source33
+MOFScriptModel::SelectExpression "1..1" *-- "0..1" MOFScriptModel::SimpleExpression : sourceReference100
+MOFScriptModel::MOFScriptStatement "0..9999" -- "1..1" MOFScriptModel::StatementBlock : statements16
+MOFScriptModel::MOFScriptStatement "0..9999" --* "1..1" MOFScriptModel::MOFScriptStatementOwner : statements8
+MOFScriptModel::Reference "0..1" -- "1..1" MOFScriptModel::M2MTrace : target115
+MOFScriptModel::MOFScriptTransformation "0..9999" --* "1..1" MOFScriptModel::MOFScriptSpecification : transformation81
+MOFScriptModel::TransformationRule "0..1" -- "1..1" MOFScriptModel::FunctionCall : transformationRule53
+MOFScriptModel::TransformationRule "0..9999" --* "1..1" MOFScriptModel::MOFScriptTransformation : transformationrules29
+MOFScriptModel::ValueExpression "0..1" --* "1..1" MOFScriptModel::CreateExpressionParameter : value107
+MOFScriptModel::Expression "0..1" --* "1..1" MOFScriptModel::VariableDeclaration : value14
+MOFScriptModel::VariableDeclaration "0..1" -- "1..1" MOFScriptModel::VariableDeclarationStatement : variable112
+MOFScriptModel::MOFScriptTransformation "1..1" *-- "0..9999" MOFScriptModel::VariableDeclaration : variables18
+MOFScriptModel::MOFScriptStatementOwner "1..1" *-- "0..9999" MOFScriptModel::VariableDeclaration : variables9
+@enduml

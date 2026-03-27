@@ -1,0 +1,24 @@
+@startuml
+class Topic {
+}
+class mindmap::CentralTopic {
+}
+class mindmap::MainTopic {
+}
+class mindmap::MindMap {
+  + title : str
+}
+class mindmap::SubTopic {
+}
+abstract class mindmap::Topic {
+  + marker : int
+  + name : str
+}
+Topic <|-- mindmap::CentralTopic
+Topic <|-- mindmap::MainTopic
+Topic <|-- mindmap::SubTopic
+mindmap::MainTopic "0..9999" --* "1..1" mindmap::CentralTopic : maintopics1
+mindmap::SubTopic "0..9999" --* "1..1" mindmap::SubTopic : subsubtopics6
+mindmap::SubTopic "0..9999" --* "1..1" mindmap::MainTopic : subtopics3
+mindmap::MindMap "1..1" *-- "1..1" mindmap::CentralTopic : topic0
+@enduml

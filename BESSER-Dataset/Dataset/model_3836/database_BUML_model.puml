@@ -1,0 +1,21 @@
+@startuml
+class database::Column {
+  + name : str
+  + type : str
+}
+class database::ForeignKey {
+}
+class database::Schema {
+  + name : str
+}
+class database::Table {
+  + is_local : bool
+  + name : str
+}
+database::Column "0..9999" --* "1..1" database::Table : cols1
+database::Column "0..9999" -- "1..1" database::ForeignKey : cols8
+database::ForeignKey "0..9999" --* "1..1" database::Table : fkeys3
+database::Table "1..1" -- "0..9999" database::Column : pkey5
+database::Table "1..1" -- "1..1" database::ForeignKey : references11
+database::Table "0..9999" --* "1..1" database::Schema : tables0
+@enduml

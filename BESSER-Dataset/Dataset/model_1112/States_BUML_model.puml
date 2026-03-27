@@ -1,0 +1,35 @@
+@startuml
+class State {
+}
+class states::CompoundState {
+}
+class states::Event {
+  + name : str
+}
+class states::Module {
+  + name : str
+}
+class states::SimpleState {
+  + value : int
+}
+class states::State {
+  + initial : bool
+  + name : str
+}
+class states::Statemachine {
+  + initial : bool
+  + name : str
+  + value : int
+}
+class states::Transition {
+}
+State <|-- states::CompoundState
+State <|-- states::SimpleState
+states::Transition "1..1" -- "0..1" states::Event : event9
+states::Statemachine "1..1" *-- "0..9999" states::Event : events1
+states::Statemachine "0..1" -- "1..1" states::CompoundState : machine7
+states::Module "1..1" *-- "0..9999" states::Statemachine : machines0
+states::State "0..1" -- "1..1" states::Transition : state12
+states::State "0..9999" --* "1..1" states::Statemachine : states3
+states::Transition "0..9999" --* "1..1" states::State : transitions5
+@enduml

@@ -1,0 +1,77 @@
+@startuml
+class Collection {
+}
+class Key {
+}
+enum PrimitiveType {
+  BOOLEAN
+  DATE
+  FLOAT
+  ID
+  INT
+  TEXT
+  TIMESTAMP
+}
+class Type {
+}
+class columnFamilyDataModel::ClusteringKey {
+}
+abstract class columnFamilyDataModel::Collection {
+  + type : str
+}
+class columnFamilyDataModel::Column {
+  + name : str
+}
+class columnFamilyDataModel::ColumnFamily {
+  + name : str
+}
+class columnFamilyDataModel::ColumnFamilyDataModel {
+}
+class columnFamilyDataModel::Field {
+  + name : str
+}
+abstract class columnFamilyDataModel::Key {
+}
+class columnFamilyDataModel::List {
+}
+class columnFamilyDataModel::Map {
+  + keyType : str
+}
+class columnFamilyDataModel::PartitionKey {
+}
+class columnFamilyDataModel::Set {
+}
+class columnFamilyDataModel::SimpleType {
+  + type : str
+}
+class columnFamilyDataModel::Table {
+  + name : str
+}
+class columnFamilyDataModel::Tuple {
+  + types : str
+}
+abstract class columnFamilyDataModel::Type {
+}
+class columnFamilyDataModel::UserDefinedType {
+  + name : str
+}
+Collection <|-- columnFamilyDataModel::List
+Collection <|-- columnFamilyDataModel::Map
+Collection <|-- columnFamilyDataModel::Set
+Key <|-- columnFamilyDataModel::ClusteringKey
+Key <|-- columnFamilyDataModel::PartitionKey
+Type <|-- columnFamilyDataModel::Collection
+Type <|-- columnFamilyDataModel::SimpleType
+Type <|-- columnFamilyDataModel::Tuple
+Type <|-- columnFamilyDataModel::UserDefinedType
+columnFamilyDataModel::ClusteringKey "0..9999" --* "1..1" columnFamilyDataModel::Table : clusteringKeys7
+columnFamilyDataModel::Column "1..1" -- "1..1" columnFamilyDataModel::Key : column18
+columnFamilyDataModel::Table "1..1" *-- "1..9999" columnFamilyDataModel::ColumnFamily : columnFamilies1
+columnFamilyDataModel::ColumnFamily "0..1" -- "1..1" columnFamilyDataModel::Column : columnFamily11
+columnFamilyDataModel::Column "0..9999" --* "1..1" columnFamilyDataModel::Table : columns3
+columnFamilyDataModel::Field "0..9999" --* "1..1" columnFamilyDataModel::UserDefinedType : fields14
+columnFamilyDataModel::Table "1..1" *-- "1..9999" columnFamilyDataModel::PartitionKey : partitionKeys5
+columnFamilyDataModel::Table "0..9999" --* "1..1" columnFamilyDataModel::ColumnFamilyDataModel : tables0
+columnFamilyDataModel::Field "1..1" *-- "1..1" columnFamilyDataModel::Type : type15
+columnFamilyDataModel::Type "0..1" --* "1..1" columnFamilyDataModel::Column : type9
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+class library::t::author {
+  + tagName : str
+  + text : str
+}
+class library::t::book {
+  + pages : int
+  + tagName : str
+  + text : str
+  + title : str
+}
+class library::t::library {
+  + tagName : str
+  + text : str
+}
+class library::t::published {
+  + tagName : str
+  + text : str
+}
+library::t::book "1..1" *-- "0..9999" library::t::author : author4
+library::t::book "0..9999" --* "1..1" library::t::library : book0
+library::t::library "0..1" --* "1..1" library::t::book : parentNode1
+library::t::published "1..1" *-- "0..1" library::t::book : parentNode11
+library::t::book "0..1" --* "1..1" library::t::author : parentNode8
+library::t::published "0..1" --* "1..1" library::t::book : published6
+@enduml

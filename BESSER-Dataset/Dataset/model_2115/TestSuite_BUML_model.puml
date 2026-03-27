@@ -1,0 +1,169 @@
+@startuml
+class Assertion {
+}
+class Authorization {
+}
+class ComplianceAssertion {
+}
+enum HTTPMethod {
+  DELETE
+  GET
+  OPTIONS
+  POST
+  PUT
+  undefined
+}
+class HTTPStatusAssertion {
+}
+class HeaderAssertion {
+}
+class InputProperty {
+}
+class NamedElement {
+}
+class OutputProperty {
+}
+enum ParameterLocation {
+  body
+  formData
+  header
+  path
+  query
+  undefined
+}
+enum PathLanguage {
+  JSONPath
+  XPath
+  undefined
+}
+class PerformanceAssertion {
+}
+class Property {
+}
+class ResponseMessageAssertion {
+}
+enum SchemeType {
+  http
+  https
+  undefined
+}
+class TestStep {
+}
+class test::APIRequest {
+  + accept : str
+  + contentType : str
+  + operationId : str
+  + scheme : str
+}
+abstract class test::Assertion {
+  + errorMessage : str
+}
+abstract class test::Authorization {
+}
+class test::Basic {
+  + password : str
+  + username : str
+}
+abstract class test::ComplianceAssertion {
+  + path : str
+}
+abstract class test::HTTPStatusAssertion {
+  + code : str
+}
+abstract class test::HeaderAssertion {
+  + key : str
+}
+class test::HeaderEqualsAssertion {
+  + value : str
+}
+class test::HeaderExistsAssertion {
+}
+class test::HeaderProperty {
+}
+abstract class test::InputProperty {
+}
+class test::InvalidStatusCodesAssertion {
+}
+abstract class test::NamedElement {
+  + name : str
+}
+class test::OAuth2 {
+  + token : str
+}
+abstract class test::OutputProperty {
+}
+class test::Parameter {
+  + location : str
+  + name : str
+  + value : str
+}
+class test::ParameterProperty {
+}
+abstract class test::PerformanceAssertion {
+}
+abstract class test::Property {
+  + expression : str
+  + pathLanguage : str
+}
+class test::PropertyTransfer {
+}
+abstract class test::ResponseMessageAssertion {
+  + value : str
+}
+class test::ResponseMessageContainsAssertion {
+}
+class test::ResponseMessageEqualsAssertion {
+}
+class test::ResponseProperty {
+}
+class test::SLAAssertion {
+  + maxTime : str
+}
+class test::SchemaComplianceAssertion {
+}
+class test::TestCase {
+  + description : str
+}
+abstract class test::TestStep {
+}
+class test::TestSuite {
+  + api : str
+  + description : str
+}
+class test::ValidStatusCodesAssertion {
+}
+Assertion <|-- test::ComplianceAssertion
+Assertion <|-- test::HTTPStatusAssertion
+Assertion <|-- test::HeaderAssertion
+Assertion <|-- test::PerformanceAssertion
+Assertion <|-- test::ResponseMessageAssertion
+Authorization <|-- test::Basic
+Authorization <|-- test::OAuth2
+ComplianceAssertion <|-- test::SchemaComplianceAssertion
+HTTPStatusAssertion <|-- test::InvalidStatusCodesAssertion
+HTTPStatusAssertion <|-- test::ValidStatusCodesAssertion
+HeaderAssertion <|-- test::HeaderEqualsAssertion
+HeaderAssertion <|-- test::HeaderExistsAssertion
+InputProperty <|-- test::ParameterProperty
+NamedElement <|-- test::TestCase
+NamedElement <|-- test::TestStep
+NamedElement <|-- test::TestSuite
+OutputProperty <|-- test::HeaderProperty
+OutputProperty <|-- test::ResponseProperty
+PerformanceAssertion <|-- test::SLAAssertion
+Property <|-- test::InputProperty
+Property <|-- test::OutputProperty
+ResponseMessageAssertion <|-- test::ResponseMessageContainsAssertion
+ResponseMessageAssertion <|-- test::ResponseMessageEqualsAssertion
+TestStep <|-- test::APIRequest
+TestStep <|-- test::PropertyTransfer
+test::APIRequest "1..1" *-- "0..9999" test::Assertion : assertions4
+test::Authorization "0..1" --* "1..1" test::APIRequest : authorization6
+test::Parameter "1..1" -- "1..1" test::ParameterProperty : parameter12
+test::Parameter "0..9999" --* "1..1" test::APIRequest : parameters3
+test::APIRequest "1..1" -- "1..1" test::OutputProperty : request14
+test::Property "1..1" --* "1..1" test::PropertyTransfer : source8
+test::PropertyTransfer "1..1" *-- "1..1" test::Property : target9
+test::TestCase "0..9999" --* "1..1" test::TestSuite : testCases0
+test::TestStep "0..9999" --* "1..1" test::TestCase : testSteps1
+@enduml

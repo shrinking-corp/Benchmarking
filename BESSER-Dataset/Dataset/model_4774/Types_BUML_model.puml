@@ -1,0 +1,141 @@
+@startuml
+class Collection {
+}
+class Element {
+}
+class FloatingPoint {
+}
+class Int {
+}
+class OpenDDSLib {
+}
+class SignedInt {
+}
+class Simple {
+}
+class Type {
+}
+class UnsignedInt {
+}
+class types::Array {
+}
+class types::Boolean {
+}
+class types::Branch {
+}
+class types::Case {
+  + literal : str
+}
+class types::Char {
+}
+abstract class types::Collection {
+  + length : str
+}
+class types::DataLib {
+}
+class types::Double {
+}
+class types::Enum {
+  + literals : str
+  + name : str
+}
+class types::Field {
+  + name : str
+}
+class types::Float {
+}
+abstract class types::FloatingPoint {
+}
+abstract class types::Int {
+}
+class types::Key {
+}
+class types::Long {
+}
+class types::LongDouble {
+}
+class types::LongLong {
+}
+class types::Octet {
+}
+class types::Sequence {
+}
+class types::Short {
+}
+abstract class types::SignedInt {
+}
+abstract class types::Simple {
+}
+class types::String {
+}
+class types::Struct {
+  + isDcpsDataType : bool
+  + name : str
+}
+abstract class types::Type {
+}
+class types::Typedef {
+  + name : str
+}
+class types::ULong {
+}
+class types::ULongLong {
+}
+class types::UShort {
+}
+class types::Union {
+  + name : str
+}
+abstract class types::UnsignedInt {
+}
+class types::WChar {
+}
+class types::WString {
+}
+Collection <|-- types::Array
+Collection <|-- types::Sequence
+Collection <|-- types::String
+Collection <|-- types::WString
+Element <|-- types::Branch
+Element <|-- types::Case
+Element <|-- types::Field
+Element <|-- types::Key
+Element <|-- types::Type
+FloatingPoint <|-- types::Double
+FloatingPoint <|-- types::Float
+FloatingPoint <|-- types::LongDouble
+Int <|-- types::SignedInt
+Int <|-- types::UnsignedInt
+OpenDDSLib <|-- types::DataLib
+SignedInt <|-- types::Long
+SignedInt <|-- types::LongLong
+SignedInt <|-- types::Short
+Simple <|-- types::Boolean
+Simple <|-- types::Char
+Simple <|-- types::Enum
+Simple <|-- types::FloatingPoint
+Simple <|-- types::Int
+Simple <|-- types::Octet
+Simple <|-- types::WChar
+Type <|-- types::Collection
+Type <|-- types::Simple
+Type <|-- types::Struct
+Type <|-- types::Typedef
+Type <|-- types::Union
+UnsignedInt <|-- types::ULong
+UnsignedInt <|-- types::ULongLong
+UnsignedInt <|-- types::UShort
+types::Branch "1..9999" --* "1..1" types::Union : branches18
+types::Case "1..9999" --* "1..1" types::Branch : cases2
+types::Union "1..1" *-- "0..1" types::Field : default23
+types::Branch "1..1" *-- "1..1" types::Field : field1
+types::Field "1..1" -- "1..1" types::Key : field7
+types::Field "1..9999" --* "1..1" types::Struct : fields11
+types::Struct "1..1" *-- "0..9999" types::Key : keys13
+types::Type "1..1" -- "1..1" types::Array : subtype0
+types::Type "1..1" -- "1..1" types::Sequence : subtype9
+types::Type "1..1" -- "1..1" types::Union : switch20
+types::Type "1..1" -- "1..1" types::Typedef : type16
+types::Field "1..1" -- "1..1" types::Type : type4
+types::Type "0..9999" --* "1..1" types::DataLib : types26
+@enduml

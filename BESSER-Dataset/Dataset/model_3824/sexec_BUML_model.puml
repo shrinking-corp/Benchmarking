@@ -1,0 +1,168 @@
+@startuml
+class Check {
+}
+class Event {
+}
+class ExecutionNode {
+}
+class ExecutionScope {
+}
+class MappedElement {
+}
+class NamedElement {
+}
+class ScopedElement {
+}
+class Step {
+}
+class Trace {
+}
+class sexec::Call {
+}
+class sexec::Check {
+}
+class sexec::CheckRef {
+}
+class sexec::EObject {
+}
+class sexec::EnterState {
+}
+class sexec::Execution {
+}
+class sexec::ExecutionChoice {
+}
+class sexec::ExecutionEntry {
+}
+class sexec::ExecutionExit {
+}
+class sexec::ExecutionFlow {
+}
+class sexec::ExecutionNode {
+  + simpleName : str
+}
+class sexec::ExecutionRegion {
+}
+class sexec::ExecutionScope {
+}
+class sexec::ExecutionState {
+  + leaf : bool
+}
+class sexec::ExecutionSynchronization {
+}
+class sexec::ExitState {
+}
+class sexec::Expression {
+}
+class sexec::HistoryEntry {
+  + deep : bool
+}
+class sexec::MappedElement {
+}
+class sexec::ReactionFired {
+}
+class sexec::SaveHistory {
+  + deep : bool
+}
+class sexec::ScheduleTimeEvent {
+}
+class sexec::StateCase {
+}
+class sexec::StateSwitch {
+  + stateConfigurationIdx : int
+}
+class sexec::StateVector {
+  + offset : int
+  + size : int
+}
+abstract class sexec::Step {
+  + comment : str
+}
+class sexec::TimeEvent {
+  + periodic : bool
+}
+abstract class sexec::Trace {
+}
+class sexec::TraceBeginRunCycle {
+}
+class sexec::TraceEndRunCycle {
+}
+class sexec::TraceNodeExecuted {
+}
+class sexec::TraceReactionWillFire {
+}
+class sexec::TraceStateEntered {
+}
+class sexec::TraceStateExited {
+}
+class sexec::UnscheduleTimeEvent {
+}
+Check <|-- sexec::CheckRef
+Event <|-- sexec::TimeEvent
+ExecutionNode <|-- sexec::ExecutionChoice
+ExecutionNode <|-- sexec::ExecutionEntry
+ExecutionNode <|-- sexec::ExecutionExit
+ExecutionNode <|-- sexec::ExecutionFlow
+ExecutionNode <|-- sexec::ExecutionState
+ExecutionNode <|-- sexec::ExecutionSynchronization
+ExecutionScope <|-- sexec::ExecutionFlow
+ExecutionScope <|-- sexec::ExecutionRegion
+ExecutionScope <|-- sexec::ExecutionState
+MappedElement <|-- sexec::ExecutionNode
+MappedElement <|-- sexec::ExecutionScope
+NamedElement <|-- sexec::ExecutionNode
+NamedElement <|-- sexec::ExecutionScope
+NamedElement <|-- sexec::Step
+ScopedElement <|-- sexec::ExecutionFlow
+Step <|-- sexec::Call
+Step <|-- sexec::Check
+Step <|-- sexec::EnterState
+Step <|-- sexec::Execution
+Step <|-- sexec::ExitState
+Step <|-- sexec::HistoryEntry
+Step <|-- sexec::SaveHistory
+Step <|-- sexec::ScheduleTimeEvent
+Step <|-- sexec::StateSwitch
+Step <|-- sexec::Trace
+Step <|-- sexec::UnscheduleTimeEvent
+Trace <|-- sexec::ReactionFired
+Trace <|-- sexec::TraceBeginRunCycle
+Trace <|-- sexec::TraceEndRunCycle
+Trace <|-- sexec::TraceNodeExecuted
+Trace <|-- sexec::TraceReactionWillFire
+Trace <|-- sexec::TraceStateEntered
+Trace <|-- sexec::TraceStateExited
+sexec::StateCase "0..9999" --* "1..1" sexec::StateSwitch : cases47
+sexec::Check "0..1" -- "1..1" sexec::CheckRef : check34
+sexec::Expression "0..1" --* "1..1" sexec::Check : condition32
+sexec::ExecutionState "1..1" *-- "0..1" sexec::Step : entryAction13
+sexec::Step "0..1" --* "1..1" sexec::ExecutionFlow : entryAction8
+sexec::Step "0..1" --* "1..1" sexec::ExecutionFlow : exitAction10
+sexec::Step "0..1" --* "1..1" sexec::ExecutionState : exitAction16
+sexec::ExecutionRegion "0..1" -- "1..1" sexec::StateSwitch : historyRegion48
+sexec::Step "0..1" --* "1..1" sexec::HistoryEntry : historyStep64
+sexec::StateVector "0..1" --* "1..1" sexec::ExecutionRegion : historyVector26
+sexec::ExecutionFlow "1..1" *-- "0..1" sexec::StateVector : historyVector6
+sexec::Step "0..1" --* "1..1" sexec::HistoryEntry : initialStep59
+sexec::TraceNodeExecuted "1..1" -- "0..1" sexec::ExecutionNode : node67
+sexec::ExecutionNode "0..9999" --* "1..1" sexec::ExecutionFlow : nodes2
+sexec::ExecutionNode "0..9999" -- "1..1" sexec::ExecutionRegion : nodes29
+sexec::Check "1..1" -- "0..9999" sexec::CheckRef : refs33
+sexec::ExecutionRegion "0..1" -- "1..1" sexec::SaveHistory : region57
+sexec::ExecutionRegion "0..1" -- "1..1" sexec::HistoryEntry : region61
+sexec::ExecutionRegion "0..9999" --* "1..1" sexec::ExecutionFlow : regions4
+sexec::EObject "0..1" -- "1..1" sexec::MappedElement : sourceElement0
+sexec::EnterState "1..1" -- "0..1" sexec::ExecutionState : state37
+sexec::ExecutionState "0..1" -- "1..1" sexec::ExitState : state39
+sexec::ExecutionState "0..1" -- "1..1" sexec::StateCase : state51
+sexec::ExecutionState "0..1" -- "1..1" sexec::TraceStateEntered : state69
+sexec::ExecutionState "0..1" -- "1..1" sexec::TraceStateExited : state71
+sexec::StateVector "0..1" --* "1..1" sexec::ExecutionScope : stateVector19
+sexec::Expression "0..1" --* "1..1" sexec::Execution : statement35
+sexec::ExecutionState "0..9999" --* "1..1" sexec::ExecutionFlow : states1
+sexec::StateCase "1..1" *-- "0..1" sexec::Step : step54
+sexec::ExecutionScope "0..9999" -- "1..1" sexec::ExecutionScope : subScopes22
+sexec::ExecutionScope "1..1" -- "0..1" sexec::ExecutionScope : superScope24
+sexec::TimeEvent "0..1" -- "1..1" sexec::ScheduleTimeEvent : timeEvent41
+sexec::UnscheduleTimeEvent "1..1" -- "0..1" sexec::TimeEvent : timeEvent45
+sexec::Expression "0..1" --* "1..1" sexec::ScheduleTimeEvent : timeValue42
+@enduml

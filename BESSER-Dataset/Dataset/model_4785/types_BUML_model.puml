@@ -1,0 +1,61 @@
+@startuml
+class Feature {
+}
+class NamedElement {
+}
+class PrimitiveType {
+}
+class Type {
+}
+class TypedElement {
+}
+class types::ComplexType {
+}
+class types::EnumerationType {
+}
+class types::Enumerator {
+  + literalValue : str
+}
+class types::Event {
+}
+abstract class types::Feature {
+}
+class types::Operation {
+}
+class types::Parameter {
+}
+class types::PrimitiveType {
+}
+class types::Property {
+}
+abstract class types::Type {
+}
+class types::TypeConstraint {
+  + value : str
+}
+abstract class types::TypedElement {
+}
+Feature <|-- types::Event
+Feature <|-- types::Operation
+Feature <|-- types::Property
+NamedElement <|-- types::Enumerator
+NamedElement <|-- types::Feature
+NamedElement <|-- types::Parameter
+NamedElement <|-- types::Type
+NamedElement <|-- types::TypeConstraint
+PrimitiveType <|-- types::EnumerationType
+TypedElement <|-- types::Feature
+TypedElement <|-- types::Parameter
+Type <|-- types::ComplexType
+Type <|-- types::PrimitiveType
+types::PrimitiveType "0..1" -- "1..1" types::PrimitiveType : baseType8
+types::Type "1..1" *-- "0..9999" types::TypeConstraint : constraint0
+types::EnumerationType "1..1" *-- "0..9999" types::Enumerator : enumerator6
+types::Feature "0..9999" --* "1..1" types::ComplexType : features9
+types::EnumerationType "0..1" -- "1..1" types::Enumerator : owningEnumeration12
+types::Operation "0..1" -- "1..1" types::Parameter : owningOperation3
+types::ComplexType "0..1" -- "1..1" types::Feature : owningType1
+types::Parameter "0..9999" --* "1..1" types::Operation : parameters2
+types::ComplexType "1..1" -- "0..9999" types::ComplexType : superTypes11
+types::Type "0..1" -- "1..1" types::TypedElement : type4
+@enduml

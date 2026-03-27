@@ -1,0 +1,125 @@
+@startuml
+class ATL::atlext::EObject {
+}
+class ATL::atlext::Type {
+}
+class Callable {
+}
+class CallableParameter {
+}
+class CollectionOperationCallExp {
+}
+class ContextHelper {
+}
+class JavaBody {
+}
+class MatchedRule {
+}
+class OCL::atlext::EObject {
+}
+class OCL::atlext::Type {
+}
+class OclExpression {
+}
+class OutPatternElement {
+}
+class PropertyCallExp {
+}
+class ResolveTempResolution {
+}
+class RuleResolutionInfo {
+}
+enum RuleResolutionStatus {
+  RESOLUTION_CONFIRMED
+  RESOLUTION_DISCARDED
+  RESOLUTION_UNKNOWN
+}
+class StringToStringMap {
+}
+class TypedElement {
+}
+class VariableDeclaration {
+}
+class atlext::ATL::Binding {
+}
+class atlext::ATL::Callable {
+}
+class atlext::ATL::CallableParameter {
+  + name : str
+}
+class atlext::ATL::ContextHelper {
+}
+class atlext::ATL::Helper {
+  + hasContext : bool
+  + isAttribute : bool
+}
+class atlext::ATL::LocatedElement {
+  + fileLocation : str
+  + fileObject : str
+}
+class atlext::ATL::MatchedRule {
+}
+class atlext::ATL::OutPatternElement {
+}
+class atlext::ATL::RuleResolutionInfo {
+  + status : str
+}
+class atlext::ATL::StringToStringMap {
+  + key : str
+  + value : str
+}
+class atlext::OCL2::SelectByKind {
+  + isExact : bool
+}
+class atlext::OCL::CollectionOperationCallExp {
+}
+class atlext::OCL::GetAppliedStereotypesBody {
+}
+class atlext::OCL::JavaBody {
+}
+class atlext::OCL::OclExpression {
+  + implicitlyCasted : bool
+}
+class atlext::OCL::OperationCallExp {
+}
+class atlext::OCL::PropertyCallExp {
+  + isStaticCall : bool
+}
+class atlext::OCL::ResolveTempResolution {
+}
+abstract class atlext::OCL::TypedElement {
+}
+class atlext::OCL::VariableDeclaration {
+}
+CollectionOperationCallExp <|-- atlext::OCL2::SelectByKind
+JavaBody <|-- atlext::OCL::GetAppliedStereotypesBody
+OclExpression <|-- atlext::OCL::JavaBody
+RuleResolutionInfo <|-- atlext::OCL::ResolveTempResolution
+TypedElement <|-- atlext::OCL::OclExpression
+TypedElement <|-- atlext::OCL::VariableDeclaration
+MatchedRule "1..9999" -- "1..1" atlext::ATL::RuleResolutionInfo : allInvolvedRules26
+StringToStringMap "0..9999" --* "1..1" atlext::ATL::LocatedElement : annotations1
+CallableParameter "0..9999" --* "1..1" atlext::ATL::Callable : callableParameters4
+atlext::ATL::Callable "1..1" -- "0..9999" PropertyCallExp : calledBy3
+ATL::atlext::Type "1..1" -- "1..1" atlext::ATL::ContextHelper : contextType9
+ContextHelper "0..9999" -- "1..1" atlext::OCL::PropertyCallExp : dynamicResolvers43
+OutPatternElement "1..1" -- "1..1" atlext::OCL::ResolveTempResolution : element45
+ATL::atlext::Type "0..1" -- "1..1" atlext::ATL::Helper : inferredReturnType13
+OCL::atlext::Type "0..1" -- "1..1" atlext::OCL::TypedElement : inferredType29
+ATL::atlext::Type "1..1" -- "1..1" atlext::ATL::Binding : leftType20
+OCL::atlext::Type "0..1" -- "1..1" atlext::OCL::OclExpression : noCastedType32
+VariableDeclaration "0..1" -- "1..1" atlext::ATL::CallableParameter : paramDeclaration7
+PropertyCallExp "0..9999" -- "1..1" atlext::ATL::ContextHelper : polymorphicCalledBy11
+atlext::ATL::LocatedElement "1..1" -- "0..9999" ATL::atlext::EObject : problems0
+OCL::atlext::EObject "0..1" -- "1..1" atlext::OCL::PropertyCallExp : receptorType38
+atlext::OCL::OperationCallExp "1..1" *-- "0..9999" ResolveTempResolution : resolveTempResolvedBy44
+atlext::ATL::Binding "1..1" *-- "0..9999" RuleResolutionInfo : resolvedBy23
+MatchedRule "1..1" -- "1..1" atlext::ATL::RuleResolutionInfo : rule25
+Callable "1..1" -- "1..1" atlext::OCL::PropertyCallExp : staticResolver41
+ATL::atlext::Type "0..1" -- "1..1" atlext::ATL::Helper : staticReturnType15
+atlext::OCL::VariableDeclaration "1..1" -- "0..1" OCL::atlext::Type : staticType30
+atlext::ATL::CallableParameter "1..1" -- "1..1" ATL::atlext::Type : staticType6
+OCL::atlext::EObject "0..9999" -- "1..1" atlext::OCL::PropertyCallExp : subtypeFeatures35
+atlext::OCL::PropertyCallExp "1..1" -- "0..1" OCL::atlext::EObject : usedFeature34
+ATL::atlext::EObject "1..1" -- "1..1" atlext::ATL::Binding : writtenFeature18
+@enduml

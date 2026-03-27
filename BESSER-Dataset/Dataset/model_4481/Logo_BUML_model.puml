@@ -1,0 +1,129 @@
+@startuml
+enum ArithmeticOperator {
+  div
+  minus
+  mult
+  plus
+}
+class BinaryExpr {
+}
+enum BooleanOperator {
+  diff
+  equal
+  greaterThan
+  lowerThan
+}
+class ControlStructure {
+}
+class Expression {
+}
+class Instruction {
+}
+class Literal {
+}
+class Logo::ArithmeticExpr {
+  + operator : str
+}
+class Logo::Assignation {
+}
+class Logo::Back {
+}
+abstract class Logo::BinaryExpr {
+}
+class Logo::Block {
+}
+class Logo::Boolean {
+  + value : bool
+}
+class Logo::BooleanExpr {
+  + operator : str
+}
+abstract class Logo::ControlStructure {
+}
+class Logo::Double {
+  + value : float
+}
+abstract class Logo::Expression {
+}
+class Logo::Forward {
+}
+class Logo::If {
+}
+abstract class Logo::Instruction {
+}
+class Logo::Integer {
+  + value : int
+}
+class Logo::Left {
+}
+abstract class Logo::Literal {
+}
+class Logo::LogoProgram {
+}
+abstract class Logo::Primitive {
+}
+class Logo::Procedure {
+  + name : str
+}
+class Logo::ProcedureCall {
+}
+class Logo::Right {
+}
+class Logo::String {
+  + value : str
+}
+class Logo::VarDecl {
+  + name : str
+}
+class Logo::VarReference {
+}
+class Logo::Void {
+}
+class Logo::While {
+}
+class Primitive {
+}
+BinaryExpr <|-- Logo::ArithmeticExpr
+BinaryExpr <|-- Logo::BooleanExpr
+ControlStructure <|-- Logo::Block
+ControlStructure <|-- Logo::If
+ControlStructure <|-- Logo::While
+Expression <|-- Logo::BinaryExpr
+Expression <|-- Logo::Literal
+Expression <|-- Logo::ProcedureCall
+Expression <|-- Logo::VarReference
+Instruction <|-- Logo::Assignation
+Instruction <|-- Logo::ControlStructure
+Instruction <|-- Logo::Expression
+Instruction <|-- Logo::Primitive
+Instruction <|-- Logo::Procedure
+Instruction <|-- Logo::VarDecl
+Literal <|-- Logo::Boolean
+Literal <|-- Logo::Double
+Literal <|-- Logo::Integer
+Literal <|-- Logo::String
+Literal <|-- Logo::Void
+Primitive <|-- Logo::Back
+Primitive <|-- Logo::Forward
+Primitive <|-- Logo::Left
+Primitive <|-- Logo::Right
+Logo::Left "1..1" *-- "1..1" Logo::Expression : angle4
+Logo::Expression "1..1" --* "1..1" Logo::Right : angle6
+Logo::Block "0..1" --* "1..1" Logo::If : body12
+Logo::While "1..1" *-- "0..1" Logo::Block : body19
+Logo::Block "0..1" --* "1..1" Logo::Procedure : body29
+Logo::Expression "1..1" --* "1..1" Logo::If : condition13
+Logo::Expression "1..1" --* "1..1" Logo::Assignation : expr37
+Logo::VarDecl "1..1" *-- "1..1" Logo::Expression : expr8
+Logo::Expression "1..1" --* "1..1" Logo::While : guard21
+Logo::Instruction "0..9999" --* "1..1" Logo::LogoProgram : instructions0
+Logo::Instruction "0..9999" --* "1..1" Logo::Block : instructions16
+Logo::BinaryExpr "1..1" *-- "1..1" Logo::Expression : leftExpr24
+Logo::VarDecl "1..1" -- "1..1" Logo::VarReference : ref10
+Logo::ProcedureCall "1..1" -- "0..1" Logo::Procedure : ref33
+Logo::VarDecl "1..1" -- "1..1" Logo::Assignation : ref35
+Logo::Literal "0..1" --* "1..1" Logo::Procedure : returnType31
+Logo::Expression "1..1" --* "1..1" Logo::BinaryExpr : rightExpr26
+Logo::Forward "1..1" *-- "1..1" Logo::Expression : steps1
+Logo::Expression "1..1" --* "1..1" Logo::Back : steps2
+@enduml

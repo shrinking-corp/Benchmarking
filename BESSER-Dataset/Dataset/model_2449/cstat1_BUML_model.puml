@@ -1,0 +1,45 @@
+@startuml
+class AbstractState {
+}
+enum ActionMode {
+  ENTRY
+  EXIT
+}
+enum StateType {
+  FINAL
+  INITIAL
+  SIMPLE
+}
+abstract class cstat1::AbstractState {
+  + id : str
+  + type : str
+}
+class cstat1::Action {
+  + expression : str
+  + mode : str
+}
+class cstat1::EClass0 {
+}
+class cstat1::State {
+}
+class cstat1::StateChart {
+}
+class cstat1::SubState1 {
+}
+class cstat1::SubState2 {
+}
+class cstat1::Transition {
+  + event : str
+  + guard : str
+}
+AbstractState <|-- cstat1::State
+AbstractState <|-- cstat1::SubState1
+AbstractState <|-- cstat1::SubState2
+cstat1::AbstractState "1..1" *-- "0..9999" cstat1::Action : actions12
+cstat1::AbstractState "0..1" -- "1..1" cstat1::Transition : fromState5
+cstat1::StateChart "1..1" *-- "0..9999" cstat1::State : states1
+cstat1::SubState1 "0..9999" --* "1..1" cstat1::State : sub1s2
+cstat1::SubState2 "0..9999" --* "1..1" cstat1::SubState1 : sub2s0
+cstat1::Transition "1..1" -- "0..1" cstat1::AbstractState : toState6
+cstat1::Transition "0..9999" --* "1..1" cstat1::AbstractState : transitions9
+@enduml

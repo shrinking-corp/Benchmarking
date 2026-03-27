@@ -1,0 +1,49 @@
+@startuml
+class Identifiable {
+}
+class graph::Edge {
+  + EdgeLabel : int
+  + visited : bool
+}
+class graph::Graph {
+}
+class graph::GraphAsset {
+  + Encrypted : bool
+  + Label : int
+}
+abstract class graph::Identifiable {
+  + ID : str
+  + number : int
+}
+class graph::Node {
+  + Attacker : bool
+  + AttackerObservation : int
+  + name : str
+  + visited : bool
+}
+class graph::NodeResponsibility {
+  + operation : str
+  + findLeastRestrictiveLabel() : str
+  + findMostRestrictiveLabel() : str
+}
+class graph::Subgraphs {
+}
+Identifiable <|-- graph::Edge
+Identifiable <|-- graph::GraphAsset
+Identifiable <|-- graph::Node
+Identifiable <|-- graph::NodeResponsibility
+Identifiable <|-- graph::Subgraphs
+graph::Subgraphs "1..1" *-- "0..9999" graph::GraphAsset : assets22
+graph::GraphAsset "0..9999" -- "1..1" graph::Edge : graphassets4
+graph::NodeResponsibility "1..1" -- "0..9999" graph::GraphAsset : incomingassets28
+graph::Node "1..1" -- "0..9999" graph::Edge : inedges17
+graph::Node "0..9999" --* "1..1" graph::Subgraphs : nodes20
+graph::Edge "0..9999" --* "1..1" graph::Node : outedges12
+graph::GraphAsset "0..9999" -- "1..1" graph::NodeResponsibility : outgoingassets25
+graph::NodeResponsibility "0..9999" --* "1..1" graph::Node : responsibility15
+graph::Edge "1..1" -- "0..1" graph::Node : source1
+graph::Node "1..1" -- "1..1" graph::GraphAsset : source6
+graph::Subgraphs "0..9999" --* "1..1" graph::Graph : subgraphs31
+graph::Node "0..9999" -- "1..1" graph::Edge : target0
+graph::GraphAsset "1..1" -- "1..9999" graph::Node : targets9
+@enduml

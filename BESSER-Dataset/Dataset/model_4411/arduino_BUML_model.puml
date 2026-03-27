@@ -1,0 +1,220 @@
+@startuml
+class BooleanOperator {
+}
+class Control {
+}
+class Instruction {
+}
+enum Library {
+  music
+  none
+  servo
+}
+class MathOperator {
+}
+class Module {
+}
+class ModuleInstruction {
+}
+enum ModuleKind {
+  analog
+  digital
+}
+class NamedElement {
+}
+enum OperatorKind {
+  and
+  diff
+  div
+  equal
+  lower
+  lowerOrEqual
+  max
+  min
+  minus
+  mul
+  not
+  or
+  plus
+  pourcent
+  upper
+  upperOrEqual
+}
+class Parameter {
+}
+enum ParameterType {
+  Constant
+  Delay
+  Level
+  Sensor
+  Status
+}
+class Pin {
+}
+enum Time {
+  MicroSecond
+  MilliSecond
+}
+class Utilities {
+}
+class Value {
+}
+class arduino::AnalogPin {
+}
+class arduino::BooleanOperator {
+}
+class arduino::Connector {
+}
+class arduino::Constant {
+}
+abstract class arduino::Control {
+}
+class arduino::Delay {
+  + unit : str
+  + value : int
+}
+class arduino::DigitalPin {
+}
+class arduino::Function {
+  + name : str
+}
+class arduino::FunctionCall {
+}
+class arduino::Hardware {
+}
+abstract class arduino::IO {
+}
+class arduino::If {
+}
+class arduino::InputModule {
+}
+abstract class arduino::Instruction {
+}
+class arduino::Level {
+}
+abstract class arduino::MathOperator {
+  + operator : str
+}
+abstract class arduino::Module {
+  + image : str
+  + kind : str
+  + level : bool
+  + library : str
+}
+abstract class arduino::ModuleInstruction {
+}
+abstract class arduino::NamedElement {
+  + name : str
+}
+class arduino::NumericalOperator {
+}
+class arduino::OutputModule {
+}
+abstract class arduino::Parameter {
+}
+class arduino::ParameterCall {
+}
+class arduino::ParameterDefinition {
+  + name : str
+  + type : str
+}
+abstract class arduino::Pin {
+  + id : int
+}
+class arduino::Platform {
+  + image : str
+}
+class arduino::Project {
+}
+class arduino::Repeat {
+  + iteration : int
+}
+class arduino::Sensor {
+}
+class arduino::Set {
+}
+class arduino::Sketch {
+}
+class arduino::Status {
+  + status : bool
+}
+abstract class arduino::Utilities {
+}
+abstract class arduino::Value {
+  + value : str
+}
+class arduino::Variable {
+  + name : str
+}
+class arduino::While {
+}
+BooleanOperator <|-- arduino::Sensor
+Control <|-- arduino::If
+Control <|-- arduino::Repeat
+Control <|-- arduino::While
+Instruction <|-- arduino::Control
+Instruction <|-- arduino::FunctionCall
+Instruction <|-- arduino::IO
+Instruction <|-- arduino::MathOperator
+Instruction <|-- arduino::ModuleInstruction
+Instruction <|-- arduino::ParameterCall
+Instruction <|-- arduino::Set
+Instruction <|-- arduino::Sketch
+Instruction <|-- arduino::Utilities
+Instruction <|-- arduino::Value
+Instruction <|-- arduino::Variable
+MathOperator <|-- arduino::BooleanOperator
+MathOperator <|-- arduino::NumericalOperator
+ModuleInstruction <|-- arduino::Level
+ModuleInstruction <|-- arduino::Sensor
+ModuleInstruction <|-- arduino::Status
+Module <|-- arduino::InputModule
+Module <|-- arduino::OutputModule
+NamedElement <|-- arduino::Hardware
+NamedElement <|-- arduino::Module
+NamedElement <|-- arduino::Platform
+NamedElement <|-- arduino::Sketch
+Parameter <|-- arduino::ModuleInstruction
+Parameter <|-- arduino::Utilities
+Parameter <|-- arduino::Value
+Pin <|-- arduino::AnalogPin
+Pin <|-- arduino::DigitalPin
+Utilities <|-- arduino::Delay
+Value <|-- arduino::Constant
+Value <|-- arduino::MathOperator
+Value <|-- arduino::Status
+Value <|-- arduino::Variable
+arduino::AnalogPin "0..9999" --* "1..1" arduino::Platform : analogPins7
+arduino::BooleanOperator "1..1" -- "1..1" arduino::While : condition44
+arduino::BooleanOperator "1..1" -- "1..1" arduino::If : condition54
+arduino::Hardware "1..1" *-- "0..9999" arduino::Connector : connectors3
+arduino::ParameterDefinition "0..1" -- "1..1" arduino::Parameter : definition61
+arduino::Function "1..1" -- "1..1" arduino::FunctionCall : definition63
+arduino::ParameterDefinition "0..1" -- "1..1" arduino::ParameterCall : definition68
+arduino::DigitalPin "0..9999" --* "1..1" arduino::Platform : digitalPins5
+arduino::Function "0..9999" --* "1..1" arduino::Sketch : functions13
+arduino::Hardware "0..1" --* "1..1" arduino::Project : hardware15
+arduino::Hardware "1..1" -- "1..1" arduino::Sketch : hardware9
+arduino::Sketch "1..1" *-- "0..9999" arduino::Instruction : instructions11
+arduino::Instruction "0..9999" --* "1..1" arduino::Control : instructions36
+arduino::Function "1..1" *-- "0..9999" arduino::Instruction : instructions58
+arduino::Value "1..1" -- "1..1" arduino::MathOperator : left45
+arduino::Value "1..1" -- "1..1" arduino::Level : level33
+arduino::ModuleInstruction "1..1" -- "1..1" arduino::Module : module34
+arduino::Connector "1..1" -- "0..1" arduino::Module : module40
+arduino::Module "0..9999" -- "1..1" arduino::Hardware : modules1
+arduino::Module "0..9999" --* "1..1" arduino::Project : modules20
+arduino::Instruction "0..1" -- "1..1" arduino::Instruction : next30
+arduino::ParameterDefinition "0..9999" --* "1..1" arduino::Function : paramDefs56
+arduino::FunctionCall "1..1" -- "0..9999" arduino::Parameter : parameters65
+arduino::Pin "0..1" -- "1..1" arduino::Connector : pin38
+arduino::Platform "0..9999" --* "1..1" arduino::Project : platform23
+arduino::Hardware "1..1" -- "1..9999" arduino::Platform : platforms0
+arduino::Instruction "1..1" -- "0..1" arduino::Instruction : previous27
+arduino::MathOperator "1..1" -- "0..1" arduino::Value : right47
+arduino::Sensor "0..1" -- "1..1" arduino::Status : sensor32
+arduino::Sketch "0..1" --* "1..1" arduino::Project : sketch17
+arduino::Status "0..9999" -- "1..1" arduino::Sensor : status43
+arduino::Value "1..1" -- "1..1" arduino::Set : value51
+arduino::Variable "1..1" -- "1..1" arduino::Set : variable50
+@enduml

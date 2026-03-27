@@ -1,0 +1,23 @@
+@startuml
+class Node {
+}
+class mention::graph::Edge {
+}
+class mention::graph::HashTag {
+  + count : int
+}
+class mention::graph::MentionGraph {
+}
+abstract class mention::graph::Node {
+  + value : str
+}
+class mention::graph::User {
+}
+Node <|-- mention::graph::HashTag
+Node <|-- mention::graph::User
+mention::graph::MentionGraph "1..1" *-- "0..9999" mention::graph::Edge : edges1
+mention::graph::Node "0..9999" --* "1..1" mention::graph::MentionGraph : nodes0
+mention::graph::HashTag "0..9999" -- "1..1" mention::graph::User : relatedHashtags3
+mention::graph::Node "1..1" -- "1..1" mention::graph::Edge : source4
+mention::graph::Node "1..1" -- "1..1" mention::graph::Edge : target7
+@enduml

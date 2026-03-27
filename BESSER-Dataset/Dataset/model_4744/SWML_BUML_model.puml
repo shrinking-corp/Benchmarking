@@ -1,0 +1,33 @@
+@startuml
+enum SWMLTypes {
+  Boolean
+  Email
+  Float
+  Integer
+  String
+}
+class sWML::Attribute {
+  + name : str
+  + type : str
+}
+class sWML::Class {
+  + name : str
+}
+class sWML::ContentLayer {
+}
+class sWML::HypertextLayer {
+}
+class sWML::IndexPage {
+  + name : str
+  + size : int
+}
+class sWML::WebModel {
+  + name : str
+}
+sWML::Class "1..1" *-- "0..9999" sWML::Attribute : attributes10
+sWML::ContentLayer "1..1" *-- "0..9999" sWML::Class : classes7
+sWML::WebModel "1..1" *-- "0..1" sWML::ContentLayer : content1
+sWML::IndexPage "1..1" -- "0..1" sWML::Class : displayedClass5
+sWML::HypertextLayer "0..1" --* "1..1" sWML::WebModel : hypertext0
+sWML::IndexPage "0..9999" --* "1..1" sWML::HypertextLayer : pages3
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+enum UnitVerificationState {
+  UNKNOWN
+  UPGRADED
+  VERIFIED
+}
+class p2::DocumentRoot {
+  + mixed : str
+}
+class p2::EStringToStringMapEntry {
+}
+abstract class p2::IArtifactRepository {
+}
+abstract class p2::IArtifactRepositoryManager {
+}
+abstract class p2::IMetadataRepository {
+}
+abstract class p2::IMetadataRepositoryManager {
+}
+class p2::LocationType {
+  + includeAllPlatforms : str
+  + includeConfigurePhase : str
+  + includeMode : str
+  + includeSource : str
+  + type : str
+  + artifactRepository() : str
+  + metadataRepository() : str
+}
+class p2::LocationsType {
+}
+class p2::RepositoryType {
+  + location : str
+}
+class p2::TargetType {
+  + name : str
+  + sequenceNumber : str
+  + artifactRepositoryManager() : str
+  + metadataRepositoryManager() : str
+}
+class p2::UnitType {
+  + id : str
+  + state : str
+  + version : str
+  + verifyIU() : void
+}
+p2::LocationType "1..9999" --* "1..1" p2::LocationsType : location6
+p2::LocationsType "1..1" --* "1..1" p2::TargetType : locations11
+p2::RepositoryType "1..1" --* "1..1" p2::LocationType : repository9
+p2::TargetType "0..9999" --* "1..1" p2::DocumentRoot : target4
+p2::LocationType "1..1" *-- "1..9999" p2::UnitType : unit7
+p2::EStringToStringMapEntry "0..9999" --* "1..1" p2::DocumentRoot : xMLNSPrefixMap0
+p2::DocumentRoot "1..1" *-- "0..9999" p2::EStringToStringMapEntry : xSISchemaLocation1
+@enduml

@@ -1,0 +1,134 @@
+@startuml
+class AtomicExpression {
+}
+class BinaryExpression {
+}
+class Expression {
+}
+class Operation {
+}
+class Statement {
+}
+class UnaryExpression {
+}
+class mpl::AddExpression {
+}
+class mpl::Assignment {
+}
+class mpl::AssignmentStatement {
+}
+abstract class mpl::AtomicExpression {
+}
+abstract class mpl::BinaryExpression {
+}
+class mpl::Block {
+}
+class mpl::Comparison {
+  + operator : str
+}
+class mpl::DivExpression {
+}
+abstract class mpl::Expression {
+}
+class mpl::ExpressionStatement {
+}
+class mpl::ForLoop {
+  + increment : bool
+}
+class mpl::Function {
+}
+class mpl::IfStatement {
+}
+class mpl::LiteralValue {
+  + rawValue : int
+}
+class mpl::MPLModel {
+}
+class mpl::MultExpression {
+}
+abstract class mpl::Operation {
+  + name : str
+}
+class mpl::OperationCall {
+}
+class mpl::ParenthesisExpression {
+}
+class mpl::Procedure {
+}
+class mpl::Program {
+}
+class mpl::ReturnStatement {
+}
+abstract class mpl::Statement {
+}
+class mpl::SubExpression {
+}
+class mpl::TraceStatement {
+}
+abstract class mpl::UnaryExpression {
+}
+class mpl::UnaryMinusExpression {
+}
+class mpl::Variable {
+  + name : str
+  + value : int
+}
+class mpl::VariableDeclaration {
+}
+class mpl::VariableReference {
+}
+class mpl::WhileLoop {
+}
+AtomicExpression <|-- mpl::LiteralValue
+AtomicExpression <|-- mpl::OperationCall
+AtomicExpression <|-- mpl::VariableReference
+BinaryExpression <|-- mpl::AddExpression
+BinaryExpression <|-- mpl::DivExpression
+BinaryExpression <|-- mpl::MultExpression
+BinaryExpression <|-- mpl::SubExpression
+Expression <|-- mpl::AtomicExpression
+Expression <|-- mpl::BinaryExpression
+Expression <|-- mpl::UnaryExpression
+Operation <|-- mpl::Function
+Operation <|-- mpl::Procedure
+Operation <|-- mpl::Program
+Statement <|-- mpl::AssignmentStatement
+Statement <|-- mpl::ExpressionStatement
+Statement <|-- mpl::ForLoop
+Statement <|-- mpl::IfStatement
+Statement <|-- mpl::ReturnStatement
+Statement <|-- mpl::TraceStatement
+Statement <|-- mpl::WhileLoop
+UnaryExpression <|-- mpl::ParenthesisExpression
+UnaryExpression <|-- mpl::UnaryMinusExpression
+mpl::AssignmentStatement "1..1" *-- "1..1" mpl::Assignment : assignment46
+mpl::Block "1..1" --* "1..1" mpl::WhileLoop : block33
+mpl::ForLoop "1..1" *-- "1..1" mpl::Block : block38
+mpl::Block "1..1" --* "1..1" mpl::Operation : block53
+mpl::Comparison "1..1" --* "1..1" mpl::IfStatement : condition25
+mpl::Comparison "1..1" --* "1..1" mpl::WhileLoop : condition35
+mpl::IfStatement "1..1" *-- "0..1" mpl::Block : else22
+mpl::Expression "1..1" --* "1..1" mpl::ExpressionStatement : expression7
+mpl::Assignment "1..1" --* "1..1" mpl::ForLoop : index40
+mpl::Expression "0..1" --* "1..1" mpl::VariableDeclaration : initialValue1
+mpl::Assignment "1..1" *-- "1..1" mpl::VariableReference : leftHandSide3
+mpl::Expression "1..1" --* "1..1" mpl::BinaryExpression : operand114
+mpl::Expression "1..1" --* "1..1" mpl::UnaryExpression : operand12
+mpl::Expression "1..1" --* "1..1" mpl::Comparison : operand130
+mpl::Expression "1..1" --* "1..1" mpl::BinaryExpression : operand216
+mpl::Expression "1..1" --* "1..1" mpl::Comparison : operand227
+mpl::Operation "1..1" -- "1..1" mpl::OperationCall : operation60
+mpl::Operation "0..9999" --* "1..1" mpl::MPLModel : operations64
+mpl::VariableDeclaration "0..9999" --* "1..1" mpl::Operation : parameters48
+mpl::Expression "0..9999" --* "1..1" mpl::OperationCall : parameters58
+mpl::MPLModel "1..1" *-- "1..1" mpl::Program : program63
+mpl::Expression "1..1" --* "1..1" mpl::Assignment : rightHandSide4
+mpl::Statement "0..9999" --* "1..1" mpl::Block : statements19
+mpl::Block "1..1" --* "1..1" mpl::IfStatement : then20
+mpl::Expression "1..1" --* "1..1" mpl::ForLoop : upperBound43
+mpl::ReturnStatement "1..1" *-- "0..1" mpl::Expression : value56
+mpl::VariableDeclaration "1..1" *-- "1..1" mpl::Variable : variable0
+mpl::Variable "1..1" -- "1..1" mpl::VariableReference : variable9
+mpl::VariableDeclaration "0..9999" --* "1..1" mpl::Operation : variableDeclarations50
+mpl::VariableReference "1..1" --* "1..1" mpl::TraceStatement : variableReference67
+@enduml

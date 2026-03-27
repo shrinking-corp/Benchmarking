@@ -1,0 +1,75 @@
+@startuml
+class ComponentType {
+}
+class ElectronicDevice {
+}
+class HardwareComponent {
+}
+class IDBase {
+}
+class MechanicalDevice {
+}
+class component::diagram::Actuator {
+}
+class component::diagram::Architecture {
+}
+class component::diagram::ComponentInstance {
+  + name : str
+  + version : int
+}
+abstract class component::diagram::ComponentType {
+  + name : str
+}
+class component::diagram::Connector {
+  + name : str
+}
+class component::diagram::ElectronicDevice {
+}
+class component::diagram::HardwareComponent {
+  + powerSupply : str
+}
+class component::diagram::MechanicalDevice {
+}
+class component::diagram::PortInstance {
+  + name : str
+}
+class component::diagram::PortType {
+  + name : str
+}
+class component::diagram::Sensor {
+  + type : str
+}
+class component::diagram::SoftwareComponent {
+}
+ComponentType <|-- component::diagram::HardwareComponent
+ComponentType <|-- component::diagram::SoftwareComponent
+ElectronicDevice <|-- component::diagram::Sensor
+HardwareComponent <|-- component::diagram::ElectronicDevice
+HardwareComponent <|-- component::diagram::MechanicalDevice
+IDBase <|-- component::diagram::Architecture
+IDBase <|-- component::diagram::ComponentInstance
+IDBase <|-- component::diagram::ComponentType
+IDBase <|-- component::diagram::Connector
+IDBase <|-- component::diagram::PortInstance
+IDBase <|-- component::diagram::PortType
+MechanicalDevice <|-- component::diagram::Actuator
+component::diagram::ComponentType "0..9999" --* "1..1" component::diagram::Architecture : component10
+component::diagram::ComponentType "0..1" -- "1..1" component::diagram::PortType : component_type30
+component::diagram::Connector "0..1" -- "1..1" component::diagram::PortInstance : connect3
+component::diagram::Architecture "1..1" *-- "0..9999" component::diagram::Connector : connectors11
+component::diagram::PortInstance "1..1" -- "0..1" component::diagram::ComponentInstance : inComponent6
+component::diagram::ComponentInstance "1..1" *-- "0..9999" component::diagram::PortInstance : inPorts25
+component::diagram::ComponentInstance "0..9999" -- "1..1" component::diagram::ComponentType : instance1
+component::diagram::Architecture "1..1" *-- "0..9999" component::diagram::ComponentInstance : instances15
+component::diagram::ComponentInstance "0..1" -- "1..1" component::diagram::PortInstance : outComponent4
+component::diagram::PortInstance "0..9999" --* "1..1" component::diagram::ComponentInstance : outPorts27
+component::diagram::ComponentInstance "0..1" -- "1..1" component::diagram::ComponentInstance : parentcomponent23
+component::diagram::Connector "1..1" -- "2..2" component::diagram::PortInstance : port2
+component::diagram::PortInstance "0..9999" -- "1..1" component::diagram::PortType : port_instance32
+component::diagram::PortType "0..9999" --* "1..1" component::diagram::Architecture : port_type17
+component::diagram::PortType "0..9999" --* "1..1" component::diagram::ComponentType : port_types0
+component::diagram::PortInstance "0..9999" --* "1..1" component::diagram::Architecture : ports13
+component::diagram::ComponentInstance "0..9999" --* "1..1" component::diagram::ComponentInstance : subcomponent20
+component::diagram::ComponentType "1..1" -- "1..1" component::diagram::ComponentInstance : type29
+component::diagram::PortType "1..1" -- "1..1" component::diagram::PortInstance : type8
+@enduml

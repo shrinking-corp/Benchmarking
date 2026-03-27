@@ -1,0 +1,56 @@
+@startuml
+class Class {
+}
+class Type {
+}
+enum Visibility {
+  private
+  public
+}
+class tallerE1Java::Annotation {
+  + content : str
+  + type : str
+}
+class tallerE1Java::Attribute {
+  + name : str
+  + visibility : str
+}
+abstract class tallerE1Java::Class {
+}
+class tallerE1Java::Container {
+  + type : str
+}
+class tallerE1Java::DAOClass {
+}
+class tallerE1Java::EntityClass {
+}
+class tallerE1Java::Package {
+  + name : str
+}
+class tallerE1Java::PrimitiveType {
+}
+class tallerE1Java::Program {
+}
+class tallerE1Java::TestClass {
+}
+abstract class tallerE1Java::Type {
+  + name : str
+}
+Class <|-- tallerE1Java::DAOClass
+Class <|-- tallerE1Java::EntityClass
+Class <|-- tallerE1Java::TestClass
+Type <|-- tallerE1Java::Class
+Type <|-- tallerE1Java::Container
+Type <|-- tallerE1Java::PrimitiveType
+tallerE1Java::Annotation "0..9999" --* "1..1" tallerE1Java::Attribute : annotations11
+tallerE1Java::Attribute "0..9999" --* "1..1" tallerE1Java::Class : attributes7
+tallerE1Java::Package "1..1" *-- "0..9999" tallerE1Java::Class : classes5
+tallerE1Java::Container "0..9999" --* "1..1" tallerE1Java::Program : containerTypes3
+tallerE1Java::DAOClass "0..1" -- "1..1" tallerE1Java::TestClass : dao17
+tallerE1Java::EntityClass "0..9999" -- "1..1" tallerE1Java::DAOClass : entities16
+tallerE1Java::EntityClass "0..1" -- "1..1" tallerE1Java::TestClass : entity19
+tallerE1Java::Package "0..9999" --* "1..1" tallerE1Java::Program : packages0
+tallerE1Java::Container "1..1" -- "0..1" tallerE1Java::Type : param13
+tallerE1Java::PrimitiveType "0..9999" --* "1..1" tallerE1Java::Program : primitiveTypes1
+tallerE1Java::Type "0..1" -- "1..1" tallerE1Java::Attribute : type9
+@enduml

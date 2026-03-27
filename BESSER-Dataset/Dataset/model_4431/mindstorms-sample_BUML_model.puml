@@ -1,0 +1,58 @@
+@startuml
+class Action {
+}
+class Block {
+}
+class Instruction {
+}
+class NamedElement {
+}
+abstract class mindstorms::Action {
+}
+class mindstorms::Begin {
+}
+abstract class mindstorms::Block {
+}
+class mindstorms::Choreography {
+}
+class mindstorms::EdgeInstruction {
+}
+class mindstorms::End {
+}
+class mindstorms::GoBackward {
+  + cm : int
+  + infinite : bool
+}
+class mindstorms::GoForward {
+  + cm : int
+  + infinite : bool
+}
+class mindstorms::Grab {
+}
+abstract class mindstorms::Instruction {
+}
+abstract class mindstorms::NamedElement {
+  + name : str
+}
+class mindstorms::Release {
+}
+class mindstorms::Rotate {
+  + degrees : int
+  + random : bool
+}
+Action <|-- mindstorms::Begin
+Action <|-- mindstorms::End
+Action <|-- mindstorms::GoBackward
+Action <|-- mindstorms::GoForward
+Action <|-- mindstorms::Grab
+Action <|-- mindstorms::Release
+Action <|-- mindstorms::Rotate
+Block <|-- mindstorms::Action
+Instruction <|-- mindstorms::Block
+Instruction <|-- mindstorms::Choreography
+NamedElement <|-- mindstorms::Instruction
+mindstorms::EdgeInstruction "0..9999" --* "1..1" mindstorms::Choreography : edgeInstructions1
+mindstorms::Instruction "0..9999" --* "1..1" mindstorms::Choreography : instructions0
+mindstorms::Instruction "0..1" -- "1..1" mindstorms::EdgeInstruction : source3
+mindstorms::Instruction "0..1" -- "1..1" mindstorms::EdgeInstruction : target6
+@enduml

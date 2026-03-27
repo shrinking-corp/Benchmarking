@@ -1,0 +1,92 @@
+@startuml
+class Block {
+}
+class Conditional {
+}
+class FlowInstr {
+}
+class Item {
+}
+class JumpStmt {
+}
+class Stmt {
+}
+class Var {
+}
+class flowgraph::Block {
+}
+class flowgraph::Break {
+}
+abstract class flowgraph::Conditional {
+}
+class flowgraph::Continue {
+}
+class flowgraph::Exit {
+}
+class flowgraph::Expr {
+}
+abstract class flowgraph::FlowInstr {
+}
+class flowgraph::If {
+}
+abstract class flowgraph::Item {
+  + txt : str
+}
+abstract class flowgraph::JumpStmt {
+}
+class flowgraph::Label {
+}
+class flowgraph::Loop {
+}
+class flowgraph::Method {
+}
+class flowgraph::Param {
+}
+class flowgraph::Return {
+}
+class flowgraph::SimpleStmt {
+}
+abstract class flowgraph::Stmt {
+}
+class flowgraph::Var {
+}
+Block <|-- flowgraph::Method
+Conditional <|-- flowgraph::If
+Conditional <|-- flowgraph::Loop
+FlowInstr <|-- flowgraph::Exit
+FlowInstr <|-- flowgraph::Expr
+FlowInstr <|-- flowgraph::JumpStmt
+FlowInstr <|-- flowgraph::Method
+FlowInstr <|-- flowgraph::Return
+FlowInstr <|-- flowgraph::SimpleStmt
+Item <|-- flowgraph::FlowInstr
+Item <|-- flowgraph::Stmt
+Item <|-- flowgraph::Var
+JumpStmt <|-- flowgraph::Break
+JumpStmt <|-- flowgraph::Continue
+Stmt <|-- flowgraph::Block
+Stmt <|-- flowgraph::Conditional
+Stmt <|-- flowgraph::JumpStmt
+Stmt <|-- flowgraph::Label
+Stmt <|-- flowgraph::Return
+Stmt <|-- flowgraph::SimpleStmt
+Var <|-- flowgraph::Param
+flowgraph::Stmt "1..1" --* "1..1" flowgraph::Loop : body8
+flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::FlowInstr : cfNext13
+flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::FlowInstr : cfPrev15
+flowgraph::Var "0..9999" -- "1..1" flowgraph::FlowInstr : def17
+flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::Var : definers23
+flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::FlowInstr : dfNext22
+flowgraph::Stmt "0..1" --* "1..1" flowgraph::If : else3
+flowgraph::Method "1..1" *-- "1..1" flowgraph::Exit : exit6
+flowgraph::Conditional "1..1" *-- "1..1" flowgraph::Expr : expr10
+flowgraph::JumpStmt "0..9999" -- "1..1" flowgraph::Label : jumps30
+flowgraph::Label "0..1" -- "1..1" flowgraph::JumpStmt : label11
+flowgraph::Var "1..1" -- "0..1" flowgraph::Method : method27
+flowgraph::Stmt "1..1" --* "1..1" flowgraph::Label : stmt28
+flowgraph::Block "1..1" *-- "0..9999" flowgraph::Stmt : stmts0
+flowgraph::If "1..1" *-- "1..1" flowgraph::Stmt : then1
+flowgraph::FlowInstr "1..1" -- "0..9999" flowgraph::Var : use19
+flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::Var : users25
+flowgraph::Method "1..1" *-- "0..9999" flowgraph::Var : vars7
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+class petrinet::Arc {
+  + toPlace : bool
+  + weight : int
+}
+class petrinet::PetriNet {
+  + name : str
+}
+class petrinet::Place {
+  + name : str
+  + token : int
+}
+class petrinet::Transition {
+  + name : str
+}
+petrinet::PetriNet "1..1" *-- "0..9999" petrinet::Arc : arcs8
+petrinet::Place "1..1" -- "0..9999" petrinet::Transition : inhibitorArc0
+petrinet::Place "1..1" -- "1..1" petrinet::Arc : place3
+petrinet::Place "0..9999" --* "1..1" petrinet::PetriNet : places6
+petrinet::Transition "1..1" -- "1..1" petrinet::Arc : transition1
+petrinet::Transition "0..9999" --* "1..1" petrinet::PetriNet : transitions11
+@enduml

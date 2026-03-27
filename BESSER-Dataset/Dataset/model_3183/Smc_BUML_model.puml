@@ -1,0 +1,264 @@
+@startuml
+class AbstractAssignment {
+}
+class AccessControl {
+}
+enum BasicType {
+  BOOLEAN
+  DOUBLE
+  ENCRYPTED
+  INT
+  STRING
+}
+enum BlockType {
+  ACCESS
+  ANONYMIZATION
+  COMP
+  INSERT
+  PERMISSION
+  SEARCH
+}
+class Command {
+}
+class Computation {
+}
+class Download {
+}
+class Expression {
+}
+class Functions {
+}
+enum SecType {
+  PRIVATE
+  PUBLIC
+}
+class smc::AbstractAssignment {
+}
+class smc::AccessControl {
+}
+class smc::AddValues {
+}
+class smc::And {
+}
+class smc::Average {
+}
+class smc::BellLapadula {
+  + mode : str
+}
+class smc::Block {
+}
+class smc::BlockSMC {
+  + name : str
+  + type : str
+}
+class smc::BloomFilter {
+}
+class smc::BooleanLiteral {
+  + value : bool
+}
+class smc::CheckTable {
+}
+class smc::Client {
+  + arg : str
+}
+class smc::Command {
+}
+class smc::Comparison {
+  + op : str
+}
+class smc::Computation {
+}
+class smc::Count {
+}
+class smc::Covered {
+}
+class smc::CreateTable {
+}
+class smc::Database {
+  + clm : str
+}
+class smc::DateLiteral {
+  + value : str
+}
+class smc::Dict {
+}
+class smc::DoubleLiteral {
+  + value : float
+}
+class smc::Download {
+}
+class smc::Equality {
+  + op : str
+}
+class smc::Expression {
+}
+class smc::Functions {
+}
+class smc::IfThenElse {
+}
+class smc::IntLiteral {
+  + value : int
+}
+class smc::Invocation {
+}
+class smc::InvocationVoid {
+}
+class smc::List {
+}
+class smc::MainSMC {
+}
+class smc::Median {
+}
+class smc::MulOrDiv {
+  + op : str
+}
+class smc::Multiplication {
+}
+class smc::Not {
+}
+class smc::Or {
+}
+class smc::ParamDecl {
+  + btype : str
+  + name : str
+  + parName : str
+  + stype : str
+}
+class smc::PlusOrMinus {
+  + op : str
+}
+class smc::Print {
+}
+class smc::Return {
+}
+class smc::Search {
+  + column : str
+}
+class smc::Smc {
+}
+class smc::StringLiteral {
+  + value : str
+}
+class smc::TimeLiteral {
+  + value : str
+}
+class smc::Tuple {
+}
+class smc::VariableAssignment {
+}
+class smc::VariableDecl {
+  + array : bool
+  + length : int
+  + name : str
+  + type : str
+  + visibility : str
+}
+class smc::VariableRef {
+}
+class smc::WeightedAvg {
+}
+class smc::While {
+}
+AbstractAssignment <|-- smc::Download
+AbstractAssignment <|-- smc::Expression
+AccessControl <|-- smc::BellLapadula
+AccessControl <|-- smc::Covered
+Command <|-- smc::Block
+Command <|-- smc::IfThenElse
+Command <|-- smc::InvocationVoid
+Command <|-- smc::ParamDecl
+Command <|-- smc::Print
+Command <|-- smc::Return
+Command <|-- smc::VariableAssignment
+Command <|-- smc::VariableDecl
+Command <|-- smc::While
+Computation <|-- smc::Average
+Computation <|-- smc::Count
+Computation <|-- smc::Median
+Computation <|-- smc::Multiplication
+Computation <|-- smc::WeightedAvg
+Download <|-- smc::Client
+Download <|-- smc::Database
+Expression <|-- smc::And
+Expression <|-- smc::BooleanLiteral
+Expression <|-- smc::Comparison
+Expression <|-- smc::DateLiteral
+Expression <|-- smc::Dict
+Expression <|-- smc::DoubleLiteral
+Expression <|-- smc::Equality
+Expression <|-- smc::IntLiteral
+Expression <|-- smc::Invocation
+Expression <|-- smc::List
+Expression <|-- smc::MulOrDiv
+Expression <|-- smc::Not
+Expression <|-- smc::Or
+Expression <|-- smc::PlusOrMinus
+Expression <|-- smc::StringLiteral
+Expression <|-- smc::TimeLiteral
+Expression <|-- smc::Tuple
+Expression <|-- smc::VariableRef
+Functions <|-- smc::AccessControl
+Functions <|-- smc::AddValues
+Functions <|-- smc::BloomFilter
+Functions <|-- smc::CheckTable
+Functions <|-- smc::Computation
+Functions <|-- smc::CreateTable
+Functions <|-- smc::Search
+smc::Expression "0..1" --* "1..1" smc::Tuple : arg128
+smc::Expression "0..1" --* "1..1" smc::Tuple : arg230
+smc::List "1..1" *-- "0..9999" smc::Expression : args33
+smc::VariableDecl "0..9999" -- "1..1" smc::AddValues : args87
+smc::VariableDecl "0..1" -- "1..1" smc::Median : array50
+smc::Average "1..1" -- "0..1" smc::VariableDecl : array57
+smc::VariableDecl "0..1" -- "1..1" smc::Count : array59
+smc::BlockSMC "0..1" -- "1..1" smc::Invocation : blockName40
+smc::BlockSMC "0..9999" --* "1..1" smc::Smc : blocks0
+smc::Command "0..1" --* "1..1" smc::While : body9
+smc::VariableDecl "0..1" -- "1..1" smc::AccessControl : c_lvls61
+smc::Invocation "0..1" --* "1..1" smc::InvocationVoid : call5
+smc::Command "0..9999" --* "1..1" smc::MainSMC : commands3
+smc::Command "0..9999" --* "1..1" smc::Block : commands94
+smc::Expression "0..1" --* "1..1" smc::IfThenElse : condition12
+smc::While "1..1" *-- "0..1" smc::Expression : condition7
+smc::VariableDecl "0..1" -- "1..1" smc::Covered : covered70
+smc::VariableDecl "0..1" -- "1..1" smc::BellLapadula : cur66
+smc::VariableDecl "0..1" -- "1..1" smc::WeightedAvg : elems54
+smc::IfThenElse "1..1" *-- "0..1" smc::Command : elseBranch17
+smc::Not "1..1" *-- "0..1" smc::Expression : expression126
+smc::Invocation "1..1" *-- "0..1" smc::Functions : funcName43
+smc::Expression "0..1" --* "1..1" smc::Dict : key35
+smc::VariableDecl "0..1" -- "1..1" smc::Search : keyword75
+smc::Expression "0..1" --* "1..1" smc::And : left101
+smc::Expression "0..1" --* "1..1" smc::Equality : left106
+smc::Expression "0..1" --* "1..1" smc::Comparison : left111
+smc::Expression "0..1" --* "1..1" smc::PlusOrMinus : left116
+smc::Expression "0..1" --* "1..1" smc::MulOrDiv : left121
+smc::Expression "0..1" --* "1..1" smc::Or : left96
+smc::MainSMC "0..1" --* "1..1" smc::Smc : main1
+smc::VariableDecl "0..1" -- "1..1" smc::Covered : match68
+smc::AbstractAssignment "0..1" --* "1..1" smc::VariableDecl : option20
+smc::AbstractAssignment "0..1" --* "1..1" smc::VariableAssignment : option23
+smc::ParamDecl "0..9999" -- "1..1" smc::CreateTable : params92
+smc::BloomFilter "1..1" -- "0..1" smc::VariableDecl : post80
+smc::BloomFilter "1..1" -- "0..1" smc::VariableDecl : pre78
+smc::And "1..1" *-- "0..1" smc::Expression : right103
+smc::Expression "0..1" --* "1..1" smc::Equality : right108
+smc::Comparison "1..1" *-- "0..1" smc::Expression : right113
+smc::Expression "0..1" --* "1..1" smc::PlusOrMinus : right118
+smc::MulOrDiv "1..1" *-- "0..1" smc::Expression : right123
+smc::Expression "0..1" --* "1..1" smc::Or : right98
+smc::Database "1..1" *-- "0..1" smc::Expression : tbl26
+smc::Search "1..1" -- "0..1" smc::VariableDecl : tblname73
+smc::VariableDecl "0..1" -- "1..1" smc::CheckTable : tblname83
+smc::AddValues "1..1" -- "0..1" smc::VariableDecl : tblname85
+smc::VariableDecl "0..1" -- "1..1" smc::CreateTable : tblname90
+smc::Command "0..1" --* "1..1" smc::IfThenElse : thenBrach14
+smc::VariableDecl "0..1" -- "1..1" smc::AccessControl : v_lvl63
+smc::List "0..1" -- "1..1" smc::Dict : value37
+smc::Print "1..1" *-- "0..1" smc::Expression : value6
+smc::VariableDecl "0..1" -- "1..1" smc::VariableAssignment : var21
+smc::VariableDecl "0..1" -- "1..1" smc::VariableRef : variable128
+smc::WeightedAvg "1..1" -- "0..1" smc::VariableDecl : weights52
+smc::VariableDecl "0..1" -- "1..1" smc::Multiplication : x45
+smc::VariableDecl "0..1" -- "1..1" smc::Multiplication : y47
+@enduml

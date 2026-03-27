@@ -1,0 +1,32 @@
+@startuml
+class smDsl::Command {
+  + name : str
+}
+class smDsl::CommandsSection {
+}
+class smDsl::Event {
+  + name : str
+}
+class smDsl::EventHandlingDescription {
+}
+class smDsl::EventsSection {
+}
+class smDsl::Model {
+  + name : str
+}
+class smDsl::State {
+  + initial : bool
+  + name : str
+}
+smDsl::EventHandlingDescription "1..1" -- "0..9999" smDsl::Command : commands20
+smDsl::Command "0..9999" --* "1..1" smDsl::CommandsSection : commands7
+smDsl::Model "1..1" *-- "0..1" smDsl::CommandsSection : commandsSection1
+smDsl::Command "0..9999" -- "1..1" smDsl::State : entryCommands9
+smDsl::Event "0..1" -- "1..1" smDsl::EventHandlingDescription : event17
+smDsl::State "1..1" *-- "0..9999" smDsl::EventHandlingDescription : eventHandlingDescriptions12
+smDsl::Event "0..9999" --* "1..1" smDsl::EventsSection : events5
+smDsl::EventsSection "0..1" --* "1..1" smDsl::Model : eventsSection0
+smDsl::Command "0..9999" -- "1..1" smDsl::State : exitCommands14
+smDsl::State "0..9999" --* "1..1" smDsl::Model : states3
+smDsl::State "0..1" -- "1..1" smDsl::EventHandlingDescription : targetState23
+@enduml

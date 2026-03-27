@@ -1,0 +1,76 @@
+@startuml
+class CallExp {
+}
+class Element {
+}
+class NamedElement {
+}
+class Namespace {
+}
+class TypedElement {
+}
+class Visitable {
+}
+class classes::Argument {
+}
+abstract class classes::CallExp {
+}
+class classes::Class {
+}
+abstract class classes::Element {
+}
+abstract class classes::NamedElement {
+  + name : str
+}
+abstract class classes::Namespace {
+}
+class classes::Operation {
+}
+class classes::OperationCallExp {
+}
+class classes::Package {
+}
+class classes::Parameter {
+}
+class classes::Property {
+}
+class classes::PropertyCallExp {
+}
+class classes::Root {
+}
+abstract class classes::TypedElement {
+}
+abstract class classes::Visitable {
+}
+CallExp <|-- classes::OperationCallExp
+CallExp <|-- classes::PropertyCallExp
+Element <|-- classes::NamedElement
+Element <|-- classes::Namespace
+Element <|-- classes::Root
+Element <|-- classes::TypedElement
+NamedElement <|-- classes::Argument
+NamedElement <|-- classes::Class
+NamedElement <|-- classes::Operation
+NamedElement <|-- classes::Package
+NamedElement <|-- classes::Parameter
+NamedElement <|-- classes::Property
+Namespace <|-- classes::Package
+TypedElement <|-- classes::CallExp
+TypedElement <|-- classes::Operation
+TypedElement <|-- classes::Property
+Visitable <|-- classes::Element
+classes::Argument "0..9999" --* "1..1" classes::OperationCallExp : ownedArguments26
+classes::CallExp "1..1" *-- "0..1" classes::CallExp : ownedCallExp2
+classes::Package "1..1" *-- "0..9999" classes::Class : ownedClasses7
+classes::CallExp "0..9999" --* "1..1" classes::Operation : ownedExpressions22
+classes::Operation "0..9999" --* "1..1" classes::Class : ownedOperations16
+classes::Package "0..9999" --* "1..1" classes::Package : ownedPackages11
+classes::Package "0..9999" --* "1..1" classes::Root : ownedPackages6
+classes::Parameter "0..9999" --* "1..1" classes::Operation : ownedParameters20
+classes::Class "1..1" *-- "0..9999" classes::Property : ownedProperties18
+classes::CallExp "0..1" -- "1..1" classes::CallExp : owningSource4
+classes::Operation "0..1" -- "1..1" classes::OperationCallExp : referredOperation27
+classes::Property "0..1" -- "1..1" classes::PropertyCallExp : referredProperty24
+classes::Class "0..1" -- "1..1" classes::Class : superClass14
+classes::Class "0..1" -- "1..1" classes::TypedElement : type0
+@enduml

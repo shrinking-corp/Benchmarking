@@ -1,0 +1,75 @@
+@startuml
+class AbstractDataMove {
+}
+class DataMove {
+}
+class Entity {
+}
+class PyDslRep::AbstractCrossMove {
+}
+class PyDslRep::AbstractDataMove {
+}
+class PyDslRep::AbstractMove {
+}
+class PyDslRep::DataMove {
+  + name : bool
+  + type : str
+  + velocity : str
+}
+class PyDslRep::Entity {
+}
+class PyDslRep::Environment {
+  + name : str
+}
+class PyDslRep::IP {
+  + ip : str
+  + name : str
+}
+class PyDslRep::Model {
+}
+class PyDslRep::Move {
+  + distance : str
+}
+class PyDslRep::MoveCollection {
+  + concurrent : bool
+  + name : str
+}
+class PyDslRep::Robot {
+  + name : str
+  + port : int
+}
+class PyDslRep::Sensor {
+  + name : str
+}
+class PyDslRep::Turn {
+}
+class PyDslRep::TypeSensor {
+  + typeName : str
+}
+class PyDslRep::Wheel {
+  + name : str
+  + radius : str
+}
+AbstractDataMove <|-- PyDslRep::AbstractCrossMove
+AbstractDataMove <|-- PyDslRep::AbstractMove
+DataMove <|-- PyDslRep::Move
+DataMove <|-- PyDslRep::Turn
+Entity <|-- PyDslRep::DataMove
+Entity <|-- PyDslRep::Environment
+Entity <|-- PyDslRep::IP
+Entity <|-- PyDslRep::MoveCollection
+Entity <|-- PyDslRep::Robot
+Entity <|-- PyDslRep::Sensor
+Entity <|-- PyDslRep::TypeSensor
+Entity <|-- PyDslRep::Wheel
+PyDslRep::Model "1..1" *-- "0..9999" PyDslRep::Entity : environment0
+PyDslRep::Environment "1..1" -- "0..1" PyDslRep::IP : ip1
+PyDslRep::MoveCollection "1..1" *-- "0..9999" PyDslRep::AbstractDataMove : moves11
+PyDslRep::MoveCollection "0..9999" -- "1..1" PyDslRep::Environment : moves4
+PyDslRep::Robot "0..1" -- "1..1" PyDslRep::MoveCollection : robot8
+PyDslRep::Robot "0..9999" -- "1..1" PyDslRep::Environment : robots2
+PyDslRep::Sensor "1..1" *-- "0..1" PyDslRep::TypeSensor : type16
+PyDslRep::DataMove "0..1" --* "1..1" PyDslRep::AbstractMove : typeM13
+PyDslRep::DataMove "0..1" -- "1..1" PyDslRep::AbstractCrossMove : typeM14
+PyDslRep::Wheel "0..9999" -- "1..1" PyDslRep::Robot : wheels6
+@enduml

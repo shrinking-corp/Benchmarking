@@ -1,0 +1,45 @@
+@startuml
+class Type {
+}
+class agentDSL::Attribute {
+  + many : bool
+  + name : str
+}
+class agentDSL::Entity {
+}
+class agentDSL::Function {
+}
+class agentDSL::Goal {
+  + name : str
+}
+class agentDSL::JAVAID {
+  + name : str
+}
+class agentDSL::Model {
+}
+class agentDSL::Outcome {
+}
+class agentDSL::Task {
+}
+class agentDSL::Type {
+  + name : str
+}
+class agentDSL::TypeDef {
+}
+Type <|-- agentDSL::Entity
+Type <|-- agentDSL::Function
+Type <|-- agentDSL::Outcome
+Type <|-- agentDSL::Task
+Type <|-- agentDSL::TypeDef
+agentDSL::Attribute "0..9999" --* "1..1" agentDSL::Outcome : attributes10
+agentDSL::Attribute "0..9999" --* "1..1" agentDSL::Goal : attributes15
+agentDSL::Function "1..1" *-- "0..9999" agentDSL::Attribute : attributes18
+agentDSL::Attribute "0..9999" --* "1..1" agentDSL::Entity : attributes4
+agentDSL::Attribute "0..9999" --* "1..1" agentDSL::Task : attributes6
+agentDSL::Goal "0..1" --* "1..1" agentDSL::Outcome : goal13
+agentDSL::JAVAID "0..1" --* "1..1" agentDSL::TypeDef : mappedType1
+agentDSL::Task "1..1" *-- "0..1" agentDSL::Outcome : outcome8
+agentDSL::Entity "0..1" -- "1..1" agentDSL::Entity : superEntity3
+agentDSL::Attribute "1..1" -- "0..1" agentDSL::Type : type20
+agentDSL::Model "1..1" *-- "0..9999" agentDSL::Type : types0
+@enduml

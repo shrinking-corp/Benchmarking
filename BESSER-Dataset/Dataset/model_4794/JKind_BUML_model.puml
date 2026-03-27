@@ -1,0 +1,136 @@
+@startuml
+class Expr {
+}
+class IdRef {
+}
+class Type {
+}
+class Typedef {
+}
+class jkind::AbbreviationType {
+}
+class jkind::Assertion {
+}
+class jkind::BinaryExpr {
+  + op : str
+}
+class jkind::BoolExpr {
+  + val : str
+}
+class jkind::BoolType {
+}
+class jkind::Constant {
+}
+class jkind::Equation {
+}
+class jkind::Expr {
+}
+class jkind::Field {
+  + name : str
+}
+class jkind::File {
+}
+class jkind::IdExpr {
+}
+class jkind::IdRef {
+  + name : str
+}
+class jkind::IfThenElseExpr {
+}
+class jkind::IntExpr {
+  + val : str
+}
+class jkind::IntType {
+}
+class jkind::Node {
+  + main : str
+  + name : str
+}
+class jkind::NodeCallExpr {
+}
+class jkind::ProjectionExpr {
+}
+class jkind::Property {
+}
+class jkind::RealExpr {
+  + val : str
+}
+class jkind::RealType {
+}
+class jkind::RecordExpr {
+}
+class jkind::RecordType {
+}
+class jkind::SubrangeType {
+  + high : str
+  + low : str
+}
+class jkind::Type {
+}
+class jkind::Typedef {
+  + name : str
+}
+class jkind::UnaryExpr {
+  + op : str
+}
+class jkind::UserType {
+}
+class jkind::Variable {
+}
+class jkind::VariableGroup {
+}
+Expr <|-- jkind::BinaryExpr
+Expr <|-- jkind::BoolExpr
+Expr <|-- jkind::IdExpr
+Expr <|-- jkind::IfThenElseExpr
+Expr <|-- jkind::IntExpr
+Expr <|-- jkind::NodeCallExpr
+Expr <|-- jkind::ProjectionExpr
+Expr <|-- jkind::RealExpr
+Expr <|-- jkind::RecordExpr
+Expr <|-- jkind::UnaryExpr
+IdRef <|-- jkind::Constant
+IdRef <|-- jkind::Variable
+Typedef <|-- jkind::AbbreviationType
+Typedef <|-- jkind::RecordType
+Type <|-- jkind::BoolType
+Type <|-- jkind::IntType
+Type <|-- jkind::RealType
+Type <|-- jkind::SubrangeType
+Type <|-- jkind::UserType
+jkind::Expr "0..9999" --* "1..1" jkind::NodeCallExpr : args71
+jkind::Assertion "0..9999" --* "1..1" jkind::Node : assertions19
+jkind::IfThenElseExpr "1..1" *-- "0..1" jkind::Expr : cond61
+jkind::Constant "0..9999" --* "1..1" jkind::File : constants1
+jkind::Typedef "0..1" -- "1..1" jkind::UserType : def46
+jkind::Expr "0..1" --* "1..1" jkind::IfThenElseExpr : else66
+jkind::Equation "0..9999" --* "1..1" jkind::Node : equations17
+jkind::Expr "0..1" --* "1..1" jkind::Assertion : expr37
+jkind::UnaryExpr "1..1" *-- "0..1" jkind::Expr : expr53
+jkind::Expr "0..1" --* "1..1" jkind::ProjectionExpr : expr55
+jkind::Expr "0..1" --* "1..1" jkind::Constant : expr7
+jkind::RecordExpr "1..1" *-- "0..9999" jkind::Expr : exprs79
+jkind::Field "0..1" -- "1..1" jkind::ProjectionExpr : field57
+jkind::RecordType "1..1" *-- "0..9999" jkind::Field : fields42
+jkind::Field "0..9999" -- "1..1" jkind::RecordExpr : fields76
+jkind::IdRef "0..1" -- "1..1" jkind::IdExpr : id60
+jkind::VariableGroup "0..9999" --* "1..1" jkind::Node : inputs9
+jkind::Expr "0..1" --* "1..1" jkind::BinaryExpr : left48
+jkind::Variable "0..9999" -- "1..1" jkind::Equation : lhs28
+jkind::Node "1..1" *-- "0..9999" jkind::VariableGroup : locals14
+jkind::Node "0..1" -- "1..1" jkind::NodeCallExpr : node69
+jkind::Node "0..9999" --* "1..1" jkind::File : nodes3
+jkind::VariableGroup "0..9999" --* "1..1" jkind::Node : outputs11
+jkind::Node "1..1" *-- "0..9999" jkind::Property : properties21
+jkind::Variable "0..1" -- "1..1" jkind::Property : ref34
+jkind::Equation "1..1" *-- "0..1" jkind::Expr : rhs31
+jkind::Expr "0..1" --* "1..1" jkind::BinaryExpr : right50
+jkind::Expr "0..1" --* "1..1" jkind::IfThenElseExpr : then63
+jkind::Type "0..1" --* "1..1" jkind::VariableGroup : type25
+jkind::Type "0..1" --* "1..1" jkind::AbbreviationType : type40
+jkind::Constant "1..1" *-- "0..1" jkind::Type : type5
+jkind::RecordExpr "1..1" -- "0..1" jkind::RecordType : type74
+jkind::File "1..1" *-- "0..9999" jkind::Typedef : typedefs0
+jkind::Type "0..9999" --* "1..1" jkind::RecordType : types43
+jkind::Variable "0..9999" --* "1..1" jkind::VariableGroup : variables23
+@enduml

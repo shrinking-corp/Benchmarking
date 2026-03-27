@@ -1,0 +1,163 @@
+@startuml
+class AbstractState {
+}
+enum ArithmeticOperator {
+  div
+  minus
+  mult
+  plus
+}
+abstract class CompleteDSLPckg::AbstractState {
+}
+class CompleteDSLPckg::AndTrigger {
+}
+class CompleteDSLPckg::ArithmeticExpression {
+  + operator : str
+}
+class CompleteDSLPckg::Assignation {
+}
+class CompleteDSLPckg::Block {
+}
+class CompleteDSLPckg::BoolLit {
+  + value : bool
+}
+class CompleteDSLPckg::Conditional {
+}
+class CompleteDSLPckg::ConsoleOutput {
+  + input : str
+}
+abstract class CompleteDSLPckg::Expression {
+}
+class CompleteDSLPckg::FinalState {
+}
+class CompleteDSLPckg::InitialState {
+}
+class CompleteDSLPckg::IntegerLit {
+  + value : int
+}
+abstract class CompleteDSLPckg::Literal {
+}
+class CompleteDSLPckg::Loop {
+}
+class CompleteDSLPckg::NamedElement {
+  + name : str
+}
+class CompleteDSLPckg::NotTrigger {
+}
+class CompleteDSLPckg::OrTrigger {
+}
+class CompleteDSLPckg::Print {
+}
+class CompleteDSLPckg::Println {
+}
+abstract class CompleteDSLPckg::Pseudostate {
+}
+class CompleteDSLPckg::Region {
+}
+class CompleteDSLPckg::RelationalExpression {
+  + operator : str
+}
+class CompleteDSLPckg::State {
+}
+class CompleteDSLPckg::StateMachine {
+}
+abstract class CompleteDSLPckg::Statement {
+}
+class CompleteDSLPckg::StringLit {
+  + value : str
+}
+class CompleteDSLPckg::Transition {
+}
+class CompleteDSLPckg::Trigger {
+  + expression : str
+}
+class CompleteDSLPckg::VarDecl {
+  + name : str
+}
+class CompleteDSLPckg::VarRef {
+  + ref : str
+}
+class CompleteDSLPckg::Wait {
+  + miliseconds : str
+}
+class ConsoleOutput {
+}
+class Expression {
+}
+class Literal {
+}
+class NamedElement {
+}
+class Pseudostate {
+}
+enum RelationalOperator {
+  equals
+  greaterThan
+  greaterThanOrEqualTo
+  lessThan
+  lessThanOrEqualTo
+  notEqual
+}
+class State {
+}
+class Statement {
+}
+class Trigger {
+}
+AbstractState <|-- CompleteDSLPckg::Pseudostate
+AbstractState <|-- CompleteDSLPckg::State
+ConsoleOutput <|-- CompleteDSLPckg::Print
+ConsoleOutput <|-- CompleteDSLPckg::Println
+Expression <|-- CompleteDSLPckg::ArithmeticExpression
+Expression <|-- CompleteDSLPckg::Literal
+Expression <|-- CompleteDSLPckg::RelationalExpression
+Expression <|-- CompleteDSLPckg::VarRef
+Literal <|-- CompleteDSLPckg::BoolLit
+Literal <|-- CompleteDSLPckg::IntegerLit
+Literal <|-- CompleteDSLPckg::StringLit
+NamedElement <|-- CompleteDSLPckg::AbstractState
+NamedElement <|-- CompleteDSLPckg::Region
+NamedElement <|-- CompleteDSLPckg::StateMachine
+NamedElement <|-- CompleteDSLPckg::Transition
+Pseudostate <|-- CompleteDSLPckg::InitialState
+State <|-- CompleteDSLPckg::FinalState
+Statement <|-- CompleteDSLPckg::Assignation
+Statement <|-- CompleteDSLPckg::Conditional
+Statement <|-- CompleteDSLPckg::ConsoleOutput
+Statement <|-- CompleteDSLPckg::Loop
+Statement <|-- CompleteDSLPckg::VarDecl
+Statement <|-- CompleteDSLPckg::Wait
+Trigger <|-- CompleteDSLPckg::AndTrigger
+Trigger <|-- CompleteDSLPckg::NotTrigger
+Trigger <|-- CompleteDSLPckg::OrTrigger
+CompleteDSLPckg::Statement "0..9999" --* "1..1" CompleteDSLPckg::Conditional : body12
+CompleteDSLPckg::Statement "0..9999" --* "1..1" CompleteDSLPckg::Loop : body17
+CompleteDSLPckg::Conditional "1..1" *-- "1..1" CompleteDSLPckg::Expression : condition10
+CompleteDSLPckg::State "1..1" *-- "0..1" CompleteDSLPckg::Block : doAction46
+CompleteDSLPckg::Block "0..1" --* "1..1" CompleteDSLPckg::State : entryAction44
+CompleteDSLPckg::Block "0..1" --* "1..1" CompleteDSLPckg::State : exitAction49
+CompleteDSLPckg::Expression "1..1" --* "1..1" CompleteDSLPckg::VarDecl : expr20
+CompleteDSLPckg::Expression "1..1" --* "1..1" CompleteDSLPckg::Assignation : expression24
+CompleteDSLPckg::Expression "1..1" --* "1..1" CompleteDSLPckg::Loop : guard15
+CompleteDSLPckg::AbstractState "1..1" -- "0..9999" CompleteDSLPckg::Transition : incoming35
+CompleteDSLPckg::ArithmeticExpression "1..1" *-- "1..1" CompleteDSLPckg::Expression : left0
+CompleteDSLPckg::Expression "1..1" --* "1..1" CompleteDSLPckg::RelationalExpression : left4
+CompleteDSLPckg::AndTrigger "1..1" *-- "1..1" CompleteDSLPckg::Trigger : left62
+CompleteDSLPckg::Trigger "1..1" --* "1..1" CompleteDSLPckg::OrTrigger : left67
+CompleteDSLPckg::Transition "0..9999" -- "1..1" CompleteDSLPckg::AbstractState : outgoing38
+CompleteDSLPckg::Region "1..1" -- "1..1" CompleteDSLPckg::AbstractState : ownerRegion41
+CompleteDSLPckg::StateMachine "0..1" -- "1..1" CompleteDSLPckg::Region : ownerStateMachine32
+CompleteDSLPckg::StateMachine "1..1" *-- "0..9999" CompleteDSLPckg::Region : regions27
+CompleteDSLPckg::Expression "1..1" --* "1..1" CompleteDSLPckg::ArithmeticExpression : right1
+CompleteDSLPckg::RelationalExpression "1..1" *-- "1..1" CompleteDSLPckg::Expression : right6
+CompleteDSLPckg::Trigger "1..1" --* "1..1" CompleteDSLPckg::AndTrigger : right64
+CompleteDSLPckg::Trigger "1..1" --* "1..1" CompleteDSLPckg::OrTrigger : right69
+CompleteDSLPckg::AbstractState "1..1" -- "1..1" CompleteDSLPckg::Transition : source57
+CompleteDSLPckg::Statement "0..9999" --* "1..1" CompleteDSLPckg::Block : statements9
+CompleteDSLPckg::AbstractState "0..9999" --* "1..1" CompleteDSLPckg::Region : subvertex28
+CompleteDSLPckg::AbstractState "1..1" -- "1..1" CompleteDSLPckg::Transition : target54
+CompleteDSLPckg::Transition "0..9999" --* "1..1" CompleteDSLPckg::Region : transitions30
+CompleteDSLPckg::Trigger "0..1" --* "1..1" CompleteDSLPckg::Transition : trigger52
+CompleteDSLPckg::Trigger "1..1" --* "1..1" CompleteDSLPckg::NotTrigger : trigger60
+CompleteDSLPckg::Assignation "1..1" -- "1..1" CompleteDSLPckg::VarDecl : varRef22
+@enduml

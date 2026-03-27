@@ -1,0 +1,180 @@
+@startuml
+class BuildElement {
+}
+class ParameterDefinition {
+}
+enum TestCaseResult {
+  FAILED
+  FIXED
+  PASSED
+  REGRESSION
+  SKIPPED
+}
+class TestElement {
+}
+class builds::Artifact {
+  + relativePath : str
+}
+class builds::BooleanParameterDefinition {
+  + defaultValue : bool
+}
+class builds::Build {
+  + buildNumber : int
+  + displayName : str
+  + duration : str
+  + id : str
+  + label : str
+  + state : str
+  + status : str
+  + summary : str
+  + timestamp : str
+}
+class builds::BuildCause {
+  + description : str
+}
+abstract class builds::BuildElement {
+  + elementStatus : str
+  + name : str
+  + operations : str
+  + refreshDate : date
+  + url : str
+  + getLabel() : str
+  + getServer() : str
+}
+class builds::BuildModel {
+}
+class builds::BuildParameterDefinition {
+  + buildPlanId : str
+}
+class builds::BuildPlan {
+  + description : str
+  + flags : str
+  + health : int
+  + id : str
+  + info : str
+  + selected : bool
+  + state : str
+  + status : str
+  + summary : str
+}
+class builds::BuildReference {
+  + build : str
+  + plan : str
+}
+class builds::BuildServer {
+  + connectorKind : str
+  + location : str
+  + repositoryUrl : str
+}
+class builds::Change {
+  + date : str
+  + message : str
+  + revision : str
+}
+class builds::ChangeArtifact {
+  + dead : bool
+  + editType : str
+  + file : str
+  + prevRevision : str
+  + relativePath : str
+  + revision : str
+}
+class builds::ChangeSet {
+  + kind : str
+}
+class builds::ChoiceParameterDefinition {
+  + defaultValue : str
+  + options : str
+}
+class builds::FileParameterDefinition {
+}
+class builds::HealthReport {
+  + description : str
+  + health : int
+}
+abstract class builds::ParameterDefinition {
+  + description : str
+  + name : str
+}
+class builds::PasswordParameterDefinition {
+  + defaultValue : str
+}
+class builds::PlanParameterDefinition {
+}
+class builds::StringParameterDefinition {
+  + defaultValue : str
+}
+class builds::StringToStringMap {
+  + key : str
+  + value : str
+}
+class builds::TestCase {
+  + className : str
+  + message : str
+  + skipped : bool
+  + stackTrace : str
+  + status : str
+}
+class builds::TestElement {
+  + duration : str
+  + errorOutput : str
+  + label : str
+  + output : str
+}
+class builds::TestResult {
+  + duration : str
+  + errorCount : int
+  + failCount : int
+  + ignoredCount : int
+  + passCount : int
+}
+class builds::TestSuite {
+}
+class builds::User {
+  + email : str
+  + id : str
+}
+BuildElement <|-- builds::Artifact
+BuildElement <|-- builds::Build
+BuildElement <|-- builds::BuildPlan
+BuildElement <|-- builds::BuildServer
+BuildElement <|-- builds::User
+ParameterDefinition <|-- builds::BooleanParameterDefinition
+ParameterDefinition <|-- builds::BuildParameterDefinition
+ParameterDefinition <|-- builds::ChoiceParameterDefinition
+ParameterDefinition <|-- builds::FileParameterDefinition
+ParameterDefinition <|-- builds::PasswordParameterDefinition
+ParameterDefinition <|-- builds::PlanParameterDefinition
+ParameterDefinition <|-- builds::StringParameterDefinition
+TestElement <|-- builds::TestCase
+TestElement <|-- builds::TestSuite
+builds::Build "1..1" *-- "0..9999" builds::Artifact : artifacts0
+builds::ChangeArtifact "0..9999" --* "1..1" builds::Change : artifacts40
+builds::StringToStringMap "0..9999" --* "1..1" builds::BuildElement : attributes17
+builds::Change "1..1" *-- "0..1" builds::User : author41
+builds::BuildReference "0..1" --* "1..1" builds::BuildCause : build12
+builds::Build "0..1" -- "1..1" builds::TestResult : build51
+builds::BuildPlan "0..1" -- "1..1" builds::BuildParameterDefinition : buildPlan49
+builds::BuildModel "1..1" *-- "0..9999" builds::Build : builds37
+builds::TestCase "0..9999" --* "1..1" builds::TestSuite : cases53
+builds::BuildCause "0..9999" --* "1..1" builds::Build : cause10
+builds::ChangeSet "0..1" --* "1..1" builds::Build : changeSet1
+builds::Change "0..9999" --* "1..1" builds::ChangeSet : changes44
+builds::BuildPlan "0..9999" -- "1..1" builds::BuildPlan : children22
+builds::BuildPlan "0..1" -- "1..1" builds::ParameterDefinition : containingBuildPlan47
+builds::User "0..9999" --* "1..1" builds::Build : culprits8
+builds::HealthReport "0..9999" --* "1..1" builds::BuildPlan : healthReports30
+builds::Build "0..1" -- "1..1" builds::BuildPlan : lastBuild26
+builds::BuildPlan "1..1" *-- "0..9999" builds::ParameterDefinition : parameterDefinitions29
+builds::BuildPlan "1..1" -- "0..1" builds::BuildPlan : parent24
+builds::BuildPlan "0..1" -- "1..1" builds::Build : plan3
+builds::BuildPlan "0..9999" --* "1..1" builds::BuildModel : plans34
+builds::TestResult "0..1" -- "1..1" builds::TestSuite : result54
+builds::BuildServer "1..1" -- "1..1" builds::BuildPlan : server18
+builds::BuildServer "0..1" -- "1..1" builds::Build : server5
+builds::BuildServer "0..9999" --* "1..1" builds::BuildModel : servers32
+builds::TestCase "1..1" -- "0..1" builds::TestSuite : suite56
+builds::TestSuite "0..9999" --* "1..1" builds::TestResult : suites52
+builds::Build "1..1" *-- "0..1" builds::TestResult : testResult7
+builds::User "0..1" --* "1..1" builds::BuildCause : user14
+@enduml

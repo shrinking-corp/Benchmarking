@@ -1,0 +1,39 @@
+@startuml
+class Arc {
+}
+class Identification {
+}
+abstract class petriNetEMF::Arc {
+}
+abstract class petriNetEMF::Identification {
+  + ID : str
+  + name : str
+}
+class petriNetEMF::PetriNet {
+}
+class petriNetEMF::Place {
+}
+class petriNetEMF::PlaceToTransitionArc {
+}
+class petriNetEMF::Transition {
+}
+class petriNetEMF::TransitionToPlaceArc {
+}
+Arc <|-- petriNetEMF::PlaceToTransitionArc
+Arc <|-- petriNetEMF::TransitionToPlaceArc
+Identification <|-- petriNetEMF::Arc
+Identification <|-- petriNetEMF::PetriNet
+Identification <|-- petriNetEMF::Place
+Identification <|-- petriNetEMF::Transition
+petriNetEMF::Arc "0..9999" --* "1..1" petriNetEMF::PetriNet : Arcs3
+petriNetEMF::PetriNet "1..1" *-- "0..9999" petriNetEMF::Place : Places0
+petriNetEMF::PetriNet "1..1" *-- "0..9999" petriNetEMF::Transition : Transitions1
+petriNetEMF::Place "1..1" -- "1..1" petriNetEMF::PlaceToTransitionArc : from14
+petriNetEMF::Transition "1..1" -- "1..1" petriNetEMF::TransitionToPlaceArc : from15
+petriNetEMF::PlaceToTransitionArc "0..9999" -- "1..1" petriNetEMF::Transition : incomingArcs10
+petriNetEMF::TransitionToPlaceArc "0..9999" -- "1..1" petriNetEMF::Place : incomingArcs6
+petriNetEMF::PlaceToTransitionArc "0..9999" -- "1..1" petriNetEMF::Place : outgoingArcs5
+petriNetEMF::Transition "1..1" -- "0..9999" petriNetEMF::TransitionToPlaceArc : outgoingArcs7
+petriNetEMF::PlaceToTransitionArc "1..1" -- "1..1" petriNetEMF::Transition : to13
+petriNetEMF::Place "1..1" -- "1..1" petriNetEMF::TransitionToPlaceArc : to18
+@enduml

@@ -1,0 +1,62 @@
+@startuml
+enum DAAP_COMM_CST {
+  MAX_SIMULTATNEOUS_CONNECTIONS
+  MAX_USER_CONNECTIONS_PER_SESSION
+  MAX_USER_SIMULTANEOUS_CONNECTION
+}
+enum DAAP_CONNECTION_KIND {
+  DB
+  USER
+}
+class EZDaapElem {
+}
+class EZDaapIntelPropertyElem {
+}
+class EZDaapLibraryUnit {
+}
+class ezdaap::EZDaapAlbum {
+}
+class ezdaap::EZDaapArtist {
+}
+class ezdaap::EZDaapDictionary {
+}
+class ezdaap::EZDaapElem {
+}
+class ezdaap::EZDaapITunesInstance {
+  + id : str
+  + revID : int
+  + serverName : str
+  + sessionID : int
+}
+class ezdaap::EZDaapIntelPropertyElem {
+  + license : str
+}
+class ezdaap::EZDaapLibrary {
+}
+abstract class ezdaap::EZDaapLibraryUnit {
+  + name : str
+}
+class ezdaap::EZDaapManager {
+}
+class ezdaap::EZDaapPlayList {
+}
+class ezdaap::EZDaapSong {
+}
+EZDaapElem <|-- ezdaap::EZDaapAlbum
+EZDaapElem <|-- ezdaap::EZDaapPlayList
+EZDaapElem <|-- ezdaap::EZDaapSong
+EZDaapIntelPropertyElem <|-- ezdaap::EZDaapAlbum
+EZDaapIntelPropertyElem <|-- ezdaap::EZDaapSong
+EZDaapLibraryUnit <|-- ezdaap::EZDaapElem
+EZDaapLibraryUnit <|-- ezdaap::EZDaapLibrary
+ezdaap::EZDaapAlbum "0..9999" --* "1..1" ezdaap::EZDaapITunesInstance : Albums5
+ezdaap::EZDaapArtist "0..9999" -- "1..1" ezdaap::EZDaapIntelPropertyElem : artists19
+ezdaap::EZDaapITunesInstance "1..1" *-- "0..9999" ezdaap::EZDaapArtist : artists7
+ezdaap::EZDaapLibrary "1..1" *-- "0..9999" ezdaap::EZDaapLibraryUnit : elements17
+ezdaap::EZDaapITunesInstance "0..9999" --* "1..1" ezdaap::EZDaapManager : iTunes9
+ezdaap::EZDaapLibrary "0..9999" --* "1..1" ezdaap::EZDaapITunesInstance : libraries0
+ezdaap::EZDaapPlayList "0..9999" --* "1..1" ezdaap::EZDaapITunesInstance : palylists1
+ezdaap::EZDaapSong "0..9999" -- "1..1" ezdaap::EZDaapAlbum : songs11
+ezdaap::EZDaapSong "0..9999" -- "1..1" ezdaap::EZDaapPlayList : songs14
+ezdaap::EZDaapITunesInstance "1..1" *-- "0..9999" ezdaap::EZDaapSong : songs3
+@enduml

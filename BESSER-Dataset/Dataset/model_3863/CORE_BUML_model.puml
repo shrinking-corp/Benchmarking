@@ -1,0 +1,76 @@
+@startuml
+class CORECompositionSpecification {
+}
+class COREModel {
+}
+class COREModelElement {
+}
+class CORENamedElement {
+}
+abstract class core::COREBinding {
+}
+abstract class core::CORECompositionSpecification {
+}
+class core::COREConcern {
+}
+abstract class core::COREConfiguration {
+}
+abstract class core::COREFeature {
+}
+abstract class core::COREFeatureModel {
+}
+abstract class core::COREImpactModel {
+}
+abstract class core::COREImpactModelElement {
+}
+class core::COREInterface {
+}
+class core::COREMapping {
+}
+abstract class core::COREModel {
+}
+abstract class core::COREModelElement {
+}
+abstract class core::CORENamedElement {
+  + name : str
+}
+abstract class core::COREPattern {
+}
+class core::COREReuse {
+}
+abstract class core::COREStrategy {
+}
+CORECompositionSpecification <|-- core::COREBinding
+CORECompositionSpecification <|-- core::COREPattern
+COREModelElement <|-- core::COREFeature
+COREModelElement <|-- core::COREImpactModelElement
+COREModel <|-- core::COREFeatureModel
+COREModel <|-- core::COREImpactModel
+CORENamedElement <|-- core::COREConcern
+CORENamedElement <|-- core::COREConfiguration
+CORENamedElement <|-- core::COREModel
+CORENamedElement <|-- core::COREModelElement
+CORENamedElement <|-- core::COREStrategy
+core::CORECompositionSpecification "0..9999" -- "1..1" core::COREReuse : compositions38
+core::COREConfiguration "0..9999" --* "1..1" core::COREFeature : configurations10
+core::COREStrategy "1..1" -- "0..9999" core::COREConfiguration : configurations21
+core::COREMapping "0..9999" -- "1..1" core::COREBinding : coreMappings12
+core::COREModelElement "0..9999" -- "1..1" core::COREInterface : customizable27
+core::COREInterface "1..1" -- "0..9999" core::COREImpactModelElement : impacted33
+core::COREInterface "1..1" --* "1..1" core::COREConcern : interface6
+core::COREModelElement "1..1" -- "1..1" core::COREMapping : mappedFrom18
+core::COREModelElement "1..1" -- "1..1" core::COREMapping : mappedTo15
+core::COREModelElement "0..9999" -- "1..1" core::COREModel : modelElements1
+core::COREModel "2..9999" -- "1..1" core::COREConcern : models4
+core::COREModel "0..9999" -- "1..1" core::COREFeature : realizedBy8
+core::COREModel "1..1" -- "0..9999" core::COREFeature : realizes3
+core::COREConcern "1..1" -- "1..1" core::COREReuse : reusedConcern35
+core::COREConfiguration "1..1" -- "0..9999" core::COREConcern : reusedConcern44
+core::COREReuse "0..9999" --* "1..1" core::COREModel : reuses0
+core::COREFeature "0..9999" -- "1..1" core::COREInterface : selectable24
+core::COREFeature "1..9999" -- "1..1" core::COREReuse : selected41
+core::COREFeature "1..9999" -- "1..1" core::COREConfiguration : selected47
+core::CORECompositionSpecification "1..1" -- "1..1" core::COREModel : source13
+core::COREStrategy "0..9999" --* "1..1" core::COREFeature : strategies9
+core::COREModelElement "0..9999" -- "1..1" core::COREInterface : usable30
+@enduml

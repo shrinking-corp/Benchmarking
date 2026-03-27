@@ -1,0 +1,128 @@
+@startuml
+class BaseElement {
+}
+class Cause {
+}
+enum CauseType {
+  BasicEvent
+  Gate
+  InputEvent
+  OutputEvent
+}
+class FMEAEntry {
+}
+enum FMEAType {
+  FMEA
+  FMEDA
+}
+class Failure {
+}
+class FailureModel {
+}
+enum FailureOriginType {
+  Input
+  Internal
+  Output
+}
+enum GateType {
+  AND
+  InputEvent
+  NOT
+  OR
+  OutputEvent
+  PAND
+  POR
+  SAND
+  VOTE
+  XOR
+}
+class ODEProductPackage {
+}
+class failureLogic::Cause {
+  + causeType : str
+}
+class failureLogic::FMEA {
+  + type : str
+}
+class failureLogic::FMEAEntry {
+}
+class failureLogic::FMEDAEntry {
+  + diagnosisRate : float
+}
+class failureLogic::Failure {
+  + failureClass : str
+  + failureRate : float
+  + isCcf : bool
+  + originType : str
+}
+class failureLogic::FailureLogicPackage {
+}
+class failureLogic::FailureModel {
+}
+class failureLogic::FaultTree {
+}
+class failureLogic::Gate {
+  + gateType : str
+}
+class failureLogic::MarkovChain {
+}
+class failureLogic::MinimalCutSets {
+}
+class failureLogic::MinimalCutset {
+}
+class failureLogic::ProbDist {
+  + type : str
+}
+class failureLogic::ProbDistParam {
+  + value : str
+}
+class failureLogic::SecurityViolation {
+}
+class failureLogic::State {
+  + isFailState : bool
+  + isInitialState : bool
+}
+class failureLogic::Transition {
+  + transition : float
+}
+BaseElement <|-- failureLogic::Cause
+BaseElement <|-- failureLogic::FMEAEntry
+BaseElement <|-- failureLogic::Failure
+BaseElement <|-- failureLogic::FailureModel
+BaseElement <|-- failureLogic::MinimalCutSets
+BaseElement <|-- failureLogic::MinimalCutset
+BaseElement <|-- failureLogic::ProbDist
+BaseElement <|-- failureLogic::ProbDistParam
+BaseElement <|-- failureLogic::State
+BaseElement <|-- failureLogic::Transition
+Cause <|-- failureLogic::Gate
+FMEAEntry <|-- failureLogic::FMEDAEntry
+FailureModel <|-- failureLogic::FMEA
+FailureModel <|-- failureLogic::FaultTree
+FailureModel <|-- failureLogic::MarkovChain
+Failure <|-- failureLogic::SecurityViolation
+ODEProductPackage <|-- failureLogic::FailureLogicPackage
+failureLogic::Cause "0..9999" --* "1..1" failureLogic::FaultTree : causes23
+failureLogic::Cause "0..9999" -- "1..1" failureLogic::Gate : causes27
+failureLogic::Failure "0..9999" -- "1..1" failureLogic::Failure : ccfFailures3
+failureLogic::MinimalCutSets "1..1" *-- "0..9999" failureLogic::MinimalCutset : cutsets13
+failureLogic::ProbDist "0..1" --* "1..1" failureLogic::FMEDAEntry : diagnosisProbDistribution51
+failureLogic::Failure "0..1" -- "1..1" failureLogic::FMEAEntry : effect45
+failureLogic::FMEAEntry "0..9999" --* "1..1" failureLogic::FMEA : entries44
+failureLogic::State "1..1" -- "0..1" failureLogic::Failure : failState32
+failureLogic::Cause "1..1" -- "0..1" failureLogic::Failure : failure24
+failureLogic::FailureLogicPackage "1..1" *-- "0..9999" failureLogic::FailureModel : failureModels0
+failureLogic::ProbDist "0..1" --* "1..1" failureLogic::Failure : failureProbDistribution1
+failureLogic::Failure "0..9999" -- "1..1" failureLogic::MinimalCutSets : failures15
+failureLogic::Failure "0..9999" -- "1..1" failureLogic::MinimalCutset : failures18
+failureLogic::FailureModel "1..1" *-- "0..9999" failureLogic::Failure : failures7
+failureLogic::State "0..9999" -- "1..1" failureLogic::Transition : fromStates38
+failureLogic::MinimalCutSets "0..9999" --* "1..1" failureLogic::FailureModel : minimalCutsets5
+failureLogic::Failure "0..1" -- "1..1" failureLogic::FMEAEntry : mode48
+failureLogic::ProbDistParam "0..9999" --* "1..1" failureLogic::ProbDist : parameters21
+failureLogic::State "0..9999" --* "1..1" failureLogic::MarkovChain : states30
+failureLogic::FailureModel "0..9999" -- "1..1" failureLogic::FailureModel : subModels11
+failureLogic::State "0..9999" -- "1..1" failureLogic::Transition : toStates41
+failureLogic::Transition "1..1" *-- "0..1" failureLogic::ProbDist : transitionProbDistribution35
+failureLogic::Transition "0..9999" --* "1..1" failureLogic::MarkovChain : transitions29
+@enduml

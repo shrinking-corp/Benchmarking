@@ -1,0 +1,40 @@
+@startuml
+enum HibernateAnnotationTypes {
+  Column
+  ManyToMany
+  ManyToOne
+  OneToMany
+  OneToOne
+}
+enum HibernateCascadeTypes {
+  ALL
+  NONE
+}
+class Type {
+}
+class metamodel::Attribute {
+  + list : bool
+  + name : str
+}
+class metamodel::Datatype {
+}
+class metamodel::Entity {
+}
+class metamodel::HibernateAnnotation {
+  + annotationType : str
+  + cascade : str
+  + unique : str
+}
+class metamodel::Model {
+}
+abstract class metamodel::Type {
+  + name : str
+}
+Type <|-- metamodel::Datatype
+Type <|-- metamodel::Entity
+metamodel::Attribute "1..1" *-- "0..9999" metamodel::HibernateAnnotation : annotations5
+metamodel::Attribute "0..9999" --* "1..1" metamodel::Entity : attributes1
+metamodel::Attribute "0..1" -- "1..1" metamodel::HibernateAnnotation : mappedBy7
+metamodel::Type "0..1" -- "1..1" metamodel::Attribute : type2
+metamodel::Model "1..1" *-- "0..9999" metamodel::Type : types0
+@enduml

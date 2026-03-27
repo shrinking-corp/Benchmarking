@@ -1,0 +1,52 @@
+@startuml
+class NamedEntity {
+}
+class Transition {
+}
+class dtmc::CallTransition {
+}
+class dtmc::Dtmc {
+}
+class dtmc::InvokedTransition {
+}
+class dtmc::Module {
+  + isAutonomous : bool
+}
+abstract class dtmc::NamedEntity {
+  + description : str
+  + name : str
+}
+class dtmc::Node {
+  + isEnd : bool
+  + isFail : bool
+  + isStart : bool
+}
+class dtmc::StandardTransition {
+}
+class dtmc::SynchronizedTransition {
+}
+abstract class dtmc::Transition {
+  + probability : str
+}
+NamedEntity <|-- dtmc::Dtmc
+NamedEntity <|-- dtmc::Module
+NamedEntity <|-- dtmc::Node
+NamedEntity <|-- dtmc::Transition
+Transition <|-- dtmc::CallTransition
+Transition <|-- dtmc::InvokedTransition
+Transition <|-- dtmc::StandardTransition
+Transition <|-- dtmc::SynchronizedTransition
+dtmc::Transition "1..1" -- "0..1" dtmc::Node : _from5
+dtmc::Node "0..1" -- "1..1" dtmc::Transition : _to6
+dtmc::CallTransition "1..1" -- "1..1" dtmc::InvokedTransition : callTransition21
+dtmc::Transition "0..9999" -- "1..1" dtmc::Node : inTransitions3
+dtmc::CallTransition "1..1" -- "1..1" dtmc::InvokedTransition : invokedTransition20
+dtmc::Module "1..1" -- "1..1" dtmc::Node : module1
+dtmc::Module "1..1" -- "1..1" dtmc::Transition : module8
+dtmc::Module "1..9999" --* "1..1" dtmc::Dtmc : modules0
+dtmc::Node "1..9999" --* "1..1" dtmc::Module : nodes15
+dtmc::Transition "0..9999" -- "1..1" dtmc::Node : outTransitions2
+dtmc::SynchronizedTransition "1..9999" -- "1..1" dtmc::SynchronizedTransition : syncWith11
+dtmc::SynchronizedTransition "1..1" -- "1..9999" dtmc::SynchronizedTransition : synchedWith13
+dtmc::Transition "0..9999" --* "1..1" dtmc::Module : transitions17
+@enduml

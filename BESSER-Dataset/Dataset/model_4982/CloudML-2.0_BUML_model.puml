@@ -1,0 +1,216 @@
+@startuml
+class CloudMLElement {
+}
+class CloudMLElementWithProperties {
+}
+class Component {
+}
+class ComponentInstance {
+}
+class ExecutionPlatform {
+}
+class ExecutionPlatformInstance {
+}
+class ExternalComponent {
+}
+class ExternalComponentInstance {
+}
+class Port {
+}
+class PortInstance {
+}
+class Resource {
+}
+class cloudml::Cloud {
+}
+abstract class cloudml::CloudMLElement {
+  + name : str
+}
+abstract class cloudml::CloudMLElementWithProperties {
+}
+class cloudml::CloudMLModel {
+}
+abstract class cloudml::Component {
+}
+abstract class cloudml::ComponentInstance {
+}
+class cloudml::ExecuteInstance {
+}
+abstract class cloudml::ExecutionPlatform {
+}
+abstract class cloudml::ExecutionPlatformInstance {
+}
+class cloudml::ExternalComponent {
+  + Region : str
+  + endPoint : str
+  + location : str
+  + login : str
+  + passwd : str
+  + serviceType : str
+}
+class cloudml::ExternalComponentInstance {
+  + ips : str
+}
+class cloudml::InternalComponent {
+}
+class cloudml::InternalComponentInstance {
+}
+abstract class cloudml::Port {
+  + isLocal : bool
+  + portNumber : int
+}
+class cloudml::PortInstance {
+}
+class cloudml::Property {
+  + value : str
+}
+class cloudml::ProvidedExecutionPlatform {
+}
+class cloudml::ProvidedExecutionPlatformInstance {
+}
+class cloudml::ProvidedPort {
+}
+class cloudml::ProvidedPortInstance {
+}
+class cloudml::Provider {
+  + credentials : str
+}
+class cloudml::PuppetResource {
+  + configurationFile : str
+  + configureHostnameCommand : str
+  + manifestEntry : str
+  + masterEndpoint : str
+  + repositoryEndpoint : str
+  + repositoryKey : str
+  + username : str
+}
+class cloudml::Relationship {
+}
+class cloudml::RelationshipInstance {
+}
+class cloudml::RequiredExecutionPlatform {
+}
+class cloudml::RequiredExecutionPlatformInstance {
+}
+class cloudml::RequiredPort {
+  + isMandatory : bool
+}
+class cloudml::RequiredPortInstance {
+}
+class cloudml::Resource {
+  + configureCommand : str
+  + downloadCommand : str
+  + executeLocally : bool
+  + installCommand : str
+  + requireCredentials : bool
+  + startCommand : str
+  + stopCommand : str
+  + uploadCommand : str
+}
+class cloudml::VM {
+  + groupName : str
+  + imageId : str
+  + is64os : bool
+  + maxCores : int
+  + maxRam : int
+  + maxStorage : int
+  + minCores : int
+  + minRam : int
+  + minStorage : int
+  + os : str
+  + privateKey : str
+  + providerSpecificTypeName : str
+  + securityGroup : str
+  + sshKey : str
+}
+class cloudml::VMInstance {
+  + id : str
+  + publicAddress : str
+}
+class cloudml::VMPort {
+}
+class cloudml::VMPortInstance {
+}
+CloudMLElementWithProperties <|-- cloudml::Cloud
+CloudMLElementWithProperties <|-- cloudml::CloudMLModel
+CloudMLElementWithProperties <|-- cloudml::Component
+CloudMLElementWithProperties <|-- cloudml::ComponentInstance
+CloudMLElementWithProperties <|-- cloudml::ExecuteInstance
+CloudMLElementWithProperties <|-- cloudml::ExecutionPlatform
+CloudMLElementWithProperties <|-- cloudml::ExecutionPlatformInstance
+CloudMLElementWithProperties <|-- cloudml::Port
+CloudMLElementWithProperties <|-- cloudml::PortInstance
+CloudMLElementWithProperties <|-- cloudml::Provider
+CloudMLElementWithProperties <|-- cloudml::Relationship
+CloudMLElementWithProperties <|-- cloudml::RelationshipInstance
+CloudMLElementWithProperties <|-- cloudml::Resource
+CloudMLElementWithProperties <|-- cloudml::VMPort
+CloudMLElementWithProperties <|-- cloudml::VMPortInstance
+CloudMLElement <|-- cloudml::CloudMLElementWithProperties
+CloudMLElement <|-- cloudml::Property
+ComponentInstance <|-- cloudml::ExternalComponentInstance
+ComponentInstance <|-- cloudml::InternalComponentInstance
+Component <|-- cloudml::ExternalComponent
+Component <|-- cloudml::InternalComponent
+ExecutionPlatformInstance <|-- cloudml::ProvidedExecutionPlatformInstance
+ExecutionPlatformInstance <|-- cloudml::RequiredExecutionPlatformInstance
+ExecutionPlatform <|-- cloudml::ProvidedExecutionPlatform
+ExecutionPlatform <|-- cloudml::RequiredExecutionPlatform
+ExternalComponentInstance <|-- cloudml::VMInstance
+ExternalComponent <|-- cloudml::VM
+PortInstance <|-- cloudml::ProvidedPortInstance
+PortInstance <|-- cloudml::RequiredPortInstance
+Port <|-- cloudml::ProvidedPort
+Port <|-- cloudml::RequiredPort
+Resource <|-- cloudml::PuppetResource
+cloudml::Cloud "0..9999" --* "1..1" cloudml::CloudMLModel : clouds8
+cloudml::Component "1..1" -- "1..1" cloudml::Port : component43
+cloudml::ComponentInstance "1..1" -- "1..1" cloudml::PortInstance : componentInstance78
+cloudml::CloudMLModel "1..1" *-- "0..9999" cloudml::ComponentInstance : componentInstances10
+cloudml::Component "0..9999" --* "1..1" cloudml::CloudMLModel : components6
+cloudml::InternalComponent "0..9999" --* "1..1" cloudml::InternalComponent : compositeInternalComponents39
+cloudml::Property "0..9999" --* "1..1" cloudml::RequiredExecutionPlatform : demands109
+cloudml::ExecuteInstance "0..9999" --* "1..1" cloudml::CloudMLModel : executesInstances28
+cloudml::CloudMLModel "1..1" *-- "0..9999" cloudml::ExternalComponentInstance : externalComponentInstances18
+cloudml::ExternalComponent "0..9999" --* "1..1" cloudml::CloudMLModel : externalComponents14
+cloudml::InternalComponentInstance "0..9999" --* "1..1" cloudml::CloudMLModel : internalComponentInstances16
+cloudml::InternalComponent "0..9999" --* "1..1" cloudml::CloudMLModel : internalComponents12
+cloudml::Property "0..9999" --* "1..1" cloudml::ProvidedExecutionPlatform : offers106
+cloudml::ComponentInstance "1..1" -- "1..1" cloudml::ExecutionPlatformInstance : owner101
+cloudml::ExecutionPlatform "1..1" -- "1..1" cloudml::Component : owner99
+cloudml::Property "0..9999" --* "1..1" cloudml::CloudMLElementWithProperties : properties0
+cloudml::VMPort "0..9999" --* "1..1" cloudml::ExternalComponent : provide93
+cloudml::VMPortInstance "0..9999" --* "1..1" cloudml::ExternalComponentInstance : provide96
+cloudml::VMPort "0..9999" --* "1..1" cloudml::VM : provided30
+cloudml::VMPortInstance "0..9999" --* "1..1" cloudml::VMInstance : provided60
+cloudml::ExecuteInstance "1..1" -- "1..1" cloudml::ProvidedExecutionPlatformInstance : providedExecutionPlatformInstance112
+cloudml::ProvidedExecutionPlatformInstance "0..9999" --* "1..1" cloudml::ComponentInstance : providedExecutionPlatformInstances70
+cloudml::ProvidedExecutionPlatform "0..9999" --* "1..1" cloudml::Component : providedExecutionPlatforms34
+cloudml::ProvidedPort "1..1" -- "1..1" cloudml::Relationship : providedPort48
+cloudml::RelationshipInstance "1..1" -- "1..1" cloudml::ProvidedPortInstance : providedPortInstance87
+cloudml::ProvidedPortInstance "0..9999" --* "1..1" cloudml::ComponentInstance : providedPortInstances65
+cloudml::Resource "0..1" --* "1..1" cloudml::Relationship : providedPortResource54
+cloudml::Component "1..1" *-- "0..9999" cloudml::ProvidedPort : providedPorts32
+cloudml::Provider "0..1" -- "1..1" cloudml::ExternalComponent : provider90
+cloudml::Provider "0..9999" --* "1..1" cloudml::CloudMLModel : providers5
+cloudml::PuppetResource "0..9999" --* "1..1" cloudml::CloudMLElementWithProperties : puppetResources3
+cloudml::CloudMLModel "1..1" *-- "0..9999" cloudml::RelationshipInstance : relationshipInstances26
+cloudml::Relationship "0..9999" --* "1..1" cloudml::CloudMLModel : relationships24
+cloudml::InternalComponent "1..1" *-- "1..1" cloudml::RequiredExecutionPlatform : requiredExecutionPlatform41
+cloudml::RequiredExecutionPlatformInstance "1..1" -- "1..1" cloudml::ExecuteInstance : requiredExecutionPlatformInstance115
+cloudml::RequiredExecutionPlatformInstance "1..1" --* "1..1" cloudml::InternalComponentInstance : requiredExecutionPlatformInstance74
+cloudml::RequiredPort "1..1" -- "1..1" cloudml::Relationship : requiredPort45
+cloudml::RequiredPortInstance "1..1" -- "1..1" cloudml::RelationshipInstance : requiredPortInstance84
+cloudml::RequiredPortInstance "0..9999" --* "1..1" cloudml::InternalComponentInstance : requiredPortInstances72
+cloudml::Relationship "1..1" *-- "0..1" cloudml::Resource : requiredPortResource51
+cloudml::RequiredPort "0..9999" --* "1..1" cloudml::InternalComponent : requiredPorts36
+cloudml::CloudMLElementWithProperties "1..1" *-- "0..9999" cloudml::Resource : resources1
+cloudml::ExecutionPlatform "1..1" -- "1..1" cloudml::ExecutionPlatformInstance : type103
+cloudml::VMPort "1..1" -- "1..1" cloudml::VMPortInstance : type62
+cloudml::ComponentInstance "1..1" -- "1..1" cloudml::Component : type67
+cloudml::Port "1..1" -- "1..1" cloudml::PortInstance : type76
+cloudml::RelationshipInstance "1..1" -- "1..1" cloudml::Relationship : type81
+cloudml::VMInstance "0..9999" --* "1..1" cloudml::CloudMLModel : vmInstances22
+cloudml::Cloud "1..1" *-- "0..9999" cloudml::VMInstance : vmInstances57
+cloudml::VM "0..9999" --* "1..1" cloudml::CloudMLModel : vms20
+@enduml

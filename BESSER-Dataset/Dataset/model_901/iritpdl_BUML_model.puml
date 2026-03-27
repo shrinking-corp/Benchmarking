@@ -1,0 +1,55 @@
+@startuml
+class ProcessElement {
+}
+enum WorkSequenceType {
+  finishToFinish
+  finishToStart
+  startToFinish
+  startToStart
+}
+class iritpdl::Guidance {
+  + text : str
+}
+class iritpdl::Process {
+  + maxTime : int
+  + minTime : int
+  + name : str
+}
+class iritpdl::ProcessElement {
+}
+class iritpdl::Resource {
+  + occurrences : int
+}
+class iritpdl::ResourceConf {
+  + name : str
+}
+class iritpdl::ResourceType {
+  + name : str
+  + occurrences : int
+}
+class iritpdl::WorkDefinition {
+  + maxTime : int
+  + minTime : int
+  + name : str
+}
+class iritpdl::WorkSequence {
+  + linkType : str
+}
+ProcessElement <|-- iritpdl::WorkDefinition
+ProcessElement <|-- iritpdl::WorkSequence
+iritpdl::ProcessElement "0..9999" --* "1..1" iritpdl::WorkDefinition : children9
+iritpdl::Guidance "0..9999" --* "1..1" iritpdl::Process : guidanceGFX1
+iritpdl::Guidance "0..9999" -- "1..1" iritpdl::ProcessElement : guides13
+iritpdl::WorkSequence "0..9999" -- "1..1" iritpdl::WorkDefinition : linksToPredecessors5
+iritpdl::WorkDefinition "1..1" -- "0..9999" iritpdl::WorkSequence : linksToSuccessors6
+iritpdl::Resource "0..9999" --* "1..1" iritpdl::ResourceConf : neededResources24
+iritpdl::ProcessElement "1..1" -- "0..1" iritpdl::WorkDefinition : parent16
+iritpdl::WorkDefinition "1..1" -- "1..1" iritpdl::WorkSequence : predecessor10
+iritpdl::ProcessElement "0..9999" --* "1..1" iritpdl::Process : processElements0
+iritpdl::ResourceConf "1..1" -- "1..1" iritpdl::Resource : resourceConf20
+iritpdl::ResourceConf "1..9999" --* "1..1" iritpdl::WorkDefinition : resourceConf8
+iritpdl::ResourceType "0..9999" --* "1..1" iritpdl::Process : resources3
+iritpdl::WorkDefinition "1..1" -- "1..1" iritpdl::WorkSequence : successor11
+iritpdl::Resource "1..1" -- "1..1" iritpdl::ResourceType : type18
+iritpdl::WorkDefinition "1..1" -- "1..1" iritpdl::ResourceConf : workDefinition22
+@enduml

@@ -1,0 +1,281 @@
+@startuml
+enum CapabilityType {
+  Functional
+  ObjectRelated
+  Operational
+  Performance
+}
+class EnterpriseObject {
+}
+enum EnterpriseObjectiveType {
+  None
+  Operational
+  Strategic
+  Tactic
+}
+class EnterpriseProcessor {
+}
+class EnterpriseResource {
+}
+class ObjectView {
+}
+enum ObjectiveNature {
+  Cost
+  Delay
+  Economical
+  Environmental
+  Human
+  Legacy
+  None
+  Other
+  Performance
+  Quality
+}
+class OrganisationCell {
+}
+enum Origin {
+  External_provider
+  Internal_provider
+  None
+}
+enum ProductNature {
+  Information
+  None
+  Physical
+}
+enum ProductState {
+  Intermediary
+  None
+  Ready_for_customer
+}
+enum RequirementNature {
+  Constraint
+  Functional
+  Non_functional
+  None
+  Verification_and_Validation
+}
+enum RequirementOrigin {
+  Expectation
+  None
+  Stackeholder_requirement
+  System_requirement
+}
+enum RoleType {
+  Composite
+  Controle
+  Decision
+  Transformation
+}
+class SIPME::object {
+}
+enum ServiceState {
+  For_external_customer
+  For_internal_usage
+}
+class Stakeholder {
+}
+enum StakeholderType {
+  EEnumLiteral0
+}
+class sipme::Activity {
+  + ActivityDuration : int
+  + endingStatus : str
+}
+class sipme::Application {
+  + applicationEditor : str
+  + applicationMaintainer : str
+}
+class sipme::BusinessProcess {
+  + ProcessPriority : int
+}
+class sipme::BusinessRules {
+}
+class sipme::Capability {
+  + capabilityType : str
+}
+class sipme::Capacity {
+  + unit : str
+  + value : float
+}
+class sipme::CompanyMember {
+  + address : str
+  + fullName : str
+  + socialSecurityNumber : int
+}
+class sipme::Device::Machine {
+  + machineMaintainer : str
+  + manufacturer : str
+}
+class sipme::Domain {
+  + domainCharacterization : str
+  + performanceIndicators : float
+}
+class sipme::Enterprise {
+  + acronym : str
+  + status : str
+}
+abstract class sipme::EnterpriseObject {
+  + properties : str
+  + reference : str
+}
+abstract class sipme::EnterpriseProcessor {
+  + processorOrigin : str
+}
+class sipme::EnterpriseProduct {
+  + productNarure : str
+  + productState : str
+}
+abstract class sipme::EnterpriseResource {
+  + resourceOrigin : str
+}
+class sipme::EnterpriseService {
+  + serviceState : str
+}
+class sipme::Event {
+  + frequency : str
+  + occurenceProbability : str
+  + source : str
+  + timeStamp : date
+}
+class sipme::ObjectView {
+  + viewPoint : str
+}
+class sipme::Objective {
+  + objectiveNature : str
+  + objectiveType : str
+}
+class sipme::ObjectsFileView {
+  + filePriority : int
+  + fileState : str
+}
+class sipme::OrganisationCell {
+  + organisationLevel : int
+}
+class sipme::Requirement {
+  + requirementDate : date
+  + requirementMaturity : int
+  + requirementNature : str
+  + requirementOrigin : str
+  + requirementPriority : int
+  + requirementStatement : str
+  + requirementStatus : str
+  + requirementVersion : str
+}
+class sipme::Role::Function {
+  + roleType : str
+}
+abstract class sipme::SIPME::object {
+  + UUID : str
+  + description : str
+  + name : str
+}
+abstract class sipme::Stakeholder {
+  + stakeholderOrganism : str
+  + stakeholderType : str
+}
+class sipme::Task {
+  + taskDuration : int
+}
+class sipme::Workstation {
+  + ProfileDeescription : str
+}
+EnterpriseObject <|-- sipme::BusinessRules
+EnterpriseObject <|-- sipme::Capability
+EnterpriseObject <|-- sipme::Capacity
+EnterpriseObject <|-- sipme::EnterpriseProcessor
+EnterpriseObject <|-- sipme::EnterpriseProduct
+EnterpriseObject <|-- sipme::EnterpriseResource
+EnterpriseObject <|-- sipme::EnterpriseService
+EnterpriseObject <|-- sipme::Objective
+EnterpriseProcessor <|-- sipme::Activity
+EnterpriseProcessor <|-- sipme::BusinessProcess
+EnterpriseProcessor <|-- sipme::Domain
+EnterpriseProcessor <|-- sipme::Enterprise
+EnterpriseProcessor <|-- sipme::OrganisationCell
+EnterpriseProcessor <|-- sipme::Role::Function
+EnterpriseProcessor <|-- sipme::Task
+EnterpriseProcessor <|-- sipme::Workstation
+EnterpriseResource <|-- sipme::Application
+EnterpriseResource <|-- sipme::CompanyMember
+EnterpriseResource <|-- sipme::Device::Machine
+ObjectView <|-- sipme::ObjectsFileView
+OrganisationCell <|-- sipme::Domain
+SIPME::object <|-- sipme::Domain
+SIPME::object <|-- sipme::EnterpriseObject
+SIPME::object <|-- sipme::Event
+SIPME::object <|-- sipme::ObjectView
+SIPME::object <|-- sipme::Requirement
+SIPME::object <|-- sipme::Stakeholder
+Stakeholder <|-- sipme::CompanyMember
+sipme::Activity "2..6" --* "1..1" sipme::BusinessProcess : activities2
+sipme::Activity "1..1" -- "1..1" sipme::BusinessProcess : activityOf1
+sipme::OrganisationCell "1..1" -- "0..9999" sipme::OrganisationCell : assignedTo90
+sipme::Objective "0..1" -- "1..1" sipme::Requirement : associatedObjective99
+sipme::BusinessProcess "1..1" -- "0..1" sipme::Domain : businessProcessOf3
+sipme::BusinessProcess "1..9999" --* "1..1" sipme::Domain : businessProcesses14
+sipme::EnterpriseResource "0..9999" -- "1..1" sipme::Role::Function : canBePlayedBy116
+sipme::CompanyMember "1..1" -- "1..1" sipme::OrganisationCell : cellResponsible88
+sipme::CompanyMember "0..9999" --* "1..1" sipme::Enterprise : companyMembers33
+sipme::Domain "1..9999" --* "1..1" sipme::Enterprise : concerns23
+sipme::Activity "0..1" -- "1..1" sipme::Requirement : concernsActivity111
+sipme::EnterpriseProcessor "0..1" -- "1..1" sipme::Requirement : concernsProcessors108
+sipme::EnterpriseResource "0..9999" -- "1..1" sipme::Requirement : concernsResources105
+sipme::EnterpriseObject "0..9999" -- "1..1" sipme::BusinessRules : considers4
+sipme::Domain "1..1" -- "1..9999" sipme::OrganisationCell : coveredBy17
+sipme::OrganisationCell "1..1" -- "1..9999" sipme::Domain : covers87
+sipme::EnterpriseObject "0..9999" --* "1..1" sipme::EnterpriseObject : decomposedIn41
+sipme::Capability "1..1" *-- "0..1" sipme::Capacity : defines8
+sipme::Event "0..9999" -- "1..1" sipme::ObjectView : events83
+sipme::EnterpriseResource "1..1" -- "0..1" sipme::Task : executes60
+sipme::Requirement "1..1" -- "0..9999" sipme::Stakeholder : expresseCommonlydBy101
+sipme::Requirement "0..9999" -- "1..1" sipme::Stakeholder : expresses123
+sipme::CompanyMember "0..1" -- "1..1" sipme::ObjectsFileView : fileResponsible97
+sipme::EnterpriseProcessor "0..9999" -- "1..1" sipme::Event : generatedBy68
+sipme::Event "0..9999" -- "1..1" sipme::EnterpriseProcessor : generates43
+sipme::ObjectView "0..9999" -- "1..1" sipme::Event : hasAssociatedEvents73
+sipme::Capacity "0..9999" -- "1..1" sipme::EnterpriseProcessor : hasCapacity54
+sipme::EnterpriseProcessor "1..1" -- "0..9999" sipme::ObjectView : hasControlInputs50
+sipme::EnterpriseProcessor "1..1" -- "0..9999" sipme::ObjectView : hasInputs45
+sipme::EnterpriseObject "0..9999" -- "1..1" sipme::BusinessRules : impacts5
+sipme::EnterpriseProcessor "0..9999" -- "1..1" sipme::Role::Function : implementedBy118
+sipme::Role::Function "1..9999" -- "1..1" sipme::EnterpriseProcessor : implements53
+sipme::Workstation "0..9999" -- "1..1" sipme::CompanyMember : inChargeOf9
+sipme::BusinessRules "0..9999" -- "1..1" sipme::Domain : induces19
+sipme::Event "0..9999" -- "1..1" sipme::EnterpriseProcessor : initiatedBy48
+sipme::Event "1..1" -- "0..9999" sipme::EnterpriseProcessor : initiates69
+sipme::Role::Function "0..9999" -- "1..1" sipme::EnterpriseResource : isAbleToPlay63
+sipme::ObjectsFileView "1..1" *-- "0..9999" sipme::ObjectView : objectViews92
+sipme::Task "0..9999" -- "1..1" sipme::Task : operations132
+sipme::Workstation "1..1" -- "0..1" sipme::OrganisationCell : organisationCell134
+sipme::OrganisationCell "0..9999" --* "1..1" sipme::Enterprise : organizationCells35
+sipme::CompanyMember "1..9999" -- "1..1" sipme::Workstation : owners138
+sipme::EnterpriseObject "0..1" -- "1..1" sipme::EnterpriseObject : partOf38
+sipme::EnterpriseResource "1..9999" -- "1..1" sipme::Role::Function : playedBy115
+sipme::Role::Function "0..9999" -- "1..1" sipme::EnterpriseResource : plays61
+sipme::Event "0..9999" -- "1..1" sipme::Event : priorTo72
+sipme::Enterprise "1..1" -- "0..9999" sipme::EnterpriseProduct : proposesProducts31
+sipme::EnterpriseService "0..9999" -- "1..1" sipme::Enterprise : proposesServices29
+sipme::Capability "1..9999" -- "1..1" sipme::EnterpriseResource : providesCapability65
+sipme::ObjectView "0..9999" -- "1..1" sipme::EnterpriseProcessor : providesOutputs44
+sipme::EnterpriseObject "0..9999" --* "1..1" sipme::Enterprise : refers26
+sipme::Objective "1..1" -- "1..1" sipme::Objective : refines78
+sipme::Requirement "0..9999" -- "1..1" sipme::Requirement : refinesRequirement103
+sipme::EnterpriseObject "1..1" -- "0..9999" sipme::ObjectView : representedBy39
+sipme::EnterpriseObject "1..1" -- "1..1" sipme::ObjectView : represents81
+sipme::Capability "0..9999" -- "1..1" sipme::EnterpriseProcessor : requiresCapabilities57
+sipme::Role::Function "1..1" -- "1..9999" sipme::Task : requiresTasks113
+sipme::BusinessRules "0..9999" -- "1..1" sipme::Role::Function : respectsRoleRules120
+sipme::BusinessRules "0..1" -- "1..1" sipme::Task : respectsTaskRules126
+sipme::CompanyMember "1..1" -- "1..1" sipme::Workstation : responsible136
+sipme::Workstation "0..9999" -- "1..1" sipme::CompanyMember : responsibleOf10
+sipme::OrganisationCell "0..9999" -- "1..1" sipme::CompanyMember : responsibleOfCell12
+sipme::ObjectsFileView "0..9999" -- "1..1" sipme::CompanyMember : responsibleOfFile13
+sipme::Enterprise "1..1" -- "0..9999" sipme::Objective : strategicObjectives22
+sipme::ObjectsFileView "0..9999" -- "1..1" sipme::ObjectsFileView : subFiles95
+sipme::Objective "0..9999" --* "1..1" sipme::Objective : subObjectives76
+sipme::Objective "1..1" -- "0..9999" sipme::Requirement : takenIntoAccountBy80
+sipme::Task "1..1" -- "1..1" sipme::Activity : taskOf129
+sipme::Task "0..9999" --* "1..1" sipme::Activity : tasks0
+sipme::Workstation "1..9999" --* "1..1" sipme::OrganisationCell : workstations85
+@enduml

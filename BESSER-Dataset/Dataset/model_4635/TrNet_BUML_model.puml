@@ -1,0 +1,149 @@
+@startuml
+class Expression {
+}
+class ExpressionOperator {
+}
+class FlowRule {
+}
+class NodePattern {
+}
+class Operand {
+}
+class Operator {
+}
+class Restriction {
+}
+class Result {
+}
+class trnet::AntiOperand {
+}
+class trnet::AnyOperand {
+}
+class trnet::AnyResult {
+}
+class trnet::AttributePattern {
+  + name : str
+}
+class trnet::Combinator {
+}
+class trnet::Different {
+}
+class trnet::EdgePattern {
+  + name : str
+}
+class trnet::Equality {
+}
+class trnet::Eventually {
+}
+abstract class trnet::Expression {
+}
+abstract class trnet::ExpressionOperator {
+}
+class trnet::External {
+}
+abstract class trnet::FlowRule {
+}
+class trnet::Keep {
+}
+class trnet::MandatoryNode {
+}
+class trnet::Next {
+}
+class trnet::NextDerived {
+}
+abstract class trnet::NodePattern {
+  + id : str
+  + name : str
+}
+abstract class trnet::Operand {
+  + index : int
+}
+abstract class trnet::Operator {
+  + id : str
+}
+class trnet::OptionalNode {
+}
+class trnet::OptionalOperand {
+}
+class trnet::Pattern {
+  + expected_size : int
+  + id : str
+}
+abstract class trnet::Restriction {
+}
+abstract class trnet::Result {
+}
+class trnet::Same {
+}
+class trnet::SomeOperand {
+  + count : int
+}
+class trnet::SomeResult {
+  + count : int
+}
+class trnet::StringLiteral {
+  + value : str
+}
+class trnet::TrNetModel {
+  + id : str
+}
+class trnet::Union {
+}
+ExpressionOperator <|-- trnet::Equality
+Expression <|-- trnet::StringLiteral
+FlowRule <|-- trnet::Eventually
+FlowRule <|-- trnet::Next
+FlowRule <|-- trnet::NextDerived
+NodePattern <|-- trnet::MandatoryNode
+NodePattern <|-- trnet::OptionalNode
+Operand <|-- trnet::AntiOperand
+Operand <|-- trnet::AnyOperand
+Operand <|-- trnet::OptionalOperand
+Operand <|-- trnet::SomeOperand
+Operator <|-- trnet::Combinator
+Operator <|-- trnet::External
+Operator <|-- trnet::Union
+Restriction <|-- trnet::Different
+Restriction <|-- trnet::Keep
+Restriction <|-- trnet::Same
+Result <|-- trnet::AnyResult
+Result <|-- trnet::SomeResult
+trnet::AttributePattern "0..9999" --* "1..1" trnet::NodePattern : attributes14
+trnet::NodePattern "1..1" -- "0..9999" trnet::Different : differentIn15
+trnet::Different "0..9999" -- "1..1" trnet::NodePattern : differentOut17
+trnet::Pattern "1..1" *-- "0..9999" trnet::EdgePattern : edges32
+trnet::Expression "1..1" --* "1..1" trnet::AttributePattern : expression49
+trnet::TrNetModel "1..1" *-- "0..9999" trnet::FlowRule : flowRules3
+trnet::EdgePattern "0..9999" -- "1..1" trnet::NodePattern : incoming5
+trnet::Result "0..9999" -- "1..1" trnet::Pattern : incommingResults37
+trnet::Keep "0..9999" -- "1..1" trnet::NodePattern : keepIn20
+trnet::Keep "0..9999" -- "1..1" trnet::NodePattern : keepOut22
+trnet::NodePattern "1..9999" --* "1..1" trnet::Pattern : nodes30
+trnet::Operand "1..9999" --* "1..1" trnet::Operator : operands39
+trnet::ExpressionOperator "1..1" --* "1..1" trnet::AttributePattern : operator51
+trnet::Operator "1..1" -- "1..1" trnet::Operand : operator59
+trnet::Operator "1..1" -- "1..1" trnet::Result : operator62
+trnet::Operator "0..9999" --* "1..1" trnet::TrNetModel : operators1
+trnet::EdgePattern "0..9999" -- "1..1" trnet::NodePattern : outgoing6
+trnet::Operand "0..9999" -- "1..1" trnet::Pattern : outgoingOperands35
+trnet::NodePattern "1..1" -- "1..1" trnet::Pattern : pattern13
+trnet::Pattern "1..1" -- "1..1" trnet::EdgePattern : pattern28
+trnet::Pattern "1..1" -- "1..1" trnet::Operand : pattern57
+trnet::Pattern "1..1" -- "1..1" trnet::Result : pattern60
+trnet::Pattern "0..9999" --* "1..1" trnet::TrNetModel : patterns0
+trnet::Restriction "0..9999" --* "1..1" trnet::Combinator : restrictions44
+trnet::Restriction "0..9999" --* "1..1" trnet::Union : restrictions68
+trnet::Result "1..9999" --* "1..1" trnet::Operator : results41
+trnet::NodePattern "1..1" -- "0..9999" trnet::Same : sameIn10
+trnet::Same "0..9999" -- "1..1" trnet::NodePattern : sameOut8
+trnet::EdgePattern "1..1" -- "1..1" trnet::NodePattern : source25
+trnet::NodePattern "1..1" -- "1..1" trnet::Same : source45
+trnet::NodePattern "1..1" -- "1..1" trnet::Keep : source53
+trnet::Different "1..1" -- "1..1" trnet::NodePattern : source64
+trnet::TrNetModel "0..1" -- "1..1" trnet::FlowRule : source70
+trnet::NodePattern "1..1" -- "1..1" trnet::EdgePattern : target26
+trnet::Same "1..1" -- "1..1" trnet::NodePattern : target47
+trnet::Keep "1..1" -- "1..1" trnet::NodePattern : target55
+trnet::NodePattern "1..1" -- "1..1" trnet::Different : target66
+trnet::FlowRule "1..1" -- "1..1" trnet::TrNetModel : target73
+@enduml

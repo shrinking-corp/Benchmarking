@@ -1,0 +1,61 @@
+@startuml
+enum SemesterTime {
+  Fall
+  Spring
+}
+enum SlotType {
+  O
+  V
+  V2
+}
+class university::CourseInstances {
+}
+class university::Courses {
+  + code : str
+  + credits : float
+  + name : str
+}
+class university::ProgrammeInstances {
+  + startYear : int
+}
+class university::ProgrammeSemesters {
+}
+class university::Programmes {
+  + code : str
+  + name : str
+}
+class university::Semesters {
+  + semesterTime : str
+  + year : int
+}
+class university::Slot {
+  + name : str
+  + points : int
+  + slotType : str
+}
+class university::Specializations {
+  + name : str
+}
+class university::University {
+  + name : str
+}
+university::CourseInstances "0..9999" -- "1..1" university::Slot : avaliableCourses19
+university::CourseInstances "1..1" -- "1..1" university::Courses : course6
+university::Courses "0..9999" --* "1..1" university::University : courses28
+university::Programmes "1..1" *-- "0..9999" university::ProgrammeInstances : instances0
+university::CourseInstances "0..9999" --* "1..1" university::Courses : instances5
+university::ProgrammeInstances "1..1" -- "1..1" university::Programmes : programme1
+university::ProgrammeInstances "1..1" -- "1..1" university::Specializations : programmeInstance23
+university::ProgrammeInstances "0..1" -- "1..1" university::ProgrammeSemesters : programmeInstance9
+university::ProgrammeSemesters "1..1" -- "1..1" university::Slot : programmeSemester17
+university::Specializations "1..1" *-- "0..9999" university::ProgrammeSemesters : programmeSemester25
+university::ProgrammeSemesters "1..9999" --* "1..1" university::ProgrammeInstances : programmeSemesters2
+university::ProgrammeSemesters "0..9999" -- "1..1" university::Semesters : programmeSemesters21
+university::Programmes "0..9999" --* "1..1" university::University : programmes27
+university::ProgrammeSemesters "1..1" -- "1..1" university::Semesters : semester12
+university::Semesters "1..1" -- "1..1" university::CourseInstances : semester8
+university::University "1..1" *-- "0..9999" university::Semesters : semesters30
+university::Slot "0..9999" --* "1..1" university::ProgrammeSemesters : slots11
+university::Specializations "0..1" -- "1..1" university::ProgrammeSemesters : specialization14
+university::Specializations "0..9999" --* "1..1" university::ProgrammeInstances : specializations3
+@enduml

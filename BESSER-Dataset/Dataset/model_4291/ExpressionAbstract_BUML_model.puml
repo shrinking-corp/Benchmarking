@@ -1,0 +1,37 @@
+@startuml
+class Expression {
+}
+class SubExpression {
+}
+class SubExpression2 {
+}
+class expression::BooleanExpression {
+  + value : str
+}
+abstract class expression::Expression {
+}
+class expression::ExpressionList {
+}
+class expression::IncludingExpression {
+}
+class expression::NegativeIntExpression {
+  + isNegative : str
+  + value : str
+}
+class expression::StringExpression {
+  + value : str
+}
+abstract class expression::SubExpression {
+}
+class expression::SubExpression2 {
+}
+Expression <|-- expression::SubExpression
+Expression <|-- expression::SubExpression2
+SubExpression2 <|-- expression::NegativeIntExpression
+SubExpression2 <|-- expression::StringExpression
+SubExpression <|-- expression::BooleanExpression
+SubExpression <|-- expression::IncludingExpression
+expression::Expression "1..1" -- "1..1" expression::IncludingExpression : argument0
+expression::Expression "0..9999" -- "1..1" expression::ExpressionList : elements4
+expression::Expression "1..1" -- "1..1" expression::IncludingExpression : source1
+@enduml

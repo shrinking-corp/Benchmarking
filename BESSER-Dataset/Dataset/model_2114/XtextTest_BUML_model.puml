@@ -1,0 +1,87 @@
+@startuml
+class xtextTest::After {
+}
+class xtextTest::Before {
+}
+class xtextTest::CodeCall {
+  + method : str
+  + myclass : str
+  + params : str
+}
+class xtextTest::Element {
+  + importing : str
+  + name : str
+}
+class xtextTest::EmfTest {
+  + file : str
+  + mydefault : str
+  + package : str
+  + timeOut : int
+}
+class xtextTest::Generator {
+  + exception : str
+  + expected : str
+  + isSameAsInputFile : bool
+  + output : str
+  + patternFile : str
+}
+class xtextTest::Import {
+  + alias : str
+  + id : str
+}
+class xtextTest::Inner {
+  + assignAsBool : str
+  + assignAsData : str
+  + isEmpty : bool
+  + isNotNull : bool
+  + isNull : bool
+  + parameter : str
+  + value : str
+}
+class xtextTest::Input {
+  + file : str
+  + text : str
+}
+class xtextTest::Model {
+}
+class xtextTest::MyTokens {
+  + count : int
+  + string : str
+  + token : str
+}
+class xtextTest::ReplacePatterns {
+  + regex : str
+  + replace : str
+}
+class xtextTest::Tokens {
+}
+class xtextTest::XtextTest {
+  + boolean : str
+  + imports : str
+  + lang : str
+  + package : str
+  + timeOut : int
+}
+xtextTest::After "0..1" --* "1..1" xtextTest::XtextTest : after13
+xtextTest::After "0..1" --* "1..1" xtextTest::EmfTest : after31
+xtextTest::Element "0..1" --* "1..1" xtextTest::Inner : assign38
+xtextTest::Element "0..9999" --* "1..1" xtextTest::Inner : assignList41
+xtextTest::Before "0..1" --* "1..1" xtextTest::XtextTest : before11
+xtextTest::Before "0..1" --* "1..1" xtextTest::EmfTest : before28
+xtextTest::CodeCall "0..1" --* "1..1" xtextTest::EmfTest : codeCall17
+xtextTest::Before "1..1" *-- "0..1" xtextTest::CodeCall : codeCall46
+xtextTest::CodeCall "0..1" --* "1..1" xtextTest::After : codeCall49
+xtextTest::Model "1..1" *-- "0..1" xtextTest::EmfTest : emfTest1
+xtextTest::Inner "0..9999" --* "1..1" xtextTest::Element : inner36
+xtextTest::Input "0..1" --* "1..1" xtextTest::XtextTest : input3
+xtextTest::Import "0..9999" --* "1..1" xtextTest::EmfTest : myimport15
+xtextTest::CodeCall "0..1" --* "1..1" xtextTest::EmfTest : optionCall19
+xtextTest::Generator "0..1" --* "1..1" xtextTest::XtextTest : output9
+xtextTest::EmfTest "1..1" *-- "0..1" xtextTest::CodeCall : paramCall22
+xtextTest::Generator "1..1" *-- "0..9999" xtextTest::ReplacePatterns : replacePatterns44
+xtextTest::EmfTest "1..1" *-- "0..1" xtextTest::Element : root25
+xtextTest::XtextTest "1..1" *-- "0..1" xtextTest::Element : root7
+xtextTest::MyTokens "0..9999" --* "1..1" xtextTest::Tokens : tokens34
+xtextTest::Tokens "0..1" --* "1..1" xtextTest::XtextTest : tokens5
+xtextTest::XtextTest "0..1" --* "1..1" xtextTest::Model : xtextTest0
+@enduml

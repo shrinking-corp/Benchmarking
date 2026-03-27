@@ -1,0 +1,96 @@
+@startuml
+class FormalParameterList {
+}
+class NamedDisplayElement {
+}
+class NamedElement {
+}
+enum OperationResultTypes {
+  File
+  None
+}
+class Order {
+}
+class Variable {
+}
+class service::Asc {
+}
+class service::Association {
+}
+class service::BusinessOperation {
+  + resultMimeType : str
+  + resultType : str
+}
+class service::Constant {
+}
+class service::ConstantReference {
+  + name : str
+}
+class service::Desc {
+}
+class service::EntityAssociation {
+}
+class service::EntityOrView {
+}
+class service::Expression {
+}
+class service::Feature {
+}
+class service::Filter {
+  + methodName : str
+}
+abstract class service::Order {
+}
+class service::Predicate {
+}
+class service::Selection {
+  + distinct : bool
+  + limit : int
+  + methodName : str
+}
+class service::Service {
+}
+class service::ServiceFeatureReference {
+  + name : str
+}
+class service::Services {
+}
+class service::Variable {
+}
+FormalParameterList <|-- service::BusinessOperation
+FormalParameterList <|-- service::Filter
+FormalParameterList <|-- service::Selection
+NamedDisplayElement <|-- service::Filter
+NamedElement <|-- service::BusinessOperation
+NamedElement <|-- service::Constant
+NamedElement <|-- service::Selection
+NamedElement <|-- service::Service
+Order <|-- service::Asc
+Order <|-- service::Desc
+Variable <|-- service::ConstantReference
+Variable <|-- service::ServiceFeatureReference
+service::Predicate "0..1" --* "1..1" service::Selection : condition23
+service::Predicate "1..1" --* "1..1" service::Filter : condition42
+service::Service "1..1" *-- "0..9999" service::Constant : constants1
+service::Constant "1..1" -- "1..1" service::Service : definedBy15
+service::Service "0..1" -- "1..1" service::BusinessOperation : definedBy36
+service::ServiceFeatureReference "1..1" -- "1..1" service::Feature : feature34
+service::Selection "1..1" -- "0..9999" service::Feature : fields19
+service::Filter "0..9999" --* "1..1" service::Selection : filters25
+service::Selection "0..1" -- "1..1" service::Service : findAll5
+service::Selection "0..1" -- "1..1" service::Service : findOne7
+service::Association "0..9999" -- "1..1" service::Selection : joins21
+service::BusinessOperation "0..9999" --* "1..1" service::Service : operations10
+service::Selection "1..1" *-- "0..9999" service::Order : ordering26
+service::Variable "1..1" --* "1..1" service::Order : path30
+service::EntityAssociation "0..9999" -- "1..1" service::Selection : selectPath28
+service::Filter "1..1" -- "0..1" service::Selection : selection40
+service::Service "1..1" *-- "0..9999" service::Selection : selections4
+service::EntityOrView "0..1" -- "1..1" service::Service : serves2
+service::Service "0..9999" --* "1..1" service::Services : services0
+service::Service "1..1" -- "1..1" service::Selection : usedBy17
+service::Service "0..9999" -- "1..1" service::Service : uses13
+service::Service "0..9999" -- "1..1" service::BusinessOperation : uses38
+service::Expression "0..1" --* "1..1" service::Constant : value16
+service::Constant "1..1" -- "1..1" service::ConstantReference : value32
+@enduml

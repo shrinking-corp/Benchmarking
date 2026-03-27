@@ -1,0 +1,87 @@
+@startuml
+enum BooleanOperator {
+  And
+  Or
+}
+enum ComparisionOperator {
+  GreaterThan
+  LessThan
+}
+class Expression {
+}
+class Literal {
+}
+class Predicate {
+}
+class expression::BooleanLiteral {
+  + value : bool
+}
+abstract class expression::Expression {
+  + suffixes : str
+}
+class expression::IntegerLiteral {
+  + value : int
+}
+abstract class expression::Literal {
+}
+class expression::NullLiteral {
+}
+abstract class expression::Predicate {
+  + negated : bool
+}
+class expression::PredicateBooleanOperator {
+  + operator : str
+}
+class expression::PredicateComparisonOperator {
+  + operator : str
+}
+class expression::PredicateEqualityOperator {
+}
+class expression::PredicateInOperator {
+}
+class expression::PredicateIsEmpty {
+}
+class expression::PredicateIsNull {
+}
+class expression::PredicateIsOperator {
+}
+class expression::PredicateLikeOperator {
+}
+class expression::StringLiteral {
+  + value : str
+}
+class expression::TimeLiteral {
+  + value : str
+}
+abstract class expression::Variable {
+}
+Expression <|-- expression::Literal
+Expression <|-- expression::Predicate
+Expression <|-- expression::Variable
+Literal <|-- expression::BooleanLiteral
+Literal <|-- expression::IntegerLiteral
+Literal <|-- expression::NullLiteral
+Literal <|-- expression::StringLiteral
+Literal <|-- expression::TimeLiteral
+Predicate <|-- expression::PredicateBooleanOperator
+Predicate <|-- expression::PredicateComparisonOperator
+Predicate <|-- expression::PredicateEqualityOperator
+Predicate <|-- expression::PredicateInOperator
+Predicate <|-- expression::PredicateIsEmpty
+Predicate <|-- expression::PredicateIsNull
+Predicate <|-- expression::PredicateIsOperator
+Predicate <|-- expression::PredicateLikeOperator
+expression::PredicateBooleanOperator "1..1" *-- "1..9999" expression::Predicate : expressions0
+expression::Variable "0..1" --* "1..1" expression::PredicateIsEmpty : feature25
+expression::Variable "0..1" --* "1..1" expression::PredicateIsNull : feature26
+expression::Expression "1..1" --* "1..1" expression::PredicateEqualityOperator : left1
+expression::Expression "1..1" --* "1..1" expression::PredicateInOperator : left10
+expression::PredicateIsOperator "1..1" *-- "1..1" expression::Expression : left15
+expression::Expression "1..1" --* "1..1" expression::PredicateLikeOperator : left20
+expression::Expression "1..1" --* "1..1" expression::PredicateComparisonOperator : left5
+expression::Expression "1..1" --* "1..1" expression::PredicateInOperator : right12
+expression::PredicateIsOperator "1..1" *-- "1..1" expression::Expression : right17
+expression::Expression "1..1" --* "1..1" expression::PredicateEqualityOperator : right2
+expression::PredicateLikeOperator "1..1" *-- "1..1" expression::Expression : right22
+expression::PredicateComparisonOperator "1..1" *-- "1..1" expression::Expression : right7
+@enduml

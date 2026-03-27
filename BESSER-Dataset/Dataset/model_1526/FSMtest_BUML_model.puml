@@ -1,0 +1,53 @@
+@startuml
+class fsmtest::ConditionDeclaration {
+}
+class fsmtest::FsmDefinition {
+  + name : str
+}
+class fsmtest::GuardDeclaration {
+}
+class fsmtest::LoopsDeclaration {
+  + val : int
+}
+class fsmtest::Model {
+}
+class fsmtest::PostconditionDeclaration {
+}
+class fsmtest::PreconditionDeclaration {
+}
+class fsmtest::RandomTest {
+  + name : str
+}
+class fsmtest::SeedDeclaration {
+  + val : int
+}
+class fsmtest::SignalDeclaration {
+  + intVal : int
+  + port : str
+  + signame : str
+  + strVal : str
+}
+class fsmtest::StateDeclaration {
+  + name : str
+}
+class fsmtest::TransitionDeclaration {
+  + name : str
+}
+fsmtest::FsmDefinition "0..9999" --* "1..1" fsmtest::Model : FsmDefinitions0
+fsmtest::RandomTest "0..9999" --* "1..1" fsmtest::Model : RandomTests1
+fsmtest::ConditionDeclaration "0..9999" --* "1..1" fsmtest::StateDeclaration : condition33
+fsmtest::StateDeclaration "0..1" -- "1..1" fsmtest::TransitionDeclaration : destination13
+fsmtest::FsmDefinition "0..1" -- "1..1" fsmtest::RandomTest : fsm5
+fsmtest::LoopsDeclaration "0..1" --* "1..1" fsmtest::RandomTest : loopsDeclaration8
+fsmtest::PostconditionDeclaration "0..9999" --* "1..1" fsmtest::TransitionDeclaration : postcondition23
+fsmtest::PreconditionDeclaration "0..9999" --* "1..1" fsmtest::TransitionDeclaration : precondition21
+fsmtest::SeedDeclaration "0..1" --* "1..1" fsmtest::RandomTest : seedDeclaration10
+fsmtest::SignalDeclaration "0..1" --* "1..1" fsmtest::GuardDeclaration : signal12
+fsmtest::ConditionDeclaration "1..1" *-- "0..1" fsmtest::SignalDeclaration : signal25
+fsmtest::SignalDeclaration "0..1" --* "1..1" fsmtest::PreconditionDeclaration : signal27
+fsmtest::PostconditionDeclaration "1..1" *-- "0..1" fsmtest::SignalDeclaration : signal30
+fsmtest::FsmDefinition "1..1" *-- "0..9999" fsmtest::StateDeclaration : states3
+fsmtest::StateDeclaration "1..1" *-- "0..9999" fsmtest::TransitionDeclaration : transitions36
+fsmtest::SignalDeclaration "0..1" --* "1..1" fsmtest::TransitionDeclaration : trigger15
+fsmtest::GuardDeclaration "0..9999" --* "1..1" fsmtest::TransitionDeclaration : triggers18
+@enduml

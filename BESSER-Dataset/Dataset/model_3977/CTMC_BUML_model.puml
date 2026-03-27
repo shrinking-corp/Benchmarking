@@ -1,0 +1,30 @@
+@startuml
+class IDBase {
+}
+class ctmc::CTMC {
+  + name : str
+}
+class ctmc::Label {
+  + name : str
+}
+class ctmc::State {
+  + exitRate : float
+  + name : str
+}
+class ctmc::Transition {
+  + prob : float
+  + rate : float
+}
+IDBase <|-- ctmc::CTMC
+IDBase <|-- ctmc::Label
+IDBase <|-- ctmc::State
+IDBase <|-- ctmc::Transition
+ctmc::CTMC "1..1" *-- "0..9999" ctmc::State : States0
+ctmc::State "1..1" -- "1..1" ctmc::Transition : from8
+ctmc::State "1..1" -- "0..9999" ctmc::Transition : incoming4
+ctmc::State "0..1" -- "1..1" ctmc::CTMC : initialState1
+ctmc::State "1..1" *-- "0..9999" ctmc::Label : labels7
+ctmc::Transition "0..9999" --* "1..1" ctmc::State : outgoing5
+ctmc::State "1..1" -- "1..1" ctmc::Label : state11
+ctmc::State "1..1" -- "1..1" ctmc::Transition : to9
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+class DatabaseElement {
+}
+class NamedElement {
+}
+class db::Column {
+  + type : str
+}
+class db::Database {
+}
+abstract class db::DatabaseElement {
+}
+class db::ForeignKey {
+  + isMany : str
+}
+abstract class db::NamedElement {
+  + name : str
+}
+class db::Table {
+}
+DatabaseElement <|-- db::Column
+DatabaseElement <|-- db::ForeignKey
+DatabaseElement <|-- db::Table
+NamedElement <|-- db::DatabaseElement
+db::Column "0..1" -- "1..1" db::ForeignKey : child7
+db::Table "1..1" *-- "0..9999" db::Column : columns2
+db::DatabaseElement "0..9999" --* "1..1" db::Database : contents0
+db::DatabaseElement "1..1" -- "0..1" db::Database : database1
+db::Column "0..1" -- "1..1" db::ForeignKey : parent5
+db::Column "0..9999" -- "1..1" db::Table : primaryKeys3
+db::Column "1..1" -- "0..1" db::Table : table4
+@enduml

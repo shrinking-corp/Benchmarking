@@ -1,0 +1,34 @@
+@startuml
+enum ArcKind {
+  normal
+  read_arc
+}
+class Node {
+}
+class petrinet::Arc {
+  + kind : str
+  + readOnly : bool
+  + tokensCount : int
+}
+class petrinet::Network {
+  + name : str
+}
+abstract class petrinet::Node {
+  + name : str
+}
+class petrinet::Place {
+  + tokensCount : int
+}
+class petrinet::Transition {
+}
+Node <|-- petrinet::Place
+Node <|-- petrinet::Transition
+petrinet::Arc "0..9999" --* "1..1" petrinet::Network : arcs1
+petrinet::Node "0..9999" --* "1..1" petrinet::Network : nodes0
+petrinet::Arc "0..9999" -- "1..1" petrinet::Node : predecessors4
+petrinet::Network "1..1" -- "1..1" petrinet::Node : reseau3
+petrinet::Network "1..1" -- "1..1" petrinet::Arc : reseau8
+petrinet::Arc "1..1" -- "1..1" petrinet::Node : source10
+petrinet::Arc "0..9999" -- "1..1" petrinet::Node : successors6
+petrinet::Node "1..1" -- "1..1" petrinet::Arc : target12
+@enduml

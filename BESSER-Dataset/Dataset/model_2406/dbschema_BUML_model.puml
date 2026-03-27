@@ -1,0 +1,68 @@
+@startuml
+class Column {
+}
+enum ColumnType {
+  ARRAY
+  BIGINT
+  BINARY
+  BIT
+  BLOB
+  BOOLEAN
+  CHAR
+  CLOB
+  DATALINK
+  DATE
+  DECIMAL
+  DISTINCT
+  DOUBLE
+  FLOAT
+  INTEGER
+  JAVAOBJECT
+  LONGNVARCHAR
+  LONGVARBINARY
+  LONGVARCHAR
+  NCHAR
+  NCLOB
+  NULL
+  NUMERIC
+  NVARCHAR
+  OTHER
+  REAL
+  REF
+  ROWID
+  SMALLINT
+  SQLXML
+  STRUCT
+  TIME
+  TIMESTAMP
+  TINYINT
+  VARBINARY
+  VARCHAR
+}
+class NamedElement {
+}
+class dbschema::AttributeColumn {
+}
+abstract class dbschema::Column {
+  + primary : bool
+  + size : int
+  + type : str
+}
+class dbschema::DBSchema {
+}
+class dbschema::ForeignKeyColumn {
+}
+abstract class dbschema::NamedElement {
+  + name : str
+}
+class dbschema::Table {
+}
+Column <|-- dbschema::AttributeColumn
+Column <|-- dbschema::ForeignKeyColumn
+NamedElement <|-- dbschema::Column
+NamedElement <|-- dbschema::DBSchema
+NamedElement <|-- dbschema::Table
+dbschema::Column "0..9999" --* "1..1" dbschema::Table : columns1
+dbschema::ForeignKeyColumn "1..1" -- "1..1" dbschema::AttributeColumn : referencedColumn3
+dbschema::Table "0..9999" --* "1..1" dbschema::DBSchema : tables0
+@enduml

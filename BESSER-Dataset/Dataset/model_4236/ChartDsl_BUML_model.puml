@@ -1,0 +1,23 @@
+@startuml
+enum ProjectType {
+  Development
+  Regie
+}
+class chartDsl::Company {
+  + name : str
+}
+class chartDsl::Employee {
+  + name : str
+}
+class chartDsl::Project {
+  + name : str
+  + projectType : str
+}
+class chartDsl::Task {
+  + name : str
+}
+chartDsl::Employee "0..9999" --* "1..1" chartDsl::Company : employees0
+chartDsl::Project "0..9999" --* "1..1" chartDsl::Company : projects1
+chartDsl::Employee "0..1" -- "1..1" chartDsl::Task : responsable5
+chartDsl::Project "1..1" *-- "0..9999" chartDsl::Task : tasks3
+@enduml

@@ -1,0 +1,85 @@
+@startuml
+class AnnotatedElement {
+}
+class Class {
+}
+class Classifier {
+}
+class Feature {
+}
+class NamedElement {
+}
+abstract class OO::AnnotatedElement {
+}
+class OO::Annotation {
+  + key : str
+  + value : str
+}
+class OO::Attribute {
+}
+class OO::Class {
+  + isAbstract : str
+}
+abstract class OO::Classifier {
+}
+class OO::Datatype {
+}
+class OO::ExternalClass {
+}
+abstract class OO::Feature {
+  + visibility : str
+}
+class OO::Model {
+}
+abstract class OO::NamedElement {
+  + name : str
+}
+class OO::Operation {
+}
+class OO::Package {
+}
+abstract class OO::PackageableElement {
+}
+class OO::Parameter {
+}
+class OO::Reference {
+}
+abstract class OO::StructuralFeature {
+  + isMany : str
+}
+class Package {
+}
+class PackageableElement {
+}
+class StructuralFeature {
+}
+enum VisibilityEnum {
+  private
+  public
+}
+AnnotatedElement <|-- OO::NamedElement
+Class <|-- OO::ExternalClass
+Classifier <|-- OO::Class
+Classifier <|-- OO::Datatype
+Feature <|-- OO::Operation
+Feature <|-- OO::StructuralFeature
+NamedElement <|-- OO::Feature
+NamedElement <|-- OO::PackageableElement
+NamedElement <|-- OO::Parameter
+Package <|-- OO::Model
+PackageableElement <|-- OO::Classifier
+PackageableElement <|-- OO::Package
+StructuralFeature <|-- OO::Attribute
+StructuralFeature <|-- OO::Reference
+OO::AnnotatedElement "1..1" *-- "0..9999" OO::Annotation : annotations1
+OO::PackageableElement "0..9999" --* "1..1" OO::Package : contents2
+OO::Class "0..9999" -- "1..1" OO::Class : extendedBy6
+OO::Class "0..1" -- "1..1" OO::Class : extends4
+OO::Feature "0..9999" --* "1..1" OO::Class : features8
+OO::Operation "0..1" -- "1..1" OO::Parameter : owner16
+OO::Class "0..1" -- "1..1" OO::Feature : owner9
+OO::Package "0..1" -- "1..1" OO::PackageableElement : package0
+OO::Operation "1..1" *-- "0..9999" OO::Parameter : parameters12
+OO::Feature "1..1" -- "0..1" OO::Classifier : type11
+OO::Parameter "1..1" -- "0..1" OO::Classifier : type14
+@enduml

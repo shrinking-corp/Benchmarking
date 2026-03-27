@@ -1,0 +1,177 @@
+@startuml
+class BuiltinEventSpec {
+}
+class Declaration {
+}
+class DefRoot {
+}
+class Effect {
+}
+class Event {
+}
+class EventSpec {
+}
+class Expression {
+}
+class NamedElement {
+}
+class Operation {
+}
+class Property {
+}
+class Reaction {
+}
+class ReactionProperty {
+}
+class Scope {
+}
+class ScopedElement {
+}
+class StatechartScope {
+}
+enum TimeEventType {
+  after
+  every
+}
+enum TimeUnit {
+  microsecond
+  millisecond
+  nanosecond
+  second
+}
+class Trigger {
+}
+class TypeAlias {
+}
+class stext::ActiveStateReferenceExpression {
+}
+class stext::AlwaysEvent {
+}
+class stext::BuiltinEventSpec {
+}
+class stext::DefRoot {
+}
+class stext::DefaultTrigger {
+}
+class stext::EntryEvent {
+}
+class stext::EntryPointSpec {
+  + entrypoint : str
+}
+class stext::EventDefinition {
+}
+class stext::EventRaisingExpression {
+}
+class stext::EventSpec {
+}
+class stext::EventValueReferenceExpression {
+}
+class stext::ExitEvent {
+}
+class stext::ExitPointSpec {
+  + exitpoint : str
+}
+class stext::Expression {
+}
+class stext::Guard {
+}
+class stext::ImportScope {
+}
+class stext::InterfaceScope {
+}
+class stext::InternalScope {
+}
+class stext::LocalReaction {
+}
+class stext::OperationDefinition {
+}
+class stext::Package {
+}
+class stext::ReactionEffect {
+}
+class stext::ReactionTrigger {
+}
+class stext::RegularEventSpec {
+}
+class stext::Root {
+}
+class stext::Scope {
+}
+class stext::SimpleScope {
+}
+class stext::State {
+}
+class stext::StateRoot {
+}
+class stext::StateSpecification {
+}
+class stext::StatechartRoot {
+}
+class stext::StatechartScope {
+}
+class stext::StatechartSpecification {
+}
+class stext::TimeEventSpec {
+  + type : str
+  + unit : str
+}
+class stext::TransitionReaction {
+}
+class stext::TransitionRoot {
+}
+class stext::TransitionSpecification {
+}
+class stext::TypeAliasDefinition {
+}
+class stext::VariableDefinition {
+}
+BuiltinEventSpec <|-- stext::AlwaysEvent
+BuiltinEventSpec <|-- stext::EntryEvent
+BuiltinEventSpec <|-- stext::ExitEvent
+Declaration <|-- stext::TypeAliasDefinition
+DefRoot <|-- stext::StateRoot
+DefRoot <|-- stext::StatechartRoot
+DefRoot <|-- stext::TransitionRoot
+Effect <|-- stext::ReactionEffect
+EventSpec <|-- stext::BuiltinEventSpec
+EventSpec <|-- stext::RegularEventSpec
+EventSpec <|-- stext::TimeEventSpec
+Event <|-- stext::EventDefinition
+Expression <|-- stext::ActiveStateReferenceExpression
+Expression <|-- stext::EventRaisingExpression
+Expression <|-- stext::EventValueReferenceExpression
+NamedElement <|-- stext::InterfaceScope
+Operation <|-- stext::OperationDefinition
+Property <|-- stext::VariableDefinition
+ReactionProperty <|-- stext::EntryPointSpec
+ReactionProperty <|-- stext::ExitPointSpec
+Reaction <|-- stext::LocalReaction
+Reaction <|-- stext::TransitionReaction
+ScopedElement <|-- stext::StatechartSpecification
+Scope <|-- stext::SimpleScope
+Scope <|-- stext::StatechartScope
+StatechartScope <|-- stext::ImportScope
+StatechartScope <|-- stext::InterfaceScope
+StatechartScope <|-- stext::InternalScope
+Trigger <|-- stext::DefaultTrigger
+Trigger <|-- stext::ReactionTrigger
+TypeAlias <|-- stext::TypeAliasDefinition
+stext::Expression "0..9999" --* "1..1" stext::ReactionEffect : actions20
+stext::StatechartSpecification "0..1" --* "1..1" stext::StatechartRoot : def1
+stext::StateSpecification "0..1" --* "1..1" stext::StateRoot : def2
+stext::TransitionSpecification "0..1" --* "1..1" stext::TransitionRoot : def3
+stext::RegularEventSpec "1..1" *-- "0..1" stext::Expression : event12
+stext::EventRaisingExpression "1..1" *-- "0..1" stext::Expression : event22
+stext::Expression "0..1" --* "1..1" stext::Guard : expression10
+stext::Guard "0..1" --* "1..1" stext::ReactionTrigger : guard17
+stext::Package "0..9999" -- "1..1" stext::ImportScope : imports8
+stext::Expression "0..1" --* "1..1" stext::VariableDefinition : initialValue9
+stext::TransitionReaction "0..1" --* "1..1" stext::TransitionSpecification : reaction6
+stext::Root "1..1" *-- "0..9999" stext::DefRoot : roots0
+stext::Scope "0..1" --* "1..1" stext::StateSpecification : scope4
+stext::EventSpec "0..9999" --* "1..1" stext::ReactionTrigger : triggers16
+stext::TimeEventSpec "1..1" *-- "0..1" stext::Expression : value14
+stext::Expression "0..1" --* "1..1" stext::EventRaisingExpression : value24
+stext::Expression "0..1" --* "1..1" stext::EventValueReferenceExpression : value27
+stext::ActiveStateReferenceExpression "1..1" -- "0..1" stext::State : value29
+@enduml

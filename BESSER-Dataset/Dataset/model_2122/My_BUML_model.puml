@@ -1,0 +1,38 @@
+@startuml
+class List::Element {
+  + name : str
+  + value : int
+}
+class List::List {
+  + size : int
+  + type : str
+}
+class List::SubTestPackage::SubTest {
+  + value : int
+}
+class List::TestPackage::Test {
+  + value : int
+}
+class SubTestPackage::List::Element {
+}
+class SubTestPackage::SubTest {
+}
+class Test {
+}
+class TestPackage::List::Element {
+}
+enum listType {
+  ArrayList
+  List
+}
+TestPackage::List::Element "0..1" -- "1..1" List::TestPackage::Test : elementPointer16
+List::SubTestPackage::SubTest "1..1" -- "0..1" SubTestPackage::List::Element : elementPointer20
+TestPackage::List::Element "0..1" -- "1..1" List::TestPackage::Test : elementPointer217
+List::List "1..1" *-- "0..9999" List::Element : elements0
+List::Element "0..1" --* "1..1" List::List : firstElement1
+List::List "1..1" *-- "0..1" List::Element : lastElement4
+Test "0..1" -- "1..1" List::List : packagePointer10
+List::List "0..1" -- "1..1" List::Element : subElements12
+SubTestPackage::SubTest "0..1" -- "1..1" List::Element : subTestPointer15
+List::List "1..1" -- "0..1" List::List : testPointer8
+@enduml

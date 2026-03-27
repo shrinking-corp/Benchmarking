@@ -1,0 +1,80 @@
+@startuml
+class BuiltInType {
+}
+class Content {
+}
+class Description {
+}
+class Type {
+}
+class Value {
+}
+enum Visibility {
+  private
+  protected
+  public
+}
+class classes::Association {
+  + name : str
+}
+class classes::Attribute {
+  + name : str
+  + visibility : str
+}
+class classes::BuiltInType {
+}
+class classes::Class {
+  + name : str
+}
+class classes::ClassModel {
+}
+class classes::ClassRef {
+}
+class classes::Constant {
+  + name : str
+}
+class classes::ConstantRef {
+}
+class classes::Content {
+}
+class classes::Description {
+  + description : str
+}
+class classes::IntegerLiteral {
+  + value : int
+}
+class classes::IntegerType {
+}
+class classes::StringType {
+}
+class classes::Type {
+}
+class classes::Value {
+}
+BuiltInType <|-- classes::IntegerType
+BuiltInType <|-- classes::StringType
+Content <|-- classes::Association
+Content <|-- classes::Class
+Content <|-- classes::Constant
+Description <|-- classes::Association
+Description <|-- classes::Attribute
+Description <|-- classes::Class
+Description <|-- classes::Constant
+Type <|-- classes::BuiltInType
+Type <|-- classes::ClassRef
+Value <|-- classes::ConstantRef
+Value <|-- classes::IntegerLiteral
+classes::Attribute "0..9999" --* "1..1" classes::Class : attributes15
+classes::Content "0..9999" --* "1..1" classes::ClassModel : content0
+classes::Value "0..1" --* "1..1" classes::Constant : initial1
+classes::Value "0..1" --* "1..1" classes::Attribute : lowerBound19
+classes::Value "0..1" --* "1..1" classes::Association : lowerBound6
+classes::Association "1..1" -- "0..1" classes::Class : source2
+classes::Class "0..9999" --* "1..1" classes::Class : subClasses13
+classes::Class "0..1" -- "1..1" classes::ClassRef : target25
+classes::Constant "0..1" -- "1..1" classes::ConstantRef : target27
+classes::Class "0..1" -- "1..1" classes::Association : target3
+classes::Attribute "1..1" *-- "0..1" classes::Type : type17
+classes::Value "0..1" --* "1..1" classes::Attribute : upperBound22
+classes::Value "0..1" --* "1..1" classes::Association : upperBound9
+@enduml

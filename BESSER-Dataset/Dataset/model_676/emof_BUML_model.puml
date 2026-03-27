@@ -1,0 +1,127 @@
+@startuml
+class Class {
+}
+class Comment {
+}
+class DataType {
+}
+class Element {
+}
+class Enumeration {
+}
+class EnumerationLiteral {
+}
+class Extent {
+}
+class MultiplicityElement {
+}
+class NamedElement {
+}
+class Object {
+}
+class Operation {
+}
+class Package {
+}
+class Parameter {
+}
+class Property {
+}
+class Tag {
+}
+class Type {
+}
+class TypedElement {
+}
+class emof::Class {
+  + isAbstract : str
+}
+class emof::Comment {
+}
+class emof::DataType {
+}
+abstract class emof::Element {
+}
+class emof::Enumeration {
+}
+class emof::EnumerationLiteral {
+}
+class emof::Extent {
+}
+abstract class emof::MultiplicityElement {
+  + isOrdered : str
+  + isUnique : str
+  + lower : str
+  + upper : str
+}
+abstract class emof::NamedElement {
+  + name : str
+}
+class emof::Object {
+}
+class emof::Operation {
+}
+class emof::Package {
+  + uri : str
+}
+class emof::Parameter {
+}
+class emof::PrimitiveType {
+}
+class emof::Property {
+  + default : str
+  + isComposite : str
+  + isDerived : str
+  + isId : str
+  + isReadOnly : str
+}
+class emof::Tag {
+  + name : str
+  + value : str
+}
+abstract class emof::Type {
+}
+abstract class emof::TypedElement {
+}
+class emof::URIExtent {
+}
+DataType <|-- emof::Enumeration
+DataType <|-- emof::PrimitiveType
+Element <|-- emof::Comment
+Element <|-- emof::NamedElement
+Element <|-- emof::Tag
+Extent <|-- emof::URIExtent
+MultiplicityElement <|-- emof::Operation
+MultiplicityElement <|-- emof::Parameter
+MultiplicityElement <|-- emof::Property
+NamedElement <|-- emof::EnumerationLiteral
+NamedElement <|-- emof::Package
+NamedElement <|-- emof::Type
+NamedElement <|-- emof::TypedElement
+Object <|-- emof::Element
+Object <|-- emof::Extent
+TypedElement <|-- emof::Operation
+TypedElement <|-- emof::Parameter
+TypedElement <|-- emof::Property
+Type <|-- emof::Class
+Type <|-- emof::DataType
+NamedElement "0..9999" -- "1..1" emof::Comment : annotatedElement5
+emof::Operation "1..1" -- "1..1" Class : class11
+Class "1..1" -- "1..1" emof::Property : class23
+Element "0..9999" -- "1..1" emof::Tag : element28
+emof::EnumerationLiteral "1..1" -- "0..1" Enumeration : enumeration10
+Package "0..9999" --* "1..1" emof::Package : nestedPackage17
+Operation "0..1" -- "1..1" emof::Parameter : operation21
+Property "0..1" -- "1..1" emof::Property : opposite25
+Property "0..9999" --* "1..1" emof::Class : ownedAttribute0
+Comment "0..9999" --* "1..1" emof::Element : ownedComment6
+EnumerationLiteral "0..9999" --* "1..1" emof::Enumeration : ownedLiteral9
+Operation "0..9999" --* "1..1" emof::Class : ownedOperation1
+Parameter "0..9999" --* "1..1" emof::Operation : ownedParameter13
+emof::Package "1..1" *-- "0..9999" Type : ownedType18
+emof::Type "1..1" -- "1..1" Package : package29
+Type "0..9999" -- "1..1" emof::Operation : raisedException15
+emof::Class "1..1" -- "0..9999" Class : superClass3
+Tag "0..9999" -- "1..1" emof::Element : tag7
+Type "0..1" -- "1..1" emof::TypedElement : type31
+@enduml

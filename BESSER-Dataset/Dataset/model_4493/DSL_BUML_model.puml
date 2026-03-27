@@ -1,0 +1,46 @@
+@startuml
+enum Direction {
+  BACKWARD
+  FORWARD
+}
+class dSL::Action {
+  + blinkLights : bool
+  + direction : str
+  + driveDirection : bool
+  + driveDistance : bool
+  + probeLake : bool
+  + showLakes : bool
+  + steer : bool
+}
+class dSL::ActionList {
+}
+class dSL::Angle {
+  + away : bool
+  + value : int
+}
+class dSL::Condition {
+  + allLakes : bool
+  + atLake : bool
+  + collision : bool
+  + isProbed : bool
+  + not : bool
+}
+class dSL::ConditionList {
+}
+class dSL::Distance {
+  + value : int
+}
+class dSL::Rule {
+}
+class dSL::Specification {
+}
+dSL::ActionList "0..1" --* "1..1" dSL::Rule : actionList3
+dSL::Action "0..9999" --* "1..1" dSL::ActionList : actions12
+dSL::Action "1..1" *-- "0..1" dSL::Angle : angle17
+dSL::Condition "0..1" --* "1..1" dSL::Condition : condition8
+dSL::ConditionList "0..1" --* "1..1" dSL::Rule : conditionList1
+dSL::Condition "0..9999" --* "1..1" dSL::ConditionList : conditions5
+dSL::Condition "1..1" *-- "0..1" dSL::Distance : distance10
+dSL::Distance "0..1" --* "1..1" dSL::Action : distance14
+dSL::Specification "1..1" *-- "0..9999" dSL::Rule : rule0
+@enduml

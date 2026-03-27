@@ -1,0 +1,56 @@
+@startuml
+class Class {
+}
+class JavaMM::Annotation {
+  + content : str
+  + type : str
+}
+class JavaMM::Attribute {
+  + name : str
+  + visibility : str
+}
+abstract class JavaMM::Class {
+}
+class JavaMM::Container {
+  + type : str
+}
+class JavaMM::DAOClass {
+}
+class JavaMM::EntityClass {
+}
+class JavaMM::Package {
+  + name : str
+}
+class JavaMM::PrimitiveType {
+}
+class JavaMM::Program {
+}
+class JavaMM::TestClass {
+}
+abstract class JavaMM::Type {
+  + name : str
+}
+class Type {
+}
+enum Visibility {
+  private
+  public
+}
+Class <|-- JavaMM::DAOClass
+Class <|-- JavaMM::EntityClass
+Class <|-- JavaMM::TestClass
+Type <|-- JavaMM::Class
+Type <|-- JavaMM::Container
+Type <|-- JavaMM::PrimitiveType
+JavaMM::Annotation "0..9999" --* "1..1" JavaMM::Attribute : annotations11
+JavaMM::Class "1..1" *-- "0..9999" JavaMM::Attribute : attributes7
+JavaMM::Class "0..9999" --* "1..1" JavaMM::Package : classes5
+JavaMM::Program "1..1" *-- "0..9999" JavaMM::Container : containerTypes3
+JavaMM::DAOClass "0..1" -- "1..1" JavaMM::TestClass : dao17
+JavaMM::DAOClass "1..1" -- "0..9999" JavaMM::EntityClass : entities16
+JavaMM::EntityClass "0..1" -- "1..1" JavaMM::TestClass : entity19
+JavaMM::Package "0..9999" --* "1..1" JavaMM::Program : packages0
+JavaMM::Type "0..1" -- "1..1" JavaMM::Container : param13
+JavaMM::PrimitiveType "0..9999" --* "1..1" JavaMM::Program : primitiveTypes1
+JavaMM::Type "0..1" -- "1..1" JavaMM::Attribute : type9
+@enduml

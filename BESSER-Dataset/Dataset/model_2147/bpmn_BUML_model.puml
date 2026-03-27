@@ -1,0 +1,178 @@
+@startuml
+class Activity {
+}
+enum ActivityType {
+  EventEndCancel
+  EventEndCompensation
+  EventEndEmpty
+  EventEndError
+  EventEndLink
+  EventEndMessage
+  EventEndMultiple
+  EventEndSignal
+  EventEndTerminate
+  EventIntermediateCancel
+  EventIntermediateCompensation
+  EventIntermediateEmpty
+  EventIntermediateError
+  EventIntermediateLink
+  EventIntermediateMessage
+  EventIntermediateMultiple
+  EventIntermediateRule
+  EventIntermediateSignal
+  EventIntermediateTimer
+  EventStartEmpty
+  EventStartLink
+  EventStartMessage
+  EventStartMultiple
+  EventStartRule
+  EventStartSignal
+  EventStartTimer
+  GatewayComplex
+  GatewayDataBasedExclusive
+  GatewayDataBasedInclusive
+  GatewayEventBasedExclusive
+  GatewayParallel
+  SubProcess
+  Task
+}
+class Artifact {
+}
+class ArtifactsContainer {
+}
+class AssociationTarget {
+}
+enum DirectionType {
+  Both
+  From
+  None
+  To
+}
+class EModelElement {
+}
+class Graph {
+}
+class Identifiable {
+}
+class MessageVertex {
+}
+class NamedBpmnObject {
+}
+enum SequenceFlowConditionType {
+  Default
+  Expression
+  None
+}
+class Vertex {
+}
+class bpmn::Activity {
+  + activityType : str
+  + looping : str
+}
+class bpmn::Artifact {
+}
+class bpmn::ArtifactsContainer {
+}
+class bpmn::Association {
+  + direction : str
+}
+class bpmn::AssociationTarget {
+}
+class bpmn::BpmnDiagram {
+  + author : str
+  + title : str
+}
+class bpmn::DataObject {
+}
+class bpmn::Graph {
+}
+class bpmn::Group {
+}
+class bpmn::Identifiable {
+  + iD : str
+}
+class bpmn::Lane {
+}
+class bpmn::MessageVertex {
+  + orderedMessages : str
+}
+class bpmn::MessagingEdge {
+}
+class bpmn::NamedBpmnObject {
+  + documentation : str
+  + name : str
+  + ncname : str
+}
+class bpmn::Pool {
+}
+class bpmn::SequenceEdge {
+  + conditionType : str
+  + isDefault : str
+}
+class bpmn::SubProcess {
+  + adhoc : str
+  + isTransaction : str
+}
+class bpmn::TextAnnotation {
+}
+class bpmn::Vertex {
+}
+Activity <|-- bpmn::SubProcess
+Artifact <|-- bpmn::DataObject
+Artifact <|-- bpmn::Group
+Artifact <|-- bpmn::TextAnnotation
+ArtifactsContainer <|-- bpmn::BpmnDiagram
+ArtifactsContainer <|-- bpmn::Graph
+AssociationTarget <|-- bpmn::Graph
+AssociationTarget <|-- bpmn::Lane
+AssociationTarget <|-- bpmn::MessagingEdge
+AssociationTarget <|-- bpmn::SequenceEdge
+AssociationTarget <|-- bpmn::Vertex
+EModelElement <|-- bpmn::Association
+EModelElement <|-- bpmn::Identifiable
+Graph <|-- bpmn::Pool
+Graph <|-- bpmn::SubProcess
+Identifiable <|-- bpmn::Artifact
+Identifiable <|-- bpmn::AssociationTarget
+Identifiable <|-- bpmn::BpmnDiagram
+Identifiable <|-- bpmn::MessageVertex
+MessageVertex <|-- bpmn::Activity
+MessageVertex <|-- bpmn::Pool
+NamedBpmnObject <|-- bpmn::Artifact
+NamedBpmnObject <|-- bpmn::ArtifactsContainer
+NamedBpmnObject <|-- bpmn::Lane
+NamedBpmnObject <|-- bpmn::MessageVertex
+NamedBpmnObject <|-- bpmn::MessagingEdge
+NamedBpmnObject <|-- bpmn::SequenceEdge
+Vertex <|-- bpmn::Activity
+bpmn::Activity "0..9999" -- "1..1" bpmn::Group : activities19
+bpmn::Activity "0..9999" -- "1..1" bpmn::Lane : activities20
+bpmn::Artifact "0..9999" --* "1..1" bpmn::ArtifactsContainer : artifacts6
+bpmn::ArtifactsContainer "0..1" -- "1..1" bpmn::Artifact : artifactsContainer5
+bpmn::Association "0..9999" -- "1..1" bpmn::AssociationTarget : associations11
+bpmn::Association "0..9999" --* "1..1" bpmn::Artifact : associations4
+bpmn::BpmnDiagram "0..1" -- "1..1" bpmn::MessagingEdge : bpmnDiagram34
+bpmn::BpmnDiagram "0..1" -- "1..1" bpmn::Pool : bpmnDiagram37
+bpmn::SubProcess "0..1" -- "1..1" bpmn::Activity : eventHandlerFor3
+bpmn::Activity "0..9999" --* "1..1" bpmn::SubProcess : eventHandlers44
+bpmn::Graph "0..1" -- "1..1" bpmn::SequenceEdge : graph43
+bpmn::Graph "0..1" -- "1..1" bpmn::Vertex : graph52
+bpmn::Group "0..9999" -- "1..1" bpmn::Activity : groups0
+bpmn::Vertex "1..1" -- "0..9999" bpmn::SequenceEdge : incomingEdges49
+bpmn::MessageVertex "1..1" -- "0..9999" bpmn::MessagingEdge : incomingMessages25
+bpmn::Activity "1..1" -- "0..9999" bpmn::Lane : lanes1
+bpmn::Lane "0..9999" --* "1..1" bpmn::Pool : lanes35
+bpmn::MessagingEdge "0..9999" --* "1..1" bpmn::BpmnDiagram : messages14
+bpmn::SequenceEdge "0..9999" -- "1..1" bpmn::Vertex : outgoingEdges46
+bpmn::MessagingEdge "0..9999" -- "1..1" bpmn::MessageVertex : outgoingMessages28
+bpmn::Lane "1..1" -- "0..1" bpmn::Pool : pool22
+bpmn::Pool "0..9999" --* "1..1" bpmn::BpmnDiagram : pools13
+bpmn::SequenceEdge "0..9999" --* "1..1" bpmn::Graph : sequenceEdges17
+bpmn::MessagingEdge "1..1" -- "0..1" bpmn::MessageVertex : source31
+bpmn::Vertex "0..1" -- "1..1" bpmn::SequenceEdge : source39
+bpmn::Association "1..1" -- "0..1" bpmn::Artifact : source7
+bpmn::MessageVertex "0..1" -- "1..1" bpmn::MessagingEdge : target32
+bpmn::SequenceEdge "1..1" -- "0..1" bpmn::Vertex : target41
+bpmn::Association "1..1" -- "0..1" bpmn::AssociationTarget : target9
+bpmn::Graph "1..1" *-- "0..9999" bpmn::Vertex : vertices16
+@enduml

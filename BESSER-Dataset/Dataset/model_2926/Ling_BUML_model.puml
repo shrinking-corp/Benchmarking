@@ -1,0 +1,37 @@
+@startuml
+class AbstractElement {
+}
+class Type {
+}
+class ling::AbstractElement {
+}
+class ling::DataType {
+}
+class ling::Domainmodel {
+}
+class ling::Entity {
+}
+class ling::Feature {
+  + many : bool
+  + name : str
+}
+class ling::Import {
+  + importedNamespace : str
+}
+class ling::PackageDeclaration {
+  + name : str
+}
+class ling::Type {
+  + name : str
+}
+AbstractElement <|-- ling::Import
+AbstractElement <|-- ling::PackageDeclaration
+AbstractElement <|-- ling::Type
+Type <|-- ling::DataType
+Type <|-- ling::Entity
+ling::AbstractElement "0..9999" --* "1..1" ling::Domainmodel : elements0
+ling::AbstractElement "0..9999" --* "1..1" ling::PackageDeclaration : elements1
+ling::Feature "0..9999" --* "1..1" ling::Entity : features5
+ling::Entity "1..1" -- "0..1" ling::Entity : superType4
+ling::Feature "1..1" -- "0..1" ling::Type : type7
+@enduml

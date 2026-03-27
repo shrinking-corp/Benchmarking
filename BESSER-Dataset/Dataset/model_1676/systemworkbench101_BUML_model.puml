@@ -1,0 +1,63 @@
+@startuml
+class Named {
+}
+class NamedElement {
+}
+class systemworkbench101::Component {
+}
+class systemworkbench101::Function {
+}
+class systemworkbench101::FunctionProperty {
+  + description : str
+}
+abstract class systemworkbench101::Named {
+  + ident : str
+}
+class systemworkbench101::NamedElement {
+  + name : str
+}
+class systemworkbench101::PatternCatalog {
+  + id : int
+}
+class systemworkbench101::RelatedTo {
+  + since : str
+}
+class systemworkbench101::System {
+}
+class systemworkbench101::Thing {
+  + id : int
+}
+class systemworkbench101::Thoughts {
+}
+class systemworkbench101::Workbench {
+  + foobar : str
+}
+NamedElement <|-- systemworkbench101::RelatedTo
+NamedElement <|-- systemworkbench101::Thing
+NamedElement <|-- systemworkbench101::Thoughts
+Named <|-- systemworkbench101::Component
+Named <|-- systemworkbench101::Function
+Named <|-- systemworkbench101::FunctionProperty
+Named <|-- systemworkbench101::System
+Named <|-- systemworkbench101::Workbench
+systemworkbench101::Function "1..1" -- "0..1" systemworkbench101::Component : allocatedTo25
+systemworkbench101::Function "0..1" -- "1..1" systemworkbench101::Function : associations23
+systemworkbench101::Component "0..9999" -- "1..1" systemworkbench101::Component : associations30
+systemworkbench101::PatternCatalog "0..9999" --* "1..1" systemworkbench101::Workbench : catalog7
+systemworkbench101::Function "0..9999" --* "1..1" systemworkbench101::Function : decompositions17
+systemworkbench101::Component "0..9999" -- "1..1" systemworkbench101::Component : decompositions27
+systemworkbench101::Thing "0..1" -- "1..1" systemworkbench101::RelatedTo : fromThing36
+systemworkbench101::FunctionProperty "0..9999" --* "1..1" systemworkbench101::Workbench : functionProperties5
+systemworkbench101::System "1..1" *-- "0..1" systemworkbench101::Function : functionalArchitecture0
+systemworkbench101::FunctionProperty "0..1" -- "1..1" systemworkbench101::FunctionProperty : parent14
+systemworkbench101::Function "0..9999" -- "1..1" systemworkbench101::PatternCatalog : patterns33
+systemworkbench101::Component "1..1" -- "0..9999" systemworkbench101::Function : performs32
+systemworkbench101::Component "0..1" --* "1..1" systemworkbench101::System : physicalArchitecture1
+systemworkbench101::Function "1..1" -- "0..9999" systemworkbench101::FunctionProperty : property19
+systemworkbench101::Thing "0..9999" -- "1..1" systemworkbench101::Thoughts : relatedTo44
+systemworkbench101::Thing "1..1" *-- "0..9999" systemworkbench101::RelatedTo : relations41
+systemworkbench101::System "0..1" --* "1..1" systemworkbench101::Workbench : systemView3
+systemworkbench101::Workbench "1..1" *-- "0..9999" systemworkbench101::Thing : things9
+systemworkbench101::Thoughts "0..9999" --* "1..1" systemworkbench101::Workbench : thoughts11
+systemworkbench101::Thing "0..1" -- "1..1" systemworkbench101::RelatedTo : toThing38
+@enduml

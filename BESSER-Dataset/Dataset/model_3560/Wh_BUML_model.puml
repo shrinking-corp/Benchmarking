@@ -1,0 +1,94 @@
+@startuml
+class wh::Assign {
+}
+class wh::Command {
+}
+class wh::Commands {
+}
+class wh::Definition {
+}
+class wh::EObject {
+}
+class wh::Expr {
+}
+class wh::ExprAnd {
+}
+class wh::ExprEq {
+  + sym : str
+}
+class wh::ExprNot {
+  + hasNot : str
+}
+class wh::ExprOr {
+}
+class wh::ExprSimple {
+  + nil : str
+  + sym : str
+  + variable : str
+}
+class wh::Exprs {
+}
+class wh::For {
+}
+class wh::Foreach {
+}
+class wh::Function {
+  + fname : str
+}
+class wh::If {
+}
+class wh::Input {
+  + params : str
+}
+class wh::LExpr {
+}
+class wh::Model {
+}
+class wh::Nop {
+  + nop : str
+}
+class wh::Output {
+  + r_values : str
+}
+class wh::Program {
+}
+class wh::Vars {
+  + variables : str
+}
+class wh::While {
+}
+wh::Commands "1..1" *-- "0..9999" wh::Command : command11
+wh::EObject "0..1" --* "1..1" wh::Command : command13
+wh::Commands "0..1" --* "1..1" wh::While : commands19
+wh::Commands "0..1" --* "1..1" wh::For : commands24
+wh::Foreach "1..1" *-- "0..1" wh::Commands : commands40
+wh::Commands "0..1" --* "1..1" wh::Definition : commands7
+wh::Expr "0..1" --* "1..1" wh::While : cond18
+wh::For "1..1" *-- "0..1" wh::Expr : cond22
+wh::Expr "0..1" --* "1..1" wh::If : cond27
+wh::Expr "0..1" --* "1..1" wh::Foreach : cond35
+wh::LExpr "0..1" --* "1..1" wh::ExprSimple : cons_exp48
+wh::Function "1..1" *-- "0..1" wh::Definition : definition3
+wh::Commands "0..1" --* "1..1" wh::If : else_commands32
+wh::Expr "0..1" --* "1..1" wh::Foreach : ens37
+wh::Expr "0..9999" --* "1..1" wh::Exprs : expr43
+wh::ExprEq "1..1" *-- "0..1" wh::Expr : expr73
+wh::Expr "0..9999" --* "1..1" wh::LExpr : expr76
+wh::ExprAnd "0..1" --* "1..1" wh::Expr : expr_and46
+wh::ExprEq "0..1" --* "1..1" wh::ExprNot : expr_eq62
+wh::ExprSimple "0..1" --* "1..1" wh::ExprEq : expr_left64
+wh::ExprNot "0..9999" --* "1..1" wh::ExprOr : expr_not60
+wh::ExprOr "0..9999" --* "1..1" wh::ExprAnd : expr_or58
+wh::ExprEq "1..1" *-- "0..1" wh::ExprSimple : expr_right67
+wh::Exprs "0..1" --* "1..1" wh::Assign : exprs16
+wh::Function "0..9999" --* "1..1" wh::Program : functions1
+wh::ExprSimple "1..1" *-- "0..1" wh::Expr : hd_expr52
+wh::If "1..1" *-- "0..1" wh::Commands : if_commands29
+wh::Input "0..1" --* "1..1" wh::Definition : inputs5
+wh::LExpr "0..1" --* "1..1" wh::ExprEq : lexpr70
+wh::LExpr "0..1" --* "1..1" wh::ExprSimple : list_exp49
+wh::Output "0..1" --* "1..1" wh::Definition : outputs9
+wh::Program "0..1" --* "1..1" wh::Model : text0
+wh::Expr "0..1" --* "1..1" wh::ExprSimple : tl_expr55
+wh::Assign "1..1" *-- "0..1" wh::Vars : vars15
+@enduml

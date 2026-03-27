@@ -1,0 +1,31 @@
+@startuml
+class BaseElement {
+}
+class Error {
+}
+class Message {
+}
+class Operation {
+}
+class RootElement {
+}
+class services::services::EObject {
+}
+class services::services::EndPoint {
+}
+class services::services::Interface {
+  + name : str
+}
+class services::services::Operation {
+  + name : str
+}
+BaseElement <|-- services::services::Operation
+RootElement <|-- services::services::EndPoint
+RootElement <|-- services::services::Interface
+Error "0..9999" -- "1..1" services::services::Operation : errorRefs7
+services::services::EObject "0..1" -- "1..1" services::services::Interface : implementationRef1
+services::services::Operation "1..1" -- "0..1" services::services::EObject : implementationRef9
+Message "1..1" -- "1..1" services::services::Operation : inMessageRef3
+Operation "1..9999" --* "1..1" services::services::Interface : operations0
+services::services::Operation "1..1" -- "0..1" Message : outMessageRef4
+@enduml

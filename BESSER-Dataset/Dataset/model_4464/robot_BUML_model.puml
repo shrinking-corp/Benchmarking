@@ -1,0 +1,155 @@
+@startuml
+class Condition {
+}
+enum EOperator {
+  AND
+  DIFF
+  EQ
+  GT
+  GTE
+  LT
+  LTE
+  OR
+}
+enum ESensor {
+  distanceBL
+  distanceBR
+  distanceFLB
+  distanceFLF
+  distanceFRB
+  distanceFRF
+  distanceL
+  distanceR
+  lightBL
+  lightBR
+  lightFLB
+  lightFLF
+  lightFRB
+  lightFRF
+  lightL
+  lightR
+}
+class Movement {
+}
+class Operation {
+}
+class Operator {
+}
+class Values {
+}
+class Var {
+}
+class robot::Affectation {
+}
+class robot::Alternative {
+}
+class robot::Backward {
+}
+class robot::Compare {
+}
+class robot::Condition {
+}
+class robot::Declaration {
+}
+class robot::Different {
+}
+class robot::Echo {
+  + param : str
+}
+class robot::Event {
+}
+class robot::Forward {
+}
+class robot::Mission {
+}
+class robot::Movement {
+  + duration : float
+}
+class robot::Operation {
+}
+class robot::Operator {
+  + type : str
+}
+class robot::Sensor {
+  + name : str
+}
+class robot::Sequence {
+}
+class robot::Sleep {
+}
+class robot::Stop {
+}
+class robot::TBoolean {
+  + Value : str
+}
+class robot::TFloat {
+  + Value : str
+}
+class robot::TInteger {
+  + Value : str
+}
+class robot::TString {
+  + Value : str
+}
+class robot::TurnLeft {
+}
+class robot::TurnRight {
+}
+class robot::Value {
+}
+class robot::Values {
+}
+class robot::Var {
+  + Name : str
+}
+class robot::Variable {
+  + Name : str
+}
+class robot::Whenever {
+}
+class robot::While {
+}
+Condition <|-- robot::Compare
+Condition <|-- robot::Value
+Movement <|-- robot::Backward
+Movement <|-- robot::Forward
+Movement <|-- robot::Sleep
+Movement <|-- robot::Stop
+Movement <|-- robot::TurnLeft
+Movement <|-- robot::TurnRight
+Operation <|-- robot::Alternative
+Operation <|-- robot::Echo
+Operation <|-- robot::Event
+Operation <|-- robot::Movement
+Operation <|-- robot::Sequence
+Operation <|-- robot::Var
+Operation <|-- robot::Whenever
+Operation <|-- robot::While
+Operator <|-- robot::Different
+Values <|-- robot::Sensor
+Values <|-- robot::TBoolean
+Values <|-- robot::TFloat
+Values <|-- robot::TInteger
+Values <|-- robot::TString
+Values <|-- robot::Variable
+Var <|-- robot::Affectation
+Var <|-- robot::Declaration
+robot::Operation "0..1" --* "1..1" robot::Alternative : Alternative5
+robot::Operation "1..1" --* "1..1" robot::Event : At10
+robot::Condition "1..1" --* "1..1" robot::Compare : Condition138
+robot::Event "1..1" *-- "1..1" robot::Condition : Condition15
+robot::Condition "1..1" --* "1..1" robot::Whenever : Condition19
+robot::Condition "1..1" --* "1..1" robot::Compare : Condition235
+robot::Condition "1..1" --* "1..1" robot::While : Condition29
+robot::Alternative "1..1" *-- "1..1" robot::Condition : Condition8
+robot::Alternative "1..1" *-- "1..1" robot::Operation : Consequence3
+robot::Operation "0..1" --* "1..1" robot::Whenever : Else24
+robot::Operation "0..1" --* "1..1" robot::Event : Onleave12
+robot::Operation "1..1" --* "1..1" robot::While : Operation27
+robot::Operation "1..9999" --* "1..1" robot::Sequence : Operations1
+robot::Operator "1..1" --* "1..1" robot::Compare : Operator34
+robot::Sequence "1..1" --* "1..1" robot::Mission : Sequence0
+robot::Values "1..1" --* "1..1" robot::Var : Value18
+robot::Value "1..1" *-- "1..1" robot::Values : Variable32
+robot::Whenever "1..1" *-- "1..1" robot::Operation : Whenever21
+@enduml

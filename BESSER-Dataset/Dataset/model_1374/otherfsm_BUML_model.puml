@@ -1,0 +1,57 @@
+@startuml
+class NamedElement {
+}
+class Pseudostate {
+}
+class State2 {
+}
+class Transition2 {
+}
+class finitestatemachines::FinalState {
+}
+class finitestatemachines::Fork {
+}
+class finitestatemachines::InitialState {
+}
+class finitestatemachines::Join2 {
+}
+class finitestatemachines::NamedElement {
+  + name : str
+}
+class finitestatemachines::Pseudostate {
+}
+class finitestatemachines::State2 {
+  + finalTime : int
+  + initialTime2 : int
+}
+class finitestatemachines::StateMachine {
+}
+class finitestatemachines::TimedTransition {
+  + duration : int
+}
+class finitestatemachines::Transition2 {
+  + finalTime2 : int
+  + initialTime : int
+}
+class finitestatemachines::Trigger2 {
+  + expression : str
+}
+NamedElement <|-- finitestatemachines::State2
+NamedElement <|-- finitestatemachines::StateMachine
+NamedElement <|-- finitestatemachines::Transition2
+Pseudostate <|-- finitestatemachines::Fork
+Pseudostate <|-- finitestatemachines::Join2
+State2 <|-- finitestatemachines::FinalState
+State2 <|-- finitestatemachines::InitialState
+State2 <|-- finitestatemachines::Pseudostate
+Transition2 <|-- finitestatemachines::TimedTransition
+finitestatemachines::Transition2 "0..9999" -- "1..1" finitestatemachines::State2 : incoming8
+finitestatemachines::Transition2 "0..9999" -- "1..1" finitestatemachines::State2 : outgoing5
+finitestatemachines::State2 "1..1" -- "1..1" finitestatemachines::Transition2 : source17
+finitestatemachines::Transition2 "1..1" -- "1..1" finitestatemachines::StateMachine : stateMachine21
+finitestatemachines::State2 "1..1" -- "0..1" finitestatemachines::StateMachine : stateMachine211
+finitestatemachines::StateMachine "1..1" *-- "0..9999" finitestatemachines::State2 : states20
+finitestatemachines::State2 "1..1" -- "1..1" finitestatemachines::Transition2 : target14
+finitestatemachines::Transition2 "0..9999" --* "1..1" finitestatemachines::StateMachine : transitions22
+finitestatemachines::Trigger2 "0..1" --* "1..1" finitestatemachines::Transition2 : trigger20
+@enduml

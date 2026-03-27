@@ -1,0 +1,116 @@
+@startuml
+class Expression {
+}
+class FeatureCall {
+}
+class Literal {
+}
+class SyntaxElement {
+}
+class expression::BooleanLiteral {
+  + val : str
+}
+class expression::BooleanOperation {
+  + operator : str
+}
+class expression::Case {
+}
+class expression::CastedExpression {
+}
+class expression::ChainExpression {
+}
+class expression::CollectionExpression {
+  + var : str
+}
+class expression::ConstructorCallExpression {
+}
+class expression::Expression {
+}
+class expression::FeatureCall {
+  + name : str
+}
+class expression::GlobalVarExpression {
+  + name : str
+}
+class expression::Identifier {
+  + cl : str
+  + id : str
+}
+class expression::IfExpression {
+}
+class expression::IntegerLiteral {
+  + val : int
+}
+class expression::LetExpression {
+  + identifier : str
+}
+class expression::ListLiteral {
+}
+class expression::Literal {
+}
+class expression::NullLiteral {
+  + val : str
+}
+class expression::OperationCall {
+}
+class expression::RealLiteral {
+  + val : str
+}
+class expression::StringLiteral {
+  + val : str
+}
+class expression::SwitchExpression {
+}
+class expression::SyntaxElement {
+}
+class expression::TypeSelectExpression {
+}
+Expression <|-- expression::BooleanOperation
+Expression <|-- expression::CastedExpression
+Expression <|-- expression::ChainExpression
+Expression <|-- expression::CollectionExpression
+Expression <|-- expression::ConstructorCallExpression
+Expression <|-- expression::FeatureCall
+Expression <|-- expression::GlobalVarExpression
+Expression <|-- expression::IfExpression
+Expression <|-- expression::LetExpression
+Expression <|-- expression::ListLiteral
+Expression <|-- expression::Literal
+Expression <|-- expression::OperationCall
+Expression <|-- expression::SwitchExpression
+Expression <|-- expression::TypeSelectExpression
+FeatureCall <|-- expression::CollectionExpression
+FeatureCall <|-- expression::OperationCall
+FeatureCall <|-- expression::TypeSelectExpression
+Literal <|-- expression::BooleanLiteral
+Literal <|-- expression::IntegerLiteral
+Literal <|-- expression::NullLiteral
+Literal <|-- expression::RealLiteral
+Literal <|-- expression::StringLiteral
+SyntaxElement <|-- expression::Case
+SyntaxElement <|-- expression::Expression
+SyntaxElement <|-- expression::Identifier
+expression::Case "0..9999" --* "1..1" expression::SwitchExpression : case18
+expression::Case "1..1" *-- "0..1" expression::Expression : condition23
+expression::Expression "0..1" --* "1..1" expression::IfExpression : condition8
+expression::Expression "0..1" --* "1..1" expression::SwitchExpression : defaultExpr20
+expression::Expression "0..9999" --* "1..1" expression::ListLiteral : elements36
+expression::Expression "0..1" --* "1..1" expression::IfExpression : elsePart13
+expression::CollectionExpression "1..1" *-- "0..1" expression::Expression : exp40
+expression::Expression "0..1" --* "1..1" expression::ChainExpression : first45
+expression::Identifier "1..1" *-- "0..1" expression::Identifier : id143
+expression::Expression "0..1" --* "1..1" expression::BooleanOperation : left50
+expression::Expression "0..1" --* "1..1" expression::ChainExpression : next47
+expression::OperationCall "1..1" *-- "0..9999" expression::Expression : params29
+expression::Expression "0..1" --* "1..1" expression::BooleanOperation : right52
+expression::Expression "0..1" --* "1..1" expression::SwitchExpression : switchExpr16
+expression::Expression "0..1" --* "1..1" expression::LetExpression : target1
+expression::Expression "0..1" --* "1..1" expression::FeatureCall : target31
+expression::Expression "0..1" --* "1..1" expression::CastedExpression : target5
+expression::Expression "0..1" --* "1..1" expression::Case : thenPar26
+expression::IfExpression "1..1" *-- "0..1" expression::Expression : thenPart10
+expression::Identifier "0..1" --* "1..1" expression::FeatureCall : type33
+expression::Identifier "0..1" --* "1..1" expression::ConstructorCallExpression : type38
+expression::CastedExpression "1..1" *-- "0..1" expression::Identifier : type4
+expression::Expression "0..1" --* "1..1" expression::LetExpression : varExpr0
+@enduml

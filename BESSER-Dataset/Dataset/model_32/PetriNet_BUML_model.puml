@@ -1,0 +1,33 @@
+@startuml
+class Arc {
+}
+class Named {
+}
+abstract class petrinet::Arc {
+  + weight : int
+}
+class petrinet::InArc {
+}
+abstract class petrinet::Named {
+  + name : str
+}
+class petrinet::OutArc {
+}
+class petrinet::PetriNet {
+}
+class petrinet::Place {
+  + token : int
+}
+class petrinet::Transition {
+}
+Arc <|-- petrinet::InArc
+Arc <|-- petrinet::OutArc
+Named <|-- petrinet::Place
+Named <|-- petrinet::Transition
+petrinet::InArc "1..9999" --* "1..1" petrinet::Transition : inArc3
+petrinet::Transition "1..1" *-- "1..9999" petrinet::OutArc : outArc5
+petrinet::Place "0..9999" --* "1..1" petrinet::PetriNet : places0
+petrinet::OutArc "1..1" -- "1..1" petrinet::Place : sourcePlace10
+petrinet::Place "1..1" -- "1..1" petrinet::InArc : targetPlace7
+petrinet::Transition "0..9999" --* "1..1" petrinet::PetriNet : transitions1
+@enduml

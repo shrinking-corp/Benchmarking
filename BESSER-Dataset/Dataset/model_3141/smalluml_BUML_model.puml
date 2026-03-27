@@ -1,0 +1,53 @@
+@startuml
+class NamedElement {
+}
+class Type {
+}
+class smalluml::Attribute {
+}
+class smalluml::Cardinality {
+  + lowerBound : int
+  + upperBound : int
+}
+class smalluml::Class {
+  + isAbstract : bool
+}
+class smalluml::ConcreteType {
+}
+class smalluml::Enumeration {
+}
+class smalluml::EnumerationElement {
+  + value : str
+}
+class smalluml::Method {
+}
+abstract class smalluml::NamedElement {
+  + name : str
+}
+class smalluml::Package {
+}
+class smalluml::Relation {
+}
+abstract class smalluml::Type {
+}
+NamedElement <|-- smalluml::Attribute
+NamedElement <|-- smalluml::Class
+NamedElement <|-- smalluml::Method
+NamedElement <|-- smalluml::Relation
+NamedElement <|-- smalluml::Type
+Type <|-- smalluml::ConcreteType
+Type <|-- smalluml::Enumeration
+smalluml::Class "1..1" *-- "0..9999" smalluml::Attribute : attributes1
+smalluml::Cardinality "1..1" --* "1..1" smalluml::Relation : cardinality15
+smalluml::Class "0..9999" --* "1..1" smalluml::Package : class22
+smalluml::Class "1..1" -- "1..1" smalluml::Relation : from16
+smalluml::Method "0..9999" --* "1..1" smalluml::Class : methods2
+smalluml::Method "1..1" *-- "0..9999" smalluml::Attribute : parameters9
+smalluml::Class "0..9999" -- "1..1" smalluml::Class : parents5
+smalluml::Package "1..1" *-- "0..9999" smalluml::Relation : relation24
+smalluml::Type "1..1" -- "1..1" smalluml::Method : returnTypedValue12
+smalluml::Relation "1..1" -- "1..1" smalluml::Class : to19
+smalluml::Type "1..1" -- "1..1" smalluml::Attribute : typedValue7
+smalluml::Package "1..1" *-- "0..9999" smalluml::Type : types27
+smalluml::EnumerationElement "1..9999" --* "1..1" smalluml::Enumeration : value0
+@enduml

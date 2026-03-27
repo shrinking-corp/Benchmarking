@@ -1,0 +1,54 @@
+@startuml
+enum DeviceType {
+  Computer
+  Smartphone
+  Tablet
+}
+class MediaArtifact {
+}
+enum MediaSourceType {
+  ExternalArtifact
+  MediaStore
+}
+class mode::AudioBook {
+  + length : int
+}
+class mode::Device {
+  + name : str
+  + type : str
+}
+class mode::EBook {
+}
+abstract class mode::MediaArtifact {
+  + identifier : str
+  + name : str
+  + source : str
+}
+class mode::MediaCollection {
+  + name : str
+}
+class mode::MediaLibrary {
+}
+class mode::Music {
+  + length : int
+}
+class mode::User {
+  + name : str
+}
+class mode::Video {
+  + length : int
+}
+MediaArtifact <|-- mode::AudioBook
+MediaArtifact <|-- mode::EBook
+MediaArtifact <|-- mode::Music
+MediaArtifact <|-- mode::Video
+mode::MediaCollection "1..1" -- "1..1" mode::MediaArtifact : collection9
+mode::MediaCollection "0..9999" --* "1..1" mode::MediaLibrary : collections3
+mode::MediaLibrary "1..1" *-- "0..9999" mode::Device : devices0
+mode::MediaArtifact "1..9999" --* "1..1" mode::MediaCollection : mediaArtifacts6
+mode::MediaCollection "0..9999" -- "1..1" mode::User : ownedCollections5
+mode::User "0..1" -- "1..1" mode::MediaCollection : ownedUser8
+mode::Device "1..1" -- "0..9999" mode::MediaCollection : synchronisedCollections11
+mode::Device "0..9999" -- "1..1" mode::MediaCollection : synchronisedDevices7
+mode::User "0..9999" --* "1..1" mode::MediaLibrary : users1
+@enduml

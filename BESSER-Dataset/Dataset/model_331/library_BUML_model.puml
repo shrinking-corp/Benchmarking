@@ -1,0 +1,22 @@
+@startuml
+class library::Book {
+  + pages : int
+  + title : str
+}
+class library::Library {
+  + name : str
+}
+class library::Member {
+  + id : int
+  + name : str
+}
+class library::Writer {
+  + name : str
+}
+library::Book "1..1" -- "0..1" library::Writer : author5
+library::Book "0..9999" --* "1..1" library::Library : books0
+library::Book "0..9999" -- "1..1" library::Writer : books6
+library::Member "1..1" -- "0..9999" library::Book : borrowedBooks7
+library::Member "0..9999" --* "1..1" library::Library : members3
+library::Writer "0..9999" --* "1..1" library::Library : writers1
+@enduml

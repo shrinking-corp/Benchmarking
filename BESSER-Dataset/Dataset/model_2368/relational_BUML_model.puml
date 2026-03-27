@@ -1,0 +1,48 @@
+@startuml
+class ModelElement {
+}
+enum Type {
+  CHAR
+  DATE
+  FLOAT
+  NUMERIC
+  TIME
+  VARCHAR
+}
+class relational::4relational2UML::Column {
+  + isPrimaryKey : bool
+  + isUnique : bool
+  + name : str
+  + type : str
+}
+class relational::4relational2UML::Database {
+  + name : str
+  + url : str
+}
+class relational::4relational2UML::ForeignKey {
+  + name : str
+}
+abstract class relational::4relational2UML::ModelElement {
+  + comment : str
+}
+class relational::4relational2UML::Schema {
+  + name : str
+}
+class relational::4relational2UML::Table {
+  + name : str
+}
+ModelElement <|-- relational::4relational2UML::Column
+ModelElement <|-- relational::4relational2UML::Database
+ModelElement <|-- relational::4relational2UML::ForeignKey
+ModelElement <|-- relational::4relational2UML::Schema
+ModelElement <|-- relational::4relational2UML::Table
+relational::4relational2UML::Table "1..1" -- "1..1" relational::4relational2UML::ForeignKey : foreignTable9
+relational::4relational2UML::Column "0..9999" --* "1..1" relational::4relational2UML::Table : ownedColumns4
+relational::4relational2UML::Table "1..1" *-- "0..9999" relational::4relational2UML::ForeignKey : ownedForeignKeys6
+relational::4relational2UML::Database "1..1" *-- "0..9999" relational::4relational2UML::Schema : ownedSchemas0
+relational::4relational2UML::Table "0..9999" --* "1..1" relational::4relational2UML::Schema : ownedTables1
+relational::4relational2UML::Table "1..1" -- "1..1" relational::4relational2UML::Column : owner12
+relational::4relational2UML::Database "1..1" -- "1..1" relational::4relational2UML::Schema : owner3
+relational::4relational2UML::Schema "1..1" -- "1..1" relational::4relational2UML::Table : owner7
+relational::4relational2UML::ForeignKey "1..1" -- "1..1" relational::4relational2UML::Table : sourceTable11
+@enduml

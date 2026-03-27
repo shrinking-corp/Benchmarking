@@ -1,0 +1,24 @@
+@startuml
+class PetriNet {
+}
+class PetriNets::PetriNet {
+}
+class PetriNets::Place {
+  + capacity : int
+  + itokens : int
+  + tokens() : int
+}
+class PetriNets::Token {
+}
+class PetriNets::Transition {
+}
+PetriNet <|-- PetriNets::Transition
+PetriNets::Place "0..9999" -- "1..1" PetriNets::Transition : ins9
+PetriNets::Place "1..1" -- "1..1" PetriNets::PetriNet : net3
+PetriNets::PetriNet "1..1" -- "1..1" PetriNets::Transition : net7
+PetriNets::Place "0..9999" -- "1..1" PetriNets::Transition : outs10
+PetriNets::Place "1..1" -- "1..1" PetriNets::Token : place5
+PetriNets::Place "0..9999" --* "1..1" PetriNets::PetriNet : places0
+PetriNets::Token "0..9999" --* "1..1" PetriNets::Place : tokens4
+PetriNets::Transition "0..9999" --* "1..1" PetriNets::PetriNet : trans1
+@enduml

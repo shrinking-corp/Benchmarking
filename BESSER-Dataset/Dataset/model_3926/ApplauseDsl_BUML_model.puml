@@ -1,0 +1,235 @@
+@startuml
+enum CellAccessory {
+  Check
+  Detail
+  Link
+  None
+}
+enum CellType {
+  default
+  subtitle
+  value1
+  value2
+}
+class CollectionExpression {
+}
+class CollectionFunction {
+}
+class ContentProviderImplementation {
+}
+class Expression {
+}
+class ModelElement {
+}
+class PropertyPathPart {
+}
+class ProviderConstruction {
+}
+class ScalarExpression {
+}
+enum SerializationFormat {
+  JSON
+  XML
+}
+class StringFunction {
+}
+enum TableViewStyle {
+  Grouped
+  Plain
+}
+class Type {
+}
+class View {
+}
+class ViewAction {
+}
+class ViewContentElement {
+}
+class applauseDsl::Application {
+  + name : str
+}
+class applauseDsl::Cell {
+  + accessory : str
+  + type : str
+}
+class applauseDsl::CollectionExpression {
+}
+class applauseDsl::CollectionFunction {
+}
+class applauseDsl::CollectionIterator {
+}
+class applauseDsl::CollectionLiteral {
+}
+class applauseDsl::ComplexProviderConstruction {
+}
+class applauseDsl::ContentProvider {
+  + many : bool
+  + storing : bool
+}
+class applauseDsl::ContentProviderImplementation {
+}
+class applauseDsl::CustomContentProviderImplementation {
+}
+class applauseDsl::CustomView {
+  + className : str
+}
+class applauseDsl::Entity {
+  + runtimeType : bool
+}
+class applauseDsl::Expression {
+}
+class applauseDsl::ExternalOpen {
+}
+class applauseDsl::FetchingContentProviderImplementation {
+  + format : str
+}
+class applauseDsl::Model {
+}
+class applauseDsl::ModelElement {
+  + name : str
+}
+class applauseDsl::ObjectReference {
+}
+class applauseDsl::Parameter {
+}
+class applauseDsl::ProjectClass {
+  + name : str
+}
+class applauseDsl::Property {
+  + derived : bool
+}
+class applauseDsl::PropertyPathPart {
+  + name : str
+}
+class applauseDsl::ProviderConstruction {
+}
+class applauseDsl::ScalarExpression {
+}
+class applauseDsl::Section {
+}
+class applauseDsl::Selector {
+  + name : str
+}
+class applauseDsl::SimpleProviderConstruction {
+}
+class applauseDsl::SimpleType {
+  + platformType : str
+}
+class applauseDsl::StringConcat {
+}
+class applauseDsl::StringFunction {
+}
+class applauseDsl::StringLiteral {
+  + value : str
+}
+class applauseDsl::StringReplace {
+}
+class applauseDsl::StringSplit {
+}
+class applauseDsl::StringUrlConform {
+}
+class applauseDsl::Tab {
+}
+class applauseDsl::TabView {
+}
+class applauseDsl::TableView {
+  + style : str
+}
+class applauseDsl::Type {
+}
+class applauseDsl::TypeDescription {
+  + many : bool
+}
+class applauseDsl::View {
+}
+class applauseDsl::ViewAction {
+}
+class applauseDsl::ViewCall {
+}
+class applauseDsl::ViewContentElement {
+}
+CollectionExpression <|-- applauseDsl::CollectionFunction
+CollectionExpression <|-- applauseDsl::CollectionLiteral
+CollectionExpression <|-- applauseDsl::ObjectReference
+CollectionFunction <|-- applauseDsl::StringSplit
+ContentProviderImplementation <|-- applauseDsl::CustomContentProviderImplementation
+ContentProviderImplementation <|-- applauseDsl::FetchingContentProviderImplementation
+Expression <|-- applauseDsl::CollectionFunction
+Expression <|-- applauseDsl::CollectionLiteral
+Expression <|-- applauseDsl::ObjectReference
+Expression <|-- applauseDsl::StringFunction
+Expression <|-- applauseDsl::StringLiteral
+ModelElement <|-- applauseDsl::ContentProvider
+ModelElement <|-- applauseDsl::Type
+ModelElement <|-- applauseDsl::View
+PropertyPathPart <|-- applauseDsl::CollectionIterator
+PropertyPathPart <|-- applauseDsl::Parameter
+PropertyPathPart <|-- applauseDsl::Property
+ProviderConstruction <|-- applauseDsl::ComplexProviderConstruction
+ProviderConstruction <|-- applauseDsl::SimpleProviderConstruction
+ScalarExpression <|-- applauseDsl::ObjectReference
+ScalarExpression <|-- applauseDsl::StringFunction
+ScalarExpression <|-- applauseDsl::StringLiteral
+StringFunction <|-- applauseDsl::StringConcat
+StringFunction <|-- applauseDsl::StringReplace
+StringFunction <|-- applauseDsl::StringUrlConform
+Type <|-- applauseDsl::Entity
+Type <|-- applauseDsl::SimpleType
+ViewAction <|-- applauseDsl::ExternalOpen
+ViewAction <|-- applauseDsl::Selector
+ViewAction <|-- applauseDsl::ViewCall
+ViewContentElement <|-- applauseDsl::Cell
+ViewContentElement <|-- applauseDsl::Section
+View <|-- applauseDsl::CustomView
+View <|-- applauseDsl::TabView
+View <|-- applauseDsl::TableView
+applauseDsl::ViewAction "0..1" --* "1..1" applauseDsl::Cell : action75
+applauseDsl::Application "0..1" --* "1..1" applauseDsl::Model : application0
+applauseDsl::Expression "0..1" --* "1..1" applauseDsl::ComplexProviderConstruction : argument106
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::Application : background13
+applauseDsl::Cell "0..9999" --* "1..1" applauseDsl::Section : cells64
+applauseDsl::CollectionExpression "0..1" --* "1..1" applauseDsl::CollectionIterator : collection77
+applauseDsl::Parameter "0..1" --* "1..1" applauseDsl::View : content38
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::StringSplit : delimiter101
+applauseDsl::TypeDescription "0..1" --* "1..1" applauseDsl::Property : description22
+applauseDsl::TypeDescription "0..1" --* "1..1" applauseDsl::Parameter : description4
+applauseDsl::Cell "1..1" *-- "0..1" applauseDsl::ScalarExpression : details69
+applauseDsl::ModelElement "0..9999" --* "1..1" applauseDsl::Model : elements1
+applauseDsl::SimpleProviderConstruction "1..1" *-- "0..1" applauseDsl::Expression : expression108
+applauseDsl::Entity "0..1" -- "1..1" applauseDsl::Entity : extends19
+applauseDsl::Tab "1..1" *-- "0..1" applauseDsl::ScalarExpression : icon44
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::Cell : image72
+applauseDsl::ContentProviderImplementation "0..1" --* "1..1" applauseDsl::ContentProvider : implementation30
+applauseDsl::ScalarExpression "0..9999" --* "1..1" applauseDsl::CollectionLiteral : items12
+applauseDsl::ViewContentElement "1..1" *-- "0..1" applauseDsl::CollectionIterator : iterator60
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::StringReplace : match91
+applauseDsl::ObjectReference "1..1" -- "0..1" applauseDsl::PropertyPathPart : object8
+applauseDsl::Parameter "0..1" --* "1..1" applauseDsl::ContentProvider : parameter25
+applauseDsl::Entity "1..1" *-- "0..9999" applauseDsl::Property : properties20
+applauseDsl::ContentProvider "0..1" -- "1..1" applauseDsl::ComplexProviderConstruction : provider104
+applauseDsl::ProviderConstruction "0..1" --* "1..1" applauseDsl::ViewCall : provider84
+applauseDsl::CustomContentProviderImplementation "1..1" *-- "0..1" applauseDsl::ProjectClass : providerClass37
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::StringReplace : replacement94
+applauseDsl::Section "0..9999" --* "1..1" applauseDsl::TableView : sections58
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::FetchingContentProviderImplementation : selection34
+applauseDsl::Application "1..1" *-- "0..1" applauseDsl::ViewCall : startView16
+applauseDsl::Tab "0..9999" --* "1..1" applauseDsl::TabView : tabs40
+applauseDsl::ObjectReference "0..1" --* "1..1" applauseDsl::ObjectReference : tail10
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::Cell : text66
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::Tab : title41
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::TableView : title52
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::Section : title61
+applauseDsl::TableView "1..1" *-- "0..1" applauseDsl::ScalarExpression : titleImage55
+applauseDsl::ContentProvider "1..1" -- "0..1" applauseDsl::Type : type27
+applauseDsl::Type "0..1" -- "1..1" applauseDsl::TypeDescription : type3
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::FetchingContentProviderImplementation : url32
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::ExternalOpen : url79
+applauseDsl::ProviderConstruction "0..1" --* "1..1" applauseDsl::Parameter : value6
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::StringReplace : value89
+applauseDsl::StringUrlConform "1..1" *-- "0..1" applauseDsl::ScalarExpression : value97
+applauseDsl::ScalarExpression "0..1" --* "1..1" applauseDsl::StringSplit : value99
+applauseDsl::StringConcat "1..1" *-- "0..9999" applauseDsl::ScalarExpression : values87
+applauseDsl::Parameter "0..9999" --* "1..1" applauseDsl::TableView : variables50
+applauseDsl::ViewCall "0..1" --* "1..1" applauseDsl::Tab : view47
+applauseDsl::View "0..1" -- "1..1" applauseDsl::ViewCall : view81
+@enduml

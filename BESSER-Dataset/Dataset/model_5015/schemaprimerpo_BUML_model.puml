@@ -1,0 +1,34 @@
+@startuml
+class schemaprimerpo::DocumentRoot {
+  + comment : str
+  + mixed : str
+}
+class schemaprimerpo::EStringToStringMapEntry {
+}
+class schemaprimerpo::Item {
+  + comment : str
+  + partNum : str
+  + productName : str
+  + quantity : str
+  + shipDate : str
+  + uSPrice : str
+}
+class schemaprimerpo::PurchaseOrder {
+  + comment : str
+  + orderDate : str
+}
+class schemaprimerpo::USAddress {
+  + city : str
+  + country : str
+  + name : str
+  + state : str
+  + street : str
+  + zip : str
+}
+schemaprimerpo::USAddress "1..1" --* "1..1" schemaprimerpo::PurchaseOrder : billTo8
+schemaprimerpo::Item "0..9999" --* "1..1" schemaprimerpo::PurchaseOrder : items11
+schemaprimerpo::PurchaseOrder "0..9999" --* "1..1" schemaprimerpo::DocumentRoot : order4
+schemaprimerpo::USAddress "0..1" --* "1..1" schemaprimerpo::PurchaseOrder : shipTo6
+schemaprimerpo::EStringToStringMapEntry "0..9999" --* "1..1" schemaprimerpo::DocumentRoot : xMLNSPrefixMap0
+schemaprimerpo::DocumentRoot "1..1" *-- "0..9999" schemaprimerpo::EStringToStringMapEntry : xSISchemaLocation1
+@enduml

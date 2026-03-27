@@ -1,0 +1,78 @@
+@startuml
+class A {
+}
+class Block {
+}
+class ModelElement {
+}
+class SMElement {
+}
+class Sum {
+}
+class systemmodel::A {
+  + multiValAtt : str
+  + name : str
+}
+class systemmodel::B {
+}
+abstract class systemmodel::Block {
+}
+class systemmodel::C {
+  + name : str
+}
+class systemmodel::Inport {
+}
+abstract class systemmodel::ModelElement {
+}
+class systemmodel::Outport {
+}
+class systemmodel::Root {
+}
+abstract class systemmodel::SMElement {
+}
+class systemmodel::Signal {
+}
+class systemmodel::SrcBlock {
+}
+class systemmodel::Sum {
+}
+class systemmodel::Sum1 {
+}
+class systemmodel::Sum2 {
+}
+class systemmodel::SystemModel {
+}
+class systemmodel::Test {
+}
+class systemmodel::UnitDelay {
+}
+A <|-- systemmodel::B
+Block <|-- systemmodel::SrcBlock
+Block <|-- systemmodel::Sum
+Block <|-- systemmodel::Test
+Block <|-- systemmodel::UnitDelay
+ModelElement <|-- systemmodel::A
+ModelElement <|-- systemmodel::C
+SMElement <|-- systemmodel::Block
+SMElement <|-- systemmodel::Inport
+SMElement <|-- systemmodel::ModelElement
+SMElement <|-- systemmodel::Outport
+SMElement <|-- systemmodel::Root
+SMElement <|-- systemmodel::Signal
+SMElement <|-- systemmodel::SystemModel
+Sum <|-- systemmodel::Sum1
+Sum <|-- systemmodel::Sum2
+systemmodel::Block "0..9999" --* "1..1" systemmodel::SystemModel : blocks0
+systemmodel::Inport "1..1" -- "1..1" systemmodel::Signal : dstPort8
+systemmodel::ModelElement "0..9999" --* "1..1" systemmodel::Root : elements18
+systemmodel::Inport "1..1" -- "0..1" systemmodel::Signal : inSignal9
+systemmodel::Block "1..1" *-- "0..9999" systemmodel::Inport : inports3
+systemmodel::Block "0..9999" -- "1..1" systemmodel::Test : nonUniqueOrderedRef13
+systemmodel::Signal "0..9999" -- "1..1" systemmodel::Outport : outSignals10
+systemmodel::Outport "0..9999" --* "1..1" systemmodel::Block : outports5
+systemmodel::Block "1..1" -- "1..1" systemmodel::Outport : parentBlock12
+systemmodel::B "0..9999" -- "1..1" systemmodel::A : refB15
+systemmodel::C "0..9999" -- "1..1" systemmodel::A : refC16
+systemmodel::Signal "0..9999" --* "1..1" systemmodel::SystemModel : signals1
+systemmodel::Outport "1..1" -- "1..1" systemmodel::Signal : srcPort6
+@enduml

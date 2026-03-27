@@ -1,0 +1,156 @@
+@startuml
+class Expr {
+}
+class Member {
+}
+class Symbol {
+}
+class paplj::Add {
+}
+class paplj::And {
+}
+class paplj::Assignment {
+}
+class paplj::Binding {
+}
+class paplj::Block2 {
+}
+class paplj::Bool {
+  + true : bool
+}
+class paplj::Cast {
+}
+class paplj::Div {
+}
+class paplj::Eq {
+}
+class paplj::Expr {
+}
+class paplj::Field {
+}
+class paplj::If {
+}
+class paplj::Import {
+  + importedNamespace : str
+}
+class paplj::Let {
+}
+class paplj::Lt {
+}
+class paplj::Member {
+}
+class paplj::MemberRef {
+  + methodInvocation : bool
+}
+class paplj::Method {
+}
+class paplj::Min {
+}
+class paplj::Mul {
+}
+class paplj::Neq {
+}
+class paplj::New {
+}
+class paplj::Not {
+}
+class paplj::Null {
+}
+class paplj::Num {
+  + value : int
+}
+class paplj::Or {
+}
+class paplj::Param {
+}
+class paplj::Program {
+  + name : str
+}
+class paplj::Sub {
+}
+class paplj::Symbol {
+  + name : str
+}
+class paplj::This {
+}
+class paplj::Type {
+  + name : str
+}
+class paplj::Var {
+  + methodInvocation : bool
+}
+Expr <|-- paplj::Add
+Expr <|-- paplj::And
+Expr <|-- paplj::Assignment
+Expr <|-- paplj::Block2
+Expr <|-- paplj::Bool
+Expr <|-- paplj::Cast
+Expr <|-- paplj::Div
+Expr <|-- paplj::Eq
+Expr <|-- paplj::If
+Expr <|-- paplj::Let
+Expr <|-- paplj::Lt
+Expr <|-- paplj::MemberRef
+Expr <|-- paplj::Min
+Expr <|-- paplj::Mul
+Expr <|-- paplj::Neq
+Expr <|-- paplj::New
+Expr <|-- paplj::Not
+Expr <|-- paplj::Null
+Expr <|-- paplj::Num
+Expr <|-- paplj::Or
+Expr <|-- paplj::Sub
+Expr <|-- paplj::This
+Expr <|-- paplj::Var
+Member <|-- paplj::Field
+Member <|-- paplj::Method
+Symbol <|-- paplj::Binding
+Symbol <|-- paplj::Member
+Symbol <|-- paplj::Param
+paplj::Expr "0..9999" --* "1..1" paplj::Var : args106
+paplj::Expr "0..9999" --* "1..1" paplj::MemberRef : args97
+paplj::Binding "0..9999" --* "1..1" paplj::Let : bindings28
+paplj::Block2 "0..1" --* "1..1" paplj::Method : body13
+paplj::Type "0..9999" --* "1..1" paplj::Program : classes1
+paplj::If "1..1" *-- "0..1" paplj::Expr : condition20
+paplj::Program "1..1" *-- "0..1" paplj::Expr : expr3
+paplj::Let "1..1" *-- "0..1" paplj::Expr : expr30
+paplj::Expr "0..1" --* "1..1" paplj::Not : expr88
+paplj::Min "1..1" *-- "0..1" paplj::Expr : expr90
+paplj::Expr "0..9999" --* "1..1" paplj::Block2 : exprs17
+paplj::Import "0..9999" --* "1..1" paplj::Program : imports0
+paplj::Expr "0..1" --* "1..1" paplj::Assignment : left33
+paplj::Expr "0..1" --* "1..1" paplj::Or : left38
+paplj::And "1..1" *-- "0..1" paplj::Expr : left43
+paplj::Expr "0..1" --* "1..1" paplj::Eq : left48
+paplj::Neq "1..1" *-- "0..1" paplj::Expr : left53
+paplj::Expr "0..1" --* "1..1" paplj::Lt : left58
+paplj::Add "1..1" *-- "0..1" paplj::Expr : left63
+paplj::Expr "0..1" --* "1..1" paplj::Sub : left68
+paplj::Mul "1..1" *-- "0..1" paplj::Expr : left73
+paplj::Expr "0..1" --* "1..1" paplj::Div : left78
+paplj::Cast "1..1" *-- "0..1" paplj::Expr : left83
+paplj::Expr "0..1" --* "1..1" paplj::MemberRef : left92
+paplj::Var "1..1" -- "0..1" paplj::Symbol : member104
+paplj::Member "0..1" -- "1..1" paplj::MemberRef : member94
+paplj::Type "1..1" *-- "0..9999" paplj::Member : members8
+paplj::Expr "0..1" --* "1..1" paplj::If : onFalse25
+paplj::Expr "0..1" --* "1..1" paplj::If : onTrue22
+paplj::Param "0..9999" --* "1..1" paplj::Method : params12
+paplj::Expr "0..1" --* "1..1" paplj::Or : right40
+paplj::Expr "0..1" --* "1..1" paplj::And : right45
+paplj::Expr "0..1" --* "1..1" paplj::Eq : right50
+paplj::Expr "0..1" --* "1..1" paplj::Neq : right55
+paplj::Expr "0..1" --* "1..1" paplj::Lt : right60
+paplj::Expr "0..1" --* "1..1" paplj::Add : right65
+paplj::Expr "0..1" --* "1..1" paplj::Sub : right70
+paplj::Expr "0..1" --* "1..1" paplj::Mul : right75
+paplj::Expr "0..1" --* "1..1" paplj::Div : right80
+paplj::Type "0..1" -- "1..1" paplj::Type : superType6
+paplj::Type "0..1" -- "1..1" paplj::Symbol : type10
+paplj::Type "0..1" -- "1..1" paplj::Null : type100
+paplj::Type "0..1" -- "1..1" paplj::New : type102
+paplj::Type "0..1" -- "1..1" paplj::Cast : type85
+paplj::Expr "0..1" --* "1..1" paplj::Binding : value15
+paplj::Expr "0..1" --* "1..1" paplj::Assignment : value35
+@enduml

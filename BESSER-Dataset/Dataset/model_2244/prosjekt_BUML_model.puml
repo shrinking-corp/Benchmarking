@@ -1,0 +1,26 @@
+@startuml
+class prosjekt::Course {
+  + avgGrade : int
+  + code : str
+  + name : str
+  + studyPoints : float
+}
+class prosjekt::CourseCoordinator {
+  + name : str
+}
+class prosjekt::Institute {
+  + name : str
+  + shortName : str
+}
+class prosjekt::Semester {
+  + name : str
+}
+prosjekt::Course "0..1" -- "1..1" prosjekt::Institute : course0
+prosjekt::Course "0..1" -- "1..1" prosjekt::CourseCoordinator : course11
+prosjekt::Course "0..1" -- "1..1" prosjekt::Semester : course9
+prosjekt::CourseCoordinator "0..9999" -- "1..1" prosjekt::Institute : courseCoordinator1
+prosjekt::CourseCoordinator "0..9999" --* "1..1" prosjekt::Course : courseCoordinator6
+prosjekt::Institute "0..1" -- "1..1" prosjekt::CourseCoordinator : institute13
+prosjekt::Institute "0..1" --* "1..1" prosjekt::Course : institute3
+prosjekt::Course "1..1" *-- "0..1" prosjekt::Semester : semester4
+@enduml

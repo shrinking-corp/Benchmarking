@@ -1,0 +1,49 @@
+@startuml
+class Employee {
+}
+class company::Company {
+  + eotmDelta : str
+  + name : str
+}
+class company::Department {
+  + biggestNumberOfStudentsOrFreelancers : str
+  + budget : str
+  + maxJuniors : str
+  + name : str
+  + calcExpenses() : str
+  + sumBudget() : str
+}
+class company::Division {
+  + budget : str
+  + name : str
+  + numberEmployeesOfTheMonth : str
+}
+class company::Employee {
+  + age : str
+  + name : str
+  + salary : str
+}
+class company::Freelance {
+  + assignment : str
+}
+class company::Student {
+}
+Employee <|-- company::Freelance
+Employee <|-- company::Student
+company::Employee "0..1" -- "1..1" company::Department : boss9
+company::Company "0..1" -- "1..1" company::Division : company26
+company::Department "0..9999" --* "1..1" company::Division : department19
+company::Division "0..1" -- "1..1" company::Employee : directed3
+company::Division "1..1" *-- "0..1" company::Employee : director21
+company::Division "0..1" -- "1..1" company::Company : division27
+company::Company "1..1" -- "0..1" company::Employee : divisionDirector29
+company::Department "1..1" *-- "0..9999" company::Employee : employee8
+company::Department "1..1" -- "0..9999" company::Employee : employeeOfTheMonth17
+company::Employee "0..9999" -- "1..1" company::Division : employeesOfTheMonth23
+company::Department "0..1" -- "1..1" company::Employee : employer0
+company::Student "0..1" -- "1..1" company::Employee : intern6
+company::Department "0..1" -- "1..1" company::Employee : managed1
+company::Department "0..1" -- "1..1" company::Department : parentDepartment15
+company::Employee "1..1" *-- "0..1" company::Employee : secretary5
+company::Department "0..9999" --* "1..1" company::Department : subDepartment12
+@enduml

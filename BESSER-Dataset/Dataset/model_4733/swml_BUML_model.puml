@@ -1,0 +1,127 @@
+@startuml
+enum Datentyp {
+  Boolean
+  Date
+  Email
+  Float
+  Integer
+  String
+  Time
+}
+class EntityPages {
+}
+class LinkKat1 {
+}
+class LinkKat2 {
+}
+class Links {
+}
+class WebPage {
+}
+class dynamicPage {
+}
+class swml::Attribute {
+  + Typ : str
+  + name : str
+}
+class swml::ContentModel {
+}
+class swml::ContextualLinks {
+}
+class swml::CreatePage {
+}
+class swml::DeletePage {
+}
+class swml::Entity {
+  + name : str
+}
+class swml::EntityPages {
+}
+class swml::EnumTyp {
+  + name : str
+}
+class swml::Enumeration {
+  + name : str
+}
+class swml::HypertextModel {
+}
+class swml::IndexPages {
+}
+class swml::KO {
+}
+class swml::LinkJoinNode {
+}
+abstract class swml::LinkKat1 {
+}
+abstract class swml::LinkKat2 {
+}
+class swml::LinkParamater {
+  + Parameter : str
+}
+abstract class swml::Links {
+  + Name : str
+}
+class swml::Literals {
+  + name : str
+}
+class swml::NonContextualLinks {
+}
+class swml::OK {
+}
+class swml::Reference {
+  + lowerBound : int
+  + rolename : str
+  + upperBound : int
+}
+class swml::UpdatePage {
+}
+class swml::WebModel {
+}
+abstract class swml::WebPage {
+  + name : str
+}
+abstract class swml::dynamicPage {
+}
+class swml::staticPage {
+}
+EntityPages <|-- swml::CreatePage
+EntityPages <|-- swml::DeletePage
+EntityPages <|-- swml::UpdatePage
+LinkKat1 <|-- swml::KO
+LinkKat1 <|-- swml::OK
+LinkKat2 <|-- swml::ContextualLinks
+LinkKat2 <|-- swml::NonContextualLinks
+Links <|-- swml::LinkKat1
+Links <|-- swml::LinkKat2
+WebPage <|-- swml::LinkJoinNode
+WebPage <|-- swml::dynamicPage
+WebPage <|-- swml::staticPage
+dynamicPage <|-- swml::EntityPages
+dynamicPage <|-- swml::IndexPages
+swml::Attribute "1..9999" --* "1..1" swml::Entity : Attributes9
+swml::Entity "0..9999" --* "1..1" swml::Entity : Child14
+swml::Entity "1..9999" --* "1..1" swml::ContentModel : Entities5
+swml::dynamicPage "1..1" -- "1..1" swml::Entity : EntityType34
+swml::EnumTyp "0..9999" --* "1..1" swml::Entity : EnumAttribute7
+swml::ContentModel "1..1" *-- "0..9999" swml::Enumeration : Enumerations3
+swml::EnumTyp "1..1" -- "1..1" swml::Enumeration : Enums16
+swml::dynamicPage "0..9999" -- "1..1" swml::EntityPages : InnerPage36
+swml::KO "1..1" --* "1..1" swml::UpdatePage : KOLink39
+swml::KO "1..1" --* "1..1" swml::DeletePage : KOLink43
+swml::KO "1..1" --* "1..1" swml::CreatePage : KOLink48
+swml::LinkKat2 "0..9999" --* "1..1" swml::WebPage : Link31
+swml::Links "1..1" *-- "1..1" swml::LinkParamater : Link51
+swml::LinkKat1 "0..9999" --* "1..1" swml::LinkJoinNode : Links33
+swml::OK "1..1" --* "1..1" swml::UpdatePage : OKLink38
+swml::DeletePage "1..1" *-- "1..1" swml::OK : OKLink41
+swml::OK "1..1" --* "1..1" swml::CreatePage : OKLink46
+swml::Reference "0..1" -- "1..1" swml::Reference : Opposite20
+swml::Entity "1..1" -- "1..1" swml::Reference : RefTo22
+swml::Reference "0..9999" --* "1..1" swml::Entity : References11
+swml::WebPage "1..1" -- "1..1" swml::Links : TargetPage52
+swml::HypertextModel "1..1" *-- "1..9999" swml::WebPage : WebPages27
+swml::ContentModel "1..9999" --* "1..1" swml::WebModel : contentmodels1
+swml::staticPage "1..1" -- "1..1" swml::HypertextModel : homepage29
+swml::HypertextModel "1..9999" --* "1..1" swml::WebModel : hypertextmodels0
+swml::Literals "0..9999" --* "1..1" swml::Enumeration : ownedLiteral25
+@enduml

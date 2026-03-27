@@ -1,0 +1,39 @@
+@startuml
+class StudyProgramme::Course {
+  + code : str
+  + credits : float
+  + level : str
+  + name : str
+}
+class StudyProgramme::CourseGroup {
+  + status : str
+}
+class StudyProgramme::Department {
+  + code : str
+  + name : str
+}
+class StudyProgramme::Programme {
+  + code : str
+  + duration : int
+  + name : str
+}
+class StudyProgramme::Semester {
+  + creditConstraint : str
+  + number : int
+  + season : str
+  + totalCredits : float
+}
+class StudyProgramme::Specialization {
+  + name : str
+}
+StudyProgramme::Department "1..1" *-- "0..9999" StudyProgramme::Course : course21
+StudyProgramme::Semester "1..1" *-- "1..2" StudyProgramme::CourseGroup : courseGroups5
+StudyProgramme::Course "0..9999" -- "1..1" StudyProgramme::Semester : courseList3
+StudyProgramme::Course "1..9999" -- "1..1" StudyProgramme::CourseGroup : coursesInGroup16
+StudyProgramme::Semester "0..9999" --* "1..1" StudyProgramme::Programme : programmeSemester0
+StudyProgramme::Specialization "0..9999" --* "1..1" StudyProgramme::Programme : programmeSpecializaton1
+StudyProgramme::Programme "0..9999" --* "1..1" StudyProgramme::Department : programmes19
+StudyProgramme::Specialization "1..1" *-- "0..9999" StudyProgramme::Semester : semesters10
+StudyProgramme::Course "0..1" -- "1..1" StudyProgramme::Specialization : specializationCourse7
+StudyProgramme::Specialization "0..9999" --* "1..1" StudyProgramme::Specialization : specializations14
+@enduml

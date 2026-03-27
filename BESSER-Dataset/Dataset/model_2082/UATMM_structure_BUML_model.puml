@@ -1,0 +1,84 @@
+@startuml
+class Connector {
+}
+enum EdgeKind {
+  DEPENDENCY
+  TRIGGER
+}
+enum Nature {
+  Attack
+  Fault
+  Hybrid
+}
+enum RoleType {
+  Contributing
+  Counteracting
+}
+class UATMM::structure::AND {
+}
+class UATMM::structure::AttackTree {
+}
+class UATMM::structure::Connector {
+}
+class UATMM::structure::Edge {
+  + edgeKind : str
+}
+class UATMM::structure::FDEP {
+}
+class UATMM::structure::KofN {
+  + Threshold : int
+}
+class UATMM::structure::Node {
+  + id : str
+  + label : str
+  + nature : str
+  + role : str
+}
+class UATMM::structure::OR {
+}
+class UATMM::structure::PAND {
+}
+class UATMM::structure::RDEP {
+  + factor : float
+}
+class UATMM::structure::SAND {
+}
+class UATMM::structure::SOR {
+}
+class UATMM::structure::Spare {
+}
+class UATMM::structure::TAND {
+}
+class UATMM::structure::TreeMetaData {
+  + Key : str
+  + Value : str
+}
+class UATMM::structure::Weighted {
+  + Treshold : float
+  + Weights : float
+}
+class UATMM::structure::XOR {
+}
+Connector <|-- UATMM::structure::AND
+Connector <|-- UATMM::structure::FDEP
+Connector <|-- UATMM::structure::KofN
+Connector <|-- UATMM::structure::OR
+Connector <|-- UATMM::structure::PAND
+Connector <|-- UATMM::structure::RDEP
+Connector <|-- UATMM::structure::SAND
+Connector <|-- UATMM::structure::SOR
+Connector <|-- UATMM::structure::Spare
+Connector <|-- UATMM::structure::TAND
+Connector <|-- UATMM::structure::Weighted
+Connector <|-- UATMM::structure::XOR
+UATMM::structure::AttackTree "1..1" *-- "0..9999" UATMM::structure::Edge : Edges4
+UATMM::structure::Node "1..9999" --* "1..1" UATMM::structure::AttackTree : Nodes1
+UATMM::structure::Node "1..1" -- "1..1" UATMM::structure::AttackTree : Root0
+UATMM::structure::Node "1..1" -- "1..1" UATMM::structure::Edge : Source17
+UATMM::structure::Node "1..1" -- "1..1" UATMM::structure::Edge : Target14
+UATMM::structure::Node "0..9999" -- "1..1" UATMM::structure::Node : children10
+UATMM::structure::Connector "0..1" --* "1..1" UATMM::structure::Node : connector8
+UATMM::structure::Connector "1..1" -- "1..1" UATMM::structure::Node : gate20
+UATMM::structure::AttackTree "1..1" *-- "0..9999" UATMM::structure::TreeMetaData : metadata6
+UATMM::structure::Node "1..1" -- "0..9999" UATMM::structure::Node : parents12
+@enduml

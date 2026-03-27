@@ -1,0 +1,67 @@
+@startuml
+class BinaryExpression {
+}
+class Expression {
+}
+class FeatureCallExpression {
+}
+class Statement {
+}
+class simple::lang::ArithmeticExpression {
+}
+class simple::lang::AssignmentStatement {
+}
+abstract class simple::lang::BinaryExpression {
+  + operator : str
+}
+class simple::lang::ComparisonExpression {
+}
+abstract class simple::lang::Expression {
+}
+class simple::lang::ExpressionStatement {
+}
+abstract class simple::lang::FeatureCallExpression {
+  + name : str
+}
+class simple::lang::IfStatement {
+}
+class simple::lang::LogicalExpression {
+}
+class simple::lang::MethodCallExpression {
+}
+class simple::lang::PropertyCallExpression {
+}
+class simple::lang::SimpleLang {
+}
+abstract class simple::lang::Statement {
+}
+class simple::lang::Type {
+}
+class simple::lang::WhileStatement {
+}
+BinaryExpression <|-- simple::lang::ArithmeticExpression
+BinaryExpression <|-- simple::lang::ComparisonExpression
+BinaryExpression <|-- simple::lang::LogicalExpression
+Expression <|-- simple::lang::BinaryExpression
+Expression <|-- simple::lang::FeatureCallExpression
+FeatureCallExpression <|-- simple::lang::MethodCallExpression
+FeatureCallExpression <|-- simple::lang::PropertyCallExpression
+Statement <|-- simple::lang::AssignmentStatement
+Statement <|-- simple::lang::ExpressionStatement
+Statement <|-- simple::lang::IfStatement
+Statement <|-- simple::lang::WhileStatement
+simple::lang::Expression "0..9999" --* "1..1" simple::lang::MethodCallExpression : arguments9
+simple::lang::Expression "1..1" --* "1..1" simple::lang::IfStatement : condition13
+simple::lang::Expression "1..1" --* "1..1" simple::lang::WhileStatement : condition21
+simple::lang::Statement "0..9999" --* "1..1" simple::lang::IfStatement : elseBody18
+simple::lang::Expression "1..1" --* "1..1" simple::lang::ExpressionStatement : expression11
+simple::lang::IfStatement "1..1" *-- "1..9999" simple::lang::Statement : ifBody15
+simple::lang::Expression "1..1" --* "1..1" simple::lang::BinaryExpression : lhs2
+simple::lang::Expression "1..1" --* "1..1" simple::lang::AssignmentStatement : lhs26
+simple::lang::Expression "1..1" --* "1..1" simple::lang::AssignmentStatement : rhs28
+simple::lang::Expression "1..1" --* "1..1" simple::lang::BinaryExpression : rhs4
+simple::lang::WhileStatement "1..1" *-- "1..9999" simple::lang::Statement : statement23
+simple::lang::Statement "0..9999" --* "1..1" simple::lang::SimpleLang : statements0
+simple::lang::FeatureCallExpression "1..1" *-- "0..1" simple::lang::Expression : target7
+simple::lang::Expression "1..1" *-- "1..1" simple::lang::Type : type1
+@enduml

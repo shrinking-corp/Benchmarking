@@ -1,0 +1,35 @@
+@startuml
+class Named {
+}
+class Person {
+}
+abstract class school::Named {
+  + name : str
+}
+abstract class school::Person {
+}
+class school::School {
+  + getStudents() : void
+  + getTeachers() : void
+}
+class school::SchoolModel {
+}
+class school::SchoolStatistics {
+  + studentsNumber : int
+  + studentsWithNoTeacher : str
+  + teachersNumber : int
+}
+class school::Student {
+  + registrationNum : int
+}
+class school::Teacher {
+}
+Named <|-- school::Person
+Named <|-- school::School
+Person <|-- school::Student
+Person <|-- school::Teacher
+school::Person "0..9999" --* "1..1" school::School : persons3
+school::School "0..9999" --* "1..1" school::SchoolModel : schools0
+school::SchoolStatistics "0..1" --* "1..1" school::School : statistics1
+school::Teacher "0..9999" -- "1..1" school::Student : teachers5
+@enduml

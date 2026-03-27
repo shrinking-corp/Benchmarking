@@ -1,0 +1,116 @@
+@startuml
+class Expression {
+}
+class Instruction {
+}
+class logo::Backward {
+}
+class logo::Block {
+}
+class logo::Clear {
+}
+class logo::Constant {
+  + integerValue : int
+}
+class logo::Div {
+}
+class logo::Equals {
+}
+class logo::Expression {
+}
+class logo::Forward {
+}
+class logo::Greater {
+}
+class logo::If {
+}
+class logo::Instruction {
+}
+class logo::Left {
+}
+class logo::LogoProgram {
+}
+class logo::Lower {
+}
+class logo::Minus {
+}
+class logo::Mult {
+}
+class logo::Parameter {
+  + name : str
+}
+class logo::ParameterCall {
+}
+class logo::PenDown {
+}
+class logo::PenUp {
+}
+class logo::Plus {
+}
+class logo::ProcCall {
+}
+class logo::ProcDeclaration {
+  + name : str
+}
+class logo::Repeat {
+}
+class logo::Right {
+}
+class logo::While {
+}
+Expression <|-- logo::Constant
+Expression <|-- logo::Div
+Expression <|-- logo::Equals
+Expression <|-- logo::Greater
+Expression <|-- logo::Lower
+Expression <|-- logo::Minus
+Expression <|-- logo::Mult
+Expression <|-- logo::ParameterCall
+Expression <|-- logo::Plus
+Instruction <|-- logo::Backward
+Instruction <|-- logo::Block
+Instruction <|-- logo::Clear
+Instruction <|-- logo::Forward
+Instruction <|-- logo::If
+Instruction <|-- logo::Left
+Instruction <|-- logo::ParameterCall
+Instruction <|-- logo::PenDown
+Instruction <|-- logo::PenUp
+Instruction <|-- logo::ProcCall
+Instruction <|-- logo::ProcDeclaration
+Instruction <|-- logo::Repeat
+Instruction <|-- logo::Right
+Instruction <|-- logo::While
+logo::ProcCall "1..1" *-- "0..9999" logo::Expression : actualArgs9
+logo::Expression "0..1" --* "1..1" logo::Left : angle4
+logo::Right "1..1" *-- "0..1" logo::Expression : angle6
+logo::Parameter "0..9999" --* "1..1" logo::ProcDeclaration : args12
+logo::Repeat "1..1" *-- "0..1" logo::Block : block29
+logo::Block "0..1" --* "1..1" logo::While : block34
+logo::If "1..1" *-- "0..1" logo::Expression : condition19
+logo::Expression "0..1" --* "1..1" logo::Repeat : condition27
+logo::Expression "0..1" --* "1..1" logo::While : condition32
+logo::ProcDeclaration "0..1" -- "1..1" logo::ProcCall : declaration8
+logo::Block "0..1" --* "1..1" logo::If : elsePart24
+logo::Instruction "0..9999" --* "1..1" logo::LogoProgram : instructions0
+logo::Instruction "0..9999" --* "1..1" logo::ProcDeclaration : instructions14
+logo::Instruction "0..9999" --* "1..1" logo::Block : instructions17
+logo::Equals "1..1" *-- "0..1" logo::Expression : lhs39
+logo::Expression "0..1" --* "1..1" logo::Greater : lhs44
+logo::Lower "1..1" *-- "0..1" logo::Expression : lhs49
+logo::Expression "0..1" --* "1..1" logo::Plus : lhs54
+logo::Minus "1..1" *-- "0..1" logo::Expression : lhs59
+logo::Expression "0..1" --* "1..1" logo::Mult : lhs64
+logo::Expression "0..1" --* "1..1" logo::Div : lhs69
+logo::ParameterCall "1..1" -- "0..1" logo::Parameter : parameter37
+logo::Expression "0..1" --* "1..1" logo::Equals : rhs41
+logo::Expression "0..1" --* "1..1" logo::Greater : rhs46
+logo::Expression "0..1" --* "1..1" logo::Lower : rhs51
+logo::Expression "0..1" --* "1..1" logo::Plus : rhs56
+logo::Expression "0..1" --* "1..1" logo::Minus : rhs61
+logo::Expression "0..1" --* "1..1" logo::Mult : rhs66
+logo::Expression "0..1" --* "1..1" logo::Div : rhs71
+logo::Backward "1..1" *-- "0..1" logo::Expression : steps1
+logo::Expression "0..1" --* "1..1" logo::Forward : steps2
+logo::Block "0..1" --* "1..1" logo::If : thenPart21
+@enduml

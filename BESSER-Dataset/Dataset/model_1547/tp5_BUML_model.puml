@@ -1,0 +1,38 @@
+@startuml
+class tp5::Collaboration {
+  + ratio : int
+}
+class tp5::Paper {
+  + name : str
+}
+class tp5::Paragraph {
+  + content : str
+  + id : int
+  + name : str
+}
+class tp5::Position {
+  + description : str
+  + name : str
+}
+class tp5::PublicationStructure {
+}
+class tp5::Researcher {
+  + forName : str
+  + name : str
+}
+class tp5::Skill {
+  + description : str
+}
+tp5::Researcher "0..9999" -- "1..1" tp5::Paper : authors7
+tp5::Paper "0..1" -- "1..1" tp5::Paper : citedBy9
+tp5::Collaboration "1..1" -- "0..1" tp5::Paper : col_paper22
+tp5::Researcher "1..1" *-- "0..9999" tp5::Collaboration : collaborations4
+tp5::Paper "0..9999" --* "1..1" tp5::PublicationStructure : papers13
+tp5::Paragraph "0..9999" --* "1..1" tp5::Paper : paragraphs6
+tp5::Position "0..1" -- "1..1" tp5::Position : parent20
+tp5::Position "0..9999" --* "1..1" tp5::PublicationStructure : positions16
+tp5::Paper "0..9999" -- "1..1" tp5::Researcher : res_papers0
+tp5::Position "0..1" -- "1..1" tp5::Researcher : res_position2
+tp5::PublicationStructure "1..1" *-- "0..9999" tp5::Researcher : researchers11
+tp5::Researcher "1..1" *-- "0..9999" tp5::Skill : skills1
+@enduml

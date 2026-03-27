@@ -1,0 +1,60 @@
+@startuml
+class CourseSlot {
+}
+enum Credits {
+  Basic
+  Double
+  Full
+  Minor
+}
+enum ProgrammeType {
+  Bachelor
+  IntegrertMaster
+  Master
+  Årsstudie
+}
+enum Seasons {
+  Fall
+  Spring
+}
+class universityStudies::Course {
+  + code : str
+  + credits : str
+  + level : int
+  + name : str
+}
+abstract class universityStudies::CourseSlot {
+}
+class universityStudies::Department {
+}
+class universityStudies::ElectiveCourseSlot {
+}
+class universityStudies::MandatoryCourseSlot {
+}
+class universityStudies::Programme {
+  + name : str
+  + numberOfSemesters : int
+  + programmeType : str
+}
+class universityStudies::Semester {
+  + name : str
+  + season : str
+  + semesterNumber : int
+}
+class universityStudies::Specialization {
+  + name : str
+}
+CourseSlot <|-- universityStudies::ElectiveCourseSlot
+CourseSlot <|-- universityStudies::MandatoryCourseSlot
+universityStudies::Department "1..1" *-- "0..9999" universityStudies::Course : Courses14
+universityStudies::Programme "1..1" -- "0..1" universityStudies::Department : Department5
+universityStudies::Programme "0..1" --* "1..1" universityStudies::Department : Programmes16
+universityStudies::Course "0..1" -- "1..1" universityStudies::CourseSlot : course18
+universityStudies::CourseSlot "1..9999" --* "1..1" universityStudies::Semester : courseSlots12
+universityStudies::Specialization "0..9999" --* "1..1" universityStudies::Specialization : furtherSpecializations7
+universityStudies::Course "0..9999" -- "1..1" universityStudies::ElectiveCourseSlot : optionalCourses21
+universityStudies::Programme "0..9999" --* "1..1" universityStudies::Course : programmes0
+universityStudies::Programme "1..1" *-- "0..10" universityStudies::Semester : semesters3
+universityStudies::Semester "0..9999" --* "1..1" universityStudies::Specialization : semesters9
+universityStudies::Specialization "0..9999" --* "1..1" universityStudies::Programme : specializations1
+@enduml

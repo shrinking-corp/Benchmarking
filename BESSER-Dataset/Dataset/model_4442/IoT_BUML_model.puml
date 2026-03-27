@@ -1,0 +1,115 @@
+@startuml
+class Condition {
+}
+class ioT::AndCondition {
+}
+class ioT::ComparisonCondition {
+  + operator : str
+}
+class ioT::Condition {
+}
+class ioT::Destination {
+  + name : str
+}
+class ioT::DestinationType {
+  + name : str
+}
+class ioT::DestinationTypes {
+}
+class ioT::Device {
+  + name : str
+}
+class ioT::DeviceType {
+  + name : str
+}
+class ioT::DeviceTypes {
+}
+class ioT::EObject {
+}
+class ioT::FetchData {
+}
+class ioT::FetchDataCondition {
+}
+class ioT::FetchDataExpression {
+  + timeUnit : str
+}
+class ioT::Ip {
+  + ip : int
+}
+class ioT::LiteralBool {
+  + value : str
+}
+class ioT::LiteralNumber {
+  + value : int
+}
+class ioT::Method {
+  + name : str
+  + parameters : str
+}
+class ioT::OrCondition {
+}
+class ioT::Portnumber {
+  + number : int
+}
+class ioT::Sensor {
+  + name : str
+}
+class ioT::SensorGetMethod {
+}
+class ioT::SensorGroup {
+  + name : str
+}
+class ioT::SensorType {
+  + name : str
+}
+class ioT::SensorTypes {
+}
+class ioT::Server {
+  + name : str
+}
+class ioT::ServerType {
+  + name : str
+}
+class ioT::ServerTypes {
+}
+class ioT::System {
+}
+class ioT::Time {
+  + time : int
+}
+Condition <|-- ioT::AndCondition
+Condition <|-- ioT::ComparisonCondition
+Condition <|-- ioT::LiteralBool
+Condition <|-- ioT::LiteralNumber
+Condition <|-- ioT::Method
+Condition <|-- ioT::OrCondition
+ioT::FetchDataCondition "0..1" --* "1..1" ioT::FetchData : condition34
+ioT::Condition "0..1" --* "1..1" ioT::FetchDataCondition : condition40
+ioT::EObject "0..1" -- "1..1" ioT::FetchData : destination31
+ioT::FetchData "1..1" -- "0..1" ioT::Device : device28
+ioT::EObject "0..1" -- "1..1" ioT::Device : devices13
+ioT::FetchDataExpression "1..1" *-- "0..1" ioT::Time : duration38
+ioT::FetchDataCondition "0..1" --* "1..1" ioT::FetchDataCondition : else43
+ioT::EObject "0..1" -- "1..1" ioT::FetchData : filter26
+ioT::Ip "0..1" --* "1..1" ioT::Server : ip19
+ioT::Condition "0..1" --* "1..1" ioT::OrCondition : left45
+ioT::Condition "0..1" --* "1..1" ioT::AndCondition : left50
+ioT::Condition "0..1" --* "1..1" ioT::ComparisonCondition : left55
+ioT::SensorGetMethod "1..1" *-- "0..1" ioT::Method : method6
+ioT::Server "1..1" *-- "0..1" ioT::Portnumber : port21
+ioT::OrCondition "1..1" *-- "0..1" ioT::Condition : right47
+ioT::AndCondition "1..1" *-- "0..1" ioT::Condition : right52
+ioT::Condition "0..1" --* "1..1" ioT::ComparisonCondition : right57
+ioT::Sensor "0..9999" -- "1..1" ioT::SensorGroup : sensors4
+ioT::EObject "0..9999" --* "1..1" ioT::System : system0
+ioT::FetchDataExpression "0..1" --* "1..1" ioT::FetchData : triggered36
+ioT::DeviceType "0..1" -- "1..1" ioT::Device : type11
+ioT::ServerType "0..1" -- "1..1" ioT::Server : type17
+ioT::SensorType "0..1" -- "1..1" ioT::Sensor : type2
+ioT::DestinationType "0..1" -- "1..1" ioT::Destination : type24
+ioT::SensorType "0..1" -- "1..1" ioT::SensorGetMethod : type7
+ioT::SensorTypes "1..1" *-- "0..9999" ioT::SensorType : types1
+ioT::DeviceType "0..9999" --* "1..1" ioT::DeviceTypes : types10
+ioT::ServerTypes "1..1" *-- "0..9999" ioT::ServerType : types16
+ioT::DestinationType "0..9999" --* "1..1" ioT::DestinationTypes : types23
+@enduml

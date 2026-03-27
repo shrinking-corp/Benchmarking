@@ -1,0 +1,53 @@
+@startuml
+enum Genre {
+  Adventure
+  SciFi
+}
+enum StaffListType {
+  characters
+  titles
+}
+class imdb::Movie {
+  + age : int
+  + criticReviews : int
+  + genres : str
+  + metaScore : int
+  + metacriticReviews : int
+  + poster : str
+  + rating : float
+  + releaseDate : date
+  + runtime : int
+  + synopsis : str
+  + title : str
+  + userRatings : int
+  + userReviews : int
+}
+class imdb::Person {
+  + name : str
+}
+class imdb::StaffList {
+  + coverPhoto : str
+  + createdDate : date
+  + elementType : str
+  + elements : str
+  + name : str
+}
+class imdb::User {
+  + username : str
+  + watchlist : str
+}
+class imdb::db {
+  + bestOf2014 : str
+  + sam() : str
+}
+imdb::Person "0..9999" -- "1..1" imdb::Movie : actors4
+imdb::Person "0..9999" --* "1..1" imdb::db : allActors12
+imdb::Person "0..9999" --* "1..1" imdb::db : allDirectors7
+imdb::Movie "0..9999" --* "1..1" imdb::db : allMovies15
+imdb::StaffList "0..9999" --* "1..1" imdb::db : allStaffLists18
+imdb::db "1..1" *-- "0..9999" imdb::User : allUsers20
+imdb::Person "0..9999" --* "1..1" imdb::db : allWriters9
+imdb::Movie "1..1" -- "0..1" imdb::Person : director0
+imdb::User "0..1" -- "1..1" imdb::StaffList : user22
+imdb::Person "0..9999" -- "1..1" imdb::Movie : writers1
+@enduml

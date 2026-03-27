@@ -1,0 +1,72 @@
+@startuml
+class Activities {
+}
+class Parameter {
+}
+class ProcessElement {
+}
+enum WorkSequenceType {
+  finishToFinish
+  finishToStart
+  startToFinish
+  startToStart
+}
+abstract class simplepdl::Activities {
+  + max_time : int
+  + min_time : int
+  + name : str
+}
+class simplepdl::Guidance {
+  + text : str
+}
+abstract class simplepdl::Parameter {
+  + name : str
+  + nbNeeds : int
+}
+class simplepdl::ParameterSWD {
+}
+class simplepdl::ParameterWD {
+}
+class simplepdl::Process {
+  + max_time : int
+  + min_time : int
+  + name : str
+}
+abstract class simplepdl::ProcessElement {
+}
+class simplepdl::Resource {
+  + marking : int
+  + name : str
+}
+class simplepdl::SubWorkDefinition {
+}
+class simplepdl::WorkDefinition {
+}
+class simplepdl::WorkSequence {
+  + linkType : str
+  + name : str
+}
+Activities <|-- simplepdl::SubWorkDefinition
+Activities <|-- simplepdl::WorkDefinition
+Parameter <|-- simplepdl::ParameterSWD
+Parameter <|-- simplepdl::ParameterWD
+ProcessElement <|-- simplepdl::Activities
+ProcessElement <|-- simplepdl::Guidance
+ProcessElement <|-- simplepdl::Parameter
+ProcessElement <|-- simplepdl::WorkSequence
+simplepdl::Activities "1..1" -- "0..9999" simplepdl::SubWorkDefinition : children11
+simplepdl::Guidance "1..1" -- "0..9999" simplepdl::ProcessElement : element3
+simplepdl::Parameter "1..1" -- "1..1" simplepdl::ParameterSWD : internResource19
+simplepdl::WorkSequence "0..9999" -- "1..1" simplepdl::Activities : linksToPredecessors8
+simplepdl::WorkSequence "0..9999" -- "1..1" simplepdl::Activities : linksToSuccessors9
+simplepdl::ParameterSWD "0..9999" -- "1..1" simplepdl::SubWorkDefinition : needsSWD15
+simplepdl::ParameterWD "0..9999" -- "1..1" simplepdl::WorkDefinition : needsWD12
+simplepdl::Activities "1..1" -- "1..1" simplepdl::SubWorkDefinition : parent13
+simplepdl::Activities "1..1" -- "1..1" simplepdl::WorkSequence : predecessor5
+simplepdl::ProcessElement "0..9999" --* "1..1" simplepdl::Process : processElements0
+simplepdl::Resource "1..1" -- "1..1" simplepdl::ParameterWD : resource16
+simplepdl::Resource "0..9999" --* "1..1" simplepdl::Process : resources1
+simplepdl::SubWorkDefinition "1..1" -- "1..1" simplepdl::ParameterSWD : subWorkDefinition21
+simplepdl::Activities "1..1" -- "1..1" simplepdl::WorkSequence : successor6
+simplepdl::ParameterWD "1..1" -- "1..1" simplepdl::WorkDefinition : workDefinition18
+@enduml

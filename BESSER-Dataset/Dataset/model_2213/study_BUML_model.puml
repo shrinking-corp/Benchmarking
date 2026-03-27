@@ -1,0 +1,66 @@
+@startuml
+enum GradeEnum {
+  A
+  B
+  C
+  D
+  E
+  F
+  NONE
+}
+class study::Course {
+  + code : str
+  + credits : float
+  + level : int
+  + name : str
+}
+class study::CourseRelationship {
+  + grade : str
+  + numExamAttempts : int
+}
+class study::ElectiveCourseList {
+}
+class study::IndividualStudyPlan {
+}
+class study::Semester {
+  + ordinal : int
+}
+class study::Specialization {
+  + name : str
+  + numYears : int
+}
+class study::Student {
+  + name : str
+  + username : str
+}
+class study::StudyProgramme {
+  + code : str
+  + name : str
+  + numYears : int
+}
+class study::University {
+  + name : str
+}
+study::Specialization "1..9999" --* "1..1" study::StudyProgramme : allSpecializations6
+study::Specialization "1..9999" -- "1..1" study::StudyProgramme : baseSpecializations7
+study::Course "1..1" -- "1..1" study::CourseRelationship : course36
+study::Course "0..9999" --* "1..1" study::University : courses1
+study::Course "1..9999" -- "1..1" study::ElectiveCourseList : courses22
+study::IndividualStudyPlan "1..1" *-- "0..9999" study::CourseRelationship : courses31
+study::Semester "1..1" -- "1..1" study::IndividualStudyPlan : currentSemester29
+study::ElectiveCourseList "0..1" --* "1..1" study::Semester : electiveCourses17
+study::Specialization "0..9999" -- "1..1" study::Specialization : furtherSpecializations12
+study::Semester "1..1" -- "0..9999" study::Course : mandatoryCourses16
+study::Semester "1..1" -- "1..1" study::ElectiveCourseList : semester20
+study::Semester "2..9999" --* "1..1" study::Specialization : semesters10
+study::Specialization "1..1" -- "1..1" study::Semester : specialization14
+study::Student "1..1" -- "1..1" study::IndividualStudyPlan : student27
+study::University "1..1" *-- "0..9999" study::Student : students3
+study::Student "1..1" *-- "1..1" study::IndividualStudyPlan : studyPlan26
+study::IndividualStudyPlan "1..1" -- "1..1" study::CourseRelationship : studyPlan33
+study::Specialization "1..1" -- "1..1" study::StudyProgramme : studyProgramme8
+study::University "1..1" *-- "0..9999" study::StudyProgramme : studyProgrammes0
+study::University "1..1" -- "1..1" study::Course : university18
+study::University "1..1" -- "1..1" study::Student : university24
+study::StudyProgramme "1..1" -- "1..1" study::University : university5
+@enduml

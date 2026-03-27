@@ -1,0 +1,179 @@
+@startuml
+enum AccessModifiers {
+  default
+  private
+  protected
+  public
+}
+class ArithmeticExpression {
+}
+class BinaryExpression {
+}
+class Declaration {
+}
+class EqualityExpression {
+}
+class Expression {
+}
+enum Languages {
+  CPP
+  CS
+  Java
+  Python
+}
+class LogicExpression {
+}
+class Statement {
+}
+enum Type {
+  boolean
+  char
+  double
+  int
+  long
+  string
+  void
+}
+class UnaryExpression {
+}
+class workflow::Addition {
+}
+class workflow::And {
+}
+abstract class workflow::ArithmeticExpression {
+}
+abstract class workflow::BinaryExpression {
+}
+class workflow::Block {
+}
+class workflow::CompilationUnit {
+  + language : str
+  + name : str
+}
+class workflow::Constant {
+  + asBoolean : str
+  + asInteger : str
+  + asReal : str
+  + asString : str
+}
+abstract class workflow::Declaration {
+  + name : str
+}
+class workflow::Division {
+}
+class workflow::Equal {
+}
+abstract class workflow::EqualityExpression {
+}
+abstract class workflow::Expression {
+}
+class workflow::GreaterThan {
+}
+class workflow::GreaterThanOrEqual {
+}
+class workflow::If {
+}
+class workflow::LessThan {
+}
+class workflow::LessThanOrEqual {
+}
+abstract class workflow::LogicExpression {
+}
+class workflow::Multiplication {
+}
+class workflow::Not {
+}
+class workflow::NotEqual {
+}
+class workflow::Or {
+}
+class workflow::ParameterDeclaration {
+  + type : str
+}
+class workflow::ProcedureCall {
+  + name : str
+}
+class workflow::ProcedureDeclaration {
+  + accessModifier : str
+  + returnType : str
+}
+class workflow::ProcedureReturn {
+}
+class workflow::Read {
+  + type : str
+}
+abstract class workflow::Statement {
+}
+class workflow::Subtraction {
+}
+class workflow::UMinus {
+}
+abstract class workflow::UnaryExpression {
+}
+class workflow::Variable {
+  + name : str
+}
+class workflow::VariableAssignment {
+}
+class workflow::VariableDeclaration {
+  + isConstant : str
+  + type : str
+}
+class workflow::While {
+}
+class workflow::Write {
+}
+ArithmeticExpression <|-- workflow::Addition
+ArithmeticExpression <|-- workflow::Division
+ArithmeticExpression <|-- workflow::Multiplication
+ArithmeticExpression <|-- workflow::Subtraction
+BinaryExpression <|-- workflow::ArithmeticExpression
+BinaryExpression <|-- workflow::EqualityExpression
+BinaryExpression <|-- workflow::LogicExpression
+Declaration <|-- workflow::ParameterDeclaration
+Declaration <|-- workflow::ProcedureDeclaration
+Declaration <|-- workflow::VariableDeclaration
+EqualityExpression <|-- workflow::Equal
+EqualityExpression <|-- workflow::GreaterThan
+EqualityExpression <|-- workflow::GreaterThanOrEqual
+EqualityExpression <|-- workflow::LessThan
+EqualityExpression <|-- workflow::LessThanOrEqual
+EqualityExpression <|-- workflow::NotEqual
+Expression <|-- workflow::BinaryExpression
+Expression <|-- workflow::Constant
+Expression <|-- workflow::ProcedureCall
+Expression <|-- workflow::UnaryExpression
+Expression <|-- workflow::Variable
+LogicExpression <|-- workflow::And
+LogicExpression <|-- workflow::Or
+Statement <|-- workflow::Block
+Statement <|-- workflow::Declaration
+Statement <|-- workflow::Expression
+Statement <|-- workflow::If
+Statement <|-- workflow::ProcedureReturn
+Statement <|-- workflow::Read
+Statement <|-- workflow::VariableAssignment
+Statement <|-- workflow::While
+Statement <|-- workflow::Write
+UnaryExpression <|-- workflow::Not
+UnaryExpression <|-- workflow::UMinus
+workflow::Block "0..1" --* "1..1" workflow::If : Alternative6
+workflow::ProcedureCall "1..1" *-- "0..9999" workflow::Expression : Argument31
+workflow::Block "1..1" --* "1..1" workflow::While : Body11
+workflow::Block "1..1" --* "1..1" workflow::ProcedureDeclaration : Body26
+workflow::Block "1..1" --* "1..1" workflow::If : Body3
+workflow::If "1..1" *-- "1..1" workflow::Expression : Condition2
+workflow::Expression "1..1" --* "1..1" workflow::While : Condition9
+workflow::Expression "0..1" --* "1..1" workflow::ProcedureReturn : Expression18
+workflow::VariableAssignment "1..1" *-- "1..1" workflow::Variable : LValue14
+workflow::Expression "1..1" --* "1..1" workflow::BinaryExpression : Operand135
+workflow::Expression "1..1" --* "1..1" workflow::BinaryExpression : Operand237
+workflow::Expression "1..1" --* "1..1" workflow::UnaryExpression : Operand33
+workflow::ParameterDeclaration "0..9999" --* "1..1" workflow::ProcedureDeclaration : Parameter29
+workflow::Expression "1..1" --* "1..1" workflow::VariableAssignment : RValue15
+workflow::Statement "0..9999" --* "1..1" workflow::Block : Statement1
+workflow::ProcedureDeclaration "1..1" *-- "0..9999" workflow::VariableDeclaration : Variables24
+workflow::ProcedureDeclaration "0..9999" --* "1..1" workflow::CompilationUnit : declarations0
+workflow::Read "1..1" *-- "1..1" workflow::Variable : rVar22
+workflow::Variable "1..1" --* "1..1" workflow::Write : wVar20
+@enduml

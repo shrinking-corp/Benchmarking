@@ -1,0 +1,169 @@
+@startuml
+class ActivitiesProv::Activity {
+  + isReadOnly : bool
+  + isSingleExecution : bool
+}
+abstract class ActivitiesProv::ActivityEdge {
+}
+class ActivitiesProv::ActivityFinalNode {
+}
+abstract class ActivitiesProv::ActivityGroup {
+}
+abstract class ActivitiesProv::ActivityNode {
+}
+class ActivitiesProv::ActivityParameterNode {
+}
+class ActivitiesProv::ActivityPartition {
+}
+class ActivitiesProv::CentralBufferNode {
+}
+class ActivitiesProv::Clause {
+}
+class ActivitiesProv::ConditionalNode {
+  + isAssumed : bool
+  + isDeterminate : bool
+}
+class ActivitiesProv::ControlFlow {
+}
+abstract class ActivitiesProv::ControlNode {
+}
+class ActivitiesProv::DataStoreNode {
+}
+class ActivitiesProv::DecisionNode {
+}
+class ActivitiesProv::ExceptionHandler {
+}
+class ActivitiesProv::ExecutableNode {
+}
+class ActivitiesProv::ExpansionNode {
+}
+class ActivitiesProv::ExpansionRegion {
+}
+abstract class ActivitiesProv::FinalNode {
+}
+class ActivitiesProv::FlowFinalNode {
+}
+class ActivitiesProv::ForkNode {
+}
+class ActivitiesProv::InitialNode {
+}
+class ActivitiesProv::InterruptibleActivityRegion {
+}
+class ActivitiesProv::JoinNode {
+  + isCombineDuplicate : bool
+}
+class ActivitiesProv::LoopNode {
+  + isTestedFirst : bool
+}
+class ActivitiesProv::MergeNode {
+}
+class ActivitiesProv::ObjectFlow {
+  + isControlType : bool
+  + isMulticast : bool
+  + isMultireceive : bool
+}
+abstract class ActivitiesProv::ObjectNode {
+}
+class ActivitiesProv::ParameterSet {
+}
+class ActivitiesProv::SequenceNode {
+}
+class ActivitiesProv::StructuredActivityNode {
+  + mustIsolate : bool
+}
+class ActivityEdge {
+}
+class ActivityGroup {
+}
+class ActivityNode {
+}
+class CentralBufferNode {
+}
+class ControlNode {
+}
+class ExecutableNode {
+}
+class FinalNode {
+}
+class ObjectNode {
+}
+class StructuredActivityNode {
+}
+ActivityEdge <|-- ActivitiesProv::ControlFlow
+ActivityEdge <|-- ActivitiesProv::ObjectFlow
+ActivityGroup <|-- ActivitiesProv::ActivityPartition
+ActivityGroup <|-- ActivitiesProv::InterruptibleActivityRegion
+ActivityGroup <|-- ActivitiesProv::StructuredActivityNode
+ActivityNode <|-- ActivitiesProv::ControlNode
+ActivityNode <|-- ActivitiesProv::ExecutableNode
+ActivityNode <|-- ActivitiesProv::ObjectNode
+CentralBufferNode <|-- ActivitiesProv::DataStoreNode
+ControlNode <|-- ActivitiesProv::ActivityFinalNode
+ControlNode <|-- ActivitiesProv::DecisionNode
+ControlNode <|-- ActivitiesProv::FinalNode
+ControlNode <|-- ActivitiesProv::ForkNode
+ControlNode <|-- ActivitiesProv::InitialNode
+ControlNode <|-- ActivitiesProv::JoinNode
+ControlNode <|-- ActivitiesProv::MergeNode
+ExecutableNode <|-- ActivitiesProv::StructuredActivityNode
+FinalNode <|-- ActivitiesProv::ActivityFinalNode
+FinalNode <|-- ActivitiesProv::FlowFinalNode
+ObjectNode <|-- ActivitiesProv::ActivityParameterNode
+ObjectNode <|-- ActivitiesProv::CentralBufferNode
+ObjectNode <|-- ActivitiesProv::ExpansionNode
+StructuredActivityNode <|-- ActivitiesProv::ConditionalNode
+StructuredActivityNode <|-- ActivitiesProv::ExpansionRegion
+StructuredActivityNode <|-- ActivitiesProv::LoopNode
+StructuredActivityNode <|-- ActivitiesProv::SequenceNode
+ActivitiesProv::Activity "0..1" -- "1..1" ActivitiesProv::StructuredActivityNode : activity84
+ActivitiesProv::ConditionalNode "1..1" -- "1..9999" ActivitiesProv::ExecutableNode : body106
+ActivitiesProv::ExecutableNode "0..9999" -- "1..1" ActivitiesProv::LoopNode : bodyPart96
+ActivitiesProv::Clause "1..9999" --* "1..1" ActivitiesProv::ConditionalNode : clause102
+ActivitiesProv::ActivityEdge "0..9999" -- "1..1" ActivitiesProv::ActivityGroup : containedEdge41
+ActivitiesProv::ActivityGroup "1..1" -- "0..9999" ActivitiesProv::ActivityNode : containedNode38
+ActivitiesProv::ObjectFlow "0..1" -- "1..1" ActivitiesProv::DecisionNode : decisionInputFlow65
+ActivitiesProv::ActivityEdge "0..9999" --* "1..1" ActivitiesProv::Activity : edge3
+ActivitiesProv::ActivityPartition "1..1" -- "0..9999" ActivitiesProv::ActivityEdge : edge66
+ActivitiesProv::StructuredActivityNode "1..1" *-- "0..9999" ActivitiesProv::ActivityEdge : edge90
+ActivitiesProv::ExceptionHandler "1..1" -- "1..1" ActivitiesProv::ObjectNode : exceptionInput123
+ActivitiesProv::SequenceNode "1..1" *-- "0..9999" ActivitiesProv::ExecutableNode : executableNode115
+ActivitiesProv::Activity "1..1" *-- "0..9999" ActivitiesProv::ActivityGroup : group1
+ActivitiesProv::ExceptionHandler "0..9999" --* "1..1" ActivitiesProv::ExecutableNode : handler93
+ActivitiesProv::ExecutableNode "1..1" -- "1..1" ActivitiesProv::ExceptionHandler : handlerBody117
+ActivitiesProv::Activity "0..1" -- "1..1" ActivitiesProv::ActivityGroup : inActivity35
+ActivitiesProv::ActivityGroup "0..9999" -- "1..1" ActivitiesProv::ActivityEdge : inGroup53
+ActivitiesProv::ActivityGroup "0..9999" -- "1..1" ActivitiesProv::ActivityNode : inGroup9
+ActivitiesProv::InterruptibleActivityRegion "0..1" -- "1..1" ActivitiesProv::ActivityNode : inInterruptibleRegion24
+ActivitiesProv::ActivityNode "1..1" -- "0..9999" ActivitiesProv::ActivityPartition : inPartition21
+ActivitiesProv::ActivityEdge "1..1" -- "0..9999" ActivitiesProv::ActivityPartition : inPartition56
+ActivitiesProv::StructuredActivityNode "0..1" -- "1..1" ActivitiesProv::ActivityNode : inStructuredNode26
+ActivitiesProv::StructuredActivityNode "0..1" -- "1..1" ActivitiesProv::ActivityEdge : inStructuredNode62
+ActivitiesProv::ActivityEdge "0..9999" -- "1..1" ActivitiesProv::ActivityNode : incoming15
+ActivitiesProv::ExpansionNode "1..9999" -- "1..1" ActivitiesProv::ExpansionRegion : inputElement125
+ActivitiesProv::InterruptibleActivityRegion "1..1" -- "0..9999" ActivitiesProv::ActivityEdge : interruptingEdge78
+ActivitiesProv::InterruptibleActivityRegion "0..1" -- "1..1" ActivitiesProv::ActivityEdge : interrupts59
+ActivitiesProv::ActivityNode "0..9999" --* "1..1" ActivitiesProv::Activity : node0
+ActivitiesProv::ActivityNode "0..9999" -- "1..1" ActivitiesProv::ActivityPartition : node75
+ActivitiesProv::ActivityNode "0..9999" -- "1..1" ActivitiesProv::InterruptibleActivityRegion : node81
+ActivitiesProv::ActivityNode "0..9999" --* "1..1" ActivitiesProv::StructuredActivityNode : node87
+ActivitiesProv::ActivityEdge "0..9999" -- "1..1" ActivitiesProv::ActivityNode : outgoing18
+ActivitiesProv::ExpansionNode "0..9999" -- "1..1" ActivitiesProv::ExpansionRegion : outputElement126
+ActivitiesProv::Activity "1..1" -- "0..9999" ActivitiesProv::ActivityPartition : partition5
+ActivitiesProv::Clause "0..9999" -- "1..1" ActivitiesProv::Clause : predecessorClause110
+ActivitiesProv::ExecutableNode "1..1" -- "1..1" ActivitiesProv::ExceptionHandler : protectedNode120
+ActivitiesProv::ActivityEdge "0..9999" -- "1..1" ActivitiesProv::ActivityEdge : redefinedEdge51
+ActivitiesProv::ActivityNode "1..1" -- "0..9999" ActivitiesProv::ActivityNode : redefinedNode13
+ActivitiesProv::ExpansionRegion "0..1" -- "1..1" ActivitiesProv::ExpansionNode : regionAsInput129
+ActivitiesProv::ExpansionRegion "0..1" -- "1..1" ActivitiesProv::ExpansionNode : regionAsOutput132
+ActivitiesProv::LoopNode "1..1" -- "0..9999" ActivitiesProv::ExecutableNode : setupPart94
+ActivitiesProv::ActivityNode "1..1" -- "1..1" ActivitiesProv::ActivityEdge : source47
+ActivitiesProv::StructuredActivityNode "0..9999" --* "1..1" ActivitiesProv::Activity : structuredNode7
+ActivitiesProv::ActivityGroup "1..1" *-- "0..9999" ActivitiesProv::ActivityGroup : subgroup30
+ActivitiesProv::ActivityPartition "0..9999" --* "1..1" ActivitiesProv::ActivityPartition : subpartition70
+ActivitiesProv::Clause "0..9999" -- "1..1" ActivitiesProv::Clause : sucessorClause113
+ActivitiesProv::ActivityGroup "0..1" -- "1..1" ActivitiesProv::ActivityGroup : superGroup33
+ActivitiesProv::ActivityPartition "0..1" -- "1..1" ActivitiesProv::ActivityPartition : superPartition73
+ActivitiesProv::ActivityEdge "1..1" -- "1..1" ActivitiesProv::ActivityNode : target44
+ActivitiesProv::ExecutableNode "1..9999" -- "1..1" ActivitiesProv::ConditionalNode : test103
+ActivitiesProv::ExecutableNode "1..9999" -- "1..1" ActivitiesProv::LoopNode : test99
+@enduml

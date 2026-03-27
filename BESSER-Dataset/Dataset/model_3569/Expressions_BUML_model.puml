@@ -1,0 +1,40 @@
+@startuml
+class AbstractElement {
+}
+class Expression {
+}
+class expressions::AbstractElement {
+}
+class expressions::BoolConstant {
+  + value : str
+}
+class expressions::Expression {
+}
+class expressions::ExpressionsModel {
+}
+class expressions::IntConstant {
+  + value : int
+}
+class expressions::Plus {
+}
+class expressions::StringConstant {
+  + value : str
+}
+class expressions::Variable {
+  + name : str
+}
+class expressions::VariableRef {
+}
+AbstractElement <|-- expressions::Expression
+AbstractElement <|-- expressions::Variable
+Expression <|-- expressions::BoolConstant
+Expression <|-- expressions::IntConstant
+Expression <|-- expressions::Plus
+Expression <|-- expressions::StringConstant
+Expression <|-- expressions::VariableRef
+expressions::AbstractElement "0..9999" --* "1..1" expressions::ExpressionsModel : elements0
+expressions::Expression "0..1" --* "1..1" expressions::Variable : expression1
+expressions::Plus "1..1" *-- "0..1" expressions::Expression : left2
+expressions::Expression "0..1" --* "1..1" expressions::Plus : right4
+expressions::Variable "0..1" -- "1..1" expressions::VariableRef : variable7
+@enduml

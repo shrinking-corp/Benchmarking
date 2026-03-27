@@ -1,0 +1,88 @@
+@startuml
+class Address {
+}
+class Person {
+}
+enum Sexus {
+  female
+  male
+  undefined
+}
+class Source {
+}
+abstract class gedcoml::Address {
+  + entry : str
+  + exodus : str
+}
+class gedcoml::Author {
+  + firstName : str
+  + lastName : str
+}
+class gedcoml::BekanntePerson {
+  + birthDay : str
+  + birthName : str
+  + deathDay : str
+  + firstName : str
+  + lastName : str
+  + middleName : str
+}
+class gedcoml::Family {
+  + name : str
+}
+class gedcoml::FamilyBook {
+}
+class gedcoml::FamilyImport {
+}
+class gedcoml::Married {
+  + separationDay : str
+  + weddingDay : str
+}
+class gedcoml::Note {
+  + content : str
+}
+class gedcoml::Others {
+  + description : str
+}
+abstract class gedcoml::Person {
+  + id : str
+  + sex : str
+}
+class gedcoml::PersonRef {
+}
+class gedcoml::PostAddress {
+  + city : str
+  + postcode : str
+  + street : str
+}
+class gedcoml::Projectdescription {
+  + artifactId : str
+  + groupId : str
+  + publishingDate : str
+  + version : str
+}
+abstract class gedcoml::Source {
+}
+class gedcoml::UnbekanntePerson {
+}
+Address <|-- gedcoml::PostAddress
+Person <|-- gedcoml::BekanntePerson
+Person <|-- gedcoml::UnbekanntePerson
+Source <|-- gedcoml::Others
+Source <|-- gedcoml::PersonRef
+gedcoml::Address "0..9999" --* "1..1" gedcoml::Person : addresses34
+gedcoml::Author "1..1" --* "1..1" gedcoml::Projectdescription : author1
+gedcoml::Person "1..1" -- "1..1" gedcoml::BekanntePerson : biologicalFatherIs9
+gedcoml::Person "1..1" -- "1..1" gedcoml::BekanntePerson : biologicalMotherIs12
+gedcoml::Person "0..9999" -- "1..1" gedcoml::BekanntePerson : biologicalParentOf7
+gedcoml::FamilyImport "1..1" -- "1..1" gedcoml::Family : importedResource23
+gedcoml::Projectdescription "1..1" *-- "0..9999" gedcoml::FamilyImport : imports0
+gedcoml::FamilyImport "0..9999" --* "1..1" gedcoml::Family : imports4
+gedcoml::BekanntePerson "1..1" *-- "0..9999" gedcoml::Married : marriedWith15
+gedcoml::BekanntePerson "0..1" -- "1..1" gedcoml::Author : memberId29
+gedcoml::Family "1..1" *-- "1..9999" gedcoml::Person : members3
+gedcoml::Note "0..9999" --* "1..1" gedcoml::BekanntePerson : notes17
+gedcoml::Person "1..1" -- "1..1" gedcoml::Married : partner26
+gedcoml::PersonRef "1..1" -- "1..1" gedcoml::BekanntePerson : personID32
+gedcoml::Projectdescription "0..1" --* "1..1" gedcoml::FamilyBook : project21
+gedcoml::Source "1..9999" --* "1..1" gedcoml::BekanntePerson : sources19
+@enduml

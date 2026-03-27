@@ -1,0 +1,155 @@
+@startuml
+class ASTNode {
+}
+class Call {
+}
+class Expression {
+}
+class FilePath {
+}
+class If {
+}
+class Literal {
+}
+class Method {
+}
+class Parameter {
+}
+class Resource {
+}
+class Script {
+}
+class ScriptDescriptor {
+}
+class Statement {
+}
+class core::mt::Resource {
+}
+abstract class mt::Resource {
+  + name : str
+}
+class mt::ResourceSet {
+}
+abstract class mt::core::ASTNode {
+  + begin : int
+  + end : int
+  + getTemplate() : str
+}
+class mt::core::FilePath {
+}
+class mt::core::Metamodel {
+  + packageClass : str
+}
+class mt::core::Method {
+  + name : str
+  + return : str
+}
+class mt::core::Parameter {
+  + type : str
+}
+class mt::core::Script {
+}
+class mt::core::ScriptDescriptor {
+  + description : str
+  + name : str
+  + type : str
+}
+class mt::core::Service {
+}
+class mt::core::Template {
+  + beginTag : str
+  + endTag : str
+}
+class mt::expressions::BooleanLiteral {
+  + value : bool
+}
+class mt::expressions::Call {
+  + name : str
+  + prefix : str
+}
+class mt::expressions::CallSet {
+}
+class mt::expressions::DoubleLiteral {
+  + value : float
+}
+abstract class mt::expressions::Expression {
+}
+class mt::expressions::IntegerLiteral {
+  + value : int
+}
+abstract class mt::expressions::Literal {
+}
+class mt::expressions::Not {
+}
+class mt::expressions::NullLiteral {
+}
+class mt::expressions::Operator {
+  + operator : str
+}
+class mt::expressions::Parenthesis {
+}
+class mt::expressions::StringLiteral {
+  + value : str
+}
+class mt::statements::Comment {
+  + value : str
+}
+class mt::statements::Feature {
+}
+class mt::statements::For {
+}
+class mt::statements::If {
+}
+abstract class mt::statements::Statement {
+}
+class mt::statements::Text {
+  + value : str
+}
+ASTNode <|-- mt::core::FilePath
+ASTNode <|-- mt::core::Script
+ASTNode <|-- mt::core::ScriptDescriptor
+ASTNode <|-- mt::expressions::Call
+ASTNode <|-- mt::expressions::Expression
+ASTNode <|-- mt::statements::Statement
+Expression <|-- mt::expressions::CallSet
+Expression <|-- mt::expressions::Literal
+Expression <|-- mt::expressions::Not
+Expression <|-- mt::expressions::Operator
+Expression <|-- mt::expressions::Parenthesis
+Literal <|-- mt::expressions::BooleanLiteral
+Literal <|-- mt::expressions::DoubleLiteral
+Literal <|-- mt::expressions::IntegerLiteral
+Literal <|-- mt::expressions::NullLiteral
+Literal <|-- mt::expressions::StringLiteral
+Resource <|-- mt::core::Metamodel
+Resource <|-- mt::core::Service
+Resource <|-- mt::core::Template
+Statement <|-- mt::statements::Comment
+Statement <|-- mt::statements::Feature
+Statement <|-- mt::statements::For
+Statement <|-- mt::statements::If
+Statement <|-- mt::statements::Text
+mt::expressions::Call "1..1" *-- "0..9999" Expression : arguments15
+Call "0..9999" --* "1..1" mt::expressions::CallSet : calls14
+mt::statements::If "1..1" *-- "1..1" Expression : condition26
+ScriptDescriptor "1..1" --* "1..1" mt::core::Script : descriptor4
+If "0..9999" --* "1..1" mt::statements::If : elseIf34
+Statement "0..9999" --* "1..1" mt::statements::If : elseStatements31
+Expression "1..1" --* "1..1" mt::expressions::Not : expression20
+mt::expressions::Parenthesis "1..1" *-- "1..1" Expression : expression24
+Expression "1..1" --* "1..1" mt::statements::Feature : expression41
+mt::core::ScriptDescriptor "1..1" *-- "0..1" FilePath : file7
+Expression "0..1" --* "1..1" mt::expressions::Call : filter17
+core::mt::Resource "0..9999" -- "1..1" mt::core::Template : imports1
+mt::statements::For "1..1" *-- "1..1" Expression : iterator36
+Method "0..9999" --* "1..1" mt::core::Service : methods12
+Expression "2..9999" --* "1..1" mt::expressions::Operator : operands22
+Parameter "0..9999" --* "1..1" mt::core::Method : parameters13
+Expression "0..1" --* "1..1" mt::core::ScriptDescriptor : post8
+mt::ResourceSet "1..1" *-- "0..9999" mt::Resource : resources0
+mt::core::Template "1..1" *-- "0..9999" Script : scripts2
+Statement "0..9999" --* "1..1" mt::core::FilePath : statements10
+Statement "0..9999" --* "1..1" mt::statements::For : statements38
+Statement "0..9999" --* "1..1" mt::core::Script : statements5
+Statement "0..9999" --* "1..1" mt::statements::If : thenStatements28
+@enduml

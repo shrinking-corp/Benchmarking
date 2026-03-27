@@ -1,0 +1,124 @@
+@startuml
+enum FunctionDomain {
+  form
+  space
+  time
+}
+class Port {
+}
+class ProcessNode {
+}
+class Sequence {
+}
+class SequenceNode {
+}
+class syswbeff106::And {
+}
+class syswbeff106::Component {
+  + name : str
+}
+class syswbeff106::Description {
+  + content : str
+}
+class syswbeff106::Final {
+}
+class syswbeff106::Flow {
+}
+class syswbeff106::Function {
+  + domain : str
+}
+class syswbeff106::FunctionProperty {
+  + description : str
+}
+class syswbeff106::InputPort {
+}
+class syswbeff106::Item {
+  + name : str
+}
+class syswbeff106::Iteration {
+}
+class syswbeff106::Loop {
+}
+class syswbeff106::LoopExit {
+}
+class syswbeff106::Or {
+}
+class syswbeff106::OutputPort {
+}
+class syswbeff106::PatternCatalog {
+  + id : str
+}
+abstract class syswbeff106::Port {
+  + id : str
+}
+abstract class syswbeff106::ProcessNode {
+  + label : str
+}
+class syswbeff106::RelatedTo {
+  + since : str
+}
+abstract class syswbeff106::Sequence {
+}
+abstract class syswbeff106::SequenceNode {
+  + name : str
+  + tMax : int
+  + tMin : int
+}
+class syswbeff106::Start {
+}
+class syswbeff106::System {
+}
+class syswbeff106::Thing {
+  + id : int
+}
+class syswbeff106::Thoughts {
+}
+class syswbeff106::Token {
+}
+class syswbeff106::Workbench {
+  + aprop : str
+}
+Port <|-- syswbeff106::InputPort
+Port <|-- syswbeff106::OutputPort
+ProcessNode <|-- syswbeff106::Flow
+ProcessNode <|-- syswbeff106::Function
+SequenceNode <|-- syswbeff106::Function
+SequenceNode <|-- syswbeff106::Sequence
+Sequence <|-- syswbeff106::And
+Sequence <|-- syswbeff106::Final
+Sequence <|-- syswbeff106::Iteration
+Sequence <|-- syswbeff106::Loop
+Sequence <|-- syswbeff106::LoopExit
+Sequence <|-- syswbeff106::Or
+Sequence <|-- syswbeff106::Start
+syswbeff106::Function "1..1" -- "0..1" syswbeff106::Component : allocatedTo19
+syswbeff106::Function "0..1" -- "1..1" syswbeff106::Function : associations17
+syswbeff106::Component "1..1" -- "0..9999" syswbeff106::Component : associations47
+syswbeff106::Workbench "1..1" *-- "0..9999" syswbeff106::PatternCatalog : catalog70
+syswbeff106::SequenceNode "0..9999" -- "1..1" syswbeff106::SequenceNode : controlFlowEdge22
+syswbeff106::Function "0..9999" --* "1..1" syswbeff106::Function : decompositions1
+syswbeff106::Component "0..9999" -- "1..1" syswbeff106::Component : decompositions44
+syswbeff106::Description "0..9999" --* "1..1" syswbeff106::Function : descriptions10
+syswbeff106::Flow "0..9999" --* "1..1" syswbeff106::Function : flows4
+syswbeff106::Thing "0..1" -- "1..1" syswbeff106::RelatedTo : fromThing31
+syswbeff106::FunctionProperty "0..9999" --* "1..1" syswbeff106::Workbench : functionProperties67
+syswbeff106::Function "0..1" --* "1..1" syswbeff106::System : functionalArchitecture52
+syswbeff106::InputPort "0..9999" --* "1..1" syswbeff106::Function : inputPorts8
+syswbeff106::InputPort "0..9999" -- "1..1" syswbeff106::Flow : inputflowEdge23
+syswbeff106::Item "0..9999" --* "1..1" syswbeff106::Flow : items26
+syswbeff106::OutputPort "0..9999" --* "1..1" syswbeff106::Function : outputPorts6
+syswbeff106::OutputPort "1..1" -- "0..9999" syswbeff106::Flow : outputflowEdge28
+syswbeff106::FunctionProperty "0..1" -- "1..1" syswbeff106::FunctionProperty : parent41
+syswbeff106::PatternCatalog "1..1" *-- "0..9999" syswbeff106::Function : patterns57
+syswbeff106::Function "0..9999" -- "1..1" syswbeff106::Component : performs49
+syswbeff106::Component "0..1" --* "1..1" syswbeff106::System : physicalArchitecture54
+syswbeff106::FunctionProperty "0..9999" -- "1..1" syswbeff106::Function : property14
+syswbeff106::Thing "0..9999" -- "1..1" syswbeff106::Thoughts : relatedTo38
+syswbeff106::Thing "1..1" *-- "0..9999" syswbeff106::RelatedTo : relations35
+syswbeff106::Function "1..1" *-- "0..9999" syswbeff106::Sequence : sequenceNodes2
+syswbeff106::System "0..1" --* "1..1" syswbeff106::Workbench : systemView64
+syswbeff106::Thing "0..9999" --* "1..1" syswbeff106::Workbench : things59
+syswbeff106::Thoughts "0..9999" --* "1..1" syswbeff106::Workbench : thoughts61
+syswbeff106::Thing "0..1" -- "1..1" syswbeff106::RelatedTo : toThing32
+syswbeff106::Token "0..9999" --* "1..1" syswbeff106::Function : tokens12
+@enduml

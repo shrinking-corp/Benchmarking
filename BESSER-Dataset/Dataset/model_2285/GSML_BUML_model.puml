@@ -1,0 +1,45 @@
+@startuml
+enum MinRequirementType {
+  Absolute
+  Relative
+}
+class Task {
+}
+class gsml::ConcreteTask {
+  + MaxPoints : float
+}
+class gsml::Course {
+  + Name : str
+}
+class gsml::Grade {
+  + Name : str
+  + RequiredPoints : float
+}
+class gsml::Grading {
+  + Semester : str
+}
+class gsml::GradingScheme {
+}
+class gsml::GradingSystem {
+}
+abstract class gsml::Task {
+  + MinRequirement : float
+  + MinRequirementType : str
+  + Name : str
+}
+class gsml::TaskGroup {
+}
+Task <|-- gsml::ConcreteTask
+Task <|-- gsml::TaskGroup
+gsml::Task "0..9999" --* "1..1" gsml::TaskGroup : contains9
+gsml::Course "0..9999" --* "1..1" gsml::GradingSystem : courses15
+gsml::Grade "1..1" --* "1..1" gsml::GradingScheme : fallback12
+gsml::Grade "0..9999" --* "1..1" gsml::GradingScheme : grades10
+gsml::GradingScheme "1..1" --* "1..1" gsml::Course : gradingScheme6
+gsml::Course "1..1" *-- "0..9999" gsml::Grading : gradings0
+gsml::GradingScheme "1..1" -- "1..1" gsml::Grading : gradingscheme17
+gsml::GradingScheme "1..1" -- "1..1" gsml::Course : gradingscheme3
+gsml::GradingScheme "0..9999" -- "1..1" gsml::Course : gradingschemes1
+gsml::Grading "1..1" *-- "1..9999" gsml::Task : has23
+gsml::Grading "1..1" *-- "0..9999" gsml::Task : tasks20
+@enduml

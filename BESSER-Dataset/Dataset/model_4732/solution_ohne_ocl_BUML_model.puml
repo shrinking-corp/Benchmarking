@@ -1,0 +1,87 @@
+@startuml
+enum DataType {
+  Boolean
+  Float
+  Integer
+  String
+}
+class DynamicPage {
+}
+class EditablePage {
+}
+class EntityPage {
+}
+class Link {
+}
+class WebPage {
+}
+class solution::Attribute {
+  + dataType : str
+  + name : str
+}
+class solution::ContextualLink {
+}
+class solution::CreatePage {
+}
+class solution::DeletePage {
+}
+abstract class solution::DynamicPage {
+}
+abstract class solution::EditablePage {
+}
+class solution::Entity {
+  + name : str
+}
+class solution::EntityPage {
+}
+class solution::IndexPage {
+}
+abstract class solution::Link {
+  + name : str
+}
+class solution::NonContextualLink {
+}
+class solution::Relationship {
+  + lowerBound : int
+  + roleName : str
+  + upperBound : int
+}
+class solution::StaticPage {
+}
+class solution::UpdatePage {
+}
+class solution::WebApplication {
+  + name : str
+  + creationDateBeforeGoLive() : bool
+}
+abstract class solution::WebPage {
+  + name : str
+  + relativeUrl : str
+}
+DynamicPage <|-- solution::EntityPage
+DynamicPage <|-- solution::IndexPage
+EditablePage <|-- solution::CreatePage
+EditablePage <|-- solution::DeletePage
+EditablePage <|-- solution::UpdatePage
+EntityPage <|-- solution::EditablePage
+Link <|-- solution::ContextualLink
+Link <|-- solution::NonContextualLink
+WebPage <|-- solution::DynamicPage
+WebPage <|-- solution::StaticPage
+solution::Attribute "0..9999" --* "1..1" solution::Entity : attributes5
+solution::Entity "0..9999" --* "1..1" solution::WebApplication : entities0
+solution::DynamicPage "1..1" -- "1..1" solution::Entity : entity21
+solution::NonContextualLink "1..1" --* "1..1" solution::WebPage : homeLink19
+solution::StaticPage "1..1" -- "1..1" solution::WebApplication : homePage3
+solution::Entity "1..1" -- "1..1" solution::Attribute : id7
+solution::Entity "1..1" -- "1..1" solution::ContextualLink : information28
+solution::DynamicPage "0..9999" --* "1..1" solution::EntityPage : innerPages23
+solution::WebPage "1..1" *-- "0..9999" solution::Link : links17
+solution::Relationship "0..1" -- "1..1" solution::Relationship : opposite15
+solution::Entity "1..1" *-- "0..9999" solution::Relationship : relationships10
+solution::EditablePage "1..1" -- "0..1" solution::EntityPage : returnPage30
+solution::Entity "1..1" -- "1..1" solution::Relationship : source11
+solution::Entity "1..1" -- "1..1" solution::Relationship : target12
+solution::WebPage "1..1" -- "1..1" solution::Link : target25
+solution::WebApplication "1..1" *-- "0..9999" solution::WebPage : webpages1
+@enduml

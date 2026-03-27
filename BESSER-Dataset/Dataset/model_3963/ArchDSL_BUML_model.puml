@@ -1,0 +1,77 @@
+@startuml
+class SuperCall {
+}
+class SuperMethod {
+}
+class archDSL::AltCall {
+  + opt : bool
+}
+class archDSL::AltMethod {
+  + a_name : str
+  + type : str
+}
+class archDSL::Behavior {
+}
+class archDSL::CertainCall {
+}
+class archDSL::Connector {
+  + name : str
+}
+class archDSL::Interface {
+  + name : str
+}
+class archDSL::Method {
+  + type : str
+}
+class archDSL::Model {
+}
+class archDSL::OptCall {
+}
+class archDSL::OptMethod {
+  + type : str
+}
+class archDSL::Param {
+  + name : str
+  + type : str
+}
+class archDSL::SuperCall {
+}
+class archDSL::SuperMethod {
+  + name : str
+}
+class archDSL::UncertainBehavior {
+  + name : str
+}
+class archDSL::UncertainConnector {
+  + name : str
+}
+class archDSL::UncertainInterface {
+  + name : str
+}
+SuperCall <|-- archDSL::AltCall
+SuperCall <|-- archDSL::CertainCall
+SuperCall <|-- archDSL::OptCall
+SuperMethod <|-- archDSL::AltMethod
+SuperMethod <|-- archDSL::Method
+SuperMethod <|-- archDSL::OptMethod
+archDSL::AltCall "1..1" -- "0..9999" archDSL::SuperMethod : a_name41
+archDSL::AltMethod "0..9999" --* "1..1" archDSL::UncertainInterface : altmethods12
+archDSL::Behavior "0..9999" --* "1..1" archDSL::Connector : behaviors18
+archDSL::Behavior "0..9999" --* "1..1" archDSL::Model : behaviors3
+archDSL::Behavior "1..1" -- "0..9999" archDSL::Method : call29
+archDSL::SuperCall "0..9999" --* "1..1" archDSL::UncertainBehavior : call36
+archDSL::Model "1..1" *-- "0..9999" archDSL::Connector : connectors7
+archDSL::Interface "0..1" -- "1..1" archDSL::Behavior : end32
+archDSL::Interface "0..1" -- "1..1" archDSL::UncertainBehavior : end38
+archDSL::Interface "0..1" -- "1..1" archDSL::Behavior : interface26
+archDSL::Interface "0..9999" --* "1..1" archDSL::Model : interfaces0
+archDSL::Method "0..9999" --* "1..1" archDSL::Interface : methods16
+archDSL::SuperMethod "0..1" -- "1..1" archDSL::SuperCall : name43
+archDSL::UncertainInterface "1..1" *-- "0..9999" archDSL::OptMethod : optmethods14
+archDSL::SuperMethod "1..1" *-- "0..9999" archDSL::Param : param35
+archDSL::Interface "0..1" -- "1..1" archDSL::UncertainConnector : superInterface21
+archDSL::Interface "0..1" -- "1..1" archDSL::UncertainInterface : superInterface9
+archDSL::UncertainConnector "1..1" *-- "0..9999" archDSL::UncertainBehavior : u_behaviors24
+archDSL::UncertainConnector "0..9999" --* "1..1" archDSL::Model : u_connectors5
+archDSL::Model "1..1" *-- "0..9999" archDSL::UncertainInterface : u_interfaces1
+@enduml

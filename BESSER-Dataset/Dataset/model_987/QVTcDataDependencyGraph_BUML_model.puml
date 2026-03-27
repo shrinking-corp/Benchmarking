@@ -1,0 +1,65 @@
+@startuml
+enum DependencyDirection {
+  input
+  output
+}
+class Edge {
+}
+class Element {
+}
+enum Model {
+  input
+  middle
+  output
+}
+class Node {
+}
+class qVTcDataDependencyGraph::ClassNode {
+  + model : str
+  + superTypes : str
+}
+class qVTcDataDependencyGraph::ContainmentEdge {
+  + model : str
+}
+class qVTcDataDependencyGraph::DataTypeNode {
+}
+class qVTcDataDependencyGraph::DependencyEdge {
+  + derived : bool
+  + direction : str
+  + multiple : bool
+}
+class qVTcDataDependencyGraph::EObject {
+}
+class qVTcDataDependencyGraph::Edge {
+}
+abstract class qVTcDataDependencyGraph::Element {
+}
+class qVTcDataDependencyGraph::Graph {
+  + name : str
+}
+class qVTcDataDependencyGraph::MappingNode {
+}
+class qVTcDataDependencyGraph::Node {
+  + label : str
+}
+class qVTcDataDependencyGraph::ReferenceEdge {
+}
+Edge <|-- qVTcDataDependencyGraph::ContainmentEdge
+Edge <|-- qVTcDataDependencyGraph::DependencyEdge
+Edge <|-- qVTcDataDependencyGraph::ReferenceEdge
+Element <|-- qVTcDataDependencyGraph::Edge
+Element <|-- qVTcDataDependencyGraph::Node
+Node <|-- qVTcDataDependencyGraph::ClassNode
+Node <|-- qVTcDataDependencyGraph::DataTypeNode
+Node <|-- qVTcDataDependencyGraph::MappingNode
+qVTcDataDependencyGraph::DataTypeNode "1..1" -- "1..1" qVTcDataDependencyGraph::EObject : attribute0
+qVTcDataDependencyGraph::Element "0..9999" --* "1..1" qVTcDataDependencyGraph::Graph : elements10
+qVTcDataDependencyGraph::Graph "1..1" -- "1..1" qVTcDataDependencyGraph::Element : graph9
+qVTcDataDependencyGraph::Edge "0..9999" -- "1..1" qVTcDataDependencyGraph::Node : incoming11
+qVTcDataDependencyGraph::Edge "0..9999" -- "1..1" qVTcDataDependencyGraph::Node : outgoing12
+qVTcDataDependencyGraph::Node "1..1" -- "0..1" qVTcDataDependencyGraph::EObject : qvtAstNode14
+qVTcDataDependencyGraph::EObject "0..1" -- "1..1" qVTcDataDependencyGraph::Edge : referredProperty7
+qVTcDataDependencyGraph::Edge "1..1" -- "1..1" qVTcDataDependencyGraph::Node : source5
+qVTcDataDependencyGraph::Node "1..1" -- "1..1" qVTcDataDependencyGraph::Edge : target4
+qVTcDataDependencyGraph::EObject "1..1" -- "1..1" qVTcDataDependencyGraph::DataTypeNode : type1
+@enduml

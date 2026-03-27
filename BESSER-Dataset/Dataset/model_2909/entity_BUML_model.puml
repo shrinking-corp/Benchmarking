@@ -1,0 +1,26 @@
+@startuml
+class Type {
+}
+class entitymm::Attribute {
+  + name : str
+}
+class entitymm::Entity {
+  + desc : str
+  + isPersistent : bool
+  + size : int
+}
+class entitymm::Model {
+  + name : str
+}
+class entitymm::PrimitiveType {
+}
+abstract class entitymm::Type {
+  + name : str
+}
+Type <|-- entitymm::Entity
+Type <|-- entitymm::PrimitiveType
+entitymm::Attribute "1..9999" --* "1..1" entitymm::Entity : attributes3
+entitymm::Attribute "1..1" -- "1..1" entitymm::Entity : entity1
+entitymm::PrimitiveType "1..1" -- "1..1" entitymm::Attribute : type2
+entitymm::Model "1..1" *-- "0..9999" entitymm::Type : types0
+@enduml

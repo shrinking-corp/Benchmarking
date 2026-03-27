@@ -1,0 +1,119 @@
+@startuml
+class Action {
+}
+enum Color {
+  BLACK
+  BLUE
+  BROWN
+  CYAN
+  DARK_GRAY
+  GRAY
+  GREEN
+  LIGHT_GRAY
+  MAGENTA
+  NONE
+  ORANGE
+  PINK
+  RED
+  WHITE
+  YELLOW
+}
+class Condition {
+}
+class ConditionalFlow {
+}
+class Flow {
+}
+class Instruction {
+}
+enum OperatorKind {
+  equal
+  lowerOrEqual
+  notEqual
+  upperOrEqual
+}
+class Sensor {
+}
+abstract class mindstorms::Action {
+}
+class mindstorms::Choregraphy {
+  + name : str
+}
+class mindstorms::ColorSensor {
+  + color : str
+}
+abstract class mindstorms::Condition {
+}
+abstract class mindstorms::ConditionalFlow {
+}
+class mindstorms::Delay {
+  + ms : int
+}
+abstract class mindstorms::Flow {
+}
+class mindstorms::GoBackward {
+  + cm : int
+  + infinite : bool
+}
+class mindstorms::GoForward {
+  + cm : int
+  + infinite : bool
+}
+class mindstorms::GoTo {
+  + x : int
+  + y : int
+}
+class mindstorms::Grab {
+}
+class mindstorms::If {
+}
+abstract class mindstorms::Instruction {
+}
+class mindstorms::Release {
+}
+class mindstorms::ReturnToBase {
+}
+class mindstorms::Reuse {
+}
+class mindstorms::Rotate {
+  + degrees : int
+  + random : bool
+}
+abstract class mindstorms::Sensor {
+}
+class mindstorms::TouchSensor {
+  + isPressed : bool
+}
+class mindstorms::UltrasonicSensor {
+  + operator : str
+  + value : float
+}
+class mindstorms::While {
+}
+Action <|-- mindstorms::Delay
+Action <|-- mindstorms::GoBackward
+Action <|-- mindstorms::GoForward
+Action <|-- mindstorms::GoTo
+Action <|-- mindstorms::Grab
+Action <|-- mindstorms::Release
+Action <|-- mindstorms::ReturnToBase
+Action <|-- mindstorms::Rotate
+ConditionalFlow <|-- mindstorms::If
+ConditionalFlow <|-- mindstorms::While
+Condition <|-- mindstorms::Sensor
+Flow <|-- mindstorms::Choregraphy
+Flow <|-- mindstorms::ConditionalFlow
+Instruction <|-- mindstorms::Action
+Instruction <|-- mindstorms::Flow
+Instruction <|-- mindstorms::Reuse
+Sensor <|-- mindstorms::ColorSensor
+Sensor <|-- mindstorms::TouchSensor
+Sensor <|-- mindstorms::UltrasonicSensor
+mindstorms::Choregraphy "0..1" -- "1..1" mindstorms::Reuse : choregraphy9
+mindstorms::ConditionalFlow "1..1" *-- "0..1" mindstorms::Condition : condition10
+mindstorms::If "0..1" --* "1..1" mindstorms::If : elsif12
+mindstorms::Instruction "0..1" -- "1..1" mindstorms::Flow : first5
+mindstorms::Instruction "0..9999" --* "1..1" mindstorms::Flow : instructions6
+mindstorms::Instruction "0..1" -- "1..1" mindstorms::Instruction : next1
+mindstorms::Instruction "0..1" -- "1..1" mindstorms::Instruction : previous3
+@enduml

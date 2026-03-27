@@ -1,0 +1,75 @@
+@startuml
+class Condition {
+}
+class ConditionalStatement {
+}
+class ControlStatement {
+}
+class NamedElement {
+}
+class Statement {
+}
+class robot::Condition {
+}
+abstract class robot::ConditionalStatement {
+}
+class robot::Connection {
+  + ip : str
+  + port : int
+}
+abstract class robot::ControlStatement {
+  + value : int
+}
+class robot::ExecuteStatement {
+}
+class robot::ForwardStatement {
+}
+class robot::IfStatement {
+}
+abstract class robot::NamedElement {
+  + name : str
+}
+class robot::ObjectAheadCondition {
+}
+class robot::PrintStatement {
+  + text : str
+}
+class robot::RightStatement {
+}
+class robot::Robot {
+}
+class robot::Scenario {
+}
+abstract class robot::Statement {
+}
+class robot::StatementBlock {
+}
+class robot::TrueCondition {
+}
+class robot::UntilStatement {
+}
+class robot::WhileStatement {
+}
+ConditionalStatement <|-- robot::IfStatement
+ConditionalStatement <|-- robot::UntilStatement
+ConditionalStatement <|-- robot::WhileStatement
+Condition <|-- robot::ObjectAheadCondition
+Condition <|-- robot::TrueCondition
+ControlStatement <|-- robot::ForwardStatement
+ControlStatement <|-- robot::RightStatement
+NamedElement <|-- robot::Robot
+NamedElement <|-- robot::Scenario
+Statement <|-- robot::ConditionalStatement
+Statement <|-- robot::ControlStatement
+Statement <|-- robot::ExecuteStatement
+Statement <|-- robot::PrintStatement
+robot::Condition "1..1" --* "1..1" robot::ConditionalStatement : condition11
+robot::Connection "0..1" --* "1..1" robot::Robot : connection6
+robot::Scenario "1..1" -- "1..1" robot::ExecuteStatement : destination15
+robot::StatementBlock "1..1" --* "1..1" robot::Robot : global1
+robot::Robot "1..1" -- "0..1" robot::Scenario : initial3
+robot::Robot "1..1" *-- "0..9999" robot::Scenario : scenarii0
+robot::ConditionalStatement "1..1" *-- "1..1" robot::StatementBlock : statementBlock12
+robot::StatementBlock "1..1" --* "1..1" robot::Scenario : statementBlock8
+robot::Statement "0..9999" --* "1..1" robot::StatementBlock : statements17
+@enduml

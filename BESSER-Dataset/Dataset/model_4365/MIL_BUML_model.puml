@@ -1,0 +1,101 @@
+@startuml
+class Instruction {
+}
+class JumpInstruction {
+}
+class PrtInstruction {
+}
+class Value {
+}
+class mil::AddInstruction {
+}
+class mil::CalInstruction {
+}
+class mil::ConstantInteger {
+  + rawValue : int
+}
+class mil::DivInstruction {
+}
+class mil::EqInstruction {
+}
+class mil::ErrInstruction {
+}
+class mil::GeqInstruction {
+}
+class mil::GtInstruction {
+}
+class mil::InpInstruction {
+}
+abstract class mil::Instruction {
+}
+class mil::JmpInstruction {
+}
+class mil::JpcInstruction {
+}
+abstract class mil::JumpInstruction {
+}
+class mil::LabelInstruction {
+  + name : str
+}
+class mil::LeqInstruction {
+}
+class mil::LoadInstruction {
+}
+class mil::LtInstruction {
+}
+class mil::MILModel {
+}
+class mil::MulInstruction {
+}
+class mil::NegInstruction {
+}
+class mil::NeqInstruction {
+}
+class mil::PrtInstruction {
+  + value : str
+}
+class mil::RegisterReference {
+  + address : str
+}
+class mil::RetInstruction {
+}
+class mil::StoreInstruction {
+}
+class mil::SubInstruction {
+}
+abstract class mil::Value {
+}
+class mil::YldInstruction {
+}
+Instruction <|-- mil::AddInstruction
+Instruction <|-- mil::DivInstruction
+Instruction <|-- mil::EqInstruction
+Instruction <|-- mil::GeqInstruction
+Instruction <|-- mil::GtInstruction
+Instruction <|-- mil::InpInstruction
+Instruction <|-- mil::JumpInstruction
+Instruction <|-- mil::LabelInstruction
+Instruction <|-- mil::LeqInstruction
+Instruction <|-- mil::LoadInstruction
+Instruction <|-- mil::LtInstruction
+Instruction <|-- mil::MulInstruction
+Instruction <|-- mil::NegInstruction
+Instruction <|-- mil::NeqInstruction
+Instruction <|-- mil::PrtInstruction
+Instruction <|-- mil::RetInstruction
+Instruction <|-- mil::StoreInstruction
+Instruction <|-- mil::SubInstruction
+Instruction <|-- mil::YldInstruction
+JumpInstruction <|-- mil::CalInstruction
+JumpInstruction <|-- mil::JmpInstruction
+JumpInstruction <|-- mil::JpcInstruction
+PrtInstruction <|-- mil::ErrInstruction
+Value <|-- mil::ConstantInteger
+Value <|-- mil::RegisterReference
+mil::Instruction "0..9999" --* "1..1" mil::MILModel : instructions0
+mil::LabelInstruction "1..1" -- "1..1" mil::JumpInstruction : label3
+mil::ConstantInteger "0..1" --* "1..1" mil::InpInstruction : lowerBound4
+mil::RegisterReference "0..1" --* "1..1" mil::StoreInstruction : registerReference2
+mil::InpInstruction "1..1" *-- "0..1" mil::ConstantInteger : upperBound5
+mil::Value "1..1" --* "1..1" mil::LoadInstruction : value1
+@enduml

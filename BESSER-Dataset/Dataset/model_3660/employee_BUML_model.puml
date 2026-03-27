@@ -1,0 +1,70 @@
+@startuml
+enum Gender {
+  Female
+  Male
+}
+class Project {
+}
+class employee::Address {
+  + city : str
+  + country : str
+  + postalCode : str
+  + province : str
+  + street : str
+}
+class employee::Degree {
+  + name : str
+}
+class employee::Directory {
+  + name : str
+}
+class employee::EmailAddress {
+  + address : str
+}
+class employee::Employee {
+  + firstName : str
+  + gender : str
+  + lastName : str
+  + responsibilities : str
+  + salary : float
+}
+class employee::EmploymentPeriod {
+  + endDate : date
+  + startDate : date
+}
+class employee::JobTitle {
+  + title : str
+}
+class employee::LargeProject {
+  + budget : float
+  + milestone : date
+}
+class employee::PhoneNumber {
+  + areaCode : str
+  + number : str
+  + type : str
+}
+abstract class employee::Project {
+  + description : str
+  + name : str
+}
+class employee::SmallProject {
+}
+Project <|-- employee::LargeProject
+Project <|-- employee::SmallProject
+employee::Address "0..1" --* "1..1" employee::Employee : address13
+employee::Employee "1..1" -- "0..9999" employee::Degree : degrees25
+employee::Directory "1..1" *-- "0..9999" employee::Degree : degrees5
+employee::EmailAddress "0..9999" --* "1..1" employee::Employee : emailAddresses31
+employee::Employee "0..9999" --* "1..1" employee::Directory : employees1
+employee::JobTitle "0..1" -- "1..1" employee::Employee : jobTitle15
+employee::JobTitle "0..9999" --* "1..1" employee::Directory : jobs3
+employee::Employee "0..9999" -- "1..1" employee::Employee : managedEmployees22
+employee::Employee "0..1" -- "1..1" employee::Employee : manager19
+employee::PhoneNumber "1..1" -- "1..1" employee::Employee : owner10
+employee::EmploymentPeriod "0..1" --* "1..1" employee::Employee : period11
+employee::PhoneNumber "0..9999" --* "1..1" employee::Employee : phoneNumbers24
+employee::Project "0..9999" --* "1..1" employee::Directory : projects0
+employee::Project "0..9999" -- "1..1" employee::Employee : projects28
+employee::Employee "0..1" -- "1..1" employee::Project : teamLeader7
+@enduml

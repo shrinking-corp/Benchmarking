@@ -1,0 +1,54 @@
+@startuml
+enum PseudostateKind {
+  final
+  initial
+}
+class Region {
+}
+class State {
+}
+class Transition {
+}
+class Vertex {
+}
+class statemachine::Action {
+  + name : str
+}
+class statemachine::ComplexState {
+}
+class statemachine::LabeledTransition {
+}
+class statemachine::Pseudostate {
+  + id : str
+  + kind : str
+}
+class statemachine::Region {
+  + realInitialState() : State
+}
+class statemachine::State {
+  + name : str
+}
+class statemachine::Statemachine {
+  + name : str
+}
+class statemachine::Transition {
+  + id : str
+}
+abstract class statemachine::Vertex {
+}
+Region <|-- statemachine::Statemachine
+State <|-- statemachine::ComplexState
+Transition <|-- statemachine::LabeledTransition
+Vertex <|-- statemachine::Pseudostate
+Vertex <|-- statemachine::State
+statemachine::Action "1..1" -- "1..1" statemachine::LabeledTransition : action19
+statemachine::Statemachine "1..1" *-- "0..9999" statemachine::Action : actions12
+statemachine::Region "1..1" *-- "1..1" statemachine::Pseudostate : initial17
+statemachine::Transition "0..9999" -- "1..1" statemachine::Vertex : outgoings0
+statemachine::Region "0..1" --* "1..1" statemachine::ComplexState : region2
+statemachine::Vertex "1..1" -- "1..1" statemachine::Transition : source4
+statemachine::State "0..9999" --* "1..1" statemachine::Region : states14
+statemachine::State "1..1" -- "0..1" statemachine::ComplexState : super1
+statemachine::Vertex "1..1" -- "1..1" statemachine::Transition : target7
+statemachine::Transition "0..9999" --* "1..1" statemachine::Statemachine : transitions10
+@enduml

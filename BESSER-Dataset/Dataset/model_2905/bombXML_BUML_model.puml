@@ -1,0 +1,33 @@
+@startuml
+enum FeatureKind {
+  attribute
+  containment
+  reference
+}
+class NamedElement {
+}
+class Type {
+}
+class bombXML::DataType {
+}
+class bombXML::Entity {
+  + abstract : bool
+}
+class bombXML::EntityModel {
+}
+class bombXML::Feature {
+  + kind : str
+}
+abstract class bombXML::NamedElement {
+  + name : str
+}
+abstract class bombXML::Type {
+}
+NamedElement <|-- bombXML::Feature
+NamedElement <|-- bombXML::Type
+Type <|-- bombXML::DataType
+Type <|-- bombXML::Entity
+bombXML::Feature "0..9999" --* "1..1" bombXML::Entity : features0
+bombXML::Feature "1..1" -- "1..1" bombXML::Type : type2
+bombXML::Type "0..9999" --* "1..1" bombXML::EntityModel : types1
+@enduml

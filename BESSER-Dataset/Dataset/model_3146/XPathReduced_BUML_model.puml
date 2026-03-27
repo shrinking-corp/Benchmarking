@@ -1,0 +1,43 @@
+@startuml
+class Expression {
+}
+class LiteralExp {
+}
+class LocatedElement {
+}
+class NamedElement {
+}
+abstract class XPath::Expression {
+}
+class XPath::IntegerExp {
+  + symbol : str
+}
+abstract class XPath::LiteralExp {
+}
+abstract class XPath::LocatedElement {
+  + commentsAfter : str
+  + commentsBefore : str
+  + location : str
+}
+abstract class XPath::NamedElement {
+  + name : str
+}
+class XPath::OperatorCallExp {
+}
+class XPath::StringExp {
+  + symbol : str
+}
+class XPath::VariableExp {
+}
+Expression <|-- XPath::LiteralExp
+Expression <|-- XPath::VariableExp
+LiteralExp <|-- XPath::IntegerExp
+LiteralExp <|-- XPath::StringExp
+LocatedElement <|-- XPath::Expression
+LocatedElement <|-- XPath::NamedElement
+LocatedElement <|-- XPath::OperatorCallExp
+NamedElement <|-- XPath::OperatorCallExp
+NamedElement <|-- XPath::VariableExp
+XPath::Expression "1..1" -- "1..1" XPath::OperatorCallExp : left0
+XPath::Expression "0..1" -- "1..1" XPath::OperatorCallExp : right1
+@enduml

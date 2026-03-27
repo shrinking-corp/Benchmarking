@@ -1,0 +1,46 @@
+@startuml
+class MocaTree::Attribute {
+  + value : str
+}
+class MocaTree::File {
+}
+class MocaTree::Folder {
+}
+class MocaTree::Link {
+}
+class MocaTree::Node {
+  + startIndex : int
+  + startLineIndex : int
+  + stopIndex : int
+  + stopLineIndex : int
+}
+class MocaTree::Text {
+}
+abstract class MocaTree::TreeElement {
+  + index : int
+  + name : str
+}
+class Text {
+}
+class TreeElement {
+}
+Text <|-- MocaTree::Node
+TreeElement <|-- MocaTree::Attribute
+TreeElement <|-- MocaTree::File
+TreeElement <|-- MocaTree::Folder
+TreeElement <|-- MocaTree::Link
+TreeElement <|-- MocaTree::Text
+MocaTree::Attribute "0..9999" --* "1..1" MocaTree::Link : attribute13
+MocaTree::Attribute "0..9999" --* "1..1" MocaTree::Node : attribute18
+MocaTree::Text "0..9999" --* "1..1" MocaTree::Node : children17
+MocaTree::File "0..9999" --* "1..1" MocaTree::Folder : file11
+MocaTree::Node "1..1" -- "0..1" MocaTree::File : file15
+MocaTree::File "1..1" -- "1..1" MocaTree::Folder : folder1
+MocaTree::Link "0..9999" --* "1..1" MocaTree::TreeElement : links21
+MocaTree::Node "0..1" -- "1..1" MocaTree::Attribute : node0
+MocaTree::Folder "1..1" -- "1..1" MocaTree::Folder : parentFolder9
+MocaTree::Text "1..1" -- "0..1" MocaTree::Node : parentNode19
+MocaTree::Node "1..1" --* "1..1" MocaTree::File : rootNode2
+MocaTree::Folder "0..9999" --* "1..1" MocaTree::Folder : subFolder6
+MocaTree::TreeElement "0..9999" -- "1..1" MocaTree::Link : targets12
+@enduml

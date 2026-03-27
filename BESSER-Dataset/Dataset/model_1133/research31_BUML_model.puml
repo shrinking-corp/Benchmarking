@@ -1,0 +1,147 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class StateMachineObject {
+}
+enum StateType {
+  final
+  initial
+  ongoing
+}
+class research31::Action {
+  + actionLabel : str
+  + actionStatement : str
+}
+class research31::Collaboration {
+  + ratio : int
+}
+abstract class research31::Counted {
+  + id : int
+}
+class research31::Keyword {
+  + word : str
+}
+class research31::KnowledgeManager {
+}
+abstract class research31::Labelled {
+  + lname : str
+}
+abstract class research31::Named {
+  + name : str
+}
+class research31::Paper {
+}
+class research31::PaperKeyword {
+  + weight : int
+}
+class research31::Paragraph {
+  + content : str
+}
+class research31::Phase {
+  + name : str
+}
+class research31::Position {
+  + description : str
+}
+class research31::Progress {
+  + percent : int
+}
+class research31::PublicationProcess {
+  + maxTime : int
+  + minTime : int
+}
+class research31::PublicationStatus {
+  + label : str
+}
+class research31::PublicationStructure {
+}
+class research31::PublicationSystem {
+}
+class research31::Researcher {
+  + forName : str
+  + name : str
+}
+class research31::Review {
+  + date : date
+}
+class research31::ReviewNote {
+  + content : str
+}
+class research31::Skill {
+  + description : str
+}
+class research31::State {
+  + id : int
+  + kind : str
+  + name : str
+}
+abstract class research31::StateMachineObject {
+  + label : str
+}
+class research31::StateMachineVariable {
+}
+class research31::Transition {
+  + guardExpression : str
+  + guardLabel : str
+}
+class research31::Write {
+  + timeSpent : int
+}
+Counted <|-- research31::Paragraph
+Labelled <|-- research31::Progress
+Labelled <|-- research31::Review
+Labelled <|-- research31::Write
+Named <|-- research31::Keyword
+Named <|-- research31::KnowledgeManager
+Named <|-- research31::Paper
+Named <|-- research31::Paragraph
+Named <|-- research31::Position
+Named <|-- research31::PublicationProcess
+Named <|-- research31::PublicationStructure
+Named <|-- research31::PublicationSystem
+Named <|-- research31::ReviewNote
+StateMachineObject <|-- research31::State
+StateMachineObject <|-- research31::Transition
+research31::Keyword "0..9999" --* "1..1" research31::KnowledgeManager : allkeywords55
+research31::Researcher "0..9999" -- "1..1" research31::Paper : authors13
+research31::Paper "0..1" -- "1..1" research31::Paper : citedBy17
+research31::Collaboration "1..1" -- "0..1" research31::Paper : col_paper61
+research31::Collaboration "0..9999" --* "1..1" research31::Researcher : collaborations9
+research31::Keyword "0..1" -- "1..1" research31::PaperKeyword : keyword58
+research31::Paper "1..1" *-- "0..9999" research31::PaperKeyword : keywords14
+research31::PublicationStructure "1..1" *-- "0..1" research31::KnowledgeManager : knowledgeMan38
+research31::Keyword "1..1" -- "0..9999" research31::Paper : kpapers53
+research31::StateMachineVariable "0..9999" --* "1..1" research31::PublicationStatus : machineVariables64
+research31::Action "0..1" -- "1..1" research31::Action : next83
+research31::Paper "0..1" -- "1..1" research31::Progress : paper25
+research31::Paper "0..9999" --* "1..1" research31::PublicationStructure : papers35
+research31::Paragraph "0..1" -- "1..1" research31::Write : paragraph27
+research31::Paragraph "0..9999" --* "1..1" research31::Paper : paragraphs11
+research31::Position "0..1" -- "1..1" research31::Position : parent51
+research31::PublicationProcess "1..1" *-- "0..9999" research31::Phase : phases0
+research31::Position "0..9999" --* "1..1" research31::PublicationSystem : positions47
+research31::Progress "1..1" -- "0..1" research31::PublicationProcess : process23
+research31::PublicationProcess "0..1" --* "1..1" research31::PublicationSystem : processView42
+research31::Paper "1..1" *-- "0..9999" research31::Progress : progress12
+research31::State "0..9999" --* "1..1" research31::PublicationStatus : pubStates66
+research31::Researcher "1..1" -- "0..9999" research31::Paper : res_papers4
+research31::Position "0..1" -- "1..1" research31::Researcher : res_position7
+research31::Researcher "0..9999" --* "1..1" research31::PublicationStructure : researchers33
+research31::ReviewNote "0..1" -- "1..1" research31::Review : reviewNote30
+research31::Review "0..9999" --* "1..1" research31::Researcher : reviews2
+research31::Paragraph "1..1" *-- "0..9999" research31::ReviewNote : reviews21
+research31::Action "0..9999" --* "1..1" research31::State : s_actions79
+research31::Skill "0..9999" --* "1..1" research31::Researcher : skills5
+research31::State "0..1" -- "1..1" research31::Transition : source70
+research31::State "0..1" -- "1..1" research31::Paper : state19
+research31::PublicationStatus "0..1" --* "1..1" research31::PublicationStructure : status40
+research31::PublicationStructure "0..1" --* "1..1" research31::PublicationSystem : structuralView44
+research31::Transition "1..1" *-- "0..9999" research31::Action : t_actions69
+research31::Transition "1..1" -- "0..1" research31::State : target73
+research31::Transition "0..9999" --* "1..1" research31::State : transitions76
+research31::Write "0..9999" --* "1..1" research31::Researcher : writes1
+@enduml

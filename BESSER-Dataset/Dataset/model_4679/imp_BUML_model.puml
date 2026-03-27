@@ -1,0 +1,171 @@
+@startuml
+enum BinaryOp {
+  ADD
+  AND
+  EQ
+  GEQ
+  GT
+  LEQ
+  LT
+  MUL
+  OR
+  SUB
+}
+class Expr {
+}
+class Member {
+}
+class NamedElement {
+}
+class Stmt {
+}
+class Symbol {
+}
+enum UnaryOp {
+  NEGATE
+  NOT
+}
+class Value {
+}
+class imp::ArrayDecl {
+}
+class imp::ArrayValue {
+}
+class imp::Assignment {
+}
+class imp::AttributeDecl {
+  + name : str
+}
+class imp::Binary {
+  + op : str
+}
+class imp::Block {
+}
+class imp::BoolConst {
+  + value : bool
+}
+class imp::BoolValue {
+  + value : bool
+}
+class imp::Class {
+  + name : str
+}
+class imp::Declaration {
+  + name : str
+}
+abstract class imp::Expr {
+}
+class imp::If {
+}
+class imp::IntConst {
+  + value : int
+}
+class imp::IntValue {
+  + value : int
+}
+abstract class imp::Member {
+}
+class imp::MethodDecl {
+  + name : str
+}
+abstract class imp::NamedElement {
+}
+class imp::NewClass {
+}
+class imp::ParamDecl {
+  + name : str
+}
+class imp::Print {
+}
+class imp::Program {
+}
+class imp::Project {
+  + ismethodcall : bool
+}
+class imp::Return {
+}
+abstract class imp::Stmt {
+}
+class imp::Store {
+}
+class imp::StringConst {
+  + value : str
+}
+class imp::StringToValueMap {
+  + key : str
+}
+class imp::StringValue {
+  + value : str
+}
+abstract class imp::Symbol {
+}
+class imp::This {
+}
+class imp::Unary {
+  + op : str
+}
+abstract class imp::Value {
+}
+class imp::VarRef {
+}
+class imp::While {
+}
+Expr <|-- imp::ArrayDecl
+Expr <|-- imp::Binary
+Expr <|-- imp::BoolConst
+Expr <|-- imp::IntConst
+Expr <|-- imp::NewClass
+Expr <|-- imp::Project
+Expr <|-- imp::StringConst
+Expr <|-- imp::This
+Expr <|-- imp::Unary
+Expr <|-- imp::VarRef
+Member <|-- imp::AttributeDecl
+Member <|-- imp::MethodDecl
+NamedElement <|-- imp::Class
+NamedElement <|-- imp::Symbol
+Stmt <|-- imp::Assignment
+Stmt <|-- imp::Block
+Stmt <|-- imp::Declaration
+Stmt <|-- imp::Expr
+Stmt <|-- imp::If
+Stmt <|-- imp::Print
+Stmt <|-- imp::Return
+Stmt <|-- imp::While
+Symbol <|-- imp::Declaration
+Symbol <|-- imp::ParamDecl
+Value <|-- imp::ArrayValue
+Value <|-- imp::BoolValue
+Value <|-- imp::IntValue
+Value <|-- imp::StringValue
+imp::AttributeDecl "0..9999" --* "1..1" imp::Class : attributes44
+imp::Stmt "1..1" --* "1..1" imp::While : body15
+imp::Class "1..1" -- "1..1" imp::NewClass : class49
+imp::Class "0..9999" --* "1..1" imp::Program : classes33
+imp::Expr "1..1" --* "1..1" imp::While : cond13
+imp::Expr "1..1" --* "1..1" imp::If : cond5
+imp::Expr "1..1" --* "1..1" imp::Declaration : exp0
+imp::Expr "1..1" --* "1..1" imp::Unary : expr18
+imp::Return "1..1" *-- "1..1" imp::Expr : expr40
+imp::Expr "1..1" --* "1..1" imp::Print : expr42
+imp::Declaration "1..1" *-- "0..1" imp::Expr : index1
+imp::Expr "0..1" --* "1..1" imp::Binary : lhs20
+imp::Expr "1..1" --* "1..1" imp::Assignment : lhs51
+imp::Project "1..1" *-- "1..1" imp::Expr : lhs56
+imp::If "1..1" *-- "1..1" imp::Stmt : lhs7
+imp::Program "1..1" *-- "0..9999" imp::MethodDecl : methods32
+imp::Class "1..1" *-- "0..9999" imp::MethodDecl : methods46
+imp::ParamDecl "0..9999" --* "1..1" imp::MethodDecl : params38
+imp::Expr "0..9999" --* "1..1" imp::Project : params60
+imp::Symbol "1..1" -- "1..1" imp::VarRef : ref63
+imp::Stmt "1..1" --* "1..1" imp::If : rhs10
+imp::Binary "1..1" *-- "1..1" imp::Expr : rhs22
+imp::Expr "1..1" --* "1..1" imp::Assignment : rhs53
+imp::Member "1..1" -- "1..1" imp::Project : rhs58
+imp::Stmt "1..1" --* "1..1" imp::MethodDecl : stmt35
+imp::Block "1..1" *-- "0..9999" imp::Stmt : stmts4
+imp::Value "1..1" --* "1..1" imp::StringToValueMap : value26
+imp::StringToValueMap "0..9999" --* "1..1" imp::Store : values25
+imp::Value "0..9999" --* "1..1" imp::ArrayValue : values28
+imp::Expr "0..9999" --* "1..1" imp::ArrayDecl : values30
+@enduml

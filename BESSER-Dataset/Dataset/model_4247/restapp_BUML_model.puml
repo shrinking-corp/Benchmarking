@@ -1,0 +1,108 @@
+@startuml
+class Card {
+}
+class Category {
+}
+class Employee {
+}
+class PhysicalCard {
+}
+class Product {
+}
+class Provider {
+}
+class Purchase {
+}
+class User {
+}
+class restapp::model::Card {
+  + change : float
+  + discount : int
+  + id : int
+  + payedValue : float
+  + sellDate : date
+  + totalValue : float
+  + totalValueWithDiscount : float
+}
+class restapp::model::Category {
+  + description : str
+  + id : int
+  + name : str
+  + status : int
+}
+class restapp::model::Employee {
+  + address : str
+  + comission : float
+  + contracted : date
+  + cpf : str
+  + fired : date
+  + id : int
+  + mobile : str
+  + name : str
+  + phone : str
+  + rg : str
+  + salary : float
+  + status : int
+  + working : bool
+  + zipcode : str
+}
+class restapp::model::PhysicalCard {
+  + id : int
+  + number : int
+  + status : int
+}
+class restapp::model::Price {
+  + date : date
+  + id : int
+  + value : float
+}
+class restapp::model::Product {
+  + description : str
+  + id : int
+  + name : str
+  + status : int
+  + stock : int
+}
+class restapp::model::ProductsCard {
+  + date : date
+  + id : int
+}
+class restapp::model::ProductsPurchase {
+  + quantity : int
+  + unityDiscount : int
+  + unityValue : float
+  + unityValueWithDiscount : float
+}
+class restapp::model::Provider {
+  + Address : str
+  + CNPJ : str
+  + contact : str
+  + id : int
+  + name : str
+  + phone : str
+}
+class restapp::model::Purchase {
+  + date : date
+  + discount : int
+  + id : int
+  + totalValue : float
+  + totalWithDiscount : float
+}
+class restapp::model::User {
+  + id : int
+  + password : str
+  + status : int
+  + user : str
+}
+Employee "0..1" -- "1..1" restapp::model::User : newEReference10
+restapp::model::Product "1..1" -- "0..1" Category : newEReference11
+restapp::model::Card "1..1" -- "0..1" PhysicalCard : newEReference110
+Product "0..1" -- "1..1" restapp::model::ProductsCard : newEReference111
+Provider "0..1" -- "1..1" restapp::model::Purchase : newEReference13
+restapp::model::ProductsPurchase "1..1" -- "0..1" Purchase : newEReference16
+Product "0..9999" --* "1..1" restapp::model::Price : newEReference2
+Card "0..1" -- "1..1" restapp::model::ProductsCard : newEReference213
+User "0..1" -- "1..1" restapp::model::Purchase : newEReference24
+Product "0..1" -- "1..1" restapp::model::ProductsPurchase : newEReference27
+User "0..1" -- "1..1" restapp::model::ProductsCard : newEReference315
+@enduml

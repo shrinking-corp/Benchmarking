@@ -1,0 +1,70 @@
+@startuml
+class Anotation {
+}
+enum Cascade {
+  ALL
+  MERGE
+  PERSIST
+  REFRESH
+  REMOVE
+}
+enum Fetch {
+  EAGER
+  LAZY
+}
+class JPA::Anotation {
+}
+class JPA::Column {
+  + fetch : str
+  + name : str
+  + nullable : bool
+  + type : str
+}
+class JPA::Entity {
+  + comment : str
+  + name : str
+}
+class JPA::EntityPk {
+  + name : str
+}
+class JPA::ManyToMany {
+}
+class JPA::ManyToOne {
+  + name : str
+  + referencedEntityName : str
+  + referencedPropertyName : str
+  + type : str
+}
+class JPA::OneToMany {
+  + name : str
+  + referencedEntityName : str
+  + type : str
+}
+class JPA::OneToOne {
+  + name : str
+  + referencedEntityName : str
+  + referencedPropertyName : str
+  + type : str
+}
+class JPA::PersistenceUnit {
+}
+class JPA::Property {
+  + comment : str
+  + name : str
+}
+class JPA::Table {
+  + name : str
+}
+Anotation <|-- JPA::Column
+Anotation <|-- JPA::EntityPk
+Anotation <|-- JPA::ManyToMany
+Anotation <|-- JPA::ManyToOne
+Anotation <|-- JPA::OneToMany
+Anotation <|-- JPA::OneToOne
+Anotation <|-- JPA::Table
+JPA::Entity "1..1" *-- "0..9999" JPA::Anotation : anotations3
+JPA::Property "1..1" *-- "0..9999" JPA::Anotation : anotations5
+JPA::Entity "0..9999" --* "1..1" JPA::PersistenceUnit : entities0
+JPA::Property "0..9999" --* "1..1" JPA::Entity : properties1
+JPA::Property "0..9999" --* "1..1" JPA::EntityPk : properties8
+@enduml

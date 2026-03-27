@@ -1,0 +1,61 @@
+@startuml
+class CarRental2::Branch {
+  + location : str
+  + rentalsForDate() : void
+}
+class CarRental2::Car {
+  + id : str
+  + description() : str
+}
+class CarRental2::CarGroup {
+  + kind : str
+}
+class CarRental2::Check {
+  + description : str
+}
+class CarRental2::Customer {
+  + address : str
+}
+class CarRental2::Employee {
+  + salary : int
+  + raiseSalary() : int
+}
+abstract class CarRental2::Person {
+  + age : int
+  + firstname : str
+  + isMarried : bool
+  + lastname : str
+  + fullname() : str
+}
+class CarRental2::Rental {
+  + fromDate : str
+  + untilDate : str
+}
+class CarRental2::ServiceDepot {
+  + location : str
+}
+class Person {
+}
+Person <|-- CarRental2::Customer
+Person <|-- CarRental2::Employee
+CarRental2::Car "0..1" -- "1..1" CarRental2::Rental : Assignment_Car16
+CarRental2::Rental "0..1" -- "1..1" CarRental2::Car : Assignment_Rental34
+CarRental2::Customer "1..1" -- "1..1" CarRental2::Rental : Booking_Customer11
+CarRental2::Rental "0..9999" -- "1..1" CarRental2::Customer : Booking_Rental0
+CarRental2::Car "0..9999" -- "1..1" CarRental2::CarGroup : Classification_Car20
+CarRental2::CarGroup "1..1" -- "1..1" CarRental2::Car : Classification_CarGroup32
+CarRental2::Branch "1..1" -- "1..1" CarRental2::Employee : Employment_Branch_role_employer2
+CarRental2::Employee "0..9999" -- "1..1" CarRental2::Branch : Employment_Employee_role_employee5
+CarRental2::Car "1..1" -- "1..1" CarRental2::Branch : Fleet_Branch30
+CarRental2::Branch "1..1" -- "0..9999" CarRental2::Car : Fleet_Car7
+CarRental2::Branch "0..1" -- "1..1" CarRental2::Employee : Management_Branch_role_managedBranch1
+CarRental2::Employee "1..1" -- "1..1" CarRental2::Branch : Management_Employee_role_manager4
+CarRental2::Branch "0..9999" -- "1..1" CarRental2::CarGroup : Offers_Branch18
+CarRental2::CarGroup "0..9999" -- "1..1" CarRental2::Branch : Offers_CarGroup8
+CarRental2::Branch "1..1" -- "1..1" CarRental2::Rental : Provider_Branch12
+CarRental2::Rental "0..9999" -- "1..1" CarRental2::Branch : Provider_Rental9
+CarRental2::CarGroup "0..1" -- "1..1" CarRental2::CarGroup : Quality_CarGroup_role_higher28
+CarRental2::CarGroup "1..1" -- "0..1" CarRental2::CarGroup : Quality_CarGroup_role_lower25
+CarRental2::Rental "1..1" -- "1..1" CarRental2::CarGroup : Reservation_CarGroup14
+CarRental2::CarGroup "1..1" -- "0..9999" CarRental2::Rental : Reservation_Rental22
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+enum Direction {
+  input
+  return
+}
+class JElement {
+}
+class JFeature {
+}
+class JField {
+}
+class JParameter {
+}
+enum PrimitiveType {
+  JBoolean
+  JByte
+  JChar
+  JDouble
+  JFloat
+  JInt
+  JLong
+  JShort
+}
+enum ReferenceType {
+  JArrayType
+  JClassType
+  JInterfaceType
+}
+enum Vis {
+  private
+  protected
+  public
+}
+class javaMetaModel::JAttribute {
+  + primitiveType : str
+}
+class javaMetaModel::JClass {
+  + isAbstract : bool
+  + isFinal : bool
+}
+class javaMetaModel::JElement {
+  + name : str
+}
+abstract class javaMetaModel::JFeature {
+  + isStatic : bool
+  + visibility : str
+}
+abstract class javaMetaModel::JField {
+}
+class javaMetaModel::JMethod {
+}
+class javaMetaModel::JPackage {
+}
+abstract class javaMetaModel::JParameter {
+  + direction : str
+}
+class javaMetaModel::JPrimitiveTypePar {
+  + primitiveType : str
+}
+class javaMetaModel::JReference {
+  + refType : str
+}
+class javaMetaModel::JReferenceTypePar {
+  + refType : str
+}
+JElement <|-- javaMetaModel::JClass
+JElement <|-- javaMetaModel::JFeature
+JElement <|-- javaMetaModel::JPackage
+JElement <|-- javaMetaModel::JParameter
+JFeature <|-- javaMetaModel::JField
+JFeature <|-- javaMetaModel::JMethod
+JField <|-- javaMetaModel::JAttribute
+JField <|-- javaMetaModel::JReference
+JParameter <|-- javaMetaModel::JPrimitiveTypePar
+JParameter <|-- javaMetaModel::JReferenceTypePar
+javaMetaModel::JPackage "1..1" *-- "0..9999" javaMetaModel::JClass : jclass9
+javaMetaModel::JClass "1..1" *-- "0..9999" javaMetaModel::JFeature : jfeature1
+javaMetaModel::JParameter "0..9999" --* "1..1" javaMetaModel::JMethod : jparameter0
+javaMetaModel::JClass "0..9999" -- "1..1" javaMetaModel::JClass : jsubClass5
+javaMetaModel::JClass "0..1" -- "1..1" javaMetaModel::JClass : jsuperClass7
+javaMetaModel::JMethod "0..1" -- "1..1" javaMetaModel::JParameter : owner12
+javaMetaModel::JClass "0..1" -- "1..1" javaMetaModel::JFeature : owner13
+javaMetaModel::JPackage "0..1" -- "1..1" javaMetaModel::JClass : owner3
+@enduml

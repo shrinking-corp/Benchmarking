@@ -1,0 +1,116 @@
+@startuml
+class DynamicPage {
+}
+class EntityPage {
+}
+class Link {
+}
+class Node {
+}
+class Page {
+}
+enum SWMLType {
+  Boolean
+  Date
+  Email
+  Float
+  Integer
+  String
+  Time
+}
+class swml::Attribute {
+  + name : str
+  + type : str
+}
+class swml::ContentModel {
+}
+class swml::ContextualLink {
+}
+class swml::CreatePage {
+}
+class swml::DeletePage {
+}
+abstract class swml::DynamicPage {
+}
+class swml::EntityPage {
+}
+class swml::EntityType {
+  + isAbstract : bool
+  + name : str
+}
+class swml::Enumeration {
+  + name : str
+}
+class swml::HypertextModel {
+}
+class swml::IndexPage {
+}
+class swml::KOLink {
+}
+abstract class swml::Link {
+}
+class swml::LinkJoinNode {
+}
+class swml::Literal {
+  + name : str
+}
+abstract class swml::Node {
+}
+class swml::NonContextualLink {
+}
+class swml::OKLink {
+}
+abstract class swml::Page {
+  + name : str
+}
+class swml::Parameter {
+  + ValueSpec : str
+}
+class swml::Relationship {
+  + lower : int
+  + name : str
+  + upper : int
+}
+class swml::StaticPage {
+}
+class swml::UpdatePage {
+}
+class swml::WebApplication {
+  + name : str
+}
+DynamicPage <|-- swml::EntityPage
+DynamicPage <|-- swml::IndexPage
+EntityPage <|-- swml::CreatePage
+EntityPage <|-- swml::DeletePage
+EntityPage <|-- swml::UpdatePage
+Link <|-- swml::ContextualLink
+Link <|-- swml::KOLink
+Link <|-- swml::NonContextualLink
+Link <|-- swml::OKLink
+Node <|-- swml::LinkJoinNode
+Node <|-- swml::Page
+Page <|-- swml::DynamicPage
+Page <|-- swml::LinkJoinNode
+Page <|-- swml::StaticPage
+swml::Enumeration "0..1" -- "1..1" swml::Attribute : EnumType11
+swml::Attribute "0..9999" --* "1..1" swml::EntityType : attribute3
+swml::ContentModel "1..1" --* "1..1" swml::WebApplication : contentModel0
+swml::DynamicPage "1..1" -- "1..1" swml::EntityType : displayedEntityType18
+swml::EntityType "1..1" -- "1..1" swml::Relationship : entityType21
+swml::ContentModel "1..1" *-- "0..9999" swml::EntityType : entityType32
+swml::Enumeration "0..9999" --* "1..1" swml::ContentModel : enumerations29
+swml::StaticPage "1..1" --* "1..1" swml::HypertextModel : homepage38
+swml::WebApplication "1..1" *-- "1..1" swml::HypertextModel : hyperTextModel1
+swml::Attribute "0..1" --* "1..1" swml::EntityType : id4
+swml::DynamicPage "0..9999" --* "1..1" swml::EntityPage : innerPage17
+swml::Link "0..9999" --* "1..1" swml::Node : link40
+swml::Literal "0..9999" --* "1..1" swml::Enumeration : literals27
+swml::Relationship "1..1" -- "1..1" swml::Relationship : opposite23
+swml::Node "0..9999" --* "1..1" swml::HypertextModel : page35
+swml::Parameter "0..1" --* "1..1" swml::Link : parameter15
+swml::Relationship "0..9999" --* "1..1" swml::EntityType : relationship7
+swml::Node "1..1" -- "1..1" swml::Link : source13
+swml::EntityType "1..1" -- "0..1" swml::EntityType : superEntityType9
+swml::Node "1..1" -- "1..1" swml::Link : target14
+swml::EntityType "1..1" -- "1..1" swml::Relationship : target24
+@enduml

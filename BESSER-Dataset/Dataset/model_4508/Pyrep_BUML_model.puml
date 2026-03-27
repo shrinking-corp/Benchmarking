@@ -1,0 +1,75 @@
+@startuml
+class AbstractDataMove {
+}
+class DataMove {
+}
+class Entity {
+}
+class pyrep::AbstractCrossMove {
+}
+class pyrep::AbstractDataMove {
+}
+class pyrep::AbstractMove {
+}
+class pyrep::DataMove {
+  + name : bool
+  + type : str
+  + velocity : str
+}
+class pyrep::Entity {
+}
+class pyrep::Environment {
+  + name : str
+}
+class pyrep::IP {
+  + ip : str
+  + name : str
+}
+class pyrep::Model {
+}
+class pyrep::Move {
+  + distance : str
+}
+class pyrep::MoveCollection {
+  + concurrent : bool
+  + name : str
+}
+class pyrep::Robot {
+  + name : str
+  + port : int
+}
+class pyrep::Sensor {
+  + name : str
+}
+class pyrep::Turn {
+}
+class pyrep::TypeSensor {
+  + typeName : str
+}
+class pyrep::Wheel {
+  + name : str
+  + radius : str
+}
+AbstractDataMove <|-- pyrep::AbstractCrossMove
+AbstractDataMove <|-- pyrep::AbstractMove
+DataMove <|-- pyrep::Move
+DataMove <|-- pyrep::Turn
+Entity <|-- pyrep::DataMove
+Entity <|-- pyrep::Environment
+Entity <|-- pyrep::IP
+Entity <|-- pyrep::MoveCollection
+Entity <|-- pyrep::Robot
+Entity <|-- pyrep::Sensor
+Entity <|-- pyrep::TypeSensor
+Entity <|-- pyrep::Wheel
+pyrep::Entity "0..9999" --* "1..1" pyrep::Model : environment0
+pyrep::IP "0..1" -- "1..1" pyrep::Environment : ip1
+pyrep::AbstractDataMove "0..9999" --* "1..1" pyrep::MoveCollection : moves11
+pyrep::MoveCollection "0..9999" -- "1..1" pyrep::Environment : moves4
+pyrep::Robot "0..1" -- "1..1" pyrep::MoveCollection : robot8
+pyrep::Environment "1..1" -- "0..9999" pyrep::Robot : robots2
+pyrep::TypeSensor "0..1" --* "1..1" pyrep::Sensor : type16
+pyrep::DataMove "0..1" --* "1..1" pyrep::AbstractMove : typeM13
+pyrep::AbstractCrossMove "1..1" -- "0..1" pyrep::DataMove : typeM14
+pyrep::Wheel "0..9999" -- "1..1" pyrep::Robot : wheels6
+@enduml

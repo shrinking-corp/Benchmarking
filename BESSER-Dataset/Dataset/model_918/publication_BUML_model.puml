@@ -1,0 +1,116 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class PlaceHolder {
+}
+enum SequenceType {
+  finishToFinish
+  finishToStart
+  startToFinish
+  startToStart
+}
+abstract class publication::Counted {
+  + id : int
+}
+abstract class publication::Labelled {
+  + lname : str
+}
+abstract class publication::Named {
+  + name : str
+}
+class publication::Paper {
+}
+class publication::Paragraph {
+  + content : str
+}
+abstract class publication::PlaceHolder {
+}
+class publication::PlaceHolderPP {
+}
+class publication::PlaceHolderRn {
+}
+class publication::PlaceHolderRs {
+}
+class publication::PlaceHolderRule {
+}
+class publication::Progress {
+  + percent : int
+  + time : int
+}
+class publication::PublicationPhase {
+  + maxTime : int
+  + minTime : int
+  + name : str
+}
+class publication::PublicationProcess {
+  + maxTime : int
+  + minTime : int
+}
+class publication::PublicationStructure {
+}
+class publication::PublicationSystem {
+}
+class publication::Researcher {
+  + forName : str
+  + name : str
+  + position : str
+}
+class publication::Review {
+}
+class publication::ReviewNote {
+  + content : str
+}
+class publication::Rule {
+  + key : str
+  + text : str
+}
+class publication::Sequence {
+  + sequenceType : str
+}
+class publication::Write {
+}
+Counted <|-- publication::Paragraph
+Labelled <|-- publication::Progress
+Labelled <|-- publication::Review
+Labelled <|-- publication::Write
+Named <|-- publication::Paper
+Named <|-- publication::Paragraph
+Named <|-- publication::PublicationProcess
+Named <|-- publication::PublicationStructure
+Named <|-- publication::ReviewNote
+PlaceHolder <|-- publication::PlaceHolderPP
+PlaceHolder <|-- publication::PlaceHolderRn
+PlaceHolder <|-- publication::PlaceHolderRs
+PlaceHolder <|-- publication::PlaceHolderRule
+publication::Researcher "0..9999" -- "1..1" publication::Paper : authors28
+publication::Sequence "0..9999" --* "1..1" publication::PublicationPhase : linksToSuccessors3
+publication::PublicationPhase "1..1" -- "0..9999" publication::Researcher : neededPerson5
+publication::Progress "1..1" -- "0..1" publication::Paper : paper36
+publication::Paper "0..9999" -- "1..1" publication::Researcher : papers23
+publication::Paper "0..9999" --* "1..1" publication::PublicationStructure : papers46
+publication::Write "1..1" -- "0..1" publication::Paragraph : paragraph38
+publication::Paragraph "0..9999" --* "1..1" publication::Paper : paragraphs26
+publication::Researcher "1..1" -- "0..9999" publication::PublicationPhase : phaseParticipation19
+publication::PublicationPhase "0..9999" --* "1..1" publication::PublicationProcess : phases0
+publication::PlaceHolderRule "0..1" --* "1..1" publication::Rule : placeholder17
+publication::PlaceHolderRs "0..1" --* "1..1" publication::Researcher : placeholder24
+publication::PlaceHolderRn "0..1" --* "1..1" publication::ReviewNote : placeholder32
+publication::PlaceHolderPP "0..1" --* "1..1" publication::PublicationPhase : placeholder9
+publication::Sequence "1..1" -- "1..1" publication::PublicationPhase : predecessor14
+publication::PublicationProcess "0..1" -- "1..1" publication::Progress : process34
+publication::PublicationSystem "1..1" *-- "0..1" publication::PublicationProcess : processView49
+publication::Paper "1..1" *-- "0..9999" publication::Progress : progress27
+publication::Rule "0..9999" --* "1..1" publication::PublicationProcess : publicationRules1
+publication::Researcher "0..9999" --* "1..1" publication::PublicationStructure : researchers44
+publication::ReviewNote "0..1" -- "1..1" publication::Review : reviewNote41
+publication::Researcher "1..1" *-- "0..9999" publication::Review : reviews21
+publication::ReviewNote "0..9999" --* "1..1" publication::Paragraph : reviews30
+publication::Rule "0..9999" -- "1..1" publication::PublicationPhase : rules6
+publication::PublicationStructure "0..1" --* "1..1" publication::PublicationSystem : structuralView51
+publication::PublicationPhase "1..1" -- "1..1" publication::Sequence : successor11
+publication::Write "0..9999" --* "1..1" publication::Researcher : writes20
+@enduml

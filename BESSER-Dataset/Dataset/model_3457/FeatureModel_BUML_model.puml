@@ -1,0 +1,83 @@
+@startuml
+class Alternative {
+}
+class BooleanConstraint {
+}
+enum ComparisonOperator {
+  equal
+  geq
+  gt
+  leq
+  lt
+}
+class FMConstraint {
+}
+class Feature {
+}
+enum SelectionOperator {
+  deselect
+  select
+}
+class VariabilityElement {
+}
+class featureModel::Action {
+  + type : str
+}
+class featureModel::AdaptationRule {
+}
+class featureModel::Alternative {
+}
+class featureModel::Attribute {
+  + name : str
+  + runtime : bool
+}
+abstract class featureModel::BooleanConstraint {
+}
+class featureModel::Condition {
+  + type : str
+}
+class featureModel::Excludes {
+}
+class featureModel::Exclusive {
+}
+abstract class featureModel::FMConstraint {
+}
+class featureModel::Feature {
+  + mandatory : bool
+  + name : str
+  + selected : bool
+  + unselected : bool
+}
+class featureModel::FeatureModel {
+}
+class featureModel::Implies {
+}
+class featureModel::IntValue {
+}
+class featureModel::Value {
+}
+abstract class featureModel::VariabilityElement {
+}
+Alternative <|-- featureModel::Exclusive
+BooleanConstraint <|-- featureModel::Excludes
+BooleanConstraint <|-- featureModel::Implies
+FMConstraint <|-- featureModel::AdaptationRule
+FMConstraint <|-- featureModel::BooleanConstraint
+Feature <|-- featureModel::Alternative
+VariabilityElement <|-- featureModel::Attribute
+VariabilityElement <|-- featureModel::Feature
+featureModel::Action "1..1" --* "1..1" featureModel::AdaptationRule : action18
+featureModel::Attribute "1..1" -- "1..1" featureModel::Condition : attribute20
+featureModel::Attribute "0..9999" --* "1..1" featureModel::Feature : attributes3
+featureModel::Condition "1..1" --* "1..1" featureModel::AdaptationRule : condition17
+featureModel::FMConstraint "0..9999" --* "1..1" featureModel::FeatureModel : constraints0
+featureModel::Condition "1..1" -- "1..1" featureModel::Feature : feature25
+featureModel::Feature "1..1" -- "1..1" featureModel::Action : feature28
+featureModel::Feature "1..1" -- "1..1" featureModel::BooleanConstraint : from12
+featureModel::FeatureModel "1..1" *-- "1..1" featureModel::Feature : rootFeature1
+featureModel::Feature "0..9999" --* "1..1" featureModel::Feature : subFeatures6
+featureModel::BooleanConstraint "1..1" -- "1..1" featureModel::Feature : to14
+featureModel::Attribute "1..1" *-- "1..1" featureModel::Value : value10
+featureModel::IntValue "1..1" --* "1..1" featureModel::Condition : value23
+featureModel::Feature "1..9999" --* "1..1" featureModel::Alternative : variants8
+@enduml

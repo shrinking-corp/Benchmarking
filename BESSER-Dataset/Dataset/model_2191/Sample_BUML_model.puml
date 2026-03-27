@@ -1,0 +1,96 @@
+@startuml
+class Node {
+}
+class PhysicalNode {
+}
+enum SomeKind {
+  Three
+  Two
+  one
+}
+class sample::Comment {
+  + content : str
+}
+class sample::DataTypeMap {
+  + key : str
+  + value : str
+}
+class sample::ETypes {
+  + uris : str
+}
+class sample::LocalNode {
+}
+abstract class sample::Node {
+  + label : str
+}
+class sample::PhysicalNode {
+}
+class sample::PrimaryObject {
+  + featureMapAttributeCollection : str
+  + featureMapAttributeType1 : str
+  + featureMapAttributeType2 : str
+  + featureMapReferenceCollection : str
+  + id : str
+  + kind : str
+  + name : str
+  + unsettableAttribute : str
+  + unsettableAttributeWithDefault : str
+}
+class sample::RemoteNode {
+}
+class sample::StringMap {
+  + key : str
+  + value : str
+}
+class sample::TargetObject {
+  + manyAttributes : str
+  + name : str
+  + singleAttribute : str
+}
+class sample::Tree {
+  + name : str
+}
+class sample::Type {
+  + name : str
+}
+class sample::TypeMap {
+}
+class sample::TypeMapReference {
+}
+class sample::Value {
+  + value : int
+}
+class sample::VirtualNode {
+}
+Node <|-- sample::PhysicalNode
+Node <|-- sample::VirtualNode
+PhysicalNode <|-- sample::LocalNode
+PhysicalNode <|-- sample::RemoteNode
+sample::Tree "0..9999" --* "1..1" sample::Tree : children46
+sample::Node "1..1" *-- "0..9999" sample::Node : children50
+sample::Node "0..9999" --* "1..1" sample::Node : childrenProxies54
+sample::DataTypeMap "0..9999" --* "1..1" sample::ETypes : dataTypeValues5
+sample::TargetObject "0..9999" --* "1..1" sample::PrimaryObject : featureMapReferenceType130
+sample::TargetObject "0..9999" --* "1..1" sample::PrimaryObject : featureMapReferenceType233
+sample::PrimaryObject "0..1" -- "1..1" sample::TypeMapReference : key11
+sample::TypeMap "1..1" *-- "0..1" sample::Type : key7
+sample::Comment "0..9999" --* "1..1" sample::Node : manyContainmentReference65
+sample::TargetObject "0..9999" --* "1..1" sample::PrimaryObject : manyContainmentReferences27
+sample::Comment "0..9999" -- "1..1" sample::Tree : manyReference48
+sample::PrimaryObject "1..1" -- "0..9999" sample::TargetObject : manyReferences21
+sample::PrimaryObject "0..9999" -- "1..1" sample::TargetObject : manyReferences39
+sample::Tree "1..1" *-- "0..9999" sample::Node : nodes42
+sample::Tree "0..1" -- "1..1" sample::Tree : parent44
+sample::Node "0..1" -- "1..1" sample::Node : parent57
+sample::Node "1..1" -- "0..1" sample::Node : parentProxy61
+sample::TargetObject "0..1" --* "1..1" sample::PrimaryObject : singleContainmentReference24
+sample::TargetObject "0..1" -- "1..1" sample::PrimaryObject : singleReference18
+sample::TargetObject "1..1" -- "0..1" sample::PrimaryObject : singleReference36
+sample::StringMap "0..9999" --* "1..1" sample::ETypes : stringValues3
+sample::Tree "0..1" -- "1..1" sample::Node : tree63
+sample::TargetObject "0..1" -- "1..1" sample::PrimaryObject : unsettableReference15
+sample::TypeMapReference "1..1" -- "0..1" sample::TargetObject : value13
+sample::Value "0..1" --* "1..1" sample::TypeMap : value9
+sample::TypeMap "0..9999" --* "1..1" sample::ETypes : values0
+sample::ETypes "1..1" *-- "0..9999" sample::TypeMapReference : valuesWithReferences1
+@enduml

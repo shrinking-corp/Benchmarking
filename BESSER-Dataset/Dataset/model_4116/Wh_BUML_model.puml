@@ -1,0 +1,30 @@
+@startuml
+class wh::Commands {
+  + command : str
+}
+class wh::Definition {
+}
+class wh::Function {
+  + name : str
+}
+class wh::Input {
+  + variable : str
+}
+class wh::Model {
+}
+class wh::Output {
+  + variable : str
+}
+class wh::Program {
+}
+wh::Commands "0..1" --* "1..1" wh::Definition : commands10
+wh::Commands "0..1" --* "1..1" wh::Commands : commands21
+wh::Definition "0..1" --* "1..1" wh::Function : definition6
+wh::Function "0..1" --* "1..1" wh::Program : function1
+wh::Input "1..1" *-- "0..1" wh::Input : input15
+wh::Definition "1..1" *-- "0..1" wh::Input : input8
+wh::Output "0..1" --* "1..1" wh::Definition : output12
+wh::Output "0..1" --* "1..1" wh::Output : output18
+wh::Program "0..9999" --* "1..1" wh::Model : program0
+wh::Program "1..1" *-- "0..1" wh::Program : program4
+@enduml

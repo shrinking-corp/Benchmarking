@@ -1,0 +1,63 @@
+@startuml
+class MT::::Element {
+}
+class MTpos::::Element {
+}
+class MTpre::::Element {
+}
+class ramRoot::GenericNode {
+}
+abstract class ramRoot::MT::::Element {
+  + MT__isProcessed : bool
+  + MT__label : str
+}
+class ramRoot::MTpos::::Chair {
+  + MTpos__order : str
+}
+abstract class ramRoot::MTpos::::Element {
+}
+class ramRoot::MTpos::::Restaurant {
+}
+class ramRoot::MTpos::::Table {
+  + MTpos__id : str
+  + MTpos__isReserved : str
+}
+class ramRoot::MTpos::::Waitress {
+  + MTpos__name : str
+}
+class ramRoot::MTpre::::Chair {
+  + MTpre__order : str
+}
+abstract class ramRoot::MTpre::::Element {
+  + MT__matchSubtype : bool
+}
+class ramRoot::MTpre::::Restaurant {
+}
+class ramRoot::MTpre::::Table {
+  + MTpre__id : str
+  + MTpre__isReserved : str
+}
+class ramRoot::MTpre::::Waitress {
+  + MTpre__name : str
+}
+MT::::Element <|-- ramRoot::GenericNode
+MT::::Element <|-- ramRoot::MTpos::::Element
+MT::::Element <|-- ramRoot::MTpre::::Element
+MTpos::::Element <|-- ramRoot::MTpos::::Chair
+MTpos::::Element <|-- ramRoot::MTpos::::Restaurant
+MTpos::::Element <|-- ramRoot::MTpos::::Table
+MTpos::::Element <|-- ramRoot::MTpos::::Waitress
+MTpre::::Element <|-- ramRoot::MTpre::::Chair
+MTpre::::Element <|-- ramRoot::MTpre::::Restaurant
+MTpre::::Element <|-- ramRoot::MTpre::::Table
+MTpre::::Element <|-- ramRoot::MTpre::::Waitress
+ramRoot::GenericNode "1..1" -- "0..9999" ramRoot::MT::::Element : GenericLink0
+ramRoot::MTpos::::Chair "0..9999" --* "1..1" ramRoot::MTpos::::Table : chairs1
+ramRoot::MTpre::::Chair "0..9999" --* "1..1" ramRoot::MTpre::::Table : chairs4
+ramRoot::MTpos::::Restaurant "1..1" *-- "0..9999" ramRoot::MTpos::::Table : tables14
+ramRoot::MTpos::::Table "0..9999" --* "1..1" ramRoot::MTpos::::Waitress : tables2
+ramRoot::MTpre::::Table "0..9999" --* "1..1" ramRoot::MTpre::::Waitress : tables5
+ramRoot::MTpre::::Restaurant "1..1" *-- "0..9999" ramRoot::MTpre::::Table : tables7
+ramRoot::MTpos::::Waitress "0..9999" --* "1..1" ramRoot::MTpos::::Restaurant : waitress12
+ramRoot::MTpre::::Waitress "0..9999" --* "1..1" ramRoot::MTpre::::Restaurant : waitress9
+@enduml

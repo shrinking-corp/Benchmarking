@@ -1,0 +1,46 @@
+@startuml
+enum BookCategoryType {
+  fiction
+  magazine
+  novel
+  other
+}
+enum BookCategoryType1 {
+  fiction
+  magazine
+  novel
+  other
+}
+class sunBooks::AuthorsType {
+  + authorName : str
+}
+class sunBooks::BookType {
+  + bookCategory : str
+  + description : str
+  + iSBN : str
+  + itemId : str
+  + name : str
+  + price : str
+  + publicationDate : str
+}
+class sunBooks::BooksType {
+}
+class sunBooks::CollectionType {
+}
+class sunBooks::DocumentRoot {
+  + mixed : str
+}
+class sunBooks::EStringToStringMapEntry {
+}
+class sunBooks::PromotionType {
+  + discount : str
+  + none : str
+}
+sunBooks::BookType "1..1" *-- "1..1" sunBooks::AuthorsType : authors1
+sunBooks::BookType "1..9999" --* "1..1" sunBooks::BooksType : book0
+sunBooks::BooksType "1..1" --* "1..1" sunBooks::CollectionType : books5
+sunBooks::DocumentRoot "1..1" *-- "0..9999" sunBooks::CollectionType : collection11
+sunBooks::PromotionType "1..1" --* "1..1" sunBooks::BookType : promotion3
+sunBooks::EStringToStringMapEntry "0..9999" --* "1..1" sunBooks::DocumentRoot : xMLNSPrefixMap7
+sunBooks::EStringToStringMapEntry "0..9999" --* "1..1" sunBooks::DocumentRoot : xSISchemaLocation8
+@enduml

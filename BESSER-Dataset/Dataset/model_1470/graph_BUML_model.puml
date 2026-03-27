@@ -1,0 +1,33 @@
+@startuml
+class graph::Cause {
+  + name : str
+  + type : str
+}
+class graph::Dependency {
+  + id : str
+  + locality : str
+}
+class graph::DependencyGraph {
+}
+class graph::DeploymentUnitType {
+}
+class graph::DocumentRoot {
+  + mixed : str
+}
+class graph::EStringToStringMapEntry {
+}
+class graph::Node {
+  + id : str
+}
+graph::Dependency "1..1" *-- "0..9999" graph::Cause : cause0
+graph::Node "1..1" -- "0..9999" graph::Dependency : dependency23
+graph::Dependency "0..9999" --* "1..1" graph::DependencyGraph : dependency8
+graph::DependencyGraph "0..9999" --* "1..1" graph::DocumentRoot : dependencyGraph18
+graph::Node "0..1" -- "1..1" graph::Dependency : destination1
+graph::Node "1..9999" --* "1..1" graph::DependencyGraph : node6
+graph::Node "0..1" -- "1..1" graph::DependencyGraph : origin11
+graph::Node "0..1" -- "1..1" graph::Dependency : source3
+graph::DeploymentUnitType "1..1" --* "1..1" graph::Node : unit21
+graph::DocumentRoot "1..1" *-- "0..9999" graph::EStringToStringMapEntry : xMLNSPrefixMap14
+graph::EStringToStringMapEntry "0..9999" --* "1..1" graph::DocumentRoot : xSISchemaLocation15
+@enduml

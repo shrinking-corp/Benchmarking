@@ -1,0 +1,41 @@
+@startuml
+class Edge {
+}
+class NamedElement {
+}
+abstract class petrinet::Edge {
+}
+class petrinet::InhibitorEdge {
+}
+class petrinet::InputEdge {
+}
+class petrinet::NamedElement {
+  + name : str
+}
+class petrinet::OutputEdge {
+}
+class petrinet::PetriNet {
+}
+class petrinet::Place {
+  + tokens : int
+}
+class petrinet::ReadEdge {
+}
+class petrinet::Transition {
+}
+Edge <|-- petrinet::InhibitorEdge
+Edge <|-- petrinet::InputEdge
+Edge <|-- petrinet::OutputEdge
+Edge <|-- petrinet::ReadEdge
+NamedElement <|-- petrinet::Edge
+NamedElement <|-- petrinet::PetriNet
+NamedElement <|-- petrinet::Place
+NamedElement <|-- petrinet::Transition
+petrinet::Edge "0..9999" --* "1..1" petrinet::PetriNet : edges3
+petrinet::Edge "0..9999" -- "1..1" petrinet::Place : edges5
+petrinet::Edge "0..9999" -- "1..1" petrinet::Transition : edges6
+petrinet::Place "0..1" -- "1..1" petrinet::Edge : place8
+petrinet::Place "0..9999" --* "1..1" petrinet::PetriNet : places0
+petrinet::Edge "1..1" -- "0..1" petrinet::Transition : transition9
+petrinet::PetriNet "1..1" *-- "0..9999" petrinet::Transition : transitions1
+@enduml

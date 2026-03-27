@@ -1,0 +1,62 @@
+@startuml
+enum AppTypes {
+  Boolean
+  Double
+  Float
+  Integer
+  String
+}
+class DynamicPage {
+}
+class Page {
+}
+class wappm::Attribute {
+  + name : str
+  + type : str
+}
+class wappm::ContentLayer {
+  + contentName : str
+}
+class wappm::DetailPage {
+}
+class wappm::DynamicPage {
+}
+class wappm::HypertextLayer {
+  + hyperName : str
+}
+class wappm::IndexPage {
+  + size : int
+}
+class wappm::Link {
+}
+class wappm::Page {
+  + name : str
+  + path : str
+}
+class wappm::Reference {
+  + lowBound : int
+  + name : str
+  + upBound : int
+}
+class wappm::StaticPage {
+}
+class wappm::WebClass {
+  + name : str
+}
+class wappm::WebModel {
+  + name : str
+}
+DynamicPage <|-- wappm::DetailPage
+DynamicPage <|-- wappm::IndexPage
+Page <|-- wappm::DynamicPage
+Page <|-- wappm::StaticPage
+wappm::Attribute "0..9999" --* "1..1" wappm::WebClass : attributes14
+wappm::WebClass "0..9999" --* "1..1" wappm::ContentLayer : classes11
+wappm::ContentLayer "0..1" --* "1..1" wappm::WebModel : content1
+wappm::DynamicPage "1..1" -- "0..1" wappm::WebClass : displayedClass7
+wappm::HypertextLayer "0..1" --* "1..1" wappm::WebModel : hypertext0
+wappm::Link "0..9999" --* "1..1" wappm::Page : links5
+wappm::Page "0..1" -- "1..1" wappm::Link : page8
+wappm::HypertextLayer "1..1" *-- "0..9999" wappm::Page : pages3
+wappm::Reference "0..9999" --* "1..1" wappm::WebClass : references16
+@enduml

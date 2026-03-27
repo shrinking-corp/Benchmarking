@@ -1,0 +1,43 @@
+@startuml
+class SqoopHiveImport {
+}
+class SqoopImport {
+}
+class ingest::Catalogue {
+}
+class ingest::Database {
+  + jdbcDriver : str
+  + jdbcPassword : str
+  + jdbcUrl : str
+  + jdbcUser : str
+  + label : str
+}
+class ingest::DbColumn {
+  + jdbcPrecision : int
+  + jdbcScale : int
+  + jdbcType : int
+  + name : str
+}
+class ingest::DbSchema {
+  + name : str
+}
+class ingest::DbTable {
+  + name : str
+}
+class ingest::SqoopHiveImport {
+  + targetHiveDatabase : str
+  + targetHiveTable : str
+}
+class ingest::SqoopHiveIncrementalImport {
+}
+class ingest::SqoopImport {
+}
+SqoopHiveImport <|-- ingest::SqoopHiveIncrementalImport
+SqoopImport <|-- ingest::SqoopHiveImport
+ingest::DbColumn "1..1" -- "1..1" ingest::SqoopHiveIncrementalImport : checkColumn7
+ingest::DbColumn "0..9999" --* "1..1" ingest::DbTable : columns1
+ingest::Database "0..9999" --* "1..1" ingest::Catalogue : databases9
+ingest::Database "1..1" *-- "0..9999" ingest::DbSchema : schemas0
+ingest::DbTable "1..1" *-- "0..9999" ingest::SqoopImport : sqoopImports2
+ingest::DbTable "0..9999" --* "1..1" ingest::DbSchema : tables4
+@enduml

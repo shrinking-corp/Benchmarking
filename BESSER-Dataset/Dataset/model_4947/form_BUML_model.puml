@@ -1,0 +1,48 @@
+@startuml
+class Editable {
+}
+class Element {
+}
+class form::Editable {
+  + disabled : bool
+  + name : str
+}
+abstract class form::Element {
+}
+class form::Formulario {
+}
+class form::Input {
+  + checked : bool
+  + type : str
+  + value : str
+}
+class form::Label {
+  + content : str
+  + for : str
+}
+class form::Orden {
+}
+class form::SelectionList {
+  + multiple : bool
+}
+class form::option {
+  + content : str
+  + value : str
+}
+class form::textArea {
+  + content : str
+}
+Editable <|-- form::Input
+Editable <|-- form::SelectionList
+Editable <|-- form::textArea
+Element <|-- form::Editable
+Element <|-- form::Label
+form::Element "1..1" -- "1..1" form::Orden : destino6
+form::Orden "0..1" -- "1..1" form::Element : entrantes9
+form::Element "0..9999" --* "1..1" form::Formulario : hasElement0
+form::Editable "1..1" *-- "0..1" form::Label : hasLabel3
+form::option "1..9999" --* "1..1" form::SelectionList : hasOption4
+form::Formulario "1..1" *-- "0..9999" form::Orden : orden1
+form::Element "1..1" -- "1..1" form::Orden : origen5
+form::Element "1..1" -- "0..1" form::Orden : salientes8
+@enduml

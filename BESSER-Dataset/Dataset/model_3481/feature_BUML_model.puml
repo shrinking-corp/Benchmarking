@@ -1,0 +1,128 @@
+@startuml
+class AtomicExpression {
+}
+enum AttributeComparisonOperator {
+  equal
+  greaterThan
+  greaterThanOrEqual
+  lessThan
+  lessThanOrEqual
+  unequal
+}
+class AttributeOperand {
+}
+class BinaryExpression {
+}
+class Domain {
+}
+class Expression {
+}
+class Identifiable {
+}
+enum SelectedState {
+  deselected
+  selected
+  undetermined
+}
+class UnaryExpression {
+}
+class feature::AndExpression {
+}
+abstract class feature::AtomicExpression {
+}
+class feature::Attribute {
+  + name : str
+  + value : str
+}
+class feature::AttributeComparisonExpression {
+  + operator : str
+}
+abstract class feature::AttributeOperand {
+}
+class feature::AttributeReference {
+}
+class feature::AttributeValueLiteral {
+  + value : str
+}
+abstract class feature::BinaryExpression {
+}
+class feature::Constraint {
+}
+class feature::ContinuousDomain {
+}
+class feature::DiscreteDomain {
+  + values : str
+}
+abstract class feature::Domain {
+}
+class feature::ExcludesExpression {
+}
+abstract class feature::Expression {
+}
+class feature::Feature {
+  + name : str
+  + selected : str
+}
+class feature::FeatureModel {
+  + name : str
+}
+class feature::FeatureReference {
+}
+class feature::Group {
+  + maxCardinality : int
+  + minCardinality : int
+}
+abstract class feature::Identifiable {
+  + id : str
+}
+class feature::ImpliesExpression {
+}
+class feature::Interval {
+  + lowerBound : int
+  + upperBound : int
+}
+class feature::NestedExpression {
+}
+class feature::NotExpression {
+}
+class feature::OrExpression {
+}
+abstract class feature::UnaryExpression {
+}
+AtomicExpression <|-- feature::AttributeComparisonExpression
+AtomicExpression <|-- feature::FeatureReference
+AttributeOperand <|-- feature::AttributeReference
+AttributeOperand <|-- feature::AttributeValueLiteral
+BinaryExpression <|-- feature::AndExpression
+BinaryExpression <|-- feature::ExcludesExpression
+BinaryExpression <|-- feature::ImpliesExpression
+BinaryExpression <|-- feature::OrExpression
+Domain <|-- feature::ContinuousDomain
+Domain <|-- feature::DiscreteDomain
+Expression <|-- feature::AtomicExpression
+Expression <|-- feature::BinaryExpression
+Expression <|-- feature::UnaryExpression
+Identifiable <|-- feature::Constraint
+Identifiable <|-- feature::Domain
+Identifiable <|-- feature::Feature
+Identifiable <|-- feature::Group
+UnaryExpression <|-- feature::NestedExpression
+UnaryExpression <|-- feature::NotExpression
+feature::AttributeComparisonExpression "1..1" *-- "1..1" feature::AttributeOperand : attribute126
+feature::AttributeComparisonExpression "1..1" *-- "1..1" feature::AttributeOperand : attribute227
+feature::Attribute "1..1" -- "1..1" feature::AttributeReference : attribute30
+feature::Attribute "0..9999" --* "1..1" feature::Feature : attributes5
+feature::Feature "1..9999" --* "1..1" feature::Group : childFeatures8
+feature::Constraint "0..9999" --* "1..1" feature::FeatureModel : constraints3
+feature::Domain "1..1" -- "1..1" feature::Attribute : domain12
+feature::FeatureModel "1..1" *-- "0..9999" feature::Domain : domains1
+feature::Expression "1..1" --* "1..1" feature::Constraint : expression15
+feature::Feature "1..1" -- "1..1" feature::Attribute : feature11
+feature::Feature "1..1" -- "1..1" feature::FeatureReference : feature24
+feature::Group "0..9999" --* "1..1" feature::Feature : groups6
+feature::ContinuousDomain "1..1" *-- "1..9999" feature::Interval : intervals14
+feature::BinaryExpression "1..1" *-- "1..1" feature::Expression : operand119
+feature::Expression "1..1" --* "1..1" feature::UnaryExpression : operand17
+feature::Expression "1..1" --* "1..1" feature::BinaryExpression : operand221
+feature::Feature "1..1" --* "1..1" feature::FeatureModel : root0
+@enduml

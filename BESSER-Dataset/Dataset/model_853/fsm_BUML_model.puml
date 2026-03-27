@@ -1,0 +1,67 @@
+@startuml
+class NamedElement {
+}
+class Pseudostate {
+}
+class State {
+}
+class Transition {
+}
+class fsm::CompositeState {
+}
+class fsm::FinalState {
+}
+class fsm::Fork {
+}
+class fsm::InitialState {
+}
+class fsm::Join {
+}
+class fsm::NamedElement {
+  + name : str
+}
+class fsm::Pseudostate {
+}
+class fsm::Region {
+}
+class fsm::State {
+  + finalTime : int
+  + initialTime : int
+}
+class fsm::StateMachine {
+}
+class fsm::TimedTransition {
+  + duration : int
+}
+class fsm::Transition {
+  + finalTime : int
+  + initialTime : int
+  + time : int
+}
+class fsm::Trigger {
+  + expression : str
+}
+NamedElement <|-- fsm::State
+NamedElement <|-- fsm::StateMachine
+NamedElement <|-- fsm::Transition
+Pseudostate <|-- fsm::Fork
+Pseudostate <|-- fsm::Join
+State <|-- fsm::CompositeState
+State <|-- fsm::FinalState
+State <|-- fsm::InitialState
+State <|-- fsm::Pseudostate
+Transition <|-- fsm::TimedTransition
+fsm::State "1..1" -- "0..9999" fsm::Transition : incoming8
+fsm::Transition "0..9999" -- "1..1" fsm::State : outgoing5
+fsm::CompositeState "1..1" -- "1..1" fsm::Region : parent30
+fsm::CompositeState "0..1" -- "1..1" fsm::State : parentState14
+fsm::Region "1..9999" --* "1..1" fsm::CompositeState : regions25
+fsm::State "1..1" -- "1..1" fsm::Transition : source18
+fsm::State "1..1" -- "0..1" fsm::StateMachine : stateMachine11
+fsm::Transition "1..1" -- "1..1" fsm::StateMachine : stateMachine22
+fsm::State "0..9999" --* "1..1" fsm::StateMachine : states0
+fsm::Region "1..1" *-- "0..9999" fsm::State : states27
+fsm::Transition "1..1" -- "1..1" fsm::State : target15
+fsm::Transition "0..9999" --* "1..1" fsm::StateMachine : transitions2
+fsm::Trigger "0..1" --* "1..1" fsm::Transition : trigger21
+@enduml

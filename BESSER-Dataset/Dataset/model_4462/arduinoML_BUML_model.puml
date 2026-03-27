@@ -1,0 +1,75 @@
+@startuml
+class Actuator {
+}
+class Brick {
+}
+enum DigitalSignalEnum {
+  HIGH
+  LOW
+}
+class NamedElement {
+}
+enum Operator {
+  AND
+  NONE
+  OR
+}
+class Sensor {
+}
+class Signal {
+}
+class arduinoML::Action {
+}
+class arduinoML::Actuator {
+}
+class arduinoML::App {
+  + name : str
+}
+abstract class arduinoML::Brick {
+  + pins : int
+}
+class arduinoML::Condition {
+  + operator : str
+}
+class arduinoML::DigitalSignal {
+  + value : str
+}
+class arduinoML::KeyboardSensor {
+}
+class arduinoML::LCDScreenActuator {
+}
+abstract class arduinoML::NamedElement {
+  + name : str
+}
+class arduinoML::Sensor {
+}
+abstract class arduinoML::Signal {
+}
+class arduinoML::State {
+}
+class arduinoML::StringSignal {
+  + value : str
+}
+class arduinoML::Transition {
+}
+Actuator <|-- arduinoML::LCDScreenActuator
+Brick <|-- arduinoML::Actuator
+Brick <|-- arduinoML::Sensor
+NamedElement <|-- arduinoML::Brick
+NamedElement <|-- arduinoML::Condition
+NamedElement <|-- arduinoML::State
+Sensor <|-- arduinoML::KeyboardSensor
+Signal <|-- arduinoML::DigitalSignal
+Signal <|-- arduinoML::StringSignal
+arduinoML::Action "1..9999" --* "1..1" arduinoML::State : actions6
+arduinoML::Actuator "1..1" -- "1..1" arduinoML::Action : actuator10
+arduinoML::Brick "1..9999" --* "1..1" arduinoML::App : bricks0
+arduinoML::Condition "1..9999" --* "1..1" arduinoML::Transition : conditions17
+arduinoML::State "1..1" -- "1..1" arduinoML::App : initial3
+arduinoML::State "1..1" -- "1..1" arduinoML::Transition : next14
+arduinoML::Condition "1..1" -- "1..1" arduinoML::Sensor : sensor19
+arduinoML::Condition "1..1" *-- "1..1" arduinoML::Signal : signal21
+arduinoML::App "1..1" *-- "1..9999" arduinoML::State : states1
+arduinoML::State "1..1" *-- "1..1" arduinoML::Transition : transition8
+arduinoML::Signal "1..1" --* "1..1" arduinoML::Action : value12
+@enduml

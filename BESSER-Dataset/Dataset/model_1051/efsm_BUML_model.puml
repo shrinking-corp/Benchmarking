@@ -1,0 +1,34 @@
+@startuml
+class AbstractState {
+}
+abstract class efsm::AbstractState {
+  + name : str
+}
+class efsm::ContextVariable {
+  + name : str
+  + type : str
+}
+class efsm::EFSM {
+  + name : str
+}
+class efsm::InitialState {
+}
+class efsm::State {
+}
+class efsm::Transition {
+  + action : str
+  + event : str
+  + guard : str
+  + input : str
+  + name : str
+  + output : str
+}
+AbstractState <|-- efsm::InitialState
+AbstractState <|-- efsm::State
+efsm::InitialState "1..1" --* "1..1" efsm::EFSM : initialstate1
+efsm::Transition "1..1" -- "1..1" efsm::AbstractState : source7
+efsm::State "1..9999" --* "1..1" efsm::EFSM : states3
+efsm::AbstractState "1..1" -- "1..1" efsm::Transition : target9
+efsm::Transition "1..9999" --* "1..1" efsm::EFSM : transitions0
+efsm::ContextVariable "0..9999" --* "1..1" efsm::EFSM : variables5
+@enduml

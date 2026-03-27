@@ -1,0 +1,21 @@
+@startuml
+class ExtendedFamilies::Family {
+  + lastName : str
+  + noOfChildren : int
+}
+class ExtendedFamilies::Female {
+}
+class ExtendedFamilies::Male {
+}
+abstract class ExtendedFamilies::Person {
+  + firstName : str
+}
+class Person {
+}
+Person <|-- ExtendedFamilies::Female
+Person <|-- ExtendedFamilies::Male
+ExtendedFamilies::Person "1..1" -- "0..9999" ExtendedFamilies::Person : children3
+ExtendedFamilies::Family "0..1" -- "1..1" ExtendedFamilies::Person : family1
+ExtendedFamilies::Person "0..9999" --* "1..1" ExtendedFamilies::Family : members0
+ExtendedFamilies::Person "0..2" -- "1..1" ExtendedFamilies::Person : parents6
+@enduml

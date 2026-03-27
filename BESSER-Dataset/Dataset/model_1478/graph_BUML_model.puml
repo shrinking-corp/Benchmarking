@@ -1,0 +1,46 @@
+@startuml
+class Entity {
+}
+class graphmodelling::Edge {
+}
+class graphmodelling::Entity {
+  + ID : str
+  + accessModifier : str
+  + category : str
+  + className : str
+  + description : str
+  + group : str
+  + height : str
+  + name : str
+  + text : str
+  + type : str
+  + value : str
+  + width : str
+  + x : str
+  + y : str
+}
+class graphmodelling::Graph {
+}
+class graphmodelling::ModellingType {
+  + name : str
+}
+class graphmodelling::Node {
+}
+class graphmodelling::Operation {
+}
+class graphmodelling::Property {
+}
+Entity <|-- graphmodelling::Edge
+Entity <|-- graphmodelling::Graph
+Entity <|-- graphmodelling::Node
+Entity <|-- graphmodelling::Operation
+Entity <|-- graphmodelling::Property
+graphmodelling::Edge "0..9999" --* "1..1" graphmodelling::Graph : edges1
+graphmodelling::Node "0..9999" --* "1..1" graphmodelling::Graph : nodes0
+graphmodelling::Operation "0..9999" --* "1..1" graphmodelling::Node : operations11
+graphmodelling::Node "0..1" --* "1..1" graphmodelling::Node : parentNode4
+graphmodelling::Node "1..1" *-- "0..9999" graphmodelling::Property : properties9
+graphmodelling::Node "0..1" -- "1..1" graphmodelling::Edge : source13
+graphmodelling::Node "0..9999" --* "1..1" graphmodelling::Node : subNodes7
+graphmodelling::Node "0..1" -- "1..1" graphmodelling::Edge : target16
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+class UMLDiagramItem {
+}
+class UMLElement {
+}
+class UMLIncrement {
+}
+class classDiagram::UMLAssoc {
+}
+class classDiagram::UMLCardinality {
+  + cardString : str
+}
+class classDiagram::UMLClass {
+}
+class classDiagram::UMLClassDiagram {
+}
+abstract class classDiagram::UMLDiagramItem {
+}
+abstract class classDiagram::UMLElement {
+  + name : str
+}
+abstract class classDiagram::UMLIncrement {
+}
+class classDiagram::UMLRole {
+  + adornment : str
+}
+class classDiagram::UMLStereotype {
+  + text : str
+}
+UMLDiagramItem <|-- classDiagram::UMLAssoc
+UMLDiagramItem <|-- classDiagram::UMLClass
+UMLElement <|-- classDiagram::UMLClassDiagram
+UMLElement <|-- classDiagram::UMLIncrement
+UMLIncrement <|-- classDiagram::UMLCardinality
+UMLIncrement <|-- classDiagram::UMLDiagramItem
+UMLIncrement <|-- classDiagram::UMLRole
+UMLIncrement <|-- classDiagram::UMLStereotype
+classDiagram::UMLRole "1..1" -- "0..1" classDiagram::UMLCardinality : card10
+classDiagram::UMLClassDiagram "0..1" -- "1..1" classDiagram::UMLElement : diagram8
+classDiagram::UMLElement "0..9999" --* "1..1" classDiagram::UMLClassDiagram : elements5
+classDiagram::UMLIncrement "0..1" -- "1..1" classDiagram::UMLStereotype : increment15
+classDiagram::UMLRole "0..1" -- "1..1" classDiagram::UMLAssoc : leftRole0
+classDiagram::UMLRole "0..1" -- "1..1" classDiagram::UMLCardinality : revCard3
+classDiagram::UMLAssoc "0..1" -- "1..1" classDiagram::UMLRole : revLeftRole11
+classDiagram::UMLAssoc "0..1" -- "1..1" classDiagram::UMLRole : revRightRole12
+classDiagram::UMLRole "0..1" -- "1..1" classDiagram::UMLAssoc : rightRole1
+classDiagram::UMLRole "0..9999" -- "1..1" classDiagram::UMLClass : roles6
+classDiagram::UMLStereotype "0..9999" -- "1..1" classDiagram::UMLIncrement : stereotypes9
+classDiagram::UMLRole "1..1" -- "0..1" classDiagram::UMLClass : target14
+@enduml

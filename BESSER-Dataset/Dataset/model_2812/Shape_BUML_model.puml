@@ -1,0 +1,255 @@
+@startuml
+class AnchorPositionPos {
+}
+enum AnchorPredefiniedEnum {
+  center
+  corners
+}
+class AnchorType {
+}
+enum CompartmentLayout {
+  FIT
+  FIXED
+  HORIZONTAL
+  VERTICAL
+}
+class CompartmentShape {
+}
+enum ConnectionStyle {
+  freeform
+  manhatten
+}
+enum HAlign {
+  CENTER
+  LEFT
+  RIGHT
+}
+class Shape {
+}
+class ShapeConnection {
+}
+class ShapeContainerElement {
+}
+enum TextType {
+  default
+  multiline
+}
+enum VAlign {
+  BOTTOM
+  MIDDLE
+  TOP
+}
+class shape::Anchor {
+}
+class shape::AnchorFixPointPosition {
+  + xcor : int
+  + ycor : int
+}
+class shape::AnchorManual {
+}
+class shape::AnchorPosition {
+}
+class shape::AnchorPositionPos {
+}
+class shape::AnchorPredefinied {
+  + value : str
+}
+class shape::AnchorRelativePosition {
+  + xoffset : str
+  + yoffset : str
+}
+class shape::AnchorType {
+}
+class shape::CDEllipse {
+}
+class shape::CDLine {
+}
+class shape::CDPolygon {
+}
+class shape::CDPolyline {
+}
+class shape::CDRectangle {
+}
+class shape::CDRoundedRectangle {
+}
+class shape::CDText {
+  + texttype : str
+}
+class shape::CommonLayout {
+  + heigth : int
+  + width : int
+  + xcor : int
+  + ycor : int
+}
+class shape::Compartment {
+  + compartmentLayout : str
+}
+class shape::CompartmentEllipse {
+}
+class shape::CompartmentInfo {
+  + compartmentLayout : str
+  + invisible : bool
+  + margin : int
+  + spacing : int
+  + stretchH : str
+  + stretchV : str
+}
+class shape::CompartmentPolygon {
+}
+class shape::CompartmentRectangle {
+}
+class shape::CompartmentRoundedRectangle {
+}
+class shape::CompartmentShape {
+}
+class shape::ConnectionDefinition {
+  + connectionStyle : str
+}
+class shape::Description {
+  + hAlign : str
+  + style : str
+  + vAlign : str
+}
+class shape::Ellipse {
+}
+class shape::Line {
+}
+class shape::LineLayout {
+}
+class shape::PlacingDefinition {
+  + angle : int
+  + distance : int
+  + offset : str
+}
+class shape::Point {
+  + curveAfter : int
+  + curveBefore : int
+  + xcor : str
+  + ycor : str
+}
+class shape::PolyLineLayout {
+}
+class shape::Polygon {
+}
+class shape::Polyline {
+}
+class shape::Rectangle {
+}
+class shape::RectangleEllipseLayout {
+}
+class shape::RoundedRectangle {
+}
+class shape::RoundedRectangleLayout {
+  + curveHeight : int
+  + curveWidth : int
+}
+class shape::Shape {
+  + style : str
+}
+class shape::ShapeConnection {
+  + style : str
+}
+class shape::ShapeContainer {
+}
+class shape::ShapeContainerElement {
+  + name : str
+  + style : str
+}
+class shape::ShapeDefinition {
+}
+class shape::ShapeLayout {
+  + maxheight : int
+  + maxwidth : int
+  + minheight : int
+  + minwidth : int
+  + proportional : str
+  + stretchH : str
+  + stretchV : str
+}
+class shape::ShapestyleLayout {
+}
+class shape::Text {
+  + texttype : str
+}
+class shape::TextBody {
+  + value : str
+}
+class shape::TextLayout {
+  + hAlign : str
+  + vAlign : str
+}
+AnchorPositionPos <|-- shape::AnchorFixPointPosition
+AnchorPositionPos <|-- shape::AnchorRelativePosition
+AnchorType <|-- shape::AnchorManual
+AnchorType <|-- shape::AnchorPredefinied
+CompartmentShape <|-- shape::CompartmentEllipse
+CompartmentShape <|-- shape::CompartmentRectangle
+ShapeConnection <|-- shape::CDEllipse
+ShapeConnection <|-- shape::CDLine
+ShapeConnection <|-- shape::CDPolygon
+ShapeConnection <|-- shape::CDPolyline
+ShapeConnection <|-- shape::CDRectangle
+ShapeConnection <|-- shape::CDRoundedRectangle
+ShapeConnection <|-- shape::CDText
+ShapeContainerElement <|-- shape::ConnectionDefinition
+ShapeContainerElement <|-- shape::ShapeDefinition
+Shape <|-- shape::Ellipse
+Shape <|-- shape::Line
+Shape <|-- shape::Polygon
+Shape <|-- shape::Polyline
+Shape <|-- shape::Rectangle
+Shape <|-- shape::RoundedRectangle
+Shape <|-- shape::Text
+shape::ShapeDefinition "1..1" *-- "0..1" shape::Anchor : anchor9
+shape::TextBody "0..1" --* "1..1" shape::CDText : body27
+shape::Text "1..1" *-- "0..1" shape::TextBody : body60
+shape::TextBody "0..1" --* "1..1" shape::Description : body83
+shape::CommonLayout "0..1" --* "1..1" shape::RoundedRectangleLayout : common102
+shape::CommonLayout "0..1" --* "1..1" shape::TextLayout : common108
+shape::CommonLayout "0..1" --* "1..1" shape::RectangleEllipseLayout : common86
+shape::CompartmentInfo "0..1" --* "1..1" shape::Rectangle : compartmentInfo33
+shape::Ellipse "1..1" *-- "0..1" shape::CompartmentInfo : compartmentInfo50
+shape::Description "0..1" --* "1..1" shape::ShapeDefinition : description7
+shape::CompartmentInfo "1..1" *-- "0..1" shape::TextBody : id63
+shape::CompartmentShape "1..1" *-- "0..1" shape::TextBody : id70
+shape::TextBody "0..1" --* "1..1" shape::CompartmentRoundedRectangle : id75
+shape::CompartmentPolygon "1..1" *-- "0..1" shape::TextBody : id80
+shape::ShapestyleLayout "0..1" --* "1..1" shape::ConnectionDefinition : layout1
+shape::RoundedRectangleLayout "1..1" *-- "0..1" shape::ShapestyleLayout : layout105
+shape::ShapestyleLayout "0..1" --* "1..1" shape::TextLayout : layout111
+shape::LineLayout "0..1" --* "1..1" shape::CDLine : layout18
+shape::PolyLineLayout "0..1" --* "1..1" shape::CDPolyline : layout19
+shape::RectangleEllipseLayout "0..1" --* "1..1" shape::CDRectangle : layout20
+shape::RoundedRectangleLayout "0..1" --* "1..1" shape::CDRoundedRectangle : layout21
+shape::CDPolygon "1..1" *-- "0..1" shape::PolyLineLayout : layout22
+shape::RectangleEllipseLayout "0..1" --* "1..1" shape::CDEllipse : layout24
+shape::TextLayout "0..1" --* "1..1" shape::CDText : layout26
+shape::Line "1..1" *-- "0..1" shape::LineLayout : layout29
+shape::PolyLineLayout "0..1" --* "1..1" shape::Polyline : layout31
+shape::Rectangle "1..1" *-- "0..1" shape::RectangleEllipseLayout : layout34
+shape::RoundedRectangleLayout "0..1" --* "1..1" shape::RoundedRectangle : layout40
+shape::PolyLineLayout "0..1" --* "1..1" shape::Polygon : layout45
+shape::RectangleEllipseLayout "0..1" --* "1..1" shape::Ellipse : layout52
+shape::TextLayout "0..1" --* "1..1" shape::Text : layout58
+shape::RectangleEllipseLayout "0..1" --* "1..1" shape::CompartmentShape : layout67
+shape::RoundedRectangleLayout "0..1" --* "1..1" shape::CompartmentRoundedRectangle : layout73
+shape::PolyLineLayout "0..1" --* "1..1" shape::CompartmentPolygon : layout78
+shape::ShapestyleLayout "0..1" --* "1..1" shape::RectangleEllipseLayout : layout88
+shape::LineLayout "1..1" *-- "0..1" shape::ShapestyleLayout : layout93
+shape::ShapestyleLayout "0..1" --* "1..1" shape::PolyLineLayout : layout99
+shape::PlacingDefinition "0..9999" --* "1..1" shape::ConnectionDefinition : placing2
+shape::Point "0..9999" --* "1..1" shape::LineLayout : point91
+shape::Point "0..9999" --* "1..1" shape::PolyLineLayout : point96
+shape::AnchorPositionPos "0..1" --* "1..1" shape::AnchorPosition : pos16
+shape::AnchorPosition "0..9999" --* "1..1" shape::AnchorManual : position15
+shape::Shape "0..9999" --* "1..1" shape::Rectangle : shape37
+shape::Shape "0..9999" --* "1..1" shape::RoundedRectangle : shape42
+shape::Shape "0..9999" --* "1..1" shape::Polygon : shape47
+shape::ShapeDefinition "1..1" *-- "0..9999" shape::Shape : shape5
+shape::Shape "0..9999" --* "1..1" shape::Ellipse : shape55
+shape::CompartmentShape "0..1" --* "1..1" shape::Compartment : shape66
+shape::ShapeConnection "0..1" --* "1..1" shape::PlacingDefinition : shapeCon11
+shape::ShapeContainer "1..1" *-- "0..9999" shape::ShapeContainerElement : shapeContainerElement0
+shape::ShapeLayout "0..1" --* "1..1" shape::ShapeDefinition : shapeLayout4
+shape::Anchor "1..1" *-- "0..1" shape::AnchorType : type13
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+class AbstractElement {
+}
+enum Event {
+  RECEIVE
+  SEND
+}
+enum TypeOfChannel {
+  Asynchronous
+  Synchronous
+}
+abstract class network::AbstractElement {
+  + name : str
+}
+class network::Channel {
+  + Type : str
+}
+class network::Network {
+}
+class network::State {
+}
+class network::Statemachine {
+}
+class network::Transition {
+  + Event : str
+}
+AbstractElement <|-- network::Channel
+AbstractElement <|-- network::Network
+AbstractElement <|-- network::State
+AbstractElement <|-- network::Statemachine
+network::Channel "1..9999" --* "1..1" network::Network : channel1
+network::Transition "1..1" -- "1..1" network::Channel : channel16
+network::Statemachine "1..1" -- "1..1" network::State : initState5
+network::State "1..1" -- "1..1" network::Transition : source10
+network::State "1..9999" --* "1..1" network::Statemachine : state3
+network::Statemachine "1..9999" --* "1..1" network::Network : statemachine0
+network::State "1..1" -- "1..1" network::Transition : target13
+network::Statemachine "1..1" *-- "1..9999" network::Transition : transition8
+@enduml

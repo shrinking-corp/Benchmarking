@@ -1,0 +1,37 @@
+@startuml
+class fenix::Capacity {
+  + exam : int
+  + normal : int
+}
+class fenix::CourseLoad {
+  + description : str
+  + id : str
+  + name : str
+  + totalQuantity : int
+  + type : str
+  + unitQuantity : int
+}
+class fenix::LessonPeriod {
+  + end : str
+  + start : str
+}
+class fenix::Occupation {
+  + current : int
+  + max : int
+}
+class fenix::Shift {
+  + name : str
+  + types : str
+}
+class fenix::scheduleOfCourse {
+}
+fenix::Capacity "0..1" -- "1..1" fenix::CourseLoad : capacity11
+fenix::CourseLoad "1..9999" -- "1..1" fenix::scheduleOfCourse : courseLoads15
+fenix::LessonPeriod "1..9999" -- "1..1" fenix::scheduleOfCourse : lessonPeriods13
+fenix::LessonPeriod "1..9999" -- "1..1" fenix::Shift : lessons1
+fenix::Occupation "1..1" -- "1..1" fenix::Shift : occupation0
+fenix::CourseLoad "1..1" -- "1..1" fenix::LessonPeriod : room5
+fenix::Shift "1..1" -- "1..9999" fenix::CourseLoad : rooms3
+fenix::scheduleOfCourse "1..1" -- "1..9999" fenix::Shift : shifts18
+fenix::CourseLoad "1..1" -- "1..1" fenix::CourseLoad : topLevelSpace9
+@enduml

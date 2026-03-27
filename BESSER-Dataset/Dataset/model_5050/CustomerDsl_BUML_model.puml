@@ -1,0 +1,42 @@
+@startuml
+class Address {
+}
+enum OrderChannel {
+  MAIL
+  PHONE
+  WEB
+}
+class customerDsl::Address {
+  + name : str
+  + zip : str
+}
+class customerDsl::Customer {
+  + fullName : str
+  + name : str
+}
+class customerDsl::CustomerDb {
+}
+class customerDsl::Order {
+  + channel : str
+  + name : str
+}
+class customerDsl::POBox {
+  + number : int
+}
+class customerDsl::Product {
+  + name : str
+  + price : int
+}
+class customerDsl::StreetAddress {
+  + city : str
+  + street : str
+}
+Address <|-- customerDsl::POBox
+Address <|-- customerDsl::StreetAddress
+customerDsl::Order "1..1" -- "0..1" customerDsl::Address : address10
+customerDsl::Address "0..9999" --* "1..1" customerDsl::Customer : addresses5
+customerDsl::Customer "0..1" -- "1..1" customerDsl::Order : customer7
+customerDsl::Customer "0..9999" --* "1..1" customerDsl::CustomerDb : customers0
+customerDsl::CustomerDb "1..1" *-- "0..9999" customerDsl::Order : orders1
+customerDsl::Product "0..9999" --* "1..1" customerDsl::CustomerDb : products3
+@enduml

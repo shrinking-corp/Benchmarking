@@ -1,0 +1,58 @@
+@startuml
+class CriticsReviewType {
+}
+enum GenreTypes {
+  Action
+  Animation
+  Classics
+  Comedy
+  Documentary
+  Drama
+  Family
+  Horror
+  NewRelease
+  Romance
+  SciFi
+  Thriller
+}
+class db::CriticsReviewType {
+  + rating : str
+  + reviewedBy : str
+}
+class db::CustomerReviewType {
+  + comment : str
+}
+class db::CustomerType {
+}
+class db::DocumentRoot {
+  + language : str
+  + mixed : str
+  + specialFeatures : str
+}
+class db::EStringToStringMapEntry {
+}
+class db::MovieDBType {
+  + comment : str
+  + movieDBFeatureMap : str
+}
+class db::MovieType {
+  + actors : str
+  + any : str
+  + criticsReviewGroup : str
+  + director : str
+  + genre : str
+  + iD : str
+  + summary : str
+  + title : str
+}
+CriticsReviewType <|-- db::CustomerReviewType
+db::CustomerType "1..1" -- "1..1" db::MovieType : checkedOutBy17
+db::DocumentRoot "1..1" -- "0..9999" db::CustomerType : checkedOutBy4
+db::MovieType "1..1" *-- "0..9999" db::CriticsReviewType : criticsReview14
+db::DocumentRoot "1..1" *-- "0..9999" db::CriticsReviewType : criticsReview6
+db::CustomerReviewType "0..9999" --* "1..1" db::DocumentRoot : customerReview8
+db::MovieType "1..9999" --* "1..1" db::MovieDBType : movie12
+db::MovieDBType "0..9999" --* "1..1" db::DocumentRoot : movieDB10
+db::EStringToStringMapEntry "0..9999" --* "1..1" db::DocumentRoot : xMLNSPrefixMap0
+db::DocumentRoot "1..1" *-- "0..9999" db::EStringToStringMapEntry : xSISchemaLocation1
+@enduml

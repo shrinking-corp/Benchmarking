@@ -1,0 +1,153 @@
+@startuml
+enum CorrectAnwser {
+  False
+  True
+}
+class EntityWebPage {
+}
+class ExternalSource {
+}
+class Multiple {
+}
+enum MySqlType {
+  BOOLEAN
+  DATE
+  INT
+  REAL
+  VARCHAR
+}
+class PageS::Q {
+}
+class Question {
+}
+class SimpleQuestion {
+}
+class TrueFalse {
+}
+enum VisualRepresentation {
+  BAR_CHART
+  LINEAL_CHART
+  PIE_CHART
+  TEXTUAL
+}
+class WebApp::Attribute {
+  + name : str
+  + type : str
+}
+class WebApp::CRUD {
+}
+class WebApp::Create {
+}
+class WebApp::DataBase {
+}
+class WebApp::Delete {
+}
+class WebApp::Details {
+}
+class WebApp::Entity {
+  + name : str
+}
+abstract class WebApp::EntityWebPage {
+}
+class WebApp::ExternalLink {
+  + url : str
+}
+abstract class WebApp::ExternalSource {
+}
+class WebApp::GroupOfQuestions {
+  + name : str
+}
+class WebApp::Home {
+}
+class WebApp::Index {
+}
+abstract class WebApp::Multiple {
+}
+class WebApp::MultipleForQuestionnary {
+}
+class WebApp::MultipleForSurvey {
+}
+class WebApp::Opened {
+}
+class WebApp::Option {
+  + fraction : int
+  + text : str
+}
+abstract class WebApp::PageS::Q {
+}
+abstract class WebApp::Question {
+}
+class WebApp::QuestionBank {
+}
+class WebApp::Questionnary {
+  + feedback : bool
+}
+class WebApp::RSSFeed {
+  + feedname : str
+  + items_to_display : int
+  + show_date : str
+  + url : str
+}
+abstract class WebApp::SimpleQuestion {
+  + QuestionText : str
+  + visualRep : str
+}
+class WebApp::Survey {
+}
+abstract class WebApp::TrueFalse {
+}
+class WebApp::TrueFalseForQuestionnary {
+  + correct : str
+}
+class WebApp::TrueFalseForSurvey {
+}
+class WebApp::Twitter {
+  + username : str
+}
+class WebApp::WebApp {
+  + Password : str
+  + User : str
+  + name : str
+}
+abstract class WebApp::WebPage {
+  + name : str
+}
+class WebPage {
+}
+EntityWebPage <|-- WebApp::CRUD
+EntityWebPage <|-- WebApp::Create
+EntityWebPage <|-- WebApp::Delete
+EntityWebPage <|-- WebApp::Details
+EntityWebPage <|-- WebApp::Index
+ExternalSource <|-- WebApp::RSSFeed
+ExternalSource <|-- WebApp::Twitter
+Multiple <|-- WebApp::MultipleForQuestionnary
+Multiple <|-- WebApp::MultipleForSurvey
+PageS::Q <|-- WebApp::Questionnary
+PageS::Q <|-- WebApp::Survey
+Question <|-- WebApp::GroupOfQuestions
+Question <|-- WebApp::SimpleQuestion
+SimpleQuestion <|-- WebApp::Multiple
+SimpleQuestion <|-- WebApp::Opened
+SimpleQuestion <|-- WebApp::TrueFalse
+TrueFalse <|-- WebApp::TrueFalseForQuestionnary
+TrueFalse <|-- WebApp::TrueFalseForSurvey
+WebPage <|-- WebApp::EntityWebPage
+WebPage <|-- WebApp::Home
+WebPage <|-- WebApp::PageS::Q
+WebApp::Attribute "1..9999" --* "1..1" WebApp::Entity : attributes5
+WebApp::MultipleForQuestionnary "1..1" -- "1..1" WebApp::Option : correctOption28
+WebApp::DataBase "1..1" --* "1..1" WebApp::WebApp : database1
+WebApp::DataBase "1..1" *-- "0..9999" WebApp::Entity : entities22
+WebApp::Entity "1..1" -- "1..1" WebApp::EntityWebPage : entity20
+WebApp::Entity "1..1" -- "0..9999" WebApp::Entity : entityReference7
+WebApp::ExternalLink "0..9999" --* "1..1" WebApp::WebPage : externallinks15
+WebApp::WebPage "0..9999" -- "1..1" WebApp::WebPage : internallink13
+WebApp::Option "2..9999" --* "1..1" WebApp::Multiple : option19
+WebApp::PageS::Q "1..1" -- "1..9999" WebApp::Question : question9
+WebApp::QuestionBank "1..1" --* "1..1" WebApp::WebApp : questionbank3
+WebApp::Question "1..9999" --* "1..1" WebApp::GroupOfQuestions : questions17
+WebApp::Question "1..9999" --* "1..1" WebApp::QuestionBank : quiestions25
+WebApp::WebPage "1..1" *-- "1..9999" WebApp::ExternalSource : socialnetwork10
+WebApp::WebPage "1..9999" --* "1..1" WebApp::WebApp : webpages0
+@enduml

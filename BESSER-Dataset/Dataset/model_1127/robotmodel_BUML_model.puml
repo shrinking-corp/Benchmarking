@@ -1,0 +1,75 @@
+@startuml
+enum Is_Style {
+  non_style
+  style
+}
+class robotmodel::Action {
+  + name : str
+}
+class robotmodel::Component {
+  + atype : str
+  + depends : str
+  + frequency : float
+  + name : str
+  + type : str
+}
+class robotmodel::Connector {
+  + atype : str
+  + name : str
+  + type : str
+}
+class robotmodel::Event {
+  + name : str
+}
+class robotmodel::Port {
+  + name : str
+}
+class robotmodel::Property {
+  + name : str
+  + type : str
+  + value : str
+}
+class robotmodel::Property::List {
+  + name : str
+}
+class robotmodel::Role {
+  + name : str
+}
+class robotmodel::State {
+  + name : str
+}
+class robotmodel::System {
+  + author : str
+  + author_email : str
+  + depends : str
+  + description : str
+  + name : str
+}
+class robotmodel::Transition {
+  + name : str
+}
+robotmodel::Action "0..9999" --* "1..1" robotmodel::Component : action16
+robotmodel::Action "0..9999" --* "1..1" robotmodel::State : action31
+robotmodel::Transition "1..1" -- "0..1" robotmodel::Action : action46
+robotmodel::System "1..1" *-- "0..9999" robotmodel::Component : component0
+robotmodel::Component "0..9999" --* "1..1" robotmodel::Component : component8
+robotmodel::Connector "0..9999" --* "1..1" robotmodel::System : connector1
+robotmodel::Action "0..1" -- "1..1" robotmodel::State : entryaction37
+robotmodel::Component "1..1" *-- "0..9999" robotmodel::Event : event12
+robotmodel::Event "0..9999" --* "1..1" robotmodel::State : event43
+robotmodel::State "1..1" -- "0..1" robotmodel::Action : exitaction40
+robotmodel::Action "0..1" -- "1..1" robotmodel::Transition : guard49
+robotmodel::Port "0..9999" --* "1..1" robotmodel::Component : port3
+robotmodel::Property::List "1..1" *-- "0..9999" robotmodel::Property : property26
+robotmodel::Property::List "0..9999" --* "1..1" robotmodel::Connector : property_list18
+robotmodel::Property::List "0..9999" --* "1..1" robotmodel::Component : property_list5
+robotmodel::Role "0..9999" --* "1..1" robotmodel::Connector : role21
+robotmodel::Role "0..1" -- "1..1" robotmodel::Port : role23
+robotmodel::State "1..1" -- "1..1" robotmodel::Transition : source52
+robotmodel::State "0..9999" --* "1..1" robotmodel::Component : state10
+robotmodel::State "1..1" *-- "0..9999" robotmodel::State : substate29
+robotmodel::State "1..1" -- "1..1" robotmodel::Transition : target55
+robotmodel::Transition "0..9999" --* "1..1" robotmodel::Component : transition14
+robotmodel::Transition "0..9999" --* "1..1" robotmodel::State : transition34
+robotmodel::Transition "0..1" -- "1..1" robotmodel::Event : transition58
+@enduml

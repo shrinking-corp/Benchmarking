@@ -1,0 +1,30 @@
+@startuml
+class Graph::DirectedArc {
+  + weight : int
+}
+class Graph::Graph {
+}
+class Graph::GraphElement {
+  + color : str
+  + label : str
+}
+class Graph::NamedElement {
+  + name : str
+}
+class Graph::Node {
+  + shape : str
+  + style : str
+}
+class GraphElement {
+}
+class NamedElement {
+}
+GraphElement <|-- Graph::DirectedArc
+GraphElement <|-- Graph::Node
+NamedElement <|-- Graph::Graph
+NamedElement <|-- Graph::GraphElement
+Graph::GraphElement "0..9999" --* "1..1" Graph::Graph : contents0
+Graph::Graph "0..1" -- "1..1" Graph::GraphElement : graph1
+Graph::DirectedArc "1..1" -- "0..1" Graph::Node : sourceNode2
+Graph::Node "0..1" -- "1..1" Graph::DirectedArc : targetNode3
+@enduml

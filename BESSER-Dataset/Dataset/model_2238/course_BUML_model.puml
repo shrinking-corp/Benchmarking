@@ -1,0 +1,103 @@
+@startuml
+enum DayOfWeek {
+  Friday
+  Monday
+  Thursday
+  Tuesday
+  Wednesday
+}
+class Person {
+}
+enum TypeOfInstruction {
+  Lab
+  Lecture
+}
+class course::Course {
+  + code : str
+  + content : str
+  + credits : float
+  + name : str
+}
+class course::CourseCoordinator {
+}
+class course::CourseInstance {
+}
+class course::CourseWork {
+  + labHours : int
+  + lectureHours : int
+}
+class course::Department {
+  + name : str
+  + shortName : str
+}
+class course::Evaluation {
+  + assigments : int
+  + exam : int
+  + project : int
+}
+class course::Faculty {
+  + name : str
+  + shortName : str
+}
+class course::Lecturer {
+}
+class course::Organisation {
+}
+class course::Person {
+  + name : str
+}
+class course::Student {
+}
+class course::StudyProgram {
+  + code : str
+}
+class course::TA {
+}
+class course::Timetable {
+}
+class course::TimetableEntry {
+  + day : str
+  + room : str
+  + time : str
+  + type : str
+}
+class course::University {
+  + name : str
+}
+Person <|-- course::CourseCoordinator
+Person <|-- course::Lecturer
+Person <|-- course::Student
+Person <|-- course::TA
+course::Course "1..1" -- "1..1" course::CourseInstance : course13
+course::CourseCoordinator "1..1" --* "1..1" course::Organisation : courseCoordinator31
+course::CourseInstance "0..1" -- "1..1" course::Evaluation : courseInstance27
+course::CourseInstance "0..1" -- "1..1" course::Organisation : courseInstance36
+course::CourseWork "1..1" -- "1..1" course::CourseInstance : courseInstance41
+course::CourseInstance "1..1" -- "1..1" course::Timetable : courseInstance43
+course::CourseInstance "0..9999" --* "1..1" course::Course : courseInstances10
+course::CourseWork "1..1" --* "1..1" course::CourseInstance : courseWork17
+course::Department "1..1" *-- "0..9999" course::Course : courses21
+course::Department "1..1" -- "1..1" course::Course : department11
+course::Faculty "1..1" *-- "0..9999" course::Department : departments2
+course::Evaluation "1..1" --* "1..1" course::CourseInstance : evaluation15
+course::Student "1..1" -- "0..9999" course::Evaluation : evaluation50
+course::University "1..1" *-- "0..9999" course::Faculty : faculties0
+course::Faculty "1..1" -- "1..1" course::Department : faculty25
+course::Organisation "1..1" *-- "1..9999" course::Lecturer : lecturer32
+course::CourseInstance "1..1" *-- "1..1" course::Organisation : organisation14
+course::Organisation "1..1" -- "1..1" course::CourseCoordinator : organisation52
+course::Lecturer "1..1" -- "1..1" course::Organisation : organisation54
+course::Organisation "1..1" -- "1..1" course::TA : organisation56
+course::Course "0..9999" -- "1..1" course::Course : recommendedPreCond6
+course::Student "0..9999" -- "1..1" course::Evaluation : registeredStudents29
+course::Course "0..9999" -- "1..1" course::Course : requiredPreCond4
+course::Student "0..9999" --* "1..1" course::StudyProgram : students39
+course::StudyProgram "0..9999" -- "1..1" course::TimetableEntry : studyProgram46
+course::StudyProgram "1..1" -- "1..1" course::Student : studyProgram49
+course::StudyProgram "1..9999" --* "1..1" course::Department : studyPrograms23
+course::Course "1..1" -- "0..9999" course::StudyProgram : studyPrograms8
+course::TA "0..9999" --* "1..1" course::Organisation : ta34
+course::Timetable "1..1" --* "1..1" course::CourseInstance : timeTable19
+course::TimetableEntry "1..9999" --* "1..1" course::Timetable : timetableEntry45
+course::University "0..1" -- "1..1" course::Faculty : university1
+@enduml

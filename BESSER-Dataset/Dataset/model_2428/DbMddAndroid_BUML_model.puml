@@ -1,0 +1,31 @@
+@startuml
+class DbMddAndroid::Column {
+  + type : str
+}
+class DbMddAndroid::DBScheme {
+}
+abstract class DbMddAndroid::NamedElement {
+  + name : str
+}
+class DbMddAndroid::Relation {
+  + maxSourceMultiplicity : int
+  + maxTargetMultiplicity : int
+  + minSourceMultiplicity : int
+  + minTargetMultiplicity : int
+}
+class DbMddAndroid::Table {
+}
+class NamedElement {
+}
+NamedElement <|-- DbMddAndroid::Column
+NamedElement <|-- DbMddAndroid::DBScheme
+NamedElement <|-- DbMddAndroid::Table
+DbMddAndroid::Column "0..9999" --* "1..1" DbMddAndroid::Table : columns3
+DbMddAndroid::Table "1..1" -- "0..9999" DbMddAndroid::Relation : inRelation9
+DbMddAndroid::Relation "0..9999" --* "1..1" DbMddAndroid::Table : outRelation8
+DbMddAndroid::Column "0..1" -- "1..1" DbMddAndroid::Table : primaryKey5
+DbMddAndroid::DBScheme "1..1" -- "0..9999" DbMddAndroid::Relation : relations1
+DbMddAndroid::Relation "1..1" -- "1..1" DbMddAndroid::Table : source11
+DbMddAndroid::DBScheme "1..1" *-- "0..9999" DbMddAndroid::Table : tables0
+DbMddAndroid::Table "1..1" -- "1..1" DbMddAndroid::Relation : target12
+@enduml

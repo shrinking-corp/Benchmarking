@@ -1,0 +1,32 @@
+@startuml
+class ModelRoot {
+}
+class Named {
+}
+class Referenced {
+}
+class region::RgInitialPseudostate {
+}
+class region::RgRegion {
+  + containerClass : str
+}
+class region::RgState {
+  + entry : str
+  + exit : str
+  + isFinal : bool
+}
+class region::RgTransition {
+  + effect : str
+  + event : str
+  + message : str
+}
+ModelRoot <|-- region::RgRegion
+Named <|-- region::RgInitialPseudostate
+Named <|-- region::RgState
+Referenced <|-- region::RgTransition
+region::RgInitialPseudostate "1..1" -- "1..1" region::RgRegion : initialPseudostate0
+region::RgTransition "1..1" -- "1..1" region::RgInitialPseudostate : initialTransition3
+region::RgState "1..9999" -- "1..1" region::RgRegion : states1
+region::RgTransition "1..1" -- "1..1" region::RgState : target8
+region::RgState "1..1" -- "0..9999" region::RgTransition : transitions5
+@enduml

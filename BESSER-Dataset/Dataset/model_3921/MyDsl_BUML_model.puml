@@ -1,0 +1,27 @@
+@startuml
+class Type {
+}
+class myDsl::Entity {
+}
+class myDsl::Import {
+  + importURI : str
+}
+class myDsl::Model {
+}
+class myDsl::Property {
+  + many : bool
+  + name : str
+}
+class myDsl::SimpleType {
+}
+class myDsl::Type {
+  + name : str
+}
+Type <|-- myDsl::Entity
+Type <|-- myDsl::SimpleType
+myDsl::Type "0..9999" --* "1..1" myDsl::Model : elements1
+myDsl::Entity "0..1" -- "1..1" myDsl::Entity : extends4
+myDsl::Model "1..1" *-- "0..9999" myDsl::Import : imports0
+myDsl::Property "0..9999" --* "1..1" myDsl::Entity : properties5
+myDsl::Type "0..1" -- "1..1" myDsl::Property : type7
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+class NamedElement {
+}
+class simpleClass::Association {
+}
+class simpleClass::Attribute {
+}
+class simpleClass::Class {
+  + persistent : bool
+}
+class simpleClass::ClassModel {
+}
+abstract class simpleClass::NamedElement {
+  + name : str
+}
+class simpleClass::Package {
+}
+NamedElement <|-- simpleClass::Association
+NamedElement <|-- simpleClass::Attribute
+NamedElement <|-- simpleClass::Class
+NamedElement <|-- simpleClass::Package
+simpleClass::Package "1..1" *-- "0..9999" simpleClass::Association : associations6
+simpleClass::Attribute "0..9999" --* "1..1" simpleClass::Class : attributes8
+simpleClass::Class "0..9999" --* "1..1" simpleClass::Package : classes4
+simpleClass::ClassModel "1..1" *-- "0..9999" simpleClass::Package : packages0
+simpleClass::Class "1..1" -- "1..1" simpleClass::Association : source13
+simpleClass::Package "0..9999" --* "1..1" simpleClass::Package : subPackages2
+simpleClass::Class "1..1" -- "0..9999" simpleClass::Class : super11
+simpleClass::Class "1..1" -- "1..1" simpleClass::Association : target16
+@enduml

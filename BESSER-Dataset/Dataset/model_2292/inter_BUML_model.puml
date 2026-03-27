@@ -1,0 +1,141 @@
+@startuml
+class zlvp::Anrede {
+  + id : int
+  + name : str
+}
+class zlvp::Essen {
+  + datum : date
+  + id : int
+  + nachmittag : str
+  + nacht : str
+  + vormittag : str
+}
+class zlvp::Funktion {
+  + id : int
+  + name : str
+}
+class zlvp::Geschlecht {
+  + id : int
+  + name : str
+}
+class zlvp::Gruppen {
+  + id : int
+  + name : str
+  + spruch : str
+}
+class zlvp::Jahr {
+  + id : int
+  + name : str
+}
+class zlvp::Lager {
+  + id : int
+  + name : str
+  + ort : str
+  + start : date
+  + stop : date
+  + thema : str
+}
+class zlvp::Lagerort {
+  + id : int
+  + name : str
+}
+class zlvp::Legenda {
+  + bemerkung : str
+  + email : str
+  + faxNr : str
+  + firma : str
+  + handyNr : str
+  + id : int
+  + nachname : str
+  + ort : str
+  + plz : str
+  + strasse : str
+  + telNr : str
+  + vorname : str
+}
+class zlvp::LegendaTyp {
+  + id : int
+  + name : str
+}
+class zlvp::Leiter {
+  + id : int
+}
+class zlvp::Person {
+  + email : str
+  + gebDat : date
+  + handyNr : str
+  + id : int
+  + nachname : str
+  + notTelNr : str
+  + ort : str
+  + plz : str
+  + strasse : str
+  + telNr : str
+  + version : str
+  + vorname : str
+}
+class zlvp::Programm {
+  + datum : date
+  + id : int
+  + nachmittag : str
+  + nacht : str
+  + vormittag : str
+}
+class zlvp::Schaeden {
+  + bezeichnung : str
+  + datum : date
+  + id : int
+}
+class zlvp::Stab {
+  + id : int
+}
+class zlvp::Teilnehmer {
+  + id : int
+}
+class zlvp::Verleih {
+  + bemerkung : str
+  + datum : date
+  + id : int
+  + person : str
+}
+class zlvp::Zelt {
+  + id : int
+  + name : str
+}
+class zlvp::ZeltDetail {
+  + id : int
+  + name : str
+}
+class zlvp::ZeltDetailBezeichnung {
+  + id : int
+  + name : str
+}
+zlvp::Lager "1..9999" --* "1..1" zlvp::Zelt : Lager49
+zlvp::Anrede "1..1" --* "1..1" zlvp::Person : anrede1
+zlvp::Anrede "1..1" --* "1..1" zlvp::Legenda : anrede54
+zlvp::Essen "0..9999" --* "1..1" zlvp::Lager : essen26
+zlvp::Funktion "1..1" --* "1..1" zlvp::Stab : funktion7
+zlvp::Geschlecht "1..1" --* "1..1" zlvp::Person : geschlecht0
+zlvp::Gruppen "1..9999" --* "1..1" zlvp::Teilnehmer : gruppen13
+zlvp::Gruppen "0..9999" --* "1..1" zlvp::Lager : gruppen20
+zlvp::Gruppen "0..9999" --* "1..1" zlvp::Leiter : gruppen9
+zlvp::Jahr "1..1" *-- "0..9999" zlvp::Lager : lager18
+zlvp::Lager "0..9999" --* "1..1" zlvp::Stab : lager3
+zlvp::Lager "1..9999" --* "1..1" zlvp::Lagerort : lager61
+zlvp::Lagerort "0..1" --* "1..1" zlvp::Lager : lagerort35
+zlvp::Legenda "0..9999" --* "1..1" zlvp::Lagerort : legenda58
+zlvp::Legenda "1..1" *-- "1..2" zlvp::LegendaTyp : legendaTyp56
+zlvp::Leiter "1..9999" --* "1..1" zlvp::Gruppen : leiter37
+zlvp::Person "0..9999" --* "1..1" zlvp::Lager : materialwart32
+zlvp::Leiter "1..1" *-- "1..1" zlvp::Person : person10
+zlvp::Person "1..1" --* "1..1" zlvp::Teilnehmer : person15
+zlvp::Stab "1..1" *-- "1..1" zlvp::Person : person4
+zlvp::Lager "1..1" *-- "0..9999" zlvp::Programm : programm28
+zlvp::Schaeden "0..9999" --* "1..1" zlvp::Zelt : schaeden45
+zlvp::Stab "0..9999" --* "1..1" zlvp::Lager : stab23
+zlvp::Gruppen "1..1" *-- "1..9999" zlvp::Teilnehmer : teilnehmer40
+zlvp::Zelt "1..1" *-- "0..9999" zlvp::Verleih : verleih47
+zlvp::Zelt "0..9999" --* "1..1" zlvp::Lager : zelt30
+zlvp::ZeltDetail "0..9999" --* "1..1" zlvp::Zelt : zeltDetail43
+zlvp::ZeltDetailBezeichnung "0..9999" --* "1..1" zlvp::ZeltDetail : zeltDetailBezeichnung52
+@enduml

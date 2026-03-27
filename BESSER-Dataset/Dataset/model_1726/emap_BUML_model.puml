@@ -1,0 +1,32 @@
+@startuml
+enum Category {
+  Complex
+  Simple
+}
+class emap::Book {
+  + title : str
+}
+class emap::DateToCategoryMapEntry {
+  + key : str
+  + value : str
+}
+class emap::StringToStringMapEntry {
+  + key : str
+  + value : str
+}
+class emap::StringToWriterMapEntry {
+  + key : str
+}
+class emap::Writer {
+  + name : str
+}
+class emap::WriterToStringMapEntry {
+  + value : str
+}
+emap::Book "1..1" *-- "0..9999" emap::DateToCategoryMapEntry : categoryByDate5
+emap::WriterToStringMapEntry "0..9999" --* "1..1" emap::Book : cityByWriter3
+emap::WriterToStringMapEntry "1..1" -- "0..1" emap::Writer : key9
+emap::Book "1..1" *-- "0..9999" emap::StringToStringMapEntry : keyWords1
+emap::Writer "0..1" -- "1..1" emap::StringToWriterMapEntry : value7
+emap::StringToWriterMapEntry "0..9999" --* "1..1" emap::Book : writers0
+@enduml

@@ -1,0 +1,133 @@
+@startuml
+class DEdge {
+}
+class DGraphElement {
+}
+class DLabeledElement {
+}
+class DLineEdge {
+}
+class DNestedEdge {
+}
+class DNode {
+}
+class DOwnedEdge {
+}
+class DOwnedElement {
+}
+enum DShape {
+  circle
+  dot
+  rectangle
+  roundedRect
+  triangle
+  vee
+}
+class DSimpleEdge {
+}
+class diagraph::DAffixedEdge {
+}
+class diagraph::DCompartmentEdge {
+  + depth : int
+  + partitionName : str
+}
+class diagraph::DContainment {
+  + name : str
+}
+abstract class diagraph::DEdge {
+  + propagated : bool
+}
+class diagraph::DGeneric {
+}
+class diagraph::DGraph {
+  + facade1 : str
+  + facade2 : str
+  + viewName : str
+}
+abstract class diagraph::DGraphElement {
+  + abztract : bool
+  + icon : str
+  + name : str
+}
+class diagraph::DLabel {
+  + abztract : bool
+  + inferred : bool
+  + propagated : bool
+}
+class diagraph::DLabeledEdge {
+}
+abstract class diagraph::DLabeledElement {
+  + expression : str
+  + labls : str
+}
+abstract class diagraph::DLineEdge {
+  + arrows : str
+}
+class diagraph::DNavigationEdge {
+}
+class diagraph::DNestedEdge {
+}
+class diagraph::DNode {
+  + layout : bool
+  + navigationLink : str
+  + shape : str
+}
+abstract class diagraph::DOwnedEdge {
+}
+abstract class diagraph::DOwnedElement {
+}
+class diagraph::DPointOfView {
+}
+class diagraph::DReference {
+}
+abstract class diagraph::DSimpleEdge {
+}
+class diagraph::DViewNavigation {
+  + id : str
+}
+class diagraph::EAttribute {
+}
+class diagraph::EClass {
+}
+class diagraph::ENamedElement {
+}
+class diagraph::EReference {
+}
+DEdge <|-- diagraph::DOwnedEdge
+DEdge <|-- diagraph::DSimpleEdge
+DGraphElement <|-- diagraph::DEdge
+DGraphElement <|-- diagraph::DLabeledElement
+DLabeledElement <|-- diagraph::DGeneric
+DLabeledElement <|-- diagraph::DLabeledEdge
+DLabeledElement <|-- diagraph::DNode
+DLineEdge <|-- diagraph::DLabeledEdge
+DLineEdge <|-- diagraph::DReference
+DNestedEdge <|-- diagraph::DAffixedEdge
+DNestedEdge <|-- diagraph::DCompartmentEdge
+DNode <|-- diagraph::DPointOfView
+DOwnedEdge <|-- diagraph::DLabeledEdge
+DOwnedEdge <|-- diagraph::DNestedEdge
+DOwnedElement <|-- diagraph::DNode
+DOwnedElement <|-- diagraph::DOwnedEdge
+DSimpleEdge <|-- diagraph::DLineEdge
+DSimpleEdge <|-- diagraph::DNavigationEdge
+diagraph::EAttribute "0..1" -- "1..1" diagraph::DLabel : attribute20
+diagraph::DContainment "0..9999" --* "1..1" diagraph::DNode : containments6
+diagraph::DLabeledElement "1..1" *-- "0..9999" diagraph::DLabel : dlabels13
+diagraph::EClass "0..1" -- "1..1" diagraph::DLabeledElement : eClaz12
+diagraph::DNestedEdge "0..9999" -- "1..1" diagraph::DContainment : edges24
+diagraph::DGraphElement "0..9999" --* "1..1" diagraph::DGraph : elements10
+diagraph::DGraphElement "1..1" -- "0..1" diagraph::DGraph : graph4
+diagraph::DNode "0..1" -- "1..1" diagraph::DViewNavigation : navigationSource19
+diagraph::DGraph "0..1" -- "1..1" diagraph::DViewNavigation : navigationTarget17
+diagraph::DContainment "1..1" -- "1..1" diagraph::DNode : node22
+diagraph::DNode "0..1" -- "1..1" diagraph::DOwnedElement : owner15
+diagraph::DPointOfView "1..1" -- "1..1" diagraph::DGraph : pointOfView11
+diagraph::ENamedElement "0..1" -- "1..1" diagraph::DGraphElement : semanticRole3
+diagraph::DNode "1..1" -- "1..1" diagraph::DSimpleEdge : source27
+diagraph::DNestedEdge "1..1" -- "1..1" diagraph::DContainment : source9
+diagraph::DLabeledEdge "1..1" -- "0..1" diagraph::EReference : sourceReference7
+diagraph::DNode "1..1" -- "1..1" diagraph::DEdge : target0
+diagraph::EReference "0..1" -- "1..1" diagraph::DEdge : targetReference1
+diagraph::DViewNavigation "0..1" --* "1..1" diagraph::DNode : viewNavigation5
+@enduml

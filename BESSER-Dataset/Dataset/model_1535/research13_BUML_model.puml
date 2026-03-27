@@ -1,0 +1,107 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class research13::Collaboration {
+  + ratio : int
+}
+abstract class research13::Counted {
+  + id : int
+}
+class research13::Keyword {
+  + description : str
+}
+class research13::KnowledgeManager {
+}
+abstract class research13::Labelled {
+  + lname : str
+}
+abstract class research13::Named {
+  + name : str
+}
+class research13::Paper {
+}
+class research13::PaperKeyword {
+  + weight : int
+}
+class research13::Paragraph {
+  + content : str
+}
+class research13::Phase {
+  + name : str
+}
+class research13::Position {
+  + description : str
+}
+class research13::Progress {
+  + percent : int
+}
+class research13::PublicationProcess {
+  + maxTime : int
+  + minTime : int
+}
+class research13::PublicationStructure {
+}
+class research13::PublicationSystem {
+}
+class research13::Researcher {
+  + forName : str
+  + name : str
+}
+class research13::Review {
+  + date : date
+}
+class research13::ReviewNote {
+  + content : str
+}
+class research13::Skill {
+  + description : str
+}
+class research13::Write {
+  + timeSpent : int
+}
+Counted <|-- research13::Paragraph
+Labelled <|-- research13::Progress
+Labelled <|-- research13::Review
+Labelled <|-- research13::Write
+Named <|-- research13::Keyword
+Named <|-- research13::KnowledgeManager
+Named <|-- research13::Paper
+Named <|-- research13::Paragraph
+Named <|-- research13::Position
+Named <|-- research13::PublicationProcess
+Named <|-- research13::PublicationStructure
+Named <|-- research13::PublicationSystem
+Named <|-- research13::ReviewNote
+research13::Keyword "0..9999" --* "1..1" research13::KnowledgeManager : allkeywords51
+research13::Researcher "0..9999" -- "1..1" research13::Paper : authors13
+research13::Paper "1..1" -- "0..1" research13::Paper : citedBy17
+research13::Collaboration "1..1" -- "0..1" research13::Paper : col_paper57
+research13::Collaboration "0..9999" --* "1..1" research13::Researcher : collaborations9
+research13::Keyword "0..1" -- "1..1" research13::PaperKeyword : keyword54
+research13::PaperKeyword "0..9999" --* "1..1" research13::Paper : keywords14
+research13::PublicationStructure "1..1" *-- "0..1" research13::KnowledgeManager : knowledgeMan36
+research13::Keyword "1..1" -- "0..9999" research13::Paper : kpapers49
+research13::Progress "1..1" -- "0..1" research13::Paper : paper23
+research13::Paper "0..9999" --* "1..1" research13::PublicationStructure : papers33
+research13::Paragraph "0..1" -- "1..1" research13::Write : paragraph25
+research13::Paragraph "0..9999" --* "1..1" research13::Paper : paragraphs11
+research13::Position "0..1" -- "1..1" research13::Position : parent47
+research13::PublicationProcess "1..1" *-- "0..9999" research13::Phase : phases0
+research13::Position "0..9999" --* "1..1" research13::PublicationSystem : positions43
+research13::PublicationProcess "0..1" -- "1..1" research13::Progress : process21
+research13::PublicationProcess "0..1" --* "1..1" research13::PublicationSystem : processView38
+research13::Progress "0..9999" --* "1..1" research13::Paper : progress12
+research13::Researcher "1..1" -- "0..9999" research13::Paper : res_papers4
+research13::Researcher "1..1" -- "0..1" research13::Position : res_position7
+research13::Researcher "0..9999" --* "1..1" research13::PublicationStructure : researchers31
+research13::ReviewNote "0..1" -- "1..1" research13::Review : reviewNote28
+research13::ReviewNote "0..9999" --* "1..1" research13::Paragraph : reviews19
+research13::Review "0..9999" --* "1..1" research13::Researcher : reviews2
+research13::Skill "0..9999" --* "1..1" research13::Researcher : skills5
+research13::PublicationStructure "0..1" --* "1..1" research13::PublicationSystem : structuralView40
+research13::Write "0..9999" --* "1..1" research13::Researcher : writes1
+@enduml

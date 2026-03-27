@@ -1,0 +1,44 @@
+@startuml
+class Brick {
+}
+class NamedElement {
+}
+enum Signal {
+  HIGH
+  LOW
+}
+class arduinoML::Action {
+  + value : str
+}
+class arduinoML::Actuator {
+}
+class arduinoML::App {
+}
+abstract class arduinoML::Brick {
+  + pin : int
+}
+abstract class arduinoML::NamedElement {
+  + name : str
+}
+class arduinoML::Sensor {
+}
+class arduinoML::State {
+}
+class arduinoML::Transition {
+  + value : str
+}
+Brick <|-- arduinoML::Actuator
+Brick <|-- arduinoML::Sensor
+NamedElement <|-- arduinoML::App
+NamedElement <|-- arduinoML::Brick
+NamedElement <|-- arduinoML::State
+arduinoML::State "1..1" *-- "1..9999" arduinoML::Action : actions6
+arduinoML::Action "1..1" -- "1..1" arduinoML::Actuator : actuator9
+arduinoML::Brick "1..9999" --* "1..1" arduinoML::App : bricks0
+arduinoML::State "1..1" -- "1..1" arduinoML::App : initial3
+arduinoML::Transition "1..1" -- "1..1" arduinoML::State : next11
+arduinoML::Sensor "1..1" -- "1..1" arduinoML::Transition : sensor13
+arduinoML::Transition "1..1" -- "1..1" arduinoML::State : state15
+arduinoML::State "1..9999" --* "1..1" arduinoML::App : states1
+arduinoML::Transition "1..1" --* "1..1" arduinoML::State : transition8
+@enduml

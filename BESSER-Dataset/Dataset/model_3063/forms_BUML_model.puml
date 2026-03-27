@@ -1,0 +1,143 @@
+@startuml
+class AttributePageElement {
+}
+enum AttributeType {
+  Boolean
+  Date
+  Email
+  Integer
+  None
+  String
+  Text
+  Time
+  Year
+}
+enum CompositeConditionOperator {
+  AND
+  OR
+}
+class Condition {
+}
+enum ConditionType {
+  Disable
+  Enable
+  Hide
+  Show
+}
+class PageElement {
+}
+class RelationshipPageElement {
+}
+class forms::Attribute {
+  + mandatory : bool
+  + name : str
+  + type : str
+}
+abstract class forms::AttributePageElement {
+}
+class forms::AttributeValueCondition {
+  + value : str
+}
+class forms::Column {
+}
+class forms::CompositeCondition {
+  + operator : str
+}
+abstract class forms::Condition {
+  + conditionID : str
+  + type : str
+}
+class forms::DateSelectionAttributePageElement {
+}
+class forms::Entity {
+  + name : str
+}
+class forms::EntityModel {
+}
+class forms::EnumerationLiteral {
+  + name : str
+  + value : str
+}
+class forms::EnumerationType {
+  + name : str
+}
+class forms::Form {
+  + description : str
+  + name : str
+  + title : str
+}
+class forms::FormModel {
+}
+class forms::ListRelationshipPageElement {
+}
+class forms::Page {
+  + title : str
+}
+abstract class forms::PageElement {
+  + elementID : str
+  + label : str
+}
+class forms::Relationship {
+  + lowerBound : str
+  + name : str
+  + upperBound : str
+}
+abstract class forms::RelationshipPageElement {
+}
+class forms::SelectionAttributePageElement {
+}
+class forms::TableRelationshipPageElement {
+}
+class forms::TextFieldAttributePageElement {
+  + format : str
+}
+class forms::TextareaAttributePageElement {
+}
+class forms::TimeSelectionAttributePageElement {
+}
+AttributePageElement <|-- forms::DateSelectionAttributePageElement
+AttributePageElement <|-- forms::SelectionAttributePageElement
+AttributePageElement <|-- forms::TextFieldAttributePageElement
+AttributePageElement <|-- forms::TextareaAttributePageElement
+AttributePageElement <|-- forms::TimeSelectionAttributePageElement
+Condition <|-- forms::AttributeValueCondition
+Condition <|-- forms::CompositeCondition
+PageElement <|-- forms::AttributePageElement
+PageElement <|-- forms::RelationshipPageElement
+RelationshipPageElement <|-- forms::ListRelationshipPageElement
+RelationshipPageElement <|-- forms::TableRelationshipPageElement
+forms::Attribute "1..1" -- "1..1" forms::AttributePageElement : attribute45
+forms::Attribute "1..1" -- "1..1" forms::Column : attribute53
+forms::Attribute "0..9999" --* "1..1" forms::Entity : attributes11
+forms::Column "1..9999" --* "1..1" forms::TableRelationshipPageElement : columns52
+forms::Condition "0..9999" --* "1..1" forms::Page : conditions38
+forms::Condition "0..9999" --* "1..1" forms::PageElement : conditions41
+forms::CompositeCondition "1..1" *-- "2..2" forms::Condition : conditions65
+forms::Form "1..1" -- "1..1" forms::RelationshipPageElement : editingForm49
+forms::Entity "0..9999" --* "1..1" forms::EntityModel : entities0
+forms::Attribute "1..1" -- "0..1" forms::Entity : entity16
+forms::Form "1..1" -- "1..1" forms::Entity : entity33
+forms::EntityModel "1..1" --* "1..1" forms::FormModel : entityModel26
+forms::EnumerationType "0..1" -- "1..1" forms::Attribute : enumerationType13
+forms::EnumerationType "0..9999" --* "1..1" forms::EntityModel : enumerations1
+forms::Page "1..1" -- "0..1" forms::Form : form40
+forms::Form "1..9999" --* "1..1" forms::FormModel : forms28
+forms::Entity "1..1" -- "1..1" forms::Attribute : id3
+forms::EnumerationLiteral "1..9999" --* "1..1" forms::EnumerationType : literals17
+forms::Relationship "0..1" -- "1..1" forms::Relationship : opposite24
+forms::Page "0..1" -- "1..1" forms::PageElement : page43
+forms::Page "0..1" -- "1..1" forms::Condition : page56
+forms::PageElement "0..1" -- "1..1" forms::Condition : pageElement58
+forms::PageElement "0..9999" --* "1..1" forms::Page : pageElements37
+forms::Page "0..9999" --* "1..1" forms::Form : pages36
+forms::Condition "1..1" -- "0..1" forms::CompositeCondition : parentCondtion61
+forms::RelationshipPageElement "1..1" -- "1..1" forms::Relationship : relationship47
+forms::Relationship "0..9999" --* "1..1" forms::Entity : relationships12
+forms::Relationship "1..1" -- "0..1" forms::Entity : source19
+forms::Entity "0..1" -- "1..1" forms::Entity : superType6
+forms::Entity "1..1" -- "0..9999" forms::Entity : superTypes9
+forms::TableRelationshipPageElement "0..1" -- "1..1" forms::Column : table55
+forms::Entity "1..1" -- "1..1" forms::Relationship : target21
+forms::AttributePageElement "1..1" -- "1..1" forms::AttributeValueCondition : trigger63
+forms::Form "1..1" -- "1..1" forms::FormModel : welcomeForm30
+@enduml

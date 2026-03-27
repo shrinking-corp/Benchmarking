@@ -1,0 +1,69 @@
+@startuml
+class Type {
+}
+class Variable {
+}
+class metamodel::ActsAs {
+  + actsAsWhat : str
+}
+class metamodel::ConnectionToEntity {
+  + cardinalityMany : bool
+  + name : str
+}
+class metamodel::Controller {
+}
+class metamodel::Datatype {
+}
+class metamodel::Entity {
+  + base : str
+}
+class metamodel::EntityObserver {
+}
+class metamodel::Extension::MQPublishing {
+  + queue : str
+}
+class metamodel::Model {
+}
+class metamodel::PlainVariable {
+}
+class metamodel::StaticVariable {
+}
+class metamodel::TransientVariable {
+}
+abstract class metamodel::Type {
+  + name : str
+}
+class metamodel::Validation::ValueRestriction {
+}
+class metamodel::ValueRestriction::Value {
+  + value : str
+}
+abstract class metamodel::Variable {
+  + name : str
+}
+class metamodel::View {
+}
+Type <|-- metamodel::Controller
+Type <|-- metamodel::Datatype
+Type <|-- metamodel::Entity
+Type <|-- metamodel::Model
+Type <|-- metamodel::View
+Variable <|-- metamodel::PlainVariable
+Variable <|-- metamodel::StaticVariable
+Variable <|-- metamodel::TransientVariable
+metamodel::ActsAs "0..9999" --* "1..1" metamodel::Entity : actsAs8
+metamodel::View "1..1" -- "1..1" metamodel::Controller : belongsTo21
+metamodel::ConnectionToEntity "0..9999" --* "1..1" metamodel::Entity : belongsToEntity1
+metamodel::Extension::MQPublishing "0..9999" --* "1..1" metamodel::EntityObserver : extendedBy19
+metamodel::Variable "0..9999" --* "1..1" metamodel::Entity : hasAttribute0
+metamodel::Controller "0..9999" --* "1..1" metamodel::Model : hasControllers22
+metamodel::Entity "0..9999" --* "1..1" metamodel::Model : hasEntities27
+metamodel::ConnectionToEntity "0..9999" --* "1..1" metamodel::Entity : hasEntity3
+metamodel::Model "1..1" *-- "0..9999" metamodel::View : hasViews24
+metamodel::Entity "1..1" *-- "0..9999" metamodel::EntityObserver : isObservedBy6
+metamodel::Entity "1..1" -- "1..1" metamodel::ConnectionToEntity : otherEntity11
+metamodel::ValueRestriction::Value "1..9999" --* "1..1" metamodel::Validation::ValueRestriction : restrictsTo10
+metamodel::Variable "1..1" -- "1..1" metamodel::Type : type14
+metamodel::Type "0..9999" --* "1..1" metamodel::Model : types30
+metamodel::Validation::ValueRestriction "0..1" --* "1..1" metamodel::Variable : validatedBy16
+@enduml

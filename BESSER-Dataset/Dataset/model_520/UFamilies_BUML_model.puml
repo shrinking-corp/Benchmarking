@@ -1,0 +1,91 @@
+@startuml
+class Families::Family {
+  + address : str
+  + lastName : str
+}
+class Families::FamilyRegistry {
+}
+class Families::Member {
+  + age : int
+  + firstName : str
+}
+abstract class Families::uncertainty::ModelElement {
+}
+abstract class Families::uncertainty::UData {
+  + name : str
+  + utype : str
+}
+abstract class Families::uncertainty::aFamily {
+}
+abstract class Families::uncertainty::aFamilyRegistry {
+}
+abstract class Families::uncertainty::aMember {
+}
+class Families::uncertainty::uFamily {
+}
+class Families::uncertainty::uFamilyRegistry {
+}
+class Families::uncertainty::uMember {
+}
+class ModelElement {
+}
+enum OperatorType {
+  AND
+  OR
+  XOR
+}
+class aFamily {
+}
+class aMember {
+}
+class uFamily {
+}
+class uFamilyRegistry {
+}
+class uMember {
+}
+class uncertainty::Families::Family {
+}
+class uncertainty::Families::FamilyRegistry {
+}
+class uncertainty::Families::Member {
+}
+class uncertainty::ModelElement {
+}
+class uncertainty::UData {
+}
+class uncertainty::aFamily {
+}
+class uncertainty::aFamilyRegistry {
+}
+class uncertainty::aMember {
+}
+uncertainty::ModelElement <|-- Families::Family
+uncertainty::ModelElement <|-- Families::FamilyRegistry
+uncertainty::ModelElement <|-- Families::Member
+uncertainty::UData <|-- Families::uncertainty::uFamily
+uncertainty::UData <|-- Families::uncertainty::uFamilyRegistry
+uncertainty::UData <|-- Families::uncertainty::uMember
+uncertainty::aFamily <|-- Families::Family
+uncertainty::aFamily <|-- Families::uncertainty::uFamily
+uncertainty::aFamilyRegistry <|-- Families::FamilyRegistry
+uncertainty::aFamilyRegistry <|-- Families::uncertainty::uFamilyRegistry
+uncertainty::aMember <|-- Families::Member
+uncertainty::aMember <|-- Families::uncertainty::uMember
+Families::Family "1..1" *-- "0..9999" aMember : children0
+Families::uncertainty::ModelElement "1..1" -- "0..9999" ModelElement : exclude11
+aFamily "0..9999" --* "1..1" Families::FamilyRegistry : families8
+aMember "0..1" --* "1..1" Families::Family : father4
+aFamily "0..1" -- "1..1" Families::Member : guardian7
+ModelElement "0..9999" -- "1..1" Families::uncertainty::ModelElement : include10
+aMember "0..1" --* "1..1" Families::Family : mother1
+uncertainty::Families::Family "0..9999" --* "1..1" Families::uncertainty::uFamily : uleft14
+uncertainty::Families::Member "0..9999" --* "1..1" Families::uncertainty::uMember : uleft20
+Families::uncertainty::uFamilyRegistry "1..1" *-- "0..9999" uncertainty::Families::FamilyRegistry : uleft26
+Families::uncertainty::uFamily "1..1" *-- "0..9999" uFamily : upoint18
+uMember "0..9999" --* "1..1" Families::uncertainty::uMember : upoint24
+uFamilyRegistry "0..9999" --* "1..1" Families::uncertainty::uFamilyRegistry : upoint30
+uncertainty::Families::Family "0..9999" --* "1..1" Families::uncertainty::uFamily : uright15
+uncertainty::Families::Member "0..9999" --* "1..1" Families::uncertainty::uMember : uright21
+uncertainty::Families::FamilyRegistry "0..9999" --* "1..1" Families::uncertainty::uFamilyRegistry : uright27
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+class ioautomaton::Automaton {
+  + sender : str
+}
+class ioautomaton::AutomatonContainer {
+}
+class ioautomaton::Object {
+  + name : str
+}
+class ioautomaton::Operation {
+  + name : str
+}
+class ioautomaton::OutMessage {
+}
+class ioautomaton::Return {
+  + value : str
+}
+class ioautomaton::State {
+  + name : str
+}
+class ioautomaton::Transition {
+}
+ioautomaton::Object "0..1" -- "1..1" ioautomaton::OutMessage : _object23
+ioautomaton::Return "1..1" -- "1..1" ioautomaton::Transition : _return13
+ioautomaton::Return "0..1" -- "1..1" ioautomaton::OutMessage : _return20
+ioautomaton::AutomatonContainer "1..1" *-- "0..9999" ioautomaton::Automaton : automaton0
+ioautomaton::Transition "0..9999" -- "1..1" ioautomaton::State : incomingtransition9
+ioautomaton::Automaton "1..1" -- "1..1" ioautomaton::State : initialstate5
+ioautomaton::Transition "1..1" -- "1..1" ioautomaton::Operation : operation11
+ioautomaton::OutMessage "1..1" -- "0..1" ioautomaton::Operation : operation25
+ioautomaton::Transition "0..9999" -- "1..1" ioautomaton::State : outgoingtransition8
+ioautomaton::OutMessage "0..9999" --* "1..1" ioautomaton::Transition : outmessage15
+ioautomaton::Transition "1..1" -- "0..1" ioautomaton::State : poststate18
+ioautomaton::State "0..1" -- "1..1" ioautomaton::Transition : prestate17
+ioautomaton::State "0..9999" --* "1..1" ioautomaton::Automaton : state1
+ioautomaton::Transition "0..9999" --* "1..1" ioautomaton::Automaton : transition3
+@enduml

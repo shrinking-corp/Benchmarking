@@ -1,0 +1,133 @@
+@startuml
+class BoolExpr {
+}
+enum EBoolOneOp {
+  NOT
+}
+enum EBoolTwoOp {
+  AND
+  OR
+  XOR
+}
+enum EBoolVal {
+  FALSE
+  TRUE
+}
+enum ECompOp {
+  EQ
+  GE
+  GT
+  LE
+  LT
+  NE
+}
+enum EIntOneOp {
+  MIN
+}
+enum EIntTwoOp {
+  ADD
+  DIV
+  MUL
+  SUB
+}
+class IntExpr {
+}
+class Node {
+}
+class flinkie2::AssignStat {
+}
+abstract class flinkie2::BoolExpr {
+}
+class flinkie2::BoolVal {
+  + value : bool
+}
+class flinkie2::BooleanEvaluation {
+}
+class flinkie2::BracExprBool {
+}
+class flinkie2::BracExprInt {
+}
+class flinkie2::Comparison {
+  + operator : str
+}
+class flinkie2::DeclStat {
+}
+class flinkie2::FlowChart {
+}
+class flinkie2::Init {
+}
+abstract class flinkie2::IntExpr {
+}
+class flinkie2::Message {
+  + text : str
+}
+abstract class flinkie2::Node {
+}
+class flinkie2::Number {
+  + value : int
+}
+class flinkie2::OneOpBool {
+  + operator : str
+}
+class flinkie2::OneOpInt {
+  + operator : str
+}
+class flinkie2::Option {
+  + text : str
+}
+class flinkie2::Question {
+  + text : str
+}
+class flinkie2::TwoOpBool {
+  + operator : str
+}
+class flinkie2::TwoOpInt {
+  + operator : str
+}
+class flinkie2::Variable {
+  + name : str
+}
+class flinkie2::VariableExpr {
+}
+BoolExpr <|-- flinkie2::BoolVal
+BoolExpr <|-- flinkie2::BracExprBool
+BoolExpr <|-- flinkie2::Comparison
+BoolExpr <|-- flinkie2::OneOpBool
+BoolExpr <|-- flinkie2::TwoOpBool
+IntExpr <|-- flinkie2::BracExprInt
+IntExpr <|-- flinkie2::Number
+IntExpr <|-- flinkie2::OneOpInt
+IntExpr <|-- flinkie2::TwoOpInt
+IntExpr <|-- flinkie2::VariableExpr
+Node <|-- flinkie2::BooleanEvaluation
+Node <|-- flinkie2::Message
+Node <|-- flinkie2::Question
+flinkie2::Question "1..1" *-- "0..9999" flinkie2::AssignStat : assignstats15
+flinkie2::AssignStat "0..9999" --* "1..1" flinkie2::Message : assignstats18
+flinkie2::AssignStat "0..9999" --* "1..1" flinkie2::Option : assignstats23
+flinkie2::AssignStat "0..9999" --* "1..1" flinkie2::BooleanEvaluation : assignstats5
+flinkie2::BoolExpr "1..1" --* "1..1" flinkie2::BooleanEvaluation : boolexpr12
+flinkie2::BoolExpr "1..1" --* "1..1" flinkie2::OneOpBool : boolexpr50
+flinkie2::BoolExpr "1..1" --* "1..1" flinkie2::BracExprBool : boolexpr57
+flinkie2::DeclStat "0..9999" --* "1..1" flinkie2::Init : declstats0
+flinkie2::Node "0..1" -- "1..1" flinkie2::BooleanEvaluation : false9
+flinkie2::FlowChart "1..1" *-- "1..1" flinkie2::Init : initialisation42
+flinkie2::IntExpr "1..1" --* "1..1" flinkie2::OneOpInt : intexpr29
+flinkie2::IntExpr "1..1" --* "1..1" flinkie2::AssignStat : intexpr37
+flinkie2::IntExpr "1..1" --* "1..1" flinkie2::BracExprInt : intexpr45
+flinkie2::IntExpr "1..1" --* "1..1" flinkie2::TwoOpInt : left30
+flinkie2::TwoOpBool "1..1" *-- "1..1" flinkie2::BoolExpr : left52
+flinkie2::IntExpr "1..1" --* "1..1" flinkie2::Comparison : left61
+flinkie2::Node "1..1" -- "1..1" flinkie2::Init : node1
+flinkie2::Node "0..1" -- "1..1" flinkie2::Message : node20
+flinkie2::Option "1..1" -- "0..1" flinkie2::Node : node26
+flinkie2::Node "0..9999" --* "1..1" flinkie2::FlowChart : nodes40
+flinkie2::Option "1..9999" --* "1..1" flinkie2::Question : options14
+flinkie2::TwoOpInt "1..1" *-- "1..1" flinkie2::IntExpr : right32
+flinkie2::BoolExpr "1..1" --* "1..1" flinkie2::TwoOpBool : right54
+flinkie2::Comparison "1..1" *-- "1..1" flinkie2::IntExpr : right59
+flinkie2::BooleanEvaluation "1..1" -- "0..1" flinkie2::Node : true6
+flinkie2::Variable "1..1" --* "1..1" flinkie2::DeclStat : variable3
+flinkie2::Variable "1..1" -- "1..1" flinkie2::VariableExpr : variable47
+flinkie2::VariableExpr "1..1" --* "1..1" flinkie2::AssignStat : variableexpr35
+@enduml

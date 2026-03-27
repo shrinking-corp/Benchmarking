@@ -1,0 +1,127 @@
+@startuml
+class Expression {
+}
+enum IO {
+  INPUT
+  OUTPUT
+}
+class Or {
+}
+class Parenthesis {
+}
+enum TYPE {
+  ANALOG
+  DIGITAL
+}
+class Value {
+}
+class ardlers::And {
+}
+class ardlers::Assignment {
+}
+class ardlers::Attribute {
+}
+class ardlers::BoardDefinition {
+  + ain : int
+  + aout : int
+  + di : int
+  + do : int
+  + name : str
+}
+class ardlers::Comparison {
+}
+class ardlers::Component {
+  + name : str
+}
+class ardlers::ComponentBody {
+  + io : str
+  + pin : int
+  + pinned : str
+  + type : str
+}
+class ardlers::Delta {
+}
+class ardlers::EObject {
+}
+class ardlers::Exp {
+}
+class ardlers::Expression {
+}
+class ardlers::Factor {
+}
+class ardlers::Library {
+}
+class ardlers::Map {
+}
+class ardlers::Node {
+  + name : str
+}
+class ardlers::NumberLiteral {
+  + float : str
+  + int : int
+}
+class ardlers::Or {
+  + operator : str
+}
+class ardlers::Parenthesis {
+}
+class ardlers::Program {
+}
+class ardlers::Range {
+  + high : float
+  + low : float
+}
+class ardlers::Rate {
+  + value : int
+}
+class ardlers::Rule {
+  + type : str
+}
+class ardlers::RuleBody {
+}
+class ardlers::SensorImport {
+  + name : str
+}
+class ardlers::Smoothing {
+  + value : float
+}
+class ardlers::State {
+  + value : str
+}
+class ardlers::Value {
+}
+Expression <|-- ardlers::And
+Expression <|-- ardlers::Comparison
+Expression <|-- ardlers::Exp
+Expression <|-- ardlers::Factor
+Expression <|-- ardlers::Parenthesis
+Or <|-- ardlers::Expression
+Parenthesis <|-- ardlers::Value
+Value <|-- ardlers::Attribute
+Value <|-- ardlers::Delta
+Value <|-- ardlers::NumberLiteral
+ardlers::Assignment "0..9999" --* "1..1" ardlers::RuleBody : assignment25
+ardlers::Delta "1..1" *-- "0..1" ardlers::Attribute : attr23
+ardlers::Attribute "0..1" --* "1..1" ardlers::Assignment : attribute27
+ardlers::Program "1..1" *-- "0..1" ardlers::Library : board0
+ardlers::Node "1..1" -- "0..1" ardlers::BoardDefinition : boardType33
+ardlers::Library "1..1" -- "0..1" ardlers::BoardDefinition : boardtype7
+ardlers::RuleBody "0..1" --* "1..1" ardlers::Rule : body11
+ardlers::Component "0..1" -- "1..1" ardlers::Attribute : component21
+ardlers::Component "0..9999" --* "1..1" ardlers::Node : components36
+ardlers::Or "0..1" --* "1..1" ardlers::Rule : condition10
+ardlers::BoardDefinition "0..9999" --* "1..1" ardlers::Program : definitions5
+ardlers::Range "0..1" --* "1..1" ardlers::Map : in48
+ardlers::Or "0..1" --* "1..1" ardlers::Or : left14
+ardlers::Map "0..1" --* "1..1" ardlers::ComponentBody : map46
+ardlers::Node "0..1" -- "1..1" ardlers::Attribute : name20
+ardlers::Map "1..1" *-- "0..1" ardlers::Range : out50
+ardlers::Program "1..1" *-- "0..9999" ardlers::EObject : program3
+ardlers::ComponentBody "0..1" --* "1..1" ardlers::Component : properties42
+ardlers::Rate "0..1" --* "1..1" ardlers::ComponentBody : rate44
+ardlers::Or "1..1" *-- "0..1" ardlers::Expression : right16
+ardlers::SensorImport "0..1" -- "1..1" ardlers::Component : sensor39
+ardlers::SensorImport "0..9999" --* "1..1" ardlers::Program : sensorsImports1
+ardlers::Or "0..1" --* "1..1" ardlers::Parenthesis : sub18
+ardlers::EObject "0..1" --* "1..1" ardlers::Assignment : value30
+@enduml

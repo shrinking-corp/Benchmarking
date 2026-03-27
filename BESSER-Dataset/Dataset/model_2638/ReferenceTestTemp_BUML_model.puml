@@ -1,0 +1,39 @@
+@startuml
+class SubTestClass {
+}
+enum SubTestEnum {
+}
+class SuperClass {
+}
+enum TestEnum {
+}
+class TestPackage::SubPackage::SubTestClass {
+}
+abstract class TestPackage::SubPackage::SubTestInterface {
+}
+abstract class TestPackage::SuperClass {
+}
+class TestPackage::TestClass {
+}
+abstract class TestPackage::TestInterface {
+  + testAttr : str
+}
+abstract class TestPackage::UberClass {
+}
+class UberClass {
+}
+SuperClass <|-- TestPackage::TestClass
+SuperClass <|-- TestPackage::TestInterface
+UberClass <|-- TestPackage::TestClass
+TestPackage::TestClass "1..1" *-- "0..1" SubTestClass : testRef0
+TestPackage::TestInterface "0..1" -- "1..1" TestPackage::TestClass : testRef21
+TestPackage::TestClass "1..1" -- "1..1" TestPackage::TestInterface : testRef33
+TestPackage::TestInterface "0..9999" -- "1..1" TestPackage::TestClass : testRef46
+TestPackage::TestInterface "1..5" -- "1..1" TestPackage::TestClass : testRef59
+TestPackage::TestClass "1..1" -- "1..9999" TestPackage::TestInterface : testRef612
+TestPackage::TestInterface "0..9999" -- "1..1" TestPackage::TestClass : testRef721
+TestPackage::TestInterface "1..5" -- "1..1" TestPackage::TestClass : testRef824
+TestPackage::TestClass "1..1" -- "1..9999" TestPackage::TestInterface : testRef927
+TestPackage::TestInterface "0..1" -- "1..1" TestPackage::TestClass : testRefWithExp15
+TestPackage::TestInterface "0..1" -- "1..1" TestPackage::TestClass : testRefWithKey18
+@enduml

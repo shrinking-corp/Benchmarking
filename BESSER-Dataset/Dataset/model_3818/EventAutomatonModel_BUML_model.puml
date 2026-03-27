@@ -1,0 +1,119 @@
+@startuml
+class AbstractTransition {
+}
+class Action {
+}
+class Binding {
+}
+class EventAutomatonModel::AbstractTransition {
+}
+abstract class EventAutomatonModel::Action {
+}
+class EventAutomatonModel::Automaton {
+  + name : str
+}
+abstract class EventAutomatonModel::Binding {
+}
+class EventAutomatonModel::ComplexEventProcessor {
+}
+class EventAutomatonModel::ConstantBinding {
+}
+class EventAutomatonModel::EpsilonTransition {
+}
+class EventAutomatonModel::Event {
+}
+class EventAutomatonModel::EventGuard {
+}
+class EventAutomatonModel::FixParameter {
+  + value : str
+}
+class EventAutomatonModel::FreeParameter {
+  + excludedValues : str
+}
+abstract class EventAutomatonModel::Parameter {
+}
+class EventAutomatonModel::ResetTimerAction {
+}
+class EventAutomatonModel::SetTimerAction {
+  + toValue : int
+}
+class EventAutomatonModel::State {
+  + acceptor : str
+  + id : int
+}
+abstract class EventAutomatonModel::SymbolicEvent {
+}
+class EventAutomatonModel::SymbolicEventParameter {
+}
+class EventAutomatonModel::SymbolicInputEvent {
+  + name : str
+}
+abstract class EventAutomatonModel::SymbolicParameter {
+  + name : str
+}
+class EventAutomatonModel::SymbolicTimeoutEvent {
+}
+class EventAutomatonModel::SymbolicTimer {
+  + name : str
+}
+class EventAutomatonModel::SymbolicTokenParameter {
+}
+abstract class EventAutomatonModel::TimerAction {
+}
+class EventAutomatonModel::Token {
+}
+class EventAutomatonModel::TokenParameterBinding {
+}
+class EventAutomatonModel::Transition {
+}
+class Parameter {
+}
+class SymbolicEvent {
+}
+class SymbolicParameter {
+}
+class TimerAction {
+}
+AbstractTransition <|-- EventAutomatonModel::EpsilonTransition
+AbstractTransition <|-- EventAutomatonModel::Transition
+Action <|-- EventAutomatonModel::TimerAction
+Binding <|-- EventAutomatonModel::ConstantBinding
+Binding <|-- EventAutomatonModel::TokenParameterBinding
+Parameter <|-- EventAutomatonModel::FixParameter
+Parameter <|-- EventAutomatonModel::FreeParameter
+SymbolicEvent <|-- EventAutomatonModel::SymbolicInputEvent
+SymbolicEvent <|-- EventAutomatonModel::SymbolicTimeoutEvent
+SymbolicParameter <|-- EventAutomatonModel::SymbolicEventParameter
+SymbolicParameter <|-- EventAutomatonModel::SymbolicTokenParameter
+TimerAction <|-- EventAutomatonModel::ResetTimerAction
+TimerAction <|-- EventAutomatonModel::SetTimerAction
+EventAutomatonModel::Action "0..9999" --* "1..1" EventAutomatonModel::AbstractTransition : actions52
+EventAutomatonModel::Automaton "0..9999" --* "1..1" EventAutomatonModel::ComplexEventProcessor : automata15
+EventAutomatonModel::Binding "0..9999" --* "1..1" EventAutomatonModel::EventGuard : bindings42
+EventAutomatonModel::SymbolicEventParameter "1..1" -- "1..1" EventAutomatonModel::Binding : binds29
+EventAutomatonModel::TokenParameterBinding "1..1" -- "1..1" EventAutomatonModel::SymbolicTokenParameter : boundTo13
+EventAutomatonModel::ConstantBinding "1..1" *-- "1..1" EventAutomatonModel::FixParameter : boundTo27
+EventAutomatonModel::Transition "1..1" *-- "1..1" EventAutomatonModel::EventGuard : eventguard41
+EventAutomatonModel::AbstractTransition "1..1" -- "1..1" EventAutomatonModel::State : from50
+EventAutomatonModel::AbstractTransition "0..9999" -- "1..1" EventAutomatonModel::State : incomingTransitions24
+EventAutomatonModel::State "1..1" -- "1..1" EventAutomatonModel::Automaton : initialState3
+EventAutomatonModel::State "1..1" -- "1..1" EventAutomatonModel::Token : on37
+EventAutomatonModel::AbstractTransition "0..9999" --* "1..1" EventAutomatonModel::State : outgoingTransitions25
+EventAutomatonModel::FixParameter "0..9999" --* "1..1" EventAutomatonModel::Event : parameters34
+EventAutomatonModel::Parameter "0..9999" --* "1..1" EventAutomatonModel::Token : parameters38
+EventAutomatonModel::State "0..9999" --* "1..1" EventAutomatonModel::Automaton : states0
+EventAutomatonModel::ComplexEventProcessor "1..1" *-- "0..9999" EventAutomatonModel::SymbolicInputEvent : symbolicEvents17
+EventAutomatonModel::SymbolicEvent "1..1" *-- "0..9999" EventAutomatonModel::SymbolicParameter : symbolicParameters19
+EventAutomatonModel::SymbolicParameter "0..9999" --* "1..1" EventAutomatonModel::Automaton : symbolicTokenParameters6
+EventAutomatonModel::SymbolicTimeoutEvent "1..1" --* "1..1" EventAutomatonModel::SymbolicTimer : timeoutEvent14
+EventAutomatonModel::SymbolicTimer "1..1" -- "1..1" EventAutomatonModel::SymbolicTimeoutEvent : timer28
+EventAutomatonModel::TimerAction "1..1" -- "1..1" EventAutomatonModel::SymbolicTimer : timer30
+EventAutomatonModel::Automaton "1..1" *-- "0..9999" EventAutomatonModel::SymbolicTimer : timers8
+EventAutomatonModel::State "1..1" -- "1..1" EventAutomatonModel::AbstractTransition : to48
+EventAutomatonModel::Token "0..9999" -- "1..1" EventAutomatonModel::Automaton : tokens1
+EventAutomatonModel::Token "0..9999" --* "1..1" EventAutomatonModel::State : tokens23
+EventAutomatonModel::State "1..1" -- "1..1" EventAutomatonModel::Automaton : trapState10
+EventAutomatonModel::SymbolicParameter "1..1" -- "1..1" EventAutomatonModel::Parameter : type21
+EventAutomatonModel::SymbolicEvent "1..1" -- "1..1" EventAutomatonModel::Event : type32
+EventAutomatonModel::SymbolicEvent "0..1" -- "1..1" EventAutomatonModel::EventGuard : type45
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+enum ArcKind {
+  inhibitor
+  normal
+  read_arc
+}
+class Node {
+}
+class PetriNet::Arc {
+  + kind : str
+  + weight : int
+}
+abstract class PetriNet::Node {
+  + name : str
+}
+class PetriNet::PetriNet {
+  + name : str
+}
+class PetriNet::Place {
+  + marking : int
+}
+class PetriNet::Transition {
+  + max_time : int
+  + min_time : int
+}
+Node <|-- PetriNet::Place
+Node <|-- PetriNet::Transition
+PetriNet::Arc "0..9999" --* "1..1" PetriNet::PetriNet : arcs1
+PetriNet::Arc "0..9999" -- "1..1" PetriNet::Node : incomings6
+PetriNet::Arc "1..1" -- "1..1" PetriNet::PetriNet : net12
+PetriNet::PetriNet "1..1" -- "1..1" PetriNet::Node : net3
+PetriNet::Node "0..9999" --* "1..1" PetriNet::PetriNet : nodes0
+PetriNet::Arc "0..9999" -- "1..1" PetriNet::Node : outgoings4
+PetriNet::Node "1..1" -- "1..1" PetriNet::Arc : source10
+PetriNet::Node "1..1" -- "1..1" PetriNet::Arc : target8
+@enduml

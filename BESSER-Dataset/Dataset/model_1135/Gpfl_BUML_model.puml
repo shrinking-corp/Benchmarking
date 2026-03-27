@@ -1,0 +1,153 @@
+@startuml
+class GExpression {
+}
+class gpfl::AcceptCmd {
+}
+class gpfl::AlarmCmd {
+}
+class gpfl::AutomataDef {
+  + name : str
+}
+class gpfl::AutomatonCmd {
+  + name : str
+}
+class gpfl::CmdAdd {
+}
+class gpfl::CmdAnd {
+}
+class gpfl::CmdEq {
+}
+class gpfl::CmdGCompare {
+}
+class gpfl::CmdGECompare {
+}
+class gpfl::CmdLCompare {
+}
+class gpfl::CmdLECompare {
+}
+class gpfl::CmdNEq {
+}
+class gpfl::CmdSub {
+}
+class gpfl::CondStmt {
+}
+class gpfl::DropCmd {
+}
+class gpfl::Field {
+  + name : str
+}
+class gpfl::GBoolFalse {
+}
+class gpfl::GBoolTrue {
+}
+class gpfl::GExpression {
+}
+class gpfl::InPort {
+}
+class gpfl::IntLitCmd {
+  + value : int
+}
+class gpfl::InterruptStmt {
+  + timeout : int
+}
+class gpfl::IterStmt {
+}
+class gpfl::NopCmd {
+}
+class gpfl::OutPort {
+}
+class gpfl::PortLit {
+  + inSide : bool
+}
+class gpfl::Program {
+  + name : str
+}
+class gpfl::SendCmd {
+}
+class gpfl::SetCmd {
+  + name : str
+}
+class gpfl::State {
+  + name : str
+}
+class gpfl::StpCmd {
+}
+class gpfl::StringLit {
+  + value : str
+}
+class gpfl::Transition {
+  + event : str
+}
+class gpfl::Variable {
+  + value : str
+}
+GExpression <|-- gpfl::AcceptCmd
+GExpression <|-- gpfl::AlarmCmd
+GExpression <|-- gpfl::AutomatonCmd
+GExpression <|-- gpfl::CmdAdd
+GExpression <|-- gpfl::CmdAnd
+GExpression <|-- gpfl::CmdEq
+GExpression <|-- gpfl::CmdGCompare
+GExpression <|-- gpfl::CmdGECompare
+GExpression <|-- gpfl::CmdLCompare
+GExpression <|-- gpfl::CmdLECompare
+GExpression <|-- gpfl::CmdNEq
+GExpression <|-- gpfl::CmdSub
+GExpression <|-- gpfl::CondStmt
+GExpression <|-- gpfl::DropCmd
+GExpression <|-- gpfl::GBoolFalse
+GExpression <|-- gpfl::GBoolTrue
+GExpression <|-- gpfl::InPort
+GExpression <|-- gpfl::IntLitCmd
+GExpression <|-- gpfl::InterruptStmt
+GExpression <|-- gpfl::IterStmt
+GExpression <|-- gpfl::NopCmd
+GExpression <|-- gpfl::OutPort
+GExpression <|-- gpfl::PortLit
+GExpression <|-- gpfl::SendCmd
+GExpression <|-- gpfl::SetCmd
+GExpression <|-- gpfl::StpCmd
+GExpression <|-- gpfl::StringLit
+GExpression <|-- gpfl::Variable
+gpfl::AutomataDef "0..9999" --* "1..1" gpfl::Program : automatas0
+gpfl::AutomataDef "0..1" -- "1..1" gpfl::AutomatonCmd : automaton45
+gpfl::AutomatonCmd "0..1" -- "1..1" gpfl::StpCmd : automaton47
+gpfl::StpCmd "1..1" *-- "0..9999" gpfl::GExpression : errors52
+gpfl::GExpression "0..1" --* "1..1" gpfl::StpCmd : event49
+gpfl::GExpression "0..1" --* "1..1" gpfl::CondStmt : exp21
+gpfl::IterStmt "1..1" *-- "0..1" gpfl::GExpression : exp26
+gpfl::GExpression "0..1" --* "1..1" gpfl::AlarmCmd : exp41
+gpfl::SetCmd "1..1" *-- "0..1" gpfl::GExpression : exp43
+gpfl::GExpression "1..1" *-- "0..1" gpfl::GExpression : expression7
+gpfl::Field "0..9999" --* "1..1" gpfl::SendCmd : fields38
+gpfl::State "0..1" -- "1..1" gpfl::AutomataDef : init11
+gpfl::GExpression "0..9999" --* "1..1" gpfl::Program : initStmts1
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdAnd : left55
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdEq : left60
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdNEq : left65
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdGECompare : left70
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdLECompare : left75
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdGCompare : left80
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdLCompare : left85
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdAdd : left90
+gpfl::CmdSub "1..1" *-- "0..1" gpfl::GExpression : left95
+gpfl::GExpression "0..1" --* "1..1" gpfl::InterruptStmt : periodic31
+gpfl::GExpression "0..1" --* "1..1" gpfl::SendCmd : port36
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdAnd : right57
+gpfl::CmdEq "1..1" *-- "0..1" gpfl::GExpression : right62
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdNEq : right67
+gpfl::CmdGECompare "1..1" *-- "0..1" gpfl::GExpression : right72
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdLECompare : right77
+gpfl::CmdGCompare "1..1" *-- "0..1" gpfl::GExpression : right82
+gpfl::CmdLCompare "1..1" *-- "0..1" gpfl::GExpression : right87
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdAdd : right92
+gpfl::GExpression "0..1" --* "1..1" gpfl::CmdSub : right97
+gpfl::State "0..9999" --* "1..1" gpfl::AutomataDef : states13
+gpfl::GExpression "0..9999" --* "1..1" gpfl::CondStmt : stmts23
+gpfl::GExpression "0..9999" --* "1..1" gpfl::IterStmt : stmts28
+gpfl::Program "1..1" *-- "0..9999" gpfl::GExpression : stmts3
+gpfl::InterruptStmt "1..1" *-- "0..9999" gpfl::GExpression : stmts33
+gpfl::State "0..1" -- "1..1" gpfl::Transition : target18
+gpfl::State "1..1" *-- "0..9999" gpfl::Transition : transitions16
+gpfl::GExpression "0..1" --* "1..1" gpfl::Field : value9
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+class FSM::AssociationStateState {
+}
+class FSM::MgaObject {
+  + name : str
+  + position : str
+}
+class FSM::RootFolder {
+  + name : str
+}
+class FSM::State {
+}
+class FSM::StateMachine {
+}
+class FSM::Transition {
+}
+class MgaObject {
+}
+MgaObject <|-- FSM::State
+MgaObject <|-- FSM::StateMachine
+MgaObject <|-- FSM::Transition
+FSM::AssociationStateState "1..1" -- "1..1" FSM::Transition : associationStateState1
+FSM::AssociationStateState "1..9999" -- "1..1" FSM::State : associationStateStatedst5
+FSM::AssociationStateState "1..9999" -- "1..1" FSM::State : associationStateStatesrc7
+FSM::State "1..9999" -- "1..1" FSM::AssociationStateState : dstTransition20
+FSM::StateMachine "1..1" -- "1..1" FSM::RootFolder : rootFolder9
+FSM::RootFolder "1..1" *-- "0..9999" FSM::RootFolder : rootFolders15
+FSM::AssociationStateState "1..1" -- "1..9999" FSM::State : srcTransition22
+FSM::State "0..9999" --* "1..1" FSM::StateMachine : state10
+FSM::Transition "1..1" -- "1..1" FSM::StateMachine : stateMachine0
+FSM::StateMachine "0..9999" --* "1..1" FSM::RootFolder : stateMachine16
+FSM::State "1..1" -- "1..1" FSM::StateMachine : stateMachine3
+FSM::Transition "0..9999" --* "1..1" FSM::StateMachine : transition12
+FSM::Transition "1..1" -- "1..1" FSM::AssociationStateState : transition18
+@enduml

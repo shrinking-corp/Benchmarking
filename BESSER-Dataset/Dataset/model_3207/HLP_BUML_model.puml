@@ -1,0 +1,149 @@
+@startuml
+class ArithmeticExpression {
+}
+class AtomicExpression {
+}
+class BinaryExpression {
+}
+enum ComparisonOperator {
+  EQUAL
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL
+  LESS_THAN
+  LESS_THAN_OR_EQUAL
+  UNEQUAL
+}
+class ConditionalLoop {
+}
+class Expression {
+}
+class Loop {
+}
+class Nameable {
+}
+class Statement {
+}
+class UnaryExpression {
+}
+class VariableDeclarationScope {
+}
+class hlp::AddExpression {
+}
+abstract class hlp::ArithmeticExpression {
+}
+class hlp::Assignment {
+}
+abstract class hlp::AtomicExpression {
+}
+abstract class hlp::BinaryExpression {
+}
+class hlp::Block {
+}
+class hlp::Condition {
+  + operator : str
+}
+abstract class hlp::ConditionalLoop {
+}
+class hlp::DivideExpression {
+}
+abstract class hlp::Expression {
+}
+class hlp::ExpressionStatement {
+}
+class hlp::ForLoop {
+  + incrementing : bool
+}
+class hlp::HighLevelProgram {
+}
+class hlp::IfStatement {
+}
+class hlp::LiteralValue {
+  + rawValue : str
+}
+abstract class hlp::Loop {
+}
+class hlp::MultiplyExpression {
+}
+abstract class hlp::Nameable {
+  + name : str
+}
+class hlp::ParenthesisExpression {
+}
+class hlp::ScheduleInstruction {
+}
+abstract class hlp::Statement {
+}
+class hlp::SubtractExpression {
+}
+class hlp::SynchronizedStatement {
+}
+class hlp::Task {
+}
+abstract class hlp::UnaryExpression {
+}
+class hlp::UnaryMinusExpression {
+}
+class hlp::Variable {
+}
+class hlp::VariableDeclaration {
+}
+abstract class hlp::VariableDeclarationScope {
+}
+class hlp::VariableReference {
+}
+class hlp::WhileLoop {
+}
+ArithmeticExpression <|-- hlp::AddExpression
+ArithmeticExpression <|-- hlp::DivideExpression
+ArithmeticExpression <|-- hlp::MultiplyExpression
+ArithmeticExpression <|-- hlp::SubtractExpression
+AtomicExpression <|-- hlp::LiteralValue
+AtomicExpression <|-- hlp::VariableReference
+BinaryExpression <|-- hlp::ArithmeticExpression
+ConditionalLoop <|-- hlp::WhileLoop
+Expression <|-- hlp::AtomicExpression
+Expression <|-- hlp::BinaryExpression
+Expression <|-- hlp::ParenthesisExpression
+Expression <|-- hlp::UnaryExpression
+Loop <|-- hlp::ConditionalLoop
+Loop <|-- hlp::ForLoop
+Nameable <|-- hlp::HighLevelProgram
+Nameable <|-- hlp::Task
+Nameable <|-- hlp::Variable
+Statement <|-- hlp::Assignment
+Statement <|-- hlp::ExpressionStatement
+Statement <|-- hlp::IfStatement
+Statement <|-- hlp::Loop
+Statement <|-- hlp::SynchronizedStatement
+UnaryExpression <|-- hlp::UnaryMinusExpression
+VariableDeclarationScope <|-- hlp::HighLevelProgram
+VariableDeclarationScope <|-- hlp::Task
+hlp::Block "1..1" --* "1..1" hlp::Loop : block36
+hlp::Block "1..1" --* "1..1" hlp::SynchronizedStatement : block52
+hlp::Task "1..1" *-- "1..1" hlp::Block : block57
+hlp::Expression "1..1" --* "1..1" hlp::ForLoop : bound142
+hlp::Expression "1..1" --* "1..1" hlp::ForLoop : bound245
+hlp::Condition "1..1" --* "1..1" hlp::IfStatement : condition26
+hlp::Condition "1..1" --* "1..1" hlp::ConditionalLoop : condition38
+hlp::Block "0..1" --* "1..1" hlp::IfStatement : elseBlock23
+hlp::ExpressionStatement "1..1" *-- "1..1" hlp::Expression : expression48
+hlp::Expression "1..1" --* "1..1" hlp::UnaryExpression : expression50
+hlp::Expression "0..1" --* "1..1" hlp::VariableDeclaration : initialValue4
+hlp::BinaryExpression "1..1" *-- "1..1" hlp::Expression : leftHandSide13
+hlp::Expression "1..1" --* "1..1" hlp::Condition : leftHandSide28
+hlp::VariableReference "1..1" --* "1..1" hlp::Assignment : leftHandSide6
+hlp::ParenthesisExpression "1..1" *-- "1..1" hlp::Expression : operand18
+hlp::Expression "1..1" --* "1..1" hlp::BinaryExpression : rightHandSide15
+hlp::Condition "1..1" *-- "1..1" hlp::Expression : rightHandSide31
+hlp::Expression "1..1" --* "1..1" hlp::Assignment : rightHandSide7
+hlp::HighLevelProgram "1..1" *-- "0..1" hlp::ScheduleInstruction : scheduleInstruction1
+hlp::Block "1..1" *-- "0..9999" hlp::Statement : statements20
+hlp::HighLevelProgram "1..1" *-- "0..9999" hlp::Task : tasks0
+hlp::Task "1..9999" -- "1..1" hlp::ScheduleInstruction : tasks60
+hlp::Block "1..1" --* "1..1" hlp::IfStatement : thenBlock21
+hlp::Variable "1..1" -- "1..1" hlp::VariableReference : variable10
+hlp::Variable "1..1" --* "1..1" hlp::VariableDeclaration : variable3
+hlp::VariableDeclarationScope "1..1" *-- "0..9999" hlp::VariableDeclaration : variableDeclarations34
+hlp::VariableReference "1..1" --* "1..1" hlp::ForLoop : variableReference40
+hlp::VariableReference "1..9999" --* "1..1" hlp::SynchronizedStatement : variableReferences54
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+class AbstractState {
+}
+abstract class FSM::AbstractState {
+  + envs : str
+  + name : str
+}
+class FSM::EndState {
+}
+class FSM::StartState {
+}
+class FSM::State {
+}
+class FSM::StateMachine {
+  + code : str
+}
+class FSM::Transition {
+}
+AbstractState <|-- FSM::EndState
+AbstractState <|-- FSM::StartState
+AbstractState <|-- FSM::State
+FSM::AbstractState "1..1" -- "0..9999" FSM::Transition : source3
+FSM::AbstractState "1..1" -- "1..1" FSM::Transition : src8
+FSM::StateMachine "1..1" -- "1..1" FSM::Transition : statemachine12
+FSM::AbstractState "1..1" -- "1..1" FSM::StateMachine : statemachine7
+FSM::StateMachine "1..1" *-- "1..9999" FSM::AbstractState : states0
+FSM::AbstractState "1..1" -- "1..1" FSM::Transition : tar10
+FSM::Transition "0..9999" -- "1..1" FSM::AbstractState : target5
+FSM::Transition "1..9999" --* "1..1" FSM::StateMachine : transitions1
+@enduml

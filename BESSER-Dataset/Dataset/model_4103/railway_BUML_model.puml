@@ -1,0 +1,65 @@
+@startuml
+enum Position {
+  DIVERGING
+  FAILURE
+  STRAIGHT
+}
+class RailwayElement {
+}
+enum Signal {
+  FAILURE
+  GO
+  STOP
+}
+class TrackElement {
+}
+class railway::RailwayContainer {
+}
+abstract class railway::RailwayElement {
+  + id : int
+}
+class railway::Region {
+}
+class railway::Route {
+  + active : bool
+}
+class railway::Segment {
+  + length : int
+}
+class railway::Semaphore {
+  + signal : str
+}
+class railway::Sensor {
+}
+class railway::Switch {
+  + currentPosition : str
+}
+class railway::SwitchPosition {
+  + position : str
+}
+abstract class railway::TrackElement {
+}
+RailwayElement <|-- railway::Region
+RailwayElement <|-- railway::Route
+RailwayElement <|-- railway::Semaphore
+RailwayElement <|-- railway::Sensor
+RailwayElement <|-- railway::SwitchPosition
+RailwayElement <|-- railway::TrackElement
+TrackElement <|-- railway::Segment
+TrackElement <|-- railway::Switch
+railway::TrackElement "0..9999" -- "1..1" railway::TrackElement : connectsTo19
+railway::TrackElement "0..9999" --* "1..1" railway::Region : elements5
+railway::Semaphore "0..1" -- "1..1" railway::Route : entry11
+railway::Semaphore "0..1" -- "1..1" railway::Route : exit13
+railway::SwitchPosition "0..9999" --* "1..1" railway::Route : follows7
+railway::TrackElement "1..1" -- "0..9999" railway::Sensor : monitoredBy17
+railway::TrackElement "0..9999" -- "1..1" railway::Sensor : monitors16
+railway::SwitchPosition "0..9999" -- "1..1" railway::Switch : positions23
+railway::RailwayContainer "1..1" *-- "0..9999" railway::Region : regions1
+railway::Route "1..1" -- "2..9999" railway::Sensor : requires8
+railway::Route "0..1" -- "1..1" railway::SwitchPosition : route25
+railway::Route "0..9999" --* "1..1" railway::RailwayContainer : routes0
+railway::Semaphore "0..9999" --* "1..1" railway::Segment : semaphores21
+railway::Sensor "0..9999" --* "1..1" railway::Region : sensors3
+railway::SwitchPosition "1..1" -- "0..1" railway::Switch : target26
+@enduml

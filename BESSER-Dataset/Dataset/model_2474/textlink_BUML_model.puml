@@ -1,0 +1,34 @@
+@startuml
+class ModelLocation {
+}
+class TraceLinkEnd {
+}
+class textlink::EObject {
+}
+class textlink::EmfModelLocation {
+}
+abstract class textlink::ModelLocation {
+  + propertyName : str
+}
+class textlink::Region {
+  + length : str
+  + offset : str
+}
+class textlink::TextLocation {
+  + resource : str
+}
+class textlink::Trace {
+}
+class textlink::TraceLink {
+}
+abstract class textlink::TraceLinkEnd {
+}
+ModelLocation <|-- textlink::EmfModelLocation
+TraceLinkEnd <|-- textlink::ModelLocation
+TraceLinkEnd <|-- textlink::TextLocation
+textlink::TextLocation "1..1" --* "1..1" textlink::TraceLink : destination3
+textlink::EObject "1..1" -- "1..1" textlink::EmfModelLocation : modelElement5
+textlink::Region "1..1" --* "1..1" textlink::TextLocation : region6
+textlink::ModelLocation "1..1" --* "1..1" textlink::TraceLink : source1
+textlink::Trace "1..1" *-- "0..9999" textlink::TraceLink : traceLinks0
+@enduml

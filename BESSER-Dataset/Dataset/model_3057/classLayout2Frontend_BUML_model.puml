@@ -1,0 +1,168 @@
+@startuml
+class Association {
+}
+class AtomicView {
+}
+class ContainerView {
+}
+class ElementView {
+}
+class EntityModelElement {
+}
+class Input {
+}
+enum LayoutType {
+  LEFT_BAR
+  RIGHT_BAR
+  SINGLE_COLUMN
+  THREE_COLUMNS
+  TWO_COLUMNS
+}
+class Output {
+}
+class PropertyType {
+}
+class Selection {
+}
+class StructuralFeature {
+}
+abstract class classLayout2Frontend::Association {
+  + many : bool
+}
+abstract class classLayout2Frontend::AtomicView {
+}
+class classLayout2Frontend::Autocomplete {
+  + multiple : bool
+}
+class classLayout2Frontend::CheckList {
+}
+class classLayout2Frontend::Composition {
+}
+abstract class classLayout2Frontend::ContainerView {
+}
+class classLayout2Frontend::Dropdownlist {
+}
+abstract class classLayout2Frontend::ElementView {
+  + description : str
+  + displayName : str
+  + name : str
+}
+class classLayout2Frontend::EntitiesModel {
+  + name : str
+}
+class classLayout2Frontend::Entity {
+  + isAbstract : bool
+}
+abstract class classLayout2Frontend::EntityModelElement {
+  + description : str
+  + displayName : str
+  + name : str
+}
+class classLayout2Frontend::Enumeration {
+}
+class classLayout2Frontend::FileUpload {
+}
+class classLayout2Frontend::Image {
+  + height : float
+  + width : float
+}
+abstract class classLayout2Frontend::Input {
+  + label : str
+}
+class classLayout2Frontend::InputForm {
+}
+class classLayout2Frontend::InputText {
+  + multiline : bool
+}
+class classLayout2Frontend::IterationContainer {
+}
+class classLayout2Frontend::IterationFilter {
+}
+class classLayout2Frontend::List {
+  + multiple : bool
+}
+class classLayout2Frontend::Literal {
+  + value : int
+}
+abstract class classLayout2Frontend::Output {
+}
+class classLayout2Frontend::PageView {
+  + layoutType : str
+  + name : str
+}
+class classLayout2Frontend::PrimitiveType {
+}
+class classLayout2Frontend::Project {
+  + name : str
+}
+class classLayout2Frontend::Property {
+  + defaultValue : str
+}
+abstract class classLayout2Frontend::PropertyType {
+}
+class classLayout2Frontend::RadioButtonGroup {
+}
+class classLayout2Frontend::Reference {
+}
+abstract class classLayout2Frontend::Selection {
+}
+class classLayout2Frontend::SiteView {
+  + displayName : str
+  + name : str
+  + templateColor : str
+  + templateName : str
+}
+class classLayout2Frontend::StaticContainer {
+}
+abstract class classLayout2Frontend::StructuralFeature {
+  + required : bool
+}
+class classLayout2Frontend::TextArea {
+  + isTitle : bool
+  + value : str
+}
+Association <|-- classLayout2Frontend::Composition
+Association <|-- classLayout2Frontend::Reference
+AtomicView <|-- classLayout2Frontend::Input
+AtomicView <|-- classLayout2Frontend::Output
+ContainerView <|-- classLayout2Frontend::InputForm
+ContainerView <|-- classLayout2Frontend::IterationContainer
+ContainerView <|-- classLayout2Frontend::StaticContainer
+ElementView <|-- classLayout2Frontend::AtomicView
+ElementView <|-- classLayout2Frontend::ContainerView
+EntityModelElement <|-- classLayout2Frontend::Entity
+EntityModelElement <|-- classLayout2Frontend::Literal
+EntityModelElement <|-- classLayout2Frontend::PropertyType
+EntityModelElement <|-- classLayout2Frontend::StructuralFeature
+Input <|-- classLayout2Frontend::FileUpload
+Input <|-- classLayout2Frontend::InputText
+Input <|-- classLayout2Frontend::Selection
+Output <|-- classLayout2Frontend::Image
+Output <|-- classLayout2Frontend::TextArea
+PropertyType <|-- classLayout2Frontend::Enumeration
+PropertyType <|-- classLayout2Frontend::PrimitiveType
+Selection <|-- classLayout2Frontend::Autocomplete
+Selection <|-- classLayout2Frontend::CheckList
+Selection <|-- classLayout2Frontend::Dropdownlist
+Selection <|-- classLayout2Frontend::List
+Selection <|-- classLayout2Frontend::RadioButtonGroup
+StructuralFeature <|-- classLayout2Frontend::Association
+StructuralFeature <|-- classLayout2Frontend::Property
+classLayout2Frontend::Project "1..1" *-- "0..9999" classLayout2Frontend::ContainerView : containerViews5
+classLayout2Frontend::ElementView "0..9999" -- "1..1" classLayout2Frontend::PageView : elementViews20
+classLayout2Frontend::ElementView "0..9999" --* "1..1" classLayout2Frontend::ContainerView : elements27
+classLayout2Frontend::EntitiesModel "0..1" --* "1..1" classLayout2Frontend::Project : entitiesmodel0
+classLayout2Frontend::Entity "0..1" -- "1..1" classLayout2Frontend::ContainerView : entity30
+classLayout2Frontend::IterationFilter "1..1" -- "0..1" classLayout2Frontend::Input : input19
+classLayout2Frontend::IterationContainer "1..1" *-- "0..9999" classLayout2Frontend::IterationFilter : iterationFilters25
+classLayout2Frontend::Literal "0..9999" --* "1..1" classLayout2Frontend::Enumeration : literals16
+classLayout2Frontend::EntitiesModel "1..1" *-- "0..9999" classLayout2Frontend::EntityModelElement : modelElements9
+classLayout2Frontend::PageView "0..9999" -- "1..1" classLayout2Frontend::SiteView : pageViews22
+classLayout2Frontend::Project "1..1" *-- "0..9999" classLayout2Frontend::PageView : pageViews3
+classLayout2Frontend::StructuralFeature "0..1" -- "1..1" classLayout2Frontend::AtomicView : property17
+classLayout2Frontend::SiteView "0..9999" --* "1..1" classLayout2Frontend::Project : siteViews1
+classLayout2Frontend::StructuralFeature "0..9999" --* "1..1" classLayout2Frontend::Entity : structuralFeatures14
+classLayout2Frontend::Entity "0..1" -- "1..1" classLayout2Frontend::Entity : superclass12
+classLayout2Frontend::Entity "1..1" -- "1..1" classLayout2Frontend::Association : target7
+classLayout2Frontend::PropertyType "1..1" -- "1..1" classLayout2Frontend::Property : type8
+@enduml

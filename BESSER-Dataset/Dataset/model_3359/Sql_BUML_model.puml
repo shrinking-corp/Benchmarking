@@ -1,0 +1,67 @@
+@startuml
+enum ConstraintType {
+  COMPOSITE_PRIMARY_KEY
+  FOREIGN_KEY
+  PRIMARY_KEY
+  UNIQUE
+}
+enum Datatype {
+  BIGINT
+  BLOB
+  BOOLEAN
+  CHAR
+  DATE
+  DATETIME
+  DECIMAL
+  DOUBLE
+  FLOAT
+  INT
+  LONGTEXT
+  SMALLINT
+  STRING
+  TEXT
+  TIMESTAMP
+  TINYTEXT
+  VARCHAR
+}
+class metamodel::Cell {
+  + value : str
+}
+class metamodel::Column {
+  + name : str
+  + nullable : bool
+  + size : str
+  + type : str
+}
+class metamodel::Constraint {
+  + name : str
+  + reference : str
+  + type : str
+}
+class metamodel::Database {
+  + name : str
+}
+class metamodel::Row {
+}
+class metamodel::Sequence {
+  + currentValue : str
+  + cycle : bool
+  + incrementby : int
+  + maxValue : str
+  + minValue : int
+  + name : str
+  + startwith : str
+}
+class metamodel::Table {
+  + name : str
+}
+metamodel::Column "1..9999" --* "1..1" metamodel::Constraint : References9
+metamodel::Cell "0..9999" --* "1..1" metamodel::Row : cells15
+metamodel::Cell "1..1" -- "1..1" metamodel::Column : column17
+metamodel::Column "1..9999" --* "1..1" metamodel::Table : columns5
+metamodel::Column "1..1" *-- "0..9999" metamodel::Constraint : constraints12
+metamodel::Constraint "0..9999" --* "1..1" metamodel::Table : constraints3
+metamodel::Row "0..9999" -- "1..1" metamodel::Table : rows7
+metamodel::Database "1..1" *-- "0..9999" metamodel::Sequence : sequences1
+metamodel::Database "1..1" *-- "0..9999" metamodel::Table : table0
+@enduml

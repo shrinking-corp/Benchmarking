@@ -1,0 +1,45 @@
+@startuml
+enum AnnotationColor {
+  Blue
+  Green
+  Purple
+  Red
+  Underline
+  Yellow
+}
+class Bookmark {
+}
+class library::Book {
+  + author : str
+  + bookURL : str
+  + bookURN : str
+  + collection : str
+  + lastHref : str
+  + lastLocation : str
+  + lastOpened : str
+  + title : str
+}
+class library::Bookmark {
+  + href : str
+  + id : str
+  + location : str
+  + page : int
+  + text : str
+  + timestamp : date
+}
+class library::Library {
+  + version : str
+}
+class library::Metadata {
+  + key : str
+  + value : str
+}
+class library::TextAnnotation {
+  + color : str
+  + comment : str
+}
+Bookmark <|-- library::TextAnnotation
+library::Bookmark "0..9999" --* "1..1" library::Book : bookmarks1
+library::Library "1..1" *-- "0..9999" library::Book : books0
+library::Metadata "0..9999" --* "1..1" library::Book : metadata3
+@enduml

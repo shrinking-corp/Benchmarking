@@ -1,0 +1,94 @@
+@startuml
+class AbstractModelElement {
+}
+class Arc {
+}
+class GuiGraphNode {
+}
+class ITimeConsumer {
+}
+class Place {
+}
+class Predicate {
+}
+enum TimingType {
+  DelayUntilStart
+  Interval
+}
+class Transition {
+}
+class Widget {
+}
+abstract class guigraph::Arc {
+}
+class guigraph::ConditionActionTransition {
+  + actionsText : str
+  + applicationConditionText : str
+}
+class guigraph::Form {
+}
+class guigraph::GuiGraph {
+  + invariantText : str
+}
+abstract class guigraph::GuiGraphNode {
+}
+class guigraph::InhibitorArc {
+}
+class guigraph::NoWidgetNode {
+}
+class guigraph::PageMappingArc {
+}
+class guigraph::PageTransition {
+}
+abstract class guigraph::Place {
+  + initialTokens : int
+  + provideAsInterface : bool
+}
+class guigraph::PreGenerationSequence {
+}
+class guigraph::StandardArc {
+  + weight : int
+}
+class guigraph::TimerTransition {
+  + duration : int
+}
+abstract class guigraph::Transition {
+  + risk : float
+  + terminates : bool
+  + timeMax : str
+  + timeMin : str
+  + timingType : str
+}
+class guigraph::Widget {
+  + image : str
+}
+class rules::IRealTimeConsumer {
+}
+AbstractModelElement <|-- guigraph::Arc
+AbstractModelElement <|-- guigraph::GuiGraph
+AbstractModelElement <|-- guigraph::GuiGraphNode
+AbstractModelElement <|-- guigraph::Widget
+Arc <|-- guigraph::InhibitorArc
+Arc <|-- guigraph::PageMappingArc
+Arc <|-- guigraph::StandardArc
+GuiGraphNode <|-- guigraph::PageTransition
+GuiGraphNode <|-- guigraph::Place
+GuiGraphNode <|-- guigraph::Transition
+Place <|-- guigraph::Form
+Place <|-- guigraph::NoWidgetNode
+Transition <|-- guigraph::ConditionActionTransition
+Transition <|-- guigraph::TimerTransition
+Widget <|-- guigraph::Form
+rules::IRealTimeConsumer <|-- guigraph::Transition
+guigraph::PreGenerationSequence "0..1" --* "1..1" guigraph::ConditionActionTransition : actions9
+Predicate "1..1" --* "1..1" guigraph::ConditionActionTransition : applicationCondition7
+guigraph::Arc "0..9999" --* "1..1" guigraph::GuiGraph : arcs0
+guigraph::Widget "0..9999" --* "1..1" guigraph::Widget : children6
+guigraph::TimerTransition "1..1" -- "1..1" ITimeConsumer : consumer11
+guigraph::GuiGraph "1..1" *-- "0..1" Predicate : invariant3
+guigraph::Place "0..1" -- "1..1" guigraph::PageMappingArc : mapping20
+guigraph::GuiGraphNode "0..9999" --* "1..1" guigraph::GuiGraph : nodes1
+guigraph::GuiGraph "1..1" -- "1..1" guigraph::PageTransition : page18
+guigraph::GuiGraphNode "1..1" -- "1..1" guigraph::Arc : source12
+guigraph::Arc "1..1" -- "1..1" guigraph::GuiGraphNode : target15
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+class Account {
+}
+abstract class BankingSystem::Account {
+  + accountNumber : str
+  + balance : float
+}
+class BankingSystem::Bank {
+  + bankId : int
+  + description : str
+  + name : str
+}
+class BankingSystem::Branch {
+  + branchId : int
+  + location : str
+  + name : str
+  + phoneNumber : str
+}
+class BankingSystem::Chequing {
+}
+class BankingSystem::Customer {
+  + address : str
+  + age : int
+  + customerType : str
+  + name : str
+  + phoneNumber : str
+}
+abstract class BankingSystem::Employee {
+  + eaddress : str
+  + eage : int
+  + eid : int
+  + ename : str
+  + ephoneNumber : str
+  + isCustomer : bool
+}
+class BankingSystem::Financial::Representative {
+}
+class BankingSystem::Loan {
+  + amount : float
+  + duration : int
+  + interestRate : float
+  + loanNumber : str
+}
+class BankingSystem::Saving {
+  + interestRate : float
+}
+enum CustomerType {
+  Adult
+  Senior
+  Youth
+}
+class Employee {
+}
+Account <|-- BankingSystem::Chequing
+Account <|-- BankingSystem::Saving
+Employee <|-- BankingSystem::Financial::Representative
+BankingSystem::Financial::Representative "1..1" -- "0..9999" BankingSystem::Customer : a17
+BankingSystem::Account "1..9999" --* "1..1" BankingSystem::Customer : accounts7
+BankingSystem::Branch "1..1" -- "1..1" BankingSystem::Bank : bank4
+BankingSystem::Branch "1..1" -- "1..1" BankingSystem::Employee : branch13
+BankingSystem::Customer "1..1" -- "1..1" BankingSystem::Branch : branch5
+BankingSystem::Branch "1..9999" --* "1..1" BankingSystem::Bank : branches0
+BankingSystem::Customer "1..1" -- "1..1" BankingSystem::Account : customer11
+BankingSystem::Customer "1..1" -- "1..1" BankingSystem::Loan : customer15
+BankingSystem::Customer "1..9999" --* "1..1" BankingSystem::Branch : customers1
+BankingSystem::Employee "1..9999" --* "1..1" BankingSystem::Branch : employees2
+BankingSystem::Customer "1..1" *-- "0..9999" BankingSystem::Loan : loans8
+BankingSystem::Financial::Representative "0..9999" -- "1..1" BankingSystem::Customer : representative10
+@enduml

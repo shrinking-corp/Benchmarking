@@ -1,0 +1,53 @@
+@startuml
+class Component {
+}
+class Port {
+}
+class Property {
+}
+abstract class componentmodel::Component {
+  + description : str
+  + name : str
+}
+class componentmodel::CompositeComponent {
+}
+class componentmodel::EnumProperty {
+  + literalValue : str
+}
+class componentmodel::InPort {
+}
+class componentmodel::NumericProperty {
+  + defaultValue : float
+  + maxValue : float
+  + minValue : float
+}
+class componentmodel::OutPort {
+}
+abstract class componentmodel::Port {
+  + description : str
+  + name : str
+  + type : str
+  + typePackage : str
+}
+class componentmodel::PrimitiveComponent {
+}
+abstract class componentmodel::Property {
+  + description : str
+  + name : str
+}
+Component <|-- componentmodel::CompositeComponent
+Component <|-- componentmodel::PrimitiveComponent
+Port <|-- componentmodel::InPort
+Port <|-- componentmodel::OutPort
+Property <|-- componentmodel::EnumProperty
+Property <|-- componentmodel::NumericProperty
+componentmodel::Component "1..9999" --* "1..1" componentmodel::CompositeComponent : components2
+componentmodel::InPort "0..1" -- "1..1" componentmodel::InPort : delegatesFrom8
+componentmodel::InPort "0..9999" -- "1..1" componentmodel::InPort : delegatesTo5
+componentmodel::Component "1..1" *-- "1..9999" componentmodel::Port : ports0
+componentmodel::OutPort "0..1" -- "1..1" componentmodel::OutPort : propagatesFrom11
+componentmodel::OutPort "1..1" -- "0..9999" componentmodel::OutPort : propagatesTo16
+componentmodel::PrimitiveComponent "1..1" *-- "0..9999" componentmodel::Property : properties1
+componentmodel::InPort "0..9999" -- "1..1" componentmodel::OutPort : sink13
+componentmodel::InPort "1..1" -- "0..1" componentmodel::OutPort : source6
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+class RdbmsModelElement {
+}
+class SimpleRDBMS::RdbmsColumn {
+  + rdbmsType : str
+}
+class SimpleRDBMS::RdbmsForeignKey {
+}
+class SimpleRDBMS::RdbmsKey {
+}
+class SimpleRDBMS::RdbmsModelElement {
+  + id : str
+  + rdbmsKind : str
+  + rdbmsName : str
+}
+class SimpleRDBMS::RdbmsSchema {
+}
+class SimpleRDBMS::RdbmsTable {
+}
+RdbmsModelElement <|-- SimpleRDBMS::RdbmsColumn
+RdbmsModelElement <|-- SimpleRDBMS::RdbmsForeignKey
+RdbmsModelElement <|-- SimpleRDBMS::RdbmsKey
+RdbmsModelElement <|-- SimpleRDBMS::RdbmsSchema
+RdbmsModelElement <|-- SimpleRDBMS::RdbmsTable
+SimpleRDBMS::RdbmsColumn "0..9999" -- "1..1" SimpleRDBMS::RdbmsKey : rdbmsColumn11
+SimpleRDBMS::RdbmsColumn "0..9999" --* "1..1" SimpleRDBMS::RdbmsTable : rdbmsColumn20
+SimpleRDBMS::RdbmsColumn "0..9999" -- "1..1" SimpleRDBMS::RdbmsForeignKey : rdbmsColumn9
+SimpleRDBMS::RdbmsTable "1..1" *-- "0..9999" SimpleRDBMS::RdbmsForeignKey : rdbmsForeignKey22
+SimpleRDBMS::RdbmsForeignKey "0..9999" -- "1..1" SimpleRDBMS::RdbmsColumn : rdbmsForeignKey3
+SimpleRDBMS::RdbmsColumn "1..1" -- "0..9999" SimpleRDBMS::RdbmsKey : rdbmsKey1
+SimpleRDBMS::RdbmsKey "0..9999" --* "1..1" SimpleRDBMS::RdbmsTable : rdbmsKey25
+SimpleRDBMS::RdbmsTable "1..1" -- "1..1" SimpleRDBMS::RdbmsColumn : rdbmsOwner0
+SimpleRDBMS::RdbmsKey "1..1" -- "1..1" SimpleRDBMS::RdbmsTable : rdbmsOwner15
+SimpleRDBMS::RdbmsTable "1..1" -- "1..1" SimpleRDBMS::RdbmsForeignKey : rdbmsOwner5
+SimpleRDBMS::RdbmsKey "1..1" -- "1..1" SimpleRDBMS::RdbmsForeignKey : rdbmsRefersTo7
+SimpleRDBMS::RdbmsForeignKey "0..9999" -- "1..1" SimpleRDBMS::RdbmsKey : rdbmsRefersToOpposite13
+SimpleRDBMS::RdbmsSchema "1..1" -- "1..1" SimpleRDBMS::RdbmsTable : rdbmsSchema28
+SimpleRDBMS::RdbmsTable "0..9999" --* "1..1" SimpleRDBMS::RdbmsSchema : rdbmsTable18
+@enduml

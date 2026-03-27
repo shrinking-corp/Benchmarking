@@ -1,0 +1,79 @@
+@startuml
+class Arch::Application {
+  + name : str
+}
+class Arch::Attribute {
+  + name : str
+  + type : str
+}
+class Arch::BackEnd {
+  + name : str
+}
+class Arch::Controller {
+  + name : str
+}
+class Arch::Div {
+}
+class Arch::DropDownList {
+  + items : str
+}
+class Arch::Entity {
+  + name : str
+}
+class Arch::Event {
+  + name : str
+}
+class Arch::FrontEnd {
+  + name : str
+}
+abstract class Arch::GraphicControl {
+  + name : str
+}
+class Arch::Label {
+  + text : str
+}
+class Arch::Logic {
+  + name : str
+}
+class Arch::Method {
+  + name : str
+  + returntype : str
+}
+class Arch::Parameter {
+  + name : str
+  + type : str
+}
+class Arch::Service {
+  + name : str
+}
+class Arch::TextBox {
+  + type : str
+}
+class Arch::View {
+  + name : str
+}
+class GraphicControl {
+}
+GraphicControl <|-- Arch::Div
+GraphicControl <|-- Arch::DropDownList
+GraphicControl <|-- Arch::Label
+GraphicControl <|-- Arch::TextBox
+Arch::Attribute "0..9999" --* "1..1" Arch::Entity : attributes28
+Arch::BackEnd "1..1" --* "1..1" Arch::Application : backend1
+Arch::Controller "0..9999" -- "1..1" Arch::View : controllers15
+Arch::FrontEnd "1..1" *-- "0..9999" Arch::Controller : controllers5
+Arch::Entity "0..9999" --* "1..1" Arch::BackEnd : entities11
+Arch::Event "0..9999" -- "1..1" Arch::Controller : events21
+Arch::Event "0..9999" --* "1..1" Arch::GraphicControl : events35
+Arch::Application "1..1" *-- "1..1" Arch::FrontEnd : frontend0
+Arch::GraphicControl "0..9999" --* "1..1" Arch::View : graphicControls13
+Arch::Div "1..1" *-- "0..9999" Arch::GraphicControl : graphicControls38
+Arch::BackEnd "1..1" *-- "0..9999" Arch::Logic : logics9
+Arch::Method "0..9999" --* "1..1" Arch::Service : methods23
+Arch::Logic "1..1" *-- "0..9999" Arch::Method : methods25
+Arch::Method "0..9999" --* "1..1" Arch::Entity : methods30
+Arch::Method "1..1" *-- "0..9999" Arch::Parameter : parameters33
+Arch::Service "0..9999" --* "1..1" Arch::BackEnd : services7
+Arch::View "0..9999" -- "1..1" Arch::Controller : views18
+Arch::View "0..9999" --* "1..1" Arch::FrontEnd : views3
+@enduml

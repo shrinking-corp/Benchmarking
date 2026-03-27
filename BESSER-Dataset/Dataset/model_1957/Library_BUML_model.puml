@@ -1,0 +1,73 @@
+@startuml
+class Command {
+}
+class Search {
+}
+class library::Add {
+  + isbn : str
+  + title : str
+  + year : str
+}
+class library::AddAuthor {
+  + isbn : str
+}
+class library::AddUser {
+  + age : str
+  + firstname : str
+  + secondname : str
+}
+class library::Author {
+  + firstname : str
+  + secondname : str
+}
+class library::ByAuthor {
+}
+class library::ByYear {
+  + year : str
+}
+class library::Check {
+  + isbn : str
+}
+class library::Command {
+}
+class library::Lend {
+  + firstname : str
+  + isbn : str
+  + secondname : str
+}
+class library::Model {
+}
+class library::Remove {
+  + isbn : str
+}
+class library::Return {
+  + firstname : str
+  + isbn : str
+  + secondname : str
+}
+class library::Search {
+}
+class library::Show {
+  + what : str
+}
+class library::ShowUserAccount {
+  + firstname : str
+  + secondname : str
+}
+Command <|-- library::Add
+Command <|-- library::AddAuthor
+Command <|-- library::AddUser
+Command <|-- library::Check
+Command <|-- library::Lend
+Command <|-- library::Remove
+Command <|-- library::Return
+Command <|-- library::Search
+Command <|-- library::Show
+Command <|-- library::ShowUserAccount
+Search <|-- library::ByAuthor
+Search <|-- library::ByYear
+library::AddAuthor "1..1" *-- "0..1" library::Author : author1
+library::Author "0..1" --* "1..1" library::ByAuthor : author2
+library::Author "0..9999" --* "1..1" library::Add : authors4
+library::Model "1..1" *-- "0..9999" library::Command : commands0
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+enum Booktype {
+  novel
+  science
+}
+class Paragraph {
+}
+class bz288963::Book {
+  + id : str
+  + selfdef : str
+  + type : str
+}
+class bz288963::DocumentRoot {
+  + mixed : str
+}
+class bz288963::EStringToStringMapEntry {
+}
+class bz288963::Footnote {
+}
+class bz288963::Indentedpara {
+  + indentSpace : str
+}
+class bz288963::Paragraph {
+  + number : str
+  + title : str
+}
+Paragraph <|-- bz288963::Footnote
+Paragraph <|-- bz288963::Indentedpara
+bz288963::Book "0..9999" --* "1..1" bz288963::DocumentRoot : book8
+bz288963::Book "1..1" *-- "0..1" bz288963::Book : citation1
+bz288963::DocumentRoot "1..1" *-- "0..9999" bz288963::Footnote : footnote11
+bz288963::Indentedpara "0..9999" --* "1..1" bz288963::DocumentRoot : indentedpara13
+bz288963::Paragraph "0..9999" --* "1..1" bz288963::DocumentRoot : paragraph15
+bz288963::Paragraph "0..9999" --* "1..1" bz288963::Book : paralist2
+bz288963::EStringToStringMapEntry "0..9999" --* "1..1" bz288963::DocumentRoot : xMLNSPrefixMap4
+bz288963::DocumentRoot "1..1" *-- "0..9999" bz288963::EStringToStringMapEntry : xSISchemaLocation5
+@enduml

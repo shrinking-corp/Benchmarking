@@ -1,0 +1,64 @@
+@startuml
+class Dependency {
+}
+class Element {
+}
+class Gate {
+}
+class dynamicFaultTree::AND {
+}
+class dynamicFaultTree::DFT {
+  + name : str
+}
+abstract class dynamicFaultTree::Dependency {
+}
+abstract class dynamicFaultTree::Element {
+  + elementID : int
+  + name : str
+  + probability : float
+  + sequencePosition : int
+}
+class dynamicFaultTree::Event {
+}
+class dynamicFaultTree::FunctionalDependency {
+}
+abstract class dynamicFaultTree::Gate {
+}
+class dynamicFaultTree::OR {
+}
+class dynamicFaultTree::PAND {
+}
+class dynamicFaultTree::POR {
+}
+class dynamicFaultTree::Sequence {
+}
+class dynamicFaultTree::Spare {
+}
+class dynamicFaultTree::TopLevelEvent {
+}
+class dynamicFaultTree::XOR {
+}
+Dependency <|-- dynamicFaultTree::FunctionalDependency
+Dependency <|-- dynamicFaultTree::Sequence
+Element <|-- dynamicFaultTree::Dependency
+Element <|-- dynamicFaultTree::Event
+Element <|-- dynamicFaultTree::Gate
+Element <|-- dynamicFaultTree::TopLevelEvent
+Gate <|-- dynamicFaultTree::AND
+Gate <|-- dynamicFaultTree::OR
+Gate <|-- dynamicFaultTree::PAND
+Gate <|-- dynamicFaultTree::POR
+Gate <|-- dynamicFaultTree::Spare
+Gate <|-- dynamicFaultTree::XOR
+dynamicFaultTree::Event "0..9999" --* "1..1" dynamicFaultTree::Gate : childEvent11
+dynamicFaultTree::Gate "1..1" *-- "0..9999" dynamicFaultTree::Gate : childGate6
+dynamicFaultTree::Dependency "0..9999" --* "1..1" dynamicFaultTree::DFT : dependencies1
+dynamicFaultTree::Event "1..1" -- "0..9999" dynamicFaultTree::Dependency : dependency15
+dynamicFaultTree::Event "0..9999" -- "1..1" dynamicFaultTree::Dependency : events16
+dynamicFaultTree::Gate "0..1" --* "1..1" dynamicFaultTree::TopLevelEvent : gate3
+dynamicFaultTree::Gate "0..1" -- "1..1" dynamicFaultTree::Event : parentGate13
+dynamicFaultTree::Gate "0..1" -- "1..1" dynamicFaultTree::Gate : parentGate9
+dynamicFaultTree::Event "0..9999" -- "1..1" dynamicFaultTree::Spare : spares18
+dynamicFaultTree::DFT "1..1" *-- "0..1" dynamicFaultTree::TopLevelEvent : topLevelEvent0
+dynamicFaultTree::TopLevelEvent "0..1" -- "1..1" dynamicFaultTree::Gate : toplevelevent4
+@enduml

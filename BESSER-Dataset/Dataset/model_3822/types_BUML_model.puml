@@ -1,0 +1,135 @@
+@startuml
+class AnnotatableElement {
+}
+class Declaration {
+}
+enum Direction {
+  IN
+  LOCAL
+  OUT
+}
+class NamedElement {
+}
+class PackageMember {
+}
+class ParameterizedType {
+}
+class PrimitiveType {
+}
+class Type {
+}
+class TypeConstraint {
+}
+class TypeSpecifier {
+}
+class TypedElement {
+}
+class types::AnnotatableElement {
+}
+class types::Annotation {
+}
+class types::ArrayTypeSpecifier {
+  + size : int
+  + getElementType() : Type
+}
+class types::ComplexType {
+  + getAllFeatures() : Declaration
+}
+abstract class types::Declaration {
+}
+class types::Domain {
+  + domainID : str
+}
+class types::EObject {
+}
+class types::EnumerationType {
+}
+class types::Enumerator {
+  + literalValue : int
+}
+class types::Event {
+  + direction : str
+}
+class types::Operation {
+}
+class types::Package {
+}
+class types::PackageMember {
+  + id : str
+}
+class types::Parameter {
+}
+class types::ParameterizedType {
+}
+class types::PrimitiveType {
+}
+class types::Property {
+  + const : bool
+  + external : bool
+  + readonly : bool
+}
+class types::RangeConstraint {
+  + lowerBound : str
+  + upperBound : str
+}
+class types::Type {
+  + abstract : bool
+  + visible : bool
+  + getOriginType() : str
+}
+class types::TypeAlias {
+}
+class types::TypeConstraint {
+  + value : str
+}
+class types::TypeParameter {
+}
+class types::TypeSpecifier {
+}
+abstract class types::TypedElement {
+}
+AnnotatableElement <|-- types::PackageMember
+AnnotatableElement <|-- types::Parameter
+Declaration <|-- types::Enumerator
+Declaration <|-- types::Event
+Declaration <|-- types::Operation
+Declaration <|-- types::Property
+NamedElement <|-- types::Declaration
+NamedElement <|-- types::Package
+NamedElement <|-- types::PackageMember
+NamedElement <|-- types::Parameter
+PackageMember <|-- types::Annotation
+PackageMember <|-- types::Declaration
+PackageMember <|-- types::Type
+ParameterizedType <|-- types::ComplexType
+PrimitiveType <|-- types::EnumerationType
+TypeConstraint <|-- types::RangeConstraint
+TypeSpecifier <|-- types::ArrayTypeSpecifier
+TypedElement <|-- types::Declaration
+TypedElement <|-- types::Parameter
+TypedElement <|-- types::TypeAlias
+Type <|-- types::ParameterizedType
+Type <|-- types::PrimitiveType
+Type <|-- types::TypeAlias
+Type <|-- types::TypeParameter
+types::Annotation "0..9999" -- "1..1" types::AnnotatableElement : annotations34
+types::PrimitiveType "0..1" -- "1..1" types::PrimitiveType : baseType21
+types::Type "0..1" -- "1..1" types::TypeParameter : bound27
+types::TypeConstraint "0..9999" --* "1..1" types::Type : constraint6
+types::Package "1..1" *-- "0..1" types::Domain : domain1
+types::Enumerator "0..9999" --* "1..1" types::EnumerationType : enumerator19
+types::Declaration "0..9999" --* "1..1" types::ComplexType : features22
+types::Package "0..9999" -- "1..1" types::Package : import4
+types::PackageMember "0..9999" --* "1..1" types::Package : member0
+types::EnumerationType "0..1" -- "1..1" types::Enumerator : owningEnumeration26
+types::Parameter "1..1" -- "0..1" types::Operation : owningOperation8
+types::ParameterizedType "1..1" *-- "0..9999" types::TypeParameter : parameter29
+types::Parameter "0..9999" --* "1..1" types::Operation : parameters7
+types::Annotation "1..1" *-- "0..9999" types::Property : properties31
+types::ComplexType "0..9999" -- "1..1" types::ComplexType : superTypes24
+types::EObject "0..9999" -- "1..1" types::Annotation : targets32
+types::Type "0..1" -- "1..1" types::TypeSpecifier : type13
+types::Type "0..1" -- "1..1" types::TypedElement : type9
+types::TypeSpecifier "0..9999" --* "1..1" types::TypeSpecifier : typeArguments17
+types::TypeSpecifier "0..1" --* "1..1" types::TypedElement : typeSpecifier11
+@enduml

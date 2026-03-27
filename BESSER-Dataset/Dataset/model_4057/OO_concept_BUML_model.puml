@@ -1,0 +1,49 @@
+@startuml
+class Class {
+}
+class Feature {
+}
+class NamedElement {
+}
+class simple::OO::concept::Attribute {
+}
+class simple::OO::concept::Behavior {
+}
+class simple::OO::concept::Class {
+  + isAbstract : bool
+}
+class simple::OO::concept::Dependency {
+}
+abstract class simple::OO::concept::Feature {
+  + isPrivate : bool
+  + isProtected : bool
+  + isPublic : bool
+}
+abstract class simple::OO::concept::NamedElement {
+  + name : str
+}
+class simple::OO::concept::Operation {
+}
+class simple::OO::concept::Package {
+}
+class simple::OO::concept::Parameter {
+}
+Class <|-- simple::OO::concept::Behavior
+Feature <|-- simple::OO::concept::Attribute
+Feature <|-- simple::OO::concept::Operation
+NamedElement <|-- simple::OO::concept::Attribute
+NamedElement <|-- simple::OO::concept::Class
+NamedElement <|-- simple::OO::concept::Operation
+NamedElement <|-- simple::OO::concept::Package
+simple::OO::concept::Attribute "0..9999" --* "1..1" simple::OO::concept::Class : attributes8
+simple::OO::concept::Attribute "1..1" -- "0..1" simple::OO::concept::Class : atttype15
+simple::OO::concept::Class "0..9999" --* "1..1" simple::OO::concept::Package : classes0
+simple::OO::concept::Dependency "1..1" -- "1..9999" simple::OO::concept::NamedElement : client5
+simple::OO::concept::Package "1..1" *-- "0..9999" simple::OO::concept::Dependency : dependencies1
+simple::OO::concept::Behavior "0..9999" -- "1..1" simple::OO::concept::Operation : method20
+simple::OO::concept::Operation "0..9999" --* "1..1" simple::OO::concept::Class : operations10
+simple::OO::concept::Operation "1..1" *-- "0..9999" simple::OO::concept::Parameter : parameters18
+simple::OO::concept::Class "0..9999" -- "1..1" simple::OO::concept::Class : parents13
+simple::OO::concept::Class "0..1" -- "1..1" simple::OO::concept::Parameter : partype22
+simple::OO::concept::NamedElement "1..9999" -- "1..1" simple::OO::concept::Dependency : supplier3
+@enduml

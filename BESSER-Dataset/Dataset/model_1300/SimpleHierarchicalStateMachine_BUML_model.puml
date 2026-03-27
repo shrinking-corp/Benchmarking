@@ -1,0 +1,28 @@
+@startuml
+class SimpleHierarchicalStateMachine::CompositeState {
+}
+class SimpleHierarchicalStateMachine::FinalState {
+}
+class SimpleHierarchicalStateMachine::InitialState {
+}
+class SimpleHierarchicalStateMachine::State {
+  + name : str
+}
+class SimpleHierarchicalStateMachine::StateMachine {
+}
+class SimpleHierarchicalStateMachine::Transition {
+  + effect : str
+  + trigger : str
+}
+class State {
+}
+State <|-- SimpleHierarchicalStateMachine::CompositeState
+State <|-- SimpleHierarchicalStateMachine::FinalState
+State <|-- SimpleHierarchicalStateMachine::InitialState
+SimpleHierarchicalStateMachine::StateMachine "1..1" *-- "1..9999" SimpleHierarchicalStateMachine::State : ownedState9
+SimpleHierarchicalStateMachine::State "1..9999" --* "1..1" SimpleHierarchicalStateMachine::CompositeState : ownedSubState6
+SimpleHierarchicalStateMachine::Transition "0..9999" --* "1..1" SimpleHierarchicalStateMachine::StateMachine : ownedTransition11
+SimpleHierarchicalStateMachine::State "1..1" -- "0..1" SimpleHierarchicalStateMachine::CompositeState : owningCompositeState0
+SimpleHierarchicalStateMachine::Transition "1..1" -- "1..1" SimpleHierarchicalStateMachine::State : source3
+SimpleHierarchicalStateMachine::State "1..1" -- "1..1" SimpleHierarchicalStateMachine::Transition : target1
+@enduml

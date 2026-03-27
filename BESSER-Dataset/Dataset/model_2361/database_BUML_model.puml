@@ -1,0 +1,120 @@
+@startuml
+class AbstractTable {
+}
+class DatabaseElement {
+}
+class NamedElement {
+}
+class TableContainer {
+}
+class TypesLibraryUser {
+}
+abstract class database::AbstractTable {
+}
+class database::Column {
+  + autoincrement : bool
+  + defaultValue : str
+  + inForeignKey : bool
+  + inPrimaryKey : bool
+  + nullable : bool
+  + unique : bool
+  + addToPrimaryKey() : void
+  + addToUniqueIndex() : void
+  + removeFromPrimaryKey() : void
+  + removeFromUniqueIndex() : void
+}
+class database::Constraint {
+  + expression : str
+}
+class database::DataBase {
+  + url : str
+}
+abstract class database::DatabaseElement {
+  + ID : str
+  + comments : str
+}
+class database::ForeignKey {
+  + getSourceTable() : str
+  + getTargetTable() : str
+}
+class database::ForeignKeyElement {
+}
+class database::Index {
+  + cardinality : int
+  + indexType : str
+  + qualifier : str
+  + unique : bool
+}
+class database::IndexElement {
+  + asc : bool
+}
+abstract class database::NamedElement {
+  + name : str
+}
+class database::PrimaryKey {
+}
+class database::Schema {
+}
+class database::Sequence {
+  + increment : int
+  + maxValue : int
+  + minValue : int
+  + start : int
+}
+class database::Table {
+}
+abstract class database::TableContainer {
+}
+class database::Type {
+}
+class database::UserDefinedTypesLibrary {
+}
+class database::View {
+  + query : str
+}
+AbstractTable <|-- database::Table
+AbstractTable <|-- database::View
+DatabaseElement <|-- database::ForeignKeyElement
+DatabaseElement <|-- database::IndexElement
+DatabaseElement <|-- database::NamedElement
+NamedElement <|-- database::AbstractTable
+NamedElement <|-- database::Column
+NamedElement <|-- database::Constraint
+NamedElement <|-- database::ForeignKey
+NamedElement <|-- database::Index
+NamedElement <|-- database::PrimaryKey
+NamedElement <|-- database::Sequence
+NamedElement <|-- database::TableContainer
+TableContainer <|-- database::DataBase
+TableContainer <|-- database::Schema
+TypesLibraryUser <|-- database::DataBase
+database::Column "0..1" -- "1..1" database::IndexElement : column45
+database::Column "0..9999" -- "1..1" database::PrimaryKey : columns29
+database::Column "0..9999" --* "1..1" database::AbstractTable : columns3
+database::Constraint "0..9999" --* "1..1" database::Table : constraints25
+database::UserDefinedTypesLibrary "0..9999" --* "1..1" database::DataBase : defines1
+database::IndexElement "0..9999" --* "1..1" database::Index : elements17
+database::ForeignKeyElement "0..9999" --* "1..1" database::ForeignKey : elements34
+database::Column "0..1" -- "1..1" database::ForeignKeyElement : fkColumn40
+database::ForeignKeyElement "0..9999" -- "1..1" database::Column : foreignKeyElements10
+database::ForeignKey "0..9999" --* "1..1" database::Table : foreignKeys23
+database::ForeignKey "0..9999" -- "1..1" database::Column : foreignKeys8
+database::IndexElement "0..9999" -- "1..1" database::Column : indexElements6
+database::Table "1..1" *-- "0..9999" database::Index : indexes27
+database::Index "0..9999" -- "1..1" database::Column : indexes5
+database::Column "1..1" -- "1..1" database::AbstractTable : owner15
+database::Table "1..1" -- "1..1" database::Index : owner19
+database::Table "1..1" -- "1..1" database::PrimaryKey : owner31
+database::ForeignKey "1..1" -- "1..1" database::Table : owner36
+database::TableContainer "1..1" -- "1..1" database::AbstractTable : owner4
+database::Table "1..1" -- "1..1" database::Constraint : owner47
+database::ForeignKeyElement "1..1" -- "0..1" database::Column : pkColumn42
+database::PrimaryKey "0..1" --* "1..1" database::Table : primaryKey20
+database::Column "1..1" -- "0..1" database::PrimaryKey : primaryKey7
+database::DataBase "1..1" *-- "0..9999" database::Schema : schemas0
+database::Sequence "0..1" -- "1..1" database::Column : sequence13
+database::TableContainer "1..1" *-- "0..9999" database::Sequence : sequences52
+database::AbstractTable "0..9999" --* "1..1" database::TableContainer : tables49
+database::Table "0..1" -- "1..1" database::ForeignKey : target38
+database::Column "1..1" *-- "1..1" database::Type : type11
+@enduml

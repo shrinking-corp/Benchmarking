@@ -1,0 +1,252 @@
+@startuml
+enum AudienceType {
+  BEGINNER
+  BOTH
+  EXPERT
+}
+enum Color {
+  BLACK
+  BLUE
+  CYAN
+  DARK_BLUE
+  DARK_GRAY
+  DARK_GREEN
+  GRAY
+  GREEN
+  LIGHT_BLUE
+  LIGHT_GRAY
+  LIGHT_GREEN
+  ORANGE
+  RED
+  WHITE
+  YELLOW
+}
+enum DefinitionType {
+  GRAPHICAL
+  HYBRID
+  TEXTUAL
+}
+class DiagramElement {
+}
+class Figure {
+}
+enum FillTextureType {
+  DASH
+  DASHDOT
+  DASHDOTDOT
+  DOT
+  NONE
+  STRIP
+}
+class GraphicalElement {
+}
+class IDElement {
+}
+enum IconType {
+  ARROW
+  CROSS
+  LETTER
+}
+enum Layout {
+  HORIZONTAL
+  UNKNOWN
+  VERTICAL
+}
+enum LineTextureType {
+  DASH
+  DASHDOT
+  DASHDOTDOT
+  DOT
+  DOUBLE
+  INVISIBLE
+  SOLID
+}
+enum Orientation {
+  HORIZONTAL
+  LEFT_DIAGONAL
+  RIGHT_DIAGONAL
+  VERTICAL
+}
+class Relation {
+}
+class Style {
+}
+class TextualElement {
+}
+class Value {
+}
+class notation::AttributeValue {
+}
+class notation::BorderStyle {
+  + color : str
+  + texture : str
+  + thickness : float
+}
+class notation::Circle {
+}
+class notation::Compartment {
+  + layout : str
+}
+class notation::Composite {
+  + layout : str
+}
+class notation::Cube {
+}
+class notation::Cylinder {
+}
+class notation::DiagramDefinition {
+  + Legend : str
+  + Level : int
+  + allowChunks : bool
+  + targetedAudience : str
+}
+abstract class notation::DiagramElement {
+}
+class notation::Diamond {
+}
+abstract class notation::Figure {
+}
+class notation::FigureContainment {
+  + layout : str
+}
+class notation::FigureStyle {
+  + brightness : int
+  + fillColor : str
+  + fillOrientation : str
+  + fillTexture : str
+  + fillTextureColor : str
+  + height : float
+  + orientation : str
+  + width : float
+}
+abstract class notation::GraphicalElement {
+}
+class notation::IDElement {
+  + ID : str
+}
+class notation::Icon {
+  + iconType : str
+}
+class notation::IconStyle {
+  + brightness : int
+  + color : str
+  + height : float
+  + orientation : str
+  + width : float
+}
+class notation::Image {
+  + path : str
+}
+class notation::Keyword {
+}
+class notation::Label {
+}
+class notation::Line {
+}
+class notation::LineStyle {
+  + brightness : int
+  + color : str
+  + length : float
+  + orientation : str
+  + texture : str
+  + thickness : float
+}
+class notation::Link {
+}
+class notation::Node {
+}
+class notation::NotationDefinition {
+  + Type : str
+}
+class notation::Point {
+  + x : int
+  + y : int
+}
+class notation::Polyline {
+}
+class notation::Rectangle {
+}
+class notation::ReferenceValue {
+}
+abstract class notation::Relation {
+}
+class notation::Roundtangle {
+}
+class notation::Square {
+}
+abstract class notation::Style {
+}
+class notation::SyntaxOf {
+}
+class notation::TextStyle {
+  + bold : bool
+  + fontColor : str
+  + fontName : str
+  + fontSize : int
+  + italic : bool
+  + underlined : bool
+}
+class notation::TextualContainment {
+  + layout : str
+}
+abstract class notation::TextualElement {
+}
+class notation::Token {
+}
+class notation::Triangle {
+}
+abstract class notation::Value {
+}
+DiagramElement <|-- notation::Node
+DiagramElement <|-- notation::Relation
+Figure <|-- notation::Circle
+Figure <|-- notation::Cube
+Figure <|-- notation::Cylinder
+Figure <|-- notation::Diamond
+Figure <|-- notation::Polyline
+Figure <|-- notation::Rectangle
+Figure <|-- notation::Roundtangle
+Figure <|-- notation::Square
+Figure <|-- notation::Triangle
+GraphicalElement <|-- notation::Composite
+GraphicalElement <|-- notation::Figure
+GraphicalElement <|-- notation::Icon
+GraphicalElement <|-- notation::Image
+GraphicalElement <|-- notation::Label
+GraphicalElement <|-- notation::Line
+GraphicalElement <|-- notation::SyntaxOf
+IDElement <|-- notation::DiagramElement
+IDElement <|-- notation::GraphicalElement
+IDElement <|-- notation::TextualElement
+Relation <|-- notation::Compartment
+Relation <|-- notation::Link
+Style <|-- notation::BorderStyle
+Style <|-- notation::FigureStyle
+Style <|-- notation::IconStyle
+Style <|-- notation::LineStyle
+Style <|-- notation::TextStyle
+TextualElement <|-- notation::Keyword
+TextualElement <|-- notation::Token
+TextualElement <|-- notation::Value
+Value <|-- notation::AttributeValue
+Value <|-- notation::ReferenceValue
+notation::GraphicalElement "0..1" --* "1..1" notation::Image : approximateRepresentation11
+notation::BorderStyle "1..1" --* "1..1" notation::Figure : borderStyle23
+notation::NotationDefinition "1..1" *-- "1..9999" notation::DiagramDefinition : diagrams0
+notation::DiagramElement "0..9999" --* "1..1" notation::DiagramDefinition : elements1
+notation::GraphicalElement "0..9999" --* "1..1" notation::FigureContainment : elements27
+notation::TextualContainment "1..1" *-- "1..9999" notation::TextualElement : elements31
+notation::Figure "1..1" *-- "0..1" notation::FigureContainment : figureContainment25
+notation::FigureStyle "1..1" --* "1..1" notation::Figure : figureStyle22
+notation::Node "1..1" *-- "1..1" notation::GraphicalElement : graphicalElement3
+notation::GraphicalElement "1..1" --* "1..1" notation::Link : graphicalElement6
+notation::LineStyle "1..1" --* "1..1" notation::Line : lineStyle21
+notation::Node "0..1" -- "1..1" notation::Compartment : nodeType4
+notation::Point "0..9999" --* "1..1" notation::Polyline : points30
+notation::GraphicalElement "1..1" -- "1..1" notation::Composite : primaryShape15
+notation::DiagramElement "1..1" -- "1..1" notation::SyntaxOf : referredElement8
+notation::Icon "1..1" *-- "1..1" notation::IconStyle : style10
+notation::GraphicalElement "1..9999" --* "1..1" notation::Composite : subElements13
+notation::TextualContainment "1..1" --* "1..1" notation::Label : text19
+notation::Label "1..1" *-- "1..1" notation::TextStyle : textStyle18
+@enduml

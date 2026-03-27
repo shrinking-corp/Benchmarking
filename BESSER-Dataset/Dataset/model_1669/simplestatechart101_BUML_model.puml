@@ -1,0 +1,41 @@
+@startuml
+class NamedElement {
+}
+class Thing {
+}
+abstract class simplestatechart101::NamedElement {
+  + name : str
+}
+class simplestatechart101::RelatedTo {
+  + since : str
+}
+class simplestatechart101::State {
+  + activity : str
+  + label : str
+  + type : str
+}
+abstract class simplestatechart101::Thing {
+  + id : int
+}
+class simplestatechart101::Transition {
+  + expression : str
+}
+class simplestatechart101::Variable {
+  + type : str
+  + value : str
+}
+NamedElement <|-- simplestatechart101::RelatedTo
+NamedElement <|-- simplestatechart101::State
+NamedElement <|-- simplestatechart101::Thing
+NamedElement <|-- simplestatechart101::Transition
+Thing <|-- simplestatechart101::Variable
+simplestatechart101::RelatedTo "1..1" -- "0..1" simplestatechart101::Thing : fromThing1
+simplestatechart101::State "1..1" -- "0..1" simplestatechart101::State : parentstate11
+simplestatechart101::RelatedTo "0..9999" --* "1..1" simplestatechart101::Thing : relations0
+simplestatechart101::Transition "1..1" -- "0..1" simplestatechart101::State : source3
+simplestatechart101::State "0..9999" --* "1..1" simplestatechart101::State : substates8
+simplestatechart101::State "0..1" -- "1..1" simplestatechart101::Transition : target4
+simplestatechart101::Thing "0..1" -- "1..1" simplestatechart101::RelatedTo : toThing2
+simplestatechart101::Transition "0..9999" --* "1..1" simplestatechart101::State : transitions15
+simplestatechart101::Variable "0..9999" --* "1..1" simplestatechart101::State : variables13
+@enduml

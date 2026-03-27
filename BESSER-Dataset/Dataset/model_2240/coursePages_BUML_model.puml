@@ -1,0 +1,109 @@
+@startuml
+enum CourseWorkType {
+  Exercise
+  Lab
+  Lecture
+}
+enum EvaluationType {
+  Assignments
+  OralExam
+  Participated
+  PracticalExam
+  WrittenExam
+}
+class Person {
+}
+enum PrecondistionType {
+  Recommended
+  Required
+}
+enum TermType {
+  Fall
+  Spring
+  Summer
+}
+class coursePages::Course {
+  + courseCode : str
+  + courseContent : str
+  + courseCredits : float
+  + courseName : str
+}
+class coursePages::CourseInstance {
+  + courseYear : str
+  + term : str
+}
+class coursePages::CourseWork {
+}
+class coursePages::CourseWorkObject {
+  + courseWorkType : str
+  + day : str
+  + end : date
+  + room : str
+  + start : date
+}
+class coursePages::CourseWorker {
+  + courseRole : str
+}
+class coursePages::Department {
+  + departmentName : str
+  + email : str
+  + phoneNummber : str
+}
+class coursePages::Employee {
+  + position : str
+}
+class coursePages::EvaluationObject {
+  + credits : int
+  + date : date
+  + evaluationsForm : str
+  + term : str
+}
+class coursePages::Evaluations {
+}
+class coursePages::Person {
+  + email : str
+  + firstName : str
+  + phoneNummber : str
+  + surName : str
+}
+class coursePages::Precondition {
+  + preconditionStatus : str
+}
+class coursePages::Reduction {
+  + creditReduction : float
+}
+class coursePages::Student {
+  + studentID : str
+}
+class coursePages::StudyPrograms {
+  + studyProgramCode : str
+  + studyProgramName : str
+}
+enum personRoleType {
+  CourseCordinator
+  Lecture
+}
+Person <|-- coursePages::Employee
+Person <|-- coursePages::Student
+coursePages::Department "1..1" -- "1..1" coursePages::StudyPrograms : belongsToDepartment8
+coursePages::Student "1..1" -- "0..9999" coursePages::Course : course1
+coursePages::Course "0..9999" -- "1..1" coursePages::StudyPrograms : course12
+coursePages::Course "1..1" -- "1..1" coursePages::Precondition : course34
+coursePages::Course "1..1" -- "1..1" coursePages::Reduction : course37
+coursePages::Department "1..1" -- "0..9999" coursePages::Course : course6
+coursePages::CourseInstance "0..9999" --* "1..1" coursePages::Course : courseinstance16
+coursePages::CourseInstance "1..1" *-- "1..1" coursePages::CourseWork : coursework26
+coursePages::CourseWorker "0..9999" --* "1..1" coursePages::Course : courseworker20
+coursePages::CourseWorkObject "1..9999" --* "1..1" coursePages::CourseWork : courseworkobject15
+coursePages::Employee "1..1" -- "1..1" coursePages::Department : department2
+coursePages::Employee "0..9999" -- "1..1" coursePages::Department : employee3
+coursePages::CourseWorker "1..1" -- "0..1" coursePages::Employee : employee32
+coursePages::EvaluationObject "1..9999" --* "1..1" coursePages::Evaluations : evaluationobject14
+coursePages::Evaluations "1..1" --* "1..1" coursePages::CourseInstance : evaluations29
+coursePages::Precondition "0..9999" --* "1..1" coursePages::Course : precondition22
+coursePages::Reduction "0..9999" --* "1..1" coursePages::Course : reduction24
+coursePages::Student "0..9999" -- "1..1" coursePages::StudyPrograms : student10
+coursePages::Student "1..1" -- "1..1" coursePages::StudyPrograms : studyprograms0
+coursePages::Course "1..1" -- "0..9999" coursePages::StudyPrograms : studyprograms18
+coursePages::StudyPrograms "0..9999" -- "1..1" coursePages::Department : studyprograms4
+@enduml

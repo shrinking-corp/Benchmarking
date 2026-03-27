@@ -1,0 +1,98 @@
+@startuml
+class Control {
+}
+enum DateFormat {
+  DayMonthYear
+  YearMonthDay
+}
+class FormButton {
+}
+class NormalControl {
+}
+class Page {
+}
+class TextBox {
+}
+class webapp::CheckBox {
+  + text : str
+}
+abstract class webapp::Control {
+  + id : str
+  + name : str
+}
+class webapp::DateBox {
+  + format : str
+}
+class webapp::DropDownList {
+}
+class webapp::DynamicWebApp {
+  + name : str
+}
+class webapp::EmailBox {
+}
+abstract class webapp::FormButton {
+  + text : str
+}
+class webapp::FormPage {
+  + persist : bool
+}
+class webapp::Label {
+}
+class webapp::Link {
+}
+class webapp::ListElement {
+  + value : str
+}
+class webapp::NormalButton {
+}
+abstract class webapp::NormalControl {
+  + text : str
+}
+class webapp::NormalPage {
+}
+abstract class webapp::Page {
+  + default : bool
+  + name : str
+  + title : str
+}
+class webapp::PasswordBox {
+}
+class webapp::RadioButton {
+}
+class webapp::ResetButton {
+}
+class webapp::SubmitButton {
+}
+class webapp::TextBox {
+  + maxLength : int
+  + required : bool
+  + size : int
+  + text : str
+}
+Control <|-- webapp::CheckBox
+Control <|-- webapp::DropDownList
+Control <|-- webapp::FormButton
+Control <|-- webapp::Label
+Control <|-- webapp::Link
+Control <|-- webapp::NormalControl
+Control <|-- webapp::RadioButton
+Control <|-- webapp::TextBox
+FormButton <|-- webapp::ResetButton
+FormButton <|-- webapp::SubmitButton
+NormalControl <|-- webapp::Label
+NormalControl <|-- webapp::Link
+NormalControl <|-- webapp::NormalButton
+Page <|-- webapp::FormPage
+Page <|-- webapp::NormalPage
+TextBox <|-- webapp::DateBox
+TextBox <|-- webapp::EmailBox
+TextBox <|-- webapp::PasswordBox
+webapp::FormPage "1..1" *-- "1..9999" webapp::Control : controls4
+webapp::NormalControl "0..9999" --* "1..1" webapp::NormalPage : controls6
+webapp::Page "1..1" -- "1..1" webapp::Link : destination7
+webapp::RadioButton "1..1" *-- "2..9999" webapp::ListElement : elements10
+webapp::ListElement "0..9999" --* "1..1" webapp::DropDownList : elements9
+webapp::Page "0..1" -- "1..1" webapp::FormPage : errorTarget1
+webapp::Page "1..9999" --* "1..1" webapp::DynamicWebApp : pages12
+webapp::FormPage "1..1" -- "0..1" webapp::Page : successTarget0
+@enduml

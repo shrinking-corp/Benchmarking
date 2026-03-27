@@ -1,0 +1,64 @@
+@startuml
+class DocumElt {
+}
+class Port {
+}
+class Vertex {
+}
+class dslComponent::Component {
+  + id : str
+  + name : str
+}
+class dslComponent::ControlSubsystem {
+  + name : str
+}
+abstract class dslComponent::DocumElt {
+  + desc : str
+  + name : str
+}
+class dslComponent::Edge {
+}
+class dslComponent::InPort {
+}
+class dslComponent::InitialState {
+}
+class dslComponent::OutPort {
+}
+abstract class dslComponent::Port {
+  + name : str
+}
+class dslComponent::SimpleState {
+}
+class dslComponent::StateMachine {
+  + name : str
+}
+class dslComponent::Subsystem {
+  + description : str
+  + name : str
+}
+abstract class dslComponent::Vertex {
+}
+class dslComponent::WTComponents {
+  + author : str
+  + id : str
+}
+DocumElt <|-- dslComponent::Edge
+DocumElt <|-- dslComponent::Vertex
+Port <|-- dslComponent::InPort
+Port <|-- dslComponent::OutPort
+Vertex <|-- dslComponent::InitialState
+Vertex <|-- dslComponent::SimpleState
+dslComponent::ControlSubsystem "0..9999" --* "1..1" dslComponent::Subsystem : beh1
+dslComponent::Subsystem "1..1" *-- "0..9999" dslComponent::Component : components3
+dslComponent::Edge "0..9999" -- "1..1" dslComponent::Vertex : incoming16
+dslComponent::StateMachine "0..9999" -- "1..1" dslComponent::Component : machines10
+dslComponent::ControlSubsystem "1..1" *-- "0..9999" dslComponent::StateMachine : machines22
+dslComponent::Edge "0..9999" -- "1..1" dslComponent::Vertex : outgoing17
+dslComponent::Port "0..9999" --* "1..1" dslComponent::Component : ports8
+dslComponent::Edge "1..1" -- "1..1" dslComponent::Vertex : source19
+dslComponent::StateMachine "1..1" *-- "0..9999" dslComponent::Vertex : states12
+dslComponent::Subsystem "0..9999" --* "1..1" dslComponent::WTComponents : subsystems0
+dslComponent::Subsystem "0..9999" --* "1..1" dslComponent::Subsystem : subsystems6
+dslComponent::Vertex "1..1" -- "1..1" dslComponent::Edge : target20
+dslComponent::Edge "0..9999" --* "1..1" dslComponent::StateMachine : transitions14
+@enduml

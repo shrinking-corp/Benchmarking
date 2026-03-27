@@ -1,0 +1,28 @@
+@startuml
+enum TournamentType {
+  Amateur
+  Pro
+}
+class bowling::Game {
+  + frames : int
+}
+class bowling::League {
+  + name : str
+}
+class bowling::Matchup {
+}
+class bowling::Player {
+  + dateOfBirth : date
+  + height : float
+  + isProfessional : bool
+  + name : str
+}
+class bowling::Tournament {
+  + type : str
+}
+bowling::Matchup "1..1" *-- "0..2" bowling::Game : Game2
+bowling::Matchup "0..9999" --* "1..1" bowling::Tournament : Matchup1
+bowling::Matchup "0..1" -- "1..1" bowling::Game : Matchup3
+bowling::Game "1..1" -- "0..1" bowling::Player : player6
+bowling::Player "0..9999" --* "1..1" bowling::League : players0
+@enduml

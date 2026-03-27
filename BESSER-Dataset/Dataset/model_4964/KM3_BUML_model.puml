@@ -1,0 +1,103 @@
+@startuml
+class Class {
+}
+class Classifier {
+}
+class EnumLiteral {
+}
+class Enumeration {
+}
+class LocatedElement {
+}
+class Metamodel {
+}
+class ModelElement {
+}
+class Operation {
+}
+class Package {
+}
+class Parameter {
+}
+class Reference {
+}
+class StructuralFeature {
+}
+class TemplateParameter {
+}
+class TypedElement {
+}
+class km3::Attribute {
+}
+class km3::Class {
+  + isAbstract : str
+}
+class km3::Classifier {
+}
+class km3::DataType {
+}
+class km3::EnumLiteral {
+}
+class km3::Enumeration {
+}
+abstract class km3::LocatedElement {
+  + location : str
+}
+class km3::Metamodel {
+}
+abstract class km3::ModelElement {
+  + name : str
+}
+class km3::Operation {
+}
+class km3::Package {
+}
+class km3::Parameter {
+}
+class km3::Reference {
+  + isContainer : str
+}
+class km3::StructuralFeature {
+}
+class km3::TemplateParameter {
+}
+class km3::TypedElement {
+  + isOrdered : str
+  + isUnique : str
+  + lower : str
+  + upper : str
+}
+Classifier <|-- km3::Class
+Classifier <|-- km3::DataType
+Classifier <|-- km3::Enumeration
+Classifier <|-- km3::TemplateParameter
+LocatedElement <|-- km3::Metamodel
+LocatedElement <|-- km3::ModelElement
+ModelElement <|-- km3::Classifier
+ModelElement <|-- km3::EnumLiteral
+ModelElement <|-- km3::Package
+ModelElement <|-- km3::TypedElement
+StructuralFeature <|-- km3::Attribute
+StructuralFeature <|-- km3::Reference
+TypedElement <|-- km3::Operation
+TypedElement <|-- km3::Parameter
+TypedElement <|-- km3::StructuralFeature
+ModelElement "0..9999" --* "1..1" km3::Package : contents36
+km3::Metamodel "1..1" *-- "0..9999" Package : contents42
+StructuralFeature "0..9999" -- "1..1" km3::StructuralFeature : derivedFrom23
+Enumeration "0..1" -- "1..1" km3::EnumLiteral : enum4
+EnumLiteral "0..9999" -- "1..1" km3::Enumeration : literals1
+Metamodel "0..1" -- "1..1" km3::Package : metamodel39
+Operation "0..9999" -- "1..1" km3::Class : operations13
+Reference "0..1" -- "1..1" km3::Reference : opposite26
+Class "0..1" -- "1..1" km3::StructuralFeature : owner17
+Class "0..1" -- "1..1" km3::Operation : owner27
+Operation "0..1" -- "1..1" km3::Parameter : owner33
+km3::ModelElement "1..1" -- "0..1" Package : package0
+km3::Operation "1..1" -- "0..9999" Parameter : parameters30
+TemplateParameter "0..9999" -- "1..1" km3::Class : parameters7
+km3::Class "1..1" *-- "0..9999" StructuralFeature : structuralFeatures10
+km3::StructuralFeature "1..1" -- "0..9999" StructuralFeature : subsetOf20
+Class "0..9999" -- "1..1" km3::Class : supertypes8
+Classifier "1..1" -- "1..1" km3::TypedElement : type16
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+class zhu::Region {
+  + name : str
+}
+class zhu::State {
+  + name : str
+}
+class zhu::StateMachine {
+}
+class zhu::States {
+}
+class zhu::StatesSeparated {
+}
+class zhu::TopRegion {
+}
+class zhu::Transition {
+  + behaviour : str
+  + guard : str
+}
+class zhu::Transitions {
+}
+class zhu::Triggers {
+}
+class zhu::TriggersSeparated {
+  + firstTrigger : str
+  + followingTriggers : str
+}
+zhu::State "0..1" --* "1..1" zhu::StatesSeparated : firstState30
+zhu::Transition "0..1" --* "1..1" zhu::Transitions : firstTransition16
+zhu::StatesSeparated "1..1" *-- "0..9999" zhu::State : followingStates33
+zhu::Transition "0..9999" --* "1..1" zhu::Transitions : followingTransitions18
+zhu::TopRegion "0..1" --* "1..1" zhu::StateMachine : region0
+zhu::Region "1..1" *-- "0..9999" zhu::Region : regions11
+zhu::TopRegion "1..1" *-- "0..9999" zhu::Region : regions3
+zhu::State "0..1" -- "1..1" zhu::Transition : source21
+zhu::States "0..1" --* "1..1" zhu::TopRegion : states1
+zhu::StatesSeparated "0..1" --* "1..1" zhu::States : states28
+zhu::States "0..1" --* "1..1" zhu::Region : states7
+zhu::Transition "1..1" -- "0..1" zhu::State : target23
+zhu::Transitions "0..1" --* "1..1" zhu::Region : transitions13
+zhu::Transitions "0..1" --* "1..1" zhu::TopRegion : transitions5
+zhu::Triggers "0..1" --* "1..1" zhu::Transition : triggers26
+zhu::Triggers "1..1" *-- "0..1" zhu::TriggersSeparated : triggers36
+@enduml

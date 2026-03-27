@@ -1,0 +1,23 @@
+@startuml
+class library::Book {
+  + author : str
+  + name : str
+}
+class library::BorrowedItem {
+  + borrowDate : date
+  + lastReturnDate : date
+}
+class library::Library {
+  + name : str
+}
+class library::User {
+  + name : str
+}
+library::Library "1..1" *-- "0..9999" library::Book : books0
+library::BorrowedItem "0..9999" --* "1..1" library::User : borrowedItems4
+library::Book "1..1" -- "1..1" library::BorrowedItem : item7
+library::Library "1..1" -- "1..1" library::Book : library3
+library::Library "1..1" -- "1..1" library::User : library5
+library::BorrowedItem "1..1" -- "1..1" library::User : user8
+library::User "0..9999" --* "1..1" library::Library : users1
+@enduml

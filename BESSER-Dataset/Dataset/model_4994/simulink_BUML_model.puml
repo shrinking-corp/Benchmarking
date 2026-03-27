@@ -1,0 +1,214 @@
+@startuml
+class Block {
+}
+class CompositeStateflowElement {
+}
+class ContainableStateflowElement {
+}
+class Data {
+}
+enum DecompositionType {
+  EXCLUSIVE_OR
+  PARALLEL_AND
+}
+class InPort {
+}
+class OutPort {
+}
+class Port {
+}
+class PortBlock {
+}
+class Reference {
+}
+class SimulinkElement {
+}
+class StateflowElement {
+}
+class SubSystem {
+}
+class TruthTable {
+}
+class Vertex {
+}
+class simulink::Action {
+  + statement : str
+}
+class simulink::ActionEntry {
+  + actionReference : str
+  + actionStatement : str
+  + description : str
+}
+class simulink::ActionTable {
+}
+class simulink::Block {
+}
+class simulink::BlockReference {
+}
+class simulink::Chart {
+  + decomposition : str
+}
+abstract class simulink::CompositeStateflowElement {
+}
+class simulink::Condition {
+  + description : str
+  + statement : str
+}
+class simulink::ConditionTable {
+}
+class simulink::Connection {
+}
+abstract class simulink::ContainableStateflowElement {
+}
+class simulink::ContainableTruthTable {
+}
+abstract class simulink::Data {
+}
+class simulink::Decision {
+  + actionReference : str
+  + id : int
+}
+class simulink::DecisionEntry {
+  + conditionOutcome : str
+}
+class simulink::Function {
+  + signature : str
+}
+class simulink::InPort {
+}
+class simulink::InPortBlock {
+}
+class simulink::InputData {
+}
+class simulink::Junction {
+}
+class simulink::LocalData {
+  + dataType : str
+}
+class simulink::ModelReference {
+  + modelName : str
+}
+class simulink::OutPort {
+}
+class simulink::OutPortBlock {
+}
+class simulink::OutputData {
+}
+abstract class simulink::Port {
+  + dataType : str
+  + portNumber : int
+}
+abstract class simulink::PortBlock {
+  + portNumber : int
+}
+abstract class simulink::Reference {
+}
+class simulink::SFWGuard {
+  + statement : str
+}
+class simulink::SFWTrigger {
+  + statement : str
+}
+abstract class simulink::SimulinkElement {
+  + handle : str
+  + name : str
+}
+class simulink::SimulinkModel {
+  + file : str
+  + isLibrary : bool
+}
+class simulink::State {
+  + decomposition : str
+  + executionOrder : int
+}
+abstract class simulink::StateflowElement {
+  + id : int
+  + path : str
+}
+class simulink::SubSystem {
+}
+class simulink::Transition {
+  + executionOrder : int
+  + isDefaultTransition : bool
+}
+abstract class simulink::TruthTable {
+}
+class simulink::TruthTableChart {
+}
+abstract class simulink::Vertex {
+}
+Block <|-- simulink::Chart
+Block <|-- simulink::PortBlock
+Block <|-- simulink::SubSystem
+Block <|-- simulink::TruthTableChart
+CompositeStateflowElement <|-- simulink::Chart
+CompositeStateflowElement <|-- simulink::Function
+CompositeStateflowElement <|-- simulink::State
+ContainableStateflowElement <|-- simulink::ContainableTruthTable
+ContainableStateflowElement <|-- simulink::Data
+ContainableStateflowElement <|-- simulink::Function
+ContainableStateflowElement <|-- simulink::Transition
+ContainableStateflowElement <|-- simulink::Vertex
+Data <|-- simulink::InputData
+Data <|-- simulink::LocalData
+Data <|-- simulink::OutputData
+InPort <|-- simulink::InputData
+OutPort <|-- simulink::OutputData
+PortBlock <|-- simulink::InPortBlock
+PortBlock <|-- simulink::OutPortBlock
+Port <|-- simulink::InPort
+Port <|-- simulink::OutPort
+Reference <|-- simulink::BlockReference
+Reference <|-- simulink::ModelReference
+SimulinkElement <|-- simulink::Block
+SimulinkElement <|-- simulink::Connection
+SimulinkElement <|-- simulink::Port
+SimulinkElement <|-- simulink::StateflowElement
+StateflowElement <|-- simulink::CompositeStateflowElement
+StateflowElement <|-- simulink::ContainableStateflowElement
+StateflowElement <|-- simulink::TruthTable
+SubSystem <|-- simulink::Reference
+SubSystem <|-- simulink::SimulinkModel
+TruthTable <|-- simulink::ContainableTruthTable
+TruthTable <|-- simulink::TruthTableChart
+Vertex <|-- simulink::Junction
+Vertex <|-- simulink::State
+simulink::ActionEntry "1..9999" --* "1..1" simulink::ActionTable : actionEntries53
+simulink::ActionTable "1..1" --* "1..1" simulink::TruthTable : actionTable45
+simulink::Block "0..1" -- "1..1" simulink::Port : block2
+simulink::ContainableStateflowElement "0..9999" --* "1..1" simulink::CompositeStateflowElement : children41
+simulink::Condition "1..1" -- "1..1" simulink::DecisionEntry : condition57
+simulink::TruthTable "1..1" *-- "1..1" simulink::ConditionTable : conditionTable44
+simulink::Condition "1..9999" --* "1..1" simulink::ConditionTable : conditions51
+simulink::InPort "1..1" -- "0..1" simulink::Connection : connection4
+simulink::Connection "0..1" -- "1..1" simulink::OutPort : connection5
+simulink::Connection "0..9999" --* "1..1" simulink::SubSystem : connections9
+simulink::Data "0..9999" --* "1..1" simulink::TruthTable : data47
+simulink::Decision "1..1" *-- "1..9999" simulink::DecisionEntry : decisionEntries55
+simulink::Decision "1..9999" --* "1..1" simulink::ConditionTable : decisions49
+simulink::Vertex "1..1" -- "1..1" simulink::Transition : destination24
+simulink::Action "0..9999" --* "1..1" simulink::State : duringActions19
+simulink::Action "0..9999" --* "1..1" simulink::State : entryActions18
+simulink::Action "0..9999" --* "1..1" simulink::State : exitActions21
+simulink::OutPort "0..1" -- "1..1" simulink::Connection : from12
+simulink::SFWGuard "0..1" --* "1..1" simulink::Transition : guard26
+simulink::Transition "1..9999" -- "1..1" simulink::Vertex : incomingTransitions15
+simulink::Vertex "1..1" -- "0..9999" simulink::Transition : outgoingTransitions16
+simulink::Port "0..9999" --* "1..1" simulink::Block : ownedPorts0
+simulink::Block "1..1" -- "0..1" simulink::SubSystem : parent1
+simulink::CompositeStateflowElement "0..1" -- "1..1" simulink::ContainableStateflowElement : parent43
+simulink::PortBlock "1..1" -- "0..1" simulink::Port : port10
+simulink::PortBlock "0..1" -- "1..1" simulink::Port : portBlock3
+simulink::Transition "1..1" -- "0..1" simulink::Vertex : source23
+simulink::Block "0..1" -- "1..1" simulink::Reference : sourceBlock62
+simulink::Action "1..1" -- "0..1" simulink::State : stateDuring37
+simulink::State "0..1" -- "1..1" simulink::Action : stateEntry36
+simulink::State "0..1" -- "1..1" simulink::Action : stateExit39
+simulink::Block "0..9999" --* "1..1" simulink::SubSystem : subBlocks7
+simulink::InPort "0..1" -- "1..1" simulink::Connection : to13
+simulink::Transition "0..1" -- "1..1" simulink::SFWGuard : transition32
+simulink::Transition "0..1" -- "1..1" simulink::Action : transition34
+simulink::Transition "0..1" -- "1..1" simulink::SFWTrigger : transition60
+simulink::Transition "1..1" *-- "0..1" simulink::SFWTrigger : trigger30
+simulink::Action "0..9999" --* "1..1" simulink::Transition : triggeredActions27
+@enduml

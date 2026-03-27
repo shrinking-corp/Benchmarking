@@ -1,0 +1,161 @@
+@startuml
+enum ActionEnum {
+  BACKWARD
+  FORWARD
+  STOP
+}
+class Actions {
+}
+enum BackEnum {
+  BACK
+}
+enum ColorEnum {
+  BLACK
+  BLUE
+  BROWN
+  GREEN
+  NONE
+  RED
+  WHITE
+  YELLOW
+}
+enum EdgeEnum {
+  BACK
+  FRONTLEFT
+  FRONTRIGHT
+}
+class EndCondition {
+}
+class Expression {
+}
+enum FBEnum {
+  BACKWARD
+  FORWARD
+}
+enum LREnum {
+  LEFT
+  RIGHT
+}
+enum MAEnum {
+  MEASURE
+}
+class RotateMovementAction {
+}
+class RotatePoints {
+}
+enum Tenum {
+  TRUE
+}
+enum TouchEnum {
+  LEFT
+  RIGHT
+}
+class dSL::ANDexpression {
+}
+class dSL::Actions {
+}
+class dSL::Behavior {
+  + name : str
+}
+class dSL::BehaviorName {
+  + name : str
+}
+class dSL::ColorLiteral {
+  + color : str
+}
+class dSL::DepthLiteral {
+  + back : str
+}
+class dSL::DistanceLiteral {
+  + distance : int
+}
+class dSL::EdgeLiteral {
+  + edge : str
+}
+class dSL::EndAfter {
+  + time : int
+}
+class dSL::EndCondition {
+}
+class dSL::EndWhen {
+  + name : str
+  + times : int
+}
+class dSL::Expression {
+}
+class dSL::ExpressionBracket {
+}
+class dSL::LeftMovementAction {
+}
+class dSL::LeftRotatePoint {
+  + leftdir : str
+}
+class dSL::MarsRoverExpedition {
+}
+class dSL::MeasurementAction {
+  + measure : str
+}
+class dSL::MiddleRotatePoint {
+  + middledir : str
+}
+class dSL::Mission {
+  + name : str
+}
+class dSL::MoveAction {
+  + dir : str
+}
+class dSL::MovementAction {
+  + actionenum : str
+}
+class dSL::ORexpression {
+}
+class dSL::RightMovementAction {
+}
+class dSL::RightRotatePoint {
+  + rightdir : str
+}
+class dSL::RotateMovementAction {
+}
+class dSL::RotatePoints {
+  + degrees : int
+}
+class dSL::TouchLiteral {
+  + touch : str
+}
+class dSL::TrueLiteral {
+  + t : str
+}
+Actions <|-- dSL::LeftMovementAction
+Actions <|-- dSL::MeasurementAction
+Actions <|-- dSL::MoveAction
+Actions <|-- dSL::RightMovementAction
+Actions <|-- dSL::RotateMovementAction
+EndCondition <|-- dSL::EndAfter
+Expression <|-- dSL::ANDexpression
+Expression <|-- dSL::ColorLiteral
+Expression <|-- dSL::DepthLiteral
+Expression <|-- dSL::DistanceLiteral
+Expression <|-- dSL::EdgeLiteral
+Expression <|-- dSL::ExpressionBracket
+Expression <|-- dSL::ORexpression
+Expression <|-- dSL::TouchLiteral
+Expression <|-- dSL::TrueLiteral
+RotateMovementAction <|-- dSL::RotatePoints
+RotatePoints <|-- dSL::LeftRotatePoint
+RotatePoints <|-- dSL::MiddleRotatePoint
+RotatePoints <|-- dSL::RightRotatePoint
+dSL::Actions "0..9999" --* "1..1" dSL::Behavior : actionlist11
+dSL::Mission "1..1" *-- "0..9999" dSL::BehaviorName : behaviorlist3
+dSL::EndCondition "0..1" --* "1..1" dSL::Mission : endcondition5
+dSL::EndWhen "0..9999" --* "1..1" dSL::EndCondition : endwhenlist7
+dSL::ExpressionBracket "1..1" *-- "0..1" dSL::Expression : exp16
+dSL::Expression "0..1" --* "1..1" dSL::ANDexpression : left18
+dSL::Expression "0..1" --* "1..1" dSL::ORexpression : left23
+dSL::MovementAction "0..1" --* "1..1" dSL::LeftMovementAction : leftmove13
+dSL::MarsRoverExpedition "1..1" *-- "0..9999" dSL::Mission : missionlist0
+dSL::Expression "0..1" --* "1..1" dSL::ANDexpression : right20
+dSL::ORexpression "1..1" *-- "0..1" dSL::Expression : right25
+dSL::MovementAction "0..1" --* "1..1" dSL::RightMovementAction : rightmove14
+dSL::Behavior "1..1" *-- "0..1" dSL::Expression : sensorExpression9
+dSL::Behavior "0..9999" --* "1..1" dSL::MarsRoverExpedition : tasklist1
+@enduml

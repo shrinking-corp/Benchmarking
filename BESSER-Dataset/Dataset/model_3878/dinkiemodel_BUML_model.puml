@@ -1,0 +1,186 @@
+@startuml
+enum EBaseType {
+  BOOL
+  CHAR
+  INT
+}
+enum EOneOperator {
+  MINUS
+  NOT
+}
+enum ETwoOperator {
+  AND
+  DEVIDE
+  EQUAL
+  GE
+  GT
+  LE
+  LT
+  MINUS
+  NOT_EQUAL
+  OR
+  PLUS
+  TIMES
+  XOR
+}
+class Expression {
+}
+class Statement {
+}
+class Type {
+}
+class dinkiemodel::Argument {
+  + name : str
+}
+class dinkiemodel::ArrayAssign {
+  + varName : str
+}
+class dinkiemodel::ArrayExpr {
+  + varName : str
+}
+class dinkiemodel::ArrayType {
+  + arrayType : str
+}
+class dinkiemodel::Assign {
+  + varName : str
+}
+class dinkiemodel::BaseType {
+  + type : str
+}
+class dinkiemodel::BoolVal {
+  + value : bool
+}
+class dinkiemodel::BracketExpr {
+}
+class dinkiemodel::Character {
+  + value : str
+}
+class dinkiemodel::Declaration {
+  + global : bool
+  + varName : str
+}
+class dinkiemodel::EmptyArrayDecl {
+  + global : bool
+  + size : int
+  + varName : str
+}
+abstract class dinkiemodel::Expression {
+}
+class dinkiemodel::FilledArrayDecl {
+  + global : bool
+  + varName : str
+}
+class dinkiemodel::FuncExpr {
+  + funcName : str
+}
+class dinkiemodel::FunctionDecl {
+  + name : str
+}
+class dinkiemodel::IfOne {
+}
+class dinkiemodel::IfTwo {
+}
+class dinkiemodel::Main {
+}
+class dinkiemodel::Number {
+  + value : int
+}
+class dinkiemodel::OneOperator {
+  + operator : str
+}
+class dinkiemodel::Parallel {
+  + nrOfThreads : int
+}
+class dinkiemodel::Program {
+}
+class dinkiemodel::ReadStatement {
+  + varName : str
+}
+class dinkiemodel::Return {
+}
+abstract class dinkiemodel::Statement {
+}
+class dinkiemodel::StringArrayDecl {
+  + content : str
+  + global : bool
+  + varName : str
+}
+class dinkiemodel::Sync {
+  + varName : str
+}
+class dinkiemodel::ThreadID {
+}
+class dinkiemodel::TwoOperator {
+  + operator : str
+}
+abstract class dinkiemodel::Type {
+}
+class dinkiemodel::VariableExpr {
+  + name : str
+}
+class dinkiemodel::While {
+}
+class dinkiemodel::WriteStatement {
+}
+Expression <|-- dinkiemodel::ArrayExpr
+Expression <|-- dinkiemodel::BoolVal
+Expression <|-- dinkiemodel::BracketExpr
+Expression <|-- dinkiemodel::Character
+Expression <|-- dinkiemodel::FuncExpr
+Expression <|-- dinkiemodel::Number
+Expression <|-- dinkiemodel::OneOperator
+Expression <|-- dinkiemodel::ThreadID
+Expression <|-- dinkiemodel::TwoOperator
+Expression <|-- dinkiemodel::VariableExpr
+Statement <|-- dinkiemodel::ArrayAssign
+Statement <|-- dinkiemodel::Assign
+Statement <|-- dinkiemodel::Declaration
+Statement <|-- dinkiemodel::EmptyArrayDecl
+Statement <|-- dinkiemodel::FilledArrayDecl
+Statement <|-- dinkiemodel::FuncExpr
+Statement <|-- dinkiemodel::IfOne
+Statement <|-- dinkiemodel::IfTwo
+Statement <|-- dinkiemodel::Parallel
+Statement <|-- dinkiemodel::ReadStatement
+Statement <|-- dinkiemodel::Return
+Statement <|-- dinkiemodel::StringArrayDecl
+Statement <|-- dinkiemodel::Sync
+Statement <|-- dinkiemodel::While
+Statement <|-- dinkiemodel::WriteStatement
+Type <|-- dinkiemodel::ArrayType
+Type <|-- dinkiemodel::BaseType
+dinkiemodel::Expression "0..9999" --* "1..1" dinkiemodel::FuncExpr : arguments70
+dinkiemodel::Argument "0..9999" --* "1..1" dinkiemodel::FunctionDecl : arguments8
+dinkiemodel::ArrayType "1..1" --* "1..1" dinkiemodel::EmptyArrayDecl : arraytype15
+dinkiemodel::ArrayType "1..1" --* "1..1" dinkiemodel::FilledArrayDecl : arraytype25
+dinkiemodel::Statement "0..9999" --* "1..1" dinkiemodel::IfTwo : elseStats50
+dinkiemodel::Expression "0..1" --* "1..1" dinkiemodel::Declaration : expression13
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::WriteStatement : expression20
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::Assign : expression23
+dinkiemodel::FilledArrayDecl "1..1" *-- "1..9999" dinkiemodel::Expression : expression27
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::ArrayAssign : expression32
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::While : expression35
+dinkiemodel::IfOne "1..1" *-- "1..1" dinkiemodel::Expression : expression40
+dinkiemodel::IfTwo "1..1" *-- "1..1" dinkiemodel::Expression : expression47
+dinkiemodel::Return "1..1" *-- "0..1" dinkiemodel::Expression : expression57
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::OneOperator : expression59
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::BracketExpr : expression66
+dinkiemodel::FunctionDecl "0..9999" --* "1..1" dinkiemodel::Program : functions0
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::ArrayAssign : index30
+dinkiemodel::ArrayExpr "1..1" *-- "1..1" dinkiemodel::Expression : index68
+dinkiemodel::Expression "1..1" --* "1..1" dinkiemodel::TwoOperator : leftExpr61
+dinkiemodel::Main "1..1" --* "1..1" dinkiemodel::Program : mainFunc1
+dinkiemodel::TwoOperator "1..1" *-- "1..1" dinkiemodel::Expression : rightExpr63
+dinkiemodel::Main "1..1" *-- "0..9999" dinkiemodel::Statement : statements3
+dinkiemodel::Statement "0..9999" --* "1..1" dinkiemodel::While : statements37
+dinkiemodel::Statement "0..9999" --* "1..1" dinkiemodel::IfOne : statements42
+dinkiemodel::Statement "0..9999" --* "1..1" dinkiemodel::FunctionDecl : statements5
+dinkiemodel::Statement "0..9999" --* "1..1" dinkiemodel::Parallel : statements53
+dinkiemodel::Statement "0..9999" --* "1..1" dinkiemodel::Sync : statements55
+dinkiemodel::Statement "0..9999" --* "1..1" dinkiemodel::IfTwo : thenStats45
+dinkiemodel::Type "0..1" --* "1..1" dinkiemodel::FunctionDecl : type10
+dinkiemodel::Declaration "1..1" *-- "1..1" dinkiemodel::BaseType : type12
+dinkiemodel::BaseType "1..1" --* "1..1" dinkiemodel::ReadStatement : type16
+dinkiemodel::WriteStatement "1..1" *-- "1..1" dinkiemodel::Type : type18
+dinkiemodel::Type "1..1" --* "1..1" dinkiemodel::Argument : type72
+@enduml

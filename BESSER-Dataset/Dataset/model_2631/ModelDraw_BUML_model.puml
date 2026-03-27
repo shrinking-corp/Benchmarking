@@ -1,0 +1,111 @@
+@startuml
+enum Decoration {
+  diamond
+  empty
+  none
+  odiamond
+  open
+  triangle
+}
+enum DrawType {
+  diagram
+}
+class Item {
+}
+class NamedItem {
+}
+enum NodeColor {
+  gray95
+}
+enum NodeShape {
+  circle
+  doublecircle
+  record
+}
+enum NodeStyle {
+  italic
+  none
+  underline
+}
+enum NodeType {
+  markednode
+  node
+}
+class Relation {
+}
+class modeldraw::BooleanAttribute {
+  + negation : bool
+}
+class modeldraw::Content {
+  + symbol : str
+}
+class modeldraw::EAttribute {
+}
+class modeldraw::EClass {
+}
+class modeldraw::EEnumLiteral {
+}
+class modeldraw::EReference {
+}
+class modeldraw::Edge {
+}
+class modeldraw::Enumerator {
+  + value : str
+}
+class modeldraw::Information {
+}
+abstract class modeldraw::Item {
+}
+class modeldraw::Level {
+}
+class modeldraw::MutatorDraw {
+  + metamodel : str
+  + type : str
+}
+abstract class modeldraw::NamedItem {
+}
+class modeldraw::Node {
+  + color : str
+  + shape : str
+  + style : str
+  + type : str
+}
+class modeldraw::NodeEnumerator {
+}
+abstract class modeldraw::Relation {
+  + src_decoration : str
+  + tar_decoration : str
+}
+Item <|-- modeldraw::BooleanAttribute
+Item <|-- modeldraw::Information
+Item <|-- modeldraw::MutatorDraw
+Item <|-- modeldraw::NamedItem
+Item <|-- modeldraw::NodeEnumerator
+NamedItem <|-- modeldraw::Content
+NamedItem <|-- modeldraw::Node
+NamedItem <|-- modeldraw::Relation
+Relation <|-- modeldraw::Edge
+Relation <|-- modeldraw::Level
+modeldraw::NodeEnumerator "1..1" -- "1..1" modeldraw::EAttribute : att33
+modeldraw::EAttribute "0..1" -- "1..1" modeldraw::Information : att41
+modeldraw::EAttribute "1..1" -- "1..1" modeldraw::BooleanAttribute : att7
+modeldraw::EAttribute "0..1" -- "1..1" modeldraw::NamedItem : attName6
+modeldraw::BooleanAttribute "0..9999" --* "1..1" modeldraw::Node : attribute9
+modeldraw::Content "0..9999" --* "1..1" modeldraw::MutatorDraw : contents4
+modeldraw::NodeEnumerator "1..1" *-- "0..9999" modeldraw::Enumerator : enumerator35
+modeldraw::Content "1..1" *-- "0..9999" modeldraw::Information : info47
+modeldraw::EAttribute "0..1" -- "1..1" modeldraw::Relation : label17
+modeldraw::Enumerator "1..1" -- "1..1" modeldraw::EEnumLiteral : literal37
+modeldraw::EClass "0..1" -- "1..1" modeldraw::Item : name0
+modeldraw::NodeEnumerator "0..9999" --* "1..1" modeldraw::Content : nodenum44
+modeldraw::Node "0..9999" --* "1..1" modeldraw::MutatorDraw : nodes1
+modeldraw::Node "1..1" -- "0..9999" modeldraw::EReference : reference12
+modeldraw::EReference "0..1" -- "1..1" modeldraw::Relation : reference14
+modeldraw::MutatorDraw "1..1" *-- "0..9999" modeldraw::Relation : relations2
+modeldraw::EReference "0..1" -- "1..1" modeldraw::Edge : source26
+modeldraw::EAttribute "0..1" -- "1..1" modeldraw::Relation : src_label20
+modeldraw::Relation "1..1" -- "0..1" modeldraw::EAttribute : tar_label23
+modeldraw::EReference "0..1" -- "1..1" modeldraw::Edge : target28
+modeldraw::EReference "1..1" -- "1..1" modeldraw::Information : type39
+modeldraw::EReference "0..1" -- "1..1" modeldraw::Level : upper31
+@enduml

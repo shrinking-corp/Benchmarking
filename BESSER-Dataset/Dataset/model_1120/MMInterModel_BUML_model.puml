@@ -1,0 +1,89 @@
+@startuml
+class Element {
+}
+class MMInterModel::Attribute {
+  + arraySize : int
+  + component : str
+  + defaultValue : str
+  + isArray : bool
+  + lowerBound : int
+  + model : str
+  + type : str
+  + upperBound : int
+}
+class MMInterModel::Component {
+  + model : str
+  + numberOfSpares : int
+}
+class MMInterModel::Element {
+  + id : str
+  + name : str
+}
+class MMInterModel::Event {
+  + model : str
+  + type : str
+}
+class MMInterModel::Guard {
+  + specification : str
+  + transition : str
+}
+class MMInterModel::Model {
+}
+class MMInterModel::State {
+  + duringBehaviour : str
+  + entryBehaviour : str
+  + exitBehaviour : str
+  + stateConfiguration : str
+  + stateMachine : str
+  + stateNumber : int
+}
+class MMInterModel::StateConfiguration {
+  + condition : str
+  + configOperator : str
+  + model : str
+  + negation : bool
+}
+class MMInterModel::StateMachine {
+  + component : str
+  + superState : str
+  + type : str
+}
+class MMInterModel::StringEnumeration {
+  + attribute : str
+}
+class MMInterModel::Transition {
+  + action : str
+  + stateMachine : str
+}
+Element <|-- MMInterModel::Attribute
+Element <|-- MMInterModel::Component
+Element <|-- MMInterModel::Event
+Element <|-- MMInterModel::Guard
+Element <|-- MMInterModel::Model
+Element <|-- MMInterModel::State
+Element <|-- MMInterModel::StateConfiguration
+Element <|-- MMInterModel::StateMachine
+Element <|-- MMInterModel::StringEnumeration
+Element <|-- MMInterModel::Transition
+MMInterModel::Component "1..9999" --* "1..1" MMInterModel::Model : components0
+MMInterModel::State "0..9999" --* "1..1" MMInterModel::StateConfiguration : configurationStates47
+MMInterModel::Attribute "1..1" *-- "0..9999" MMInterModel::StringEnumeration : enumerationLiterals42
+MMInterModel::Event "0..1" --* "1..1" MMInterModel::Transition : event28
+MMInterModel::Event "0..9999" --* "1..1" MMInterModel::Model : events3
+MMInterModel::StateMachine "0..9999" --* "1..1" MMInterModel::Component : failurePatterns12
+MMInterModel::Model "1..1" *-- "0..9999" MMInterModel::Attribute : globalVariables1
+MMInterModel::Transition "1..1" *-- "0..9999" MMInterModel::Guard : guard31
+MMInterModel::Transition "0..9999" --* "1..1" MMInterModel::State : incomingTransitions33
+MMInterModel::State "0..1" --* "1..1" MMInterModel::StateMachine : initialState19
+MMInterModel::Attribute "0..9999" --* "1..1" MMInterModel::Component : localVariables9
+MMInterModel::Component "1..1" *-- "0..1" MMInterModel::StateMachine : normalBehaviour7
+MMInterModel::Transition "0..9999" --* "1..1" MMInterModel::State : outgoingTransitions36
+MMInterModel::State "0..1" --* "1..1" MMInterModel::Transition : source22
+MMInterModel::StateConfiguration "0..9999" --* "1..1" MMInterModel::Model : stateConfigurations5
+MMInterModel::State "0..9999" --* "1..1" MMInterModel::StateMachine : states17
+MMInterModel::StateConfiguration "0..9999" --* "1..1" MMInterModel::StateConfiguration : subConfigurations51
+MMInterModel::StateMachine "0..1" --* "1..1" MMInterModel::State : subMachines39
+MMInterModel::State "0..1" --* "1..1" MMInterModel::Transition : target25
+MMInterModel::StateMachine "1..1" *-- "0..9999" MMInterModel::Transition : transitions15
+MMInterModel::Event "1..1" *-- "1..9999" MMInterModel::Transition : transitionsTriggeredByEvent44
+@enduml

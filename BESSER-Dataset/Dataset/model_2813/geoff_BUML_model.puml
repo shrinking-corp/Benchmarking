@@ -1,0 +1,239 @@
+@startuml
+class Descriptive {
+}
+enum EventCondition {
+  CLICK
+  HOVER
+  SINGLE_CLICK
+}
+class Fill {
+}
+class Geometry {
+}
+class Identifiable {
+}
+class Image {
+}
+class Interaction {
+}
+class Layer {
+}
+class Location {
+}
+enum RendererHint {
+  CANVAS
+  DOM
+  WEBGL
+}
+enum ScriptContext {
+  GLOBAL
+  LAYER
+  MAP
+}
+class SimpleGeometry {
+}
+class Source {
+}
+enum SourceFormat {
+  GPX
+  GeoJSON
+  INTERNAL
+  KML
+}
+class Stroke {
+}
+class Style {
+}
+class Text {
+}
+class TileImage {
+}
+class TileSource {
+}
+class XYZ {
+}
+class geoff::Color {
+  + alpha : float
+  + blue : int
+  + green : int
+  + red : int
+}
+abstract class geoff::Descriptive {
+  + longDescription : str
+  + shortDescription : str
+}
+class geoff::Feature {
+  + onclick : str
+}
+class geoff::GeoMap {
+  + rendererHint : str
+}
+abstract class geoff::Identifiable {
+  + id : str
+}
+abstract class geoff::Location {
+  + projectionCode : str
+}
+class geoff::Script {
+  + context : str
+  + src : str
+  + type : str
+}
+class geoff::StringToStringMapEntry {
+  + key : str
+  + value : str
+}
+class geoff::StyleEntry {
+  + key : str
+}
+class geoff::View {
+  + zoom : int
+}
+class geoff::XYZLocation {
+  + x : float
+  + y : float
+  + z : float
+}
+abstract class geoff::geom::Geometry {
+}
+class geoff::geom::LineString {
+}
+class geoff::geom::Point {
+}
+class geoff::geom::Polygon {
+}
+class geoff::geom::SimpleGeometry {
+}
+abstract class geoff::interaction::Interaction {
+}
+class geoff::interaction::Select {
+  + condition : str
+  + multi : bool
+}
+abstract class geoff::layer::Layer {
+}
+class geoff::layer::TileLayer {
+}
+class geoff::layer::VectorLayer {
+}
+class geoff::source::BingMaps {
+  + imagerySet : str
+  + key : str
+}
+class geoff::source::MapQuest {
+  + layer : str
+}
+class geoff::source::OSM {
+}
+abstract class geoff::source::Source {
+}
+abstract class geoff::source::TileImage {
+}
+abstract class geoff::source::TileSource {
+}
+class geoff::source::VectorSource {
+  + format : str
+  + projection : str
+  + url : str
+}
+abstract class geoff::source::XYZ {
+}
+class geoff::style::Circle {
+  + radius : float
+}
+class geoff::style::Fill {
+}
+class geoff::style::Icon {
+  + src : str
+}
+class geoff::style::Image {
+}
+class geoff::style::Stroke {
+  + lineCap : str
+  + lineDash : float
+  + lineJoin : str
+  + miterLimit : str
+  + width : str
+}
+class geoff::style::Style {
+  + zindex : str
+}
+class geoff::style::Text {
+  + font : str
+  + offsetX : float
+  + offsetY : float
+  + rotation : str
+  + scale : str
+  + text : str
+  + textAlign : str
+  + textBaseLine : str
+}
+class geom::geoff::Location {
+}
+class layer::geoff::StyleEntry {
+}
+class source::geoff::Feature {
+}
+class style::geoff::Color {
+}
+Descriptive <|-- geoff::GeoMap
+Descriptive <|-- geoff::layer::Layer
+Descriptive <|-- geoff::source::Source
+Geometry <|-- geoff::geom::SimpleGeometry
+Identifiable <|-- geoff::Color
+Identifiable <|-- geoff::Feature
+Identifiable <|-- geoff::GeoMap
+Identifiable <|-- geoff::Location
+Identifiable <|-- geoff::Script
+Identifiable <|-- geoff::View
+Identifiable <|-- geoff::geom::Geometry
+Identifiable <|-- geoff::interaction::Interaction
+Identifiable <|-- geoff::layer::Layer
+Identifiable <|-- geoff::source::Source
+Identifiable <|-- geoff::style::Fill
+Identifiable <|-- geoff::style::Image
+Identifiable <|-- geoff::style::Stroke
+Identifiable <|-- geoff::style::Style
+Identifiable <|-- geoff::style::Text
+Image <|-- geoff::style::Circle
+Image <|-- geoff::style::Icon
+Interaction <|-- geoff::interaction::Select
+Layer <|-- geoff::layer::TileLayer
+Layer <|-- geoff::layer::VectorLayer
+Location <|-- geoff::XYZLocation
+SimpleGeometry <|-- geoff::geom::LineString
+SimpleGeometry <|-- geoff::geom::Point
+SimpleGeometry <|-- geoff::geom::Polygon
+Source <|-- geoff::source::TileSource
+Source <|-- geoff::source::VectorSource
+TileImage <|-- geoff::source::XYZ
+TileSource <|-- geoff::source::TileImage
+XYZ <|-- geoff::source::BingMaps
+XYZ <|-- geoff::source::MapQuest
+XYZ <|-- geoff::source::OSM
+geoff::View "1..1" *-- "1..1" geoff::Location : center7
+style::geoff::Color "0..1" --* "1..1" geoff::style::Fill : color31
+style::geoff::Color "0..1" --* "1..1" geoff::style::Stroke : color32
+geom::geoff::Location "1..1" --* "1..1" geoff::geom::Point : coordinates19
+geom::geoff::Location "2..9999" --* "1..1" geoff::geom::LineString : coordinates20
+geoff::geom::Polygon "1..1" *-- "2..9999" geom::geoff::Location : coordinates22
+source::geoff::Feature "0..9999" --* "1..1" geoff::source::VectorSource : features18
+Fill "0..1" --* "1..1" geoff::style::Style : fill25
+Fill "0..1" --* "1..1" geoff::style::Circle : fill34
+Fill "0..1" --* "1..1" geoff::style::Text : fill39
+Geometry "1..1" --* "1..1" geoff::Feature : geometry9
+Image "0..1" --* "1..1" geoff::style::Style : image24
+Interaction "0..9999" --* "1..1" geoff::GeoMap : interactions5
+Layer "0..9999" --* "1..1" geoff::GeoMap : layers0
+geoff::StringToStringMapEntry "0..9999" --* "1..1" geoff::Feature : properties12
+geoff::Script "0..9999" --* "1..1" geoff::GeoMap : scripts3
+geoff::layer::Layer "1..1" *-- "1..1" Source : source16
+Stroke "0..1" --* "1..1" geoff::style::Style : stroke27
+geoff::style::Circle "1..1" *-- "0..1" Stroke : stroke36
+Stroke "0..1" --* "1..1" geoff::style::Text : stroke41
+Style "0..1" --* "1..1" geoff::Feature : style10
+layer::geoff::StyleEntry "0..9999" --* "1..1" geoff::layer::VectorLayer : styles17
+geoff::style::Style "1..1" *-- "0..1" Text : text29
+Style "0..1" --* "1..1" geoff::StyleEntry : value14
+geoff::GeoMap "1..1" *-- "0..1" geoff::View : view1
+@enduml

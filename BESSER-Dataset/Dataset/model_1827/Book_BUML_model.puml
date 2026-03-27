@@ -1,0 +1,109 @@
+@startuml
+class Action {
+}
+class Animation {
+}
+class Control {
+}
+class Node {
+}
+class Page {
+}
+abstract class book::Action {
+}
+abstract class book::Animation {
+  + autoReverse : bool
+  + delay : float
+  + duration : float
+  + repeat : int
+}
+class book::Book {
+  + author : str
+  + bookId : str
+  + description : str
+  + resolution : str
+  + title : str
+  + version : str
+}
+class book::Control {
+  + image : str
+  + sound : str
+}
+class book::Fade {
+  + fromValue : float
+  + toValue : float
+}
+class book::Group {
+}
+class book::ImageFlash {
+  + duration : int
+  + images : str
+}
+class book::JSAction {
+  + javaScript : str
+}
+class book::Label {
+  + font : str
+  + text : str
+}
+class book::Layer {
+  + visible : bool
+}
+class book::Media {
+  + autoPlay : bool
+  + duration : int
+  + repeat : int
+  + url : str
+}
+class book::Move {
+  + fromLocation : str
+  + toLocation : str
+}
+abstract class book::Node {
+  + background : str
+  + bounds : str
+  + enable : bool
+  + foreground : str
+  + opacity : float
+}
+class book::OpenPage {
+}
+class book::Page {
+  + name : str
+}
+class book::Rotation {
+  + fromAngle : float
+  + toAngle : float
+}
+class book::Shape {
+  + lineWidth : int
+  + points : str
+}
+class book::Splash {
+  + duration : int
+}
+Action <|-- book::Animation
+Action <|-- book::JSAction
+Action <|-- book::OpenPage
+Animation <|-- book::Fade
+Animation <|-- book::Move
+Animation <|-- book::Rotation
+Control <|-- book::Group
+Control <|-- book::ImageFlash
+Control <|-- book::Label
+Control <|-- book::Media
+Node <|-- book::Control
+Node <|-- book::Shape
+Page <|-- book::Splash
+book::Node "0..9999" --* "1..1" book::Group : children15
+book::Layer "1..1" *-- "0..1" book::Control : control8
+book::Animation "0..1" --* "1..1" book::ImageFlash : in17
+book::Layer "0..9999" --* "1..1" book::Page : layers6
+book::Page "0..1" --* "1..1" book::Book : main3
+book::Action "0..9999" --* "1..1" book::Control : onExposed10
+book::Action "0..9999" --* "1..1" book::Control : onTouched12
+book::Animation "0..1" --* "1..1" book::ImageFlash : out16
+book::OpenPage "1..1" -- "0..1" book::Page : page20
+book::Page "0..9999" --* "1..1" book::Book : pages0
+book::Splash "0..1" --* "1..1" book::Book : splash1
+@enduml

@@ -1,0 +1,82 @@
+@startuml
+class sedml::algorithm {
+  + kisaoID : str
+}
+class sedml::curve {
+  + id : str
+  + logX : str
+  + logY : str
+  + xDataReference : str
+  + yDataReference : str
+}
+class sedml::dataGenerator {
+  + id : str
+  + name : str
+}
+class sedml::listOfCurves {
+}
+class sedml::listOfDataGenerators {
+}
+class sedml::listOfModels {
+}
+class sedml::listOfOutputs {
+}
+class sedml::listOfSimulations {
+}
+class sedml::listOfTasks {
+}
+class sedml::listOfVariables {
+}
+class sedml::math {
+  + xlms : str
+}
+class sedml::model {
+  + id : str
+  + language : str
+  + name : str
+  + source : str
+}
+class sedml::plot2D {
+  + id : str
+  + name : str
+}
+class sedml::sedML {
+  + level : int
+  + version : int
+}
+class sedml::task {
+  + id : str
+  + name : str
+}
+class sedml::uniformTimeCourse {
+  + id : str
+  + initialTime : int
+  + numberOfPoints : int
+  + outputEndTime : int
+  + outputStartTime : int
+}
+class sedml::variable {
+  + id : str
+  + symbol : str
+  + target : str
+}
+sedml::algorithm "1..1" --* "1..1" sedml::uniformTimeCourse : algorithm19
+sedml::curve "0..9999" --* "1..1" sedml::listOfCurves : curve29
+sedml::listOfDataGenerators "1..1" *-- "0..9999" sedml::dataGenerator : dataGenerator15
+sedml::plot2D "1..1" -- "1..1" sedml::listOfCurves : listOfCurves27
+sedml::listOfDataGenerators "1..1" --* "1..1" sedml::sedML : listOfDataGenerators5
+sedml::listOfModels "1..1" --* "1..1" sedml::sedML : listOfModels1
+sedml::sedML "1..1" *-- "1..1" sedml::listOfOutputs : listOfOutputs7
+sedml::listOfSimulations "1..1" --* "1..1" sedml::sedML : listOfSimulations0
+sedml::sedML "1..1" *-- "1..1" sedml::listOfTasks : listOfTasks3
+sedml::listOfVariables "0..1" --* "1..1" sedml::dataGenerator : listOfVariables31
+sedml::math "1..1" --* "1..1" sedml::dataGenerator : math33
+sedml::listOfModels "1..1" *-- "0..9999" sedml::model : model11
+sedml::model "1..1" -- "1..1" sedml::task : modelReference21
+sedml::plot2D "0..9999" --* "1..1" sedml::listOfOutputs : plot2D17
+sedml::uniformTimeCourse "1..1" -- "1..1" sedml::task : simulationReference24
+sedml::task "0..9999" --* "1..1" sedml::listOfTasks : task13
+sedml::task "1..1" -- "1..1" sedml::variable : taskReference37
+sedml::uniformTimeCourse "0..9999" --* "1..1" sedml::listOfSimulations : uniformTimeCourse9
+sedml::listOfVariables "1..1" *-- "0..9999" sedml::variable : variable35
+@enduml

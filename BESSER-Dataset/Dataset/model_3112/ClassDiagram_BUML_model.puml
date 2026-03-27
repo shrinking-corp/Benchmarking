@@ -1,0 +1,66 @@
+@startuml
+class Association {
+}
+class AttributeValue {
+}
+class classdiagram::Aggregation {
+}
+class classdiagram::Association {
+  + name : str
+  + sourceMultiplicity : int
+  + targetMultiplicity : int
+}
+class classdiagram::Attribute {
+  + is_primary : bool
+  + name : str
+}
+abstract class classdiagram::AttributeValue {
+}
+class classdiagram::Class {
+  + is_persistent : bool
+  + name : str
+}
+class classdiagram::Composition {
+}
+class classdiagram::Dependency {
+}
+class classdiagram::Diagram {
+}
+class classdiagram::Generalization {
+}
+class classdiagram::Interface {
+  + name : str
+}
+class classdiagram::InterfaceRealization {
+}
+class classdiagram::Method {
+  + name : str
+}
+class classdiagram::PrimitiveDataType {
+  + name : str
+}
+class classdiagram::Realization {
+}
+Association <|-- classdiagram::Aggregation
+Association <|-- classdiagram::Composition
+Association <|-- classdiagram::Dependency
+AttributeValue <|-- classdiagram::Class
+AttributeValue <|-- classdiagram::PrimitiveDataType
+classdiagram::Association "0..9999" --* "1..1" classdiagram::Diagram : associations1
+classdiagram::Class "1..1" *-- "0..9999" classdiagram::Attribute : attribute13
+classdiagram::Attribute "0..9999" --* "1..1" classdiagram::Interface : attribute23
+classdiagram::Class "1..9999" --* "1..1" classdiagram::Diagram : classes0
+classdiagram::Generalization "0..9999" --* "1..1" classdiagram::Diagram : generalizations5
+classdiagram::Method "0..9999" --* "1..1" classdiagram::Class : method15
+classdiagram::Interface "1..1" *-- "0..9999" classdiagram::Method : method25
+classdiagram::Class "1..1" -- "1..1" classdiagram::Generalization : source17
+classdiagram::Interface "0..9999" -- "1..1" classdiagram::InterfaceRealization : source28
+classdiagram::Class "1..1" -- "1..1" classdiagram::Realization : source33
+classdiagram::Association "1..1" -- "1..1" classdiagram::Class : source7
+classdiagram::Class "1..1" -- "1..1" classdiagram::Association : target10
+classdiagram::Class "1..1" -- "1..1" classdiagram::Generalization : target20
+classdiagram::Class "0..9999" -- "1..1" classdiagram::InterfaceRealization : target30
+classdiagram::Class "1..9999" -- "1..1" classdiagram::Realization : target35
+classdiagram::AttributeValue "1..1" -- "1..1" classdiagram::Attribute : type38
+classdiagram::Diagram "1..1" *-- "0..9999" classdiagram::PrimitiveDataType : types3
+@enduml

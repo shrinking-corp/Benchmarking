@@ -1,0 +1,201 @@
+@startuml
+class AbstractDevice {
+}
+class HighLevelOperation {
+}
+class InAcquireOperation {
+}
+class InOperation {
+}
+class Message {
+}
+class OutInMessage {
+}
+class OutOnlyMessage {
+}
+class OutOperation {
+}
+class PortProtocol {
+}
+class SupportData {
+}
+class SupportSpecification {
+}
+class arduino::AbstractDevice {
+  + name : str
+  + pin : str
+}
+class arduino::AcceptInvitation {
+}
+class arduino::Actuator {
+}
+class arduino::AskInvitation {
+}
+class arduino::CommunicationParams {
+  + baudrate : int
+  + dns : str
+  + gateway : str
+  + ip : str
+  + mac : str
+  + subnet : str
+  + type : str
+}
+class arduino::DemandRequest {
+}
+class arduino::Dispatch {
+  + name : str
+}
+class arduino::EObject {
+}
+class arduino::EmptyPrecondition {
+  + name : str
+}
+class arduino::ExplicitSupportData {
+  + host : str
+  + port : int
+}
+class arduino::ForwardDispatch {
+}
+class arduino::GrantRequest {
+}
+class arduino::Handler {
+  + name : str
+}
+class arduino::HighLevelOperation {
+}
+class arduino::IODevice {
+  + analog : bool
+  + pullup : bool
+}
+class arduino::IP {
+  + value : str
+}
+class arduino::InAcquireOperation {
+}
+class arduino::InOperation {
+}
+class arduino::Interrupt {
+  + eventKind : str
+  + interruptKind : str
+  + name : str
+}
+class arduino::Invitation {
+}
+class arduino::LoopItem {
+}
+class arduino::Message {
+}
+class arduino::OutInMessage {
+  + name : str
+}
+class arduino::OutOnlyMessage {
+}
+class arduino::OutOperation {
+}
+class arduino::Poll {
+  + h : int
+  + l : int
+  + type : str
+}
+class arduino::PortConnectionData {
+  + host : str
+  + port : int
+}
+class arduino::PortProtocol {
+}
+class arduino::PortTCP {
+  + supportType : str
+}
+class arduino::Precondition {
+  + op : str
+}
+class arduino::Precondition1 {
+}
+class arduino::Request {
+}
+class arduino::Sensor {
+  + analog : bool
+  + pullup : bool
+}
+class arduino::SensorValuePrecondition {
+  + cond : str
+  + value : str
+}
+class arduino::Serial {
+}
+class arduino::ServeDispatch {
+}
+class arduino::Sketch {
+  + defineSystem : bool
+  + hardware : str
+  + name : str
+}
+class arduino::SupportData {
+}
+class arduino::SupportSpecification {
+  + supportType : str
+}
+class arduino::SystemDefinition {
+}
+class arduino::TCP {
+}
+class arduino::Task {
+  + external : bool
+  + name : str
+}
+AbstractDevice <|-- arduino::Actuator
+AbstractDevice <|-- arduino::IODevice
+AbstractDevice <|-- arduino::Sensor
+HighLevelOperation <|-- arduino::InOperation
+HighLevelOperation <|-- arduino::OutOperation
+InAcquireOperation <|-- arduino::AcceptInvitation
+InAcquireOperation <|-- arduino::GrantRequest
+InAcquireOperation <|-- arduino::ServeDispatch
+InOperation <|-- arduino::InAcquireOperation
+Message <|-- arduino::OutInMessage
+Message <|-- arduino::OutOnlyMessage
+OutInMessage <|-- arduino::Invitation
+OutInMessage <|-- arduino::Request
+OutOnlyMessage <|-- arduino::Dispatch
+OutOperation <|-- arduino::AskInvitation
+OutOperation <|-- arduino::DemandRequest
+OutOperation <|-- arduino::ForwardDispatch
+PortProtocol <|-- arduino::PortTCP
+SupportData <|-- arduino::ExplicitSupportData
+SupportSpecification <|-- arduino::Serial
+SupportSpecification <|-- arduino::TCP
+arduino::Invitation "0..1" -- "1..1" arduino::AcceptInvitation : accept67
+arduino::Invitation "0..1" -- "1..1" arduino::AskInvitation : ask59
+arduino::DemandRequest "1..1" -- "0..1" arduino::Request : demand51
+arduino::AbstractDevice "0..9999" --* "1..1" arduino::Sketch : devices0
+arduino::Dispatch "0..1" -- "1..1" arduino::ForwardDispatch : forward55
+arduino::Request "0..1" -- "1..1" arduino::GrantRequest : grant63
+arduino::Handler "0..1" -- "1..1" arduino::Interrupt : handler26
+arduino::Poll "1..1" -- "0..1" arduino::Handler : handler32
+arduino::Handler "0..9999" --* "1..1" arduino::Sketch : handlers1
+arduino::PortConnectionData "0..1" --* "1..1" arduino::PortTCP : info35
+arduino::TCP "1..1" *-- "0..1" arduino::SupportData : info69
+arduino::Interrupt "0..9999" --* "1..1" arduino::Sketch : interrupts3
+arduino::LoopItem "0..9999" --* "1..1" arduino::Sketch : loop9
+arduino::Message "0..9999" --* "1..1" arduino::SystemDefinition : messages15
+arduino::SystemDefinition "1..1" *-- "0..9999" arduino::CommunicationParams : mydata13
+arduino::HighLevelOperation "0..9999" --* "1..1" arduino::SystemDefinition : operation17
+arduino::Sketch "1..1" *-- "0..9999" arduino::Poll : pollings5
+arduino::Precondition1 "0..1" --* "1..1" arduino::Precondition : pre136
+arduino::Precondition "0..1" --* "1..1" arduino::Precondition : pre39
+arduino::Precondition1 "1..1" *-- "0..1" arduino::EObject : pre41
+arduino::LoopItem "1..1" *-- "0..1" arduino::Precondition : precondition22
+arduino::Task "0..1" -- "1..1" arduino::InAcquireOperation : receiver47
+arduino::Task "0..9999" -- "1..1" arduino::DemandRequest : receiver52
+arduino::Task "0..1" -- "1..1" arduino::ForwardDispatch : receiver56
+arduino::Task "0..9999" -- "1..1" arduino::AskInvitation : receiver60
+arduino::Task "0..1" -- "1..1" arduino::OutOperation : sender45
+arduino::Sensor "0..1" -- "1..1" arduino::Interrupt : sensor24
+arduino::Poll "1..1" -- "0..1" arduino::Sensor : sensor29
+arduino::Sensor "0..1" -- "1..1" arduino::SensorValuePrecondition : sensor43
+arduino::ServeDispatch "1..1" -- "0..1" arduino::Dispatch : serve65
+arduino::SupportSpecification "0..1" --* "1..1" arduino::InAcquireOperation : support49
+arduino::SystemDefinition "0..1" --* "1..1" arduino::Sketch : systemDefinition11
+arduino::Task "0..1" -- "1..1" arduino::LoopItem : task19
+arduino::Task "0..9999" --* "1..1" arduino::Sketch : tasks7
+@enduml

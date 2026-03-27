@@ -1,0 +1,52 @@
+@startuml
+class Graph {
+}
+class GraphWiki::ArticleGraph {
+}
+class GraphWiki::CategoryGraph {
+}
+class GraphWiki::ClassificationGraph {
+}
+class GraphWiki::Edge {
+  + type : str
+}
+class GraphWiki::Graph {
+  + name : str
+}
+class GraphWiki::IndexGraph {
+}
+class GraphWiki::Node {
+  + editions : int
+  + node_id : int
+  + node_namespace : int
+  + title : str
+  + type : str
+  + visits : int
+}
+class GraphWiki::Revision {
+  + date : str
+  + text_id : int
+  + user : str
+}
+class GraphWiki::Wiki {
+  + title : str
+}
+Graph <|-- GraphWiki::ArticleGraph
+Graph <|-- GraphWiki::CategoryGraph
+Graph <|-- GraphWiki::ClassificationGraph
+Graph <|-- GraphWiki::IndexGraph
+GraphWiki::Edge "0..9999" -- "1..1" GraphWiki::Graph : edges15
+GraphWiki::Wiki "1..1" *-- "0..9999" GraphWiki::Edge : edges9
+GraphWiki::Node "1..1" -- "1..1" GraphWiki::Edge : from22
+GraphWiki::ArticleGraph "0..1" --* "1..1" GraphWiki::Wiki : graphArticles3
+GraphWiki::Wiki "1..1" *-- "0..1" GraphWiki::CategoryGraph : graphCategories1
+GraphWiki::ClassificationGraph "0..1" --* "1..1" GraphWiki::Wiki : graphClassification5
+GraphWiki::IndexGraph "0..1" --* "1..1" GraphWiki::Wiki : graphIndex0
+GraphWiki::Node "1..1" -- "0..1" GraphWiki::Revision : lastRevision18
+GraphWiki::Node "0..1" -- "1..1" GraphWiki::Revision : node28
+GraphWiki::Node "0..9999" -- "1..1" GraphWiki::Graph : nodes13
+GraphWiki::Node "0..9999" --* "1..1" GraphWiki::Wiki : nodes7
+GraphWiki::Revision "0..9999" --* "1..1" GraphWiki::Wiki : revisions11
+GraphWiki::Revision "0..9999" -- "1..1" GraphWiki::Node : revisions21
+GraphWiki::Node "1..1" -- "1..1" GraphWiki::Edge : to25
+@enduml

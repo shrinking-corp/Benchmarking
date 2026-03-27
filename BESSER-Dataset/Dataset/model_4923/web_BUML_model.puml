@@ -1,0 +1,112 @@
+@startuml
+class Container {
+}
+class Content {
+}
+class Page {
+}
+enum ReleaseType {
+  milestone
+  nightly
+  release
+}
+enum VersionState {
+  IN_DEVELOPMENT
+  PLANNED
+  RELEASED
+}
+class web::Author {
+  + email : str
+  + name : str
+  + plusLink : str
+}
+abstract class web::Container {
+}
+abstract class web::Content {
+}
+class web::ContentPage {
+}
+class web::FooterEntry {
+  + link : str
+  + name : str
+}
+class web::Gallery {
+  + label : str
+}
+class web::GalleryContent {
+}
+class web::HtmlContent {
+  + data : str
+}
+class web::Image {
+  + label : str
+  + src : str
+}
+class web::Link {
+  + label : str
+  + target : str
+}
+class web::NewsEntry {
+  + date : date
+  + description : str
+  + title : str
+}
+class web::NewsFeedPage {
+}
+abstract class web::Page {
+  + id : str
+  + name : str
+}
+class web::Release {
+  + alternateMsiName : str
+  + buildId : str
+  + date : date
+  + javadoc : bool
+  + name : str
+  + releaseNotesLink : str
+  + type : str
+  + unqualifiedName : str
+}
+class web::ReleaseSection {
+}
+class web::Site {
+  + description : str
+  + name : str
+}
+class web::SocialBar {
+}
+class web::SocialInformation {
+  + facebookUrl : str
+  + plusUrl : str
+  + twitterUrl : str
+  + url : str
+}
+class web::Version {
+  + name : str
+  + state : str
+}
+Container <|-- web::ContentPage
+Container <|-- web::NewsEntry
+Content <|-- web::GalleryContent
+Content <|-- web::HtmlContent
+Content <|-- web::ReleaseSection
+Content <|-- web::SocialBar
+Page <|-- web::ContentPage
+Page <|-- web::NewsFeedPage
+web::Author "1..1" -- "1..1" web::NewsEntry : author13
+web::Author "0..9999" --* "1..1" web::Site : author4
+web::Container "1..1" *-- "0..9999" web::Content : content16
+web::FooterEntry "0..9999" --* "1..1" web::Site : footer1
+web::Site "1..1" *-- "0..9999" web::Gallery : galleries10
+web::Gallery "1..1" -- "1..1" web::GalleryContent : gallery22
+web::Gallery "1..1" *-- "0..9999" web::Image : images20
+web::SocialBar "1..1" *-- "0..1" web::SocialInformation : information24
+web::Link "0..9999" --* "1..1" web::Site : links6
+web::Site "1..1" *-- "0..9999" web::NewsEntry : news2
+web::Site "1..1" *-- "0..9999" web::Page : pages0
+web::Release "0..1" -- "1..1" web::ReleaseSection : release18
+web::Release "0..9999" --* "1..1" web::Version : releases19
+web::Site "0..1" -- "1..1" web::Page : site12
+web::Version "0..1" -- "1..1" web::Release : version17
+web::Version "0..9999" --* "1..1" web::Site : versions8
+@enduml

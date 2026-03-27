@@ -1,0 +1,105 @@
+@startuml
+class Editable {
+}
+class FormElement {
+}
+enum GraphType {
+  BAR
+  NONE
+  PIE
+  SCALAR
+}
+enum InputType {
+  DATE
+  EMAIL
+  NUMBER
+  RANGE
+  TEXT
+}
+enum SelectType {
+  COMBO
+  LIST
+}
+class SelectionList {
+}
+class html::ColumnOption {
+  + content : str
+  + value : int
+}
+class html::Container {
+  + name : str
+}
+abstract class html::Editable {
+  + name : int
+  + required : bool
+}
+abstract class html::FormElement {
+  + id : str
+  + visible : bool
+}
+class html::Graph {
+  + title : str
+  + type : str
+}
+class html::Input {
+  + checked : bool
+  + max : int
+  + maxLength : int
+  + min : int
+  + step : int
+  + type : str
+}
+class html::Label {
+  + content : str
+  + forText : int
+}
+class html::Option {
+  + content : str
+  + value : int
+}
+class html::Page {
+  + description : str
+  + id : int
+  + title : str
+  + urlToGetData : str
+  + urlToGetRelationResult : str
+  + urlToSaveResponses : str
+}
+class html::Section {
+  + id : int
+  + title : str
+}
+class html::Select {
+  + type : str
+}
+class html::SelectComplex {
+}
+abstract class html::SelectionList {
+  + multiple : bool
+}
+class html::TextArea {
+  + maxLength : int
+  + rows : int
+}
+class html::View {
+  + title : str
+}
+Editable <|-- html::Input
+Editable <|-- html::SelectionList
+Editable <|-- html::TextArea
+FormElement <|-- html::Editable
+FormElement <|-- html::Label
+SelectionList <|-- html::Select
+SelectionList <|-- html::SelectComplex
+html::ColumnOption "0..9999" --* "1..1" html::SelectComplex : columnsOptions12
+html::FormElement "0..9999" --* "1..1" html::Section : formElements3
+html::FormElement "0..9999" -- "1..1" html::Option : formElements9
+html::Graph "0..9999" --* "1..1" html::View : graphs0
+html::Label "1..1" --* "1..1" html::Editable : label5
+html::SelectComplex "1..1" *-- "0..9999" html::Option : options13
+html::Select "1..1" *-- "0..9999" html::Option : options6
+html::TextArea "0..1" --* "1..1" html::Option : otherArea7
+html::Page "0..9999" --* "1..1" html::Container : pages16
+html::View "1..1" *-- "0..9999" html::Section : sections1
+html::Page "1..1" *-- "0..9999" html::View : views17
+@enduml

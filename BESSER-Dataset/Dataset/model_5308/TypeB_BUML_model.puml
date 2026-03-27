@@ -1,0 +1,44 @@
+@startuml
+class Element {
+}
+class ElementR {
+}
+class ElementX {
+}
+class TypeB::AnotherElement {
+  + abstractBaseName : str
+  + additionalField : str
+  + nameElement : str
+  + type : str
+}
+class TypeB::Element {
+  + abstractBaseName : str
+  + nameElement : str
+  + type : str
+}
+class TypeB::ElementR {
+  + nameR : str
+}
+class TypeB::ElementS {
+  + nameS : str
+}
+class TypeB::ElementX {
+  + nameX : str
+}
+class TypeB::ElementY {
+  + nameY : str
+}
+class TypeB::ListElement {
+  + nameListElement : str
+}
+class TypeB::SubElement {
+  + additionalField : str
+}
+ElementR <|-- TypeB::ElementS
+Element <|-- TypeB::SubElement
+ElementX <|-- TypeB::ElementY
+TypeB::ListElement "1..1" *-- "0..9999" Element : elements0
+ElementR "0..9999" --* "1..1" TypeB::ListElement : rsElements6
+Element "0..1" --* "1..1" TypeB::ListElement : singleElement1
+TypeB::ListElement "1..1" *-- "0..9999" ElementX : xyElements4
+@enduml

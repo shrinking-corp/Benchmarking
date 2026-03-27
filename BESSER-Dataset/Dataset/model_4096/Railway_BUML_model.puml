@@ -1,0 +1,100 @@
+@startuml
+enum ConnectionDirection {
+  LEFT
+  RIGHT
+  STRAIGHT
+  TOP
+}
+class RDM::ConnectionPoint {
+  + direction : str
+}
+abstract class RDM::RDMElement {
+  + length : int
+  + name : str
+}
+class RDM::RailwayDomainModel {
+}
+class RDM::Route {
+}
+class RDM::RouteElement {
+}
+class RDM::Section {
+}
+class RDM::Signal {
+  + allowedSpeed : str
+}
+class RDM::Station {
+}
+abstract class RDM::TrackElement {
+}
+class RDM::Train {
+  + headingSpeed : str
+  + maxSpeed : str
+}
+class RDM::Turnout {
+  + currentDirection : str
+  + switchingDirection : str
+}
+class RDM::TurnoutDesiredDirection {
+  + desiredDirection : str
+}
+class RDM::TurnoutSignal {
+}
+class RDMElement {
+}
+class Section {
+}
+class Signal {
+}
+enum Speed {
+  FOURTY
+  SIXTY
+  TWENTY
+  ZERO
+}
+class TrackElement {
+}
+enum TurnoutDirection {
+  LEFT
+  RIGHT
+  STRAIGHT
+}
+RDMElement <|-- RDM::ConnectionPoint
+RDMElement <|-- RDM::Route
+RDMElement <|-- RDM::RouteElement
+RDMElement <|-- RDM::Signal
+RDMElement <|-- RDM::TrackElement
+RDMElement <|-- RDM::Train
+RDMElement <|-- RDM::TurnoutDesiredDirection
+Section <|-- RDM::Station
+Signal <|-- RDM::TurnoutSignal
+TrackElement <|-- RDM::Section
+TrackElement <|-- RDM::Turnout
+RDM::Station "1..1" -- "1..1" RDM::Train : arrivesTo15
+RDM::Route "0..1" -- "1..1" RDM::RouteElement : belongsTo49
+RDM::ConnectionPoint "1..3" --* "1..1" RDM::TrackElement : connectsTo27
+RDM::Station "1..1" -- "1..2" RDM::Signal : controls37
+RDM::Train "1..1" -- "1..1" RDM::Station : departuresFrom17
+RDM::RouteElement "1..1" *-- "0..1" RDM::TurnoutDesiredDirection : desiredDirection48
+RDM::ConnectionPoint "0..9999" --* "1..1" RDM::RailwayDomainModel : editorCP5
+RDM::Route "0..9999" --* "1..1" RDM::RailwayDomainModel : editorRoute11
+RDM::RouteElement "0..9999" --* "1..1" RDM::RailwayDomainModel : editorRouteElement13
+RDM::Signal "0..9999" --* "1..1" RDM::RailwayDomainModel : editorSignal7
+RDM::RailwayDomainModel "1..1" *-- "0..9999" RDM::TurnoutDesiredDirection : editorTDD9
+RDM::Route "1..1" *-- "1..1" RDM::RouteElement : firstElement31
+RDM::Route "1..1" --* "1..1" RDM::Train : follows20
+RDM::Signal "1..1" --* "1..1" RDM::ConnectionPoint : holds40
+RDM::TrackElement "1..1" -- "1..1" RDM::ConnectionPoint : nextElement42
+RDM::RouteElement "0..1" --* "1..1" RDM::RouteElement : nextElement51
+RDM::Signal "1..1" -- "1..1" RDM::TrackElement : observes25
+RDM::Train "0..1" -- "1..1" RDM::TrackElement : occupiedBy30
+RDM::TrackElement "1..1" -- "1..1" RDM::RouteElement : referredElement45
+RDM::Turnout "1..1" -- "1..1" RDM::TurnoutDesiredDirection : referredTurnout32
+RDM::RouteElement "0..1" -- "1..1" RDM::TurnoutDesiredDirection : routeElement35
+RDM::RailwayDomainModel "1..1" *-- "3..9999" RDM::Section : sections1
+RDM::TrackElement "1..2" -- "1..1" RDM::Train : standsOn23
+RDM::ConnectionPoint "0..1" -- "1..1" RDM::Signal : standsOn24
+RDM::Train "2..9999" --* "1..1" RDM::RailwayDomainModel : trains0
+RDM::Turnout "1..1" -- "1..1" RDM::TurnoutSignal : turnout53
+RDM::Turnout "2..9999" --* "1..1" RDM::RailwayDomainModel : turnouts3
+@enduml

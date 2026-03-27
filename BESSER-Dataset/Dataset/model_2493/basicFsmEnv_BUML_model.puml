@@ -1,0 +1,33 @@
+@startuml
+class State {
+}
+abstract class basicFsmEnv::Action {
+}
+abstract class basicFsmEnv::Guard {
+}
+class basicFsmEnv::InitialState {
+}
+class basicFsmEnv::Machine {
+  + name : str
+}
+class basicFsmEnv::State {
+  + name : str
+}
+class basicFsmEnv::Trans {
+  + event : str
+}
+class basicFsmEnv::VarDecl {
+  + name : str
+  + value : str
+}
+State <|-- basicFsmEnv::InitialState
+basicFsmEnv::Action "0..1" -- "1..1" basicFsmEnv::Trans : action13
+basicFsmEnv::VarDecl "0..9999" --* "1..1" basicFsmEnv::State : decls6
+basicFsmEnv::Trans "1..1" -- "0..1" basicFsmEnv::Guard : guard11
+basicFsmEnv::Trans "0..9999" -- "1..1" basicFsmEnv::State : in3
+basicFsmEnv::Trans "0..9999" -- "1..1" basicFsmEnv::State : out4
+basicFsmEnv::State "1..1" -- "1..1" basicFsmEnv::Trans : src9
+basicFsmEnv::State "0..9999" --* "1..1" basicFsmEnv::Machine : states0
+basicFsmEnv::State "1..1" -- "1..1" basicFsmEnv::Trans : tgt8
+basicFsmEnv::Machine "1..1" *-- "0..9999" basicFsmEnv::Trans : trans1
+@enduml

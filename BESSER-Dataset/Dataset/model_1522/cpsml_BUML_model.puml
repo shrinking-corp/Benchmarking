@@ -1,0 +1,78 @@
+@startuml
+class Transition {
+}
+class cpsml::ComTransition {
+}
+class cpsml::Condition {
+  + name : str
+}
+class cpsml::DeVariable {
+  + name : str
+}
+class cpsml::Fright {
+  + name : str
+}
+class cpsml::Function {
+  + name : str
+}
+class cpsml::IndeVariable {
+  + name : str
+}
+class cpsml::Interval {
+  + left : float
+  + name : str
+  + right : float
+  + subinterval : float
+}
+class cpsml::ODE {
+  + name : str
+}
+class cpsml::ProbTransition {
+  + probability : float
+}
+class cpsml::State {
+  + name : str
+}
+class cpsml::System {
+  + name : str
+}
+abstract class cpsml::Transition {
+  + action : str
+  + event : str
+  + guard : str
+  + name : str
+}
+class cpsml::Variable {
+  + value : float
+}
+Transition <|-- cpsml::ComTransition
+Transition <|-- cpsml::ProbTransition
+cpsml::Condition "1..1" --* "1..1" cpsml::ODE : condition52
+cpsml::State "1..1" -- "1..1" cpsml::ComTransition : csrc43
+cpsml::State "1..1" -- "1..1" cpsml::ComTransition : ctgt44
+cpsml::DeVariable "1..1" --* "1..1" cpsml::Function : devariable58
+cpsml::Fright "1..1" --* "1..1" cpsml::Function : fright60
+cpsml::Function "1..1" --* "1..1" cpsml::ODE : function50
+cpsml::ComTransition "0..9999" -- "1..1" cpsml::State : incomingComTransitions17
+cpsml::ProbTransition "0..9999" -- "1..1" cpsml::State : incomingProbTransitions20
+cpsml::Function "1..1" *-- "1..1" cpsml::IndeVariable : indevariable56
+cpsml::State "1..1" -- "1..1" cpsml::System : initialState8
+cpsml::State "1..1" -- "1..1" cpsml::State : initialsubstate26
+cpsml::Interval "1..1" --* "1..1" cpsml::ODE : interval54
+cpsml::State "1..1" -- "0..9999" cpsml::ComTransition : outgoingComTransitions16
+cpsml::ProbTransition "0..9999" -- "1..1" cpsml::State : outgoingProbTransitions19
+cpsml::State "0..9999" --* "1..1" cpsml::System : ownedStates4
+cpsml::System "1..1" *-- "0..9999" cpsml::Transition : ownedTransitions6
+cpsml::ODE "0..9999" --* "1..1" cpsml::System : ownedodes11
+cpsml::Variable "0..9999" --* "1..1" cpsml::System : ownedvariables0
+cpsml::State "1..1" -- "1..1" cpsml::ProbTransition : psrc46
+cpsml::ProbTransition "1..1" -- "1..1" cpsml::State : ptgt48
+cpsml::System "1..1" -- "1..1" cpsml::Variable : relatedvariable1
+cpsml::Transition "1..1" -- "1..1" cpsml::Variable : relatedvariable240
+cpsml::ODE "1..1" -- "1..1" cpsml::State : slaveode13
+cpsml::State "0..9999" --* "1..1" cpsml::State : subStates23
+cpsml::ODE "0..9999" --* "1..1" cpsml::State : subodes31
+cpsml::Variable "1..1" -- "1..1" cpsml::State : subrelatedvariable37
+cpsml::Variable "0..9999" --* "1..1" cpsml::State : subrelatedvariables34
+cpsml::State "1..1" *-- "0..9999" cpsml::Transition : subtransitions28
+@enduml

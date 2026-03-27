@@ -1,0 +1,47 @@
+@startuml
+class CarRentalModel::Agency {
+  + place : str
+  + street : str
+  + zip : int
+}
+class CarRentalModel::Automobile {
+  + isCabrio : bool
+}
+class CarRentalModel::CarRental {
+}
+abstract class CarRentalModel::Craft {
+  + charge : float
+  + licenseNo : str
+  + vin : int
+}
+class CarRentalModel::Customer {
+  + identifier : str
+  + lastname : str
+  + surname : str
+}
+class CarRentalModel::Motorcycle {
+  + cm3 : int
+}
+class CarRentalModel::Order {
+  + orderDate : date
+  + price : float
+}
+class CarRentalModel::VipCustomer {
+  + discount : float
+}
+class Craft {
+}
+class Customer {
+}
+Craft <|-- CarRentalModel::Automobile
+Craft <|-- CarRentalModel::Motorcycle
+Customer <|-- CarRentalModel::VipCustomer
+CarRentalModel::Agency "1..9999" --* "1..1" CarRentalModel::CarRental : agencies1
+CarRentalModel::Customer "1..1" *-- "1..9999" CarRentalModel::Order : bestellungen8
+CarRentalModel::Craft "1..1" -- "1..1" CarRentalModel::Order : craft9
+CarRentalModel::CarRental "1..1" *-- "1..9999" CarRentalModel::Craft : crafts3
+CarRentalModel::Customer "0..9999" --* "1..1" CarRentalModel::CarRental : customer0
+CarRentalModel::Customer "1..1" -- "1..1" CarRentalModel::Order : customer10
+CarRentalModel::Agency "1..1" -- "1..1" CarRentalModel::CarRental : mainAgency5
+CarRentalModel::Order "0..9999" -- "1..1" CarRentalModel::Craft : rentBy11
+@enduml

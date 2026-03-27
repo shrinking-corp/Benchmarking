@@ -1,0 +1,64 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+abstract class researchva::Counted {
+  + id : int
+}
+class researchva::Keyword {
+  + word : str
+}
+abstract class researchva::Labelled {
+  + lname : str
+}
+abstract class researchva::Named {
+  + name : str
+}
+class researchva::Paper {
+}
+class researchva::Paragraph {
+  + content : str
+}
+class researchva::PublicationStructure {
+}
+class researchva::Researcher {
+  + forName : str
+  + name : str
+}
+class researchva::Review {
+  + date : date
+}
+class researchva::ReviewNote {
+  + content : str
+}
+class researchva::Skill {
+  + description : str
+}
+class researchva::Write {
+  + timeSpent : int
+}
+Counted <|-- researchva::Paragraph
+Labelled <|-- researchva::Review
+Labelled <|-- researchva::Write
+Named <|-- researchva::Keyword
+Named <|-- researchva::Paper
+Named <|-- researchva::Paragraph
+Named <|-- researchva::PublicationStructure
+Named <|-- researchva::ReviewNote
+researchva::Keyword "0..9999" --* "1..1" researchva::PublicationStructure : allKeyWords24
+researchva::Paper "1..1" -- "0..9999" researchva::Researcher : authors7
+researchva::Paper "0..1" -- "1..1" researchva::Paper : citedBy9
+researchva::PublicationStructure "1..1" *-- "0..9999" researchva::Paper : papers21
+researchva::Paragraph "0..1" -- "1..1" researchva::Write : paragraph13
+researchva::Paragraph "0..9999" --* "1..1" researchva::Paper : paragraphs6
+researchva::Paper "0..9999" -- "1..1" researchva::Researcher : res_papers3
+researchva::Researcher "0..9999" --* "1..1" researchva::PublicationStructure : researchers19
+researchva::Review "1..1" -- "0..1" researchva::ReviewNote : reviewNote16
+researchva::Researcher "1..1" *-- "0..9999" researchva::Review : reviews1
+researchva::ReviewNote "0..9999" --* "1..1" researchva::Paragraph : reviews11
+researchva::Skill "0..9999" --* "1..1" researchva::Researcher : skills4
+researchva::Write "0..9999" --* "1..1" researchva::Researcher : writes0
+@enduml

@@ -1,0 +1,276 @@
+@startuml
+class Chunk {
+}
+class Expression {
+}
+class Field {
+}
+class LastStatement {
+}
+class LastStatement::Return {
+}
+class Statement {
+}
+class Statement::FunctioncallOrAssignment {
+}
+class lua::Block {
+}
+class lua::Chunk {
+}
+class lua::Expression {
+}
+class lua::Expression::AccessArray {
+}
+class lua::Expression::AccessMember {
+  + memberName : str
+}
+class lua::Expression::And {
+}
+class lua::Expression::CallFunction {
+}
+class lua::Expression::CallMemberFunction {
+  + memberFunctionName : str
+}
+class lua::Expression::Concatenation {
+}
+class lua::Expression::Division {
+}
+class lua::Expression::Equal {
+}
+class lua::Expression::Exponentiation {
+}
+class lua::Expression::False {
+}
+class lua::Expression::Function {
+}
+class lua::Expression::Invert {
+}
+class lua::Expression::Larger {
+}
+class lua::Expression::Larger::Equal {
+}
+class lua::Expression::Length {
+}
+class lua::Expression::Minus {
+}
+class lua::Expression::Modulo {
+}
+class lua::Expression::Multiplication {
+}
+class lua::Expression::Negate {
+}
+class lua::Expression::Nil {
+}
+class lua::Expression::Not::Equal {
+}
+class lua::Expression::Number {
+  + value : float
+}
+class lua::Expression::Or {
+}
+class lua::Expression::Plus {
+}
+class lua::Expression::Smaller {
+}
+class lua::Expression::Smaller::Equal {
+}
+class lua::Expression::String {
+  + value : str
+}
+class lua::Expression::TableConstructor {
+}
+class lua::Expression::True {
+}
+class lua::Expression::VarArgs {
+}
+class lua::Expression::VariableName {
+  + variable : str
+}
+class lua::Field {
+}
+class lua::Field::AddEntryToTable {
+  + key : str
+}
+class lua::Field::AddEntryToTable::Brackets {
+}
+class lua::Field::AppendEntryToTable {
+}
+class lua::Function {
+  + parameters : str
+  + varArgs : bool
+}
+class lua::Functioncall::Arguments {
+}
+class lua::LastStatement {
+}
+class lua::LastStatement::Break {
+}
+class lua::LastStatement::Return {
+}
+class lua::LastStatement::ReturnWithValue {
+}
+class lua::Statement {
+}
+class lua::Statement::Assignment {
+}
+class lua::Statement::Block {
+}
+class lua::Statement::CallFunction {
+}
+class lua::Statement::CallMemberFunction {
+  + memberFunctionName : str
+}
+class lua::Statement::For::Generic {
+  + names : str
+}
+class lua::Statement::For::Numeric {
+  + iteratorName : str
+}
+class lua::Statement::FunctioncallOrAssignment {
+}
+class lua::Statement::GlobalFunction::Declaration {
+  + functionName : str
+  + prefix : str
+}
+class lua::Statement::If::Then::Else {
+}
+class lua::Statement::If::Then::Else::ElseIfPart {
+}
+class lua::Statement::Local::Variable::Declaration {
+  + variableNames : str
+}
+class lua::Statement::LocalFunction::Declaration {
+  + functionName : str
+}
+class lua::Statement::Repeat {
+}
+class lua::Statement::While {
+}
+Chunk <|-- lua::Block
+Expression <|-- lua::Expression::AccessArray
+Expression <|-- lua::Expression::AccessMember
+Expression <|-- lua::Expression::And
+Expression <|-- lua::Expression::CallFunction
+Expression <|-- lua::Expression::CallMemberFunction
+Expression <|-- lua::Expression::Concatenation
+Expression <|-- lua::Expression::Division
+Expression <|-- lua::Expression::Equal
+Expression <|-- lua::Expression::Exponentiation
+Expression <|-- lua::Expression::False
+Expression <|-- lua::Expression::Function
+Expression <|-- lua::Expression::Invert
+Expression <|-- lua::Expression::Larger
+Expression <|-- lua::Expression::Larger::Equal
+Expression <|-- lua::Expression::Length
+Expression <|-- lua::Expression::Minus
+Expression <|-- lua::Expression::Modulo
+Expression <|-- lua::Expression::Multiplication
+Expression <|-- lua::Expression::Negate
+Expression <|-- lua::Expression::Nil
+Expression <|-- lua::Expression::Not::Equal
+Expression <|-- lua::Expression::Number
+Expression <|-- lua::Expression::Or
+Expression <|-- lua::Expression::Plus
+Expression <|-- lua::Expression::Smaller
+Expression <|-- lua::Expression::Smaller::Equal
+Expression <|-- lua::Expression::String
+Expression <|-- lua::Expression::TableConstructor
+Expression <|-- lua::Expression::True
+Expression <|-- lua::Expression::VarArgs
+Expression <|-- lua::Expression::VariableName
+Field <|-- lua::Field::AddEntryToTable
+Field <|-- lua::Field::AddEntryToTable::Brackets
+Field <|-- lua::Field::AppendEntryToTable
+LastStatement::Return <|-- lua::LastStatement::ReturnWithValue
+LastStatement <|-- lua::LastStatement::Break
+LastStatement <|-- lua::LastStatement::Return
+Statement::FunctioncallOrAssignment <|-- lua::Expression
+Statement::FunctioncallOrAssignment <|-- lua::Statement::Assignment
+Statement::FunctioncallOrAssignment <|-- lua::Statement::CallFunction
+Statement::FunctioncallOrAssignment <|-- lua::Statement::CallMemberFunction
+Statement <|-- lua::Statement::Block
+Statement <|-- lua::Statement::For::Generic
+Statement <|-- lua::Statement::For::Numeric
+Statement <|-- lua::Statement::FunctioncallOrAssignment
+Statement <|-- lua::Statement::GlobalFunction::Declaration
+Statement <|-- lua::Statement::If::Then::Else
+Statement <|-- lua::Statement::Local::Variable::Declaration
+Statement <|-- lua::Statement::LocalFunction::Declaration
+Statement <|-- lua::Statement::Repeat
+Statement <|-- lua::Statement::While
+lua::Expression::CallMemberFunction "1..1" *-- "0..1" lua::Functioncall::Arguments : arguments164
+lua::Functioncall::Arguments "0..1" --* "1..1" lua::Expression::CallFunction : arguments169
+lua::Expression "0..9999" --* "1..1" lua::Functioncall::Arguments : arguments57
+lua::Functioncall::Arguments "0..1" --* "1..1" lua::Statement::CallMemberFunction : arguments73
+lua::Statement::CallFunction "1..1" *-- "0..1" lua::Functioncall::Arguments : arguments78
+lua::Expression::AccessArray "1..1" *-- "0..1" lua::Expression : array172
+lua::Block "0..1" --* "1..1" lua::Statement::Block : block3
+lua::Block "0..1" --* "1..1" lua::Statement::For::Numeric : block38
+lua::Block "0..1" --* "1..1" lua::Statement::For::Generic : block43
+lua::Block "0..1" --* "1..1" lua::Statement::While : block6
+lua::Statement::Repeat "1..1" *-- "0..1" lua::Block : block9
+lua::Block "0..1" --* "1..1" lua::Function : body54
+lua::Statement::If::Then::Else "1..1" *-- "0..1" lua::Block : elseBlock21
+lua::Statement::If::Then::Else::ElseIfPart "0..9999" --* "1..1" lua::Statement::If::Then::Else : elseIf19
+lua::Block "0..1" --* "1..1" lua::Statement::If::Then::Else::ElseIfPart : elseifBlock27
+lua::Expression "0..1" --* "1..1" lua::Statement::If::Then::Else::ElseIfPart : elseifExpression24
+lua::Expression "0..1" --* "1..1" lua::Expression::Negate : exp151
+lua::Expression::Length "1..1" *-- "0..1" lua::Expression : exp153
+lua::Expression "0..1" --* "1..1" lua::Expression::Invert : exp155
+lua::Expression "0..1" --* "1..1" lua::Statement::Repeat : expression11
+lua::Statement::While "1..1" *-- "0..1" lua::Expression : expression5
+lua::Expression "0..9999" --* "1..1" lua::Statement::For::Generic : expressions41
+lua::Field "0..9999" --* "1..1" lua::Expression::TableConstructor : fields53
+lua::Function "0..1" --* "1..1" lua::Statement::GlobalFunction::Declaration : function46
+lua::Statement::LocalFunction::Declaration "1..1" *-- "0..1" lua::Function : function47
+lua::Expression::Function "1..1" *-- "0..1" lua::Function : function51
+lua::Block "0..1" --* "1..1" lua::Statement::If::Then::Else : ifBlock16
+lua::Expression "0..1" --* "1..1" lua::Statement::If::Then::Else : ifExpression14
+lua::Expression "0..1" --* "1..1" lua::Expression::AccessArray : index174
+lua::Expression "0..1" --* "1..1" lua::Field::AddEntryToTable::Brackets : indexExpression62
+lua::Expression "0..9999" --* "1..1" lua::Statement::Local::Variable::Declaration : initialValue49
+lua::Expression "0..1" --* "1..1" lua::Expression::Smaller : left101
+lua::Expression "0..1" --* "1..1" lua::Expression::Smaller::Equal : left106
+lua::Expression "0..1" --* "1..1" lua::Expression::Equal : left111
+lua::Expression "0..1" --* "1..1" lua::Expression::Not::Equal : left116
+lua::Expression "0..1" --* "1..1" lua::Expression::Concatenation : left121
+lua::Expression "0..1" --* "1..1" lua::Expression::Plus : left126
+lua::Expression "0..1" --* "1..1" lua::Expression::Minus : left131
+lua::Expression::Multiplication "1..1" *-- "0..1" lua::Expression : left136
+lua::Expression "0..1" --* "1..1" lua::Expression::Division : left141
+lua::Expression "0..1" --* "1..1" lua::Expression::Modulo : left146
+lua::Expression "0..1" --* "1..1" lua::Expression::Exponentiation : left157
+lua::Expression "0..1" --* "1..1" lua::Expression::Or : left81
+lua::Expression::And "1..1" *-- "0..1" lua::Expression : left86
+lua::Expression "0..1" --* "1..1" lua::Expression::Larger : left91
+lua::Expression "0..1" --* "1..1" lua::Expression::Larger::Equal : left96
+lua::Expression "0..1" --* "1..1" lua::Expression::CallMemberFunction : object162
+lua::Expression "0..1" --* "1..1" lua::Expression::CallFunction : object167
+lua::Expression "0..1" --* "1..1" lua::Expression::AccessMember : object177
+lua::Expression "0..1" --* "1..1" lua::Statement::CallMemberFunction : object71
+lua::Expression "0..1" --* "1..1" lua::Statement::CallFunction : object76
+lua::Block "1..1" *-- "0..1" lua::LastStatement : returnValue1
+lua::Expression "0..9999" --* "1..1" lua::LastStatement::ReturnWithValue : returnValues64
+lua::Expression::Smaller "1..1" *-- "0..1" lua::Expression : right103
+lua::Expression "0..1" --* "1..1" lua::Expression::Smaller::Equal : right108
+lua::Expression::Equal "1..1" *-- "0..1" lua::Expression : right113
+lua::Expression "0..1" --* "1..1" lua::Expression::Not::Equal : right118
+lua::Expression::Concatenation "1..1" *-- "0..1" lua::Expression : right123
+lua::Expression "0..1" --* "1..1" lua::Expression::Plus : right128
+lua::Expression "0..1" --* "1..1" lua::Expression::Minus : right133
+lua::Expression "0..1" --* "1..1" lua::Expression::Multiplication : right138
+lua::Expression "0..1" --* "1..1" lua::Expression::Division : right143
+lua::Expression "0..1" --* "1..1" lua::Expression::Modulo : right148
+lua::Expression "0..1" --* "1..1" lua::Expression::Exponentiation : right159
+lua::Expression "0..1" --* "1..1" lua::Expression::Or : right83
+lua::Expression "0..1" --* "1..1" lua::Expression::And : right88
+lua::Expression::Larger "1..1" *-- "0..1" lua::Expression : right93
+lua::Expression "0..1" --* "1..1" lua::Expression::Larger::Equal : right98
+lua::Expression "0..1" --* "1..1" lua::Statement::For::Numeric : startExpr30
+lua::Statement "0..9999" --* "1..1" lua::Block : statements0
+lua::Expression "0..1" --* "1..1" lua::Statement::For::Numeric : stepExpr35
+lua::Statement::For::Numeric "1..1" *-- "0..1" lua::Expression : untilExpr32
+lua::Field "1..1" *-- "0..1" lua::Expression : value59
+lua::Statement::Assignment "1..1" *-- "0..9999" lua::Expression : values68
+lua::Expression "0..9999" --* "1..1" lua::Statement::Assignment : variable66
+@enduml

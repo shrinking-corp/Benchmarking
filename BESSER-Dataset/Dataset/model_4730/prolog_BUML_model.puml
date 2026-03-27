@@ -1,0 +1,96 @@
+@startuml
+enum ADDITIVE_OPERATOR {
+  minus
+  plus
+}
+enum MULTIPLICATIVE_OPERATOR {
+  div
+  mult
+}
+class Part {
+}
+class Tail {
+}
+class Term {
+}
+class prolog::Additive {
+  + operator : str
+}
+class prolog::AnonymousVariable {
+  + text : str
+}
+class prolog::Assignment {
+}
+class prolog::BracketExpression {
+}
+class prolog::Clause {
+}
+class prolog::Conjunction {
+}
+class prolog::List {
+}
+class prolog::Multiplicative {
+  + operator : str
+}
+class prolog::Negation {
+  + operator : str
+}
+class prolog::Numeral {
+  + value : float
+}
+abstract class prolog::Part {
+}
+class prolog::Power {
+}
+class prolog::Predicate {
+  + name : str
+}
+class prolog::PrologProgram {
+}
+class prolog::String {
+  + text : str
+}
+abstract class prolog::Tail {
+}
+abstract class prolog::Term {
+}
+class prolog::Variable {
+  + name : str
+}
+class prolog::VariableReference {
+}
+Part <|-- prolog::Assignment
+Part <|-- prolog::Predicate
+Tail <|-- prolog::List
+Tail <|-- prolog::Variable
+Term <|-- prolog::Additive
+Term <|-- prolog::AnonymousVariable
+Term <|-- prolog::BracketExpression
+Term <|-- prolog::List
+Term <|-- prolog::Multiplicative
+Term <|-- prolog::Negation
+Term <|-- prolog::Numeral
+Term <|-- prolog::Power
+Term <|-- prolog::Predicate
+Term <|-- prolog::String
+Term <|-- prolog::Variable
+Term <|-- prolog::VariableReference
+prolog::Term "1..1" --* "1..1" prolog::Power : base29
+prolog::Negation "1..1" *-- "1..1" prolog::Term : body34
+prolog::Term "1..1" --* "1..1" prolog::BracketExpression : body36
+prolog::Clause "1..9999" --* "1..1" prolog::PrologProgram : clauses0
+prolog::Conjunction "0..1" --* "1..1" prolog::Clause : conjunction3
+prolog::Term "1..1" --* "1..1" prolog::Power : exponent31
+prolog::Term "0..9999" --* "1..1" prolog::List : headTerms5
+prolog::Term "1..1" --* "1..1" prolog::Additive : left19
+prolog::Multiplicative "1..1" *-- "1..1" prolog::Term : left24
+prolog::Part "1..9999" --* "1..1" prolog::Conjunction : parts17
+prolog::Clause "1..1" *-- "1..1" prolog::Predicate : predicate1
+prolog::Term "1..1" --* "1..1" prolog::Additive : right21
+prolog::Term "1..1" --* "1..1" prolog::Multiplicative : right26
+prolog::List "1..1" *-- "0..1" prolog::Tail : tail6
+prolog::Assignment "1..1" *-- "1..1" prolog::Term : term14
+prolog::Term "0..9999" --* "1..1" prolog::Predicate : terms8
+prolog::Variable "1..1" -- "1..1" prolog::VariableReference : variable11
+prolog::VariableReference "1..1" --* "1..1" prolog::Assignment : variable12
+@enduml

@@ -1,0 +1,293 @@
+@startuml
+class Association {
+}
+class Attribute {
+}
+enum Cardinality {
+  Many
+  Optional
+  Required
+}
+class Classifier {
+}
+enum DatabaseTechnologies {
+  MySql
+  Oracle
+}
+enum DateDetails {
+  DateAndTime
+  DateOnly
+  TimeOnly
+}
+class EncapsulatedFeature {
+}
+class EntityAssociation {
+}
+class EntityAttribute {
+}
+class EntityFeature {
+}
+class EntityOrView {
+}
+class Feature {
+}
+class Label {
+}
+class ModelLabelFeature {
+}
+class NamedDisplayElement {
+}
+class NamedElement {
+}
+enum OrmTechnologies {
+  DataMapper
+  DoctrineODM
+  DoctrineORM
+  Idiorm
+  JPA
+  Kohana
+}
+class PathElement {
+}
+class ResourceAttribute {
+}
+class ViewFeature {
+}
+enum isHasChoices {
+  hasA
+  isA
+}
+abstract class persistence::Association {
+  + inputClass : str
+  + pseudo : bool
+  + serializationMaxDepth : int
+}
+class persistence::AssociationKey {
+}
+class persistence::AssociationWithContainment {
+  + sourceVisible : bool
+}
+class persistence::AssociationWithoutContainment {
+  + targetCardinality : str
+  + targetUnique : bool
+}
+abstract class persistence::Attribute {
+  + inputClass : str
+  + validationPattern : str
+}
+class persistence::DataType {
+}
+class persistence::DataTypeAttribute {
+  + caseInsensitive : bool
+  + encrypt : bool
+  + obfuscateFormFields : bool
+}
+class persistence::DateAttribute {
+  + details : str
+  + format : str
+}
+class persistence::DatePathElement {
+  + format : str
+}
+class persistence::EncapsulatedAssociation {
+  + cardinality : str
+  + isSourceAssociation : bool
+  + name : str
+}
+class persistence::EncapsulatedAttribute {
+  + cardinality : str
+  + name : str
+}
+class persistence::EncapsulatedFeature {
+  + alias : str
+  + columnName : str
+  + displayLabel : str
+}
+class persistence::Entity {
+}
+abstract class persistence::EntityAssociation {
+  + bidirectional : bool
+  + pivotTableName : str
+  + targetColumnName : str
+  + targetDisplayClass : str
+  + targetDisplayLabel : str
+  + targetFeatureName : str
+  + targetFooterClass : str
+  + targetHeaderClass : str
+  + targetInputClass : str
+  + targetPrimaryKey : bool
+  + unique : bool
+}
+abstract class persistence::EntityAttribute {
+  + containerUnique : bool
+  + hidden : bool
+  + interfaceType : str
+  + ormType : str
+  + persistentType : str
+  + unique : bool
+}
+abstract class persistence::EntityFeature {
+  + booleanIsHasChoice : str
+  + cardinality : str
+  + columnName : str
+  + customiseSet : bool
+  + derived : bool
+  + ordered : bool
+  + pluralisedName : str
+  + primaryKey : bool
+  + singletonName : str
+}
+abstract class persistence::EntityOrView {
+  + allowFormTypeCustomisation : bool
+  + autoKeyGenerationStrategy : str
+  + autoKeyName : str
+  + autoKeyPersistentType : str
+  + implementsUserInterface : bool
+  + pluralisedName : str
+  + singletonName : str
+  + tableName : str
+}
+class persistence::Expression {
+}
+abstract class persistence::Feature {
+  + collectionOrmAllowAdd : bool
+  + collectionOrmAllowRemove : bool
+  + displayClass : str
+  + encodeUriKey : bool
+  + footerClass : str
+  + headerClass : str
+  + nullDisplayValue : str
+  + placeholder : str
+  + title : str
+}
+class persistence::FileAttribute {
+}
+class persistence::ImageAttribute {
+}
+abstract class persistence::Label {
+}
+class persistence::LocationAttribute {
+}
+class persistence::ModelLabel {
+  + customise : bool
+  + format : str
+}
+class persistence::ModelLabelAssociation {
+  + isSourceAssociation : bool
+}
+class persistence::ModelLabelAttribute {
+  + dateFormat : str
+}
+abstract class persistence::ModelLabelFeature {
+}
+abstract class persistence::PathElement {
+}
+class persistence::Persistence {
+  + databaseTechnology : str
+  + ormTechnology : str
+  + timestampCreation : bool
+  + timestampUpdates : bool
+}
+abstract class persistence::ResourceAttribute {
+  + maximumUploadSize : int
+  + uploadsWithinWebsite : bool
+  + validUploadExtensions : str
+  + validUploadMimeTypes : str
+}
+class persistence::SerializationGroup {
+}
+class persistence::StaticPathElement {
+  + element : str
+}
+class persistence::UrlAttribute {
+  + displayValue : str
+}
+class persistence::View {
+}
+class persistence::ViewAssociation {
+  + cardinality : str
+}
+abstract class persistence::ViewFeature {
+}
+Association <|-- persistence::EncapsulatedAssociation
+Association <|-- persistence::EntityAssociation
+Association <|-- persistence::ViewAssociation
+Attribute <|-- persistence::EncapsulatedAttribute
+Attribute <|-- persistence::EntityAttribute
+Classifier <|-- persistence::EntityOrView
+EncapsulatedFeature <|-- persistence::EncapsulatedAssociation
+EncapsulatedFeature <|-- persistence::EncapsulatedAttribute
+EntityAssociation <|-- persistence::AssociationWithContainment
+EntityAssociation <|-- persistence::AssociationWithoutContainment
+EntityAttribute <|-- persistence::DataTypeAttribute
+EntityAttribute <|-- persistence::DateAttribute
+EntityAttribute <|-- persistence::LocationAttribute
+EntityAttribute <|-- persistence::ResourceAttribute
+EntityAttribute <|-- persistence::UrlAttribute
+EntityFeature <|-- persistence::EntityAssociation
+EntityFeature <|-- persistence::EntityAttribute
+EntityOrView <|-- persistence::Entity
+EntityOrView <|-- persistence::View
+Feature <|-- persistence::Association
+Feature <|-- persistence::Attribute
+Feature <|-- persistence::EntityFeature
+Feature <|-- persistence::ViewFeature
+Label <|-- persistence::Attribute
+Label <|-- persistence::ModelLabel
+ModelLabelFeature <|-- persistence::ModelLabelAssociation
+ModelLabelFeature <|-- persistence::ModelLabelAttribute
+NamedDisplayElement <|-- persistence::EntityFeature
+NamedDisplayElement <|-- persistence::ViewAssociation
+NamedElement <|-- persistence::ModelLabel
+NamedElement <|-- persistence::SerializationGroup
+PathElement <|-- persistence::DatePathElement
+PathElement <|-- persistence::StaticPathElement
+ResourceAttribute <|-- persistence::FileAttribute
+ResourceAttribute <|-- persistence::ImageAttribute
+ViewFeature <|-- persistence::EncapsulatedFeature
+ViewFeature <|-- persistence::ViewAssociation
+persistence::Association "0..9999" -- "1..1" persistence::EntityOrView : allAssociations24
+persistence::Feature "0..9999" -- "1..1" persistence::EntityOrView : allFeatures17
+persistence::EntityAssociation "1..1" -- "1..1" persistence::ModelLabelAssociation : association47
+persistence::Association "1..1" -- "1..1" persistence::EncapsulatedAssociation : association76
+persistence::EntityAssociation "0..9999" -- "1..1" persistence::Entity : associationEnds53
+persistence::Association "0..9999" -- "1..1" persistence::EntityOrView : associations22
+persistence::Attribute "1..1" -- "1..1" persistence::ModelLabelAttribute : attribute45
+persistence::Attribute "1..1" -- "1..1" persistence::EncapsulatedAttribute : attribute74
+persistence::EntityOrView "1..1" -- "0..9999" persistence::Attribute : attributes20
+persistence::EntityOrView "1..1" -- "0..9999" persistence::Feature : containerUnique10
+persistence::DataType "1..1" -- "1..1" persistence::DataTypeAttribute : dataType57
+persistence::Persistence "1..1" *-- "0..9999" persistence::DataType : dataTypes1
+persistence::Attribute "1..1" *-- "0..1" persistence::Expression : defaultValue30
+persistence::ModelLabelAssociation "1..1" -- "0..1" persistence::ModelLabel : dynamicLabel48
+persistence::EncapsulatedAssociation "0..9999" -- "1..1" persistence::Association : encapsulatedBy32
+persistence::EncapsulatedAssociation "1..1" -- "0..1" persistence::EncapsulatedAssociation : encapsulatedTarget78
+persistence::EntityOrView "0..9999" -- "1..1" persistence::View : encapsulates69
+persistence::EntityOrView "0..9999" --* "1..1" persistence::Persistence : entities3
+persistence::EntityFeature "0..9999" --* "1..1" persistence::Entity : entityFeatures51
+persistence::Feature "0..9999" -- "1..1" persistence::EntityOrView : features14
+persistence::ModelLabelFeature "0..9999" --* "1..1" persistence::ModelLabel : features40
+persistence::EntityAssociation "1..1" -- "1..1" persistence::AssociationKey : keyFor63
+persistence::Feature "0..9999" -- "1..1" persistence::EntityOrView : keys5
+persistence::AssociationKey "0..9999" --* "1..1" persistence::EntityAssociation : keys60
+persistence::ModelLabel "1..1" -- "1..1" persistence::EntityOrView : labelFor39
+persistence::ModelLabel "0..9999" --* "1..1" persistence::EntityOrView : labels13
+persistence::EncapsulatedAssociation "1..1" -- "1..1" persistence::ViewAssociation : opposite84
+persistence::ModelLabel "1..1" -- "1..1" persistence::ModelLabelFeature : partOf43
+persistence::Entity "1..1" -- "1..1" persistence::EntityFeature : partOf54
+persistence::View "1..1" -- "1..1" persistence::ViewFeature : partOf73
+persistence::SerializationGroup "0..9999" --* "1..1" persistence::Persistence : serializationGroups0
+persistence::SerializationGroup "0..9999" -- "1..1" persistence::Feature : serializationGroups27
+persistence::ModelLabel "1..1" -- "0..9999" persistence::SerializationGroup : serializationGroups41
+persistence::EntityAttribute "1..1" -- "0..9999" persistence::Attribute : slugFields55
+persistence::Entity "1..1" -- "1..1" persistence::EncapsulatedAssociation : sourceEntity79
+persistence::EntityOrView "1..1" -- "1..1" persistence::Association : sourceEntityX33
+persistence::AssociationKey "1..1" -- "1..1" persistence::EntityFeature : sourceFeature65
+persistence::EntityAssociation "1..1" -- "1..1" persistence::Entity : targetEntity61
+persistence::Entity "1..1" -- "1..1" persistence::EncapsulatedAssociation : targetEntity81
+persistence::EntityOrView "1..1" -- "1..1" persistence::Association : targetEntityX36
+persistence::EntityFeature "0..1" -- "1..1" persistence::AssociationKey : targetFeature66
+persistence::Feature "0..9999" -- "1..1" persistence::EntityOrView : unique7
+persistence::PathElement "0..9999" --* "1..1" persistence::ResourceAttribute : uploadPath59
+persistence::View "1..1" *-- "0..9999" persistence::ViewFeature : viewFeatures71
+@enduml

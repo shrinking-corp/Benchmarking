@@ -1,0 +1,33 @@
+@startuml
+enum ColumnType {
+  Char
+  Date
+  Number
+}
+class NamedElement {
+}
+class my::Column {
+  + primary : bool
+  + size : int
+  + type : str
+  + unique : bool
+}
+class my::Database {
+}
+class my::FKRelation {
+  + label : str
+}
+class my::NamedElement {
+  + name : str
+}
+class my::Table {
+}
+NamedElement <|-- my::Column
+NamedElement <|-- my::Database
+NamedElement <|-- my::Table
+my::Column "0..9999" --* "1..1" my::Table : columns0
+my::Database "1..1" *-- "0..9999" my::FKRelation : fkrelations3
+my::Column "1..1" -- "1..1" my::FKRelation : source8
+my::Database "1..1" *-- "0..9999" my::Table : tables1
+my::Column "1..1" -- "1..1" my::FKRelation : target5
+@enduml

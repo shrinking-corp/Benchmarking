@@ -1,0 +1,84 @@
+@startuml
+class Event {
+}
+class Join {
+}
+class Node {
+}
+class Routing {
+}
+class Split {
+}
+class Work {
+}
+class apromore::ANDJoin {
+}
+class apromore::ANDSplit {
+}
+class apromore::CanonicalProcess {
+  + author : str
+  + uri : str
+  + version : str
+}
+class apromore::Edge {
+  + condition : str
+  + default : bool
+  + ident : int
+}
+class apromore::Event {
+}
+class apromore::Join {
+}
+class apromore::Message {
+}
+class apromore::Net {
+  + ident : int
+}
+abstract class apromore::Node {
+  + configurable : bool
+  + ident : int
+  + name : str
+}
+class apromore::ORJoin {
+}
+class apromore::ORSplit {
+}
+class apromore::Routing {
+}
+class apromore::Split {
+}
+class apromore::State {
+}
+class apromore::Task {
+}
+class apromore::Time {
+}
+class apromore::Work {
+}
+class apromore::XORJoin {
+}
+class apromore::XORSplit {
+}
+Event <|-- apromore::Message
+Event <|-- apromore::Time
+Join <|-- apromore::ANDJoin
+Join <|-- apromore::ORJoin
+Join <|-- apromore::XORJoin
+Node <|-- apromore::Routing
+Node <|-- apromore::Work
+Routing <|-- apromore::Join
+Routing <|-- apromore::Split
+Routing <|-- apromore::State
+Split <|-- apromore::ANDSplit
+Split <|-- apromore::ORSplit
+Split <|-- apromore::XORSplit
+Work <|-- apromore::Event
+Work <|-- apromore::Task
+apromore::Edge "0..9999" --* "1..1" apromore::Net : edges6
+apromore::Net "1..9999" -- "1..1" apromore::CanonicalProcess : nets0
+apromore::Node "1..9999" --* "1..1" apromore::Net : nodes4
+apromore::CanonicalProcess "1..1" *-- "0..1" apromore::Net : root1
+apromore::Node "0..1" -- "1..1" apromore::Edge : source8
+apromore::Net "0..1" --* "1..1" apromore::Task : subnet14
+apromore::Node "0..1" -- "1..1" apromore::Edge : target11
+@enduml

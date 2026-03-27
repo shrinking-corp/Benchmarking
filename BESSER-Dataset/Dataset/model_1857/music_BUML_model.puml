@@ -1,0 +1,24 @@
+@startuml
+enum MediaType {
+  CD
+  MP3
+  TAPE
+}
+class music::Artist {
+  + name : str
+  + notes : str
+  + printState() : void
+}
+class music::MusicLibrary {
+  + name : str
+}
+class music::Work {
+  + mediaTypes : str
+  + name : str
+  + notes : str
+  + whenMade : str
+}
+music::MusicLibrary "1..1" *-- "0..9999" music::Artist : artists1
+music::Artist "1..1" -- "1..1" music::Work : performer2
+music::Work "0..9999" --* "1..1" music::Artist : works0
+@enduml

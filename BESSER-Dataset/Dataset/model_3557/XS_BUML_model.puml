@@ -1,0 +1,216 @@
+@startuml
+class Declaration {
+}
+class Expression {
+}
+class Literal {
+}
+class Statement {
+}
+class Type {
+}
+class VarDeclaration {
+}
+class xs::AndExpression {
+  + op : str
+}
+class xs::Assign {
+}
+class xs::Block {
+}
+class xs::BoolType {
+}
+class xs::BreakStatement {
+}
+class xs::Call {
+}
+class xs::ComparisonExpression {
+  + op : str
+}
+class xs::ContinueStatement {
+}
+class xs::Declaration {
+}
+class xs::EqualsExpression {
+  + op : str
+}
+class xs::Expression {
+}
+class xs::Factor {
+  + op : str
+}
+class xs::FloatType {
+}
+class xs::ForStatement {
+  + op : str
+}
+class xs::ForVarDeclaration {
+}
+class xs::FunctionDeclaration {
+  + mutable : bool
+  + name : str
+}
+class xs::GlobalVarDeclaration {
+  + const : bool
+  + extern : bool
+}
+class xs::IfElseStatement {
+}
+class xs::IncludeDeclaration {
+  + filePath : str
+}
+class xs::IntType {
+}
+class xs::Literal {
+}
+class xs::LiteralBool {
+  + value : bool
+}
+class xs::LiteralFloat {
+  + value : float
+}
+class xs::LiteralInt {
+  + value : int
+}
+class xs::LiteralString {
+  + value : str
+}
+class xs::LocalVarDeclaration {
+}
+class xs::OrExpression {
+  + op : str
+}
+class xs::ParameterDeclaration {
+}
+class xs::PostfixStatement {
+  + op : str
+}
+class xs::Program {
+}
+class xs::ReturnStatement {
+}
+class xs::RuleDeclaration {
+  + active : bool
+  + group : str
+  + highFrequency : bool
+  + maxInterval : int
+  + minInterval : int
+  + name : str
+  + priority : int
+  + runImmediately : bool
+}
+class xs::Statement {
+}
+class xs::StringType {
+}
+class xs::SwitchCase {
+}
+class xs::SwitchDefault {
+}
+class xs::SwitchStatement {
+}
+class xs::Term {
+  + op : str
+}
+class xs::Type {
+}
+class xs::Var {
+}
+class xs::VarDeclaration {
+  + name : str
+}
+class xs::VectorLiteral {
+}
+class xs::VectorType {
+}
+class xs::VoidType {
+}
+class xs::WhileStatement {
+}
+Declaration <|-- xs::FunctionDeclaration
+Declaration <|-- xs::GlobalVarDeclaration
+Declaration <|-- xs::IncludeDeclaration
+Declaration <|-- xs::RuleDeclaration
+Expression <|-- xs::AndExpression
+Expression <|-- xs::Assign
+Expression <|-- xs::Call
+Expression <|-- xs::ComparisonExpression
+Expression <|-- xs::EqualsExpression
+Expression <|-- xs::Factor
+Expression <|-- xs::Literal
+Expression <|-- xs::OrExpression
+Expression <|-- xs::Term
+Expression <|-- xs::Var
+Literal <|-- xs::LiteralBool
+Literal <|-- xs::LiteralFloat
+Literal <|-- xs::LiteralInt
+Literal <|-- xs::LiteralString
+Literal <|-- xs::VectorLiteral
+Statement <|-- xs::Block
+Statement <|-- xs::BreakStatement
+Statement <|-- xs::ContinueStatement
+Statement <|-- xs::Expression
+Statement <|-- xs::ForStatement
+Statement <|-- xs::IfElseStatement
+Statement <|-- xs::LocalVarDeclaration
+Statement <|-- xs::PostfixStatement
+Statement <|-- xs::ReturnStatement
+Statement <|-- xs::SwitchStatement
+Statement <|-- xs::WhileStatement
+Type <|-- xs::BoolType
+Type <|-- xs::FloatType
+Type <|-- xs::IntType
+Type <|-- xs::StringType
+Type <|-- xs::VectorType
+Type <|-- xs::VoidType
+VarDeclaration <|-- xs::ForVarDeclaration
+VarDeclaration <|-- xs::GlobalVarDeclaration
+VarDeclaration <|-- xs::LocalVarDeclaration
+VarDeclaration <|-- xs::ParameterDeclaration
+xs::Call "1..1" *-- "0..9999" xs::Expression : arguments96
+xs::FunctionDeclaration "1..1" *-- "0..1" xs::Block : body12
+xs::Block "0..1" --* "1..1" xs::RuleDeclaration : body14
+xs::SwitchCase "0..9999" --* "1..1" xs::SwitchStatement : cases51
+xs::Expression "0..1" --* "1..1" xs::IfElseStatement : condition29
+xs::WhileStatement "1..1" *-- "0..1" xs::Expression : condition37
+xs::Block "1..1" *-- "0..9999" xs::Statement : contents16
+xs::Var "1..1" -- "0..1" xs::VarDeclaration : declaration25
+xs::Declaration "0..9999" --* "1..1" xs::Program : declarations0
+xs::SwitchDefault "0..1" --* "1..1" xs::SwitchStatement : default54
+xs::Statement "0..1" --* "1..1" xs::IfElseStatement : elseStatement34
+xs::Expression "0..1" --* "1..1" xs::ForStatement : end43
+xs::SwitchStatement "1..1" *-- "0..1" xs::Expression : expression49
+xs::ReturnStatement "1..1" *-- "0..1" xs::Expression : expression57
+xs::Expression "0..1" --* "1..1" xs::Assign : expression61
+xs::FunctionDeclaration "0..1" -- "1..1" xs::Call : function94
+xs::Expression "0..1" --* "1..1" xs::OrExpression : left64
+xs::Expression "0..1" --* "1..1" xs::AndExpression : left69
+xs::Expression "0..1" --* "1..1" xs::EqualsExpression : left74
+xs::Expression "0..1" --* "1..1" xs::ComparisonExpression : left79
+xs::Expression "0..1" --* "1..1" xs::Term : left84
+xs::Expression "0..1" --* "1..1" xs::Factor : left89
+xs::ParameterDeclaration "0..9999" --* "1..1" xs::FunctionDeclaration : parameters9
+xs::Expression "0..1" --* "1..1" xs::OrExpression : right66
+xs::AndExpression "1..1" *-- "0..1" xs::Expression : right71
+xs::EqualsExpression "1..1" *-- "0..1" xs::Expression : right76
+xs::Expression "0..1" --* "1..1" xs::ComparisonExpression : right81
+xs::Expression "0..1" --* "1..1" xs::Term : right86
+xs::Factor "1..1" *-- "0..1" xs::Expression : right91
+xs::Statement "0..1" --* "1..1" xs::SwitchCase : statement20
+xs::Statement "0..1" --* "1..1" xs::SwitchDefault : statement23
+xs::Statement "0..1" --* "1..1" xs::WhileStatement : statement39
+xs::Statement "0..1" --* "1..1" xs::ForStatement : statement46
+xs::Statement "0..1" --* "1..1" xs::IfElseStatement : thenStatement31
+xs::Type "0..1" --* "1..1" xs::LocalVarDeclaration : type2
+xs::Type "0..1" --* "1..1" xs::GlobalVarDeclaration : type3
+xs::Type "0..1" --* "1..1" xs::ParameterDeclaration : type5
+xs::Type "0..1" --* "1..1" xs::FunctionDeclaration : type7
+xs::Expression "0..1" --* "1..1" xs::VarDeclaration : value1
+xs::Expression "0..1" --* "1..1" xs::SwitchCase : value18
+xs::VarDeclaration "0..1" -- "1..1" xs::PostfixStatement : var27
+xs::ForVarDeclaration "0..1" --* "1..1" xs::ForStatement : var42
+xs::Var "0..1" --* "1..1" xs::Assign : var59
+xs::Expression "0..1" --* "1..1" xs::VectorLiteral : x99
+xs::Expression "0..1" --* "1..1" xs::VectorLiteral : y101
+xs::Expression "0..1" --* "1..1" xs::VectorLiteral : z104
+@enduml

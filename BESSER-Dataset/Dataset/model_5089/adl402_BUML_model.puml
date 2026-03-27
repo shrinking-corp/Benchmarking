@@ -1,0 +1,44 @@
+@startuml
+class Binding {
+}
+class Interface {
+}
+abstract class adl402::Binding {
+}
+class adl402::Component {
+  + name : str
+}
+class adl402::Content {
+  + expression : str
+  + language : str
+}
+class adl402::EClass0 {
+  + EAttribute0 : str
+}
+class adl402::EClass1 {
+}
+class adl402::EClass2 {
+}
+abstract class adl402::Interface {
+  + name : str
+  + signature : str
+}
+class adl402::Provided {
+}
+class adl402::Required {
+}
+Binding <|-- adl402::EClass1
+Binding <|-- adl402::EClass2
+Interface <|-- adl402::Provided
+Interface <|-- adl402::Required
+adl402::EClass0 "0..9999" --* "1..1" adl402::Content : EReference08
+adl402::Interface "1..1" *-- "0..9999" adl402::Binding : bindings0
+adl402::Content "0..1" --* "1..1" adl402::Component : content15
+adl402::Content "1..1" -- "0..1" adl402::Component : contentParent7
+adl402::EClass0 "0..9999" --* "1..1" adl402::EClass0 : erefs017
+adl402::Interface "0..1" -- "1..1" adl402::Binding : from1
+adl402::Provided "0..9999" --* "1..1" adl402::Component : providedInterfaces13
+adl402::Component "1..1" *-- "0..9999" adl402::Required : requiredInterfaces11
+adl402::Component "0..9999" --* "1..1" adl402::Component : subComponents10
+adl402::Interface "0..1" -- "1..1" adl402::Binding : to4
+@enduml

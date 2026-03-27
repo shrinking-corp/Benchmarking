@@ -1,0 +1,43 @@
+@startuml
+class Unit {
+}
+class units::pc::av::Advice {
+}
+class units::pc::av::BaseUnit {
+  + name : str
+}
+class units::pc::av::EObject {
+}
+class units::pc::av::GlobalScope {
+}
+class units::pc::av::PerJoinPointScope {
+}
+class units::pc::av::Pointcut {
+}
+class units::pc::av::Unit {
+}
+class units::pc::av::UnitCarryingElement {
+  + unitSpecification : str
+}
+class units::pc::av::UnitLiteral {
+}
+class units::pc::av::UnitMultiplication {
+}
+class units::pc::av::UnitPower {
+  + exponent : int
+}
+class units::pc::av::UnitRepository {
+}
+Unit <|-- units::pc::av::UnitLiteral
+Unit <|-- units::pc::av::UnitMultiplication
+Unit <|-- units::pc::av::UnitPower
+units::pc::av::BaseUnit "0..1" -- "1..1" units::pc::av::UnitLiteral : baseUnit6
+units::pc::av::EObject "0..9999" --* "1..1" units::pc::av::Pointcut : children8
+units::pc::av::EObject "0..9999" --* "1..1" units::pc::av::Advice : children9
+units::pc::av::EObject "1..1" -- "1..1" units::pc::av::GlobalScope : scopedObject11
+units::pc::av::PerJoinPointScope "1..1" -- "1..1" units::pc::av::EObject : scopedObject13
+units::pc::av::UnitCarryingElement "1..1" -- "0..1" units::pc::av::Unit : unit0
+units::pc::av::UnitPower "1..1" *-- "0..1" units::pc::av::Unit : unit4
+units::pc::av::UnitRepository "1..1" *-- "0..9999" units::pc::av::BaseUnit : units1
+units::pc::av::UnitMultiplication "1..1" *-- "0..9999" units::pc::av::Unit : units2
+@enduml

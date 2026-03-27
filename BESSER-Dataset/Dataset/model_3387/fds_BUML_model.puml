@@ -1,0 +1,48 @@
+@startuml
+class CandidateKey {
+}
+class NamedElement {
+}
+class Restriction {
+}
+class fds::CandidateKey {
+}
+class fds::Column {
+}
+class fds::Database {
+}
+class fds::ForeignKey {
+}
+class fds::FunctionalDependency {
+}
+abstract class fds::NamedElement {
+  + name : str
+}
+class fds::PrimaryKey {
+}
+abstract class fds::Restriction {
+}
+class fds::RestrictionColumn {
+}
+class fds::Table {
+}
+CandidateKey <|-- fds::PrimaryKey
+NamedElement <|-- fds::Column
+NamedElement <|-- fds::Database
+NamedElement <|-- fds::Restriction
+NamedElement <|-- fds::RestrictionColumn
+NamedElement <|-- fds::Table
+Restriction <|-- fds::CandidateKey
+Restriction <|-- fds::ForeignKey
+fds::RestrictionColumn "1..1" -- "1..1" fds::Column : column16
+fds::Column "0..9999" --* "1..1" fds::Table : columns1
+fds::Column "0..9999" -- "1..1" fds::FunctionalDependency : dependant12
+fds::Column "0..9999" -- "1..1" fds::FunctionalDependency : determinant9
+fds::Table "1..1" *-- "0..9999" fds::FunctionalDependency : functionalDependencies3
+fds::RestrictionColumn "0..1" -- "1..1" fds::RestrictionColumn : pkRestrictionColumn19
+fds::ForeignKey "1..1" -- "1..1" fds::PrimaryKey : primaryKey8
+fds::Restriction "1..1" -- "1..1" fds::RestrictionColumn : restriction15
+fds::Restriction "0..9999" --* "1..1" fds::Table : restrictions5
+fds::RestrictionColumn "0..9999" --* "1..1" fds::Restriction : restrictionsColumns7
+fds::Database "1..1" *-- "0..9999" fds::Table : tables0
+@enduml

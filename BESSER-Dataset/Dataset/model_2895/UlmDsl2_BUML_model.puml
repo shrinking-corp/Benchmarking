@@ -1,0 +1,79 @@
+@startuml
+class ulmDsl2::Attribute {
+  + desc : str
+  + name : str
+}
+class ulmDsl2::AttributeDecimalType {
+  + array : bool
+  + name : str
+  + precision : int
+  + scale : int
+}
+class ulmDsl2::AttributeFeatureType {
+}
+class ulmDsl2::AttributeStringType {
+  + array : bool
+  + length : int
+  + name : str
+}
+class ulmDsl2::AttributeType {
+  + name : str
+}
+class ulmDsl2::Context {
+  + name : str
+  + version : str
+}
+class ulmDsl2::EObject {
+}
+class ulmDsl2::Entity {
+  + desc : str
+  + name : str
+  + type : str
+}
+class ulmDsl2::EntityFeatureType {
+  + array : bool
+  + length : int
+}
+class ulmDsl2::Feature {
+  + identifier : bool
+  + mandatory : bool
+  + name : str
+}
+class ulmDsl2::FeatureType {
+}
+class ulmDsl2::Lookup {
+  + name : str
+}
+class ulmDsl2::LookupInt {
+  + description : str
+}
+class ulmDsl2::LookupIntValue {
+  + description : str
+  + value : int
+}
+class ulmDsl2::LookupString {
+  + description : str
+}
+class ulmDsl2::LookupStringValue {
+  + description : str
+  + value : str
+}
+class ulmDsl2::Model {
+  + name : str
+}
+ulmDsl2::Attribute "0..1" -- "1..1" ulmDsl2::AttributeFeatureType : attribute19
+ulmDsl2::Attribute "0..9999" --* "1..1" ulmDsl2::Context : attributes1
+ulmDsl2::Context "0..9999" --* "1..1" ulmDsl2::Model : contexts0
+ulmDsl2::Context "1..1" *-- "0..9999" ulmDsl2::Entity : entities5
+ulmDsl2::Entity "0..1" -- "1..1" ulmDsl2::EntityFeatureType : entity24
+ulmDsl2::Feature "0..9999" --* "1..1" ulmDsl2::Entity : features12
+ulmDsl2::AttributeFeatureType "1..1" -- "0..1" ulmDsl2::Lookup : lookup21
+ulmDsl2::Lookup "0..9999" --* "1..1" ulmDsl2::Context : lookups3
+ulmDsl2::Entity "0..1" -- "1..1" ulmDsl2::Entity : superType10
+ulmDsl2::Feature "1..1" *-- "0..1" ulmDsl2::FeatureType : type14
+ulmDsl2::EObject "0..1" --* "1..1" ulmDsl2::FeatureType : type16
+ulmDsl2::EObject "0..1" --* "1..1" ulmDsl2::Lookup : type26
+ulmDsl2::EObject "0..1" --* "1..1" ulmDsl2::Attribute : type7
+ulmDsl2::LookupIntValue "0..9999" --* "1..1" ulmDsl2::LookupInt : values29
+ulmDsl2::LookupStringValue "0..9999" --* "1..1" ulmDsl2::LookupString : values30
+@enduml

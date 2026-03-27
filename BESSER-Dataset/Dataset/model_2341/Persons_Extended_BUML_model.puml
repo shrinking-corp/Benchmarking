@@ -1,0 +1,52 @@
+@startuml
+class Facility {
+}
+class NamedElement {
+}
+class Person {
+}
+class persons::Association {
+}
+class persons::Committee {
+}
+class persons::Community {
+}
+class persons::District {
+}
+abstract class persons::Facility {
+}
+class persons::Man {
+}
+abstract class persons::NamedElement {
+  + name : str
+}
+class persons::OrdinaryFacility {
+}
+abstract class persons::Person {
+  + fullName : str
+}
+class persons::SpecialFacility {
+}
+class persons::TownHall {
+}
+class persons::Woman {
+}
+Facility <|-- persons::OrdinaryFacility
+Facility <|-- persons::SpecialFacility
+NamedElement <|-- persons::Association
+NamedElement <|-- persons::Committee
+NamedElement <|-- persons::District
+NamedElement <|-- persons::Facility
+NamedElement <|-- persons::TownHall
+Person <|-- persons::Man
+Person <|-- persons::Woman
+persons::Community "1..1" *-- "0..9999" persons::Association : associations3
+persons::Association "1..1" -- "0..1" persons::Committee : committee12
+persons::Committee "1..1" --* "1..1" persons::TownHall : committee8
+persons::District "1..9999" --* "1..1" persons::TownHall : districts10
+persons::District "1..1" *-- "0..9999" persons::Facility : facilities15
+persons::Person "0..9999" -- "1..1" persons::Facility : members17
+persons::Person "1..9999" --* "1..1" persons::Community : persons0
+persons::TownHall "1..9999" --* "1..1" persons::Community : townHalls1
+persons::Person "0..9999" -- "1..1" persons::TownHall : workers5
+@enduml

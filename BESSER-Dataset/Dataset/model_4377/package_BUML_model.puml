@@ -1,0 +1,89 @@
+@startuml
+class KragsteinPackage::Aggregation {
+}
+class KragsteinPackage::Association {
+}
+class KragsteinPackage::Attribute {
+  + isConst : bool
+  + isStatic : bool
+  + name : str
+  + type : str
+  + value : str
+  + visibility : str
+}
+class KragsteinPackage::Class {
+  + isInterface : bool
+  + isSingletone : bool
+  + name : str
+  + superClass : str
+  + supplierElement : str
+  + visibility : str
+}
+class KragsteinPackage::Composition {
+}
+class KragsteinPackage::Dependency {
+}
+class KragsteinPackage::Generalization {
+  + type : str
+}
+class KragsteinPackage::ImportedClass {
+  + isInternal : bool
+  + name : str
+  + path : str
+}
+class KragsteinPackage::Link {
+}
+class KragsteinPackage::Method {
+  + isConst : bool
+  + isStatic : bool
+  + isVirtual : bool
+  + name : str
+  + type : str
+  + visibility : str
+}
+class KragsteinPackage::Note {
+  + name : str
+  + text : str
+}
+class KragsteinPackage::Package {
+  + name : str
+  + path : str
+}
+class KragsteinPackage::Parameter {
+  + name : str
+  + type : str
+  + value : str
+}
+class KragsteinPackage::Realization {
+}
+abstract class KragsteinPackage::Relationship {
+  + lowerBound : int
+  + name : str
+  + upperBound : int
+}
+abstract class KragsteinPackage::Unit {
+}
+class Relationship {
+}
+class Unit {
+}
+Relationship <|-- KragsteinPackage::Aggregation
+Relationship <|-- KragsteinPackage::Association
+Relationship <|-- KragsteinPackage::Composition
+Relationship <|-- KragsteinPackage::Dependency
+Relationship <|-- KragsteinPackage::Generalization
+Relationship <|-- KragsteinPackage::Realization
+Unit <|-- KragsteinPackage::Class
+Unit <|-- KragsteinPackage::Note
+KragsteinPackage::Attribute "0..9999" --* "1..1" KragsteinPackage::Class : attribute5
+KragsteinPackage::ImportedClass "0..9999" --* "1..1" KragsteinPackage::Class : importedClass12
+KragsteinPackage::Method "0..9999" --* "1..1" KragsteinPackage::Class : method7
+KragsteinPackage::Parameter "0..9999" --* "1..1" KragsteinPackage::Method : parameter14
+KragsteinPackage::Unit "0..1" -- "1..1" KragsteinPackage::Link : source18
+KragsteinPackage::Relationship "1..1" -- "0..1" KragsteinPackage::Class : source2
+KragsteinPackage::Class "0..1" -- "1..1" KragsteinPackage::Relationship : target1
+KragsteinPackage::Unit "0..1" -- "1..1" KragsteinPackage::Link : target21
+KragsteinPackage::Unit "1..1" *-- "0..9999" KragsteinPackage::Link : targetLink16
+KragsteinPackage::Relationship "0..9999" --* "1..1" KragsteinPackage::Class : targetRelationship9
+KragsteinPackage::Unit "0..9999" --* "1..1" KragsteinPackage::Package : unit0
+@enduml

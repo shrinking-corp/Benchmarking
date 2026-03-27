@@ -1,0 +1,697 @@
+@startuml
+enum ClientErrorKind {
+  ADDRESS_INCOMPLETE
+  AMBIGUOUS
+  BAD_EXTENSION
+  BAD_REQUEST
+  BUSY_HERE
+  CALL_OR_TRANSACTION_DOES_NOT_EXIST
+  EXTENSION_REQUIRED
+  FORBIDDEN
+  GONE
+  INTERVAL_TOO_BRIEF
+  LOOP_DETECTED
+  METHOD_NOT_ALLOWED
+  NOT_ACCEPTABLE
+  NOT_ACCEPTABLE_HERE
+  NOT_FOUND
+  PAYMENT_REQUIRED
+  PROXY_AUTHENTICATION_REQUIRED
+  REQUESTURI_TOO_LONG
+  REQUEST_ENTITY_TOO_LARGE
+  REQUEST_PENDING
+  REQUEST_TERMINATED
+  REQUEST_TIMEOUT
+  TEMPORARILY_UNAVAILABLE
+  TOO_MANY_HOPS
+  UNAUTHORIZED
+  UNDECIPHERABLE
+  UNSUPPORTED_MEDIA_TYPE
+  UNSUPPORTED_URI_SCHEME
+}
+enum ControlMethod {
+  deploy
+  undeploy
+  uninvite
+  unregister
+  unsubscribe
+}
+enum Direction {
+  in
+  inout
+  out
+}
+enum FunctionLocation {
+  local
+  remote
+}
+enum GlobalErrorKind {
+  BUSY_EVERYWHERE
+  DECLINE
+  DOES_NOT_EXIST_ANYWHERE
+  NOT_ACCEPTABLE
+}
+enum Modifier {
+  FIFO
+  LIFO
+}
+enum PrimitiveType {
+  bool
+  int
+  request
+  response
+  string
+  time
+  uri
+  void
+}
+enum RedirectionErrorKind {
+  ALTERNATIVE_SERVICE
+  MOVED_PERMANENTLY
+  MOVED_TEMPORARILY
+  MULTIPLE_CHOICES
+  USE_PROXY
+}
+enum SIPHeader {
+  CALL_ID
+  CONTACT
+  CSEQ
+  EVENT
+  FROM
+  MAX_FORWARDS
+  SUBSCRIPTION_STATE
+  TO
+  VIA
+}
+enum SIPMethod {
+  ACK
+  BYE
+  CANCEL
+  INVITE
+  NOTIFY
+  OPTIONS
+  REACK
+  REGISTER
+  REINVITE
+  REREGISTER
+  RESUBSCRIBE
+  SUBSCRIBE
+}
+enum ServerErrorKind {
+  BAD_GATEWAY
+  MESSAGE_TOO_LARGE
+  NOT_IMPLEMENTED
+  SERVER_INTERNAL_ERROR
+  SERVER_TIMEOUT
+  SERVICE_UNAVAILABLE
+  VERSION_NOT_SUPPORTED
+}
+class SrcAction {
+}
+class SrcBusy {
+}
+class SrcDefault {
+}
+class SrcElement {
+}
+class SrcFailure {
+}
+class SrcIncoming {
+}
+class SrcNoAnswer {
+}
+class SrcNode {
+}
+class SrcNodeContainer {
+}
+class SrcNotPresent {
+}
+class SrcOtherwise {
+}
+class SrcOutgoing {
+}
+class SrcRedirection {
+}
+class SrcReject {
+}
+class SrcSignallingAction {
+}
+class SrcSubAction {
+}
+class SrcSwitch {
+}
+class SrcSwitchedAddress {
+}
+class SrcSwitchedLanguage {
+}
+class SrcSwitchedPriority {
+}
+class SrcSwitchedString {
+}
+class SrcSwitchedTime {
+}
+enum SuccessKind {
+  ACCEPTED
+  OK
+}
+class TrgArgument {
+}
+class TrgBranch {
+}
+class TrgConstant {
+}
+class TrgDeclaration {
+}
+class TrgErrorResponse {
+}
+class TrgExpression {
+}
+class TrgFunctionCall {
+}
+class TrgFunctionDeclaration {
+}
+class TrgLocatedElement {
+}
+class TrgMessageField {
+}
+class TrgMethod {
+}
+class TrgMethodName {
+}
+class TrgNamedBranch {
+}
+class TrgPlace {
+}
+class TrgResponse {
+}
+class TrgSelectCase {
+}
+class TrgSelectDefault {
+}
+class TrgSelectMember {
+}
+class TrgServerErrorResponse {
+}
+class TrgService {
+}
+class TrgSession {
+}
+class TrgStatement {
+}
+class TrgTypeExpression {
+}
+class TrgVariable {
+}
+class TrgVariableDeclaration {
+}
+class TrgVariablePlace {
+}
+class TrgWhenHeader {
+}
+class jointPackage::CPL2SPL::JointMM {
+}
+abstract class jointPackage::CPL2SPL::SrcAction {
+}
+class jointPackage::CPL2SPL::SrcAddressSwitch {
+  + field : str
+  + subField : str
+}
+class jointPackage::CPL2SPL::SrcBusy {
+}
+class jointPackage::CPL2SPL::SrcCPL {
+}
+class jointPackage::CPL2SPL::SrcCPLModel {
+}
+class jointPackage::CPL2SPL::SrcDefault {
+}
+abstract class jointPackage::CPL2SPL::SrcElement {
+}
+class jointPackage::CPL2SPL::SrcFailure {
+}
+class jointPackage::CPL2SPL::SrcIncoming {
+}
+class jointPackage::CPL2SPL::SrcLanguageSwitch {
+}
+class jointPackage::CPL2SPL::SrcLocation {
+  + clear : str
+  + priority : str
+  + url : str
+}
+class jointPackage::CPL2SPL::SrcNoAnswer {
+}
+abstract class jointPackage::CPL2SPL::SrcNode {
+}
+abstract class jointPackage::CPL2SPL::SrcNodeContainer {
+}
+class jointPackage::CPL2SPL::SrcNotPresent {
+}
+class jointPackage::CPL2SPL::SrcOtherwise {
+}
+class jointPackage::CPL2SPL::SrcOutgoing {
+}
+class jointPackage::CPL2SPL::SrcPrioritySwitch {
+}
+class jointPackage::CPL2SPL::SrcProxy {
+  + ordering : str
+  + recurse : str
+  + timeout : str
+}
+class jointPackage::CPL2SPL::SrcRedirect {
+  + permanent : str
+}
+class jointPackage::CPL2SPL::SrcRedirection {
+}
+class jointPackage::CPL2SPL::SrcReject {
+  + reason : str
+  + status : str
+}
+abstract class jointPackage::CPL2SPL::SrcSignallingAction {
+}
+class jointPackage::CPL2SPL::SrcStringSwitch {
+  + field : str
+}
+class jointPackage::CPL2SPL::SrcSubAction {
+  + id : str
+}
+class jointPackage::CPL2SPL::SrcSubCall {
+  + ref : str
+}
+abstract class jointPackage::CPL2SPL::SrcSwitch {
+}
+class jointPackage::CPL2SPL::SrcSwitchedAddress {
+  + contains : str
+  + is : str
+  + subDomainOf : str
+}
+class jointPackage::CPL2SPL::SrcSwitchedLanguage {
+  + matches : str
+}
+class jointPackage::CPL2SPL::SrcSwitchedPriority {
+  + equal : str
+  + greater : str
+  + less : str
+}
+class jointPackage::CPL2SPL::SrcSwitchedString {
+  + contains : str
+  + is : str
+}
+class jointPackage::CPL2SPL::SrcSwitchedTime {
+  + byDay : str
+  + byHour : str
+  + byMinute : str
+  + byMonth : str
+  + byMonthDay : str
+  + bySecond : str
+  + bySetPos : str
+  + byWeekNo : str
+  + byYearDay : str
+  + count : str
+  + dtend : str
+  + dtstart : str
+  + duration : str
+  + freq : str
+  + interval : str
+  + until : str
+  + wkst : str
+}
+class jointPackage::CPL2SPL::SrcTimeSwitch {
+  + tzid : str
+  + tzurl : str
+}
+class jointPackage::CPL2SPL::TrgArgument {
+}
+class jointPackage::CPL2SPL::TrgBODYExp {
+}
+class jointPackage::CPL2SPL::TrgBlockExp {
+}
+class jointPackage::CPL2SPL::TrgBooleanConstant {
+  + value : bool
+}
+class jointPackage::CPL2SPL::TrgBranch {
+}
+class jointPackage::CPL2SPL::TrgBreakStat {
+}
+class jointPackage::CPL2SPL::TrgClientErrorResponse {
+  + errorKind : str
+}
+class jointPackage::CPL2SPL::TrgCompoundStat {
+}
+abstract class jointPackage::CPL2SPL::TrgConstant {
+}
+class jointPackage::CPL2SPL::TrgConstantExp {
+}
+class jointPackage::CPL2SPL::TrgContinueStat {
+}
+class jointPackage::CPL2SPL::TrgControlMethodName {
+  + name : str
+}
+abstract class jointPackage::CPL2SPL::TrgDeclaration {
+  + name : str
+}
+class jointPackage::CPL2SPL::TrgDeclarationStat {
+}
+class jointPackage::CPL2SPL::TrgDefaultBranch {
+}
+class jointPackage::CPL2SPL::TrgDefinedType {
+  + typeName : str
+}
+class jointPackage::CPL2SPL::TrgDialog {
+}
+class jointPackage::CPL2SPL::TrgErrorResponse {
+}
+class jointPackage::CPL2SPL::TrgEvent {
+  + eventId : str
+}
+abstract class jointPackage::CPL2SPL::TrgExpression {
+}
+class jointPackage::CPL2SPL::TrgForeachStat {
+  + iteratorName : str
+}
+class jointPackage::CPL2SPL::TrgForwardExp {
+  + isParallel : bool
+}
+class jointPackage::CPL2SPL::TrgFunctionCall {
+}
+class jointPackage::CPL2SPL::TrgFunctionCallExp {
+}
+class jointPackage::CPL2SPL::TrgFunctionCallStat {
+}
+abstract class jointPackage::CPL2SPL::TrgFunctionDeclaration {
+}
+class jointPackage::CPL2SPL::TrgGlobalErrorResponse {
+  + errorKind : str
+}
+class jointPackage::CPL2SPL::TrgHeadedMessageField {
+  + headerId : str
+}
+class jointPackage::CPL2SPL::TrgIfStat {
+}
+class jointPackage::CPL2SPL::TrgIntegerConstant {
+  + value : int
+}
+class jointPackage::CPL2SPL::TrgLocalFunctionDeclaration {
+}
+abstract class jointPackage::CPL2SPL::TrgLocatedElement {
+  + commentsAfter : str
+  + commentsBefore : str
+  + location : str
+}
+abstract class jointPackage::CPL2SPL::TrgMessageField {
+}
+class jointPackage::CPL2SPL::TrgMethod {
+  + direction : str
+}
+abstract class jointPackage::CPL2SPL::TrgMethodName {
+}
+class jointPackage::CPL2SPL::TrgNamedBranch {
+  + name : str
+}
+class jointPackage::CPL2SPL::TrgOperatorExp {
+  + opName : str
+}
+abstract class jointPackage::CPL2SPL::TrgPlace {
+}
+class jointPackage::CPL2SPL::TrgPopExp {
+}
+class jointPackage::CPL2SPL::TrgProgram {
+}
+class jointPackage::CPL2SPL::TrgPropertyCallPlace {
+  + propName : str
+}
+class jointPackage::CPL2SPL::TrgPushStat {
+}
+class jointPackage::CPL2SPL::TrgReasonExp {
+}
+class jointPackage::CPL2SPL::TrgReasonMessageField {
+}
+class jointPackage::CPL2SPL::TrgRedirectionErrorResponse {
+  + errorKind : str
+}
+class jointPackage::CPL2SPL::TrgRegistration {
+}
+class jointPackage::CPL2SPL::TrgRemoteFunctionDeclaration {
+  + functionLocation : str
+}
+class jointPackage::CPL2SPL::TrgRequestURIExp {
+}
+abstract class jointPackage::CPL2SPL::TrgResponse {
+}
+class jointPackage::CPL2SPL::TrgResponseConstant {
+}
+class jointPackage::CPL2SPL::TrgReturnStat {
+}
+class jointPackage::CPL2SPL::TrgSIPHeaderPlace {
+  + header : str
+}
+class jointPackage::CPL2SPL::TrgSIPMethodName {
+  + name : str
+}
+class jointPackage::CPL2SPL::TrgSelectCase {
+}
+class jointPackage::CPL2SPL::TrgSelectDefault {
+}
+abstract class jointPackage::CPL2SPL::TrgSelectMember {
+}
+class jointPackage::CPL2SPL::TrgSelectStat {
+}
+class jointPackage::CPL2SPL::TrgSequenceConstant {
+}
+class jointPackage::CPL2SPL::TrgSequenceType {
+  + modifier : str
+  + size : int
+  + type : str
+}
+class jointPackage::CPL2SPL::TrgServerErrorResponse {
+  + errorKind : str
+}
+class jointPackage::CPL2SPL::TrgService {
+  + name : str
+}
+abstract class jointPackage::CPL2SPL::TrgSession {
+}
+class jointPackage::CPL2SPL::TrgSetStat {
+}
+class jointPackage::CPL2SPL::TrgSimpleType {
+  + type : str
+}
+abstract class jointPackage::CPL2SPL::TrgStatement {
+}
+class jointPackage::CPL2SPL::TrgStringConstant {
+  + value : str
+}
+class jointPackage::CPL2SPL::TrgStructureDeclaration {
+}
+class jointPackage::CPL2SPL::TrgStructureProperty {
+  + name : str
+}
+class jointPackage::CPL2SPL::TrgSuccessResponse {
+  + successKind : str
+}
+abstract class jointPackage::CPL2SPL::TrgTypeExpression {
+}
+class jointPackage::CPL2SPL::TrgURIConstant {
+  + uri : str
+}
+class jointPackage::CPL2SPL::TrgVariable {
+}
+class jointPackage::CPL2SPL::TrgVariableDeclaration {
+}
+abstract class jointPackage::CPL2SPL::TrgVariablePlace {
+}
+class jointPackage::CPL2SPL::TrgWhenHeader {
+  + headerId : str
+}
+class jointPackage::CPL2SPL::TrgWhenStat {
+}
+class jointPackage::CPL2SPL::TrgWithExp {
+}
+SrcAction <|-- jointPackage::CPL2SPL::SrcSignallingAction
+SrcElement <|-- jointPackage::CPL2SPL::SrcCPL
+SrcElement <|-- jointPackage::CPL2SPL::SrcNode
+SrcElement <|-- jointPackage::CPL2SPL::SrcNodeContainer
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcBusy
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcDefault
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcFailure
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcIncoming
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcLocation
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcNoAnswer
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcNotPresent
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcOtherwise
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcOutgoing
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcRedirection
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSubAction
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedAddress
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedLanguage
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedPriority
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedString
+SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedTime
+SrcNode <|-- jointPackage::CPL2SPL::SrcAction
+SrcNode <|-- jointPackage::CPL2SPL::SrcLocation
+SrcNode <|-- jointPackage::CPL2SPL::SrcSubCall
+SrcNode <|-- jointPackage::CPL2SPL::SrcSwitch
+SrcSignallingAction <|-- jointPackage::CPL2SPL::SrcProxy
+SrcSignallingAction <|-- jointPackage::CPL2SPL::SrcRedirect
+SrcSignallingAction <|-- jointPackage::CPL2SPL::SrcReject
+SrcSwitch <|-- jointPackage::CPL2SPL::SrcAddressSwitch
+SrcSwitch <|-- jointPackage::CPL2SPL::SrcLanguageSwitch
+SrcSwitch <|-- jointPackage::CPL2SPL::SrcPrioritySwitch
+SrcSwitch <|-- jointPackage::CPL2SPL::SrcStringSwitch
+SrcSwitch <|-- jointPackage::CPL2SPL::SrcTimeSwitch
+TrgBranch <|-- jointPackage::CPL2SPL::TrgDefaultBranch
+TrgBranch <|-- jointPackage::CPL2SPL::TrgNamedBranch
+TrgConstant <|-- jointPackage::CPL2SPL::TrgBooleanConstant
+TrgConstant <|-- jointPackage::CPL2SPL::TrgIntegerConstant
+TrgConstant <|-- jointPackage::CPL2SPL::TrgResponseConstant
+TrgConstant <|-- jointPackage::CPL2SPL::TrgSequenceConstant
+TrgConstant <|-- jointPackage::CPL2SPL::TrgStringConstant
+TrgConstant <|-- jointPackage::CPL2SPL::TrgURIConstant
+TrgDeclaration <|-- jointPackage::CPL2SPL::TrgFunctionDeclaration
+TrgDeclaration <|-- jointPackage::CPL2SPL::TrgStructureDeclaration
+TrgDeclaration <|-- jointPackage::CPL2SPL::TrgVariableDeclaration
+TrgErrorResponse <|-- jointPackage::CPL2SPL::TrgClientErrorResponse
+TrgErrorResponse <|-- jointPackage::CPL2SPL::TrgGlobalErrorResponse
+TrgErrorResponse <|-- jointPackage::CPL2SPL::TrgRedirectionErrorResponse
+TrgErrorResponse <|-- jointPackage::CPL2SPL::TrgServerErrorResponse
+TrgExpression <|-- jointPackage::CPL2SPL::TrgBODYExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgBlockExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgConstantExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgForwardExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgFunctionCallExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgOperatorExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgPlace
+TrgExpression <|-- jointPackage::CPL2SPL::TrgPopExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgReasonExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgRequestURIExp
+TrgExpression <|-- jointPackage::CPL2SPL::TrgWithExp
+TrgFunctionDeclaration <|-- jointPackage::CPL2SPL::TrgLocalFunctionDeclaration
+TrgFunctionDeclaration <|-- jointPackage::CPL2SPL::TrgRemoteFunctionDeclaration
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgBranch
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgConstant
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgDeclaration
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgExpression
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgFunctionCall
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgMessageField
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgMethodName
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgProgram
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgResponse
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgSelectMember
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgService
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgSession
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgStatement
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgStructureProperty
+TrgLocatedElement <|-- jointPackage::CPL2SPL::TrgTypeExpression
+TrgMessageField <|-- jointPackage::CPL2SPL::TrgHeadedMessageField
+TrgMessageField <|-- jointPackage::CPL2SPL::TrgReasonMessageField
+TrgMethodName <|-- jointPackage::CPL2SPL::TrgControlMethodName
+TrgMethodName <|-- jointPackage::CPL2SPL::TrgSIPMethodName
+TrgPlace <|-- jointPackage::CPL2SPL::TrgSIPHeaderPlace
+TrgPlace <|-- jointPackage::CPL2SPL::TrgVariablePlace
+TrgResponse <|-- jointPackage::CPL2SPL::TrgErrorResponse
+TrgResponse <|-- jointPackage::CPL2SPL::TrgSuccessResponse
+TrgSelectMember <|-- jointPackage::CPL2SPL::TrgSelectCase
+TrgSelectMember <|-- jointPackage::CPL2SPL::TrgSelectDefault
+TrgSession <|-- jointPackage::CPL2SPL::TrgDialog
+TrgSession <|-- jointPackage::CPL2SPL::TrgEvent
+TrgSession <|-- jointPackage::CPL2SPL::TrgMethod
+TrgSession <|-- jointPackage::CPL2SPL::TrgRegistration
+TrgStatement <|-- jointPackage::CPL2SPL::TrgBreakStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgCompoundStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgContinueStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgDeclarationStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgForeachStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgFunctionCallStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgIfStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgPushStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgReturnStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgSelectStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgSetStat
+TrgStatement <|-- jointPackage::CPL2SPL::TrgWhenStat
+TrgTypeExpression <|-- jointPackage::CPL2SPL::TrgDefinedType
+TrgTypeExpression <|-- jointPackage::CPL2SPL::TrgSequenceType
+TrgTypeExpression <|-- jointPackage::CPL2SPL::TrgSimpleType
+TrgVariableDeclaration <|-- jointPackage::CPL2SPL::TrgArgument
+TrgVariableDeclaration <|-- jointPackage::CPL2SPL::TrgWhenHeader
+TrgVariablePlace <|-- jointPackage::CPL2SPL::TrgPropertyCallPlace
+TrgVariablePlace <|-- jointPackage::CPL2SPL::TrgVariable
+SrcSwitchedAddress "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcAddressSwitch : addresses9
+TrgArgument "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgMethod : arguments50
+TrgArgument "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgFunctionDeclaration : arguments64
+jointPackage::CPL2SPL::TrgReturnStat "1..1" -- "0..1" TrgNamedBranch : branch85
+jointPackage::CPL2SPL::TrgMethod "1..1" *-- "1..9999" TrgBranch : branches54
+SrcBusy "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : busy14
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgIfStat : condition87
+jointPackage::CPL2SPL::SrcNodeContainer "1..1" -- "0..1" SrcNode : contents23
+TrgDeclaration "1..1" --* "1..1" jointPackage::CPL2SPL::TrgDeclarationStat : declaration81
+TrgDeclaration "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgService : declarations29
+jointPackage::CPL2SPL::TrgRegistration "1..1" *-- "0..9999" TrgDeclaration : declarations32
+TrgDeclaration "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgDialog : declarations37
+jointPackage::CPL2SPL::TrgEvent "1..1" *-- "0..9999" TrgDeclaration : declarations41
+SrcDefault "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : default21
+SrcElement "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcCPLModel : elements3
+jointPackage::CPL2SPL::TrgWhenStat "1..1" *-- "0..9999" TrgStatement : elseStatements101
+TrgStatement "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgIfStat : elseStatements92
+TrgExpression "0..1" --* "1..1" jointPackage::CPL2SPL::TrgForwardExp : exp133
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgWithExp : exp135
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgBlockExp : exp139
+jointPackage::CPL2SPL::TrgMessageField "1..1" *-- "1..1" TrgExpression : exp148
+SrcFailure "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : failure19
+jointPackage::CPL2SPL::TrgFunctionCall "1..1" -- "1..1" TrgFunctionDeclaration : function71
+TrgFunctionCall "1..1" --* "1..1" jointPackage::CPL2SPL::TrgFunctionCallStat : functionCall115
+TrgFunctionCall "1..1" --* "1..1" jointPackage::CPL2SPL::TrgFunctionCallExp : functionCall143
+TrgVariable "1..1" --* "1..1" jointPackage::CPL2SPL::TrgWhenStat : idExp95
+SrcIncoming "0..1" --* "1..1" jointPackage::CPL2SPL::SrcCPL : incoming7
+TrgExpression "0..1" --* "1..1" jointPackage::CPL2SPL::TrgVariableDeclaration : initExp60
+SrcSwitchedLanguage "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcLanguageSwitch : languages11
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgOperatorExp : leftExp128
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgSelectStat : matchedExp109
+TrgMethodName "1..1" --* "1..1" jointPackage::CPL2SPL::TrgMethod : methodName48
+TrgMethod "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgDialog : methods39
+TrgMethod "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgEvent : methods43
+TrgMessageField "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgWithExp : msgFields137
+jointPackage::CPL2SPL::SrcProxy "1..1" *-- "0..1" SrcNoAnswer : noAnswer15
+SrcNotPresent "0..1" --* "1..1" jointPackage::CPL2SPL::SrcSwitch : notPresent24
+SrcOtherwise "0..1" --* "1..1" jointPackage::CPL2SPL::SrcSwitch : otherwise25
+SrcOutgoing "0..1" --* "1..1" jointPackage::CPL2SPL::SrcCPL : outgoing5
+TrgExpression "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgFunctionCall : parameters72
+SrcSwitchedPriority "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcPrioritySwitch : priorities13
+TrgArgument "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgStructureDeclaration : properties69
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgPushStat : pushedValue118
+SrcRedirection "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : redirection17
+TrgResponse "1..1" --* "1..1" jointPackage::CPL2SPL::TrgResponseConstant : response152
+jointPackage::CPL2SPL::TrgFunctionDeclaration "1..1" *-- "1..1" TrgTypeExpression : returnType62
+TrgExpression "0..1" --* "1..1" jointPackage::CPL2SPL::TrgReturnStat : returnedValue83
+jointPackage::CPL2SPL::TrgOperatorExp "1..1" *-- "0..1" TrgExpression : rightExp130
+jointPackage::CPL2SPL::TrgSelectStat "1..1" *-- "0..9999" TrgSelectCase : selectCases111
+TrgSelectDefault "0..1" --* "1..1" jointPackage::CPL2SPL::TrgSelectStat : selectDefault113
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgForeachStat : sequenceExp104
+TrgService "1..1" --* "1..1" jointPackage::CPL2SPL::TrgProgram : service27
+TrgSession "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgService : sessions30
+TrgSession "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgRegistration : sessions34
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgSetStat : setValue78
+jointPackage::CPL2SPL::TrgPopExp "1..1" *-- "1..1" TrgPlace : source141
+TrgVariablePlace "1..1" --* "1..1" jointPackage::CPL2SPL::TrgPropertyCallPlace : source145
+jointPackage::CPL2SPL::TrgVariable "1..1" -- "1..1" TrgDeclaration : source146
+jointPackage::CPL2SPL::JointMM "1..1" *-- "1..1" SrcReject : sourceRoot0
+TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgForeachStat : statements106
+TrgStatement "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgSelectMember : statements122
+TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgMethod : statements52
+jointPackage::CPL2SPL::TrgBranch "1..1" *-- "1..9999" TrgStatement : statements56
+TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgLocalFunctionDeclaration : statements67
+TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgCompoundStat : statements75
+jointPackage::CPL2SPL::TrgWhenStat "1..1" *-- "1..9999" TrgStatement : statements98
+SrcSwitchedString "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcStringSwitch : strings10
+jointPackage::CPL2SPL::SrcCPL "1..1" *-- "0..9999" SrcSubAction : subActions4
+TrgPlace "1..1" --* "1..1" jointPackage::CPL2SPL::TrgPushStat : target116
+TrgPlace "1..1" --* "1..1" jointPackage::CPL2SPL::TrgSetStat : target77
+TrgServerErrorResponse "1..1" --* "1..1" jointPackage::CPL2SPL::JointMM : targetRoot1
+jointPackage::CPL2SPL::TrgIfStat "1..1" *-- "1..9999" TrgStatement : thenStatements89
+jointPackage::CPL2SPL::SrcTimeSwitch "1..1" *-- "0..9999" SrcSwitchedTime : times12
+jointPackage::CPL2SPL::TrgStructureProperty "1..1" *-- "1..1" TrgTypeExpression : type28
+TrgTypeExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgMethod : type46
+TrgTypeExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgVariableDeclaration : type58
+TrgConstant "0..1" --* "1..1" jointPackage::CPL2SPL::TrgWhenHeader : value121
+jointPackage::CPL2SPL::TrgConstantExp "1..1" *-- "1..1" TrgConstant : value126
+TrgConstant "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgSelectCase : values124
+TrgConstant "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgSequenceConstant : values150
+TrgWhenHeader "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgWhenStat : whenHeaders96
+@enduml

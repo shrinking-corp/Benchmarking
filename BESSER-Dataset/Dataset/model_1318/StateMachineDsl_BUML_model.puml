@@ -1,0 +1,186 @@
+@startuml
+class ChangeAction {
+}
+class Expression {
+}
+class ExtDeclaration {
+}
+class stateMachineDsl::Action {
+}
+class stateMachineDsl::And {
+}
+class stateMachineDsl::BoolExp {
+  + value : str
+}
+class stateMachineDsl::ChangeAction {
+}
+class stateMachineDsl::CommandAction {
+}
+class stateMachineDsl::Comparison {
+  + op : str
+}
+class stateMachineDsl::Condition {
+}
+class stateMachineDsl::Declaration {
+}
+class stateMachineDsl::DecrementAction {
+}
+class stateMachineDsl::DoubleExp {
+  + decimal : int
+  + negative : str
+  + number : int
+}
+class stateMachineDsl::EObject {
+}
+class stateMachineDsl::Equality {
+  + op : str
+}
+class stateMachineDsl::Event {
+  + name : str
+}
+class stateMachineDsl::Expression {
+}
+class stateMachineDsl::ExtDeclaration {
+  + name : str
+}
+class stateMachineDsl::Function {
+}
+class stateMachineDsl::FunctionUse {
+}
+class stateMachineDsl::IncrementAction {
+}
+class stateMachineDsl::Member {
+}
+class stateMachineDsl::MemberState {
+}
+class stateMachineDsl::MinusCond {
+}
+class stateMachineDsl::MulOrDiv {
+  + op : str
+}
+class stateMachineDsl::Not {
+}
+class stateMachineDsl::NumberExp {
+  + negative : str
+  + value : int
+}
+class stateMachineDsl::Or {
+}
+class stateMachineDsl::Parameter {
+}
+class stateMachineDsl::ParameterFunction {
+  + name : str
+}
+class stateMachineDsl::Parenthesis {
+}
+class stateMachineDsl::PlusCond {
+}
+class stateMachineDsl::Procedure {
+  + name : str
+}
+class stateMachineDsl::ProcedureUse {
+}
+class stateMachineDsl::ResetAction {
+}
+class stateMachineDsl::SetAction {
+}
+class stateMachineDsl::State {
+  + name : str
+}
+class stateMachineDsl::StateMachine {
+  + name : str
+}
+class stateMachineDsl::StringExp {
+  + value : str
+}
+class stateMachineDsl::Transition {
+}
+class stateMachineDsl::VarParName {
+  + name : str
+}
+class stateMachineDsl::VarRef {
+}
+class stateMachineDsl::VarType {
+  + vt : str
+}
+class stateMachineDsl::Variable {
+}
+ChangeAction <|-- stateMachineDsl::DecrementAction
+ChangeAction <|-- stateMachineDsl::IncrementAction
+ChangeAction <|-- stateMachineDsl::ResetAction
+Expression <|-- stateMachineDsl::And
+Expression <|-- stateMachineDsl::BoolExp
+Expression <|-- stateMachineDsl::Comparison
+Expression <|-- stateMachineDsl::DoubleExp
+Expression <|-- stateMachineDsl::Equality
+Expression <|-- stateMachineDsl::FunctionUse
+Expression <|-- stateMachineDsl::MinusCond
+Expression <|-- stateMachineDsl::MulOrDiv
+Expression <|-- stateMachineDsl::Not
+Expression <|-- stateMachineDsl::NumberExp
+Expression <|-- stateMachineDsl::Or
+Expression <|-- stateMachineDsl::Parenthesis
+Expression <|-- stateMachineDsl::PlusCond
+Expression <|-- stateMachineDsl::StringExp
+Expression <|-- stateMachineDsl::VarRef
+ExtDeclaration <|-- stateMachineDsl::CommandAction
+ExtDeclaration <|-- stateMachineDsl::Function
+stateMachineDsl::Action "0..1" --* "1..1" stateMachineDsl::MemberState : action19
+stateMachineDsl::Action "0..1" --* "1..1" stateMachineDsl::Member : action66
+stateMachineDsl::EObject "0..1" --* "1..1" stateMachineDsl::Action : action74
+stateMachineDsl::Action "0..9999" --* "1..1" stateMachineDsl::Transition : actions33
+stateMachineDsl::Expression "0..9999" --* "1..1" stateMachineDsl::FunctionUse : arguments88
+stateMachineDsl::Expression "0..9999" --* "1..1" stateMachineDsl::ProcedureUse : arguments93
+stateMachineDsl::CommandAction "0..1" --* "1..1" stateMachineDsl::MemberState : commandaction23
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::Parenthesis : cond134
+stateMachineDsl::Condition "1..1" *-- "0..1" stateMachineDsl::Expression : cond96
+stateMachineDsl::Transition "1..1" *-- "0..1" stateMachineDsl::Condition : condition31
+stateMachineDsl::Condition "0..1" --* "1..1" stateMachineDsl::Event : condition44
+stateMachineDsl::Condition "0..1" --* "1..1" stateMachineDsl::Procedure : condition51
+stateMachineDsl::Condition "0..1" --* "1..1" stateMachineDsl::Action : condition76
+stateMachineDsl::Declaration "0..9999" --* "1..1" stateMachineDsl::StateMachine : declarations0
+stateMachineDsl::Event "0..1" --* "1..1" stateMachineDsl::Declaration : event10
+stateMachineDsl::Event "0..1" -- "1..1" stateMachineDsl::Transition : event28
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::Not : expression138
+stateMachineDsl::ExtDeclaration "0..1" --* "1..1" stateMachineDsl::Declaration : extdecl8
+stateMachineDsl::FunctionUse "1..1" -- "0..1" stateMachineDsl::Function : funct86
+stateMachineDsl::StateMachine "1..1" -- "0..1" stateMachineDsl::State : initial3
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::And : left104
+stateMachineDsl::Equality "1..1" *-- "0..1" stateMachineDsl::Expression : left109
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::Comparison : left114
+stateMachineDsl::PlusCond "1..1" *-- "0..1" stateMachineDsl::Expression : left119
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::MinusCond : left124
+stateMachineDsl::MulOrDiv "1..1" *-- "0..1" stateMachineDsl::Expression : left129
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::Or : left99
+stateMachineDsl::MemberState "0..9999" --* "1..1" stateMachineDsl::State : members14
+stateMachineDsl::Member "0..9999" --* "1..1" stateMachineDsl::Event : members47
+stateMachineDsl::Member "0..9999" --* "1..1" stateMachineDsl::Procedure : members54
+stateMachineDsl::VarParName "0..1" --* "1..1" stateMachineDsl::Variable : n36
+stateMachineDsl::Parameter "1..1" *-- "0..1" stateMachineDsl::VarParName : n60
+stateMachineDsl::ParameterFunction "0..9999" --* "1..1" stateMachineDsl::ExtDeclaration : parameters42
+stateMachineDsl::Procedure "1..1" *-- "0..9999" stateMachineDsl::Parameter : parameters49
+stateMachineDsl::Declaration "1..1" *-- "0..1" stateMachineDsl::Procedure : procedure12
+stateMachineDsl::Procedure "0..1" -- "1..1" stateMachineDsl::ProcedureUse : procedure91
+stateMachineDsl::VarType "0..1" --* "1..1" stateMachineDsl::Function : returnvalue69
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::Or : right101
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::And : right106
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::Equality : right111
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::Comparison : right116
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::PlusCond : right121
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::MinusCond : right126
+stateMachineDsl::Expression "0..1" --* "1..1" stateMachineDsl::MulOrDiv : right131
+stateMachineDsl::StateMachine "1..1" *-- "0..9999" stateMachineDsl::State : states1
+stateMachineDsl::State "0..1" -- "1..1" stateMachineDsl::Transition : to25
+stateMachineDsl::MemberState "1..1" *-- "0..1" stateMachineDsl::Transition : transition21
+stateMachineDsl::VarType "0..1" --* "1..1" stateMachineDsl::Variable : type38
+stateMachineDsl::VarType "0..1" --* "1..1" stateMachineDsl::Parameter : type57
+stateMachineDsl::ParameterFunction "1..1" *-- "0..1" stateMachineDsl::VarType : type71
+stateMachineDsl::Variable "1..1" *-- "0..1" stateMachineDsl::Expression : value40
+stateMachineDsl::SetAction "1..1" *-- "0..1" stateMachineDsl::Expression : value81
+stateMachineDsl::VarRef "1..1" -- "0..1" stateMachineDsl::VarParName : variable136
+stateMachineDsl::Variable "0..1" --* "1..1" stateMachineDsl::MemberState : variable16
+stateMachineDsl::Variable "0..1" --* "1..1" stateMachineDsl::Declaration : variable6
+stateMachineDsl::Variable "0..1" --* "1..1" stateMachineDsl::Member : variable63
+stateMachineDsl::VarParName "0..1" -- "1..1" stateMachineDsl::SetAction : variable79
+stateMachineDsl::VarParName "0..1" -- "1..1" stateMachineDsl::ChangeAction : variable84
+@enduml

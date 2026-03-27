@@ -1,0 +1,155 @@
+@startuml
+class SrcAuthor {
+}
+class SrcAuthoredEntry {
+}
+class SrcBibTeXEntry {
+}
+class SrcBook {
+}
+class SrcBookTitledEntry {
+}
+class SrcDatedEntry {
+}
+class SrcMasterThesis {
+}
+class SrcProceedings {
+}
+class SrcThesisEntry {
+}
+class SrcTitledEntry {
+}
+class TrgArticle {
+}
+class TrgBook {
+}
+class TrgDocBook {
+}
+class TrgPara {
+}
+class TrgSect1 {
+}
+class TrgSect2 {
+}
+class TrgSection {
+}
+class TrgTitledElement {
+}
+class jointPackage::JointMM {
+}
+class jointPackage::SrcArticle {
+  + journal : str
+}
+class jointPackage::SrcAuthor {
+  + author : str
+}
+abstract class jointPackage::SrcAuthoredEntry {
+}
+abstract class jointPackage::SrcBibTeXEntry {
+  + id : str
+}
+class jointPackage::SrcBibTeXFile {
+}
+class jointPackage::SrcBook {
+  + publisher : str
+}
+abstract class jointPackage::SrcBookTitledEntry {
+  + booktitle : str
+}
+class jointPackage::SrcBooklet {
+}
+abstract class jointPackage::SrcDatedEntry {
+  + year : str
+}
+class jointPackage::SrcInBook {
+  + chapter : int
+}
+class jointPackage::SrcInCollection {
+}
+class jointPackage::SrcInProceedings {
+}
+class jointPackage::SrcManual {
+}
+class jointPackage::SrcMasterThesis {
+}
+class jointPackage::SrcMisc {
+}
+class jointPackage::SrcPhDThesis {
+}
+class jointPackage::SrcProceedings {
+}
+class jointPackage::SrcTechReport {
+}
+abstract class jointPackage::SrcThesisEntry {
+  + school : str
+}
+abstract class jointPackage::SrcTitledEntry {
+  + title : str
+}
+class jointPackage::SrcUnpublished {
+  + note : str
+}
+class jointPackage::TrgArticle {
+}
+class jointPackage::TrgBook {
+}
+class jointPackage::TrgDocBook {
+}
+class jointPackage::TrgPara {
+  + content : str
+}
+class jointPackage::TrgSect1 {
+}
+class jointPackage::TrgSect2 {
+}
+abstract class jointPackage::TrgSection {
+}
+abstract class jointPackage::TrgTitledElement {
+  + title : str
+}
+SrcAuthoredEntry <|-- jointPackage::SrcArticle
+SrcAuthoredEntry <|-- jointPackage::SrcBook
+SrcAuthoredEntry <|-- jointPackage::SrcInProceedings
+SrcAuthoredEntry <|-- jointPackage::SrcTechReport
+SrcAuthoredEntry <|-- jointPackage::SrcThesisEntry
+SrcAuthoredEntry <|-- jointPackage::SrcUnpublished
+SrcBibTeXEntry <|-- jointPackage::SrcAuthoredEntry
+SrcBibTeXEntry <|-- jointPackage::SrcBookTitledEntry
+SrcBibTeXEntry <|-- jointPackage::SrcDatedEntry
+SrcBibTeXEntry <|-- jointPackage::SrcMisc
+SrcBibTeXEntry <|-- jointPackage::SrcTitledEntry
+SrcBookTitledEntry <|-- jointPackage::SrcInCollection
+SrcBookTitledEntry <|-- jointPackage::SrcInProceedings
+SrcBook <|-- jointPackage::SrcInBook
+SrcBook <|-- jointPackage::SrcInCollection
+SrcDatedEntry <|-- jointPackage::SrcArticle
+SrcDatedEntry <|-- jointPackage::SrcBook
+SrcDatedEntry <|-- jointPackage::SrcBooklet
+SrcDatedEntry <|-- jointPackage::SrcProceedings
+SrcDatedEntry <|-- jointPackage::SrcTechReport
+SrcDatedEntry <|-- jointPackage::SrcThesisEntry
+SrcProceedings <|-- jointPackage::SrcInProceedings
+SrcThesisEntry <|-- jointPackage::SrcMasterThesis
+SrcThesisEntry <|-- jointPackage::SrcPhDThesis
+SrcTitledEntry <|-- jointPackage::SrcArticle
+SrcTitledEntry <|-- jointPackage::SrcBook
+SrcTitledEntry <|-- jointPackage::SrcManual
+SrcTitledEntry <|-- jointPackage::SrcProceedings
+SrcTitledEntry <|-- jointPackage::SrcTechReport
+SrcTitledEntry <|-- jointPackage::SrcThesisEntry
+SrcTitledEntry <|-- jointPackage::SrcUnpublished
+TrgSection <|-- jointPackage::TrgSect1
+TrgSection <|-- jointPackage::TrgSect2
+TrgTitledElement <|-- jointPackage::TrgArticle
+TrgTitledElement <|-- jointPackage::TrgSection
+TrgArticle "1..9999" --* "1..1" jointPackage::TrgBook : articles6
+jointPackage::SrcAuthoredEntry "1..1" *-- "1..9999" SrcAuthor : authors4
+TrgBook "1..9999" --* "1..1" jointPackage::TrgDocBook : books5
+SrcBibTeXEntry "0..9999" --* "1..1" jointPackage::SrcBibTeXFile : entries3
+TrgPara "1..9999" --* "1..1" jointPackage::TrgSection : paras8
+jointPackage::TrgPara "1..1" -- "1..1" TrgSection : section10
+TrgSect1 "1..9999" --* "1..1" jointPackage::TrgArticle : sections_17
+TrgSect2 "1..9999" --* "1..1" jointPackage::TrgSect1 : sections_29
+jointPackage::JointMM "1..1" *-- "1..1" SrcMasterThesis : sourceRoot0
+TrgDocBook "1..1" --* "1..1" jointPackage::JointMM : targetRoot1
+@enduml

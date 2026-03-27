@@ -1,0 +1,108 @@
+@startuml
+class ASD::Annotation {
+  + key : str
+  + value : str
+}
+class ASD::Assertion {
+  + dimension : str
+  + dimensionType : str
+  + lType : str
+  + maxVal : float
+  + minVal : float
+  + role : str
+  + subset : str
+}
+class ASD::AssertionSet {
+  + lType : str
+}
+class ASD::InfoType {
+  + subset : str
+  + valueRange : str
+  + valueType : str
+}
+class ASD::InfoTypeImported {
+  + url : str
+}
+class ASD::Message {
+  + role : str
+  + subset : str
+}
+abstract class ASD::NamedElement {
+  + name : str
+}
+class ASD::Operation {
+  + messagePattern : str
+}
+class ASD::Profile {
+}
+class ASD::ServiceDescription {
+}
+enum EEnumDimensionType {
+  antitonic
+  monotonic
+}
+enum EEnumIntention {
+  expectation
+  offering
+}
+enum EEnumMes {
+  fault
+  input
+  output
+}
+enum EEnumOp {
+  notification
+  oneway
+  requestresponse
+  solicitresponse
+}
+enum EEnumSubset {
+  exp
+  off
+  pro
+  req
+}
+enum EEnumValueType {
+  date
+  document
+  double
+  float
+  int
+  string
+}
+enum EEnumlogicalType {
+  AND
+  OR
+}
+class InfoType {
+}
+class NamedElement {
+}
+InfoType <|-- ASD::InfoTypeImported
+NamedElement <|-- ASD::Assertion
+NamedElement <|-- ASD::AssertionSet
+NamedElement <|-- ASD::InfoType
+NamedElement <|-- ASD::Message
+NamedElement <|-- ASD::Operation
+NamedElement <|-- ASD::Profile
+NamedElement <|-- ASD::ServiceDescription
+ASD::Annotation "0..9999" --* "1..1" ASD::NamedElement : annotations29
+ASD::Assertion "1..9999" --* "1..1" ASD::AssertionSet : assertions26
+ASD::Operation "1..1" *-- "1..9999" ASD::Message : contents5
+ASD::InfoType "0..9999" --* "1..1" ASD::InfoType : infoType12
+ASD::InfoType "1..9999" -- "1..1" ASD::Message : infoType7
+ASD::InfoType "0..9999" --* "1..1" ASD::ServiceDescription : infotypes1
+ASD::Message "0..9999" -- "1..1" ASD::InfoType : message16
+ASD::Operation "0..1" -- "1..1" ASD::Message : operation9
+ASD::Operation "0..9999" --* "1..1" ASD::ServiceDescription : operations0
+ASD::Annotation "1..1" -- "0..1" ASD::NamedElement : owner30
+ASD::AssertionSet "1..1" -- "0..1" ASD::Profile : profile24
+ASD::ServiceDescription "1..1" *-- "0..9999" ASD::Profile : profiles3
+ASD::InfoType "1..1" -- "0..1" ASD::InfoType : ref14
+ASD::Operation "1..9999" -- "1..1" ASD::Profile : refers20
+ASD::ServiceDescription "0..1" -- "1..1" ASD::InfoType : service18
+ASD::ServiceDescription "0..1" -- "1..1" ASD::Profile : service22
+ASD::ServiceDescription "0..1" -- "1..1" ASD::Operation : service6
+ASD::AssertionSet "0..1" -- "1..1" ASD::Assertion : set27
+ASD::AssertionSet "1..9999" --* "1..1" ASD::Profile : sets21
+@enduml

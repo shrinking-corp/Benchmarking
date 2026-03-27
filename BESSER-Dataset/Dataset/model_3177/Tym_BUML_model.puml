@@ -1,0 +1,116 @@
+@startuml
+class AbstractElement {
+}
+class Expression {
+}
+class tym::AbstractElement {
+}
+class tym::And {
+}
+class tym::Block {
+}
+class tym::BoolConstant {
+  + value : str
+}
+class tym::Comparison {
+  + op : str
+}
+class tym::EObject {
+}
+class tym::Equality {
+  + op : str
+}
+class tym::Expression {
+}
+class tym::Function {
+  + name : str
+  + return : str
+}
+class tym::FunctionBlock {
+}
+class tym::FunctionCall {
+}
+class tym::IntConstant {
+  + value : int
+}
+class tym::LoopStatement {
+}
+class tym::Minus {
+}
+class tym::Model {
+}
+class tym::MulOrDiv {
+  + op : str
+}
+class tym::Not {
+}
+class tym::Or {
+}
+class tym::Plus {
+}
+class tym::PrintStatement {
+}
+class tym::Return {
+}
+class tym::StringConstant {
+  + value : str
+}
+class tym::TestStatement {
+}
+class tym::Variable {
+  + name : str
+  + vartype : str
+}
+class tym::VariableRef {
+}
+AbstractElement <|-- tym::FunctionCall
+AbstractElement <|-- tym::LoopStatement
+AbstractElement <|-- tym::PrintStatement
+AbstractElement <|-- tym::Return
+AbstractElement <|-- tym::TestStatement
+AbstractElement <|-- tym::Variable
+Expression <|-- tym::And
+Expression <|-- tym::BoolConstant
+Expression <|-- tym::Comparison
+Expression <|-- tym::Equality
+Expression <|-- tym::IntConstant
+Expression <|-- tym::Minus
+Expression <|-- tym::MulOrDiv
+Expression <|-- tym::Not
+Expression <|-- tym::Or
+Expression <|-- tym::Plus
+Expression <|-- tym::StringConstant
+Expression <|-- tym::VariableRef
+tym::Block "0..1" --* "1..1" tym::LoopStatement : body26
+tym::Function "1..1" *-- "0..1" tym::FunctionBlock : body8
+tym::Model "1..1" *-- "0..9999" tym::EObject : elements0
+tym::AbstractElement "0..9999" --* "1..1" tym::Block : elements19
+tym::AbstractElement "0..9999" --* "1..1" tym::FunctionBlock : elements21
+tym::TestStatement "1..1" *-- "0..1" tym::Block : elseBlock16
+tym::EObject "0..1" --* "1..1" tym::PrintStatement : expression10
+tym::TestStatement "1..1" *-- "0..1" tym::EObject : expression12
+tym::LoopStatement "1..1" *-- "0..1" tym::EObject : expression24
+tym::EObject "0..1" --* "1..1" tym::Return : expression29
+tym::EObject "0..1" --* "1..1" tym::Variable : expression3
+tym::Expression "0..1" --* "1..1" tym::Not : expression70
+tym::Function "0..1" -- "1..1" tym::FunctionCall : funcname31
+tym::Expression "0..1" --* "1..1" tym::Or : left35
+tym::Expression "0..1" --* "1..1" tym::And : left40
+tym::Expression "0..1" --* "1..1" tym::Equality : left45
+tym::Expression "0..1" --* "1..1" tym::Comparison : left50
+tym::Plus "1..1" *-- "0..1" tym::Expression : left55
+tym::Expression "0..1" --* "1..1" tym::Minus : left60
+tym::MulOrDiv "1..1" *-- "0..1" tym::Expression : left65
+tym::FunctionCall "1..1" *-- "0..9999" tym::Expression : params33
+tym::Variable "0..9999" --* "1..1" tym::Function : params6
+tym::Expression "0..1" --* "1..1" tym::Or : right37
+tym::And "1..1" *-- "0..1" tym::Expression : right42
+tym::Expression "0..1" --* "1..1" tym::Equality : right47
+tym::Expression "0..1" --* "1..1" tym::Comparison : right52
+tym::Expression "0..1" --* "1..1" tym::Plus : right57
+tym::Expression "0..1" --* "1..1" tym::Minus : right62
+tym::MulOrDiv "1..1" *-- "0..1" tym::Expression : right67
+tym::Block "0..1" --* "1..1" tym::TestStatement : thenBlock14
+tym::Variable "0..1" -- "1..1" tym::Variable : variable2
+tym::Variable "0..1" -- "1..1" tym::VariableRef : variable72
+@enduml

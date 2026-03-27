@@ -1,0 +1,43 @@
+@startuml
+class TopNode {
+}
+class compartments::Canvas {
+}
+class compartments::ChildOfA::C {
+  + name : str
+}
+class compartments::ChildOfA::D {
+  + name : str
+}
+class compartments::ChildOfAffixed {
+  + description : str
+}
+class compartments::ChildOfB::E {
+  + name : str
+}
+class compartments::ChildOfB::F {
+  + name : str
+}
+class compartments::ChildOfB::G {
+  + number : int
+}
+class compartments::TopNode {
+}
+class compartments::TopNodeA {
+  + name : str
+}
+class compartments::TopNodeB {
+  + name : str
+}
+TopNode <|-- compartments::TopNodeA
+TopNode <|-- compartments::TopNodeB
+compartments::ChildOfA::C "0..1" -- "1..1" compartments::ChildOfB::E : cNodeRelation9
+compartments::TopNodeA "1..1" *-- "0..9999" compartments::ChildOfA::C : childrenC1
+compartments::ChildOfA::D "0..9999" --* "1..1" compartments::TopNodeA : childrenD2
+compartments::ChildOfB::E "0..9999" --* "1..1" compartments::TopNodeB : childrenE4
+compartments::TopNodeB "1..1" *-- "0..9999" compartments::ChildOfB::F : childrenF7
+compartments::ChildOfB::G "0..9999" --* "1..1" compartments::TopNodeB : childrenG5
+compartments::ChildOfAffixed "0..9999" --* "1..1" compartments::ChildOfB::G : childrenOfAffixed12
+compartments::ChildOfA::D "0..1" -- "1..1" compartments::ChildOfB::F : dNodeRelation14
+compartments::TopNode "0..9999" --* "1..1" compartments::Canvas : elements0
+@enduml

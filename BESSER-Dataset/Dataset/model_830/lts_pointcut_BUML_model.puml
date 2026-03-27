@@ -1,0 +1,26 @@
+@startuml
+class lts::pc::EObject {
+}
+class lts::pc::LTS {
+  + name : str
+}
+class lts::pc::Pointcut {
+}
+class lts::pc::State {
+  + name : str
+}
+class lts::pc::Transition {
+  + input : str
+  + output : str
+}
+lts::pc::EObject "0..9999" --* "1..1" lts::pc::Pointcut : children16
+lts::pc::State "0..1" -- "1..1" lts::pc::LTS : currentState2
+lts::pc::LTS "1..1" -- "0..9999" lts::pc::State : finalState5
+lts::pc::Transition "0..9999" -- "1..1" lts::pc::State : incomingTransition10
+lts::pc::State "0..1" -- "1..1" lts::pc::LTS : initialState1
+lts::pc::Transition "0..9999" --* "1..1" lts::pc::State : outgoingTransition9
+lts::pc::State "0..9999" --* "1..1" lts::pc::LTS : ownedState0
+lts::pc::LTS "0..1" -- "1..1" lts::pc::State : owningLTS8
+lts::pc::State "0..1" -- "1..1" lts::pc::Transition : source12
+lts::pc::Transition "1..1" -- "0..1" lts::pc::State : target14
+@enduml

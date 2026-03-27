@@ -1,0 +1,132 @@
+@startuml
+enum ActionType {
+  AOP
+  WS
+}
+class Activity {
+}
+class ActivityEdge {
+}
+class ActivityNode {
+}
+class ActivityPartition {
+}
+class ControlNode {
+}
+enum EventType {
+  POST
+  PRE
+  TIME
+}
+class ExecutableNode {
+}
+class FinalNode {
+}
+class NamedElement {
+}
+class PiServiceComposition::Action {
+  + type : str
+}
+abstract class PiServiceComposition::Activity {
+}
+abstract class PiServiceComposition::ActivityEdge {
+}
+class PiServiceComposition::ActivityFinalNode {
+}
+abstract class PiServiceComposition::ActivityNode {
+}
+abstract class PiServiceComposition::ActivityPartition {
+  + isDimension : bool
+  + isExternal : bool
+}
+class PiServiceComposition::BussinessCollaborator {
+}
+class PiServiceComposition::CompositionServiceModel {
+}
+class PiServiceComposition::ControlFlow {
+}
+abstract class PiServiceComposition::ControlNode {
+}
+class PiServiceComposition::DecisionNode {
+}
+abstract class PiServiceComposition::ExecutableNode {
+}
+abstract class PiServiceComposition::FinalNode {
+}
+class PiServiceComposition::ForkNode {
+}
+class PiServiceComposition::InitialNode {
+}
+class PiServiceComposition::JoinNode {
+}
+class PiServiceComposition::MergeNode {
+}
+abstract class PiServiceComposition::NamedElement {
+  + name : str
+}
+class PiServiceComposition::ObjectFlow {
+}
+class PiServiceComposition::ObjectNode {
+}
+class PiServiceComposition::Policy {
+  + name : str
+}
+class PiServiceComposition::Rule {
+  + action : str
+  + condition : str
+  + event : str
+  + name : str
+}
+class PiServiceComposition::ServiceActivity {
+}
+class PiServiceComposition::Variable {
+  + name : str
+  + type : str
+}
+ActivityEdge <|-- PiServiceComposition::ControlFlow
+ActivityEdge <|-- PiServiceComposition::ObjectFlow
+ActivityNode <|-- PiServiceComposition::ControlNode
+ActivityNode <|-- PiServiceComposition::ExecutableNode
+ActivityNode <|-- PiServiceComposition::ObjectNode
+ActivityPartition <|-- PiServiceComposition::BussinessCollaborator
+Activity <|-- PiServiceComposition::ServiceActivity
+ControlNode <|-- PiServiceComposition::DecisionNode
+ControlNode <|-- PiServiceComposition::FinalNode
+ControlNode <|-- PiServiceComposition::ForkNode
+ControlNode <|-- PiServiceComposition::InitialNode
+ControlNode <|-- PiServiceComposition::JoinNode
+ControlNode <|-- PiServiceComposition::MergeNode
+ExecutableNode <|-- PiServiceComposition::Action
+FinalNode <|-- PiServiceComposition::ActivityFinalNode
+NamedElement <|-- PiServiceComposition::Activity
+NamedElement <|-- PiServiceComposition::ActivityEdge
+NamedElement <|-- PiServiceComposition::ActivityNode
+NamedElement <|-- PiServiceComposition::ActivityPartition
+PiServiceComposition::ActivityPartition "0..1" --* "1..1" PiServiceComposition::ActivityPartition : APartition12
+PiServiceComposition::Action "1..9999" --* "1..1" PiServiceComposition::ServiceActivity : action37
+PiServiceComposition::Action "0..9999" -- "1..1" PiServiceComposition::Policy : action51
+PiServiceComposition::Activity "0..9999" --* "1..1" PiServiceComposition::CompositionServiceModel : activities1
+PiServiceComposition::ActivityNode "1..1" -- "0..1" PiServiceComposition::Activity : activity25
+PiServiceComposition::Policy "0..9999" --* "1..1" PiServiceComposition::CompositionServiceModel : compositionPolices5
+PiServiceComposition::Policy "1..1" *-- "1..9999" PiServiceComposition::Rule : contains46
+PiServiceComposition::Policy "0..1" -- "1..1" PiServiceComposition::Action : definePolices41
+PiServiceComposition::ActivityEdge "0..9999" -- "1..1" PiServiceComposition::ActivityPartition : edges14
+PiServiceComposition::CompositionServiceModel "1..1" *-- "0..9999" PiServiceComposition::ActivityEdge : edges3
+PiServiceComposition::ServiceActivity "1..1" -- "0..9999" PiServiceComposition::Policy : hasPolices38
+PiServiceComposition::Policy "0..9999" -- "1..1" PiServiceComposition::BussinessCollaborator : hasPolices42
+PiServiceComposition::Variable "0..9999" -- "1..1" PiServiceComposition::Policy : hasVars47
+PiServiceComposition::ActivityEdge "0..9999" -- "1..1" PiServiceComposition::ActivityNode : incoming28
+PiServiceComposition::Activity "1..1" *-- "0..9999" PiServiceComposition::ActivityNode : node9
+PiServiceComposition::ActivityNode "0..9999" -- "1..1" PiServiceComposition::ActivityPartition : nodes15
+PiServiceComposition::ActivityEdge "0..9999" -- "1..1" PiServiceComposition::ActivityNode : outgoing30
+PiServiceComposition::ActivityPartition "0..9999" --* "1..1" PiServiceComposition::CompositionServiceModel : partition0
+PiServiceComposition::ActivityPartition "0..1" -- "1..1" PiServiceComposition::ActivityEdge : partition24
+PiServiceComposition::ActivityNode "1..1" -- "0..1" PiServiceComposition::ActivityPartition : partition35
+PiServiceComposition::Policy "1..1" -- "1..1" PiServiceComposition::Rule : policy44
+PiServiceComposition::ActivityEdge "0..9999" -- "1..1" PiServiceComposition::ActivityEdge : redefinedElement22
+PiServiceComposition::ActivityNode "0..9999" -- "1..1" PiServiceComposition::ActivityNode : redefinedElement33
+PiServiceComposition::ActivityNode "1..1" -- "1..1" PiServiceComposition::ActivityEdge : source19
+PiServiceComposition::ActivityEdge "1..1" -- "1..1" PiServiceComposition::ActivityNode : target17
+PiServiceComposition::BussinessCollaborator "0..9999" -- "1..1" PiServiceComposition::Policy : typeOperation50
+PiServiceComposition::Variable "0..9999" --* "1..1" PiServiceComposition::CompositionServiceModel : vars7
+@enduml

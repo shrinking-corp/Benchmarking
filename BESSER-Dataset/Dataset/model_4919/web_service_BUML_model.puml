@@ -1,0 +1,35 @@
+@startuml
+class DataRecogniser {
+}
+class FunctionProvider {
+}
+class MessageFormatter {
+}
+class web::service::DataRecogniser {
+  + name : str
+}
+class web::service::Endpoint {
+  + name : str
+}
+class web::service::FunctionProvider {
+  + name : str
+}
+class web::service::GenericDataRecogniser {
+}
+class web::service::GenericFunctionProvider {
+}
+class web::service::GenericMessageFormatter {
+}
+class web::service::MessageFormatter {
+  + name : str
+}
+class web::service::Service {
+}
+DataRecogniser <|-- web::service::GenericDataRecogniser
+FunctionProvider <|-- web::service::GenericFunctionProvider
+MessageFormatter <|-- web::service::GenericMessageFormatter
+web::service::Endpoint "1..1" --* "1..1" web::service::Service : endpoint0
+web::service::Endpoint "1..1" *-- "1..9999" web::service::MessageFormatter : formatters1
+web::service::FunctionProvider "1..9999" --* "1..1" web::service::Endpoint : functions3
+web::service::DataRecogniser "0..9999" --* "1..1" web::service::Endpoint : recognisers5
+@enduml

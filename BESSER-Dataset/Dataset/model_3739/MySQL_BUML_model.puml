@@ -1,0 +1,53 @@
+@startuml
+class Column {
+}
+class DataBase {
+}
+class EnumItem {
+}
+class EnumSet {
+}
+class MySQL::Column {
+  + comment : str
+  + defaultValue : str
+  + isPrimaryKey : str
+  + type : str
+}
+class MySQL::DataBase {
+}
+class MySQL::EnumColumn {
+}
+class MySQL::EnumItem {
+}
+class MySQL::EnumSet {
+}
+class MySQL::ForeignColumn {
+}
+class MySQL::IntegerColumn {
+  + isAutoIncrement : str
+}
+abstract class MySQL::NamedElement {
+  + name : str
+}
+class MySQL::Table {
+}
+class NamedElement {
+}
+class Table {
+}
+Column <|-- MySQL::EnumColumn
+Column <|-- MySQL::ForeignColumn
+Column <|-- MySQL::IntegerColumn
+NamedElement <|-- MySQL::Column
+NamedElement <|-- MySQL::DataBase
+NamedElement <|-- MySQL::EnumItem
+NamedElement <|-- MySQL::Table
+Column "0..9999" --* "1..1" MySQL::Table : columns1
+DataBase "1..1" -- "1..1" MySQL::Table : database4
+EnumItem "0..9999" --* "1..1" MySQL::EnumSet : enumItems11
+EnumSet "1..1" --* "1..1" MySQL::EnumColumn : enumSet10
+MySQL::EnumItem "1..1" -- "1..1" EnumSet : enumSet14
+Table "1..1" -- "1..1" MySQL::ForeignColumn : refers17
+Table "1..1" -- "1..1" MySQL::Column : table7
+Table "0..9999" --* "1..1" MySQL::DataBase : tables0
+@enduml

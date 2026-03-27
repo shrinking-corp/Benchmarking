@@ -1,0 +1,160 @@
+@startuml
+class Action {
+}
+enum BooleanOperator {
+  eq
+  neq
+}
+class BooleanValue {
+}
+class NumberValue {
+}
+enum NumericOperator {
+  eq
+  geq
+  gt
+  leq
+  lt
+  neq
+}
+class Query {
+}
+class RoverExpression {
+}
+class RoverValue {
+}
+class Statement {
+}
+enum StringOperator {
+  eq
+  neq
+}
+class StringValue {
+}
+abstract class rcl::Action {
+}
+class rcl::BackwardAction {
+}
+class rcl::BackwardMinAction {
+}
+class rcl::BooleanExpression {
+  + op : str
+}
+class rcl::BooleanValue {
+  + bValue : bool
+}
+class rcl::Conditional {
+}
+class rcl::ForwardAction {
+}
+class rcl::ForwardMinAction {
+}
+class rcl::HumidityQuery {
+}
+class rcl::LogAction {
+  + message : str
+}
+class rcl::Loop {
+}
+class rcl::MessageQuery {
+}
+class rcl::NumberValue {
+  + nValue : int
+}
+class rcl::NumericExpression {
+  + op : str
+}
+class rcl::ObstacleQuery {
+  + front : bool
+}
+class rcl::Param {
+  + name : str
+}
+abstract class rcl::Query {
+}
+class rcl::RclBlock {
+}
+abstract class rcl::RoverExpression {
+}
+class rcl::RoverProgram {
+  + name : str
+}
+abstract class rcl::RoverValue {
+}
+class rcl::SendAction {
+  + message : str
+}
+abstract class rcl::Statement {
+}
+class rcl::StopAction {
+}
+class rcl::StringExpression {
+  + op : str
+}
+class rcl::StringValue {
+  + sValue : str
+}
+class rcl::TemperatureQuery {
+}
+class rcl::TurnAction {
+}
+class rcl::TurnDegAction {
+}
+class rcl::VarAssignment {
+  + name : str
+}
+class rcl::VarRef {
+  + name : str
+}
+Action <|-- rcl::BackwardAction
+Action <|-- rcl::BackwardMinAction
+Action <|-- rcl::ForwardAction
+Action <|-- rcl::ForwardMinAction
+Action <|-- rcl::LogAction
+Action <|-- rcl::SendAction
+Action <|-- rcl::StopAction
+Action <|-- rcl::TurnAction
+Action <|-- rcl::TurnDegAction
+BooleanValue <|-- rcl::ObstacleQuery
+BooleanValue <|-- rcl::VarRef
+NumberValue <|-- rcl::HumidityQuery
+NumberValue <|-- rcl::TemperatureQuery
+NumberValue <|-- rcl::VarRef
+Query <|-- rcl::HumidityQuery
+Query <|-- rcl::MessageQuery
+Query <|-- rcl::ObstacleQuery
+Query <|-- rcl::TemperatureQuery
+RoverExpression <|-- rcl::BooleanExpression
+RoverExpression <|-- rcl::NumericExpression
+RoverExpression <|-- rcl::StringExpression
+RoverValue <|-- rcl::BooleanValue
+RoverValue <|-- rcl::NumberValue
+RoverValue <|-- rcl::StringValue
+Statement <|-- rcl::Action
+Statement <|-- rcl::Conditional
+Statement <|-- rcl::Loop
+Statement <|-- rcl::RclBlock
+Statement <|-- rcl::VarAssignment
+Statement <|-- rcl::VarRef
+StringValue <|-- rcl::MessageQuery
+StringValue <|-- rcl::VarRef
+rcl::RoverProgram "1..1" *-- "0..1" rcl::RclBlock : block1
+rcl::RclBlock "0..1" --* "1..1" rcl::Loop : block15
+rcl::Conditional "1..1" *-- "0..1" rcl::RclBlock : condFalse10
+rcl::RclBlock "0..1" --* "1..1" rcl::Conditional : condTrue7
+rcl::TurnDegAction "1..1" *-- "0..1" rcl::NumberValue : degrees37
+rcl::NumberValue "0..1" --* "1..1" rcl::ForwardMinAction : distance33
+rcl::NumberValue "0..1" --* "1..1" rcl::BackwardMinAction : distance35
+rcl::Statement "1..1" -- "0..1" rcl::RclBlock : enclosing3
+rcl::RoverExpression "0..1" --* "1..1" rcl::Loop : expr13
+rcl::RoverExpression "0..1" --* "1..1" rcl::Conditional : expr6
+rcl::NumericExpression "1..1" *-- "0..1" rcl::NumberValue : lhs21
+rcl::StringValue "0..1" --* "1..1" rcl::StringExpression : lhs25
+rcl::BooleanExpression "1..1" *-- "0..1" rcl::BooleanValue : lhs29
+rcl::Param "0..9999" --* "1..1" rcl::RoverProgram : params0
+rcl::NumberValue "0..1" --* "1..1" rcl::NumericExpression : rhs22
+rcl::StringValue "0..1" --* "1..1" rcl::StringExpression : rhs26
+rcl::BooleanValue "0..1" --* "1..1" rcl::BooleanExpression : rhs30
+rcl::Statement "0..9999" --* "1..1" rcl::RclBlock : stmts18
+rcl::RoverValue "0..1" --* "1..1" rcl::VarAssignment : value5
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+class AbstractState {
+}
+abstract class fsm::AbstractState {
+  + name : str
+}
+class fsm::CompositeState {
+}
+class fsm::InitialState {
+}
+class fsm::RegularState {
+}
+class fsm::Root {
+}
+class fsm::StateMachine {
+  + name : str
+}
+class fsm::Transition {
+  + label : str
+}
+AbstractState <|-- fsm::CompositeState
+AbstractState <|-- fsm::InitialState
+AbstractState <|-- fsm::RegularState
+fsm::CompositeState "0..1" -- "1..1" fsm::AbstractState : compositeStates10
+fsm::Transition "1..1" -- "1..1" fsm::AbstractState : source4
+fsm::StateMachine "1..1" -- "1..1" fsm::Transition : stateMachine3
+fsm::AbstractState "1..1" -- "1..1" fsm::StateMachine : stateMachine8
+fsm::StateMachine "0..9999" --* "1..1" fsm::Root : stateMachines14
+fsm::StateMachine "1..1" *-- "0..9999" fsm::AbstractState : states1
+fsm::AbstractState "0..9999" -- "1..1" fsm::CompositeState : states12
+fsm::AbstractState "1..1" -- "1..1" fsm::Transition : target5
+fsm::StateMachine "1..1" *-- "0..9999" fsm::Transition : transitions0
+@enduml

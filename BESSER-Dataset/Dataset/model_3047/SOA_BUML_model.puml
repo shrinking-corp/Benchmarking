@@ -1,0 +1,89 @@
+@startuml
+class Entities {
+}
+class FeatureType {
+}
+enum PrimitiveType {
+  Boolean
+  Byte
+  Date
+  Datetime
+  Decimal
+  Double
+  Float
+  Integer
+  Long
+  Short
+  String
+  Timestamp
+}
+class soa::Architecture {
+  + name : str
+}
+class soa::Comment {
+  + value : str
+}
+class soa::Entities {
+  + name : str
+}
+class soa::EntitiesFeature {
+}
+class soa::Entity {
+}
+class soa::Enum {
+  + features : str
+}
+class soa::Exception {
+  + msg : str
+  + name : str
+}
+class soa::Exceptions {
+}
+class soa::Feature {
+  + name : str
+}
+class soa::FeatureType {
+}
+class soa::GenericListFeature {
+}
+class soa::Import {
+  + importedNamespace : str
+}
+class soa::Model {
+}
+class soa::Module {
+  + event : str
+  + name : str
+  + version : str
+}
+class soa::Operation {
+  + name : str
+}
+class soa::PrimitiveFeature {
+  + type : str
+}
+class soa::Service {
+  + name : str
+}
+Entities <|-- soa::Entity
+Entities <|-- soa::Enum
+FeatureType <|-- soa::EntitiesFeature
+FeatureType <|-- soa::GenericListFeature
+FeatureType <|-- soa::PrimitiveFeature
+soa::Entities "0..9999" --* "1..1" soa::Model : entities9
+soa::Exception "0..9999" --* "1..1" soa::Exceptions : exceptions20
+soa::Exceptions "0..1" --* "1..1" soa::Module : exceptions5
+soa::Operation "1..1" -- "0..9999" soa::Exception : exceptionts30
+soa::Feature "1..1" *-- "0..9999" soa::Comment : featureComment12
+soa::Feature "0..9999" --* "1..1" soa::Entity : features11
+soa::Feature "0..9999" --* "1..1" soa::Operation : featuresInput24
+soa::Feature "0..9999" --* "1..1" soa::Operation : featuresOutput27
+soa::Import "0..9999" --* "1..1" soa::Module : imports1
+soa::Module "1..1" *-- "0..1" soa::Model : model3
+soa::Architecture "1..1" *-- "0..1" soa::Module : module0
+soa::Operation "0..9999" --* "1..1" soa::Service : operations22
+soa::Module "1..1" *-- "0..9999" soa::Service : services7
+soa::FeatureType "0..1" --* "1..1" soa::Feature : type14
+soa::EntitiesFeature "1..1" -- "0..1" soa::Entities : type16
+soa::FeatureType "0..1" --* "1..1" soa::GenericListFeature : type18
+@enduml

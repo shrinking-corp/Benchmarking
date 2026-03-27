@@ -1,0 +1,122 @@
+@startuml
+class ConstructorBody {
+}
+enum DirectionKind {
+  in
+  inout
+  out
+}
+class EntryOperation {
+}
+class ImperativeCallExp {
+}
+class ImperativeOperation {
+}
+enum ImportKind {
+  access
+  extension
+}
+class MappingOperation {
+}
+class ModelParameter {
+}
+class ModelType {
+}
+class Module {
+}
+class ModuleImport {
+}
+class OperationBody {
+}
+class QVTOperational::Constructor {
+}
+class QVTOperational::ConstructorBody {
+}
+class QVTOperational::ContextualProperty {
+}
+class QVTOperational::EntryOperation {
+}
+class QVTOperational::Helper {
+  + isQuery : str
+}
+class QVTOperational::ImperativeCallExp {
+  + isVirtual : str
+}
+class QVTOperational::ImperativeOperation {
+  + isBlackbox : str
+}
+class QVTOperational::Library {
+}
+class QVTOperational::MappingBody {
+}
+class QVTOperational::MappingCallExp {
+  + isStrict : str
+}
+class QVTOperational::MappingOperation {
+}
+class QVTOperational::MappingParameter {
+}
+class QVTOperational::ModelParameter {
+}
+class QVTOperational::ModelType {
+  + conformanceKind : str
+}
+class QVTOperational::Module {
+  + isBlackbox : str
+}
+class QVTOperational::ModuleImport {
+  + kind : str
+}
+class QVTOperational::ObjectExp {
+}
+class QVTOperational::OperationBody {
+}
+class QVTOperational::OperationalTransformation {
+}
+class QVTOperational::ResolveExp {
+  + isDeferred : str
+  + isInverse : str
+  + one : str
+}
+class QVTOperational::ResolveInExp {
+}
+class QVTOperational::VarParameter {
+  + kind : str
+}
+class ResolveExp {
+}
+class VarParameter {
+}
+ImperativeCallExp <|-- QVTOperational::MappingCallExp
+ImperativeOperation <|-- QVTOperational::Constructor
+ImperativeOperation <|-- QVTOperational::EntryOperation
+ImperativeOperation <|-- QVTOperational::Helper
+ImperativeOperation <|-- QVTOperational::MappingOperation
+Module <|-- QVTOperational::Library
+Module <|-- QVTOperational::OperationalTransformation
+OperationBody <|-- QVTOperational::ConstructorBody
+OperationBody <|-- QVTOperational::MappingBody
+ResolveExp <|-- QVTOperational::ResolveInExp
+VarParameter <|-- QVTOperational::MappingParameter
+VarParameter <|-- QVTOperational::ModelParameter
+ModelType "0..9999" -- "1..1" QVTOperational::ModuleImport : binding21
+QVTOperational::ImperativeOperation "1..1" *-- "0..1" OperationBody : body0
+QVTOperational::ObjectExp "1..1" *-- "1..1" ConstructorBody : body28
+VarParameter "0..1" --* "1..1" QVTOperational::ImperativeOperation : context1
+QVTOperational::VarParameter "1..1" -- "0..1" ImperativeOperation : ctxOwner35
+QVTOperational::MappingOperation "1..1" -- "0..9999" MappingOperation : disjunct8
+EntryOperation "0..1" -- "1..1" QVTOperational::Module : entry16
+ModelParameter "0..1" -- "1..1" QVTOperational::MappingParameter : extent15
+Module "1..1" -- "1..1" QVTOperational::ModuleImport : importedModule23
+MappingOperation "0..1" -- "1..1" QVTOperational::ResolveInExp : inMapping33
+MappingOperation "0..9999" -- "1..1" QVTOperational::MappingOperation : inherited9
+QVTOperational::MappingOperation "1..1" -- "0..9999" MappingOperation : merged12
+ModelParameter "0..9999" --* "1..1" QVTOperational::OperationalTransformation : modelParameter31
+Module "0..1" -- "1..1" QVTOperational::ModuleImport : module25
+QVTOperational::Module "1..1" *-- "0..9999" ModuleImport : moduleImport17
+ImperativeOperation "0..1" -- "1..1" QVTOperational::OperationBody : operation29
+ImperativeOperation "0..1" -- "1..1" QVTOperational::ImperativeOperation : overridden3
+ImperativeOperation "0..1" -- "1..1" QVTOperational::VarParameter : resOwner37
+QVTOperational::ImperativeOperation "1..1" *-- "0..9999" VarParameter : result5
+ModelType "0..9999" -- "1..1" QVTOperational::Module : usedModelType19
+@enduml

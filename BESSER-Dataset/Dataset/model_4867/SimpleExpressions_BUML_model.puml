@@ -1,0 +1,42 @@
+@startuml
+class Expression {
+}
+class simpleExpressions::AndExpression {
+}
+class simpleExpressions::BooleanLiteral {
+  + value : bool
+}
+class simpleExpressions::Comparison {
+  + operator : str
+}
+class simpleExpressions::Expression {
+}
+class simpleExpressions::IfCondition {
+  + elseif : bool
+}
+class simpleExpressions::MethodCall {
+  + value : str
+}
+class simpleExpressions::NotExpression {
+}
+class simpleExpressions::NumberLiteral {
+  + value : int
+}
+class simpleExpressions::OrExpression {
+}
+Expression <|-- simpleExpressions::AndExpression
+Expression <|-- simpleExpressions::BooleanLiteral
+Expression <|-- simpleExpressions::Comparison
+Expression <|-- simpleExpressions::MethodCall
+Expression <|-- simpleExpressions::NotExpression
+Expression <|-- simpleExpressions::NumberLiteral
+Expression <|-- simpleExpressions::OrExpression
+simpleExpressions::Expression "0..1" --* "1..1" simpleExpressions::IfCondition : condition0
+simpleExpressions::Expression "0..1" --* "1..1" simpleExpressions::NotExpression : expression16
+simpleExpressions::OrExpression "1..1" *-- "0..1" simpleExpressions::Expression : left1
+simpleExpressions::Expression "0..1" --* "1..1" simpleExpressions::Comparison : left11
+simpleExpressions::Expression "0..1" --* "1..1" simpleExpressions::AndExpression : left6
+simpleExpressions::Comparison "1..1" *-- "0..1" simpleExpressions::Expression : right13
+simpleExpressions::Expression "0..1" --* "1..1" simpleExpressions::OrExpression : right3
+simpleExpressions::Expression "0..1" --* "1..1" simpleExpressions::AndExpression : right8
+@enduml

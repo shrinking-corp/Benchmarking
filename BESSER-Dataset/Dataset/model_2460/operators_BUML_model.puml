@@ -1,0 +1,47 @@
+@startuml
+class NumericExp {
+}
+class OclExpression {
+}
+class OperatorCallExp {
+}
+class PrimitiveExp {
+}
+class operators::BinaryOperatorCallExp {
+}
+class operators::BooleanExp {
+  + booleanSymbol : str
+}
+class operators::IntegerExp {
+  + integerSymbol : str
+}
+abstract class operators::NumericExp {
+}
+abstract class operators::OclExpression {
+}
+abstract class operators::OperatorCallExp {
+  + name : str
+}
+abstract class operators::PrimitiveExp {
+}
+class operators::RealExp {
+  + realSymbol : str
+}
+class operators::StringExp {
+  + stringSymbol : str
+}
+class operators::UnaryOperatorCallExp {
+}
+NumericExp <|-- operators::IntegerExp
+NumericExp <|-- operators::RealExp
+OclExpression <|-- operators::OperatorCallExp
+OclExpression <|-- operators::PrimitiveExp
+OperatorCallExp <|-- operators::BinaryOperatorCallExp
+OperatorCallExp <|-- operators::UnaryOperatorCallExp
+PrimitiveExp <|-- operators::BooleanExp
+PrimitiveExp <|-- operators::NumericExp
+PrimitiveExp <|-- operators::StringExp
+operators::BinaryOperatorCallExp "1..1" *-- "1..1" operators::OclExpression : argument1
+operators::OclExpression "1..1" --* "1..1" operators::BinaryOperatorCallExp : source0
+operators::OclExpression "1..1" --* "1..1" operators::UnaryOperatorCallExp : source4
+@enduml

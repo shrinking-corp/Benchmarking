@@ -1,0 +1,83 @@
+@startuml
+class NamedElement {
+}
+class Pseudostate {
+}
+class State {
+}
+class Transition {
+}
+class fsm::Action {
+  + value : bool
+  + variable : str
+}
+class fsm::Choice {
+}
+class fsm::CompositeState {
+}
+class fsm::FinalState {
+}
+class fsm::Fork {
+}
+class fsm::Guard {
+  + expression : str
+}
+class fsm::InitialState {
+}
+class fsm::Join {
+}
+class fsm::NamedElement {
+  + name : str
+}
+class fsm::Pseudostate {
+}
+class fsm::Region {
+}
+class fsm::State {
+  + finalTime : int
+  + initialTime : int
+}
+class fsm::StateMachine {
+}
+class fsm::TimedTransition {
+  + duration : int
+}
+class fsm::Transition {
+  + finalTime : int
+  + initialTime : int
+}
+class fsm::Trigger {
+  + expression : str
+}
+class fsm::Variable {
+  + name : str
+  + value : bool
+}
+NamedElement <|-- fsm::State
+NamedElement <|-- fsm::StateMachine
+NamedElement <|-- fsm::Transition
+Pseudostate <|-- fsm::Choice
+Pseudostate <|-- fsm::Fork
+Pseudostate <|-- fsm::Join
+State <|-- fsm::CompositeState
+State <|-- fsm::FinalState
+State <|-- fsm::InitialState
+State <|-- fsm::Pseudostate
+Transition <|-- fsm::TimedTransition
+fsm::Action "0..1" --* "1..1" fsm::Transition : action28
+fsm::Transition "1..1" *-- "0..1" fsm::Guard : guard26
+fsm::State "1..1" -- "0..9999" fsm::Transition : incoming9
+fsm::Transition "0..9999" -- "1..1" fsm::State : outgoing6
+fsm::Region "1..1" -- "1..1" fsm::CompositeState : parent35
+fsm::CompositeState "0..1" -- "1..1" fsm::State : parentState15
+fsm::Region "1..9999" --* "1..1" fsm::CompositeState : regions30
+fsm::State "1..1" -- "1..1" fsm::Transition : source19
+fsm::StateMachine "0..1" -- "1..1" fsm::State : stateMachine12
+fsm::StateMachine "1..1" -- "1..1" fsm::Transition : stateMachine23
+fsm::State "0..9999" --* "1..1" fsm::StateMachine : states0
+fsm::State "0..9999" --* "1..1" fsm::Region : states32
+fsm::Transition "1..1" -- "1..1" fsm::State : target16
+fsm::StateMachine "1..1" *-- "0..9999" fsm::Transition : transitions2
+fsm::Trigger "0..1" --* "1..1" fsm::Transition : trigger22
+fsm::Variable "0..9999" --* "1..1" fsm::StateMachine : variables5
+@enduml

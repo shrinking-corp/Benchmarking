@@ -1,0 +1,96 @@
+@startuml
+enum AttrType {
+  boolean
+  double
+  integer
+  string
+}
+class Data {
+}
+class Edge {
+}
+enum EdgeType {
+  directed
+  undirected
+}
+enum ElemType {
+  edge
+  graph
+  node
+}
+class Element {
+}
+class EndPoint {
+}
+class Graph {
+}
+class GraphML::Data {
+  + key : str
+  + value : str
+}
+class GraphML::Edge {
+  + directed : str
+}
+class GraphML::Element {
+  + id : str
+}
+class GraphML::EndPoint {
+}
+class GraphML::Graph {
+  + edgeDefault : str
+}
+class GraphML::HyperEdge {
+}
+class GraphML::Key {
+  + attrName : str
+  + defValue : str
+  + for : str
+  + type : str
+}
+abstract class GraphML::LocatedElement {
+  + commentsAfter : str
+  + commentsBefore : str
+  + location : str
+}
+class GraphML::Node {
+}
+class GraphML::Port {
+  + name : str
+}
+class GraphML::Root {
+}
+class Key {
+}
+class LocatedElement {
+}
+class Node {
+}
+class Port {
+}
+Element <|-- GraphML::Edge
+Element <|-- GraphML::Graph
+Element <|-- GraphML::HyperEdge
+Element <|-- GraphML::Key
+Element <|-- GraphML::Node
+LocatedElement <|-- GraphML::Data
+LocatedElement <|-- GraphML::Element
+LocatedElement <|-- GraphML::EndPoint
+LocatedElement <|-- GraphML::Port
+LocatedElement <|-- GraphML::Root
+GraphML::Graph "1..1" *-- "0..9999" Element : contents5
+GraphML::Element "1..1" *-- "0..9999" Data : datas3
+EndPoint "0..9999" --* "1..1" GraphML::HyperEdge : endpoints18
+Graph "0..1" -- "1..1" GraphML::Element : graph4
+Graph "0..9999" --* "1..1" GraphML::Root : graphs1
+Key "0..9999" --* "1..1" GraphML::Root : keys0
+Node "1..1" -- "1..1" GraphML::EndPoint : node30
+Port "1..1" -- "1..1" GraphML::EndPoint : port31
+GraphML::Node "1..1" *-- "0..9999" Port : ports21
+Node "1..1" -- "1..1" GraphML::Edge : source8
+Edge "0..9999" -- "1..1" GraphML::Node : sourceOf24
+Port "1..1" -- "1..1" GraphML::Edge : sourceport14
+Graph "1..1" --* "1..1" GraphML::Node : subgraph19
+Node "1..1" -- "1..1" GraphML::Edge : target11
+GraphML::Node "1..1" -- "0..9999" Edge : targetOf27
+GraphML::Edge "1..1" -- "1..1" Port : targetport15
+@enduml

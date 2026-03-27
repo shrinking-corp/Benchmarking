@@ -1,0 +1,68 @@
+@startuml
+class ERDInfo {
+}
+enum RelationKind {
+  ONE_OR_MANY
+  ONLY_ONE
+  ZERO_OR_MANY
+  ZERO_OR_ONE
+}
+class Table {
+}
+class rdb::Column {
+  + comment : str
+  + default : str
+  + extra : str
+  + field : str
+  + key : str
+  + logicalField : str
+  + null : str
+  + type : str
+}
+class rdb::DB {
+  + comment : str
+  + dbType : str
+  + id : str
+  + key : str
+  + sid : str
+  + url : str
+}
+class rdb::ERDInfo {
+  + autoLayout : bool
+  + version : str
+}
+class rdb::Relation {
+  + bendpoint : str
+  + column_name : str
+  + comment : str
+  + constraint_name : str
+  + referenced_column_name : str
+  + source_kind : str
+  + target_kind : str
+}
+class rdb::Table {
+  + comment : str
+  + constraints : str
+  + logicalName : str
+  + name : str
+}
+class rdb::UserComment {
+  + comment : str
+}
+class rdb::View {
+}
+ERDInfo <|-- rdb::DB
+Table <|-- rdb::View
+rdb::Table "1..1" -- "0..1" rdb::UserComment : UserCommentReference9
+rdb::Column "1..9999" --* "1..1" rdb::Table : columns3
+rdb::DB "1..1" -- "1..1" rdb::Relation : db16
+rdb::DB "1..1" -- "1..1" rdb::Table : db4
+rdb::Table "1..1" -- "0..9999" rdb::Relation : incomingLinks5
+rdb::Relation "0..9999" -- "1..1" rdb::Table : outgoingLinks7
+rdb::Relation "0..9999" --* "1..1" rdb::DB : references1
+rdb::Relation "1..1" -- "0..1" rdb::Table : source12
+rdb::Table "1..1" -- "1..1" rdb::Column : table10
+rdb::Table "1..1" -- "1..1" rdb::View : tableName18
+rdb::Table "0..9999" --* "1..1" rdb::DB : tables0
+rdb::Table "0..1" -- "1..1" rdb::Relation : target14
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class Identifiable {
+}
+class library::Book {
+  + category : str
+  + pages : int
+  + title : str
+}
+class library::Library {
+  + name : str
+}
+class library::Writer {
+  + name : str
+}
+Identifiable <|-- library::Book
+Identifiable <|-- library::Library
+Identifiable <|-- library::Writer
+library::Writer "1..1" -- "1..1" library::Book : author0
+library::Book "0..9999" --* "1..1" library::Library : books2
+library::Book "0..9999" -- "1..1" library::Writer : books4
+library::Writer "0..9999" --* "1..1" library::Library : writers1
+@enduml

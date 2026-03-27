@@ -1,0 +1,34 @@
+@startuml
+class Graph {
+}
+class dot::Attribute {
+  + weight : int
+}
+class dot::DirectedEdge {
+}
+class dot::DirectedGraph {
+}
+class dot::Graph {
+  + name : str
+}
+class dot::GraphModel {
+}
+class dot::Node {
+  + name : str
+}
+class dot::UnDirectedEdge {
+}
+class dot::UndirectedGraph {
+}
+Graph <|-- dot::DirectedGraph
+Graph <|-- dot::UndirectedGraph
+dot::Attribute "0..9999" --* "1..1" dot::DirectedEdge : attributes16
+dot::Attribute "0..9999" --* "1..1" dot::UnDirectedEdge : attributes8
+dot::UnDirectedEdge "0..9999" --* "1..1" dot::UndirectedGraph : edge1
+dot::DirectedGraph "1..1" *-- "0..9999" dot::DirectedEdge : edge2
+dot::GraphModel "1..1" *-- "0..9999" dot::Graph : graph0
+dot::Node "0..1" --* "1..1" dot::DirectedEdge : src10
+dot::Node "0..1" --* "1..1" dot::UnDirectedEdge : src3
+dot::DirectedEdge "1..1" *-- "0..1" dot::Node : tgt13
+dot::Node "0..1" --* "1..1" dot::UnDirectedEdge : tgt5
+@enduml

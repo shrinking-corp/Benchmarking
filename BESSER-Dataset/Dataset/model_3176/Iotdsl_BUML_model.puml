@@ -1,0 +1,111 @@
+@startuml
+class Action {
+}
+class Expression {
+}
+class iotdsl::Action {
+}
+class iotdsl::And {
+}
+class iotdsl::Attribute {
+  + tag : str
+  + typeName : str
+  + value : str
+}
+class iotdsl::BoolConstant {
+  + value : str
+}
+class iotdsl::Comparison {
+  + op : str
+}
+class iotdsl::Device {
+  + name : str
+}
+class iotdsl::Equality {
+  + op : str
+}
+class iotdsl::Event {
+  + name : str
+}
+class iotdsl::Expression {
+}
+class iotdsl::IfBlock {
+}
+class iotdsl::IfStatement {
+}
+class iotdsl::IntConstant {
+  + value : int
+}
+class iotdsl::Iot {
+}
+class iotdsl::Minus {
+}
+class iotdsl::MulOrDiv {
+  + op : str
+}
+class iotdsl::Not {
+}
+class iotdsl::Or {
+}
+class iotdsl::Plus {
+}
+class iotdsl::State {
+  + name : str
+}
+class iotdsl::StringConstant {
+  + value : str
+}
+class iotdsl::Transition {
+  + name : str
+}
+class iotdsl::Variable {
+  + name : str
+}
+class iotdsl::VariableRef {
+}
+Action <|-- iotdsl::Expression
+Action <|-- iotdsl::Variable
+Expression <|-- iotdsl::And
+Expression <|-- iotdsl::BoolConstant
+Expression <|-- iotdsl::Comparison
+Expression <|-- iotdsl::Equality
+Expression <|-- iotdsl::IfStatement
+Expression <|-- iotdsl::IntConstant
+Expression <|-- iotdsl::Minus
+Expression <|-- iotdsl::MulOrDiv
+Expression <|-- iotdsl::Not
+Expression <|-- iotdsl::Or
+Expression <|-- iotdsl::Plus
+Expression <|-- iotdsl::StringConstant
+Expression <|-- iotdsl::VariableRef
+iotdsl::Device "1..1" *-- "0..1" iotdsl::Attribute : attributes4
+iotdsl::Device "0..9999" --* "1..1" iotdsl::Iot : devices0
+iotdsl::State "1..1" *-- "0..9999" iotdsl::Action : elements12
+iotdsl::IfStatement "1..1" *-- "0..1" iotdsl::IfBlock : elseBlock25
+iotdsl::Transition "1..1" -- "0..1" iotdsl::Event : event14
+iotdsl::Event "0..9999" --* "1..1" iotdsl::Device : events8
+iotdsl::Variable "1..1" *-- "0..1" iotdsl::Expression : expression20
+iotdsl::Expression "0..1" --* "1..1" iotdsl::IfStatement : expression21
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Not : expression66
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Or : left31
+iotdsl::Expression "0..1" --* "1..1" iotdsl::And : left36
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Equality : left41
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Comparison : left46
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Plus : left51
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Minus : left56
+iotdsl::Expression "0..1" --* "1..1" iotdsl::MulOrDiv : left61
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Or : right33
+iotdsl::Expression "0..1" --* "1..1" iotdsl::And : right38
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Equality : right43
+iotdsl::Comparison "1..1" *-- "0..1" iotdsl::Expression : right48
+iotdsl::Expression "0..1" --* "1..1" iotdsl::Plus : right53
+iotdsl::Minus "1..1" *-- "0..1" iotdsl::Expression : right58
+iotdsl::Expression "0..1" --* "1..1" iotdsl::MulOrDiv : right63
+iotdsl::State "0..1" -- "1..1" iotdsl::Transition : state17
+iotdsl::Action "0..9999" --* "1..1" iotdsl::IfBlock : statements28
+iotdsl::State "0..9999" --* "1..1" iotdsl::Device : states6
+iotdsl::Device "0..1" -- "1..1" iotdsl::Device : superType2
+iotdsl::IfBlock "0..1" --* "1..1" iotdsl::IfStatement : thenBlock23
+iotdsl::Transition "0..9999" --* "1..1" iotdsl::Device : transitions10
+iotdsl::VariableRef "1..1" -- "0..1" iotdsl::Variable : variable68
+@enduml

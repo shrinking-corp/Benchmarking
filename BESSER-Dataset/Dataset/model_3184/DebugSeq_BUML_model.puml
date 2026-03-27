@@ -1,0 +1,266 @@
+@startuml
+class CodeBlock {
+}
+class Expression {
+}
+class Parameter {
+}
+class Statement {
+}
+class debugSeq::And {
+}
+class debugSeq::Assignment {
+  + op : str
+}
+class debugSeq::BitAnd {
+}
+class debugSeq::BitNot {
+}
+class debugSeq::BitOr {
+}
+class debugSeq::BitXor {
+}
+class debugSeq::Block {
+  + atomic : str
+}
+class debugSeq::CodeBlock {
+  + info : str
+}
+class debugSeq::Comparison {
+  + op : str
+}
+class debugSeq::Control {
+  + timeout : str
+}
+class debugSeq::DapDelay {
+}
+class debugSeq::DapJtagSequence {
+}
+class debugSeq::DapSwjClock {
+}
+class debugSeq::DapSwjPins {
+}
+class debugSeq::DapSwjSequence {
+}
+class debugSeq::DapWriteABORT {
+}
+class debugSeq::DebugSeqModel {
+}
+class debugSeq::DebugVars {
+  + configfile : str
+  + pname : str
+  + version : str
+}
+class debugSeq::Div {
+}
+class debugSeq::Equality {
+  + op : str
+}
+class debugSeq::Expression {
+}
+class debugSeq::IntConstant {
+  + value : str
+}
+class debugSeq::LoadDebugInfo {
+  + path : str
+}
+class debugSeq::Message {
+  + format : str
+}
+class debugSeq::Minus {
+}
+class debugSeq::Mul {
+}
+class debugSeq::Not {
+}
+class debugSeq::Or {
+}
+class debugSeq::Parameter {
+}
+class debugSeq::Plus {
+}
+class debugSeq::Query {
+  + message : str
+}
+class debugSeq::QueryValue {
+  + message : str
+}
+class debugSeq::Read16 {
+}
+class debugSeq::Read32 {
+}
+class debugSeq::Read64 {
+}
+class debugSeq::Read8 {
+}
+class debugSeq::ReadAP {
+}
+class debugSeq::ReadDP {
+}
+class debugSeq::Rem {
+}
+class debugSeq::Sequence {
+  + disable : str
+  + info : str
+  + name : str
+  + pname : str
+}
+class debugSeq::SequenceCall {
+  + seqname : str
+}
+class debugSeq::Sequences {
+}
+class debugSeq::Shift {
+  + op : str
+}
+class debugSeq::Statement {
+}
+class debugSeq::StringConstant {
+  + value : str
+}
+class debugSeq::Ternary {
+}
+class debugSeq::VariableDeclaration {
+  + name : str
+}
+class debugSeq::VariableRef {
+}
+class debugSeq::Write16 {
+}
+class debugSeq::Write32 {
+}
+class debugSeq::Write64 {
+}
+class debugSeq::Write8 {
+}
+class debugSeq::WriteAP {
+}
+class debugSeq::WriteDP {
+}
+CodeBlock <|-- debugSeq::Block
+CodeBlock <|-- debugSeq::Control
+Expression <|-- debugSeq::And
+Expression <|-- debugSeq::Assignment
+Expression <|-- debugSeq::BitAnd
+Expression <|-- debugSeq::BitNot
+Expression <|-- debugSeq::BitOr
+Expression <|-- debugSeq::BitXor
+Expression <|-- debugSeq::Comparison
+Expression <|-- debugSeq::DapDelay
+Expression <|-- debugSeq::DapJtagSequence
+Expression <|-- debugSeq::DapSwjClock
+Expression <|-- debugSeq::DapSwjPins
+Expression <|-- debugSeq::DapSwjSequence
+Expression <|-- debugSeq::DapWriteABORT
+Expression <|-- debugSeq::Div
+Expression <|-- debugSeq::Equality
+Expression <|-- debugSeq::IntConstant
+Expression <|-- debugSeq::LoadDebugInfo
+Expression <|-- debugSeq::Message
+Expression <|-- debugSeq::Minus
+Expression <|-- debugSeq::Mul
+Expression <|-- debugSeq::Not
+Expression <|-- debugSeq::Or
+Expression <|-- debugSeq::Plus
+Expression <|-- debugSeq::Query
+Expression <|-- debugSeq::QueryValue
+Expression <|-- debugSeq::Read16
+Expression <|-- debugSeq::Read32
+Expression <|-- debugSeq::Read64
+Expression <|-- debugSeq::Read8
+Expression <|-- debugSeq::ReadAP
+Expression <|-- debugSeq::ReadDP
+Expression <|-- debugSeq::Rem
+Expression <|-- debugSeq::SequenceCall
+Expression <|-- debugSeq::Shift
+Expression <|-- debugSeq::StringConstant
+Expression <|-- debugSeq::Ternary
+Expression <|-- debugSeq::VariableRef
+Expression <|-- debugSeq::Write16
+Expression <|-- debugSeq::Write32
+Expression <|-- debugSeq::Write64
+Expression <|-- debugSeq::Write8
+Expression <|-- debugSeq::WriteAP
+Expression <|-- debugSeq::WriteDP
+Parameter <|-- debugSeq::Expression
+Statement <|-- debugSeq::Expression
+Statement <|-- debugSeq::VariableDeclaration
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Read8 : addr113
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Read16 : addr115
+debugSeq::Read32 "1..1" *-- "0..1" debugSeq::Expression : addr117
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Read64 : addr119
+debugSeq::Expression "0..1" --* "1..1" debugSeq::ReadAP : addr121
+debugSeq::Expression "0..1" --* "1..1" debugSeq::ReadDP : addr123
+debugSeq::Write8 "1..1" *-- "0..1" debugSeq::Expression : addr125
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Write16 : addr130
+debugSeq::Write32 "1..1" *-- "0..1" debugSeq::Expression : addr135
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Write64 : addr140
+debugSeq::WriteAP "1..1" *-- "0..1" debugSeq::Expression : addr145
+debugSeq::Expression "0..1" --* "1..1" debugSeq::WriteDP : addr150
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapSwjSequence : cnt169
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapJtagSequence : cnt174
+debugSeq::CodeBlock "0..9999" --* "1..1" debugSeq::Control : codeblocks17
+debugSeq::CodeBlock "0..9999" --* "1..1" debugSeq::Sequence : codeblocks8
+debugSeq::DebugSeqModel "1..1" *-- "0..1" debugSeq::DebugVars : debugvars0
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Query : default104
+debugSeq::Expression "0..1" --* "1..1" debugSeq::QueryValue : default107
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapDelay : delay155
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Ternary : exp127
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Ternary : exp230
+debugSeq::Expression "0..1" --* "1..1" debugSeq::BitNot : expression100
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Not : expression98
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Control : if12
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Assignment : left20
+debugSeq::Ternary "1..1" *-- "0..1" debugSeq::Expression : left25
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Or : left33
+debugSeq::Expression "0..1" --* "1..1" debugSeq::And : left38
+debugSeq::BitOr "1..1" *-- "0..1" debugSeq::Expression : left43
+debugSeq::Expression "0..1" --* "1..1" debugSeq::BitXor : left48
+debugSeq::BitAnd "1..1" *-- "0..1" debugSeq::Expression : left53
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Equality : left58
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Comparison : left63
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Shift : left68
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Plus : left73
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Minus : left78
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Mul : left83
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Div : left88
+debugSeq::Rem "1..1" *-- "0..1" debugSeq::Expression : left93
+debugSeq::Message "1..1" *-- "0..9999" debugSeq::Parameter : parameters111
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapSwjPins : pinout159
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapSwjPins : pinselect161
+debugSeq::DapSwjPins "1..1" *-- "0..1" debugSeq::Expression : pinwait164
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Assignment : right22
+debugSeq::Or "1..1" *-- "0..1" debugSeq::Expression : right35
+debugSeq::Expression "0..1" --* "1..1" debugSeq::And : right40
+debugSeq::Expression "0..1" --* "1..1" debugSeq::BitOr : right45
+debugSeq::Expression "0..1" --* "1..1" debugSeq::BitXor : right50
+debugSeq::Expression "0..1" --* "1..1" debugSeq::BitAnd : right55
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Equality : right60
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Comparison : right65
+debugSeq::Shift "1..1" *-- "0..1" debugSeq::Expression : right70
+debugSeq::Plus "1..1" *-- "0..1" debugSeq::Expression : right75
+debugSeq::Minus "1..1" *-- "0..1" debugSeq::Expression : right80
+debugSeq::Mul "1..1" *-- "0..1" debugSeq::Expression : right85
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Div : right90
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Rem : right95
+debugSeq::DebugSeqModel "1..1" *-- "0..1" debugSeq::Sequences : sequences1
+debugSeq::Sequence "0..9999" --* "1..1" debugSeq::Sequences : sequences6
+debugSeq::Statement "0..9999" --* "1..1" debugSeq::Block : statements10
+debugSeq::Statement "0..9999" --* "1..1" debugSeq::DebugVars : statements3
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapJtagSequence : tdi179
+debugSeq::DapJtagSequence "1..1" *-- "0..1" debugSeq::Expression : tms176
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Query : type102
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Message : type109
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Write8 : val127
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Write16 : val132
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Write32 : val137
+debugSeq::Expression "0..1" --* "1..1" debugSeq::Write64 : val142
+debugSeq::Expression "0..1" --* "1..1" debugSeq::WriteAP : val147
+debugSeq::WriteDP "1..1" *-- "0..1" debugSeq::Expression : val152
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapSwjSequence : val171
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapWriteABORT : value157
+debugSeq::Expression "0..1" --* "1..1" debugSeq::DapSwjClock : value167
+debugSeq::Expression "0..1" --* "1..1" debugSeq::VariableDeclaration : value5
+debugSeq::VariableRef "1..1" -- "0..1" debugSeq::VariableDeclaration : variable182
+debugSeq::Control "1..1" *-- "0..1" debugSeq::Expression : while14
+@enduml

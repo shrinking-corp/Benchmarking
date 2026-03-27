@@ -1,0 +1,69 @@
+@startuml
+class Element {
+}
+class Elements::Edge {
+}
+class Elements::Element {
+  + value : int
+  + values : int
+}
+abstract class Elements::IdentifiedElement {
+  + id : str
+}
+abstract class Elements::NamedElement {
+  + name : str
+}
+class Elements::Node {
+}
+class Elements::ReferencingNode {
+}
+class Elements::Root {
+  + name : str
+}
+class Elements::StrictElement {
+  + sValue : int
+  + sValues : int
+}
+class IdentifiedElement {
+}
+class NamedElement {
+}
+class Node {
+}
+Element <|-- Elements::StrictElement
+IdentifiedElement <|-- Elements::NamedElement
+IdentifiedElement <|-- Elements::Root
+NamedElement <|-- Elements::Edge
+NamedElement <|-- Elements::Element
+NamedElement <|-- Elements::Node
+Node <|-- Elements::ReferencingNode
+Elements::NamedElement "0..9999" --* "1..1" Elements::Root : content0
+Elements::Node "1..1" -- "0..9999" Elements::Edge : incoming63
+Elements::Element "0..9999" --* "1..1" Elements::Element : manyContent2
+Elements::Element "0..9999" --* "1..1" Elements::Element : manyContentWithUp7
+Elements::Element "0..9999" -- "1..1" Elements::Element : manyFromManyRef136
+Elements::Element "1..1" -- "0..9999" Elements::Element : manyFromManyRef239
+Elements::Element "0..9999" -- "1..1" Elements::Element : manyFromSingleRef30
+Elements::Element "0..9999" -- "1..1" Elements::Element : manyRef18
+Elements::Edge "0..9999" -- "1..1" Elements::Node : outgoing64
+Elements::Node "1..1" -- "1..1" Elements::ReferencingNode : referenced71
+Elements::StrictElement "1..1" *-- "1..9999" Elements::Element : sManyContent41
+Elements::StrictElement "1..9999" -- "1..1" Elements::StrictElement : sManyFromManyRef158
+Elements::StrictElement "1..9999" -- "1..1" Elements::StrictElement : sManyFromManyRef261
+Elements::StrictElement "1..1" -- "1..9999" Elements::StrictElement : sManyFromSingleRef53
+Elements::Element "1..9999" -- "1..1" Elements::StrictElement : sManyRef46
+Elements::StrictElement "1..1" *-- "1..1" Elements::Element : sSingleContent43
+Elements::StrictElement "1..1" -- "1..1" Elements::StrictElement : sSingleFromManyRef55
+Elements::Element "1..1" -- "1..1" Elements::StrictElement : sSingleRef49
+Elements::Element "0..1" --* "1..1" Elements::Element : singleContent4
+Elements::Element "0..1" --* "1..1" Elements::Element : singleContentWithUp12
+Elements::Element "1..1" -- "0..1" Elements::Element : singleFromManyRef33
+Elements::Element "0..1" -- "1..1" Elements::Element : singleFromSingleRef124
+Elements::Element "0..1" -- "1..1" Elements::Element : singleFromSingleRef227
+Elements::Element "1..1" -- "0..1" Elements::Element : singleRef21
+Elements::Node "1..1" -- "1..1" Elements::Edge : source69
+Elements::NamedElement "0..9999" --* "1..1" Elements::Node : subNodes66
+Elements::Node "1..1" -- "1..1" Elements::Edge : target68
+Elements::Element "1..1" -- "0..1" Elements::Element : upFromManyContent9
+Elements::Element "0..1" -- "1..1" Elements::Element : upFromSingleContent15
+@enduml

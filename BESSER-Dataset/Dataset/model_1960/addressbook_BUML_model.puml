@@ -1,0 +1,53 @@
+@startuml
+class Contact {
+}
+enum NoteType {
+  CALL
+  EMAIL
+  MEETING
+}
+enum RelationshipType {
+  Boss
+  CoWorker
+  Employee
+  Subdivision
+}
+class addressbook::Address {
+  + City : str
+  + HouseNr : str
+  + Street : str
+}
+class addressbook::AddressBook {
+}
+class addressbook::Company {
+  + Industry : str
+}
+abstract class addressbook::Contact {
+  + EMail : str
+  + Name : str
+  + Phone : str
+  + Website : str
+}
+class addressbook::Note {
+  + Author : str
+  + Comment : str
+  + Time : date
+  + Type : str
+}
+class addressbook::Person {
+  + Title : str
+}
+class addressbook::Relationship {
+  + Type : str
+}
+Contact <|-- addressbook::Company
+Contact <|-- addressbook::Person
+addressbook::Contact "0..9999" --* "1..1" addressbook::AddressBook : Contact9
+addressbook::Note "0..9999" --* "1..1" addressbook::Contact : Note7
+addressbook::Address "0..9999" --* "1..1" addressbook::Contact : address0
+addressbook::Contact "0..9999" -- "1..1" addressbook::Contact : inRelation2
+addressbook::Relationship "0..9999" -- "1..1" addressbook::Contact : isRelated5
+addressbook::Contact "1..1" *-- "0..9999" addressbook::Relationship : relates4
+addressbook::Contact "1..1" -- "1..1" addressbook::Relationship : source12
+addressbook::Contact "1..1" -- "1..1" addressbook::Relationship : target11
+@enduml

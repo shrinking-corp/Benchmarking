@@ -1,0 +1,48 @@
+@startuml
+class ModelElement {
+}
+enum Type {
+  CHAR
+  DATE
+  FLOAT
+  NUMERIC
+  TIME
+  VARCHAR
+}
+class relational::obeo::Column {
+  + isPrimaryKey : bool
+  + isUnique : bool
+  + name : str
+  + type : str
+}
+class relational::obeo::Database {
+  + name : str
+  + url : str
+}
+class relational::obeo::ForeignKey {
+  + name : str
+}
+abstract class relational::obeo::ModelElement {
+  + comment : str
+}
+class relational::obeo::Schema {
+  + name : str
+}
+class relational::obeo::Table {
+  + name : str
+}
+ModelElement <|-- relational::obeo::Column
+ModelElement <|-- relational::obeo::Database
+ModelElement <|-- relational::obeo::ForeignKey
+ModelElement <|-- relational::obeo::Schema
+ModelElement <|-- relational::obeo::Table
+relational::obeo::ForeignKey "1..1" -- "1..1" relational::obeo::Table : foreignTable9
+relational::obeo::Column "0..9999" --* "1..1" relational::obeo::Table : ownedColumns4
+relational::obeo::ForeignKey "0..9999" --* "1..1" relational::obeo::Table : ownedForeignKeys6
+relational::obeo::Schema "0..9999" --* "1..1" relational::obeo::Database : ownedSchemas0
+relational::obeo::Table "0..9999" --* "1..1" relational::obeo::Schema : ownedTables1
+relational::obeo::Table "1..1" -- "1..1" relational::obeo::Column : owner12
+relational::obeo::Schema "1..1" -- "1..1" relational::obeo::Database : owner3
+relational::obeo::Schema "1..1" -- "1..1" relational::obeo::Table : owner7
+relational::obeo::Table "1..1" -- "1..1" relational::obeo::ForeignKey : sourceTable11
+@enduml

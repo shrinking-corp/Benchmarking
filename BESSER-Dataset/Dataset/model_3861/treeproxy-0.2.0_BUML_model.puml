@@ -1,0 +1,35 @@
+@startuml
+class EObjectTreeElement {
+}
+class EStructuralFeatureTreeElement {
+}
+class TreeElement {
+}
+class internal::treeproxy::EAttributeTreeElement {
+}
+class internal::treeproxy::EObjectTreeElement {
+}
+class internal::treeproxy::EReferenceTreeElement {
+}
+class internal::treeproxy::EStructuralFeatureTreeElement {
+}
+abstract class internal::treeproxy::TreeElement {
+}
+class treeproxy::internal::EAttribute {
+}
+class treeproxy::internal::EObject {
+}
+class treeproxy::internal::EReference {
+}
+EStructuralFeatureTreeElement <|-- internal::treeproxy::EAttributeTreeElement
+EStructuralFeatureTreeElement <|-- internal::treeproxy::EReferenceTreeElement
+TreeElement <|-- internal::treeproxy::EObjectTreeElement
+TreeElement <|-- internal::treeproxy::EStructuralFeatureTreeElement
+treeproxy::internal::EAttribute "0..1" -- "1..1" internal::treeproxy::EAttributeTreeElement : eAttribute6
+internal::treeproxy::EObjectTreeElement "1..1" -- "0..1" treeproxy::internal::EObject : eObject0
+treeproxy::internal::EReference "0..1" -- "1..1" internal::treeproxy::EReferenceTreeElement : eReference5
+EStructuralFeatureTreeElement "0..1" -- "1..1" internal::treeproxy::EObjectTreeElement : parent2
+EObjectTreeElement "0..1" -- "1..1" internal::treeproxy::EStructuralFeatureTreeElement : parent7
+internal::treeproxy::EStructuralFeatureTreeElement "1..1" *-- "0..9999" EObjectTreeElement : referedEObjectTE9
+EStructuralFeatureTreeElement "0..9999" --* "1..1" internal::treeproxy::EObjectTreeElement : sfTreeElmement1
+@enduml

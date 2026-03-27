@@ -1,0 +1,29 @@
+@startuml
+class AbstractNode {
+}
+class AbstractTransition {
+}
+abstract class ptn::AbstractNode {
+  + name : str
+  + tMax : int
+  + tMin : int
+}
+abstract class ptn::AbstractTransition {
+  + guard : str
+}
+class ptn::Place {
+}
+class ptn::Token {
+}
+class ptn::Transition {
+  + weight : int
+}
+AbstractNode <|-- ptn::AbstractTransition
+AbstractNode <|-- ptn::Place
+AbstractTransition <|-- ptn::Transition
+ptn::AbstractNode "0..9999" --* "1..1" ptn::Place : nodes2
+ptn::Place "0..9999" -- "1..1" ptn::AbstractTransition : places8
+ptn::Place "1..1" *-- "0..9999" ptn::Place : subnets1
+ptn::Token "0..9999" --* "1..1" ptn::Place : tokens6
+ptn::AbstractTransition "0..9999" -- "1..1" ptn::Place : transitions4
+@enduml

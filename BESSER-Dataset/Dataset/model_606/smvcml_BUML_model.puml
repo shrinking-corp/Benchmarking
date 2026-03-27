@@ -1,0 +1,88 @@
+@startuml
+enum AttributeType {
+  BIGINTEGER
+  DOUBLE
+  OID
+  VARCHAR
+  VOID
+}
+class Component {
+}
+class Controller {
+}
+class EntityComponent {
+}
+enum Operation {
+  _create
+  delete
+  forward
+  read
+  readALL
+  readONE
+  update
+}
+class SMVC::Attribute {
+  + label : bool
+  + multiValued : bool
+  + name : str
+  + type : str
+}
+abstract class SMVC::Component {
+}
+class SMVC::Controller {
+  + operation : str
+  + url : str
+}
+class SMVC::DataAccessObject {
+  + name : str
+  + showDirectInstancesOnly : bool
+}
+class SMVC::Entity {
+  + name : str
+}
+abstract class SMVC::EntityComponent {
+}
+class SMVC::EntityController {
+  + returnKOURL : str
+  + returnOKURL : str
+}
+class SMVC::Form {
+}
+class SMVC::Link {
+  + url : str
+}
+class SMVC::List {
+}
+class SMVC::Page {
+  + title : str
+}
+class SMVC::SMVCApplication {
+  + name : str
+}
+class SMVC::SupportedOperation {
+  + operationKind : str
+  + url : str
+}
+class SMVC::View {
+  + text : str
+}
+Component <|-- SMVC::EntityComponent
+Controller <|-- SMVC::EntityController
+EntityComponent <|-- SMVC::Form
+EntityComponent <|-- SMVC::List
+SMVC::Entity "1..1" *-- "0..9999" SMVC::Attribute : attributes18
+SMVC::Entity "0..1" -- "1..1" SMVC::Attribute : complexType20
+SMVC::Component "0..9999" --* "1..1" SMVC::View : components27
+SMVC::SMVCApplication "1..1" *-- "0..9999" SMVC::Controller : controller1
+SMVC::EntityController "1..1" -- "1..1" SMVC::DataAccessObject : dao13
+SMVC::SMVCApplication "1..1" *-- "0..9999" SMVC::DataAccessObject : daos4
+SMVC::Entity "0..9999" --* "1..1" SMVC::SMVCApplication : entities6
+SMVC::Entity "1..1" -- "1..1" SMVC::EntityComponent : entity29
+SMVC::Entity "1..1" -- "1..1" SMVC::DataAccessObject : forEntity15
+SMVC::Controller "1..1" --* "1..1" SMVC::SMVCApplication : homeController0
+SMVC::Link "0..9999" --* "1..1" SMVC::Page : links23
+SMVC::Page "1..1" --* "1..1" SMVC::Controller : page11
+SMVC::Controller "0..9999" --* "1..1" SMVC::Controller : subController9
+SMVC::SupportedOperation "0..4" --* "1..1" SMVC::List : supportedOperations31
+SMVC::Page "1..1" *-- "1..1" SMVC::View : view25
+@enduml

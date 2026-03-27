@@ -1,0 +1,27 @@
+@startuml
+class NamedElement {
+}
+class test::NamedElement {
+  + Name : str
+}
+class test::Root {
+  + ttt : str
+}
+class test::TestClassDelegate {
+}
+class test::TestElement {
+  + getRoot() : str
+}
+class test::TestElementWrapper {
+}
+class test::TestPolicy {
+}
+NamedElement <|-- test::TestClassDelegate
+NamedElement <|-- test::TestElement
+NamedElement <|-- test::TestElementWrapper
+NamedElement <|-- test::TestPolicy
+test::TestElement "0..9999" --* "1..1" test::Root : children0
+test::TestElementWrapper "1..1" -- "0..1" test::TestElement : element5
+test::TestPolicy "0..9999" --* "1..1" test::TestElement : policies1
+test::TestClassDelegate "0..1" --* "1..1" test::TestElement : testClassDelegate3
+@enduml

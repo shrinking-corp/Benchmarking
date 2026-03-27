@@ -1,0 +1,52 @@
+@startuml
+class NamedElement {
+}
+enum Signal {
+  Failure
+  Go
+  STOP
+}
+class TrackElement {
+}
+abstract class Train5::NamedElement {
+  + id : str
+}
+class Train5::RailwayDiagram {
+}
+class Train5::Route {
+  + currentIndex : str
+  + leftOver : str
+  + speed : str
+}
+class Train5::RoutePart {
+}
+class Train5::Segment {
+}
+class Train5::SensorNetwork {
+}
+class Train5::Station {
+}
+class Train5::Switch {
+}
+abstract class Train5::TrackElement {
+  + State : str
+  + length : str
+}
+NamedElement <|-- Train5::Route
+NamedElement <|-- Train5::RoutePart
+NamedElement <|-- Train5::SensorNetwork
+NamedElement <|-- Train5::TrackElement
+TrackElement <|-- Train5::Segment
+TrackElement <|-- Train5::Station
+TrackElement <|-- Train5::Switch
+Train5::RoutePart "1..1" -- "1..1" Train5::TrackElement : element17
+Train5::Segment "2..9999" -- "1..1" Train5::Switch : neighbour3
+Train5::RoutePart "0..1" -- "1..1" Train5::RoutePart : next15
+Train5::RoutePart "0..1" -- "1..1" Train5::RoutePart : previous21
+Train5::RoutePart "1..9999" --* "1..1" Train5::Route : route1
+Train5::Route "0..9999" --* "1..1" Train5::RailwayDiagram : routes11
+Train5::Switch "0..9999" -- "1..1" Train5::SensorNetwork : sensors4
+Train5::SensorNetwork "0..9999" --* "1..1" Train5::RailwayDiagram : sensors8
+Train5::RailwayDiagram "1..1" *-- "0..9999" Train5::TrackElement : trackelements6
+Train5::TrackElement "1..1" -- "0..1" Train5::Route : train0
+@enduml

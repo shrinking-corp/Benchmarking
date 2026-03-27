@@ -1,0 +1,50 @@
+@startuml
+class Expression {
+}
+class asso::Div {
+}
+class asso::EvalExpression {
+}
+class asso::Expression {
+}
+class asso::FloatConstant {
+  + value : float
+}
+class asso::Minus {
+}
+class asso::Model {
+}
+class asso::Mult {
+}
+class asso::NegFloatConstant {
+  + value : float
+}
+class asso::Plus {
+}
+class asso::Variable {
+  + name : str
+}
+class asso::VariableRef {
+}
+Expression <|-- asso::Div
+Expression <|-- asso::FloatConstant
+Expression <|-- asso::Minus
+Expression <|-- asso::Mult
+Expression <|-- asso::NegFloatConstant
+Expression <|-- asso::Plus
+Expression <|-- asso::VariableRef
+asso::EvalExpression "0..9999" --* "1..1" asso::Model : evaluations1
+asso::Expression "0..1" --* "1..1" asso::Variable : expression6
+asso::EvalExpression "1..1" *-- "0..1" asso::Expression : expression8
+asso::Plus "1..1" *-- "0..1" asso::Expression : left13
+asso::Expression "0..1" --* "1..1" asso::Minus : left18
+asso::Expression "0..1" --* "1..1" asso::Mult : left23
+asso::Expression "0..1" --* "1..1" asso::Div : left28
+asso::Expression "0..1" --* "1..1" asso::Plus : right15
+asso::Expression "0..1" --* "1..1" asso::Minus : right20
+asso::Mult "1..1" *-- "0..1" asso::Expression : right25
+asso::Expression "0..1" --* "1..1" asso::Div : right30
+asso::Variable "0..9999" --* "1..1" asso::Variable : subVar4
+asso::Variable "0..1" -- "1..1" asso::VariableRef : value11
+asso::Model "1..1" *-- "0..9999" asso::Variable : variables0
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+class ConstraintMetric {
+}
+class Metric {
+}
+class metric::Constraint {
+}
+class metric::ConstraintMetric {
+  + calledOperations : str
+  + calledProperties : str
+  + expressionCount : int
+  + expressionDepth : int
+  + numberOfIfExpressions : int
+  + numberOfLetExpressions : int
+  + usedIterators : str
+  + usedLiterals : str
+}
+class metric::ConstraintMetrics {
+  + numberOfConstraintsByKind : str
+  + getAvgExpressionCount() : float
+  + getAvgExpressionDepth() : float
+  + getConstraintCount() : int
+  + getExpressionCount() : int
+  + getMaxExpressionCount() : int
+  + getMaxExpressionDepth() : int
+  + getMeanExpressionCount() : int
+  + getMeanExpressionDepth() : int
+  + getMinExpressionCount() : int
+  + getMinExpressionDepth() : int
+}
+class metric::Metric {
+  + getReport() : str
+}
+ConstraintMetric <|-- metric::ConstraintMetrics
+Metric <|-- metric::ConstraintMetric
+metric::ConstraintMetric "0..9999" --* "1..1" metric::ConstraintMetrics : constraintMetrics0
+metric::Constraint "0..9999" -- "1..1" metric::ConstraintMetrics : constraints1
+metric::Constraint "0..1" -- "1..1" metric::ConstraintMetric : referredConstraint3
+@enduml

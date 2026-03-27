@@ -1,0 +1,39 @@
+@startuml
+class Arc {
+}
+class Node {
+}
+abstract class PetriNets::Arc {
+  + weight : int
+}
+abstract class PetriNets::Node {
+  + name : str
+}
+class PetriNets::PTArc {
+}
+class PetriNets::PetriNet {
+  + bound : int
+}
+class PetriNets::Place {
+  + tokens : int
+}
+class PetriNets::TPArc {
+}
+class PetriNets::Token {
+}
+class PetriNets::Transition {
+}
+Arc <|-- PetriNets::PTArc
+Arc <|-- PetriNets::TPArc
+Node <|-- PetriNets::Place
+Node <|-- PetriNets::Transition
+PetriNets::Arc "0..9999" --* "1..1" PetriNets::PetriNet : arcs1
+PetriNets::Place "0..1" -- "1..1" PetriNets::PTArc : input14
+PetriNets::Transition "1..1" -- "1..1" PetriNets::TPArc : input7
+PetriNets::Transition "1..1" -- "0..9999" PetriNets::Place : inputs2
+PetriNets::Node "1..1" -- "0..1" PetriNets::PetriNet : net6
+PetriNets::Node "0..9999" --* "1..1" PetriNets::PetriNet : nodes0
+PetriNets::Transition "0..1" -- "1..1" PetriNets::PTArc : output12
+PetriNets::TPArc "1..1" -- "1..1" PetriNets::Place : output9
+PetriNets::Place "0..9999" -- "1..1" PetriNets::Transition : outputs3
+@enduml

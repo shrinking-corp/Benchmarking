@@ -1,0 +1,103 @@
+@startuml
+class FeatureDependency {
+}
+class FeatureGroup {
+}
+class HybridDimension {
+}
+class HybridElement {
+}
+class UUIDElement {
+}
+class feature::ChildRelationship {
+}
+class feature::DefaultBinding {
+}
+class feature::DisplayName {
+  + displayName : str
+}
+class feature::Elimination {
+  + defaultSelection : str
+}
+class feature::Feature {
+  + transitiveEliminationState : str
+}
+abstract class feature::FeatureDependency {
+}
+class feature::FeatureExclusion {
+}
+abstract class feature::FeatureGroup {
+}
+class feature::FeatureModel {
+}
+class feature::FeatureRequirement {
+}
+class feature::GroupMembership {
+}
+class feature::Invariant {
+}
+class feature::Mandatory {
+}
+class feature::Option {
+}
+class feature::OrFeatureGroup {
+}
+class feature::Preference {
+}
+class feature::RootRelationship {
+}
+class feature::XorFeatureGroup {
+}
+FeatureDependency <|-- feature::FeatureExclusion
+FeatureDependency <|-- feature::FeatureRequirement
+FeatureGroup <|-- feature::OrFeatureGroup
+FeatureGroup <|-- feature::XorFeatureGroup
+HybridDimension <|-- feature::FeatureModel
+HybridElement <|-- feature::ChildRelationship
+HybridElement <|-- feature::DisplayName
+HybridElement <|-- feature::Elimination
+HybridElement <|-- feature::Feature
+HybridElement <|-- feature::FeatureDependency
+HybridElement <|-- feature::FeatureGroup
+HybridElement <|-- feature::GroupMembership
+HybridElement <|-- feature::Mandatory
+HybridElement <|-- feature::RootRelationship
+UUIDElement <|-- feature::Feature
+UUIDElement <|-- feature::FeatureDependency
+UUIDElement <|-- feature::FeatureGroup
+feature::Feature "0..9999" -- "1..1" feature::Feature : allChildFeatures20
+feature::Feature "0..1" -- "1..1" feature::ChildRelationship : child48
+feature::Feature "1..1" *-- "0..9999" feature::ChildRelationship : children5
+feature::FeatureDependency "1..1" *-- "0..1" feature::Invariant : dependencyInvariant33
+feature::DefaultBinding "0..1" --* "1..1" feature::Elimination : eliminationDefault60
+feature::Invariant "0..1" --* "1..1" feature::Elimination : eliminationInvariant58
+feature::Elimination "0..2" --* "1..1" feature::Feature : eliminations15
+feature::Feature "0..1" -- "1..1" feature::DisplayName : feature22
+feature::RootRelationship "1..1" -- "0..1" feature::Feature : feature44
+feature::Feature "0..1" -- "1..1" feature::Mandatory : feature54
+feature::Feature "0..1" -- "1..1" feature::Elimination : feature56
+feature::FeatureModel "0..1" -- "1..1" feature::Feature : featureModel2
+feature::Feature "1..1" *-- "0..1" feature::Option : featureOption3
+feature::FeatureModel "1..1" *-- "0..9999" feature::Feature : features1
+feature::GroupMembership "1..1" -- "0..1" feature::FeatureGroup : group31
+feature::Invariant "0..1" --* "1..1" feature::FeatureGroup : groupInvariant26
+feature::Feature "1..1" -- "0..9999" feature::GroupMembership : groupedBy9
+feature::Feature "0..1" -- "1..1" feature::GroupMembership : groupedFeature29
+feature::GroupMembership "0..9999" --* "1..1" feature::FeatureGroup : groupedFeatures24
+feature::FeatureGroup "0..9999" --* "1..1" feature::Feature : groups8
+feature::FeatureDependency "0..9999" -- "1..1" feature::Feature : incomingDependencies10
+feature::RootRelationship "0..9999" -- "1..1" feature::Feature : incomingRoots17
+feature::Mandatory "0..1" --* "1..1" feature::Feature : mandatory13
+feature::DisplayName "0..9999" --* "1..1" feature::Feature : names4
+feature::FeatureDependency "0..9999" --* "1..1" feature::Feature : outgoingDependencies11
+feature::Feature "0..1" -- "1..1" feature::ChildRelationship : parent46
+feature::FeatureGroup "1..1" -- "0..1" feature::Feature : parentFeature27
+feature::Invariant "0..1" --* "1..1" feature::ChildRelationship : parentInvariant50
+feature::ChildRelationship "1..1" *-- "0..1" feature::Preference : parentPreference52
+feature::ChildRelationship "0..9999" -- "1..1" feature::Feature : parents6
+feature::DefaultBinding "0..1" --* "1..1" feature::RootRelationship : rootDefault42
+feature::Invariant "0..1" --* "1..1" feature::RootRelationship : rootInvariant39
+feature::RootRelationship "0..9999" --* "1..1" feature::FeatureModel : roots0
+feature::Feature "0..1" -- "1..1" feature::FeatureDependency : sourceFeature35
+feature::Feature "0..1" -- "1..1" feature::FeatureDependency : targetFeature37
+@enduml

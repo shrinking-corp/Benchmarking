@@ -1,0 +1,28 @@
+@startuml
+class projectDsl::Company {
+  + name : str
+}
+class projectDsl::Employee {
+  + height : int
+  + name : str
+  + weight : int
+}
+class projectDsl::Employees {
+}
+class projectDsl::Project {
+  + name : str
+  + type : str
+}
+class projectDsl::Task {
+  + name : str
+  + type : str
+}
+enum taskType {
+  development
+  documentation
+}
+projectDsl::Employees "0..1" --* "1..1" projectDsl::Company : employees0
+projectDsl::Employee "0..9999" --* "1..1" projectDsl::Employees : employees3
+projectDsl::Company "1..1" *-- "0..1" projectDsl::Project : project1
+projectDsl::Project "1..1" *-- "0..9999" projectDsl::Task : tasks5
+@enduml

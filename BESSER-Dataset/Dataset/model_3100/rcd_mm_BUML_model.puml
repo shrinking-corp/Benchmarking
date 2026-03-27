@@ -1,0 +1,35 @@
+@startuml
+class Classifier {
+}
+class rcd::Association {
+  + lower : str
+  + name : str
+  + upper : str
+}
+class rcd::Attribute {
+  + is_primary : bool
+  + lower : str
+  + name : str
+  + upper : str
+}
+class rcd::Class {
+  + is_persistent : bool
+}
+class rcd::ClassModel {
+  + name : str
+}
+abstract class rcd::Classifier {
+  + name : str
+}
+class rcd::PrimitiveDataType {
+}
+Classifier <|-- rcd::Class
+Classifier <|-- rcd::PrimitiveDataType
+rcd::Association "0..9999" --* "1..1" rcd::ClassModel : association13
+rcd::Class "1..1" *-- "1..9999" rcd::Attribute : attrs5
+rcd::Classifier "0..9999" --* "1..1" rcd::ClassModel : classifier11
+rcd::Association "1..1" -- "1..1" rcd::Class : dest1
+rcd::Class "0..1" -- "1..1" rcd::Class : parent9
+rcd::Class "1..1" -- "1..1" rcd::Association : src0
+rcd::Attribute "1..1" -- "1..1" rcd::Classifier : type4
+@enduml

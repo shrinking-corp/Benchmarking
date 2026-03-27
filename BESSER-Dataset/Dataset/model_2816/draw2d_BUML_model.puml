@@ -1,0 +1,164 @@
+@startuml
+enum Alignment {
+  BOTTOM
+  CENTER
+  LEFT
+  MIDDLE
+  RIGHT
+  TOP
+}
+class Border {
+}
+class Canvas {
+}
+class ColoredLabeledBorder {
+}
+class ConnectionAnchor {
+}
+enum Direction {
+  EAST
+  NORTH
+  SOUTH
+  WEST
+}
+class Figure {
+}
+class LabeledBorder {
+}
+enum Orientation {
+  HORIZONTAL
+  VERTICAL
+}
+class PointListShape {
+}
+class Polyline {
+}
+class Shape {
+}
+class draw2d::BlockFlow {
+  + orientation : str
+}
+abstract class draw2d::Border {
+  + opaque : bool
+}
+class draw2d::Color {
+}
+abstract class draw2d::ColoredLabeledBorder {
+}
+abstract class draw2d::ConnectionAnchor {
+}
+class draw2d::Draw2DCanvas {
+}
+class draw2d::Ellipse {
+}
+class draw2d::Figure {
+  + bounds : str
+  + enabled : bool
+  + focusTraversable : bool
+  + maximumSize : str
+  + minimumSize : str
+  + opaque : bool
+  + preferredSize : str
+  + visible : bool
+}
+class draw2d::FlowBorder {
+  + bottomMargin : int
+  + leftMargin : int
+  + rightMargin : int
+  + topMargin : int
+}
+class draw2d::Font {
+}
+class draw2d::FrameBorder {
+}
+class draw2d::GroupBoxBorder {
+}
+class draw2d::ImageFigure {
+  + image : str
+}
+class draw2d::Label {
+  + icon : str
+  + iconAlignment : str
+  + iconTextGap : int
+  + text : str
+  + textAlignment : str
+  + textPlacement : str
+}
+abstract class draw2d::LabeledBorder {
+  + label : str
+}
+abstract class draw2d::PointListShape {
+  + pointList : int
+}
+class draw2d::Polygon {
+}
+class draw2d::PolygonShape {
+}
+class draw2d::Polyline {
+  + tolerance : int
+}
+class draw2d::PolylineShape {
+  + tolerance : int
+}
+class draw2d::RectangleFigure {
+}
+class draw2d::RoundedRectangle {
+  + cornerDimensions : str
+}
+abstract class draw2d::Shape {
+  + alpha : str
+  + antialias : str
+  + fill : bool
+  + fillXOR : bool
+  + lineCap : str
+  + lineDash : float
+  + lineDashOffset : float
+  + lineJoin : str
+  + lineMiterLimit : float
+  + lineStyle : str
+  + lineWidthFloat : float
+  + outline : bool
+  + outlineXOR : bool
+}
+class draw2d::TitleBarBorder {
+}
+class draw2d::Triangle {
+  + direction : str
+  + orientation : str
+}
+class draw2d::XYAnchor {
+  + location : str
+}
+Border <|-- draw2d::FlowBorder
+Border <|-- draw2d::LabeledBorder
+Canvas <|-- draw2d::Draw2DCanvas
+ColoredLabeledBorder <|-- draw2d::GroupBoxBorder
+ColoredLabeledBorder <|-- draw2d::TitleBarBorder
+ConnectionAnchor <|-- draw2d::XYAnchor
+Figure <|-- draw2d::BlockFlow
+Figure <|-- draw2d::ImageFigure
+Figure <|-- draw2d::Label
+Figure <|-- draw2d::Shape
+LabeledBorder <|-- draw2d::ColoredLabeledBorder
+LabeledBorder <|-- draw2d::FrameBorder
+PointListShape <|-- draw2d::PolygonShape
+PointListShape <|-- draw2d::Polyline
+PointListShape <|-- draw2d::PolylineShape
+Polyline <|-- draw2d::Polygon
+Shape <|-- draw2d::Ellipse
+Shape <|-- draw2d::PointListShape
+Shape <|-- draw2d::RectangleFigure
+Shape <|-- draw2d::RoundedRectangle
+Shape <|-- draw2d::Triangle
+draw2d::Figure "1..1" *-- "0..1" draw2d::Color : backgroundColor9
+draw2d::Border "0..1" --* "1..1" draw2d::Figure : border16
+draw2d::Figure "1..1" *-- "0..9999" draw2d::Figure : children2
+draw2d::Figure "0..1" --* "1..1" draw2d::Draw2DCanvas : contents0
+draw2d::Font "0..1" --* "1..1" draw2d::Figure : font14
+draw2d::Font "0..1" --* "1..1" draw2d::LabeledBorder : font20
+draw2d::Figure "1..1" *-- "0..1" draw2d::Color : foregroundColor11
+draw2d::Figure "0..1" -- "1..1" draw2d::ConnectionAnchor : owner18
+draw2d::Figure "0..1" -- "1..1" draw2d::Figure : parent4
+draw2d::Color "0..1" --* "1..1" draw2d::ColoredLabeledBorder : textColor22
+draw2d::Figure "1..1" *-- "0..1" draw2d::Figure : toolTip7
+@enduml

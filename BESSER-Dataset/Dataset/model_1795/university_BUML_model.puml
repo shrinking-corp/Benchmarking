@@ -1,0 +1,80 @@
+@startuml
+class NamedElement {
+}
+enum StaffMemberType {
+  Academic
+  Admin
+  Honary
+  Other
+  Research
+  ResearchStudent
+  Technical
+}
+class university::Book {
+  + ISBN : str
+  + authorNames : str
+}
+class university::Computer {
+}
+class university::Department {
+}
+class university::Library {
+}
+class university::Module {
+}
+abstract class university::NamedElement {
+  + name : str
+}
+class university::PrimitiveType {
+  + a : str
+  + b : int
+  + bigIntList : str
+  + c : str
+  + d : bool
+  + e : str
+  + f : float
+  + g : str
+  + h : str
+  + i : float
+  + j : str
+  + k : str
+  + l : str
+  + m : str
+  + n : str
+  + o : str
+  + p : str
+}
+class university::StaffMember {
+  + staffMemberType : str
+}
+class university::Student {
+  + studentId : float
+}
+class university::University {
+}
+class university::Vehicle {
+  + registrationNumber : str
+}
+NamedElement <|-- university::Book
+NamedElement <|-- university::Computer
+NamedElement <|-- university::Department
+NamedElement <|-- university::Library
+NamedElement <|-- university::Module
+NamedElement <|-- university::StaffMember
+NamedElement <|-- university::Student
+NamedElement <|-- university::University
+university::Book "0..9999" --* "1..1" university::Library : books9
+university::StaffMember "0..1" -- "1..1" university::University : chancelor3
+university::University "1..1" *-- "1..9999" university::Department : departments0
+university::Student "1..1" -- "0..9999" university::Module : enrolledModules5
+university::Student "0..9999" -- "1..1" university::Module : enrolledStudents26
+university::Library "1..9999" --* "1..1" university::University : libraries1
+university::Vehicle "0..9999" -- "1..1" university::Library : libraryVans11
+university::Computer "0..1" --* "1..1" university::Library : mainComputer7
+university::Module "1..1" -- "0..9999" university::StaffMember : moduleLecturers25
+university::Vehicle "0..1" -- "1..1" university::Student : registeredVehicle6
+university::Vehicle "0..3" -- "1..1" university::StaffMember : registeredVehicles16
+university::StaffMember "0..9999" --* "1..1" university::Department : staff19
+university::Student "0..9999" --* "1..1" university::Department : students22
+university::StaffMember "1..1" -- "0..9999" university::Module : taughtModules14
+@enduml

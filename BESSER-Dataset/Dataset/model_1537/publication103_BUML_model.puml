@@ -1,0 +1,71 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class publication103::Collaboration {
+  + ratio : int
+}
+abstract class publication103::Counted {
+  + id : int
+}
+abstract class publication103::Labelled {
+  + lname : str
+}
+abstract class publication103::Named {
+  + name : str
+}
+class publication103::Paper {
+}
+class publication103::Paragraph {
+  + content : str
+}
+class publication103::Position {
+  + description : str
+}
+class publication103::PublicationStructure {
+}
+class publication103::Researcher {
+  + forName : str
+  + name : str
+}
+class publication103::Review {
+  + date : date
+}
+class publication103::ReviewNote {
+  + content : str
+}
+class publication103::Skill {
+  + description : str
+}
+class publication103::Write {
+  + timeSpent : int
+}
+Counted <|-- publication103::Paragraph
+Labelled <|-- publication103::Review
+Labelled <|-- publication103::Write
+Named <|-- publication103::Paper
+Named <|-- publication103::Paragraph
+Named <|-- publication103::Position
+Named <|-- publication103::PublicationStructure
+Named <|-- publication103::ReviewNote
+publication103::Researcher "0..9999" -- "1..1" publication103::Paper : authors11
+publication103::Paper "0..1" -- "1..1" publication103::Paper : citedBy13
+publication103::Paper "0..1" -- "1..1" publication103::Collaboration : col_paper34
+publication103::Collaboration "0..9999" --* "1..1" publication103::Researcher : collaborations8
+publication103::Paper "0..9999" --* "1..1" publication103::PublicationStructure : papers25
+publication103::Write "1..1" -- "0..1" publication103::Paragraph : paragraph17
+publication103::Paragraph "0..9999" --* "1..1" publication103::Paper : paragraphs10
+publication103::Position "0..1" -- "1..1" publication103::Position : parent32
+publication103::Position "0..9999" --* "1..1" publication103::PublicationStructure : positions28
+publication103::Paper "0..9999" -- "1..1" publication103::Researcher : res_papers3
+publication103::Researcher "1..1" -- "0..1" publication103::Position : res_position6
+publication103::Researcher "0..9999" --* "1..1" publication103::PublicationStructure : researchers23
+publication103::ReviewNote "0..1" -- "1..1" publication103::Review : reviewNote20
+publication103::Review "0..9999" --* "1..1" publication103::Researcher : reviews1
+publication103::Paragraph "1..1" *-- "0..9999" publication103::ReviewNote : reviews15
+publication103::Skill "0..9999" --* "1..1" publication103::Researcher : skills4
+publication103::Researcher "1..1" *-- "0..9999" publication103::Write : writes0
+@enduml

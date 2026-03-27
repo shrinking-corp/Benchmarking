@@ -1,0 +1,52 @@
+@startuml
+class DContainedElement {
+}
+class DContainedVertex {
+}
+class DGraphElement {
+}
+class DTypedElement {
+}
+class DVertex {
+}
+abstract class dgf::DContainedElement {
+}
+abstract class dgf::DContainedVertex {
+}
+class dgf::DContainment {
+  + compartment : str
+}
+abstract class dgf::DGraphElement {
+  + name : str
+}
+class dgf::DLink {
+}
+class dgf::DNode {
+  + pointOfView : str
+}
+class dgf::DReference {
+  + property : bool
+}
+abstract class dgf::DTypedElement {
+}
+abstract class dgf::DVertex {
+}
+class dgf::Graph {
+}
+DContainedElement <|-- dgf::DContainedVertex
+DContainedElement <|-- dgf::DNode
+DContainedVertex <|-- dgf::DContainment
+DContainedVertex <|-- dgf::DLink
+DGraphElement <|-- dgf::DContainedElement
+DGraphElement <|-- dgf::DNode
+DGraphElement <|-- dgf::DVertex
+DTypedElement <|-- dgf::DLink
+DTypedElement <|-- dgf::DNode
+DVertex <|-- dgf::DContainedVertex
+DVertex <|-- dgf::DReference
+dgf::DNode "0..1" -- "1..1" dgf::DContainedElement : containment8
+dgf::DGraphElement "0..9999" --* "1..1" dgf::Graph : elements7
+dgf::DNode "0..1" -- "1..1" dgf::DVertex : source1
+dgf::DNode "0..1" -- "1..1" dgf::DVertex : target0
+dgf::DNode "1..1" *-- "0..9999" dgf::DVertex : vertices4
+@enduml

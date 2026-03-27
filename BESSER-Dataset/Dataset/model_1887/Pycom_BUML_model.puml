@@ -1,0 +1,116 @@
+@startuml
+class BoardMember {
+}
+class ExpMember {
+}
+class pycom::Actuator {
+}
+class pycom::Board {
+  + boardType : str
+  + communicationRate : int
+  + name : str
+}
+class pycom::BoardMember {
+}
+class pycom::Boolean {
+  + value : str
+}
+class pycom::Communication {
+}
+class pycom::CommunicationType {
+  + name : str
+  + password : str
+  + ssid : str
+}
+class pycom::ComparisonExp {
+  + op : str
+}
+class pycom::Condition {
+  + operator : str
+}
+class pycom::ConditionalAction {
+  + type : str
+}
+class pycom::Connection {
+  + portnumber : int
+}
+class pycom::ExpMember {
+}
+class pycom::Expression {
+  + outputValue : int
+}
+class pycom::Function {
+}
+class pycom::Host {
+  + ipAdr : str
+  + website : str
+}
+class pycom::Import {
+  + name : str
+  + path : str
+}
+class pycom::Library {
+  + name : str
+}
+class pycom::LogicExp {
+}
+class pycom::ModuleName {
+  + name : str
+}
+class pycom::ModuleType {
+  + name : str
+}
+class pycom::ParameterType {
+  + number : int
+  + text : str
+}
+class pycom::Pin {
+}
+class pycom::PinName {
+  + name : str
+}
+class pycom::Sensor {
+}
+class pycom::Server {
+  + name : str
+}
+class pycom::System {
+}
+BoardMember <|-- pycom::Actuator
+BoardMember <|-- pycom::Communication
+ExpMember <|-- pycom::ConditionalAction
+ExpMember <|-- pycom::Function
+pycom::ConditionalAction "1..1" *-- "0..9999" pycom::ExpMember : ExpMembers27
+pycom::Actuator "1..1" *-- "0..1" pycom::ModuleName : actuatorName37
+pycom::Board "0..1" -- "1..1" pycom::Function : board65
+pycom::Sensor "0..1" --* "1..1" pycom::BoardMember : boardMember23
+pycom::BoardMember "0..9999" --* "1..1" pycom::Board : boardMembers21
+pycom::Board "0..9999" --* "1..1" pycom::System : boards3
+pycom::Boolean "0..1" --* "1..1" pycom::LogicExp : boolVal54
+pycom::ComparisonExp "0..1" --* "1..1" pycom::LogicExp : compExp56
+pycom::Condition "0..1" --* "1..1" pycom::ConditionalAction : condition25
+pycom::Connection "0..1" --* "1..1" pycom::Server : conn12
+pycom::Server "1..1" *-- "0..9999" pycom::ConditionalAction : exps14
+pycom::Import "0..1" -- "1..1" pycom::Function : functionName68
+pycom::Host "0..1" --* "1..1" pycom::Connection : host16
+pycom::System "1..1" *-- "0..9999" pycom::Import : imports1
+pycom::Import "0..9999" --* "1..1" pycom::Library : imports7
+pycom::PinName "0..1" --* "1..1" pycom::Pin : input46
+pycom::Expression "0..1" --* "1..1" pycom::ComparisonExp : left58
+pycom::Library "0..9999" --* "1..1" pycom::System : libraries0
+pycom::Library "0..9999" -- "1..1" pycom::Board : library18
+pycom::LogicExp "0..1" --* "1..1" pycom::Condition : logicEx49
+pycom::Condition "0..1" --* "1..1" pycom::Condition : nestedCondition52
+pycom::Expression "1..1" *-- "0..1" pycom::Function : outputfunction63
+pycom::Import "1..1" *-- "0..9999" pycom::ParameterType : parameter10
+pycom::Sensor "1..1" *-- "0..1" pycom::Pin : pins33
+pycom::Pin "0..1" --* "1..1" pycom::Actuator : pins40
+pycom::Pin "0..9999" --* "1..1" pycom::Function : pins71
+pycom::PinName "0..1" --* "1..1" pycom::Pin : power44
+pycom::ComparisonExp "1..1" *-- "0..1" pycom::Expression : right60
+pycom::ModuleName "0..1" --* "1..1" pycom::Sensor : sensorName31
+pycom::Server "0..9999" --* "1..1" pycom::System : servers5
+pycom::CommunicationType "0..1" --* "1..1" pycom::Communication : type43
+pycom::ModuleType "0..1" --* "1..1" pycom::Sensor : typeName29
+pycom::ModuleType "0..1" --* "1..1" pycom::Actuator : typeName35
+@enduml

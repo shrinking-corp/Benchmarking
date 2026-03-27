@@ -1,0 +1,32 @@
+@startuml
+class HSM::CompositeState {
+}
+class HSM::FinalState {
+}
+class HSM::InitialState {
+}
+class HSM::State {
+  + name : str
+}
+class HSM::StateMachine {
+}
+class HSM::Transition {
+  + effect : str
+  + trigger : str
+}
+class State {
+}
+State <|-- HSM::CompositeState
+State <|-- HSM::FinalState
+State <|-- HSM::InitialState
+HSM::State "1..9999" --* "1..1" HSM::StateMachine : ownedState18
+HSM::State "0..9999" --* "1..1" HSM::CompositeState : ownedSubState12
+HSM::CompositeState "1..1" *-- "0..9999" HSM::Transition : ownedSubTransition15
+HSM::Transition "0..9999" --* "1..1" HSM::StateMachine : ownedTransition19
+HSM::CompositeState "0..1" -- "1..1" HSM::State : owningCompositeState0
+HSM::Transition "1..1" -- "0..1" HSM::CompositeState : owningCompositeState9
+HSM::State "1..1" -- "0..1" HSM::StateMachine : owningStateMachine1
+HSM::StateMachine "0..1" -- "1..1" HSM::Transition : owningStateMachine7
+HSM::Transition "1..1" -- "1..1" HSM::State : source4
+HSM::State "1..1" -- "1..1" HSM::Transition : target2
+@enduml

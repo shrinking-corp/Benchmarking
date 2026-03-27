@@ -1,0 +1,95 @@
+@startuml
+class Action {
+}
+class ActivityEdge {
+}
+class ActivityNode {
+}
+class ControlNode {
+}
+class Event {
+}
+class NamedElement {
+}
+class RedefinableElement {
+}
+class ValueSpecification {
+}
+enum VisibilityKind {
+  package
+  protected
+  public
+}
+class umlknes::AcceptEventAction {
+  + isUnMarshall : bool
+}
+abstract class umlknes::Action {
+}
+class umlknes::Activity {
+  + isReadOnly : bool
+  + isSingleExecution : bool
+}
+abstract class umlknes::ActivityEdge {
+}
+class umlknes::ActivityFinalNode {
+}
+abstract class umlknes::ActivityNode {
+}
+class umlknes::ControlFlow {
+}
+abstract class umlknes::ControlNode {
+}
+class umlknes::CreationEvent {
+}
+class umlknes::DecisionNode {
+}
+class umlknes::DestructionEvent {
+}
+abstract class umlknes::Event {
+}
+class umlknes::ExecutionEvent {
+}
+class umlknes::InitialNode {
+}
+abstract class umlknes::NamedElement {
+  + visibility : str
+}
+class umlknes::OpaqueExpression {
+}
+abstract class umlknes::RedefinableElement {
+  + isLeaf : bool
+}
+class umlknes::Trigger {
+}
+abstract class umlknes::ValueSpecification {
+}
+Action <|-- umlknes::AcceptEventAction
+ActivityEdge <|-- umlknes::ControlFlow
+ActivityNode <|-- umlknes::Action
+ActivityNode <|-- umlknes::ControlNode
+ControlNode <|-- umlknes::ActivityFinalNode
+ControlNode <|-- umlknes::DecisionNode
+ControlNode <|-- umlknes::InitialNode
+Event <|-- umlknes::CreationEvent
+Event <|-- umlknes::DestructionEvent
+Event <|-- umlknes::ExecutionEvent
+NamedElement <|-- umlknes::RedefinableElement
+NamedElement <|-- umlknes::Trigger
+NamedElement <|-- umlknes::ValueSpecification
+RedefinableElement <|-- umlknes::ActivityEdge
+RedefinableElement <|-- umlknes::ActivityNode
+ValueSpecification <|-- umlknes::OpaqueExpression
+umlknes::Activity "0..1" -- "1..1" umlknes::ActivityEdge : activity14
+umlknes::Activity "0..1" -- "1..1" umlknes::ActivityNode : activity3
+umlknes::ActivityEdge "0..9999" --* "1..1" umlknes::Activity : edge1
+umlknes::Event "1..1" -- "1..1" umlknes::Trigger : event21
+umlknes::ValueSpecification "1..1" --* "1..1" umlknes::ActivityEdge : guard17
+umlknes::ActivityNode "1..1" -- "0..9999" umlknes::ActivityEdge : incoming4
+umlknes::ActivityNode "0..9999" --* "1..1" umlknes::Activity : node0
+umlknes::ActivityEdge "0..9999" -- "1..1" umlknes::ActivityNode : outgoing6
+umlknes::ActivityNode "0..9999" -- "1..1" umlknes::ActivityNode : redefinedElement9
+umlknes::ActivityEdge "1..1" -- "1..1" umlknes::ActivityNode : source12
+umlknes::ActivityNode "1..1" -- "1..1" umlknes::ActivityEdge : target10
+umlknes::Trigger "1..9999" -- "1..1" umlknes::AcceptEventAction : trigger20
+umlknes::ActivityEdge "1..1" *-- "1..1" umlknes::ValueSpecification : weight16
+@enduml

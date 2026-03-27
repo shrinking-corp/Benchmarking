@@ -1,0 +1,136 @@
+@startuml
+class Action {
+}
+class ActivityEdge {
+}
+class ActivityNode {
+}
+class ControlNode {
+}
+class ExecutableNode {
+}
+class FinalNode {
+}
+class NamedActivity {
+}
+class Token {
+}
+class Value {
+}
+class Variable {
+}
+abstract class activitydiagram::Action {
+}
+class activitydiagram::Activity {
+}
+abstract class activitydiagram::ActivityEdge {
+}
+class activitydiagram::ActivityFinalNode {
+}
+abstract class activitydiagram::ActivityNode {
+  + running : bool
+}
+class activitydiagram::BooleanValue {
+  + value : bool
+}
+abstract class activitydiagram::BooleanVariable {
+}
+class activitydiagram::Context {
+}
+class activitydiagram::ControlFlow {
+}
+abstract class activitydiagram::ControlNode {
+}
+class activitydiagram::ControlToken {
+}
+class activitydiagram::DecisionNode {
+}
+abstract class activitydiagram::ExecutableNode {
+}
+abstract class activitydiagram::Exp {
+}
+abstract class activitydiagram::FinalNode {
+}
+class activitydiagram::ForkNode {
+}
+class activitydiagram::ForkedToken {
+  + remainingOffersCount : int
+}
+class activitydiagram::InitialNode {
+}
+class activitydiagram::Input {
+}
+class activitydiagram::InputValue {
+}
+class activitydiagram::IntegerValue {
+  + value : float
+}
+abstract class activitydiagram::IntegerVariable {
+}
+class activitydiagram::JoinNode {
+}
+class activitydiagram::MergeNode {
+}
+abstract class activitydiagram::NamedActivity {
+  + name : str
+}
+class activitydiagram::Offer {
+}
+class activitydiagram::OpaqueAction {
+}
+class activitydiagram::Token {
+}
+class activitydiagram::Trace {
+}
+abstract class activitydiagram::Value {
+}
+abstract class activitydiagram::Variable {
+}
+Action <|-- activitydiagram::OpaqueAction
+ActivityEdge <|-- activitydiagram::ControlFlow
+ActivityNode <|-- activitydiagram::ControlNode
+ActivityNode <|-- activitydiagram::ExecutableNode
+ControlNode <|-- activitydiagram::DecisionNode
+ControlNode <|-- activitydiagram::FinalNode
+ControlNode <|-- activitydiagram::ForkNode
+ControlNode <|-- activitydiagram::InitialNode
+ControlNode <|-- activitydiagram::JoinNode
+ControlNode <|-- activitydiagram::MergeNode
+ExecutableNode <|-- activitydiagram::Action
+FinalNode <|-- activitydiagram::ActivityFinalNode
+NamedActivity <|-- activitydiagram::Activity
+NamedActivity <|-- activitydiagram::ActivityEdge
+NamedActivity <|-- activitydiagram::ActivityNode
+Token <|-- activitydiagram::ControlToken
+Token <|-- activitydiagram::ForkedToken
+Value <|-- activitydiagram::BooleanValue
+Value <|-- activitydiagram::IntegerValue
+Variable <|-- activitydiagram::BooleanVariable
+Variable <|-- activitydiagram::IntegerVariable
+activitydiagram::Activity "1..1" -- "1..1" activitydiagram::ActivityNode : activity10
+activitydiagram::Context "1..1" -- "0..1" activitydiagram::Activity : activity41
+activitydiagram::Token "0..1" -- "1..1" activitydiagram::ForkedToken : baseToken36
+activitydiagram::Variable "1..1" *-- "0..1" activitydiagram::Value : currentValue22
+activitydiagram::ActivityEdge "0..9999" --* "1..1" activitydiagram::Activity : edges1
+activitydiagram::ActivityNode "0..9999" -- "1..1" activitydiagram::Trace : executedNodes38
+activitydiagram::Exp "0..9999" --* "1..1" activitydiagram::OpaqueAction : expressions19
+activitydiagram::ControlFlow "1..1" -- "0..1" activitydiagram::BooleanVariable : guard18
+activitydiagram::Token "0..9999" --* "1..1" activitydiagram::ActivityNode : heldTokens11
+activitydiagram::Token "1..1" -- "1..1" activitydiagram::ActivityNode : holder32
+activitydiagram::ActivityNode "1..1" -- "0..9999" activitydiagram::ActivityEdge : incoming8
+activitydiagram::Value "0..1" --* "1..1" activitydiagram::Variable : initialValue20
+activitydiagram::InputValue "0..9999" --* "1..1" activitydiagram::Input : inputValues30
+activitydiagram::InputValue "0..9999" -- "1..1" activitydiagram::Context : inputValues44
+activitydiagram::Variable "0..9999" --* "1..1" activitydiagram::Activity : inputs4
+activitydiagram::Activity "1..1" *-- "0..9999" activitydiagram::Variable : locals2
+activitydiagram::JoinNode "0..1" -- "1..1" activitydiagram::Context : node47
+activitydiagram::ActivityNode "0..9999" --* "1..1" activitydiagram::Activity : nodes0
+activitydiagram::Token "0..9999" -- "1..1" activitydiagram::Offer : offeredTokens34
+activitydiagram::ActivityEdge "1..1" *-- "0..9999" activitydiagram::Offer : offers16
+activitydiagram::ActivityEdge "0..9999" -- "1..1" activitydiagram::ActivityNode : outgoing7
+activitydiagram::Trace "0..1" -- "1..1" activitydiagram::Context : output39
+activitydiagram::ActivityNode "1..1" -- "1..1" activitydiagram::ActivityEdge : source12
+activitydiagram::ActivityNode "1..1" -- "1..1" activitydiagram::ActivityEdge : target14
+activitydiagram::Value "1..1" --* "1..1" activitydiagram::InputValue : value25
+activitydiagram::Variable "1..1" -- "1..1" activitydiagram::InputValue : variable27
+@enduml

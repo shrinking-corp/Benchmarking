@@ -1,0 +1,38 @@
+@startuml
+class DataBaseElement {
+}
+enum RailsData {
+  binary
+  boolean
+  date
+  dateTime
+  decimal
+  float
+  integer
+  string
+  text
+  time
+  timestamp
+}
+class database::Column {
+  + type : str
+}
+abstract class database::DataBaseElement {
+  + name : str
+}
+class database::ForeignKey {
+}
+class database::Schema {
+}
+class database::Table {
+}
+DataBaseElement <|-- database::Column
+DataBaseElement <|-- database::Schema
+DataBaseElement <|-- database::Table
+database::Column "1..1" -- "1..1" database::ForeignKey : column8
+database::Column "1..9999" --* "1..1" database::Table : columns1
+database::ForeignKey "0..9999" --* "1..1" database::Table : foreignKeys6
+database::Table "1..1" -- "1..1" database::Column : primaryKey3
+database::Table "1..1" -- "1..1" database::ForeignKey : reference11
+database::Schema "1..1" *-- "0..9999" database::Table : tables0
+@enduml

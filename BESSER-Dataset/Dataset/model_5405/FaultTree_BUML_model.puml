@@ -1,0 +1,74 @@
+@startuml
+class Event {
+}
+enum GateType {
+  AND
+  INHIBIT
+  OR
+  PAND
+  XOR
+}
+enum PrimaryEventType {
+  BASIC
+  EXTERNAL
+  UNDEVELOPED
+}
+class Transfer {
+}
+class faultTree::ConditioningEvent {
+  + condition : str
+}
+abstract class faultTree::Event {
+  + description : str
+  + name : str
+}
+class faultTree::FaultTree {
+  + name : str
+}
+class faultTree::Gate {
+  + name : str
+  + probability : float
+  + type : str
+}
+class faultTree::IntermediateEvent {
+  + probability : float
+}
+class faultTree::PrimaryEvent {
+  + probability : float
+  + type : str
+}
+abstract class faultTree::Transfer {
+  + name : str
+}
+class faultTree::TransferIn {
+}
+class faultTree::TransferOut {
+}
+Event <|-- faultTree::ConditioningEvent
+Event <|-- faultTree::IntermediateEvent
+Event <|-- faultTree::PrimaryEvent
+Transfer <|-- faultTree::TransferIn
+Transfer <|-- faultTree::TransferOut
+faultTree::IntermediateEvent "0..1" -- "1..1" faultTree::IntermediateEvent : bottomEvent29
+faultTree::Gate "0..1" -- "1..1" faultTree::IntermediateEvent : bottomGate23
+faultTree::ConditioningEvent "0..9999" --* "1..1" faultTree::FaultTree : conditioningEvents6
+faultTree::TransferIn "1..1" -- "0..1" faultTree::IntermediateEvent : event36
+faultTree::IntermediateEvent "0..1" -- "1..1" faultTree::TransferOut : event40
+faultTree::FaultTree "1..1" -- "0..9999" faultTree::Event : events1
+faultTree::FaultTree "1..1" -- "1..1" faultTree::Gate : faultTree17
+faultTree::FaultTree "1..1" -- "1..1" faultTree::Event : faultTree20
+faultTree::TransferIn "1..1" -- "1..1" faultTree::FaultTree : faultTree38
+faultTree::FaultTree "1..1" -- "1..1" faultTree::TransferOut : faultTree42
+faultTree::Gate "0..9999" --* "1..1" faultTree::FaultTree : gates0
+faultTree::Event "0..9999" -- "1..1" faultTree::Gate : inputs15
+faultTree::IntermediateEvent "0..9999" --* "1..1" faultTree::FaultTree : intermediateEvents2
+faultTree::IntermediateEvent "0..1" -- "1..1" faultTree::Gate : output16
+faultTree::PrimaryEvent "0..9999" --* "1..1" faultTree::FaultTree : primaryEvents4
+faultTree::FaultTree "1..1" -- "0..1" faultTree::IntermediateEvent : topEvent12
+faultTree::IntermediateEvent "1..1" -- "0..1" faultTree::IntermediateEvent : topEvent26
+faultTree::Gate "0..9999" -- "1..1" faultTree::Event : topGates18
+faultTree::TransferIn "0..1" -- "1..1" faultTree::IntermediateEvent : transferIn31
+faultTree::TransferIn "0..9999" --* "1..1" faultTree::FaultTree : transferIns10
+faultTree::TransferOut "0..1" -- "1..1" faultTree::IntermediateEvent : transferOut33
+faultTree::FaultTree "1..1" *-- "0..1" faultTree::TransferOut : transferOut8
+@enduml

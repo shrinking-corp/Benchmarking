@@ -1,0 +1,101 @@
+@startuml
+class Actuadores {
+}
+class Bloques {
+}
+class Instrucciones {
+}
+class Sensores {
+}
+abstract class arduino::Actuadores {
+  + pin : str
+}
+class arduino::Apagar {
+}
+abstract class arduino::Bloques {
+}
+class arduino::Boton {
+}
+class arduino::Buzzer {
+}
+class arduino::Encender {
+}
+class arduino::Esperar {
+  + miliseg : str
+}
+class arduino::If {
+  + operando : str
+  + referencia : str
+  + valor : str
+}
+abstract class arduino::Instrucciones {
+}
+class arduino::LDR {
+}
+class arduino::Led {
+}
+class arduino::PIR {
+}
+class arduino::Potenciometro {
+}
+abstract class arduino::Sensores {
+  + med : str
+  + pin : str
+}
+class arduino::Servo {
+  + angulo : str
+  + libreria : str
+}
+class arduino::Sketch {
+  + Nombre : str
+}
+class arduino::Temperatura {
+  + temperatura : str
+}
+class arduino::Variar {
+  + pwm : str
+}
+class arduino::While {
+  + operando : str
+  + referencia : str
+  + valor : str
+}
+enum operandos {
+  diferente
+  igual
+  mayor
+  mayorigual
+  menor
+  menorigual
+}
+Actuadores <|-- arduino::Buzzer
+Actuadores <|-- arduino::Led
+Actuadores <|-- arduino::Servo
+Bloques <|-- arduino::If
+Bloques <|-- arduino::While
+Instrucciones <|-- arduino::Apagar
+Instrucciones <|-- arduino::Encender
+Instrucciones <|-- arduino::Esperar
+Instrucciones <|-- arduino::Variar
+Sensores <|-- arduino::Boton
+Sensores <|-- arduino::LDR
+Sensores <|-- arduino::PIR
+Sensores <|-- arduino::Potenciometro
+Sensores <|-- arduino::Temperatura
+arduino::Sensores "1..1" -- "0..9999" arduino::Actuadores : act10
+arduino::Actuadores "0..9999" --* "1..1" arduino::Sketch : actuadores1
+arduino::Instrucciones "0..1" -- "1..1" arduino::Actuadores : actuadorinstruccion7
+arduino::Apagar "0..1" -- "1..1" arduino::Esperar : apagar16
+arduino::Actuadores "0..9999" --* "1..1" arduino::Bloques : bactuadores27
+arduino::Instrucciones "0..9999" --* "1..1" arduino::Bloques : binstrucciones30
+arduino::Actuadores "0..1" -- "1..1" arduino::Bloques : bloacts36
+arduino::Bloques "0..9999" --* "1..1" arduino::Bloques : bloq25
+arduino::Sketch "1..1" *-- "0..9999" arduino::Bloques : bloques5
+arduino::Bloques "1..1" -- "0..1" arduino::Sensores : bsensores33
+arduino::Sensores "0..1" -- "1..1" arduino::Variar : datos14
+arduino::Encender "0..1" -- "1..1" arduino::Esperar : encender19
+arduino::Esperar "0..1" -- "1..1" arduino::Apagar : esperar113
+arduino::Encender "1..1" -- "0..1" arduino::Esperar : esperar21
+arduino::Instrucciones "0..9999" --* "1..1" arduino::Sketch : instrucciones3
+arduino::Sketch "1..1" *-- "0..9999" arduino::Sensores : sensores0
+@enduml

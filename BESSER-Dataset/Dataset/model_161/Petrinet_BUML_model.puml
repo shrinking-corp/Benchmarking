@@ -1,0 +1,32 @@
+@startuml
+class Node {
+}
+class PObject {
+}
+class PetriNetModel::Arc {
+}
+class PetriNetModel::Node {
+  + name : str
+}
+class PetriNetModel::PObject {
+  + id : int
+}
+class PetriNetModel::PetriNet {
+}
+class PetriNetModel::Place {
+}
+class PetriNetModel::Token {
+}
+class PetriNetModel::Transition {
+}
+Node <|-- PetriNetModel::Place
+Node <|-- PetriNetModel::Transition
+PObject <|-- PetriNetModel::Arc
+PObject <|-- PetriNetModel::Node
+PetriNetModel::Arc "0..9999" -- "1..1" PetriNetModel::Node : in2
+PetriNetModel::PObject "0..9999" --* "1..1" PetriNetModel::PetriNet : objects0
+PetriNetModel::Arc "0..9999" -- "1..1" PetriNetModel::Node : out1
+PetriNetModel::Node "1..1" -- "1..1" PetriNetModel::Arc : source5
+PetriNetModel::Arc "1..1" -- "1..1" PetriNetModel::Node : target6
+PetriNetModel::Token "0..9999" --* "1..1" PetriNetModel::Place : tokens4
+@enduml

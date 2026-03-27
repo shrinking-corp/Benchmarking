@@ -1,0 +1,46 @@
+@startuml
+class Vehicle {
+}
+class platoon::Constraints {
+  + lbound : int
+  + ubound : int
+}
+class platoon::FollowingVehicle {
+}
+class platoon::Forward {
+  + distance : int
+}
+class platoon::LeaderVehicle {
+}
+class platoon::Platoon {
+}
+class platoon::Root {
+}
+class platoon::Route {
+  + name : str
+}
+class platoon::TurnLeft {
+}
+class platoon::TurnRight {
+}
+abstract class platoon::Vehicle {
+  + name : str
+}
+abstract class platoon::routeCommand {
+}
+class routeCommand {
+}
+Vehicle <|-- platoon::FollowingVehicle
+Vehicle <|-- platoon::LeaderVehicle
+routeCommand <|-- platoon::Forward
+routeCommand <|-- platoon::TurnLeft
+routeCommand <|-- platoon::TurnRight
+platoon::Constraints "1..1" --* "1..1" platoon::Root : constraints3
+platoon::Vehicle "1..1" -- "1..1" platoon::FollowingVehicle : following11
+platoon::Platoon "1..1" *-- "0..9999" platoon::FollowingVehicle : followingVehicle9
+platoon::LeaderVehicle "1..1" --* "1..1" platoon::Platoon : leaderVehicle7
+platoon::Root "1..1" *-- "1..1" platoon::Platoon : platoon0
+platoon::Route "1..1" --* "1..1" platoon::Root : route1
+platoon::Route "1..1" -- "1..1" platoon::LeaderVehicle : route13
+platoon::routeCommand "1..9999" --* "1..1" platoon::Route : routeCommands5
+@enduml

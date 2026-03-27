@@ -1,0 +1,90 @@
+@startuml
+class Addressable {
+}
+class AudioVisualItem {
+}
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class CirculatingItem {
+}
+class Item {
+}
+class Lendable {
+}
+class Person {
+}
+abstract class extlibrary::Addressable {
+  + address : str
+}
+abstract class extlibrary::AudioVisualItem {
+  + damaged : bool
+  + minutesLength : int
+  + title : str
+}
+class extlibrary::Book {
+  + category : str
+  + pages : int
+  + title : str
+}
+class extlibrary::BookOnTape {
+}
+class extlibrary::Borrower {
+}
+abstract class extlibrary::CirculatingItem {
+}
+class extlibrary::Employee {
+}
+abstract class extlibrary::Item {
+  + publicationDate : date
+}
+abstract class extlibrary::Lendable {
+  + copies : int
+}
+class extlibrary::Library {
+  + name : str
+  + people : str
+}
+abstract class extlibrary::Periodical {
+  + issuesPerYear : int
+  + title : str
+}
+class extlibrary::Person {
+  + firstName : str
+  + lastName : str
+}
+class extlibrary::VideoCassette {
+}
+class extlibrary::Writer {
+  + name : str
+}
+Addressable <|-- extlibrary::Library
+Addressable <|-- extlibrary::Person
+AudioVisualItem <|-- extlibrary::BookOnTape
+AudioVisualItem <|-- extlibrary::VideoCassette
+CirculatingItem <|-- extlibrary::AudioVisualItem
+CirculatingItem <|-- extlibrary::Book
+Item <|-- extlibrary::CirculatingItem
+Item <|-- extlibrary::Periodical
+Lendable <|-- extlibrary::CirculatingItem
+Person <|-- extlibrary::Borrower
+Person <|-- extlibrary::Employee
+Person <|-- extlibrary::Writer
+extlibrary::Book "1..1" -- "1..1" extlibrary::Writer : author0
+extlibrary::BookOnTape "1..1" -- "0..1" extlibrary::Writer : author26
+extlibrary::Book "0..9999" -- "1..1" extlibrary::Writer : books19
+extlibrary::Book "0..9999" -- "1..1" extlibrary::Library : books9
+extlibrary::Lendable "0..9999" -- "1..1" extlibrary::Borrower : borrowed31
+extlibrary::Borrower "0..9999" -- "1..1" extlibrary::Lendable : borrowers22
+extlibrary::Library "1..1" *-- "0..9999" extlibrary::Borrower : borrowers5
+extlibrary::Library "0..9999" --* "1..1" extlibrary::Library : branches12
+extlibrary::Person "0..9999" -- "1..1" extlibrary::VideoCassette : cast29
+extlibrary::Employee "0..9999" --* "1..1" extlibrary::Library : employees3
+extlibrary::Employee "0..1" -- "1..1" extlibrary::Employee : manager35
+extlibrary::Library "1..1" -- "0..1" extlibrary::Library : parentBranch16
+extlibrary::Person "0..1" -- "1..1" extlibrary::BookOnTape : reader25
+extlibrary::Item "0..9999" --* "1..1" extlibrary::Library : stock7
+extlibrary::Writer "0..9999" --* "1..1" extlibrary::Library : writers2
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+class State {
+}
+class StateMachine {
+}
+class StateMachinesProv::ConnectionPointReference {
+}
+class StateMachinesProv::FinalState {
+}
+class StateMachinesProv::ProtocolConformance {
+}
+class StateMachinesProv::ProtocolStateMachine {
+}
+class StateMachinesProv::ProtocolTransition {
+}
+class StateMachinesProv::Pseudostate {
+}
+class StateMachinesProv::Region {
+}
+class StateMachinesProv::State {
+  + isComposite : bool
+  + isOrthogonal : bool
+  + isSimple : bool
+  + isSubmachineState : bool
+}
+class StateMachinesProv::StateMachine {
+}
+class StateMachinesProv::TimeEvent {
+}
+class StateMachinesProv::Transition {
+}
+abstract class StateMachinesProv::Vertex {
+}
+class Transition {
+}
+class Vertex {
+}
+StateMachine <|-- StateMachinesProv::ProtocolStateMachine
+State <|-- StateMachinesProv::FinalState
+Transition <|-- StateMachinesProv::ProtocolTransition
+Vertex <|-- StateMachinesProv::ConnectionPointReference
+Vertex <|-- StateMachinesProv::Pseudostate
+Vertex <|-- StateMachinesProv::State
+StateMachinesProv::ProtocolConformance "0..9999" --* "1..1" StateMachinesProv::ProtocolStateMachine : conformance68
+StateMachinesProv::State "1..1" *-- "0..9999" StateMachinesProv::ConnectionPointReference : connection53
+StateMachinesProv::StateMachine "1..1" *-- "0..9999" StateMachinesProv::Pseudostate : connectionPoint1
+StateMachinesProv::Pseudostate "0..9999" --* "1..1" StateMachinesProv::State : connectionPoint56
+StateMachinesProv::Region "0..1" -- "1..1" StateMachinesProv::Vertex : container27
+StateMachinesProv::Region "0..1" -- "1..1" StateMachinesProv::Transition : container36
+StateMachinesProv::Pseudostate "0..1" -- "1..1" StateMachinesProv::ConnectionPointReference : entry47
+StateMachinesProv::ConnectionPointReference "1..1" -- "0..1" StateMachinesProv::Pseudostate : exit45
+StateMachinesProv::Region "0..1" -- "1..1" StateMachinesProv::Region : extendedRegion19
+StateMachinesProv::StateMachine "0..9999" -- "1..1" StateMachinesProv::StateMachine : extendedStateMachine6
+StateMachinesProv::ProtocolConformance "1..1" -- "1..1" StateMachinesProv::ProtocolStateMachine : generalMachine72
+StateMachinesProv::Transition "0..9999" -- "1..1" StateMachinesProv::Vertex : incoming24
+StateMachinesProv::Transition "0..9999" -- "1..1" StateMachinesProv::Vertex : outgoing21
+StateMachinesProv::State "0..1" -- "1..1" StateMachinesProv::State : redefinedState66
+StateMachinesProv::Transition "0..1" -- "1..1" StateMachinesProv::Transition : redefinedTransition40
+StateMachinesProv::Region "1..9999" --* "1..1" StateMachinesProv::StateMachine : region0
+StateMachinesProv::State "1..1" *-- "0..9999" StateMachinesProv::Region : region62
+StateMachinesProv::Vertex "1..1" -- "1..1" StateMachinesProv::Transition : source30
+StateMachinesProv::ProtocolStateMachine "1..1" -- "1..1" StateMachinesProv::ProtocolConformance : specificMachine69
+StateMachinesProv::State "0..1" -- "1..1" StateMachinesProv::Region : state15
+StateMachinesProv::State "0..1" -- "1..1" StateMachinesProv::Pseudostate : state42
+StateMachinesProv::State "0..1" -- "1..1" StateMachinesProv::ConnectionPointReference : state50
+StateMachinesProv::StateMachine "0..1" -- "1..1" StateMachinesProv::Region : stateMachine10
+StateMachinesProv::StateMachine "0..1" -- "1..1" StateMachinesProv::State : submachine59
+StateMachinesProv::State "0..9999" -- "1..1" StateMachinesProv::StateMachine : submachineState3
+StateMachinesProv::Region "1..1" *-- "0..9999" StateMachinesProv::Vertex : subvertex8
+StateMachinesProv::Transition "1..1" -- "1..1" StateMachinesProv::Vertex : target33
+StateMachinesProv::Transition "0..9999" --* "1..1" StateMachinesProv::Region : transition13
+@enduml

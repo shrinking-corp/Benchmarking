@@ -1,0 +1,208 @@
+@startuml
+class BasicBehavior::BehavioredClassifier {
+}
+class BasicBehavior::Classifier {
+}
+class Behavior {
+}
+class BehavioralFeature {
+}
+class BehavioredClassifier {
+}
+enum CallConcurrencyFeature {
+  concurrent
+  guarded
+  sequential
+}
+class Class {
+}
+class Classifier {
+}
+abstract class CommonBehavior::BasicBehavior::Behavior {
+  + isReentrant : bool
+}
+abstract class CommonBehavior::BasicBehavior::BehavioralFeature {
+  + concurrency : str
+}
+class CommonBehavior::BasicBehavior::BehavioredClassifier {
+}
+abstract class CommonBehavior::BasicBehavior::Class {
+}
+abstract class CommonBehavior::BasicBehavior::Classifier {
+}
+class CommonBehavior::BasicBehavior::Constraint {
+}
+class CommonBehavior::BasicBehavior::FunctionBehavior {
+}
+class CommonBehavior::BasicBehavior::OpaqueBehavior {
+  + body : str
+  + language : str
+}
+class CommonBehavior::BasicBehavior::OpaqueExpression {
+}
+class CommonBehavior::BasicBehavior::Parameter {
+}
+abstract class CommonBehavior::BasicBehavior::RedefinableElement {
+}
+class CommonBehavior::Communications::AnyReceiveEvent {
+}
+class CommonBehavior::Communications::CallEvent {
+}
+class CommonBehavior::Communications::ChangeEvent {
+}
+abstract class CommonBehavior::Communications::Event {
+}
+class CommonBehavior::Communications::Interface {
+}
+abstract class CommonBehavior::Communications::MessageEvent {
+}
+abstract class CommonBehavior::Communications::NamedElement {
+}
+class CommonBehavior::Communications::Operation {
+}
+abstract class CommonBehavior::Communications::PackageableElement {
+}
+class CommonBehavior::Communications::Property {
+}
+class CommonBehavior::Communications::Reception {
+}
+class CommonBehavior::Communications::Signal {
+}
+class CommonBehavior::Communications::SignalEvent {
+}
+class CommonBehavior::Communications::Trigger {
+}
+abstract class CommonBehavior::Communications::ValueSpecification {
+}
+class CommonBehavior::SimpleTime::Duration {
+}
+class CommonBehavior::SimpleTime::DurationConstraint {
+  + firstEvent : bool
+}
+class CommonBehavior::SimpleTime::DurationInterval {
+}
+class CommonBehavior::SimpleTime::DurationObservation {
+  + firstEvent : bool
+}
+class CommonBehavior::SimpleTime::Interval {
+}
+class CommonBehavior::SimpleTime::IntervalConstraint {
+}
+abstract class CommonBehavior::SimpleTime::Observation {
+}
+class CommonBehavior::SimpleTime::TimeConstraint {
+  + firstEvent : bool
+}
+class CommonBehavior::SimpleTime::TimeEvent {
+  + isRelative : bool
+}
+class CommonBehavior::SimpleTime::TimeExpression {
+}
+class CommonBehavior::SimpleTime::TimeInterval {
+}
+class CommonBehavior::SimpleTime::TimeObservation {
+  + firstEvent : bool
+}
+class Constraint {
+}
+class Duration {
+}
+class DurationInterval {
+}
+class Event {
+}
+class Interval {
+}
+class IntervalConstraint {
+}
+class MessageEvent {
+}
+class NamedElement {
+}
+class Observation {
+}
+class OpaqueBehavior {
+}
+class Operation {
+}
+class PackageableElement {
+}
+class Parameter {
+}
+class Property {
+}
+class Reception {
+}
+class RedefinableElement {
+}
+class Signal {
+}
+class TimeExpression {
+}
+class TimeInterval {
+}
+class ValueSpecification {
+}
+BasicBehavior::BehavioredClassifier <|-- CommonBehavior::BasicBehavior::Class
+BasicBehavior::Classifier <|-- CommonBehavior::BasicBehavior::Class
+Behavior <|-- CommonBehavior::BasicBehavior::OpaqueBehavior
+BehavioralFeature <|-- CommonBehavior::Communications::Reception
+Class <|-- CommonBehavior::BasicBehavior::Behavior
+Classifier <|-- CommonBehavior::BasicBehavior::BehavioredClassifier
+Classifier <|-- CommonBehavior::Communications::Interface
+Classifier <|-- CommonBehavior::Communications::Signal
+Constraint <|-- CommonBehavior::SimpleTime::IntervalConstraint
+Event <|-- CommonBehavior::Communications::ChangeEvent
+Event <|-- CommonBehavior::Communications::MessageEvent
+Interval <|-- CommonBehavior::SimpleTime::DurationInterval
+Interval <|-- CommonBehavior::SimpleTime::TimeInterval
+IntervalConstraint <|-- CommonBehavior::SimpleTime::DurationConstraint
+IntervalConstraint <|-- CommonBehavior::SimpleTime::TimeConstraint
+MessageEvent <|-- CommonBehavior::Communications::AnyReceiveEvent
+MessageEvent <|-- CommonBehavior::Communications::CallEvent
+MessageEvent <|-- CommonBehavior::Communications::SignalEvent
+NamedElement <|-- CommonBehavior::Communications::Trigger
+Observation <|-- CommonBehavior::SimpleTime::DurationObservation
+Observation <|-- CommonBehavior::SimpleTime::TimeObservation
+OpaqueBehavior <|-- CommonBehavior::BasicBehavior::FunctionBehavior
+PackageableElement <|-- CommonBehavior::Communications::Event
+PackageableElement <|-- CommonBehavior::SimpleTime::Observation
+RedefinableElement <|-- CommonBehavior::BasicBehavior::Classifier
+ValueSpecification <|-- CommonBehavior::SimpleTime::Duration
+ValueSpecification <|-- CommonBehavior::SimpleTime::Interval
+ValueSpecification <|-- CommonBehavior::SimpleTime::TimeExpression
+Behavior "0..1" -- "1..1" CommonBehavior::BasicBehavior::OpaqueExpression : behavior23
+CommonBehavior::Communications::ChangeEvent "1..1" -- "1..1" ValueSpecification : changeExpression34
+CommonBehavior::BasicBehavior::BehavioredClassifier "1..1" -- "0..1" Behavior : classifierBehavior1
+BehavioredClassifier "0..1" -- "1..1" CommonBehavior::BasicBehavior::Behavior : context5
+Duration "1..1" -- "1..1" CommonBehavior::SimpleTime::DurationInterval : durationMax58
+CommonBehavior::SimpleTime::DurationInterval "1..1" -- "1..1" Duration : durationMin59
+CommonBehavior::SimpleTime::DurationConstraint "1..1" -- "1..1" DurationInterval : durationSpecification63
+CommonBehavior::Communications::Trigger "1..1" -- "1..1" Event : event30
+NamedElement "1..1" -- "1..1" CommonBehavior::SimpleTime::TimeObservation : event40
+CommonBehavior::SimpleTime::DurationObservation "1..1" -- "1..2" NamedElement : event41
+ValueSpecification "0..1" --* "1..1" CommonBehavior::SimpleTime::TimeExpression : expr36
+ValueSpecification "0..1" --* "1..1" CommonBehavior::SimpleTime::Duration : expr43
+CommonBehavior::SimpleTime::Interval "1..1" -- "1..1" ValueSpecification : max48
+Behavior "0..9999" -- "1..1" CommonBehavior::BasicBehavior::BehavioralFeature : method18
+ValueSpecification "1..1" -- "1..1" CommonBehavior::SimpleTime::Interval : min50
+Observation "0..9999" -- "1..1" CommonBehavior::SimpleTime::TimeExpression : observation38
+Observation "0..9999" -- "1..1" CommonBehavior::SimpleTime::Duration : observation45
+Operation "1..1" -- "1..1" CommonBehavior::Communications::CallEvent : operation33
+Property "0..9999" --* "1..1" CommonBehavior::Communications::Signal : ownedAttribute26
+Behavior "0..9999" --* "1..1" CommonBehavior::BasicBehavior::BehavioredClassifier : ownedBehavior0
+Parameter "0..9999" --* "1..1" CommonBehavior::BasicBehavior::Behavior : ownedParameter11
+Reception "0..9999" --* "1..1" CommonBehavior::Communications::Interface : ownedReception28
+CommonBehavior::BasicBehavior::Class "1..1" *-- "0..9999" Reception : ownedReception4
+Constraint "0..9999" --* "1..1" CommonBehavior::BasicBehavior::Behavior : postcondition15
+Constraint "0..9999" --* "1..1" CommonBehavior::BasicBehavior::Behavior : precondition13
+Behavior "0..9999" -- "1..1" CommonBehavior::BasicBehavior::Behavior : redefinedBehavior6
+CommonBehavior::BasicBehavior::OpaqueExpression "1..1" -- "0..1" Parameter : result21
+Signal "1..1" -- "1..1" CommonBehavior::Communications::Reception : signal27
+Signal "1..1" -- "1..1" CommonBehavior::Communications::SignalEvent : signal31
+BehavioralFeature "0..1" -- "1..1" CommonBehavior::BasicBehavior::Behavior : specification9
+TimeExpression "1..1" -- "1..1" CommonBehavior::SimpleTime::TimeInterval : timeMax53
+TimeExpression "1..1" -- "1..1" CommonBehavior::SimpleTime::TimeInterval : timeMin55
+TimeInterval "1..1" -- "1..1" CommonBehavior::SimpleTime::TimeConstraint : timeSpecification62
+TimeExpression "1..1" --* "1..1" CommonBehavior::SimpleTime::TimeEvent : when35
+@enduml

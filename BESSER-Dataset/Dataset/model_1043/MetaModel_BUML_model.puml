@@ -1,0 +1,39 @@
+@startuml
+class MetaModel::EvolutionStyle {
+  + name : str
+}
+class MetaModel::FinalState {
+}
+class MetaModel::InitialState {
+}
+class MetaModel::IntermidiateState {
+}
+class MetaModel::Operation {
+  + cost : str
+  + name : str
+  + time : str
+}
+abstract class MetaModel::State {
+  + name : str
+}
+class MetaModel::Transition {
+  + description : str
+  + name : str
+}
+class State {
+}
+State <|-- MetaModel::FinalState
+State <|-- MetaModel::InitialState
+State <|-- MetaModel::IntermidiateState
+MetaModel::InitialState "1..1" --* "1..1" MetaModel::EvolutionStyle : InitialArchitecture1
+MetaModel::FinalState "1..1" --* "1..1" MetaModel::EvolutionStyle : finalArchitecture5
+MetaModel::InitialState "1..1" -- "1..9999" MetaModel::State : next14
+MetaModel::State "1..9999" -- "1..1" MetaModel::IntermidiateState : next17
+MetaModel::Operation "1..9999" --* "1..1" MetaModel::Transition : operations7
+MetaModel::State "1..9999" -- "1..1" MetaModel::IntermidiateState : prev20
+MetaModel::FinalState "1..1" -- "1..9999" MetaModel::State : prev23
+MetaModel::State "1..1" -- "1..1" MetaModel::Transition : source9
+MetaModel::EvolutionStyle "1..1" *-- "1..9999" MetaModel::IntermidiateState : states3
+MetaModel::Transition "1..1" -- "1..1" MetaModel::State : target11
+MetaModel::Transition "1..9999" --* "1..1" MetaModel::EvolutionStyle : transitions0
+@enduml

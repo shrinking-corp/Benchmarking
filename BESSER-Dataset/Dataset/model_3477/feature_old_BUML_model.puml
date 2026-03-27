@@ -1,0 +1,134 @@
+@startuml
+class AtomicExpression {
+}
+enum AttributeComparisonOperator {
+  equal
+  greaterThan
+  greaterThanOrEqual
+  lessThan
+  lessThanOrEqual
+  unequal
+}
+class AttributeOperand {
+}
+class BinaryExpression {
+}
+class Domain {
+}
+class Expression {
+}
+class Identifiable {
+}
+enum SelectedState {
+  deselected
+  selected
+  undetermined
+}
+class UnaryExpression {
+}
+class feature::AndExpression {
+}
+class feature::Annotation {
+}
+abstract class feature::AtomicExpression {
+}
+class feature::Attribute {
+  + name : str
+  + value : str
+}
+class feature::AttributeComparisonExpression {
+  + operator : str
+}
+abstract class feature::AttributeOperand {
+}
+class feature::AttributeReference {
+}
+class feature::AttributeValueLiteral {
+  + value : str
+}
+abstract class feature::BinaryExpression {
+}
+class feature::Constraint {
+}
+class feature::ContinuousDomain {
+}
+abstract class feature::Domain {
+}
+class feature::EnumDomain {
+  + values : str
+}
+class feature::ExcludesExpression {
+}
+abstract class feature::Expression {
+}
+class feature::Feature {
+  + name : str
+  + selected : str
+}
+class feature::FeatureModel {
+  + name : str
+}
+class feature::FeatureReference {
+}
+class feature::Group {
+  + maxCardinality : int
+  + minCardinality : int
+}
+abstract class feature::Identifiable {
+  + id : str
+}
+class feature::ImpliesExpression {
+}
+class feature::Interval {
+  + lowerBound : int
+  + upperBound : int
+}
+class feature::NestedExpression {
+}
+class feature::NotExpression {
+}
+class feature::OrExpression {
+}
+abstract class feature::UnaryExpression {
+}
+AtomicExpression <|-- feature::AttributeComparisonExpression
+AtomicExpression <|-- feature::FeatureReference
+AttributeOperand <|-- feature::AttributeReference
+AttributeOperand <|-- feature::AttributeValueLiteral
+BinaryExpression <|-- feature::AndExpression
+BinaryExpression <|-- feature::ExcludesExpression
+BinaryExpression <|-- feature::ImpliesExpression
+BinaryExpression <|-- feature::OrExpression
+Domain <|-- feature::ContinuousDomain
+Domain <|-- feature::EnumDomain
+Expression <|-- feature::AtomicExpression
+Expression <|-- feature::BinaryExpression
+Expression <|-- feature::UnaryExpression
+Identifiable <|-- feature::Constraint
+Identifiable <|-- feature::Feature
+Identifiable <|-- feature::Group
+UnaryExpression <|-- feature::NestedExpression
+UnaryExpression <|-- feature::NotExpression
+feature::Annotation "0..9999" --* "1..1" feature::Feature : annotations12
+feature::AttributeComparisonExpression "1..1" *-- "1..1" feature::AttributeOperand : attribute134
+feature::AttributeOperand "1..1" --* "1..1" feature::AttributeComparisonExpression : attribute235
+feature::Attribute "1..1" -- "1..1" feature::AttributeReference : attribute38
+feature::Attribute "0..9999" --* "1..1" feature::Feature : attributes8
+feature::Feature "1..9999" --* "1..1" feature::Group : childFeatures15
+feature::FeatureModel "1..1" *-- "0..9999" feature::FeatureModel : children3
+feature::Constraint "0..9999" --* "1..1" feature::FeatureModel : constraints6
+feature::Domain "1..1" --* "1..1" feature::Attribute : domain21
+feature::Expression "1..1" --* "1..1" feature::Constraint : expression17
+feature::Attribute "1..1" -- "1..1" feature::Feature : feature19
+feature::Feature "1..1" -- "1..1" feature::Annotation : feature22
+feature::Feature "1..1" -- "1..1" feature::FeatureReference : feature32
+feature::Group "0..9999" --* "1..1" feature::Feature : groups9
+feature::Interval "1..9999" --* "1..1" feature::ContinuousDomain : intervals24
+feature::BinaryExpression "1..1" *-- "1..1" feature::Expression : operand127
+feature::Expression "1..1" --* "1..1" feature::BinaryExpression : operand229
+feature::Expression "1..1" --* "1..1" feature::UnaryExpression : operand25
+feature::FeatureModel "0..1" -- "1..1" feature::FeatureModel : parent1
+feature::Group "1..1" -- "1..1" feature::Feature : parentFeature14
+feature::Group "0..1" -- "1..1" feature::Feature : parentGroup10
+feature::Feature "1..1" --* "1..1" feature::FeatureModel : root5
+@enduml

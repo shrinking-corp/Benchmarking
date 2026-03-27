@@ -1,0 +1,33 @@
+@startuml
+class Element {
+}
+class LocatedElement {
+}
+class NamedElement {
+}
+abstract class PetriNet::Element {
+}
+abstract class PetriNet::LocatedElement {
+  + location : str
+}
+abstract class PetriNet::NamedElement {
+  + name : str
+}
+class PetriNet::PetriNet {
+}
+class PetriNet::Place {
+}
+class PetriNet::Transition {
+}
+Element <|-- PetriNet::Place
+Element <|-- PetriNet::Transition
+LocatedElement <|-- PetriNet::NamedElement
+NamedElement <|-- PetriNet::Element
+NamedElement <|-- PetriNet::PetriNet
+PetriNet::Element "0..9999" --* "1..1" PetriNet::PetriNet : elements0
+PetriNet::Place "1..1" -- "0..9999" PetriNet::Transition : incomingArc2
+PetriNet::Place "0..9999" -- "1..1" PetriNet::Transition : incomingArc5
+PetriNet::PetriNet "1..1" -- "1..1" PetriNet::Element : net1
+PetriNet::Transition "0..9999" -- "1..1" PetriNet::Place : outgoingArc3
+PetriNet::Transition "1..1" -- "0..9999" PetriNet::Place : outgoingArc7
+@enduml

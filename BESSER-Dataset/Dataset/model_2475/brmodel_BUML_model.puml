@@ -1,0 +1,58 @@
+@startuml
+class Method {
+}
+class Trace {
+}
+class Variable {
+}
+class brmodel::EObject {
+}
+abstract class brmodel::Method {
+  + class : str
+  + name : str
+}
+class brmodel::Model {
+}
+class brmodel::ReachableMethod {
+  + distance : str
+}
+class brmodel::ReachableVariable {
+}
+class brmodel::RelatedMethod {
+}
+class brmodel::RelatedVariable {
+}
+class brmodel::Rule {
+  + id : str
+}
+class brmodel::RulePart {
+  + granularity : str
+}
+class brmodel::SlicedVariable {
+}
+class brmodel::Statement {
+  + textContent : str
+}
+class brmodel::Trace {
+}
+abstract class brmodel::Variable {
+  + name : str
+}
+Method <|-- brmodel::ReachableMethod
+Method <|-- brmodel::RelatedMethod
+Trace <|-- brmodel::Method
+Trace <|-- brmodel::Statement
+Trace <|-- brmodel::Variable
+Variable <|-- brmodel::ReachableVariable
+Variable <|-- brmodel::RelatedVariable
+Variable <|-- brmodel::SlicedVariable
+brmodel::Statement "1..1" --* "1..1" brmodel::RulePart : action9
+brmodel::EObject "0..1" -- "1..1" brmodel::Trace : linkToCode16
+brmodel::ReachableMethod "0..9999" --* "1..1" brmodel::RulePart : reachableMethods12
+brmodel::RelatedMethod "0..1" --* "1..1" brmodel::RulePart : relatedMethod5
+brmodel::RulePart "1..1" *-- "0..9999" brmodel::Statement : relatedStatements7
+brmodel::ReachableVariable "0..9999" --* "1..1" brmodel::RulePart : relatedVariables14
+brmodel::RulePart "0..9999" --* "1..1" brmodel::Rule : ruleParts3
+brmodel::Rule "0..9999" --* "1..1" brmodel::Model : rules0
+brmodel::Rule "1..1" *-- "1..1" brmodel::SlicedVariable : slicedVariable1
+@enduml

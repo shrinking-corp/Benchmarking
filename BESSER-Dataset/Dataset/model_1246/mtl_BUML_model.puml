@@ -1,0 +1,178 @@
+@startuml
+class ASTNode {
+}
+class Block {
+}
+class Comment {
+}
+class Documentation {
+}
+class DocumentedElement {
+}
+class ENamedElement {
+}
+class EPackage {
+}
+class ModuleElement {
+}
+class OCLExpression {
+}
+enum OpenModeKind {
+  Append
+  OverWrite
+}
+class TemplateExpression {
+}
+class Variable {
+}
+enum VisibilityKind {
+  Private
+  Protected
+  Public
+}
+class mtl::Block {
+}
+class mtl::Comment {
+}
+class mtl::CommentBody {
+  + endPosition : int
+  + startPosition : int
+  + value : str
+}
+class mtl::Documentation {
+}
+abstract class mtl::DocumentedElement {
+  + deprecated : bool
+}
+class mtl::EClassifier {
+}
+class mtl::EPackage {
+}
+class mtl::FileBlock {
+  + openMode : str
+}
+class mtl::ForBlock {
+}
+class mtl::IfBlock {
+}
+class mtl::InitSection {
+}
+class mtl::LetBlock {
+}
+class mtl::Macro {
+}
+class mtl::MacroInvocation {
+}
+class mtl::Module {
+  + endHeaderPosition : int
+  + startHeaderPosition : int
+}
+class mtl::ModuleDocumentation {
+  + author : str
+  + since : str
+  + version : str
+}
+abstract class mtl::ModuleElement {
+  + visibility : str
+}
+class mtl::ModuleElementDocumentation {
+}
+class mtl::ParameterDocumentation {
+}
+class mtl::ProtectedAreaBlock {
+}
+class mtl::Query {
+}
+class mtl::QueryInvocation {
+}
+class mtl::Template {
+  + main : bool
+}
+class mtl::TemplateExpression {
+}
+class mtl::TemplateInvocation {
+  + super : bool
+}
+class mtl::TraceBlock {
+}
+class mtl::TypedModel {
+}
+class utilities::ASTNode {
+}
+ASTNode <|-- mtl::InitSection
+Block <|-- mtl::FileBlock
+Block <|-- mtl::ForBlock
+Block <|-- mtl::IfBlock
+Block <|-- mtl::LetBlock
+Block <|-- mtl::Macro
+Block <|-- mtl::ProtectedAreaBlock
+Block <|-- mtl::Template
+Block <|-- mtl::TraceBlock
+Comment <|-- mtl::Documentation
+Comment <|-- mtl::ParameterDocumentation
+Documentation <|-- mtl::ModuleDocumentation
+Documentation <|-- mtl::ModuleElementDocumentation
+DocumentedElement <|-- mtl::Macro
+DocumentedElement <|-- mtl::Module
+DocumentedElement <|-- mtl::Query
+DocumentedElement <|-- mtl::Template
+ENamedElement <|-- mtl::ModuleElement
+EPackage <|-- mtl::Module
+ModuleElement <|-- mtl::Comment
+ModuleElement <|-- mtl::Macro
+ModuleElement <|-- mtl::Query
+ModuleElement <|-- mtl::Template
+OCLExpression <|-- mtl::TemplateExpression
+TemplateExpression <|-- mtl::Block
+TemplateExpression <|-- mtl::MacroInvocation
+TemplateExpression <|-- mtl::QueryInvocation
+TemplateExpression <|-- mtl::TemplateInvocation
+utilities::ASTNode <|-- mtl::ModuleElement
+OCLExpression "0..1" --* "1..1" mtl::TemplateInvocation : after33
+OCLExpression "0..1" --* "1..1" mtl::ForBlock : after64
+mtl::MacroInvocation "1..1" *-- "0..9999" OCLExpression : argument103
+OCLExpression "0..9999" --* "1..1" mtl::TemplateInvocation : argument27
+OCLExpression "0..9999" --* "1..1" mtl::QueryInvocation : argument48
+OCLExpression "0..1" --* "1..1" mtl::TemplateInvocation : before30
+mtl::ForBlock "1..1" *-- "0..1" OCLExpression : before58
+OCLExpression "0..9999" --* "1..1" mtl::Block : body10
+mtl::CommentBody "0..1" --* "1..1" mtl::Comment : body108
+OCLExpression "0..1" --* "1..1" mtl::FileBlock : charset91
+mtl::Macro "1..1" -- "1..1" mtl::MacroInvocation : definition101
+mtl::TemplateInvocation "1..1" -- "1..1" mtl::Template : definition25
+mtl::QueryInvocation "1..1" -- "1..1" mtl::Query : definition46
+mtl::Documentation "0..1" --* "1..1" mtl::DocumentedElement : documentation110
+mtl::DocumentedElement "0..1" -- "1..1" mtl::Documentation : documentedElement109
+mtl::TemplateInvocation "1..1" *-- "0..1" OCLExpression : each36
+OCLExpression "0..1" --* "1..1" mtl::ForBlock : each61
+mtl::Block "0..1" --* "1..1" mtl::IfBlock : else72
+mtl::LetBlock "1..1" *-- "0..1" mtl::Block : else80
+mtl::IfBlock "0..9999" --* "1..1" mtl::IfBlock : elseIf76
+mtl::LetBlock "1..1" *-- "0..9999" mtl::LetBlock : elseLet79
+OCLExpression "1..1" --* "1..1" mtl::Query : expression41
+mtl::Module "0..9999" -- "1..1" mtl::Module : extends2
+OCLExpression "1..1" --* "1..1" mtl::FileBlock : fileUrl86
+OCLExpression "0..1" --* "1..1" mtl::Template : guard19
+OCLExpression "0..1" --* "1..1" mtl::ForBlock : guard67
+mtl::IfBlock "1..1" *-- "1..1" OCLExpression : ifExpr70
+mtl::Module "1..1" -- "0..9999" mtl::Module : imports5
+mtl::InitSection "0..1" --* "1..1" mtl::Block : init9
+mtl::Module "1..1" *-- "1..9999" mtl::TypedModel : input0
+OCLExpression "1..1" --* "1..1" mtl::ForBlock : iterSet55
+Variable "1..1" --* "1..1" mtl::LetBlock : letVariable83
+Variable "1..1" --* "1..1" mtl::ForBlock : loopVariable53
+OCLExpression "1..1" --* "1..1" mtl::ProtectedAreaBlock : marker51
+mtl::TraceBlock "1..1" *-- "1..1" OCLExpression : modelElement94
+mtl::Template "1..1" -- "0..9999" mtl::Template : overrides15
+mtl::ModuleElement "1..9999" --* "1..1" mtl::Module : ownedModuleElement7
+Variable "0..9999" --* "1..1" mtl::Template : parameter16
+Variable "0..9999" --* "1..1" mtl::Query : parameter39
+Variable "0..9999" --* "1..1" mtl::Macro : parameter96
+mtl::ParameterDocumentation "0..9999" --* "1..1" mtl::ModuleElementDocumentation : parametersDocumentation111
+OCLExpression "0..1" --* "1..1" mtl::Template : post22
+mtl::EPackage "1..9999" -- "1..1" mtl::TypedModel : takesTypesFrom106
+mtl::EClassifier "1..1" -- "1..1" mtl::Query : type44
+mtl::EClassifier "1..1" -- "1..1" mtl::Macro : type98
+mtl::FileBlock "1..1" *-- "0..1" OCLExpression : uniqId88
+Variable "1..9999" --* "1..1" mtl::InitSection : variable12
+@enduml

@@ -1,0 +1,172 @@
+@startuml
+class BinaryExpression {
+}
+class Block {
+}
+class Constant {
+}
+class ControlStatement {
+}
+class Expression {
+}
+class ExtendedExpression {
+}
+class ProcedureDefinition {
+}
+class Statement {
+}
+class Symbol {
+}
+class UnaryExpression {
+}
+class Value {
+}
+class expression::logo::Expression {
+}
+abstract class logo::Expression {
+}
+class logo::Logo {
+}
+class logo::Parameter {
+  + name : str
+}
+abstract class logo::Statement {
+}
+abstract class logo::Symbol {
+  + name : str
+}
+abstract class logo::Value {
+}
+class logo::binary::Div {
+}
+class logo::binary::Equals {
+}
+class logo::binary::Greater {
+}
+class logo::binary::Lower {
+}
+class logo::binary::Minus {
+}
+class logo::binary::Mult {
+}
+class logo::binary::Plus {
+}
+class logo::constant::BoolValue {
+  + value : bool
+}
+class logo::constant::IntValue {
+  + value : int
+}
+class logo::control::If {
+}
+class logo::control::Repeat {
+}
+class logo::control::While {
+}
+abstract class logo::expression::BinaryExpression {
+}
+abstract class logo::expression::Constant {
+}
+abstract class logo::expression::ExtendedExpression {
+}
+abstract class logo::expression::UnaryExpression {
+}
+class logo::expression::VariableRead {
+  + name : str
+}
+class logo::extended::And {
+}
+class logo::extended::Or {
+}
+class logo::statement::Block {
+}
+abstract class logo::statement::ControlStatement {
+}
+class logo::statement::Forward {
+}
+class logo::statement::Left {
+}
+class logo::statement::PenDown {
+}
+class logo::statement::PenUp {
+}
+class logo::statement::ProcedureCall {
+}
+class logo::statement::ProcedureDefinition {
+  + name : str
+}
+class logo::statement::Right {
+}
+class logo::symbol::Procedure {
+}
+class logo::symbol::Variable {
+}
+class logo::unary::Not {
+}
+class logo::unary::Opposite {
+}
+class logo::value::BoolValue {
+  + value : bool
+}
+class logo::value::IntValue {
+  + value : int
+}
+class statement::logo::Expression {
+}
+class statement::logo::Parameter {
+}
+class statement::logo::Statement {
+}
+BinaryExpression <|-- logo::binary::Div
+BinaryExpression <|-- logo::binary::Equals
+BinaryExpression <|-- logo::binary::Greater
+BinaryExpression <|-- logo::binary::Lower
+BinaryExpression <|-- logo::binary::Minus
+BinaryExpression <|-- logo::binary::Mult
+BinaryExpression <|-- logo::binary::Plus
+Constant <|-- logo::constant::BoolValue
+Constant <|-- logo::constant::IntValue
+ControlStatement <|-- logo::control::If
+ControlStatement <|-- logo::control::Repeat
+ControlStatement <|-- logo::control::While
+Expression <|-- logo::expression::BinaryExpression
+Expression <|-- logo::expression::Constant
+Expression <|-- logo::expression::ExtendedExpression
+Expression <|-- logo::expression::UnaryExpression
+Expression <|-- logo::expression::VariableRead
+ExtendedExpression <|-- logo::extended::And
+ExtendedExpression <|-- logo::extended::Or
+Statement <|-- logo::statement::Block
+Statement <|-- logo::statement::ControlStatement
+Statement <|-- logo::statement::Forward
+Statement <|-- logo::statement::Left
+Statement <|-- logo::statement::PenDown
+Statement <|-- logo::statement::PenUp
+Statement <|-- logo::statement::ProcedureCall
+Statement <|-- logo::statement::ProcedureDefinition
+Statement <|-- logo::statement::Right
+Symbol <|-- logo::symbol::Procedure
+Symbol <|-- logo::symbol::Variable
+UnaryExpression <|-- logo::unary::Not
+UnaryExpression <|-- logo::unary::Opposite
+Value <|-- logo::value::BoolValue
+Value <|-- logo::value::IntValue
+logo::statement::Right "1..1" *-- "1..1" statement::logo::Expression : angle1
+statement::logo::Expression "1..1" --* "1..1" logo::statement::Left : angle2
+Block "1..1" --* "1..1" logo::control::While : block21
+logo::control::Repeat "1..1" *-- "1..1" Block : block23
+statement::logo::Expression "1..1" --* "1..1" logo::statement::ControlStatement : condition15
+logo::statement::ProcedureCall "1..1" -- "1..1" ProcedureDefinition : definition11
+Block "0..1" --* "1..1" logo::control::If : elseBlock18
+expression::logo::Expression "1..1" --* "1..1" logo::expression::UnaryExpression : expression29
+logo::expression::ExtendedExpression "1..1" *-- "2..9999" expression::logo::Expression : expressions31
+logo::control::If "1..1" *-- "1..1" Block : ifBlock17
+expression::logo::Expression "1..1" --* "1..1" logo::expression::BinaryExpression : leftExpression25
+statement::logo::Expression "0..9999" --* "1..1" logo::statement::ProcedureCall : parameterValues9
+statement::logo::Parameter "0..9999" --* "1..1" logo::statement::ProcedureDefinition : parameters6
+expression::logo::Expression "1..1" --* "1..1" logo::expression::BinaryExpression : rightExpression26
+logo::Logo "1..1" *-- "0..9999" logo::Statement : statements0
+logo::statement::Block "1..1" *-- "1..9999" statement::logo::Statement : statements13
+statement::logo::Statement "1..9999" --* "1..1" logo::statement::ProcedureDefinition : statements7
+statement::logo::Expression "1..1" --* "1..1" logo::statement::Forward : step4
+@enduml

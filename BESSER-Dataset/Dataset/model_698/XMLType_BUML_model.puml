@@ -1,0 +1,32 @@
+@startuml
+class AnyType {
+}
+class type::AnyType {
+  + any : str
+  + anyAttribute : str
+  + mixed : str
+}
+class type::EDataType {
+}
+class type::EStringToStringMapEntry {
+}
+class type::ProcessingInstruction {
+  + data : str
+  + target : str
+}
+class type::SimpleAnyType {
+  + rawValue : str
+  + value : str
+}
+class type::XMLTypeDocumentRoot {
+  + cDATA : str
+  + comment : str
+  + mixed : str
+  + text : str
+}
+AnyType <|-- type::SimpleAnyType
+type::SimpleAnyType "1..1" -- "1..1" type::EDataType : instanceType0
+type::ProcessingInstruction "0..9999" --* "1..1" type::XMLTypeDocumentRoot : processingInstruction5
+type::EStringToStringMapEntry "0..9999" --* "1..1" type::XMLTypeDocumentRoot : xMLNSPrefixMap1
+type::EStringToStringMapEntry "0..9999" --* "1..1" type::XMLTypeDocumentRoot : xSISchemaLocation2
+@enduml

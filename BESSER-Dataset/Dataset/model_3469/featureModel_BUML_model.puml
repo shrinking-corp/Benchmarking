@@ -1,0 +1,83 @@
+@startuml
+enum BinaryOperator {
+  Add
+  And
+  Divide
+  Equals
+  Higher
+  Lower
+  Multiply
+  Or
+  Subtract
+}
+class Constant {
+}
+class Expression {
+}
+class Feature {
+}
+enum SimpleType {
+  String
+  boolean
+  double
+  int
+  nulltype
+}
+enum SolitaryType {
+  Mandatory
+  Optional
+}
+enum UnaryOperator {
+  Minus
+  Not
+}
+class featureModel::BinaryOperation {
+  + operator : str
+}
+abstract class featureModel::Constant {
+}
+abstract class featureModel::Expression {
+}
+abstract class featureModel::Feature {
+  + name : str
+  + type : str
+}
+class featureModel::Group {
+  + inclusive : bool
+}
+class featureModel::GroupedFeature {
+}
+class featureModel::Identifier {
+  + name : str
+}
+class featureModel::Model {
+}
+class featureModel::NULL {
+}
+class featureModel::Number {
+  + value : int
+}
+class featureModel::SolitaryFeature {
+  + required : str
+}
+class featureModel::UnaryOperation {
+  + operator : str
+}
+Constant <|-- featureModel::NULL
+Constant <|-- featureModel::Number
+Expression <|-- featureModel::BinaryOperation
+Expression <|-- featureModel::Constant
+Expression <|-- featureModel::Identifier
+Expression <|-- featureModel::UnaryOperation
+Feature <|-- featureModel::GroupedFeature
+Feature <|-- featureModel::SolitaryFeature
+featureModel::Feature "0..9999" --* "1..1" featureModel::Model : RootFeature5
+featureModel::Expression "0..9999" --* "1..1" featureModel::Feature : constraints3
+featureModel::Expression "1..1" --* "1..1" featureModel::UnaryOperation : exp14
+featureModel::Feature "1..1" *-- "0..9999" featureModel::SolitaryFeature : features1
+featureModel::GroupedFeature "2..9999" --* "1..1" featureModel::Group : groupedFeatures7
+featureModel::Group "0..9999" --* "1..1" featureModel::Feature : groups0
+featureModel::BinaryOperation "1..1" *-- "1..1" featureModel::Expression : lexp11
+featureModel::Identifier "1..1" -- "1..9999" featureModel::Feature : ref16
+featureModel::Expression "1..1" --* "1..1" featureModel::BinaryOperation : rexp9
+@enduml

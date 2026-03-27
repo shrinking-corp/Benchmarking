@@ -1,0 +1,30 @@
+@startuml
+class State {
+}
+class gfsm::FinalState {
+}
+abstract class gfsm::Guard {
+}
+class gfsm::InitialState {
+}
+class gfsm::Machine {
+  + name : str
+}
+class gfsm::State {
+  + name : str
+}
+class gfsm::Transition {
+  + event : str
+}
+State <|-- gfsm::FinalState
+State <|-- gfsm::InitialState
+gfsm::Guard "0..1" --* "1..1" gfsm::Transition : guard14
+gfsm::Transition "0..9999" -- "1..1" gfsm::State : incoming4
+gfsm::State "1..1" -- "0..9999" gfsm::Transition : outgoing6
+gfsm::Machine "1..1" -- "1..1" gfsm::State : owning3
+gfsm::Machine "1..1" -- "1..1" gfsm::Transition : owning8
+gfsm::State "1..1" -- "1..1" gfsm::Transition : source12
+gfsm::Machine "1..1" *-- "0..9999" gfsm::State : states1
+gfsm::State "1..1" -- "1..1" gfsm::Transition : target10
+gfsm::Transition "0..9999" --* "1..1" gfsm::Machine : transitions0
+@enduml

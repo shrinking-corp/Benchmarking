@@ -1,0 +1,57 @@
+@startuml
+class CMElement {
+}
+class Expression {
+}
+class Statement {
+}
+abstract class codemodel::CMElement {
+  + name : str
+}
+class codemodel::CodeModel {
+}
+class codemodel::D {
+}
+class codemodel::E {
+}
+class codemodel::Root {
+}
+class codemodel::Variable {
+}
+class codemodel::expressions::BinExp {
+  + operator : str
+}
+abstract class codemodel::expressions::Expression {
+}
+class codemodel::expressions::VarExp {
+}
+class codemodel::statements::AsgnStmt {
+}
+class codemodel::statements::CompStmt {
+}
+abstract class codemodel::statements::Statement {
+}
+class expressions::codemodel::Variable {
+}
+CMElement <|-- codemodel::CodeModel
+CMElement <|-- codemodel::D
+CMElement <|-- codemodel::E
+CMElement <|-- codemodel::Root
+CMElement <|-- codemodel::Variable
+CMElement <|-- codemodel::expressions::Expression
+CMElement <|-- codemodel::statements::Statement
+Expression <|-- codemodel::expressions::BinExp
+Expression <|-- codemodel::expressions::VarExp
+Statement <|-- codemodel::statements::AsgnStmt
+Statement <|-- codemodel::statements::CompStmt
+codemodel::CMElement "0..9999" --* "1..1" codemodel::Root : elements4
+Expression "1..1" --* "1..1" codemodel::expressions::BinExp : left6
+Expression "1..1" --* "1..1" codemodel::statements::AsgnStmt : leftExp10
+codemodel::E "0..9999" -- "1..1" codemodel::D : refE3
+codemodel::expressions::BinExp "1..1" *-- "1..1" Expression : right7
+Expression "1..1" --* "1..1" codemodel::statements::AsgnStmt : rightExp12
+Statement "0..9999" --* "1..1" codemodel::statements::CompStmt : statements15
+Statement "0..9999" --* "1..1" codemodel::CodeModel : stmts1
+codemodel::expressions::VarExp "1..1" -- "1..1" expressions::codemodel::Variable : variable5
+codemodel::Variable "0..9999" --* "1..1" codemodel::CodeModel : vars0
+@enduml

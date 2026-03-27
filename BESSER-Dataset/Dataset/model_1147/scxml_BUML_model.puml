@@ -1,0 +1,59 @@
+@startuml
+class scxml::DocumentRoot {
+  + mixed : str
+}
+class scxml::EStringToStringMapEntry {
+}
+class scxml::ScxmlOnexecuteType {
+  + any : str
+  + anyAttribute : str
+  + scxmlExecutablecontent : str
+}
+class scxml::ScxmlParamType {
+  + any : str
+  + anyAttribute : str
+  + expr : str
+  + name : str
+  + scxmlExtraContent : str
+}
+class scxml::ScxmlScriptType {
+  + any : str
+  + content : str
+  + mixed : str
+  + scxmlExtraContent : str
+  + src : str
+}
+class scxml::ScxmlScxmlType {
+  + id : str
+  + initial : str
+  + version : str
+}
+class scxml::ScxmlSendType {
+  + event : str
+}
+class scxml::ScxmlStateType {
+  + id : str
+  + initial : str
+}
+class scxml::ScxmlTransitionType {
+  + any : str
+  + cond : str
+  + event : str
+  + scxmlExecutablecontent : str
+  + target : str
+}
+scxml::ScxmlOnexecuteType "0..9999" --* "1..1" scxml::ScxmlStateType : onentry9
+scxml::ScxmlStateType "1..1" *-- "0..9999" scxml::ScxmlOnexecuteType : onexit12
+scxml::ScxmlParamType "0..9999" --* "1..1" scxml::ScxmlSendType : param7
+scxml::ScxmlScriptType "0..9999" --* "1..1" scxml::ScxmlOnexecuteType : script1
+scxml::ScxmlScriptType "0..9999" --* "1..1" scxml::ScxmlTransitionType : script23
+scxml::ScxmlScxmlType "1..1" *-- "0..9999" scxml::ScxmlScriptType : script4
+scxml::DocumentRoot "1..1" *-- "0..9999" scxml::ScxmlScxmlType : scxml30
+scxml::ScxmlSendType "0..9999" --* "1..1" scxml::ScxmlOnexecuteType : send0
+scxml::ScxmlSendType "0..9999" --* "1..1" scxml::ScxmlTransitionType : send20
+scxml::ScxmlStateType "0..9999" --* "1..1" scxml::ScxmlStateType : state18
+scxml::ScxmlScxmlType "1..1" *-- "0..9999" scxml::ScxmlStateType : state3
+scxml::ScxmlTransitionType "0..9999" --* "1..1" scxml::ScxmlStateType : transition15
+scxml::DocumentRoot "1..1" *-- "0..9999" scxml::EStringToStringMapEntry : xMLNSPrefixMap26
+scxml::EStringToStringMapEntry "0..9999" --* "1..1" scxml::DocumentRoot : xSISchemaLocation27
+@enduml

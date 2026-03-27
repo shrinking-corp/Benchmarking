@@ -1,0 +1,67 @@
+@startuml
+enum AttributeType {
+  edge
+  graph
+  node
+}
+enum EdgeOperator {
+  directed
+  undirected
+}
+enum GraphType {
+  digraph
+  graph
+}
+class Statement {
+}
+class dot::Attribute {
+  + name : str
+  + value : str
+}
+class dot::AttributeStatement {
+  + type : str
+}
+class dot::EdgeStatement {
+}
+class dot::EdgeTarget {
+  + operator : str
+}
+class dot::Graph {
+  + name : str
+  + strict : bool
+  + type : str
+}
+class dot::GraphvizModel {
+}
+class dot::Node {
+  + name : str
+}
+class dot::NodeStatement {
+}
+class dot::Port {
+  + compass_pt : str
+  + name : str
+}
+class dot::Statement {
+}
+class dot::Subgraph {
+  + name : str
+}
+Statement <|-- dot::Attribute
+Statement <|-- dot::AttributeStatement
+Statement <|-- dot::EdgeStatement
+Statement <|-- dot::NodeStatement
+Statement <|-- dot::Subgraph
+dot::Attribute "0..9999" --* "1..1" dot::EdgeStatement : attributes12
+dot::AttributeStatement "1..1" *-- "0..9999" dot::Attribute : attributes20
+dot::Attribute "0..9999" --* "1..1" dot::NodeStatement : attributes4
+dot::EdgeTarget "0..9999" --* "1..1" dot::EdgeStatement : edgeTargets10
+dot::Graph "0..9999" --* "1..1" dot::GraphvizModel : graphs0
+dot::Node "0..1" --* "1..1" dot::NodeStatement : node3
+dot::Port "0..1" --* "1..1" dot::Node : port6
+dot::EdgeStatement "1..1" *-- "0..1" dot::Node : sourceNode8
+dot::Graph "1..1" *-- "0..9999" dot::Statement : statements1
+dot::Statement "0..9999" --* "1..1" dot::Subgraph : statements22
+dot::Subgraph "0..1" --* "1..1" dot::EdgeTarget : targetSubgraph15
+dot::EdgeTarget "1..1" *-- "0..1" dot::Node : targetnode17
+@enduml

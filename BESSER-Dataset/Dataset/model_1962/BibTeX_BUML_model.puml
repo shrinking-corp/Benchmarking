@@ -1,0 +1,102 @@
+@startuml
+class AuthorField {
+}
+class BibtexEntryTypes {
+}
+class bibTeX::AddressField {
+  + address : str
+}
+class bibTeX::Article {
+}
+class bibTeX::AuthorField {
+}
+class bibTeX::Authors {
+}
+class bibTeX::BibtexEntryTypes {
+}
+class bibTeX::Book {
+}
+class bibTeX::CiteKey {
+  + key : str
+}
+class bibTeX::EObject {
+}
+class bibTeX::EditionField {
+  + edition : str
+}
+class bibTeX::EditorField {
+  + editor : str
+}
+class bibTeX::Fullname {
+  + firstname : str
+  + lastname : str
+}
+class bibTeX::IsbnField {
+  + isbn : str
+}
+class bibTeX::JournalField {
+  + journal : str
+}
+class bibTeX::Model {
+}
+class bibTeX::MonthField {
+  + month : str
+}
+class bibTeX::NoteField {
+  + note : str
+}
+class bibTeX::NumberField {
+  + number : str
+}
+class bibTeX::PagesField {
+  + pages : str
+}
+class bibTeX::PublisherField {
+  + publisher : str
+}
+class bibTeX::SeriesField {
+  + series : str
+}
+class bibTeX::TitleField {
+  + title : str
+}
+class bibTeX::UnknownField {
+}
+class bibTeX::UnknownType {
+  + type : str
+}
+class bibTeX::UnknownValue {
+  + value : str
+}
+class bibTeX::VolumeField {
+  + volume : str
+}
+class bibTeX::YearField {
+  + year : str
+}
+AuthorField <|-- bibTeX::Authors
+BibtexEntryTypes <|-- bibTeX::Article
+BibtexEntryTypes <|-- bibTeX::Book
+bibTeX::Model "1..1" *-- "0..9999" bibTeX::BibtexEntryTypes : BibtexEntries0
+bibTeX::Book "1..1" *-- "0..1" bibTeX::AddressField : address30
+bibTeX::AuthorField "0..1" --* "1..1" bibTeX::Article : author13
+bibTeX::Book "1..1" *-- "0..1" bibTeX::EObject : author_editor22
+bibTeX::EditionField "0..1" --* "1..1" bibTeX::Book : edition32
+bibTeX::IsbnField "0..1" --* "1..1" bibTeX::Book : isbn34
+bibTeX::Article "1..1" *-- "0..1" bibTeX::JournalField : journal14
+bibTeX::BibtexEntryTypes "1..1" *-- "0..1" bibTeX::CiteKey : key1
+bibTeX::MonthField "0..1" --* "1..1" bibTeX::BibtexEntryTypes : month7
+bibTeX::Fullname "0..9999" --* "1..1" bibTeX::Authors : names40
+bibTeX::BibtexEntryTypes "1..1" *-- "0..1" bibTeX::NoteField : note9
+bibTeX::NumberField "0..1" --* "1..1" bibTeX::Article : number18
+bibTeX::PagesField "0..1" --* "1..1" bibTeX::Article : pages20
+bibTeX::PublisherField "0..1" --* "1..1" bibTeX::Book : publisher23
+bibTeX::SeriesField "0..1" --* "1..1" bibTeX::Book : series28
+bibTeX::TitleField "0..1" --* "1..1" bibTeX::BibtexEntryTypes : title3
+bibTeX::UnknownType "0..1" --* "1..1" bibTeX::UnknownField : type36
+bibTeX::UnknownField "0..9999" --* "1..1" bibTeX::BibtexEntryTypes : unknowns11
+bibTeX::UnknownValue "0..1" --* "1..1" bibTeX::UnknownField : value38
+bibTeX::VolumeField "0..1" --* "1..1" bibTeX::Article : volume16
+bibTeX::EObject "0..1" --* "1..1" bibTeX::Book : volume_number25
+bibTeX::YearField "0..1" --* "1..1" bibTeX::BibtexEntryTypes : year5
+@enduml

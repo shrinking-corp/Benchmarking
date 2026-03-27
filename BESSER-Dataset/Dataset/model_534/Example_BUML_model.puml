@@ -1,0 +1,47 @@
+@startuml
+class Dog {
+}
+class Example::Cat {
+}
+class Example::Daughter {
+}
+class Example::Dog {
+}
+class Example::Family {
+  + address : str
+}
+class Example::HuntingDog {
+}
+abstract class Example::Member {
+  + firstName : str
+  + lastName : str
+}
+class Example::Parent {
+}
+abstract class Example::Pet {
+  + breed : str
+  + name : str
+}
+class Example::RaceDog {
+}
+class Example::Son {
+}
+class Member {
+}
+class Pet {
+}
+Dog <|-- Example::HuntingDog
+Dog <|-- Example::RaceDog
+Member <|-- Example::Daughter
+Member <|-- Example::Parent
+Member <|-- Example::Son
+Pet <|-- Example::Cat
+Pet <|-- Example::Dog
+Example::Family "1..1" *-- "0..9999" Example::Daughter : daughters3
+Example::Family "1..1" -- "1..1" Example::Parent : family6
+Example::Son "1..1" -- "1..1" Example::Family : family7
+Example::Family "1..1" -- "1..1" Example::Daughter : family9
+Example::Family "1..1" *-- "0..2" Example::Parent : parents0
+Example::Family "1..1" *-- "0..9999" Example::Pet : pets5
+Example::Son "0..9999" --* "1..1" Example::Family : sons1
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+class Column {
+}
+enum DatabaseKind {
+  POSTGRES
+}
+class Named {
+}
+class PrimitiveType {
+}
+class Type {
+}
+class relationaldb::Column {
+}
+class relationaldb::Database {
+  + rawDatabase : str
+}
+class relationaldb::ForeignKey {
+}
+class relationaldb::Integer {
+}
+abstract class relationaldb::Named {
+  + name : str
+}
+abstract class relationaldb::PrimitiveType {
+}
+class relationaldb::Table {
+}
+abstract class relationaldb::Type {
+}
+class relationaldb::UmlToNoSQLID {
+}
+class relationaldb::Varchar {
+  + length : int
+}
+Column <|-- relationaldb::ForeignKey
+Named <|-- relationaldb::Column
+Named <|-- relationaldb::Database
+Named <|-- relationaldb::Table
+PrimitiveType <|-- relationaldb::Integer
+PrimitiveType <|-- relationaldb::UmlToNoSQLID
+PrimitiveType <|-- relationaldb::Varchar
+Type <|-- relationaldb::PrimitiveType
+relationaldb::Table "1..1" *-- "0..9999" relationaldb::Column : col1
+relationaldb::Table "1..1" -- "1..1" relationaldb::Column : owner4
+relationaldb::Column "0..9999" -- "1..1" relationaldb::Table : primaryKeys2
+relationaldb::Column "0..1" -- "1..1" relationaldb::ForeignKey : referencedColumn7
+relationaldb::Table "0..9999" --* "1..1" relationaldb::Database : tables0
+relationaldb::Column "1..1" *-- "1..1" relationaldb::Type : type5
+@enduml

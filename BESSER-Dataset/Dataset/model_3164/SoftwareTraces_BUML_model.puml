@@ -1,0 +1,25 @@
+@startuml
+class MyNode {
+}
+class softwaretraces::Feature {
+  + name : str
+}
+class softwaretraces::Model {
+  + resourceFileName : str
+}
+abstract class softwaretraces::MyNode {
+}
+class softwaretraces::Trace {
+  + fileName : str
+  + lineNumber : int
+  + projectName : str
+}
+MyNode <|-- softwaretraces::Feature
+MyNode <|-- softwaretraces::Model
+MyNode <|-- softwaretraces::Trace
+softwaretraces::Feature "0..9999" --* "1..1" softwaretraces::Model : features0
+softwaretraces::Feature "1..1" *-- "0..9999" softwaretraces::Feature : features4
+softwaretraces::Trace "0..9999" --* "1..1" softwaretraces::Model : traces1
+softwaretraces::Trace "0..9999" --* "1..1" softwaretraces::Trace : traces10
+softwaretraces::Trace "0..9999" --* "1..1" softwaretraces::Feature : traces6
+@enduml

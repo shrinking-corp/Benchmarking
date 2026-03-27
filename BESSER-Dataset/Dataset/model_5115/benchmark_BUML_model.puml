@@ -1,0 +1,37 @@
+@startuml
+class NamedElement {
+}
+class benchmark::InputData {
+}
+class benchmark::NamedElement {
+  + name : str
+}
+class benchmark::Property {
+  + name : str
+  + value : str
+}
+class benchmark::Scenario {
+}
+class benchmark::TestCase {
+}
+class benchmark::TimeResult {
+  + elapsedMaxTime : str
+  + elapsedTime : str
+}
+class benchmark::Variant {
+}
+NamedElement <|-- benchmark::InputData
+NamedElement <|-- benchmark::Scenario
+NamedElement <|-- benchmark::TestCase
+NamedElement <|-- benchmark::Variant
+benchmark::InputData "0..9999" --* "1..1" benchmark::Scenario : inputData0
+benchmark::InputData "0..1" -- "1..1" benchmark::TestCase : inputData5
+benchmark::Property "0..9999" --* "1..1" benchmark::TimeResult : properties11
+benchmark::Property "0..9999" --* "1..1" benchmark::NamedElement : properties9
+benchmark::TimeResult "0..9999" -- "1..1" benchmark::Variant : results14
+benchmark::TestCase "1..1" *-- "0..9999" benchmark::TimeResult : results6
+benchmark::TestCase "0..9999" --* "1..1" benchmark::Scenario : testCases1
+benchmark::TestCase "0..9999" -- "1..1" benchmark::InputData : tests8
+benchmark::TimeResult "1..1" -- "0..1" benchmark::Variant : variant10
+benchmark::Variant "0..9999" --* "1..1" benchmark::Scenario : variants3
+@enduml

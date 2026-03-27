@@ -1,0 +1,202 @@
+@startuml
+enum AddOper {
+  ADD
+  MINUS
+}
+class Attribute {
+}
+class AttributeDefinition {
+}
+enum Cardinality {
+  CEROTOMANY
+  CEROTOONE
+}
+class Control {
+}
+enum DataTypes {
+  Date
+  String
+  double
+  int
+  long
+  number
+}
+class Expression {
+}
+class GenericComponent {
+}
+enum LogicalCononnector {
+  AND
+  OR
+}
+enum LogicalOperator {
+  DIFFERENT
+  EQUALTO
+  LESSTHAN
+}
+enum MultOper {
+  DIV
+  MULT
+}
+class Operation {
+}
+class PagosPim::Action {
+}
+class PagosPim::Add {
+  + operator : str
+}
+class PagosPim::Application {
+  + name : str
+}
+class PagosPim::Attribute {
+  + isIndex : str
+}
+abstract class PagosPim::AttributeDefinition {
+  + name : str
+  + type : str
+}
+class PagosPim::Body {
+}
+class PagosPim::Control {
+  + label : str
+}
+class PagosPim::DaoComponent {
+}
+class PagosPim::DataLayerComponent {
+}
+class PagosPim::EObject {
+}
+class PagosPim::ElseSegment {
+}
+class PagosPim::Expression {
+}
+class PagosPim::Field {
+}
+class PagosPim::FrontService {
+  + fullName : str
+}
+class PagosPim::GenericComponent {
+  + name : str
+}
+class PagosPim::IfBlock {
+}
+class PagosPim::IfCondition {
+}
+class PagosPim::Input {
+}
+class PagosPim::LogicComponent {
+  + persistible : bool
+}
+class PagosPim::LogicalExpression {
+  + conOper : str
+  + literal : str
+  + logicalOperator : str
+}
+class PagosPim::Mult {
+  + operator : str
+}
+class PagosPim::NewEClass21 {
+}
+class PagosPim::Operation {
+  + name : str
+}
+class PagosPim::Output {
+}
+class PagosPim::Parameter {
+}
+class PagosPim::ParameterList {
+}
+class PagosPim::ProgramIfExpression {
+}
+class PagosPim::Relation {
+  + cardinality : str
+  + name : str
+  + type : str
+}
+class PagosPim::Return {
+  + type : str
+}
+class PagosPim::ServerService {
+}
+class PagosPim::SubComponent {
+}
+class PagosPim::TerminalValue {
+  + method : str
+  + value : str
+}
+class PagosPim::ViewComponent {
+  + title : str
+}
+class Relation {
+}
+enum RelationType {
+  COMPOSITION
+  REFERENCE
+}
+AttributeDefinition <|-- PagosPim::Attribute
+AttributeDefinition <|-- PagosPim::Parameter
+Attribute <|-- PagosPim::Field
+Attribute <|-- PagosPim::Input
+Attribute <|-- PagosPim::Output
+Control <|-- PagosPim::Action
+Control <|-- PagosPim::Input
+Control <|-- PagosPim::Output
+Expression <|-- PagosPim::Add
+Expression <|-- PagosPim::Mult
+Expression <|-- PagosPim::TerminalValue
+GenericComponent <|-- PagosPim::DaoComponent
+GenericComponent <|-- PagosPim::DataLayerComponent
+GenericComponent <|-- PagosPim::LogicComponent
+GenericComponent <|-- PagosPim::ServerService
+GenericComponent <|-- PagosPim::ViewComponent
+Operation <|-- PagosPim::Action
+Operation <|-- PagosPim::FrontService
+Relation <|-- PagosPim::SubComponent
+PagosPim::Attribute "0..1" -- "1..1" PagosPim::TerminalValue : attribute84
+PagosPim::GenericComponent "1..1" *-- "0..9999" PagosPim::Attribute : attributes23
+PagosPim::Operation "1..1" *-- "0..9999" PagosPim::Attribute : attributes34
+PagosPim::Body "0..1" --* "1..1" PagosPim::Operation : body32
+PagosPim::EObject "0..1" -- "1..1" PagosPim::AttributeDefinition : complexType42
+PagosPim::Control "0..9999" --* "1..1" PagosPim::ViewComponent : controls18
+PagosPim::DaoComponent "0..9999" --* "1..1" PagosPim::Application : daocomponent5
+PagosPim::Application "1..1" *-- "0..9999" PagosPim::DataLayerComponent : datalayercomponents3
+PagosPim::ElseSegment "0..1" --* "1..1" PagosPim::IfBlock : elsesegment52
+PagosPim::Expression "0..1" --* "1..1" PagosPim::Attribute : expression28
+PagosPim::Return "1..1" *-- "0..9999" PagosPim::Expression : expression43
+PagosPim::Return "0..1" --* "1..1" PagosPim::ElseSegment : expression67
+PagosPim::ProgramIfExpression "1..1" -- "0..1" PagosPim::Expression : expression78
+PagosPim::DaoComponent "0..1" -- "1..1" PagosPim::DataLayerComponent : extendsData103
+PagosPim::DataLayerComponent "1..1" *-- "0..9999" PagosPim::Field : fields106
+PagosPim::FrontService "0..9999" --* "1..1" PagosPim::ViewComponent : frontservices20
+PagosPim::IfBlock "0..9999" --* "1..1" PagosPim::Body : ifblock45
+PagosPim::IfCondition "0..1" --* "1..1" PagosPim::IfBlock : ifcondition50
+PagosPim::IfBlock "1..1" *-- "0..9999" PagosPim::ProgramIfExpression : ifexpression54
+PagosPim::IfBlock "0..1" --* "1..1" PagosPim::IfCondition : innerIf61
+PagosPim::Body "0..1" --* "1..1" PagosPim::ElseSegment : innerIfBlocks64
+PagosPim::Expression "0..1" --* "1..1" PagosPim::Add : leftExp87
+PagosPim::Expression "0..1" --* "1..1" PagosPim::Mult : leftExp94
+PagosPim::LogicalExpression "1..1" *-- "0..1" PagosPim::TerminalValue : leftTerm70
+PagosPim::LogicComponent "0..9999" --* "1..1" PagosPim::Application : logicalComponents0
+PagosPim::LogicalExpression "0..9999" --* "1..1" PagosPim::IfCondition : logicalexpressions56
+PagosPim::DataLayerComponent "0..1" -- "1..1" PagosPim::LogicComponent : mapsTo100
+PagosPim::LogicalExpression "0..1" --* "1..1" PagosPim::LogicalExpression : moreExpressions76
+PagosPim::GenericComponent "1..1" *-- "0..9999" PagosPim::Operation : operations26
+PagosPim::ParameterList "0..1" --* "1..1" PagosPim::Operation : parameterList30
+PagosPim::Parameter "0..9999" --* "1..1" PagosPim::ParameterList : parameters37
+PagosPim::EObject "0..1" -- "1..1" PagosPim::TerminalValue : parent81
+PagosPim::ServerService "1..1" -- "0..1" PagosPim::LogicComponent : relatesTo97
+PagosPim::Relation "0..9999" --* "1..1" PagosPim::GenericComponent : relations24
+PagosPim::Return "0..1" --* "1..1" PagosPim::IfCondition : returnBlock58
+PagosPim::Return "0..1" --* "1..1" PagosPim::Body : returnExp47
+PagosPim::Expression "0..1" --* "1..1" PagosPim::Add : rightExp89
+PagosPim::Mult "1..1" *-- "0..1" PagosPim::Expression : rightExp92
+PagosPim::TerminalValue "0..1" --* "1..1" PagosPim::LogicalExpression : rightTerm72
+PagosPim::Application "1..1" *-- "0..9999" PagosPim::ServerService : serverservice1
+PagosPim::ServerService "0..1" -- "1..1" PagosPim::FrontService : serves13
+PagosPim::FrontService "0..1" -- "1..1" PagosPim::Action : service108
+PagosPim::Input "1..1" -- "0..1" PagosPim::FrontService : service9
+PagosPim::FrontService "0..9999" -- "1..1" PagosPim::FrontService : serviceCalls11
+PagosPim::ViewComponent "1..1" *-- "0..9999" PagosPim::SubComponent : subcomponents16
+PagosPim::GenericComponent "0..1" -- "1..1" PagosPim::Relation : targetComponent39
+PagosPim::ViewComponent "0..9999" --* "1..1" PagosPim::Application : views7
+@enduml

@@ -1,0 +1,98 @@
+@startuml
+class BinaryOperation {
+}
+enum Cardinals {
+  EAST
+  NORTH
+  SOUTH
+  WEST
+}
+class Condition {
+}
+class Statement {
+}
+class Value {
+}
+abstract class minilang::BinaryOperation {
+}
+class minilang::Block {
+}
+class minilang::CallMethod {
+}
+abstract class minilang::Condition {
+}
+class minilang::Constant {
+  + value : float
+}
+class minilang::GreaterThan {
+}
+class minilang::IfStmt {
+}
+class minilang::Line {
+  + x1 : float
+  + x2 : float
+  + y1 : float
+  + y2 : float
+}
+class minilang::Method {
+  + name : str
+}
+class minilang::Modulo {
+}
+class minilang::Move {
+}
+class minilang::Program {
+  + angle : str
+  + distance : float
+  + x : float
+  + y : float
+}
+class minilang::RotateLeft {
+}
+class minilang::RotateRight {
+}
+abstract class minilang::Statement {
+}
+class minilang::Sum {
+}
+abstract class minilang::Value {
+}
+class minilang::Variable {
+  + name : str
+  + value : float
+}
+class minilang::VariableAffect {
+}
+class minilang::VariableRef {
+}
+BinaryOperation <|-- minilang::Modulo
+BinaryOperation <|-- minilang::Sum
+Condition <|-- minilang::GreaterThan
+Statement <|-- minilang::CallMethod
+Statement <|-- minilang::IfStmt
+Statement <|-- minilang::Move
+Statement <|-- minilang::RotateLeft
+Statement <|-- minilang::RotateRight
+Statement <|-- minilang::VariableAffect
+Value <|-- minilang::BinaryOperation
+Value <|-- minilang::Constant
+Value <|-- minilang::VariableRef
+minilang::Block "1..1" --* "1..1" minilang::Method : block10
+minilang::IfStmt "1..1" *-- "1..1" minilang::Condition : condition19
+minilang::Block "0..1" --* "1..1" minilang::IfStmt : elseBranch16
+minilang::Value "1..1" --* "1..1" minilang::GreaterThan : left21
+minilang::Value "1..1" --* "1..1" minilang::BinaryOperation : left34
+minilang::Line "0..9999" --* "1..1" minilang::Program : lines5
+minilang::Program "1..1" -- "1..1" minilang::Method : mainMethod2
+minilang::Method "1..1" -- "1..1" minilang::CallMethod : method37
+minilang::Method "0..9999" --* "1..1" minilang::Program : methods0
+minilang::Program "1..1" -- "1..1" minilang::Method : program7
+minilang::GreaterThan "1..1" *-- "1..1" minilang::Value : right22
+minilang::BinaryOperation "1..1" *-- "1..1" minilang::Value : right32
+minilang::Statement "0..9999" --* "1..1" minilang::Block : statements12
+minilang::IfStmt "1..1" *-- "1..1" minilang::Block : thenBranch14
+minilang::Value "1..1" --* "1..1" minilang::VariableAffect : value29
+minilang::Variable "1..1" -- "1..1" minilang::VariableRef : variable25
+minilang::Variable "1..1" -- "1..1" minilang::VariableAffect : variable27
+minilang::Variable "0..9999" --* "1..1" minilang::Program : variables3
+@enduml

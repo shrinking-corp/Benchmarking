@@ -1,0 +1,19 @@
+@startuml
+class TableM::Column {
+  + name : str
+  + type : str
+}
+class TableM::FKey {
+}
+class TableM::Table {
+  + name : str
+}
+TableM::Column "0..9999" --* "1..1" TableM::Table : cols0
+TableM::Column "0..9999" -- "1..1" TableM::FKey : cols12
+TableM::FKey "0..9999" --* "1..1" TableM::Table : fkeys2
+TableM::Table "0..1" -- "1..1" TableM::FKey : owner10
+TableM::Column "1..1" -- "0..1" TableM::Table : owner6
+TableM::Table "1..1" -- "0..9999" TableM::Column : pkeys1
+TableM::FKey "0..9999" -- "1..1" TableM::Table : referencedBy4
+TableM::FKey "1..1" -- "0..1" TableM::Table : references7
+@enduml

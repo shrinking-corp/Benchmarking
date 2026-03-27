@@ -1,0 +1,94 @@
+@startuml
+enum ActionKind {
+  ENTRY
+  EXIT
+}
+class ConstantValue {
+}
+class GAbstractAction {
+}
+class GAbstractState {
+}
+class GCompositeState {
+}
+class GState {
+}
+class Named {
+}
+class NumberValue {
+}
+class Value {
+}
+class statemachine::BooleanValue {
+}
+class statemachine::Call {
+  + actionId : str
+}
+class statemachine::CallAction {
+}
+abstract class statemachine::ConstantValue {
+  + value : str
+}
+abstract class statemachine::GAbstractAction {
+  + kind : str
+}
+abstract class statemachine::GAbstractState {
+}
+class statemachine::GCompositeState {
+}
+class statemachine::GStartState {
+}
+class statemachine::GState {
+}
+class statemachine::GStatemachine {
+  + package : str
+}
+class statemachine::GStopState {
+}
+class statemachine::GetParameter {
+}
+class statemachine::LongValue {
+}
+class statemachine::Named {
+  + comment : str
+  + name : str
+}
+abstract class statemachine::NumberValue {
+}
+class statemachine::Parameter {
+}
+class statemachine::StringValue {
+}
+class statemachine::Transition {
+  + preserveTimers : bool
+}
+abstract class statemachine::Value {
+}
+ConstantValue <|-- statemachine::BooleanValue
+ConstantValue <|-- statemachine::NumberValue
+ConstantValue <|-- statemachine::StringValue
+GAbstractAction <|-- statemachine::CallAction
+GAbstractState <|-- statemachine::GStartState
+GAbstractState <|-- statemachine::GState
+GAbstractState <|-- statemachine::GStopState
+GCompositeState <|-- statemachine::GStatemachine
+GState <|-- statemachine::GCompositeState
+Named <|-- statemachine::GState
+Named <|-- statemachine::Parameter
+Named <|-- statemachine::Transition
+NumberValue <|-- statemachine::LongValue
+Value <|-- statemachine::Call
+Value <|-- statemachine::ConstantValue
+Value <|-- statemachine::GetParameter
+statemachine::GAbstractAction "0..9999" --* "1..1" statemachine::GAbstractState : actions0
+statemachine::Call "1..1" --* "1..1" statemachine::CallAction : call20
+statemachine::Transition "1..1" *-- "0..1" statemachine::Value : delay8
+statemachine::GAbstractState "0..1" -- "1..1" statemachine::Transition : from1
+statemachine::Value "0..1" --* "1..1" statemachine::Transition : guard6
+statemachine::GStatemachine "1..1" *-- "0..9999" statemachine::Parameter : parameter19
+statemachine::GetParameter "1..1" -- "1..1" statemachine::Parameter : parameter21
+statemachine::Value "0..9999" --* "1..1" statemachine::Transition : signals11
+statemachine::GAbstractState "1..9999" --* "1..1" statemachine::GCompositeState : states14
+statemachine::Transition "1..1" -- "0..1" statemachine::GAbstractState : to3
+statemachine::Transition "0..9999" --* "1..1" statemachine::GCompositeState : transitions16
+@enduml

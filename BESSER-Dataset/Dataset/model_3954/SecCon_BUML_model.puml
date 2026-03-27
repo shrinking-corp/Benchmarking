@@ -1,0 +1,284 @@
+@startuml
+class DataType {
+}
+class Element {
+}
+class Event {
+}
+class MultiplicityElement {
+}
+class NamedElement {
+}
+enum Operator {
+  AND
+  OR
+}
+enum ParameterDirectionKind {
+  in
+  inout
+  out
+  return
+}
+enum PseudostateKind {
+  choice
+  deepHistory
+  fork
+  initial
+  join
+  junction
+  shallowHistory
+}
+class SecCon::Action {
+  + name : str
+  + parameter : str
+}
+class SecCon::Actor {
+}
+class SecCon::AttackEvent {
+}
+class SecCon::AttackUseCase {
+}
+class SecCon::AttackedState {
+}
+class SecCon::Attribute {
+  + default : str
+  + isComposite : bool
+  + isDerived : bool
+  + isID : bool
+  + isReadOnly : bool
+}
+class SecCon::Class {
+  + isAbstract : bool
+}
+class SecCon::Comment {
+  + body : str
+}
+class SecCon::Condition {
+  + condition : str
+  + logicValue : bool
+  + value : str
+}
+class SecCon::ContextInformation {
+  + name : str
+  + type : str
+}
+class SecCon::ContextScenario {
+  + name : str
+}
+class SecCon::CountermeasureEvent {
+}
+class SecCon::CountermeasureUseCase {
+}
+abstract class SecCon::DataType {
+}
+class SecCon::DetectionUseCase {
+}
+abstract class SecCon::Element {
+}
+class SecCon::Enumeration {
+}
+class SecCon::EnumerationLiteral {
+}
+abstract class SecCon::Event {
+}
+class SecCon::Extend {
+  + condition : str
+  + name : str
+}
+class SecCon::FinalState {
+}
+class SecCon::Include {
+  + name : str
+}
+class SecCon::InitialState {
+}
+abstract class SecCon::MultiplicityElement {
+  + isOrdered : bool
+  + isUnique : bool
+  + lower : int
+  + upper : str
+}
+abstract class SecCon::NamedElement {
+  + name : str
+}
+class SecCon::Operation {
+  + body : str
+}
+class SecCon::Package {
+}
+class SecCon::Parameter {
+  + default : str
+  + direction : str
+}
+class SecCon::PrevenctionUseCase {
+}
+class SecCon::PrimitiveType {
+}
+class SecCon::Project {
+}
+class SecCon::ProtectedState {
+}
+class SecCon::RecoverUseCase {
+}
+class SecCon::Rule {
+  + logicValue : bool
+  + name : str
+  + operator : str
+}
+abstract class SecCon::State {
+}
+class SecCon::StateMachineScenario {
+  + author : str
+  + version : str
+}
+class SecCon::StateOperation {
+}
+abstract class SecCon::StateVertex {
+}
+class SecCon::ThreatEvent {
+}
+class SecCon::ThreatUseCase {
+}
+class SecCon::ThreatenedState {
+}
+class SecCon::Transition {
+}
+abstract class SecCon::Type {
+}
+abstract class SecCon::TypedElement {
+}
+abstract class SecCon::UseCase {
+  + description : str
+  + preCondition : str
+}
+class SecCon::UseCaseScenario {
+  + author : str
+  + version : str
+}
+class SecCon::VulnerabilityUseCase {
+}
+class SecCon::VulnerableState {
+}
+class State {
+}
+class StateVertex {
+}
+class Type {
+}
+enum TypeOfCondition {
+  IS_DIFFERENT
+  IS_EQUAL
+  IS_OFF
+  IS_ON
+  WHEN_EQUALS
+  WHEN_HIGHER
+  WHEN_LOWER
+  WHILE_EQUALS
+  WHILE_HIGHER
+  WHILE_LOWER
+}
+enum TypeOfContext {
+  AIRPLANE_MODE
+  BATTERY_LEVEL
+  BLUETOOTH_STATUS
+  CPU_LOAD
+  GPS_STATUS
+  MEMORY_LOAD
+  NETWORK_STATUS
+  WIFI_STATUS
+}
+class TypedElement {
+}
+class UseCase {
+}
+DataType <|-- SecCon::Enumeration
+DataType <|-- SecCon::PrimitiveType
+Element <|-- SecCon::MultiplicityElement
+Element <|-- SecCon::NamedElement
+Event <|-- SecCon::AttackEvent
+Event <|-- SecCon::CountermeasureEvent
+Event <|-- SecCon::ThreatEvent
+MultiplicityElement <|-- SecCon::Attribute
+MultiplicityElement <|-- SecCon::Operation
+MultiplicityElement <|-- SecCon::Parameter
+NamedElement <|-- SecCon::Actor
+NamedElement <|-- SecCon::EnumerationLiteral
+NamedElement <|-- SecCon::Event
+NamedElement <|-- SecCon::Package
+NamedElement <|-- SecCon::Project
+NamedElement <|-- SecCon::StateMachineScenario
+NamedElement <|-- SecCon::StateOperation
+NamedElement <|-- SecCon::StateVertex
+NamedElement <|-- SecCon::Transition
+NamedElement <|-- SecCon::Type
+NamedElement <|-- SecCon::TypedElement
+NamedElement <|-- SecCon::UseCase
+NamedElement <|-- SecCon::UseCaseScenario
+State <|-- SecCon::AttackedState
+State <|-- SecCon::ProtectedState
+State <|-- SecCon::ThreatenedState
+State <|-- SecCon::VulnerableState
+StateVertex <|-- SecCon::FinalState
+StateVertex <|-- SecCon::InitialState
+StateVertex <|-- SecCon::State
+Type <|-- SecCon::Class
+Type <|-- SecCon::DataType
+TypedElement <|-- SecCon::Attribute
+TypedElement <|-- SecCon::Operation
+TypedElement <|-- SecCon::Parameter
+UseCase <|-- SecCon::AttackUseCase
+UseCase <|-- SecCon::CountermeasureUseCase
+UseCase <|-- SecCon::DetectionUseCase
+UseCase <|-- SecCon::PrevenctionUseCase
+UseCase <|-- SecCon::RecoverUseCase
+UseCase <|-- SecCon::ThreatUseCase
+UseCase <|-- SecCon::VulnerabilityUseCase
+SecCon::Actor "0..9999" -- "1..1" SecCon::UseCase : actor31
+SecCon::UseCase "1..1" -- "1..1" SecCon::Include : addition41
+SecCon::Comment "1..1" -- "0..9999" SecCon::Element : annotatedElement2
+SecCon::UseCase "1..1" -- "1..1" SecCon::Include : base42
+SecCon::UseCase "1..1" -- "1..1" SecCon::Extend : base48
+SecCon::ContextScenario "1..1" *-- "0..9999" SecCon::Rule : contains92
+SecCon::State "1..1" -- "0..9999" SecCon::Event : deferrableEvent76
+SecCon::Enumeration "0..1" -- "1..1" SecCon::EnumerationLiteral : enumeration22
+SecCon::Extend "0..9999" -- "1..1" SecCon::UseCase : extend35
+SecCon::Extend "0..9999" -- "1..1" SecCon::UseCase : extends36
+SecCon::UseCase "1..1" -- "1..1" SecCon::Extend : extension46
+SecCon::Action "1..9999" --* "1..1" SecCon::Rule : hasAction98
+SecCon::Condition "1..9999" --* "1..1" SecCon::Rule : hasCondition96
+SecCon::Condition "1..1" *-- "1..1" SecCon::ContextInformation : hasContextInformation100
+SecCon::Include "0..1" -- "1..1" SecCon::UseCase : include33
+SecCon::UseCase "1..1" -- "0..9999" SecCon::Include : includes32
+SecCon::Transition "0..9999" -- "1..1" SecCon::StateVertex : incoming72
+SecCon::ContextInformation "0..9999" --* "1..1" SecCon::ContextScenario : isFormed94
+SecCon::Package "0..9999" --* "1..1" SecCon::Package : nestedPackage27
+SecCon::Package "0..1" -- "1..1" SecCon::Package : nestingPackage29
+SecCon::Attribute "1..1" -- "0..1" SecCon::Attribute : opposite6
+SecCon::Transition "0..9999" -- "1..1" SecCon::StateVertex : outgoing69
+SecCon::Actor "0..9999" --* "1..1" SecCon::UseCaseScenario : ownedActor61
+SecCon::Attribute "0..9999" --* "1..1" SecCon::Class : ownedAttribute18
+SecCon::ContextScenario "0..9999" --* "1..1" SecCon::Project : ownedContextScenario90
+SecCon::Element "1..1" *-- "0..9999" SecCon::Comment : ownedElement0
+SecCon::StateMachineScenario "1..1" *-- "0..9999" SecCon::Event : ownedEvent65
+SecCon::Extend "0..9999" --* "1..1" SecCon::UseCaseScenario : ownedExtend55
+SecCon::UseCaseScenario "1..1" *-- "0..9999" SecCon::Include : ownedInclude58
+SecCon::EnumerationLiteral "0..9999" --* "1..1" SecCon::Enumeration : ownedLiteral21
+SecCon::Operation "0..9999" --* "1..1" SecCon::Class : ownedOperation13
+SecCon::Package "0..9999" --* "1..1" SecCon::Project : ownedPackages82
+SecCon::Parameter "0..9999" --* "1..1" SecCon::Operation : ownedParameter9
+SecCon::StateVertex "0..9999" --* "1..1" SecCon::StateMachineScenario : ownedState64
+SecCon::StateMachineScenario "0..9999" --* "1..1" SecCon::Project : ownedStateMachineScenario87
+SecCon::StateOperation "0..9999" --* "1..1" SecCon::State : ownedStateOperation75
+SecCon::StateMachineScenario "1..1" *-- "0..9999" SecCon::Transition : ownedTransition67
+SecCon::Package "1..1" *-- "0..9999" SecCon::Type : ownedType23
+SecCon::UseCase "0..9999" --* "1..1" SecCon::UseCaseScenario : ownedUseCase52
+SecCon::Project "1..1" *-- "0..9999" SecCon::UseCaseScenario : ownedUseCaseScenario84
+SecCon::Package "0..1" -- "1..1" SecCon::Type : package11
+SecCon::Type "0..9999" -- "1..1" SecCon::Operation : raisedException7
+SecCon::UseCaseScenario "0..1" -- "1..1" SecCon::UseCase : scenario39
+SecCon::Include "1..1" -- "0..1" SecCon::UseCaseScenario : scenario44
+SecCon::UseCaseScenario "0..1" -- "1..1" SecCon::Extend : scenario50
+SecCon::Class "1..1" -- "0..9999" SecCon::Class : superclass16
+SecCon::Event "0..1" -- "1..1" SecCon::Transition : trigger79
+SecCon::Type "0..1" -- "1..1" SecCon::TypedElement : type1
+@enduml

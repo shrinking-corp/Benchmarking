@@ -1,0 +1,47 @@
+@startuml
+class SElement {
+}
+class Y {
+}
+class source::EObject {
+}
+class source::PathElementCS {
+  + name : str
+}
+class source::PathNameCS {
+}
+class source::SElement {
+}
+class source::SRoot {
+}
+class source::X {
+  + isA1 : bool
+  + isA2 : bool
+  + name : str
+}
+abstract class source::Y {
+  + name : str
+}
+class source::Y1 {
+}
+class source::Y2 {
+}
+class source::Z {
+}
+SElement <|-- source::PathElementCS
+SElement <|-- source::PathNameCS
+SElement <|-- source::SRoot
+SElement <|-- source::X
+SElement <|-- source::Y
+SElement <|-- source::Z
+Y <|-- source::Y1
+Y <|-- source::Y2
+source::EObject "0..1" -- "1..1" source::SElement : ast7
+source::X "0..9999" --* "1..1" source::SRoot : ownedX6
+source::Y "0..9999" --* "1..1" source::X : ownsY0
+source::Y "1..1" *-- "0..1" source::Z : ownsZ1
+source::PathElementCS "1..9999" --* "1..1" source::PathNameCS : path8
+source::Z "1..1" *-- "0..1" source::PathNameCS : refers5
+source::X "0..1" -- "1..1" source::Y : toX2
+source::Z "1..1" -- "0..1" source::Y : toY3
+@enduml

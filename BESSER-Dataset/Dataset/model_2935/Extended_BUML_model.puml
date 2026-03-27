@@ -1,0 +1,75 @@
+@startuml
+class AbstractElement {
+}
+class AbstractType {
+}
+class FormTypes {
+}
+class extended::AbstractElement {
+}
+class extended::AbstractType {
+}
+class extended::DataType {
+  + name : str
+}
+class extended::Domainmodel {
+  + nomeProj : str
+}
+class extended::Entity {
+  + name : str
+}
+class extended::EntityType {
+}
+class extended::Feature {
+  + max : int
+  + min : int
+  + name : str
+  + required : str
+}
+class extended::Form {
+  + delete : str
+  + get : str
+  + post : str
+  + put : str
+}
+class extended::FormNewEntityOnly {
+}
+class extended::FormReport {
+  + filter : str
+  + order : str
+  + pagination : str
+}
+class extended::FormTypes {
+  + name : str
+}
+class extended::Import {
+  + importedNamespace : str
+}
+class extended::PackageDeclaration {
+  + name : str
+}
+class extended::Page {
+  + footer : str
+  + header : str
+  + name : str
+  + title : str
+}
+AbstractElement <|-- extended::Entity
+AbstractElement <|-- extended::FormTypes
+AbstractElement <|-- extended::Import
+AbstractElement <|-- extended::PackageDeclaration
+AbstractElement <|-- extended::Page
+AbstractType <|-- extended::DataType
+AbstractType <|-- extended::EntityType
+FormTypes <|-- extended::Form
+FormTypes <|-- extended::FormNewEntityOnly
+FormTypes <|-- extended::FormReport
+extended::AbstractElement "0..9999" --* "1..1" extended::Domainmodel : elements0
+extended::AbstractElement "0..9999" --* "1..1" extended::PackageDeclaration : elements1
+extended::FormTypes "1..1" -- "0..1" extended::Entity : entity12
+extended::Entity "0..1" -- "1..1" extended::EntityType : entity3
+extended::Feature "0..9999" --* "1..1" extended::Entity : features7
+extended::FormTypes "0..9999" -- "1..1" extended::Page : forms11
+extended::Entity "1..1" -- "0..1" extended::Entity : superType5
+extended::AbstractType "0..1" --* "1..1" extended::Feature : type9
+@enduml

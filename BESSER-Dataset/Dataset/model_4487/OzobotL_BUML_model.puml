@@ -1,0 +1,80 @@
+@startuml
+enum Color {
+  blue
+  green
+  none
+  red
+  yellow
+}
+class Command {
+}
+enum Direction {
+  left
+  right
+}
+class NamedElement {
+}
+enum Velocity {
+  fast
+  medium
+  slow
+  very_fast
+  very_slow
+}
+class model::Block {
+}
+abstract class model::Command {
+  + message : str
+}
+class model::Light {
+  + color : str
+}
+class model::Move {
+  + distance : int
+  + velocity : str
+}
+abstract class model::NamedElement {
+  + name : str
+}
+class model::Ozobot {
+  + orientation : float
+  + xposition : float
+  + yposition : float
+}
+class model::OzobotProgram {
+}
+class model::Repeat {
+  + count : int
+}
+class model::Rotate {
+  + angle : float
+  + direction : str
+  + velocity : str
+}
+class model::Transition {
+}
+class model::Wait {
+  + time : int
+}
+Command <|-- model::Light
+Command <|-- model::Move
+Command <|-- model::Repeat
+Command <|-- model::Rotate
+Command <|-- model::Wait
+NamedElement <|-- model::Block
+NamedElement <|-- model::Command
+NamedElement <|-- model::Ozobot
+NamedElement <|-- model::OzobotProgram
+NamedElement <|-- model::Transition
+model::Block "1..1" --* "1..1" model::OzobotProgram : block0
+model::Block "1..1" --* "1..1" model::Repeat : block11
+model::Command "0..9999" --* "1..1" model::Block : commands15
+model::OzobotProgram "1..1" -- "1..1" model::Command : current1
+model::Command "0..1" -- "1..1" model::OzobotProgram : currentCommand3
+model::Command "1..1" -- "0..1" model::Transition : incoming8
+model::Transition "0..1" -- "1..1" model::Command : outgoing6
+model::OzobotProgram "0..9999" --* "1..1" model::Ozobot : programs13
+model::Command "1..1" -- "1..1" model::Transition : source20
+model::Transition "1..1" -- "1..1" model::Command : target23
+model::Transition "0..9999" --* "1..1" model::Block : transitions18
+@enduml

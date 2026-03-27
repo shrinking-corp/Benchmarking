@@ -1,0 +1,141 @@
+@startuml
+class Expression {
+}
+class Relational {
+}
+class Statement {
+}
+class rell::And {
+}
+class rell::Attribute {
+  + modificator : str
+}
+class rell::BoolConstant {
+  + value : str
+}
+class rell::ClassDefinition {
+  + name : str
+}
+class rell::ClassType {
+}
+class rell::Comparison {
+  + op : str
+}
+class rell::ConditionElement {
+  + compareName : str
+}
+class rell::Conditions {
+}
+class rell::Create {
+}
+class rell::Delete {
+}
+class rell::Equality {
+  + op : str
+}
+class rell::Expression {
+}
+class rell::IntConstant {
+  + value : int
+}
+class rell::Minus {
+}
+class rell::Model {
+}
+class rell::MulOrDiv {
+  + op : str
+}
+class rell::Not {
+}
+class rell::Operation {
+  + name : str
+}
+class rell::Or {
+}
+class rell::Plus {
+}
+class rell::PrimitiveType {
+  + primitiveType : str
+}
+class rell::RelAttrubutesList {
+}
+class rell::Relational {
+  + entity : str
+}
+class rell::Statement {
+}
+class rell::StringConstant {
+  + value : str
+}
+class rell::TypeReference {
+}
+class rell::Update {
+}
+class rell::Variable {
+}
+class rell::VariableDeclaration {
+  + name : str
+}
+class rell::VariableInit {
+}
+class rell::VariableRef {
+}
+Expression <|-- rell::And
+Expression <|-- rell::BoolConstant
+Expression <|-- rell::Comparison
+Expression <|-- rell::Equality
+Expression <|-- rell::IntConstant
+Expression <|-- rell::Minus
+Expression <|-- rell::MulOrDiv
+Expression <|-- rell::Not
+Expression <|-- rell::Or
+Expression <|-- rell::Plus
+Expression <|-- rell::StringConstant
+Expression <|-- rell::VariableRef
+Relational <|-- rell::Create
+Relational <|-- rell::Delete
+Relational <|-- rell::Update
+Statement <|-- rell::Relational
+Statement <|-- rell::Variable
+Statement <|-- rell::VariableInit
+rell::Attribute "0..9999" --* "1..1" rell::ClassDefinition : attributes6
+rell::Conditions "0..1" --* "1..1" rell::Relational : conditions20
+rell::VariableDeclaration "0..1" --* "1..1" rell::Variable : declaration14
+rell::ConditionElement "0..9999" --* "1..1" rell::Conditions : elements23
+rell::ClassDefinition "0..9999" --* "1..1" rell::Model : entities0
+rell::ClassDefinition "0..1" -- "1..1" rell::ClassType : entityRef52
+rell::ClassType "0..1" --* "1..1" rell::TypeReference : entityType50
+rell::Expression "0..1" --* "1..1" rell::ConditionElement : expr25
+rell::Variable "1..1" *-- "0..1" rell::Expression : expression16
+rell::VariableInit "1..1" *-- "0..1" rell::Expression : expression34
+rell::Expression "0..1" --* "1..1" rell::Not : expression92
+rell::Or "1..1" *-- "0..1" rell::Expression : left55
+rell::Expression "0..1" --* "1..1" rell::And : left60
+rell::Equality "1..1" *-- "0..1" rell::Expression : left65
+rell::Expression "0..1" --* "1..1" rell::Comparison : left70
+rell::Plus "1..1" *-- "0..1" rell::Expression : left75
+rell::Expression "0..1" --* "1..1" rell::Minus : left80
+rell::Expression "0..1" --* "1..1" rell::MulOrDiv : left87
+rell::VariableDeclaration "0..1" -- "1..1" rell::VariableInit : name31
+rell::Model "1..1" *-- "0..9999" rell::Operation : operations1
+rell::Expression "0..1" --* "1..1" rell::Expression : or38
+rell::RelAttrubutesList "0..1" --* "1..1" rell::Operation : parameters8
+rell::PrimitiveType "0..1" --* "1..1" rell::TypeReference : primitive48
+rell::Relational "0..1" --* "1..1" rell::Relational : relation19
+rell::Expression "0..1" --* "1..1" rell::Or : right57
+rell::Expression "0..1" --* "1..1" rell::And : right62
+rell::Expression "0..1" --* "1..1" rell::Equality : right67
+rell::Expression "0..1" --* "1..1" rell::Comparison : right72
+rell::Expression "0..1" --* "1..1" rell::Plus : right77
+rell::Minus "1..1" *-- "0..1" rell::Expression : right82
+rell::Expression "0..1" --* "1..1" rell::MulOrDiv : right89
+rell::Operation "1..1" *-- "0..9999" rell::Statement : statements10
+rell::ClassDefinition "0..1" -- "1..1" rell::ClassDefinition : superType4
+rell::VariableDeclaration "1..1" *-- "0..1" rell::TypeReference : type46
+rell::VariableDeclaration "0..9999" --* "1..1" rell::RelAttrubutesList : value40
+rell::VariableInit "0..1" --* "1..1" rell::VariableInit : varInit29
+rell::Variable "1..1" *-- "0..1" rell::Variable : variable13
+rell::VariableDeclaration "0..1" --* "1..1" rell::Attribute : variable43
+rell::VariableRef "1..1" -- "0..1" rell::VariableDeclaration : variable85
+rell::VariableInit "0..9999" --* "1..1" rell::Update : variableList22
+@enduml

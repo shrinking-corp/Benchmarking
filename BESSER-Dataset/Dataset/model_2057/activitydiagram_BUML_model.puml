@@ -1,0 +1,186 @@
+@startuml
+class Action {
+}
+class ActivityEdge {
+}
+class ActivityNode {
+}
+enum BooleanBinaryOperator {
+  AND
+  OR
+}
+class BooleanExpression {
+}
+enum BooleanUnaryOperator {
+  NOT
+}
+class ControlNode {
+}
+class ExecutableNode {
+}
+class Expression {
+}
+class FinalNode {
+}
+enum IntegerCalculationOperator {
+  ADD
+  SUBRACT
+}
+enum IntegerComparisonOperator {
+  EQUALS
+  GREATER
+  GREATER_EQUALS
+  SMALLER
+  SMALLER_EQUALS
+}
+class IntegerExpression {
+}
+class NamedElement {
+}
+class Token {
+}
+class Value {
+}
+class Variable {
+}
+abstract class activitydiagram::Action {
+}
+class activitydiagram::Activity {
+}
+abstract class activitydiagram::ActivityEdge {
+}
+class activitydiagram::ActivityFinalNode {
+}
+abstract class activitydiagram::ActivityNode {
+  + running : bool
+}
+class activitydiagram::BooleanBinaryExpression {
+  + operator : str
+}
+abstract class activitydiagram::BooleanExpression {
+}
+class activitydiagram::BooleanUnaryExpression {
+  + operator : str
+}
+class activitydiagram::BooleanValue {
+  + value : bool
+}
+class activitydiagram::BooleanVariable {
+}
+class activitydiagram::ControlFlow {
+}
+abstract class activitydiagram::ControlNode {
+}
+class activitydiagram::ControlToken {
+}
+class activitydiagram::DecisionNode {
+}
+abstract class activitydiagram::ExecutableNode {
+}
+abstract class activitydiagram::Expression {
+}
+abstract class activitydiagram::FinalNode {
+}
+class activitydiagram::ForkNode {
+}
+class activitydiagram::ForkedToken {
+  + remainingOffersCount : int
+}
+class activitydiagram::InitialNode {
+}
+class activitydiagram::Input {
+}
+class activitydiagram::InputValue {
+}
+class activitydiagram::IntegerCalculationExpression {
+  + operator : str
+}
+class activitydiagram::IntegerComparisonExpression {
+  + operator : str
+}
+abstract class activitydiagram::IntegerExpression {
+}
+class activitydiagram::IntegerValue {
+  + value : int
+}
+class activitydiagram::IntegerVariable {
+}
+class activitydiagram::JoinNode {
+}
+class activitydiagram::MergeNode {
+}
+abstract class activitydiagram::NamedElement {
+  + name : str
+}
+class activitydiagram::Offer {
+}
+class activitydiagram::OpaqueAction {
+}
+abstract class activitydiagram::Token {
+}
+class activitydiagram::Trace {
+}
+abstract class activitydiagram::Value {
+}
+abstract class activitydiagram::Variable {
+  + name : str
+}
+Action <|-- activitydiagram::OpaqueAction
+ActivityEdge <|-- activitydiagram::ControlFlow
+ActivityNode <|-- activitydiagram::ControlNode
+ActivityNode <|-- activitydiagram::ExecutableNode
+BooleanExpression <|-- activitydiagram::BooleanBinaryExpression
+BooleanExpression <|-- activitydiagram::BooleanUnaryExpression
+ControlNode <|-- activitydiagram::DecisionNode
+ControlNode <|-- activitydiagram::FinalNode
+ControlNode <|-- activitydiagram::ForkNode
+ControlNode <|-- activitydiagram::InitialNode
+ControlNode <|-- activitydiagram::JoinNode
+ControlNode <|-- activitydiagram::MergeNode
+ExecutableNode <|-- activitydiagram::Action
+Expression <|-- activitydiagram::BooleanExpression
+Expression <|-- activitydiagram::IntegerExpression
+FinalNode <|-- activitydiagram::ActivityFinalNode
+IntegerExpression <|-- activitydiagram::IntegerCalculationExpression
+IntegerExpression <|-- activitydiagram::IntegerComparisonExpression
+NamedElement <|-- activitydiagram::Activity
+NamedElement <|-- activitydiagram::ActivityEdge
+NamedElement <|-- activitydiagram::ActivityNode
+Token <|-- activitydiagram::ControlToken
+Token <|-- activitydiagram::ForkedToken
+Value <|-- activitydiagram::BooleanValue
+Value <|-- activitydiagram::IntegerValue
+Variable <|-- activitydiagram::BooleanVariable
+Variable <|-- activitydiagram::IntegerVariable
+activitydiagram::Activity "1..1" -- "1..1" activitydiagram::ActivityNode : activity12
+activitydiagram::BooleanVariable "1..1" -- "1..1" activitydiagram::BooleanExpression : assignee31
+activitydiagram::IntegerVariable "1..1" -- "1..1" activitydiagram::IntegerCalculationExpression : assignee33
+activitydiagram::BooleanVariable "1..1" -- "1..1" activitydiagram::IntegerComparisonExpression : assignee35
+activitydiagram::Token "1..1" -- "1..1" activitydiagram::ForkedToken : baseToken57
+activitydiagram::Value "0..1" --* "1..1" activitydiagram::Variable : currentValue24
+activitydiagram::ActivityEdge "0..9999" --* "1..1" activitydiagram::Activity : edges1
+activitydiagram::Trace "1..1" -- "0..9999" activitydiagram::ActivityNode : executedNodes48
+activitydiagram::Expression "0..9999" --* "1..1" activitydiagram::OpaqueAction : expressions21
+activitydiagram::BooleanVariable "0..1" -- "1..1" activitydiagram::ControlFlow : guard20
+activitydiagram::ActivityNode "1..1" *-- "0..9999" activitydiagram::Token : heldTokens13
+activitydiagram::ActivityNode "1..1" -- "1..1" activitydiagram::Token : holder46
+activitydiagram::ActivityEdge "0..9999" -- "1..1" activitydiagram::ActivityNode : incoming10
+activitydiagram::Value "0..1" --* "1..1" activitydiagram::Variable : initialValue22
+activitydiagram::InputValue "0..9999" --* "1..1" activitydiagram::Input : inputValues55
+activitydiagram::Variable "0..9999" --* "1..1" activitydiagram::Activity : inputs4
+activitydiagram::Variable "0..9999" --* "1..1" activitydiagram::Activity : locals2
+activitydiagram::Activity "1..1" *-- "0..9999" activitydiagram::ActivityNode : nodes0
+activitydiagram::Offer "1..1" -- "0..9999" activitydiagram::Token : offeredTokens44
+activitydiagram::Offer "0..9999" --* "1..1" activitydiagram::ActivityEdge : offers18
+activitydiagram::IntegerExpression "1..1" -- "0..1" activitydiagram::IntegerVariable : operand128
+activitydiagram::BooleanVariable "1..1" -- "1..1" activitydiagram::BooleanBinaryExpression : operand139
+activitydiagram::IntegerExpression "1..1" -- "0..1" activitydiagram::IntegerVariable : operand227
+activitydiagram::BooleanVariable "1..1" -- "1..1" activitydiagram::BooleanBinaryExpression : operand241
+activitydiagram::BooleanVariable "1..1" -- "1..1" activitydiagram::BooleanUnaryExpression : operand37
+activitydiagram::ActivityEdge "0..9999" -- "1..1" activitydiagram::ActivityNode : outgoing9
+activitydiagram::ActivityNode "1..1" -- "1..1" activitydiagram::ActivityEdge : source14
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::ActivityNode : target16
+activitydiagram::Activity "1..1" *-- "0..1" activitydiagram::Trace : trace7
+activitydiagram::Value "1..1" --* "1..1" activitydiagram::InputValue : value50
+activitydiagram::Variable "1..1" -- "1..1" activitydiagram::InputValue : variable52
+@enduml

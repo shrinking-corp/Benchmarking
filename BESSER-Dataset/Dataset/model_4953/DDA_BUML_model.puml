@@ -1,0 +1,74 @@
+@startuml
+class IdElement {
+}
+class NamedElement {
+}
+class WebApp::Action {
+}
+class WebApp::ActionMapping {
+}
+class WebApp::Attribute {
+  + value : str
+}
+class WebApp::Controller {
+}
+class WebApp::Dummies {
+}
+class WebApp::DynamicApplication {
+}
+class WebApp::Entities {
+}
+class WebApp::FormElements {
+}
+class WebApp::Forms {
+}
+abstract class WebApp::IdElement {
+  + Id : str
+}
+abstract class WebApp::NamedElement {
+  + Name : str
+}
+class WebApp::Pages {
+}
+class WebApp::Tables {
+}
+class WebApp::Views {
+}
+class WebApp::styleElements {
+}
+IdElement <|-- WebApp::FormElements
+IdElement <|-- WebApp::Forms
+IdElement <|-- WebApp::Tables
+IdElement <|-- WebApp::Views
+IdElement <|-- WebApp::styleElements
+NamedElement <|-- WebApp::Action
+NamedElement <|-- WebApp::Attribute
+NamedElement <|-- WebApp::Controller
+NamedElement <|-- WebApp::Dummies
+NamedElement <|-- WebApp::DynamicApplication
+NamedElement <|-- WebApp::Entities
+NamedElement <|-- WebApp::FormElements
+NamedElement <|-- WebApp::Forms
+NamedElement <|-- WebApp::Pages
+NamedElement <|-- WebApp::Tables
+NamedElement <|-- WebApp::Views
+NamedElement <|-- WebApp::styleElements
+WebApp::Controller "1..9999" --* "1..1" WebApp::ActionMapping : Controller17
+WebApp::Pages "1..1" *-- "0..9999" WebApp::Action : action0
+WebApp::Action "1..9999" --* "1..1" WebApp::Controller : action11
+WebApp::Action "1..1" *-- "1..9999" WebApp::ActionMapping : actionmapping13
+WebApp::Entities "1..1" *-- "1..9999" WebApp::Attribute : attribute28
+WebApp::Dummies "1..1" *-- "1..9999" WebApp::Attribute : attribute38
+WebApp::styleElements "0..9999" -- "1..1" WebApp::Tables : contain30
+WebApp::Entities "1..9999" -- "1..1" WebApp::Action : entities15
+WebApp::Entities "1..9999" --* "1..1" WebApp::DynamicApplication : entities35
+WebApp::FormElements "0..9999" --* "1..1" WebApp::Forms : formelements9
+WebApp::Views "1..1" *-- "0..9999" WebApp::Forms : forms5
+WebApp::Entities "1..1" *-- "0..9999" WebApp::Entities : has24
+WebApp::styleElements "1..9999" --* "1..1" WebApp::Views : has7
+WebApp::Pages "1..9999" --* "1..1" WebApp::DynamicApplication : pages33
+WebApp::Tables "0..9999" --* "1..1" WebApp::Views : tables3
+WebApp::Dummies "0..9999" --* "1..1" WebApp::Entities : values26
+WebApp::Views "1..9999" --* "1..1" WebApp::Pages : views1
+WebApp::Views "0..9999" -- "1..1" WebApp::Entities : views20
+@enduml

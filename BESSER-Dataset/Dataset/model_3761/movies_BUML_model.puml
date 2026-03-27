@@ -1,0 +1,48 @@
+@startuml
+class CriticsReview {
+}
+enum GenreTypes {
+  Action
+  Animation
+  Classics
+  Comedy
+  Documentary
+  Drama
+  Family
+  Horror
+  NewRelease
+  Romance
+  SciFi
+  Thriller
+}
+class movies::Copy {
+  + id : str
+}
+class movies::CriticsReview {
+  + rating : str
+  + reviewedBy : str
+}
+class movies::CustomerReview {
+  + comment : str
+}
+class movies::Movie {
+  + actors : str
+  + director : str
+  + genre : str
+  + summary : str
+  + title : str
+}
+class movies::MoviesDB {
+  + comment : str
+}
+class movies::Place {
+  + id : str
+  + name : str
+}
+CriticsReview <|-- movies::CustomerReview
+movies::Copy "0..9999" --* "1..1" movies::Movie : copies0
+movies::Movie "0..9999" --* "1..1" movies::MoviesDB : movies3
+movies::Place "0..1" -- "1..1" movies::Copy : place7
+movies::MoviesDB "1..1" *-- "0..9999" movies::Place : places5
+movies::Movie "1..1" *-- "0..9999" movies::CriticsReview : review1
+@enduml

@@ -1,0 +1,83 @@
+@startuml
+class Controller {
+}
+class Data {
+}
+enum DataType {
+  any
+  array
+  boolean
+  date
+  number
+  object
+  string
+}
+class NamedElement {
+}
+class webapp::Attribute {
+  + baseType : str
+  + customType : str
+}
+class webapp::Collection {
+}
+abstract class webapp::Controller {
+}
+class webapp::Data {
+  + endpoint : str
+}
+class webapp::Model {
+}
+class webapp::NamedElement {
+  + name : str
+}
+class webapp::PageController {
+}
+class webapp::Router {
+}
+class webapp::RouterBinding {
+  + requestCookies : str
+  + requestURL : str
+}
+class webapp::ServiceController {
+  + endpoint : str
+}
+class webapp::Style {
+  + href : str
+  + src : str
+}
+class webapp::Template {
+  + structure : str
+}
+class webapp::View {
+}
+class webapp::WebApp {
+}
+Controller <|-- webapp::PageController
+Controller <|-- webapp::ServiceController
+Data <|-- webapp::Collection
+Data <|-- webapp::Model
+NamedElement <|-- webapp::Attribute
+NamedElement <|-- webapp::Controller
+NamedElement <|-- webapp::Data
+NamedElement <|-- webapp::Style
+NamedElement <|-- webapp::Template
+NamedElement <|-- webapp::View
+NamedElement <|-- webapp::WebApp
+webapp::Attribute "0..9999" --* "1..1" webapp::Model : attributes13
+webapp::Router "1..1" *-- "0..9999" webapp::RouterBinding : bindings27
+webapp::Collection "0..9999" --* "1..1" webapp::WebApp : collections0
+webapp::Controller "1..1" -- "1..1" webapp::RouterBinding : controller32
+webapp::Controller "0..9999" --* "1..1" webapp::WebApp : controllers5
+webapp::Attribute "0..1" --* "1..1" webapp::View : data24
+webapp::Collection "1..1" -- "0..1" webapp::Model : model15
+webapp::Model "0..9999" --* "1..1" webapp::WebApp : models3
+webapp::View "0..1" -- "1..1" webapp::PageController : page38
+webapp::Attribute "0..9999" --* "1..1" webapp::Controller : parameters35
+webapp::WebApp "1..1" *-- "0..1" webapp::Router : router1
+webapp::Style "0..1" -- "1..1" webapp::Template : style29
+webapp::Style "0..9999" --* "1..1" webapp::WebApp : styles11
+webapp::View "0..9999" --* "1..1" webapp::View : subviews19
+webapp::View "1..1" -- "0..1" webapp::Template : template21
+webapp::Template "0..9999" --* "1..1" webapp::WebApp : templates7
+webapp::WebApp "1..1" *-- "0..9999" webapp::View : views9
+@enduml

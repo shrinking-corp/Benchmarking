@@ -1,0 +1,111 @@
+@startuml
+class Action {
+}
+class Actuate {
+}
+class Behavior {
+}
+enum BumperKind {
+  Left
+  Right
+}
+class Condition {
+}
+enum DistanceKind {
+  Major
+  Minor
+}
+enum FailureState {
+  Failure
+  Running
+  Success
+}
+enum LightStatus {
+  Off
+  On
+}
+class Node {
+}
+enum RunningState {
+  Failure
+  Running
+  Success
+}
+enum SuccessState {
+  Failure
+  Running
+  Success
+}
+abstract class gyro::Action {
+}
+abstract class gyro::Actuate {
+}
+abstract class gyro::Behavior {
+}
+class gyro::Bumpers {
+  + bumperKind : str
+}
+class gyro::Child {
+}
+abstract class gyro::Condition {
+}
+class gyro::Distance {
+  + kind : str
+  + value : int
+}
+class gyro::GyroSpecification {
+  + name : str
+}
+class gyro::LED {
+  + status : str
+}
+class gyro::Motor {
+  + leftMotor : int
+  + rightMotor : int
+}
+abstract class gyro::Node {
+  + name : str
+}
+class gyro::Parallel {
+}
+class gyro::Priority {
+}
+class gyro::Sequential {
+}
+class gyro::Servo {
+  + maximalPosition : int
+  + minimalPosition : int
+  + step : int
+}
+class gyro::Sibling {
+}
+class gyro::StatusChange {
+  + changeFailure : str
+  + changeRunning : str
+  + changeSuccess : str
+}
+class gyro::Waiting {
+  + time : int
+}
+Action <|-- gyro::Actuate
+Action <|-- gyro::Condition
+Actuate <|-- gyro::LED
+Actuate <|-- gyro::Motor
+Actuate <|-- gyro::Servo
+Behavior <|-- gyro::Parallel
+Behavior <|-- gyro::Priority
+Behavior <|-- gyro::Sequential
+Behavior <|-- gyro::StatusChange
+Condition <|-- gyro::Bumpers
+Condition <|-- gyro::Distance
+Condition <|-- gyro::Waiting
+Node <|-- gyro::Action
+Node <|-- gyro::Behavior
+gyro::Child "0..9999" --* "1..1" gyro::GyroSpecification : child1
+gyro::Sibling "0..9999" --* "1..1" gyro::GyroSpecification : next3
+gyro::Node "0..9999" --* "1..1" gyro::GyroSpecification : nodes0
+gyro::Node "0..9999" -- "1..1" gyro::Sibling : source10
+gyro::Behavior "0..9999" -- "1..1" gyro::Child : source5
+gyro::Sibling "1..1" -- "0..9999" gyro::Node : target13
+gyro::Child "1..1" -- "0..9999" gyro::Node : target7
+@enduml

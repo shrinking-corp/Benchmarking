@@ -1,0 +1,45 @@
+@startuml
+class ClassDiagram::Attribute {
+  + multivalued : bool
+}
+class ClassDiagram::Class {
+}
+class ClassDiagram::Classifier {
+  + name : str
+}
+class ClassDiagram::Model {
+}
+class ClassDiagram::Operation {
+}
+class ClassDiagram::Parameter {
+  + name : str
+}
+class ClassDiagram::PrimitiveType {
+}
+abstract class ClassDiagram::StructuralFeature {
+  + name : str
+  + visibility : str
+}
+class ClassDiagram::TypedElement {
+}
+class Classifier {
+}
+class StructuralFeature {
+}
+class TypedElement {
+}
+Classifier <|-- ClassDiagram::Class
+Classifier <|-- ClassDiagram::PrimitiveType
+StructuralFeature <|-- ClassDiagram::Attribute
+StructuralFeature <|-- ClassDiagram::Operation
+TypedElement <|-- ClassDiagram::Parameter
+TypedElement <|-- ClassDiagram::StructuralFeature
+ClassDiagram::Class "0..9999" -- "1..1" ClassDiagram::Class : childs5
+ClassDiagram::Classifier "0..9999" --* "1..1" ClassDiagram::Model : classifiers0
+ClassDiagram::Class "1..1" *-- "0..9999" ClassDiagram::StructuralFeature : features1
+ClassDiagram::Class "1..1" -- "1..1" ClassDiagram::StructuralFeature : owner7
+ClassDiagram::Operation "1..1" -- "1..1" ClassDiagram::Parameter : paramOf12
+ClassDiagram::Parameter "0..9999" -- "1..1" ClassDiagram::Operation : params11
+ClassDiagram::Class "0..9999" -- "1..1" ClassDiagram::Class : parents3
+ClassDiagram::TypedElement "1..1" -- "0..1" ClassDiagram::Classifier : type9
+@enduml

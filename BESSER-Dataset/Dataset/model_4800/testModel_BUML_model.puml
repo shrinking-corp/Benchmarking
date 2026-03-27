@@ -1,0 +1,55 @@
+@startuml
+enum ElementType {
+  Type1
+  Type2
+}
+class Leafs {
+}
+class testModel::ContainedLeaf {
+  + Character : str
+  + DoubleObj : str
+  + byteArray : str
+  + byteObject : str
+  + char : str
+  + date : date
+  + double : float
+  + elementType : str
+  + float : float
+  + name : str
+}
+abstract class testModel::Leafs {
+}
+class testModel::Node {
+  + Boolean : str
+  + bigdeci : str
+  + bigint : str
+  + bool : bool
+  + byte : str
+  + name : str
+}
+class testModel::multiRefLeaf {
+  + name : str
+}
+class testModel::referedLeaf {
+  + Float : str
+  + Integer : str
+  + LongObj : str
+  + ShortObj : str
+  + int : int
+  + long : str
+  + name : str
+  + notChangeable : str
+  + short : str
+}
+class testModel::upperBoundLeaf {
+  + name : str
+}
+Leafs <|-- testModel::multiRefLeaf
+Leafs <|-- testModel::referedLeaf
+Leafs <|-- testModel::upperBoundLeaf
+testModel::ContainedLeaf "0..9999" --* "1..1" testModel::Node : contains2
+testModel::multiRefLeaf "0..9999" -- "1..1" testModel::referedLeaf : multiRef8
+testModel::ContainedLeaf "1..1" -- "0..9999" testModel::referedLeaf : ref4
+testModel::Node "0..9999" -- "1..1" testModel::Node : subNode1
+testModel::upperBoundLeaf "0..2" --* "1..1" testModel::ContainedLeaf : upperBound6
+@enduml

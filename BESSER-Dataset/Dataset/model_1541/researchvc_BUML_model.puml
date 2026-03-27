@@ -1,0 +1,69 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+abstract class researchvc::Counted {
+  + id : int
+}
+class researchvc::Keyword {
+  + word : str
+}
+abstract class researchvc::Labelled {
+  + lname : str
+}
+abstract class researchvc::Named {
+  + name : str
+}
+class researchvc::Paper {
+}
+class researchvc::PaperKeyword {
+  + weight : int
+}
+class researchvc::Paragraph {
+  + content : str
+}
+class researchvc::PublicationStructure {
+}
+class researchvc::Researcher {
+  + forName : str
+  + name : str
+}
+class researchvc::Review {
+  + date : date
+}
+class researchvc::ReviewNote {
+  + content : str
+}
+class researchvc::Skill {
+  + description : str
+}
+class researchvc::Write {
+  + timeSpent : int
+}
+Counted <|-- researchvc::Paragraph
+Labelled <|-- researchvc::Review
+Labelled <|-- researchvc::Write
+Named <|-- researchvc::Keyword
+Named <|-- researchvc::Paper
+Named <|-- researchvc::Paragraph
+Named <|-- researchvc::PublicationStructure
+Named <|-- researchvc::ReviewNote
+researchvc::Keyword "0..9999" --* "1..1" researchvc::PublicationStructure : allKeyWords26
+researchvc::Researcher "0..9999" -- "1..1" researchvc::Paper : authors7
+researchvc::Paper "1..1" -- "0..1" researchvc::Paper : citedBy11
+researchvc::PaperKeyword "1..1" -- "0..1" researchvc::Keyword : keyword28
+researchvc::PaperKeyword "0..9999" --* "1..1" researchvc::Paper : keywords8
+researchvc::PublicationStructure "1..1" *-- "0..9999" researchvc::Paper : papers23
+researchvc::Paragraph "0..1" -- "1..1" researchvc::Write : paragraph15
+researchvc::Paragraph "0..9999" --* "1..1" researchvc::Paper : paragraphs6
+researchvc::Paper "0..9999" -- "1..1" researchvc::Researcher : res_papers3
+researchvc::Researcher "0..9999" --* "1..1" researchvc::PublicationStructure : researchers21
+researchvc::ReviewNote "0..1" -- "1..1" researchvc::Review : reviewNote18
+researchvc::Review "0..9999" --* "1..1" researchvc::Researcher : reviews1
+researchvc::Paragraph "1..1" *-- "0..9999" researchvc::ReviewNote : reviews13
+researchvc::Skill "0..9999" --* "1..1" researchvc::Researcher : skills4
+researchvc::Write "0..9999" --* "1..1" researchvc::Researcher : writes0
+@enduml

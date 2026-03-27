@@ -1,0 +1,81 @@
+@startuml
+class Diagram {
+}
+class Label {
+}
+class LabeledEdge {
+}
+class LabeledShape {
+}
+enum MessageVisibleKind {
+  initiating
+  non_initiating
+}
+enum ParticipantBandKind {
+  bottom_initiating
+  bottom_non_initiating
+  middle_initiating
+  middle_non_initiating
+  top_initiating
+  top_non_initiating
+}
+class Plane {
+}
+class Style {
+}
+class di::BPMNDiagram {
+}
+class di::BPMNEdge {
+  + messageVisibleKind : str
+}
+class di::BPMNLabel {
+}
+class di::BPMNLabelStyle {
+}
+class di::BPMNPlane {
+}
+class di::BPMNShape {
+  + isExpanded : bool
+  + isHorizontal : bool
+  + isMarkerVisible : bool
+  + isMessageVisible : bool
+  + participantBandKind : str
+}
+class di::BaseElement {
+}
+class di::DiagramElement {
+}
+class di::DocumentRoot {
+  + mixed : str
+}
+class di::EStringToStringMapEntry {
+}
+class di::Font {
+}
+Diagram <|-- di::BPMNDiagram
+Label <|-- di::BPMNLabel
+LabeledEdge <|-- di::BPMNEdge
+LabeledShape <|-- di::BPMNShape
+Plane <|-- di::BPMNPlane
+Style <|-- di::BPMNLabelStyle
+di::BPMNDiagram "0..9999" --* "1..1" di::DocumentRoot : bPMNDiagram4
+di::DocumentRoot "1..1" *-- "0..9999" di::BPMNEdge : bPMNEdge6
+di::BPMNLabel "0..9999" --* "1..1" di::DocumentRoot : bPMNLabel8
+di::DocumentRoot "1..1" *-- "0..9999" di::BPMNLabelStyle : bPMNLabelStyle10
+di::BPMNPlane "0..9999" --* "1..1" di::DocumentRoot : bPMNPlane12
+di::DocumentRoot "1..1" *-- "0..9999" di::BPMNShape : bPMNShape14
+di::BaseElement "0..1" -- "1..1" di::BPMNEdge : bpmnElement25
+di::BPMNPlane "1..1" -- "0..1" di::BaseElement : bpmnElement37
+di::BaseElement "0..1" -- "1..1" di::BPMNShape : bpmnElement43
+di::BPMNShape "0..1" -- "1..1" di::BPMNShape : choreographyActivityShape47
+di::Font "1..1" --* "1..1" di::BPMNLabelStyle : font35
+di::BPMNLabel "0..1" --* "1..1" di::BPMNEdge : label22
+di::BPMNLabel "0..1" --* "1..1" di::BPMNShape : label40
+di::BPMNDiagram "1..1" *-- "0..9999" di::BPMNLabelStyle : labelStyle19
+di::BPMNLabelStyle "0..1" -- "1..1" di::BPMNLabel : labelStyle32
+di::BPMNPlane "1..1" --* "1..1" di::BPMNDiagram : plane16
+di::BPMNEdge "1..1" -- "0..1" di::DiagramElement : sourceElement27
+di::DiagramElement "0..1" -- "1..1" di::BPMNEdge : targetElement29
+di::EStringToStringMapEntry "0..9999" --* "1..1" di::DocumentRoot : xMLNSPrefixMap0
+di::EStringToStringMapEntry "0..9999" --* "1..1" di::DocumentRoot : xSISchemaLocation1
+@enduml

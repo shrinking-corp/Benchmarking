@@ -1,0 +1,48 @@
+@startuml
+class ModelElement {
+}
+enum Type {
+  CHAR
+  DATE
+  FLOAT
+  NUMERIC
+  TIME
+  VARCHAR
+}
+class relational::Column {
+  + isPrimaryKey : bool
+  + isUnique : bool
+  + name : str
+  + type : str
+}
+class relational::Database {
+  + name : str
+  + url : str
+}
+class relational::ForeignKey {
+  + name : str
+}
+abstract class relational::ModelElement {
+  + comment : str
+}
+class relational::Schema {
+  + name : str
+}
+class relational::Table {
+  + name : str
+}
+ModelElement <|-- relational::Column
+ModelElement <|-- relational::Database
+ModelElement <|-- relational::ForeignKey
+ModelElement <|-- relational::Schema
+ModelElement <|-- relational::Table
+relational::Table "1..1" -- "1..1" relational::ForeignKey : foreignTable9
+relational::Table "1..1" *-- "0..9999" relational::Column : ownedColumns4
+relational::ForeignKey "0..9999" --* "1..1" relational::Table : ownedForeignKeys6
+relational::Schema "0..9999" --* "1..1" relational::Database : ownedSchemas0
+relational::Schema "1..1" *-- "0..9999" relational::Table : ownedTables1
+relational::Table "1..1" -- "1..1" relational::Column : owner12
+relational::Database "1..1" -- "1..1" relational::Schema : owner3
+relational::Schema "1..1" -- "1..1" relational::Table : owner7
+relational::ForeignKey "1..1" -- "1..1" relational::Table : sourceTable11
+@enduml

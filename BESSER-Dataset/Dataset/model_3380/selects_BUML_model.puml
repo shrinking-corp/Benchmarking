@@ -1,0 +1,36 @@
+@startuml
+class NamedElement {
+}
+class Selects::Aplicacion {
+}
+class Selects::Fichero {
+}
+class Selects::From {
+}
+class Selects::Join {
+}
+abstract class Selects::NamedElement {
+  + nombre : str
+}
+class Selects::Operando {
+  + columna : str
+  + tabla : str
+}
+class Selects::Select {
+}
+class Selects::Tabla {
+  + tabAlias : str
+}
+class Selects::Where {
+}
+NamedElement <|-- Selects::Fichero
+NamedElement <|-- Selects::Tabla
+Selects::Aplicacion "1..1" *-- "0..9999" Selects::Fichero : ficheros0
+Selects::Join "0..9999" --* "1..1" Selects::Where : joins9
+Selects::Join "1..1" *-- "1..1" Selects::Operando : operando111
+Selects::Operando "1..1" --* "1..1" Selects::Join : operando213
+Selects::From "1..1" --* "1..1" Selects::Select : parte_from3
+Selects::Where "1..1" --* "1..1" Selects::Select : parte_where5
+Selects::Select "0..9999" --* "1..1" Selects::Fichero : selects1
+Selects::Tabla "1..9999" --* "1..1" Selects::From : tablas7
+@enduml

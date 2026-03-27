@@ -1,0 +1,58 @@
+@startuml
+class NamedElement {
+}
+class Pseudostate {
+}
+class State {
+}
+class Transition {
+}
+class fsm::FinalState {
+}
+class fsm::Fork {
+}
+class fsm::InitialState {
+}
+class fsm::Join {
+}
+class fsm::NamedElement {
+  + name : str
+}
+class fsm::Pseudostate {
+}
+class fsm::State {
+  + finalTime : int
+  + initialTime : int
+}
+class fsm::StateMachine {
+}
+class fsm::TimedTransition {
+  + duration : int
+}
+class fsm::Transition {
+  + finalTime : int
+  + initialTime : int
+  + time : int
+}
+class fsm::Trigger {
+  + expression : str
+}
+NamedElement <|-- fsm::State
+NamedElement <|-- fsm::StateMachine
+NamedElement <|-- fsm::Transition
+Pseudostate <|-- fsm::Fork
+Pseudostate <|-- fsm::Join
+State <|-- fsm::FinalState
+State <|-- fsm::InitialState
+State <|-- fsm::Pseudostate
+Transition <|-- fsm::TimedTransition
+fsm::Transition "0..9999" -- "1..1" fsm::State : incoming8
+fsm::Transition "0..9999" -- "1..1" fsm::State : outgoing5
+fsm::Transition "1..1" -- "1..1" fsm::State : source17
+fsm::State "1..1" -- "0..1" fsm::StateMachine : stateMachine11
+fsm::StateMachine "1..1" -- "1..1" fsm::Transition : stateMachine21
+fsm::State "0..9999" --* "1..1" fsm::StateMachine : states0
+fsm::State "1..1" -- "1..1" fsm::Transition : target14
+fsm::Transition "0..9999" --* "1..1" fsm::StateMachine : transitions2
+fsm::Trigger "0..1" --* "1..1" fsm::Transition : trigger20
+@enduml

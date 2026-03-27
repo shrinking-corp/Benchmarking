@@ -1,0 +1,42 @@
+@startuml
+class Exp {
+}
+class Primary {
+}
+class mathInterpeter::Div {
+}
+class mathInterpeter::Exp {
+}
+class mathInterpeter::MathExp {
+}
+class mathInterpeter::Minus {
+}
+class mathInterpeter::Mult {
+}
+class mathInterpeter::Number {
+  + value : int
+}
+class mathInterpeter::Parenthesis {
+}
+class mathInterpeter::Plus {
+}
+class mathInterpeter::Primary {
+}
+Exp <|-- mathInterpeter::Div
+Exp <|-- mathInterpeter::Minus
+Exp <|-- mathInterpeter::Mult
+Exp <|-- mathInterpeter::Plus
+Exp <|-- mathInterpeter::Primary
+Primary <|-- mathInterpeter::Number
+Primary <|-- mathInterpeter::Parenthesis
+mathInterpeter::Exp "0..1" --* "1..1" mathInterpeter::MathExp : exp0
+mathInterpeter::Parenthesis "1..1" *-- "0..1" mathInterpeter::Exp : exp1
+mathInterpeter::Mult "1..1" *-- "0..1" mathInterpeter::Exp : left13
+mathInterpeter::Div "1..1" *-- "0..1" mathInterpeter::Exp : left17
+mathInterpeter::Exp "0..1" --* "1..1" mathInterpeter::Plus : left3
+mathInterpeter::Exp "0..1" --* "1..1" mathInterpeter::Minus : left8
+mathInterpeter::Minus "1..1" *-- "0..1" mathInterpeter::Exp : right10
+mathInterpeter::Primary "0..1" --* "1..1" mathInterpeter::Mult : right15
+mathInterpeter::Primary "0..1" --* "1..1" mathInterpeter::Div : right19
+mathInterpeter::Exp "0..1" --* "1..1" mathInterpeter::Plus : right5
+@enduml

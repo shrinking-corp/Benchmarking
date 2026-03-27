@@ -1,0 +1,42 @@
+@startuml
+class shop::Customer {
+  + address : str
+  + comments : str
+  + familyName : str
+  + hotel : str
+  + surname : str
+  + telephoneNr : str
+}
+class shop::Order {
+  + comments : str
+  + number : str
+}
+class shop::PriceCategory {
+  + name : str
+  + prices : float
+}
+class shop::Product {
+  + description : str
+  + name : str
+  + number : str
+}
+class shop::ProductCategory {
+  + name : str
+}
+class shop::Transaction {
+  + endDate : date
+  + number : str
+  + paidDate : date
+  + price : float
+  + startDate : date
+}
+shop::Customer "0..1" -- "1..1" shop::Order : customer10
+shop::Transaction "1..1" -- "0..1" shop::Order : order11
+shop::ProductCategory "0..1" -- "1..1" shop::ProductCategory : parent7
+shop::Product "1..1" -- "0..1" shop::PriceCategory : priceCategory1
+shop::Product "0..1" -- "1..1" shop::Transaction : product12
+shop::ProductCategory "0..1" -- "1..1" shop::Product : productCategory0
+shop::Product "0..9999" --* "1..1" shop::ProductCategory : products2
+shop::ProductCategory "0..9999" --* "1..1" shop::ProductCategory : subCategorys4
+shop::Transaction "0..9999" --* "1..1" shop::Order : transactions9
+@enduml

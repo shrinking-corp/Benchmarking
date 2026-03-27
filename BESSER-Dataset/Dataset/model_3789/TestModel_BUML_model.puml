@@ -1,0 +1,93 @@
+@startuml
+enum ProblemType {
+  ASSERTION
+  ASSUMPTION
+  ERROR
+}
+enum ProgressState {
+  COMPLETED
+  NOT_STARTED
+  RUNNING
+  STOPPED
+}
+class TestContainer {
+}
+class TestElement {
+}
+class TestProblem {
+}
+enum TestState {
+  ERROR
+  FAILURE
+  IGNORED
+  NOT_RUN
+  PASS
+}
+class TraceElement {
+}
+class model::ComparisonProblem {
+  + actual : str
+  + expected : str
+}
+class model::Metadata {
+  + key : str
+  + value : str
+}
+class model::TestCaseElement {
+}
+class model::TestContainer {
+  + getAssumptionMismatchCount() : int
+  + getCompletedCount() : int
+  + getErrorCount() : int
+  + getFailureCount() : int
+  + getIgnoredCount() : int
+  + getMergedTestState() : str
+  + getTestCaseCount() : int
+  + updateProgressState() : void
+}
+abstract class model::TestElement {
+  + description : str
+  + elementUnderTest : str
+  + endTimestamp : str
+  + name : str
+  + progressState : str
+  + startTimestamp : str
+  + target : str
+  + testState : str
+  + getDuration() : str
+  + getImageDescriptor() : str
+  + getRoot() : str
+  + hasWrongAssumption() : bool
+  + isErrorOrFailure() : bool
+  + isRunning() : bool
+  + open() : void
+}
+class model::TestProblem {
+  + message : str
+  + problemType : str
+  + getTestElement() : TestElement
+}
+class model::TestRoot {
+  + testRunner : str
+}
+abstract class model::TraceElement {
+  + message : str
+  + getImageDescriptor() : str
+  + getProblem() : TestProblem
+  + open() : void
+}
+class model::TraceException {
+}
+class model::TraceStackframe {
+}
+TestContainer <|-- model::TestRoot
+TestElement <|-- model::TestCaseElement
+TestElement <|-- model::TestContainer
+TestProblem <|-- model::ComparisonProblem
+TraceElement <|-- model::TraceException
+TraceElement <|-- model::TraceStackframe
+model::TestElement "0..9999" --* "1..1" model::TestContainer : children2
+model::TestContainer "0..1" -- "1..1" model::TestElement : parent0
+model::TestElement "1..1" *-- "0..1" model::TestProblem : problem1
+model::TraceElement "0..9999" --* "1..1" model::TestProblem : trace3
+@enduml

@@ -1,0 +1,90 @@
+@startuml
+class Addressable {
+}
+class AudioVisualItem {
+}
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class CirculatingItem {
+}
+class Item {
+}
+class Lendable {
+}
+class Person {
+}
+abstract class library::Addressable {
+  + address : str
+}
+abstract class library::AudioVisualItem {
+  + damaged : bool
+  + minutesLength : int
+  + title : str
+}
+class library::Book {
+  + category : str
+  + pages : int
+  + title : str
+}
+class library::BookOnTape {
+}
+class library::Borrower {
+}
+abstract class library::CirculatingItem {
+}
+class library::Employee {
+}
+abstract class library::Item {
+  + publicationDate : date
+}
+abstract class library::Lendable {
+  + copies : int
+}
+class library::Library {
+  + name : str
+  + people : str
+}
+abstract class library::Periodical {
+  + issuesPerYear : int
+  + title : str
+}
+class library::Person {
+  + firstName : str
+  + lastName : str
+}
+class library::VideoCassette {
+}
+class library::Writer {
+  + name : str
+}
+Addressable <|-- library::Library
+Addressable <|-- library::Person
+AudioVisualItem <|-- library::BookOnTape
+AudioVisualItem <|-- library::VideoCassette
+CirculatingItem <|-- library::AudioVisualItem
+CirculatingItem <|-- library::Book
+Item <|-- library::CirculatingItem
+Item <|-- library::Periodical
+Lendable <|-- library::CirculatingItem
+Person <|-- library::Borrower
+Person <|-- library::Employee
+Person <|-- library::Writer
+library::Writer "1..1" -- "1..1" library::Book : author0
+library::Writer "0..1" -- "1..1" library::BookOnTape : author18
+library::Book "0..9999" -- "1..1" library::Writer : books15
+library::Book "0..9999" --* "1..1" library::Library : books8
+library::Lendable "0..9999" -- "1..1" library::Borrower : borrowed23
+library::Borrower "0..9999" -- "1..1" library::Lendable : borrowers16
+library::Borrower "0..9999" --* "1..1" library::Library : borrowers4
+library::Library "0..9999" --* "1..1" library::Library : branches11
+library::Person "0..9999" -- "1..1" library::VideoCassette : cast21
+library::Employee "0..9999" --* "1..1" library::Library : employees2
+library::Employee "1..1" -- "0..1" library::Employee : manager25
+library::Library "0..1" -- "1..1" library::Library : parentBranch13
+library::BookOnTape "1..1" -- "0..1" library::Person : reader17
+library::Library "1..1" *-- "0..9999" library::Item : stock6
+library::Library "1..1" *-- "0..9999" library::Writer : writers1
+@enduml

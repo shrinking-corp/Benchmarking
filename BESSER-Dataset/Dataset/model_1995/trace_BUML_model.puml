@@ -1,0 +1,33 @@
+@startuml
+enum ReferenceMappingType {
+  MAPPED
+  NONE
+  TRANSLATED
+}
+class trace::AttributeMapping {
+}
+class trace::ClassMapping {
+}
+class trace::EAttribute {
+}
+class trace::EClass {
+}
+class trace::EReference {
+}
+class trace::EStructuralFeature {
+}
+class trace::ReferenceMapping {
+  + type : str
+}
+class trace::Trace {
+}
+trace::Trace "1..1" *-- "0..9999" trace::AttributeMapping : attributeMappings1
+trace::ClassMapping "0..9999" --* "1..1" trace::Trace : classMappings0
+trace::AttributeMapping "1..1" -- "1..1" trace::EAttribute : image12
+trace::EStructuralFeature "1..1" -- "1..1" trace::ReferenceMapping : image17
+trace::EClass "1..1" -- "1..1" trace::ClassMapping : image7
+trace::EAttribute "1..1" -- "1..1" trace::AttributeMapping : proto10
+trace::EReference "1..1" -- "1..1" trace::ReferenceMapping : proto15
+trace::ClassMapping "1..1" -- "1..1" trace::EClass : proto5
+trace::ReferenceMapping "0..9999" --* "1..1" trace::Trace : referenceMappings3
+@enduml

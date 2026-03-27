@@ -1,0 +1,107 @@
+@startuml
+class SrcConnection {
+}
+class SrcElement {
+}
+class SrcLocatedElement {
+}
+class SrcNamedElement {
+}
+class TrgArc {
+}
+class TrgElement {
+}
+class TrgLocatedElement {
+}
+class TrgNamedElement {
+}
+class jointPackage::Grafcet2PetriNet::JointMM {
+}
+abstract class jointPackage::Grafcet2PetriNet::SrcConnection {
+}
+abstract class jointPackage::Grafcet2PetriNet::SrcElement {
+}
+class jointPackage::Grafcet2PetriNet::SrcGrafcet {
+}
+abstract class jointPackage::Grafcet2PetriNet::SrcLocatedElement {
+  + location : str
+}
+abstract class jointPackage::Grafcet2PetriNet::SrcNamedElement {
+  + name : str
+}
+class jointPackage::Grafcet2PetriNet::SrcStep {
+  + action : str
+  + isActive : bool
+  + isInitial : bool
+}
+class jointPackage::Grafcet2PetriNet::SrcStepToTransition {
+}
+class jointPackage::Grafcet2PetriNet::SrcTransition {
+  + condition : str
+}
+class jointPackage::Grafcet2PetriNet::SrcTransitionToStep {
+}
+abstract class jointPackage::Grafcet2PetriNet::TrgArc {
+  + weight : int
+}
+abstract class jointPackage::Grafcet2PetriNet::TrgElement {
+}
+abstract class jointPackage::Grafcet2PetriNet::TrgLocatedElement {
+  + location : str
+}
+abstract class jointPackage::Grafcet2PetriNet::TrgNamedElement {
+  + name : str
+}
+class jointPackage::Grafcet2PetriNet::TrgPetriNet {
+}
+class jointPackage::Grafcet2PetriNet::TrgPlace {
+}
+class jointPackage::Grafcet2PetriNet::TrgPlaceToTransition {
+}
+class jointPackage::Grafcet2PetriNet::TrgTransition {
+}
+class jointPackage::Grafcet2PetriNet::TrgTransitionToPlace {
+}
+SrcConnection <|-- jointPackage::Grafcet2PetriNet::SrcStepToTransition
+SrcConnection <|-- jointPackage::Grafcet2PetriNet::SrcTransitionToStep
+SrcElement <|-- jointPackage::Grafcet2PetriNet::SrcStep
+SrcElement <|-- jointPackage::Grafcet2PetriNet::SrcTransition
+SrcLocatedElement <|-- jointPackage::Grafcet2PetriNet::SrcNamedElement
+SrcNamedElement <|-- jointPackage::Grafcet2PetriNet::SrcConnection
+SrcNamedElement <|-- jointPackage::Grafcet2PetriNet::SrcElement
+SrcNamedElement <|-- jointPackage::Grafcet2PetriNet::SrcGrafcet
+TrgArc <|-- jointPackage::Grafcet2PetriNet::TrgPlaceToTransition
+TrgArc <|-- jointPackage::Grafcet2PetriNet::TrgTransitionToPlace
+TrgElement <|-- jointPackage::Grafcet2PetriNet::TrgPlace
+TrgElement <|-- jointPackage::Grafcet2PetriNet::TrgTransition
+TrgLocatedElement <|-- jointPackage::Grafcet2PetriNet::TrgNamedElement
+TrgNamedElement <|-- jointPackage::Grafcet2PetriNet::TrgArc
+TrgNamedElement <|-- jointPackage::Grafcet2PetriNet::TrgElement
+TrgNamedElement <|-- jointPackage::Grafcet2PetriNet::TrgPetriNet
+jointPackage::Grafcet2PetriNet::TrgArc "0..9999" --* "1..1" jointPackage::Grafcet2PetriNet::TrgPetriNet : arcs26
+jointPackage::Grafcet2PetriNet::SrcConnection "0..9999" --* "1..1" jointPackage::Grafcet2PetriNet::SrcGrafcet : connections4
+jointPackage::Grafcet2PetriNet::TrgPetriNet "1..1" *-- "0..9999" jointPackage::Grafcet2PetriNet::TrgElement : elements25
+jointPackage::Grafcet2PetriNet::SrcElement "0..9999" --* "1..1" jointPackage::Grafcet2PetriNet::SrcGrafcet : elements3
+jointPackage::Grafcet2PetriNet::SrcStep "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::SrcStepToTransition : from17
+jointPackage::Grafcet2PetriNet::SrcTransition "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::SrcTransitionToStep : from19
+jointPackage::Grafcet2PetriNet::TrgPlace "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::TrgPlaceToTransition : from42
+jointPackage::Grafcet2PetriNet::TrgTransition "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::TrgTransitionToPlace : from44
+jointPackage::Grafcet2PetriNet::SrcGrafcet "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::SrcConnection : grafcet15
+jointPackage::Grafcet2PetriNet::SrcElement "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::SrcGrafcet : grafcet6
+jointPackage::Grafcet2PetriNet::TrgTransitionToPlace "0..9999" -- "1..1" jointPackage::Grafcet2PetriNet::TrgPlace : incomingArc30
+jointPackage::Grafcet2PetriNet::TrgTransition "1..1" -- "1..9999" jointPackage::Grafcet2PetriNet::TrgPlaceToTransition : incomingArc34
+jointPackage::Grafcet2PetriNet::SrcTransitionToStep "0..9999" -- "1..1" jointPackage::Grafcet2PetriNet::SrcStep : incomingConnections7
+jointPackage::Grafcet2PetriNet::SrcStepToTransition "0..9999" -- "1..1" jointPackage::Grafcet2PetriNet::SrcTransition : incomingConnections9
+jointPackage::Grafcet2PetriNet::TrgPetriNet "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::TrgElement : net28
+jointPackage::Grafcet2PetriNet::TrgPetriNet "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::TrgArc : net40
+jointPackage::Grafcet2PetriNet::TrgPlaceToTransition "0..9999" -- "1..1" jointPackage::Grafcet2PetriNet::TrgPlace : outgoingArc32
+jointPackage::Grafcet2PetriNet::TrgTransitionToPlace "1..9999" -- "1..1" jointPackage::Grafcet2PetriNet::TrgTransition : outgoingArc37
+jointPackage::Grafcet2PetriNet::SrcTransitionToStep "0..9999" -- "1..1" jointPackage::Grafcet2PetriNet::SrcTransition : outgoingConnections12
+jointPackage::Grafcet2PetriNet::SrcStepToTransition "0..9999" -- "1..1" jointPackage::Grafcet2PetriNet::SrcStep : outgoingConnections8
+jointPackage::Grafcet2PetriNet::JointMM "1..1" *-- "1..1" jointPackage::Grafcet2PetriNet::SrcGrafcet : sourceRoot0
+jointPackage::Grafcet2PetriNet::TrgPetriNet "1..1" --* "1..1" jointPackage::Grafcet2PetriNet::JointMM : targetRoot1
+jointPackage::Grafcet2PetriNet::SrcStepToTransition "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::SrcTransition : to18
+jointPackage::Grafcet2PetriNet::SrcStep "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::SrcTransitionToStep : to22
+jointPackage::Grafcet2PetriNet::TrgPlaceToTransition "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::TrgTransition : to43
+jointPackage::Grafcet2PetriNet::TrgPlace "1..1" -- "1..1" jointPackage::Grafcet2PetriNet::TrgTransitionToPlace : to47
+@enduml

@@ -1,0 +1,82 @@
+@startuml
+enum Alignment {
+  BOTTOM
+  CENTER
+  LEFT
+  MIDDLE
+  RIGHT
+  TOP
+  UNSPECIFIED
+}
+class Rectangle {
+}
+class Widget {
+}
+class sofiagraphics::Color {
+  + a : float
+  + b : float
+  + g : float
+  + r : float
+}
+class sofiagraphics::Dimension {
+  + height : float
+  + hrelative : bool
+  + noresize : bool
+  + width : float
+  + wrelative : bool
+}
+class sofiagraphics::Ellipse {
+}
+class sofiagraphics::Gesture {
+}
+class sofiagraphics::Point {
+  + x : float
+  + xrelative : bool
+  + y : float
+  + yrelative : bool
+}
+class sofiagraphics::Polyline {
+}
+class sofiagraphics::Rectangle {
+}
+class sofiagraphics::RoundedRectangle {
+}
+class sofiagraphics::Scene {
+}
+class sofiagraphics::Style {
+  + filled : bool
+  + lineWidth : float
+}
+class sofiagraphics::Text {
+  + attributeName : str
+  + halign : str
+  + text : str
+  + valign : str
+}
+abstract class sofiagraphics::Widget {
+  + gestureOnly : bool
+  + portYPosition : float
+}
+Rectangle <|-- sofiagraphics::RoundedRectangle
+Widget <|-- sofiagraphics::Ellipse
+Widget <|-- sofiagraphics::Polyline
+Widget <|-- sofiagraphics::Rectangle
+Widget <|-- sofiagraphics::Text
+sofiagraphics::Color "0..1" -- "1..1" sofiagraphics::Style : bgcolor35
+sofiagraphics::Widget "1..1" *-- "0..9999" sofiagraphics::Widget : child4
+sofiagraphics::Color "0..9999" --* "1..1" sofiagraphics::Scene : color25
+sofiagraphics::Dimension "1..1" --* "1..1" sofiagraphics::RoundedRectangle : corner10
+sofiagraphics::Dimension "0..1" --* "1..1" sofiagraphics::Widget : dim8
+sofiagraphics::Dimension "0..9999" --* "1..1" sofiagraphics::Scene : dimension22
+sofiagraphics::Style "1..1" -- "0..1" sofiagraphics::Color : fgcolor32
+sofiagraphics::Gesture "0..9999" --* "1..1" sofiagraphics::Scene : gesture30
+sofiagraphics::Widget "0..9999" --* "1..1" sofiagraphics::Scene : object14
+sofiagraphics::Widget "0..1" -- "1..1" sofiagraphics::Widget : parent1
+sofiagraphics::Polyline "1..1" *-- "2..9999" sofiagraphics::Point : point12
+sofiagraphics::Point "0..9999" --* "1..1" sofiagraphics::Scene : point19
+sofiagraphics::Point "0..1" --* "1..1" sofiagraphics::Widget : pos6
+sofiagraphics::Scene "1..1" -- "0..1" sofiagraphics::Widget : root16
+sofiagraphics::Style "0..1" -- "1..1" sofiagraphics::Widget : style2
+sofiagraphics::Scene "1..1" *-- "0..9999" sofiagraphics::Style : style27
+sofiagraphics::Widget "0..9999" -- "1..1" sofiagraphics::Gesture : widget38
+@enduml

@@ -1,0 +1,189 @@
+@startuml
+enum AdditiveOperator {
+  minus
+  plus
+}
+class ArgumentExpression {
+}
+enum AssignmentOperator {
+  addAssign
+  andAssign
+  assign
+  divAssign
+  leftShiftAssign
+  modAssign
+  multAssign
+  orAssign
+  rightShiftAssign
+  subAssign
+  xorAssign
+}
+class BinaryExpression {
+}
+enum BitwiseOperator {
+  and
+  or
+  xor
+}
+class Expression {
+}
+class Literal {
+}
+enum LogicalOperator {
+  and
+  not
+  or
+}
+enum MultiplicativeOperator {
+  div
+  mod
+  mul
+}
+enum RelationalOperator {
+  equals
+  greater
+  greaterEqual
+  notEquals
+  smaller
+  smallerEqual
+}
+enum ShiftOperator {
+  left
+  right
+}
+class UnaryExpression {
+}
+enum UnaryOperator {
+  complement
+  negative
+  positive
+}
+abstract class expressions::ArgumentExpression {
+}
+class expressions::AssignmentExpression {
+  + operator : str
+}
+abstract class expressions::BinaryExpression {
+  + getOperator() : str
+}
+class expressions::BitwiseAndExpression {
+}
+class expressions::BitwiseOrExpression {
+}
+class expressions::BitwiseXorExpression {
+}
+class expressions::BoolLiteral {
+  + value : bool
+}
+class expressions::ConditionalExpression {
+}
+class expressions::DoubleLiteral {
+  + value : float
+}
+class expressions::EObject {
+}
+class expressions::ElementReferenceExpression {
+  + arrayAccess : bool
+  + operationCall : bool
+}
+abstract class expressions::Expression {
+}
+class expressions::FeatureCall {
+  + arrayAccess : bool
+  + operationCall : bool
+}
+class expressions::FloatLiteral {
+  + value : float
+}
+class expressions::HexLiteral {
+  + value : int
+}
+class expressions::IntLiteral {
+  + value : int
+}
+abstract class expressions::Literal {
+}
+class expressions::LogicalAndExpression {
+}
+class expressions::LogicalNotExpression {
+}
+class expressions::LogicalOrExpression {
+}
+class expressions::LogicalRelationExpression {
+  + operator : str
+}
+class expressions::NullLiteral {
+}
+class expressions::NumericalAddSubtractExpression {
+  + operator : str
+}
+class expressions::NumericalMultiplyDivideExpression {
+  + operator : str
+}
+class expressions::NumericalUnaryExpression {
+  + operator : str
+}
+class expressions::ParenthesizedExpression {
+}
+class expressions::PrimitiveValueExpression {
+}
+class expressions::ShiftExpression {
+  + operator : str
+}
+class expressions::StringLiteral {
+  + value : str
+}
+class expressions::Type {
+}
+class expressions::TypeCastExpression {
+}
+abstract class expressions::UnaryExpression {
+  + getOperator() : str
+}
+ArgumentExpression <|-- expressions::ElementReferenceExpression
+ArgumentExpression <|-- expressions::FeatureCall
+BinaryExpression <|-- expressions::BitwiseAndExpression
+BinaryExpression <|-- expressions::BitwiseOrExpression
+BinaryExpression <|-- expressions::BitwiseXorExpression
+BinaryExpression <|-- expressions::LogicalAndExpression
+BinaryExpression <|-- expressions::LogicalOrExpression
+BinaryExpression <|-- expressions::LogicalRelationExpression
+BinaryExpression <|-- expressions::NumericalAddSubtractExpression
+BinaryExpression <|-- expressions::NumericalMultiplyDivideExpression
+BinaryExpression <|-- expressions::ShiftExpression
+Expression <|-- expressions::ArgumentExpression
+Expression <|-- expressions::AssignmentExpression
+Expression <|-- expressions::BinaryExpression
+Expression <|-- expressions::ConditionalExpression
+Expression <|-- expressions::ParenthesizedExpression
+Expression <|-- expressions::PrimitiveValueExpression
+Expression <|-- expressions::TypeCastExpression
+Expression <|-- expressions::UnaryExpression
+Literal <|-- expressions::BoolLiteral
+Literal <|-- expressions::DoubleLiteral
+Literal <|-- expressions::FloatLiteral
+Literal <|-- expressions::HexLiteral
+Literal <|-- expressions::IntLiteral
+Literal <|-- expressions::NullLiteral
+Literal <|-- expressions::StringLiteral
+UnaryExpression <|-- expressions::LogicalNotExpression
+UnaryExpression <|-- expressions::NumericalUnaryExpression
+expressions::Expression "0..9999" --* "1..1" expressions::ArgumentExpression : args6
+expressions::Expression "0..9999" --* "1..1" expressions::FeatureCall : arraySelector26
+expressions::Expression "0..9999" --* "1..1" expressions::ElementReferenceExpression : arraySelector31
+expressions::Expression "0..1" --* "1..1" expressions::ConditionalExpression : condition13
+expressions::AssignmentExpression "1..1" *-- "0..1" expressions::Expression : expression10
+expressions::Expression "0..1" --* "1..1" expressions::ParenthesizedExpression : expression34
+expressions::Expression "0..1" --* "1..1" expressions::ConditionalExpression : falseCase18
+expressions::EObject "0..1" -- "1..1" expressions::FeatureCall : feature24
+expressions::Expression "0..1" --* "1..1" expressions::BinaryExpression : leftOperand0
+expressions::Expression "0..1" --* "1..1" expressions::TypeCastExpression : operand36
+expressions::Expression "0..1" --* "1..1" expressions::UnaryExpression : operand4
+expressions::Expression "0..1" --* "1..1" expressions::FeatureCall : owner22
+expressions::ElementReferenceExpression "1..1" -- "0..1" expressions::EObject : reference29
+expressions::BinaryExpression "1..1" *-- "0..1" expressions::Expression : rightOperand1
+expressions::Expression "0..1" --* "1..1" expressions::ConditionalExpression : trueCase15
+expressions::Type "0..1" -- "1..1" expressions::TypeCastExpression : type38
+expressions::PrimitiveValueExpression "1..1" *-- "0..1" expressions::Literal : value21
+expressions::Expression "0..1" --* "1..1" expressions::AssignmentExpression : varRef8
+@enduml

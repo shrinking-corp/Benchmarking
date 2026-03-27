@@ -1,0 +1,50 @@
+@startuml
+class NamedElement {
+}
+class TypedElement {
+}
+class classdiagram::Association {
+}
+class classdiagram::Attribute {
+}
+class classdiagram::Class {
+}
+class classdiagram::ClassDiagram {
+}
+class classdiagram::Dependency {
+  + name : str
+}
+abstract class classdiagram::NamedElement {
+  + name : str
+}
+class classdiagram::Operation {
+}
+abstract class classdiagram::TypedElement {
+  + public : bool
+}
+NamedElement <|-- classdiagram::Association
+NamedElement <|-- classdiagram::Class
+NamedElement <|-- classdiagram::TypedElement
+TypedElement <|-- classdiagram::Attribute
+TypedElement <|-- classdiagram::Operation
+classdiagram::Association "0..9999" --* "1..1" classdiagram::ClassDiagram : associations3
+classdiagram::Class "1..1" -- "0..9999" classdiagram::Association : associationsAsSource22
+classdiagram::Association "0..9999" -- "1..1" classdiagram::Class : associationsAsTarget23
+classdiagram::ClassDiagram "1..1" *-- "0..9999" classdiagram::Class : classes0
+classdiagram::Class "1..1" -- "1..1" classdiagram::Dependency : dependee29
+classdiagram::ClassDiagram "1..1" *-- "0..9999" classdiagram::Dependency : dependencies1
+classdiagram::Dependency "0..9999" -- "1..1" classdiagram::Class : dependenciesAsDependee8
+classdiagram::Dependency "0..9999" -- "1..1" classdiagram::Class : dependenciesAsDepender9
+classdiagram::Class "1..1" -- "1..1" classdiagram::Dependency : depender31
+classdiagram::Class "0..9999" -- "1..1" classdiagram::Class : nested14
+classdiagram::Class "1..1" -- "0..1" classdiagram::Class : nestedIn12
+classdiagram::Class "1..1" *-- "0..9999" classdiagram::Attribute : ownedAttributes5
+classdiagram::Operation "0..9999" --* "1..1" classdiagram::Class : ownedOperations6
+classdiagram::Attribute "1..1" -- "1..1" classdiagram::Class : owner25
+classdiagram::Class "1..1" -- "1..1" classdiagram::Operation : owner27
+classdiagram::Class "1..1" -- "1..1" classdiagram::Association : source35
+classdiagram::Class "0..9999" -- "1..1" classdiagram::Class : subclasses20
+classdiagram::Class "0..1" -- "1..1" classdiagram::Class : superclass17
+classdiagram::Class "1..1" -- "1..1" classdiagram::Association : target37
+classdiagram::TypedElement "1..1" -- "1..1" classdiagram::Class : type33
+@enduml

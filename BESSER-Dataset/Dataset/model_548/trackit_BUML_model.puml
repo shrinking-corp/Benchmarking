@@ -1,0 +1,80 @@
+@startuml
+class Identifiable {
+}
+enum IssueStatus {
+  CLOSED
+  OPEN
+}
+enum IssueType {
+  BUG
+  DUPLICATE
+  ENHANCEMENT
+  HELP_REQUIRED
+  WONT_FIX
+}
+enum VersionStatus {
+  COMPLETE
+  IN_PROGRESS
+}
+class trackit::Comment {
+  + dateCreated : str
+  + text : str
+}
+abstract class trackit::Identifiable {
+  + uuid : str
+}
+class trackit::Issue {
+  + dateCreated : str
+  + description : str
+  + issueType : str
+  + status : str
+  + title : str
+}
+class trackit::IssueTracker {
+  + projectName : str
+}
+class trackit::Member {
+  + firstName : str
+  + fullName : str
+  + lastName : str
+}
+class trackit::Product {
+  + name : str
+}
+class trackit::Team {
+  + teamName : str
+}
+class trackit::Version {
+  + name : str
+  + status : str
+}
+Identifiable <|-- trackit::Comment
+Identifiable <|-- trackit::Issue
+Identifiable <|-- trackit::Member
+Identifiable <|-- trackit::Product
+Identifiable <|-- trackit::Team
+Identifiable <|-- trackit::Version
+trackit::Member "0..9999" -- "1..1" trackit::Issue : assignedTo26
+trackit::Member "0..1" -- "1..1" trackit::Issue : author22
+trackit::Comment "1..1" -- "0..1" trackit::Member : author42
+trackit::Issue "1..1" -- "0..9999" trackit::Issue : blockers24
+trackit::Issue "0..9999" -- "1..1" trackit::Issue : blocking38
+trackit::Comment "0..9999" --* "1..1" trackit::Issue : comments28
+trackit::Comment "0..9999" -- "1..1" trackit::Member : comments8
+trackit::Issue "1..1" -- "0..9999" trackit::Issue : dependencies34
+trackit::Issue "0..9999" -- "1..1" trackit::Issue : duplicateOf31
+trackit::Issue "0..1" -- "1..1" trackit::Comment : issue40
+trackit::Issue "0..9999" -- "1..1" trackit::Version : issues20
+trackit::IssueTracker "1..1" *-- "0..9999" trackit::Issue : issues3
+trackit::Issue "0..9999" -- "1..1" trackit::Member : issuesAssigned10
+trackit::Issue "0..9999" -- "1..1" trackit::Member : issuesCreated7
+trackit::Team "1..1" -- "1..9999" trackit::Member : members12
+trackit::Member "1..9999" --* "1..1" trackit::IssueTracker : members5
+trackit::Comment "0..1" -- "1..1" trackit::Comment : parent46
+trackit::Product "0..1" -- "1..1" trackit::Version : product17
+trackit::IssueTracker "1..1" *-- "1..9999" trackit::Product : products1
+trackit::Comment "0..9999" --* "1..1" trackit::Comment : replies49
+trackit::Team "1..9999" --* "1..1" trackit::IssueTracker : teams0
+trackit::Product "1..1" *-- "1..9999" trackit::Version : version15
+trackit::Version "1..9999" -- "1..1" trackit::Issue : versionsAffected36
+@enduml

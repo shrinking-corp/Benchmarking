@@ -1,0 +1,64 @@
+@startuml
+class ControlTask {
+}
+class NamedElement {
+}
+class Task {
+}
+abstract class mission::ControlTask {
+}
+class mission::Coordinate {
+  + altitude : float
+  + latitude : float
+  + longitude : float
+}
+class mission::Drone {
+  + returnHome : bool
+  + type : str
+}
+class mission::Fork {
+}
+class mission::Join {
+}
+abstract class mission::LineTask {
+}
+class mission::Mission {
+  + crs : str
+}
+abstract class mission::NamedElement {
+  + name : str
+}
+abstract class mission::PointTask {
+}
+abstract class mission::PolygonTask {
+}
+class mission::Swarm {
+}
+abstract class mission::Task {
+}
+class mission::TaskDependency {
+}
+ControlTask <|-- mission::Fork
+ControlTask <|-- mission::Join
+NamedElement <|-- mission::Drone
+NamedElement <|-- mission::Mission
+NamedElement <|-- mission::Task
+NamedElement <|-- mission::TaskDependency
+Task <|-- mission::ControlTask
+Task <|-- mission::LineTask
+Task <|-- mission::PointTask
+Task <|-- mission::PolygonTask
+mission::Drone "1..9999" --* "1..1" mission::Swarm : drones5
+mission::Task "1..1" -- "1..1" mission::TaskDependency : from11
+mission::Drone "1..1" *-- "1..1" mission::Coordinate : home7
+mission::PolygonTask "1..1" *-- "1..1" mission::Coordinate : initialPosition19
+mission::Coordinate "1..1" --* "1..1" mission::LineTask : initialPosition26
+mission::Coordinate "1..1" --* "1..1" mission::PointTask : point22
+mission::Coordinate "1..9999" --* "1..1" mission::LineTask : points24
+mission::Coordinate "0..1" --* "1..1" mission::ControlTask : referencePosition9
+mission::Coordinate "3..9999" --* "1..1" mission::PolygonTask : shell17
+mission::Swarm "1..1" --* "1..1" mission::Mission : swarm3
+mission::TaskDependency "0..9999" --* "1..1" mission::Mission : taskDependencies1
+mission::Mission "1..1" *-- "1..9999" mission::Task : tasks0
+mission::Task "1..1" -- "1..1" mission::TaskDependency : to14
+@enduml

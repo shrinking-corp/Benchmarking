@@ -1,0 +1,71 @@
+@startuml
+class BinaryExpression {
+}
+class IntegerExpression {
+}
+class UnaryExpression {
+}
+class core::Add {
+}
+class core::And {
+}
+class core::BinaryExpression {
+}
+class core::Conditional {
+}
+class core::Div {
+}
+class core::Equal {
+}
+abstract class core::Filter {
+}
+class core::Greater {
+}
+abstract class core::IntegerExpression {
+}
+class core::IntegerLiteral {
+  + val : int
+}
+class core::Lower {
+}
+class core::Minus {
+}
+class core::Mod {
+}
+class core::Mult {
+}
+class core::Not {
+}
+class core::Or {
+}
+class core::Rule {
+}
+class core::UMinus {
+}
+class core::UnaryExpression {
+}
+BinaryExpression <|-- core::Add
+BinaryExpression <|-- core::And
+BinaryExpression <|-- core::Div
+BinaryExpression <|-- core::Equal
+BinaryExpression <|-- core::Greater
+BinaryExpression <|-- core::Lower
+BinaryExpression <|-- core::Minus
+BinaryExpression <|-- core::Mod
+BinaryExpression <|-- core::Mult
+BinaryExpression <|-- core::Or
+IntegerExpression <|-- core::BinaryExpression
+IntegerExpression <|-- core::Conditional
+IntegerExpression <|-- core::IntegerLiteral
+IntegerExpression <|-- core::UnaryExpression
+UnaryExpression <|-- core::Not
+UnaryExpression <|-- core::UMinus
+core::IntegerExpression "1..1" --* "1..1" core::Conditional : condition10
+core::Rule "1..1" *-- "1..1" core::IntegerExpression : evaluatedVal0
+core::Filter "0..1" --* "1..1" core::Rule : filter1
+core::IntegerExpression "1..1" --* "1..1" core::Conditional : ifFalseExpression7
+core::IntegerExpression "1..1" --* "1..1" core::Conditional : ifTrueExpression5
+core::BinaryExpression "1..1" *-- "1..1" core::IntegerExpression : left13
+core::IntegerExpression "1..1" --* "1..1" core::BinaryExpression : right15
+core::UnaryExpression "1..1" *-- "1..1" core::IntegerExpression : target3
+@enduml

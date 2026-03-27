@@ -1,0 +1,186 @@
+@startuml
+class AttributeRef {
+}
+class ClassRef {
+}
+class ClassifierCS {
+}
+class ClassifierRef {
+}
+class DataTypeOrEnumCS {
+}
+class DataTypeRef {
+}
+class ModelElementCS {
+}
+class NamedElementCS {
+}
+class ReferenceRef {
+}
+class StructuralFeatureCS {
+}
+class TypedElementCS {
+}
+class oclinEcoreCST::AnnotationCS {
+  + idSource : str
+  + stringSource : str
+}
+class oclinEcoreCST::AttributeCS {
+}
+class oclinEcoreCST::AttributeCSRef {
+}
+abstract class oclinEcoreCST::AttributeRef {
+}
+class oclinEcoreCST::ClassCS {
+}
+class oclinEcoreCST::ClassCSRef {
+}
+abstract class oclinEcoreCST::ClassRef {
+}
+abstract class oclinEcoreCST::ClassifierCS {
+  + instanceClassName : str
+  + qualifiers : str
+}
+class oclinEcoreCST::ClassifierCSRef {
+}
+abstract class oclinEcoreCST::ClassifierRef {
+}
+class oclinEcoreCST::ConstraintCS {
+  + stereotype : str
+}
+class oclinEcoreCST::DataTypeCS {
+}
+class oclinEcoreCST::DataTypeCSRef {
+}
+abstract class oclinEcoreCST::DataTypeOrEnumCS {
+}
+abstract class oclinEcoreCST::DataTypeRef {
+}
+class oclinEcoreCST::DetailCS {
+  + idName : str
+  + stringName : str
+  + value : str
+}
+class oclinEcoreCST::DocumentCS {
+}
+class oclinEcoreCST::EAttribute {
+}
+class oclinEcoreCST::EAttributeRef {
+}
+class oclinEcoreCST::EClass {
+}
+class oclinEcoreCST::EClassRef {
+}
+class oclinEcoreCST::EClassifier {
+}
+class oclinEcoreCST::EClassifierRef {
+}
+class oclinEcoreCST::EDataType {
+}
+class oclinEcoreCST::EDataTypeRef {
+}
+class oclinEcoreCST::EReference {
+}
+class oclinEcoreCST::EReferenceRef {
+}
+class oclinEcoreCST::EnumCS {
+}
+class oclinEcoreCST::EnumLiteralCS {
+  + value : int
+}
+class oclinEcoreCST::ImportCS {
+  + importedNamespace : str
+}
+abstract class oclinEcoreCST::ModelElementCS {
+}
+abstract class oclinEcoreCST::NamedElementCS {
+  + name : str
+}
+class oclinEcoreCST::OclExpressionCS {
+}
+class oclinEcoreCST::OperationCS {
+}
+class oclinEcoreCST::PackageCS {
+}
+class oclinEcoreCST::ParameterCS {
+}
+class oclinEcoreCST::ReferenceCS {
+  + containment : bool
+}
+class oclinEcoreCST::ReferenceCSRef {
+}
+abstract class oclinEcoreCST::ReferenceRef {
+}
+abstract class oclinEcoreCST::StructuralFeatureCS {
+}
+abstract class oclinEcoreCST::TypeParameterCS {
+}
+abstract class oclinEcoreCST::TypedElementCS {
+  + lower : int
+  + multiplicity : str
+  + qualifiers : str
+  + upper : int
+}
+AttributeRef <|-- oclinEcoreCST::AttributeCSRef
+AttributeRef <|-- oclinEcoreCST::EAttributeRef
+ClassRef <|-- oclinEcoreCST::ClassCSRef
+ClassRef <|-- oclinEcoreCST::EClassRef
+ClassifierCS <|-- oclinEcoreCST::ClassCS
+ClassifierCS <|-- oclinEcoreCST::DataTypeOrEnumCS
+ClassifierRef <|-- oclinEcoreCST::ClassRef
+ClassifierRef <|-- oclinEcoreCST::ClassifierCSRef
+ClassifierRef <|-- oclinEcoreCST::DataTypeRef
+ClassifierRef <|-- oclinEcoreCST::EClassifierRef
+DataTypeOrEnumCS <|-- oclinEcoreCST::DataTypeCS
+DataTypeOrEnumCS <|-- oclinEcoreCST::EnumCS
+DataTypeRef <|-- oclinEcoreCST::DataTypeCSRef
+DataTypeRef <|-- oclinEcoreCST::EDataTypeRef
+ModelElementCS <|-- oclinEcoreCST::AnnotationCS
+ModelElementCS <|-- oclinEcoreCST::NamedElementCS
+NamedElementCS <|-- oclinEcoreCST::ClassifierCS
+NamedElementCS <|-- oclinEcoreCST::ConstraintCS
+NamedElementCS <|-- oclinEcoreCST::EnumLiteralCS
+NamedElementCS <|-- oclinEcoreCST::PackageCS
+NamedElementCS <|-- oclinEcoreCST::TypeParameterCS
+NamedElementCS <|-- oclinEcoreCST::TypedElementCS
+ReferenceRef <|-- oclinEcoreCST::EReferenceRef
+ReferenceRef <|-- oclinEcoreCST::ReferenceCSRef
+StructuralFeatureCS <|-- oclinEcoreCST::AttributeCS
+StructuralFeatureCS <|-- oclinEcoreCST::ReferenceCS
+TypedElementCS <|-- oclinEcoreCST::OperationCS
+TypedElementCS <|-- oclinEcoreCST::ParameterCS
+TypedElementCS <|-- oclinEcoreCST::StructuralFeatureCS
+oclinEcoreCST::ModelElementCS "1..1" *-- "0..9999" oclinEcoreCST::AnnotationCS : annotations26
+oclinEcoreCST::PackageCS "1..1" *-- "0..9999" oclinEcoreCST::ClassifierCS : classifiers38
+oclinEcoreCST::ConstraintCS "0..9999" --* "1..1" oclinEcoreCST::OperationCS : constraints28
+oclinEcoreCST::StructuralFeatureCS "1..1" *-- "0..9999" oclinEcoreCST::ConstraintCS : constraints49
+oclinEcoreCST::ConstraintCS "0..9999" --* "1..1" oclinEcoreCST::ClassifierCS : constraints9
+oclinEcoreCST::DetailCS "0..9999" --* "1..1" oclinEcoreCST::AnnotationCS : details0
+oclinEcoreCST::OperationCS "1..1" *-- "0..9999" oclinEcoreCST::ClassifierRef : exceptions36
+oclinEcoreCST::OclExpressionCS "0..1" --* "1..1" oclinEcoreCST::ConstraintCS : expr14
+oclinEcoreCST::ClassifierRef "0..9999" --* "1..1" oclinEcoreCST::TypeParameterCS : extends54
+oclinEcoreCST::ImportCS "0..9999" --* "1..1" oclinEcoreCST::DocumentCS : imports17
+oclinEcoreCST::AttributeRef "0..9999" --* "1..1" oclinEcoreCST::ReferenceCS : keys45
+oclinEcoreCST::EnumLiteralCS "0..9999" --* "1..1" oclinEcoreCST::EnumCS : literals25
+oclinEcoreCST::OperationCS "0..9999" --* "1..1" oclinEcoreCST::ClassCS : operations3
+oclinEcoreCST::ReferenceRef "0..1" --* "1..1" oclinEcoreCST::ReferenceCS : opposite44
+oclinEcoreCST::PackageCS "0..9999" --* "1..1" oclinEcoreCST::DocumentCS : packages18
+oclinEcoreCST::ParameterCS "0..9999" --* "1..1" oclinEcoreCST::OperationCS : parameters31
+oclinEcoreCST::AttributeCS "0..1" -- "1..1" oclinEcoreCST::AttributeCSRef : ref1
+oclinEcoreCST::ClassifierCSRef "1..1" -- "0..1" oclinEcoreCST::ClassifierCS : ref12
+oclinEcoreCST::DataTypeCSRef "1..1" -- "0..1" oclinEcoreCST::DataTypeOrEnumCS : ref16
+oclinEcoreCST::EAttribute "0..1" -- "1..1" oclinEcoreCST::EAttributeRef : ref20
+oclinEcoreCST::EClass "0..1" -- "1..1" oclinEcoreCST::EClassRef : ref21
+oclinEcoreCST::EClassifier "0..1" -- "1..1" oclinEcoreCST::EClassifierRef : ref22
+oclinEcoreCST::EDataType "0..1" -- "1..1" oclinEcoreCST::EDataTypeRef : ref23
+oclinEcoreCST::EReference "0..1" -- "1..1" oclinEcoreCST::EReferenceRef : ref24
+oclinEcoreCST::ReferenceCSRef "1..1" -- "0..1" oclinEcoreCST::ReferenceCS : ref47
+oclinEcoreCST::ClassCSRef "1..1" -- "0..1" oclinEcoreCST::ClassCS : ref7
+oclinEcoreCST::StructuralFeatureCS "0..9999" --* "1..1" oclinEcoreCST::ClassCS : structuralFeatures5
+oclinEcoreCST::PackageCS "0..9999" --* "1..1" oclinEcoreCST::PackageCS : subpackages42
+oclinEcoreCST::TypeParameterCS "1..1" *-- "0..1" oclinEcoreCST::ClassifierRef : super57
+oclinEcoreCST::ClassCS "1..1" *-- "0..9999" oclinEcoreCST::ClassRef : superTypes2
+oclinEcoreCST::ClassifierRef "0..1" --* "1..1" oclinEcoreCST::TypedElementCS : type52
+oclinEcoreCST::TypeParameterCS "0..9999" --* "1..1" oclinEcoreCST::ClassifierCS : typeParameters10
+oclinEcoreCST::TypeParameterCS "0..9999" --* "1..1" oclinEcoreCST::OperationCS : typeParameters33
+@enduml

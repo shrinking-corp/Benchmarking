@@ -1,0 +1,170 @@
+@startuml
+class Action {
+}
+class MTReference {
+}
+class OpType {
+}
+class Operation {
+}
+class Reference {
+}
+class State {
+}
+class Trigger {
+}
+class Value {
+}
+class WritableReference {
+}
+abstract class restbehavior::Action {
+}
+class restbehavior::ActionSequence {
+}
+class restbehavior::Attribute {
+}
+class restbehavior::AttributeReference {
+}
+class restbehavior::BehaviorSpecification {
+}
+class restbehavior::BinOpType {
+}
+class restbehavior::BinaryOperation {
+}
+class restbehavior::Condition {
+}
+class restbehavior::ConditionalAction {
+}
+class restbehavior::Constant {
+  + stringRepresentation : str
+}
+class restbehavior::CreateAction {
+}
+class restbehavior::Creator {
+}
+class restbehavior::DataType {
+}
+class restbehavior::DeletedState {
+}
+class restbehavior::ExternalLink {
+}
+class restbehavior::ExternalLinkReference {
+}
+class restbehavior::InternalLink {
+}
+class restbehavior::InternalLinkReference {
+}
+class restbehavior::InternalMessage {
+  + name : str
+}
+class restbehavior::ListAddAction {
+}
+class restbehavior::ListRemoveAction {
+}
+class restbehavior::MTLinkReference {
+}
+abstract class restbehavior::MTReference {
+}
+class restbehavior::MediaType {
+}
+class restbehavior::MediaTypeElement {
+}
+class restbehavior::MediaTypeLink {
+}
+class restbehavior::MessageAction {
+}
+class restbehavior::Metadata {
+}
+class restbehavior::Method {
+}
+class restbehavior::MtElementReference {
+}
+abstract class restbehavior::OpType {
+  + name : str
+}
+abstract class restbehavior::Operation {
+}
+class restbehavior::Parameter {
+}
+abstract class restbehavior::Reference {
+}
+class restbehavior::Representation {
+}
+class restbehavior::ReturnAction {
+}
+class restbehavior::State {
+  + name : str
+}
+class restbehavior::StatusCode {
+  + number : int
+}
+class restbehavior::Transition {
+}
+abstract class restbehavior::Trigger {
+}
+class restbehavior::UpdateAction {
+}
+abstract class restbehavior::Value {
+}
+abstract class restbehavior::WritableReference {
+}
+Action <|-- restbehavior::ActionSequence
+Action <|-- restbehavior::ConditionalAction
+Action <|-- restbehavior::CreateAction
+Action <|-- restbehavior::ListAddAction
+Action <|-- restbehavior::ListRemoveAction
+Action <|-- restbehavior::MessageAction
+Action <|-- restbehavior::ReturnAction
+Action <|-- restbehavior::UpdateAction
+MTReference <|-- restbehavior::MTLinkReference
+MTReference <|-- restbehavior::MtElementReference
+OpType <|-- restbehavior::BinOpType
+Operation <|-- restbehavior::BinaryOperation
+Reference <|-- restbehavior::MTReference
+Reference <|-- restbehavior::WritableReference
+State <|-- restbehavior::DeletedState
+Trigger <|-- restbehavior::InternalMessage
+Value <|-- restbehavior::Constant
+Value <|-- restbehavior::Operation
+Value <|-- restbehavior::Reference
+WritableReference <|-- restbehavior::AttributeReference
+WritableReference <|-- restbehavior::ExternalLinkReference
+WritableReference <|-- restbehavior::InternalLinkReference
+restbehavior::BehaviorSpecification "1..1" *-- "0..1" restbehavior::Action : action5
+restbehavior::Condition "1..1" --* "1..1" restbehavior::ConditionalAction : actionCondition29
+restbehavior::Action "0..1" --* "1..1" restbehavior::ConditionalAction : actionIfFalse34
+restbehavior::ConditionalAction "1..1" *-- "0..1" restbehavior::Action : actionIfTrue31
+restbehavior::Action "1..9999" --* "1..1" restbehavior::ActionSequence : actionelements39
+restbehavior::Condition "0..1" --* "1..1" restbehavior::Transition : condition21
+restbehavior::Value "1..1" --* "1..1" restbehavior::Condition : conditionExpr26
+restbehavior::Creator "1..1" -- "1..9999" restbehavior::MediaType : consumedMT0
+restbehavior::BehaviorSpecification "1..1" --* "1..1" restbehavior::Creator : createbehavior3
+restbehavior::Creator "0..1" -- "1..1" restbehavior::CreateAction : creator37
+restbehavior::Parameter "0..9999" --* "1..1" restbehavior::Creator : creatorParams1
+restbehavior::BehaviorSpecification "0..1" --* "1..1" restbehavior::Transition : effect23
+restbehavior::UpdateAction "1..1" *-- "1..1" restbehavior::WritableReference : elementForUpdate41
+restbehavior::BehaviorSpecification "0..1" --* "1..1" restbehavior::State : entering7
+restbehavior::Value "1..1" --* "1..1" restbehavior::BinaryOperation : firstOp51
+restbehavior::DataType "1..1" -- "1..1" restbehavior::BinOpType : firstOpType60
+restbehavior::State "1..1" *-- "0..1" restbehavior::BehaviorSpecification : leaving9
+restbehavior::InternalMessage "1..1" -- "1..1" restbehavior::MessageAction : message28
+restbehavior::Metadata "0..9999" --* "1..1" restbehavior::ReturnAction : metadata46
+restbehavior::Value "1..1" --* "1..1" restbehavior::UpdateAction : newValue42
+restbehavior::BinOpType "1..1" -- "1..1" restbehavior::BinaryOperation : optype56
+restbehavior::Attribute "1..1" -- "1..1" restbehavior::AttributeReference : referencedAttribute66
+restbehavior::ExternalLink "0..1" -- "1..1" restbehavior::ExternalLinkReference : referencedExternalLink73
+restbehavior::InternalLinkReference "1..1" -- "1..1" restbehavior::InternalLink : referencedLink67
+restbehavior::MtElementReference "1..1" -- "1..1" restbehavior::MediaTypeElement : referencedMTElement72
+restbehavior::MediaTypeLink "1..1" -- "1..1" restbehavior::MTLinkReference : referencedMTLink71
+restbehavior::WritableReference "0..1" --* "1..1" restbehavior::InternalLinkReference : referencedReference68
+restbehavior::Representation "0..1" --* "1..1" restbehavior::ReturnAction : representation48
+restbehavior::DataType "1..1" -- "1..1" restbehavior::OpType : resultType58
+restbehavior::Value "1..1" --* "1..1" restbehavior::BinaryOperation : secondOp53
+restbehavior::DataType "1..1" -- "1..1" restbehavior::BinOpType : secondOpType63
+restbehavior::ReturnAction "1..1" *-- "1..1" restbehavior::StatusCode : status45
+restbehavior::State "1..1" -- "0..9999" restbehavior::Method : supportedMethods14
+restbehavior::Transition "1..1" -- "1..1" restbehavior::State : targetState18
+restbehavior::Transition "0..9999" --* "1..1" restbehavior::State : transitions12
+restbehavior::Trigger "1..9999" --* "1..1" restbehavior::Transition : trigger16
+restbehavior::Constant "1..1" -- "1..1" restbehavior::DataType : type50
+@enduml

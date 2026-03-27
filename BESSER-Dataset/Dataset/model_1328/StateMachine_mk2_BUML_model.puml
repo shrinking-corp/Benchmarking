@@ -1,0 +1,38 @@
+@startuml
+class State {
+}
+class statemachine::mk2::Composite::state {
+}
+class statemachine::mk2::Event {
+  + description : str
+}
+class statemachine::mk2::Final::state {
+}
+class statemachine::mk2::SimpleState {
+}
+abstract class statemachine::mk2::State {
+  + name : str
+}
+class statemachine::mk2::StateMachine {
+}
+class statemachine::mk2::Transition {
+  + name : str
+}
+State <|-- statemachine::mk2::Composite::state
+State <|-- statemachine::mk2::Final::state
+State <|-- statemachine::mk2::SimpleState
+statemachine::mk2::Transition "0..9999" -- "1..1" statemachine::mk2::Event : causes23
+statemachine::mk2::StateMachine "1..1" *-- "0..1" statemachine::mk2::Composite::state : composite_states9
+statemachine::mk2::StateMachine "1..1" *-- "0..9999" statemachine::mk2::Event : events5
+statemachine::mk2::Final::state "0..1" --* "1..1" statemachine::mk2::StateMachine : final_states7
+statemachine::mk2::Transition "0..9999" -- "1..1" statemachine::mk2::State : incoming12
+statemachine::mk2::State "1..1" -- "1..1" statemachine::mk2::StateMachine : initial_state1
+statemachine::mk2::Transition "0..9999" -- "1..1" statemachine::mk2::State : outgoing11
+statemachine::mk2::Event "1..1" -- "0..9999" statemachine::mk2::State : possible_states20
+statemachine::mk2::SimpleState "0..9999" --* "1..1" statemachine::mk2::StateMachine : simple_states0
+statemachine::mk2::State "1..1" -- "1..1" statemachine::mk2::Transition : source14
+statemachine::mk2::State "0..9999" -- "1..1" statemachine::mk2::Composite::state : substates26
+statemachine::mk2::State "1..1" -- "1..1" statemachine::mk2::Transition : target15
+statemachine::mk2::Transition "0..9999" --* "1..1" statemachine::mk2::StateMachine : transitions3
+statemachine::mk2::Event "0..9999" -- "1..1" statemachine::mk2::Transition : triggers17
+@enduml

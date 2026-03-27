@@ -1,0 +1,33 @@
+@startuml
+class ResourceTreeNode {
+}
+class SemanticResourceDB::ResourceTreeNode {
+  + dynamicContentProviderID : str
+  + exists : bool
+  + localOnly : bool
+  + name : str
+  + path : str
+  + persistentProperties : str
+  + queryPart : str
+  + remoteURI : str
+  + sessionProperties : str
+  + templateID : str
+  + type : str
+}
+class SemanticResourceDB::SemanticDB {
+}
+class SemanticResourceDB::TreeRoot {
+  + rootURI : str
+}
+enum TreeNodeType {
+  FILE
+  FOLDER
+  PROJECT
+  UNKNOWN
+}
+ResourceTreeNode <|-- SemanticResourceDB::TreeRoot
+SemanticResourceDB::ResourceTreeNode "0..9999" --* "1..1" SemanticResourceDB::ResourceTreeNode : children1
+SemanticResourceDB::ResourceTreeNode "0..1" -- "1..1" SemanticResourceDB::ResourceTreeNode : parent3
+SemanticResourceDB::TreeRoot "1..1" -- "0..1" SemanticResourceDB::SemanticDB : parentDB6
+SemanticResourceDB::TreeRoot "0..9999" --* "1..1" SemanticResourceDB::SemanticDB : roots5
+@enduml

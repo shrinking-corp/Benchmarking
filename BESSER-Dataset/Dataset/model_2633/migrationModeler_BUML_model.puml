@@ -1,0 +1,246 @@
+@startuml
+class AbstractNode {
+}
+class AbstractNodeRepresentation {
+}
+class AbstractRepresentation {
+}
+enum AlignmentKind {
+  HORIZONTAL
+  SQUARE
+  VERTICAL
+}
+enum BackgroundStyle {
+  GradientLeftToRight
+  GradientTopToBottom
+  Liquid
+}
+class BasicLabelStyle {
+}
+class BorderedStyle {
+}
+enum BundledImageShape {
+  dot
+  ring
+  square
+  stroke
+  triangle
+}
+enum ContainerShape {
+  parallelogram
+}
+class ContainerStyle {
+}
+enum FontFormat {
+  bold
+  bold_italic
+  italic
+  normal
+}
+class GraphicalElement {
+}
+enum LabelAlignment {
+  CENTER
+  LEFT
+  RIGHT
+}
+enum LabelPosition {
+  border
+  node
+}
+class LabelStyle {
+}
+class NodeStyle {
+}
+class Representation {
+}
+enum RoutingStyle {
+  Manhattan
+  Straight
+  Tree
+}
+abstract class migrationmodeler::AbstractNode {
+}
+abstract class migrationmodeler::AbstractNodeRepresentation {
+}
+abstract class migrationmodeler::AbstractRepresentation {
+  + displayed : bool
+  + hidden : bool
+  + mappingId : str
+  + pinned : bool
+}
+class migrationmodeler::BasicLabelStyle {
+  + iconPath : str
+  + labelFormat : str
+  + labelSize : int
+  + showIcon : bool
+}
+class migrationmodeler::Bordered {
+}
+class migrationmodeler::BorderedRepresentation {
+}
+class migrationmodeler::BorderedStyle {
+  + borderSize : int
+}
+class migrationmodeler::BundledImage {
+  + shape : str
+}
+class migrationmodeler::Color {
+  + blue : int
+  + green : int
+  + red : int
+}
+class migrationmodeler::Container {
+}
+class migrationmodeler::ContainerRepresentation {
+  + autoSized : bool
+}
+class migrationmodeler::ContainerStyle {
+}
+class migrationmodeler::Diagram {
+}
+class migrationmodeler::Dot {
+}
+class migrationmodeler::Edge {
+}
+class migrationmodeler::EdgeRepresentation {
+}
+class migrationmodeler::EdgeStyle {
+  + routingStyle : str
+}
+class migrationmodeler::Ellipse {
+  + horizontalDiameter : str
+  + verticalDiameter : str
+}
+class migrationmodeler::Filter {
+  + activated : bool
+  + id : str
+}
+class migrationmodeler::FlatContainerStyle {
+  + backgroundStyle : str
+}
+class migrationmodeler::GaugeCompositeStyle {
+  + alignment : str
+}
+class migrationmodeler::GaugeSection {
+  + label : str
+  + max : str
+  + min : str
+  + value : str
+}
+abstract class migrationmodeler::GraphicalElement {
+  + id : str
+}
+class migrationmodeler::LabelStyle {
+  + labelAlignment : str
+}
+class migrationmodeler::Layer {
+  + activated : bool
+  + id : str
+}
+class migrationmodeler::Layout {
+  + height : int
+  + width : int
+  + x : int
+  + y : int
+}
+class migrationmodeler::Lozenge {
+  + height : str
+  + width : str
+}
+class migrationmodeler::Node {
+}
+class migrationmodeler::NodeRepresentation {
+}
+class migrationmodeler::NodeStyle {
+  + hideLabelByDefault : bool
+  + labelPosition : str
+}
+class migrationmodeler::Note {
+}
+class migrationmodeler::Point {
+  + x : int
+  + y : int
+}
+abstract class migrationmodeler::Representation {
+  + name : str
+}
+class migrationmodeler::ShapeContainerStyle {
+  + shape : str
+}
+class migrationmodeler::Square {
+  + height : str
+  + width : str
+}
+class migrationmodeler::TestCase {
+}
+class migrationmodeler::WorkspaceImage {
+  + workspacePath : str
+}
+AbstractNodeRepresentation <|-- migrationmodeler::BorderedRepresentation
+AbstractNodeRepresentation <|-- migrationmodeler::NodeRepresentation
+AbstractNode <|-- migrationmodeler::Bordered
+AbstractNode <|-- migrationmodeler::Node
+AbstractRepresentation <|-- migrationmodeler::AbstractNodeRepresentation
+AbstractRepresentation <|-- migrationmodeler::ContainerRepresentation
+AbstractRepresentation <|-- migrationmodeler::EdgeRepresentation
+BasicLabelStyle <|-- migrationmodeler::LabelStyle
+BorderedStyle <|-- migrationmodeler::ContainerStyle
+BorderedStyle <|-- migrationmodeler::NodeStyle
+ContainerStyle <|-- migrationmodeler::FlatContainerStyle
+ContainerStyle <|-- migrationmodeler::ShapeContainerStyle
+ContainerStyle <|-- migrationmodeler::WorkspaceImage
+GraphicalElement <|-- migrationmodeler::AbstractNode
+GraphicalElement <|-- migrationmodeler::Container
+GraphicalElement <|-- migrationmodeler::Edge
+LabelStyle <|-- migrationmodeler::ContainerStyle
+LabelStyle <|-- migrationmodeler::NodeStyle
+NodeStyle <|-- migrationmodeler::BundledImage
+NodeStyle <|-- migrationmodeler::Dot
+NodeStyle <|-- migrationmodeler::Ellipse
+NodeStyle <|-- migrationmodeler::GaugeCompositeStyle
+NodeStyle <|-- migrationmodeler::Lozenge
+NodeStyle <|-- migrationmodeler::Note
+NodeStyle <|-- migrationmodeler::Square
+NodeStyle <|-- migrationmodeler::WorkspaceImage
+Representation <|-- migrationmodeler::Diagram
+migrationmodeler::Dot "1..1" *-- "0..1" migrationmodeler::Color : backgroundColor57
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::GaugeSection : backgroundColor59
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::FlatContainerStyle : backgroundColor64
+migrationmodeler::ShapeContainerStyle "1..1" *-- "1..1" migrationmodeler::Color : backgroundColor69
+migrationmodeler::BasicLabelStyle "0..1" --* "1..1" migrationmodeler::EdgeStyle : beginLabelStyle43
+migrationmodeler::Point "0..9999" --* "1..1" migrationmodeler::EdgeRepresentation : bendpoints31
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::BorderedStyle : borderColor52
+migrationmodeler::BorderedRepresentation "1..9999" --* "1..1" migrationmodeler::Bordered : borderedRepresentations11
+migrationmodeler::Bordered "0..9999" --* "1..1" migrationmodeler::AbstractNodeRepresentation : bordereds35
+migrationmodeler::EdgeStyle "1..1" *-- "0..1" migrationmodeler::BasicLabelStyle : centerLabelStyle45
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::EdgeStyle : color41
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::Square : color71
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::Ellipse : color73
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::Lozenge : color75
+migrationmodeler::Color "1..1" --* "1..1" migrationmodeler::BundledImage : color77
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::Note : color81
+migrationmodeler::Container "1..1" *-- "1..9999" migrationmodeler::ContainerRepresentation : containerRepresentations12
+migrationmodeler::Container "0..9999" --* "1..1" migrationmodeler::Diagram : containers0
+migrationmodeler::EdgeRepresentation "1..9999" --* "1..1" migrationmodeler::Edge : edgeRepresentations16
+migrationmodeler::Edge "0..9999" --* "1..1" migrationmodeler::Diagram : edges3
+migrationmodeler::GraphicalElement "0..9999" --* "1..1" migrationmodeler::Container : elements14
+migrationmodeler::BasicLabelStyle "0..1" --* "1..1" migrationmodeler::EdgeStyle : endLabelStyle48
+migrationmodeler::Diagram "1..1" *-- "0..9999" migrationmodeler::Filter : filters5
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::GaugeSection : foregroundColor61
+migrationmodeler::FlatContainerStyle "1..1" *-- "0..1" migrationmodeler::Color : foregroundColor66
+migrationmodeler::Color "0..1" --* "1..1" migrationmodeler::BasicLabelStyle : labelColor54
+migrationmodeler::Layer "0..9999" --* "1..1" migrationmodeler::Diagram : layers7
+migrationmodeler::Layout "0..1" --* "1..1" migrationmodeler::AbstractRepresentation : layout24
+migrationmodeler::NodeRepresentation "1..9999" --* "1..1" migrationmodeler::Node : nodeRepresentations9
+migrationmodeler::Node "0..9999" --* "1..1" migrationmodeler::Diagram : nodes1
+migrationmodeler::EdgeStyle "0..1" --* "1..1" migrationmodeler::EdgeRepresentation : ownedStyle33
+migrationmodeler::AbstractNodeRepresentation "1..1" *-- "0..1" migrationmodeler::NodeStyle : ownedStyle37
+migrationmodeler::ContainerStyle "0..1" --* "1..1" migrationmodeler::ContainerRepresentation : ownedStyle39
+migrationmodeler::Representation "0..9999" --* "1..1" migrationmodeler::TestCase : representations51
+migrationmodeler::GaugeSection "0..9999" --* "1..1" migrationmodeler::GaugeCompositeStyle : sections79
+migrationmodeler::GraphicalElement "1..1" -- "1..1" migrationmodeler::Edge : source18
+migrationmodeler::GraphicalElement "0..1" -- "1..1" migrationmodeler::EdgeRepresentation : source25
+migrationmodeler::Edge "1..1" -- "1..1" migrationmodeler::GraphicalElement : target21
+migrationmodeler::EdgeRepresentation "1..1" -- "0..1" migrationmodeler::GraphicalElement : target28
+@enduml

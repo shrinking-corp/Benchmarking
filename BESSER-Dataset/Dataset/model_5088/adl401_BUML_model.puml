@@ -1,0 +1,36 @@
+@startuml
+class Interface {
+}
+class adl401::Binding {
+}
+class adl401::Component {
+  + name : str
+}
+class adl401::Content {
+  + expression : str
+  + language : str
+}
+class adl401::EClass0 {
+  + EAttribute0 : str
+}
+abstract class adl401::Interface {
+  + name : str
+  + signature : str
+}
+class adl401::Provided {
+}
+class adl401::Required {
+}
+Interface <|-- adl401::Provided
+Interface <|-- adl401::Required
+adl401::EClass0 "0..9999" --* "1..1" adl401::Content : EReference08
+adl401::Binding "0..9999" --* "1..1" adl401::Interface : bindings0
+adl401::Content "0..1" --* "1..1" adl401::Component : content15
+adl401::Component "0..1" -- "1..1" adl401::Content : contentParent7
+adl401::EClass0 "1..1" *-- "0..9999" adl401::EClass0 : erefs017
+adl401::Interface "0..1" -- "1..1" adl401::Binding : from1
+adl401::Provided "0..9999" --* "1..1" adl401::Component : providedInterfaces13
+adl401::Component "1..1" *-- "0..9999" adl401::Required : requiredInterfaces11
+adl401::Component "0..9999" --* "1..1" adl401::Component : subComponents10
+adl401::Binding "1..1" -- "0..1" adl401::Interface : to4
+@enduml

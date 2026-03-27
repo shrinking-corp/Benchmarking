@@ -1,0 +1,112 @@
+@startuml
+class Expr {
+}
+class Statement {
+}
+class graph::And {
+}
+class graph::AssignStmt {
+}
+class graph::BoolConstant {
+  + value : str
+}
+class graph::Comparison {
+  + op : str
+}
+class graph::Declaration {
+  + name : str
+  + type : str
+}
+class graph::Edge {
+}
+class graph::Expr {
+}
+class graph::GraphConstant {
+}
+class graph::IfStmt {
+}
+class graph::IntConstant {
+  + value : int
+}
+class graph::MoveStmt {
+}
+class graph::MulOrDiv {
+  + op : str
+}
+class graph::Not {
+}
+class graph::Or {
+}
+class graph::ParticleConstant {
+}
+class graph::PathExistence {
+}
+class graph::PlusOrMin {
+  + op : str
+}
+class graph::PrintStmt {
+}
+class graph::Program {
+}
+class graph::Statement {
+}
+class graph::StringConstant {
+  + value : str
+}
+class graph::VariableRef {
+}
+class graph::Vertex {
+  + name : str
+}
+class graph::WhileStmt {
+}
+Expr <|-- graph::And
+Expr <|-- graph::BoolConstant
+Expr <|-- graph::Comparison
+Expr <|-- graph::GraphConstant
+Expr <|-- graph::IntConstant
+Expr <|-- graph::MulOrDiv
+Expr <|-- graph::Not
+Expr <|-- graph::Or
+Expr <|-- graph::ParticleConstant
+Expr <|-- graph::PathExistence
+Expr <|-- graph::PlusOrMin
+Expr <|-- graph::StringConstant
+Expr <|-- graph::VariableRef
+Statement <|-- graph::AssignStmt
+Statement <|-- graph::IfStmt
+Statement <|-- graph::MoveStmt
+Statement <|-- graph::PrintStmt
+Statement <|-- graph::WhileStmt
+graph::Expr "0..1" --* "1..1" graph::Not : Expr58
+graph::Declaration "0..9999" --* "1..1" graph::Program : declarations0
+graph::Vertex "0..1" -- "1..1" graph::Edge : dest25
+graph::Edge "0..9999" --* "1..1" graph::GraphConstant : edges64
+graph::Statement "0..9999" --* "1..1" graph::IfStmt : elseStmts14
+graph::Expr "0..1" --* "1..1" graph::WhileStmt : expr17
+graph::Expr "0..1" --* "1..1" graph::AssignStmt : expr5
+graph::PrintStmt "1..1" *-- "0..1" graph::Expr : expr7
+graph::IfStmt "1..1" *-- "0..1" graph::Expr : expr9
+graph::Expr "0..1" --* "1..1" graph::ParticleConstant : graph67
+graph::Expr "0..1" --* "1..1" graph::Or : left28
+graph::And "1..1" *-- "0..1" graph::Expr : left33
+graph::Expr "0..1" --* "1..1" graph::PathExistence : left38
+graph::Expr "0..1" --* "1..1" graph::Comparison : left43
+graph::Expr "0..1" --* "1..1" graph::PlusOrMin : left48
+graph::Expr "0..1" --* "1..1" graph::MulOrDiv : left53
+graph::Expr "0..1" --* "1..1" graph::Or : right30
+graph::Expr "0..1" --* "1..1" graph::And : right35
+graph::Expr "0..1" --* "1..1" graph::PathExistence : right40
+graph::Comparison "1..1" *-- "0..1" graph::Expr : right45
+graph::Expr "0..1" --* "1..1" graph::PlusOrMin : right50
+graph::Expr "0..1" --* "1..1" graph::MulOrDiv : right55
+graph::Vertex "0..1" -- "1..1" graph::Edge : source24
+graph::Program "1..1" *-- "0..9999" graph::Statement : stmts1
+graph::Statement "0..9999" --* "1..1" graph::IfStmt : stmts11
+graph::WhileStmt "1..1" *-- "0..9999" graph::Statement : stmts19
+graph::Declaration "0..1" -- "1..1" graph::MoveStmt : var22
+graph::Declaration "0..1" -- "1..1" graph::AssignStmt : var3
+graph::VariableRef "1..1" -- "0..1" graph::Declaration : variable60
+graph::ParticleConstant "1..1" -- "0..1" graph::Vertex : vertex69
+graph::Vertex "0..9999" --* "1..1" graph::GraphConstant : vertices62
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class lazy::Book {
+  + category : str
+  + pages : str
+  + title : str
+}
+class lazy::Library {
+  + name : str
+}
+class lazy::Writer {
+  + name : str
+}
+lazy::Writer "1..1" -- "1..1" lazy::Book : author0
+lazy::Book "0..9999" --* "1..1" lazy::Library : books2
+lazy::Book "0..9999" -- "1..1" lazy::Writer : books4
+lazy::Library "1..1" *-- "0..9999" lazy::Writer : writers1
+@enduml

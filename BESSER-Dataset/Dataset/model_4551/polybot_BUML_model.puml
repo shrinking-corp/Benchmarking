@@ -1,0 +1,52 @@
+@startuml
+class Instruction {
+}
+class Move {
+}
+class polybot::Bot {
+}
+class polybot::Forward {
+}
+class polybot::GoTo {
+}
+class polybot::IfObjectDetected {
+}
+class polybot::IfObstacleDetected {
+}
+abstract class polybot::Instruction {
+}
+class polybot::Left {
+}
+abstract class polybot::Move {
+  + duration : int
+  + speed : int
+}
+class polybot::Point {
+  + x : int
+  + y : int
+}
+class polybot::Reverse {
+}
+class polybot::Right {
+}
+class polybot::TakeDropObject {
+}
+class polybot::While {
+  + nb : int
+}
+Instruction <|-- polybot::IfObjectDetected
+Instruction <|-- polybot::IfObstacleDetected
+Instruction <|-- polybot::Move
+Instruction <|-- polybot::TakeDropObject
+Instruction <|-- polybot::While
+Move <|-- polybot::Forward
+Move <|-- polybot::GoTo
+Move <|-- polybot::Left
+Move <|-- polybot::Reverse
+Move <|-- polybot::Right
+polybot::Bot "1..1" *-- "0..1" polybot::Point : initialPosition0
+polybot::Instruction "0..9999" --* "1..1" polybot::Bot : instructionList1
+polybot::Instruction "0..9999" --* "1..1" polybot::IfObjectDetected : listOfInstructions3
+polybot::Instruction "0..9999" --* "1..1" polybot::IfObstacleDetected : listOfInstructions5
+polybot::Instruction "0..9999" --* "1..1" polybot::While : listOfInstructions7
+@enduml

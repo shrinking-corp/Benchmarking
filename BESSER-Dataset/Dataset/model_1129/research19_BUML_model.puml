@@ -1,0 +1,147 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class StateMachineObject {
+}
+enum StateType {
+  final
+  initial
+  ongoing
+}
+class research19::Action {
+  + actionLabel : str
+  + actionStatement : str
+}
+class research19::Collaboration {
+  + ratio : int
+}
+abstract class research19::Counted {
+  + id : int
+}
+class research19::Keyword {
+  + word : str
+}
+class research19::KnowledgeManager {
+}
+abstract class research19::Labelled {
+  + lname : str
+}
+abstract class research19::Named {
+  + name : str
+}
+class research19::Paper {
+}
+class research19::PaperKeyword {
+  + weight : int
+}
+class research19::Paragraph {
+  + content : str
+}
+class research19::Phase {
+  + name : str
+}
+class research19::Position {
+  + description : str
+}
+class research19::Progress {
+  + percent : int
+}
+class research19::PublicationProcess {
+  + maxTime : int
+  + minTime : int
+}
+class research19::PublicationStatus {
+  + label : str
+}
+class research19::PublicationStructure {
+}
+class research19::PublicationSystem {
+}
+class research19::Researcher {
+  + forName : str
+  + name : str
+}
+class research19::Review {
+  + date : date
+}
+class research19::ReviewNote {
+  + content : str
+}
+class research19::Skill {
+  + description : str
+}
+class research19::State {
+  + id : int
+  + kind : str
+  + name : str
+}
+abstract class research19::StateMachineObject {
+  + label : str
+}
+class research19::StateMachineVariable {
+}
+class research19::Transition {
+  + guardExpression : str
+  + guardLabel : str
+}
+class research19::Write {
+  + timeSpent : int
+}
+Counted <|-- research19::Paragraph
+Labelled <|-- research19::Progress
+Labelled <|-- research19::Review
+Labelled <|-- research19::Write
+Named <|-- research19::Keyword
+Named <|-- research19::KnowledgeManager
+Named <|-- research19::Paper
+Named <|-- research19::Paragraph
+Named <|-- research19::Position
+Named <|-- research19::PublicationProcess
+Named <|-- research19::PublicationStructure
+Named <|-- research19::PublicationSystem
+Named <|-- research19::ReviewNote
+StateMachineObject <|-- research19::State
+StateMachineObject <|-- research19::Transition
+research19::Keyword "0..9999" --* "1..1" research19::KnowledgeManager : allkeywords55
+research19::Researcher "0..9999" -- "1..1" research19::Paper : authors13
+research19::PublicationSystem "1..1" *-- "0..1" research19::PublicationStatus : behaviorView48
+research19::Paper "1..1" -- "0..1" research19::Paper : citedBy17
+research19::Paper "0..1" -- "1..1" research19::Collaboration : col_paper61
+research19::Collaboration "0..9999" --* "1..1" research19::Researcher : collaborations9
+research19::Keyword "0..1" -- "1..1" research19::PaperKeyword : keyword58
+research19::PaperKeyword "0..9999" --* "1..1" research19::Paper : keywords14
+research19::PublicationStructure "1..1" *-- "0..1" research19::KnowledgeManager : knowledgeMan38
+research19::Keyword "1..1" -- "0..9999" research19::Paper : kpapers53
+research19::StateMachineVariable "0..9999" --* "1..1" research19::PublicationStatus : machineVariables64
+research19::Action "0..1" -- "1..1" research19::Action : next83
+research19::Progress "1..1" -- "0..1" research19::Paper : paper25
+research19::Paper "0..9999" --* "1..1" research19::PublicationStructure : papers35
+research19::Write "1..1" -- "0..1" research19::Paragraph : paragraph27
+research19::Paragraph "0..9999" --* "1..1" research19::Paper : paragraphs11
+research19::Position "0..1" -- "1..1" research19::Position : parent51
+research19::Phase "0..9999" --* "1..1" research19::PublicationProcess : phases0
+research19::Position "0..9999" --* "1..1" research19::PublicationSystem : positions45
+research19::PublicationProcess "0..1" -- "1..1" research19::Progress : process23
+research19::PublicationProcess "0..1" --* "1..1" research19::PublicationSystem : processView40
+research19::Progress "0..9999" --* "1..1" research19::Paper : progress12
+research19::State "0..9999" --* "1..1" research19::PublicationStatus : pubStates66
+research19::Researcher "1..1" -- "0..9999" research19::Paper : res_papers4
+research19::Position "0..1" -- "1..1" research19::Researcher : res_position7
+research19::Researcher "0..9999" --* "1..1" research19::PublicationStructure : researchers33
+research19::ReviewNote "0..1" -- "1..1" research19::Review : reviewNote30
+research19::Review "0..9999" --* "1..1" research19::Researcher : reviews2
+research19::ReviewNote "0..9999" --* "1..1" research19::Paragraph : reviews21
+research19::Action "0..9999" --* "1..1" research19::State : s_actions79
+research19::Skill "0..9999" --* "1..1" research19::Researcher : skills5
+research19::State "0..1" -- "1..1" research19::Transition : source70
+research19::State "0..1" -- "1..1" research19::Paper : state19
+research19::PublicationStructure "0..1" --* "1..1" research19::PublicationSystem : structuralView42
+research19::Transition "1..1" *-- "0..9999" research19::Action : t_actions69
+research19::State "0..1" -- "1..1" research19::Transition : target73
+research19::Transition "0..9999" --* "1..1" research19::State : transitions76
+research19::Write "0..9999" --* "1..1" research19::Researcher : writes1
+@enduml

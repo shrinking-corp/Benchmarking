@@ -1,0 +1,25 @@
+@startuml
+class eMFProject::Command {
+  + code : str
+  + name : str
+}
+class eMFProject::Event {
+  + code : str
+  + name : str
+}
+class eMFProject::State {
+  + name : str
+}
+class eMFProject::Statemachine {
+}
+class eMFProject::Transition {
+}
+eMFProject::Command "0..9999" -- "1..1" eMFProject::State : actions8
+eMFProject::Statemachine "1..1" *-- "0..9999" eMFProject::Command : commands4
+eMFProject::Event "0..1" -- "1..1" eMFProject::Transition : event13
+eMFProject::Event "0..9999" --* "1..1" eMFProject::Statemachine : events0
+eMFProject::Event "0..9999" -- "1..1" eMFProject::Statemachine : resetEvents1
+eMFProject::State "0..1" -- "1..1" eMFProject::Transition : state16
+eMFProject::State "0..9999" --* "1..1" eMFProject::Statemachine : states6
+eMFProject::State "1..1" *-- "0..9999" eMFProject::Transition : transitions11
+@enduml

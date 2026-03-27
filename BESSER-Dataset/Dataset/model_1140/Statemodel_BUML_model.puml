@@ -1,0 +1,49 @@
+@startuml
+class Activity {
+}
+class Element {
+}
+enum StateType {
+  FINAL
+  INITIAL
+  NONE
+}
+class statemodel::Activity {
+}
+class statemodel::Annotation {
+}
+class statemodel::Element {
+}
+class statemodel::Entity {
+}
+class statemodel::Import {
+  + importURI : str
+}
+class statemodel::Model {
+}
+class statemodel::State {
+  + name : str
+  + type : str
+}
+class statemodel::Statemachine {
+}
+class statemodel::Transition {
+  + action : str
+  + guard : str
+}
+class statemodel::TransitionBlock {
+  + event : str
+}
+Activity <|-- statemodel::State
+Activity <|-- statemodel::TransitionBlock
+Element <|-- statemodel::State
+Element <|-- statemodel::Statemachine
+statemodel::Annotation "0..9999" --* "1..1" statemodel::Element : annotation3
+statemodel::Activity "0..9999" --* "1..1" statemodel::State : element8
+statemodel::Element "0..9999" --* "1..1" statemodel::Model : elements1
+statemodel::Model "1..1" *-- "0..9999" statemodel::Import : imports0
+statemodel::Statemachine "1..1" -- "0..1" statemodel::Entity : name5
+statemodel::State "0..1" -- "1..1" statemodel::Transition : state11
+statemodel::State "0..9999" --* "1..1" statemodel::Statemachine : state6
+statemodel::Transition "0..9999" --* "1..1" statemodel::TransitionBlock : transition10
+@enduml

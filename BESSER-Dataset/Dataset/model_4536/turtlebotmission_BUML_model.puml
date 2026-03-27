@@ -1,0 +1,47 @@
+@startuml
+class NamedElement {
+}
+class Task {
+}
+class turtlebotmission::Area {
+  + xmax : int
+  + ymax : int
+}
+class turtlebotmission::LineTask {
+}
+class turtlebotmission::Mission {
+}
+abstract class turtlebotmission::NamedElement {
+  + name : str
+}
+class turtlebotmission::ReturnToStartTask {
+}
+class turtlebotmission::ShortestPathTask {
+}
+abstract class turtlebotmission::Task {
+}
+class turtlebotmission::TurtleBot {
+}
+class turtlebotmission::WayPoint {
+  + coord_x : int
+  + coord_y : int
+}
+class turtlebotmission::WaypointType {
+}
+NamedElement <|-- turtlebotmission::Mission
+NamedElement <|-- turtlebotmission::TurtleBot
+NamedElement <|-- turtlebotmission::WayPoint
+NamedElement <|-- turtlebotmission::WaypointType
+Task <|-- turtlebotmission::LineTask
+Task <|-- turtlebotmission::ReturnToStartTask
+Task <|-- turtlebotmission::ShortestPathTask
+turtlebotmission::Area "1..1" --* "1..1" turtlebotmission::TurtleBot : area0
+turtlebotmission::WayPoint "1..1" -- "1..1" turtlebotmission::TurtleBot : bot_start3
+turtlebotmission::Mission "0..9999" --* "1..1" turtlebotmission::TurtleBot : missions8
+turtlebotmission::Mission "1..1" *-- "1..9999" turtlebotmission::Task : task13
+turtlebotmission::WayPoint "1..9999" -- "1..1" turtlebotmission::LineTask : waypoints15
+turtlebotmission::ShortestPathTask "1..1" -- "1..9999" turtlebotmission::WayPoint : waypoints17
+turtlebotmission::TurtleBot "1..1" *-- "1..9999" turtlebotmission::WayPoint : waypoints5
+turtlebotmission::WaypointType "1..9999" --* "1..1" turtlebotmission::TurtleBot : waypointtypes1
+turtlebotmission::WaypointType "1..9999" -- "1..1" turtlebotmission::WayPoint : waypointtypes10
+@enduml

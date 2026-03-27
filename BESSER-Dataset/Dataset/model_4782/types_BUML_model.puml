@@ -1,0 +1,89 @@
+@startuml
+class Feature {
+}
+class NamedElement {
+}
+class PackageMember {
+}
+class ParameterizedType {
+}
+class PrimitiveType {
+}
+class Type {
+}
+class TypeConstraint {
+}
+class TypedElement {
+}
+class types::ComplexType {
+  + getAllFeatures() : Feature
+}
+class types::EnumerationType {
+}
+class types::Enumerator {
+  + literalValue : str
+}
+class types::Event {
+}
+abstract class types::Feature {
+}
+class types::Operation {
+}
+class types::Package {
+}
+class types::PackageMember {
+}
+class types::Parameter {
+}
+class types::ParameterizedType {
+}
+class types::PrimitiveType {
+}
+class types::Property {
+}
+class types::RangeConstraint {
+  + lowerBound : str
+  + upperBound : str
+}
+abstract class types::Type {
+  + scheme : str
+}
+class types::TypeConstraint {
+  + value : str
+}
+class types::TypeParameter {
+}
+abstract class types::TypedElement {
+}
+Feature <|-- types::Event
+Feature <|-- types::Operation
+Feature <|-- types::Property
+NamedElement <|-- types::Enumerator
+NamedElement <|-- types::Feature
+NamedElement <|-- types::Package
+NamedElement <|-- types::PackageMember
+NamedElement <|-- types::Parameter
+PackageMember <|-- types::Type
+ParameterizedType <|-- types::ComplexType
+PrimitiveType <|-- types::EnumerationType
+TypeConstraint <|-- types::RangeConstraint
+TypedElement <|-- types::Feature
+TypedElement <|-- types::Parameter
+Type <|-- types::ParameterizedType
+Type <|-- types::PrimitiveType
+Type <|-- types::TypeParameter
+types::PrimitiveType "0..1" -- "1..1" types::PrimitiveType : baseType12
+types::TypeParameter "1..1" -- "0..1" types::Type : bound17
+types::TypeConstraint "0..9999" --* "1..1" types::Type : constraint1
+types::EnumerationType "1..1" *-- "0..9999" types::Enumerator : enumerator10
+types::Feature "0..9999" --* "1..1" types::ComplexType : features13
+types::Package "1..1" *-- "0..9999" types::PackageMember : member0
+types::EnumerationType "0..1" -- "1..1" types::Enumerator : owningEnumeration16
+types::Parameter "1..1" -- "0..1" types::Operation : owningOperation4
+types::ComplexType "0..1" -- "1..1" types::Feature : owningType2
+types::TypeParameter "0..9999" --* "1..1" types::ParameterizedType : parameter19
+types::Parameter "0..9999" --* "1..1" types::Operation : parameters3
+types::ComplexType "1..1" -- "0..9999" types::ComplexType : superTypes15
+types::Type "0..1" -- "1..1" types::TypedElement : type5
+types::Type "0..9999" -- "1..1" types::TypedElement : typeArguments7
+@enduml

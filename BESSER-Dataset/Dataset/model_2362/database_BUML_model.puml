@@ -1,0 +1,130 @@
+@startuml
+class AbstractTable {
+}
+class DatabaseElement {
+}
+class NamedElement {
+}
+class TableContainer {
+}
+class TypesLibraryUser {
+}
+abstract class database::AbstractTable {
+}
+class database::Column {
+  + autoincrement : bool
+  + defaultValue : str
+  + inForeignKey : bool
+  + inPrimaryKey : bool
+  + nullable : bool
+  + unique : bool
+  + addToPrimaryKey() : void
+  + addToUniqueIndex() : void
+  + removeFromPrimaryKey() : void
+  + removeFromUniqueIndex() : void
+}
+class database::Constraint {
+  + expression : str
+}
+class database::DataBase {
+  + url : str
+}
+abstract class database::DatabaseElement {
+  + ID : str
+  + comments : str
+  + techID : str
+}
+class database::ForeignKey {
+  + getSourceTable() : str
+  + getTargetTable() : str
+}
+class database::ForeignKeyElement {
+}
+class database::Index {
+  + cardinality : int
+  + indexType : str
+  + qualifier : str
+  + unique : bool
+}
+class database::IndexElement {
+  + asc : bool
+}
+abstract class database::NamedElement {
+  + name : str
+}
+class database::PrimaryKey {
+}
+class database::Schema {
+}
+class database::Sequence {
+  + cacheSize : str
+  + cycle : bool
+  + increment : str
+  + maxValue : str
+  + minValue : str
+  + start : str
+}
+class database::Table {
+}
+abstract class database::TableContainer {
+}
+class database::Type {
+}
+class database::UserDefinedTypesLibrary {
+}
+class database::View {
+  + query : str
+}
+class database::ViewElement {
+  + alias : str
+  + name : str
+}
+AbstractTable <|-- database::Table
+AbstractTable <|-- database::View
+DatabaseElement <|-- database::ForeignKeyElement
+DatabaseElement <|-- database::IndexElement
+DatabaseElement <|-- database::NamedElement
+NamedElement <|-- database::AbstractTable
+NamedElement <|-- database::Column
+NamedElement <|-- database::Constraint
+NamedElement <|-- database::ForeignKey
+NamedElement <|-- database::Index
+NamedElement <|-- database::PrimaryKey
+NamedElement <|-- database::Sequence
+NamedElement <|-- database::TableContainer
+TableContainer <|-- database::DataBase
+TableContainer <|-- database::Schema
+TypesLibraryUser <|-- database::DataBase
+database::Column "0..1" -- "1..1" database::IndexElement : column50
+database::ViewElement "0..9999" --* "1..1" database::View : columns20
+database::Column "0..9999" --* "1..1" database::Table : columns32
+database::PrimaryKey "1..1" -- "0..9999" database::Column : columns34
+database::Column "0..9999" -- "1..1" database::Sequence : columns54
+database::Constraint "0..9999" --* "1..1" database::Table : constraints28
+database::UserDefinedTypesLibrary "0..9999" --* "1..1" database::DataBase : defines1
+database::Index "1..1" *-- "0..9999" database::IndexElement : elements16
+database::ForeignKeyElement "0..9999" --* "1..1" database::ForeignKey : elements39
+database::Column "0..1" -- "1..1" database::ForeignKeyElement : fkColumn45
+database::ForeignKeyElement "0..9999" -- "1..1" database::Column : foreignKeyElements9
+database::Table "1..1" *-- "0..9999" database::ForeignKey : foreignKeys26
+database::ForeignKey "0..9999" -- "1..1" database::Column : foreignKeys7
+database::IndexElement "0..9999" -- "1..1" database::Column : indexElements5
+database::Index "0..9999" --* "1..1" database::Table : indexes30
+database::Index "0..9999" -- "1..1" database::Column : indexes4
+database::Table "1..1" -- "1..1" database::Column : owner14
+database::Index "1..1" -- "1..1" database::Table : owner18
+database::TableContainer "1..1" -- "1..1" database::AbstractTable : owner3
+database::Table "1..1" -- "1..1" database::PrimaryKey : owner36
+database::Table "1..1" -- "1..1" database::ForeignKey : owner41
+database::Table "1..1" -- "1..1" database::Constraint : owner52
+database::Column "0..1" -- "1..1" database::ForeignKeyElement : pkColumn47
+database::PrimaryKey "0..1" --* "1..1" database::Table : primaryKey24
+database::PrimaryKey "0..1" -- "1..1" database::Column : primaryKey6
+database::DataBase "1..1" *-- "0..9999" database::Schema : schemas0
+database::Column "1..1" -- "0..1" database::Sequence : sequence12
+database::Sequence "0..9999" --* "1..1" database::TableContainer : sequences58
+database::ViewElement "0..9999" --* "1..1" database::View : tables21
+database::TableContainer "1..1" *-- "0..9999" database::AbstractTable : tables56
+database::ForeignKey "1..1" -- "0..1" database::Table : target43
+database::Type "1..1" --* "1..1" database::Column : type10
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+enum FeatureKind {
+  attribute
+  containment
+  reference
+}
+class NamedElement {
+}
+class Type {
+}
+class coral::DataType {
+}
+class coral::Entity {
+  + abstract : bool
+}
+class coral::EntityModel {
+}
+class coral::Feature {
+  + kind : str
+}
+abstract class coral::NamedElement {
+  + name : str
+}
+abstract class coral::Type {
+}
+NamedElement <|-- coral::Feature
+NamedElement <|-- coral::Type
+Type <|-- coral::DataType
+Type <|-- coral::Entity
+coral::Feature "0..9999" --* "1..1" coral::Entity : features0
+coral::Type "1..1" -- "1..1" coral::Feature : type2
+coral::EntityModel "1..1" *-- "0..9999" coral::Type : types1
+@enduml

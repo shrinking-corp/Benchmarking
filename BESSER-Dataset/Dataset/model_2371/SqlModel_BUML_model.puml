@@ -1,0 +1,39 @@
+@startuml
+class DB::Column {
+  + name : str
+  + notNull : bool
+  + type : str
+}
+class DB::Database {
+  + name : str
+}
+class DB::ForeignKey {
+  + isMany : str
+}
+class DB::Key {
+  + name : str
+}
+class DB::Table {
+  + name : str
+}
+enum DataType {
+  bool
+  decimal
+  int
+  text
+  unknown
+  varchar
+}
+DB::Table "1..1" *-- "1..9999" DB::Column : columns5
+DB::Database "1..1" -- "1..1" DB::Table : database7
+DB::Column "1..1" -- "0..9999" DB::ForeignKey : foreign16
+DB::Column "0..1" -- "1..1" DB::ForeignKey : foreign_column22
+DB::Table "1..1" *-- "0..9999" DB::ForeignKey : foreignkeys1
+DB::Key "0..1" -- "1..1" DB::Column : key13
+DB::Column "1..9999" -- "1..1" DB::Key : key_column25
+DB::Key "0..9999" --* "1..1" DB::Table : primary_key3
+DB::Key "1..1" -- "0..1" DB::ForeignKey : referenced28
+DB::Key "0..1" -- "1..1" DB::ForeignKey : referencedKey19
+DB::Table "0..1" -- "1..1" DB::Column : table10
+DB::Table "1..9999" --* "1..1" DB::Database : tables0
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class library::Book {
+  + category : str
+  + pages : int
+  + title : str
+}
+class library::Chapter {
+  + name : str
+}
+class library::Community {
+  + name : str
+}
+class library::CommunityRole {
+  + role : str
+}
+class library::Library {
+  + name : str
+}
+class library::Opinion {
+  + context : str
+  + text : str
+}
+class library::Review {
+  + positive : bool
+  + title : str
+}
+class library::Writer {
+  + name : str
+}
+library::Writer "1..1" -- "1..1" library::Book : author10
+library::Book "1..1" -- "1..1" library::Review : book17
+library::Book "1..1" -- "1..1" library::Opinion : book21
+library::Book "0..9999" --* "1..1" library::Library : books1
+library::Book "0..9999" -- "1..1" library::Writer : books4
+library::Writer "1..1" *-- "0..2" library::Book : brochures5
+library::Chapter "0..9999" --* "1..1" library::Book : chapters12
+library::Library "1..1" *-- "0..9999" library::Community : communities3
+library::CommunityRole "1..1" -- "0..1" library::Community : community27
+library::Library "0..1" -- "1..1" library::Community : library26
+library::Opinion "0..2" -- "1..1" library::Book : opinions14
+library::Opinion "0..2" --* "1..1" library::Writer : opinions8
+library::Writer "0..9999" -- "1..1" library::CommunityRole : participants29
+library::CommunityRole "0..9999" -- "1..1" library::Writer : participates9
+library::Book "1..1" *-- "0..9999" library::Review : reviews11
+library::CommunityRole "1..9999" --* "1..1" library::Community : roles24
+library::Writer "1..1" -- "1..1" library::Opinion : writer19
+library::Library "1..1" *-- "0..9999" library::Writer : writers0
+@enduml

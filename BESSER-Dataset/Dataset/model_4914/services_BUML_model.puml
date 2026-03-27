@@ -1,0 +1,130 @@
+@startuml
+enum InterrestKindType {
+  Escallation
+  FinancialManagement
+  ProductManagement
+  Reporting
+  SalesManagement
+  ServiceManagement
+}
+enum LifeCycleStateType {
+  Active
+  Planned
+  Removed
+}
+enum MaintenanceType {
+  _1stLineMaintenance
+  _2ndLineMaintenance
+}
+enum SecurityRatingType {
+  High
+  Low
+  Medium
+}
+class Service {
+}
+enum ServiceClassType {
+  Bronze
+  Silver
+  Sold
+}
+enum ServiceKindType {
+  CFS
+  RFS
+}
+enum UsageStateType {
+  Assigned
+  Disabled
+  Free
+  Reserved
+}
+class services::CFSService {
+  + provider : str
+  + scenario : str
+}
+class services::CIID {
+  + commonCIID : str
+  + localCIID : str
+}
+class services::EObject {
+}
+class services::Parameter {
+}
+class services::RFSService {
+  + functionalCategory : str
+  + location : str
+}
+class services::Service {
+  + mostTopService : str
+  + serviceCategory : str
+  + serviceCharacterCommon : str
+  + serviceClass : str
+  + serviceKind : str
+  + serviceSupport1 : str
+  + ssDomain : str
+}
+class services::ServiceAdditional {
+  + costCenter : str
+  + history : str
+  + kpi : str
+  + lifeCycleState : str
+  + link : str
+  + report : str
+  + usageState : str
+}
+class services::ServiceContract {
+  + oLA : str
+  + sLA : str
+  + uC : str
+  + wLA : str
+}
+class services::ServiceDescription {
+  + serviceDescriptionCommon : str
+  + serviceDescriptionNational : str
+}
+class services::ServiceIncidentMgt {
+  + businessImpact : str
+  + maintenance : str
+  + maintenanceWindow : str
+  + monitoring : str
+}
+class services::ServiceInterrest {
+  + contactUnit : str
+  + interrestKind : str
+}
+class services::ServiceName {
+  + alias : str
+  + identifier : str
+  + index : str
+  + name : str
+}
+class services::ServiceProfile {
+  + name : str
+}
+class services::ServiceSecurityMgt {
+  + drPlanContact : str
+  + drPlanRepository : str
+  + drRecoveryPlan : str
+  + securityRating : str
+}
+class services::ServiceSupport {
+  + supportDays : str
+  + supportHours : str
+}
+Service <|-- services::CFSService
+Service <|-- services::RFSService
+services::CIID "0..1" --* "1..1" services::Service : ciID12
+services::CFSService "1..1" -- "0..9999" services::EObject : elements0
+services::EObject "0..9999" -- "1..1" services::RFSService : elements1
+services::Service "1..1" *-- "0..9999" services::ServiceContract : serviceContracts16
+services::ServiceDescription "0..1" --* "1..1" services::Service : serviceDescription6
+services::ServiceIncidentMgt "0..1" --* "1..1" services::Service : serviceIncidentMgt10
+services::ServiceInterrest "0..1" --* "1..1" services::Service : serviceInterrest14
+services::ServiceAdditional "0..1" --* "1..1" services::Service : serviceMisc20
+services::ServiceName "0..1" --* "1..1" services::Service : serviceName5
+services::ServiceProfile "1..1" *-- "0..9999" services::Parameter : serviceParameters25
+services::RFSService "1..1" *-- "0..1" services::ServiceProfile : serviceProfile3
+services::Service "1..1" *-- "0..1" services::ServiceSecurityMgt : serviceSecurityMgt8
+services::ServiceSupport "0..1" --* "1..1" services::Service : serviceSupport18
+services::Service "0..9999" --* "1..1" services::Service : services23
+@enduml

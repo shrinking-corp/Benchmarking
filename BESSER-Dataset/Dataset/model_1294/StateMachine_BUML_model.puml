@@ -1,0 +1,85 @@
+@startuml
+class Behavior {
+}
+enum PseudoStateKind {
+  choice
+  deepHistory
+  entryPoint
+  exitPoint
+  fork
+  initial
+  join
+  junction
+  shallowHistory
+  terminate
+}
+class State {
+}
+class StateMachine::Behavior {
+}
+class StateMachine::CodeBlock {
+  + desc : str
+}
+class StateMachine::Constraint {
+  + constraint : str
+}
+class StateMachine::FinalState {
+}
+class StateMachine::PseudoState {
+  + pseudoStateKind : str
+  + returnValue : str
+}
+class StateMachine::Region {
+  + name : str
+}
+class StateMachine::State {
+  + isComposite : str
+  + isSimple : str
+  + isSubmachineState : str
+}
+class StateMachine::StateMachine {
+  + name : str
+}
+class StateMachine::Transition {
+  + kind : str
+  + name : str
+}
+class StateMachine::Trigger {
+  + trigger : str
+}
+class StateMachine::Vertex {
+  + name : str
+}
+enum TransitionKind {
+  external
+  internal
+  local
+}
+class Vertex {
+}
+Behavior <|-- StateMachine::CodeBlock
+Behavior <|-- StateMachine::StateMachine
+State <|-- StateMachine::FinalState
+Vertex <|-- StateMachine::PseudoState
+Vertex <|-- StateMachine::State
+StateMachine::State "1..1" *-- "0..9999" StateMachine::Trigger : deferrableTrigger3
+StateMachine::Behavior "0..1" --* "1..1" StateMachine::State : doActivity1
+StateMachine::Transition "1..1" *-- "0..1" StateMachine::Behavior : effect32
+StateMachine::Behavior "0..1" --* "1..1" StateMachine::State : entry10
+StateMachine::State "1..1" -- "0..1" StateMachine::PseudoState : entryPoint14
+StateMachine::Behavior "0..1" --* "1..1" StateMachine::State : exit7
+StateMachine::State "1..1" -- "0..9999" StateMachine::PseudoState : exitPoint16
+StateMachine::Constraint "0..1" --* "1..1" StateMachine::Transition : guard38
+StateMachine::Transition "0..9999" -- "1..1" StateMachine::Vertex : incoming20
+StateMachine::Transition "0..9999" -- "1..1" StateMachine::Vertex : outgoing19
+StateMachine::Region "0..9999" --* "1..1" StateMachine::State : region0
+StateMachine::Region "1..9999" --* "1..1" StateMachine::StateMachine : region26
+StateMachine::Vertex "1..1" -- "1..1" StateMachine::Transition : source29
+StateMachine::Constraint "0..1" --* "1..1" StateMachine::State : stateInvariant5
+StateMachine::StateMachine "0..1" -- "1..1" StateMachine::State : submachine13
+StateMachine::State "0..9999" -- "1..1" StateMachine::StateMachine : submachineState28
+StateMachine::Vertex "0..9999" --* "1..1" StateMachine::Region : subvertex22
+StateMachine::Vertex "1..1" -- "1..1" StateMachine::Transition : target30
+StateMachine::Region "1..1" *-- "0..9999" StateMachine::Transition : transition24
+StateMachine::Trigger "0..9999" --* "1..1" StateMachine::Transition : trigger35
+@enduml

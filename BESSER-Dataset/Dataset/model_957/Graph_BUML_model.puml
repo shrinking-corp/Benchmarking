@@ -1,0 +1,37 @@
+@startuml
+class Element {
+}
+class ElementType {
+}
+class graph::Edge {
+}
+class graph::EdgeType {
+}
+abstract class graph::Element {
+}
+abstract class graph::ElementType {
+  + name : str
+}
+class graph::Graph {
+  + name : str
+}
+class graph::Node {
+  + label : str
+}
+class graph::NodeType {
+}
+ElementType <|-- graph::EdgeType
+ElementType <|-- graph::NodeType
+Element <|-- graph::Edge
+Element <|-- graph::Node
+graph::Element "0..9999" --* "1..1" graph::Graph : element11
+graph::Graph "1..1" -- "0..9999" graph::ElementType : elementType12
+graph::Graph "1..1" -- "1..1" graph::Element : graph8
+graph::Graph "1..1" -- "1..1" graph::ElementType : graph9
+graph::Node "1..1" -- "0..9999" graph::Edge : incoming0
+graph::Edge "0..9999" -- "1..1" graph::Node : outgoing1
+graph::Node "1..1" -- "1..1" graph::Edge : source5
+graph::Edge "1..1" -- "1..1" graph::Node : target4
+graph::NodeType "0..1" -- "1..1" graph::Node : type3
+graph::Edge "1..1" -- "0..1" graph::EdgeType : type7
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+enum CourseStatus {
+  ELECTIVE
+  MANDATORY
+}
+enum Season {
+  FALL
+  SPRING
+}
+class studyplan::Course {
+  + code : str
+  + credits : float
+  + name : str
+}
+class studyplan::Department {
+  + name : str
+}
+class studyplan::Program {
+  + code : str
+  + name : str
+}
+class studyplan::Semester {
+  + name : str
+  + season : str
+  + year : int
+}
+class studyplan::SemesterCourse {
+  + status : str
+}
+class studyplan::Specialization {
+  + name : str
+}
+studyplan::Course "0..1" -- "1..1" studyplan::SemesterCourse : course14
+studyplan::Course "0..9999" --* "1..1" studyplan::Department : courses16
+studyplan::Semester "1..1" *-- "0..9999" studyplan::SemesterCourse : courses4
+studyplan::Department "0..1" -- "1..1" studyplan::Course : department12
+studyplan::Program "1..1" -- "0..1" studyplan::Department : department3
+studyplan::Program "0..9999" --* "1..1" studyplan::Department : programs17
+studyplan::Program "1..1" *-- "0..9999" studyplan::Semester : semesters0
+studyplan::Semester "0..9999" --* "1..1" studyplan::Specialization : semesters6
+studyplan::Specialization "0..9999" --* "1..1" studyplan::Program : specializations1
+studyplan::Specialization "1..1" *-- "0..9999" studyplan::Specialization : specializations10
+@enduml

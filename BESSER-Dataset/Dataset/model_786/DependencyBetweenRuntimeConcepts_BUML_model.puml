@@ -1,0 +1,27 @@
+@startuml
+class fsm::FSM {
+}
+class fsm::RuntimeConcept1 {
+  + foo : int
+}
+class fsm::RuntimeConcept2 {
+  + bar : str
+}
+class fsm::State {
+  + name : str
+}
+class fsm::Transition {
+  + input : str
+  + output : str
+}
+fsm::State "1..9999" -- "1..1" fsm::FSM : finalState3
+fsm::Transition "0..9999" -- "1..1" fsm::State : incomingTransition13
+fsm::State "1..1" -- "1..1" fsm::FSM : initialState2
+fsm::RuntimeConcept1 "0..9999" -- "1..1" fsm::RuntimeConcept2 : myFoos6
+fsm::State "0..1" -- "1..1" fsm::RuntimeConcept1 : myState22
+fsm::State "1..1" *-- "0..9999" fsm::Transition : outgoingTransition10
+fsm::State "0..9999" --* "1..1" fsm::FSM : ownedState0
+fsm::FSM "1..1" -- "1..1" fsm::State : owningFSM7
+fsm::Transition "1..1" -- "1..1" fsm::State : source16
+fsm::State "1..1" -- "1..1" fsm::Transition : target19
+@enduml

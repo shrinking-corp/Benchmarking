@@ -1,0 +1,152 @@
+@startuml
+class Block {
+}
+class CSTNode {
+}
+class Comment {
+}
+class EPackage {
+}
+class ModuleElement {
+}
+enum OpenModeKind {
+  Append
+  OverWrite
+}
+class TemplateExpression {
+}
+enum VisibilityKind {
+  Private
+  Protected
+  Public
+}
+class cst::Block {
+}
+abstract class cst::CSTNode {
+  + endPosition : int
+  + startPosition : int
+}
+class cst::Comment {
+  + body : str
+}
+class cst::Documentation {
+}
+class cst::EPackage {
+}
+class cst::FileBlock {
+  + openMode : str
+}
+class cst::ForBlock {
+}
+class cst::IfBlock {
+}
+class cst::InitSection {
+}
+class cst::LetBlock {
+}
+class cst::Macro {
+  + type : str
+}
+class cst::ModelExpression {
+  + body : str
+}
+class cst::Module {
+}
+abstract class cst::ModuleElement {
+  + name : str
+  + visibility : str
+}
+class cst::ModuleExtendsValue {
+  + name : str
+}
+class cst::ModuleImportsValue {
+  + name : str
+}
+class cst::ProtectedAreaBlock {
+}
+class cst::Query {
+  + type : str
+}
+class cst::Template {
+}
+class cst::TemplateExpression {
+}
+class cst::TemplateOverridesValue {
+  + name : str
+}
+class cst::TextExpression {
+  + value : str
+}
+class cst::TraceBlock {
+}
+class cst::TypedModel {
+}
+class cst::Variable {
+  + name : str
+  + type : str
+}
+Block <|-- cst::FileBlock
+Block <|-- cst::ForBlock
+Block <|-- cst::IfBlock
+Block <|-- cst::LetBlock
+Block <|-- cst::Macro
+Block <|-- cst::ProtectedAreaBlock
+Block <|-- cst::Template
+Block <|-- cst::TraceBlock
+CSTNode <|-- cst::InitSection
+CSTNode <|-- cst::Module
+CSTNode <|-- cst::ModuleElement
+CSTNode <|-- cst::ModuleExtendsValue
+CSTNode <|-- cst::ModuleImportsValue
+CSTNode <|-- cst::TemplateExpression
+CSTNode <|-- cst::TemplateOverridesValue
+CSTNode <|-- cst::TypedModel
+CSTNode <|-- cst::Variable
+Comment <|-- cst::Documentation
+EPackage <|-- cst::Module
+ModuleElement <|-- cst::Comment
+ModuleElement <|-- cst::Macro
+ModuleElement <|-- cst::Query
+ModuleElement <|-- cst::Template
+TemplateExpression <|-- cst::Block
+TemplateExpression <|-- cst::Comment
+TemplateExpression <|-- cst::ModelExpression
+TemplateExpression <|-- cst::TextExpression
+cst::ModelExpression "0..1" --* "1..1" cst::ModelExpression : after29
+cst::ModelExpression "0..1" --* "1..1" cst::ForBlock : after50
+cst::ModelExpression "0..1" --* "1..1" cst::ModelExpression : before23
+cst::ModelExpression "0..1" --* "1..1" cst::ForBlock : before44
+cst::TemplateExpression "0..9999" --* "1..1" cst::Block : body32
+cst::ModelExpression "0..1" --* "1..1" cst::FileBlock : charset77
+cst::Module "1..1" *-- "0..1" cst::Documentation : documentation7
+cst::ModelExpression "0..1" --* "1..1" cst::ModelExpression : each26
+cst::ForBlock "1..1" *-- "0..1" cst::ModelExpression : each47
+cst::Block "0..1" --* "1..1" cst::IfBlock : else58
+cst::Block "0..1" --* "1..1" cst::LetBlock : else66
+cst::IfBlock "0..9999" --* "1..1" cst::IfBlock : elseIf62
+cst::LetBlock "1..1" *-- "0..9999" cst::LetBlock : elseLet65
+cst::ModelExpression "0..1" --* "1..1" cst::Query : expression86
+cst::ModuleExtendsValue "0..9999" --* "1..1" cst::Module : extends3
+cst::ModelExpression "1..1" --* "1..1" cst::FileBlock : fileUrl72
+cst::ModelExpression "0..1" --* "1..1" cst::Template : guard14
+cst::ForBlock "1..1" *-- "0..1" cst::ModelExpression : guard53
+cst::ModelExpression "1..1" --* "1..1" cst::IfBlock : ifExpr56
+cst::ModuleImportsValue "0..9999" --* "1..1" cst::Module : imports5
+cst::InitSection "0..1" --* "1..1" cst::Block : init31
+cst::ModelExpression "0..1" --* "1..1" cst::Variable : initExpression19
+cst::TypedModel "1..9999" --* "1..1" cst::Module : input0
+cst::ModelExpression "1..1" --* "1..1" cst::ForBlock : iterSet41
+cst::Variable "1..1" --* "1..1" cst::LetBlock : letVariable69
+cst::ForBlock "1..1" *-- "1..1" cst::Variable : loopVariable39
+cst::ModelExpression "1..1" --* "1..1" cst::ProtectedAreaBlock : marker37
+cst::ModelExpression "1..1" --* "1..1" cst::TraceBlock : modelElement80
+cst::TemplateOverridesValue "0..9999" --* "1..1" cst::Template : overrides11
+cst::ModuleElement "1..9999" --* "1..1" cst::Module : ownedModuleElement1
+cst::Template "1..1" *-- "0..9999" cst::Variable : parameter12
+cst::Macro "1..1" *-- "0..9999" cst::Variable : parameter82
+cst::Variable "0..9999" --* "1..1" cst::Query : parameter84
+cst::ModelExpression "0..1" --* "1..1" cst::Template : post16
+cst::TypedModel "1..1" -- "1..9999" cst::EPackage : takesTypesFrom9
+cst::FileBlock "1..1" *-- "0..1" cst::ModelExpression : uniqId74
+cst::Variable "1..9999" --* "1..1" cst::InitSection : variable34
+@enduml

@@ -1,0 +1,80 @@
+@startuml
+class AbstractState {
+}
+class EObject {
+}
+class FromState {
+}
+class IntermediateState {
+}
+class Named {
+}
+class StateContainer {
+}
+class ToState {
+}
+abstract class workflow::AbstractState {
+  + associatedClass : str
+}
+class workflow::Decision {
+}
+class workflow::End {
+}
+class workflow::Fork {
+}
+abstract class workflow::FromState {
+}
+abstract class workflow::IntermediateState {
+}
+class workflow::Join {
+}
+abstract class workflow::Named {
+  + name : str
+}
+class workflow::Processing {
+}
+class workflow::Start {
+}
+abstract class workflow::StateContainer {
+}
+class workflow::StateTransition {
+}
+class workflow::SubProcess {
+}
+class workflow::Task {
+}
+abstract class workflow::ToState {
+}
+class workflow::Workflow {
+}
+AbstractState <|-- workflow::End
+AbstractState <|-- workflow::IntermediateState
+AbstractState <|-- workflow::Start
+EObject <|-- workflow::Named
+FromState <|-- workflow::IntermediateState
+FromState <|-- workflow::Start
+IntermediateState <|-- workflow::Decision
+IntermediateState <|-- workflow::Fork
+IntermediateState <|-- workflow::Join
+IntermediateState <|-- workflow::Processing
+IntermediateState <|-- workflow::SubProcess
+IntermediateState <|-- workflow::Task
+Named <|-- workflow::AbstractState
+Named <|-- workflow::StateTransition
+Named <|-- workflow::Workflow
+StateContainer <|-- workflow::SubProcess
+StateContainer <|-- workflow::Workflow
+ToState <|-- workflow::End
+ToState <|-- workflow::IntermediateState
+workflow::End "1..1" --* "1..1" workflow::StateContainer : endState7
+workflow::StateTransition "1..1" -- "1..1" workflow::FromState : from10
+workflow::StateTransition "1..9999" -- "1..1" workflow::ToState : inboundTransitions2
+workflow::StateTransition "1..9999" -- "1..1" workflow::FromState : outboundTransitions1
+workflow::StateContainer "1..1" *-- "1..1" workflow::Start : startState4
+workflow::StateContainer "1..1" -- "1..1" workflow::Start : stateContainer12
+workflow::End "1..1" -- "1..1" workflow::StateContainer : stateContainer14
+workflow::StateContainer "1..1" -- "1..1" workflow::IntermediateState : stateContainer9
+workflow::IntermediateState "0..9999" --* "1..1" workflow::StateContainer : states5
+workflow::ToState "1..1" -- "1..1" workflow::StateTransition : to11
+workflow::StateTransition "0..9999" --* "1..1" workflow::Workflow : transition0
+@enduml

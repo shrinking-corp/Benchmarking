@@ -1,0 +1,25 @@
+@startuml
+class State {
+}
+class mydsl::FSM {
+  + name : str
+}
+class mydsl::Final {
+}
+class mydsl::Initial {
+}
+class mydsl::State {
+  + name : str
+}
+class mydsl::Transition {
+  + name : str
+  + trigger : str
+}
+State <|-- mydsl::Final
+State <|-- mydsl::Initial
+mydsl::Final "1..1" --* "1..1" mydsl::FSM : final3
+mydsl::Initial "1..1" --* "1..1" mydsl::FSM : initial5
+mydsl::State "0..9999" --* "1..1" mydsl::FSM : state0
+mydsl::State "2..2" -- "1..1" mydsl::Transition : state7
+mydsl::FSM "1..1" *-- "0..9999" mydsl::Transition : transition1
+@enduml

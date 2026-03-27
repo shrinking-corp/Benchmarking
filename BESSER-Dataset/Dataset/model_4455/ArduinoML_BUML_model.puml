@@ -1,0 +1,46 @@
+@startuml
+class Action {
+}
+class Brick {
+}
+abstract class arduinoml::Action {
+}
+class arduinoml::Actuator {
+}
+class arduinoml::ActuatorState {
+  + isOn : bool
+}
+class arduinoml::Board {
+}
+abstract class arduinoml::Brick {
+  + name : str
+  + pin : int
+}
+class arduinoml::Off {
+  + turnOff() : void
+}
+class arduinoml::On {
+  + turnOn() : void
+}
+class arduinoml::Sensor {
+}
+class arduinoml::State {
+  + name : str
+}
+class arduinoml::Transition {
+}
+Action <|-- arduinoml::Off
+Action <|-- arduinoml::On
+Brick <|-- arduinoml::Actuator
+Brick <|-- arduinoml::Sensor
+arduinoml::State "1..1" *-- "0..9999" arduinoml::Action : actions6
+arduinoml::Brick "0..9999" --* "1..1" arduinoml::Board : bricks4
+arduinoml::Transition "1..9999" --* "1..1" arduinoml::State : eventCode8
+arduinoml::Board "1..1" *-- "1..1" arduinoml::State : initial0
+arduinoml::State "0..9999" --* "1..1" arduinoml::Board : possibles1
+arduinoml::State "1..1" -- "1..1" arduinoml::Transition : source11
+arduinoml::ActuatorState "1..1" --* "1..1" arduinoml::Actuator : state10
+arduinoml::Transition "1..1" -- "1..1" arduinoml::State : target14
+arduinoml::Sensor "1..1" -- "1..1" arduinoml::Action : target17
+arduinoml::Transition "1..1" -- "1..1" arduinoml::ActuatorState : triggers19
+@enduml

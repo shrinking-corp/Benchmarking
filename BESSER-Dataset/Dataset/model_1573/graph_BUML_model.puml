@@ -1,0 +1,50 @@
+@startuml
+class GraphElement {
+}
+class Named {
+}
+class Typed {
+}
+class graph::Edge {
+}
+class graph::Entry {
+  + key : str
+  + value : str
+}
+class graph::Graph {
+  + direct : bool
+}
+abstract class graph::GraphElement {
+  + id : int
+}
+class graph::Label {
+}
+abstract class graph::Named {
+  + name : str
+}
+abstract class graph::Typed {
+  + type : str
+}
+class graph::Vertex {
+}
+GraphElement <|-- graph::Vertex
+Named <|-- graph::Graph
+Named <|-- graph::Label
+Named <|-- graph::Typed
+Typed <|-- graph::Edge
+Typed <|-- graph::GraphElement
+graph::Edge "1..1" -- "1..1" graph::Vertex : SourceVertex13
+graph::Edge "0..1" -- "1..1" graph::Label : edge17
+graph::Graph "1..1" *-- "0..9999" graph::Edge : edges0
+graph::Entry "0..9999" --* "1..1" graph::Label : entries22
+graph::Graph "0..1" -- "1..1" graph::Vertex : graph3
+graph::Graph "0..1" -- "1..1" graph::Edge : graph9
+graph::Edge "0..9999" -- "1..1" graph::Vertex : ingoingEdges7
+graph::Label "0..1" --* "1..1" graph::Edge : label11
+graph::Label "0..1" -- "1..1" graph::Entry : label24
+graph::Label "0..1" --* "1..1" graph::Vertex : label4
+graph::Vertex "1..1" -- "0..9999" graph::Edge : outgoingEdges5
+graph::Vertex "1..1" -- "1..1" graph::Edge : targetVertex15
+graph::Label "1..1" -- "0..1" graph::Vertex : vertex19
+graph::Vertex "0..9999" --* "1..1" graph::Graph : vertices1
+@enduml

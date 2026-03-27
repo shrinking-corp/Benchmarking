@@ -1,0 +1,118 @@
+@startuml
+class SrcArc {
+}
+class SrcElement {
+}
+class SrcLocatedElement {
+}
+class SrcNamedElement {
+}
+class TrgIdedElement {
+}
+class TrgLabeledElement {
+}
+class TrgLocatedElement {
+}
+class TrgNetContent {
+}
+class TrgNetContentElement {
+}
+class jointPackage::PetriNet2PNML::JointMM {
+}
+abstract class jointPackage::PetriNet2PNML::SrcArc {
+  + weight : int
+}
+abstract class jointPackage::PetriNet2PNML::SrcElement {
+}
+abstract class jointPackage::PetriNet2PNML::SrcLocatedElement {
+  + location : str
+}
+abstract class jointPackage::PetriNet2PNML::SrcNamedElement {
+  + name : str
+}
+class jointPackage::PetriNet2PNML::SrcPetriNet {
+}
+class jointPackage::PetriNet2PNML::SrcPlace {
+}
+class jointPackage::PetriNet2PNML::SrcPlaceToTransition {
+}
+class jointPackage::PetriNet2PNML::SrcTransition {
+}
+class jointPackage::PetriNet2PNML::SrcTransitionToPlace {
+}
+class jointPackage::PetriNet2PNML::TrgArc {
+}
+abstract class jointPackage::PetriNet2PNML::TrgIdedElement {
+  + id : str
+}
+class jointPackage::PetriNet2PNML::TrgLabel {
+  + text : str
+}
+abstract class jointPackage::PetriNet2PNML::TrgLabeledElement {
+}
+abstract class jointPackage::PetriNet2PNML::TrgLocatedElement {
+  + location : str
+}
+class jointPackage::PetriNet2PNML::TrgName {
+}
+abstract class jointPackage::PetriNet2PNML::TrgNetContent {
+}
+abstract class jointPackage::PetriNet2PNML::TrgNetContentElement {
+}
+class jointPackage::PetriNet2PNML::TrgNetElement {
+}
+class jointPackage::PetriNet2PNML::TrgPNMLDocument {
+}
+class jointPackage::PetriNet2PNML::TrgPlace {
+}
+class jointPackage::PetriNet2PNML::TrgTransition {
+}
+class jointPackage::PetriNet2PNML::TrgURI {
+  + value : str
+}
+SrcArc <|-- jointPackage::PetriNet2PNML::SrcPlaceToTransition
+SrcArc <|-- jointPackage::PetriNet2PNML::SrcTransitionToPlace
+SrcElement <|-- jointPackage::PetriNet2PNML::SrcPlace
+SrcElement <|-- jointPackage::PetriNet2PNML::SrcTransition
+SrcLocatedElement <|-- jointPackage::PetriNet2PNML::SrcNamedElement
+SrcNamedElement <|-- jointPackage::PetriNet2PNML::SrcArc
+SrcNamedElement <|-- jointPackage::PetriNet2PNML::SrcElement
+SrcNamedElement <|-- jointPackage::PetriNet2PNML::SrcPetriNet
+TrgIdedElement <|-- jointPackage::PetriNet2PNML::TrgArc
+TrgIdedElement <|-- jointPackage::PetriNet2PNML::TrgNetContentElement
+TrgIdedElement <|-- jointPackage::PetriNet2PNML::TrgNetElement
+TrgLabeledElement <|-- jointPackage::PetriNet2PNML::TrgName
+TrgLocatedElement <|-- jointPackage::PetriNet2PNML::TrgIdedElement
+TrgLocatedElement <|-- jointPackage::PetriNet2PNML::TrgLabel
+TrgLocatedElement <|-- jointPackage::PetriNet2PNML::TrgLabeledElement
+TrgLocatedElement <|-- jointPackage::PetriNet2PNML::TrgNetContent
+TrgLocatedElement <|-- jointPackage::PetriNet2PNML::TrgPNMLDocument
+TrgLocatedElement <|-- jointPackage::PetriNet2PNML::TrgURI
+TrgNetContentElement <|-- jointPackage::PetriNet2PNML::TrgPlace
+TrgNetContentElement <|-- jointPackage::PetriNet2PNML::TrgTransition
+TrgNetContent <|-- jointPackage::PetriNet2PNML::TrgArc
+TrgNetContent <|-- jointPackage::PetriNet2PNML::TrgNetContentElement
+jointPackage::PetriNet2PNML::SrcArc "0..9999" --* "1..1" jointPackage::PetriNet2PNML::SrcPetriNet : arcs4
+jointPackage::PetriNet2PNML::TrgNetElement "1..1" *-- "0..9999" jointPackage::PetriNet2PNML::TrgNetContent : contents32
+jointPackage::PetriNet2PNML::SrcPetriNet "1..1" *-- "0..9999" jointPackage::PetriNet2PNML::SrcElement : elements3
+jointPackage::PetriNet2PNML::SrcPlace "1..1" -- "1..1" jointPackage::PetriNet2PNML::SrcPlaceToTransition : from17
+jointPackage::PetriNet2PNML::SrcTransition "1..1" -- "1..1" jointPackage::PetriNet2PNML::SrcTransitionToPlace : from19
+jointPackage::PetriNet2PNML::SrcTransitionToPlace "0..9999" -- "1..1" jointPackage::PetriNet2PNML::SrcPlace : incomingArc7
+jointPackage::PetriNet2PNML::SrcTransition "1..1" -- "1..9999" jointPackage::PetriNet2PNML::SrcPlaceToTransition : incomingArc9
+jointPackage::PetriNet2PNML::TrgLabel "0..9999" --* "1..1" jointPackage::PetriNet2PNML::TrgLabeledElement : labels39
+jointPackage::PetriNet2PNML::TrgName "0..1" --* "1..1" jointPackage::PetriNet2PNML::TrgNetElement : name34
+jointPackage::PetriNet2PNML::TrgName "0..1" --* "1..1" jointPackage::PetriNet2PNML::TrgNetContent : name36
+jointPackage::PetriNet2PNML::SrcPetriNet "1..1" -- "1..1" jointPackage::PetriNet2PNML::SrcArc : net15
+jointPackage::PetriNet2PNML::SrcElement "1..1" -- "1..1" jointPackage::PetriNet2PNML::SrcPetriNet : net6
+jointPackage::PetriNet2PNML::TrgNetElement "1..9999" --* "1..1" jointPackage::PetriNet2PNML::TrgPNMLDocument : nets27
+jointPackage::PetriNet2PNML::SrcTransitionToPlace "1..9999" -- "1..1" jointPackage::PetriNet2PNML::SrcTransition : outgoingArc12
+jointPackage::PetriNet2PNML::SrcPlaceToTransition "0..9999" -- "1..1" jointPackage::PetriNet2PNML::SrcPlace : outgoingArc8
+jointPackage::PetriNet2PNML::TrgNetContentElement "1..1" -- "1..1" jointPackage::PetriNet2PNML::TrgArc : source40
+jointPackage::PetriNet2PNML::SrcPetriNet "1..1" --* "1..1" jointPackage::PetriNet2PNML::JointMM : sourceRoot0
+jointPackage::PetriNet2PNML::TrgNetContentElement "1..1" -- "1..1" jointPackage::PetriNet2PNML::TrgArc : target41
+jointPackage::PetriNet2PNML::TrgPNMLDocument "1..1" --* "1..1" jointPackage::PetriNet2PNML::JointMM : targetRoot1
+jointPackage::PetriNet2PNML::SrcPlaceToTransition "1..1" -- "1..1" jointPackage::PetriNet2PNML::SrcTransition : to18
+jointPackage::PetriNet2PNML::SrcPlace "1..1" -- "1..1" jointPackage::PetriNet2PNML::SrcTransitionToPlace : to22
+jointPackage::PetriNet2PNML::TrgURI "1..1" --* "1..1" jointPackage::PetriNet2PNML::TrgNetElement : type29
+jointPackage::PetriNet2PNML::TrgURI "1..1" --* "1..1" jointPackage::PetriNet2PNML::TrgPNMLDocument : xmlns25
+@enduml

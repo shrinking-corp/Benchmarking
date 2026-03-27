@@ -1,0 +1,41 @@
+@startuml
+class ModelElement {
+}
+class TypedElement {
+}
+class umlsimp::Class {
+}
+class umlsimp::DataType {
+}
+class umlsimp::Model {
+}
+abstract class umlsimp::ModelElement {
+  + name : str
+}
+class umlsimp::Operation {
+}
+class umlsimp::Parameter {
+}
+class umlsimp::Property {
+  + visibility : str
+}
+class umlsimp::TypedElement {
+}
+enum visType {
+  private
+  public
+}
+ModelElement <|-- umlsimp::Class
+ModelElement <|-- umlsimp::DataType
+ModelElement <|-- umlsimp::TypedElement
+TypedElement <|-- umlsimp::Operation
+TypedElement <|-- umlsimp::Parameter
+TypedElement <|-- umlsimp::Property
+umlsimp::Operation "1..1" -- "1..1" umlsimp::Class : class3
+umlsimp::Class "1..1" -- "1..1" umlsimp::Property : class5
+umlsimp::ModelElement "0..9999" --* "1..1" umlsimp::Model : modelElements8
+umlsimp::Class "1..1" *-- "0..9999" umlsimp::Operation : operations1
+umlsimp::Operation "1..1" *-- "0..1" umlsimp::Parameter : ownedParameter4
+umlsimp::Class "1..1" *-- "0..9999" umlsimp::Property : properties0
+umlsimp::DataType "0..1" -- "1..1" umlsimp::TypedElement : type7
+@enduml

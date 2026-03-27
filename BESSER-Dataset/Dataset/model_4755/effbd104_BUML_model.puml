@@ -1,0 +1,83 @@
+@startuml
+enum FunctionDomain {
+  form
+  space
+  time
+}
+class Port {
+}
+class ProcessNode {
+}
+class Sequence {
+}
+class SequenceNode {
+}
+class effbd104::And {
+}
+class effbd104::Description {
+  + content : str
+}
+class effbd104::Final {
+}
+class effbd104::Flow {
+}
+class effbd104::Function {
+  + domain : str
+}
+class effbd104::InputPort {
+}
+class effbd104::Item {
+  + name : str
+}
+class effbd104::Iteration {
+}
+class effbd104::Loop {
+}
+class effbd104::LoopExit {
+}
+class effbd104::Or {
+}
+class effbd104::OutputPort {
+}
+abstract class effbd104::Port {
+  + id : str
+}
+abstract class effbd104::ProcessNode {
+  + label : str
+}
+abstract class effbd104::Sequence {
+}
+abstract class effbd104::SequenceNode {
+  + name : str
+  + tMax : int
+  + tMin : int
+}
+class effbd104::Start {
+}
+class effbd104::Token {
+}
+Port <|-- effbd104::InputPort
+Port <|-- effbd104::OutputPort
+ProcessNode <|-- effbd104::Flow
+ProcessNode <|-- effbd104::Function
+SequenceNode <|-- effbd104::Function
+SequenceNode <|-- effbd104::Sequence
+Sequence <|-- effbd104::And
+Sequence <|-- effbd104::Final
+Sequence <|-- effbd104::Iteration
+Sequence <|-- effbd104::Loop
+Sequence <|-- effbd104::LoopExit
+Sequence <|-- effbd104::Or
+Sequence <|-- effbd104::Start
+effbd104::SequenceNode "0..9999" -- "1..1" effbd104::SequenceNode : controlFlowEdge15
+effbd104::Function "0..9999" --* "1..1" effbd104::Function : decompositions1
+effbd104::Function "1..1" *-- "0..9999" effbd104::Description : descriptions10
+effbd104::Flow "0..9999" --* "1..1" effbd104::Function : flows4
+effbd104::InputPort "0..9999" --* "1..1" effbd104::Function : inputPorts8
+effbd104::InputPort "0..9999" -- "1..1" effbd104::Flow : inputflowEdge16
+effbd104::Item "0..9999" --* "1..1" effbd104::Flow : items19
+effbd104::OutputPort "0..9999" --* "1..1" effbd104::Function : outputPorts6
+effbd104::Flow "0..9999" -- "1..1" effbd104::OutputPort : outputflowEdge21
+effbd104::Function "1..1" *-- "0..9999" effbd104::Sequence : sequenceNodes2
+effbd104::Token "0..9999" --* "1..1" effbd104::Function : tokens12
+@enduml

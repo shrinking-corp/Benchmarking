@@ -1,0 +1,66 @@
+@startuml
+class Clonable {
+}
+enum ConfigState {
+  MACHINE_ELIMINATED
+  MACHINE_SELECTED
+  UNDECIDED
+  USER_ELIMINATED
+  USER_SELECTED
+}
+class Node {
+}
+enum ValueType {
+  FEATURE
+  FLOAT
+  INTEGER
+  NONE
+  STRING
+}
+abstract class fmp::Clonable {
+  + state : str
+}
+class fmp::Constraint {
+  + text : str
+}
+class fmp::Feature {
+  + name : str
+  + valueType : str
+}
+class fmp::FeatureGroup {
+}
+abstract class fmp::Node {
+  + id : str
+  + max : int
+  + min : int
+}
+class fmp::Project {
+}
+class fmp::Reference {
+}
+class fmp::TypedValue {
+  + floatValue : str
+  + integerValue : str
+  + stringValue : str
+}
+Clonable <|-- fmp::Feature
+Clonable <|-- fmp::Reference
+Node <|-- fmp::Clonable
+Node <|-- fmp::FeatureGroup
+fmp::Node "0..9999" --* "1..1" fmp::Node : children15
+fmp::Clonable "1..1" -- "0..9999" fmp::Clonable : clones31
+fmp::Feature "1..1" *-- "0..9999" fmp::Feature : configurations1
+fmp::Node "1..1" -- "0..9999" fmp::Node : confs9
+fmp::Constraint "0..9999" --* "1..1" fmp::Feature : constraints6
+fmp::Node "0..1" -- "1..1" fmp::Feature : describedNode5
+fmp::Feature "0..1" -- "1..1" fmp::Reference : feature17
+fmp::Feature "0..1" -- "1..1" fmp::TypedValue : featureValue27
+fmp::Feature "0..1" --* "1..1" fmp::Project : metaMetaModel24
+fmp::Feature "0..1" --* "1..1" fmp::Project : metaModel21
+fmp::Project "1..1" *-- "0..1" fmp::Feature : model19
+fmp::Node "0..1" -- "1..1" fmp::Node : origin12
+fmp::Node "1..1" -- "0..1" fmp::Feature : properties16
+fmp::Clonable "0..1" -- "1..1" fmp::Clonable : prototype33
+fmp::Feature "1..1" -- "0..9999" fmp::Reference : references2
+fmp::TypedValue "0..1" --* "1..1" fmp::Feature : typedValue3
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+class TreeElement {
+}
+enum TreeElementType {
+  dont_know
+  empty
+  inadmissible
+  no
+  trusted
+  yes
+}
+class ed2::ED2 {
+  + name : str
+}
+class ed2::EDD {
+  + name : str
+}
+class ed2::Leaf {
+}
+class ed2::Model {
+}
+class ed2::Node {
+}
+abstract class ed2::TreeElement {
+  + index : str
+  + name : str
+  + type : str
+}
+class ed2::TreeObject {
+  + index : str
+  + name : str
+  + type : str
+}
+class ed2::TreeParent {
+  + index : str
+  + name : str
+  + type : str
+}
+TreeElement <|-- ed2::Leaf
+TreeElement <|-- ed2::Node
+ed2::Model "1..1" *-- "0..1" ed2::ED2 : ed214
+ed2::Leaf "0..9999" --* "1..1" ed2::Node : leaves3
+ed2::Node "0..9999" --* "1..1" ed2::Node : nodes5
+ed2::TreeElement "0..9999" --* "1..1" ed2::ED2 : treeElements13
+ed2::TreeObject "0..9999" --* "1..1" ed2::EDD : treeObjects0
+ed2::TreeObject "0..9999" -- "1..1" ed2::TreeParent : treeObjects7
+ed2::TreeParent "0..9999" --* "1..1" ed2::EDD : treeParents1
+ed2::TreeParent "1..1" -- "0..9999" ed2::TreeParent : treeParents11
+@enduml

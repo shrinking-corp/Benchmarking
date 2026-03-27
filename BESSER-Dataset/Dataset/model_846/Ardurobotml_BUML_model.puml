@@ -1,0 +1,174 @@
+@startuml
+class Action {
+}
+class Condition {
+}
+class Guard {
+}
+class NamedElement {
+}
+class RegionContainer {
+}
+class ardurobotml::AcceleratetAction {
+  + ratio : int
+  + startTick : int
+}
+abstract class ardurobotml::Action {
+  + begin() : void
+  + end() : void
+}
+class ardurobotml::ActionSequence {
+}
+class ardurobotml::AllActionFinishedCondition {
+}
+class ardurobotml::CollisionSensorCondition {
+}
+abstract class ardurobotml::Condition {
+}
+class ardurobotml::DeceleratetAction {
+  + ratio : int
+  + startTick : int
+}
+class ardurobotml::EmergencyStopAction {
+  + begin() : void
+}
+class ardurobotml::EvaluateGuard {
+}
+class ardurobotml::EventGuard {
+}
+class ardurobotml::FSMClock {
+  + value : int
+  + ticks() : void
+}
+class ardurobotml::FSMEvent {
+}
+abstract class ardurobotml::Guard {
+}
+class ardurobotml::MoveBackardAction {
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+class ardurobotml::MoveBackardAndTurningLeftAction {
+  + diff : int
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+class ardurobotml::MoveBackardAndTurningRightAction {
+  + diff : int
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+class ardurobotml::MoveForwardAction {
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+class ardurobotml::MoveForwardAndTurningLeftAction {
+  + diff : int
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+class ardurobotml::MoveForwardAndTurningRightAction {
+  + diff : int
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+class ardurobotml::NamedElement {
+  + name : str
+}
+class ardurobotml::Region {
+  + name : str
+}
+abstract class ardurobotml::RegionContainer {
+}
+class ardurobotml::SCANCollisionAction {
+}
+class ardurobotml::State {
+  + onEnter() : str
+  + onLeave() : str
+}
+class ardurobotml::StopAction {
+}
+class ardurobotml::SystemPropertyCondition {
+  + expectedAttributeValue : bool
+}
+class ardurobotml::TFSM {
+  + initialize() : str
+}
+class ardurobotml::TemporalGuard {
+  + afterDuration : int
+}
+class ardurobotml::TimedSystem {
+}
+class ardurobotml::Transition {
+  + fire() : str
+}
+class ardurobotml::TurningLeftAction {
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+class ardurobotml::TurningRightAction {
+  + duration : int
+  + speed : int
+  + startTick : int
+}
+Action <|-- ardurobotml::AcceleratetAction
+Action <|-- ardurobotml::ActionSequence
+Action <|-- ardurobotml::DeceleratetAction
+Action <|-- ardurobotml::EmergencyStopAction
+Action <|-- ardurobotml::MoveBackardAction
+Action <|-- ardurobotml::MoveBackardAndTurningLeftAction
+Action <|-- ardurobotml::MoveBackardAndTurningRightAction
+Action <|-- ardurobotml::MoveForwardAction
+Action <|-- ardurobotml::MoveForwardAndTurningLeftAction
+Action <|-- ardurobotml::MoveForwardAndTurningRightAction
+Action <|-- ardurobotml::SCANCollisionAction
+Action <|-- ardurobotml::StopAction
+Action <|-- ardurobotml::TurningLeftAction
+Action <|-- ardurobotml::TurningRightAction
+Condition <|-- ardurobotml::AllActionFinishedCondition
+Condition <|-- ardurobotml::CollisionSensorCondition
+Condition <|-- ardurobotml::SystemPropertyCondition
+Guard <|-- ardurobotml::EvaluateGuard
+Guard <|-- ardurobotml::EventGuard
+Guard <|-- ardurobotml::TemporalGuard
+NamedElement <|-- ardurobotml::Action
+NamedElement <|-- ardurobotml::FSMClock
+NamedElement <|-- ardurobotml::FSMEvent
+NamedElement <|-- ardurobotml::Guard
+NamedElement <|-- ardurobotml::RegionContainer
+NamedElement <|-- ardurobotml::TimedSystem
+NamedElement <|-- ardurobotml::Transition
+RegionContainer <|-- ardurobotml::State
+RegionContainer <|-- ardurobotml::TFSM
+ardurobotml::Action "0..9999" --* "1..1" ardurobotml::State : actions22
+ardurobotml::Action "0..9999" --* "1..1" ardurobotml::ActionSequence : actions46
+ardurobotml::EvaluateGuard "1..1" *-- "1..1" ardurobotml::Condition : condition41
+ardurobotml::State "0..1" -- "1..1" ardurobotml::TFSM : currentState15
+ardurobotml::FSMEvent "0..9999" -- "1..1" ardurobotml::Transition : generatedEvents31
+ardurobotml::FSMClock "0..9999" --* "1..1" ardurobotml::TimedSystem : globalClocks1
+ardurobotml::TimedSystem "1..1" *-- "0..9999" ardurobotml::FSMEvent : globalEvents3
+ardurobotml::Transition "0..9999" -- "1..1" ardurobotml::State : incomingTransitions20
+ardurobotml::State "1..1" -- "1..1" ardurobotml::TFSM : initialState5
+ardurobotml::FSMClock "1..1" --* "1..1" ardurobotml::TFSM : localClock10
+ardurobotml::FSMEvent "0..9999" --* "1..1" ardurobotml::TFSM : localEvents7
+ardurobotml::TemporalGuard "1..1" -- "1..1" ardurobotml::FSMClock : onClock34
+ardurobotml::State "1..1" -- "0..9999" ardurobotml::Transition : outgoingTransitions19
+ardurobotml::Guard "1..1" --* "1..1" ardurobotml::Transition : ownedGuard29
+ardurobotml::RegionContainer "1..1" *-- "0..9999" ardurobotml::Region : ownedRegions44
+ardurobotml::State "0..9999" -- "1..1" ardurobotml::TFSM : ownedStates18
+ardurobotml::State "0..9999" --* "1..1" ardurobotml::Region : ownedStates42
+ardurobotml::Transition "0..9999" --* "1..1" ardurobotml::TFSM : ownedTransitions13
+ardurobotml::TFSM "1..1" -- "1..1" ardurobotml::State : owningFSM24
+ardurobotml::Transition "0..9999" -- "1..1" ardurobotml::FSMEvent : sollicitingTransitions38
+ardurobotml::Transition "1..1" -- "1..1" ardurobotml::State : source25
+ardurobotml::State "1..1" -- "1..1" ardurobotml::Transition : target27
+ardurobotml::TimedSystem "1..1" *-- "0..9999" ardurobotml::TFSM : tfsms0
+ardurobotml::FSMEvent "1..1" -- "1..1" ardurobotml::EventGuard : triggeringEvent36
+@enduml

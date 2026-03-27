@@ -1,0 +1,139 @@
+@startuml
+class TAbstractType {
+}
+class TAnnotatable {
+}
+class TElementWithId {
+}
+class TMember {
+}
+class TSignature {
+}
+abstract class basic::TAbstractType {
+  + tLib : bool
+  + tName : str
+}
+class basic::TAccess {
+}
+abstract class basic::TAnnotatable {
+}
+class basic::TAnnotation {
+}
+class basic::TAnnotationType {
+}
+class basic::TClass {
+}
+abstract class basic::TElementWithId {
+  + ID : int
+}
+class basic::TField {
+  + tName : str
+}
+class basic::TFieldDefinition {
+}
+class basic::TFieldSignature {
+}
+class basic::TInterface {
+}
+abstract class basic::TMember {
+}
+class basic::TMethod {
+  + tName : str
+}
+class basic::TMethodDefinition {
+}
+class basic::TMethodSignature {
+}
+class basic::TPackage {
+  + tName : str
+}
+class basic::TParameter {
+}
+class basic::TParameterList {
+}
+abstract class basic::TSignature {
+}
+class basic::TypeGraph {
+  + tName : str
+}
+TAbstractType <|-- basic::TAnnotationType
+TAbstractType <|-- basic::TClass
+TAbstractType <|-- basic::TInterface
+TAnnotatable <|-- basic::TAbstractType
+TAnnotatable <|-- basic::TMember
+TAnnotatable <|-- basic::TPackage
+TAnnotatable <|-- basic::TSignature
+TElementWithId <|-- basic::TAbstractType
+TElementWithId <|-- basic::TAccess
+TElementWithId <|-- basic::TAnnotation
+TElementWithId <|-- basic::TField
+TElementWithId <|-- basic::TMember
+TElementWithId <|-- basic::TMethod
+TElementWithId <|-- basic::TPackage
+TElementWithId <|-- basic::TParameter
+TElementWithId <|-- basic::TParameterList
+TElementWithId <|-- basic::TSignature
+TElementWithId <|-- basic::TypeGraph
+TMember <|-- basic::TFieldDefinition
+TMember <|-- basic::TMethodDefinition
+TSignature <|-- basic::TFieldSignature
+TSignature <|-- basic::TMethodSignature
+basic::TAccess "0..9999" -- "1..1" basic::TMember : accessedBy52
+basic::TAnnotation "0..9999" -- "1..1" basic::TAnnotationType : annotations172
+basic::TClass "1..1" -- "0..9999" basic::TClass : childClasses19
+basic::TInterface "0..9999" -- "1..1" basic::TInterface : childInterfaces158
+basic::TPackage "1..1" -- "0..9999" basic::TClass : classes106
+basic::TypeGraph "1..1" -- "0..9999" basic::TClass : classes139
+basic::TAbstractType "1..1" -- "1..1" basic::TMember : definedBy49
+basic::TMember "0..9999" -- "1..1" basic::TAbstractType : defines169
+basic::TFieldDefinition "0..9999" --* "1..1" basic::TFieldSignature : definitions42
+basic::TMethodDefinition "0..9999" --* "1..1" basic::TMethodSignature : definitions89
+basic::TParameterList "1..1" *-- "0..9999" basic::TParameter : entries124
+basic::TField "1..1" -- "1..1" basic::TFieldSignature : field45
+basic::TField "0..9999" --* "1..1" basic::TypeGraph : fields136
+basic::TParameter "0..1" -- "1..1" basic::TParameterList : first127
+basic::TFieldDefinition "0..9999" -- "1..1" basic::TFieldDefinition : hiddenBy39
+basic::TFieldDefinition "1..1" -- "0..1" basic::TFieldDefinition : hiding35
+basic::TInterface "1..1" -- "0..9999" basic::TClass : implementedBy150
+basic::TClass "1..1" -- "0..9999" basic::TInterface : implements22
+basic::TInterface "0..9999" -- "1..1" basic::TPackage : interfaces107
+basic::TInterface "0..9999" -- "1..1" basic::TypeGraph : interfaces142
+basic::TMethodSignature "1..1" -- "1..1" basic::TMethod : method85
+basic::TypeGraph "1..1" *-- "0..9999" basic::TMethod : methods133
+basic::TParameter "0..1" -- "1..1" basic::TParameter : next115
+basic::TMethodDefinition "0..9999" -- "1..1" basic::TMethodDefinition : overloadedBy80
+basic::TMethodDefinition "0..9999" -- "1..1" basic::TMethodDefinition : overloading76
+basic::TMethodDefinition "1..1" -- "0..9999" basic::TMethodDefinition : overriddenBy72
+basic::TMethodDefinition "0..1" -- "1..1" basic::TMethodDefinition : overriding68
+basic::TAbstractType "0..9999" -- "1..1" basic::TPackage : ownedTypes109
+basic::TAbstractType "0..9999" --* "1..1" basic::TypeGraph : ownedTypes145
+basic::TAbstractType "1..1" -- "0..1" basic::TPackage : package164
+basic::TPackage "0..9999" --* "1..1" basic::TypeGraph : packages130
+basic::TParameterList "0..1" --* "1..1" basic::TMethodSignature : paramList88
+basic::TPackage "0..1" -- "1..1" basic::TPackage : parent103
+basic::TClass "0..1" -- "1..1" basic::TClass : parentClass15
+basic::TInterface "0..9999" -- "1..1" basic::TInterface : parentInterfaces154
+basic::TypeGraph "1..1" -- "1..1" basic::TAbstractType : pg161
+basic::TypeGraph "1..1" -- "1..1" basic::TField : pg28
+basic::TMethod "1..1" -- "1..1" basic::TypeGraph : pg58
+basic::TypeGraph "0..1" -- "1..1" basic::TPackage : pg95
+basic::TParameter "0..1" -- "1..1" basic::TParameter : previous119
+basic::TAbstractType "0..1" -- "1..1" basic::TMethodDefinition : returnType83
+basic::TAbstractType "0..1" -- "1..1" basic::TMethodSignature : returnType92
+basic::TSignature "0..9999" -- "1..1" basic::TAbstractType : signature167
+basic::TFieldSignature "1..1" -- "1..1" basic::TFieldDefinition : signature31
+basic::TMethodSignature "1..1" -- "1..1" basic::TMethodDefinition : signature64
+basic::TFieldSignature "0..9999" --* "1..1" basic::TField : signatures25
+basic::TMethodSignature "0..9999" --* "1..1" basic::TMethod : signatures61
+basic::TPackage "0..9999" --* "1..1" basic::TPackage : subpackage99
+basic::TAccess "0..9999" --* "1..1" basic::TMember : tAccessing55
+basic::TAnnotatable "1..1" -- "1..1" basic::TAnnotation : tAnnotated8
+basic::TAnnotation "0..9999" --* "1..1" basic::TAnnotatable : tAnnotation5
+basic::TAnnotationType "0..9999" -- "1..1" basic::TypeGraph : tAnnotationTypes148
+basic::TMember "1..1" -- "1..1" basic::TAccess : tSource2
+basic::TAccess "1..1" -- "1..1" basic::TMember : tTarget0
+basic::TAnnotation "1..1" -- "1..1" basic::TAnnotationType : type11
+basic::TAbstractType "1..1" -- "1..1" basic::TParameter : type122
+basic::TFieldSignature "1..1" -- "1..1" basic::TAbstractType : type48
+basic::TPackage "1..1" -- "1..1" basic::TypeGraph : typeGraph112
+@enduml

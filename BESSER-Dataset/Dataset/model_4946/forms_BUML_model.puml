@@ -1,0 +1,42 @@
+@startuml
+class ItemType {
+}
+class forms::Choice {
+  + multiple : bool
+}
+class forms::Date {
+}
+class forms::Decision {
+}
+class forms::Form {
+  + caption : str
+}
+class forms::FreeText {
+}
+class forms::Group {
+  + name : str
+}
+class forms::Item {
+  + explanation : str
+  + text : str
+}
+abstract class forms::ItemType {
+}
+class forms::Number {
+}
+class forms::Option {
+  + id : str
+  + text : str
+}
+ItemType <|-- forms::Choice
+ItemType <|-- forms::Date
+ItemType <|-- forms::Decision
+ItemType <|-- forms::FreeText
+ItemType <|-- forms::Number
+forms::Item "1..1" -- "0..9999" forms::Option : dependentOf2
+forms::Group "1..9999" --* "1..1" forms::Form : groups0
+forms::Item "1..1" *-- "1..1" forms::ItemType : itemType1
+forms::Item "1..9999" --* "1..1" forms::Group : items6
+forms::Option "1..9999" --* "1..1" forms::Choice : options4
+forms::Decision "1..1" *-- "2..2" forms::Option : options9
+@enduml

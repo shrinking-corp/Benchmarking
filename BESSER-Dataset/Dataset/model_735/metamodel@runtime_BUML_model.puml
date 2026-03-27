@@ -1,0 +1,241 @@
+@startuml
+class AbstractPort {
+}
+class Attribute {
+}
+class AttributeInstance {
+}
+class BasicAttribute {
+}
+class Binding {
+}
+class CardinalityElement {
+}
+class ComponentImplementation {
+}
+class ComponentInstance {
+}
+class ComponentType {
+}
+class CompositeInstance {
+}
+class DelegationBinding {
+}
+class Dictionary {
+}
+class DictionaryDefaultValue {
+}
+class Entry {
+}
+class Group {
+}
+class InstanceGroup {
+}
+enum InstanceState {
+  OFF
+  ON
+}
+class ModelElement {
+}
+class NamedElement {
+}
+class Operation {
+}
+class Parameter {
+}
+class PortId {
+}
+enum PortRole {
+  client
+  server
+}
+class Service {
+}
+class TransmissionBinding {
+}
+class TypeGroup {
+}
+class TypeImplementation {
+}
+class TypedElement {
+}
+abstract class art::CardinalityElement {
+  + lower : str
+  + upper : str
+}
+class art::DataType {
+}
+abstract class art::ModelElement {
+}
+abstract class art::NamedElement {
+  + name : str
+}
+class art::System {
+}
+abstract class art::TypedElement {
+}
+abstract class art::group::Group {
+}
+class art::group::InstanceGroup {
+}
+class art::group::TypeGroup {
+}
+abstract class art::implem::ComponentImplementation {
+}
+class art::implem::FractalComponent {
+  + contentDesc : str
+  + controllerDesc : str
+}
+class art::implem::OSGiComponent {
+  + implementingClass : str
+}
+class art::implem::OSGiType {
+  + generateInstanceBundle : str
+}
+abstract class art::implem::TypeImplementation {
+}
+abstract class art::instance::AttributeInstance {
+}
+abstract class art::instance::Binding {
+  + id : str
+}
+abstract class art::instance::ComponentInstance {
+  + state : str
+}
+class art::instance::CompositeInstance {
+}
+class art::instance::DefaultEntry {
+}
+class art::instance::DelegationBinding {
+}
+class art::instance::DictionaryValuedAttribute {
+}
+abstract class art::instance::Entry {
+  + value : str
+}
+class art::instance::OtherEntry {
+  + key : str
+}
+class art::instance::PrimitiveInstance {
+}
+class art::instance::TransmissionBinding {
+}
+class art::instance::ValuedAttribute {
+  + value : str
+}
+abstract class art::type::AbstractPort {
+  + role : str
+}
+abstract class art::type::Attribute {
+}
+class art::type::BasicAttribute {
+  + defaultValue : str
+}
+abstract class art::type::ComponentType {
+}
+class art::type::CompositeType {
+}
+class art::type::ControlService {
+}
+class art::type::Dictionary {
+}
+class art::type::DictionaryDefaultValue {
+  + key : str
+  + value : str
+}
+class art::type::FunctionalService {
+}
+class art::type::Operation {
+}
+class art::type::Parameter {
+}
+class art::type::Port {
+  + isOptional : str
+}
+class art::type::PortCollection {
+}
+class art::type::PortId {
+}
+class art::type::PrimitiveType {
+}
+abstract class art::type::Service {
+}
+class type::AbstractPort {
+}
+class type::art::DataType {
+}
+AbstractPort <|-- art::type::PortCollection
+AttributeInstance <|-- art::instance::DictionaryValuedAttribute
+AttributeInstance <|-- art::instance::ValuedAttribute
+Attribute <|-- art::type::BasicAttribute
+Attribute <|-- art::type::Dictionary
+Binding <|-- art::instance::DelegationBinding
+Binding <|-- art::instance::TransmissionBinding
+CardinalityElement <|-- art::type::Port
+ComponentImplementation <|-- art::implem::FractalComponent
+ComponentImplementation <|-- art::implem::OSGiComponent
+ComponentInstance <|-- art::instance::CompositeInstance
+ComponentInstance <|-- art::instance::PrimitiveInstance
+ComponentType <|-- art::type::CompositeType
+ComponentType <|-- art::type::PrimitiveType
+Entry <|-- art::instance::DefaultEntry
+Entry <|-- art::instance::OtherEntry
+Group <|-- art::group::InstanceGroup
+Group <|-- art::group::TypeGroup
+ModelElement <|-- art::CardinalityElement
+ModelElement <|-- art::DataType
+ModelElement <|-- art::System
+ModelElement <|-- art::TypedElement
+ModelElement <|-- art::instance::ComponentInstance
+ModelElement <|-- art::type::ComponentType
+ModelElement <|-- art::type::Operation
+ModelElement <|-- art::type::Service
+NamedElement <|-- art::ModelElement
+NamedElement <|-- art::group::Group
+NamedElement <|-- art::type::AbstractPort
+NamedElement <|-- art::type::PortId
+Service <|-- art::type::ControlService
+Service <|-- art::type::FunctionalService
+TypeImplementation <|-- art::implem::OSGiType
+TypedElement <|-- art::type::Attribute
+TypedElement <|-- art::type::Parameter
+type::AbstractPort <|-- art::type::Port
+AttributeInstance "0..9999" --* "1..1" art::instance::ComponentInstance : attribute15
+BasicAttribute "1..1" -- "1..1" art::instance::ValuedAttribute : attribute36
+Dictionary "1..1" -- "1..1" art::instance::DictionaryValuedAttribute : attribute38
+art::type::ComponentType "1..1" *-- "0..9999" Attribute : attribute43
+TransmissionBinding "0..9999" --* "1..1" art::instance::ComponentInstance : binding17
+AbstractPort "1..1" -- "1..1" art::instance::TransmissionBinding : client27
+art::DataType "0..9999" --* "1..1" art::System : dataTypes5
+DelegationBinding "0..9999" --* "1..1" art::instance::CompositeInstance : delegation24
+art::instance::DictionaryValuedAttribute "1..1" *-- "0..9999" Entry : entries37
+AbstractPort "1..1" -- "1..1" art::instance::DelegationBinding : exported33
+art::instance::ComponentInstance "1..1" -- "0..9999" InstanceGroup : groups21
+TypeGroup "0..9999" -- "1..1" art::type::ComponentType : groups45
+art::System "1..1" *-- "0..9999" Group : groups7
+PortId "1..9999" --* "1..1" art::type::PortCollection : ids56
+ComponentImplementation "0..1" --* "1..1" art::instance::ComponentInstance : implem19
+art::type::ComponentType "1..1" *-- "0..1" TypeImplementation : implem47
+Parameter "0..9999" --* "1..1" art::type::Operation : input50
+art::group::InstanceGroup "1..1" -- "0..9999" ComponentInstance : instances65
+DictionaryDefaultValue "1..1" -- "1..1" art::instance::DefaultEntry : key40
+DictionaryDefaultValue "0..9999" --* "1..1" art::type::Dictionary : keys58
+Operation "0..9999" --* "1..1" art::type::Service : operation49
+Parameter "0..9999" --* "1..1" art::type::Operation : output51
+AbstractPort "0..9999" --* "1..1" art::type::ComponentType : port41
+CompositeInstance "1..1" --* "1..1" art::System : root0
+art::instance::TransmissionBinding "1..1" -- "1..1" AbstractPort : server28
+ComponentInstance "1..1" -- "1..1" art::instance::Binding : serverInstance25
+art::type::AbstractPort "1..1" -- "1..1" Service : service54
+Service "0..9999" --* "1..1" art::System : services1
+AbstractPort "1..1" -- "1..1" art::instance::DelegationBinding : source31
+ComponentInstance "0..9999" --* "1..1" art::instance::CompositeInstance : subComponent22
+TypeGroup "0..9999" --* "1..1" art::group::TypeGroup : subGroups63
+InstanceGroup "0..9999" --* "1..1" art::group::InstanceGroup : subGroups68
+art::instance::ComponentInstance "1..1" -- "0..1" CompositeInstance : superComponent13
+ComponentType "1..1" -- "1..1" art::instance::ComponentInstance : type11
+art::DataType "1..1" -- "1..1" art::TypedElement : type9
+ComponentType "0..9999" --* "1..1" art::System : types3
+art::group::TypeGroup "1..1" -- "0..9999" ComponentType : types61
+type::art::DataType "1..1" -- "1..1" art::type::Dictionary : valueType57
+@enduml

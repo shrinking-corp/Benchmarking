@@ -1,0 +1,75 @@
+@startuml
+class FormWidget {
+}
+class Widget {
+}
+class bootstrap::CheckBox {
+  + description : str
+}
+class bootstrap::Form {
+}
+abstract class bootstrap::FormWidget {
+  + label : str
+}
+class bootstrap::Gallery {
+  + imagesPath : str
+}
+class bootstrap::ImagesBlock {
+  + imagesPath : str
+}
+class bootstrap::MainPage {
+  + description : str
+  + title : str
+}
+class bootstrap::Page {
+  + description : str
+  + name : str
+  + title : str
+}
+class bootstrap::Section {
+  + description : str
+  + title : str
+}
+class bootstrap::Site {
+  + title : str
+}
+class bootstrap::Spinner {
+  + values : str
+}
+class bootstrap::Table {
+  + bordered : bool
+  + columnNames : str
+  + rowNames : str
+  + striped : bool
+}
+class bootstrap::Text {
+  + columnNumber : int
+}
+class bootstrap::TextArea {
+}
+class bootstrap::Video {
+  + path : str
+}
+abstract class bootstrap::Widget {
+  + title : str
+}
+FormWidget <|-- bootstrap::CheckBox
+FormWidget <|-- bootstrap::Spinner
+FormWidget <|-- bootstrap::TextArea
+Widget <|-- bootstrap::Form
+Widget <|-- bootstrap::Gallery
+Widget <|-- bootstrap::ImagesBlock
+Widget <|-- bootstrap::Table
+Widget <|-- bootstrap::Text
+Widget <|-- bootstrap::Video
+bootstrap::Form "1..1" -- "1..1" bootstrap::FormWidget : form13
+bootstrap::Form "1..1" *-- "1..9999" bootstrap::FormWidget : formWidgets12
+bootstrap::MainPage "1..1" --* "1..1" bootstrap::Site : mainPage1
+bootstrap::Section "1..1" -- "1..1" bootstrap::Page : page8
+bootstrap::Page "0..9999" --* "1..1" bootstrap::Site : pages0
+bootstrap::Section "1..1" -- "1..1" bootstrap::Widget : section10
+bootstrap::Section "1..9999" --* "1..1" bootstrap::Page : sections3
+bootstrap::Site "1..1" -- "1..1" bootstrap::Page : site4
+bootstrap::MainPage "1..1" -- "1..1" bootstrap::Site : site5
+bootstrap::Widget "1..9999" --* "1..1" bootstrap::Section : widgets7
+@enduml

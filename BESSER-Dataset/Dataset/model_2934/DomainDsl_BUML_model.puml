@@ -1,0 +1,47 @@
+@startuml
+class AbstractElement {
+}
+class Type {
+}
+class domainDsl::AbstractElement {
+}
+class domainDsl::DataType {
+}
+class domainDsl::Domainmodel {
+}
+class domainDsl::EType {
+  + name : str
+}
+class domainDsl::Entity {
+}
+class domainDsl::Feature {
+  + defaultVal : str
+  + many : bool
+  + name : str
+}
+class domainDsl::Import {
+  + importedNamespace : str
+}
+class domainDsl::PackageDeclaration {
+  + name : str
+}
+class domainDsl::Type {
+  + name : str
+}
+class domainDsl::Validator {
+  + name : str
+  + svalue : str
+  + value : int
+}
+AbstractElement <|-- domainDsl::Import
+AbstractElement <|-- domainDsl::PackageDeclaration
+AbstractElement <|-- domainDsl::Type
+Type <|-- domainDsl::DataType
+Type <|-- domainDsl::Entity
+domainDsl::Domainmodel "1..1" *-- "0..9999" domainDsl::AbstractElement : elements0
+domainDsl::AbstractElement "0..9999" --* "1..1" domainDsl::PackageDeclaration : elements1
+domainDsl::Feature "0..9999" --* "1..1" domainDsl::Entity : features5
+domainDsl::Entity "1..1" -- "0..1" domainDsl::Entity : superType4
+domainDsl::Type "0..1" -- "1..1" domainDsl::Feature : type7
+domainDsl::Validator "0..9999" --* "1..1" domainDsl::Feature : valdiators9
+@enduml

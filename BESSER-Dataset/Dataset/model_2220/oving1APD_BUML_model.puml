@@ -1,0 +1,42 @@
+@startuml
+class oving1APD::Course {
+  + code : str
+  + credit : float
+  + level : int
+  + name : str
+}
+class oving1APD::Department {
+  + name : str
+  + shortName : str
+}
+class oving1APD::Semester {
+  + number : int
+}
+class oving1APD::Slot {
+  + name : str
+}
+class oving1APD::Specialization {
+  + name : str
+}
+class oving1APD::StudyProgram {
+  + name : str
+  + shortName : str
+}
+oving1APD::Department "1..1" *-- "0..9999" oving1APD::Course : course1
+oving1APD::Course "0..9999" -- "1..1" oving1APD::Specialization : course24
+oving1APD::Course "0..1" -- "1..1" oving1APD::Slot : course30
+oving1APD::Semester "0..9999" -- "1..1" oving1APD::Course : courseInSemester7
+oving1APD::StudyProgram "1..1" -- "0..1" oving1APD::Department : department5
+oving1APD::Course "0..9999" -- "1..1" oving1APD::Semester : hasCourse13
+oving1APD::Specialization "1..1" -- "0..1" oving1APD::Semester : semester22
+oving1APD::Semester "0..1" -- "1..1" oving1APD::StudyProgram : semester3
+oving1APD::Semester "0..1" -- "1..1" oving1APD::Slot : semester32
+oving1APD::Course "1..1" -- "0..1" oving1APD::Slot : slot11
+oving1APD::Slot "0..1" --* "1..1" oving1APD::Semester : slot14
+oving1APD::Specialization "0..1" -- "1..1" oving1APD::Semester : specialization19
+oving1APD::Specialization "0..9999" --* "1..1" oving1APD::StudyProgram : specialization2
+oving1APD::Specialization "0..1" -- "1..1" oving1APD::Course : specialization9
+oving1APD::StudyProgram "0..9999" --* "1..1" oving1APD::Department : studyProgram0
+oving1APD::Semester "1..1" -- "0..1" oving1APD::StudyProgram : studyProgram16
+oving1APD::StudyProgram "0..1" -- "1..1" oving1APD::Specialization : studyProgram27
+@enduml

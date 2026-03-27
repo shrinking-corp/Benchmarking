@@ -1,0 +1,178 @@
+@startuml
+class BlockType {
+}
+enum BooleanValue {
+  false
+  true
+}
+class ClientBlock {
+}
+class Declaration {
+}
+class HttpMethodBlock {
+}
+enum HttpMethodType {
+  delete
+  get
+  patch
+  post
+  put
+}
+class IntrinsicType {
+}
+class Literal {
+}
+class Member {
+}
+class NumericType {
+}
+class Type {
+}
+class UserTypeDeclaration {
+}
+class netModel::BlockType {
+}
+class netModel::BodyBlock {
+}
+class netModel::BooleanLiteral {
+  + literal : str
+}
+class netModel::BooleanType {
+}
+class netModel::Client {
+  + baseUrl : str
+}
+class netModel::ClientBlock {
+}
+class netModel::ComplexTypeDeclaration {
+}
+class netModel::ComplexTypeLiteral {
+}
+class netModel::Declaration {
+  + name : str
+}
+class netModel::DoubleType {
+}
+class netModel::EnumMember {
+  + assignment : bool
+  + name : str
+  + value : int
+}
+class netModel::EnumTypeDeclaration {
+}
+class netModel::EnumTypeLiteral {
+}
+class netModel::GenericListType {
+  + id : str
+}
+class netModel::Header {
+  + name : str
+  + value : str
+}
+class netModel::HeaderBlock {
+}
+class netModel::HttpMethod {
+  + name : str
+  + type : str
+}
+class netModel::HttpMethodBlock {
+}
+class netModel::IntegerType {
+}
+class netModel::IntrinsicType {
+  + id : str
+}
+class netModel::Literal {
+}
+class netModel::LongType {
+}
+class netModel::Member {
+  + name : str
+}
+class netModel::Model {
+  + packageName : str
+}
+class netModel::NumericLiteral {
+  + literal : str
+}
+class netModel::NumericType {
+}
+class netModel::ParamsBlock {
+}
+class netModel::Path {
+  + arb : str
+}
+class netModel::ResponseBlock {
+}
+class netModel::SimpleMember {
+  + name : str
+}
+class netModel::SimpleMemberAssignment {
+}
+class netModel::SkipMember {
+}
+class netModel::StringLiteral {
+  + literal : str
+}
+class netModel::StringType {
+}
+class netModel::Type {
+}
+class netModel::TypedMember {
+}
+class netModel::UserType {
+}
+class netModel::UserTypeDeclaration {
+  + keyword : str
+  + nogen : bool
+}
+BlockType <|-- netModel::ComplexTypeLiteral
+BlockType <|-- netModel::Type
+ClientBlock <|-- netModel::HeaderBlock
+ClientBlock <|-- netModel::HttpMethod
+ClientBlock <|-- netModel::ParamsBlock
+Declaration <|-- netModel::Client
+Declaration <|-- netModel::UserTypeDeclaration
+HttpMethodBlock <|-- netModel::BodyBlock
+HttpMethodBlock <|-- netModel::HeaderBlock
+HttpMethodBlock <|-- netModel::ParamsBlock
+HttpMethodBlock <|-- netModel::ResponseBlock
+IntrinsicType <|-- netModel::BooleanType
+IntrinsicType <|-- netModel::NumericType
+IntrinsicType <|-- netModel::StringType
+Literal <|-- netModel::BooleanLiteral
+Literal <|-- netModel::NumericLiteral
+Literal <|-- netModel::StringLiteral
+Member <|-- netModel::SkipMember
+Member <|-- netModel::TypedMember
+NumericType <|-- netModel::DoubleType
+NumericType <|-- netModel::IntegerType
+NumericType <|-- netModel::LongType
+Type <|-- netModel::GenericListType
+Type <|-- netModel::IntrinsicType
+Type <|-- netModel::UserType
+UserTypeDeclaration <|-- netModel::ComplexTypeDeclaration
+UserTypeDeclaration <|-- netModel::EnumTypeDeclaration
+netModel::ClientBlock "0..9999" --* "1..1" netModel::Client : blocks1
+netModel::HttpMethodBlock "0..9999" --* "1..1" netModel::HttpMethod : blocks4
+netModel::UserTypeDeclaration "0..1" -- "1..1" netModel::UserType : declaration25
+netModel::Model "1..1" *-- "0..9999" netModel::Declaration : declarations0
+netModel::Literal "0..1" --* "1..1" netModel::SimpleMemberAssignment : defaultValue12
+netModel::Type "0..1" --* "1..1" netModel::GenericListType : elementType23
+netModel::HeaderBlock "1..1" *-- "0..9999" netModel::Header : headers2
+netModel::ComplexTypeLiteral "0..1" --* "1..1" netModel::SkipMember : literal20
+netModel::ComplexTypeLiteral "0..1" --* "1..1" netModel::ComplexTypeDeclaration : literal26
+netModel::EnumTypeLiteral "0..1" --* "1..1" netModel::EnumTypeDeclaration : literal30
+netModel::SimpleMember "0..1" --* "1..1" netModel::SimpleMemberAssignment : member10
+netModel::EnumMember "0..9999" --* "1..1" netModel::EnumTypeLiteral : members32
+netModel::Member "0..9999" --* "1..1" netModel::ComplexTypeLiteral : members34
+netModel::SimpleMemberAssignment "0..9999" --* "1..1" netModel::Path : params6
+netModel::ParamsBlock "1..1" *-- "0..9999" netModel::SimpleMemberAssignment : params8
+netModel::Path "0..1" --* "1..1" netModel::HttpMethod : path3
+netModel::ResponseBlock "1..1" -- "0..1" netModel::ComplexTypeDeclaration : superType15
+netModel::EnumTypeDeclaration "1..1" *-- "0..1" netModel::IntegerType : superType29
+netModel::BlockType "0..1" --* "1..1" netModel::BodyBlock : type14
+netModel::BlockType "0..1" --* "1..1" netModel::ResponseBlock : type16
+netModel::Type "0..1" --* "1..1" netModel::TypedMember : type19
+netModel::SimpleMember "1..1" *-- "0..1" netModel::IntrinsicType : type21
+@enduml

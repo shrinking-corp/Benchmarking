@@ -1,0 +1,82 @@
+@startuml
+class Action {
+}
+class FunctionDeclaration {
+}
+class Statement {
+}
+abstract class model::Action {
+}
+class model::AssignmentStatement {
+}
+class model::Block {
+}
+class model::Branch {
+}
+class model::BreakStatement {
+}
+class model::ChoiceStatement {
+}
+class model::ConstantDeclaration {
+}
+class model::ConstantDeclarationStatement {
+}
+class model::EmptyStatement {
+}
+class model::Expression {
+}
+class model::ExpressionStatement {
+}
+class model::ForStatement {
+}
+class model::IfStatement {
+}
+class model::ParameterDeclaration {
+}
+class model::ProcedureDeclaration {
+}
+class model::ReferenceExpression {
+}
+class model::ReturnStatement {
+}
+abstract class model::Statement {
+}
+class model::SwitchStatement {
+}
+class model::VariableDeclaration {
+}
+class model::VariableDeclarationStatement {
+}
+Action <|-- model::Block
+Action <|-- model::Statement
+FunctionDeclaration <|-- model::ProcedureDeclaration
+Statement <|-- model::AssignmentStatement
+Statement <|-- model::BreakStatement
+Statement <|-- model::ChoiceStatement
+Statement <|-- model::ConstantDeclarationStatement
+Statement <|-- model::EmptyStatement
+Statement <|-- model::ExpressionStatement
+Statement <|-- model::ForStatement
+Statement <|-- model::IfStatement
+Statement <|-- model::ReturnStatement
+Statement <|-- model::SwitchStatement
+Statement <|-- model::VariableDeclarationStatement
+model::Action "1..1" --* "1..1" model::Branch : action4
+model::Block "1..1" *-- "0..9999" model::Action : actions1
+model::Block "0..1" --* "1..1" model::ProcedureDeclaration : body0
+model::Action "1..1" --* "1..1" model::ForStatement : body24
+model::Branch "1..9999" --* "1..1" model::ChoiceStatement : branches30
+model::Branch "1..9999" --* "1..1" model::SwitchStatement : cases17
+model::Branch "1..9999" --* "1..1" model::IfStatement : conditionals13
+model::ConstantDeclarationStatement "1..1" *-- "0..1" model::ConstantDeclaration : constantDeclaration8
+model::Expression "1..1" --* "1..1" model::SwitchStatement : controlExpression15
+model::Expression "0..1" --* "1..1" model::ReturnStatement : expression11
+model::Expression "0..1" --* "1..1" model::ExpressionStatement : expression9
+model::Expression "1..1" --* "1..1" model::Branch : guard3
+model::ReferenceExpression "1..1" --* "1..1" model::AssignmentStatement : lhs32
+model::ForStatement "1..1" *-- "1..1" model::ParameterDeclaration : parameter20
+model::Expression "1..1" --* "1..1" model::ForStatement : range21
+model::Expression "1..1" --* "1..1" model::AssignmentStatement : rhs33
+model::ForStatement "1..1" *-- "0..1" model::Action : then27
+model::VariableDeclaration "0..1" --* "1..1" model::VariableDeclarationStatement : variableDeclaration7
+@enduml

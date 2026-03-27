@@ -1,0 +1,28 @@
+@startuml
+class Borrowable {
+}
+abstract class library::Borrowable {
+  + copiesAvailable : int
+  + title : str
+}
+class library::CityLibrary {
+  + address : str
+}
+class library::Customer {
+  + name : str
+}
+class library::borrowables::Book {
+  + authors : str
+}
+class library::borrowables::CD {
+}
+class library::borrowables::Magazine {
+}
+Borrowable <|-- library::borrowables::Book
+Borrowable <|-- library::borrowables::CD
+Borrowable <|-- library::borrowables::Magazine
+library::Borrowable "0..9999" --* "1..1" library::CityLibrary : borrowables0
+library::Customer "1..1" -- "0..9999" library::Borrowable : borrowed2
+library::Customer "0..9999" --* "1..1" library::CityLibrary : customers1
+library::CityLibrary "0..1" -- "1..1" library::Borrowable : library4
+@enduml

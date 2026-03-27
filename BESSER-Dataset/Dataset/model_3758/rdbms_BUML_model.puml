@@ -1,0 +1,225 @@
+@startuml
+class RdbmsElement {
+}
+class RdbmsExpression {
+}
+class RdbmsField {
+}
+class RdbmsFieldOperation {
+}
+class RdbmsIdentifierField {
+}
+class RdbmsTable {
+}
+class RdbmsTableOperation {
+}
+class RdbmsViewAliasField {
+}
+class RdbmsViewField {
+}
+class RdbmsViewTableField {
+}
+class rdbms::RdbmsConfiguration {
+  + dialect : str
+}
+class rdbms::RdbmsCreateFieldOperation {
+}
+class rdbms::RdbmsCreateTableOperation {
+}
+class rdbms::RdbmsDeleteFieldOperation {
+}
+class rdbms::RdbmsDeleteTableOperation {
+}
+abstract class rdbms::RdbmsElement {
+  + description : str
+  + fullName : str
+  + name : str
+  + originalName : str
+  + originalPackage : str
+  + shortName : str
+  + sqlName : str
+  + uuid : str
+}
+abstract class rdbms::RdbmsExpression {
+  + expression : str
+}
+class rdbms::RdbmsFeature {
+  + name : str
+}
+abstract class rdbms::RdbmsField {
+  + mandatory : bool
+  + precision : int
+  + rdbmsTypeName : str
+  + scale : int
+  + size : int
+  + storageByte : int
+}
+abstract class rdbms::RdbmsFieldOperation {
+  + reviewRequired : bool
+}
+class rdbms::RdbmsFieldType {
+  + description : str
+  + name : str
+  + precision : int
+  + rdbmsTypeName : str
+  + scale : int
+  + size : int
+  + storageByte : int
+  + uuid : str
+}
+class rdbms::RdbmsForeignKey {
+  + deferred : bool
+  + deleteOnCascade : bool
+  + foreignKeySqlName : str
+  + inheritenceBased : bool
+  + readOnly : bool
+}
+class rdbms::RdbmsIdentifierField {
+}
+class rdbms::RdbmsIndex {
+  + unique : bool
+}
+class rdbms::RdbmsJunctionTable {
+}
+class rdbms::RdbmsLabelExpression {
+  + text : str
+}
+class rdbms::RdbmsModel {
+  + version : str
+}
+class rdbms::RdbmsModifyFieldOperation {
+  + changedForeignKeyToValueField : str
+  + changedValueFieldToForeignKey : str
+  + mandatoryChanged : bool
+  + nameChanged : str
+  + sizeChanged : str
+  + typeChanged : bool
+}
+class rdbms::RdbmsModifyTableOperation {
+  + nameChanged : str
+}
+class rdbms::RdbmsOperationMeta {
+}
+class rdbms::RdbmsRelationExpression {
+}
+class rdbms::RdbmsTable {
+}
+class rdbms::RdbmsTableAlias {
+}
+abstract class rdbms::RdbmsTableOperation {
+}
+class rdbms::RdbmsUniqueConstraint {
+}
+class rdbms::RdbmsValueField {
+  + technical : bool
+}
+class rdbms::RdbmsView {
+  + originUuid : str
+}
+abstract class rdbms::RdbmsViewAliasField {
+}
+class rdbms::RdbmsViewExpressionField {
+  + expression : str
+}
+abstract class rdbms::RdbmsViewField {
+  + inherited : bool
+}
+class rdbms::RdbmsViewForeignIdentifierField {
+}
+class rdbms::RdbmsViewIdentifierField {
+}
+class rdbms::RdbmsViewRecord {
+}
+class rdbms::RdbmsViewRecordValue {
+  + value : str
+}
+class rdbms::RdbmsViewRelation {
+  + name : str
+}
+abstract class rdbms::RdbmsViewTableField {
+  + foreign : bool
+}
+class rdbms::RdbmsViewValueField {
+}
+RdbmsElement <|-- rdbms::RdbmsExpression
+RdbmsElement <|-- rdbms::RdbmsField
+RdbmsElement <|-- rdbms::RdbmsFieldOperation
+RdbmsElement <|-- rdbms::RdbmsIndex
+RdbmsElement <|-- rdbms::RdbmsTable
+RdbmsElement <|-- rdbms::RdbmsTableAlias
+RdbmsElement <|-- rdbms::RdbmsTableOperation
+RdbmsElement <|-- rdbms::RdbmsUniqueConstraint
+RdbmsElement <|-- rdbms::RdbmsView
+RdbmsElement <|-- rdbms::RdbmsViewField
+RdbmsExpression <|-- rdbms::RdbmsLabelExpression
+RdbmsExpression <|-- rdbms::RdbmsRelationExpression
+RdbmsFieldOperation <|-- rdbms::RdbmsCreateFieldOperation
+RdbmsFieldOperation <|-- rdbms::RdbmsDeleteFieldOperation
+RdbmsFieldOperation <|-- rdbms::RdbmsModifyFieldOperation
+RdbmsField <|-- rdbms::RdbmsIdentifierField
+RdbmsField <|-- rdbms::RdbmsValueField
+RdbmsIdentifierField <|-- rdbms::RdbmsForeignKey
+RdbmsTableOperation <|-- rdbms::RdbmsCreateTableOperation
+RdbmsTableOperation <|-- rdbms::RdbmsDeleteTableOperation
+RdbmsTableOperation <|-- rdbms::RdbmsModifyTableOperation
+RdbmsTable <|-- rdbms::RdbmsJunctionTable
+RdbmsViewAliasField <|-- rdbms::RdbmsViewIdentifierField
+RdbmsViewAliasField <|-- rdbms::RdbmsViewValueField
+RdbmsViewField <|-- rdbms::RdbmsViewExpressionField
+RdbmsViewField <|-- rdbms::RdbmsViewTableField
+RdbmsViewTableField <|-- rdbms::RdbmsViewAliasField
+RdbmsViewTableField <|-- rdbms::RdbmsViewForeignIdentifierField
+rdbms::RdbmsTableAlias "1..1" -- "1..1" rdbms::RdbmsViewAliasField : alias54
+rdbms::RdbmsConfiguration "1..1" --* "1..1" rdbms::RdbmsModel : configuration40
+rdbms::RdbmsCreateFieldOperation "0..9999" --* "1..1" rdbms::RdbmsModifyTableOperation : createFieldOperations57
+rdbms::RdbmsModel "1..1" -- "1..1" rdbms::RdbmsOperationMeta : currentModel105
+rdbms::RdbmsDeleteFieldOperation "0..9999" --* "1..1" rdbms::RdbmsModifyTableOperation : deleteFieldOperations60
+rdbms::RdbmsViewExpressionField "1..1" *-- "1..9999" rdbms::RdbmsExpression : expressions31
+rdbms::RdbmsFeature "0..9999" --* "1..1" rdbms::RdbmsConfiguration : features46
+rdbms::RdbmsForeignKey "1..1" -- "1..1" rdbms::RdbmsJunctionTable : field116
+rdbms::RdbmsForeignKey "1..1" -- "1..1" rdbms::RdbmsJunctionTable : field217
+rdbms::RdbmsRelationExpression "1..1" -- "1..1" rdbms::RdbmsViewAliasField : field53
+rdbms::RdbmsField "1..1" -- "1..1" rdbms::RdbmsFieldOperation : field65
+rdbms::RdbmsField "0..9999" --* "1..1" rdbms::RdbmsTable : fields0
+rdbms::RdbmsField "1..9999" -- "1..1" rdbms::RdbmsUniqueConstraint : fields14
+rdbms::RdbmsViewField "0..9999" --* "1..1" rdbms::RdbmsView : fields21
+rdbms::RdbmsField "1..9999" -- "1..1" rdbms::RdbmsIndex : fields88
+rdbms::RdbmsIdentifierField "1..1" -- "0..9999" rdbms::RdbmsForeignKey : foreignKeys20
+rdbms::RdbmsTableAlias "1..1" -- "1..1" rdbms::RdbmsViewRelation : fromAlias70
+rdbms::RdbmsViewRelation "1..1" -- "1..1" rdbms::RdbmsIdentifierField : fromField76
+rdbms::RdbmsViewIdentifierField "0..1" -- "1..1" rdbms::RdbmsViewRecordValue : identifierField95
+rdbms::RdbmsModel "1..1" -- "1..1" rdbms::RdbmsOperationMeta : incrementalModel108
+rdbms::RdbmsIndex "0..9999" --* "1..1" rdbms::RdbmsTable : indexes4
+rdbms::RdbmsModifyFieldOperation "0..9999" --* "1..1" rdbms::RdbmsModifyTableOperation : modifyFieldOperations58
+rdbms::RdbmsTable "0..1" -- "1..1" rdbms::RdbmsTable : parent7
+rdbms::RdbmsField "1..1" -- "1..1" rdbms::RdbmsModifyFieldOperation : previousField67
+rdbms::RdbmsModel "1..1" -- "1..1" rdbms::RdbmsOperationMeta : previousModel103
+rdbms::RdbmsTable "1..1" -- "1..1" rdbms::RdbmsModifyTableOperation : previousTable62
+rdbms::RdbmsViewIdentifierField "1..1" -- "1..1" rdbms::RdbmsView : primaryIdentifierField25
+rdbms::RdbmsIdentifierField "1..1" -- "1..1" rdbms::RdbmsTable : primaryKey3
+rdbms::RdbmsTableAlias "1..1" -- "1..1" rdbms::RdbmsView : primaryTable22
+rdbms::RdbmsModel "1..1" *-- "0..9999" rdbms::RdbmsFieldType : rdbmsFieldTypes32
+rdbms::RdbmsTable "0..9999" --* "1..1" rdbms::RdbmsModel : rdbmsTables34
+rdbms::RdbmsView "0..9999" --* "1..1" rdbms::RdbmsModel : rdbmsViews37
+rdbms::RdbmsViewIdentifierField "1..1" -- "1..1" rdbms::RdbmsViewForeignIdentifierField : referenceIdentifier84
+rdbms::RdbmsForeignKey "1..1" -- "1..1" rdbms::RdbmsIdentifierField : referenceKey11
+rdbms::RdbmsViewRelation "0..9999" --* "1..1" rdbms::RdbmsView : relations23
+rdbms::RdbmsTable "1..1" -- "1..1" rdbms::RdbmsTableOperation : table100
+rdbms::RdbmsUniqueConstraint "1..1" -- "1..1" rdbms::RdbmsTable : table12
+rdbms::RdbmsTable "1..1" -- "1..1" rdbms::RdbmsTableAlias : table48
+rdbms::RdbmsIndex "1..1" -- "1..1" rdbms::RdbmsTable : table86
+rdbms::RdbmsTable "1..1" -- "1..1" rdbms::RdbmsField : table9
+rdbms::RdbmsField "1..1" -- "1..1" rdbms::RdbmsViewTableField : tableField82
+rdbms::RdbmsModel "1..1" *-- "0..9999" rdbms::RdbmsTableOperation : tableOperations42
+rdbms::RdbmsTableAlias "1..9999" --* "1..1" rdbms::RdbmsView : tables27
+rdbms::RdbmsTableAlias "1..1" -- "1..1" rdbms::RdbmsViewRelation : toAlias73
+rdbms::RdbmsIdentifierField "1..1" -- "1..1" rdbms::RdbmsViewRelation : toField79
+rdbms::RdbmsField "1..1" -- "0..1" rdbms::RdbmsFieldType : type10
+rdbms::RdbmsTable "1..1" *-- "0..9999" rdbms::RdbmsUniqueConstraint : uniqueConstraints1
+rdbms::RdbmsViewRecordValue "1..1" -- "0..1" rdbms::RdbmsViewValueField : valueField98
+rdbms::RdbmsViewRecordValue "0..9999" --* "1..1" rdbms::RdbmsViewRecord : values90
+rdbms::RdbmsView "1..1" -- "1..1" rdbms::RdbmsViewField : view29
+rdbms::RdbmsView "1..1" -- "1..1" rdbms::RdbmsTableAlias : view51
+rdbms::RdbmsViewRecord "1..1" -- "1..1" rdbms::RdbmsView : view92
+rdbms::RdbmsViewRecord "0..9999" --* "1..1" rdbms::RdbmsModel : viewRecords44
+@enduml

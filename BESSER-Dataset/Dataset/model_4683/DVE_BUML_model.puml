@@ -1,0 +1,246 @@
+@startuml
+class Assignment {
+}
+enum BinaryOperator {
+  AND
+  BAND
+  BOR
+  BXOR
+  DIV
+  EQ
+  GEQ
+  GT
+  IMPLY
+  LEQ
+  LT
+  MINUS
+  MOD
+  MULT
+  NEQ
+  OR
+  PLUS
+  SHL
+  SHR
+}
+class BooleanLiteral {
+}
+class ChannelDeclaration {
+}
+class ChannelReference {
+}
+class CompositeDeclaration {
+}
+class DVE::model::ArrayLiteral {
+}
+class DVE::model::ArrayType {
+}
+class DVE::model::Assignment {
+}
+class DVE::model::Asynchronous {
+}
+class DVE::model::BinaryExpression {
+  + operator : str
+}
+class DVE::model::BooleanLiteral {
+}
+class DVE::model::ByteType {
+}
+class DVE::model::ChannelDeclaration {
+}
+class DVE::model::ChannelReference {
+}
+abstract class DVE::model::CompositeDeclaration {
+}
+class DVE::model::ConstantDeclaration {
+}
+abstract class DVE::model::Declaration {
+}
+abstract class DVE::model::Element {
+}
+abstract class DVE::model::Expression {
+}
+class DVE::model::FalseLiteral {
+}
+class DVE::model::IndexedExpression {
+}
+class DVE::model::InputSynchronization {
+}
+class DVE::model::IntegerType {
+}
+abstract class DVE::model::Literal {
+}
+abstract class DVE::model::NamedDeclaration {
+  + name : str
+}
+class DVE::model::NumberLiteral {
+  + value : str
+}
+class DVE::model::OutputSynchronization {
+}
+abstract class DVE::model::PrefixedReference {
+}
+class DVE::model::Process {
+}
+class DVE::model::ProcessReference {
+}
+class DVE::model::ProcessStateReference {
+}
+class DVE::model::ProcessVariableReference {
+}
+abstract class DVE::model::Reference {
+  + refName : str
+}
+class DVE::model::State {
+}
+class DVE::model::StateReference {
+}
+abstract class DVE::model::Synchronization {
+}
+class DVE::model::Synchronous {
+}
+class DVE::model::System {
+}
+class DVE::model::SystemProperties {
+}
+abstract class DVE::model::SystemType {
+}
+class DVE::model::Transition {
+}
+class DVE::model::TrueLiteral {
+}
+abstract class DVE::model::Type {
+}
+class DVE::model::TypedChannelDeclaration {
+}
+class DVE::model::UnaryExpression {
+  + operator : str
+}
+class DVE::model::VariableDeclaration {
+}
+class DVE::model::VariableReference {
+}
+class Declaration {
+}
+class Element {
+}
+class Expression {
+}
+class Literal {
+}
+class NamedDeclaration {
+}
+class Process {
+}
+class ProcessReference {
+}
+class Reference {
+}
+class State {
+}
+class StateReference {
+}
+class Synchronization {
+}
+class System {
+}
+class SystemProperties {
+}
+class SystemType {
+}
+class Transition {
+}
+class Type {
+}
+enum UnaryOperator {
+  BNOT
+  MINUS
+  NOT
+}
+class VariableDeclaration {
+}
+class model::PrefixedReference {
+}
+class model::StateReference {
+}
+class model::VariableReference {
+}
+BooleanLiteral <|-- DVE::model::FalseLiteral
+BooleanLiteral <|-- DVE::model::TrueLiteral
+ChannelDeclaration <|-- DVE::model::TypedChannelDeclaration
+CompositeDeclaration <|-- DVE::model::Process
+CompositeDeclaration <|-- DVE::model::System
+Declaration <|-- DVE::model::NamedDeclaration
+Declaration <|-- DVE::model::Transition
+Element <|-- DVE::model::Assignment
+Element <|-- DVE::model::Declaration
+Element <|-- DVE::model::Expression
+Element <|-- DVE::model::Synchronization
+Element <|-- DVE::model::SystemProperties
+Element <|-- DVE::model::SystemType
+Element <|-- DVE::model::Type
+Expression <|-- DVE::model::BinaryExpression
+Expression <|-- DVE::model::IndexedExpression
+Expression <|-- DVE::model::Literal
+Expression <|-- DVE::model::PrefixedReference
+Expression <|-- DVE::model::Reference
+Expression <|-- DVE::model::UnaryExpression
+Literal <|-- DVE::model::ArrayLiteral
+Literal <|-- DVE::model::BooleanLiteral
+Literal <|-- DVE::model::NumberLiteral
+NamedDeclaration <|-- DVE::model::ChannelDeclaration
+NamedDeclaration <|-- DVE::model::CompositeDeclaration
+NamedDeclaration <|-- DVE::model::State
+NamedDeclaration <|-- DVE::model::VariableDeclaration
+Reference <|-- DVE::model::ChannelReference
+Reference <|-- DVE::model::ProcessReference
+Reference <|-- DVE::model::StateReference
+Reference <|-- DVE::model::VariableReference
+Synchronization <|-- DVE::model::InputSynchronization
+Synchronization <|-- DVE::model::OutputSynchronization
+SystemType <|-- DVE::model::Asynchronous
+SystemType <|-- DVE::model::Synchronous
+Type <|-- DVE::model::ArrayType
+Type <|-- DVE::model::ByteType
+Type <|-- DVE::model::IntegerType
+VariableDeclaration <|-- DVE::model::ConstantDeclaration
+model::PrefixedReference <|-- DVE::model::ProcessStateReference
+model::PrefixedReference <|-- DVE::model::ProcessVariableReference
+model::StateReference <|-- DVE::model::ProcessStateReference
+model::VariableReference <|-- DVE::model::ProcessVariableReference
+DVE::model::Process "1..1" *-- "0..9999" StateReference : accepting19
+Expression "1..1" --* "1..1" DVE::model::IndexedExpression : base65
+Expression "1..1" --* "1..1" DVE::model::TypedChannelDeclaration : bufferSize13
+ChannelReference "1..1" --* "1..1" DVE::model::Synchronization : channel41
+StateReference "0..9999" --* "1..1" DVE::model::Process : commited21
+NamedDeclaration "0..9999" --* "1..1" DVE::model::CompositeDeclaration : declarations0
+Assignment "0..9999" --* "1..1" DVE::model::Transition : effect39
+Type "1..1" --* "1..1" DVE::model::ArrayType : elementType3
+StateReference "1..1" --* "1..1" DVE::model::Transition : from29
+Expression "1..1" --* "1..1" DVE::model::Transition : guard34
+Expression "1..1" --* "1..1" DVE::model::IndexedExpression : index67
+StateReference "1..1" --* "1..1" DVE::model::Process : initial24
+Expression "1..1" --* "1..1" DVE::model::VariableDeclaration : initial8
+Expression "1..1" --* "1..1" DVE::model::Assignment : lhs48
+Expression "1..1" --* "1..1" DVE::model::UnaryExpression : operand53
+DVE::model::BinaryExpression "1..1" *-- "2..2" Expression : operands55
+ProcessReference "1..1" --* "1..1" DVE::model::PrefixedReference : prefix63
+Process "0..9999" -- "1..1" DVE::model::System : processes1
+DVE::model::System "1..1" *-- "1..1" SystemProperties : properties2
+DVE::model::SystemProperties "1..1" *-- "1..1" ProcessReference : property46
+DVE::model::VariableReference "1..1" -- "1..1" VariableDeclaration : ref57
+ChannelDeclaration "1..1" -- "1..1" DVE::model::ChannelReference : ref58
+Process "1..1" -- "1..1" DVE::model::ProcessReference : ref59
+State "1..1" -- "1..1" DVE::model::StateReference : ref61
+Expression "1..1" --* "1..1" DVE::model::Assignment : rhs50
+Expression "1..1" --* "1..1" DVE::model::ArrayType : size4
+State "0..9999" --* "1..1" DVE::model::Process : states18
+DVE::model::Transition "1..1" *-- "1..1" Synchronization : sync37
+System "1..1" -- "1..1" DVE::model::Process : system16
+SystemType "1..1" --* "1..1" DVE::model::SystemProperties : systemType45
+StateReference "1..1" --* "1..1" DVE::model::Transition : to31
+DVE::model::Process "1..1" *-- "0..9999" Transition : transitions27
+Type "1..1" --* "1..1" DVE::model::VariableDeclaration : type6
+DVE::model::TypedChannelDeclaration "1..1" *-- "0..9999" Type : types11
+Expression "0..1" --* "1..1" DVE::model::Synchronization : value42
+DVE::model::ArrayLiteral "1..1" *-- "0..9999" Expression : values70
+@enduml

@@ -1,0 +1,316 @@
+@startuml
+class Action {
+}
+class ActionType {
+}
+class Contract {
+}
+class Expression {
+}
+class Placeholder {
+}
+class Prefix {
+}
+class Process {
+}
+class ReceiveGroup {
+}
+class SendGroup {
+}
+class Type {
+}
+class VariableDeclaration {
+}
+class co2::Action {
+  + name : str
+}
+class co2::ActionType {
+  + value : str
+}
+class co2::AndExpression {
+}
+class co2::ArithmeticSigned {
+}
+class co2::Ask {
+  + formula : str
+}
+class co2::BoolPlaceholder {
+}
+class co2::BooleanLiteral {
+  + value : str
+}
+class co2::BooleanNegation {
+}
+class co2::BooleanType {
+}
+class co2::CO2System {
+}
+class co2::Case {
+}
+class co2::Comparison {
+  + op : str
+}
+class co2::Contract {
+}
+class co2::ContractDefinition {
+  + name : str
+}
+class co2::ContractReference {
+}
+class co2::ContractsAndProcessesDeclaration {
+}
+class co2::DelimitedProcess {
+}
+class co2::DoInput {
+}
+class co2::DoOutput {
+}
+class co2::EmptyContract {
+  + value : str
+}
+class co2::EmptyProcess {
+  + value : str
+}
+class co2::Equals {
+  + op : str
+}
+class co2::Expression {
+}
+class co2::ExtAction {
+}
+class co2::ExtSum {
+}
+class co2::HonestyDeclaration {
+}
+class co2::IfThenElse {
+}
+class co2::Import {
+  + importedNamespace : str
+}
+class co2::Input {
+}
+class co2::IntAction {
+}
+class co2::IntActionType {
+}
+class co2::IntPlaceholder {
+}
+class co2::IntSum {
+}
+class co2::IntType {
+}
+class co2::Minus {
+}
+class co2::MultiOrDiv {
+  + op : str
+}
+class co2::NumberLiteral {
+  + value : int
+}
+class co2::OrExpression {
+}
+class co2::PackageDeclaration {
+  + name : str
+  + single : bool
+}
+class co2::ParallelProcesses {
+}
+class co2::Placeholder {
+}
+class co2::Plus {
+}
+class co2::Prefix {
+}
+class co2::Process {
+}
+class co2::ProcessCall {
+}
+class co2::ProcessDefinition {
+  + name : str
+  + withoutRestrictions : bool
+}
+class co2::Receive {
+  + timeout : bool
+}
+class co2::ReceiveGroup {
+}
+class co2::Retract {
+}
+class co2::RetractedProcess {
+}
+class co2::Send {
+}
+class co2::SendGroup {
+}
+class co2::Session {
+}
+class co2::SessionType {
+}
+class co2::StringActionType {
+}
+class co2::StringLiteral {
+  + value : str
+}
+class co2::StringPlaceholder {
+}
+class co2::StringType {
+}
+class co2::Sum {
+}
+class co2::SwitchCase {
+  + default : bool
+}
+class co2::Tau {
+}
+class co2::Tell {
+}
+class co2::TellAndReturn {
+}
+class co2::TellAndWait {
+  + timeout : bool
+}
+class co2::TimeoutProcess {
+}
+class co2::Type {
+  + value : str
+}
+class co2::UnitActionType {
+}
+class co2::Variable {
+}
+class co2::VariableDeclaration {
+  + name : str
+}
+class co2::VariableReference {
+}
+ActionType <|-- co2::IntActionType
+ActionType <|-- co2::StringActionType
+ActionType <|-- co2::UnitActionType
+Action <|-- co2::ExtAction
+Action <|-- co2::IntAction
+Contract <|-- co2::ContractReference
+Contract <|-- co2::EmptyContract
+Contract <|-- co2::ExtSum
+Contract <|-- co2::IntSum
+Expression <|-- co2::AndExpression
+Expression <|-- co2::ArithmeticSigned
+Expression <|-- co2::BooleanLiteral
+Expression <|-- co2::BooleanNegation
+Expression <|-- co2::Comparison
+Expression <|-- co2::Equals
+Expression <|-- co2::Minus
+Expression <|-- co2::MultiOrDiv
+Expression <|-- co2::NumberLiteral
+Expression <|-- co2::OrExpression
+Expression <|-- co2::Placeholder
+Expression <|-- co2::Plus
+Expression <|-- co2::StringLiteral
+Expression <|-- co2::VariableReference
+Placeholder <|-- co2::BoolPlaceholder
+Placeholder <|-- co2::IntPlaceholder
+Placeholder <|-- co2::StringPlaceholder
+Prefix <|-- co2::Ask
+Prefix <|-- co2::DoInput
+Prefix <|-- co2::DoOutput
+Prefix <|-- co2::Retract
+Prefix <|-- co2::Tau
+Prefix <|-- co2::Tell
+Process <|-- co2::EmptyProcess
+Process <|-- co2::IfThenElse
+Process <|-- co2::ParallelProcesses
+Process <|-- co2::ProcessCall
+Process <|-- co2::ReceiveGroup
+Process <|-- co2::RetractedProcess
+Process <|-- co2::SendGroup
+Process <|-- co2::Sum
+Process <|-- co2::SwitchCase
+Process <|-- co2::TellAndReturn
+Process <|-- co2::TellAndWait
+ReceiveGroup <|-- co2::Receive
+SendGroup <|-- co2::Send
+Type <|-- co2::BooleanType
+Type <|-- co2::IntType
+Type <|-- co2::SessionType
+Type <|-- co2::StringType
+VariableDeclaration <|-- co2::Session
+VariableDeclaration <|-- co2::Variable
+co2::IntAction "0..1" -- "1..1" co2::Send : action82
+co2::DoOutput "1..1" -- "0..1" co2::IntAction : actionName49
+co2::ExtAction "0..1" -- "1..1" co2::DoInput : actionName56
+co2::IntAction "0..9999" --* "1..1" co2::IntSum : actions133
+co2::ExtAction "0..9999" --* "1..1" co2::ExtSum : actions135
+co2::Input "1..1" -- "0..9999" co2::ExtAction : actions98
+co2::Process "0..1" --* "1..1" co2::Case : caseProc117
+co2::SwitchCase "1..1" *-- "0..9999" co2::Case : cases109
+co2::Contract "0..1" --* "1..1" co2::Session : contract124
+co2::ContractDefinition "1..1" *-- "0..1" co2::Contract : contract130
+co2::Tell "1..1" *-- "0..1" co2::Contract : contract40
+co2::ContractDefinition "0..1" -- "1..1" co2::Session : contractReference127
+co2::ContractDefinition "0..1" -- "1..1" co2::Tell : contractReference42
+co2::ContractDefinition "0..9999" --* "1..1" co2::ContractsAndProcessesDeclaration : contracts7
+co2::CO2System "1..1" *-- "0..1" co2::ContractsAndProcessesDeclaration : contractsAndProcessesDeclaration3
+co2::Process "0..1" --* "1..1" co2::SwitchCase : defaultProc111
+co2::Process "0..1" --* "1..1" co2::IfThenElse : else28
+co2::Expression "0..1" --* "1..1" co2::SwitchCase : exp107
+co2::BooleanNegation "1..1" *-- "0..1" co2::Expression : expression178
+co2::Expression "0..1" --* "1..1" co2::ArithmeticSigned : expression180
+co2::Variable "0..9999" --* "1..1" co2::DelimitedProcess : freeNames18
+co2::HonestyDeclaration "0..1" --* "1..1" co2::CO2System : honesty1
+co2::Expression "0..1" --* "1..1" co2::IfThenElse : if24
+co2::Input "0..9999" --* "1..1" co2::Receive : inputs91
+co2::Expression "0..1" --* "1..1" co2::OrExpression : left143
+co2::Expression "0..1" --* "1..1" co2::AndExpression : left148
+co2::Expression "0..1" --* "1..1" co2::Comparison : left153
+co2::Expression "0..1" --* "1..1" co2::Equals : left158
+co2::Expression "0..1" --* "1..1" co2::Plus : left163
+co2::Expression "0..1" --* "1..1" co2::Minus : left168
+co2::Expression "0..1" --* "1..1" co2::MultiOrDiv : left173
+co2::Expression "0..1" --* "1..1" co2::Case : match114
+co2::Action "1..1" *-- "0..1" co2::Contract : next138
+co2::Process "0..1" --* "1..1" co2::Prefix : next36
+co2::Process "0..1" --* "1..1" co2::Send : next80
+co2::Process "0..1" --* "1..1" co2::Input : next95
+co2::PackageDeclaration "0..1" --* "1..1" co2::CO2System : package0
+co2::ProcessDefinition "1..1" *-- "0..9999" co2::Variable : params12
+co2::Expression "0..9999" --* "1..1" co2::ProcessCall : params33
+co2::Prefix "0..9999" --* "1..1" co2::Sum : prefixes23
+co2::ParallelProcesses "0..1" --* "1..1" co2::ProcessDefinition : process14
+co2::Process "0..1" --* "1..1" co2::RetractedProcess : process141
+co2::DelimitedProcess "1..1" *-- "0..1" co2::Process : process21
+co2::Process "0..1" --* "1..1" co2::TellAndReturn : process64
+co2::Process "0..1" --* "1..1" co2::TellAndWait : process69
+co2::DelimitedProcess "0..9999" --* "1..1" co2::ParallelProcesses : processes16
+co2::ProcessDefinition "0..9999" -- "1..1" co2::HonestyDeclaration : processes5
+co2::ProcessDefinition "0..9999" --* "1..1" co2::ContractsAndProcessesDeclaration : processes9
+co2::VariableReference "1..1" -- "0..1" co2::VariableDeclaration : ref182
+co2::ContractDefinition "0..1" -- "1..1" co2::ContractReference : ref184
+co2::ProcessDefinition "0..1" -- "1..1" co2::ProcessCall : reference31
+co2::Expression "0..1" --* "1..1" co2::OrExpression : right145
+co2::Expression "0..1" --* "1..1" co2::AndExpression : right150
+co2::Comparison "1..1" *-- "0..1" co2::Expression : right155
+co2::Expression "0..1" --* "1..1" co2::Equals : right160
+co2::Plus "1..1" *-- "0..1" co2::Expression : right165
+co2::Expression "0..1" --* "1..1" co2::Minus : right170
+co2::MultiOrDiv "1..1" *-- "0..1" co2::Expression : right175
+co2::VariableDeclaration "0..1" -- "1..1" co2::Input : session104
+co2::VariableDeclaration "0..1" -- "1..1" co2::Tell : session39
+co2::VariableDeclaration "0..1" -- "1..1" co2::Retract : session45
+co2::VariableDeclaration "0..1" -- "1..1" co2::DoOutput : session47
+co2::DoInput "1..1" -- "0..1" co2::VariableDeclaration : session54
+co2::VariableDeclaration "0..1" -- "1..1" co2::Ask : session61
+co2::Session "0..1" --* "1..1" co2::TellAndReturn : session63
+co2::TellAndWait "1..1" *-- "0..1" co2::Session : session67
+co2::Send "1..1" -- "0..1" co2::VariableDeclaration : session88
+co2::TimeoutProcess "1..1" *-- "0..1" co2::Process : tProcess77
+co2::IfThenElse "1..1" *-- "0..1" co2::Process : then25
+co2::TimeoutProcess "0..1" --* "1..1" co2::TellAndWait : timeoutValue72
+co2::TimeoutProcess "0..1" --* "1..1" co2::Receive : timeoutValue92
+co2::Placeholder "1..1" *-- "0..1" co2::Type : type120
+co2::Type "0..1" --* "1..1" co2::Variable : type121
+co2::ActionType "0..1" --* "1..1" co2::Action : type137
+co2::Expression "0..1" --* "1..1" co2::DoOutput : value51
+co2::Expression "0..1" --* "1..1" co2::TimeoutProcess : value74
+co2::Send "1..1" *-- "0..1" co2::Expression : value85
+co2::Variable "0..1" --* "1..1" co2::Input : variable101
+co2::Variable "0..1" --* "1..1" co2::DoInput : variable58
+@enduml

@@ -1,0 +1,77 @@
+@startuml
+class AbstractElement {
+}
+class Expression {
+}
+class expressions::AbstractElement {
+}
+class expressions::And {
+}
+class expressions::BoolConstant {
+  + value : str
+}
+class expressions::Comparison {
+  + op : str
+}
+class expressions::Equality {
+  + op : str
+}
+class expressions::Expression {
+}
+class expressions::ExpressionsModel {
+}
+class expressions::IntConstant {
+  + value : int
+}
+class expressions::Minus {
+}
+class expressions::MulOrDiv {
+  + op : str
+}
+class expressions::Not {
+}
+class expressions::Or {
+}
+class expressions::Plus {
+}
+class expressions::StringConstant {
+  + value : str
+}
+class expressions::Variable {
+  + name : str
+}
+class expressions::VariableRef {
+}
+AbstractElement <|-- expressions::Expression
+AbstractElement <|-- expressions::Variable
+Expression <|-- expressions::And
+Expression <|-- expressions::BoolConstant
+Expression <|-- expressions::Comparison
+Expression <|-- expressions::Equality
+Expression <|-- expressions::IntConstant
+Expression <|-- expressions::Minus
+Expression <|-- expressions::MulOrDiv
+Expression <|-- expressions::Not
+Expression <|-- expressions::Or
+Expression <|-- expressions::Plus
+Expression <|-- expressions::StringConstant
+Expression <|-- expressions::VariableRef
+expressions::ExpressionsModel "1..1" *-- "0..9999" expressions::AbstractElement : elements0
+expressions::Expression "0..1" --* "1..1" expressions::Variable : expression1
+expressions::Expression "0..1" --* "1..1" expressions::Not : expression37
+expressions::Expression "0..1" --* "1..1" expressions::Equality : left12
+expressions::Comparison "1..1" *-- "0..1" expressions::Expression : left17
+expressions::Expression "0..1" --* "1..1" expressions::Or : left2
+expressions::Plus "1..1" *-- "0..1" expressions::Expression : left22
+expressions::Expression "0..1" --* "1..1" expressions::Minus : left27
+expressions::Expression "0..1" --* "1..1" expressions::MulOrDiv : left32
+expressions::And "1..1" *-- "0..1" expressions::Expression : left7
+expressions::Expression "0..1" --* "1..1" expressions::Equality : right14
+expressions::Expression "0..1" --* "1..1" expressions::Comparison : right19
+expressions::Expression "0..1" --* "1..1" expressions::Plus : right24
+expressions::Expression "0..1" --* "1..1" expressions::Minus : right29
+expressions::MulOrDiv "1..1" *-- "0..1" expressions::Expression : right34
+expressions::Expression "0..1" --* "1..1" expressions::Or : right4
+expressions::Expression "0..1" --* "1..1" expressions::And : right9
+expressions::Variable "0..1" -- "1..1" expressions::VariableRef : variable39
+@enduml

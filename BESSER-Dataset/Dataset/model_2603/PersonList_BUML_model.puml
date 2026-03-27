@@ -1,0 +1,27 @@
+@startuml
+enum Gender {
+  Female
+  Male
+}
+class PersonList::List {
+}
+class PersonList::LivingPlace {
+  + address : str
+}
+class PersonList::Person {
+  + firstname : str
+  + gender : str
+  + lastname : str
+}
+class PersonList::WorkPlace {
+  + address : str
+}
+PersonList::LivingPlace "1..1" -- "1..1" PersonList::Person : home6
+PersonList::List "1..1" -- "1..1" PersonList::Person : list4
+PersonList::List "1..1" *-- "0..9999" PersonList::LivingPlace : lplaces2
+PersonList::Person "0..9999" --* "1..1" PersonList::List : members0
+PersonList::Person "0..9999" -- "1..1" PersonList::LivingPlace : persons10
+PersonList::Person "0..9999" -- "1..1" PersonList::WorkPlace : persons8
+PersonList::WorkPlace "1..1" -- "1..1" PersonList::Person : works5
+PersonList::WorkPlace "0..9999" --* "1..1" PersonList::List : wplaces1
+@enduml

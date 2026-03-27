@@ -1,0 +1,36 @@
+@startuml
+class CSTrace {
+}
+abstract class companies::CSTrace {
+}
+class companies::Visitable {
+}
+class companies::company {
+  + name : str
+}
+class companies::department {
+  + name : str
+}
+class companies::department::employees {
+}
+class companies::department::manager {
+}
+class companies::employee {
+  + address : str
+  + mentor : str
+  + name : str
+  + salary : float
+}
+CSTrace <|-- companies::company
+CSTrace <|-- companies::department
+CSTrace <|-- companies::department::employees
+CSTrace <|-- companies::department::manager
+CSTrace <|-- companies::employee
+companies::Visitable "0..1" -- "1..1" companies::CSTrace : ast13
+companies::department "0..9999" --* "1..1" companies::company : deparment0
+companies::department "1..1" *-- "0..9999" companies::department : deparment6
+companies::department "1..1" *-- "0..1" companies::department::employees : department_employees3
+companies::department::manager "0..1" --* "1..1" companies::department : department_manager1
+companies::employee "0..9999" --* "1..1" companies::department::employees : employee10
+companies::employee "0..1" --* "1..1" companies::department::manager : employee8
+@enduml

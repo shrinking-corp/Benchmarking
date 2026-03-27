@@ -1,0 +1,32 @@
+@startuml
+class Arc {
+}
+class Node {
+}
+abstract class petri::Arc {
+}
+abstract class petri::Node {
+  + name : str
+}
+class petri::PTArc {
+}
+class petri::PetriNet {
+}
+class petri::Place {
+  + tokens : int
+}
+class petri::TPArc {
+}
+class petri::Transition {
+}
+Arc <|-- petri::PTArc
+Arc <|-- petri::TPArc
+Node <|-- petri::Place
+Node <|-- petri::Transition
+petri::PetriNet "1..1" *-- "0..9999" petri::Arc : arcs1
+petri::Node "0..9999" --* "1..1" petri::PetriNet : elems0
+petri::Transition "1..1" -- "1..1" petri::TPArc : input3
+petri::Place "1..1" -- "1..1" petri::PTArc : input6
+petri::Place "1..1" -- "1..1" petri::TPArc : output4
+petri::Transition "1..1" -- "1..1" petri::PTArc : output8
+@enduml

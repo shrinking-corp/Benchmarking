@@ -1,68 +1,93 @@
 from __future__ import annotations
 
-from typing import Optional
+
+class smalluml_Class(Type):
+    """Class smalluml::Class."""
+
+    def __init__(self) -> None:
+        pass
 
 
-class petrinet_Petrinet:
-    """Class petrinet::Petrinet."""
+class Type:
+    """Class Type."""
+
+    def __init__(self) -> None:
+        pass
+
+
+class smalluml_Operation(NamedElement):
+    """Class smalluml::Operation."""
+
+    def __init__(self) -> None:
+        pass
+
+
+class NamedElement:
+    """Class NamedElement."""
+
+    def __init__(self) -> None:
+        pass
+
+
+class smalluml_Type(NamedElement):
+    """Class smalluml::Type."""
+
+    def __init__(self) -> None:
+        pass
+
+
+class smalluml_NamedElement:
+    """Class smalluml::NamedElement."""
 
     def __init__(self, name: str) -> None:
-        self.name: str = name
+        self.name = name
 
 
-class petrinet_Arc:
-    """Class petrinet::Arc."""
+class smalluml_TypeString(Type):
+    """Class smalluml::TypeString."""
 
-    def __init__(self, weight: int) -> None:
-        self.weight: int = weight
-
-
-class petrinet_Token:
-    """Class petrinet::Token."""
-
-    def __init__(self) -> None:
-        pass
+    def __init__(self, value: str) -> None:
+        self.value = value
 
 
-class petrinet_PTArc(Arc):
-    """Class petrinet::PTArc."""
+class smalluml_TypeReal(Type):
+    """Class smalluml::TypeReal."""
 
-    def __init__(self) -> None:
-        super().__init__()
-
-
-class petrinet_Place:
-    """Class petrinet::Place."""
-
-    def __init__(self, name: str) -> None:
-        self.name: str = name
-
-    def isAPart(self) -> bool:
-        pass
-
-    def getTokenNumber(self) -> int:
-        pass
+    def __init__(self, value: str) -> None:
+        self.value = value
 
 
-class petrinet_Transition:
-    """Class petrinet::Transition."""
+class smalluml_Property(NamedElement):
+    """Class smalluml::Property."""
 
-    def __init__(self, name: str) -> None:
-        self.name: str = name
-
-    def isEnabled(self) -> bool:
-        pass
+    def __init__(self, upperBound: int, lowerBound: int) -> None:
+        self.upperBound = upperBound
+        self.lowerBound = lowerBound
 
 
-class Arc:
-    """Class Arc."""
+class smalluml_TypeBoolean(Type):
+    """Class smalluml::TypeBoolean."""
+
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class smalluml_Root:
+    """Class smalluml::Root."""
 
     def __init__(self) -> None:
         pass
 
 
-class petrinet_TPArc(Arc):
-    """Class petrinet::TPArc."""
+class smalluml_TypeInteger(Type):
+    """Class smalluml::TypeInteger."""
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class smalluml_TypeUnlimitedNatural(Type):
+    """Class smalluml::TypeUnlimitedNatural."""
+
+    def __init__(self, value: str) -> None:
+        self.value = value

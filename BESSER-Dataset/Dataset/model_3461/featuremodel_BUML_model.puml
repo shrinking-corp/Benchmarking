@@ -1,0 +1,50 @@
+@startuml
+class Attribute {
+}
+enum ConstraintType {
+  EXCLUDES
+  REQUIRES
+}
+abstract class featuremodels::Attribute {
+  + name : str
+}
+class featuremodels::Constraint {
+  + name : str
+  + rule : str
+  + type : str
+}
+class featuremodels::ContainmentAssociation {
+  + lowerBound : int
+  + upperBound : int
+}
+class featuremodels::Feature {
+  + lowerBound : int
+  + name : str
+  + required : bool
+  + root : bool
+  + upperBound : int
+}
+class featuremodels::FeatureModel {
+  + name : str
+}
+class featuremodels::Instance {
+  + descritpion : str
+  + id : str
+}
+class featuremodels::SimpleAttribute {
+  + type : str
+  + value : str
+}
+Attribute <|-- featuremodels::SimpleAttribute
+featuremodels::Attribute "0..9999" --* "1..1" featuremodels::Feature : attributes9
+featuremodels::FeatureModel "1..1" *-- "0..9999" featuremodels::Constraint : constraints16
+featuremodels::ContainmentAssociation "0..1" -- "1..1" featuremodels::Feature : containerParent6
+featuremodels::Feature "1..1" *-- "0..9999" featuremodels::ContainmentAssociation : containers5
+featuremodels::Feature "0..1" -- "1..1" featuremodels::Feature : featureParent3
+featuremodels::Instance "0..9999" --* "1..1" featuremodels::FeatureModel : instances18
+featuremodels::ContainmentAssociation "1..1" -- "0..1" featuremodels::Feature : parent12
+featuremodels::Feature "1..1" --* "1..1" featuremodels::FeatureModel : rootFeature14
+featuremodels::Feature "1..9999" -- "1..1" featuremodels::Instance : selectedFeatures20
+featuremodels::Feature "1..1" *-- "0..9999" featuremodels::Feature : subFeatures1
+featuremodels::Feature "1..9999" --* "1..1" featuremodels::ContainmentAssociation : subFeatures10
+@enduml

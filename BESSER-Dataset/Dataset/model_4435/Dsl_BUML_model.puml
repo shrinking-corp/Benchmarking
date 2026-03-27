@@ -1,0 +1,80 @@
+@startuml
+enum Actions {
+  BEEP
+  DRIVETOEDGE
+  DRIVE_BACKWARD
+  DRIVE_FORWARD
+  MEASURE
+  ROTATE_L
+  ROTATE_R
+  STOP_DRIVING
+  TURN_AROUND
+}
+enum Colors {
+  BLACK
+  BLUE
+  CYAN
+  DARK_GRAY
+  GRAY
+  GREEN
+  LIGHT_GRAY
+  MAGENTA
+  ORANGE
+  PINK
+  RED
+  WHITE
+  YELLOW
+}
+enum CompareOperator {
+  EQ
+  G
+  GEQ
+  L
+  LEQ
+  NEQ
+}
+enum Directions {
+  E
+  N
+  NE
+  NW
+  S
+  SE
+  SW
+  W
+}
+class SensorType {
+}
+enum TouchSensorSides {
+  BOTH
+  LEFT
+  RIGHT
+}
+class dsl::ColorSensor {
+  + key : str
+}
+class dsl::Ignorables {
+  + AVOID_OBJECTS : str
+}
+class dsl::Mission {
+}
+class dsl::SensorType {
+}
+class dsl::Task {
+  + action : str
+  + ignoreBehavior : bool
+  + name : str
+}
+class dsl::TouchSensor {
+  + key : str
+}
+class dsl::UltrasonicSensor {
+  + comparator : str
+  + distance : str
+}
+SensorType <|-- dsl::ColorSensor
+SensorType <|-- dsl::TouchSensor
+SensorType <|-- dsl::UltrasonicSensor
+dsl::Task "1..1" *-- "0..1" dsl::SensorType : sensor1
+dsl::Task "0..9999" --* "1..1" dsl::Mission : tasks0
+@enduml

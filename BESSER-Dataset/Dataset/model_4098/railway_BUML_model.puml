@@ -1,0 +1,60 @@
+@startuml
+enum Position {
+  FAILURE
+  LEFT
+  RIGHT
+  STRAIGHT
+}
+class RailwayElement {
+}
+enum Signal {
+  FAILURE
+  GO
+  STOP
+}
+class TrackElement {
+}
+class railway::RailwayContainer {
+}
+abstract class railway::RailwayElement {
+  + id : int
+}
+class railway::Route {
+}
+class railway::Segment {
+  + length : int
+}
+class railway::Semaphore {
+  + signal : str
+}
+class railway::Sensor {
+}
+class railway::Switch {
+  + currentPosition : str
+}
+class railway::SwitchPosition {
+  + position : str
+}
+abstract class railway::TrackElement {
+}
+RailwayElement <|-- railway::Route
+RailwayElement <|-- railway::Semaphore
+RailwayElement <|-- railway::Sensor
+RailwayElement <|-- railway::SwitchPosition
+RailwayElement <|-- railway::TrackElement
+TrackElement <|-- railway::Segment
+TrackElement <|-- railway::Switch
+railway::TrackElement "1..1" -- "0..9999" railway::TrackElement : connectsTo2
+railway::Sensor "2..9999" --* "1..1" railway::Route : definedBy10
+railway::TrackElement "0..9999" --* "1..1" railway::Sensor : elements14
+railway::Route "1..1" -- "1..1" railway::Semaphore : entry4
+railway::Semaphore "1..1" -- "1..1" railway::Route : exit7
+railway::SwitchPosition "0..9999" --* "1..1" railway::Route : follows5
+railway::RailwayElement "0..9999" --* "1..1" railway::RailwayContainer : invalids15
+railway::SwitchPosition "0..9999" -- "1..1" railway::Switch : positions3
+railway::Route "1..1" -- "1..1" railway::SwitchPosition : route13
+railway::Route "0..9999" --* "1..1" railway::RailwayContainer : routes19
+railway::Semaphore "0..9999" --* "1..1" railway::RailwayContainer : semaphores16
+railway::Sensor "0..1" -- "1..1" railway::TrackElement : sensor0
+railway::SwitchPosition "1..1" -- "1..1" railway::Switch : switch12
+@enduml

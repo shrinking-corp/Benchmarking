@@ -1,0 +1,38 @@
+@startuml
+class ER::ERAttribute {
+  + isKey : bool
+  + name : str
+}
+abstract class ER::ERElem {
+}
+class ER::ERSchema {
+}
+class ER::Entity {
+  + name : str
+}
+class ER::Relship {
+  + name : str
+}
+class ER::RelshipEnd {
+  + name : str
+}
+class ERElem {
+}
+ERElem <|-- ER::ERAttribute
+ERElem <|-- ER::ERSchema
+ERElem <|-- ER::Entity
+ERElem <|-- ER::Relship
+ERElem <|-- ER::RelshipEnd
+ER::Entity "1..1" *-- "0..9999" ER::ERAttribute : attrs3
+ER::ERAttribute "0..9999" --* "1..1" ER::Relship : attrs7
+ER::RelshipEnd "0..9999" -- "1..1" ER::Entity : ends4
+ER::RelshipEnd "2..9999" --* "1..1" ER::Relship : ends9
+ER::Entity "1..9999" --* "1..1" ER::ERSchema : entities0
+ER::Entity "1..1" -- "1..1" ER::RelshipEnd : entity16
+ER::Entity "0..1" -- "1..1" ER::ERAttribute : entity19
+ER::Relship "1..1" -- "1..1" ER::RelshipEnd : relship14
+ER::Relship "0..1" -- "1..1" ER::ERAttribute : relship21
+ER::Relship "0..9999" --* "1..1" ER::ERSchema : relships1
+ER::Relship "1..1" -- "1..1" ER::ERSchema : schema12
+ER::Entity "1..1" -- "1..1" ER::ERSchema : schema6
+@enduml

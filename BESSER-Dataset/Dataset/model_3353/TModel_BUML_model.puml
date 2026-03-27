@@ -1,0 +1,32 @@
+@startuml
+class Operation {
+}
+class Trmodel::Add {
+}
+class Trmodel::Column {
+  + Name : str
+  + tableName : str
+}
+class Trmodel::Delete {
+}
+class Trmodel::LoadModel {
+  + url : str
+}
+abstract class Trmodel::Operation {
+}
+class Trmodel::Table {
+  + Name : str
+}
+class Trmodel::Update {
+  + newName : str
+}
+class Trmodel::loader {
+}
+Operation <|-- Trmodel::Add
+Operation <|-- Trmodel::Delete
+Operation <|-- Trmodel::Update
+Trmodel::Operation "1..1" *-- "0..1" Trmodel::Column : column5
+Trmodel::LoadModel "1..1" --* "1..1" Trmodel::loader : loadmodel1
+Trmodel::loader "1..1" *-- "0..9999" Trmodel::Operation : operation0
+Trmodel::Table "0..1" --* "1..1" Trmodel::Operation : table3
+@enduml

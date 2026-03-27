@@ -1,0 +1,140 @@
+@startuml
+class DataFlowEdge {
+}
+class DataPort {
+}
+class EffbdElement {
+}
+class EffbdNode {
+}
+enum FunctionDomain {
+  form
+  space
+  time
+}
+class FunctionSpecification {
+}
+class In {
+}
+class SequenceNode {
+}
+class Transformed {
+}
+class Transformer {
+}
+class effbd2::ContinuousFlowItem {
+}
+class effbd2::Control {
+}
+class effbd2::ControlFlowEdge {
+}
+class effbd2::DataFlowEdge {
+}
+class effbd2::DataFlowInputEdge {
+}
+class effbd2::DataFlowOutputEdge {
+}
+abstract class effbd2::DataPort {
+  + id : str
+}
+class effbd2::Decision {
+}
+abstract class effbd2::EffbdElement {
+  + name : str
+}
+abstract class effbd2::EffbdNode {
+}
+class effbd2::Final {
+}
+class effbd2::Fork {
+}
+class effbd2::Function {
+}
+class effbd2::FunctionDefinition {
+  + transformationDefinition : str
+}
+abstract class effbd2::FunctionSpecification {
+  + domain : str
+  + maxDuration : int
+  + minDuration : int
+}
+abstract class effbd2::In {
+}
+class effbd2::Input {
+}
+class effbd2::ItemContent {
+  + id : str
+}
+class effbd2::IterationEnd {
+}
+class effbd2::IterationStart {
+}
+class effbd2::Join {
+}
+class effbd2::LoopEnd {
+}
+class effbd2::LoopExit {
+}
+class effbd2::LoopStart {
+}
+class effbd2::Merge {
+}
+class effbd2::Out {
+}
+class effbd2::Resource {
+}
+abstract class effbd2::SequenceNode {
+}
+class effbd2::Start {
+}
+abstract class effbd2::Transformed {
+}
+abstract class effbd2::Transformer {
+}
+class effbd2::TriggerItem {
+}
+DataFlowEdge <|-- effbd2::DataFlowInputEdge
+DataFlowEdge <|-- effbd2::DataFlowOutputEdge
+DataPort <|-- effbd2::In
+DataPort <|-- effbd2::Out
+EffbdElement <|-- effbd2::ControlFlowEdge
+EffbdElement <|-- effbd2::DataFlowEdge
+EffbdElement <|-- effbd2::EffbdNode
+EffbdNode <|-- effbd2::Transformed
+EffbdNode <|-- effbd2::Transformer
+FunctionSpecification <|-- effbd2::Function
+In <|-- effbd2::Control
+In <|-- effbd2::Input
+In <|-- effbd2::Resource
+SequenceNode <|-- effbd2::Decision
+SequenceNode <|-- effbd2::Final
+SequenceNode <|-- effbd2::Fork
+SequenceNode <|-- effbd2::IterationEnd
+SequenceNode <|-- effbd2::IterationStart
+SequenceNode <|-- effbd2::Join
+SequenceNode <|-- effbd2::LoopEnd
+SequenceNode <|-- effbd2::LoopExit
+SequenceNode <|-- effbd2::LoopStart
+SequenceNode <|-- effbd2::Merge
+SequenceNode <|-- effbd2::Start
+Transformed <|-- effbd2::ContinuousFlowItem
+Transformed <|-- effbd2::TriggerItem
+Transformer <|-- effbd2::FunctionSpecification
+Transformer <|-- effbd2::SequenceNode
+effbd2::Transformed "1..1" *-- "0..9999" effbd2::ItemContent : content17
+effbd2::ControlFlowEdge "0..9999" --* "1..1" effbd2::Function : controlEdges3
+effbd2::FunctionSpecification "1..1" *-- "0..9999" effbd2::Control : controlPorts9
+effbd2::DataFlowEdge "0..9999" --* "1..1" effbd2::Function : dataEdges0
+effbd2::Function "0..9999" --* "1..1" effbd2::Function : decompositions6
+effbd2::FunctionDefinition "0..9999" --* "1..1" effbd2::FunctionSpecification : definitions15
+effbd2::Function "1..1" *-- "0..9999" effbd2::EffbdNode : effbdNodes1
+effbd2::ControlFlowEdge "1..1" -- "0..1" effbd2::Transformer : from18
+effbd2::DataFlowInputEdge "1..1" -- "0..1" effbd2::Transformed : inputFrom23
+effbd2::Input "0..9999" --* "1..1" effbd2::FunctionSpecification : inputPorts8
+effbd2::In "0..1" -- "1..1" effbd2::DataFlowInputEdge : inputTo25
+effbd2::Transformed "0..1" -- "1..1" effbd2::DataFlowOutputEdge : ouputTo29
+effbd2::Out "0..1" -- "1..1" effbd2::DataFlowOutputEdge : outputFrom27
+effbd2::Out "0..1" --* "1..1" effbd2::FunctionSpecification : outputPort13
+effbd2::Resource "0..9999" --* "1..1" effbd2::FunctionSpecification : resourcePorts11
+effbd2::Transformer "0..1" -- "1..1" effbd2::ControlFlowEdge : to20
+@enduml

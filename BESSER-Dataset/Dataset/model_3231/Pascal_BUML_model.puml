@@ -1,0 +1,189 @@
+@startuml
+class pascal::EObject {
+}
+class pascal::abstraction::declaration {
+}
+class pascal::abstraction::heading {
+  + name : str
+  + returnType : str
+}
+class pascal::any::number {
+  + integer : str
+  + real : str
+}
+class pascal::assignment::statement {
+}
+class pascal::block {
+}
+class pascal::compound::statement {
+}
+class pascal::constant {
+  + boolLiteral : str
+  + name : str
+  + nil : bool
+  + opterator : str
+  + string : str
+}
+class pascal::constant::definition {
+  + name : str
+}
+class pascal::constant::definition::part {
+}
+class pascal::expression {
+  + operators : str
+}
+class pascal::expression::list {
+}
+class pascal::factor {
+  + boolean : str
+  + nil : bool
+  + string : str
+}
+class pascal::field::list {
+}
+class pascal::formal::parameter::list {
+}
+class pascal::formal::parameter::section {
+}
+class pascal::function::designator {
+  + name : str
+}
+class pascal::function::procedure::declaration {
+}
+class pascal::identifier::list {
+  + names : str
+}
+class pascal::label {
+  + number : str
+}
+class pascal::label::declaration {
+}
+class pascal::number {
+}
+class pascal::parameter::type {
+  + name : str
+}
+class pascal::program {
+}
+class pascal::program::heading::block {
+  + name : str
+}
+class pascal::record::section {
+}
+class pascal::record::type {
+  + endKeyword : str
+  + recordKeyword : str
+}
+class pascal::simple::expression {
+  + operators : str
+  + prefixOperator : str
+}
+class pascal::simple::statement {
+  + function_noargs : str
+}
+class pascal::simple::type {
+  + name : str
+}
+class pascal::statement {
+}
+class pascal::statement::part {
+}
+class pascal::statement::sequence {
+}
+class pascal::structured::statement {
+}
+class pascal::structured::type {
+}
+class pascal::term {
+  + operators : str
+}
+class pascal::type {
+}
+class pascal::type::definition {
+  + name : str
+}
+class pascal::type::definition::part {
+}
+class pascal::unpacked::structured::type {
+}
+class pascal::value::parameter::section {
+}
+class pascal::variable {
+  + name : str
+}
+class pascal::variable::declaration::part {
+}
+class pascal::variable::identifier::list {
+  + names : str
+}
+class pascal::variable::parameter::section {
+}
+class pascal::variable::section {
+}
+class pascal::while::statement {
+}
+pascal::block "1..1" *-- "0..1" pascal::function::procedure::declaration : abstraction11
+pascal::simple::statement "1..1" *-- "0..1" pascal::assignment::statement : assignment25
+pascal::program "1..1" *-- "0..1" pascal::block : block1
+pascal::abstraction::declaration "1..1" *-- "0..1" pascal::block : block73
+pascal::compound::statement "0..1" --* "1..1" pascal::structured::statement : compound29
+pascal::constant "0..1" --* "1..1" pascal::constant::definition : const107
+pascal::constant::definition::part "0..1" --* "1..1" pascal::block : constant9
+pascal::constant::definition::part "1..1" *-- "0..9999" pascal::constant::definition : consts105
+pascal::while::statement "1..1" *-- "0..1" pascal::expression : expression139
+pascal::expression "0..1" --* "1..1" pascal::assignment::statement : expression38
+pascal::expression "0..1" --* "1..1" pascal::factor : expression55
+pascal::expression::list "1..1" *-- "0..9999" pascal::expression : expressions40
+pascal::simple::expression "0..9999" --* "1..1" pascal::expression : expressions42
+pascal::function::designator "1..1" *-- "0..1" pascal::expression::list : expressions61
+pascal::factor "0..9999" --* "1..1" pascal::term : factors46
+pascal::field::list "0..1" --* "1..1" pascal::record::type : fields122
+pascal::function::designator "0..1" --* "1..1" pascal::simple::statement : function27
+pascal::function::designator "0..1" --* "1..1" pascal::factor : function52
+pascal::abstraction::heading "0..1" --* "1..1" pascal::formal::parameter::section : function85
+pascal::abstraction::declaration "0..9999" --* "1..1" pascal::function::procedure::declaration : functions64
+pascal::program "1..1" *-- "0..1" pascal::program::heading::block : heading0
+pascal::abstraction::heading "0..1" --* "1..1" pascal::abstraction::declaration : heading70
+pascal::identifier::list "0..1" --* "1..1" pascal::record::section : identifiers126
+pascal::variable::identifier::list "0..1" --* "1..1" pascal::variable::section : identifiers134
+pascal::value::parameter::section "1..1" *-- "0..1" pascal::identifier::list : identifiers88
+pascal::identifier::list "0..1" --* "1..1" pascal::variable::parameter::section : indentifiers92
+pascal::label "0..1" --* "1..1" pascal::statement : label19
+pascal::label::declaration "0..1" --* "1..1" pascal::block : label3
+pascal::label "0..9999" --* "1..1" pascal::label::declaration : labels100
+pascal::factor "0..1" --* "1..1" pascal::factor : not59
+pascal::number "0..1" --* "1..1" pascal::constant : number103
+pascal::number "0..1" --* "1..1" pascal::factor : number50
+pascal::number "1..1" *-- "0..1" pascal::any::number : number98
+pascal::abstraction::heading "1..1" *-- "0..1" pascal::formal::parameter::list : parameters69
+pascal::formal::parameter::section "0..9999" --* "1..1" pascal::formal::parameter::list : parameters76
+pascal::formal::parameter::section "1..1" *-- "0..1" pascal::abstraction::heading : procedure82
+pascal::abstraction::declaration "0..9999" --* "1..1" pascal::function::procedure::declaration : procedures66
+pascal::record::type "0..1" --* "1..1" pascal::unpacked::structured::type : record120
+pascal::record::section "0..9999" --* "1..1" pascal::field::list : sections124
+pascal::variable::section "0..9999" --* "1..1" pascal::variable::declaration::part : sections132
+pascal::statement::sequence "0..1" --* "1..1" pascal::statement::part : sequence15
+pascal::statement::sequence "0..1" --* "1..1" pascal::compound::statement : sequence33
+pascal::simple::type "0..1" --* "1..1" pascal::type : simple114
+pascal::simple::statement "0..1" --* "1..1" pascal::statement : simple21
+pascal::statement::part "0..1" --* "1..1" pascal::block : statement13
+pascal::statement::sequence "0..1" --* "1..1" pascal::while::statement : statement142
+pascal::statement "0..9999" --* "1..1" pascal::statement::sequence : statements17
+pascal::structured::type "0..1" --* "1..1" pascal::type : structured116
+pascal::structured::statement "0..1" --* "1..1" pascal::statement : structured23
+pascal::EObject "0..9999" --* "1..1" pascal::simple::expression : terms44
+pascal::type::definition "1..1" *-- "0..1" pascal::type : type112
+pascal::unpacked::structured::type "0..1" --* "1..1" pascal::structured::type : type118
+pascal::record::section "1..1" *-- "0..1" pascal::type : type129
+pascal::type "0..1" --* "1..1" pascal::variable::section : type136
+pascal::type::definition::part "0..1" --* "1..1" pascal::block : type5
+pascal::parameter::type "0..1" --* "1..1" pascal::value::parameter::section : type90
+pascal::parameter::type "0..1" --* "1..1" pascal::variable::parameter::section : type95
+pascal::type::definition "0..9999" --* "1..1" pascal::type::definition::part : types110
+pascal::value::parameter::section "0..1" --* "1..1" pascal::formal::parameter::section : value78
+pascal::assignment::statement "1..1" *-- "0..1" pascal::variable : variable36
+pascal::factor "1..1" *-- "0..1" pascal::variable : variable47
+pascal::variable::declaration::part "0..1" --* "1..1" pascal::block : variable7
+pascal::variable::parameter::section "0..1" --* "1..1" pascal::formal::parameter::section : variable80
+pascal::while::statement "0..1" --* "1..1" pascal::structured::statement : while_stmt31
+@enduml

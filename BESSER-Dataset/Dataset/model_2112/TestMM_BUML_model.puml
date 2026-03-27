@@ -1,0 +1,28 @@
+@startuml
+enum ActionType {
+  click
+  comment
+  copy
+  insert
+}
+class TestMM::Action {
+  + description : str
+  + id : str
+  + type : str
+  + value : str
+  + xpath : str
+}
+class TestMM::Metadata {
+  + date : str
+  + taglist : str
+  + user : str
+  + webpage : str
+}
+class TestMM::Test {
+  + id : str
+}
+TestMM::Action "1..9999" --* "1..1" TestMM::Test : act1
+TestMM::Metadata "1..1" --* "1..1" TestMM::Test : md0
+TestMM::Test "1..1" -- "1..1" TestMM::Metadata : te3
+TestMM::Test "1..1" -- "1..1" TestMM::Action : te4
+@enduml

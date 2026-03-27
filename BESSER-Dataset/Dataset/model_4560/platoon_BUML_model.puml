@@ -1,0 +1,47 @@
+@startuml
+class Vehicle {
+}
+class platoon::FrontGap {
+  + actualGapSize : int
+}
+class platoon::JoinPlatoonCoord {
+}
+class platoon::JoiningPosition {
+}
+class platoon::JoiningVehicle {
+}
+class platoon::Platoon {
+  + desiredGapSize : int
+  + length : int
+}
+class platoon::PlatoonVehicle {
+  + position : int
+}
+class platoon::PlatooningSystem {
+}
+abstract class platoon::Vehicle {
+  + id : int
+}
+Vehicle <|-- platoon::JoiningVehicle
+Vehicle <|-- platoon::PlatoonVehicle
+platoon::JoinPlatoonCoord "1..1" -- "1..1" platoon::Vehicle : cordManager18
+platoon::Platoon "1..1" *-- "0..9999" platoon::PlatoonVehicle : follower1
+platoon::Vehicle "0..1" -- "1..1" platoon::Vehicle : follows11
+platoon::Platoon "0..1" -- "1..1" platoon::Platoon : follows5
+platoon::FrontGap "0..1" --* "1..1" platoon::PlatoonVehicle : forms32
+platoon::Vehicle "1..1" -- "1..1" platoon::JoinPlatoonCoord : gapMaker21
+platoon::FrontGap "0..1" -- "1..1" platoon::JoiningVehicle : insertsIn27
+platoon::Vehicle "0..1" -- "1..1" platoon::Vehicle : isAwareOf13
+platoon::JoinPlatoonCoord "0..1" -- "1..1" platoon::Vehicle : joinCord15
+platoon::JoiningVehicle "0..1" -- "1..1" platoon::PlatoonVehicle : joiningRequest38
+platoon::Vehicle "1..1" -- "1..1" platoon::JoinPlatoonCoord : joiningVehicle24
+platoon::Platoon "1..1" *-- "0..1" platoon::JoinPlatoonCoord : joinplatoonCord7
+platoon::PlatoonVehicle "1..1" --* "1..1" platoon::Platoon : leader0
+platoon::JoiningPosition "0..1" -- "1..1" platoon::JoiningVehicle : locatedIn30
+platoon::JoiningPosition "0..1" --* "1..1" platoon::PlatoonVehicle : marks35
+platoon::PlatoonVehicle "1..9999" -- "1..1" platoon::Platoon : members9
+platoon::Platoon "0..1" -- "1..1" platoon::PlatoonVehicle : platoon39
+platoon::Platoon "0..9999" --* "1..1" platoon::PlatooningSystem : platoon42
+platoon::PlatooningSystem "1..1" *-- "0..9999" platoon::Vehicle : vehicles40
+platoon::JoiningVehicle "1..1" -- "0..1" platoon::PlatoonVehicle : wantsToJoin28
+@enduml

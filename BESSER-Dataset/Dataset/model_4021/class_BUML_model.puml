@@ -1,0 +1,51 @@
+@startuml
+class Classifier {
+}
+class NamedElt {
+}
+enum Visibility {
+  package
+  private
+  protected
+  public
+}
+class classmm::Attribute {
+  + multivalued : bool
+  + visibility : str
+}
+class classmm::Class {
+  + isAbstract : bool
+  + visibility : str
+}
+class classmm::Classifier {
+}
+class classmm::DataType {
+}
+class classmm::Method {
+}
+class classmm::NamedElt {
+  + name : str
+}
+class classmm::Package {
+}
+class classmm::Parameter {
+}
+Classifier <|-- classmm::Class
+Classifier <|-- classmm::DataType
+NamedElt <|-- classmm::Attribute
+NamedElt <|-- classmm::Classifier
+NamedElt <|-- classmm::Method
+NamedElt <|-- classmm::Package
+NamedElt <|-- classmm::Parameter
+classmm::Class "1..1" *-- "0..9999" classmm::Attribute : att0
+classmm::Class "0..9999" --* "1..1" classmm::Package : classes8
+classmm::Method "0..9999" --* "1..1" classmm::Class : methods4
+classmm::Class "1..1" -- "1..1" classmm::Method : owner10
+classmm::Method "1..1" -- "1..1" classmm::Parameter : owner16
+classmm::Class "1..1" -- "1..1" classmm::Attribute : owner7
+classmm::Package "1..1" -- "1..1" classmm::Class : package3
+classmm::Method "1..1" *-- "0..9999" classmm::Parameter : params12
+classmm::Class "1..1" -- "0..9999" classmm::Class : super2
+classmm::Classifier "1..1" -- "1..1" classmm::Parameter : type14
+classmm::Attribute "1..1" -- "1..1" classmm::Classifier : type6
+@enduml

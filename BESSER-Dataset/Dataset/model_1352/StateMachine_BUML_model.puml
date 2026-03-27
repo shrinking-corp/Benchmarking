@@ -1,0 +1,50 @@
+@startuml
+class AbstractState {
+}
+class Behaviour {
+}
+class NamedElement {
+}
+class ObeoDSMObject {
+}
+class StateMachineDescription {
+}
+abstract class statemachine::AbstractState {
+}
+class statemachine::FinalState {
+}
+class statemachine::InitialState {
+}
+abstract class statemachine::NamedElement {
+  + name : str
+}
+class statemachine::Region {
+}
+class statemachine::State {
+}
+class statemachine::StateMachine {
+}
+abstract class statemachine::StateMachineDescription {
+}
+class statemachine::Transition {
+  + guard : str
+}
+AbstractState <|-- statemachine::FinalState
+AbstractState <|-- statemachine::InitialState
+AbstractState <|-- statemachine::State
+Behaviour <|-- statemachine::StateMachine
+NamedElement <|-- statemachine::State
+NamedElement <|-- statemachine::StateMachineDescription
+ObeoDSMObject <|-- statemachine::AbstractState
+ObeoDSMObject <|-- statemachine::NamedElement
+ObeoDSMObject <|-- statemachine::Transition
+StateMachineDescription <|-- statemachine::Region
+StateMachineDescription <|-- statemachine::StateMachine
+statemachine::AbstractState "1..1" -- "1..1" statemachine::Transition : from7
+statemachine::AbstractState "1..1" -- "0..9999" statemachine::Transition : incomingTransitions4
+statemachine::Transition "0..9999" -- "1..1" statemachine::AbstractState : outcomingTransitions5
+statemachine::Region "0..9999" --* "1..1" statemachine::StateMachine : regions0
+statemachine::StateMachineDescription "1..1" *-- "0..9999" statemachine::AbstractState : states1
+statemachine::AbstractState "1..1" -- "1..1" statemachine::Transition : to8
+statemachine::Transition "0..9999" --* "1..1" statemachine::StateMachineDescription : transitions2
+@enduml

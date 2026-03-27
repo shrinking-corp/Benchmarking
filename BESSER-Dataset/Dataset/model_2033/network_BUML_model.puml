@@ -1,0 +1,52 @@
+@startuml
+class AbstractElement {
+}
+enum Event {
+  RECEIVE
+  SEND
+}
+enum TypeOfChannel {
+  Asynchronous
+  Synchronous
+}
+abstract class network::AbstractElement {
+  + name : str
+}
+class network::Channel {
+  + Type : str
+}
+class network::ChannelBuffer {
+}
+class network::CurrentStateMapState {
+}
+class network::Network {
+}
+class network::RunTimeNetwork {
+  + initialize() : void
+  + makeStep() : void
+}
+class network::State {
+}
+class network::Statemachine {
+}
+class network::Transition {
+  + Event : str
+}
+AbstractElement <|-- network::Channel
+AbstractElement <|-- network::Network
+AbstractElement <|-- network::State
+AbstractElement <|-- network::Statemachine
+network::Channel "1..9999" --* "1..1" network::Network : channel1
+network::Channel "1..1" -- "1..1" network::Transition : channel16
+network::ChannelBuffer "0..9999" --* "1..1" network::RunTimeNetwork : channelbuffer23
+network::CurrentStateMapState "0..9999" --* "1..1" network::RunTimeNetwork : currentstatemapstate21
+network::State "1..1" -- "1..1" network::Statemachine : initState5
+network::Channel "0..1" -- "1..1" network::ChannelBuffer : key28
+network::RunTimeNetwork "1..1" -- "0..1" network::Network : network19
+network::State "1..1" -- "1..1" network::Transition : source10
+network::State "1..1" -- "1..1" network::CurrentStateMapState : state25
+network::State "1..9999" --* "1..1" network::Statemachine : state3
+network::Statemachine "1..9999" --* "1..1" network::Network : statemachine0
+network::State "1..1" -- "1..1" network::Transition : target13
+network::Statemachine "1..1" *-- "1..9999" network::Transition : transition8
+@enduml

@@ -1,0 +1,73 @@
+@startuml
+enum AccessModifiers {
+  private
+  protected
+  public
+}
+class Classifier {
+}
+enum Languages {
+  CPP
+  CS
+  Java
+  Python
+}
+class Relation {
+}
+enum Types {
+  boolean
+  double
+  float
+  int
+  long
+  string
+  void
+}
+class design::Aggregation {
+}
+class design::Association {
+}
+class design::Attribute {
+  + name : str
+  + type : str
+}
+class design::Class {
+}
+abstract class design::Classifier {
+  + accessModifier : str
+  + name : str
+}
+class design::Composition {
+}
+class design::Dependency {
+}
+class design::Design {
+  + language : str
+}
+class design::Generalization {
+}
+class design::Interface {
+}
+class design::Operation {
+  + name : str
+  + returnType : str
+}
+class design::Realization {
+}
+abstract class design::Relation {
+}
+Classifier <|-- design::Class
+Classifier <|-- design::Interface
+Relation <|-- design::Aggregation
+Relation <|-- design::Association
+Relation <|-- design::Composition
+Relation <|-- design::Dependency
+Relation <|-- design::Generalization
+Relation <|-- design::Realization
+design::Attribute "0..9999" --* "1..1" design::Classifier : attributes9
+design::Design "1..1" *-- "0..9999" design::Classifier : elements0
+design::Operation "0..9999" --* "1..1" design::Classifier : operations11
+design::Relation "0..9999" --* "1..1" design::Design : relations1
+design::Classifier "0..1" -- "1..1" design::Relation : source3
+design::Relation "1..1" -- "0..1" design::Classifier : target6
+@enduml

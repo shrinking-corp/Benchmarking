@@ -1,0 +1,171 @@
+@startuml
+class ArithmeticExpression {
+}
+class AtomicExpression {
+}
+class ComparisonOperator {
+}
+class Expression {
+}
+class Form {
+}
+class FunctionalUnit {
+}
+class Loop {
+}
+class Operation {
+}
+class UnaryExpression {
+}
+class mpl::AddExpression {
+}
+abstract class mpl::ArithmeticExpression {
+}
+class mpl::Assignment {
+}
+abstract class mpl::AtomicExpression {
+}
+class mpl::Block {
+}
+class mpl::Comparison {
+}
+abstract class mpl::ComparisonOperator {
+}
+class mpl::DivisionExpression {
+}
+class mpl::EQ {
+}
+abstract class mpl::Expression {
+}
+class mpl::ExpressionStatement {
+}
+class mpl::For {
+  + downwards : str
+}
+abstract class mpl::Form {
+}
+class mpl::Function {
+}
+abstract class mpl::FunctionalUnit {
+  + name : str
+}
+class mpl::GE {
+}
+class mpl::GT {
+}
+class mpl::If {
+}
+class mpl::InputExpression {
+}
+class mpl::LE {
+}
+class mpl::LT {
+}
+class mpl::LiteralValue {
+  + rawValue : int
+}
+abstract class mpl::Loop {
+}
+class mpl::MPLModel {
+}
+class mpl::MultiplyExpression {
+}
+class mpl::NE {
+}
+class mpl::NegateExpression {
+}
+abstract class mpl::Operation {
+}
+class mpl::OperationExpression {
+}
+class mpl::ParenExpression {
+}
+class mpl::Procedure {
+}
+class mpl::Program {
+}
+class mpl::Return {
+}
+class mpl::Statement {
+}
+class mpl::SubtractExpression {
+}
+class mpl::TraceCall {
+}
+abstract class mpl::UnaryExpression {
+}
+class mpl::Variable {
+  + name : str
+}
+class mpl::VariableDeclaration {
+}
+class mpl::VariableReference {
+}
+class mpl::While {
+}
+ArithmeticExpression <|-- mpl::AddExpression
+ArithmeticExpression <|-- mpl::DivisionExpression
+ArithmeticExpression <|-- mpl::MultiplyExpression
+ArithmeticExpression <|-- mpl::SubtractExpression
+AtomicExpression <|-- mpl::LiteralValue
+AtomicExpression <|-- mpl::VariableReference
+ComparisonOperator <|-- mpl::EQ
+ComparisonOperator <|-- mpl::GE
+ComparisonOperator <|-- mpl::GT
+ComparisonOperator <|-- mpl::LE
+ComparisonOperator <|-- mpl::LT
+ComparisonOperator <|-- mpl::NE
+Expression <|-- mpl::ArithmeticExpression
+Expression <|-- mpl::AtomicExpression
+Expression <|-- mpl::InputExpression
+Expression <|-- mpl::OperationExpression
+Expression <|-- mpl::UnaryExpression
+Form <|-- mpl::Assignment
+Form <|-- mpl::ExpressionStatement
+Form <|-- mpl::If
+Form <|-- mpl::Loop
+Form <|-- mpl::Return
+Form <|-- mpl::TraceCall
+FunctionalUnit <|-- mpl::Operation
+FunctionalUnit <|-- mpl::Program
+Loop <|-- mpl::For
+Loop <|-- mpl::While
+Operation <|-- mpl::Function
+Operation <|-- mpl::Procedure
+UnaryExpression <|-- mpl::NegateExpression
+UnaryExpression <|-- mpl::ParenExpression
+mpl::Block "1..1" --* "1..1" mpl::FunctionalUnit : body4
+mpl::Block "1..1" --* "1..1" mpl::Loop : body49
+mpl::Comparison "1..1" --* "1..1" mpl::If : condition41
+mpl::While "1..1" *-- "1..1" mpl::Comparison : condition51
+mpl::Block "0..1" --* "1..1" mpl::If : else46
+mpl::ExpressionStatement "1..1" *-- "1..1" mpl::Expression : expression18
+mpl::Form "1..1" --* "1..1" mpl::Statement : form12
+mpl::Assignment "1..1" --* "1..1" mpl::For : from53
+mpl::VariableDeclaration "1..1" *-- "0..1" mpl::Expression : initialValue8
+mpl::Assignment "1..1" *-- "1..1" mpl::VariableReference : leftHandSide14
+mpl::Comparison "1..1" *-- "1..1" mpl::Expression : leftHandSide34
+mpl::LiteralValue "0..1" --* "1..1" mpl::InputExpression : lowerBound30
+mpl::Expression "1..1" --* "1..1" mpl::ArithmeticExpression : operand123
+mpl::Expression "1..1" --* "1..1" mpl::ArithmeticExpression : operand225
+mpl::Expression "1..1" --* "1..1" mpl::UnaryExpression : operand28
+mpl::Operation "1..1" -- "1..1" mpl::OperationExpression : operation69
+mpl::MPLModel "1..1" *-- "0..9999" mpl::Operation : operations1
+mpl::ComparisonOperator "1..1" --* "1..1" mpl::Comparison : operator36
+mpl::OperationExpression "1..1" *-- "0..9999" mpl::Expression : parameterValues71
+mpl::Variable "0..9999" --* "1..1" mpl::Operation : parameters58
+mpl::Comparison "0..9999" --* "1..1" mpl::Operation : postconditions64
+mpl::Operation "1..1" *-- "0..9999" mpl::Comparison : preconditions61
+mpl::Program "1..1" --* "1..1" mpl::MPLModel : program0
+mpl::Expression "1..1" --* "1..1" mpl::Assignment : rightHandSide15
+mpl::Expression "1..1" --* "1..1" mpl::Comparison : rightHandSide38
+mpl::Statement "0..9999" --* "1..1" mpl::Block : statements10
+mpl::If "1..1" *-- "1..1" mpl::Block : then43
+mpl::Expression "1..1" --* "1..1" mpl::For : to55
+mpl::LiteralValue "0..1" --* "1..1" mpl::InputExpression : upperBound31
+mpl::Expression "0..1" --* "1..1" mpl::Return : value67
+mpl::VariableReference "1..1" -- "1..1" mpl::Variable : variable20
+mpl::Variable "1..1" --* "1..1" mpl::VariableDeclaration : variable6
+mpl::VariableReference "1..1" --* "1..1" mpl::TraceCall : variable74
+mpl::VariableDeclaration "0..9999" --* "1..1" mpl::FunctionalUnit : variableDeclarations3
+@enduml

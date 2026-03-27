@@ -1,0 +1,50 @@
+@startuml
+class IPort {
+}
+class IWorkflowElement {
+}
+class IWorkflowNode {
+}
+class workflow::IInputPort {
+}
+class workflow::ILink {
+}
+class workflow::IOutputPort {
+}
+abstract class workflow::IPort {
+  + fileName : str
+}
+class workflow::IWorkflow {
+}
+abstract class workflow::IWorkflowElement {
+  + id : str
+  + name : str
+}
+class workflow::IWorkflowJob {
+  + jobDescription : str
+  + jobDescriptionFileName : str
+}
+abstract class workflow::IWorkflowNode {
+  + isFinish : bool
+  + isStart : bool
+}
+IPort <|-- workflow::IInputPort
+IPort <|-- workflow::IOutputPort
+IWorkflowElement <|-- workflow::ILink
+IWorkflowElement <|-- workflow::IPort
+IWorkflowElement <|-- workflow::IWorkflow
+IWorkflowElement <|-- workflow::IWorkflowNode
+IWorkflowNode <|-- workflow::IWorkflowJob
+workflow::IInputPort "1..9999" --* "1..1" workflow::IWorkflowNode : inputs20
+workflow::IWorkflow "1..1" *-- "0..9999" workflow::ILink : links13
+workflow::ILink "0..9999" -- "1..1" workflow::IInputPort : links6
+workflow::IOutputPort "1..1" -- "0..9999" workflow::ILink : links9
+workflow::IWorkflowNode "1..1" -- "1..1" workflow::IInputPort : node5
+workflow::IWorkflowNode "1..1" -- "1..1" workflow::IOutputPort : node7
+workflow::IWorkflowNode "0..9999" --* "1..1" workflow::IWorkflow : nodes11
+workflow::IOutputPort "1..9999" --* "1..1" workflow::IWorkflowNode : outputs18
+workflow::IOutputPort "1..1" -- "1..1" workflow::ILink : source3
+workflow::ILink "1..1" -- "1..1" workflow::IInputPort : target1
+workflow::IWorkflow "1..1" -- "1..1" workflow::ILink : workflow0
+workflow::IWorkflow "1..1" -- "1..1" workflow::IWorkflowNode : workflow16
+@enduml

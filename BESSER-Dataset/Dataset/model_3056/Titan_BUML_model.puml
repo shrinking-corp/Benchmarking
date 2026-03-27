@@ -1,0 +1,59 @@
+@startuml
+class DataType {
+}
+enum DataTypes {
+  Boolean
+  Double
+  Integer
+  Long
+  String
+}
+class Feature {
+}
+enum InternalDSLType {
+  NestedFunctions
+}
+class Reference {
+}
+class titan::DataType {
+  + type : str
+}
+class titan::Entity {
+  + name : str
+}
+class titan::Feature {
+  + name : str
+}
+class titan::Module {
+  + name : str
+  + type : str
+}
+class titan::MultiDataType {
+  + unique : bool
+}
+class titan::MultiReference {
+}
+class titan::Package {
+  + name : str
+}
+class titan::Reference {
+  + unique : bool
+}
+class titan::SingleDataType {
+}
+class titan::SingleReference {
+}
+DataType <|-- titan::MultiDataType
+DataType <|-- titan::SingleDataType
+Feature <|-- titan::DataType
+Feature <|-- titan::Reference
+Reference <|-- titan::MultiReference
+Reference <|-- titan::SingleReference
+titan::Package "1..1" *-- "0..9999" titan::Entity : entities1
+titan::Feature "0..9999" --* "1..1" titan::Entity : features6
+titan::MultiReference "0..1" -- "1..1" titan::Reference : opposite10
+titan::MultiDataType "0..1" -- "1..1" titan::DataType : opposite12
+titan::Module "1..1" *-- "0..9999" titan::Package : packages0
+titan::Entity "0..1" -- "1..1" titan::Reference : reference8
+titan::Entity "0..1" -- "1..1" titan::Entity : superEntity4
+@enduml

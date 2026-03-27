@@ -1,0 +1,35 @@
+@startuml
+class model::Buffer {
+  + initialValue : str
+  + name : str
+}
+class model::FSM {
+  + name : str
+  + run() : void
+}
+class model::State {
+  + name : str
+}
+class model::System {
+}
+class model::Transition {
+  + action : str
+  + name : str
+  + trigger : str
+}
+model::FSM "0..1" -- "1..1" model::State : fsm11
+model::FSM "0..1" -- "1..1" model::Transition : fsm20
+model::Transition "0..9999" -- "1..1" model::State : incoming7
+model::FSM "0..1" -- "1..1" model::Buffer : incomingFSM14
+model::FSM "1..1" -- "0..1" model::State : initialState6
+model::FSM "1..1" -- "0..1" model::Buffer : inputBuffer3
+model::State "1..1" -- "0..9999" model::Transition : outgoing9
+model::FSM "0..1" -- "1..1" model::Buffer : outgoingFSM12
+model::Buffer "0..1" -- "1..1" model::FSM : outputBuffer4
+model::Buffer "0..9999" --* "1..1" model::System : ownedBuffers24
+model::FSM "0..9999" --* "1..1" model::System : ownedFsms22
+model::State "0..9999" --* "1..1" model::FSM : ownedStates0
+model::Transition "0..9999" --* "1..1" model::FSM : ownedTransitions1
+model::State "0..1" -- "1..1" model::Transition : src18
+model::Transition "1..1" -- "0..1" model::State : tgt16
+@enduml

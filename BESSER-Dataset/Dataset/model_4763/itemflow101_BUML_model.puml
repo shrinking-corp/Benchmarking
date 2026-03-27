@@ -1,0 +1,38 @@
+@startuml
+class Port {
+}
+class ProcessNode {
+}
+class itemflow101::Description {
+  + content : str
+}
+class itemflow101::Flow {
+}
+class itemflow101::Function {
+}
+class itemflow101::InputPort {
+}
+class itemflow101::Item {
+  + name : str
+}
+class itemflow101::OutputPort {
+}
+abstract class itemflow101::Port {
+  + id : str
+}
+abstract class itemflow101::ProcessNode {
+  + label : str
+}
+Port <|-- itemflow101::InputPort
+Port <|-- itemflow101::OutputPort
+ProcessNode <|-- itemflow101::Flow
+ProcessNode <|-- itemflow101::Function
+itemflow101::Function "0..9999" --* "1..1" itemflow101::Function : decompositions2
+itemflow101::Description "0..9999" --* "1..1" itemflow101::Function : descriptions8
+itemflow101::Flow "0..9999" --* "1..1" itemflow101::Function : flows0
+itemflow101::Function "1..1" *-- "0..9999" itemflow101::InputPort : inputPorts6
+itemflow101::InputPort "0..9999" -- "1..1" itemflow101::Flow : inputflowEdge10
+itemflow101::Item "0..9999" --* "1..1" itemflow101::Flow : items13
+itemflow101::Function "1..1" *-- "0..9999" itemflow101::OutputPort : outputPorts4
+itemflow101::Flow "0..9999" -- "1..1" itemflow101::OutputPort : outputflowEdge15
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+class Attribute {
+}
+class Class {
+}
+class ClassDiagram::Attribute {
+  + multiValued : str
+}
+class ClassDiagram::Class {
+  + isAbstract : str
+}
+abstract class ClassDiagram::Classifier {
+}
+class ClassDiagram::Column {
+}
+class ClassDiagram::DataType {
+}
+abstract class ClassDiagram::Named {
+  + name : str
+}
+abstract class ClassDiagram::NamedElement {
+  + name : str
+}
+class ClassDiagram::Table {
+}
+class ClassDiagram::Type {
+}
+class Classifier {
+}
+class Column {
+}
+class Named {
+}
+class NamedElement {
+}
+class Table {
+}
+class Type {
+}
+Classifier <|-- ClassDiagram::Class
+Classifier <|-- ClassDiagram::DataType
+Named <|-- ClassDiagram::Column
+Named <|-- ClassDiagram::Table
+Named <|-- ClassDiagram::Type
+NamedElement <|-- ClassDiagram::Attribute
+NamedElement <|-- ClassDiagram::Classifier
+ClassDiagram::Class "1..1" *-- "0..9999" Attribute : attr1
+ClassDiagram::Table "1..1" *-- "0..9999" Column : col6
+Column "0..9999" -- "1..1" ClassDiagram::Table : key9
+Table "0..1" -- "1..1" ClassDiagram::Column : keyOf15
+Table "1..1" -- "1..1" ClassDiagram::Column : owner12
+ClassDiagram::Attribute "1..1" -- "1..1" Class : owner3
+Class "0..9999" -- "1..1" ClassDiagram::Class : super0
+ClassDiagram::Column "1..1" -- "1..1" Type : type18
+Classifier "1..1" -- "1..1" ClassDiagram::Attribute : type2
+@enduml

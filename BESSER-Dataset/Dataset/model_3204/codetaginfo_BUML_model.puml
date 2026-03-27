@@ -1,0 +1,48 @@
+@startuml
+enum CodeTagType {
+  CLASSGENERATEDATTRIBUTEGET
+  CLASSGENERATEDATTRIBUTESET
+  CLASSGENERATEDOPERATIONIMPL
+  CLASSPRIVATEMEMBERSSECTIONDECLARE
+  CLASSPRIVATEMETHODSSECTIONDECLARE
+  CLASSPRIVATEMETHODSSECTIONIMPL
+  CLASSPUBLICMETHODSSECTIONDECLARE
+  CLASSPUBLICMETHODSSECTIONIMPL
+  CONSTRUCTORINITLIST
+  FILEFOOTERCPP
+  FILEFOOTERH
+  FILEHEADERCPP
+  FILEHEADERH
+  FILEINCLUDESCPP
+  FILEINCLUDESH
+}
+class codetaginfo::CodeTag {
+  + contents : str
+  + group : str
+  + name : str
+  + tag_begin : str
+  + tag_end : str
+  + type : str
+  + uuid : str
+}
+class codetaginfo::CodeTagContext {
+  + class_name : str
+  + component_name : str
+  + group : str
+  + operation_name : str
+}
+class codetaginfo::CodeTagInfo {
+  + filename : str
+  + group : str
+}
+class codetaginfo::DocumentRoot {
+  + mixed : str
+}
+class codetaginfo::EStringToStringMapEntry {
+}
+codetaginfo::CodeTagInfo "0..9999" --* "1..1" codetaginfo::DocumentRoot : codeTagInfo7
+codetaginfo::CodeTagInfo "1..1" *-- "0..9999" codetaginfo::CodeTag : codetag1
+codetaginfo::CodeTagContext "0..9999" --* "1..1" codetaginfo::CodeTag : contextinfo0
+codetaginfo::EStringToStringMapEntry "0..9999" --* "1..1" codetaginfo::DocumentRoot : xMLNSPrefixMap3
+codetaginfo::DocumentRoot "1..1" *-- "0..9999" codetaginfo::EStringToStringMapEntry : xSISchemaLocation4
+@enduml

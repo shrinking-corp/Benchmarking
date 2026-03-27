@@ -1,0 +1,58 @@
+@startuml
+class ComparisonExpression {
+}
+class Expression {
+}
+class Statement {
+}
+class mini::lang::AssignmentStatement {
+}
+class mini::lang::Block {
+}
+abstract class mini::lang::ComparisonExpression {
+}
+class mini::lang::EqualsExpression {
+}
+abstract class mini::lang::Expression {
+}
+class mini::lang::ExpressionStatement {
+}
+class mini::lang::FOLCallExpression {
+  + iterator : str
+  + method : str
+}
+class mini::lang::IfStatement {
+}
+class mini::lang::MiniLang {
+}
+class mini::lang::NameExpression {
+  + name : str
+}
+class mini::lang::NotEqualsExpression {
+}
+class mini::lang::ReturnStatement {
+}
+abstract class mini::lang::Statement {
+}
+ComparisonExpression <|-- mini::lang::EqualsExpression
+ComparisonExpression <|-- mini::lang::NotEqualsExpression
+Expression <|-- mini::lang::ComparisonExpression
+Expression <|-- mini::lang::FOLCallExpression
+Expression <|-- mini::lang::NameExpression
+Statement <|-- mini::lang::AssignmentStatement
+Statement <|-- mini::lang::ExpressionStatement
+Statement <|-- mini::lang::IfStatement
+Statement <|-- mini::lang::ReturnStatement
+mini::lang::Block "0..1" --* "1..1" mini::lang::MiniLang : block0
+mini::lang::FOLCallExpression "1..1" *-- "1..1" mini::lang::Expression : condition21
+mini::lang::Expression "1..1" --* "1..1" mini::lang::IfStatement : condition3
+mini::lang::Expression "1..1" --* "1..1" mini::lang::ExpressionStatement : expr12
+mini::lang::Expression "0..1" --* "1..1" mini::lang::ReturnStatement : expr14
+mini::lang::Block "1..1" --* "1..1" mini::lang::IfStatement : ifBody4
+mini::lang::Expression "1..1" --* "1..1" mini::lang::ComparisonExpression : lhs16
+mini::lang::Expression "1..1" --* "1..1" mini::lang::AssignmentStatement : lhs7
+mini::lang::Expression "1..1" --* "1..1" mini::lang::ComparisonExpression : rhs18
+mini::lang::AssignmentStatement "1..1" *-- "1..1" mini::lang::Expression : rhs9
+mini::lang::Block "1..1" *-- "0..9999" mini::lang::Statement : statements1
+mini::lang::Expression "1..1" --* "1..1" mini::lang::FOLCallExpression : target23
+@enduml

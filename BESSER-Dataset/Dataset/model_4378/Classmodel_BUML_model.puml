@@ -1,0 +1,143 @@
+@startuml
+class Element {
+}
+class Entity {
+}
+class Feature {
+}
+class Relationship {
+}
+enum Visibility {
+  PACKAGE_PRIVATE
+  PRIVATE
+  PROTECTED
+  PUBLIC
+}
+class classmodel::Aggregation {
+  + headLabel : str
+  + headNavigable : bool
+  + headVisibility : str
+  + tailLabel : str
+  + tailNavigable : bool
+  + tailVisibility : str
+}
+class classmodel::Annotation {
+}
+class classmodel::Array {
+}
+class classmodel::Association {
+  + headLabel : str
+  + headNavigable : bool
+  + headVisibility : str
+  + tailLabel : str
+  + tailNavigable : bool
+  + tailVisibility : str
+}
+class classmodel::Attribute {
+  + implicit : str
+  + static : bool
+}
+class classmodel::Classifier {
+  + constraint : str
+}
+class classmodel::Composition {
+  + headLabel : str
+  + headNavigable : bool
+  + headVisibility : str
+  + tailLabel : str
+  + tailNavigable : bool
+  + tailVisibility : str
+}
+class classmodel::Constant {
+}
+class classmodel::Datatype {
+}
+class classmodel::Dependency {
+}
+class classmodel::Element {
+}
+class classmodel::Entity {
+  + name : str
+}
+class classmodel::Enumeration {
+  + constraint : str
+}
+class classmodel::Feature {
+  + constraint : str
+  + name : str
+  + value : str
+  + visibility : str
+}
+class classmodel::Generalization {
+}
+class classmodel::Import {
+  + importURI : str
+}
+class classmodel::Model {
+}
+class classmodel::Multiplicity {
+  + lower : str
+  + upper : str
+}
+class classmodel::Operation {
+  + body : str
+  + static : bool
+}
+class classmodel::Package {
+  + name : str
+}
+class classmodel::Parameter {
+  + implicit : str
+  + name : str
+}
+class classmodel::Realization {
+}
+class classmodel::Reference {
+}
+class classmodel::Relationship {
+  + label : str
+}
+class classmodel::Type {
+  + visibility : str
+}
+Element <|-- classmodel::Entity
+Element <|-- classmodel::Package
+Element <|-- classmodel::Relationship
+Entity <|-- classmodel::Classifier
+Entity <|-- classmodel::Datatype
+Entity <|-- classmodel::Enumeration
+Feature <|-- classmodel::Attribute
+Feature <|-- classmodel::Constant
+Feature <|-- classmodel::Operation
+Relationship <|-- classmodel::Aggregation
+Relationship <|-- classmodel::Association
+Relationship <|-- classmodel::Composition
+Relationship <|-- classmodel::Dependency
+Relationship <|-- classmodel::Generalization
+Relationship <|-- classmodel::Realization
+classmodel::Annotation "0..9999" --* "1..1" classmodel::Element : annotation3
+classmodel::Array "0..9999" --* "1..1" classmodel::Reference : array50
+classmodel::Element "0..9999" --* "1..1" classmodel::Package : element5
+classmodel::Model "1..1" *-- "0..9999" classmodel::Element : elements1
+classmodel::Feature "0..9999" --* "1..1" classmodel::Enumeration : enumerator17
+classmodel::Feature "0..9999" --* "1..1" classmodel::Classifier : feature11
+classmodel::Type "0..9999" --* "1..1" classmodel::Classifier : generalization7
+classmodel::Entity "0..1" -- "1..1" classmodel::Relationship : head20
+classmodel::Multiplicity "0..1" --* "1..1" classmodel::Association : headMultiplicity25
+classmodel::Multiplicity "0..1" --* "1..1" classmodel::Aggregation : headMultiplicity29
+classmodel::Multiplicity "0..1" --* "1..1" classmodel::Composition : headMultiplicity34
+classmodel::Import "0..9999" --* "1..1" classmodel::Model : imports0
+classmodel::Entity "0..1" -- "1..1" classmodel::Type : name13
+classmodel::Operation "1..1" *-- "0..9999" classmodel::Parameter : parameter39
+classmodel::Reference "0..1" --* "1..1" classmodel::Operation : return40
+classmodel::Multiplicity "0..1" --* "1..1" classmodel::Array : size52
+classmodel::Relationship "1..1" -- "0..1" classmodel::Entity : tail22
+classmodel::Multiplicity "0..1" --* "1..1" classmodel::Association : tailMultiplicity26
+classmodel::Multiplicity "0..1" --* "1..1" classmodel::Aggregation : tailMultiplicity31
+classmodel::Multiplicity "0..1" --* "1..1" classmodel::Composition : tailMultiplicity36
+classmodel::Parameter "1..1" *-- "0..1" classmodel::Reference : type42
+classmodel::Reference "0..1" --* "1..1" classmodel::Attribute : type45
+classmodel::Reference "1..1" -- "0..1" classmodel::Entity : type47
+classmodel::Enumeration "1..1" *-- "0..1" classmodel::Type : upperClass15
+classmodel::Classifier "1..1" *-- "0..1" classmodel::Type : upperClass8
+@enduml

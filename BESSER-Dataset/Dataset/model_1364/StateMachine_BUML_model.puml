@@ -1,0 +1,96 @@
+@startuml
+class Behavior {
+}
+class BehavioralFeature {
+}
+class BehavioredClassifier {
+}
+class Event {
+}
+class MessageEvent {
+}
+class NamedElement {
+}
+enum PseudoStateKind {
+  initial
+}
+class State {
+}
+class Vertex {
+}
+class statemachine::Behavior {
+}
+class statemachine::BehavioralFeature {
+}
+class statemachine::BehavioredClassifier {
+}
+class statemachine::CallEvent {
+}
+class statemachine::Class {
+}
+class statemachine::Constraint {
+}
+class statemachine::Event {
+}
+class statemachine::FinalState {
+}
+class statemachine::MessageEvent {
+}
+class statemachine::NamedElement {
+}
+class statemachine::OpaqueBehavior {
+  + body : str
+  + language : str
+}
+class statemachine::Operation {
+}
+class statemachine::PseudoState {
+  + kind : str
+}
+class statemachine::Region {
+}
+class statemachine::State {
+}
+class statemachine::StateMachine {
+}
+class statemachine::Transition {
+}
+class statemachine::Trigger {
+}
+abstract class statemachine::Vertex {
+}
+BehavioralFeature <|-- statemachine::Operation
+BehavioredClassifier <|-- statemachine::Class
+Behavior <|-- statemachine::OpaqueBehavior
+Behavior <|-- statemachine::StateMachine
+Event <|-- statemachine::MessageEvent
+MessageEvent <|-- statemachine::CallEvent
+NamedElement <|-- statemachine::Transition
+NamedElement <|-- statemachine::Vertex
+State <|-- statemachine::FinalState
+Vertex <|-- statemachine::PseudoState
+Vertex <|-- statemachine::State
+statemachine::Behavior "0..1" -- "1..1" statemachine::BehavioralFeature : behavior27
+statemachine::Behavior "1..1" -- "0..1" statemachine::Transition : behaviortransition7
+statemachine::Constraint "1..1" -- "0..1" statemachine::Transition : constrainttransition33
+statemachine::BehavioredClassifier "0..1" -- "1..1" statemachine::Behavior : context6
+statemachine::Behavior "0..1" --* "1..1" statemachine::Transition : effect17
+statemachine::Event "1..1" -- "1..1" statemachine::Trigger : event32
+statemachine::Trigger "0..1" -- "1..1" statemachine::Event : eventtrigger25
+statemachine::Constraint "0..1" --* "1..1" statemachine::Transition : guard9
+statemachine::Transition "0..9999" -- "1..1" statemachine::Vertex : incoming21
+statemachine::StateMachine "0..1" -- "1..1" statemachine::Region : machine2
+statemachine::Operation "1..1" -- "1..1" statemachine::CallEvent : operation26
+statemachine::Transition "0..9999" -- "1..1" statemachine::Vertex : outgoing19
+statemachine::BehavioredClassifier "1..1" *-- "0..9999" statemachine::Behavior : ownedBehavior1
+statemachine::Region "1..9999" --* "1..1" statemachine::StateMachine : region0
+statemachine::Vertex "1..1" -- "0..1" statemachine::Region : regionvertex23
+statemachine::Vertex "1..1" -- "1..1" statemachine::Transition : source10
+statemachine::Behavior "1..1" -- "0..1" statemachine::BehavioralFeature : specification5
+statemachine::Vertex "0..9999" --* "1..1" statemachine::Region : subvertex3
+statemachine::Vertex "1..1" -- "1..1" statemachine::Transition : target12
+statemachine::Transition "0..9999" --* "1..1" statemachine::Region : transition4
+statemachine::Region "1..1" -- "1..1" statemachine::Transition : transitionregion14
+statemachine::Transition "1..1" *-- "0..9999" statemachine::Trigger : trigger16
+statemachine::Trigger "1..1" -- "0..1" statemachine::Transition : triggertransition29
+@enduml

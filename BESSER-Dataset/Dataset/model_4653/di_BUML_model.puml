@@ -1,0 +1,74 @@
+@startuml
+class DiagramElement {
+}
+class Edge {
+}
+class Node {
+}
+class Shape {
+}
+class di::Bounds {
+}
+abstract class di::Diagram {
+  + documentation : str
+  + id : str
+  + name : str
+  + resolution : str
+}
+abstract class di::DiagramElement {
+  + anyAttribute : str
+  + id : str
+}
+class di::DocumentRoot {
+  + mixed : str
+}
+class di::EStringToStringMapEntry {
+}
+abstract class di::Edge {
+}
+class di::ExtensionType {
+  + any : str
+}
+abstract class di::Label {
+}
+abstract class di::LabeledEdge {
+}
+abstract class di::LabeledShape {
+}
+abstract class di::Node {
+}
+abstract class di::Plane {
+  + diagramElementGroup : str
+}
+class di::Point {
+}
+abstract class di::Shape {
+}
+abstract class di::Style {
+  + id : str
+}
+DiagramElement <|-- di::Edge
+DiagramElement <|-- di::Node
+Edge <|-- di::LabeledEdge
+Node <|-- di::Label
+Node <|-- di::Plane
+Node <|-- di::Shape
+Shape <|-- di::LabeledShape
+di::Bounds "0..1" --* "1..1" di::Label : bounds2
+di::Shape "1..1" *-- "1..1" di::Bounds : bounds5
+di::Diagram "0..9999" --* "1..1" di::DocumentRoot : diagram14
+di::DiagramElement "0..9999" --* "1..1" di::DocumentRoot : diagramElement11
+di::DiagramElement "0..9999" --* "1..1" di::Plane : diagramElement3
+di::Edge "0..9999" --* "1..1" di::DocumentRoot : edge16
+di::ExtensionType "0..1" --* "1..1" di::DiagramElement : extension0
+di::Label "0..9999" --* "1..1" di::DocumentRoot : label19
+di::LabeledEdge "0..9999" --* "1..1" di::DocumentRoot : labeledEdge22
+di::DocumentRoot "1..1" *-- "0..9999" di::LabeledShape : labeledShape24
+di::Node "0..9999" --* "1..1" di::DocumentRoot : node26
+di::Plane "0..9999" --* "1..1" di::DocumentRoot : plane28
+di::Shape "0..9999" --* "1..1" di::DocumentRoot : shape31
+di::Style "0..9999" --* "1..1" di::DocumentRoot : style34
+di::Edge "1..1" *-- "2..9999" di::Point : waypoint1
+di::EStringToStringMapEntry "0..9999" --* "1..1" di::DocumentRoot : xMLNSPrefixMap7
+di::DocumentRoot "1..1" *-- "0..9999" di::EStringToStringMapEntry : xSISchemaLocation8
+@enduml

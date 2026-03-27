@@ -1,0 +1,293 @@
+@startuml
+class AstExpression {
+}
+class AstType {
+}
+class ExpressionLiteral {
+}
+class RegExp {
+}
+class Statement {
+}
+class cal::AnnotationArgument {
+  + name : str
+  + value : str
+}
+class cal::AstAction {
+}
+class cal::AstActor {
+}
+class cal::AstAnnotation {
+  + name : str
+}
+class cal::AstEntity {
+  + name : str
+  + package : str
+}
+class cal::AstExpression {
+}
+class cal::AstPort {
+  + name : str
+}
+class cal::AstProcedure {
+  + name : str
+}
+class cal::AstState {
+  + name : str
+  + node : str
+}
+class cal::AstTag {
+  + identifiers : str
+}
+class cal::AstTransition {
+}
+class cal::AstType {
+}
+class cal::AstTypeBool {
+}
+class cal::AstTypeDouble {
+}
+class cal::AstTypeFloat {
+}
+class cal::AstTypeHalf {
+}
+class cal::AstTypeInt {
+}
+class cal::AstTypeList {
+}
+class cal::AstTypeString {
+}
+class cal::AstTypeUint {
+}
+class cal::AstUnit {
+}
+class cal::ExpressionBinary {
+  + operator : str
+}
+class cal::ExpressionBoolean {
+  + value : bool
+}
+class cal::ExpressionCall {
+}
+class cal::ExpressionElsif {
+}
+class cal::ExpressionFloat {
+  + value : float
+}
+class cal::ExpressionIf {
+}
+class cal::ExpressionIndex {
+}
+class cal::ExpressionInteger {
+  + value : str
+}
+class cal::ExpressionList {
+}
+class cal::ExpressionLiteral {
+}
+class cal::ExpressionString {
+  + value : str
+}
+class cal::ExpressionUnary {
+  + unaryOperator : str
+}
+class cal::ExpressionVariable {
+}
+class cal::ExternalTarget {
+}
+class cal::Fsm {
+}
+class cal::Function {
+  + name : str
+}
+class cal::Generator {
+}
+class cal::Guard {
+}
+class cal::Import {
+  + importedNamespace : str
+}
+class cal::Inequality {
+}
+class cal::InputPattern {
+}
+class cal::LocalFsm {
+  + name : str
+}
+class cal::OutputPattern {
+}
+class cal::Priority {
+}
+class cal::RegExp {
+}
+class cal::RegExpBinary {
+  + operator : str
+}
+class cal::RegExpTag {
+}
+class cal::RegExpUnary {
+  + unaryOperator : str
+}
+class cal::ScheduleFsm {
+}
+class cal::Statement {
+}
+class cal::StatementAssign {
+}
+class cal::StatementCall {
+}
+class cal::StatementElsif {
+}
+class cal::StatementForeach {
+}
+class cal::StatementIf {
+}
+class cal::StatementWhile {
+}
+class cal::Variable {
+  + constant : bool
+  + name : str
+}
+class cal::VariableReference {
+}
+AstExpression <|-- cal::ExpressionBinary
+AstExpression <|-- cal::ExpressionCall
+AstExpression <|-- cal::ExpressionIf
+AstExpression <|-- cal::ExpressionIndex
+AstExpression <|-- cal::ExpressionList
+AstExpression <|-- cal::ExpressionLiteral
+AstExpression <|-- cal::ExpressionUnary
+AstExpression <|-- cal::ExpressionVariable
+AstType <|-- cal::AstTypeBool
+AstType <|-- cal::AstTypeDouble
+AstType <|-- cal::AstTypeFloat
+AstType <|-- cal::AstTypeHalf
+AstType <|-- cal::AstTypeInt
+AstType <|-- cal::AstTypeList
+AstType <|-- cal::AstTypeString
+AstType <|-- cal::AstTypeUint
+ExpressionLiteral <|-- cal::ExpressionBoolean
+ExpressionLiteral <|-- cal::ExpressionFloat
+ExpressionLiteral <|-- cal::ExpressionInteger
+ExpressionLiteral <|-- cal::ExpressionString
+RegExp <|-- cal::RegExpBinary
+RegExp <|-- cal::RegExpTag
+RegExp <|-- cal::RegExpUnary
+Statement <|-- cal::StatementAssign
+Statement <|-- cal::StatementCall
+Statement <|-- cal::StatementForeach
+Statement <|-- cal::StatementIf
+Statement <|-- cal::StatementWhile
+cal::AstAction "0..9999" --* "1..1" cal::AstActor : actions37
+cal::AstActor "0..1" --* "1..1" cal::AstEntity : actor3
+cal::AstEntity "1..1" *-- "0..9999" cal::AstAnnotation : annotations1
+cal::AstAction "1..1" *-- "0..9999" cal::AstAnnotation : annotations127
+cal::Variable "1..1" *-- "0..9999" cal::AstAnnotation : annotations15
+cal::AstAnnotation "0..9999" --* "1..1" cal::Statement : annotations210
+cal::AstAnnotation "0..9999" --* "1..1" cal::ExpressionCall : annotations213
+cal::AstPort "1..1" *-- "0..9999" cal::AstAnnotation : annotations53
+cal::AstAnnotation "0..9999" --* "1..1" cal::Function : annotations59
+cal::AstAnnotation "0..9999" --* "1..1" cal::AstProcedure : annotations74
+cal::AstExpression "0..9999" --* "1..1" cal::StatementCall : arguments175
+cal::AnnotationArgument "0..9999" --* "1..1" cal::AstAnnotation : arguments269
+cal::RegExp "0..1" --* "1..1" cal::RegExpUnary : child276
+cal::StatementIf "1..1" *-- "0..1" cal::AstExpression : condition189
+cal::AstExpression "0..1" --* "1..1" cal::StatementElsif : condition199
+cal::AstExpression "0..1" --* "1..1" cal::StatementWhile : condition205
+cal::ExpressionIf "1..1" *-- "0..1" cal::AstExpression : condition226
+cal::ExpressionElsif "1..1" *-- "0..1" cal::AstExpression : condition236
+cal::Fsm "0..1" --* "1..1" cal::LocalFsm : contents124
+cal::ScheduleFsm "1..1" *-- "0..1" cal::Fsm : contents91
+cal::AstExpression "0..9999" --* "1..1" cal::Variable : dimensions20
+cal::Statement "0..9999" --* "1..1" cal::StatementIf : else196
+cal::AstExpression "0..1" --* "1..1" cal::ExpressionIf : else233
+cal::StatementElsif "0..9999" --* "1..1" cal::StatementIf : elsifs194
+cal::ExpressionIf "1..1" *-- "0..9999" cal::ExpressionElsif : elsifs231
+cal::RegExp "0..1" --* "1..1" cal::RegExp : exp122
+cal::ExpressionUnary "1..1" *-- "0..1" cal::AstExpression : expression285
+cal::AstExpression "0..1" --* "1..1" cal::Function : expression71
+cal::AstExpression "0..9999" --* "1..1" cal::Guard : expressions163
+cal::AstExpression "0..9999" --* "1..1" cal::ExpressionList : expressions242
+cal::ExternalTarget "0..1" --* "1..1" cal::AstTransition : externalTarget107
+cal::AstState "0..1" -- "1..1" cal::ExternalTarget : from115
+cal::ExternalTarget "1..1" -- "0..1" cal::LocalFsm : fsm109
+cal::Function "0..1" -- "1..1" cal::ExpressionCall : function215
+cal::Function "0..9999" --* "1..1" cal::AstActor : functions31
+cal::Function "0..9999" --* "1..1" cal::AstUnit : functions7
+cal::Generator "0..9999" --* "1..1" cal::ExpressionList : generators244
+cal::AstAction "1..1" *-- "0..1" cal::Guard : guard137
+cal::AstExpression "0..1" --* "1..1" cal::StatementForeach : higher183
+cal::Generator "1..1" *-- "0..1" cal::AstExpression : higher252
+cal::Import "0..9999" --* "1..1" cal::AstEntity : imports0
+cal::StatementAssign "1..1" *-- "0..9999" cal::AstExpression : indexes167
+cal::AstExpression "0..9999" --* "1..1" cal::ExpressionIndex : indexes223
+cal::Inequality "0..9999" --* "1..1" cal::Priority : inequalities86
+cal::AstState "0..1" -- "1..1" cal::ScheduleFsm : initialState89
+cal::AstAction "0..9999" --* "1..1" cal::AstActor : initializes39
+cal::InputPattern "0..9999" --* "1..1" cal::AstAction : inputs133
+cal::AstPort "0..9999" --* "1..1" cal::AstActor : inputs26
+cal::RegExp "0..1" --* "1..1" cal::RegExpBinary : left271
+cal::AstExpression "0..1" --* "1..1" cal::ExpressionBinary : left280
+cal::AstActor "1..1" *-- "0..9999" cal::LocalFsm : localFsms45
+cal::AstExpression "0..1" --* "1..1" cal::StatementForeach : lower180
+cal::AstExpression "0..1" --* "1..1" cal::Generator : lower249
+cal::OutputPattern "0..9999" --* "1..1" cal::AstAction : outputs135
+cal::AstPort "0..9999" --* "1..1" cal::AstActor : outputs28
+cal::ExpressionCall "1..1" *-- "0..9999" cal::AstExpression : parameters218
+cal::AstActor "1..1" *-- "0..9999" cal::Variable : parameters23
+cal::Variable "0..9999" --* "1..1" cal::Function : parameters62
+cal::AstProcedure "1..1" *-- "0..9999" cal::Variable : parameters77
+cal::AstPort "0..1" -- "1..1" cal::InputPattern : port145
+cal::AstPort "0..1" -- "1..1" cal::OutputPattern : port154
+cal::Priority "0..9999" --* "1..1" cal::AstActor : priorities51
+cal::StatementCall "1..1" -- "0..1" cal::AstProcedure : procedure173
+cal::AstActor "1..1" *-- "0..9999" cal::AstProcedure : procedures34
+cal::AstUnit "1..1" *-- "0..9999" cal::AstProcedure : procedures9
+cal::AstExpression "0..1" --* "1..1" cal::InputPattern : repeat151
+cal::AstExpression "0..1" --* "1..1" cal::OutputPattern : repeat160
+cal::RegExp "0..1" --* "1..1" cal::RegExpBinary : right273
+cal::AstExpression "0..1" --* "1..1" cal::ExpressionBinary : right282
+cal::ScheduleFsm "0..1" --* "1..1" cal::AstActor : scheduleFsm47
+cal::RegExp "0..1" --* "1..1" cal::AstActor : scheduleRegExp49
+cal::AstExpression "0..1" --* "1..1" cal::AstTypeInt : size257
+cal::AstExpression "0..1" --* "1..1" cal::AstTypeList : size261
+cal::AstExpression "0..1" --* "1..1" cal::AstTypeUint : size264
+cal::VariableReference "0..1" --* "1..1" cal::ExpressionIndex : source221
+cal::AstState "0..1" -- "1..1" cal::AstTransition : source98
+cal::AstState "0..1" -- "1..1" cal::ExternalTarget : state112
+cal::Variable "0..9999" --* "1..1" cal::AstActor : stateVariables42
+cal::Statement "0..9999" --* "1..1" cal::AstAction : statements142
+cal::Statement "0..9999" --* "1..1" cal::StatementForeach : statements186
+cal::Statement "0..9999" --* "1..1" cal::StatementWhile : statements207
+cal::AstProcedure "1..1" *-- "0..9999" cal::Statement : statements83
+cal::AstState "0..9999" --* "1..1" cal::Fsm : states95
+cal::AstTransition "1..1" *-- "0..1" cal::AstTag : tag101
+cal::AstTag "0..1" --* "1..1" cal::AstAction : tag130
+cal::RegExpTag "1..1" *-- "0..1" cal::AstTag : tag278
+cal::AstTag "0..9999" --* "1..1" cal::Inequality : tags85
+cal::AstState "0..1" -- "1..1" cal::AstTransition : target104
+cal::VariableReference "0..1" --* "1..1" cal::StatementAssign : target166
+cal::Statement "0..9999" --* "1..1" cal::StatementIf : then191
+cal::Statement "0..9999" --* "1..1" cal::StatementElsif : then202
+cal::AstExpression "0..1" --* "1..1" cal::ExpressionIf : then228
+cal::AstExpression "0..1" --* "1..1" cal::ExpressionElsif : then239
+cal::AstState "0..1" -- "1..1" cal::ExternalTarget : to118
+cal::InputPattern "1..1" *-- "0..9999" cal::Variable : tokens148
+cal::AstTransition "0..9999" --* "1..1" cal::Fsm : transitions93
+cal::AstType "0..1" --* "1..1" cal::Variable : type18
+cal::AstType "0..1" --* "1..1" cal::AstTypeList : type259
+cal::AstType "0..1" --* "1..1" cal::AstPort : type56
+cal::Function "1..1" *-- "0..1" cal::AstType : type65
+cal::AstUnit "0..1" --* "1..1" cal::AstEntity : unit5
+cal::AstExpression "0..1" --* "1..1" cal::Variable : value13
+cal::AstExpression "0..1" --* "1..1" cal::StatementAssign : value170
+cal::VariableReference "0..1" --* "1..1" cal::ExpressionVariable : value255
+cal::AstExpression "0..9999" --* "1..1" cal::OutputPattern : values157
+cal::StatementForeach "1..1" *-- "0..1" cal::Variable : variable178
+cal::Generator "1..1" *-- "0..1" cal::Variable : variable246
+cal::VariableReference "1..1" -- "0..1" cal::Variable : variable266
+cal::Variable "0..9999" --* "1..1" cal::AstUnit : variables11
+cal::Variable "0..9999" --* "1..1" cal::AstAction : variables139
+cal::Variable "0..9999" --* "1..1" cal::Function : variables68
+cal::Variable "0..9999" --* "1..1" cal::AstProcedure : variables80
+@enduml

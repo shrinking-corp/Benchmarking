@@ -1,0 +1,38 @@
+@startuml
+class NamedElement {
+}
+class helloworld150::Comment {
+  + content : str
+}
+abstract class helloworld150::NamedElement {
+  + name : str
+}
+class helloworld150::Own {
+  + ownerName : str
+  + since : str
+}
+class helloworld150::Person {
+  + birthDate : str
+  + forName : str
+}
+class helloworld150::Profession {
+  + name : str
+}
+class helloworld150::Thing {
+  + id : int
+}
+class helloworld150::World {
+}
+NamedElement <|-- helloworld150::Own
+NamedElement <|-- helloworld150::Person
+NamedElement <|-- helloworld150::Thing
+helloworld150::Comment "0..1" --* "1..1" helloworld150::NamedElement : comment8
+helloworld150::Own "0..1" -- "1..1" helloworld150::Thing : ownership5
+helloworld150::Own "0..9999" --* "1..1" helloworld150::Thing : ownerships6
+helloworld150::Person "0..1" -- "1..1" helloworld150::Own : person10
+helloworld150::Person "0..9999" --* "1..1" helloworld150::World : persons1
+helloworld150::Profession "0..1" -- "1..1" helloworld150::Person : profession13
+helloworld150::Profession "0..9999" --* "1..1" helloworld150::World : professions3
+helloworld150::Own "1..1" -- "0..1" helloworld150::Thing : thing9
+helloworld150::Thing "0..9999" --* "1..1" helloworld150::World : things0
+@enduml

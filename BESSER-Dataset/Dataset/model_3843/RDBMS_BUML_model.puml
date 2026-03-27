@@ -1,0 +1,21 @@
+@startuml
+class RDBMS::Column {
+  + name : str
+  + type : str
+}
+class RDBMS::ForeignKey {
+}
+class RDBMS::Schema {
+  + name : str
+}
+class RDBMS::Table {
+  + is_local : bool
+  + name : str
+}
+RDBMS::Table "1..1" *-- "0..9999" RDBMS::Column : cols1
+RDBMS::Column "0..9999" -- "1..1" RDBMS::ForeignKey : cols8
+RDBMS::ForeignKey "0..9999" --* "1..1" RDBMS::Table : fkeys3
+RDBMS::Column "0..9999" -- "1..1" RDBMS::Table : pkey5
+RDBMS::ForeignKey "1..1" -- "1..1" RDBMS::Table : references11
+RDBMS::Table "0..9999" --* "1..1" RDBMS::Schema : tables0
+@enduml

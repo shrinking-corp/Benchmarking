@@ -1,0 +1,84 @@
+@startuml
+class Action {
+}
+class Actuate {
+}
+class Behavior {
+}
+class Condition {
+}
+class Node {
+}
+abstract class farrusco::Action {
+  + name : str
+}
+abstract class farrusco::Actuate {
+}
+class farrusco::AlterarEstado {
+  + fail_policy : int
+  + runn_policy : int
+  + succ_policy : int
+}
+abstract class farrusco::Behavior {
+  + Name : str
+}
+class farrusco::BumperDireito {
+}
+class farrusco::BumperEsquerdo {
+}
+abstract class farrusco::Condition {
+}
+class farrusco::Distancia {
+  + distancia : int
+  + how_sucess : bool
+}
+class farrusco::Espera {
+  + time : int
+}
+class farrusco::Filho {
+}
+class farrusco::Irmao {
+}
+class farrusco::LED {
+  + on_off : bool
+}
+class farrusco::Motor {
+  + MotorLeft : int
+  + MotorRight : int
+}
+class farrusco::Node {
+}
+class farrusco::Paralelo {
+}
+class farrusco::Prioridade {
+}
+class farrusco::Robot {
+  + Name : str
+}
+class farrusco::Servo {
+  + inc : int
+  + max : int
+  + min : int
+}
+Action <|-- farrusco::Actuate
+Action <|-- farrusco::Condition
+Actuate <|-- farrusco::LED
+Actuate <|-- farrusco::Motor
+Actuate <|-- farrusco::Servo
+Behavior <|-- farrusco::AlterarEstado
+Behavior <|-- farrusco::Paralelo
+Behavior <|-- farrusco::Prioridade
+Condition <|-- farrusco::BumperDireito
+Condition <|-- farrusco::BumperEsquerdo
+Condition <|-- farrusco::Distancia
+Condition <|-- farrusco::Espera
+Node <|-- farrusco::Action
+Node <|-- farrusco::Behavior
+farrusco::Filho "0..9999" --* "1..1" farrusco::Robot : child1
+farrusco::Irmao "0..9999" --* "1..1" farrusco::Robot : next3
+farrusco::Robot "1..1" *-- "0..9999" farrusco::Node : nodes0
+farrusco::Node "0..9999" -- "1..1" farrusco::Irmao : source10
+farrusco::Behavior "0..9999" -- "1..1" farrusco::Filho : source5
+farrusco::Node "0..9999" -- "1..1" farrusco::Irmao : target13
+farrusco::Filho "1..1" -- "0..9999" farrusco::Node : target7
+@enduml

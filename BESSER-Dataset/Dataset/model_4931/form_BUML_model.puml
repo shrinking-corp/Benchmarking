@@ -1,0 +1,81 @@
+@startuml
+class InputField {
+}
+class PageElement {
+}
+enum SelectionFieldType {
+  Checkbox
+  Combobox
+  Radio
+}
+class Text {
+}
+class VisibilityCondition {
+}
+class form::Form {
+}
+class form::Heading {
+  + level : int
+}
+abstract class form::InputField {
+  + label : str
+  + mandatory : bool
+}
+class form::List {
+  + ordered : bool
+}
+class form::ListItem {
+  + label : str
+}
+class form::Page {
+  + title : str
+}
+abstract class form::PageElement {
+  + elementId : str
+}
+class form::Paragraph {
+}
+class form::SelectionCondition {
+}
+class form::SelectionField {
+  + selectionFieldType : str
+}
+class form::SelectionItem {
+  + label : str
+  + selected : bool
+}
+abstract class form::Text {
+  + content : str
+}
+class form::TextArea {
+}
+class form::TextField {
+  + encrypted : bool
+}
+abstract class form::VisibilityCondition {
+}
+InputField <|-- form::SelectionField
+InputField <|-- form::TextArea
+InputField <|-- form::TextField
+PageElement <|-- form::InputField
+PageElement <|-- form::List
+PageElement <|-- form::Text
+Text <|-- form::Heading
+Text <|-- form::Paragraph
+VisibilityCondition <|-- form::SelectionCondition
+form::Page "0..9999" -- "1..1" form::Page : allNextPages8
+form::Page "1..1" -- "0..9999" form::Page : allPreviousPages5
+form::VisibilityCondition "1..1" -- "0..9999" form::PageElement : concernsElements25
+form::Page "1..1" *-- "0..9999" form::PageElement : elements12
+form::SelectionField "1..1" -- "1..1" form::SelectionItem : field21
+form::SelectionItem "1..1" -- "1..1" form::SelectionCondition : item26
+form::SelectionItem "1..9999" --* "1..1" form::SelectionField : items20
+form::ListItem "1..9999" --* "1..1" form::List : items22
+form::Page "0..1" -- "1..1" form::Page : nextPage11
+form::Page "1..1" -- "1..1" form::PageElement : page18
+form::Page "1..1" -- "1..1" form::VisibilityCondition : page23
+form::Page "0..9999" --* "1..1" form::Form : pages0
+form::Page "0..1" -- "1..1" form::Page : previousPage14
+form::Page "1..1" *-- "0..9999" form::VisibilityCondition : visibilityConditions16
+form::Form "1..1" -- "1..1" form::Page : welcomePage1
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+class AbstractElement {
+}
+class Feature {
+}
+class Type {
+}
+enum Visibility {
+  PRIVATE
+  PROTECTED
+  PUBLIC
+}
+class domainmodel::AbstractElement {
+}
+class domainmodel::DataType {
+}
+class domainmodel::Domainmodel {
+}
+class domainmodel::Entity {
+}
+class domainmodel::Feature {
+}
+class domainmodel::Import {
+  + importedNamespace : str
+}
+class domainmodel::Modifier {
+  + final : str
+  + many : bool
+  + name : str
+  + static : bool
+  + visibility : str
+}
+class domainmodel::PackageDeclaration {
+  + name : str
+}
+class domainmodel::Type {
+  + name : str
+}
+AbstractElement <|-- domainmodel::Import
+AbstractElement <|-- domainmodel::PackageDeclaration
+AbstractElement <|-- domainmodel::Type
+Feature <|-- domainmodel::Modifier
+Type <|-- domainmodel::DataType
+Type <|-- domainmodel::Entity
+domainmodel::Domainmodel "1..1" *-- "0..9999" domainmodel::AbstractElement : elements0
+domainmodel::PackageDeclaration "1..1" *-- "0..9999" domainmodel::AbstractElement : elements1
+domainmodel::Feature "0..9999" --* "1..1" domainmodel::Entity : features5
+domainmodel::Entity "0..1" -- "1..1" domainmodel::Entity : superType4
+domainmodel::Modifier "1..1" -- "0..1" domainmodel::Type : type7
+@enduml

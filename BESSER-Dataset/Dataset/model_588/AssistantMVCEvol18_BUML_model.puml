@@ -1,0 +1,73 @@
+@startuml
+abstract class AssistantMVC::Controller {
+}
+class AssistantMVC::Exam {
+}
+class AssistantMVC::ExamController {
+}
+abstract class AssistantMVC::ExamItem {
+  + question : str
+}
+abstract class AssistantMVC::ExamItemController {
+}
+class AssistantMVC::ExamItemView {
+}
+class AssistantMVC::ExamView {
+}
+class AssistantMVC::MultipleChoice {
+}
+class AssistantMVC::MultipleChoiceController {
+}
+class AssistantMVC::MultipleChoiceView {
+}
+class AssistantMVC::Observable {
+}
+class AssistantMVC::Observer {
+}
+class AssistantMVC::Open {
+}
+class AssistantMVC::OpenController {
+}
+class AssistantMVC::OpenView {
+}
+abstract class AssistantMVC::View {
+  + fontColor : str
+  + fontName : str
+}
+class Controller {
+}
+class ExamItem {
+}
+class ExamItemController {
+}
+class ExamItemView {
+}
+class ExamView {
+}
+class Observable {
+}
+class Observer {
+}
+class View {
+}
+Controller <|-- AssistantMVC::ExamController
+Controller <|-- AssistantMVC::ExamItemController
+ExamItem <|-- AssistantMVC::MultipleChoice
+ExamItem <|-- AssistantMVC::Open
+ExamItemController <|-- AssistantMVC::MultipleChoiceController
+ExamItemController <|-- AssistantMVC::OpenController
+ExamItemView <|-- AssistantMVC::MultipleChoiceView
+ExamView <|-- AssistantMVC::OpenView
+Observable <|-- AssistantMVC::Exam
+Observable <|-- AssistantMVC::ExamItem
+Observer <|-- AssistantMVC::Controller
+Observer <|-- AssistantMVC::View
+View <|-- AssistantMVC::ExamItemView
+View <|-- AssistantMVC::ExamView
+AssistantMVC::Exam "1..1" *-- "0..9999" AssistantMVC::Controller : controllers1
+AssistantMVC::ExamController "0..1" -- "1..1" AssistantMVC::View : examController6
+AssistantMVC::View "1..1" -- "0..1" AssistantMVC::ExamItemController : examItemController8
+AssistantMVC::ExamItem "0..9999" --* "1..1" AssistantMVC::Exam : examItems0
+AssistantMVC::Observer "0..9999" -- "1..1" AssistantMVC::Observable : observers5
+AssistantMVC::View "0..9999" --* "1..1" AssistantMVC::Exam : views3
+@enduml

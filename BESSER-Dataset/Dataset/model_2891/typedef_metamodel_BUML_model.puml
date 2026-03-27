@@ -1,0 +1,84 @@
+@startuml
+enum CSIDatatypeCodes {
+  CSIBoolean
+  CSIByte
+  CSIDate
+  CSIDouble
+  CSIFloat
+  CSIInteger
+  CSILong
+  CSIString
+}
+enum CSIExceptionTypes {
+  SYSTEM
+  UNRECOVERABLE
+  USER
+}
+class Type {
+}
+class typedef::CSIDatatype {
+  + code : str
+  + nillable : bool
+}
+class typedef::DocumentRoot {
+}
+class typedef::Entity {
+  + versionuid : int
+}
+class typedef::EnumLiteral {
+  + name : str
+  + value : str
+}
+class typedef::EnumVal {
+}
+class typedef::Exception {
+  + exceptionType : str
+}
+class typedef::Feature {
+  + name : str
+}
+class typedef::PrimitiveType {
+  + nillable : bool
+  + typesetName : str
+}
+class typedef::TDAnnotationDetail {
+  + key : str
+  + value : str
+}
+class typedef::TDDocumentation {
+  + doc : str
+}
+abstract class typedef::Type {
+  + name : str
+}
+class typedef::TypeAnnotation {
+  + source : str
+}
+class typedef::TypeLanguageBinding {
+  + defaultInitValue : str
+  + lang : str
+  + langSpecificNS : str
+  + langSpecificType : str
+  + nullValueLiteral : str
+}
+class typedef::TypedArray {
+}
+Type <|-- typedef::CSIDatatype
+Type <|-- typedef::Entity
+Type <|-- typedef::EnumVal
+Type <|-- typedef::Exception
+Type <|-- typedef::PrimitiveType
+Type <|-- typedef::TypedArray
+typedef::Type "1..1" *-- "0..9999" typedef::TypeAnnotation : annotations1
+typedef::Type "0..1" -- "1..1" typedef::TypedArray : componentType12
+typedef::TDAnnotationDetail "0..9999" --* "1..1" typedef::TypeAnnotation : details14
+typedef::TDDocumentation "0..1" --* "1..1" typedef::EnumLiteral : documentation21
+typedef::Type "1..1" *-- "0..1" typedef::TDDocumentation : documentation3
+typedef::TDDocumentation "0..1" --* "1..1" typedef::Feature : documentation9
+typedef::Feature "0..9999" --* "1..1" typedef::Entity : features5
+typedef::PrimitiveType "1..1" *-- "0..9999" typedef::TypeLanguageBinding : languageBindings16
+typedef::EnumVal "1..1" *-- "0..9999" typedef::EnumLiteral : literals19
+typedef::Type "0..1" -- "1..1" typedef::Feature : type6
+typedef::Type "0..9999" --* "1..1" typedef::DocumentRoot : types0
+typedef::Type "0..1" -- "1..1" typedef::EnumVal : valueType17
+@enduml

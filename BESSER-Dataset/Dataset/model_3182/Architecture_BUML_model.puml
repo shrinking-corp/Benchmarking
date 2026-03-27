@@ -1,0 +1,53 @@
+@startuml
+enum Type {
+  Boolean
+  Double
+  INT
+  STRING
+  Void
+}
+class architecture::AbstractModel {
+}
+class architecture::Architecture {
+}
+class architecture::AtomicType {
+  + atomType : str
+}
+class architecture::Binding {
+}
+class architecture::Component {
+  + name : str
+}
+class architecture::DomainDeclaration {
+  + name : str
+}
+class architecture::Import {
+  + importedNamespace : str
+}
+class architecture::Model {
+}
+class architecture::Operation {
+  + name : str
+}
+class architecture::Variable {
+  + name : str
+}
+architecture::AbstractModel "1..1" *-- "0..9999" architecture::Architecture : arch7
+architecture::Variable "0..9999" --* "1..1" architecture::Operation : arg35
+architecture::Binding "0..9999" --* "1..1" architecture::Architecture : bind19
+architecture::Component "0..9999" --* "1..1" architecture::AbstractModel : comp5
+architecture::Component "0..1" -- "1..1" architecture::AtomicType : compType41
+architecture::AbstractModel "0..9999" --* "1..1" architecture::DomainDeclaration : elements1
+architecture::Import "0..9999" --* "1..1" architecture::AbstractModel : imp3
+architecture::Component "1..1" *-- "0..9999" architecture::Operation : operations14
+architecture::Operation "0..9999" -- "1..1" architecture::Component : ops9
+architecture::Operation "0..9999" -- "1..1" architecture::Component : opsReq11
+architecture::DomainDeclaration "0..9999" --* "1..1" architecture::Model : package0
+architecture::Operation "0..1" -- "1..1" architecture::Binding : proMember24
+architecture::Binding "1..1" -- "0..1" architecture::Variable : provider21
+architecture::Operation "0..1" -- "1..1" architecture::Binding : recMember30
+architecture::Variable "0..1" -- "1..1" architecture::Binding : receiver27
+architecture::Variable "1..1" *-- "0..1" architecture::AtomicType : type33
+architecture::Operation "1..1" *-- "0..1" architecture::AtomicType : type38
+architecture::Variable "0..9999" --* "1..1" architecture::Architecture : vars17
+@enduml

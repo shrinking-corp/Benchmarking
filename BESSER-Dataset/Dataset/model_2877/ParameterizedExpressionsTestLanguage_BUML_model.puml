@@ -1,0 +1,70 @@
+@startuml
+class Expression {
+}
+class Statement {
+}
+class parameterizedExpressionsTestLanguage::AssignmentExpression {
+  + op : str
+}
+class parameterizedExpressionsTestLanguage::Block {
+}
+class parameterizedExpressionsTestLanguage::CommaExpression {
+}
+class parameterizedExpressionsTestLanguage::Expression {
+}
+class parameterizedExpressionsTestLanguage::ExpressionStatement {
+}
+class parameterizedExpressionsTestLanguage::FunctionDeclaration {
+  + generator : bool
+  + name : str
+}
+class parameterizedExpressionsTestLanguage::IdentifierRef {
+  + id : str
+}
+class parameterizedExpressionsTestLanguage::IndexedAccessExpression {
+}
+class parameterizedExpressionsTestLanguage::LabelledStatement {
+  + name : str
+}
+class parameterizedExpressionsTestLanguage::ParameterizedPropertyAccessExpression {
+  + property : str
+}
+class parameterizedExpressionsTestLanguage::RelationalExpression {
+  + op : str
+}
+class parameterizedExpressionsTestLanguage::ShiftExpression {
+  + op : str
+}
+class parameterizedExpressionsTestLanguage::Statement {
+}
+class parameterizedExpressionsTestLanguage::YieldExpression {
+  + many : bool
+}
+Expression <|-- parameterizedExpressionsTestLanguage::AssignmentExpression
+Expression <|-- parameterizedExpressionsTestLanguage::CommaExpression
+Expression <|-- parameterizedExpressionsTestLanguage::IdentifierRef
+Expression <|-- parameterizedExpressionsTestLanguage::IndexedAccessExpression
+Expression <|-- parameterizedExpressionsTestLanguage::ParameterizedPropertyAccessExpression
+Expression <|-- parameterizedExpressionsTestLanguage::RelationalExpression
+Expression <|-- parameterizedExpressionsTestLanguage::ShiftExpression
+Expression <|-- parameterizedExpressionsTestLanguage::YieldExpression
+Statement <|-- parameterizedExpressionsTestLanguage::Block
+Statement <|-- parameterizedExpressionsTestLanguage::ExpressionStatement
+Statement <|-- parameterizedExpressionsTestLanguage::FunctionDeclaration
+Statement <|-- parameterizedExpressionsTestLanguage::LabelledStatement
+parameterizedExpressionsTestLanguage::Block "0..1" --* "1..1" parameterizedExpressionsTestLanguage::FunctionDeclaration : body0
+parameterizedExpressionsTestLanguage::YieldExpression "1..1" *-- "0..1" parameterizedExpressionsTestLanguage::Expression : expression28
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::ExpressionStatement : expression3
+parameterizedExpressionsTestLanguage::Expression "0..9999" --* "1..1" parameterizedExpressionsTestLanguage::CommaExpression : exprs30
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::IndexedAccessExpression : index8
+parameterizedExpressionsTestLanguage::ShiftExpression "1..1" *-- "0..1" parameterizedExpressionsTestLanguage::Expression : lhs13
+parameterizedExpressionsTestLanguage::RelationalExpression "1..1" *-- "0..1" parameterizedExpressionsTestLanguage::Expression : lhs18
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::AssignmentExpression : lhs23
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::ShiftExpression : rhs15
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::RelationalExpression : rhs20
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::AssignmentExpression : rhs25
+parameterizedExpressionsTestLanguage::LabelledStatement "1..1" *-- "0..1" parameterizedExpressionsTestLanguage::Statement : statement4
+parameterizedExpressionsTestLanguage::Statement "0..9999" --* "1..1" parameterizedExpressionsTestLanguage::Block : statements1
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::ParameterizedPropertyAccessExpression : target11
+parameterizedExpressionsTestLanguage::Expression "0..1" --* "1..1" parameterizedExpressionsTestLanguage::IndexedAccessExpression : target6
+@enduml

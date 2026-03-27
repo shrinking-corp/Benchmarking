@@ -1,0 +1,103 @@
+@startuml
+class Amount {
+}
+class Angle {
+}
+enum AngleUnit {
+  DEGREES
+}
+class Condition {
+}
+enum DetectedType {
+  BALL
+  NULL
+  WALL
+}
+enum DistanceUnit {
+  CENTIMETERS
+}
+class Instruction {
+}
+class RobotProjectModel::Amount {
+  + value : int
+}
+class RobotProjectModel::Angle {
+  + angleUnit : str
+}
+class RobotProjectModel::Call {
+}
+abstract class RobotProjectModel::Condition {
+}
+class RobotProjectModel::DetectedObjectIs {
+  + rightOperand : str
+}
+class RobotProjectModel::Distance {
+  + distanceUnit : str
+}
+class RobotProjectModel::Duration {
+  + timeUnit : str
+}
+class RobotProjectModel::Function {
+  + name : str
+}
+class RobotProjectModel::Grab {
+}
+class RobotProjectModel::HomeDirection {
+}
+class RobotProjectModel::If {
+}
+abstract class RobotProjectModel::Instruction {
+}
+class RobotProjectModel::InstructionBlock {
+}
+class RobotProjectModel::MoveStraight {
+}
+class RobotProjectModel::Print {
+  + string : str
+}
+class RobotProjectModel::Release {
+}
+class RobotProjectModel::Robot {
+}
+class RobotProjectModel::SensorActivation {
+}
+abstract class RobotProjectModel::TimedInstruction {
+}
+class RobotProjectModel::Turn {
+}
+class RobotProjectModel::Wait {
+}
+enum TimeUnit {
+  MILLISECONDS
+  SECONDS
+}
+class TimedInstruction {
+}
+Amount <|-- RobotProjectModel::Angle
+Amount <|-- RobotProjectModel::Distance
+Amount <|-- RobotProjectModel::Duration
+Angle <|-- RobotProjectModel::HomeDirection
+Condition <|-- RobotProjectModel::DetectedObjectIs
+Condition <|-- RobotProjectModel::SensorActivation
+Instruction <|-- RobotProjectModel::Call
+Instruction <|-- RobotProjectModel::Function
+Instruction <|-- RobotProjectModel::Grab
+Instruction <|-- RobotProjectModel::If
+Instruction <|-- RobotProjectModel::InstructionBlock
+Instruction <|-- RobotProjectModel::Print
+Instruction <|-- RobotProjectModel::Release
+Instruction <|-- RobotProjectModel::TimedInstruction
+TimedInstruction <|-- RobotProjectModel::MoveStraight
+TimedInstruction <|-- RobotProjectModel::Turn
+TimedInstruction <|-- RobotProjectModel::Wait
+RobotProjectModel::Angle "1..1" --* "1..1" RobotProjectModel::Turn : angle3
+RobotProjectModel::Condition "1..1" --* "1..1" RobotProjectModel::If : condition7
+RobotProjectModel::Call "1..1" -- "1..1" RobotProjectModel::Function : destination5
+RobotProjectModel::Distance "0..1" --* "1..1" RobotProjectModel::MoveStraight : distance0
+RobotProjectModel::Duration "1..1" --* "1..1" RobotProjectModel::TimedInstruction : duration2
+RobotProjectModel::InstructionBlock "0..1" --* "1..1" RobotProjectModel::If : falseBlock8
+RobotProjectModel::Function "1..1" *-- "0..1" RobotProjectModel::InstructionBlock : instructionBlock4
+RobotProjectModel::Robot "1..1" *-- "0..9999" RobotProjectModel::Instruction : instructions1
+RobotProjectModel::Instruction "1..9999" --* "1..1" RobotProjectModel::InstructionBlock : instructions14
+RobotProjectModel::If "1..1" *-- "1..1" RobotProjectModel::InstructionBlock : trueBlock11
+@enduml

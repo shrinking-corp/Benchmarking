@@ -1,0 +1,44 @@
+@startuml
+class Expression {
+}
+class model::Conjunction {
+}
+class model::Disjunction {
+}
+class model::Equation {
+}
+class model::ExistsContextualExpression {
+  + contextId : str
+}
+abstract class model::Expression {
+}
+class model::ForAllContextualExpression {
+  + contextId : str
+}
+class model::Implication {
+}
+class model::Negation {
+}
+class model::PrimaryExpression {
+  + featureId : str
+}
+Expression <|-- model::Conjunction
+Expression <|-- model::Disjunction
+Expression <|-- model::Equation
+Expression <|-- model::ExistsContextualExpression
+Expression <|-- model::ForAllContextualExpression
+Expression <|-- model::Implication
+Expression <|-- model::Negation
+Expression <|-- model::PrimaryExpression
+model::Expression "0..1" --* "1..1" model::ForAllContextualExpression : expression0
+model::ExistsContextualExpression "1..1" *-- "0..1" model::Expression : expression1
+model::Negation "1..1" *-- "0..1" model::Expression : expression23
+model::Disjunction "1..1" *-- "0..1" model::Expression : leftPart13
+model::Expression "0..1" --* "1..1" model::Conjunction : leftPart18
+model::Expression "0..1" --* "1..1" model::Equation : leftPart3
+model::Expression "0..1" --* "1..1" model::Implication : leftPart8
+model::Expression "0..1" --* "1..1" model::Implication : rightPart10
+model::Expression "0..1" --* "1..1" model::Disjunction : rightPart15
+model::Expression "0..1" --* "1..1" model::Conjunction : rightPart20
+model::Expression "0..1" --* "1..1" model::Equation : rightPart5
+@enduml

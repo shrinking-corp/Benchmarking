@@ -1,0 +1,134 @@
+@startuml
+class BaseObject {
+}
+class Holdable {
+}
+enum MyEnum {
+  ONE
+  THREE
+  TWO
+  ZERO
+}
+class model6::A {
+}
+class model6::B {
+}
+class model6::BaseObject {
+  + attributeList : str
+  + attributeOptional : str
+  + attributeRequired : str
+}
+class model6::C {
+}
+class model6::CanReferenceLegacy {
+}
+class model6::ContainmentObject {
+}
+class model6::D {
+}
+class model6::E {
+}
+class model6::EObject {
+}
+class model6::EmptyStringDefault {
+  + attribute : str
+}
+class model6::EmptyStringDefaultUnsettable {
+  + attribute : str
+}
+class model6::F {
+}
+class model6::G {
+  + dummy : str
+  + isAttributeModified() : bool
+  + isListModified() : bool
+  + isReferenceModified() : bool
+}
+class model6::HasNillableAttribute {
+  + nillable : str
+}
+abstract class model6::Holdable {
+  + name : str
+}
+class model6::Holder {
+}
+class model6::MyEnumList {
+  + myEnum : str
+}
+class model6::MyEnumListUnsettable {
+  + myEnum : str
+}
+class model6::PropertiesMap {
+  + label : str
+}
+class model6::PropertiesMapEntry {
+  + key : str
+}
+class model6::PropertiesMapEntryValue {
+  + label : str
+}
+class model6::ReferenceObject {
+}
+class model6::Root {
+}
+class model6::Thing {
+}
+class model6::UnorderedList {
+}
+class model6::UnsettableAttributes {
+  + attrBigDecimal : str
+  + attrBigInteger : str
+  + attrBoolean : bool
+  + attrBooleanObject : str
+  + attrByte : str
+  + attrByteArray : str
+  + attrByteObject : str
+  + attrChar : str
+  + attrCharacterObject : str
+  + attrDate : date
+  + attrDouble : float
+  + attrDoubleObject : str
+  + attrFloat : float
+  + attrFloatObject : str
+  + attrInt : int
+  + attrIntegerObject : str
+  + attrJavaClass : str
+  + attrJavaObject : str
+  + attrLong : str
+  + attrLongObject : str
+  + attrShort : str
+  + attrShortObject : str
+  + attrString : str
+}
+BaseObject <|-- model6::ContainmentObject
+BaseObject <|-- model6::ReferenceObject
+Holdable <|-- model6::Holder
+Holdable <|-- model6::Thing
+model6::UnorderedList "0..9999" --* "1..1" model6::UnorderedList : contained21
+model6::BaseObject "0..9999" --* "1..1" model6::ContainmentObject : containmentList17
+model6::ContainmentObject "1..1" *-- "0..1" model6::BaseObject : containmentOptional15
+model6::EObject "0..1" --* "1..1" model6::D : data36
+model6::Holdable "0..9999" -- "1..1" model6::Holder : held47
+model6::BaseObject "0..9999" -- "1..1" model6::G : list44
+model6::BaseObject "0..9999" --* "1..1" model6::Root : listA0
+model6::BaseObject "0..9999" --* "1..1" model6::Root : listB1
+model6::Root "1..1" *-- "0..9999" model6::BaseObject : listC4
+model6::BaseObject "0..9999" --* "1..1" model6::Root : listD7
+model6::EObject "0..9999" --* "1..1" model6::CanReferenceLegacy : multipleContainment53
+model6::EObject "0..9999" -- "1..1" model6::CanReferenceLegacy : multipleReference59
+model6::Holder "1..1" *-- "0..9999" model6::Holdable : owned48
+model6::A "0..9999" --* "1..1" model6::E : ownedAs38
+model6::A "1..1" *-- "0..9999" model6::B : ownedBs32
+model6::C "0..1" --* "1..1" model6::B : ownedC34
+model6::D "0..9999" --* "1..1" model6::A : ownedDs31
+model6::F "1..1" *-- "0..9999" model6::E : ownedEs40
+model6::PropertiesMap "1..1" *-- "0..9999" model6::PropertiesMapEntry : persistentMap25
+model6::BaseObject "1..1" -- "1..1" model6::G : reference42
+model6::BaseObject "0..9999" -- "1..1" model6::ReferenceObject : referenceList12
+model6::BaseObject "0..1" -- "1..1" model6::ReferenceObject : referenceOptional10
+model6::UnorderedList "0..9999" -- "1..1" model6::UnorderedList : referenced23
+model6::EObject "0..1" --* "1..1" model6::CanReferenceLegacy : singleContainment51
+model6::CanReferenceLegacy "1..1" -- "0..1" model6::EObject : singleReference56
+model6::PropertiesMapEntry "0..9999" --* "1..1" model6::PropertiesMap : transientMap26
+model6::PropertiesMapEntryValue "0..1" --* "1..1" model6::PropertiesMapEntry : value29
+@enduml

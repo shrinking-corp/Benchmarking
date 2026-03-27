@@ -1,0 +1,20 @@
+@startuml
+class families::Family {
+  + lastName : str
+}
+class families::FamilyRegister {
+  + id : str
+}
+class families::Member {
+  + firstName : str
+}
+families::Member "0..9999" --* "1..1" families::Family : daughters2
+families::Family "0..9999" --* "1..1" families::FamilyRegister : families0
+families::Family "0..1" -- "1..1" families::Member : familyDaughter9
+families::Member "1..1" -- "0..1" families::Family : familyFather11
+families::Family "0..1" -- "1..1" families::Member : familyMother13
+families::Family "0..1" -- "1..1" families::Member : familySon8
+families::Family "1..1" *-- "0..1" families::Member : father4
+families::Member "0..1" --* "1..1" families::Family : mother6
+families::Family "1..1" *-- "0..9999" families::Member : sons1
+@enduml

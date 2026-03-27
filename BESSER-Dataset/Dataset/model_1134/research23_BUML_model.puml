@@ -1,0 +1,147 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class StateMachineObject {
+}
+enum StateType {
+  final
+  initial
+  ongoing
+}
+class research23::Action {
+  + actionLabel : str
+  + actionStatement : str
+}
+class research23::Collaboration {
+  + ratio : int
+}
+abstract class research23::Counted {
+  + id : int
+}
+class research23::Keyword {
+  + word : str
+}
+class research23::KnowledgeManager {
+}
+abstract class research23::Labelled {
+  + lname : str
+}
+abstract class research23::Named {
+  + name : str
+}
+class research23::Paper {
+}
+class research23::PaperKeyword {
+  + weight : int
+}
+class research23::Paragraph {
+  + content : str
+}
+class research23::Phase {
+  + name : str
+}
+class research23::Position {
+  + description : str
+}
+class research23::Progress {
+  + percent : int
+}
+class research23::PublicationProcess {
+  + maxTime : int
+  + minTime : int
+}
+class research23::PublicationStatus {
+  + label : str
+}
+class research23::PublicationStructure {
+}
+class research23::PublicationSystem {
+}
+class research23::Researcher {
+  + forName : str
+  + name : str
+}
+class research23::Review {
+  + date : date
+}
+class research23::ReviewNote {
+  + content : str
+}
+class research23::Skill {
+  + description : str
+}
+class research23::State {
+  + id : int
+  + kind : str
+  + name : str
+}
+abstract class research23::StateMachineObject {
+  + label : str
+}
+class research23::StateMachineVariable {
+}
+class research23::Transition {
+  + guardExpression : str
+  + guardLabel : str
+}
+class research23::Write {
+  + timeSpent : int
+}
+Counted <|-- research23::Paragraph
+Labelled <|-- research23::Progress
+Labelled <|-- research23::Review
+Labelled <|-- research23::Write
+Named <|-- research23::Keyword
+Named <|-- research23::KnowledgeManager
+Named <|-- research23::Paper
+Named <|-- research23::Paragraph
+Named <|-- research23::Position
+Named <|-- research23::PublicationProcess
+Named <|-- research23::PublicationStructure
+Named <|-- research23::PublicationSystem
+Named <|-- research23::ReviewNote
+StateMachineObject <|-- research23::State
+StateMachineObject <|-- research23::Transition
+research23::KnowledgeManager "1..1" *-- "0..9999" research23::Keyword : allkeywords55
+research23::Researcher "0..9999" -- "1..1" research23::Paper : authors13
+research23::Paper "0..1" -- "1..1" research23::Paper : citedBy17
+research23::Paper "0..1" -- "1..1" research23::Collaboration : col_paper61
+research23::Collaboration "0..9999" --* "1..1" research23::Researcher : collaborations9
+research23::Keyword "0..1" -- "1..1" research23::PaperKeyword : keyword58
+research23::Paper "1..1" *-- "0..9999" research23::PaperKeyword : keywords14
+research23::PublicationStructure "1..1" *-- "0..1" research23::KnowledgeManager : knowledgeMan38
+research23::Paper "0..9999" -- "1..1" research23::Keyword : kpapers53
+research23::PublicationStatus "1..1" *-- "0..9999" research23::StateMachineVariable : machineVariables64
+research23::Action "0..1" -- "1..1" research23::Action : next83
+research23::Paper "0..1" -- "1..1" research23::Progress : paper25
+research23::Paper "0..9999" --* "1..1" research23::PublicationStructure : papers35
+research23::Paragraph "0..1" -- "1..1" research23::Write : paragraph27
+research23::Paragraph "0..9999" --* "1..1" research23::Paper : paragraphs11
+research23::Position "0..1" -- "1..1" research23::Position : parent51
+research23::Phase "0..9999" --* "1..1" research23::PublicationProcess : phases0
+research23::PublicationSystem "1..1" *-- "0..9999" research23::Position : positions47
+research23::Progress "1..1" -- "0..1" research23::PublicationProcess : process23
+research23::PublicationProcess "0..1" --* "1..1" research23::PublicationSystem : processView42
+research23::Paper "1..1" *-- "0..9999" research23::Progress : progress12
+research23::State "0..9999" --* "1..1" research23::PublicationStatus : pubStates66
+research23::Paper "0..9999" -- "1..1" research23::Researcher : res_papers4
+research23::Position "0..1" -- "1..1" research23::Researcher : res_position7
+research23::Researcher "0..9999" --* "1..1" research23::PublicationStructure : researchers33
+research23::ReviewNote "0..1" -- "1..1" research23::Review : reviewNote30
+research23::Researcher "1..1" *-- "0..9999" research23::Review : reviews2
+research23::ReviewNote "0..9999" --* "1..1" research23::Paragraph : reviews21
+research23::State "1..1" *-- "0..9999" research23::Action : s_actions79
+research23::Researcher "1..1" *-- "0..9999" research23::Skill : skills5
+research23::State "0..1" -- "1..1" research23::Transition : source70
+research23::State "0..1" -- "1..1" research23::Paper : state19
+research23::PublicationStatus "0..1" --* "1..1" research23::PublicationStructure : status40
+research23::PublicationStructure "0..1" --* "1..1" research23::PublicationSystem : structuralView44
+research23::Transition "1..1" *-- "0..9999" research23::Action : t_actions69
+research23::State "0..1" -- "1..1" research23::Transition : target73
+research23::Transition "0..9999" --* "1..1" research23::State : transitions76
+research23::Write "0..9999" --* "1..1" research23::Researcher : writes1
+@enduml

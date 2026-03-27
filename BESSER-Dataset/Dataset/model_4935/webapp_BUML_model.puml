@@ -1,0 +1,66 @@
+@startuml
+class Named {
+}
+class UIElement {
+}
+enum UIElementType {
+  input
+  output
+}
+class webapp::Attribute {
+  + type : str
+}
+class webapp::ClientPage {
+}
+class webapp::DataSourceManager {
+}
+class webapp::DataStructure {
+}
+class webapp::Form {
+}
+class webapp::ImageViewer {
+}
+abstract class webapp::Named {
+  + name : str
+}
+class webapp::ServerPage {
+  + request() : void
+  + response() : void
+}
+class webapp::Table {
+}
+class webapp::TextArea {
+}
+class webapp::UIElement {
+  + type : str
+}
+class webapp::WebApp {
+}
+Named <|-- webapp::Attribute
+Named <|-- webapp::ClientPage
+Named <|-- webapp::DataSourceManager
+Named <|-- webapp::DataStructure
+Named <|-- webapp::ServerPage
+Named <|-- webapp::UIElement
+Named <|-- webapp::WebApp
+UIElement <|-- webapp::Form
+UIElement <|-- webapp::ImageViewer
+UIElement <|-- webapp::Table
+UIElement <|-- webapp::TextArea
+webapp::DataStructure "1..1" -- "1..1" webapp::Attribute : attributeOf16
+webapp::ClientPage "1..9999" --* "1..1" webapp::WebApp : clientPages0
+webapp::UIElement "0..9999" --* "1..1" webapp::ClientPage : composedOf20
+webapp::ServerPage "1..1" -- "1..1" webapp::ClientPage : connectsTo22
+webapp::DataStructure "1..1" -- "1..1" webapp::UIElement : content24
+webapp::WebApp "1..1" *-- "0..9999" webapp::DataSourceManager : contentProviders5
+webapp::DataStructure "0..9999" --* "1..1" webapp::WebApp : entities3
+webapp::ClientPage "1..1" -- "1..1" webapp::ServerPage : generates7
+webapp::DataSourceManager "1..9999" -- "1..1" webapp::ServerPage : getContents8
+webapp::DataStructure "0..9999" -- "1..1" webapp::Attribute : linkedBy18
+webapp::Attribute "0..9999" -- "1..1" webapp::DataStructure : linkedTo12
+webapp::ServerPage "1..9999" -- "1..1" webapp::DataStructure : managedBy10
+webapp::ServerPage "1..1" -- "1..9999" webapp::DataStructure : manages9
+webapp::Attribute "0..9999" --* "1..1" webapp::DataStructure : parentOf11
+webapp::DataSourceManager "1..1" -- "1..9999" webapp::ServerPage : providesContent14
+webapp::WebApp "1..1" *-- "1..9999" webapp::ServerPage : serverPages1
+@enduml

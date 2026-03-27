@@ -1,0 +1,90 @@
+@startuml
+class BehavioralFeature {
+}
+class Class {
+}
+class Classifier {
+}
+class Feature {
+}
+class NamedElement {
+}
+class OO::concept::Behavior {
+}
+abstract class OO::concept::BehavioralFeature {
+}
+class OO::concept::Class {
+}
+abstract class OO::concept::Classifier {
+}
+class OO::concept::Dependency {
+}
+abstract class OO::concept::Feature {
+}
+class OO::concept::Generalization {
+}
+class OO::concept::Model {
+}
+abstract class OO::concept::NamedElement {
+  + isAbstract : bool
+  + name : str
+  + visibility : str
+}
+class OO::concept::Operation {
+}
+class OO::concept::Package {
+}
+abstract class OO::concept::PackageableElement {
+}
+class OO::concept::Parameter {
+}
+class OO::concept::Property {
+}
+abstract class OO::concept::Type {
+}
+abstract class OO::concept::TypedElement {
+}
+class Package {
+}
+class PackageableElement {
+}
+class Type {
+}
+class TypedElement {
+}
+enum VisibilityKind {
+  package
+  private
+  protected
+  public
+}
+BehavioralFeature <|-- OO::concept::Operation
+Class <|-- OO::concept::Behavior
+Classifier <|-- OO::concept::Class
+Feature <|-- OO::concept::BehavioralFeature
+Feature <|-- OO::concept::Property
+NamedElement <|-- OO::concept::Feature
+NamedElement <|-- OO::concept::Package
+NamedElement <|-- OO::concept::Type
+NamedElement <|-- OO::concept::TypedElement
+Package <|-- OO::concept::Model
+PackageableElement <|-- OO::concept::Class
+PackageableElement <|-- OO::concept::Dependency
+PackageableElement <|-- OO::concept::Package
+Type <|-- OO::concept::Class
+TypedElement <|-- OO::concept::Operation
+TypedElement <|-- OO::concept::Parameter
+TypedElement <|-- OO::concept::Property
+OO::concept::NamedElement "1..9999" -- "1..1" OO::concept::Dependency : client12
+OO::concept::Classifier "1..1" -- "1..1" OO::concept::Generalization : general8
+OO::concept::Generalization "0..9999" --* "1..1" OO::concept::Classifier : generalization15
+OO::concept::Behavior "0..9999" -- "1..1" OO::concept::BehavioralFeature : method17
+OO::concept::Classifier "0..9999" --* "1..1" OO::concept::Class : nestedClassifier4
+OO::concept::Class "1..1" *-- "0..9999" OO::concept::Property : ownedAttribute2
+OO::concept::Operation "0..9999" --* "1..1" OO::concept::Class : ownedOperation1
+OO::concept::Parameter "0..9999" --* "1..1" OO::concept::Operation : ownedParameter6
+OO::concept::PackageableElement "0..9999" --* "1..1" OO::concept::Package : packagedElement0
+OO::concept::Generalization "1..1" -- "1..1" OO::concept::Classifier : specific10
+OO::concept::NamedElement "1..9999" -- "1..1" OO::concept::Dependency : supplier11
+OO::concept::TypedElement "1..1" -- "0..1" OO::concept::Type : type16
+@enduml

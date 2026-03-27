@@ -1,0 +1,40 @@
+@startuml
+class GraphItem {
+}
+class NamedElement {
+}
+class ZestGraph::GraphConnection {
+  + color : str
+  + lineStyle : int
+  + lineWidth : int
+}
+class ZestGraph::GraphContainer {
+}
+abstract class ZestGraph::GraphItem {
+  + text : str
+}
+class ZestGraph::GraphNode {
+  + backColor : str
+  + height : float
+  + nodeStyle : str
+  + shape : str
+  + width : float
+}
+class ZestGraph::NamedElement {
+  + name : str
+}
+class ZestGraph::ZestGraph {
+}
+GraphItem <|-- ZestGraph::GraphConnection
+GraphItem <|-- ZestGraph::GraphNode
+NamedElement <|-- ZestGraph::GraphContainer
+NamedElement <|-- ZestGraph::ZestGraph
+ZestGraph::GraphContainer "0..9999" --* "1..1" ZestGraph::ZestGraph : containers1
+ZestGraph::ZestGraph "0..1" -- "1..1" ZestGraph::GraphItem : graph4
+ZestGraph::GraphNode "1..1" -- "0..9999" ZestGraph::GraphConnection : ingoing6
+ZestGraph::ZestGraph "1..1" *-- "0..9999" ZestGraph::GraphItem : items0
+ZestGraph::GraphContainer "1..1" -- "0..9999" ZestGraph::GraphNode : nodes2
+ZestGraph::GraphConnection "0..9999" -- "1..1" ZestGraph::GraphNode : outgoing5
+ZestGraph::GraphNode "0..1" -- "1..1" ZestGraph::GraphConnection : sourceNode8
+ZestGraph::GraphNode "0..1" -- "1..1" ZestGraph::GraphConnection : targetNode9
+@enduml

@@ -1,0 +1,105 @@
+@startuml
+class Adapter {
+}
+class ExtensibleElement {
+}
+class NamedElementModel {
+}
+class NodeVisualModel {
+}
+class VisualModel {
+}
+abstract class editormodel::Adapter {
+}
+class editormodel::Color {
+  + blue : int
+  + green : int
+  + red : int
+}
+class editormodel::ConnectionBendpoint {
+  + weight : float
+}
+class editormodel::ConnectionVisualModel {
+  + sourceTerminal : str
+  + targetTerminal : str
+}
+class editormodel::CoreModel {
+}
+abstract class editormodel::Diagram {
+  + gridEnabled : str
+  + snapToGeometryEnabled : str
+}
+class editormodel::Dimension {
+  + height : int
+  + width : int
+}
+class editormodel::EObject {
+}
+class editormodel::EStringToEObjectMapEntry {
+  + key : str
+}
+class editormodel::FlabotFileModel {
+  + id : str
+  + name : str
+  + provider : str
+  + version : str
+}
+class editormodel::Folder {
+  + name : str
+}
+class editormodel::NodeVisualModel {
+  + rotation : str
+}
+class editormodel::Note {
+}
+class editormodel::Point {
+  + x : int
+  + y : int
+}
+class editormodel::VisualDiagramJump {
+  + to : str
+}
+class editormodel::VisualModel {
+  + detailLevel : int
+  + lineStyle : int
+  + lineWidth : int
+}
+Adapter <|-- editormodel::VisualModel
+ExtensibleElement <|-- editormodel::FlabotFileModel
+NamedElementModel <|-- editormodel::Diagram
+NodeVisualModel <|-- editormodel::ConnectionVisualModel
+NodeVisualModel <|-- editormodel::VisualDiagramJump
+VisualModel <|-- editormodel::NodeVisualModel
+editormodel::Color "0..1" --* "1..1" editormodel::VisualModel : backgroundColor29
+editormodel::ConnectionBendpoint "0..9999" --* "1..1" editormodel::ConnectionVisualModel : bendpoints39
+editormodel::VisualModel "1..1" *-- "0..9999" editormodel::VisualModel : children17
+editormodel::Diagram "1..1" *-- "0..9999" editormodel::VisualModel : children3
+editormodel::CoreModel "0..1" -- "1..1" editormodel::Diagram : coreModel0
+editormodel::CoreModel "0..1" --* "1..1" editormodel::FlabotFileModel : coreModel5
+editormodel::VisualModel "1..1" -- "0..1" editormodel::Diagram : diagram27
+editormodel::Diagram "0..9999" -- "1..1" editormodel::Folder : diagrams51
+editormodel::FlabotFileModel "1..1" *-- "0..9999" editormodel::Diagram : diagrams6
+editormodel::FlabotFileModel "0..1" -- "1..1" editormodel::Folder : fileModel56
+editormodel::Dimension "0..1" --* "1..1" editormodel::ConnectionBendpoint : firstRelativeDimension34
+editormodel::Folder "0..1" --* "1..1" editormodel::FlabotFileModel : folder11
+editormodel::Folder "0..1" -- "1..1" editormodel::Diagram : folder4
+editormodel::Folder "0..9999" --* "1..1" editormodel::Folder : folders48
+editormodel::VisualModel "1..1" *-- "0..1" editormodel::Color : foregroundColor31
+editormodel::FlabotFileModel "0..9999" --* "1..1" editormodel::FlabotFileModel : importedFiles9
+editormodel::Point "0..1" --* "1..1" editormodel::VisualModel : location23
+editormodel::Note "0..9999" --* "1..1" editormodel::Diagram : notes1
+editormodel::Diagram "0..9999" -- "1..1" editormodel::FlabotFileModel : openDiagrams13
+editormodel::VisualModel "1..1" -- "0..1" editormodel::VisualModel : parent20
+editormodel::Folder "1..1" -- "0..1" editormodel::Folder : parent54
+editormodel::Dimension "0..1" --* "1..1" editormodel::ConnectionBendpoint : secondRelativeDimension36
+editormodel::EObject "0..1" -- "1..1" editormodel::VisualModel : semanticModel22
+editormodel::Dimension "0..1" --* "1..1" editormodel::VisualModel : size25
+editormodel::NodeVisualModel "0..1" -- "1..1" editormodel::ConnectionVisualModel : source41
+editormodel::ConnectionVisualModel "0..9999" --* "1..1" editormodel::NodeVisualModel : sourceConnections44
+editormodel::VisualDiagramJump "1..1" -- "0..1" editormodel::Diagram : sourceDiagram61
+editormodel::NodeVisualModel "0..1" -- "1..1" editormodel::ConnectionVisualModel : target42
+editormodel::ConnectionVisualModel "0..9999" -- "1..1" editormodel::NodeVisualModel : targetConnections45
+editormodel::VisualDiagramJump "1..1" -- "0..1" editormodel::Diagram : targetDiagram63
+editormodel::NodeVisualModel "0..1" -- "1..1" editormodel::VisualDiagramJump : targetVisualNode66
+editormodel::EObject "0..1" --* "1..1" editormodel::EStringToEObjectMapEntry : value59
+@enduml

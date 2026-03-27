@@ -1,0 +1,97 @@
+@startuml
+enum CodeGenLanguage {
+  ACCELEO
+}
+class ExtensionPoint {
+}
+enum InjectionMode {
+  GOOGLE_JUICE
+  PLAIN_JAVA
+}
+class Interface {
+}
+class JavaTypeDeclaration {
+}
+class Operation {
+}
+class Packageable {
+}
+class Pointcut {
+}
+enum PointcutType {
+  AFTER
+  AFTER_BODY
+  BEFORE
+  BEFORE_BODY
+}
+class TransformationLibrary {
+}
+abstract class serviceInterfaces::Interface {
+  + description : str
+  + qName : str
+}
+class serviceInterfaces::InterfaceRepository {
+}
+class serviceInterfaces::Package {
+  + name : str
+}
+abstract class serviceInterfaces::Packageable {
+}
+class serviceInterfaces::codegen::ClassPointcut {
+}
+class serviceInterfaces::codegen::ImportElementPointcut {
+}
+class serviceInterfaces::codegen::InjectorAcceptorInterfaceL1 {
+}
+class serviceInterfaces::codegen::MethodPoincut {
+}
+abstract class serviceInterfaces::codegen::Pointcut {
+  + type : str
+}
+class serviceInterfaces::codegen::SlotPlugInterfaceL1 {
+}
+class serviceInterfaces::codegen::StatementPoincut {
+}
+class serviceInterfaces::codegen::TransformationLibrary {
+  + language : str
+  + name : str
+}
+class serviceInterfaces::modelingenv::ExtensionPoint {
+  + id : str
+}
+class serviceInterfaces::modelingenv::InjectorAcceptorInterfaceL0 {
+  + mode : str
+}
+class serviceInterfaces::modelingenv::JavaClass {
+}
+class serviceInterfaces::modelingenv::JavaInterface {
+}
+abstract class serviceInterfaces::modelingenv::JavaTypeDeclaration {
+  + qualifiedName : str
+}
+class serviceInterfaces::modelingenv::Operation {
+  + name : str
+}
+class serviceInterfaces::modelingenv::SlotPlugInterfaceL0 {
+}
+Interface <|-- serviceInterfaces::codegen::InjectorAcceptorInterfaceL1
+Interface <|-- serviceInterfaces::codegen::SlotPlugInterfaceL1
+Interface <|-- serviceInterfaces::modelingenv::InjectorAcceptorInterfaceL0
+Interface <|-- serviceInterfaces::modelingenv::SlotPlugInterfaceL0
+JavaTypeDeclaration <|-- serviceInterfaces::modelingenv::JavaClass
+JavaTypeDeclaration <|-- serviceInterfaces::modelingenv::JavaInterface
+Packageable <|-- serviceInterfaces::Interface
+Packageable <|-- serviceInterfaces::Package
+Pointcut <|-- serviceInterfaces::codegen::ClassPointcut
+Pointcut <|-- serviceInterfaces::codegen::ImportElementPointcut
+Pointcut <|-- serviceInterfaces::codegen::MethodPoincut
+Pointcut <|-- serviceInterfaces::codegen::StatementPoincut
+serviceInterfaces::Packageable "0..9999" --* "1..1" serviceInterfaces::InterfaceRepository : contents0
+serviceInterfaces::Package "1..1" *-- "0..9999" serviceInterfaces::Packageable : contents1
+JavaTypeDeclaration "1..9999" --* "1..1" serviceInterfaces::modelingenv::InjectorAcceptorInterfaceL0 : injectorImplements5
+TransformationLibrary "0..1" -- "1..1" serviceInterfaces::codegen::InjectorAcceptorInterfaceL1 : injectorProvides3
+Operation "0..9999" --* "1..1" serviceInterfaces::modelingenv::JavaInterface : operations6
+Operation "0..9999" --* "1..1" serviceInterfaces::modelingenv::JavaClass : operations7
+serviceInterfaces::codegen::SlotPlugInterfaceL1 "1..1" -- "0..1" Pointcut : pointcuts4
+ExtensionPoint "1..9999" --* "1..1" serviceInterfaces::modelingenv::SlotPlugInterfaceL0 : slot9
+@enduml

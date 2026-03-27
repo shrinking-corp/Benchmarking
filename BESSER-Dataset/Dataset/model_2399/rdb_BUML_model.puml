@@ -1,0 +1,27 @@
+@startuml
+class Key {
+}
+class rdb::Column {
+  + name : str
+  + type : str
+}
+class rdb::ForeignKey {
+}
+abstract class rdb::Key {
+}
+class rdb::PrimaryKey {
+}
+class rdb::Schema {
+  + name : str
+}
+class rdb::Table {
+  + name : str
+}
+Key <|-- rdb::ForeignKey
+Key <|-- rdb::PrimaryKey
+rdb::Column "0..9999" --* "1..1" rdb::Table : columns1
+rdb::Key "1..9999" --* "1..1" rdb::Table : constraints3
+rdb::Column "1..9999" -- "1..1" rdb::Key : keyColumn5
+rdb::Column "1..1" -- "1..1" rdb::ForeignKey : ref8
+rdb::Table "0..9999" --* "1..1" rdb::Schema : tables0
+@enduml

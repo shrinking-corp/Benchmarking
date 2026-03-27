@@ -1,0 +1,36 @@
+@startuml
+class NamedElement {
+}
+class hello121::Alias {
+  + id : str
+}
+class hello121::Base {
+}
+class hello121::Classoc {
+  + id : str
+}
+abstract class hello121::NamedElement {
+  + name : str
+}
+class hello121::RelatedTo {
+  + since : str
+}
+class hello121::Thing {
+  + id : int
+}
+class hello121::Third {
+  + id : str
+}
+NamedElement <|-- hello121::RelatedTo
+NamedElement <|-- hello121::Thing
+hello121::Alias "0..9999" --* "1..1" hello121::NamedElement : aliases9
+hello121::Classoc "1..1" -- "0..1" hello121::Base : base16
+hello121::Classoc "0..9999" --* "1..1" hello121::Base : classocs1
+hello121::Classoc "0..9999" --* "1..1" hello121::Thing : classocs6
+hello121::Third "0..9999" --* "1..1" hello121::Thing : foos4
+hello121::Thing "0..1" -- "1..1" hello121::RelatedTo : fromThing10
+hello121::RelatedTo "0..9999" --* "1..1" hello121::Thing : relations3
+hello121::Base "1..1" *-- "0..9999" hello121::Thing : things0
+hello121::Third "0..1" -- "1..1" hello121::Classoc : third13
+hello121::Thing "0..1" -- "1..1" hello121::RelatedTo : toThing11
+@enduml

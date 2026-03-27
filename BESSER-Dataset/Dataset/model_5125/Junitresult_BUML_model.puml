@@ -1,0 +1,73 @@
+@startuml
+class AbstractAggregatedTest {
+}
+class JunitResult {
+}
+class NegativeResult {
+}
+abstract class junitresult::AbstractAggregatedTest {
+  + errors : int
+  + failures : int
+  + name : str
+  + tests : int
+}
+class junitresult::Error {
+}
+class junitresult::Failure {
+}
+abstract class junitresult::JunitResult {
+}
+abstract class junitresult::NegativeResult {
+  + message : str
+  + type : str
+  + value : str
+}
+class junitresult::Property {
+  + name : str
+  + value : str
+}
+class junitresult::Skipped {
+}
+class junitresult::Testcase {
+  + assertions : str
+  + classname : str
+  + name : str
+  + status : str
+  + system_err : str
+  + system_out : str
+  + time : float
+}
+class junitresult::Testrun {
+  + ignored : int
+  + project : str
+  + started : int
+}
+class junitresult::Testsuite {
+  + disabled : int
+  + hostname : str
+  + id : int
+  + package : str
+  + skipped : int
+  + system_err : str
+  + system_out : str
+  + time : float
+  + timestamp : date
+}
+class junitresult::Testsuites {
+  + disabled : int
+  + time : float
+}
+AbstractAggregatedTest <|-- junitresult::Testrun
+AbstractAggregatedTest <|-- junitresult::Testsuite
+AbstractAggregatedTest <|-- junitresult::Testsuites
+JunitResult <|-- junitresult::AbstractAggregatedTest
+NegativeResult <|-- junitresult::Error
+NegativeResult <|-- junitresult::Failure
+NegativeResult <|-- junitresult::Skipped
+junitresult::Error "0..9999" --* "1..1" junitresult::Testcase : errors7
+junitresult::Testcase "1..1" *-- "0..9999" junitresult::Failure : failures5
+junitresult::Property "0..9999" --* "1..1" junitresult::Testsuite : properties0
+junitresult::Skipped "0..1" --* "1..1" junitresult::Testcase : skipped3
+junitresult::Testcase "0..9999" --* "1..1" junitresult::Testsuite : testcases1
+junitresult::AbstractAggregatedTest "1..1" *-- "0..9999" junitresult::Testsuite : testsuites9
+@enduml

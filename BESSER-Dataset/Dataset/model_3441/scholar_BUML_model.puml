@@ -1,0 +1,34 @@
+@startuml
+class Named {
+}
+class scholar::Discipline {
+}
+class scholar::Exam {
+  + score : float
+}
+class scholar::Lecture {
+}
+abstract class scholar::Named {
+  + name : str
+}
+class scholar::ScholarManagement {
+}
+class scholar::Student {
+  + forname : str
+}
+class scholar::Teacher {
+}
+Named <|-- scholar::Discipline
+Named <|-- scholar::Exam
+Named <|-- scholar::Lecture
+Named <|-- scholar::Student
+Named <|-- scholar::Teacher
+scholar::Discipline "0..1" -- "1..1" scholar::Lecture : discipline2
+scholar::ScholarManagement "1..1" *-- "0..9999" scholar::Discipline : disciplines9
+scholar::Exam "0..9999" --* "1..1" scholar::Student : exams0
+scholar::Exam "1..1" -- "0..1" scholar::Lecture : lecture4
+scholar::Teacher "0..1" -- "1..1" scholar::Lecture : lecture_teacher1
+scholar::Lecture "0..9999" --* "1..1" scholar::ScholarManagement : lectures12
+scholar::ScholarManagement "1..1" *-- "0..9999" scholar::Student : students7
+scholar::Teacher "0..9999" --* "1..1" scholar::ScholarManagement : teachers15
+@enduml

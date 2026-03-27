@@ -1,0 +1,70 @@
+@startuml
+class FSMGenElement {
+}
+class GraphItem {
+}
+class fsmgen::AbstractInterfaceItem {
+}
+class fsmgen::CommonTrigger {
+  + hasGuard : bool
+  + trigger : str
+}
+class fsmgen::EObject {
+}
+class fsmgen::FSMGenElement {
+}
+class fsmgen::Graph {
+  + toString() : str
+}
+class fsmgen::GraphContainer {
+  + initializedChainHeads : bool
+  + initializedCommonData : bool
+  + initializedTriggersInStates : bool
+}
+class fsmgen::GraphItem {
+  + inherited : bool
+}
+class fsmgen::Link {
+  + ifitemTriggered : bool
+  + toString() : str
+}
+class fsmgen::ModelComponent {
+}
+class fsmgen::Node {
+  + inheritanceLevel : int
+  + toString() : str
+}
+class fsmgen::StateGraph {
+}
+class fsmgen::StateGraphNode {
+}
+class fsmgen::TransitionBase {
+}
+FSMGenElement <|-- fsmgen::CommonTrigger
+FSMGenElement <|-- fsmgen::Graph
+FSMGenElement <|-- fsmgen::GraphContainer
+FSMGenElement <|-- fsmgen::GraphItem
+GraphItem <|-- fsmgen::Link
+GraphItem <|-- fsmgen::Node
+fsmgen::Node "1..1" *-- "0..9999" fsmgen::CommonTrigger : caughtTriggers18
+fsmgen::Link "0..9999" -- "1..1" fsmgen::Link : chainHeads27
+fsmgen::Link "1..1" -- "0..1" fsmgen::EObject : commonData28
+fsmgen::ModelComponent "0..1" -- "1..1" fsmgen::GraphContainer : component1
+fsmgen::Graph "0..1" --* "1..1" fsmgen::GraphContainer : graph0
+fsmgen::Graph "0..1" -- "1..1" fsmgen::Node : graph10
+fsmgen::Graph "0..1" -- "1..1" fsmgen::Link : graph20
+fsmgen::AbstractInterfaceItem "0..1" -- "1..1" fsmgen::CommonTrigger : ifitem35
+fsmgen::Node "1..1" -- "0..9999" fsmgen::Link : incoming15
+fsmgen::CommonTrigger "1..1" -- "0..9999" fsmgen::Link : links37
+fsmgen::Graph "1..1" *-- "0..9999" fsmgen::Link : links4
+fsmgen::EObject "0..1" -- "1..1" fsmgen::CommonTrigger : msg32
+fsmgen::Graph "1..1" -- "0..1" fsmgen::Node : node8
+fsmgen::Node "0..9999" --* "1..1" fsmgen::Graph : nodes3
+fsmgen::Link "0..9999" -- "1..1" fsmgen::Node : outgoing13
+fsmgen::Node "0..1" -- "1..1" fsmgen::Link : source22
+fsmgen::StateGraph "0..1" -- "1..1" fsmgen::Graph : stateGraph6
+fsmgen::StateGraphNode "0..1" -- "1..1" fsmgen::Node : stateGraphNode17
+fsmgen::Graph "0..1" --* "1..1" fsmgen::Node : subgraph11
+fsmgen::Node "0..1" -- "1..1" fsmgen::Link : target24
+fsmgen::TransitionBase "0..1" -- "1..1" fsmgen::Link : transition30
+@enduml

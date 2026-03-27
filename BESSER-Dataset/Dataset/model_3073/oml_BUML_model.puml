@@ -1,0 +1,85 @@
+@startuml
+class AnnotatedElement {
+}
+class Class {
+}
+class Classifier {
+}
+class Feature {
+}
+class NamedElement {
+}
+class Package {
+}
+class PackageableElement {
+}
+class StructuralFeature {
+}
+enum VisibilityEnum {
+  private
+  public
+}
+abstract class oml::AnnotatedElement {
+}
+class oml::Annotation {
+  + key : str
+  + value : str
+}
+class oml::Attribute {
+}
+class oml::Class {
+  + isAbstract : str
+}
+abstract class oml::Classifier {
+}
+class oml::Datatype {
+}
+class oml::ExternalClass {
+}
+abstract class oml::Feature {
+  + visibility : str
+}
+class oml::Model {
+}
+abstract class oml::NamedElement {
+  + name : str
+}
+class oml::Operation {
+}
+class oml::Package {
+}
+abstract class oml::PackageableElement {
+}
+class oml::Parameter {
+}
+class oml::Reference {
+}
+abstract class oml::StructuralFeature {
+  + isMany : str
+}
+AnnotatedElement <|-- oml::NamedElement
+Classifier <|-- oml::Class
+Classifier <|-- oml::Datatype
+Class <|-- oml::ExternalClass
+Feature <|-- oml::Operation
+Feature <|-- oml::StructuralFeature
+NamedElement <|-- oml::Feature
+NamedElement <|-- oml::PackageableElement
+NamedElement <|-- oml::Parameter
+PackageableElement <|-- oml::Classifier
+PackageableElement <|-- oml::Package
+Package <|-- oml::Model
+StructuralFeature <|-- oml::Attribute
+StructuralFeature <|-- oml::Reference
+oml::Annotation "0..9999" --* "1..1" oml::AnnotatedElement : annotations1
+oml::PackageableElement "0..9999" --* "1..1" oml::Package : contents2
+oml::Class "1..1" -- "0..9999" oml::Class : extendedBy6
+oml::Class "0..1" -- "1..1" oml::Class : extends4
+oml::Feature "0..9999" --* "1..1" oml::Class : features8
+oml::Parameter "1..1" -- "0..1" oml::Operation : owner16
+oml::Class "0..1" -- "1..1" oml::Feature : owner9
+oml::Package "0..1" -- "1..1" oml::PackageableElement : package0
+oml::Parameter "0..9999" --* "1..1" oml::Operation : parameters12
+oml::Classifier "0..1" -- "1..1" oml::Feature : type11
+oml::Classifier "0..1" -- "1..1" oml::Parameter : type14
+@enduml

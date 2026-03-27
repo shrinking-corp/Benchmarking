@@ -1,0 +1,140 @@
+@startuml
+class Measure {
+}
+class MeasureBinaryOperation {
+}
+class MeasureBinaryProductOperation {
+}
+class MeasureUnboundOperation {
+}
+class MeasureValue {
+}
+class MeasurementUncertaintyInformation {
+}
+enum Type {
+  Current
+  Duration
+  Energy
+  Frequency
+  Power
+  Scalar
+  Voltage
+}
+class TypedMeasure {
+}
+enum Visibility {
+  GLOBAL
+  LOCAL
+}
+class eel::EnergyComputation {
+  + type() : str
+  + value() : str
+}
+class eel::Integral {
+  + function : str
+}
+class eel::Interval {
+}
+abstract class eel::Measure {
+  + name : str
+  + subname : str
+  + targetClass : str
+  + targetOperation : str
+  + name() : str
+  + type() : str
+  + value() : str
+}
+class eel::MeasureAttribute {
+  + att : str
+}
+abstract class eel::MeasureBinaryOperation {
+}
+class eel::MeasureBinaryProductOperation {
+  + value() : str
+}
+class eel::MeasureBinarySumOperation {
+  + value() : str
+}
+class eel::MeasureCast {
+}
+class eel::MeasureOCL {
+  + oclQuery : str
+}
+abstract class eel::MeasureUnboundOperation {
+}
+class eel::MeasureUnboundProductOperation {
+  + value() : str
+}
+class eel::MeasureUnboundSumOperation {
+  + value() : str
+}
+class eel::MeasureValue {
+  + value : str
+  + value() : str
+}
+class eel::MeasurementUncertainty {
+  + standardUncertainty : str
+}
+abstract class eel::MeasurementUncertaintyInformation {
+}
+class eel::NormalDistribution {
+  + meanValue : str
+  + standardDeviation : str
+}
+class eel::Platform {
+  + name : str
+}
+class eel::PowerComputation {
+  + type() : str
+  + value() : str
+}
+class eel::RealTimeDuration {
+  + type() : str
+}
+class eel::Sample {
+}
+class eel::Sampling {
+  + measurementProcedure : str
+}
+abstract class eel::TypedMeasure {
+  + type : str
+  + name() : str
+  + type() : str
+}
+class eel::Variable {
+  + name : str
+  + value : str
+  + vibility : str
+}
+MeasureBinaryOperation <|-- eel::MeasureBinaryProductOperation
+MeasureBinaryOperation <|-- eel::MeasureBinarySumOperation
+MeasureBinaryProductOperation <|-- eel::EnergyComputation
+MeasureBinaryProductOperation <|-- eel::PowerComputation
+MeasureUnboundOperation <|-- eel::MeasureUnboundProductOperation
+MeasureUnboundOperation <|-- eel::MeasureUnboundSumOperation
+MeasureValue <|-- eel::MeasureAttribute
+MeasureValue <|-- eel::MeasureOCL
+MeasureValue <|-- eel::RealTimeDuration
+Measure <|-- eel::TypedMeasure
+MeasurementUncertaintyInformation <|-- eel::Integral
+MeasurementUncertaintyInformation <|-- eel::Interval
+MeasurementUncertaintyInformation <|-- eel::NormalDistribution
+MeasurementUncertaintyInformation <|-- eel::Sampling
+TypedMeasure <|-- eel::MeasureBinaryOperation
+TypedMeasure <|-- eel::MeasureCast
+TypedMeasure <|-- eel::MeasureUnboundOperation
+TypedMeasure <|-- eel::MeasureValue
+eel::MeasurementUncertaintyInformation "0..1" --* "1..1" eel::MeasurementUncertainty : information14
+eel::Interval "1..1" -- "1..1" eel::Integral : interval22
+eel::Measure "0..1" -- "1..1" eel::MeasureBinaryOperation : left7
+eel::Interval "1..1" *-- "1..1" eel::Measure : lowerEndpoint16
+eel::Measure "1..1" -- "1..1" eel::MeasureCast : measure5
+eel::Platform "1..1" *-- "0..9999" eel::Measure : measures1
+eel::MeasureUnboundOperation "1..1" -- "1..9999" eel::Measure : measures12
+eel::Measure "0..9999" --* "1..1" eel::Sample : quantity24
+eel::Measure "0..1" -- "1..1" eel::MeasureBinaryOperation : right9
+eel::Sample "0..9999" --* "1..1" eel::Sampling : samples21
+eel::MeasurementUncertainty "0..1" --* "1..1" eel::Measure : uncertainty3
+eel::Measure "1..1" --* "1..1" eel::Interval : upperEndpoint18
+eel::Variable "0..9999" --* "1..1" eel::Platform : variables0
+@enduml

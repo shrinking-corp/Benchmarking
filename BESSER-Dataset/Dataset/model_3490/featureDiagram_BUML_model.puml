@@ -1,0 +1,80 @@
+@startuml
+class Constraint {
+}
+class Feature {
+}
+class FeatureElement {
+}
+class Operator {
+}
+class featureDiagram::Alternative {
+}
+class featureDiagram::Attribute {
+  + name : str
+  + type : str
+  + value : str
+}
+class featureDiagram::Card {
+  + max : int
+  + min : int
+}
+abstract class featureDiagram::Constraint {
+}
+class featureDiagram::ConstraintEdge {
+}
+class featureDiagram::EObject {
+}
+class featureDiagram::Feature {
+  + name : str
+  + selected : bool
+}
+class featureDiagram::FeatureDiagram {
+  + graphTypeTree : bool
+}
+class featureDiagram::FeatureElement {
+}
+class featureDiagram::Mandatory {
+}
+class featureDiagram::Mutex {
+}
+class featureDiagram::Operator {
+  + name : str
+}
+class featureDiagram::Opt {
+}
+class featureDiagram::Or {
+}
+class featureDiagram::PrimitiveFeature {
+}
+class featureDiagram::Require {
+}
+Constraint <|-- featureDiagram::Mutex
+Constraint <|-- featureDiagram::Require
+FeatureElement <|-- featureDiagram::Attribute
+FeatureElement <|-- featureDiagram::Constraint
+FeatureElement <|-- featureDiagram::ConstraintEdge
+FeatureElement <|-- featureDiagram::Feature
+FeatureElement <|-- featureDiagram::FeatureDiagram
+FeatureElement <|-- featureDiagram::Operator
+Feature <|-- featureDiagram::PrimitiveFeature
+Operator <|-- featureDiagram::Alternative
+Operator <|-- featureDiagram::Card
+Operator <|-- featureDiagram::Mandatory
+Operator <|-- featureDiagram::Opt
+Operator <|-- featureDiagram::Or
+featureDiagram::Attribute "0..9999" --* "1..1" featureDiagram::Feature : attributes6
+featureDiagram::ConstraintEdge "1..1" *-- "0..1" featureDiagram::Constraint : constraint16
+featureDiagram::ConstraintEdge "0..9999" --* "1..1" featureDiagram::FeatureDiagram : constraintEdges2
+featureDiagram::Feature "0..9999" --* "1..1" featureDiagram::FeatureDiagram : features0
+featureDiagram::Feature "1..9999" -- "1..1" featureDiagram::Operator : features22
+featureDiagram::EObject "0..9999" -- "1..1" featureDiagram::Feature : modelElements11
+featureDiagram::Feature "1..1" *-- "0..9999" featureDiagram::Operator : operator5
+featureDiagram::ConstraintEdge "0..1" -- "1..1" featureDiagram::Constraint : owningCE24
+featureDiagram::Feature "0..1" -- "1..1" featureDiagram::Operator : owningFeature20
+featureDiagram::Attribute "1..1" -- "0..1" featureDiagram::Feature : owningFeature25
+featureDiagram::Feature "1..1" -- "0..1" featureDiagram::FeatureDiagram : owningFeatureDiagram4
+featureDiagram::Operator "0..9999" -- "1..1" featureDiagram::Feature : owningOperator8
+featureDiagram::Feature "1..1" -- "1..1" featureDiagram::FeatureDiagram : root1
+featureDiagram::Feature "0..1" -- "1..1" featureDiagram::ConstraintEdge : source17
+featureDiagram::ConstraintEdge "1..1" -- "0..1" featureDiagram::Feature : target13
+@enduml

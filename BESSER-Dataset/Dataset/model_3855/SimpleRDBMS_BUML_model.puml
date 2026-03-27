@@ -1,0 +1,22 @@
+@startuml
+enum FKeyType {
+  PKEY
+}
+class SimpleRDBMS::Column {
+  + id : int
+  + name : str
+  + type : str
+}
+class SimpleRDBMS::FKey {
+  + fkeyType : str
+}
+class SimpleRDBMS::Table {
+  + id : int
+  + name : str
+}
+SimpleRDBMS::Column "0..9999" --* "1..1" SimpleRDBMS::Table : cols3
+SimpleRDBMS::Column "0..9999" -- "1..1" SimpleRDBMS::FKey : cols9
+SimpleRDBMS::FKey "0..9999" --* "1..1" SimpleRDBMS::Table : fkeys0
+SimpleRDBMS::Column "0..9999" -- "1..1" SimpleRDBMS::Table : pkey1
+SimpleRDBMS::FKey "1..1" -- "1..1" SimpleRDBMS::Table : references6
+@enduml

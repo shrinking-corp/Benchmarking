@@ -1,0 +1,108 @@
+@startuml
+class Annotatable {
+}
+class Collection {
+}
+class ProbLogStatement {
+}
+class ProbabilityMeasure {
+}
+class Proposition {
+}
+class Referable {
+}
+class Statement {
+}
+abstract class problog::Annotatable {
+}
+class problog::AnnotatedReferable {
+}
+class problog::Atom {
+  + name : str
+}
+class problog::Cheat {
+  + contents : str
+}
+abstract class problog::Collection {
+}
+class problog::Comment {
+  + text : str
+}
+class problog::Evidence {
+  + value : str
+}
+class problog::ImportLibrary {
+  + name : str
+}
+class problog::LHS {
+}
+class problog::PLList {
+}
+class problog::PLTuple {
+}
+class problog::ProbLogProgram {
+}
+abstract class problog::ProbLogStatement {
+}
+class problog::ProbabilityFraction {
+  + denominator : int
+  + nominator : int
+}
+class problog::ProbabilityLiteral {
+  + value : float
+}
+abstract class problog::ProbabilityMeasure {
+}
+abstract class problog::Proposition {
+}
+class problog::Query {
+}
+class problog::RHS {
+}
+abstract class problog::Referable {
+}
+class problog::Rule {
+}
+abstract class problog::Statement {
+}
+class problog::Term {
+  + arguments : int
+  + name : str
+}
+class problog::TermInstance {
+}
+class problog::Variable {
+  + name : str
+}
+Annotatable <|-- problog::Atom
+Annotatable <|-- problog::TermInstance
+Collection <|-- problog::PLList
+Collection <|-- problog::PLTuple
+ProbLogStatement <|-- problog::Evidence
+ProbLogStatement <|-- problog::Query
+ProbabilityMeasure <|-- problog::ProbabilityFraction
+ProbabilityMeasure <|-- problog::ProbabilityLiteral
+Proposition <|-- problog::Annotatable
+Proposition <|-- problog::AnnotatedReferable
+Referable <|-- problog::Atom
+Referable <|-- problog::Collection
+Referable <|-- problog::TermInstance
+Referable <|-- problog::Variable
+Statement <|-- problog::Cheat
+Statement <|-- problog::Comment
+Statement <|-- problog::ImportLibrary
+Statement <|-- problog::ProbLogStatement
+Statement <|-- problog::Rule
+problog::Annotatable "1..1" --* "1..1" problog::AnnotatedReferable : annotates11
+problog::Referable "0..9999" --* "1..1" problog::TermInstance : arguments17
+problog::Referable "1..9999" --* "1..1" problog::RHS : conjunction8
+problog::Collection "1..1" *-- "0..9999" problog::Referable : contents20
+problog::LHS "1..1" --* "1..1" problog::Rule : lhs3
+problog::ProbabilityMeasure "1..1" --* "1..1" problog::AnnotatedReferable : probabilitymeasure10
+problog::Proposition "0..9999" --* "1..1" problog::LHS : propositions6
+problog::RHS "0..1" --* "1..1" problog::Rule : rhs4
+problog::Statement "0..9999" --* "1..1" problog::ProbLogProgram : statements0
+problog::ProbLogStatement "1..1" *-- "1..1" problog::Referable : subject13
+problog::Term "1..1" -- "1..1" problog::TermInstance : template15
+problog::ProbLogProgram "1..1" *-- "0..9999" problog::Term : terms1
+@enduml

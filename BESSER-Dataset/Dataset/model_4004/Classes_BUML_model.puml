@@ -1,0 +1,24 @@
+@startuml
+class NamedElement {
+}
+class Namespace {
+}
+class classes::Class {
+}
+abstract class classes::NamedElement {
+  + name : str
+}
+abstract class classes::Namespace {
+}
+class classes::Package {
+}
+class classes::Root {
+}
+NamedElement <|-- classes::Class
+NamedElement <|-- classes::Package
+Namespace <|-- classes::Package
+classes::Class "0..9999" --* "1..1" classes::Package : ownedClasses0
+classes::Package "1..1" *-- "0..9999" classes::Package : ownedPackages2
+classes::Package "0..9999" --* "1..1" classes::Root : ownedPackages7
+classes::Class "0..1" -- "1..1" classes::Class : superClass5
+@enduml

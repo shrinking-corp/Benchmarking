@@ -1,0 +1,42 @@
+@startuml
+class Model {
+}
+class ModelElement {
+}
+class NamedElement {
+}
+class TypedElement {
+}
+class testmodel::Association {
+  + firstLabel : str
+  + secondLabel : str
+}
+class testmodel::Attribute {
+}
+class testmodel::Class {
+}
+class testmodel::Group {
+}
+class testmodel::Model {
+}
+abstract class testmodel::ModelElement {
+}
+abstract class testmodel::NamedElement {
+  + name : str
+}
+class testmodel::TypedElement {
+}
+ModelElement <|-- testmodel::Association
+ModelElement <|-- testmodel::Class
+ModelElement <|-- testmodel::Group
+Model <|-- testmodel::Group
+NamedElement <|-- testmodel::ModelElement
+NamedElement <|-- testmodel::TypedElement
+TypedElement <|-- testmodel::Attribute
+testmodel::Attribute "0..9999" --* "1..1" testmodel::Class : attributes2
+testmodel::ModelElement "0..9999" --* "1..1" testmodel::Model : elements0
+testmodel::Class "1..1" -- "1..1" testmodel::Association : first4
+testmodel::Attribute "1..1" -- "1..1" testmodel::Class : owner3
+testmodel::Class "1..1" -- "1..1" testmodel::Association : second6
+testmodel::Class "1..1" -- "1..1" testmodel::TypedElement : type1
+@enduml

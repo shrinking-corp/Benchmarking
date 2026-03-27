@@ -1,0 +1,147 @@
+@startuml
+class Action {
+}
+class DataBag {
+}
+class DataElement {
+}
+class DataLeaf {
+}
+class DependentAction {
+}
+class FeatureVersion {
+}
+class IArithmetricFunction {
+}
+class IContextVariable {
+}
+class IDataNodeFunction {
+}
+class IFeature {
+}
+class ILogicFunction {
+}
+class ITimeConsumer {
+}
+class IValueFunction {
+}
+class PostGenerationAction {
+}
+class PreGenerationAction {
+}
+class ReconfigurationAction {
+}
+abstract class actions::Action {
+}
+class actions::ActionReference {
+}
+class actions::ActivateFeatureAction {
+}
+class actions::DeactivateFeatureAction {
+}
+abstract class actions::DependentAction {
+}
+class actions::EObject {
+}
+class actions::FailAction {
+}
+class actions::GetDataAction {
+}
+class actions::GetFeatureStateAction {
+}
+class actions::GetPropertyAction {
+}
+class actions::GetRealTimeAction {
+  + timeHint : str
+}
+abstract class actions::PostGenerationAction {
+}
+class actions::PostGenerationSequence {
+}
+abstract class actions::PreGenerationAction {
+}
+class actions::PreGenerationSequence {
+}
+abstract class actions::ReconfigurationAction {
+}
+class actions::RemoveBagAction {
+}
+class actions::SetDataAction {
+}
+class actions::SetPropertyAction {
+}
+class actions::StandAloneAction {
+}
+class actions::Term {
+}
+class actions::TermAction {
+}
+class actions::ThrowAction {
+  + eventID : str
+}
+class actions::TimeAction {
+  + time : int
+}
+class actions::TimedConditionAction {
+  + frequency : int
+}
+class core::AbstractModelElement {
+}
+class core::ITopLevelElement {
+}
+class rules::IRealTimeConsumer {
+}
+Action <|-- actions::PostGenerationAction
+Action <|-- actions::PreGenerationAction
+DependentAction <|-- actions::GetFeatureStateAction
+DependentAction <|-- actions::GetPropertyAction
+DependentAction <|-- actions::GetRealTimeAction
+PostGenerationAction <|-- actions::ActivateFeatureAction
+PostGenerationAction <|-- actions::DeactivateFeatureAction
+PostGenerationAction <|-- actions::DependentAction
+PostGenerationAction <|-- actions::FailAction
+PostGenerationAction <|-- actions::PostGenerationSequence
+PostGenerationAction <|-- actions::SetPropertyAction
+PostGenerationAction <|-- actions::TermAction
+PreGenerationAction <|-- actions::ActionReference
+PreGenerationAction <|-- actions::FailAction
+PreGenerationAction <|-- actions::GetDataAction
+PreGenerationAction <|-- actions::GetFeatureStateAction
+PreGenerationAction <|-- actions::GetRealTimeAction
+PreGenerationAction <|-- actions::PreGenerationSequence
+PreGenerationAction <|-- actions::ReconfigurationAction
+PreGenerationAction <|-- actions::TermAction
+PreGenerationAction <|-- actions::ThrowAction
+PreGenerationAction <|-- actions::TimeAction
+ReconfigurationAction <|-- actions::ActivateFeatureAction
+ReconfigurationAction <|-- actions::DeactivateFeatureAction
+ReconfigurationAction <|-- actions::RemoveBagAction
+ReconfigurationAction <|-- actions::SetDataAction
+core::AbstractModelElement <|-- actions::StandAloneAction
+core::AbstractModelElement <|-- actions::TimedConditionAction
+core::ITopLevelElement <|-- actions::StandAloneAction
+core::ITopLevelElement <|-- actions::TimedConditionAction
+rules::IRealTimeConsumer <|-- actions::TimedConditionAction
+actions::StandAloneAction "1..1" -- "1..1" actions::ActionReference : action0
+actions::PreGenerationAction "1..1" --* "1..1" actions::StandAloneAction : action3
+actions::PreGenerationAction "1..1" --* "1..1" actions::TimedConditionAction : action7
+actions::PreGenerationAction "0..9999" --* "1..1" actions::PreGenerationSequence : actions11
+actions::PostGenerationAction "0..9999" --* "1..1" actions::PostGenerationSequence : actions13
+DataBag "1..1" -- "1..1" actions::RemoveBagAction : bag20
+ILogicFunction "1..1" --* "1..1" actions::TimedConditionAction : condition9
+actions::TimeAction "1..1" -- "0..1" ITimeConsumer : consumer31
+IFeature "1..1" -- "1..1" actions::ActivateFeatureAction : feature23
+IFeature "1..1" -- "1..1" actions::DeactivateFeatureAction : feature26
+IFeature "1..1" -- "1..1" actions::GetFeatureStateAction : feature34
+actions::RemoveBagAction "1..1" *-- "1..1" IArithmetricFunction : index21
+IDataNodeFunction "1..1" --* "1..1" actions::SetDataAction : node16
+IDataNodeFunction "1..1" --* "1..1" actions::GetDataAction : node18
+actions::EObject "0..9999" --* "1..1" actions::ActionReference : parameters1
+actions::StandAloneAction "1..1" *-- "0..9999" IContextVariable : parameters5
+DataLeaf "1..1" -- "1..1" actions::SetPropertyAction : property28
+DataLeaf "1..1" -- "1..1" actions::GetPropertyAction : property32
+actions::Term "1..1" --* "1..1" actions::TermAction : term14
+actions::SetPropertyAction "1..1" -- "1..1" DataElement : value29
+actions::SetDataAction "1..1" *-- "1..1" IValueFunction : values15
+FeatureVersion "0..1" -- "1..1" actions::ActivateFeatureAction : version24
+@enduml

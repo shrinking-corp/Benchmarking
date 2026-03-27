@@ -1,0 +1,41 @@
+@startuml
+class comicBookCollection2::Artist {
+  + name : str
+}
+class comicBookCollection2::Book {
+  + name : str
+  + publicationDate : str
+}
+class comicBookCollection2::ComicBookCollection {
+}
+class comicBookCollection2::Editor {
+  + name : str
+}
+class comicBookCollection2::Publisher {
+  + publishersName : str
+}
+class comicBookCollection2::Series {
+  + seriesName : str
+}
+class comicBookCollection2::Writer {
+  + name : str
+}
+comicBookCollection2::Artist "0..9999" --* "1..1" comicBookCollection2::ComicBookCollection : artists1
+comicBookCollection2::Artist "1..9999" -- "1..1" comicBookCollection2::Book : artists14
+comicBookCollection2::ComicBookCollection "1..1" *-- "0..9999" comicBookCollection2::Book : books0
+comicBookCollection2::Book "0..9999" -- "1..1" comicBookCollection2::Artist : booksArtistFor21
+comicBookCollection2::Book "0..9999" -- "1..1" comicBookCollection2::Artist : booksCoverArtistFor23
+comicBookCollection2::Book "0..9999" -- "1..1" comicBookCollection2::Editor : booksEditorFor25
+comicBookCollection2::Series "1..1" -- "0..9999" comicBookCollection2::Book : booksInSeries12
+comicBookCollection2::Publisher "1..1" -- "0..9999" comicBookCollection2::Book : booksPublished11
+comicBookCollection2::Writer "1..1" -- "0..9999" comicBookCollection2::Book : booksWriterFor27
+comicBookCollection2::Artist "1..1" -- "1..1" comicBookCollection2::Book : coverArtist17
+comicBookCollection2::Editor "1..9999" -- "1..1" comicBookCollection2::Book : editors15
+comicBookCollection2::Editor "0..9999" --* "1..1" comicBookCollection2::ComicBookCollection : editors3
+comicBookCollection2::Publisher "1..1" -- "1..1" comicBookCollection2::Book : publisher19
+comicBookCollection2::Publisher "0..9999" --* "1..1" comicBookCollection2::ComicBookCollection : publishingCompanies7
+comicBookCollection2::ComicBookCollection "1..1" *-- "0..9999" comicBookCollection2::Series : series9
+comicBookCollection2::Series "1..1" -- "1..1" comicBookCollection2::Book : seriesPartOf20
+comicBookCollection2::Book "1..1" -- "1..9999" comicBookCollection2::Writer : writers16
+comicBookCollection2::ComicBookCollection "1..1" *-- "0..9999" comicBookCollection2::Writer : writers5
+@enduml

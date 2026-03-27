@@ -1,0 +1,30 @@
+@startuml
+class ClassMM::Association {
+  + name : str
+}
+class ClassMM::Attribute {
+  + is_primary : str
+  + name : str
+}
+class ClassMM::Class {
+  + is_persistent : str
+}
+class ClassMM::ClassModel {
+}
+abstract class ClassMM::Classifier {
+  + name : str
+}
+class ClassMM::PrimitiveDataType {
+}
+class Classifier {
+}
+Classifier <|-- ClassMM::Class
+Classifier <|-- ClassMM::PrimitiveDataType
+ClassMM::Association "0..9999" --* "1..1" ClassMM::ClassModel : association13
+ClassMM::Attribute "1..9999" --* "1..1" ClassMM::Class : attrs5
+ClassMM::ClassModel "1..1" *-- "0..9999" ClassMM::Classifier : classifier11
+ClassMM::Class "1..1" -- "1..1" ClassMM::Association : dest1
+ClassMM::Class "0..1" -- "1..1" ClassMM::Class : parent9
+ClassMM::Association "1..1" -- "1..1" ClassMM::Class : src0
+ClassMM::Classifier "1..1" -- "1..1" ClassMM::Attribute : type4
+@enduml

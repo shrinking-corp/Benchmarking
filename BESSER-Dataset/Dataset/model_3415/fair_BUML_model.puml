@@ -1,0 +1,91 @@
+@startuml
+enum Award {
+  BlueRibbon
+  GrandChampion
+  PinkRibbon
+  RedRibbon
+  ReserveChampion
+  Unspecified
+  WhiteRibbon
+}
+class Person {
+}
+class fair::Animal {
+}
+class fair::Class {
+  + comments : str
+  + description : str
+  + name : str
+}
+class fair::Department {
+  + comments : str
+  + description : str
+  + name : str
+}
+class fair::Division {
+  + comments : str
+  + description : str
+  + name : str
+}
+class fair::Exhibit {
+  + award : str
+  + comments : str
+  + inAuction : bool
+  + name : str
+  + number : int
+  + salesOrder : int
+}
+class fair::Fair {
+  + comments : str
+  + name : str
+  + exhibits() : str
+}
+class fair::Lot {
+  + comments : str
+  + description : str
+  + name : str
+}
+class fair::Person {
+  + city : str
+  + comments : str
+  + email : str
+  + exhibitorNumber : int
+  + firstName : str
+  + lastName : str
+  + name : str
+  + phone : str
+  + pin : str
+  + salesOrder : int
+  + state : str
+  + street : str
+  + zipCode : str
+}
+class fair::Premises {
+}
+class fair::YoungPerson {
+}
+class fair::YouthClub {
+  + comments : str
+  + name : str
+}
+Person <|-- fair::YoungPerson
+fair::Exhibit "1..1" -- "1..1" fair::Animal : animal7
+fair::Class "1..1" -- "1..1" fair::Lot : class27
+fair::Class "1..9999" --* "1..1" fair::Department : classes16
+fair::YoungPerson "1..1" -- "1..1" fair::YouthClub : club31
+fair::Person "1..9999" -- "1..1" fair::YouthClub : contacts12
+fair::Class "1..1" -- "1..1" fair::Department : department24
+fair::Division "1..1" *-- "1..9999" fair::Department : departments15
+fair::Division "1..1" -- "1..1" fair::Department : division19
+fair::Division "1..9999" --* "1..1" fair::Fair : divisions1
+fair::Person "1..1" -- "1..1" fair::Exhibit : exhibitor8
+fair::Exhibit "1..9999" --* "1..1" fair::Lot : exhibits26
+fair::Person "1..9999" -- "1..1" fair::Class : judges22
+fair::Lot "1..1" -- "1..1" fair::Exhibit : lot11
+fair::Lot "1..9999" --* "1..1" fair::Class : lots20
+fair::Person "1..9999" -- "1..1" fair::YoungPerson : parents29
+fair::Fair "1..1" *-- "0..9999" fair::Person : people5
+fair::Premises "1..1" -- "1..1" fair::Fair : premises3
+fair::Person "0..9999" -- "1..1" fair::Department : superintendents17
+fair::YouthClub "0..9999" --* "1..1" fair::Fair : youthClubs0
+@enduml

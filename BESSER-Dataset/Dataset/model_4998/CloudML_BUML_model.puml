@@ -1,0 +1,119 @@
+@startuml
+class Artefact {
+}
+class ArtefactInstance {
+}
+class ArtefactPort {
+}
+class ArtefactPortInstance {
+}
+class CloudMLElement {
+}
+class NamedElement {
+}
+class Node {
+}
+class NodeInstance {
+}
+class NodePort {
+}
+class NodePortInstance {
+}
+class Property {
+}
+class Provider {
+}
+class Resource {
+}
+class WithProperties {
+}
+class cloudml::core::Artefact {
+}
+class cloudml::core::ArtefactInstance {
+}
+class cloudml::core::ArtefactPort {
+}
+class cloudml::core::ArtefactPortInstance {
+}
+abstract class cloudml::core::CloudMLElement {
+}
+class cloudml::core::Composite {
+}
+class cloudml::core::DeploymentModel {
+}
+abstract class cloudml::core::NamedElement {
+  + name : str
+}
+class cloudml::core::Node {
+  + OS : str
+  + groupName : str
+  + imageID : str
+  + is64os : bool
+  + location : str
+  + minCore : int
+  + minDisk : int
+  + minRam : int
+  + privateKey : str
+  + securityGroup : str
+  + sshKey : str
+}
+class cloudml::core::NodeInstance {
+  + publicAddress : str
+}
+class cloudml::core::NodePort {
+}
+class cloudml::core::NodePortInstance {
+}
+class cloudml::core::Property {
+  + value : str
+}
+class cloudml::core::Provider {
+  + login : str
+  + password : str
+}
+class cloudml::core::Resource {
+  + deployingResourceCommand : str
+  + retrievingResourceCommand : str
+}
+abstract class cloudml::core::WithProperties {
+}
+CloudMLElement <|-- cloudml::core::NamedElement
+NamedElement <|-- cloudml::core::Composite
+NamedElement <|-- cloudml::core::Property
+NamedElement <|-- cloudml::core::WithProperties
+WithProperties <|-- cloudml::core::Artefact
+WithProperties <|-- cloudml::core::ArtefactInstance
+WithProperties <|-- cloudml::core::ArtefactPort
+WithProperties <|-- cloudml::core::ArtefactPortInstance
+WithProperties <|-- cloudml::core::DeploymentModel
+WithProperties <|-- cloudml::core::Node
+WithProperties <|-- cloudml::core::NodeInstance
+WithProperties <|-- cloudml::core::NodePort
+WithProperties <|-- cloudml::core::NodePortInstance
+WithProperties <|-- cloudml::core::Provider
+WithProperties <|-- cloudml::core::Resource
+ArtefactInstance "0..9999" --* "1..1" cloudml::core::DeploymentModel : artefactInstances4
+Artefact "0..9999" --* "1..1" cloudml::core::DeploymentModel : artefactTypes1
+Provider "1..1" -- "1..1" cloudml::core::Node : cloudProvider24
+ArtefactInstance "0..9999" --* "1..1" cloudml::core::Composite : containedArtefacts50
+NodePortInstance "0..1" -- "1..1" cloudml::core::ArtefactInstance : destination30
+cloudml::core::Artefact "1..1" -- "0..1" ArtefactPort : destination8
+cloudml::core::Artefact "1..1" *-- "0..9999" ArtefactPort : inputs11
+ArtefactPortInstance "0..9999" --* "1..1" cloudml::core::ArtefactInstance : inputs32
+NodeInstance "0..9999" --* "1..1" cloudml::core::DeploymentModel : nodeInstances6
+cloudml::core::DeploymentModel "1..1" *-- "0..9999" Node : nodeTypes2
+ArtefactPort "0..9999" -- "1..1" cloudml::core::Artefact : outputs14
+ArtefactPortInstance "0..9999" -- "1..1" cloudml::core::ArtefactInstance : outputs34
+Property "0..9999" --* "1..1" cloudml::core::WithProperties : properties0
+ArtefactPort "0..9999" -- "1..1" cloudml::core::Artefact : provided20
+cloudml::core::Node "1..1" *-- "0..9999" NodePort : provided23
+ArtefactPortInstance "0..9999" -- "1..1" cloudml::core::ArtefactInstance : provided40
+NodePortInstance "0..9999" --* "1..1" cloudml::core::NodeInstance : provided47
+ArtefactPort "0..9999" --* "1..1" cloudml::core::Artefact : required17
+cloudml::core::ArtefactInstance "1..1" *-- "0..9999" ArtefactPortInstance : required37
+Resource "0..1" -- "1..1" cloudml::core::Artefact : resource9
+ArtefactPort "1..1" -- "1..1" cloudml::core::ArtefactPortInstance : type26
+cloudml::core::ArtefactInstance "1..1" -- "1..1" Artefact : type28
+NodePort "1..1" -- "1..1" cloudml::core::NodePortInstance : type43
+NodeInstance "1..1" -- "1..1" cloudml::core::NodeInstance : type45
+@enduml

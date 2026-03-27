@@ -1,0 +1,74 @@
+@startuml
+class Brick {
+}
+enum BrickType {
+  ANALOGICAL
+  DIGITAL
+}
+enum COMPARATOR {
+  EQUALS
+  INFERIOR
+  INFERIOR_OR_EQUALS
+  NON_EQUALS
+  SUPERIOR
+  SUPERIOR_OR_EQUALS
+}
+class Condition {
+}
+class NamedElement {
+}
+enum OPERATOR {
+  AND
+  OR
+}
+class arduinoml::Action {
+  + value : str
+}
+class arduinoml::Actuator {
+}
+class arduinoml::App {
+}
+abstract class arduinoml::Brick {
+  + pin : int
+  + type : str
+}
+abstract class arduinoml::Condition {
+}
+class arduinoml::MultipleCondition {
+  + operators : str
+}
+abstract class arduinoml::NamedElement {
+  + name : str
+}
+class arduinoml::Sensor {
+}
+class arduinoml::SimpleCondition {
+  + comparator : str
+  + value : str
+}
+class arduinoml::State {
+}
+class arduinoml::Transition {
+}
+Brick <|-- arduinoml::Actuator
+Brick <|-- arduinoml::Sensor
+Condition <|-- arduinoml::MultipleCondition
+Condition <|-- arduinoml::SimpleCondition
+NamedElement <|-- arduinoml::Action
+NamedElement <|-- arduinoml::App
+NamedElement <|-- arduinoml::Brick
+NamedElement <|-- arduinoml::Condition
+NamedElement <|-- arduinoml::State
+arduinoml::State "1..1" *-- "0..9999" arduinoml::Action : actions16
+arduinoml::Actuator "1..1" -- "1..1" arduinoml::Action : actuator21
+arduinoml::Brick "1..9999" --* "1..1" arduinoml::App : bricks0
+arduinoml::Transition "1..1" -- "1..1" arduinoml::Condition : condition10
+arduinoml::SimpleCondition "1..9999" --* "1..1" arduinoml::MultipleCondition : conditions24
+arduinoml::Condition "0..9999" --* "1..1" arduinoml::App : conditions3
+arduinoml::State "1..1" -- "1..1" arduinoml::Transition : next7
+arduinoml::State "1..1" -- "1..1" arduinoml::Transition : previous13
+arduinoml::Sensor "1..1" -- "1..1" arduinoml::SimpleCondition : sensor23
+arduinoml::State "0..9999" --* "1..1" arduinoml::App : states1
+arduinoml::Transition "0..9999" -- "1..1" arduinoml::State : transitions18
+arduinoml::App "1..1" *-- "0..9999" arduinoml::Transition : transitions5
+@enduml

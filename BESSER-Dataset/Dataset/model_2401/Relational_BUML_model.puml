@@ -1,0 +1,27 @@
+@startuml
+class Named {
+}
+class relational::Column {
+}
+abstract class relational::Named {
+  + name : str
+}
+class relational::Schema {
+}
+class relational::Table {
+}
+class relational::Type {
+}
+Named <|-- relational::Column
+Named <|-- relational::Schema
+Named <|-- relational::Table
+Named <|-- relational::Type
+relational::Column "0..9999" --* "1..1" relational::Table : col0
+relational::Table "1..1" -- "0..9999" relational::Column : key1
+relational::Table "0..1" -- "1..1" relational::Column : keyOf5
+relational::Schema "0..1" -- "1..1" relational::Table : owner3
+relational::Column "1..1" -- "1..1" relational::Table : owner4
+relational::Schema "1..1" *-- "0..9999" relational::Table : tables8
+relational::Type "1..1" -- "1..1" relational::Column : type7
+relational::Type "0..9999" --* "1..1" relational::Schema : types11
+@enduml

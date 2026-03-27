@@ -1,0 +1,30 @@
+@startuml
+class Component {
+}
+class Interface {
+}
+class adlrecur::Base {
+}
+class adlrecur::Binding {
+}
+abstract class adlrecur::Component {
+  + name : str
+}
+abstract class adlrecur::Interface {
+  + name : str
+  + signature : str
+}
+class adlrecur::Provided {
+}
+class adlrecur::Required {
+}
+Component <|-- adlrecur::Base
+Interface <|-- adlrecur::Provided
+Interface <|-- adlrecur::Required
+adlrecur::Interface "1..1" *-- "0..9999" adlrecur::Binding : bindings3
+adlrecur::Base "0..9999" --* "1..1" adlrecur::Base : components11
+adlrecur::Binding "1..1" -- "0..1" adlrecur::Interface : from4
+adlrecur::Provided "0..9999" --* "1..1" adlrecur::Component : providedInterfaces1
+adlrecur::Required "0..9999" --* "1..1" adlrecur::Component : requiredInterfaces0
+adlrecur::Binding "1..1" -- "0..1" adlrecur::Interface : to7
+@enduml

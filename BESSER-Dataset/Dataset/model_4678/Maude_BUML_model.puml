@@ -1,0 +1,222 @@
+@startuml
+class Condition {
+}
+class EquationalCond {
+}
+enum ImportationMode {
+  extending
+  including
+  protecting
+}
+class Maude::BooleanCond {
+}
+class Maude::CompModExp {
+}
+abstract class Maude::Condition {
+}
+class Maude::Constant {
+  + op : str
+}
+class Maude::EqualCond {
+}
+class Maude::Equation {
+}
+abstract class Maude::EquationalCond {
+}
+class Maude::FModule {
+}
+class Maude::FTheory {
+}
+class Maude::InstModExp {
+}
+class Maude::Kind {
+}
+class Maude::LabelMapping {
+  + from : str
+  + to : str
+}
+class Maude::MatchingCond {
+}
+class Maude::MaudeSpec {
+}
+abstract class Maude::MaudeTopEl {
+  + name : str
+}
+class Maude::Membership {
+}
+class Maude::MembershipCond {
+}
+abstract class Maude::ModElement {
+}
+abstract class Maude::ModExpression {
+}
+class Maude::ModImportation {
+  + mode : str
+}
+abstract class Maude::Module {
+}
+class Maude::ModuleIdModExp {
+}
+class Maude::OpMapping {
+  + to : str
+}
+class Maude::OpTypedMapping {
+  + atts : str
+  + to : str
+}
+class Maude::Operation {
+  + atts : str
+  + name : str
+}
+class Maude::Parameter {
+  + label : str
+}
+class Maude::RecTerm {
+  + op : str
+}
+abstract class Maude::RenMapping {
+}
+class Maude::RenModExp {
+}
+class Maude::RewriteCond {
+}
+class Maude::Rule {
+}
+class Maude::SModule {
+}
+class Maude::STheory {
+}
+class Maude::Sort {
+}
+class Maude::SortMapping {
+  + to : str
+}
+abstract class Maude::Statement {
+  + atts : str
+  + label : str
+}
+class Maude::SubsortRel {
+}
+abstract class Maude::Term {
+}
+class Maude::TermMapping {
+}
+abstract class Maude::Theory {
+}
+class Maude::TheoryIdModExp {
+}
+abstract class Maude::Type {
+  + name : str
+}
+class Maude::Variable {
+  + name : str
+}
+class Maude::View {
+}
+abstract class Maude::ViewMapping {
+}
+class MaudeTopEl {
+}
+class ModElement {
+}
+class ModExpression {
+}
+class Module {
+}
+class RenMapping {
+}
+class Statement {
+}
+class Term {
+}
+class Theory {
+}
+class Type {
+}
+class ViewMapping {
+}
+Condition <|-- Maude::EquationalCond
+Condition <|-- Maude::RewriteCond
+EquationalCond <|-- Maude::BooleanCond
+EquationalCond <|-- Maude::EqualCond
+EquationalCond <|-- Maude::MatchingCond
+EquationalCond <|-- Maude::MembershipCond
+MaudeTopEl <|-- Maude::Module
+MaudeTopEl <|-- Maude::Theory
+MaudeTopEl <|-- Maude::View
+ModElement <|-- Maude::ModImportation
+ModElement <|-- Maude::Operation
+ModElement <|-- Maude::Sort
+ModElement <|-- Maude::Statement
+ModElement <|-- Maude::SubsortRel
+ModExpression <|-- Maude::CompModExp
+ModExpression <|-- Maude::InstModExp
+ModExpression <|-- Maude::ModuleIdModExp
+ModExpression <|-- Maude::Parameter
+ModExpression <|-- Maude::RenModExp
+ModExpression <|-- Maude::TheoryIdModExp
+Module <|-- Maude::FModule
+Module <|-- Maude::SModule
+RenMapping <|-- Maude::LabelMapping
+RenMapping <|-- Maude::OpMapping
+RenMapping <|-- Maude::OpTypedMapping
+RenMapping <|-- Maude::SortMapping
+Statement <|-- Maude::Equation
+Statement <|-- Maude::Membership
+Statement <|-- Maude::Rule
+Term <|-- Maude::Constant
+Term <|-- Maude::RecTerm
+Term <|-- Maude::Variable
+Theory <|-- Maude::FTheory
+Theory <|-- Maude::STheory
+Type <|-- Maude::Kind
+Type <|-- Maude::Sort
+ViewMapping <|-- Maude::RenMapping
+ViewMapping <|-- Maude::TermMapping
+Maude::RecTerm "1..1" *-- "1..9999" Maude::Term : args69
+Maude::Type "0..9999" -- "1..1" Maude::Operation : arity38
+Maude::Type "1..1" -- "1..1" Maude::Operation : coarity37
+Maude::Statement "1..1" *-- "0..9999" Maude::Condition : conds41
+Maude::MaudeTopEl "0..9999" --* "1..1" Maude::MaudeSpec : els0
+Maude::ModElement "0..9999" --* "1..1" Maude::Theory : els17
+Maude::ModElement "0..9999" --* "1..1" Maude::Module : els18
+Maude::ViewMapping "0..9999" --* "1..1" Maude::View : els77
+Maude::ModExpression "1..1" --* "1..1" Maude::View : from71
+Maude::TermMapping "1..1" *-- "1..1" Maude::Term : from79
+Maude::Sort "1..1" -- "1..1" Maude::SortMapping : from84
+Maude::Operation "1..1" -- "1..1" Maude::OpTypedMapping : from86
+Maude::Operation "1..1" -- "1..1" Maude::OpMapping : from88
+Maude::ModExpression "1..1" --* "1..1" Maude::ModImportation : imports26
+Maude::Kind "1..1" -- "1..1" Maude::Sort : kind31
+Maude::Term "1..1" --* "1..1" Maude::Equation : lhs45
+Maude::Term "0..1" --* "1..1" Maude::Rule : lhs50
+Maude::Term "1..1" --* "1..1" Maude::Condition : lhs55
+Maude::ModExpression "1..1" --* "1..1" Maude::Parameter : modExp15
+Maude::ModExpression "1..1" --* "1..1" Maude::InstModExp : modExp4
+Maude::RenModExp "1..1" *-- "1..1" Maude::ModExpression : modExp7
+Maude::ModExpression "2..9999" --* "1..1" Maude::CompModExp : modExps11
+Maude::Module "1..1" -- "1..1" Maude::ModuleIdModExp : module13
+Maude::Module "0..1" -- "1..1" Maude::ModElement : module23
+Maude::Module "1..1" *-- "0..9999" Maude::Parameter : params20
+Maude::MaudeTopEl "0..9999" -- "1..1" Maude::MaudeSpec : printableEls1
+Maude::RenMapping "1..9999" --* "1..1" Maude::RenModExp : renamings9
+Maude::Equation "1..1" *-- "1..1" Maude::Term : rhs47
+Maude::Rule "1..1" *-- "0..1" Maude::Term : rhs52
+Maude::Term "1..1" --* "1..1" Maude::RewriteCond : rhs58
+Maude::MembershipCond "1..1" -- "1..1" Maude::Sort : rhs60
+Maude::Term "1..1" --* "1..1" Maude::MatchingCond : rhs62
+Maude::Term "1..1" --* "1..1" Maude::EqualCond : rhs64
+Maude::Sort "1..1" -- "1..1" Maude::Membership : sort43
+Maude::Sort "1..9999" -- "1..1" Maude::Kind : sorts32
+Maude::Sort "1..1" -- "0..9999" Maude::SubsortRel : subsortRels28
+Maude::SubsortRel "1..1" -- "1..9999" Maude::Sort : subsorts33
+Maude::SubsortRel "0..9999" -- "1..1" Maude::Sort : supersortRels29
+Maude::Sort "1..9999" -- "1..1" Maude::SubsortRel : supersorts35
+Maude::Term "1..1" --* "1..1" Maude::Membership : term42
+Maude::TheoryIdModExp "1..1" -- "1..1" Maude::Theory : theory14
+Maude::Theory "0..1" -- "1..1" Maude::ModElement : theory24
+Maude::ModExpression "1..1" --* "1..1" Maude::View : to74
+Maude::Term "1..1" --* "1..1" Maude::TermMapping : to81
+Maude::Type "1..1" -- "1..1" Maude::Term : type66
+Maude::InstModExp "1..1" -- "1..9999" Maude::View : views5
+@enduml

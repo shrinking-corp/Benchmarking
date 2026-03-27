@@ -1,0 +1,154 @@
+@startuml
+class Edge {
+}
+class FromCompositeModeEdge {
+}
+class FromCompositeModeInitEdge {
+}
+class FromConditionalConnectorEdge {
+}
+class FromSubModeEdge {
+}
+class InitEdge {
+}
+class Mode {
+}
+enum PrimitiveTypes {
+  boolean
+  clock
+  integer
+  natural
+}
+enum ResourceTypes {
+  bandwidth
+  cpu
+  memory
+  port
+  power
+}
+class ToCompositeModeEdge {
+}
+class ToConditionalConnectorEdge {
+}
+class ToSubModeEdge {
+}
+class remes::CompositeMode {
+}
+class remes::ConditionalConnector {
+  + name : str
+}
+abstract class remes::Edge {
+  + actionBody : str
+  + actionGuard : str
+}
+class remes::EntryConditionalSubEdge {
+}
+class remes::EntryConditionalTopEdge {
+}
+class remes::EntryConditionalTopInitEdge {
+}
+class remes::EntryEdge {
+}
+class remes::EntryInitEdge {
+}
+class remes::ExitConditionalSubEdge {
+}
+class remes::ExitConditionalTopEdge {
+}
+class remes::ExitEdge {
+}
+abstract class remes::FromCompositeModeEdge {
+}
+abstract class remes::FromCompositeModeInitEdge {
+}
+abstract class remes::FromConditionalConnectorEdge {
+}
+abstract class remes::FromSubModeEdge {
+}
+abstract class remes::InitEdge {
+  + initialization : str
+}
+class remes::InternalEdge {
+}
+abstract class remes::Mode {
+  + initialization : str
+  + name : str
+}
+class remes::RemesDiagram {
+}
+class remes::Resource {
+  + expression : str
+  + type : str
+}
+class remes::SubMode {
+  + invariant : str
+  + isUrgent : bool
+}
+abstract class remes::ToCompositeModeEdge {
+}
+abstract class remes::ToConditionalConnectorEdge {
+}
+abstract class remes::ToSubModeEdge {
+}
+class remes::Variable {
+  + global : bool
+  + name : str
+  + readable : bool
+  + type : str
+  + value : str
+  + vectorSize : int
+  + writable : bool
+}
+Edge <|-- remes::EntryConditionalSubEdge
+Edge <|-- remes::EntryConditionalTopEdge
+Edge <|-- remes::EntryEdge
+Edge <|-- remes::ExitConditionalSubEdge
+Edge <|-- remes::ExitConditionalTopEdge
+Edge <|-- remes::ExitEdge
+Edge <|-- remes::InternalEdge
+FromCompositeModeEdge <|-- remes::EntryConditionalTopEdge
+FromCompositeModeEdge <|-- remes::EntryEdge
+FromCompositeModeInitEdge <|-- remes::EntryConditionalTopInitEdge
+FromCompositeModeInitEdge <|-- remes::EntryInitEdge
+FromConditionalConnectorEdge <|-- remes::EntryConditionalSubEdge
+FromConditionalConnectorEdge <|-- remes::ExitConditionalTopEdge
+FromSubModeEdge <|-- remes::ExitConditionalSubEdge
+FromSubModeEdge <|-- remes::ExitEdge
+FromSubModeEdge <|-- remes::InternalEdge
+InitEdge <|-- remes::EntryConditionalTopInitEdge
+InitEdge <|-- remes::EntryInitEdge
+Mode <|-- remes::CompositeMode
+Mode <|-- remes::SubMode
+ToCompositeModeEdge <|-- remes::ExitConditionalTopEdge
+ToCompositeModeEdge <|-- remes::ExitEdge
+ToConditionalConnectorEdge <|-- remes::EntryConditionalTopEdge
+ToConditionalConnectorEdge <|-- remes::EntryConditionalTopInitEdge
+ToConditionalConnectorEdge <|-- remes::ExitConditionalSubEdge
+ToSubModeEdge <|-- remes::EntryConditionalSubEdge
+ToSubModeEdge <|-- remes::EntryEdge
+ToSubModeEdge <|-- remes::EntryInitEdge
+ToSubModeEdge <|-- remes::InternalEdge
+remes::CompositeMode "1..1" *-- "0..9999" remes::ConditionalConnector : conditionalConnectors5
+remes::CompositeMode "0..1" -- "1..1" remes::FromCompositeModeEdge : connectFrom12
+remes::CompositeMode "0..1" -- "1..1" remes::FromCompositeModeInitEdge : connectFrom14
+remes::ConditionalConnector "0..1" -- "1..1" remes::FromConditionalConnectorEdge : connectFrom16
+remes::FromSubModeEdge "1..1" -- "0..1" remes::SubMode : connectFrom18
+remes::CompositeMode "1..1" -- "1..1" remes::ToCompositeModeEdge : connectTo31
+remes::ConditionalConnector "1..1" -- "1..1" remes::ToConditionalConnectorEdge : connectTo34
+remes::SubMode "1..1" -- "1..1" remes::ToSubModeEdge : connectTo36
+remes::FromCompositeModeEdge "1..1" --* "1..1" remes::CompositeMode : entryEdge2
+remes::ToSubModeEdge "1..9999" -- "1..1" remes::SubMode : entryEdges23
+remes::ToConditionalConnectorEdge "1..9999" -- "1..1" remes::ConditionalConnector : entryEdges7
+remes::CompositeMode "1..1" -- "1..9999" remes::ToCompositeModeEdge : exitEdges0
+remes::FromSubModeEdge "1..9999" --* "1..1" remes::SubMode : exitEdges25
+remes::ConditionalConnector "1..1" *-- "1..9999" remes::FromConditionalConnectorEdge : exitEdges9
+remes::FromCompositeModeInitEdge "1..1" --* "1..1" remes::CompositeMode : initEdge1
+remes::RemesDiagram "1..1" *-- "0..9999" remes::Mode : modes22
+remes::CompositeMode "0..1" -- "1..1" remes::ConditionalConnector : parent11
+remes::SubMode "1..1" -- "0..1" remes::CompositeMode : parent27
+remes::Resource "0..9999" --* "1..1" remes::SubMode : resources29
+remes::Mode "1..1" -- "1..1" remes::Variable : scope39
+remes::SubMode "1..1" -- "1..1" remes::Resource : scope40
+remes::SubMode "1..9999" --* "1..1" remes::CompositeMode : subModes4
+remes::Variable "0..9999" --* "1..1" remes::Mode : variables21
+@enduml

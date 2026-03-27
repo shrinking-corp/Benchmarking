@@ -1,0 +1,133 @@
+@startuml
+class BasicNode {
+}
+class Coordinator {
+}
+class Middleware {
+}
+class Node {
+}
+class Process {
+}
+class Processor {
+}
+class Repository {
+}
+class Root {
+}
+class ServiceDescription {
+}
+class ServiceImpl {
+}
+class Simulator {
+}
+class Skeleton {
+}
+class Stub {
+}
+class Tree {
+}
+class VM {
+}
+class ws::bundle::Bundle {
+  + ID : str
+}
+class ws::bundle::Process {
+  + ID : str
+  + receive() : void
+}
+abstract class ws::middleware::Middleware {
+  + bind() : void
+  + establish() : void
+  + send() : void
+}
+class ws::middleware::Processor {
+  + ID : str
+  + IP : str
+  + receive() : void
+}
+class ws::middleware::Repository {
+  + lookup() : void
+  + rebind() : void
+}
+abstract class ws::middleware::ServiceDescription {
+}
+class ws::middleware::ServiceImpl {
+  + receive() : void
+}
+class ws::middleware::Stub {
+  + receive() : void
+}
+class ws::middleware::VM {
+  + ID : str
+  + protocol : str
+}
+class ws::middleware::WebService {
+}
+class ws::skeleton::Skeleton {
+  + ID : str
+}
+abstract class ws::tree::BasicNode {
+  + modelName : str
+}
+class ws::tree::CDEVSCoordinator {
+}
+class ws::tree::CDEVSSimulator {
+}
+class ws::tree::Coordinator {
+}
+class ws::tree::FlatCoordinator {
+}
+abstract class ws::tree::Node {
+  + ID : str
+}
+class ws::tree::NodeCoordinator {
+}
+class ws::tree::P::Coordinator {
+}
+class ws::tree::P::Simulator {
+}
+class ws::tree::PDEVSCoordinator {
+}
+class ws::tree::PDEVSSimulator {
+}
+class ws::tree::Root {
+}
+abstract class ws::tree::Simulator {
+}
+class ws::tree::Tree {
+  + ID : str
+}
+BasicNode <|-- ws::tree::Coordinator
+BasicNode <|-- ws::tree::Simulator
+Coordinator <|-- ws::tree::CDEVSCoordinator
+Coordinator <|-- ws::tree::FlatCoordinator
+Coordinator <|-- ws::tree::NodeCoordinator
+Coordinator <|-- ws::tree::P::Coordinator
+Coordinator <|-- ws::tree::PDEVSCoordinator
+Middleware <|-- ws::middleware::WebService
+Node <|-- ws::tree::BasicNode
+Node <|-- ws::tree::Root
+ServiceDescription <|-- ws::middleware::ServiceImpl
+Simulator <|-- ws::tree::CDEVSSimulator
+Simulator <|-- ws::tree::P::Simulator
+Simulator <|-- ws::tree::PDEVSSimulator
+Coordinator "0..9999" --* "1..1" ws::tree::Tree : Coordinator10
+ws::bundle::Bundle "1..1" *-- "1..9999" Process : Process22
+Root "1..1" --* "1..1" ws::tree::Tree : Root9
+ws::tree::Tree "1..1" *-- "1..9999" Simulator : Simulator12
+BasicNode "1..1" -- "1..1" ws::tree::Root : child14
+BasicNode "1..9999" -- "1..1" ws::tree::Coordinator : children15
+ServiceImpl "1..1" -- "1..1" ws::middleware::Stub : impl7
+ws::bundle::Process "1..1" -- "1..1" Middleware : middleware26
+Node "1..9999" -- "1..1" ws::bundle::Process : nodes25
+ws::middleware::Middleware "1..1" -- "1..9999" Process : process1
+ws::middleware::VM "1..1" *-- "1..9999" Processor : processors6
+ws::middleware::WebService "1..1" -- "1..1" Repository : registry4
+Root "1..9999" --* "1..1" ws::skeleton::Skeleton : rootskel18
+ServiceDescription "1..9999" --* "1..1" ws::middleware::Repository : services8
+ws::bundle::Bundle "1..1" -- "1..1" Skeleton : skeleton21
+Stub "1..9999" --* "1..1" ws::middleware::WebService : stubs3
+Tree "0..1" -- "1..1" ws::skeleton::Skeleton : tree17
+VM "0..1" -- "1..1" ws::middleware::Middleware : uses0
+@enduml

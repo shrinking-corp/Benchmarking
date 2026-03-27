@@ -1,0 +1,123 @@
+@startuml
+class Categorized {
+}
+enum Containment {
+  Non
+  Source
+  Target
+}
+enum RelationType {
+  Many2Many
+  One2Many
+  One2One
+}
+class Relationship {
+}
+class Secured {
+}
+class TypeElement {
+}
+class TypePointer {
+}
+class type::Assosiation {
+  + containment : str
+  + internal : bool
+  + sourceOperation : str
+  + targetOperation : str
+  + type : str
+}
+class type::Attribute {
+  + name : str
+  + pk : bool
+  + uid : str
+}
+class type::AttributePointer {
+}
+class type::EnumAttribute {
+  + name : str
+  + uid : str
+  + value : str
+}
+class type::Enumerator {
+}
+class type::Generalization {
+}
+class type::Link {
+  + uid : str
+}
+class type::MethodPointer {
+}
+class type::Operation {
+  + name : str
+  + uid : str
+}
+class type::PackagePointer {
+}
+class type::Parameter {
+  + name : str
+  + order : int
+  + uid : str
+}
+class type::Primitive {
+}
+class type::PrimitivesGroup {
+}
+class type::References {
+}
+class type::Relationship {
+  + uid : str
+}
+class type::ReturnValue {
+  + uid : str
+}
+class type::Type {
+}
+class type::TypeElement {
+  + name : str
+  + uid : str
+}
+class type::TypeGroup {
+  + name : str
+  + uid : str
+}
+class type::TypePointer {
+}
+class type::TypeReference {
+}
+Categorized <|-- type::Attribute
+Categorized <|-- type::EnumAttribute
+Categorized <|-- type::Enumerator
+Categorized <|-- type::Operation
+Categorized <|-- type::Relationship
+Categorized <|-- type::Type
+Relationship <|-- type::Assosiation
+Relationship <|-- type::Generalization
+Relationship <|-- type::References
+Secured <|-- type::Operation
+TypeElement <|-- type::Enumerator
+TypeElement <|-- type::Primitive
+TypeElement <|-- type::Type
+TypeElement <|-- type::TypeReference
+TypePointer <|-- type::Attribute
+TypePointer <|-- type::Parameter
+TypePointer <|-- type::ReturnValue
+TypePointer <|-- type::TypeReference
+type::Attribute "0..1" -- "1..1" type::AttributePointer : attributeRef34
+type::Attribute "0..9999" --* "1..1" type::Type : attributes26
+type::Link "1..1" -- "0..1" type::Attribute : detailField20
+type::Link "0..9999" --* "1..1" type::Assosiation : links14
+type::TypePointer "0..1" --* "1..1" type::Assosiation : many2manyHelper15
+type::Attribute "0..1" -- "1..1" type::Link : masterField18
+type::MethodPointer "1..1" -- "0..1" type::Operation : methodRef32
+type::Operation "0..9999" --* "1..1" type::Type : operations28
+type::PackagePointer "1..1" -- "0..1" type::TypeGroup : packageRef12
+type::Parameter "0..9999" --* "1..1" type::Operation : parameters23
+type::Primitive "0..9999" --* "1..1" type::PrimitivesGroup : primitives3
+type::Relationship "0..9999" --* "1..1" type::TypeGroup : relationships1
+type::ReturnValue "0..1" --* "1..1" type::Operation : returnValue24
+type::TypeElement "0..1" -- "1..1" type::Relationship : source4
+type::TypeElement "0..1" -- "1..1" type::Relationship : target7
+type::TypeElement "0..1" -- "1..1" type::TypePointer : typeRef10
+type::TypeGroup "1..1" *-- "0..9999" type::TypeElement : types0
+type::EnumAttribute "0..9999" --* "1..1" type::Enumerator : values31
+@enduml

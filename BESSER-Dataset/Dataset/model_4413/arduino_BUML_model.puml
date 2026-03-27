@@ -1,0 +1,62 @@
+@startuml
+enum DigitalPinNumber {
+  D0
+  D1
+  D2
+  D4
+  D5
+}
+enum Direction {
+  INPUT
+  OUTPUT
+}
+class Function {
+}
+class Instruction {
+}
+class Pin {
+}
+class arduino::DigitalPin {
+  + number : str
+}
+abstract class arduino::Function {
+}
+abstract class arduino::Instruction {
+}
+class arduino::Loop {
+  + name : str
+}
+abstract class arduino::Pin {
+  + Direction : str
+  + name : str
+}
+class arduino::Project {
+  + name : str
+}
+class arduino::Read {
+  + name : str
+  + returnValue : str
+}
+class arduino::Setup {
+  + name : str
+}
+class arduino::Sketch {
+  + name : str
+}
+class arduino::Write {
+  + name : str
+}
+Function <|-- arduino::Read
+Function <|-- arduino::Write
+Instruction <|-- arduino::Function
+Pin <|-- arduino::DigitalPin
+arduino::DigitalPin "0..1" -- "1..1" arduino::Write : digitalpin10
+arduino::DigitalPin "0..1" -- "1..1" arduino::Read : digitalpin11
+arduino::DigitalPin "0..9999" --* "1..1" arduino::Setup : digitalpin13
+arduino::Instruction "0..9999" --* "1..1" arduino::Loop : instruction16
+arduino::Sketch "1..1" *-- "0..9999" arduino::Instruction : instruction5
+arduino::Sketch "1..1" *-- "0..1" arduino::Loop : loop3
+arduino::Instruction "0..1" -- "1..1" arduino::Instruction : next8
+arduino::Setup "0..1" --* "1..1" arduino::Sketch : setup1
+arduino::Sketch "0..1" --* "1..1" arduino::Project : sketch0
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+class State {
+}
+class StateMachineDiagram::Meta::Application {
+  + name : str
+}
+class StateMachineDiagram::Meta::Event {
+}
+class StateMachineDiagram::Meta::Pseudostate {
+}
+class StateMachineDiagram::Meta::Screen {
+}
+abstract class StateMachineDiagram::Meta::State {
+  + name : str
+}
+class StateMachineDiagram::Meta::StateMachine {
+  + name : str
+}
+class StateMachineDiagram::Meta::Transition {
+  + name : str
+  + trigger : str
+}
+abstract class StateMachineDiagram::Meta::Vertex {
+}
+class Vertex {
+}
+State <|-- StateMachineDiagram::Meta::Event
+State <|-- StateMachineDiagram::Meta::Screen
+Vertex <|-- StateMachineDiagram::Meta::Pseudostate
+Vertex <|-- StateMachineDiagram::Meta::State
+StateMachineDiagram::Meta::Transition "0..9999" -- "1..1" StateMachineDiagram::Meta::Vertex : incoming6
+StateMachineDiagram::Meta::Transition "0..9999" -- "1..1" StateMachineDiagram::Meta::Vertex : outgoing5
+StateMachineDiagram::Meta::Vertex "0..9999" -- "1..1" StateMachineDiagram::Meta::Transition : source8
+StateMachineDiagram::Meta::Application "1..1" *-- "0..9999" StateMachineDiagram::Meta::StateMachine : statemachine0
+StateMachineDiagram::Meta::StateMachine "0..9999" --* "1..1" StateMachineDiagram::Meta::State : statemachine11
+StateMachineDiagram::Meta::Vertex "0..9999" -- "1..1" StateMachineDiagram::Meta::Transition : target9
+StateMachineDiagram::Meta::Transition "0..9999" --* "1..1" StateMachineDiagram::Meta::StateMachine : transition3
+StateMachineDiagram::Meta::Vertex "0..9999" --* "1..1" StateMachineDiagram::Meta::StateMachine : vertex1
+@enduml

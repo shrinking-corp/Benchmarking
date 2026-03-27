@@ -1,0 +1,68 @@
+@startuml
+class AbstractElement {
+}
+class Feature {
+}
+class StructuralFeature {
+}
+class Type {
+}
+enum Visibility {
+  private
+  protected
+  public
+}
+class domainmodel::AbstractElement {
+}
+class domainmodel::Attribute {
+}
+class domainmodel::DataType {
+}
+class domainmodel::DomainModel {
+}
+class domainmodel::Entity {
+}
+class domainmodel::Feature {
+  + name : str
+}
+class domainmodel::Import {
+  + importedNamespace : str
+}
+class domainmodel::Operation {
+  + visibility : str
+}
+class domainmodel::PackageDeclaration {
+  + name : str
+}
+class domainmodel::Parameter {
+  + name : str
+}
+class domainmodel::Reference {
+}
+class domainmodel::StructuralFeature {
+}
+class domainmodel::Type {
+  + name : str
+}
+class domainmodel::TypeRef {
+  + multi : bool
+}
+AbstractElement <|-- domainmodel::Import
+AbstractElement <|-- domainmodel::PackageDeclaration
+AbstractElement <|-- domainmodel::Type
+Feature <|-- domainmodel::Operation
+Feature <|-- domainmodel::StructuralFeature
+StructuralFeature <|-- domainmodel::Attribute
+StructuralFeature <|-- domainmodel::Reference
+Type <|-- domainmodel::DataType
+Type <|-- domainmodel::Entity
+domainmodel::AbstractElement "0..9999" --* "1..1" domainmodel::DomainModel : elements0
+domainmodel::AbstractElement "0..9999" --* "1..1" domainmodel::PackageDeclaration : elements1
+domainmodel::Feature "0..9999" --* "1..1" domainmodel::Entity : features5
+domainmodel::Reference "0..1" -- "1..1" domainmodel::Reference : opposite10
+domainmodel::Parameter "0..9999" --* "1..1" domainmodel::Operation : params11
+domainmodel::Type "0..1" -- "1..1" domainmodel::TypeRef : referenced15
+domainmodel::Entity "1..1" -- "0..1" domainmodel::Entity : superType4
+domainmodel::Parameter "1..1" *-- "0..1" domainmodel::TypeRef : type12
+domainmodel::TypeRef "0..1" --* "1..1" domainmodel::Feature : type7
+@enduml

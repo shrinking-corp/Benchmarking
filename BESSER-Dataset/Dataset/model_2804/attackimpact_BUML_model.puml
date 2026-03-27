@@ -1,0 +1,48 @@
+@startuml
+class attackimpact::EObject {
+}
+class attackimpact::Model {
+  + description : str
+  + name : str
+}
+class attackimpact::Node {
+  + description : str
+  + domains : str
+  + name : str
+  + tags : str
+}
+class attackimpact::Propagation {
+  + severity : int
+  + tags : str
+  + type : str
+}
+class attackimpact::Vulnerability {
+  + description : str
+  + name : str
+  + severity : int
+  + tags : str
+  + type : str
+}
+enum propagationType {
+  bus
+  data
+  dataFlow
+  local
+  memory
+  processor
+}
+enum vulnerabilityType {
+  Authentication
+  Concurrency
+  Exposure
+  Isolation
+  ResourceAllocation
+  Timing
+}
+attackimpact::Propagation "1..1" -- "1..9999" attackimpact::Node : destinations8
+attackimpact::Node "0..9999" --* "1..1" attackimpact::Model : nodes11
+attackimpact::Propagation "0..9999" --* "1..1" attackimpact::Node : propagations1
+attackimpact::Propagation "0..9999" --* "1..1" attackimpact::Vulnerability : propagations5
+attackimpact::EObject "0..1" -- "1..1" attackimpact::Node : relatedObject3
+attackimpact::Vulnerability "0..9999" --* "1..1" attackimpact::Node : vulnerabilities0
+@enduml

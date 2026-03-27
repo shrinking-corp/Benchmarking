@@ -1,0 +1,116 @@
+@startuml
+class Counted {
+}
+class Labelled {
+}
+class Named {
+}
+class PlaceHolder {
+}
+enum SequenceType {
+  finishToFinish
+  finishToStart
+  startToFinish
+  startToStart
+}
+abstract class publication2014::Counted {
+  + id : int
+}
+abstract class publication2014::Labelled {
+  + lname : str
+}
+abstract class publication2014::Named {
+  + name : str
+}
+class publication2014::Paper {
+}
+class publication2014::Paragraph {
+  + content : str
+}
+abstract class publication2014::PlaceHolder {
+}
+class publication2014::PlaceHolderPP {
+}
+class publication2014::PlaceHolderRn {
+}
+class publication2014::PlaceHolderRs {
+}
+class publication2014::PlaceHolderRule {
+}
+class publication2014::Progress {
+  + percent : int
+  + time : int
+}
+class publication2014::PublicationPhase {
+  + maxTime : int
+  + minTime : int
+  + name : str
+}
+class publication2014::PublicationProcess {
+  + maxTime : int
+  + minTime : int
+}
+class publication2014::PublicationStructure {
+}
+class publication2014::PublicationSystem {
+}
+class publication2014::Researcher {
+  + forName : str
+  + name : str
+  + position : str
+}
+class publication2014::Review {
+}
+class publication2014::ReviewNote {
+  + content : str
+}
+class publication2014::Rule {
+  + key : str
+  + text : str
+}
+class publication2014::Sequence {
+  + sequenceType : str
+}
+class publication2014::Write {
+}
+Counted <|-- publication2014::Paragraph
+Labelled <|-- publication2014::Progress
+Labelled <|-- publication2014::Review
+Labelled <|-- publication2014::Write
+Named <|-- publication2014::Paper
+Named <|-- publication2014::Paragraph
+Named <|-- publication2014::PublicationProcess
+Named <|-- publication2014::PublicationStructure
+Named <|-- publication2014::ReviewNote
+PlaceHolder <|-- publication2014::PlaceHolderPP
+PlaceHolder <|-- publication2014::PlaceHolderRn
+PlaceHolder <|-- publication2014::PlaceHolderRs
+PlaceHolder <|-- publication2014::PlaceHolderRule
+publication2014::Researcher "0..9999" -- "1..1" publication2014::Paper : authors28
+publication2014::Sequence "0..9999" --* "1..1" publication2014::PublicationPhase : linksToSuccessors3
+publication2014::PublicationPhase "1..1" -- "0..9999" publication2014::Researcher : neededPerson5
+publication2014::Paper "0..1" -- "1..1" publication2014::Progress : paper36
+publication2014::Paper "0..9999" -- "1..1" publication2014::Researcher : papers23
+publication2014::PublicationStructure "1..1" *-- "0..9999" publication2014::Paper : papers46
+publication2014::Paragraph "0..1" -- "1..1" publication2014::Write : paragraph38
+publication2014::Paragraph "0..9999" --* "1..1" publication2014::Paper : paragraphs26
+publication2014::PublicationPhase "0..9999" -- "1..1" publication2014::Researcher : phaseParticipation19
+publication2014::PublicationPhase "0..9999" --* "1..1" publication2014::PublicationProcess : phases0
+publication2014::PlaceHolderRule "0..1" --* "1..1" publication2014::Rule : placeholder17
+publication2014::Researcher "1..1" *-- "0..1" publication2014::PlaceHolderRs : placeholder24
+publication2014::PlaceHolderRn "0..1" --* "1..1" publication2014::ReviewNote : placeholder32
+publication2014::PublicationPhase "1..1" *-- "0..1" publication2014::PlaceHolderPP : placeholder9
+publication2014::PublicationPhase "1..1" -- "1..1" publication2014::Sequence : predecessor14
+publication2014::Progress "1..1" -- "0..1" publication2014::PublicationProcess : process34
+publication2014::PublicationProcess "0..1" --* "1..1" publication2014::PublicationSystem : processView49
+publication2014::Progress "0..9999" --* "1..1" publication2014::Paper : progress27
+publication2014::PublicationProcess "1..1" *-- "0..9999" publication2014::Rule : publicationRules1
+publication2014::Researcher "0..9999" --* "1..1" publication2014::PublicationStructure : researchers44
+publication2014::ReviewNote "0..1" -- "1..1" publication2014::Review : reviewNote41
+publication2014::Researcher "1..1" *-- "0..9999" publication2014::Review : reviews21
+publication2014::Paragraph "1..1" *-- "0..9999" publication2014::ReviewNote : reviews30
+publication2014::Rule "0..9999" -- "1..1" publication2014::PublicationPhase : rules6
+publication2014::PublicationStructure "0..1" --* "1..1" publication2014::PublicationSystem : structuralView51
+publication2014::PublicationPhase "1..1" -- "1..1" publication2014::Sequence : successor11
+publication2014::Write "0..9999" --* "1..1" publication2014::Researcher : writes20
+@enduml

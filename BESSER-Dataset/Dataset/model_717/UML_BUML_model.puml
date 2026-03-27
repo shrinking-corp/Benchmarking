@@ -1,0 +1,192 @@
+@startuml
+class Abstraction {
+}
+class BehavioralFeature {
+}
+class Classifier {
+}
+class Dependency {
+}
+class DirectedRelationship {
+}
+class Element {
+}
+class Feature {
+}
+class NamedElement {
+}
+class Namespace {
+}
+class PackageableElement {
+}
+class Realization {
+}
+class Relationship {
+}
+class Type {
+}
+class TypedElement {
+}
+enum VisibilityKind {
+  package
+  private
+  protected
+  public
+}
+class uml::Abstraction {
+}
+class uml::Association {
+  + isDerived : str
+}
+abstract class uml::BehavioralFeature {
+  + isAbstract : str
+}
+class uml::Class {
+  + isActive : str
+  + name : str
+}
+abstract class uml::Classifier {
+  + isAbstract : str
+}
+class uml::Comment {
+  + body : str
+}
+class uml::Dependency {
+}
+abstract class uml::DirectedRelationship {
+}
+abstract class uml::Element {
+}
+class uml::ElementImport {
+  + alias : str
+  + visibility : str
+}
+abstract class uml::Feature {
+  + isStatic : str
+}
+class uml::Generalization {
+  + isSubstitutable : str
+}
+class uml::Model {
+  + name : str
+}
+abstract class uml::NamedElement {
+  + name : str
+  + qualifiedName : str
+  + visibility : str
+}
+abstract class uml::Namespace {
+}
+class uml::Operation {
+  + isOrdered : str
+  + isQuery : str
+  + isUnique : str
+  + lower : str
+  + upper : str
+}
+class uml::Package {
+  + name : str
+}
+class uml::PackageImport {
+  + visibility : str
+}
+abstract class uml::PackageableElement {
+}
+class uml::Parameter {
+  + default : str
+  + isException : str
+  + isStream : str
+}
+class uml::Property {
+  + name : str
+}
+class uml::Realization {
+}
+abstract class uml::Relationship {
+}
+class uml::Substitution {
+}
+abstract class uml::Type {
+}
+abstract class uml::TypedElement {
+}
+abstract class uml::ValueSpecification {
+}
+Abstraction <|-- uml::Realization
+BehavioralFeature <|-- uml::Operation
+Classifier <|-- uml::Association
+Classifier <|-- uml::Class
+Dependency <|-- uml::Abstraction
+DirectedRelationship <|-- uml::Dependency
+DirectedRelationship <|-- uml::ElementImport
+DirectedRelationship <|-- uml::Generalization
+DirectedRelationship <|-- uml::PackageImport
+Element <|-- uml::Comment
+Element <|-- uml::NamedElement
+Element <|-- uml::Relationship
+Feature <|-- uml::BehavioralFeature
+NamedElement <|-- uml::Namespace
+NamedElement <|-- uml::TypedElement
+Namespace <|-- uml::BehavioralFeature
+PackageableElement <|-- uml::Dependency
+PackageableElement <|-- uml::Package
+PackageableElement <|-- uml::Type
+PackageableElement <|-- uml::ValueSpecification
+Realization <|-- uml::Substitution
+Relationship <|-- uml::Association
+Relationship <|-- uml::DirectedRelationship
+TypedElement <|-- uml::ValueSpecification
+Type <|-- uml::Classifier
+uml::Comment "1..1" -- "0..9999" uml::Element : annotatedElement0
+uml::Property "0..9999" -- "1..1" uml::Classifier : attribute62
+uml::Operation "1..1" -- "0..1" uml::Class : class75
+uml::NamedElement "1..9999" -- "1..1" uml::Dependency : client14
+uml::NamedElement "1..1" -- "0..9999" uml::Dependency : clientDependency11
+uml::Classifier "1..1" -- "1..1" uml::Substitution : contract66
+uml::ValueSpecification "0..1" --* "1..1" uml::Parameter : defaultValue71
+uml::ElementImport "0..9999" --* "1..1" uml::Namespace : elementImport22
+uml::Association "1..1" -- "1..9999" uml::Type : endType46
+uml::Feature "0..9999" -- "1..1" uml::Classifier : feature52
+uml::Feature "1..1" -- "0..9999" uml::Classifier : featuringClassifier65
+uml::Classifier "0..9999" -- "1..1" uml::Classifier : general59
+uml::Generalization "1..1" -- "1..1" uml::Classifier : general96
+uml::Generalization "0..9999" --* "1..1" uml::Class : generalization94
+uml::ElementImport "1..1" -- "1..1" uml::PackageableElement : importedElement32
+uml::PackageableElement "0..9999" -- "1..1" uml::Namespace : importedMember27
+uml::Package "1..1" -- "1..1" uml::PackageImport : importedPackage36
+uml::Namespace "1..1" -- "1..1" uml::ElementImport : importingNamespace34
+uml::Namespace "1..1" -- "1..1" uml::PackageImport : importingNamespace38
+uml::NamedElement "0..9999" -- "1..1" uml::Classifier : inheritedMember53
+uml::Namespace "1..1" -- "0..9999" uml::NamedElement : member25
+uml::Property "2..9999" -- "1..1" uml::Association : memberEnd43
+uml::NamedElement "1..1" -- "0..1" uml::Namespace : namespace12
+uml::Property "0..9999" -- "1..1" uml::Association : navigableOwnedEnd49
+uml::Class "1..1" *-- "0..9999" uml::Classifier : nestedClassifier84
+uml::Operation "0..1" -- "1..1" uml::Parameter : operation70
+uml::Property "0..9999" --* "1..1" uml::Class : ownedAttribute91
+uml::Element "1..1" *-- "0..9999" uml::Comment : ownedComment6
+uml::Element "0..9999" -- "1..1" uml::Element : ownedElement2
+uml::Property "0..9999" --* "1..1" uml::Association : ownedEnd42
+uml::NamedElement "0..9999" -- "1..1" uml::Namespace : ownedMember30
+uml::Operation "0..9999" --* "1..1" uml::Class : ownedOperation87
+uml::Parameter "0..9999" --* "1..1" uml::BehavioralFeature : ownedParameter79
+uml::Type "0..9999" -- "1..1" uml::Package : ownedType9
+uml::Element "0..1" -- "1..1" uml::Element : owner4
+uml::Package "0..1" -- "1..1" uml::Type : package41
+uml::PackageImport "0..9999" --* "1..1" uml::Namespace : packageImport23
+uml::PackageableElement "0..9999" --* "1..1" uml::Package : packagedElement10
+uml::PackageableElement "0..9999" --* "1..1" uml::Model : packagedElement102
+uml::Type "0..9999" -- "1..1" uml::BehavioralFeature : raisedException81
+uml::Classifier "1..1" -- "0..9999" uml::Classifier : redefinedClassifier56
+uml::Operation "0..9999" -- "1..1" uml::Operation : redefinedOperation77
+uml::Element "1..9999" -- "1..1" uml::Relationship : relatedElement20
+uml::Element "1..9999" -- "1..1" uml::DirectedRelationship : source15
+uml::Classifier "1..1" -- "1..1" uml::Generalization : specific99
+uml::Substitution "1..1" -- "1..1" uml::Classifier : substitutingClassifier68
+uml::Classifier "1..1" *-- "0..9999" uml::Substitution : substitution61
+uml::Class "0..9999" -- "1..1" uml::Class : superClass89
+uml::NamedElement "1..9999" -- "1..1" uml::Dependency : supplier13
+uml::DirectedRelationship "1..1" -- "1..9999" uml::Element : target17
+uml::TypedElement "1..1" -- "0..1" uml::Type : type40
+uml::Class "1..1" -- "1..1" uml::Property : type73
+@enduml

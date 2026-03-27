@@ -1,0 +1,78 @@
+@startuml
+class AbstractClass {
+}
+class Classifier {
+}
+abstract class LedsCodeModel::AbstractClass {
+}
+class LedsCodeModel::Association {
+  + name : str
+}
+class LedsCodeModel::Attribute {
+  + name : str
+}
+class LedsCodeModel::Class {
+  + abstract : bool
+  + stereotypeClass : str
+}
+class LedsCodeModel::ClassDiagram {
+  + name : str
+}
+abstract class LedsCodeModel::Classifier {
+  + name : str
+}
+class LedsCodeModel::ENUM {
+  + values : str
+}
+class LedsCodeModel::Feature {
+  + applicationType : str
+  + dataBaseName : str
+  + engine : str
+  + language : str
+  + orm : str
+}
+abstract class LedsCodeModel::Model {
+}
+class LedsCodeModel::PrimitiveDataType {
+  + type : str
+}
+class LedsCodeModel::Specification {
+  + createdDate : date
+  + name : str
+}
+class Model {
+}
+enum PrimitiveData {
+  String
+  boolean
+  byte
+  char
+  double
+  float
+  int
+  long
+  short
+}
+enum StereotypeAttribute {
+  Password
+  User
+}
+enum StereotypeClass {
+  Entity
+  Security
+  View
+}
+AbstractClass <|-- LedsCodeModel::Class
+AbstractClass <|-- LedsCodeModel::ENUM
+Classifier <|-- LedsCodeModel::AbstractClass
+Classifier <|-- LedsCodeModel::PrimitiveDataType
+Model <|-- LedsCodeModel::ClassDiagram
+LedsCodeModel::Attribute "0..9999" --* "1..1" LedsCodeModel::Class : attributes4
+LedsCodeModel::ClassDiagram "1..1" *-- "0..9999" LedsCodeModel::AbstractClass : composed3
+LedsCodeModel::Feature "1..1" --* "1..1" LedsCodeModel::Specification : described1
+LedsCodeModel::Model "1..9999" --* "1..1" LedsCodeModel::Specification : has0
+LedsCodeModel::Class "1..1" -- "0..9999" LedsCodeModel::Class : parent6
+LedsCodeModel::Class "1..1" -- "1..1" LedsCodeModel::Association : source12
+LedsCodeModel::Association "1..1" -- "1..1" LedsCodeModel::Class : target10
+LedsCodeModel::Classifier "1..1" -- "1..1" LedsCodeModel::Attribute : type8
+@enduml

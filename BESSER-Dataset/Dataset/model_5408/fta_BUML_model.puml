@@ -1,0 +1,30 @@
+@startuml
+class Diagram {
+}
+enum GateType {
+  ANDGate
+  ORGate
+}
+class fta::Condition {
+  + GateKind : str
+}
+abstract class fta::Diagram {
+  + detail : str
+  + id : str
+  + name : str
+}
+class fta::Event {
+  + BaseEvent : bool
+}
+class fta::FTA {
+}
+class fta::Hazard {
+}
+Diagram <|-- fta::Condition
+Diagram <|-- fta::Event
+Diagram <|-- fta::Hazard
+fta::Condition "0..1" -- "1..1" fta::Event : condition2
+fta::Hazard "1..1" -- "0..9999" fta::Condition : conditions1
+fta::Diagram "0..9999" --* "1..1" fta::FTA : diagrams0
+fta::Condition "1..1" -- "0..9999" fta::Event : events4
+@enduml

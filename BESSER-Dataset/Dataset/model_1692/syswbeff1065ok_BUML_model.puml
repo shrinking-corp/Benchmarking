@@ -1,0 +1,125 @@
+@startuml
+enum FunctionDomain {
+  form
+  space
+  time
+}
+class Port {
+}
+class ProcessNode {
+}
+class Sequence {
+}
+class SequenceNode {
+}
+class syswbeff1065ok::And {
+}
+class syswbeff1065ok::AssociatedTo {
+  + since : str
+}
+class syswbeff1065ok::Component {
+  + name : str
+}
+class syswbeff1065ok::Description {
+  + content : str
+}
+class syswbeff1065ok::Final {
+}
+class syswbeff1065ok::Flow {
+}
+class syswbeff1065ok::Function {
+  + domain : str
+}
+class syswbeff1065ok::FunctionProperty {
+  + description : str
+}
+class syswbeff1065ok::InputPort {
+}
+class syswbeff1065ok::Item {
+  + name : str
+}
+class syswbeff1065ok::Iteration {
+}
+class syswbeff1065ok::Loop {
+}
+class syswbeff1065ok::LoopExit {
+}
+class syswbeff1065ok::Or {
+}
+class syswbeff1065ok::OutputPort {
+}
+class syswbeff1065ok::PatternCatalog {
+  + id : str
+}
+abstract class syswbeff1065ok::Port {
+  + id : str
+}
+abstract class syswbeff1065ok::ProcessNode {
+  + label : str
+}
+abstract class syswbeff1065ok::Sequence {
+}
+abstract class syswbeff1065ok::SequenceNode {
+  + name : str
+  + tMax : int
+  + tMin : int
+}
+class syswbeff1065ok::Start {
+}
+class syswbeff1065ok::System {
+  + id : str
+}
+class syswbeff1065ok::Thing {
+  + id : int
+}
+class syswbeff1065ok::Thoughts {
+  + id : str
+}
+class syswbeff1065ok::Token {
+}
+class syswbeff1065ok::Workbench {
+}
+Port <|-- syswbeff1065ok::InputPort
+Port <|-- syswbeff1065ok::OutputPort
+ProcessNode <|-- syswbeff1065ok::Flow
+ProcessNode <|-- syswbeff1065ok::Function
+SequenceNode <|-- syswbeff1065ok::Function
+SequenceNode <|-- syswbeff1065ok::Sequence
+Sequence <|-- syswbeff1065ok::And
+Sequence <|-- syswbeff1065ok::Final
+Sequence <|-- syswbeff1065ok::Iteration
+Sequence <|-- syswbeff1065ok::Loop
+Sequence <|-- syswbeff1065ok::LoopExit
+Sequence <|-- syswbeff1065ok::Or
+Sequence <|-- syswbeff1065ok::Start
+syswbeff1065ok::Function "1..1" -- "0..1" syswbeff1065ok::Component : allocatedTo19
+syswbeff1065ok::Function "0..1" -- "1..1" syswbeff1065ok::Function : associations17
+syswbeff1065ok::Component "1..1" -- "0..9999" syswbeff1065ok::Component : associations47
+syswbeff1065ok::Workbench "1..1" *-- "0..9999" syswbeff1065ok::PatternCatalog : catalog70
+syswbeff1065ok::SequenceNode "1..1" -- "0..9999" syswbeff1065ok::SequenceNode : controlFlowEdge22
+syswbeff1065ok::Function "0..9999" --* "1..1" syswbeff1065ok::Function : decompositions1
+syswbeff1065ok::Component "0..9999" -- "1..1" syswbeff1065ok::Component : decompositions44
+syswbeff1065ok::Description "0..9999" --* "1..1" syswbeff1065ok::Function : descriptions10
+syswbeff1065ok::Flow "0..9999" --* "1..1" syswbeff1065ok::Function : flows4
+syswbeff1065ok::Thing "0..1" -- "1..1" syswbeff1065ok::AssociatedTo : fromThing31
+syswbeff1065ok::FunctionProperty "0..9999" --* "1..1" syswbeff1065ok::Workbench : functionProperties67
+syswbeff1065ok::Function "0..1" --* "1..1" syswbeff1065ok::System : functionalArchitecture52
+syswbeff1065ok::InputPort "0..9999" --* "1..1" syswbeff1065ok::Function : inputPorts8
+syswbeff1065ok::Flow "1..1" -- "0..9999" syswbeff1065ok::InputPort : inputflowEdge23
+syswbeff1065ok::Item "0..9999" --* "1..1" syswbeff1065ok::Flow : items26
+syswbeff1065ok::Function "1..1" *-- "0..9999" syswbeff1065ok::OutputPort : outputPorts6
+syswbeff1065ok::Flow "0..9999" -- "1..1" syswbeff1065ok::OutputPort : outputflowEdge28
+syswbeff1065ok::FunctionProperty "0..1" -- "1..1" syswbeff1065ok::FunctionProperty : parent41
+syswbeff1065ok::PatternCatalog "1..1" *-- "0..9999" syswbeff1065ok::Function : patterns57
+syswbeff1065ok::Function "0..9999" -- "1..1" syswbeff1065ok::Component : performs49
+syswbeff1065ok::Component "0..1" --* "1..1" syswbeff1065ok::System : physicalArchitecture54
+syswbeff1065ok::Function "1..1" -- "0..9999" syswbeff1065ok::FunctionProperty : property14
+syswbeff1065ok::Thing "0..9999" -- "1..1" syswbeff1065ok::Thoughts : relatedTo38
+syswbeff1065ok::AssociatedTo "0..9999" --* "1..1" syswbeff1065ok::Thing : relations35
+syswbeff1065ok::Sequence "0..9999" --* "1..1" syswbeff1065ok::Function : sequenceNodes2
+syswbeff1065ok::Workbench "1..1" *-- "0..1" syswbeff1065ok::System : systemView64
+syswbeff1065ok::Thing "0..9999" --* "1..1" syswbeff1065ok::Workbench : things59
+syswbeff1065ok::Thoughts "0..9999" --* "1..1" syswbeff1065ok::Workbench : thoughts61
+syswbeff1065ok::AssociatedTo "1..1" -- "0..1" syswbeff1065ok::Thing : toThing32
+syswbeff1065ok::Token "0..9999" --* "1..1" syswbeff1065ok::Function : tokens12
+@enduml

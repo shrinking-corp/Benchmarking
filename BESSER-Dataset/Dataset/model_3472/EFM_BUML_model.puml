@@ -1,0 +1,156 @@
+@startuml
+class Alternative {
+}
+class BooleanConstraint {
+}
+class Cardinality {
+}
+enum ComparisonOperator {
+  equal
+  geq
+  gt
+  leq
+  lt
+}
+class EFM::Alternative {
+}
+class EFM::Attribute {
+  + name : str
+}
+abstract class EFM::BooleanConstraint {
+}
+abstract class EFM::Cardinality {
+  + cardinalityMax : int
+  + cardinalityMin : int
+  + configValue : int
+}
+class EFM::Colocated {
+}
+class EFM::Comparison {
+  + type : str
+}
+class EFM::Excludes {
+}
+class EFM::Exclusive {
+}
+abstract class EFM::FMConstraint {
+}
+class EFM::FMElement {
+}
+class EFM::FeatCardinality {
+}
+class EFM::Feature {
+  + name : str
+}
+class EFM::FeatureModel {
+}
+class EFM::Functional {
+  + type : str
+  + value : int
+}
+class EFM::HostedBy {
+}
+class EFM::Implies {
+}
+class EFM::IntValue {
+}
+class EFM::NodeFeature {
+  + name : str
+}
+abstract class EFM::NodeFeatureElement {
+}
+class EFM::NotHostedBy {
+}
+class EFM::Operation {
+}
+class EFM::RangeOperation {
+  + max : int
+  + min : int
+}
+class EFM::Requires {
+  + operator : str
+}
+class EFM::ResourceVerification {
+}
+class EFM::Separated {
+}
+class EFM::Value {
+}
+class EFM::ValueOperation {
+}
+class FMConstraint {
+}
+class FMElement {
+}
+class Feature {
+}
+enum LogicalOperator {
+  and
+  or
+  void
+}
+class NodeFeatureElement {
+}
+class Operation {
+}
+enum Operator {
+  add
+  divide
+  multiply
+  remove
+  select
+}
+Alternative <|-- EFM::Exclusive
+BooleanConstraint <|-- EFM::Excludes
+BooleanConstraint <|-- EFM::Implies
+Cardinality <|-- EFM::FeatCardinality
+FMConstraint <|-- EFM::BooleanConstraint
+FMConstraint <|-- EFM::Colocated
+FMConstraint <|-- EFM::Comparison
+FMConstraint <|-- EFM::Functional
+FMConstraint <|-- EFM::HostedBy
+FMConstraint <|-- EFM::NotHostedBy
+FMConstraint <|-- EFM::Requires
+FMConstraint <|-- EFM::ResourceVerification
+FMConstraint <|-- EFM::Separated
+FMElement <|-- EFM::Attribute
+FMElement <|-- EFM::Feature
+Feature <|-- EFM::Alternative
+NodeFeatureElement <|-- EFM::NodeFeature
+Operation <|-- EFM::RangeOperation
+Operation <|-- EFM::ValueOperation
+EFM::Feature "1..9999" -- "1..1" EFM::NotHostedBy : From77
+EFM::HostedBy "0..1" --* "1..1" EFM::NodeFeature : HostedBy54
+EFM::Attribute "0..9999" --* "1..1" EFM::NodeFeature : NodeAttributes48
+EFM::NodeFeature "1..1" *-- "1..1" EFM::FeatCardinality : NodeCardinalities51
+EFM::NotHostedBy "0..1" --* "1..1" EFM::NodeFeature : NotHostedBy56
+EFM::Operation "1..1" --* "1..1" EFM::Requires : action22
+EFM::Attribute "0..1" -- "1..1" EFM::RangeOperation : attribute37
+EFM::Attribute "0..1" -- "1..1" EFM::ValueOperation : attribute39
+EFM::Attribute "0..9999" --* "1..1" EFM::Feature : attributes3
+EFM::Requires "1..1" *-- "1..2" EFM::Operation : conditions21
+EFM::FMConstraint "0..9999" --* "1..1" EFM::FeatureModel : constraints0
+EFM::ResourceVerification "1..1" -- "1..1" EFM::Attribute : extF71
+EFM::NodeFeature "1..1" -- "1..1" EFM::NotHostedBy : extF74
+EFM::Feature "1..1" -- "1..1" EFM::Operation : feature34
+EFM::FeatCardinality "1..1" --* "1..1" EFM::Feature : featureCardinality8
+EFM::Feature "1..1" -- "1..1" EFM::BooleanConstraint : from16
+EFM::Feature "1..1" -- "1..1" EFM::Functional : from25
+EFM::Comparison "1..1" -- "1..1" EFM::FMElement : from30
+EFM::Feature "1..1" -- "1..1" EFM::Colocated : from43
+EFM::Feature "1..9999" -- "1..1" EFM::HostedBy : from58
+EFM::Feature "1..1" -- "1..1" EFM::Separated : from64
+EFM::Feature "0..9999" -- "1..1" EFM::Colocated : fromAgain45
+EFM::Attribute "1..9999" -- "1..1" EFM::ResourceVerification : fromAtt69
+EFM::Feature "1..1" *-- "0..9999" EFM::NodeFeature : nodeFeature10
+EFM::Feature "1..1" --* "1..1" EFM::FeatureModel : rootFeature1
+EFM::Feature "1..1" *-- "0..9999" EFM::Feature : subFeatures6
+EFM::BooleanConstraint "1..1" -- "1..1" EFM::Feature : to18
+EFM::Feature "1..1" -- "1..1" EFM::Functional : to27
+EFM::FMElement "1..1" -- "1..1" EFM::Comparison : to31
+EFM::HostedBy "1..1" -- "1..1" EFM::NodeFeature : to61
+EFM::Separated "1..1" -- "1..1" EFM::Feature : to66
+EFM::Value "1..1" --* "1..1" EFM::Attribute : value14
+EFM::IntValue "1..1" --* "1..1" EFM::ValueOperation : value41
+EFM::Feature "1..9999" --* "1..1" EFM::Alternative : variants12
+@enduml

@@ -1,0 +1,59 @@
+@startuml
+class ConceptASE::IndividualContainer {
+}
+class ConceptASE::Route {
+}
+class ConceptASE::Segment {
+  + Segment_height : int
+  + Segment_length : int
+}
+class ConceptASE::Sensor {
+  + Sensor_year : int
+}
+class ConceptASE::Signal {
+  + Signal_actualState : str
+}
+class ConceptASE::Switch {
+  + Switch_actualState : str
+}
+class ConceptASE::SwitchPosition {
+  + SwitchPosition_switchState : str
+}
+class ConceptASE::Thing {
+}
+class ConceptASE::Trackelement {
+}
+enum SignalStateKind {
+  SignalStateKind_FAILURE
+  SignalStateKind_GO
+  SignalStateKind_STOP
+}
+enum SwitchStateKind {
+  PointStateKind_FAILURE
+  PointStateKind_LEFT
+  PointStateKind_RIGHT
+  PointStateKind_STRAIGHT
+}
+class Thing {
+}
+class Trackelement {
+}
+Thing <|-- ConceptASE::Route
+Thing <|-- ConceptASE::Sensor
+Thing <|-- ConceptASE::Signal
+Thing <|-- ConceptASE::SwitchPosition
+Thing <|-- ConceptASE::Trackelement
+Trackelement <|-- ConceptASE::Segment
+Trackelement <|-- ConceptASE::Switch
+ConceptASE::Route "1..1" -- "1..1" ConceptASE::Signal : Route_entry4
+ConceptASE::Signal "1..1" -- "1..1" ConceptASE::Route : Route_exit7
+ConceptASE::Sensor "0..9999" -- "1..1" ConceptASE::Route : Route_routeDefinition10
+ConceptASE::SwitchPosition "0..9999" -- "1..1" ConceptASE::Route : Route_switchPosition5
+ConceptASE::Trackelement "0..9999" -- "1..1" ConceptASE::Sensor : Sensor_trackElement14
+ConceptASE::Route "0..9999" -- "1..1" ConceptASE::SwitchPosition : SwitchPosition_route13
+ConceptASE::SwitchPosition "1..1" -- "0..9999" ConceptASE::Switch : SwitchPosition_switch12
+ConceptASE::SwitchPosition "0..9999" -- "1..1" ConceptASE::Switch : Switch_switchPosition3
+ConceptASE::Trackelement "0..9999" -- "1..1" ConceptASE::Trackelement : TrackElement_connectsTo2
+ConceptASE::Sensor "0..9999" -- "1..1" ConceptASE::Trackelement : TrackElement_sensor0
+ConceptASE::Thing "0..9999" --* "1..1" ConceptASE::IndividualContainer : contains15
+@enduml

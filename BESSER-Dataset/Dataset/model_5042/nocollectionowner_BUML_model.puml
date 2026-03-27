@@ -1,0 +1,42 @@
+@startuml
+class nocollectionowner::Customer {
+  + address : str
+  + comments : str
+  + familyName : str
+  + hotel : str
+  + surname : str
+  + telephoneNr : str
+}
+class nocollectionowner::Order {
+  + comments : str
+  + number : str
+}
+class nocollectionowner::PriceCategory {
+  + name : str
+  + prices : float
+}
+class nocollectionowner::Product {
+  + description : str
+  + name : str
+  + number : str
+}
+class nocollectionowner::ProductCategory {
+  + name : str
+}
+class nocollectionowner::Transaction {
+  + endDate : date
+  + number : str
+  + paidDate : date
+  + price : float
+  + startDate : date
+}
+nocollectionowner::Customer "0..1" -- "1..1" nocollectionowner::Order : customer10
+nocollectionowner::Order "0..1" -- "1..1" nocollectionowner::Transaction : order11
+nocollectionowner::ProductCategory "0..1" -- "1..1" nocollectionowner::ProductCategory : parent7
+nocollectionowner::Product "1..1" -- "0..1" nocollectionowner::PriceCategory : priceCategory1
+nocollectionowner::Product "0..1" -- "1..1" nocollectionowner::Transaction : product12
+nocollectionowner::ProductCategory "0..1" -- "1..1" nocollectionowner::Product : productCategory0
+nocollectionowner::Product "0..9999" --* "1..1" nocollectionowner::ProductCategory : products2
+nocollectionowner::ProductCategory "0..9999" --* "1..1" nocollectionowner::ProductCategory : subCategorys4
+nocollectionowner::Order "1..1" *-- "0..9999" nocollectionowner::Transaction : transactions9
+@enduml

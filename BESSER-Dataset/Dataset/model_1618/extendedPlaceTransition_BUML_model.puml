@@ -1,0 +1,268 @@
+@startuml
+class Annotation {
+}
+enum CSS2Color {
+  AQUA
+  BLACK
+  BLUE
+  FUCHSIA
+  GRAY
+  GREEN
+  LIME
+  MAROON
+  NAVY
+  OLIVE
+  ORANGE
+  PURPLE
+  RED
+  SILVER
+  TEAL
+  WHITE
+  YELLOW
+}
+enum CSS2FontFamily {
+  ARIAL
+  GEORGIA
+  TIMES
+  TREBUCHET
+  VERDANA
+}
+enum CSS2FontSize {
+  LARGE
+  MEDIUM
+  SMALL
+  XLARGE
+  XSMALL
+  XXLARGE
+  XXSMALL
+}
+enum CSS2FontStyle {
+  ITALIC
+  NORMAL
+  OBLIQUE
+}
+enum CSS2FontWeight {
+  BOLD
+  BOLDER
+  LIGHTER
+  NORMAL
+}
+class Coordinate {
+}
+enum FontAlign {
+  CENTER
+  LEFT
+  RIGHT
+}
+enum FontDecoration {
+  LINETHROUGH
+  OVERLINE
+  UNDERLINE
+}
+enum Gradient {
+  DIAGONAL
+  HORIZONTAL
+  VERTICAL
+}
+class Graphics {
+}
+class Label {
+}
+enum LineShape {
+  CURVE
+  LINE
+}
+enum LineStyle {
+  DASH
+  DOT
+  SOLID
+}
+class Node {
+}
+enum PNType {
+  COREMODEL
+  HLPN
+  PTNET
+  SYMNET
+}
+class PlaceNode {
+}
+class PnObject {
+}
+class TransitionNode {
+}
+abstract class ptnet::Annotation {
+}
+class ptnet::AnnotationGraphics {
+}
+abstract class ptnet::AnyObject {
+}
+class ptnet::Arc {
+}
+class ptnet::ArcGraphics {
+}
+class ptnet::ArcNature {
+}
+abstract class ptnet::Attribute {
+}
+class ptnet::Capacity {
+}
+abstract class ptnet::Coordinate {
+  + x : str
+  + y : str
+}
+class ptnet::Dimension {
+}
+class ptnet::Fill {
+  + color : str
+  + gradientcolor : str
+  + gradientrotation : str
+  + image : str
+}
+class ptnet::Font {
+  + align : str
+  + decoration : str
+  + family : str
+  + rotation : str
+  + size : str
+  + style : str
+  + weight : str
+}
+abstract class ptnet::Graphics {
+}
+abstract class ptnet::Label {
+}
+class ptnet::Line {
+  + color : str
+  + shape : str
+  + style : str
+  + width : str
+}
+class ptnet::Name {
+  + text : str
+}
+abstract class ptnet::Node {
+}
+class ptnet::NodeGraphics {
+}
+class ptnet::Offset {
+}
+class ptnet::PTArcAnnotation {
+  + text : str
+}
+class ptnet::PTMarking {
+  + text : str
+}
+class ptnet::Page {
+}
+class ptnet::PetriNet {
+  + id : str
+  + type : str
+}
+class ptnet::PetriNetDoc {
+  + xmlns : str
+}
+class ptnet::Place {
+}
+abstract class ptnet::PlaceNode {
+}
+abstract class ptnet::PnObject {
+  + id : str
+}
+class ptnet::Position {
+}
+class ptnet::RefPlace {
+}
+class ptnet::RefTransition {
+}
+class ptnet::ToolInfo {
+  + formattedXMLBuffer : str
+  + tool : str
+  + toolInfoGrammarURI : str
+  + version : str
+}
+class ptnet::Transition {
+}
+abstract class ptnet::TransitionNode {
+}
+Annotation <|-- ptnet::Name
+Annotation <|-- ptnet::PTArcAnnotation
+Annotation <|-- ptnet::PTMarking
+Coordinate <|-- ptnet::Dimension
+Coordinate <|-- ptnet::Offset
+Coordinate <|-- ptnet::Position
+Graphics <|-- ptnet::AnnotationGraphics
+Graphics <|-- ptnet::ArcGraphics
+Graphics <|-- ptnet::NodeGraphics
+Label <|-- ptnet::Annotation
+Label <|-- ptnet::Attribute
+Node <|-- ptnet::PlaceNode
+Node <|-- ptnet::TransitionNode
+PlaceNode <|-- ptnet::Place
+PlaceNode <|-- ptnet::RefPlace
+PnObject <|-- ptnet::Arc
+PnObject <|-- ptnet::Node
+PnObject <|-- ptnet::Page
+TransitionNode <|-- ptnet::RefTransition
+TransitionNode <|-- ptnet::Transition
+ptnet::Node "1..1" -- "0..9999" ptnet::Arc : InArcs88
+ptnet::Arc "0..9999" -- "1..1" ptnet::Node : OutArcs90
+ptnet::AnnotationGraphics "0..1" --* "1..1" ptnet::Annotation : annotationgraphics104
+ptnet::ArcGraphics "0..1" --* "1..1" ptnet::Arc : arcgraphics83
+ptnet::Capacity "0..1" --* "1..1" ptnet::Place : capacity100
+ptnet::Annotation "0..1" -- "1..1" ptnet::AnnotationGraphics : containerAnnotation58
+ptnet::Offset "1..1" -- "0..1" ptnet::AnnotationGraphics : containerAnnotationGraphics46
+ptnet::AnnotationGraphics "0..1" -- "1..1" ptnet::Fill : containerAnnotationGraphics61
+ptnet::AnnotationGraphics "0..1" -- "1..1" ptnet::Line : containerAnnotationGraphics69
+ptnet::AnnotationGraphics "0..1" -- "1..1" ptnet::Font : containerAnnotationGraphics94
+ptnet::Arc "0..1" -- "1..1" ptnet::PTArcAnnotation : containerArc1
+ptnet::Arc "0..1" -- "1..1" ptnet::ArcGraphics : containerArc77
+ptnet::ArcGraphics "0..1" -- "1..1" ptnet::Position : containerArcGraphics43
+ptnet::ArcGraphics "0..1" -- "1..1" ptnet::Line : containerArcGraphics66
+ptnet::NodeGraphics "0..1" -- "1..1" ptnet::Dimension : containerDNodeGraphics47
+ptnet::Label "0..1" -- "1..1" ptnet::ToolInfo : containerLabel29
+ptnet::PetriNet "0..1" -- "1..1" ptnet::Name : containerNamePetriNet19
+ptnet::PnObject "0..1" -- "1..1" ptnet::Name : containerNamePnObject21
+ptnet::NodeGraphics "1..1" -- "0..1" ptnet::Node : containerNode39
+ptnet::NodeGraphics "0..1" -- "1..1" ptnet::Fill : containerNodeGraphics59
+ptnet::Line "1..1" -- "0..1" ptnet::NodeGraphics : containerNodeGraphics64
+ptnet::NodeGraphics "0..1" -- "1..1" ptnet::Position : containerPNodeGraphics44
+ptnet::Page "0..1" -- "1..1" ptnet::PnObject : containerPage17
+ptnet::NodeGraphics "1..1" -- "0..1" ptnet::Page : containerPage40
+ptnet::PetriNet "0..1" -- "1..1" ptnet::ToolInfo : containerPetriNet24
+ptnet::PetriNet "0..1" -- "1..1" ptnet::Page : containerPetriNet9
+ptnet::PetriNet "1..1" -- "0..1" ptnet::PetriNetDoc : containerPetriNetDoc7
+ptnet::Place "0..1" -- "1..1" ptnet::PTMarking : containerPlace0
+ptnet::ToolInfo "1..1" -- "0..1" ptnet::PnObject : containerPnObject26
+ptnet::AnyObject "1..1" -- "0..1" ptnet::ToolInfo : containerToolInfo106
+ptnet::Dimension "0..1" --* "1..1" ptnet::NodeGraphics : dimension35
+ptnet::Fill "0..1" --* "1..1" ptnet::NodeGraphics : fill36
+ptnet::Fill "0..1" --* "1..1" ptnet::AnnotationGraphics : fill50
+ptnet::Font "0..1" --* "1..1" ptnet::AnnotationGraphics : font56
+ptnet::Place "1..1" *-- "0..1" ptnet::PTMarking : initialMarking99
+ptnet::Arc "1..1" *-- "0..1" ptnet::PTArcAnnotation : inscription85
+ptnet::Line "0..1" --* "1..1" ptnet::NodeGraphics : line37
+ptnet::AnnotationGraphics "1..1" *-- "0..1" ptnet::Line : line53
+ptnet::Line "0..1" --* "1..1" ptnet::ArcGraphics : line74
+ptnet::PnObject "1..1" *-- "0..1" ptnet::Name : name13
+ptnet::PetriNet "1..1" *-- "0..1" ptnet::Name : name4
+ptnet::ArcNature "0..1" --* "1..1" ptnet::Arc : nature87
+ptnet::PetriNet "1..9999" --* "1..1" ptnet::PetriNetDoc : nets2
+ptnet::NodeGraphics "0..1" --* "1..1" ptnet::Page : nodegraphics11
+ptnet::Node "1..1" *-- "0..1" ptnet::NodeGraphics : nodegraphics92
+ptnet::PnObject "0..9999" --* "1..1" ptnet::Page : objects8
+ptnet::Offset "0..1" --* "1..1" ptnet::AnnotationGraphics : offset49
+ptnet::Page "1..9999" --* "1..1" ptnet::PetriNet : pages3
+ptnet::Position "0..1" --* "1..1" ptnet::NodeGraphics : position34
+ptnet::ArcGraphics "1..1" *-- "0..9999" ptnet::Position : positions72
+ptnet::TransitionNode "1..1" -- "1..1" ptnet::RefTransition : ref102
+ptnet::PlaceNode "1..1" -- "1..1" ptnet::RefPlace : ref103
+ptnet::RefPlace "0..9999" -- "1..1" ptnet::PlaceNode : referencingPlaces96
+ptnet::RefTransition "0..9999" -- "1..1" ptnet::TransitionNode : referencingTransitions97
+ptnet::Node "1..1" -- "1..1" ptnet::Arc : source79
+ptnet::Node "1..1" -- "1..1" ptnet::Arc : target81
+ptnet::ToolInfo "1..1" *-- "0..1" ptnet::AnyObject : toolInfoModel31
+ptnet::ToolInfo "0..9999" --* "1..1" ptnet::PnObject : toolspecifics15
+ptnet::ToolInfo "0..9999" --* "1..1" ptnet::Label : toolspecifics32
+ptnet::ToolInfo "0..9999" --* "1..1" ptnet::PetriNet : toolspecifics5
+@enduml

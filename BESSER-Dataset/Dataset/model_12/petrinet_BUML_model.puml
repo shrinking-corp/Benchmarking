@@ -1,0 +1,42 @@
+@startuml
+class Arc {
+}
+class NamedElement {
+}
+abstract class petrinet::Arc {
+  + weight : int
+}
+class petrinet::NamedElement {
+  + name : str
+}
+class petrinet::PTArc {
+}
+class petrinet::PetriNet {
+}
+class petrinet::Place {
+}
+class petrinet::TPArc {
+}
+class petrinet::Token {
+}
+class petrinet::Transition {
+}
+Arc <|-- petrinet::PTArc
+Arc <|-- petrinet::TPArc
+NamedElement <|-- petrinet::Place
+NamedElement <|-- petrinet::Transition
+petrinet::TPArc "0..9999" -- "1..1" petrinet::Place : inArcs2
+petrinet::PTArc "0..9999" -- "1..1" petrinet::Transition : inArcs6
+petrinet::PetriNet "1..1" -- "1..1" petrinet::Place : net0
+petrinet::PetriNet "1..1" -- "1..1" petrinet::Transition : net4
+petrinet::Place "1..1" *-- "0..9999" petrinet::PTArc : outArcs1
+petrinet::TPArc "0..9999" --* "1..1" petrinet::Transition : outArcs9
+petrinet::Token "1..1" -- "1..1" petrinet::Place : place25
+petrinet::PetriNet "1..1" *-- "0..9999" petrinet::Place : places12
+petrinet::Place "1..1" -- "1..1" petrinet::PTArc : source15
+petrinet::TPArc "1..1" -- "1..1" petrinet::Transition : source19
+petrinet::Transition "1..1" -- "1..1" petrinet::PTArc : target17
+petrinet::Place "1..1" -- "1..1" petrinet::TPArc : target22
+petrinet::Place "1..1" *-- "0..9999" petrinet::Token : tokens3
+petrinet::Transition "0..9999" --* "1..1" petrinet::PetriNet : transitions13
+@enduml

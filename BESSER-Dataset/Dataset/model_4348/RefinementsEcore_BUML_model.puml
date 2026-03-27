@@ -1,0 +1,112 @@
+@startuml
+class EClassifier {
+}
+class EDataType {
+}
+class EModelElement {
+}
+class ENamedElement {
+}
+class EStructuralFeature {
+}
+class ETypedElement {
+}
+class RefinementsEcore::EAnnotation {
+  + source : str
+}
+class RefinementsEcore::EAttribute {
+  + iD : int
+}
+class RefinementsEcore::EClass {
+  + abstract : bool
+  + interface : bool
+}
+abstract class RefinementsEcore::EClassifier {
+  + instanceClass : str
+  + instanceClassName : str
+  + instanceTypeName : str
+}
+class RefinementsEcore::EDataType {
+  + serializable : bool
+}
+class RefinementsEcore::EEnum {
+}
+class RefinementsEcore::EEnumLiteral {
+  + literal : str
+  + value : int
+}
+abstract class RefinementsEcore::EModelElement {
+}
+abstract class RefinementsEcore::ENamedElement {
+  + name : str
+}
+class RefinementsEcore::EOperation {
+}
+class RefinementsEcore::EPackage {
+  + nsPrefix : str
+  + nsURI : str
+}
+class RefinementsEcore::EParameter {
+}
+class RefinementsEcore::EReference {
+  + container : bool
+  + containment : bool
+  + resolveProxies : bool
+}
+abstract class RefinementsEcore::EStructuralFeature {
+  + changeable : bool
+  + defaultValueLiteral : str
+  + derived : bool
+  + transient : bool
+  + unsettable : bool
+  + volatile : bool
+}
+abstract class RefinementsEcore::ETypedElement {
+  + lowerBound : int
+  + many : bool
+  + ordered : bool
+  + required : bool
+  + unique : bool
+  + upperBound : int
+}
+EClassifier <|-- RefinementsEcore::EClass
+EClassifier <|-- RefinementsEcore::EDataType
+EDataType <|-- RefinementsEcore::EEnum
+EModelElement <|-- RefinementsEcore::EAnnotation
+EModelElement <|-- RefinementsEcore::ENamedElement
+ENamedElement <|-- RefinementsEcore::EClassifier
+ENamedElement <|-- RefinementsEcore::EEnumLiteral
+ENamedElement <|-- RefinementsEcore::EPackage
+ENamedElement <|-- RefinementsEcore::ETypedElement
+EStructuralFeature <|-- RefinementsEcore::EAttribute
+EStructuralFeature <|-- RefinementsEcore::EReference
+ETypedElement <|-- RefinementsEcore::EOperation
+ETypedElement <|-- RefinementsEcore::EParameter
+ETypedElement <|-- RefinementsEcore::EStructuralFeature
+RefinementsEcore::EAttribute "1..1" -- "0..1" RefinementsEcore::EAttribute : Refines2
+RefinementsEcore::EReference "0..1" -- "1..1" RefinementsEcore::EReference : Refines44
+RefinementsEcore::EAnnotation "0..9999" --* "1..1" RefinementsEcore::EModelElement : eAnnotations21
+RefinementsEcore::EDataType "1..1" -- "1..1" RefinementsEcore::EAttribute : eAttributeType0
+RefinementsEcore::EClass "1..1" -- "0..9999" RefinementsEcore::EAttribute : eAttributes10
+RefinementsEcore::EClassifier "0..9999" --* "1..1" RefinementsEcore::EPackage : eClassifiers25
+RefinementsEcore::EClass "0..1" -- "1..1" RefinementsEcore::EOperation : eContainingClass22
+RefinementsEcore::EClass "0..1" -- "1..1" RefinementsEcore::EStructuralFeature : eContainingClass46
+RefinementsEcore::EEnumLiteral "1..1" -- "0..1" RefinementsEcore::EEnum : eEnum20
+RefinementsEcore::EOperation "1..1" -- "0..9999" RefinementsEcore::EClassifier : eExceptions24
+RefinementsEcore::EAttribute "0..1" -- "1..1" RefinementsEcore::EClass : eIDAttribute13
+RefinementsEcore::EAttribute "0..9999" -- "1..1" RefinementsEcore::EReference : eKeys40
+RefinementsEcore::EEnumLiteral "0..9999" --* "1..1" RefinementsEcore::EEnum : eLiterals19
+RefinementsEcore::EModelElement "0..1" -- "1..1" RefinementsEcore::EAnnotation : eModelElement4
+RefinementsEcore::EOperation "0..1" -- "1..1" RefinementsEcore::EParameter : eOperation32
+RefinementsEcore::EOperation "0..9999" --* "1..1" RefinementsEcore::EClass : eOperations7
+RefinementsEcore::EReference "0..1" -- "1..1" RefinementsEcore::EReference : eOpposite35
+RefinementsEcore::EPackage "0..1" -- "1..1" RefinementsEcore::EClassifier : ePackage18
+RefinementsEcore::EParameter "0..9999" --* "1..1" RefinementsEcore::EOperation : eParameters23
+RefinementsEcore::EReference "1..1" -- "1..1" RefinementsEcore::EClass : eReferenceType37
+RefinementsEcore::EReference "0..9999" -- "1..1" RefinementsEcore::EClass : eReferences8
+RefinementsEcore::EStructuralFeature "0..9999" --* "1..1" RefinementsEcore::EClass : eStructuralFeatures16
+RefinementsEcore::EPackage "1..1" *-- "0..9999" RefinementsEcore::EPackage : eSubpackages27
+RefinementsEcore::EPackage "0..1" -- "1..1" RefinementsEcore::EPackage : eSuperPackage30
+RefinementsEcore::EClass "1..1" -- "0..9999" RefinementsEcore::EClass : eSuperTypes6
+RefinementsEcore::EClassifier "0..1" -- "1..1" RefinementsEcore::ETypedElement : eType48
+@enduml

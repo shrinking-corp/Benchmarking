@@ -1,0 +1,65 @@
+@startuml
+class graphDsl::ChildrenProperty {
+  + name : str
+}
+class graphDsl::Component {
+  + name : str
+}
+class graphDsl::ComponentOrFacet {
+}
+class graphDsl::ComponentProperties {
+}
+class graphDsl::ExportsProperty {
+}
+class graphDsl::ExportsVariable {
+  + intValue : int
+  + name : str
+  + strValue : str
+}
+class graphDsl::ExtendsProperty {
+  + extendsNames : str
+}
+class graphDsl::Facet {
+  + name : str
+}
+class graphDsl::FacetProperties {
+}
+class graphDsl::FacetProperty {
+}
+class graphDsl::FacetsProperty {
+  + facetsNames : str
+}
+class graphDsl::Graph {
+  + comments : str
+}
+class graphDsl::ImportsProperty {
+}
+class graphDsl::ImportsVariable {
+  + componentName : str
+  + componentProperty : str
+  + isExternal : bool
+  + isOptional : bool
+}
+class graphDsl::InstallerProperty {
+  + name : str
+}
+class graphDsl::OptionalProperty {
+}
+graphDsl::FacetProperty "1..1" *-- "0..1" graphDsl::ChildrenProperty : childrenProperty15
+graphDsl::OptionalProperty "1..1" *-- "0..1" graphDsl::ChildrenProperty : childrenProperty19
+graphDsl::Component "0..1" --* "1..1" graphDsl::ComponentOrFacet : component1
+graphDsl::ComponentOrFacet "0..9999" --* "1..1" graphDsl::Graph : components0
+graphDsl::ExportsProperty "0..1" --* "1..1" graphDsl::FacetProperty : exportsProperty17
+graphDsl::ExportsProperty "0..1" --* "1..1" graphDsl::OptionalProperty : exportsProperty22
+graphDsl::ExportsVariable "0..9999" --* "1..1" graphDsl::ExportsProperty : exportsVariables31
+graphDsl::OptionalProperty "1..1" *-- "0..1" graphDsl::ExtendsProperty : extendsProperty29
+graphDsl::Facet "0..1" --* "1..1" graphDsl::ComponentOrFacet : facet3
+graphDsl::FacetsProperty "0..1" --* "1..1" graphDsl::OptionalProperty : facetsProperty27
+graphDsl::ImportsProperty "0..1" --* "1..1" graphDsl::OptionalProperty : importsProperty25
+graphDsl::ImportsVariable "0..9999" --* "1..1" graphDsl::ImportsProperty : importsVariables33
+graphDsl::InstallerProperty "0..1" --* "1..1" graphDsl::ComponentProperties : installerProperty11
+graphDsl::OptionalProperty "0..9999" --* "1..1" graphDsl::ComponentProperties : optionalProperties9
+graphDsl::FacetProperty "0..9999" --* "1..1" graphDsl::FacetProperties : properties13
+graphDsl::Component "1..1" *-- "0..1" graphDsl::ComponentProperties : properties5
+graphDsl::Facet "1..1" *-- "0..1" graphDsl::FacetProperties : properties7
+@enduml

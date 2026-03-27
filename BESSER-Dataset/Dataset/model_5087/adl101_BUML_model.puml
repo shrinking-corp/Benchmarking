@@ -1,0 +1,31 @@
+@startuml
+class Interface {
+}
+class adl101::Binding {
+}
+class adl101::Component {
+  + name : str
+}
+class adl101::Content {
+  + expression : str
+  + language : str
+}
+abstract class adl101::Interface {
+  + name : str
+  + signature : str
+}
+class adl101::Provided {
+}
+class adl101::Required {
+}
+Interface <|-- adl101::Provided
+Interface <|-- adl101::Required
+adl101::Binding "0..9999" --* "1..1" adl101::Interface : bindings0
+adl101::Content "0..1" --* "1..1" adl101::Component : content14
+adl101::Content "1..1" -- "0..1" adl101::Component : contentParent7
+adl101::Binding "1..1" -- "0..1" adl101::Interface : from1
+adl101::Provided "0..9999" --* "1..1" adl101::Component : providedInterfaces12
+adl101::Component "1..1" *-- "0..9999" adl101::Required : requiredInterfaces10
+adl101::Component "0..9999" --* "1..1" adl101::Component : subComponents9
+adl101::Interface "0..1" -- "1..1" adl101::Binding : to4
+@enduml

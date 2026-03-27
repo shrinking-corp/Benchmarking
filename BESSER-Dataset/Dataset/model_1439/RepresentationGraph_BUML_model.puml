@@ -1,0 +1,48 @@
+@startuml
+class ContainerElement {
+}
+class GraphicElement {
+}
+class NodeElement {
+}
+class RepresentationGraph::Circle {
+  + radius : str
+}
+abstract class RepresentationGraph::ContainerElement {
+}
+class RepresentationGraph::Diagram {
+}
+class RepresentationGraph::EdgeElement {
+}
+abstract class RepresentationGraph::GraphicElement {
+  + color : str
+  + paletteIconPath : str
+  + paletteName : str
+}
+class RepresentationGraph::IconElement {
+  + filepath : str
+}
+abstract class RepresentationGraph::NodeElement {
+  + label : str
+}
+class RepresentationGraph::Rectangle {
+  + height : str
+  + width : str
+}
+class RepresentationGraph::Rhombus {
+  + height : str
+  + width : str
+}
+ContainerElement <|-- RepresentationGraph::Circle
+ContainerElement <|-- RepresentationGraph::Rectangle
+ContainerElement <|-- RepresentationGraph::Rhombus
+GraphicElement <|-- RepresentationGraph::EdgeElement
+GraphicElement <|-- RepresentationGraph::NodeElement
+NodeElement <|-- RepresentationGraph::ContainerElement
+NodeElement <|-- RepresentationGraph::IconElement
+RepresentationGraph::NodeElement "0..9999" --* "1..1" RepresentationGraph::ContainerElement : contains8
+RepresentationGraph::GraphicElement "0..9999" --* "1..1" RepresentationGraph::Diagram : elements0
+RepresentationGraph::NodeElement "1..1" -- "0..9999" RepresentationGraph::NodeElement : link6
+RepresentationGraph::EdgeElement "1..1" -- "1..1" RepresentationGraph::NodeElement : source1
+RepresentationGraph::NodeElement "1..1" -- "1..1" RepresentationGraph::EdgeElement : target2
+@enduml

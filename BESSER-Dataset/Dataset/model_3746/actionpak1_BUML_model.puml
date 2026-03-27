@@ -1,0 +1,45 @@
+@startuml
+class ActionStep {
+}
+class DynamicValue {
+}
+class ParameterizedActionstep {
+}
+class ParameterizedInitiator {
+}
+class actionpak1::ActionstepTest {
+}
+abstract class actionpak1::CustomInitiator {
+}
+abstract class actionpak1::IncomingCall2 {
+  + callName : str
+}
+class actionpak1::InvokeSaflet2 {
+  + labelText : str
+}
+class actionpak1::ScheduleSaflet {
+}
+class actionpak1::UnscheduleSaflet {
+}
+class actionstep::ParameterizedInitiator {
+}
+class call::CallSource1 {
+}
+ActionStep <|-- actionpak1::ActionstepTest
+ActionStep <|-- actionpak1::UnscheduleSaflet
+ParameterizedActionstep <|-- actionpak1::InvokeSaflet2
+ParameterizedActionstep <|-- actionpak1::ScheduleSaflet
+ParameterizedInitiator <|-- actionpak1::CustomInitiator
+actionstep::ParameterizedInitiator <|-- actionpak1::IncomingCall2
+call::CallSource1 <|-- actionpak1::IncomingCall2
+DynamicValue "0..1" --* "1..1" actionpak1::ScheduleSaflet : calendarName17
+actionpak1::ScheduleSaflet "1..1" *-- "0..1" DynamicValue : cronExpression8
+DynamicValue "0..1" --* "1..1" actionpak1::ScheduleSaflet : endDateTime14
+actionpak1::ScheduleSaflet "1..1" *-- "0..1" DynamicValue : jobName20
+DynamicValue "0..1" --* "1..1" actionpak1::UnscheduleSaflet : jobName23
+DynamicValue "0..1" --* "1..1" actionpak1::ScheduleSaflet : jobNamePrefix3
+actionpak1::ActionstepTest "1..1" *-- "0..1" DynamicValue : message0
+DynamicValue "0..1" --* "1..1" actionpak1::ScheduleSaflet : startDateTime11
+actionpak1::InvokeSaflet2 "1..1" *-- "0..1" DynamicValue : targetSafletPath1
+DynamicValue "0..1" --* "1..1" actionpak1::ScheduleSaflet : targetSafletPath5
+@enduml

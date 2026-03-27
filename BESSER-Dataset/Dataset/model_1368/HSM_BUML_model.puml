@@ -1,0 +1,30 @@
+@startuml
+class AbstractState {
+}
+abstract class HSM::AbstractState {
+  + name : str
+}
+class HSM::CompositeState {
+}
+class HSM::InitialState {
+}
+class HSM::RegularState {
+}
+class HSM::StateMachine {
+  + name : str
+}
+class HSM::Transition {
+  + label : str
+}
+AbstractState <|-- HSM::CompositeState
+AbstractState <|-- HSM::InitialState
+AbstractState <|-- HSM::RegularState
+HSM::CompositeState "0..1" -- "1..1" HSM::AbstractState : compositeState10
+HSM::AbstractState "1..1" -- "1..1" HSM::Transition : source4
+HSM::StateMachine "0..1" -- "1..1" HSM::Transition : stateMachine3
+HSM::StateMachine "0..1" -- "1..1" HSM::AbstractState : stateMachine8
+HSM::StateMachine "1..1" *-- "0..9999" HSM::AbstractState : states1
+HSM::CompositeState "1..1" -- "0..9999" HSM::AbstractState : states12
+HSM::AbstractState "1..1" -- "1..1" HSM::Transition : target5
+HSM::Transition "0..9999" --* "1..1" HSM::StateMachine : transitions0
+@enduml

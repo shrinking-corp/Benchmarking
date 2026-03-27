@@ -1,0 +1,64 @@
+@startuml
+enum DroneState {
+  CREATED
+  DONE
+  HOVERING
+  MOVING
+}
+class Observation {
+}
+enum TaskState {
+  DONE
+  IN_PROGRESS
+  NOT_STARTED
+  WAITING
+}
+class dronesSimulation::Drone {
+}
+class dronesSimulation::DroneInstance {
+  + currentBattery : float
+  + state : str
+}
+class dronesSimulation::DroneObservation {
+}
+class dronesSimulation::DronesSimulation {
+}
+abstract class dronesSimulation::Observation {
+  + id : str
+  + time : str
+}
+class dronesSimulation::Obstacle {
+}
+class dronesSimulation::ObstacleObservation {
+}
+class dronesSimulation::Position {
+}
+class dronesSimulation::Role {
+}
+class dronesSimulation::RoleInstance {
+}
+class dronesSimulation::Scenario {
+}
+class dronesSimulation::Task {
+}
+class dronesSimulation::TaskInstance {
+  + state : str
+}
+Observation <|-- dronesSimulation::DroneObservation
+Observation <|-- dronesSimulation::ObstacleObservation
+dronesSimulation::DroneInstance "0..1" -- "1..1" dronesSimulation::RoleInstance : allocatedDrone18
+dronesSimulation::RoleInstance "0..1" -- "1..1" dronesSimulation::DroneInstance : currentRole9
+dronesSimulation::Drone "1..1" -- "1..1" dronesSimulation::DroneObservation : drone20
+dronesSimulation::Drone "1..1" -- "1..1" dronesSimulation::DroneInstance : drone5
+dronesSimulation::DroneInstance "0..9999" --* "1..1" dronesSimulation::DronesSimulation : droneInstances3
+dronesSimulation::DroneInstance "1..1" *-- "0..9999" dronesSimulation::Observation : observations10
+dronesSimulation::ObstacleObservation "1..1" -- "1..1" dronesSimulation::Obstacle : obstacle19
+dronesSimulation::Position "1..1" --* "1..1" dronesSimulation::DroneObservation : position22
+dronesSimulation::Position "1..1" --* "1..1" dronesSimulation::DroneInstance : position7
+dronesSimulation::Role "0..1" -- "1..1" dronesSimulation::RoleInstance : role16
+dronesSimulation::RoleInstance "1..9999" --* "1..1" dronesSimulation::TaskInstance : roleInstances14
+dronesSimulation::DronesSimulation "1..1" -- "1..1" dronesSimulation::Scenario : scenario0
+dronesSimulation::Task "0..1" -- "1..1" dronesSimulation::TaskInstance : task12
+dronesSimulation::TaskInstance "1..1" -- "1..1" dronesSimulation::RoleInstance : taskInstance17
+dronesSimulation::TaskInstance "0..9999" --* "1..1" dronesSimulation::DronesSimulation : taskInstances1
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+class BinaryCondition {
+}
+class Condition {
+}
+class sql4csv::AndCondition {
+}
+class sql4csv::BinaryCondition {
+}
+class sql4csv::Column {
+  + name : str
+}
+class sql4csv::ColumnEquality {
+}
+class sql4csv::Condition {
+}
+class sql4csv::EObject {
+}
+class sql4csv::Equality {
+}
+class sql4csv::OrCondition {
+}
+class sql4csv::Program {
+}
+class sql4csv::Query {
+}
+class sql4csv::SQL4CSV {
+}
+class sql4csv::Table {
+  + name : str
+}
+class sql4csv::ValueEquality {
+  + right : str
+}
+BinaryCondition <|-- sql4csv::AndCondition
+BinaryCondition <|-- sql4csv::OrCondition
+Condition <|-- sql4csv::BinaryCondition
+Condition <|-- sql4csv::Equality
+sql4csv::Column "0..1" --* "1..1" sql4csv::Query : column3
+sql4csv::Column "0..9999" --* "1..1" sql4csv::Query : columns5
+sql4csv::Condition "0..1" --* "1..1" sql4csv::Query : conditions13
+sql4csv::Column "0..1" --* "1..1" sql4csv::Equality : left18
+sql4csv::Equality "0..1" --* "1..1" sql4csv::BinaryCondition : left22
+sql4csv::SQL4CSV "1..1" *-- "0..1" sql4csv::Program : program0
+sql4csv::Query "0..9999" --* "1..1" sql4csv::Program : queries1
+sql4csv::EObject "0..1" --* "1..1" sql4csv::Equality : right20
+sql4csv::Condition "0..1" --* "1..1" sql4csv::BinaryCondition : right24
+sql4csv::Column "0..1" --* "1..1" sql4csv::ColumnEquality : right27
+sql4csv::Column "1..1" -- "0..1" sql4csv::Table : table15
+sql4csv::Query "1..1" *-- "0..1" sql4csv::Table : table8
+sql4csv::Table "0..9999" --* "1..1" sql4csv::Query : tables10
+@enduml

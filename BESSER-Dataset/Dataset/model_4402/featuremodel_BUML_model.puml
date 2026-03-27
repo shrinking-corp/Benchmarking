@@ -1,0 +1,72 @@
+@startuml
+enum FeatureGroupType {
+  ORGROUP
+  SIMPLEGROUP
+  XORGROUP
+}
+enum FeatureType {
+  MANDATORY
+  OPTIONAL
+  SIMPLE
+}
+class Node {
+}
+class Relation {
+}
+enum ValueType {
+  FEATURE
+  FLOAT
+  INTEGER
+  NONE
+  STRING
+}
+class featureModel::Feature {
+  + name : str
+  + valueType : str
+}
+class featureModel::FeatureGroup {
+  + lowerBound : int
+  + type : str
+  + upperBound : int
+}
+class featureModel::Node {
+}
+class featureModel::Project {
+  + nameConfigFile : str
+  + nameConstraintsFile : str
+  + numberOfProducts : int
+  + validatedOCL : bool
+  + validatedTEF : bool
+}
+class featureModel::Relation {
+}
+class featureModel::RelationFG {
+}
+class featureModel::RelationFeature {
+  + lowerBound : int
+  + type : str
+  + upperBound : int
+}
+class featureModel::TypedValue {
+  + floatValue : str
+  + integerValue : str
+  + stringValue : str
+}
+Node <|-- featureModel::Feature
+Node <|-- featureModel::FeatureGroup
+Relation <|-- featureModel::RelationFG
+Relation <|-- featureModel::RelationFeature
+featureModel::Node "0..9999" -- "1..1" featureModel::Feature : children1
+featureModel::FeatureGroup "1..1" -- "0..9999" featureModel::Feature : children16
+featureModel::Node "0..1" -- "1..1" featureModel::Node : father19
+featureModel::Feature "0..1" -- "1..1" featureModel::TypedValue : featureValue9
+featureModel::Project "1..1" *-- "0..9999" featureModel::Node : features12
+featureModel::Feature "1..1" -- "0..1" featureModel::Feature : references4
+featureModel::Feature "0..9999" -- "1..1" featureModel::Feature : referenciated7
+featureModel::Relation "0..9999" --* "1..1" featureModel::Project : relations14
+featureModel::Node "1..1" -- "1..1" featureModel::RelationFG : source21
+featureModel::Feature "1..1" -- "1..1" featureModel::RelationFeature : source26
+featureModel::Node "1..1" -- "1..1" featureModel::RelationFG : target23
+featureModel::Feature "1..1" -- "1..1" featureModel::RelationFeature : target28
+featureModel::TypedValue "0..1" --* "1..1" featureModel::Feature : typedValue0
+@enduml

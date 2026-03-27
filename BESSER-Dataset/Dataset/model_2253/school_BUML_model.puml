@@ -1,0 +1,50 @@
+@startuml
+class Course {
+}
+class school::Course {
+  + subject : str
+  + weight : int
+}
+class school::School {
+  + address : str
+  + currentYear : int
+  + name : str
+  + numberOfTeachers : int
+}
+class school::SchoolClass {
+  + code : str
+}
+class school::SpecialisationCourse {
+  + specialisation : str
+}
+class school::Student {
+  + name : str
+}
+class school::Teacher {
+  + name : str
+}
+class school::Year {
+  + startingDate : int
+  + weightOfRegularCourses : int
+}
+Course <|-- school::SpecialisationCourse
+school::Course "0..9999" -- "1..1" school::SchoolClass : courses17
+school::Course "0..9999" -- "1..1" school::Teacher : courses27
+school::Course "0..9999" --* "1..1" school::School : courses9
+school::Course "0..9999" -- "1..1" school::SchoolClass : homeroomCourses22
+school::SchoolClass "1..1" -- "0..1" school::Teacher : homeroomTeacher20
+school::SchoolClass "0..1" -- "1..1" school::Teacher : homeroomedClass29
+school::Year "0..1" -- "1..1" school::School : lastYear12
+school::School "0..1" -- "1..1" school::Course : school0
+school::School "0..1" -- "1..1" school::Teacher : school25
+school::School "0..1" -- "1..1" school::Year : school31
+school::Student "1..1" -- "0..1" school::SchoolClass : schoolClass23
+school::Course "1..1" -- "0..1" school::SchoolClass : schoolClass3
+school::Year "1..1" *-- "0..9999" school::SchoolClass : schoolClasses33
+school::Student "0..9999" --* "1..1" school::SchoolClass : students16
+school::Course "1..1" -- "0..1" school::Teacher : teacher1
+school::Teacher "0..9999" --* "1..1" school::School : teachers6
+school::Teacher "0..9999" -- "1..1" school::School : teachersWithMostCourses11
+school::Year "0..1" -- "1..1" school::SchoolClass : year14
+school::School "1..1" *-- "0..9999" school::Year : years5
+@enduml

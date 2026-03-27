@@ -1,0 +1,31 @@
+@startuml
+class Person {
+}
+abstract class training::Person {
+  + firstname : str
+  + lastname : str
+}
+class training::Session {
+  + date : date
+}
+class training::Trainee {
+}
+class training::Trainer {
+}
+class training::Training {
+  + title : str
+}
+class training::TrainingOrganization {
+  + name : str
+}
+Person <|-- training::Trainee
+Person <|-- training::Trainer
+training::Person "1..9999" -- "1..1" training::Session : Trainees3
+training::Training "1..1" -- "1..9999" training::Trainer : canBeProvidedBy13
+training::Training "1..9999" -- "1..1" training::Trainer : canProvide14
+training::Person "0..9999" --* "1..1" training::TrainingOrganization : people5
+training::TrainingOrganization "1..1" *-- "0..9999" training::Session : sessions7
+training::Session "1..1" -- "1..1" training::Trainer : trainer1
+training::Training "1..1" -- "1..1" training::Session : training0
+training::Training "0..9999" --* "1..1" training::TrainingOrganization : training10
+@enduml

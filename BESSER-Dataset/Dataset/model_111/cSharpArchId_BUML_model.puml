@@ -1,0 +1,230 @@
+@startuml
+class ASTNode {
+}
+class AbstractMethodDeclaration {
+}
+class AbstractMethodInvocation {
+}
+class AbstractTypeDeclaration {
+}
+class BodyDeclaration {
+}
+class Comment {
+}
+class Expresion {
+}
+enum InheritanceKind {
+  abstract
+  none
+  sealed
+}
+enum ModifierKind {
+  const
+  native
+  new
+  none
+  override
+  readonly
+  sinchronized
+  static
+  virtual
+}
+class NamedElement {
+}
+enum SimpleType {
+  bool
+  byte
+  char
+  decimal
+  double
+  float
+  int
+  long
+  object
+  sbyte
+  short
+  string
+  uint
+  ulong
+  ushort
+  void
+}
+class Statement {
+}
+class Type {
+}
+class TypeDeclaration {
+}
+class VariableDeclaration {
+}
+enum VisibilityKind {
+  internal
+  internal_protected
+  none
+  private
+  private_protected
+  protected
+  public
+}
+abstract class cSharpArchId::ASTNode {
+}
+abstract class cSharpArchId::AbstractMethodDeclaration {
+}
+abstract class cSharpArchId::AbstractMethodInvocation {
+}
+abstract class cSharpArchId::AbstractTypeDeclaration {
+}
+class cSharpArchId::Annotation {
+}
+class cSharpArchId::Archive {
+  + originalFilePath : str
+}
+class cSharpArchId::Assignment {
+}
+class cSharpArchId::Block {
+}
+class cSharpArchId::BlockComment {
+}
+abstract class cSharpArchId::BodyDeclaration {
+}
+class cSharpArchId::ClassDeclaration {
+}
+class cSharpArchId::ClassInstanceCreation {
+}
+abstract class cSharpArchId::Comment {
+  + content : str
+}
+class cSharpArchId::CompileUnit {
+  + originalFilePath : str
+}
+class cSharpArchId::ConstructorDeclaration {
+}
+class cSharpArchId::ConstructorInvocation {
+}
+class cSharpArchId::ElementRef {
+}
+class cSharpArchId::Enumeration {
+}
+class cSharpArchId::EnumerationLiteral {
+}
+abstract class cSharpArchId::Expresion {
+}
+class cSharpArchId::InterfaceDeclaration {
+}
+class cSharpArchId::LineComment {
+}
+class cSharpArchId::MethodDeclaration {
+}
+class cSharpArchId::MethodInvocation {
+}
+class cSharpArchId::MethodParameter {
+}
+class cSharpArchId::Model {
+  + name : str
+}
+class cSharpArchId::Modifier {
+  + inheritance : str
+  + modifier : str
+  + static : bool
+  + visibility : str
+}
+abstract class cSharpArchId::NamedElement {
+  + name : str
+}
+class cSharpArchId::Namespace {
+}
+class cSharpArchId::PrimitiveType {
+  + kind : str
+}
+class cSharpArchId::ReturnType {
+  + returnType : str
+}
+class cSharpArchId::SingleVariableDeclaration {
+}
+abstract class cSharpArchId::Statement {
+}
+abstract class cSharpArchId::Type {
+}
+class cSharpArchId::TypeAcces {
+}
+abstract class cSharpArchId::TypeDeclaration {
+}
+class cSharpArchId::TypeParameter {
+}
+class cSharpArchId::UsingDeclaration {
+}
+abstract class cSharpArchId::VariableDeclaration {
+}
+ASTNode <|-- cSharpArchId::AbstractMethodInvocation
+ASTNode <|-- cSharpArchId::Comment
+ASTNode <|-- cSharpArchId::Expresion
+ASTNode <|-- cSharpArchId::Modifier
+ASTNode <|-- cSharpArchId::NamedElement
+ASTNode <|-- cSharpArchId::Statement
+AbstractMethodDeclaration <|-- cSharpArchId::ConstructorDeclaration
+AbstractMethodDeclaration <|-- cSharpArchId::MethodDeclaration
+AbstractMethodInvocation <|-- cSharpArchId::ClassInstanceCreation
+AbstractMethodInvocation <|-- cSharpArchId::ConstructorInvocation
+AbstractMethodInvocation <|-- cSharpArchId::MethodInvocation
+AbstractTypeDeclaration <|-- cSharpArchId::TypeDeclaration
+BodyDeclaration <|-- cSharpArchId::AbstractMethodDeclaration
+BodyDeclaration <|-- cSharpArchId::VariableDeclaration
+Comment <|-- cSharpArchId::BlockComment
+Comment <|-- cSharpArchId::LineComment
+Expresion <|-- cSharpArchId::Annotation
+Expresion <|-- cSharpArchId::Assignment
+Expresion <|-- cSharpArchId::TypeAcces
+NamedElement <|-- cSharpArchId::Archive
+NamedElement <|-- cSharpArchId::BodyDeclaration
+NamedElement <|-- cSharpArchId::CompileUnit
+NamedElement <|-- cSharpArchId::EnumerationLiteral
+NamedElement <|-- cSharpArchId::MethodParameter
+NamedElement <|-- cSharpArchId::Namespace
+NamedElement <|-- cSharpArchId::Type
+NamedElement <|-- cSharpArchId::UsingDeclaration
+Statement <|-- cSharpArchId::Block
+TypeDeclaration <|-- cSharpArchId::ClassDeclaration
+TypeDeclaration <|-- cSharpArchId::InterfaceDeclaration
+Type <|-- cSharpArchId::AbstractTypeDeclaration
+Type <|-- cSharpArchId::ElementRef
+Type <|-- cSharpArchId::Enumeration
+Type <|-- cSharpArchId::PrimitiveType
+Type <|-- cSharpArchId::ReturnType
+Type <|-- cSharpArchId::TypeParameter
+VariableDeclaration <|-- cSharpArchId::SingleVariableDeclaration
+cSharpArchId::Modifier "1..1" *-- "0..9999" cSharpArchId::Annotation : annotations40
+cSharpArchId::Model "1..1" *-- "0..9999" cSharpArchId::Archive : archives0
+cSharpArchId::Expresion "0..9999" --* "1..1" cSharpArchId::AbstractMethodInvocation : arguments61
+cSharpArchId::Block "0..1" --* "1..1" cSharpArchId::AbstractMethodDeclaration : body44
+cSharpArchId::BodyDeclaration "0..1" -- "1..1" cSharpArchId::Modifier : bodyDeclaration39
+cSharpArchId::BodyDeclaration "0..9999" --* "1..1" cSharpArchId::AbstractTypeDeclaration : bodyDeclarations34
+cSharpArchId::ClassDeclaration "1..9999" --* "1..1" cSharpArchId::Namespace : classes5
+cSharpArchId::Comment "0..9999" --* "1..1" cSharpArchId::CompileUnit : commentList14
+cSharpArchId::AbstractTypeDeclaration "1..1" *-- "0..9999" cSharpArchId::Comment : commentsAfterBody31
+cSharpArchId::Comment "0..9999" --* "1..1" cSharpArchId::AbstractTypeDeclaration : commentsBeforeBody28
+cSharpArchId::CompileUnit "0..9999" --* "1..1" cSharpArchId::Model : compileUnits1
+cSharpArchId::CompileUnit "0..9999" --* "1..1" cSharpArchId::Archive : compileUnits25
+cSharpArchId::CompileUnit "1..1" *-- "0..9999" cSharpArchId::NamedElement : elements12
+cSharpArchId::EnumerationLiteral "0..9999" --* "1..1" cSharpArchId::Enumeration : enumLiterals3
+cSharpArchId::Enumeration "1..9999" --* "1..1" cSharpArchId::Namespace : enumerations7
+cSharpArchId::ClassInstanceCreation "1..1" *-- "0..1" cSharpArchId::Expresion : expresion67
+cSharpArchId::Expresion "0..9999" --* "1..1" cSharpArchId::MethodInvocation : expression63
+cSharpArchId::MethodDeclaration "1..1" *-- "0..9999" cSharpArchId::BodyDeclaration : localVariableDeclaration57
+cSharpArchId::VariableDeclaration "1..1" -- "0..1" cSharpArchId::AbstractMethodDeclaration : methodDeclaration54
+cSharpArchId::Modifier "1..1" --* "1..1" cSharpArchId::AbstractTypeDeclaration : modifier36
+cSharpArchId::Modifier "0..1" --* "1..1" cSharpArchId::BodyDeclaration : modifier38
+cSharpArchId::CompileUnit "1..1" *-- "0..1" cSharpArchId::Namespace : namespace20
+cSharpArchId::CompileUnit "0..1" -- "1..1" cSharpArchId::ASTNode : originalCompilationUnit23
+cSharpArchId::AbstractMethodDeclaration "1..1" *-- "0..9999" cSharpArchId::VariableDeclaration : parameters45
+cSharpArchId::Type "1..1" --* "1..1" cSharpArchId::AbstractMethodDeclaration : returnType51
+cSharpArchId::ClassDeclaration "1..1" *-- "0..1" cSharpArchId::Type : superClass4
+cSharpArchId::TypeAcces "0..9999" --* "1..1" cSharpArchId::AbstractMethodDeclaration : thrownExceptions48
+cSharpArchId::Type "1..1" -- "1..1" cSharpArchId::MethodParameter : type10
+cSharpArchId::Type "1..1" --* "1..1" cSharpArchId::VariableDeclaration : type55
+cSharpArchId::TypeAcces "1..1" --* "1..1" cSharpArchId::ClassInstanceCreation : type65
+cSharpArchId::TypeAcces "0..9999" --* "1..1" cSharpArchId::AbstractMethodInvocation : typeArguments59
+cSharpArchId::AbstractTypeDeclaration "0..1" -- "1..1" cSharpArchId::CompileUnit : typeDeclaration16
+cSharpArchId::TypeParameter "0..9999" --* "1..1" cSharpArchId::AbstractMethodDeclaration : typeParameters46
+cSharpArchId::TypeAcces "1..1" --* "1..1" cSharpArchId::Annotation : typeacces42
+cSharpArchId::UsingDeclaration "0..9999" --* "1..1" cSharpArchId::CompileUnit : usings18
+@enduml

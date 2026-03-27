@@ -1,0 +1,83 @@
+@startuml
+class ProductEntity {
+}
+class product::Product {
+}
+class product::ProductAspect {
+}
+class product::ProductClass {
+}
+class product::ProductComponent {
+}
+class product::ProductContainer {
+  + name : str
+}
+class product::ProductDomainModel {
+  + elements : str
+  + name : str
+}
+class product::ProductDomainModels {
+}
+class product::ProductEntity {
+  + name : str
+  + path : str
+}
+class product::ProductFeatureConfiguration {
+  + attribute : str
+  + isSelected : bool
+  + max : int
+  + min : int
+  + name : str
+}
+class product::ProductFeaturesConfiguration {
+  + attribute : str
+  + name : str
+}
+class product::ProductFile {
+}
+class product::ProductFolder {
+}
+class product::ProductFragment {
+  + content : str
+}
+class product::ProductFragmentContainer {
+  + name : str
+}
+class product::ProductImplementationElements {
+}
+class product::ProductResourcesContainer {
+  + name : str
+}
+class product::ProductTemplate {
+  + generateToPath : str
+}
+ProductEntity <|-- product::ProductAspect
+ProductEntity <|-- product::ProductClass
+ProductEntity <|-- product::ProductComponent
+ProductEntity <|-- product::ProductFile
+ProductEntity <|-- product::ProductFolder
+ProductEntity <|-- product::ProductFragment
+ProductEntity <|-- product::ProductTemplate
+product::ProductComponent "1..1" *-- "0..9999" product::ProductAspect : aspects21
+product::ProductClass "0..9999" --* "1..1" product::ProductComponent : classes19
+product::ProductComponent "0..9999" --* "1..1" product::ProductContainer : components11
+product::ProductContainer "0..9999" --* "1..1" product::ProductImplementationElements : containers5
+product::ProductDomainModel "0..9999" --* "1..1" product::ProductDomainModels : domainModel48
+product::Product "1..1" *-- "0..1" product::ProductDomainModels : domainModels3
+product::ProductFeaturesConfiguration "1..1" *-- "0..9999" product::ProductFeatureConfiguration : features43
+product::ProductFeatureConfiguration "0..9999" --* "1..1" product::ProductFeatureConfiguration : features46
+product::ProductFile "0..9999" --* "1..1" product::ProductResourcesContainer : files15
+product::ProductFile "0..9999" --* "1..1" product::ProductComponent : files23
+product::ProductFile "0..9999" --* "1..1" product::ProductFolder : files35
+product::ProductFolder "0..9999" --* "1..1" product::ProductResourcesContainer : folders13
+product::ProductFragmentContainer "0..9999" --* "1..1" product::ProductImplementationElements : fragmentContainers7
+product::ProductFragment "0..9999" --* "1..1" product::ProductFragmentContainer : fragments41
+product::ProductFeaturesConfiguration "0..1" --* "1..1" product::Product : productFeatures1
+product::ProductImplementationElements "0..1" --* "1..1" product::Product : productImplementationElements0
+product::ProductImplementationElements "1..1" *-- "0..9999" product::ProductResourcesContainer : resourceContainers9
+product::ProductComponent "0..9999" --* "1..1" product::ProductComponent : subComponents30
+product::ProductFolder "1..1" *-- "0..9999" product::ProductFolder : subFolders33
+product::ProductResourcesContainer "1..1" *-- "0..9999" product::ProductTemplate : templates17
+product::ProductTemplate "0..9999" --* "1..1" product::ProductComponent : templates26
+product::ProductTemplate "0..9999" --* "1..1" product::ProductFolder : templates38
+@enduml

@@ -1,0 +1,80 @@
+@startuml
+class Analog {
+}
+enum AnalogID {
+  A0
+  A1
+  A2
+  A3
+  A4
+  A5
+  A6
+}
+class ArduinoMetamodel::Action {
+}
+class ArduinoMetamodel::Analog {
+  + ID : str
+}
+class ArduinoMetamodel::ArduinoBoardUNO {
+}
+class ArduinoMetamodel::Digital {
+  + ID : str
+}
+class ArduinoMetamodel::FiniteStateMachine {
+}
+class ArduinoMetamodel::Instruccion {
+  + codigo : str
+}
+class ArduinoMetamodel::Metodo {
+  + nombre : str
+}
+class ArduinoMetamodel::PWM {
+}
+abstract class ArduinoMetamodel::Pin {
+  + label : str
+  + pinMode : str
+}
+class ArduinoMetamodel::Project {
+}
+class ArduinoMetamodel::State {
+  + isInitial : bool
+  + name : str
+}
+class ArduinoMetamodel::Transition {
+}
+class ArduinoMetamodel::delay {
+}
+enum DigitalID {
+  D12
+  D13
+  D2
+  D4
+  D7
+  D8
+}
+class Instruccion {
+}
+class Pin {
+}
+enum PinMode {
+  INPUT
+  INPUT_PULLUP
+  OUTPUT
+}
+Analog <|-- ArduinoMetamodel::PWM
+Instruccion <|-- ArduinoMetamodel::delay
+Pin <|-- ArduinoMetamodel::Analog
+Pin <|-- ArduinoMetamodel::Digital
+ArduinoMetamodel::Transition "1..1" *-- "0..9999" ArduinoMetamodel::Action : actions14
+ArduinoMetamodel::ArduinoBoardUNO "1..1" *-- "0..6" ArduinoMetamodel::Analog : analogpins7
+ArduinoMetamodel::ArduinoBoardUNO "1..9999" --* "1..1" ArduinoMetamodel::Project : boards0
+ArduinoMetamodel::Digital "0..6" --* "1..1" ArduinoMetamodel::ArduinoBoardUNO : digitalpins5
+ArduinoMetamodel::FiniteStateMachine "0..1" -- "1..1" ArduinoMetamodel::Project : fsm3
+ArduinoMetamodel::Transition "0..9999" -- "1..1" ArduinoMetamodel::State : incoming11
+ArduinoMetamodel::Metodo "1..1" *-- "1..9999" ArduinoMetamodel::Instruccion : instrucciones9
+ArduinoMetamodel::Metodo "1..9999" --* "1..1" ArduinoMetamodel::Project : metodos1
+ArduinoMetamodel::Transition "0..9999" -- "1..1" ArduinoMetamodel::State : outgoing12
+ArduinoMetamodel::State "1..1" -- "1..1" ArduinoMetamodel::Transition : source15
+ArduinoMetamodel::State "0..9999" --* "1..1" ArduinoMetamodel::FiniteStateMachine : states18
+ArduinoMetamodel::State "1..1" -- "1..1" ArduinoMetamodel::Transition : target16
+@enduml

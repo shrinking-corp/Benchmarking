@@ -1,0 +1,160 @@
+@startuml
+class Action {
+}
+class ActionExpression {
+}
+class Guard {
+}
+class GuardExpression {
+}
+class NamedElement {
+}
+class State {
+}
+abstract class StateMachine::Action {
+}
+class StateMachine::ActionExpression {
+  + expression : str
+}
+class StateMachine::ChangeSignalAllowedSpeed {
+  + newAllowedSpeed : str
+}
+class StateMachine::ChangeTrainCurrentTrackElement {
+}
+class StateMachine::ChangeTrainHeadingSpeed {
+  + newHeadingSpeed : str
+}
+class StateMachine::ChangeTurnoutDirection {
+  + newTurnoutDirection : str
+}
+class StateMachine::CompositeState {
+}
+abstract class StateMachine::Guard {
+}
+class StateMachine::GuardExpression {
+  + expression : str
+}
+abstract class StateMachine::NamedElement {
+  + name : str
+}
+class StateMachine::NextTrackElementIs {
+}
+class StateMachine::RDMElement {
+}
+class StateMachine::RouteElement {
+}
+class StateMachine::Signal {
+}
+class StateMachine::SignalAllowedSpeedChanged {
+  + newAllowedSpeed : str
+}
+class StateMachine::SignalCurrentAllowedSpeed {
+  + currentAllowedSpeed : str
+}
+class StateMachine::State {
+  + isActive : bool
+  + isInitial : bool
+}
+class StateMachine::StateMachine {
+}
+class StateMachine::StateMachineBehavioralModel {
+}
+class StateMachine::TrackElement {
+}
+class StateMachine::Train {
+}
+class StateMachine::TrainCurrentHeadingSpeed {
+  + currentHeadingSpeed : str
+}
+class StateMachine::TrainCurrentlyStandsOn {
+}
+class StateMachine::TrainHeadingSpeedChanged {
+  + newHeadingSpeed : str
+}
+class StateMachine::TrainTrackElementChanged {
+}
+class StateMachine::Transition {
+  + isEnabled : bool
+  + isFireable : bool
+}
+abstract class StateMachine::Trigger {
+}
+class StateMachine::TriggerExpression {
+  + expression : str
+}
+class StateMachine::Turnout {
+}
+class StateMachine::TurnoutCurrentDirection {
+  + currentTurnoutDirection : str
+}
+class StateMachine::TurnoutDesiredDirection {
+}
+class StateMachine::TurnoutDirectionChanged {
+  + newTurnoutDirection : str
+}
+class StateMachine::TurnoutHasDesiredDirection {
+}
+class Trigger {
+}
+class TriggerExpression {
+}
+ActionExpression <|-- StateMachine::ChangeSignalAllowedSpeed
+ActionExpression <|-- StateMachine::ChangeTrainCurrentTrackElement
+ActionExpression <|-- StateMachine::ChangeTrainHeadingSpeed
+ActionExpression <|-- StateMachine::ChangeTurnoutDirection
+Action <|-- StateMachine::ActionExpression
+GuardExpression <|-- StateMachine::NextTrackElementIs
+GuardExpression <|-- StateMachine::SignalCurrentAllowedSpeed
+GuardExpression <|-- StateMachine::TrainCurrentHeadingSpeed
+GuardExpression <|-- StateMachine::TrainCurrentlyStandsOn
+GuardExpression <|-- StateMachine::TurnoutCurrentDirection
+GuardExpression <|-- StateMachine::TurnoutHasDesiredDirection
+Guard <|-- StateMachine::GuardExpression
+NamedElement <|-- StateMachine::Action
+NamedElement <|-- StateMachine::Guard
+NamedElement <|-- StateMachine::State
+NamedElement <|-- StateMachine::StateMachine
+NamedElement <|-- StateMachine::Transition
+NamedElement <|-- StateMachine::Trigger
+State <|-- StateMachine::CompositeState
+TriggerExpression <|-- StateMachine::SignalAllowedSpeedChanged
+TriggerExpression <|-- StateMachine::TrainHeadingSpeedChanged
+TriggerExpression <|-- StateMachine::TrainTrackElementChanged
+TriggerExpression <|-- StateMachine::TurnoutDirectionChanged
+Trigger <|-- StateMachine::TriggerExpression
+StateMachine::Action "0..9999" -- "1..1" StateMachine::Transition : action28
+StateMachine::StateMachine "1..1" *-- "0..9999" StateMachine::Action : actions9
+StateMachine::State "0..1" -- "1..1" StateMachine::StateMachine : activeState11
+StateMachine::TurnoutDesiredDirection "0..1" -- "1..1" StateMachine::TurnoutHasDesiredDirection : desiredDirection68
+StateMachine::Guard "0..9999" -- "1..1" StateMachine::Transition : guard25
+StateMachine::Guard "0..9999" --* "1..1" StateMachine::StateMachine : guards7
+StateMachine::Transition "0..9999" -- "1..1" StateMachine::State : incomingTransitions17
+StateMachine::ChangeTrainCurrentTrackElement "1..1" -- "0..2" StateMachine::TrackElement : newTrackElements38
+StateMachine::State "1..1" -- "0..9999" StateMachine::Transition : outgoingTransitions16
+StateMachine::RDMElement "0..1" -- "1..1" StateMachine::StateMachine : referredObject14
+StateMachine::RouteElement "0..1" -- "1..1" StateMachine::NextTrackElementIs : routeElement62
+StateMachine::Signal "0..1" -- "1..1" StateMachine::ChangeSignalAllowedSpeed : signal34
+StateMachine::SignalCurrentAllowedSpeed "1..1" -- "0..1" StateMachine::Signal : signal49
+StateMachine::Signal "0..1" -- "1..1" StateMachine::SignalAllowedSpeedChanged : signal58
+StateMachine::State "1..1" -- "1..1" StateMachine::Transition : sourceState19
+StateMachine::StateMachine "1..1" --* "1..1" StateMachine::CompositeState : statemachine31
+StateMachine::StateMachine "0..9999" --* "1..1" StateMachine::StateMachineBehavioralModel : statemachines0
+StateMachine::State "0..9999" --* "1..1" StateMachine::StateMachine : states1
+StateMachine::State "1..1" -- "1..1" StateMachine::Transition : targetState20
+StateMachine::TrackElement "0..1" -- "1..1" StateMachine::NextTrackElementIs : trackElement63
+StateMachine::TrackElement "0..2" -- "1..1" StateMachine::TrainCurrentlyStandsOn : trackElements44
+StateMachine::TrainTrackElementChanged "1..1" -- "0..2" StateMachine::TrackElement : trackElements55
+StateMachine::Train "0..1" -- "1..1" StateMachine::ChangeTrainHeadingSpeed : train33
+StateMachine::Train "0..1" -- "1..1" StateMachine::ChangeTrainCurrentTrackElement : train36
+StateMachine::Train "0..1" -- "1..1" StateMachine::TrainCurrentHeadingSpeed : train40
+StateMachine::TrainCurrentlyStandsOn "1..1" -- "0..1" StateMachine::Train : train42
+StateMachine::Train "0..1" -- "1..1" StateMachine::TrainHeadingSpeedChanged : train51
+StateMachine::Train "0..1" -- "1..1" StateMachine::TrainTrackElementChanged : train53
+StateMachine::Transition "0..9999" --* "1..1" StateMachine::StateMachine : transitions3
+StateMachine::Transition "1..1" -- "0..1" StateMachine::Trigger : trigger22
+StateMachine::StateMachine "1..1" *-- "0..9999" StateMachine::Trigger : triggers5
+StateMachine::Turnout "0..1" -- "1..1" StateMachine::ChangeTurnoutDirection : turnout35
+StateMachine::Turnout "0..1" -- "1..1" StateMachine::TurnoutCurrentDirection : turnout47
+StateMachine::Turnout "0..1" -- "1..1" StateMachine::TurnoutDirectionChanged : turnout60
+StateMachine::TurnoutHasDesiredDirection "1..1" -- "0..1" StateMachine::Turnout : turnout66
+@enduml

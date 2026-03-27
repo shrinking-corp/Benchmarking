@@ -1,0 +1,37 @@
+@startuml
+class AbstractElement {
+}
+class Type {
+}
+class myDsl::AbstractElement {
+}
+class myDsl::DataType {
+}
+class myDsl::Entity {
+}
+class myDsl::Feature {
+  + many : bool
+  + name : str
+}
+class myDsl::Import {
+  + importedNamespace : str
+}
+class myDsl::Model {
+}
+class myDsl::PackageDeclaration {
+  + name : str
+}
+class myDsl::Type {
+  + name : str
+}
+AbstractElement <|-- myDsl::Import
+AbstractElement <|-- myDsl::PackageDeclaration
+AbstractElement <|-- myDsl::Type
+Type <|-- myDsl::DataType
+Type <|-- myDsl::Entity
+myDsl::AbstractElement "0..9999" --* "1..1" myDsl::Model : elements0
+myDsl::AbstractElement "0..9999" --* "1..1" myDsl::PackageDeclaration : elements1
+myDsl::Feature "0..9999" --* "1..1" myDsl::Entity : features5
+myDsl::Entity "0..1" -- "1..1" myDsl::Entity : superType4
+myDsl::Feature "1..1" -- "0..1" myDsl::Type : type7
+@enduml

@@ -1,0 +1,70 @@
+@startuml
+enum Gender {
+  Female
+  Male
+}
+class Project {
+}
+class employee::Address {
+  + city : str
+  + country : str
+  + id : str
+  + postalCode : str
+  + province : str
+  + street : str
+}
+class employee::EmailAddress {
+  + address : str
+  + id : str
+  + name : str
+}
+class employee::Employee {
+  + firstName : str
+  + gender : str
+  + id : str
+  + lastName : str
+  + responsibilities : str
+  + salary : float
+}
+class employee::EmploymentPeriod {
+  + endDate : date
+  + id : str
+  + startDate : date
+}
+class employee::JobTitle {
+  + title : str
+}
+class employee::LargeProject {
+  + budget : float
+  + milestone : date
+}
+class employee::Organization {
+  + name : str
+}
+class employee::PhoneNumber {
+  + areaCode : str
+  + number : str
+  + type : str
+}
+abstract class employee::Project {
+  + description : str
+  + name : str
+}
+class employee::SmallProject {
+}
+Project <|-- employee::LargeProject
+Project <|-- employee::SmallProject
+employee::Employee "1..1" *-- "0..1" employee::Address : address12
+employee::EmailAddress "0..9999" --* "1..1" employee::Employee : emailAddresses29
+employee::Employee "0..9999" --* "1..1" employee::Organization : employees0
+employee::JobTitle "0..1" -- "1..1" employee::Employee : jobTitle14
+employee::JobTitle "0..9999" --* "1..1" employee::Organization : jobs3
+employee::Employee "0..9999" -- "1..1" employee::Employee : managedEmployees21
+employee::Employee "1..1" -- "0..1" employee::Employee : manager18
+employee::Employee "1..1" -- "1..1" employee::PhoneNumber : owner8
+employee::EmploymentPeriod "0..1" --* "1..1" employee::Employee : period10
+employee::PhoneNumber "0..9999" --* "1..1" employee::Employee : phoneNumbers23
+employee::Organization "1..1" *-- "0..9999" employee::Project : projects1
+employee::Employee "1..1" -- "0..9999" employee::Project : projects26
+employee::Employee "0..1" -- "1..1" employee::Project : teamLeader5
+@enduml

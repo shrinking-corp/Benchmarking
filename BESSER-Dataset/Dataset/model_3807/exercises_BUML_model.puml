@@ -1,0 +1,24 @@
+@startuml
+class NamableElement {
+}
+class exercises::DFA {
+}
+abstract class exercises::NamableElement {
+  + name : str
+}
+class exercises::State {
+  + id : str
+  + isEnd : bool
+  + isStart : bool
+}
+class exercises::Transition {
+  + input : str
+}
+NamableElement <|-- exercises::DFA
+NamableElement <|-- exercises::State
+NamableElement <|-- exercises::Transition
+exercises::State "1..1" -- "1..9999" exercises::Transition : incoming3
+exercises::Transition "1..9999" -- "1..1" exercises::State : outgoing6
+exercises::State "0..9999" --* "1..1" exercises::DFA : states0
+exercises::Transition "0..9999" --* "1..1" exercises::DFA : transition1
+@enduml

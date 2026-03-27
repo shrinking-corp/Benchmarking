@@ -1,0 +1,35 @@
+@startuml
+class vml::Diagram {
+  + title : str
+}
+class vml::Edge {
+  + relation : str
+}
+class vml::Graph {
+  + ID : str
+  + title : str
+}
+class vml::Model {
+}
+class vml::Node {
+  + title : str
+}
+class vml::Pie {
+  + ID : str
+  + title : str
+}
+class vml::Slice {
+  + title : str
+  + value : int
+}
+vml::Model "1..1" *-- "0..9999" vml::Diagram : diagrams0
+vml::Edge "0..9999" --* "1..1" vml::Graph : edges9
+vml::Graph "0..9999" --* "1..1" vml::Diagram : graph3
+vml::Edge "0..9999" -- "1..1" vml::Node : incoming12
+vml::Node "0..9999" --* "1..1" vml::Graph : nodes7
+vml::Node "1..1" -- "0..9999" vml::Edge : outgoing11
+vml::Pie "0..9999" --* "1..1" vml::Diagram : pies1
+vml::Slice "0..9999" --* "1..1" vml::Pie : slices5
+vml::Node "0..1" -- "1..1" vml::Edge : source14
+vml::Node "0..1" -- "1..1" vml::Edge : target15
+@enduml

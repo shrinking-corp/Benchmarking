@@ -1,0 +1,29 @@
+@startuml
+class Message {
+}
+class iot::BrokerSpec {
+  + brokerHost : str
+  + brokerPort : int
+}
+class iot::Dispatch {
+}
+class iot::Event {
+}
+class iot::IotSystem {
+}
+class iot::IotSystemSpec {
+  + name : str
+}
+class iot::Message {
+  + msg : str
+  + name : str
+}
+class iot::Request {
+}
+Message <|-- iot::Dispatch
+Message <|-- iot::Event
+Message <|-- iot::Request
+iot::Message "0..9999" --* "1..1" iot::IotSystemSpec : message3
+iot::IotSystemSpec "1..1" *-- "0..1" iot::BrokerSpec : mqttBroker1
+iot::IotSystemSpec "0..1" --* "1..1" iot::IotSystem : spec0
+@enduml

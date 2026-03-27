@@ -1,0 +1,104 @@
+@startuml
+enum LaunchType {
+  HTOL
+  OTHER
+  VTOL
+}
+enum MemoryType {
+  STORAGE
+  VOLATILE
+}
+class NamedElement {
+}
+class drone::Action {
+}
+class drone::Battery {
+  + capacity : int
+  + cellType : str
+  + rechargeTime : int
+  + voltage : float
+}
+class drone::Device {
+}
+class drone::Drone {
+  + accelerometer : bool
+  + barometer : bool
+  + communicationRange : float
+  + dataRate : int
+  + giro : bool
+  + gps : bool
+  + magnetometer : bool
+  + maxPowerConsumption : float
+  + maxVoltage : float
+  + minVoltage : float
+  + onBoardObstacleAvoidance : bool
+  + radioFrequency : int
+}
+class drone::FlightPerformance {
+  + launchType : str
+  + maxAcceleration : int
+  + maxAltitude : int
+  + maxClimbRate : float
+  + maxDescendRate : float
+  + maxFlightTime : int
+  + maxFlightTimeWithMaxPayload : int
+  + maxOperatingTemperature : float
+  + maxPayload : int
+  + maxSpeed : int
+  + maxTurnRate : float
+  + minAcceleration : int
+  + minOperatingTemperature : float
+  + minSpeed : int
+  + minTurnRate : float
+  + positionHold : float
+}
+class drone::Memory {
+  + size : int
+  + subType : str
+  + type : str
+}
+abstract class drone::NamedElement {
+  + name : str
+}
+class drone::Parameter {
+  + description : str
+  + key : str
+}
+class drone::Processor {
+  + architecture : str
+  + frequency : int
+}
+class drone::Property {
+  + value : str
+}
+class drone::ROSDriver {
+  + url : str
+  + version : str
+}
+class drone::Size {
+  + height : float
+  + length : float
+  + propellerSize : float
+  + propellers : int
+  + weight : float
+  + width : float
+}
+NamedElement <|-- drone::Action
+NamedElement <|-- drone::Battery
+NamedElement <|-- drone::Device
+NamedElement <|-- drone::Drone
+NamedElement <|-- drone::Memory
+NamedElement <|-- drone::Processor
+NamedElement <|-- drone::Property
+NamedElement <|-- drone::ROSDriver
+drone::Battery "0..9999" --* "1..1" drone::Drone : batteries3
+drone::Device "0..9999" --* "1..1" drone::Drone : dataEquipment9
+drone::FlightPerformance "1..1" --* "1..1" drone::Drone : flightPerf1
+drone::Drone "1..1" *-- "1..9999" drone::Memory : memory7
+drone::Parameter "0..9999" --* "1..1" drone::Action : parameters17
+drone::Processor "1..9999" --* "1..1" drone::Drone : processors5
+drone::Property "0..9999" --* "1..1" drone::Device : properties15
+drone::ROSDriver "0..1" --* "1..1" drone::Drone : rosDriver11
+drone::Drone "1..1" *-- "1..1" drone::Size : size0
+drone::Device "1..1" *-- "0..9999" drone::Action : supportedActions13
+@enduml

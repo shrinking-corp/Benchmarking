@@ -1,0 +1,164 @@
+@startuml
+class AlterTableAction {
+}
+class Comment {
+}
+class Constraint {
+}
+class Create {
+}
+class DdlStatement {
+}
+class LongRaw {
+}
+enum SortDirectionEnum {
+  ASC
+  DESC
+}
+class SqlDataType {
+}
+class SqlDateTime {
+}
+class TableProperty {
+}
+class ddlDsl::AddTableConstraint {
+  + name : str
+}
+class ddlDsl::Alter {
+}
+class ddlDsl::AlterTableAction {
+}
+class ddlDsl::Column {
+  + default : str
+  + sorted : bool
+}
+class ddlDsl::ColumnComment {
+}
+class ddlDsl::Comment {
+  + comment : str
+}
+class ddlDsl::Constraint {
+}
+class ddlDsl::Create {
+  + name : str
+}
+class ddlDsl::CreateIndex {
+  + sortOrders : str
+  + unique : bool
+}
+class ddlDsl::CreateTable {
+}
+class ddlDsl::Ddl {
+}
+class ddlDsl::DdlStatement {
+}
+class ddlDsl::Drop {
+  + object : str
+}
+class ddlDsl::DropTableConstraint {
+}
+class ddlDsl::ForeignKeyConstraint {
+}
+class ddlDsl::LargeObjectType {
+  + size : int
+}
+class ddlDsl::Long {
+  + raw : bool
+}
+class ddlDsl::LongRaw {
+}
+class ddlDsl::NullableConstraint {
+  + not : bool
+}
+class ddlDsl::PrimaryKeyConstraint {
+}
+class ddlDsl::Raw {
+  + size : int
+}
+class ddlDsl::ReferenceClause {
+}
+class ddlDsl::RowIdType {
+  + size : int
+}
+class ddlDsl::SqlBoolean {
+}
+class ddlDsl::SqlCharacter {
+  + national : bool
+  + size : int
+}
+class ddlDsl::SqlDataType {
+  + name : str
+}
+class ddlDsl::SqlDate {
+}
+class ddlDsl::SqlDateTime {
+}
+class ddlDsl::SqlInterval {
+  + day : bool
+  + precision : int
+  + secondsPrecision : int
+  + year : bool
+}
+class ddlDsl::SqlNumber {
+  + hasPrecision : bool
+  + precision : int
+  + scale : int
+}
+class ddlDsl::SqlTimeStamp {
+  + precision : int
+}
+class ddlDsl::TableComment {
+}
+class ddlDsl::TableProperty {
+  + name : str
+}
+class ddlDsl::UniqueKeyConstraint {
+}
+AlterTableAction <|-- ddlDsl::AddTableConstraint
+AlterTableAction <|-- ddlDsl::DropTableConstraint
+Comment <|-- ddlDsl::ColumnComment
+Comment <|-- ddlDsl::TableComment
+Constraint <|-- ddlDsl::ForeignKeyConstraint
+Constraint <|-- ddlDsl::NullableConstraint
+Constraint <|-- ddlDsl::PrimaryKeyConstraint
+Constraint <|-- ddlDsl::UniqueKeyConstraint
+Create <|-- ddlDsl::CreateIndex
+Create <|-- ddlDsl::CreateTable
+DdlStatement <|-- ddlDsl::Alter
+DdlStatement <|-- ddlDsl::Comment
+DdlStatement <|-- ddlDsl::Create
+DdlStatement <|-- ddlDsl::Drop
+LongRaw <|-- ddlDsl::Long
+LongRaw <|-- ddlDsl::Raw
+SqlDataType <|-- ddlDsl::LargeObjectType
+SqlDataType <|-- ddlDsl::LongRaw
+SqlDataType <|-- ddlDsl::RowIdType
+SqlDataType <|-- ddlDsl::SqlBoolean
+SqlDataType <|-- ddlDsl::SqlCharacter
+SqlDataType <|-- ddlDsl::SqlDateTime
+SqlDataType <|-- ddlDsl::SqlNumber
+SqlDateTime <|-- ddlDsl::SqlDate
+SqlDateTime <|-- ddlDsl::SqlInterval
+SqlDateTime <|-- ddlDsl::SqlTimeStamp
+TableProperty <|-- ddlDsl::Column
+TableProperty <|-- ddlDsl::Constraint
+ddlDsl::Alter "1..1" *-- "0..1" ddlDsl::AlterTableAction : action2
+ddlDsl::Column "0..1" -- "1..1" ddlDsl::ColumnComment : column10
+ddlDsl::Column "0..9999" -- "1..1" ddlDsl::CreateIndex : columns15
+ddlDsl::Column "0..9999" -- "1..1" ddlDsl::UniqueKeyConstraint : columns25
+ddlDsl::Column "0..9999" -- "1..1" ddlDsl::PrimaryKeyConstraint : columns27
+ddlDsl::ForeignKeyConstraint "1..1" -- "0..9999" ddlDsl::Column : columns29
+ddlDsl::Column "0..9999" -- "1..1" ddlDsl::ReferenceClause : columns37
+ddlDsl::Constraint "0..1" --* "1..1" ddlDsl::Column : constraint20
+ddlDsl::Constraint "0..1" --* "1..1" ddlDsl::AlterTableAction : constraint4
+ddlDsl::DropTableConstraint "1..1" -- "0..1" ddlDsl::Constraint : constraintRef6
+ddlDsl::CreateTable "1..1" *-- "0..9999" ddlDsl::TableProperty : properties11
+ddlDsl::ReferenceClause "0..1" --* "1..1" ddlDsl::Column : reference23
+ddlDsl::ReferenceClause "0..1" --* "1..1" ddlDsl::ForeignKeyConstraint : reference31
+ddlDsl::DdlStatement "0..9999" --* "1..1" ddlDsl::Ddl : statements0
+ddlDsl::Alter "1..1" -- "0..1" ddlDsl::CreateTable : table1
+ddlDsl::CreateTable "0..1" -- "1..1" ddlDsl::CreateIndex : table13
+ddlDsl::ReferenceClause "1..1" -- "0..1" ddlDsl::CreateTable : table34
+ddlDsl::CreateTable "0..1" -- "1..1" ddlDsl::TableComment : table8
+ddlDsl::SqlDataType "0..1" --* "1..1" ddlDsl::Column : type18
+@enduml

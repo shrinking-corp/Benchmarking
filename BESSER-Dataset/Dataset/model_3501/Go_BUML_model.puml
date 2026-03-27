@@ -1,0 +1,208 @@
+@startuml
+class ElseIfCondition {
+}
+class go::ARIT::EXPR {
+  + atr : str
+  + num : str
+  + num1 : str
+  + num2 : str
+  + op : str
+}
+class go::ArrayType {
+  + qtd : str
+}
+class go::ArrayValue {
+}
+class go::Assignment {
+  + id : str
+  + qtd : str
+}
+class go::BINARY::EXP {
+  + arit : str
+}
+class go::BLOCK {
+}
+class go::BOOL::OP {
+}
+class go::BOOLEAN::VALUE {
+  + falso : str
+  + verdadeiro : str
+}
+class go::BasicType {
+  + boolean : str
+  + float : str
+  + int : str
+  + string : str
+}
+class go::COMPARISON {
+  + igual : str
+  + maiorigualque : str
+  + maiorque : str
+  + menorigualque : str
+  + menorque : str
+}
+class go::Chamada {
+}
+class go::Condition {
+}
+class go::Const {
+  + const : str
+}
+class go::EObject {
+}
+class go::EXPRESSAO {
+}
+class go::EXPRESSAOLINHA {
+}
+class go::ElseCondition {
+}
+class go::ElseIfCondition {
+}
+class go::ForClause {
+}
+class go::ForDecl {
+}
+class go::FunctionCall {
+  + id : str
+}
+class go::FunctionType {
+  + nome : str
+}
+class go::GoDecl {
+}
+class go::IDList {
+  + idList : str
+  + vir : str
+}
+class go::IGUAL {
+  + igual : str
+}
+class go::IfCondition {
+}
+class go::IfStmt {
+}
+class go::Init {
+}
+class go::InitStmt {
+}
+class go::LITERAIS::BASICOS {
+  + numero : str
+  + string : str
+}
+class go::LiteraisList {
+  + vir : str
+}
+class go::PARAMETER {
+  + id : str
+}
+class go::PARAMETERS::LIST {
+  + vir : str
+}
+class go::PONTOSIGUAL {
+  + op : str
+}
+class go::Parameters {
+}
+class go::PostStmt {
+}
+class go::RangeDecl {
+}
+class go::ReturnStmt {
+}
+class go::Signature {
+}
+class go::SignatureDel {
+  + id : str
+}
+class go::TIPO {
+}
+class go::Types {
+}
+class go::Var {
+  + var : str
+}
+class go::VarCall {
+  + id : str
+}
+class go::VarDecl {
+}
+ElseIfCondition <|-- go::IfCondition
+go::ArrayType "0..1" --* "1..1" go::Types : array160
+go::ArrayType "0..1" --* "1..1" go::VarDecl : array52
+go::ArrayValue "0..1" --* "1..1" go::EXPRESSAO : arrayValue92
+go::ARIT::EXPR "0..1" --* "1..1" go::PostStmt : art32
+go::Assignment "0..1" --* "1..1" go::EXPRESSAO : assignment86
+go::Signature "0..1" --* "1..1" go::FunctionType : assinatura126
+go::IGUAL "0..1" --* "1..1" go::VarDecl : atribuicao46
+go::LITERAIS::BASICOS "0..1" --* "1..1" go::ReturnStmt : basic101
+go::LITERAIS::BASICOS "0..9999" --* "1..1" go::BINARY::EXP : basic115
+go::Types "1..1" *-- "0..1" go::BasicType : basic158
+go::BasicType "0..1" --* "1..1" go::ArrayType : basic163
+go::EXPRESSAO "1..1" *-- "0..1" go::LITERAIS::BASICOS : basic84
+go::LITERAIS::BASICOS "0..1" --* "1..1" go::PARAMETER : basico152
+go::BINARY::EXP "0..1" --* "1..1" go::EXPRESSAO : binary_exp82
+go::BLOCK "0..1" --* "1..1" go::FunctionType : bloco128
+go::BOOL::OP "0..1" --* "1..1" go::BINARY::EXP : bool124
+go::LITERAIS::BASICOS "1..1" *-- "0..1" go::BOOLEAN::VALUE : booleano113
+go::Chamada "1..1" *-- "0..9999" go::EObject : cham169
+go::Chamada "0..1" --* "1..1" go::EXPRESSAO : cham97
+go::ForDecl "1..1" *-- "0..1" go::ForClause : clause7
+go::GoDecl "0..1" --* "1..1" go::ForDecl : comandos10
+go::COMPARISON "0..1" --* "1..1" go::Condition : comparador36
+go::Condition "0..1" --* "1..1" go::IfCondition : cond137
+go::Condition "0..1" --* "1..1" go::ForClause : condition25
+go::TIPO "1..1" *-- "0..1" go::Const : constante71
+go::FunctionType "0..1" --* "1..1" go::EXPRESSAO : declFunction79
+go::PONTOSIGUAL "0..1" --* "1..1" go::Assignment : dois63
+go::GoDecl "0..9999" --* "1..1" go::Init : elements0
+go::ElseCondition "0..1" --* "1..1" go::IfStmt : else186
+go::ElseIfCondition "0..9999" --* "1..1" go::IfStmt : elseif184
+go::EXPRESSAO "0..1" --* "1..1" go::EXPRESSAOLINHA : exp73
+go::EXPRESSAOLINHA "1..1" *-- "0..1" go::EXPRESSAOLINHA : explinha77
+go::EXPRESSAO "0..1" --* "1..1" go::Condition : expr134
+go::Condition "1..1" *-- "0..1" go::EXPRESSAO : expr238
+go::EXPRESSAOLINHA "0..1" --* "1..1" go::GoDecl : expressao5
+go::EXPRESSAOLINHA "0..1" --* "1..1" go::VarDecl : expressao54
+go::EXPRESSAOLINHA "0..1" --* "1..1" go::Assignment : expressao66
+go::ForDecl "0..1" --* "1..1" go::EXPRESSAO : for89
+go::FunctionCall "0..1" --* "1..1" go::ReturnStmt : func103
+go::BINARY::EXP "1..1" *-- "0..9999" go::FunctionCall : func121
+go::FunctionCall "0..1" --* "1..1" go::RangeDecl : func21
+go::FunctionType "0..1" --* "1..1" go::GoDecl : func3
+go::RangeDecl "1..1" *-- "0..9999" go::IDList : idList13
+go::ReturnStmt "1..1" *-- "0..1" go::VarCall : idVar106
+go::IfCondition "0..1" --* "1..1" go::IfStmt : if181
+go::IfStmt "0..1" --* "1..1" go::EXPRESSAO : if99
+go::IGUAL "0..1" --* "1..1" go::RangeDecl : igual15
+go::IGUAL "0..1" --* "1..1" go::Assignment : igual61
+go::InitStmt "0..1" --* "1..1" go::ForClause : init23
+go::IDList "0..9999" --* "1..1" go::IDList : list42
+go::BLOCK "1..1" *-- "0..9999" go::EXPRESSAO : listaDeComandos144
+go::LiteraisList "0..1" --* "1..1" go::ArrayValue : lit109
+go::EObject "0..9999" --* "1..1" go::LiteraisList : lit111
+go::PONTOSIGUAL "0..1" --* "1..1" go::RangeDecl : op17
+go::Parameters "0..1" --* "1..1" go::Signature : params130
+go::Parameters "1..1" *-- "0..1" go::PARAMETERS::LIST : params135
+go::PARAMETER "0..9999" --* "1..1" go::PARAMETERS::LIST : params150
+go::FunctionCall "1..1" *-- "0..1" go::PARAMETERS::LIST : params166
+go::PostStmt "0..1" --* "1..1" go::ForClause : post27
+go::PONTOSIGUAL "0..1" --* "1..1" go::VarDecl : pront49
+go::ForDecl "1..1" *-- "0..1" go::RangeDecl : range8
+go::Types "0..1" --* "1..1" go::Signature : retorno132
+go::ReturnStmt "0..1" --* "1..1" go::BLOCK : retorno147
+go::VarDecl "1..1" *-- "0..1" go::SignatureDel : signature44
+go::EXPRESSAO "0..9999" --* "1..1" go::IfCondition : then139
+go::EXPRESSAO "0..9999" --* "1..1" go::ElseCondition : then142
+go::Types "0..1" --* "1..1" go::PARAMETER : tipo155
+go::SignatureDel "1..1" *-- "0..1" go::TIPO : tipoDecl57
+go::Types "0..1" --* "1..1" go::SignatureDel : type59
+go::VarDecl "0..1" --* "1..1" go::GoDecl : var1
+go::VarCall "0..1" --* "1..1" go::ARIT::EXPR : var1172
+go::ARIT::EXPR "1..1" *-- "0..1" go::VarCall : var178
+go::VarCall "0..1" --* "1..1" go::ARIT::EXPR : var2175
+go::VarCall "0..9999" --* "1..1" go::BINARY::EXP : varCal118
+go::InitStmt "1..1" *-- "0..1" go::VarDecl : varDecl29
+go::EXPRESSAO "1..1" *-- "0..1" go::VarDecl : variaveis94
+go::VarCall "0..1" --* "1..1" go::RangeDecl : variavel19
+go::Var "0..1" --* "1..1" go::TIPO : variavel69
+@enduml
