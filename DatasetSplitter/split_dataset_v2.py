@@ -95,7 +95,7 @@ def stratified_split(
 
             # A lone model in a category always goes to training
             if len(at_the_end) == 1:
-                at_the_end.extend(at_the_end)
+                train.extend(at_the_end)
             else:
                 train.extend(at_the_end[:split_idx])
                 validation.extend(at_the_end[split_idx:])
