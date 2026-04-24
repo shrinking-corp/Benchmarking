@@ -189,13 +189,16 @@ class rif11a::ExchangeFile::SpecType {
 AttributeDefinition <|-- rif11a::ExchangeFile::AttributeDefinitionComplex
 AttributeDefinition <|-- rif11a::ExchangeFile::AttributeDefinitionEnumeration
 AttributeDefinition <|-- rif11a::ExchangeFile::AttributeDefinitionSimple
+AttributeValue <|-- rif11a::ExchangeFile::AttributeValueComplex
+AttributeValue <|-- rif11a::ExchangeFile::AttributeValueEnumeration
+AttributeValue <|-- rif11a::ExchangeFile::AttributeValueSimple
 AttributeValueComplex <|-- rif11a::ExchangeFile::AttributeValueEmbeddedDocument
 AttributeValueComplex <|-- rif11a::ExchangeFile::AttributeValueEmbeddedFile
 AttributeValueComplex <|-- rif11a::ExchangeFile::AttributeValueFileReference
 AttributeValueComplex <|-- rif11a::ExchangeFile::AttributeValueXmlData
-AttributeValue <|-- rif11a::ExchangeFile::AttributeValueComplex
-AttributeValue <|-- rif11a::ExchangeFile::AttributeValueEnumeration
-AttributeValue <|-- rif11a::ExchangeFile::AttributeValueSimple
+DatatypeDefinition <|-- rif11a::ExchangeFile::DatatypeDefinitionComplex
+DatatypeDefinition <|-- rif11a::ExchangeFile::DatatypeDefinitionEnumeration
+DatatypeDefinition <|-- rif11a::ExchangeFile::DatatypeDefinitionSimple
 DatatypeDefinitionComplex <|-- rif11a::ExchangeFile::DatatypeDefinitionBinaryFile
 DatatypeDefinitionComplex <|-- rif11a::ExchangeFile::DatatypeDefinitionDocument
 DatatypeDefinitionComplex <|-- rif11a::ExchangeFile::DatatypeDefinitionXmlData
@@ -204,9 +207,6 @@ DatatypeDefinitionSimple <|-- rif11a::ExchangeFile::DatatypeDefinitionDate
 DatatypeDefinitionSimple <|-- rif11a::ExchangeFile::DatatypeDefinitionInteger
 DatatypeDefinitionSimple <|-- rif11a::ExchangeFile::DatatypeDefinitionReal
 DatatypeDefinitionSimple <|-- rif11a::ExchangeFile::DatatypeDefinitionString
-DatatypeDefinition <|-- rif11a::ExchangeFile::DatatypeDefinitionComplex
-DatatypeDefinition <|-- rif11a::ExchangeFile::DatatypeDefinitionEnumeration
-DatatypeDefinition <|-- rif11a::ExchangeFile::DatatypeDefinitionSimple
 Identifiable <|-- rif11a::ExchangeFile::AccessPolicy
 Identifiable <|-- rif11a::ExchangeFile::AttributeDefinition
 Identifiable <|-- rif11a::ExchangeFile::AttributeValue
@@ -220,52 +220,52 @@ SpecElementWithUserDefinedAttributes <|-- rif11a::ExchangeFile::SpecGroup
 SpecElementWithUserDefinedAttributes <|-- rif11a::ExchangeFile::SpecHierarchyRoot
 SpecElementWithUserDefinedAttributes <|-- rif11a::ExchangeFile::SpecObject
 SpecElementWithUserDefinedAttributes <|-- rif11a::ExchangeFile::SpecRelation
-rif11a::ExchangeFile::RIF "1..1" *-- "0..9999" ExchangeFile::SpecHierarchyRoot : SpecHierarchyRoots82
+ExchangeFile::SpecHierarchyRoot "0..9999" --* "1..1" rif11a::ExchangeFile::RIF : SpecHierarchyRoots82
 ExchangeFile::AccessPolicy "0..9999" --* "1..1" rif11a::ExchangeFile::RIF : accessPolicies78
 ExchangeFile::AttributeDefinition "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : attributeDefinitions25
 ExchangeFile::AttributeValue "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : attributeValues35
 DataTypes::BinaryContent "1..1" --* "1..1" rif11a::ExchangeFile::AttributeValueEmbeddedFile : binaryContent70
-rif11a::ExchangeFile::SpecHierarchyRoot "1..1" *-- "0..9999" ExchangeFile::SpecHierarchy : children0
+ExchangeFile::SpecHierarchy "0..9999" --* "1..1" rif11a::ExchangeFile::SpecHierarchyRoot : children0
 ExchangeFile::SpecHierarchy "0..9999" --* "1..1" rif11a::ExchangeFile::SpecHierarchy : children6
 ExchangeFile::DatatypeDefinition "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : datatypeDefinitions30
 ExchangeFile::DatatypeDefinition "0..9999" --* "1..1" rif11a::ExchangeFile::RIF : datatypes79
 ExchangeFile::AttributeValueComplex "0..1" --* "1..1" rif11a::ExchangeFile::AttributeDefinitionComplex : defaultValue50
 ExchangeFile::AttributeValueEnumeration "0..1" --* "1..1" rif11a::ExchangeFile::AttributeDefinitionEnumeration : defaultValue53
 ExchangeFile::AttributeValueSimple "0..1" --* "1..1" rif11a::ExchangeFile::AttributeDefinitionSimple : defaultValue62
-rif11a::ExchangeFile::AttributeValueEnumeration "1..1" -- "1..1" ExchangeFile::AttributeDefinitionEnumeration : definition59
+ExchangeFile::AttributeDefinitionEnumeration "1..1" -- "1..1" rif11a::ExchangeFile::AttributeValueEnumeration : definition59
 ExchangeFile::AttributeDefinitionSimple "1..1" -- "1..1" rif11a::ExchangeFile::AttributeValueSimple : definition64
 ExchangeFile::AttributeDefinitionComplex "1..1" -- "1..1" rif11a::ExchangeFile::AttributeValueEmbeddedDocument : definition65
 ExchangeFile::AttributeDefinitionComplex "1..1" -- "1..1" rif11a::ExchangeFile::AttributeValueEmbeddedFile : definition68
 ExchangeFile::AttributeDefinitionComplex "1..1" -- "1..1" rif11a::ExchangeFile::AttributeValueFileReference : definition72
-rif11a::ExchangeFile::AttributeValueXmlData "1..1" -- "1..1" ExchangeFile::AttributeDefinitionComplex : definition74
-rif11a::ExchangeFile::SpecHierarchy "1..1" -- "1..1" ExchangeFile::SpecObject : object5
+ExchangeFile::AttributeDefinitionComplex "1..1" -- "1..1" rif11a::ExchangeFile::AttributeValueXmlData : definition74
+ExchangeFile::SpecObject "1..1" -- "1..1" rif11a::ExchangeFile::SpecHierarchy : object5
 ExchangeFile::EmbeddedValue "1..1" --* "1..1" rif11a::ExchangeFile::EnumValue : properties56
 ExchangeFile::RelationGroup "0..9999" --* "1..1" rif11a::ExchangeFile::SpecGroup : relationGroups11
 ExchangeFile::RelationGroup "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : relationGroups28
-rif11a::ExchangeFile::RelationGroup "1..1" -- "0..1" ExchangeFile::SpecType : relationType13
+ExchangeFile::SpecType "0..1" -- "1..1" rif11a::ExchangeFile::RelationGroup : relationType13
 ExchangeFile::SpecObject "1..1" -- "1..1" rif11a::ExchangeFile::SpecRelation : source21
 ExchangeFile::SpecGroup "1..1" -- "1..1" rif11a::ExchangeFile::RelationGroup : sourceGroup16
 ExchangeFile::AttributeDefinition "0..9999" --* "1..1" rif11a::ExchangeFile::SpecType : specAttributes4
-rif11a::ExchangeFile::AccessPolicy "1..1" -- "0..9999" ExchangeFile::SpecGroup : specGroups24
+ExchangeFile::SpecGroup "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : specGroups24
 ExchangeFile::SpecGroup "0..9999" --* "1..1" rif11a::ExchangeFile::RIF : specGroups88
 ExchangeFile::SpecHierarchy "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : specHierarchies41
 ExchangeFile::SpecHierarchyRoot "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : specHierarchyRoots47
-rif11a::ExchangeFile::AccessPolicy "1..1" -- "0..9999" ExchangeFile::SpecObject : specObjects44
+ExchangeFile::SpecObject "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : specObjects44
 ExchangeFile::SpecObject "0..9999" --* "1..1" rif11a::ExchangeFile::RIF : specObjects85
 ExchangeFile::SpecObject "0..9999" -- "1..1" rif11a::ExchangeFile::SpecGroup : specObjects9
 ExchangeFile::SpecRelation "0..9999" -- "1..1" rif11a::ExchangeFile::RelationGroup : specRelations12
-rif11a::ExchangeFile::AccessPolicy "1..1" -- "0..9999" ExchangeFile::SpecRelation : specRelations32
-rif11a::ExchangeFile::RIF "1..1" *-- "0..9999" ExchangeFile::SpecRelation : specRelations94
+ExchangeFile::SpecRelation "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : specRelations32
+ExchangeFile::SpecRelation "0..9999" --* "1..1" rif11a::ExchangeFile::RIF : specRelations94
 ExchangeFile::SpecType "0..9999" -- "1..1" rif11a::ExchangeFile::AccessPolicy : specTypes38
 ExchangeFile::SpecType "0..9999" --* "1..1" rif11a::ExchangeFile::RIF : specTypes91
-rif11a::ExchangeFile::DatatypeDefinitionEnumeration "1..1" *-- "0..9999" ExchangeFile::EnumValue : specifiedValues55
+ExchangeFile::EnumValue "0..9999" --* "1..1" rif11a::ExchangeFile::DatatypeDefinitionEnumeration : specifiedValues55
 ExchangeFile::SpecObject "1..1" -- "1..1" rif11a::ExchangeFile::SpecRelation : target19
 ExchangeFile::SpecType "1..1" -- "1..1" rif11a::ExchangeFile::SpecElementWithUserDefinedAttributes : type1
 ExchangeFile::DatatypeDefinitionComplex "1..1" -- "1..1" rif11a::ExchangeFile::AttributeDefinitionComplex : type49
-rif11a::ExchangeFile::AttributeDefinitionEnumeration "1..1" -- "1..1" ExchangeFile::DatatypeDefinitionEnumeration : type52
-rif11a::ExchangeFile::AttributeDefinitionSimple "1..1" -- "1..1" ExchangeFile::DatatypeDefinitionSimple : type61
-rif11a::ExchangeFile::SpecElementWithUserDefinedAttributes "1..1" *-- "0..9999" ExchangeFile::AttributeValue : values2
+ExchangeFile::DatatypeDefinitionEnumeration "1..1" -- "1..1" rif11a::ExchangeFile::AttributeDefinitionEnumeration : type52
+ExchangeFile::DatatypeDefinitionSimple "1..1" -- "1..1" rif11a::ExchangeFile::AttributeDefinitionSimple : type61
+ExchangeFile::AttributeValue "0..9999" --* "1..1" rif11a::ExchangeFile::SpecElementWithUserDefinedAttributes : values2
 ExchangeFile::EnumValue "0..9999" -- "1..1" rif11a::ExchangeFile::AttributeValueEnumeration : values57
-rif11a::ExchangeFile::AttributeValueEmbeddedDocument "1..1" *-- "1..1" DataTypes::XhtmlContent : xhtmlContent66
+DataTypes::XhtmlContent "1..1" --* "1..1" rif11a::ExchangeFile::AttributeValueEmbeddedDocument : xhtmlContent66
 DataTypes::XmlContent "1..1" --* "1..1" rif11a::ExchangeFile::AttributeValueXmlData : xmlContent76
 @enduml

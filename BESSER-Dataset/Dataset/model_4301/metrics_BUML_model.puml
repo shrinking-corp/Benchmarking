@@ -121,21 +121,21 @@ DataKind <|-- metrics::ValueDataKind
 Mapping <|-- metrics::MappingCSV
 Mapping <|-- metrics::MappingRDBMS
 Mapping <|-- metrics::MappingXLS
-metrics::MappingColumn "0..9999" --* "1..1" metrics::Mapping : dataMappingColumns1
-metrics::MappingColumn "1..1" *-- "0..1" metrics::DataKind : dataType4
+metrics::Mapping "1..1" *-- "0..9999" metrics::MappingColumn : dataMappingColumns1
+metrics::DataKind "0..1" --* "1..1" metrics::MappingColumn : dataType4
 metrics::Expression "0..1" -- "1..1" metrics::Metric : expressionRef17
 metrics::MappingRecord "0..9999" --* "1..1" metrics::MappingStatistic : failedRecords6
-metrics::MappingColumn "0..9999" --* "1..1" metrics::Mapping : headerMappingColumns0
+metrics::Mapping "1..1" *-- "0..9999" metrics::MappingColumn : headerMappingColumns0
 metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : mappingDuration7
 metrics::Mapping "0..1" --* "1..1" metrics::MetricSource : metricMapping27
-metrics::ValueDataKind "1..1" -- "0..1" metrics::Metric : metricRef34
-metrics::MetricRetentionRules "1..1" *-- "0..9999" metrics::MetricRetentionRule : metricRetentionRules25
+metrics::Metric "0..1" -- "1..1" metrics::ValueDataKind : metricRef34
+metrics::MetricRetentionRule "0..9999" --* "1..1" metrics::MetricRetentionRules : metricRetentionRules25
 metrics::Metric "1..1" -- "0..1" metrics::MetricSource : metricSourceRef19
-metrics::Value "0..9999" --* "1..1" metrics::MetricValueRange : metricValues33
-metrics::Metric "0..9999" --* "1..1" metrics::Metric : metrics16
-metrics::MappingStatistic "1..1" *-- "1..1" metrics::DateTimeRange : periodEstimate9
+metrics::MetricValueRange "1..1" *-- "0..9999" metrics::Value : metricValues33
+metrics::Metric "1..1" *-- "0..9999" metrics::Metric : metrics16
+metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : periodEstimate9
 metrics::Expression "0..1" -- "1..1" metrics::MetricRetentionRule : retentionExpression23
 metrics::MappingStatistic "0..9999" --* "1..1" metrics::MetricSource : statistics30
 metrics::MappingStatistic "0..9999" --* "1..1" metrics::MappingStatistic : subStatistics13
-metrics::Unit "0..1" -- "1..1" metrics::Metric : unitRef21
+metrics::Metric "1..1" -- "0..1" metrics::Unit : unitRef21
 @enduml

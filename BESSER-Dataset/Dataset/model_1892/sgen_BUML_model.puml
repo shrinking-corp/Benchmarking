@@ -1,0 +1,83 @@
+@startuml
+class DeprecatableElement {
+}
+class Literal {
+}
+class NamedElement {
+}
+enum ParameterTypes {
+  BOOLEAN
+  FLOAT
+  INTEGER
+  STRING
+}
+class sgen::BoolLiteral {
+  + value : bool
+}
+class sgen::DeprecatableElement {
+  + comment : str
+  + deprecated : bool
+}
+class sgen::EObject {
+}
+class sgen::FeatureConfiguration {
+  + getParameterValue(parameterName : any) : str
+}
+class sgen::FeatureParameter {
+  + optional : bool
+  + parameterType : str
+}
+class sgen::FeatureParameterValue {
+  + getBooleanValue() : bool
+  + getStringValue() : str
+  + setValue(boolean : any) : void
+}
+class sgen::FeatureType {
+  + optional : bool
+}
+class sgen::FeatureTypeLibrary {
+  + name : str
+}
+class sgen::GeneratorConfiguration {
+}
+class sgen::GeneratorEntry {
+  + contentType : str
+  + getFeatureConfiguration(featureName : any) : str
+  + getFeatureParameterValue(featureName : any, paramName : any) : str
+}
+class sgen::GeneratorModel {
+  + generatorId : str
+}
+class sgen::IntLiteral {
+  + value : int
+}
+abstract class sgen::Literal {
+}
+class sgen::RealLiteral {
+  + value : float
+}
+class sgen::StringLiteral {
+  + value : str
+}
+DeprecatableElement <|-- sgen::FeatureParameter
+DeprecatableElement <|-- sgen::FeatureType
+Literal <|-- sgen::BoolLiteral
+Literal <|-- sgen::IntLiteral
+Literal <|-- sgen::RealLiteral
+Literal <|-- sgen::StringLiteral
+NamedElement <|-- sgen::FeatureParameter
+NamedElement <|-- sgen::FeatureType
+sgen::FeatureConfiguration "0..9999" --* "1..1" sgen::GeneratorConfiguration : configurations1
+sgen::EObject "0..1" -- "1..1" sgen::GeneratorEntry : elementRef9
+sgen::GeneratorEntry "0..9999" --* "1..1" sgen::GeneratorModel : entries0
+sgen::FeatureParameterValue "1..1" *-- "0..1" sgen::Literal : expression16
+sgen::FeatureConfiguration "0..1" -- "1..1" sgen::FeatureParameterValue : featureConfiguration15
+sgen::FeatureParameter "1..1" -- "0..1" sgen::FeatureType : featureType4
+sgen::FeatureConfiguration "0..9999" --* "1..1" sgen::GeneratorEntry : features11
+sgen::FeatureType "1..1" -- "1..1" sgen::FeatureTypeLibrary : library3
+sgen::FeatureParameter "0..1" -- "1..1" sgen::FeatureParameterValue : parameter14
+sgen::FeatureConfiguration "1..1" *-- "0..9999" sgen::FeatureParameterValue : parameterValues8
+sgen::FeatureParameter "0..9999" --* "1..1" sgen::FeatureType : parameters2
+sgen::FeatureConfiguration "1..1" -- "0..1" sgen::FeatureType : type5
+sgen::FeatureType "0..9999" --* "1..1" sgen::FeatureTypeLibrary : types18
+@enduml

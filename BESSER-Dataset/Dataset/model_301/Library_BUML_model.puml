@@ -73,18 +73,18 @@ Person <|-- Library::Borrower
 Person <|-- Library::Employee
 Person <|-- Library::Writer
 Library::Book "1..1" -- "1..1" Library::Writer : author0
-Library::Writer "0..1" -- "1..1" Library::BookOnTape : author18
+Library::BookOnTape "1..1" -- "0..1" Library::Writer : author18
 Library::Book "0..9999" -- "1..1" Library::Writer : books15
 Library::Book "0..9999" -- "1..1" Library::Library : books8
-Library::Lendable "0..9999" -- "1..1" Library::Borrower : borrowed23
+Library::Borrower "1..1" -- "0..9999" Library::Lendable : borrowed23
 Library::Borrower "0..9999" -- "1..1" Library::Lendable : borrowers16
 Library::Borrower "0..9999" --* "1..1" Library::Library : borrowers4
 Library::Library "1..1" *-- "0..9999" Library::Library : branches11
-Library::VideoCassette "1..1" -- "0..9999" Library::Person : cast21
+Library::Person "0..9999" -- "1..1" Library::VideoCassette : cast21
 Library::Employee "0..9999" --* "1..1" Library::Library : employees2
 Library::Employee "0..1" -- "1..1" Library::Employee : manager25
-Library::Library "0..1" -- "1..1" Library::Library : parentBranch13
-Library::Person "0..1" -- "1..1" Library::BookOnTape : reader17
-Library::Library "1..1" *-- "0..9999" Library::Item : stock6
-Library::Writer "0..9999" --* "1..1" Library::Library : writers1
+Library::Library "1..1" -- "0..1" Library::Library : parentBranch13
+Library::BookOnTape "1..1" -- "0..1" Library::Person : reader17
+Library::Item "0..9999" --* "1..1" Library::Library : stock6
+Library::Library "1..1" *-- "0..9999" Library::Writer : writers1
 @enduml

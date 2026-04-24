@@ -26,18 +26,18 @@ class feature::Group {
   + minCardinality : int
 }
 feature::Annotation "0..9999" --* "1..1" feature::Feature : annotations15
-feature::Feature "1..1" *-- "0..9999" feature::Attribute : attributes11
+feature::Attribute "0..9999" --* "1..1" feature::Feature : attributes11
 feature::Feature "1..9999" --* "1..1" feature::Group : childFeatures19
-feature::FeatureModel "0..9999" --* "1..1" feature::FeatureModel : children4
-feature::Feature "1..9999" -- "1..1" feature::Constraint : constrainedFeatures21
-feature::FeatureModel "0..1" -- "1..1" feature::FeatureModel : constrainingFeatureModel9
-feature::FeatureModel "1..1" *-- "0..9999" feature::Constraint : constraints0
+feature::FeatureModel "1..1" *-- "0..9999" feature::FeatureModel : children4
+feature::Constraint "1..1" -- "1..9999" feature::Feature : constrainedFeatures21
+feature::FeatureModel "1..1" -- "0..1" feature::FeatureModel : constrainingFeatureModel9
+feature::Constraint "0..9999" --* "1..1" feature::FeatureModel : constraints0
 feature::Constraint "0..9999" -- "1..1" feature::Feature : constraints17
-feature::Feature "1..1" -- "1..1" feature::Attribute : feature23
+feature::Attribute "1..1" -- "1..1" feature::Feature : feature23
 feature::Annotation "1..1" -- "1..1" feature::Feature : feature25
-feature::Group "0..9999" --* "1..1" feature::Feature : groups12
+feature::Feature "1..1" *-- "0..9999" feature::Group : groups12
 feature::FeatureModel "1..1" -- "0..1" feature::FeatureModel : parent6
-feature::Group "1..1" -- "1..1" feature::Feature : parentFeature18
-feature::Group "0..1" -- "1..1" feature::Feature : parentGroup13
+feature::Feature "1..1" -- "1..1" feature::Group : parentFeature18
+feature::Feature "1..1" -- "0..1" feature::Group : parentGroup13
 feature::Feature "0..1" --* "1..1" feature::FeatureModel : root1
 @enduml

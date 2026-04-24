@@ -189,6 +189,8 @@ class cloudml::core::VMPort {
 }
 class cloudml::core::VMPortInstance {
 }
+CloudMLElement <|-- cloudml::core::CloudMLElementWithProperties
+CloudMLElement <|-- cloudml::core::Property
 CloudMLElementWithProperties <|-- cloudml::core::Cloud
 CloudMLElementWithProperties <|-- cloudml::core::CloudMLModel
 CloudMLElementWithProperties <|-- cloudml::core::Component
@@ -205,41 +207,39 @@ CloudMLElementWithProperties <|-- cloudml::core::Resource
 CloudMLElementWithProperties <|-- cloudml::core::ResourcesPool
 CloudMLElementWithProperties <|-- cloudml::core::VMPort
 CloudMLElementWithProperties <|-- cloudml::core::VMPortInstance
-CloudMLElement <|-- cloudml::core::CloudMLElementWithProperties
-CloudMLElement <|-- cloudml::core::Property
-ComponentInstance <|-- cloudml::core::ExternalComponentInstance
-ComponentInstance <|-- cloudml::core::InternalComponentInstance
 Component <|-- cloudml::core::ExternalComponent
 Component <|-- cloudml::core::InternalComponent
-ExecutionPlatformInstance <|-- cloudml::core::ProvidedExecutionPlatformInstance
-ExecutionPlatformInstance <|-- cloudml::core::RequiredExecutionPlatformInstance
+ComponentInstance <|-- cloudml::core::ExternalComponentInstance
+ComponentInstance <|-- cloudml::core::InternalComponentInstance
 ExecutionPlatform <|-- cloudml::core::ProvidedExecutionPlatform
 ExecutionPlatform <|-- cloudml::core::RequiredExecutionPlatform
-ExternalComponentInstance <|-- cloudml::core::VMInstance
+ExecutionPlatformInstance <|-- cloudml::core::ProvidedExecutionPlatformInstance
+ExecutionPlatformInstance <|-- cloudml::core::RequiredExecutionPlatformInstance
 ExternalComponent <|-- cloudml::core::VM
-PortInstance <|-- cloudml::core::ProvidedPortInstance
-PortInstance <|-- cloudml::core::RequiredPortInstance
+ExternalComponentInstance <|-- cloudml::core::VMInstance
 Port <|-- cloudml::core::ProvidedPort
 Port <|-- cloudml::core::RequiredPort
+PortInstance <|-- cloudml::core::ProvidedPortInstance
+PortInstance <|-- cloudml::core::RequiredPortInstance
 Resource <|-- cloudml::core::DockerResource
 Resource <|-- cloudml::core::PuppetResource
 VMInstance "1..9999" -- "1..1" cloudml::core::ResourcesPool : baseInstances105
 Cloud "0..9999" --* "1..1" cloudml::core::CloudMLModel : clouds10
 Component "1..1" -- "1..1" cloudml::core::Port : component44
 ComponentInstance "1..1" -- "1..1" cloudml::core::PortInstance : componentInstance72
-cloudml::core::CloudMLModel "1..1" *-- "0..9999" ComponentInstance : componentInstances12
+ComponentInstance "0..9999" --* "1..1" cloudml::core::CloudMLModel : componentInstances12
 Component "0..9999" --* "1..1" cloudml::core::CloudMLModel : components8
 InternalComponent "0..9999" --* "1..1" cloudml::core::InternalComponent : compositeInternalComponents39
-cloudml::core::RequiredExecutionPlatform "1..1" *-- "0..9999" Property : demands98
-cloudml::core::CloudMLElementWithProperties "1..1" -- "0..9999" DockerResource : dockerResources5
+Property "0..9999" --* "1..1" cloudml::core::RequiredExecutionPlatform : demands98
+DockerResource "0..9999" -- "1..1" cloudml::core::CloudMLElementWithProperties : dockerResources5
 ExecuteInstance "0..9999" --* "1..1" cloudml::core::CloudMLModel : executesInstances30
-cloudml::core::CloudMLModel "1..1" *-- "0..9999" ExternalComponentInstance : externalComponentInstances20
+ExternalComponentInstance "0..9999" --* "1..1" cloudml::core::CloudMLModel : externalComponentInstances20
 ExternalComponent "0..9999" --* "1..1" cloudml::core::CloudMLModel : externalComponents16
 InternalComponentInstance "0..9999" --* "1..1" cloudml::core::CloudMLModel : internalComponentInstances18
 InternalComponent "0..9999" --* "1..1" cloudml::core::CloudMLModel : internalComponents14
 Property "0..9999" --* "1..1" cloudml::core::ProvidedExecutionPlatform : offers96
 Component "1..1" -- "1..1" cloudml::core::ExecutionPlatform : owner90
-cloudml::core::ExecutionPlatformInstance "1..1" -- "1..1" ComponentInstance : owner92
+ComponentInstance "1..1" -- "1..1" cloudml::core::ExecutionPlatformInstance : owner92
 Property "0..9999" --* "1..1" cloudml::core::CloudMLElementWithProperties : properties0
 VMPort "0..9999" --* "1..1" cloudml::core::ExternalComponent : provide85
 VMPortInstance "0..9999" --* "1..1" cloudml::core::ExternalComponentInstance : provide88
@@ -252,17 +252,17 @@ ProvidedPort "1..1" -- "1..1" cloudml::core::Relationship : providedPort48
 ProvidedPortInstance "1..1" -- "1..1" cloudml::core::RelationshipInstance : providedPortInstance80
 ProvidedPortInstance "0..9999" --* "1..1" cloudml::core::ComponentInstance : providedPortInstances62
 Resource "0..1" --* "1..1" cloudml::core::Relationship : providedPortResource54
-cloudml::core::Component "1..1" *-- "0..9999" ProvidedPort : providedPorts35
-cloudml::core::ExternalComponent "1..1" -- "0..1" Provider : provider83
+ProvidedPort "0..9999" --* "1..1" cloudml::core::Component : providedPorts35
+Provider "0..1" -- "1..1" cloudml::core::ExternalComponent : provider83
 Provider "0..9999" --* "1..1" cloudml::core::CloudMLModel : providers7
 PuppetResource "0..9999" --* "1..1" cloudml::core::CloudMLElementWithProperties : puppetResources3
-cloudml::core::CloudMLModel "1..1" *-- "0..9999" RelationshipInstance : relationshipInstances28
+RelationshipInstance "0..9999" --* "1..1" cloudml::core::CloudMLModel : relationshipInstances28
 Relationship "0..9999" --* "1..1" cloudml::core::CloudMLModel : relationships26
-cloudml::core::ResourcesPool "1..1" -- "0..9999" VMInstance : replicats107
-cloudml::core::InternalComponent "1..1" *-- "1..1" RequiredExecutionPlatform : requiredExecutionPlatform42
+VMInstance "0..9999" -- "1..1" cloudml::core::ResourcesPool : replicats107
+RequiredExecutionPlatform "1..1" --* "1..1" cloudml::core::InternalComponent : requiredExecutionPlatform42
 RequiredExecutionPlatformInstance "1..1" -- "1..1" cloudml::core::ExecuteInstance : requiredExecutionPlatformInstance102
 RequiredExecutionPlatformInstance "1..1" --* "1..1" cloudml::core::InternalComponentInstance : requiredExecutionPlatformInstance69
-cloudml::core::Relationship "1..1" -- "1..1" RequiredPort : requiredPort46
+RequiredPort "1..1" -- "1..1" cloudml::core::Relationship : requiredPort46
 RequiredPortInstance "1..1" -- "1..1" cloudml::core::RelationshipInstance : requiredPortInstance77
 RequiredPortInstance "0..9999" --* "1..1" cloudml::core::InternalComponentInstance : requiredPortInstances68
 Resource "0..1" --* "1..1" cloudml::core::Relationship : requiredPortResource51
@@ -270,11 +270,11 @@ RequiredPort "0..9999" --* "1..1" cloudml::core::InternalComponent : requiredPor
 ResourcesPool "0..9999" --* "1..1" cloudml::core::CloudMLModel : resourcePools32
 Resource "0..9999" --* "1..1" cloudml::core::CloudMLElementWithProperties : resources1
 VMPort "1..1" -- "1..1" cloudml::core::VMPortInstance : type60
-cloudml::core::ComponentInstance "1..1" -- "1..1" Component : type63
-cloudml::core::PortInstance "1..1" -- "1..1" Port : type71
+Component "1..1" -- "1..1" cloudml::core::ComponentInstance : type63
+Port "1..1" -- "1..1" cloudml::core::PortInstance : type71
 Relationship "1..1" -- "1..1" cloudml::core::RelationshipInstance : type75
 ExecutionPlatform "1..1" -- "1..1" cloudml::core::ExecutionPlatformInstance : type94
 VMInstance "0..9999" --* "1..1" cloudml::core::CloudMLModel : vmInstances24
-cloudml::core::Cloud "1..1" *-- "0..9999" VMInstance : vmInstances57
+VMInstance "0..9999" --* "1..1" cloudml::core::Cloud : vmInstances57
 VM "0..9999" --* "1..1" cloudml::core::CloudMLModel : vms22
 @enduml

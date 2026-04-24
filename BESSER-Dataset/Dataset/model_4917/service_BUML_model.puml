@@ -50,16 +50,16 @@ NamedElement <|-- service::Service
 Order <|-- service::Asc
 Order <|-- service::Desc
 Variable <|-- service::ServiceFeatureReference
-service::ServiceFeatureReference "1..1" -- "1..1" service::Feature : feature16
+service::Feature "1..1" -- "1..1" service::ServiceFeatureReference : feature16
 service::Feature "0..9999" -- "1..1" service::Selection : fields7
 service::Predicate "0..1" --* "1..1" service::Selection : filter10
-service::Selection "1..1" -- "0..9999" service::Association : joins8
+service::Association "0..9999" -- "1..1" service::Selection : joins8
 service::BusinessOperation "0..9999" --* "1..1" service::Service : operations4
 service::Order "0..9999" --* "1..1" service::Selection : ordering12
-service::Variable "1..1" --* "1..1" service::Order : path14
-service::Service "1..1" *-- "0..9999" service::Selection : selections3
+service::Order "1..1" *-- "1..1" service::Variable : path14
+service::Selection "0..9999" --* "1..1" service::Service : selections3
 service::EntityOrView "1..1" -- "1..1" service::Service : serves1
-service::Services "1..1" *-- "0..9999" service::Service : services0
-service::Service "1..1" -- "1..1" service::Selection : usedBy6
-service::Service "0..9999" -- "1..1" service::BusinessOperation : uses18
+service::Service "0..9999" --* "1..1" service::Services : services0
+service::Selection "1..1" -- "1..1" service::Service : usedBy6
+service::BusinessOperation "1..1" -- "0..9999" service::Service : uses18
 @enduml

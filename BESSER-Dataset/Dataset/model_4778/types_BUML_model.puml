@@ -1,0 +1,145 @@
+@startuml
+class AnnotatableElement {
+}
+class ComplexType {
+}
+class Declaration {
+}
+enum Direction {
+  IN
+  LOCAL
+  OUT
+}
+class DomainElement {
+}
+class GenericElement {
+}
+class MetaComposite {
+}
+class NamedElement {
+}
+class Type {
+}
+class TypeSpecifier {
+}
+class TypedDeclaration {
+}
+class TypedElement {
+}
+class types::AnnotatableElement {
+  + getAnnotationOfType(typeName : any) : str
+}
+class types::Annotation {
+}
+class types::AnnotationType {
+}
+class types::ArrayTypeSpecifier {
+  + size : int
+  + getElementType() : Type
+}
+class types::ComplexType {
+  + getAllFeatures() : Declaration
+}
+abstract class types::Declaration {
+  + id : str
+  + static : bool
+}
+class types::Domain {
+  + domainID : str
+}
+class types::EObject {
+}
+class types::EnumerationType {
+}
+class types::Enumerator {
+  + literalValue : int
+}
+class types::Event {
+  + direction : str
+}
+abstract class types::Expression {
+}
+class types::GenericElement {
+}
+class types::MetaComposite {
+}
+class types::Operation {
+  + variadic : bool
+  + getVarArgIndex() : int
+}
+class types::Package {
+}
+class types::Parameter {
+  + optional : bool
+  + varArgs : bool
+}
+class types::PrimitiveType {
+}
+class types::Property {
+  + const : bool
+  + readonly : bool
+}
+class types::Type {
+  + abstract : bool
+  + visible : bool
+  + getOriginType() : str
+}
+class types::TypeAlias {
+}
+class types::TypeParameter {
+}
+class types::TypeSpecifier {
+}
+class types::TypedDeclaration {
+}
+abstract class types::TypedElement {
+}
+AnnotatableElement <|-- types::Declaration
+AnnotatableElement <|-- types::Parameter
+ComplexType <|-- types::EnumerationType
+Declaration <|-- types::Package
+Declaration <|-- types::Type
+Declaration <|-- types::TypedDeclaration
+DomainElement <|-- types::Package
+GenericElement <|-- types::ComplexType
+GenericElement <|-- types::Operation
+MetaComposite <|-- types::Declaration
+NamedElement <|-- types::Declaration
+NamedElement <|-- types::GenericElement
+NamedElement <|-- types::Parameter
+Type <|-- types::AnnotationType
+Type <|-- types::ComplexType
+Type <|-- types::PrimitiveType
+Type <|-- types::TypeAlias
+Type <|-- types::TypeParameter
+TypeSpecifier <|-- types::ArrayTypeSpecifier
+TypedDeclaration <|-- types::Enumerator
+TypedDeclaration <|-- types::Event
+TypedDeclaration <|-- types::Operation
+TypedDeclaration <|-- types::Property
+TypedDeclaration <|-- types::TypeAlias
+TypedElement <|-- types::Parameter
+TypedElement <|-- types::TypedDeclaration
+types::AnnotatableElement "0..1" --* "1..1" types::AnnotatableElement : annotationInfo34
+types::AnnotatableElement "1..1" *-- "0..9999" types::Annotation : annotations31
+types::Annotation "1..1" *-- "0..9999" types::Expression : arguments28
+types::Type "0..1" -- "1..1" types::TypeParameter : bound23
+types::EnumerationType "1..1" *-- "0..9999" types::Enumerator : enumerator19
+types::ComplexType "1..1" *-- "0..9999" types::Declaration : features20
+types::Package "0..9999" -- "1..1" types::Package : import2
+types::Expression "0..1" --* "1..1" types::Property : initialValue6
+types::Declaration "0..9999" --* "1..1" types::Package : member0
+types::Declaration "0..9999" --* "1..1" types::MetaComposite : metaFeatures41
+types::EnumerationType "0..1" -- "1..1" types::Enumerator : owningEnumeration22
+types::Operation "0..1" -- "1..1" types::Parameter : owningOperation7
+types::Operation "1..1" *-- "0..9999" types::Parameter : parameters5
+types::AnnotationType "1..1" *-- "0..9999" types::Property : properties36
+types::Type "1..1" *-- "0..9999" types::TypeSpecifier : superTypes4
+types::AnnotationType "1..1" -- "0..9999" types::EObject : targets39
+types::Type "0..1" -- "1..1" types::TypeSpecifier : type13
+types::Annotation "1..1" -- "0..1" types::AnnotationType : type27
+types::Type "0..1" -- "1..1" types::TypedElement : type8
+types::TypeSpecifier "0..9999" --* "1..1" types::TypeSpecifier : typeArguments17
+types::GenericElement "1..1" *-- "0..9999" types::TypeParameter : typeParameters25
+types::TypeSpecifier "0..1" --* "1..1" types::TypedElement : typeSpecifier10
+@enduml

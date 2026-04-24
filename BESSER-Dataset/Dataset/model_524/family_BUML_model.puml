@@ -36,12 +36,12 @@ EModelElement <|-- family::Family
 EModelElement <|-- family::Person
 Person <|-- family::Man
 Person <|-- family::Woman
-family::Person "1..1" -- "0..9999" family::Person : children12
+family::Person "0..9999" -- "1..1" family::Person : children12
 family::Family "0..9999" --* "1..1" family::Family : families4
-family::Person "1..1" -- "0..1" family::Man : father6
+family::Man "0..1" -- "1..1" family::Person : father6
 family::Man "0..1" -- "1..1" family::Woman : husband17
-family::Man "0..9999" --* "1..1" family::Family : men0
-family::Woman "0..1" -- "1..1" family::Person : mother8
+family::Family "1..1" *-- "0..9999" family::Man : men0
+family::Person "1..1" -- "0..1" family::Woman : mother8
 family::Man "1..1" -- "0..1" family::Woman : wife14
 family::Family "1..1" *-- "0..9999" family::Woman : women1
 @enduml

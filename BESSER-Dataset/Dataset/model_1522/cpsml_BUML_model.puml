@@ -48,8 +48,8 @@ class cpsml::Variable {
 Transition <|-- cpsml::ComTransition
 Transition <|-- cpsml::ProbTransition
 cpsml::Condition "1..1" --* "1..1" cpsml::ODE : condition52
-cpsml::State "1..1" -- "1..1" cpsml::ComTransition : csrc43
-cpsml::State "1..1" -- "1..1" cpsml::ComTransition : ctgt44
+cpsml::ComTransition "1..1" -- "1..1" cpsml::State : csrc43
+cpsml::ComTransition "1..1" -- "1..1" cpsml::State : ctgt44
 cpsml::DeVariable "1..1" --* "1..1" cpsml::Function : devariable58
 cpsml::Fright "1..1" --* "1..1" cpsml::Function : fright60
 cpsml::Function "1..1" --* "1..1" cpsml::ODE : function50
@@ -59,20 +59,20 @@ cpsml::Function "1..1" *-- "1..1" cpsml::IndeVariable : indevariable56
 cpsml::State "1..1" -- "1..1" cpsml::System : initialState8
 cpsml::State "1..1" -- "1..1" cpsml::State : initialsubstate26
 cpsml::Interval "1..1" --* "1..1" cpsml::ODE : interval54
-cpsml::State "1..1" -- "0..9999" cpsml::ComTransition : outgoingComTransitions16
+cpsml::ComTransition "0..9999" -- "1..1" cpsml::State : outgoingComTransitions16
 cpsml::ProbTransition "0..9999" -- "1..1" cpsml::State : outgoingProbTransitions19
 cpsml::State "0..9999" --* "1..1" cpsml::System : ownedStates4
 cpsml::System "1..1" *-- "0..9999" cpsml::Transition : ownedTransitions6
 cpsml::ODE "0..9999" --* "1..1" cpsml::System : ownedodes11
-cpsml::Variable "0..9999" --* "1..1" cpsml::System : ownedvariables0
-cpsml::State "1..1" -- "1..1" cpsml::ProbTransition : psrc46
+cpsml::System "1..1" *-- "0..9999" cpsml::Variable : ownedvariables0
+cpsml::ProbTransition "1..1" -- "1..1" cpsml::State : psrc46
 cpsml::ProbTransition "1..1" -- "1..1" cpsml::State : ptgt48
 cpsml::System "1..1" -- "1..1" cpsml::Variable : relatedvariable1
 cpsml::Transition "1..1" -- "1..1" cpsml::Variable : relatedvariable240
 cpsml::ODE "1..1" -- "1..1" cpsml::State : slaveode13
 cpsml::State "0..9999" --* "1..1" cpsml::State : subStates23
 cpsml::ODE "0..9999" --* "1..1" cpsml::State : subodes31
-cpsml::Variable "1..1" -- "1..1" cpsml::State : subrelatedvariable37
-cpsml::Variable "0..9999" --* "1..1" cpsml::State : subrelatedvariables34
+cpsml::State "1..1" -- "1..1" cpsml::Variable : subrelatedvariable37
+cpsml::State "1..1" *-- "0..9999" cpsml::Variable : subrelatedvariables34
 cpsml::State "1..1" *-- "0..9999" cpsml::Transition : subtransitions28
 @enduml

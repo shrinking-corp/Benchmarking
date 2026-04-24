@@ -1,0 +1,64 @@
+@startuml
+enum EdgeState {
+  ACTIVE
+  INACTIVE
+}
+class Element {
+}
+class GraphOperations::ConstantUtils {
+  + getDouble() : float
+  + getEdgeState() : str
+  + getFloat() : float
+  + getInt() : int
+  + getLong() : str
+  + getString() : str
+}
+class GraphOperations::EIntContainer {
+  + value : int
+  + increment() : int
+  + incrementBy(value : any) : int
+}
+class GraphOperations::Edge {
+  + state : str
+  + weight : float
+}
+class GraphOperations::Element {
+  + id : str
+}
+class GraphOperations::Graph {
+  + addEdgeWithIncidentNodes(edgeId : any, srcId : any, trgId : any) : str
+  + addGivenNode(node : any) : void
+  + addNode(nodeId : any) : str
+  + addNodeWithFixedId() : str
+  + calculateDoubleNodeCount() : int
+  + calculateNodeCount() : int
+  + clear() : void
+  + emptyOperation() : void
+  + getIsolatedNode() : str
+  + getNodeWithId_CAC() : str
+  + getSomeNode() : str
+  + getTriangleWithLongestEdge() : str
+  + isNode(element : any) : bool
+  + removeEdge(edgeId : any) : void
+}
+class GraphOperations::Node {
+  + degree : float
+  + depth : int
+  + assignIdCAC() : void
+  + calculateDegree() : int
+}
+class GraphOperations::Triangle {
+}
+Element <|-- GraphOperations::Edge
+Element <|-- GraphOperations::Node
+GraphOperations::Edge "0..9999" --* "1..1" GraphOperations::Graph : edges1
+GraphOperations::Graph "1..1" -- "1..1" GraphOperations::Node : graph3
+GraphOperations::Edge "1..1" -- "1..1" GraphOperations::Graph : graph8
+GraphOperations::Edge "0..9999" -- "1..1" GraphOperations::Node : incomingEdges4
+GraphOperations::Edge "0..1" -- "1..1" GraphOperations::Triangle : longEdge14
+GraphOperations::Graph "1..1" *-- "0..9999" GraphOperations::Node : nodes0
+GraphOperations::Edge "0..9999" -- "1..1" GraphOperations::Node : outgoingEdges6
+GraphOperations::Edge "0..9999" -- "1..1" GraphOperations::Triangle : shortEdges15
+GraphOperations::Edge "1..1" -- "1..1" GraphOperations::Node : source10
+GraphOperations::Edge "1..1" -- "1..1" GraphOperations::Node : target12
+@enduml

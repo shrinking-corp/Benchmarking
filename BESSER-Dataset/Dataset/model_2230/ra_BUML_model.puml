@@ -28,18 +28,18 @@ class ra::Specialization {
 class ra::StudyPlan {
 }
 ra::Course "0..9999" --* "1..1" ra::Department : course1
-ra::MandatoryCourse "1..1" -- "0..1" ra::Course : course26
+ra::Course "0..1" -- "1..1" ra::MandatoryCourse : course26
 ra::Course "0..9999" -- "1..1" ra::Semester : courseSlot20
 ra::MandatoryCourse "0..9999" --* "1..1" ra::StudyPlan : mandatoryCourse15
-ra::Semester "1..1" -- "0..9999" ra::MandatoryCourse : mandatoryCourse23
+ra::MandatoryCourse "0..9999" -- "1..1" ra::Semester : mandatoryCourse23
 ra::Course "1..1" -- "0..1" ra::MandatoryCourse : mandatoryCourse7
-ra::Programme "0..9999" --* "1..1" ra::Department : programme0
+ra::Department "1..1" *-- "0..9999" ra::Programme : programme0
 ra::Programme "0..1" -- "1..1" ra::StudyPlan : programme9
-ra::StudyPlan "1..1" *-- "0..9999" ra::Semester : semester13
+ra::Semester "0..9999" --* "1..1" ra::StudyPlan : semester13
 ra::Semester "0..9999" --* "1..1" ra::Specialization : semester17
-ra::Semester "0..1" -- "1..1" ra::MandatoryCourse : semester25
+ra::MandatoryCourse "1..1" -- "0..1" ra::Semester : semester25
 ra::Specialization "0..9999" --* "1..1" ra::StudyPlan : spesialization10
-ra::Specialization "0..1" --* "1..1" ra::Department : spesialization5
+ra::Department "1..1" *-- "0..1" ra::Specialization : spesialization5
 ra::Department "1..1" *-- "0..1" ra::StudyPlan : studyPlan3
-ra::StudyPlan "0..1" --* "1..1" ra::Programme : studyPlan8
+ra::Programme "1..1" *-- "0..1" ra::StudyPlan : studyPlan8
 @enduml

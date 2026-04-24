@@ -1,7 +1,8 @@
 import argparse
-import importlib.util
 import os
+import re
 import sys
+import types
 import uuid
 
 from BumlToPuml.domain_model_walker import DomainModelWalker
@@ -15,16 +16,33 @@ from besser.BUML.metamodel.structural import DomainModel
 from besser.BUML.metamodel.project import Project
 
 
+_COMPAT_CONSTRUCTOR_NAMES = ("DomainModel", "Generalization", "Multiplicity")
+
+
+def _apply_compatibility_rewrites(source: str) -> str:
+    """Rewrite known legacy patterns from the dataset to current metamodel APIs."""
+    prelude = "import besser.BUML.metamodel.structural as __BUML_structural\n"
+    for name in _COMPAT_CONSTRUCTOR_NAMES:
+        source = re.sub(
+            rf"(?<![\w.]){name}\s*\(",
+            f"__BUML_structural.{name}(",
+            source,
+        )
+
+    return f"{prelude}{source}"
+
+
 def load_model(file_path: str) -> DomainModel:
     module_name = f"model_module_{uuid.uuid4().hex}"
-    spec = importlib.util.spec_from_file_location(module_name, file_path)
-    if spec is None or spec.loader is None:
-        raise ValueError(f"Could not load Python module from path: {file_path}")
-
-    module = importlib.util.module_from_spec(spec)
+    module = types.ModuleType(module_name)
+    module.__file__ = file_path
     sys.modules[module_name] = module
+
+    source = open(file_path, "r", encoding="utf-8").read()
+    source = _apply_compatibility_rewrites(source)
+
     try:
-        spec.loader.exec_module(module)
+        exec(compile(source, file_path, "exec"), module.__dict__)
     finally:
         sys.modules.pop(module_name, None)
     

@@ -1,0 +1,85 @@
+@startuml
+class Ball {
+}
+enum BallType {
+  dot_ball
+  four_runs
+  one_run
+  six_runs
+  three_runs
+  two_runs
+}
+enum ExtraType {
+  Bye
+  LegBye
+  NoBall
+  Wide
+}
+enum HowOut {
+  Bowled
+  Caught
+  Lbw
+  Run_Out
+  Stumped
+}
+class model::Ball {
+  + runValue : int
+  + runs : str
+  + switchEnds : str
+}
+class model::ExtraBall {
+  + extraType : str
+  + isValidBall : str
+}
+class model::Game {
+  + date : date
+  + venue : str
+}
+class model::Innings {
+  + Summary : str
+  + noOvers : int
+  + overCount : str
+  + total : int
+  + wicketsDown : int
+  + bowlBall() : void
+  + newOver(bowler : any) : str
+}
+class model::Over {
+  + BALLS_IN_OVER : int
+  + isComplete : bool
+  + runs : int
+  + validBalls : int
+}
+class model::Player {
+  + howOut : str
+  + name : str
+  + noBallsFaced : int
+  + noOversBowled : str
+  + runsScored : int
+}
+class model::Team {
+  + name : str
+}
+class model::WicketBall {
+  + howOut : str
+}
+Ball <|-- model::ExtraBall
+Ball <|-- model::WicketBall
+model::Player "1..1" -- "1..1" model::WicketBall : assists27
+model::Ball "0..9999" --* "1..1" model::Over : balls15
+model::Ball "0..9999" -- "1..1" model::Player : ballsFaced20
+model::Ball "1..1" -- "1..1" model::Player : batsman18
+model::Innings "1..1" -- "1..1" model::Team : battingSide4
+model::Over "1..1" -- "1..1" model::Player : bowler17
+model::Innings "1..1" -- "1..1" model::Team : bowlingSide7
+model::Innings "1..1" -- "1..1" model::Player : facingBat10
+model::Game "1..1" *-- "1..9999" model::Innings : innings0
+model::Innings "1..1" -- "1..1" model::Over : innings16
+model::Innings "1..1" -- "1..1" model::Player : nonFacingBat12
+model::Innings "1..1" *-- "0..9999" model::Over : overs3
+model::Over "0..9999" -- "1..1" model::Player : oversBowled21
+model::Player "1..1" -- "1..1" model::WicketBall : playerOut29
+model::Player "0..9999" --* "1..1" model::Team : players24
+model::Game "1..1" *-- "1..9999" model::Team : team1
+model::Player "1..1" -- "0..1" model::WicketBall : wicketball23
+@enduml

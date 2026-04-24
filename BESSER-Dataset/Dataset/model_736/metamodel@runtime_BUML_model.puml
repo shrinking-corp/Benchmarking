@@ -165,10 +165,10 @@ class type::AbstractPort {
 class type::art::DataType {
 }
 AbstractPort <|-- art::type::PortCollection
-AttributeInstance <|-- art::instance::DictionaryValuedAttribute
-AttributeInstance <|-- art::instance::ValuedAttribute
 Attribute <|-- art::type::BasicAttribute
 Attribute <|-- art::type::Dictionary
+AttributeInstance <|-- art::instance::DictionaryValuedAttribute
+AttributeInstance <|-- art::instance::ValuedAttribute
 Binding <|-- art::instance::DelegationBinding
 Binding <|-- art::instance::TransmissionBinding
 CardinalityElement <|-- art::type::Port
@@ -201,41 +201,41 @@ TypedElement <|-- art::type::Attribute
 TypedElement <|-- art::type::Parameter
 type::AbstractPort <|-- art::type::Port
 AttributeInstance "0..9999" --* "1..1" art::instance::ComponentInstance : attribute15
-art::instance::ValuedAttribute "1..1" -- "1..1" BasicAttribute : attribute36
+BasicAttribute "1..1" -- "1..1" art::instance::ValuedAttribute : attribute36
 Dictionary "1..1" -- "1..1" art::instance::DictionaryValuedAttribute : attribute38
 Attribute "0..9999" --* "1..1" art::type::ComponentType : attribute43
 TransmissionBinding "0..9999" --* "1..1" art::instance::ComponentInstance : binding17
-art::instance::TransmissionBinding "1..1" -- "1..1" AbstractPort : client27
+AbstractPort "1..1" -- "1..1" art::instance::TransmissionBinding : client27
 art::DataType "0..9999" --* "1..1" art::System : dataTypes5
 DelegationBinding "0..9999" --* "1..1" art::instance::CompositeInstance : delegation24
 Entry "0..9999" --* "1..1" art::instance::DictionaryValuedAttribute : entries37
 AbstractPort "1..1" -- "1..1" art::instance::DelegationBinding : exported33
-art::instance::ComponentInstance "1..1" -- "0..9999" InstanceGroup : groups21
+InstanceGroup "0..9999" -- "1..1" art::instance::ComponentInstance : groups21
 TypeGroup "0..9999" -- "1..1" art::type::ComponentType : groups45
 Group "0..9999" --* "1..1" art::System : groups7
 PortId "1..9999" --* "1..1" art::type::PortCollection : ids56
 ComponentImplementation "0..1" --* "1..1" art::instance::ComponentInstance : implem19
 TypeImplementation "0..1" --* "1..1" art::type::ComponentType : implem47
 Parameter "0..9999" --* "1..1" art::type::Operation : input50
-art::group::InstanceGroup "1..1" -- "0..9999" ComponentInstance : instances65
+ComponentInstance "0..9999" -- "1..1" art::group::InstanceGroup : instances65
 DictionaryDefaultValue "1..1" -- "1..1" art::instance::DefaultEntry : key40
-art::type::Dictionary "1..1" *-- "0..9999" DictionaryDefaultValue : keys58
-art::type::Service "1..1" *-- "0..9999" Operation : operation49
+DictionaryDefaultValue "0..9999" --* "1..1" art::type::Dictionary : keys58
+Operation "0..9999" --* "1..1" art::type::Service : operation49
 Parameter "0..9999" --* "1..1" art::type::Operation : output51
-art::type::ComponentType "1..1" *-- "0..9999" AbstractPort : port41
+AbstractPort "0..9999" --* "1..1" art::type::ComponentType : port41
 CompositeInstance "1..1" --* "1..1" art::System : root0
 AbstractPort "1..1" -- "1..1" art::instance::TransmissionBinding : server28
 ComponentInstance "1..1" -- "1..1" art::instance::Binding : serverInstance25
-art::type::AbstractPort "1..1" -- "1..1" Service : service54
+Service "1..1" -- "1..1" art::type::AbstractPort : service54
 Service "0..9999" --* "1..1" art::System : services1
 AbstractPort "1..1" -- "1..1" art::instance::DelegationBinding : source31
 ComponentInstance "0..9999" --* "1..1" art::instance::CompositeInstance : subComponent22
 TypeGroup "0..9999" --* "1..1" art::group::TypeGroup : subGroups63
 InstanceGroup "0..9999" --* "1..1" art::group::InstanceGroup : subGroups68
-art::instance::ComponentInstance "1..1" -- "0..1" CompositeInstance : superComponent13
-art::instance::ComponentInstance "1..1" -- "1..1" ComponentType : type11
+CompositeInstance "0..1" -- "1..1" art::instance::ComponentInstance : superComponent13
+ComponentType "1..1" -- "1..1" art::instance::ComponentInstance : type11
 art::DataType "1..1" -- "1..1" art::TypedElement : type9
-art::System "1..1" *-- "0..9999" ComponentType : types3
+ComponentType "0..9999" --* "1..1" art::System : types3
 ComponentType "0..9999" -- "1..1" art::group::TypeGroup : types61
-type::art::DataType "1..1" -- "1..1" art::type::Dictionary : valueType57
+art::type::Dictionary "1..1" -- "1..1" type::art::DataType : valueType57
 @enduml

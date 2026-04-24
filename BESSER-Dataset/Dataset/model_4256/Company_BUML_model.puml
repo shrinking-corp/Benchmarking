@@ -38,16 +38,16 @@ Division <|-- EvoCompany::ServiceLine
 Division <|-- EvoCompany::Unit
 Person <|-- EvoCompany::Client
 Person <|-- EvoCompany::Employee
-EvoCompany::Project "0..9999" -- "1..1" EvoCompany::Person : assignedTo0
+EvoCompany::Person "1..1" -- "0..9999" EvoCompany::Project : assignedTo0
 EvoCompany::Category "0..9999" --* "1..1" EvoCompany::CompanyModel : categories16
-EvoCompany::Topic "1..1" -- "1..1" EvoCompany::Category : category13
-EvoCompany::Organisation "1..1" --* "1..1" EvoCompany::CompanyModel : company14
+EvoCompany::Category "1..1" -- "1..1" EvoCompany::Topic : category13
+EvoCompany::CompanyModel "1..1" *-- "1..1" EvoCompany::Organisation : company14
 EvoCompany::CompanyModel "1..1" *-- "0..9999" EvoCompany::Division : division21
-EvoCompany::Unit "0..1" -- "1..1" EvoCompany::Person : employed1
+EvoCompany::Person "1..1" -- "0..1" EvoCompany::Unit : employed1
 EvoCompany::Division "0..9999" --* "1..1" EvoCompany::Organisation : lines8
-EvoCompany::Person "0..9999" --* "1..1" EvoCompany::Organisation : persons3
+EvoCompany::Organisation "1..1" *-- "0..9999" EvoCompany::Person : persons3
 EvoCompany::Organisation "1..1" *-- "0..9999" EvoCompany::Project : projects5
-EvoCompany::Topic "1..1" -- "1..1" EvoCompany::Project : related10
-EvoCompany::Topic "0..9999" -- "1..1" EvoCompany::Category : topics12
-EvoCompany::Topic "0..9999" --* "1..1" EvoCompany::CompanyModel : topics18
+EvoCompany::Project "1..1" -- "1..1" EvoCompany::Topic : related10
+EvoCompany::Category "1..1" -- "0..9999" EvoCompany::Topic : topics12
+EvoCompany::CompanyModel "1..1" *-- "0..9999" EvoCompany::Topic : topics18
 @enduml

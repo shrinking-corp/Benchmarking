@@ -86,15 +86,15 @@ NamedElement <|-- JMM::BodyDeclaration
 NamedElement <|-- JMM::Package
 NamedElement <|-- JMM::Type
 NamespaceAccess <|-- JMM::TypeAccess
+Type <|-- JMM::AbstractTypeDeclaration
 TypeDeclaration <|-- JMM::ClassDeclaration
 TypeDeclaration <|-- JMM::InterfaceDeclaration
-Type <|-- JMM::AbstractTypeDeclaration
-JMM::BodyDeclaration "0..9999" --* "1..1" JMM::AbstractTypeDeclaration : bodyDeclarations9
-JMM::Modifier "0..1" --* "1..1" JMM::BodyDeclaration : modifier14
+JMM::AbstractTypeDeclaration "1..1" *-- "0..9999" JMM::BodyDeclaration : bodyDeclarations9
+JMM::BodyDeclaration "1..1" *-- "0..1" JMM::Modifier : modifier14
 JMM::Model "1..1" *-- "0..9999" JMM::Package : ownedElements0
 JMM::AbstractTypeDeclaration "0..9999" --* "1..1" JMM::Package : ownedElements7
 JMM::Package "0..9999" --* "1..1" JMM::Package : ownedPackages5
 JMM::ClassDeclaration "1..1" *-- "0..1" JMM::TypeAccess : superClass1
-JMM::TypeAccess "0..9999" --* "1..1" JMM::AbstractTypeDeclaration : superInterfaces11
-JMM::TypeAccess "1..1" -- "1..1" JMM::Type : type2
+JMM::AbstractTypeDeclaration "1..1" *-- "0..9999" JMM::TypeAccess : superInterfaces11
+JMM::Type "1..1" -- "1..1" JMM::TypeAccess : type2
 @enduml

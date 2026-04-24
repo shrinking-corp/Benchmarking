@@ -65,16 +65,16 @@ NamedElement <|-- university::Student
 NamedElement <|-- university::University
 university::Book "0..9999" --* "1..1" university::Library : books9
 university::StaffMember "0..1" -- "1..1" university::University : chancelor3
-university::University "1..1" *-- "1..9999" university::Department : departments0
-university::Student "1..1" -- "0..9999" university::Module : enrolledModules5
-university::Student "0..9999" -- "1..1" university::Module : enrolledStudents26
+university::Department "1..9999" --* "1..1" university::University : departments0
+university::Module "0..9999" -- "1..1" university::Student : enrolledModules5
+university::Module "1..1" -- "0..9999" university::Student : enrolledStudents26
 university::Library "1..9999" --* "1..1" university::University : libraries1
-university::Vehicle "0..9999" -- "1..1" university::Library : libraryVans11
+university::Library "1..1" -- "0..9999" university::Vehicle : libraryVans11
 university::Computer "0..1" --* "1..1" university::Library : mainComputer7
 university::Module "1..1" -- "0..9999" university::StaffMember : moduleLecturers25
-university::Vehicle "0..1" -- "1..1" university::Student : registeredVehicle6
-university::Vehicle "0..3" -- "1..1" university::StaffMember : registeredVehicles16
-university::StaffMember "0..9999" --* "1..1" university::Department : staff19
-university::Student "0..9999" --* "1..1" university::Department : students22
-university::StaffMember "1..1" -- "0..9999" university::Module : taughtModules14
+university::Student "1..1" -- "0..1" university::Vehicle : registeredVehicle6
+university::StaffMember "1..1" -- "0..3" university::Vehicle : registeredVehicles16
+university::Department "1..1" *-- "0..9999" university::StaffMember : staff19
+university::Department "1..1" *-- "0..9999" university::Student : students22
+university::Module "0..9999" -- "1..1" university::StaffMember : taughtModules14
 @enduml

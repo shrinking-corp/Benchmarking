@@ -229,12 +229,12 @@ class limp::VoidType {
 }
 class limp::WhileStatement {
 }
-AttributeBlock <|-- limp::NoAttributeBlock
-AttributeBlock <|-- limp::SomeAttributeBlock
 Attribute <|-- limp::Define
 Attribute <|-- limp::Postcondition
 Attribute <|-- limp::Precondition
 Attribute <|-- limp::Uses
+AttributeBlock <|-- limp::NoAttributeBlock
+AttributeBlock <|-- limp::SomeAttributeBlock
 Declaration <|-- limp::Comment
 Declaration <|-- limp::ConstantDeclaration
 Declaration <|-- limp::ExternalFunction
@@ -284,11 +284,6 @@ Statement <|-- limp::LabelStatement
 Statement <|-- limp::ReturnStatement
 Statement <|-- limp::VoidStatement
 Statement <|-- limp::WhileStatement
-TypeDeclaration <|-- limp::AbstractTypeDef
-TypeDeclaration <|-- limp::ArrayTypeDef
-TypeDeclaration <|-- limp::EnumTypeDef
-TypeDeclaration <|-- limp::RecordTypeDef
-TypeDeclaration <|-- limp::TypeAlias
 Type <|-- limp::AbstractType
 Type <|-- limp::ArrayType
 Type <|-- limp::BoolType
@@ -300,6 +295,11 @@ Type <|-- limp::RecordType
 Type <|-- limp::StringType
 Type <|-- limp::TupleType
 Type <|-- limp::VoidType
+TypeDeclaration <|-- limp::AbstractTypeDef
+TypeDeclaration <|-- limp::ArrayTypeDef
+TypeDeclaration <|-- limp::EnumTypeDef
+TypeDeclaration <|-- limp::RecordTypeDef
+TypeDeclaration <|-- limp::TypeAlias
 VarBlock <|-- limp::NoVarBlock
 VarBlock <|-- limp::SomeVarBlock
 VariableRef <|-- limp::ConstantDeclaration
@@ -308,28 +308,28 @@ VariableRef <|-- limp::GlobalDeclaration
 VariableRef <|-- limp::InputArg
 VariableRef <|-- limp::LocalArg
 VariableRef <|-- limp::OutputArg
-limp::AbstractTypeDef "0..1" -- "1..1" limp::AbstractType : abstractDef130
-limp::ArrayUpdateExpr "1..1" *-- "0..1" limp::ArrayAccessExpr : access172
+limp::AbstractType "1..1" -- "0..1" limp::AbstractTypeDef : abstractDef130
+limp::ArrayAccessExpr "0..1" --* "1..1" limp::ArrayUpdateExpr : access172
 limp::NamedType "1..1" -- "0..1" limp::TypeAlias : alias131
-limp::Expr "0..1" --* "1..1" limp::ArrayAccessExpr : array167
+limp::ArrayAccessExpr "1..1" *-- "0..1" limp::Expr : array167
 limp::ArrayType "1..1" -- "0..1" limp::ArrayTypeDef : arrayDef128
 limp::ArrayExpr "1..1" -- "0..1" limp::ArrayTypeDef : arrayDefinition106
 limp::AttributeBlock "0..1" --* "1..1" limp::LocalProcedure : attributeBlock27
 limp::AttributeBlock "0..1" --* "1..1" limp::ExternalProcedure : attributeBlock8
 limp::Attribute "0..9999" --* "1..1" limp::SomeAttributeBlock : attributeList133
-limp::Type "0..1" --* "1..1" limp::ArrayTypeDef : baseType34
-limp::StatementBlock "0..1" --* "1..1" limp::ElseBlock : block134
+limp::ArrayTypeDef "1..1" *-- "0..1" limp::Type : baseType34
+limp::ElseBlock "1..1" *-- "0..1" limp::StatementBlock : block134
 limp::StatementBlock "0..1" --* "1..1" limp::WhileStatement : block84
-limp::StatementBlock "0..1" --* "1..1" limp::ForStatement : block95
+limp::ForStatement "1..1" *-- "0..1" limp::StatementBlock : block95
 limp::Expr "0..1" --* "1..1" limp::IfThenElseStatement : cond75
 limp::Expr "0..1" --* "1..1" limp::WhileStatement : cond82
-limp::IfThenElseExpr "1..1" *-- "0..1" limp::Expr : condExpr138
+limp::Expr "0..1" --* "1..1" limp::IfThenElseExpr : condExpr138
 limp::Declaration "0..9999" --* "1..1" limp::Specification : declarations0
 limp::Define "1..1" *-- "0..9999" limp::DefineUseRef : elements63
 limp::DefineUseRef "0..9999" --* "1..1" limp::Uses : elements65
-limp::IfThenElseStatement "1..1" *-- "0..1" limp::Else : else80
+limp::Else "0..1" --* "1..1" limp::IfThenElseStatement : else80
 limp::Expr "0..1" --* "1..1" limp::IfThenElseExpr : elseExpr143
-limp::EnumTypeDef "0..1" -- "1..1" limp::EnumType : enumDef124
+limp::EnumType "1..1" -- "0..1" limp::EnumTypeDef : enumDef124
 limp::EnumTypeDef "1..1" *-- "0..9999" limp::EnumValue : enumerations32
 limp::EquationBlock "0..1" --* "1..1" limp::LocalFunction : equationBlock17
 limp::Equation "0..9999" --* "1..1" limp::EquationBlock : equations102
@@ -337,61 +337,61 @@ limp::Expr "0..1" --* "1..1" limp::UnaryNegationExpr : expr156
 limp::Expr "0..1" --* "1..1" limp::UnaryMinusExpr : expr158
 limp::ConstantDeclaration "1..1" *-- "0..1" limp::Expr : expr40
 limp::Expr "0..1" --* "1..1" limp::Precondition : expr57
-limp::Postcondition "1..1" *-- "0..1" limp::Expr : expr59
+limp::Expr "0..1" --* "1..1" limp::Postcondition : expr59
 limp::Expr "0..1" --* "1..1" limp::VoidStatement : expr69
-limp::Expr "0..9999" --* "1..1" limp::ArrayExpr : exprList108
+limp::ArrayExpr "1..1" *-- "0..9999" limp::Expr : exprList108
 limp::Expr "0..9999" --* "1..1" limp::ExprList : exprList118
 limp::ExprList "0..1" --* "1..1" limp::FcnCallExpr : exprs184
-limp::RecordFieldExpr "1..1" *-- "0..1" limp::Expr : fieldExpr115
-limp::RecordFieldExpr "0..9999" --* "1..1" limp::RecordExpr : fieldExprList113
-limp::Type "0..1" --* "1..1" limp::RecordFieldType : fieldType35
+limp::Expr "0..1" --* "1..1" limp::RecordFieldExpr : fieldExpr115
+limp::RecordExpr "1..1" *-- "0..9999" limp::RecordFieldExpr : fieldExprList113
+limp::RecordFieldType "1..1" *-- "0..1" limp::Type : fieldType35
 limp::RecordFieldType "0..9999" --* "1..1" limp::RecordTypeDef : fields33
-limp::Expr "0..1" --* "1..1" limp::ChoiceExpr : first146
-limp::VariableRef "0..1" -- "1..1" limp::InitExpr : id177
+limp::ChoiceExpr "1..1" *-- "0..1" limp::Expr : first146
+limp::InitExpr "1..1" -- "0..1" limp::VariableRef : id177
 limp::SecondInit "1..1" -- "0..1" limp::VariableRef : id179
-limp::VariableRef "0..1" -- "1..1" limp::IdExpr : id181
-limp::FunctionRef "0..1" -- "1..1" limp::FcnCallExpr : id183
-limp::VariableRef "0..9999" -- "1..1" limp::IdList : ids104
+limp::IdExpr "1..1" -- "0..1" limp::VariableRef : id181
+limp::FcnCallExpr "1..1" -- "0..1" limp::FunctionRef : id183
+limp::IdList "1..1" -- "0..9999" limp::VariableRef : ids104
 limp::AssignmentStatement "1..1" *-- "0..1" limp::IdList : ids71
-limp::IfThenElseStatement "0..1" --* "1..1" limp::ElseIf : ifThenElse136
+limp::ElseIf "1..1" *-- "0..1" limp::IfThenElseStatement : ifThenElse136
 limp::AssignmentStatement "0..1" --* "1..1" limp::ForStatement : incrementStatement92
-limp::Expr "0..1" --* "1..1" limp::ArrayAccessExpr : index169
+limp::ArrayAccessExpr "1..1" *-- "0..1" limp::Expr : index169
 limp::AssignmentStatement "0..1" --* "1..1" limp::ForStatement : initStatement87
 limp::InputArg "0..9999" --* "1..1" limp::InputArgList : inputArgs44
-limp::InputArgList "0..1" --* "1..1" limp::ExternalFunction : inputs1
+limp::ExternalFunction "1..1" *-- "0..1" limp::InputArgList : inputs1
 limp::InputArgList "0..1" --* "1..1" limp::LocalFunction : inputs10
 limp::InputArgList "0..1" --* "1..1" limp::LocalProcedure : inputs19
-limp::InputArgList "0..1" --* "1..1" limp::ExternalProcedure : inputs4
+limp::ExternalProcedure "1..1" *-- "0..1" limp::InputArgList : inputs4
 limp::GotoStatement "1..1" -- "0..1" limp::LabelStatement : label98
 limp::BinaryExpr "1..1" *-- "0..1" limp::Expr : left151
-limp::ForStatement "1..1" *-- "0..1" limp::Expr : limitExpr89
-limp::SomeVarBlock "1..1" *-- "0..9999" limp::LocalArg : locals122
-limp::OutputArg "0..1" --* "1..1" limp::LocalFunction : output12
+limp::Expr "0..1" --* "1..1" limp::ForStatement : limitExpr89
+limp::LocalArg "0..9999" --* "1..1" limp::SomeVarBlock : locals122
+limp::LocalFunction "1..1" *-- "0..1" limp::OutputArg : output12
 limp::ExternalFunction "1..1" *-- "0..1" limp::OutputArg : output2
 limp::OutputArg "0..9999" --* "1..1" limp::OutputArgList : outputArgs51
-limp::OutputArgList "0..1" --* "1..1" limp::LocalProcedure : outputs21
+limp::LocalProcedure "1..1" *-- "0..1" limp::OutputArgList : outputs21
 limp::ExternalProcedure "1..1" *-- "0..1" limp::OutputArgList : outputs6
-limp::RecordAccessExpr "1..1" *-- "0..1" limp::Expr : record160
+limp::Expr "0..1" --* "1..1" limp::RecordAccessExpr : record160
 limp::Expr "0..1" --* "1..1" limp::RecordUpdateExpr : record162
-limp::RecordTypeDef "0..1" -- "1..1" limp::RecordType : recordDef126
-limp::RecordTypeDef "0..1" -- "1..1" limp::RecordExpr : recordDefinition111
-limp::Expr "0..1" --* "1..1" limp::DefineUseRef : referenceExpr61
-limp::Expr "0..1" --* "1..1" limp::AssignmentStatement : rhs72
-limp::Expr "0..1" --* "1..1" limp::BinaryExpr : right153
-limp::Expr "0..1" --* "1..1" limp::ChoiceExpr : second148
-limp::StatementBlock "0..1" --* "1..1" limp::LocalProcedure : statementblock30
+limp::RecordType "1..1" -- "0..1" limp::RecordTypeDef : recordDef126
+limp::RecordExpr "1..1" -- "0..1" limp::RecordTypeDef : recordDefinition111
+limp::DefineUseRef "1..1" *-- "0..1" limp::Expr : referenceExpr61
+limp::AssignmentStatement "1..1" *-- "0..1" limp::Expr : rhs72
+limp::BinaryExpr "1..1" *-- "0..1" limp::Expr : right153
+limp::ChoiceExpr "1..1" *-- "0..1" limp::Expr : second148
+limp::LocalProcedure "1..1" *-- "0..1" limp::StatementBlock : statementblock30
 limp::Statement "0..9999" --* "1..1" limp::StatementBlock : statements67
-limp::StatementBlock "0..1" --* "1..1" limp::IfThenElseStatement : thenBlock77
+limp::IfThenElseStatement "1..1" *-- "0..1" limp::StatementBlock : thenBlock77
 limp::Expr "0..1" --* "1..1" limp::IfThenElseExpr : thenExpr140
 limp::Type "0..1" --* "1..1" limp::TypeAlias : type120
-limp::Type "0..1" --* "1..1" limp::ConstantDeclaration : type38
-limp::Type "0..1" --* "1..1" limp::GlobalDeclaration : type42
-limp::Type "0..1" --* "1..1" limp::InputArg : type46
+limp::ConstantDeclaration "1..1" *-- "0..1" limp::Type : type38
+limp::GlobalDeclaration "1..1" *-- "0..1" limp::Type : type42
+limp::InputArg "1..1" *-- "0..1" limp::Type : type46
 limp::LocalArg "1..1" *-- "0..1" limp::Type : type49
-limp::Type "0..1" --* "1..1" limp::OutputArg : type54
+limp::OutputArg "1..1" *-- "0..1" limp::Type : type54
 limp::TupleType "1..1" *-- "0..9999" limp::Type : typeList187
 limp::Expr "0..1" --* "1..1" limp::RecordUpdateExpr : value164
-limp::Expr "0..1" --* "1..1" limp::ArrayUpdateExpr : value174
+limp::ArrayUpdateExpr "1..1" *-- "0..1" limp::Expr : value174
 limp::LocalFunction "1..1" *-- "0..1" limp::VarBlock : varBlock15
 limp::LocalProcedure "1..1" *-- "0..1" limp::VarBlock : varBlock24
 limp::Expr "0..1" --* "1..1" limp::GotoStatement : whenExpr99

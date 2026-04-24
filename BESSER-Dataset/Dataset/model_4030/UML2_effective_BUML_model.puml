@@ -120,9 +120,9 @@ abstract class uml::TypedElement {
 }
 BehavioralFeature <|-- uml::Operation
 BehavioredClassifier <|-- uml::Class
+Class <|-- uml::Behavior
 Classifier <|-- uml::BehavioredClassifier
 Classifier <|-- uml::StructuredClassifier
-Class <|-- uml::Behavior
 ConnectableElement <|-- uml::Parameter
 ConnectableElement <|-- uml::Property
 DeploymentTarget <|-- uml::Property
@@ -147,10 +147,10 @@ NamedElement <|-- uml::TypedElement
 Namespace <|-- uml::BehavioralFeature
 Namespace <|-- uml::Classifier
 Namespace <|-- uml::Package
+Package <|-- uml::Model
 PackageableElement <|-- uml::Dependency
 PackageableElement <|-- uml::Package
 PackageableElement <|-- uml::Type
-Package <|-- uml::Model
 ParameterableElement <|-- uml::ConnectableElement
 ParameterableElement <|-- uml::Operation
 ParameterableElement <|-- uml::PackageableElement
@@ -162,18 +162,18 @@ StructuredClassifier <|-- uml::EncapsulatedClassifier
 TemplateableElement <|-- uml::Classifier
 TemplateableElement <|-- uml::Operation
 TemplateableElement <|-- uml::Package
+Type <|-- uml::Classifier
 TypedElement <|-- uml::ConnectableElement
 TypedElement <|-- uml::StructuralFeature
-Type <|-- uml::Classifier
 uml::Classifier "1..1" -- "1..1" uml::Generalization : general2
 uml::Classifier "1..1" *-- "0..9999" uml::Generalization : generalization8
 uml::Behavior "0..9999" -- "1..1" uml::BehavioralFeature : method9
 uml::Class "1..1" *-- "0..9999" uml::Classifier : nestedClassifier4
 uml::Property "0..9999" --* "1..1" uml::StructuredClassifier : ownedAttribute13
-uml::Operation "0..9999" --* "1..1" uml::Class : ownedOperation3
+uml::Class "1..1" *-- "0..9999" uml::Operation : ownedOperation3
 uml::BehavioralFeature "1..1" *-- "0..9999" uml::Parameter : ownedParameter10
-uml::PackageableElement "0..9999" --* "1..1" uml::Package : packagedElement7
+uml::Package "1..1" *-- "0..9999" uml::PackageableElement : packagedElement7
 uml::Classifier "1..1" -- "1..1" uml::Generalization : specific1
-uml::NamedElement "1..9999" -- "1..1" uml::Dependency : supplier0
+uml::Dependency "1..1" -- "1..9999" uml::NamedElement : supplier0
 uml::Type "0..1" -- "1..1" uml::TypedElement : type12
 @enduml

@@ -1,0 +1,58 @@
+@startuml
+class Constraint {
+}
+class FeatureModel::Comment {
+  + text : str
+}
+abstract class FeatureModel::Constraint {
+  + code : str
+  + language : str
+}
+class FeatureModel::ExcludeConstraint {
+}
+class FeatureModel::Feature {
+  + abstract : bool
+  + mandatory : bool
+  + atMostInOneGroup(chain : any, context : any) : bool
+}
+class FeatureModel::FeatureModel {
+  + version : float
+}
+class FeatureModel::Group {
+  + groupType : str
+}
+abstract class FeatureModel::NamedElement {
+  + name : str
+}
+class FeatureModel::RequireConstraint {
+}
+enum GroupType {
+  ALT
+  OR
+}
+class NamedElement {
+}
+Constraint <|-- FeatureModel::ExcludeConstraint
+Constraint <|-- FeatureModel::RequireConstraint
+NamedElement <|-- FeatureModel::Comment
+NamedElement <|-- FeatureModel::Constraint
+NamedElement <|-- FeatureModel::Feature
+NamedElement <|-- FeatureModel::FeatureModel
+NamedElement <|-- FeatureModel::Group
+FeatureModel::Feature "1..1" *-- "0..9999" FeatureModel::Feature : children10
+FeatureModel::Comment "0..9999" --* "1..1" FeatureModel::FeatureModel : comments0
+FeatureModel::Constraint "0..9999" --* "1..1" FeatureModel::FeatureModel : constraints1
+FeatureModel::Comment "1..1" -- "1..1" FeatureModel::NamedElement : element7
+FeatureModel::ExcludeConstraint "0..9999" -- "1..1" FeatureModel::Feature : excludeConstraintsA16
+FeatureModel::ExcludeConstraint "0..9999" -- "1..1" FeatureModel::Feature : excludeConstraintsB17
+FeatureModel::ExcludeConstraint "1..1" -- "1..1" FeatureModel::Feature : excludedFeatureA22
+FeatureModel::ExcludeConstraint "1..1" -- "1..1" FeatureModel::Feature : excludedFeatureB24
+FeatureModel::Feature "1..1" -- "1..1" FeatureModel::RequireConstraint : feature20
+FeatureModel::Feature "2..9999" -- "1..1" FeatureModel::Group : features26
+FeatureModel::Feature "1..1" -- "0..1" FeatureModel::Group : group15
+FeatureModel::FeatureModel "1..1" *-- "0..9999" FeatureModel::Group : groups5
+FeatureModel::Feature "1..1" -- "0..9999" FeatureModel::RequireConstraint : requireConstraints13
+FeatureModel::Feature "1..1" -- "0..9999" FeatureModel::RequireConstraint : requiredConstraints12
+FeatureModel::Feature "1..1" -- "1..1" FeatureModel::RequireConstraint : requiredFeature19
+FeatureModel::Feature "1..1" --* "1..1" FeatureModel::FeatureModel : root3
+@enduml

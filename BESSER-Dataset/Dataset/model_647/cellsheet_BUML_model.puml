@@ -195,23 +195,23 @@ PrefixOperator <|-- cellsheet::Negation
 PrefixOperator <|-- cellsheet::Plus
 Ref <|-- cellsheet::RelativeRange
 Ref <|-- cellsheet::RelativeRef
-cellsheet::Cell "1..1" *-- "0..9999" cellsheet::Ast : asts16
+cellsheet::Ast "0..9999" --* "1..1" cellsheet::Cell : asts16
 cellsheet::Book "0..1" -- "1..1" cellsheet::CellFormat : book28
 cellsheet::Book "0..1" -- "1..1" cellsheet::Sheet : book8
 cellsheet::Book "0..9999" --* "1..1" cellsheet::Workspace : books1
 cellsheet::Ast "1..1" -- "0..1" cellsheet::Cell : cell23
-cellsheet::CellFormat "0..9999" --* "1..1" cellsheet::Book : cellFormats5
+cellsheet::Book "1..1" *-- "0..9999" cellsheet::CellFormat : cellFormats5
 cellsheet::Cell "0..9999" --* "1..1" cellsheet::Row : cells13
 cellsheet::Ast "0..9999" --* "1..1" cellsheet::Ast : children21
-cellsheet::AstEval "0..1" --* "1..1" cellsheet::Ast : result26
+cellsheet::Ast "1..1" *-- "0..1" cellsheet::AstEval : result26
 cellsheet::Ast "0..1" -- "1..1" cellsheet::Cell : root17
-cellsheet::Row "0..1" -- "1..1" cellsheet::Cell : row14
-cellsheet::Sheet "1..1" *-- "0..9999" cellsheet::Row : rows10
-cellsheet::Sheet "0..1" -- "1..1" cellsheet::Row : sheet11
-cellsheet::Sheet "0..9999" --* "1..1" cellsheet::Book : sheets6
-cellsheet::Token "0..1" -- "1..1" cellsheet::Ast : token25
+cellsheet::Cell "1..1" -- "0..1" cellsheet::Row : row14
+cellsheet::Row "0..9999" --* "1..1" cellsheet::Sheet : rows10
+cellsheet::Row "1..1" -- "0..1" cellsheet::Sheet : sheet11
+cellsheet::Book "1..1" *-- "0..9999" cellsheet::Sheet : sheets6
+cellsheet::Ast "1..1" -- "0..1" cellsheet::Token : token25
 cellsheet::EStringToTokenEntry "0..9999" --* "1..1" cellsheet::Workspace : tokens2
 cellsheet::Ast "0..9999" -- "1..1" cellsheet::Token : usedBy18
-cellsheet::Token "0..1" -- "1..1" cellsheet::EStringToTokenEntry : value0
+cellsheet::EStringToTokenEntry "1..1" -- "0..1" cellsheet::Token : value0
 cellsheet::Book "1..1" -- "0..1" cellsheet::Workspace : workspace4
 @enduml

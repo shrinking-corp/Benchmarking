@@ -108,7 +108,6 @@ class expression::VariableAssignmentStatement {
 }
 AssignmentStatement <|-- expression::SelfAssignmentStatement
 AssignmentStatement <|-- expression::VariableAssignmentStatement
-ExpressionRest <|-- expression::Expression
 Expression <|-- expression::AndExpression
 Expression <|-- expression::Apply
 Expression <|-- expression::Count
@@ -129,6 +128,7 @@ Expression <|-- expression::Sum
 Expression <|-- expression::Term
 Expression <|-- expression::ThereIsIn
 Expression <|-- expression::UnaryExpression
+ExpressionRest <|-- expression::Expression
 KeyValuePairRest <|-- expression::KeyValuePair
 Phrase <|-- expression::Expression
 Phrase <|-- expression::StatementList
@@ -139,52 +139,52 @@ Term <|-- expression::IntegerValue
 Term <|-- expression::List
 Term <|-- expression::StringValue
 expression::Apply "1..1" *-- "0..1" expression::Expression : applyExpr95
-expression::Expression "1..1" *-- "0..1" expression::Expression : condition8
+expression::Expression "0..1" --* "1..1" expression::Expression : condition8
 expression::Designator "0..1" --* "1..1" expression::VariableAssignmentStatement : designator6
 expression::Expression "0..1" --* "1..1" expression::UnaryExpression : expr100
 expression::Expression "0..1" --* "1..1" expression::ThereIsIn : expr67
 expression::Expression "0..1" --* "1..1" expression::ForallIn : expr69
-expression::FirstIn "1..1" *-- "0..1" expression::Expression : expr71
+expression::Expression "0..1" --* "1..1" expression::FirstIn : expr71
 expression::Expression "0..1" --* "1..1" expression::LastIn : expr73
 expression::Count "1..1" *-- "0..1" expression::Expression : expr75
 expression::Expression "0..1" --* "1..1" expression::Reduce : expr77
-expression::Sum "1..1" *-- "0..1" expression::Expression : expr85
+expression::Expression "0..1" --* "1..1" expression::Sum : expr85
 expression::Expression "0..1" --* "1..1" expression::Map : expr90
-expression::Expression "0..1" --* "1..1" expression::Apply : expr97
-expression::Expression "0..1" --* "1..1" expression::AssignmentStatement : expression5
+expression::Apply "1..1" *-- "0..1" expression::Expression : expr97
+expression::AssignmentStatement "1..1" *-- "0..1" expression::Expression : expression5
 Function "0..1" -- "1..1" expression::FunctionCall : function10
-expression::StatementList "1..1" *-- "0..1" expression::Statement : head1
+expression::Statement "0..1" --* "1..1" expression::StatementList : head1
 expression::Expression "0..1" --* "1..1" expression::ExpressionList : head17
 expression::Expression "0..1" --* "1..1" expression::Reduce : initValue82
-expression::StructureExpression "1..1" *-- "0..1" expression::KeyValuePair : keyValuePair105
-expression::OrExpression "1..1" *-- "0..1" expression::Expression : left32
-expression::Expression "0..1" --* "1..1" expression::AndExpression : left37
+expression::KeyValuePair "0..1" --* "1..1" expression::StructureExpression : keyValuePair105
+expression::Expression "0..1" --* "1..1" expression::OrExpression : left32
+expression::AndExpression "1..1" *-- "0..1" expression::Expression : left37
 expression::EqualityExpression "1..1" *-- "0..1" expression::Expression : left42
-expression::Expression "0..1" --* "1..1" expression::DashExpression : left47
-expression::PointExpression "1..1" *-- "0..1" expression::Expression : left52
+expression::DashExpression "1..1" *-- "0..1" expression::Expression : left47
+expression::Expression "0..1" --* "1..1" expression::PointExpression : left52
 expression::Expression "0..1" --* "1..1" expression::PowExpression : left57
-expression::QualifierExpression "1..1" *-- "0..1" expression::Expression : left62
+expression::Expression "0..1" --* "1..1" expression::QualifierExpression : left62
 expression::ExpressionList "0..1" --* "1..1" expression::FunctionCall : params11
-expression::ProcedureCall "1..1" *-- "0..1" expression::ExpressionList : params14
-expression::Phrase "0..1" --* "1..1" expression::Model : phrase0
+expression::ExpressionList "0..1" --* "1..1" expression::ProcedureCall : params14
+expression::Model "1..1" *-- "0..1" expression::Phrase : phrase0
 expression::Procedure "0..1" -- "1..1" expression::ProcedureCall : procedure13
 expression::KeyValuePair "1..1" *-- "0..9999" expression::KeyValuePairRest : rest24
 expression::Expression "0..1" --* "1..1" expression::OrExpression : right34
-expression::Expression "0..1" --* "1..1" expression::AndExpression : right39
-expression::Expression "0..1" --* "1..1" expression::EqualityExpression : right44
-expression::Expression "0..1" --* "1..1" expression::DashExpression : right49
+expression::AndExpression "1..1" *-- "0..1" expression::Expression : right39
+expression::EqualityExpression "1..1" *-- "0..1" expression::Expression : right44
+expression::DashExpression "1..1" *-- "0..1" expression::Expression : right49
 expression::Expression "0..1" --* "1..1" expression::PointExpression : right54
 expression::Expression "0..1" --* "1..1" expression::PowExpression : right59
 expression::Expression "0..1" --* "1..1" expression::QualifierExpression : right64
 expression::Expression "0..1" --* "1..1" expression::UnaryExpression : structuredExpression102
 expression::Expression "0..1" --* "1..1" expression::Term : structuredExpression26
 expression::Expression "0..9999" --* "1..1" expression::StructureExpression : structuredExpressions107
-expression::ExpressionRest "0..9999" --* "1..1" expression::ExpressionList : tail20
+expression::ExpressionList "1..1" *-- "0..9999" expression::ExpressionRest : tail20
 expression::StatementList "0..1" --* "1..1" expression::StatementList : tail3
-expression::Term "0..9999" --* "1..1" expression::List : terms28
+expression::List "1..1" *-- "0..9999" expression::Term : terms28
 expression::Expression "0..1" --* "1..1" expression::Reduce : usingExpr79
 expression::Expression "0..1" --* "1..1" expression::Sum : usingExpr87
 expression::Expression "0..1" --* "1..1" expression::Map : usingExpr92
 expression::Expression "0..1" --* "1..1" expression::KeyValuePair : value22
-expression::EObject "0..1" -- "1..1" expression::Designator : value30
+expression::Designator "1..1" -- "0..1" expression::EObject : value30
 @enduml

@@ -99,11 +99,11 @@ class core::LayoutMap {
 COREConfiguration <|-- core::COREConcernConfiguration
 COREConfiguration <|-- core::COREReuseConfiguration
 COREImpactNode <|-- core::COREFeatureImpactNode
+COREModel <|-- core::COREFeatureModel
+COREModel <|-- core::COREImpactModel
 COREModelElement <|-- core::COREFeature
 COREModelElement <|-- core::COREImpactNode
 COREModelElement <|-- core::CORERelativity
-COREModel <|-- core::COREFeatureModel
-COREModel <|-- core::COREImpactModel
 CORENamedElement <|-- core::COREConcern
 CORENamedElement <|-- core::COREModel
 CORENamedElement <|-- core::COREModelElement
@@ -111,54 +111,54 @@ CORENamedElement <|-- core::COREReuse
 core::COREFeature "1..1" -- "0..9999" core::COREFeature : children21
 core::COREReuse "1..1" *-- "0..9999" core::COREReuseConfiguration : configurations54
 core::COREConcernConfiguration "0..9999" --* "1..1" core::COREFeatureModel : configurations81
-core::COREImpactModel "1..1" *-- "0..9999" core::COREContribution : contributions8
+core::COREContribution "0..9999" --* "1..1" core::COREImpactModel : contributions8
 core::COREConcern "1..1" -- "1..1" core::COREModel : coreConcern4
-core::COREModelElement "0..9999" -- "1..1" core::COREInterface : customizable40
-core::COREFeatureModel "1..1" -- "0..1" core::COREConcernConfiguration : defaultConfiguration83
+core::COREInterface "1..1" -- "0..9999" core::COREModelElement : customizable40
+core::COREConcernConfiguration "0..1" -- "1..1" core::COREFeatureModel : defaultConfiguration83
 core::COREConfiguration "0..9999" -- "1..1" core::COREInterface : defaults49
 core::COREFeature "0..9999" -- "1..1" core::COREFeature : excludes30
 core::COREConfiguration "1..1" *-- "0..9999" core::COREReuseConfiguration : extendingConfigurations72
 core::COREReuse "0..1" -- "1..1" core::COREReuse : extends60
-core::COREFeatureModel "1..1" --* "1..1" core::COREConcern : featureModel12
+core::COREConcern "1..1" *-- "1..1" core::COREFeatureModel : featureModel12
 core::COREFeature "1..1" -- "1..1" core::CORERelativity::Opt2 : features119
 core::COREFeature "0..9999" --* "1..1" core::COREFeatureModel : features75
 core::COREConcern "1..1" *-- "0..1" core::COREImpactModel : impactModel14
-core::COREImpactNode "0..9999" --* "1..1" core::COREImpactModel : impactModelElements5
+core::COREImpactModel "1..1" *-- "0..9999" core::COREImpactNode : impactModelElements5
 core::COREImpactNode "0..9999" -- "1..1" core::COREInterface : impacted46
 core::COREContribution "1..1" -- "1..1" core::COREImpactNode : impacts92
-core::CORERelativity::Opt2 "0..9999" -- "1..1" core::COREFeature : incoming35
-core::COREImpactNode "1..1" -- "0..9999" core::COREContribution : incoming64
+core::COREFeature "1..1" -- "0..9999" core::CORERelativity::Opt2 : incoming35
+core::COREContribution "0..9999" -- "1..1" core::COREImpactNode : incoming64
 core::COREConcern "1..1" *-- "1..1" core::COREInterface : interface11
 core::EObject "1..1" -- "1..1" core::LayoutMap : key94
 core::EObject "1..1" -- "1..1" core::LayoutContainerMap : key97
-core::LayoutContainerMap "0..9999" --* "1..1" core::COREImpactModel : layouts6
-core::COREModelElement "0..9999" -- "1..1" core::COREModel : modelElements1
-core::COREModelReuse "0..9999" --* "1..1" core::COREModel : modelReuses0
-core::COREModel "1..9999" -- "1..1" core::COREConcern : models10
-core::CORERelativity::Opt2 "0..9999" -- "1..1" core::COREFeature : outgoing34
+core::COREImpactModel "1..1" *-- "0..9999" core::LayoutContainerMap : layouts6
+core::COREModel "1..1" -- "0..9999" core::COREModelElement : modelElements1
+core::COREModel "1..1" *-- "0..9999" core::COREModelReuse : modelReuses0
+core::COREConcern "1..1" -- "1..9999" core::COREModel : models10
+core::COREFeature "1..1" -- "0..9999" core::CORERelativity::Opt2 : outgoing34
 core::COREContribution "0..9999" -- "1..1" core::COREImpactNode : outgoing62
-core::COREFeature "0..1" -- "1..1" core::COREFeature : parent24
-core::COREModel "0..9999" -- "1..1" core::COREFeature : realizedBy17
-core::COREModel "1..1" -- "0..9999" core::COREFeature : realizes3
-core::COREFeature "0..9999" -- "1..1" core::COREConfiguration : reexposed69
-core::CORERelativity::Opt2 "0..9999" --* "1..1" core::COREFeatureModel : relatedFeatures86
+core::COREFeature "1..1" -- "0..1" core::COREFeature : parent24
+core::COREFeature "1..1" -- "0..9999" core::COREModel : realizedBy17
+core::COREFeature "0..9999" -- "1..1" core::COREModel : realizes3
+core::COREConfiguration "1..1" -- "0..9999" core::COREFeature : reexposed69
+core::COREFeatureModel "1..1" *-- "0..9999" core::CORERelativity::Opt2 : relatedFeatures86
 core::COREFeature "1..1" -- "0..9999" core::CORERelativity : relatedTo32
 core::COREFeature "0..1" -- "1..1" core::CORERelativity : relatedToFeature113
 core::COREFeature "1..1" -- "1..1" core::COREFeatureImpactNode : represents103
 core::COREFeature "0..9999" -- "1..1" core::COREFeature : requires27
 core::COREReuse "0..1" -- "1..1" core::COREReuseConfiguration : reuse110
-core::COREReuse "1..1" -- "1..1" core::COREModelReuse : reuse88
+core::COREModelReuse "1..1" -- "1..1" core::COREReuse : reuse88
 core::COREConcern "1..1" -- "1..1" core::COREReuse : reusedConcern51
-core::COREReuseConfiguration "1..1" -- "0..1" core::COREConcernConfiguration : reusedConfiguration107
+core::COREConcernConfiguration "0..1" -- "1..1" core::COREReuseConfiguration : reusedConfiguration107
 core::COREFeature "1..1" *-- "0..9999" core::COREReuse : reuses19
 core::COREFeature "1..1" -- "1..1" core::COREFeatureModel : root78
 core::COREFeature "0..9999" -- "1..1" core::COREInterface : selectable37
-core::COREFeature "0..9999" -- "1..1" core::COREConfiguration : selected66
-core::COREReuseConfiguration "0..1" -- "1..1" core::COREReuse : selectedConfiguration56
+core::COREConfiguration "1..1" -- "0..9999" core::COREFeature : selected66
+core::COREReuse "1..1" -- "0..1" core::COREReuseConfiguration : selectedConfiguration56
 core::COREFeature "1..1" -- "1..1" core::CORERelativity::Opt2 : source116
-core::COREImpactNode "1..1" -- "1..1" core::COREContribution : source91
+core::COREContribution "1..1" -- "1..1" core::COREImpactNode : source91
 core::COREInterface "1..1" -- "0..9999" core::COREModelElement : usable43
 core::LayoutContainerMap "1..1" *-- "1..9999" core::LayoutMap : value100
 core::LayoutElement "1..1" --* "1..1" core::LayoutMap : value95
-core::COREWeightedMapping "0..9999" -- "1..1" core::COREFeatureImpactNode : weightedMappings105
+core::COREFeatureImpactNode "1..1" -- "0..9999" core::COREWeightedMapping : weightedMappings105
 @enduml

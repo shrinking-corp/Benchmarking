@@ -16,13 +16,13 @@ class model::MappedLibrary {
 class model::Person {
   + name : str
 }
-model::Person "0..9999" -- "1..1" model::Book : authors1
+model::Book "1..1" -- "0..9999" model::Person : authors1
 model::Book "0..9999" -- "1..1" model::Person : books0
 model::Book "0..9999" --* "1..1" model::Library : books2
 model::Book "0..1" -- "1..1" model::Location : featuredBook8
 model::Book "0..1" -- "1..1" model::Library : latestBook5
-model::MappedLibrary "1..1" *-- "0..1" model::Location : location11
-model::Location "0..1" --* "1..1" model::Library : location3
+model::Location "0..1" --* "1..1" model::MappedLibrary : location11
+model::Library "1..1" *-- "0..1" model::Location : location3
 model::Book "0..9999" --* "1..1" model::MappedLibrary : rareBooks13
-model::MappedLibrary "1..1" *-- "0..9999" model::Book : regularBooks16
+model::Book "0..9999" --* "1..1" model::MappedLibrary : regularBooks16
 @enduml

@@ -399,10 +399,10 @@ ActivityEdge <|-- xmof::IntermediateActivities::ObjectFlow
 ActivityNode <|-- xmof::CompleteStructuredActivities::ExecutableNode
 ActivityNode <|-- xmof::IntermediateActivities::ControlNode
 BasicBehaviors::BehavioredClassifier <|-- xmof::Kernel::BehavioredEClass
-BehavioredEClass <|-- xmof::BasicBehaviors::Behavior
-BehavioredEOperation <|-- xmof::Communications::Reception
 Behavior <|-- xmof::BasicBehaviors::OpaqueBehavior
 Behavior <|-- xmof::IntermediateActivities::Activity
+BehavioredEClass <|-- xmof::BasicBehaviors::Behavior
+BehavioredEOperation <|-- xmof::Communications::Reception
 CallAction <|-- xmof::BasicActions::CallBehaviorAction
 CallAction <|-- xmof::BasicActions::CallOperationAction
 CallAction <|-- xmof::CompleteActions::StartObjectBehaviorAction
@@ -412,9 +412,9 @@ ControlNode <|-- xmof::IntermediateActivities::ForkNode
 ControlNode <|-- xmof::IntermediateActivities::InitialNode
 ControlNode <|-- xmof::IntermediateActivities::JoinNode
 ControlNode <|-- xmof::IntermediateActivities::MergeNode
+EClass <|-- xmof::Kernel::BehavioredEClass
 EClassifier <|-- xmof::BasicBehaviors::BehavioredClassifier
 EClassifier <|-- xmof::Communications::Signal
-EClass <|-- xmof::Kernel::BehavioredEClass
 EDataType <|-- xmof::Kernel::PrimitiveType
 EModelElement <|-- xmof::CompleteStructuredActivities::Clause
 EModelElement <|-- xmof::IntermediateActions::LinkEndData
@@ -462,31 +462,31 @@ StructuralFeatureAction <|-- xmof::IntermediateActions::WriteStructuralFeatureAc
 StructuredActivityNode <|-- xmof::CompleteStructuredActivities::ConditionalNode
 StructuredActivityNode <|-- xmof::CompleteStructuredActivities::LoopNode
 StructuredActivityNode <|-- xmof::ExtraStructuredActivities::ExpansionRegion
-ValueSpecification <|-- xmof::Kernel::EnumValue
-ValueSpecification <|-- xmof::Kernel::InstanceValue
-ValueSpecification <|-- xmof::Kernel::LiteralSpecification
 Value <|-- xmof::Kernel::EnumerationValue
 Value <|-- xmof::Kernel::ObjectValue
 Value <|-- xmof::Kernel::PrimitiveValue
+ValueSpecification <|-- xmof::Kernel::EnumValue
+ValueSpecification <|-- xmof::Kernel::InstanceValue
+ValueSpecification <|-- xmof::Kernel::LiteralSpecification
 WriteLinkAction <|-- xmof::IntermediateActions::CreateLinkAction
 WriteLinkAction <|-- xmof::IntermediateActions::DestroyLinkAction
 WriteStructuralFeatureAction <|-- xmof::IntermediateActions::AddStructuralFeatureValueAction
 WriteStructuralFeatureAction <|-- xmof::IntermediateActions::RemoveStructuralFeatureValueAction
 IntermediateActivities::Activity "0..1" -- "1..1" xmof::IntermediateActivities::ActivityEdge : activity28
-xmof::IntermediateActivities::ActivityNode "1..1" -- "0..1" IntermediateActivities::Activity : activity50
+IntermediateActivities::Activity "0..1" -- "1..1" xmof::IntermediateActivities::ActivityNode : activity50
 BasicActions::InputPin "0..9999" --* "1..1" xmof::BasicActions::InvocationAction : argument231
 IntermediateActions::xmof::EReference "1..1" -- "1..1" xmof::IntermediateActions::ClearAssociationAction : association171
 BasicBehaviors::Behavior "1..1" -- "1..1" xmof::BasicActions::CallBehaviorAction : behavior238
-xmof::CompleteStructuredActivities::Clause "1..1" -- "0..9999" CompleteStructuredActivities::ExecutableNode : body87
+CompleteStructuredActivities::ExecutableNode "0..9999" -- "1..1" xmof::CompleteStructuredActivities::Clause : body87
 BasicActions::OutputPin "0..9999" -- "1..1" xmof::CompleteStructuredActivities::LoopNode : bodyOutput68
 BasicActions::OutputPin "0..9999" -- "1..1" xmof::CompleteStructuredActivities::Clause : bodyOutput99
 CompleteStructuredActivities::ExecutableNode "0..9999" -- "1..1" xmof::CompleteStructuredActivities::LoopNode : bodyPart73
 Kernel::xmof::EClassifier "0..9999" -- "1..1" xmof::Kernel::InstanceSpecification : classifier17
-xmof::IntermediateActions::CreateObjectAction "1..1" -- "1..1" IntermediateActions::xmof::EClassifier : classifier180
+IntermediateActions::xmof::EClassifier "1..1" -- "1..1" xmof::IntermediateActions::CreateObjectAction : classifier180
 CompleteActions::xmof::EClassifier "1..1" -- "1..1" xmof::CompleteActions::ReadExtentAction : classifier200
 CompleteActions::xmof::EClassifier "1..1" -- "1..1" xmof::CompleteActions::ReadIsClassifiedObjectAction : classifier202
 BasicBehaviors::Behavior "0..1" -- "1..1" xmof::BasicBehaviors::BehavioredClassifier : classifierBehavior5
-xmof::CompleteStructuredActivities::ConditionalNode "1..1" *-- "1..9999" CompleteStructuredActivities::Clause : clause102
+CompleteStructuredActivities::Clause "1..9999" --* "1..1" xmof::CompleteStructuredActivities::ConditionalNode : clause102
 BasicActions::InputPin "1..1" --* "1..1" xmof::CompleteActions::ReduceAction : collection195
 BasicBehaviors::BehavioredClassifier "0..1" -- "1..1" xmof::BasicBehaviors::Behavior : context2
 BasicActions::xmof::EClassifier "0..1" -- "1..1" xmof::BasicActions::Action : context224
@@ -494,9 +494,9 @@ BasicActions::OutputPin "1..1" -- "1..1" xmof::CompleteStructuredActivities::Loo
 BasicActions::OutputPin "1..1" -- "1..1" xmof::CompleteStructuredActivities::Clause : decider96
 BasicBehaviors::Behavior "0..1" -- "1..1" xmof::IntermediateActivities::DecisionNode : decisionInput59
 IntermediateActivities::ObjectFlow "0..1" -- "1..1" xmof::IntermediateActivities::DecisionNode : decisionInputFlow61
-xmof::Kernel::Slot "1..1" -- "1..1" Kernel::xmof::EStructuralFeature : definingFeature21
+Kernel::xmof::EStructuralFeature "1..1" -- "1..1" xmof::Kernel::Slot : definingFeature21
 BasicActions::InputPin "0..1" -- "1..1" xmof::IntermediateActions::LinkEndDestructionData : destroyAt169
-xmof::Kernel::EEnumLiteralSpecification "1..1" -- "1..1" Kernel::xmof::EEnumLiteral : eEnumLiteral15
+Kernel::xmof::EEnumLiteral "1..1" -- "1..1" xmof::Kernel::EEnumLiteralSpecification : eEnumLiteral15
 Kernel::EEnumLiteralSpecification "1..1" --* "1..1" xmof::Kernel::EnumValue : eEnumLiteralSpecification16
 Kernel::xmof::EObject "1..1" -- "1..1" xmof::Kernel::ObjectValue : eObject249
 IntermediateActivities::ActivityEdge "0..9999" --* "1..1" xmof::CompleteStructuredActivities::StructuredActivityNode : edge109
@@ -505,8 +505,8 @@ IntermediateActions::xmof::EReference "1..1" -- "1..1" xmof::IntermediateActions
 IntermediateActions::LinkEndData "2..9999" --* "1..1" xmof::IntermediateActions::LinkAction : endData146
 Communications::Event "1..1" -- "1..1" xmof::Communications::Trigger : event8
 BasicActions::InputPin "1..1" --* "1..1" xmof::IntermediateActions::TestIdentityAction : first138
-xmof::IntermediateActivities::ActivityEdge "1..1" *-- "0..1" Kernel::ValueSpecification : guard39
-xmof::IntermediateActivities::ActivityEdge "1..1" -- "0..1" CompleteStructuredActivities::StructuredActivityNode : inStructuredNode36
+Kernel::ValueSpecification "0..1" --* "1..1" xmof::IntermediateActivities::ActivityEdge : guard39
+CompleteStructuredActivities::StructuredActivityNode "0..1" -- "1..1" xmof::IntermediateActivities::ActivityEdge : inStructuredNode36
 CompleteStructuredActivities::StructuredActivityNode "0..1" -- "1..1" xmof::IntermediateActivities::ActivityNode : inStructuredNode47
 IntermediateActivities::ActivityEdge "0..9999" -- "1..1" xmof::IntermediateActivities::ActivityNode : incoming56
 BasicActions::InputPin "0..9999" -- "1..1" xmof::BasicActions::Action : input226
@@ -517,32 +517,32 @@ BasicActions::InputPin "0..1" --* "1..1" xmof::IntermediateActions::AddStructura
 Kernel::InstanceSpecification "1..1" -- "1..1" xmof::Kernel::InstanceValue : instance27
 Kernel::xmof::EEnumLiteral "1..1" -- "1..1" xmof::Kernel::EnumerationValue : literal245
 BasicActions::OutputPin "0..9999" -- "1..1" xmof::CompleteStructuredActivities::LoopNode : loopVariable79
-xmof::CompleteStructuredActivities::LoopNode "1..1" *-- "0..9999" BasicActions::InputPin : loopVariableInput71
+BasicActions::InputPin "0..9999" --* "1..1" xmof::CompleteStructuredActivities::LoopNode : loopVariableInput71
 BasicBehaviors::Behavior "0..9999" -- "1..1" xmof::Kernel::BehavioredEOperation : method13
 CompleteActions::xmof::EClassifier "0..9999" -- "1..1" xmof::CompleteActions::ReclassifyObjectAction : newClassifier215
 IntermediateActivities::ActivityNode "0..9999" --* "1..1" xmof::CompleteStructuredActivities::StructuredActivityNode : node106
 IntermediateActivities::ActivityNode "0..9999" --* "1..1" xmof::IntermediateActivities::Activity : node41
 BasicActions::InputPin "1..1" --* "1..1" xmof::IntermediateActions::StructuralFeatureAction : object130
 BasicActions::InputPin "1..1" --* "1..1" xmof::IntermediateActions::ClearAssociationAction : object173
-xmof::CompleteActions::StartClassifierBehaviorAction "1..1" *-- "1..1" BasicActions::InputPin : object186
+BasicActions::InputPin "1..1" --* "1..1" xmof::CompleteActions::StartClassifierBehaviorAction : object186
 BasicActions::InputPin "1..1" --* "1..1" xmof::CompleteActions::StartObjectBehaviorAction : object188
 BasicActions::InputPin "1..1" --* "1..1" xmof::CompleteActions::ReadIsClassifiedObjectAction : object207
 BasicActions::InputPin "1..1" --* "1..1" xmof::CompleteActions::ReclassifyObjectAction : object212
-xmof::CompleteActions::ReclassifyObjectAction "1..1" -- "0..9999" CompleteActions::xmof::EClassifier : oldClassifier210
+CompleteActions::xmof::EClassifier "0..9999" -- "1..1" xmof::CompleteActions::ReclassifyObjectAction : oldClassifier210
 Kernel::BehavioredEOperation "1..1" -- "1..1" xmof::BasicActions::CallOperationAction : operation240
 IntermediateActivities::ActivityEdge "0..9999" -- "1..1" xmof::IntermediateActivities::ActivityNode : outgoing53
-xmof::BasicActions::Action "1..1" -- "0..9999" BasicActions::OutputPin : output222
+BasicActions::OutputPin "0..9999" -- "1..1" xmof::BasicActions::Action : output222
 ExtraStructuredActivities::ExpansionNode "0..9999" -- "1..1" xmof::ExtraStructuredActivities::ExpansionRegion : outputElement126
 Communications::xmof::EAttribute "0..9999" --* "1..1" xmof::Communications::Signal : ownedAttribute9
-xmof::BasicBehaviors::BehavioredClassifier "1..1" *-- "0..9999" BasicBehaviors::Behavior : ownedBehavior4
-xmof::BasicBehaviors::Behavior "1..1" *-- "0..9999" Kernel::DirectedParameter : ownedParameter1
+BasicBehaviors::Behavior "0..9999" --* "1..1" xmof::BasicBehaviors::BehavioredClassifier : ownedBehavior4
+Kernel::DirectedParameter "0..9999" --* "1..1" xmof::BasicBehaviors::Behavior : ownedParameter1
 Kernel::InstanceSpecification "1..1" -- "1..1" xmof::Kernel::Slot : owningInstance24
 Kernel::DirectedParameter "1..1" -- "1..1" xmof::BasicBehaviors::ParameterValue : parameter250
-xmof::IntermediateActivities::ActivityParameterNode "1..1" -- "1..1" Kernel::DirectedParameter : parameter63
+Kernel::DirectedParameter "1..1" -- "1..1" xmof::IntermediateActivities::ActivityParameterNode : parameter63
 BasicBehaviors::ParameterValue "0..9999" --* "1..1" xmof::BasicBehaviors::ParameterValueDefinition : parameterValues254
 CompleteStructuredActivities::Clause "0..9999" -- "1..1" xmof::CompleteStructuredActivities::Clause : predecessorClause90
 BasicBehaviors::Behavior "1..1" -- "1..1" xmof::CompleteActions::ReduceAction : reducer190
-xmof::ExtraStructuredActivities::ExpansionNode "1..1" -- "0..1" ExtraStructuredActivities::ExpansionRegion : regionAsInput120
+ExtraStructuredActivities::ExpansionRegion "0..1" -- "1..1" xmof::ExtraStructuredActivities::ExpansionNode : regionAsInput120
 ExtraStructuredActivities::ExpansionRegion "0..1" -- "1..1" xmof::ExtraStructuredActivities::ExpansionNode : regionAsOutput117
 BasicActions::InputPin "0..1" --* "1..1" xmof::IntermediateActions::RemoveStructuralFeatureValueAction : removeAt159
 BasicActions::OutputPin "0..9999" --* "1..1" xmof::CompleteStructuredActivities::ConditionalNode : result103
@@ -550,27 +550,27 @@ BasicActions::OutputPin "1..1" --* "1..1" xmof::IntermediateActions::TestIdentit
 BasicActions::OutputPin "1..1" --* "1..1" xmof::IntermediateActions::ValueSpecificationAction : result143
 BasicActions::OutputPin "0..1" --* "1..1" xmof::IntermediateActions::WriteStructuralFeatureAction : result156
 BasicActions::OutputPin "1..1" --* "1..1" xmof::IntermediateActions::ReadLinkAction : result161
-xmof::IntermediateActions::ReadSelfAction "1..1" *-- "1..1" BasicActions::OutputPin : result163
-xmof::IntermediateActions::ReadStructuralFeatureAction "1..1" *-- "0..1" BasicActions::OutputPin : result165
-xmof::IntermediateActions::ClearStructuralFeatureAction "1..1" *-- "0..1" BasicActions::OutputPin : result176
+BasicActions::OutputPin "1..1" --* "1..1" xmof::IntermediateActions::ReadSelfAction : result163
+BasicActions::OutputPin "0..1" --* "1..1" xmof::IntermediateActions::ReadStructuralFeatureAction : result165
+BasicActions::OutputPin "0..1" --* "1..1" xmof::IntermediateActions::ClearStructuralFeatureAction : result176
 BasicActions::OutputPin "1..1" --* "1..1" xmof::IntermediateActions::CreateObjectAction : result178
-xmof::CompleteActions::ReduceAction "1..1" *-- "1..1" BasicActions::OutputPin : result192
+BasicActions::OutputPin "1..1" --* "1..1" xmof::CompleteActions::ReduceAction : result192
 BasicActions::OutputPin "1..1" --* "1..1" xmof::CompleteActions::ReadExtentAction : result198
 BasicActions::OutputPin "1..1" --* "1..1" xmof::CompleteActions::ReadIsClassifiedObjectAction : result204
 BasicActions::OutputPin "0..9999" -- "1..1" xmof::CompleteActions::AcceptEventAction : result218
-xmof::BasicActions::CallAction "1..1" *-- "0..9999" BasicActions::OutputPin : result229
+BasicActions::OutputPin "0..9999" --* "1..1" xmof::BasicActions::CallAction : result229
 BasicActions::OutputPin "0..9999" --* "1..1" xmof::CompleteStructuredActivities::LoopNode : result76
-xmof::IntermediateActions::TestIdentityAction "1..1" *-- "1..1" BasicActions::InputPin : second133
-xmof::CompleteStructuredActivities::LoopNode "1..1" -- "0..9999" CompleteStructuredActivities::ExecutableNode : setupPart82
+BasicActions::InputPin "1..1" --* "1..1" xmof::IntermediateActions::TestIdentityAction : second133
+CompleteStructuredActivities::ExecutableNode "0..9999" -- "1..1" xmof::CompleteStructuredActivities::LoopNode : setupPart82
 Communications::Signal "1..1" -- "1..1" xmof::Communications::SignalEvent : signal10
-xmof::Communications::Reception "1..1" -- "1..1" Communications::Signal : signal11
-xmof::BasicActions::SendSignalAction "1..1" -- "1..1" Communications::Signal : signal235
+Communications::Signal "1..1" -- "1..1" xmof::Communications::Reception : signal11
+Communications::Signal "1..1" -- "1..1" xmof::BasicActions::SendSignalAction : signal235
 Kernel::Slot "0..9999" --* "1..1" xmof::Kernel::InstanceSpecification : slot18
 IntermediateActivities::ActivityNode "1..1" -- "1..1" xmof::IntermediateActivities::ActivityEdge : source30
 Kernel::BehavioredEOperation "0..1" -- "1..1" xmof::BasicBehaviors::Behavior : specification0
-xmof::IntermediateActions::StructuralFeatureAction "1..1" -- "1..1" IntermediateActions::xmof::EStructuralFeature : structuralFeature129
+IntermediateActions::xmof::EStructuralFeature "1..1" -- "1..1" xmof::IntermediateActions::StructuralFeatureAction : structuralFeature129
 BasicActions::InputPin "0..9999" --* "1..1" xmof::CompleteStructuredActivities::StructuredActivityNode : structuredNodeInput114
-xmof::CompleteStructuredActivities::StructuredActivityNode "1..1" *-- "0..9999" BasicActions::OutputPin : structuredNodeOutput112
+BasicActions::OutputPin "0..9999" --* "1..1" xmof::CompleteStructuredActivities::StructuredActivityNode : structuredNodeOutput112
 CompleteStructuredActivities::Clause "0..9999" -- "1..1" xmof::CompleteStructuredActivities::Clause : successorClause93
 BasicActions::InputPin "1..1" --* "1..1" xmof::IntermediateActions::DestroyObjectAction : target182
 BasicActions::InputPin "1..1" --* "1..1" xmof::BasicActions::SendSignalAction : target233
@@ -580,10 +580,10 @@ CompleteStructuredActivities::ExecutableNode "1..9999" -- "1..1" xmof::CompleteS
 CompleteStructuredActivities::ExecutableNode "1..9999" -- "1..1" xmof::CompleteStructuredActivities::Clause : test85
 Communications::Trigger "1..9999" --* "1..1" xmof::CompleteActions::AcceptEventAction : trigger220
 Kernel::PrimitiveType "1..1" -- "1..1" xmof::Kernel::PrimitiveValue : type244
-xmof::Kernel::EnumerationValue "1..1" -- "1..1" Kernel::xmof::EEnum : type247
+Kernel::xmof::EEnum "1..1" -- "1..1" xmof::Kernel::EnumerationValue : type247
 Kernel::ValueSpecification "1..1" --* "1..1" xmof::IntermediateActions::ValueSpecificationAction : value141
 BasicActions::InputPin "0..1" -- "1..1" xmof::IntermediateActions::LinkEndData : value150
-xmof::IntermediateActions::WriteStructuralFeatureAction "1..1" *-- "0..1" BasicActions::InputPin : value154
+BasicActions::InputPin "0..1" --* "1..1" xmof::IntermediateActions::WriteStructuralFeatureAction : value154
 Kernel::ValueSpecification "0..9999" --* "1..1" xmof::Kernel::Slot : value22
-xmof::BasicBehaviors::ParameterValue "1..1" *-- "0..9999" Kernel::Value : values252
+Kernel::Value "0..9999" --* "1..1" xmof::BasicBehaviors::ParameterValue : values252
 @enduml

@@ -38,8 +38,6 @@ class mprologTermReference::Variable {
 }
 class mprologTermReference::VariableReference {
 }
-TermReference <|-- mprologTermReference::FunctorReference
-TermReference <|-- mprologTermReference::VariableReference
 Term <|-- mprologTermReference::Functor
 Term <|-- mprologTermReference::InfixExpression
 Term <|-- mprologTermReference::List
@@ -47,20 +45,22 @@ Term <|-- mprologTermReference::Parenthesis
 Term <|-- mprologTermReference::QuotedAtom
 Term <|-- mprologTermReference::TermReference
 Term <|-- mprologTermReference::Variable
+TermReference <|-- mprologTermReference::FunctorReference
+TermReference <|-- mprologTermReference::VariableReference
 mprologTermReference::Functor "0..1" -- "1..1" mprologTermReference::FunctorReference : idReference27
 mprologTermReference::Variable "0..1" -- "1..1" mprologTermReference::VariableReference : idReference32
-mprologTermReference::Term "1..1" --* "1..1" mprologTermReference::InfixExpression : leftTerm20
-mprologTermReference::Term "0..1" --* "1..1" mprologTermReference::Term : nextTerm8
+mprologTermReference::InfixExpression "1..1" *-- "1..1" mprologTermReference::Term : leftTerm20
+mprologTermReference::Term "1..1" *-- "0..1" mprologTermReference::Term : nextTerm8
 mprologTermReference::Body "0..1" --* "1..1" mprologTermReference::Clause : ownedBody3
-mprologTermReference::Model "1..1" *-- "0..9999" mprologTermReference::Clause : ownedClause0
-mprologTermReference::Head "1..1" *-- "1..1" mprologTermReference::Functor : ownedFunctor5
-mprologTermReference::Head "0..1" --* "1..1" mprologTermReference::Clause : ownedHead1
-mprologTermReference::Term "0..1" --* "1..1" mprologTermReference::List : ownedHeadTerms15
-mprologTermReference::Operator "1..1" --* "1..1" mprologTermReference::InfixExpression : ownedOperator25
+mprologTermReference::Clause "0..9999" --* "1..1" mprologTermReference::Model : ownedClause0
+mprologTermReference::Functor "1..1" --* "1..1" mprologTermReference::Head : ownedFunctor5
+mprologTermReference::Clause "1..1" *-- "0..1" mprologTermReference::Head : ownedHead1
+mprologTermReference::List "1..1" *-- "0..1" mprologTermReference::Term : ownedHeadTerms15
+mprologTermReference::InfixExpression "1..1" *-- "1..1" mprologTermReference::Operator : ownedOperator25
 mprologTermReference::List "1..1" *-- "0..1" mprologTermReference::Term : ownedTailTerms17
-mprologTermReference::Term "0..1" --* "1..1" mprologTermReference::Functor : ownedTerm12
-mprologTermReference::Term "0..1" --* "1..1" mprologTermReference::FunctorReference : ownedTerm29
-mprologTermReference::Term "1..1" --* "1..1" mprologTermReference::Parenthesis : ownedTerm33
-mprologTermReference::Term "1..1" --* "1..1" mprologTermReference::Body : ownedTerm9
-mprologTermReference::Term "1..1" --* "1..1" mprologTermReference::InfixExpression : rightTerm22
+mprologTermReference::Functor "1..1" *-- "0..1" mprologTermReference::Term : ownedTerm12
+mprologTermReference::FunctorReference "1..1" *-- "0..1" mprologTermReference::Term : ownedTerm29
+mprologTermReference::Parenthesis "1..1" *-- "1..1" mprologTermReference::Term : ownedTerm33
+mprologTermReference::Body "1..1" *-- "1..1" mprologTermReference::Term : ownedTerm9
+mprologTermReference::InfixExpression "1..1" *-- "1..1" mprologTermReference::Term : rightTerm22
 @enduml

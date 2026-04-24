@@ -46,13 +46,13 @@ class db::MovieType {
   + title : str
 }
 CriticsReviewType <|-- db::CustomerReviewType
-db::MovieType "1..1" -- "1..1" db::CustomerType : checkedOutBy17
+db::CustomerType "1..1" -- "1..1" db::MovieType : checkedOutBy17
 db::CustomerType "0..9999" -- "1..1" db::DocumentRoot : checkedOutBy4
 db::CriticsReviewType "0..9999" --* "1..1" db::MovieType : criticsReview14
 db::CriticsReviewType "0..9999" --* "1..1" db::DocumentRoot : criticsReview6
-db::DocumentRoot "1..1" *-- "0..9999" db::CustomerReviewType : customerReview8
-db::MovieType "1..9999" --* "1..1" db::MovieDBType : movie12
-db::MovieDBType "0..9999" --* "1..1" db::DocumentRoot : movieDB10
+db::CustomerReviewType "0..9999" --* "1..1" db::DocumentRoot : customerReview8
+db::MovieDBType "1..1" *-- "1..9999" db::MovieType : movie12
+db::DocumentRoot "1..1" *-- "0..9999" db::MovieDBType : movieDB10
 db::DocumentRoot "1..1" *-- "0..9999" db::EStringToStringMapEntry : xMLNSPrefixMap0
 db::DocumentRoot "1..1" *-- "0..9999" db::EStringToStringMapEntry : xSISchemaLocation1
 @enduml

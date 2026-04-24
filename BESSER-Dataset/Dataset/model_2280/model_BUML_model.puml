@@ -25,12 +25,12 @@ class model::Student {
 class model::root {
 }
 model::Exercise "1..1" -- "0..9999" model::Student : assignedTo13
-model::Student "1..1" -- "0..9999" model::Course : attends5
-model::Exercise "0..9999" --* "1..1" model::Course : contains16
-model::root "1..1" *-- "0..9999" model::Course : containsCourse1
+model::Course "0..9999" -- "1..1" model::Student : attends5
+model::Course "1..1" *-- "0..9999" model::Exercise : contains16
+model::Course "0..9999" --* "1..1" model::root : containsCourse1
 model::Delivery "0..9999" --* "1..1" model::root : containsDelivery3
-model::root "1..1" *-- "0..9999" model::Student : containsStudent0
-model::Response "0..1" --* "1..1" model::Delivery : evaluates19
+model::Student "0..9999" --* "1..1" model::root : containsStudent0
+model::Delivery "1..1" *-- "0..1" model::Response : evaluates19
 model::Delivery "0..9999" -- "1..1" model::Exercise : hasSubmitted11
 model::Delivery "0..9999" -- "1..1" model::Student : submits8
 @enduml

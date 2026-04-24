@@ -46,20 +46,20 @@ State <|-- StateMachines::FinalState
 Vertex <|-- StateMachines::ConnectionPointReference
 Vertex <|-- StateMachines::Pseudostate
 Vertex <|-- StateMachines::State
-StateMachines::State "1..1" *-- "0..9999" StateMachines::ConnectionPointReference : connection25
+StateMachines::ConnectionPointReference "0..9999" --* "1..1" StateMachines::State : connection25
 StateMachines::Pseudostate "0..9999" --* "1..1" StateMachines::State : connectionPoint15
-StateMachines::Trigger "0..9999" --* "1..1" StateMachines::State : deferrableTrigger27
+StateMachines::State "1..1" *-- "0..9999" StateMachines::Trigger : deferrableTrigger27
 StateMachines::Behavior "0..1" --* "1..1" StateMachines::State : doActivity22
 StateMachines::Behavior "0..1" --* "1..1" StateMachines::State : entry17
-StateMachines::Pseudostate "0..9999" -- "1..1" StateMachines::ConnectionPointReference : entry33
-StateMachines::State "1..1" *-- "0..1" StateMachines::Behavior : exit19
+StateMachines::ConnectionPointReference "1..1" -- "0..9999" StateMachines::Pseudostate : entry33
+StateMachines::Behavior "0..1" --* "1..1" StateMachines::State : exit19
 StateMachines::ConnectionPointReference "1..1" -- "0..9999" StateMachines::Pseudostate : exit36
 StateMachines::Transition "0..9999" -- "1..1" StateMachines::Vertex : incoming8
 StateMachines::Transition "0..9999" -- "1..1" StateMachines::Vertex : outgoing5
 StateMachines::Region "1..9999" --* "1..1" StateMachines::StateMachine : region0
 StateMachines::Region "0..9999" --* "1..1" StateMachines::State : region13
-StateMachines::StateMachine "0..1" -- "1..1" StateMachines::State : submachine30
-StateMachines::Vertex "0..9999" -- "1..1" StateMachines::Region : subvertex1
-StateMachines::Transition "0..9999" -- "1..1" StateMachines::Region : transition3
+StateMachines::State "1..1" -- "0..1" StateMachines::StateMachine : submachine30
+StateMachines::Region "1..1" -- "0..9999" StateMachines::Vertex : subvertex1
+StateMachines::Region "1..1" -- "0..9999" StateMachines::Transition : transition3
 StateMachines::Transition "1..1" -- "0..9999" StateMachines::Trigger : trigger11
 @enduml

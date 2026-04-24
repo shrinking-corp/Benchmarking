@@ -1,0 +1,45 @@
+@startuml
+class EdgeProcessor {
+}
+enum EdgeType {
+  BACKWARD_EDGE
+  CROSS_EDGE
+  FORWARD_EDGE
+  TREE_EDGE
+}
+class dfs::DFSGraph {
+}
+class dfs::DepthFirstSearch {
+  + postTraversalCounter : int
+  + preTraversalCounter : int
+  + incrementPostTraversalCounter() : int
+  + incrementPreTraversalCounter() : int
+  + processEdge(edge : any) : str
+  + processNode(node : any) : str
+}
+class dfs::EObject {
+}
+class dfs::Edge {
+  + type : str
+}
+abstract class dfs::EdgeProcessor {
+  + processEdge(edge : any) : str
+  + processNode(node : any) : str
+}
+class dfs::Node {
+  + postTraversal : int
+  + preTraversal : int
+}
+EdgeProcessor <|-- dfs::DepthFirstSearch
+dfs::EdgeProcessor "1..1" -- "0..1" dfs::EdgeProcessor : delegate1
+dfs::DFSGraph "1..1" *-- "0..9999" dfs::Edge : edges14
+dfs::DFSGraph "1..1" -- "1..1" dfs::Node : graph3
+dfs::DFSGraph "1..1" -- "1..1" dfs::Edge : graph7
+dfs::Edge "0..9999" -- "1..1" dfs::Node : incoming2
+dfs::DFSGraph "1..1" *-- "0..9999" dfs::Node : nodes16
+dfs::EObject "1..1" -- "1..1" dfs::Edge : origin10
+dfs::EObject "1..1" -- "1..1" dfs::Node : origin4
+dfs::Edge "0..9999" -- "1..1" dfs::Node : outgoing5
+dfs::Edge "1..1" -- "1..1" dfs::Node : source9
+dfs::Edge "1..1" -- "1..1" dfs::Node : target12
+@enduml

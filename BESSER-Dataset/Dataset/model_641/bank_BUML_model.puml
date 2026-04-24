@@ -54,16 +54,16 @@ class Employee {
 Account <|-- BankingSystem::Chequing
 Account <|-- BankingSystem::Saving
 Employee <|-- BankingSystem::Financial::Representative
-BankingSystem::Financial::Representative "1..1" -- "0..9999" BankingSystem::Customer : a17
+BankingSystem::Customer "0..9999" -- "1..1" BankingSystem::Financial::Representative : a17
 BankingSystem::Account "1..9999" --* "1..1" BankingSystem::Customer : accounts7
-BankingSystem::Branch "1..1" -- "1..1" BankingSystem::Bank : bank4
+BankingSystem::Bank "1..1" -- "1..1" BankingSystem::Branch : bank4
 BankingSystem::Branch "1..1" -- "1..1" BankingSystem::Employee : branch13
-BankingSystem::Customer "1..1" -- "1..1" BankingSystem::Branch : branch5
-BankingSystem::Branch "1..9999" --* "1..1" BankingSystem::Bank : branches0
-BankingSystem::Customer "1..1" -- "1..1" BankingSystem::Account : customer11
+BankingSystem::Branch "1..1" -- "1..1" BankingSystem::Customer : branch5
+BankingSystem::Bank "1..1" *-- "1..9999" BankingSystem::Branch : branches0
+BankingSystem::Account "1..1" -- "1..1" BankingSystem::Customer : customer11
 BankingSystem::Customer "1..1" -- "1..1" BankingSystem::Loan : customer15
-BankingSystem::Customer "1..9999" --* "1..1" BankingSystem::Branch : customers1
-BankingSystem::Employee "1..9999" --* "1..1" BankingSystem::Branch : employees2
+BankingSystem::Branch "1..1" *-- "1..9999" BankingSystem::Customer : customers1
+BankingSystem::Branch "1..1" *-- "1..9999" BankingSystem::Employee : employees2
 BankingSystem::Customer "1..1" *-- "0..9999" BankingSystem::Loan : loans8
-BankingSystem::Financial::Representative "0..9999" -- "1..1" BankingSystem::Customer : representative10
+BankingSystem::Customer "1..1" -- "0..9999" BankingSystem::Financial::Representative : representative10
 @enduml

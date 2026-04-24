@@ -1,0 +1,117 @@
+@startuml
+class Component {
+}
+class Controller {
+}
+class Hardware {
+}
+class Item {
+}
+class Iteration {
+}
+enum Operator {
+  EQ
+  GE
+  GT
+  LE
+  LT
+  NE
+}
+class RequiredPort {
+}
+class iot::Actuator {
+  + toggle : bool
+  + getStatus() : bool
+  + switchOnOff(onOff : any) : str
+  + toggle() : str
+}
+class iot::Branching {
+}
+abstract class iot::Component {
+}
+class iot::ConditionPort {
+}
+abstract class iot::Controller {
+}
+class iot::CounterLoop {
+  + counter : int
+}
+class iot::ElsePort {
+}
+abstract class iot::Hardware {
+  + mode : bool
+  + pinNumber : int
+  + timeInterval : int
+  + type : str
+}
+class iot::IfPort {
+  + condition : bool
+  + operator : str
+  + var : str
+}
+abstract class iot::Item {
+  + UUID : str
+  + name : str
+  + newThread : bool
+  + invoke() : str
+}
+abstract class iot::Iteration {
+}
+class iot::IterativeLoop {
+  + operator : str
+  + var : str
+}
+class iot::ProvidedPort {
+  + UUID : str
+  + name : str
+  + invoke(method : any) : str
+}
+class iot::RequiredPort {
+  + UUID : str
+  + args : str
+  + method : str
+  + name : str
+  + invoke(method : any) : str
+}
+class iot::Sensor {
+  + script : str
+  + getData() : str
+}
+class iot::Sequence {
+}
+class iot::Snippet {
+  + scriptPath : str
+}
+class iot::Software {
+}
+class iot::ThenPort {
+}
+Component <|-- iot::Hardware
+Component <|-- iot::Snippet
+Component <|-- iot::Software
+Controller <|-- iot::Branching
+Controller <|-- iot::Iteration
+Controller <|-- iot::Sequence
+Hardware <|-- iot::Actuator
+Hardware <|-- iot::Sensor
+Item <|-- iot::Component
+Item <|-- iot::Controller
+Iteration <|-- iot::CounterLoop
+Iteration <|-- iot::IterativeLoop
+RequiredPort <|-- iot::ConditionPort
+RequiredPort <|-- iot::ElsePort
+RequiredPort <|-- iot::IfPort
+RequiredPort <|-- iot::ThenPort
+iot::ConditionPort "1..1" --* "1..1" iot::IterativeLoop : condition1
+iot::Branching "1..1" *-- "0..1" iot::ElsePort : elseport7
+iot::Branching "1..1" *-- "1..1" iot::IfPort : ifport4
+iot::Item "0..9999" --* "1..1" iot::Software : item0
+iot::Component "1..1" *-- "0..9999" iot::ProvidedPort : providedport14
+iot::Controller "1..1" *-- "1..1" iot::ProvidedPort : providedport17
+iot::Item "1..1" -- "1..1" iot::ProvidedPort : referto2
+iot::RequiredPort "1..9999" --* "1..1" iot::Sequence : requiredport10
+iot::Component "1..1" *-- "0..9999" iot::RequiredPort : requiredport12
+iot::Iteration "1..1" *-- "1..1" iot::RequiredPort : requiredport9
+iot::Branching "1..1" *-- "0..1" iot::ThenPort : thenport5
+iot::ProvidedPort "0..1" -- "1..1" iot::RequiredPort : use19
+@enduml

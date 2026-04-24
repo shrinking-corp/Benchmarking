@@ -1,0 +1,26 @@
+@startuml
+class fsmSample::Action {
+  + name : str
+  + run(sync : any) : str
+}
+class fsmSample::FSM {
+  + name : str
+}
+class fsmSample::State {
+  + name : str
+}
+class fsmSample::Transition {
+  + input : str
+  + output : str
+}
+fsmSample::Action "0..1" --* "1..1" fsmSample::Transition : action16
+fsmSample::FSM "1..1" -- "1..1" fsmSample::State : currentState5
+fsmSample::FSM "1..1" -- "1..9999" fsmSample::State : finalState2
+fsmSample::State "1..1" -- "0..9999" fsmSample::Transition : incomingTransition10
+fsmSample::FSM "1..1" -- "1..1" fsmSample::State : initialState1
+fsmSample::State "1..1" *-- "0..9999" fsmSample::Transition : outgoingTransition9
+fsmSample::FSM "1..1" *-- "0..9999" fsmSample::State : ownedState0
+fsmSample::FSM "1..1" -- "1..1" fsmSample::State : owningFSM8
+fsmSample::State "1..1" -- "1..1" fsmSample::Transition : source12
+fsmSample::State "1..1" -- "1..1" fsmSample::Transition : target14
+@enduml

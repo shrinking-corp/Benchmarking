@@ -1,0 +1,108 @@
+@startuml
+class HyFeatureAttribute {
+}
+enum HyFeatureTypeEnum {
+  MANDATORY
+  OPTIONAL
+}
+enum HyGroupTypeEnum {
+  ALTERNATIVE
+  AND
+  OR
+}
+class HyLinearTemporalElement {
+}
+class HyNamedElement {
+}
+class HyTemporalElement {
+}
+class feature::HyBooleanAttribute {
+  + default : bool
+}
+class feature::HyContextModel {
+}
+class feature::HyEnum {
+}
+class feature::HyEnumAttribute {
+}
+class feature::HyEnumLiteral {
+}
+class feature::HyFeature {
+  + deprecatedSince : date
+  + isMandatory(date : any) : bool
+  + isOptional(date : any) : bool
+}
+abstract class feature::HyFeatureAttribute {
+}
+class feature::HyFeatureChild {
+}
+class feature::HyFeatureModel {
+}
+class feature::HyFeatureType {
+  + type : str
+}
+class feature::HyGroup {
+  + isAlternative(date : any) : bool
+  + isAnd(date : any) : bool
+  + isOr(date : any) : bool
+}
+class feature::HyGroupComposition {
+}
+class feature::HyGroupType {
+  + type : str
+}
+class feature::HyNumberAttribute {
+  + default : int
+  + max : int
+  + min : int
+}
+class feature::HyRootFeature {
+}
+class feature::HyStringAttribute {
+  + default : str
+}
+class feature::HyVersion {
+  + number : str
+}
+HyFeatureAttribute <|-- feature::HyBooleanAttribute
+HyFeatureAttribute <|-- feature::HyEnumAttribute
+HyFeatureAttribute <|-- feature::HyNumberAttribute
+HyFeatureAttribute <|-- feature::HyStringAttribute
+HyLinearTemporalElement <|-- feature::HyFeatureChild
+HyLinearTemporalElement <|-- feature::HyFeatureType
+HyLinearTemporalElement <|-- feature::HyGroupComposition
+HyLinearTemporalElement <|-- feature::HyGroupType
+HyLinearTemporalElement <|-- feature::HyRootFeature
+HyNamedElement <|-- feature::HyFeature
+HyNamedElement <|-- feature::HyFeatureAttribute
+HyTemporalElement <|-- feature::HyFeature
+HyTemporalElement <|-- feature::HyFeatureAttribute
+HyTemporalElement <|-- feature::HyGroup
+HyTemporalElement <|-- feature::HyVersion
+feature::HyFeature "1..1" *-- "0..9999" feature::HyFeatureAttribute : attributes11
+feature::HyFeatureChild "1..1" -- "1..1" feature::HyGroup : childGroup47
+feature::HyFeatureChild "1..9999" -- "1..1" feature::HyGroup : childOf18
+feature::HyGroup "1..1" -- "1..1" feature::HyGroupComposition : compositionOf40
+feature::HyContextModel "0..9999" -- "1..1" feature::HyFeatureModel : contexts6
+feature::HyEnumAttribute "1..1" -- "1..1" feature::HyEnumLiteral : default33
+feature::HyEnum "1..1" -- "1..1" feature::HyEnumAttribute : enumType31
+feature::HyEnum "0..9999" --* "1..1" feature::HyFeatureModel : enums4
+feature::HyFeature "1..1" -- "1..1" feature::HyVersion : feature23
+feature::HyFeature "1..1" -- "1..1" feature::HyFeatureAttribute : feature35
+feature::HyFeature "1..1" -- "1..1" feature::HyRootFeature : feature37
+feature::HyFeature "1..1" -- "1..1" feature::HyFeatureModel : featureModel14
+feature::HyFeatureModel "1..1" -- "1..1" feature::HyGroup : featureModel21
+feature::HyFeature "0..9999" --* "1..1" feature::HyFeatureModel : features1
+feature::HyFeature "1..9999" -- "1..1" feature::HyGroupComposition : features42
+feature::HyFeature "1..1" -- "0..9999" feature::HyGroupComposition : groupMembership9
+feature::HyFeatureModel "1..1" *-- "0..9999" feature::HyGroup : groups2
+feature::HyFeature "1..1" -- "1..1" feature::HyFeatureChild : parent44
+feature::HyFeature "1..1" *-- "0..9999" feature::HyFeatureChild : parentOf10
+feature::HyGroup "1..1" *-- "1..9999" feature::HyGroupComposition : parentOf16
+feature::HyFeatureModel "1..1" *-- "1..9999" feature::HyRootFeature : rootFeature0
+feature::HyVersion "1..1" -- "0..1" feature::HyVersion : supersededVersion29
+feature::HyVersion "1..1" -- "0..9999" feature::HyVersion : supersedingVersions26
+feature::HyFeature "1..1" *-- "1..9999" feature::HyFeatureType : types13
+feature::HyGroup "1..1" *-- "1..9999" feature::HyGroupType : types20
+feature::HyFeature "1..1" *-- "0..9999" feature::HyVersion : versions8
+@enduml

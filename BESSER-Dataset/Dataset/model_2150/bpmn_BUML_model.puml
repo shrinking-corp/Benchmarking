@@ -119,14 +119,14 @@ EModelElement <|-- bpmn::Association
 EModelElement <|-- bpmn::Identifiable
 Graph <|-- bpmn::Pool
 Graph <|-- bpmn::SubProcess
-IdentifiableNode <|-- bpmn::Graph
-IdentifiableNode <|-- bpmn::Vertex
 Identifiable <|-- bpmn::Artifact
 Identifiable <|-- bpmn::BpmnDiagram
 Identifiable <|-- bpmn::IdentifiableNode
 Identifiable <|-- bpmn::Lane
 Identifiable <|-- bpmn::MessagingEdge
 Identifiable <|-- bpmn::SequenceEdge
+IdentifiableNode <|-- bpmn::Graph
+IdentifiableNode <|-- bpmn::Vertex
 NamedBpmnObject <|-- bpmn::Activity
 NamedBpmnObject <|-- bpmn::Artifact
 NamedBpmnObject <|-- bpmn::ArtifactsContainer
@@ -135,34 +135,34 @@ NamedBpmnObject <|-- bpmn::MessagingEdge
 NamedBpmnObject <|-- bpmn::Pool
 NamedBpmnObject <|-- bpmn::SequenceEdge
 Vertex <|-- bpmn::Activity
-bpmn::Group "1..1" -- "0..9999" bpmn::Activity : activities22
+bpmn::Activity "0..9999" -- "1..1" bpmn::Group : activities22
 bpmn::Activity "0..9999" -- "1..1" bpmn::Lane : activities26
-bpmn::ArtifactsContainer "1..1" *-- "0..9999" bpmn::Artifact : artifacts10
-bpmn::ArtifactsContainer "0..1" -- "1..1" bpmn::Artifact : artifactsContainer9
+bpmn::Artifact "0..9999" --* "1..1" bpmn::ArtifactsContainer : artifacts10
+bpmn::Artifact "1..1" -- "0..1" bpmn::ArtifactsContainer : artifactsContainer9
 bpmn::Association "0..9999" -- "1..1" bpmn::IdentifiableNode : associations23
-bpmn::Association "0..9999" --* "1..1" bpmn::Artifact : associations7
+bpmn::Artifact "1..1" *-- "0..9999" bpmn::Association : associations7
 bpmn::BpmnDiagram "0..1" -- "1..1" bpmn::MessagingEdge : bpmnDiagram30
-bpmn::Pool "1..1" -- "0..1" bpmn::BpmnDiagram : bpmnDiagram37
-bpmn::SubProcess "0..1" -- "1..1" bpmn::Activity : eventHandlerFor4
-bpmn::SubProcess "1..1" *-- "0..9999" bpmn::Activity : eventHandlers44
+bpmn::BpmnDiagram "0..1" -- "1..1" bpmn::Pool : bpmnDiagram37
+bpmn::Activity "1..1" -- "0..1" bpmn::SubProcess : eventHandlerFor4
+bpmn::Activity "0..9999" --* "1..1" bpmn::SubProcess : eventHandlers44
 bpmn::Graph "0..1" -- "1..1" bpmn::SequenceEdge : graph39
 bpmn::Graph "0..1" -- "1..1" bpmn::Vertex : graph52
 bpmn::Activity "1..1" -- "0..9999" bpmn::Group : groups3
 bpmn::SequenceEdge "0..9999" -- "1..1" bpmn::Vertex : incomingEdges49
-bpmn::MessagingEdge "0..9999" -- "1..1" bpmn::Activity : incomingMessages0
-bpmn::Lane "0..1" -- "1..1" bpmn::Activity : lane5
+bpmn::Activity "1..1" -- "0..9999" bpmn::MessagingEdge : incomingMessages0
+bpmn::Activity "1..1" -- "0..1" bpmn::Lane : lane5
 bpmn::Lane "0..9999" --* "1..1" bpmn::Pool : lanes35
 bpmn::BpmnDiagram "1..1" *-- "0..9999" bpmn::MessagingEdge : messages16
 bpmn::SequenceEdge "0..9999" -- "1..1" bpmn::Vertex : outgoingEdges46
-bpmn::MessagingEdge "0..9999" -- "1..1" bpmn::Activity : outgoingMessages1
-bpmn::Pool "0..1" -- "1..1" bpmn::Lane : pool28
-bpmn::Pool "0..9999" --* "1..1" bpmn::BpmnDiagram : pools15
-bpmn::SequenceEdge "0..9999" --* "1..1" bpmn::Graph : sequenceEdges20
+bpmn::Activity "1..1" -- "0..9999" bpmn::MessagingEdge : outgoingMessages1
+bpmn::Lane "1..1" -- "0..1" bpmn::Pool : pool28
+bpmn::BpmnDiagram "1..1" *-- "0..9999" bpmn::Pool : pools15
+bpmn::Graph "1..1" *-- "0..9999" bpmn::SequenceEdge : sequenceEdges20
 bpmn::Artifact "0..1" -- "1..1" bpmn::Association : source11
-bpmn::MessagingEdge "1..1" -- "0..1" bpmn::Activity : source31
-bpmn::Vertex "0..1" -- "1..1" bpmn::SequenceEdge : source40
-bpmn::IdentifiableNode "0..1" -- "1..1" bpmn::Association : target13
+bpmn::Activity "0..1" -- "1..1" bpmn::MessagingEdge : source31
+bpmn::SequenceEdge "1..1" -- "0..1" bpmn::Vertex : source40
+bpmn::Association "1..1" -- "0..1" bpmn::IdentifiableNode : target13
 bpmn::Activity "0..1" -- "1..1" bpmn::MessagingEdge : target33
-bpmn::Vertex "0..1" -- "1..1" bpmn::SequenceEdge : target42
-bpmn::Vertex "0..9999" --* "1..1" bpmn::Graph : vertices19
+bpmn::SequenceEdge "1..1" -- "0..1" bpmn::Vertex : target42
+bpmn::Graph "1..1" *-- "0..9999" bpmn::Vertex : vertices19
 @enduml

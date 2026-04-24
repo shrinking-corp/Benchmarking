@@ -28,10 +28,10 @@ class iot::System {
 }
 HWComp <|-- iot::Actuator
 HWComp <|-- iot::Sensor
-iot::Sketch "1..1" *-- "0..1" iot::IotActivity : activity10
+iot::IotActivity "0..1" --* "1..1" iot::Sketch : activity10
 iot::Board "0..9999" --* "1..1" iot::System : boards3
-iot::System "1..1" *-- "0..9999" iot::HWComp : components1
-iot::HWComp "0..9999" -- "1..1" iot::Board : components7
+iot::HWComp "0..9999" --* "1..1" iot::System : components1
+iot::Board "1..1" -- "0..9999" iot::HWComp : components7
 iot::HWComp "1..1" *-- "0..9999" iot::IotOperationDef : services0
 iot::Sketch "0..1" --* "1..1" iot::System : sketch5
 @enduml

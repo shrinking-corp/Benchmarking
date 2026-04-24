@@ -37,16 +37,16 @@ Arc <|-- PetriNet::TransToPlaceArc
 Element <|-- PetriNet::PetriNet
 Element <|-- PetriNet::Place
 Element <|-- PetriNet::Transition
-PetriNet::PetriNet "1..1" *-- "0..9999" Arc : arcs2
-PlaceToTransArc "1..9999" -- "1..1" PetriNet::Transition : incoming13
-TransToPlaceArc "0..9999" -- "1..1" PetriNet::Place : incoming4
+Arc "0..9999" --* "1..1" PetriNet::PetriNet : arcs2
+PetriNet::Transition "1..1" -- "1..9999" PlaceToTransArc : incoming13
+PetriNet::Place "1..1" -- "0..9999" TransToPlaceArc : incoming4
 PetriNet "1..1" -- "1..1" PetriNet::Place : net10
-TransToPlaceArc "1..9999" -- "1..1" PetriNet::Transition : outgoing16
+PetriNet::Transition "1..1" -- "1..9999" TransToPlaceArc : outgoing16
 PetriNet::Place "1..1" -- "0..9999" PlaceToTransArc : outgoing7
-Place "1..9999" --* "1..1" PetriNet::PetriNet : places0
+PetriNet::PetriNet "1..1" *-- "1..9999" Place : places0
 PetriNet::PlaceToTransArc "1..1" -- "1..1" Place : source19
-Transition "1..1" -- "1..1" PetriNet::TransToPlaceArc : source25
+PetriNet::TransToPlaceArc "1..1" -- "1..1" Transition : source25
 PetriNet::PlaceToTransArc "1..1" -- "1..1" Transition : target22
-Place "1..1" -- "1..1" PetriNet::TransToPlaceArc : target28
-Transition "0..9999" --* "1..1" PetriNet::PetriNet : transitions1
+PetriNet::TransToPlaceArc "1..1" -- "1..1" Place : target28
+PetriNet::PetriNet "1..1" *-- "0..9999" Transition : transitions1
 @enduml

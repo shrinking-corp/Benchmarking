@@ -471,9 +471,9 @@ FairnessConstraint <|-- asmeta::definitions::JusticeConstraint
 FiniteQuantificationTerm <|-- asmeta::furtherterms::ExistTerm
 FiniteQuantificationTerm <|-- asmeta::furtherterms::ExistUniqueTerm
 FiniteQuantificationTerm <|-- asmeta::furtherterms::ForallTerm
-FunctionTerm <|-- asmeta::basicterms::LocationTerm
 Function <|-- asmeta::definitions::BasicFunction
 Function <|-- asmeta::definitions::DerivedFunction
+FunctionTerm <|-- asmeta::basicterms::LocationTerm
 IntegerDomain <|-- asmeta::domains::NaturalDomain
 NamedElement <|-- asmeta::definitions::Classifier
 NamedElement <|-- asmeta::structure::Asm
@@ -481,12 +481,12 @@ NamedElement <|-- asmeta::structure::Initialization
 Property <|-- asmeta::definitions::Invariant
 Property <|-- asmeta::definitions::TemporalProperty
 RealDomain <|-- asmeta::domains::IntegerDomain
-RuleDeclaration <|-- asmeta::basictransitionrules::MacroDeclaration
-RuleDeclaration <|-- asmeta::turbotransitionrules::TurboDeclaration
 Rule <|-- asmeta::basictransitionrules::BasicRule
 Rule <|-- asmeta::basictransitionrules::TermAsRule
 Rule <|-- asmeta::derivedtransitionrules::DerivedRule
 Rule <|-- asmeta::turbotransitionrules::TurboRule
+RuleDeclaration <|-- asmeta::basictransitionrules::MacroDeclaration
+RuleDeclaration <|-- asmeta::turbotransitionrules::TurboDeclaration
 StructuredTd <|-- asmeta::domains::BagDomain
 StructuredTd <|-- asmeta::domains::MapDomain
 StructuredTd <|-- asmeta::domains::PowersetDomain
@@ -514,139 +514,139 @@ VariableBindingTerm <|-- asmeta::furtherterms::ComprehensionTerm
 VariableBindingTerm <|-- asmeta::furtherterms::FiniteQuantificationTerm
 VariableBindingTerm <|-- asmeta::furtherterms::LetTerm
 AgentInitialization "0..9999" --* "1..1" asmeta::structure::Initialization : agentInitialization124
-basicterms::TupleTerm "0..1" --* "1..1" asmeta::basicterms::FunctionTerm : arguments41
+asmeta::basicterms::FunctionTerm "1..1" *-- "0..1" basicterms::TupleTerm : arguments41
 Asm "1..1" -- "1..1" asmeta::structure::Initialization : asm126
-asmeta::structure::Header "1..1" -- "0..1" Asm : asm134
+Asm "0..1" -- "1..1" asmeta::structure::Header : asm134
 Asm "0..1" -- "1..1" asmeta::structure::Body : asm59
-asmeta::definitions::RuleDeclaration "1..1" -- "1..1" Body : asmBody250
+Body "1..1" -- "1..1" asmeta::definitions::RuleDeclaration : asmBody250
 asmeta::furtherterms::LetTerm "1..1" -- "1..9999" basicterms::Term : assignmentTerm2
-domains::Domain "1..1" -- "1..1" asmeta::domains::PowersetDomain : baseDomain294
-basicterms::Term "1..1" --* "1..1" asmeta::structure::FunctionDefinition : body107
-basicterms::Term "1..1" --* "1..1" asmeta::structure::DomainDefinition : body115
+asmeta::domains::PowersetDomain "1..1" -- "1..1" domains::Domain : baseDomain294
+asmeta::structure::FunctionDefinition "1..1" *-- "1..1" basicterms::Term : body107
+asmeta::structure::DomainDefinition "1..1" *-- "1..1" basicterms::Term : body115
 asmeta::turbotransitionrules::TurboLocalStateRule "1..1" *-- "1..1" basictransitionrules::Rule : body152
-basicterms::Term "1..1" --* "1..1" asmeta::definitions::Invariant : body265
-basicterms::Term "1..1" --* "1..1" asmeta::definitions::TemporalProperty : body281
-basicterms::Term "1..1" --* "1..1" asmeta::definitions::InvarConstraint : body283
+asmeta::definitions::Invariant "1..1" *-- "1..1" basicterms::Term : body265
+asmeta::definitions::TemporalProperty "1..1" *-- "1..1" basicterms::Term : body281
+asmeta::definitions::InvarConstraint "1..1" *-- "1..1" basicterms::Term : body283
 asmeta::definitions::JusticeConstraint "1..1" *-- "1..1" basicterms::Term : body285
-basicterms::Term "1..1" -- "1..1" asmeta::furtherterms::LetTerm : body4
-basicterms::Term "1..1" -- "1..1" asmeta::structure::FunctionInitialization : body68
-basicterms::Term "1..1" --* "1..1" asmeta::structure::DomainInitialization : body77
+asmeta::furtherterms::LetTerm "1..1" -- "1..1" basicterms::Term : body4
+asmeta::structure::FunctionInitialization "1..1" -- "1..1" basicterms::Term : body68
+asmeta::structure::DomainInitialization "1..1" *-- "1..1" basicterms::Term : body77
 Body "1..1" --* "1..1" asmeta::structure::Asm : bodySection142
 asmeta::basictransitionrules::ExtendRule "1..1" *-- "1..9999" basicterms::VariableTerm : boundVar232
-basictransitionrules::MacroDeclaration "1..1" -- "1..1" asmeta::basictransitionrules::MacroCallRule : calledMacro204
-turbotransitionrules::TurboDeclaration "1..1" -- "1..1" asmeta::turbotransitionrules::TurboCallRule : calledRule157
-basicterms::Term "1..9999" -- "1..1" asmeta::derivedtransitionrules::CaseRule : caseTerm184
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::turbotransitionrules::TryCatchRule : catchRule164
-domains::Domain "1..1" -- "1..1" asmeta::definitions::Function : codomain269
+asmeta::basictransitionrules::MacroCallRule "1..1" -- "1..1" basictransitionrules::MacroDeclaration : calledMacro204
+asmeta::turbotransitionrules::TurboCallRule "1..1" -- "1..1" turbotransitionrules::TurboDeclaration : calledRule157
+asmeta::derivedtransitionrules::CaseRule "1..1" -- "1..9999" basicterms::Term : caseTerm184
+asmeta::turbotransitionrules::TryCatchRule "1..1" *-- "1..1" basictransitionrules::Rule : catchRule164
+asmeta::definitions::Function "1..1" -- "1..1" domains::Domain : codomain269
 asmeta::furtherterms::CaseTerm "1..1" -- "1..1" basicterms::Term : comparedTerm28
-basicterms::Term "1..9999" -- "1..1" asmeta::furtherterms::CaseTerm : comparingTerm26
-domains::Domain "0..9999" -- "1..1" asmeta::definitions::Invariant : constrainedDomain256
-asmeta::definitions::Invariant "1..1" -- "0..9999" Function : constrainedFunction262
+asmeta::furtherterms::CaseTerm "1..1" -- "1..9999" basicterms::Term : comparingTerm26
+asmeta::definitions::Invariant "1..1" -- "0..9999" domains::Domain : constrainedDomain256
+Function "0..9999" -- "1..1" asmeta::definitions::Invariant : constrainedFunction262
 RuleDeclaration "0..9999" -- "1..1" asmeta::definitions::Invariant : constrainedRule259
-asmeta::definitions::RuleDeclaration "1..1" -- "0..9999" Invariant : constraint245
-asmeta::definitions::Function "1..1" -- "0..9999" Invariant : constraint275
+Invariant "0..9999" -- "1..1" asmeta::definitions::RuleDeclaration : constraint245
+Invariant "0..9999" -- "1..1" asmeta::definitions::Function : constraint275
 Invariant "0..9999" -- "1..1" asmeta::domains::Domain : constraint302
 Initialization "0..1" -- "1..1" asmeta::structure::Asm : defaultInitialState139
-domains::ConcreteDomain "1..1" -- "1..1" asmeta::structure::DomainDefinition : definedDomain117
+asmeta::structure::DomainDefinition "1..1" -- "1..1" domains::ConcreteDomain : definedDomain117
 Function "1..1" -- "1..1" asmeta::structure::FunctionDefinition : definedFunction112
-asmeta::definitions::Function "1..1" -- "0..1" FunctionDefinition : definition272
-asmeta::domains::ConcreteDomain "1..1" -- "0..1" DomainDefinition : definition311
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::basictransitionrules::ChooseRule : doRule195
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::basictransitionrules::ForallRule : doRule219
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::basictransitionrules::ExtendRule : doRule235
-domains::Domain "0..1" -- "1..1" asmeta::definitions::Function : domain267
-domains::Domain "1..1" -- "1..1" asmeta::domains::SequenceDomain : domain292
-domains::Domain "1..1" -- "1..1" asmeta::domains::BagDomain : domain315
-domains::Domain "1..1" -- "1..1" asmeta::basicterms::Term : domain45
-domains::Domain "1..1" -- "1..1" asmeta::structure::AgentInitialization : domain48
-domains::Domain "0..9999" --* "1..1" asmeta::structure::Signature : domain82
+FunctionDefinition "0..1" -- "1..1" asmeta::definitions::Function : definition272
+DomainDefinition "0..1" -- "1..1" asmeta::domains::ConcreteDomain : definition311
+asmeta::basictransitionrules::ChooseRule "1..1" *-- "1..1" basictransitionrules::Rule : doRule195
+asmeta::basictransitionrules::ForallRule "1..1" *-- "1..1" basictransitionrules::Rule : doRule219
+asmeta::basictransitionrules::ExtendRule "1..1" *-- "1..1" basictransitionrules::Rule : doRule235
+asmeta::definitions::Function "1..1" -- "0..1" domains::Domain : domain267
+asmeta::domains::SequenceDomain "1..1" -- "1..1" domains::Domain : domain292
+asmeta::domains::BagDomain "1..1" -- "1..1" domains::Domain : domain315
+asmeta::basicterms::Term "1..1" -- "1..1" domains::Domain : domain45
+asmeta::structure::AgentInitialization "1..1" -- "1..1" domains::Domain : domain48
+asmeta::structure::Signature "1..1" *-- "0..9999" domains::Domain : domain82
 DomainDefinition "0..9999" --* "1..1" asmeta::structure::Body : domainDefinition55
-asmeta::structure::Initialization "1..1" *-- "0..9999" DomainInitialization : domainInitialization120
+DomainInitialization "0..9999" --* "1..1" asmeta::structure::Initialization : domainInitialization120
 asmeta::domains::EnumTd "1..1" *-- "1..9999" domains::EnumElement : element301
-basictransitionrules::Rule "0..1" --* "1..1" asmeta::basictransitionrules::ConditionalRule : elseRule208
+asmeta::basictransitionrules::ConditionalRule "1..1" *-- "0..1" basictransitionrules::Rule : elseRule208
 asmeta::furtherterms::ConditionalTerm "1..1" -- "0..1" basicterms::Term : elseTerm10
 ExportClause "0..1" --* "1..1" asmeta::structure::Header : exportClause132
-domains::Domain "0..9999" -- "1..1" asmeta::structure::ExportClause : exportedDomain93
-asmeta::structure::ExportClause "1..1" -- "0..9999" Function : exportedFunction91
+asmeta::structure::ExportClause "1..1" -- "0..9999" domains::Domain : exportedDomain93
+Function "0..9999" -- "1..1" asmeta::structure::ExportClause : exportedFunction91
 RuleDeclaration "0..9999" -- "1..1" asmeta::structure::ExportClause : exportedRule96
-domains::Domain "1..1" -- "1..1" asmeta::basictransitionrules::ExtendRule : extendedDomain230
-asmeta::structure::Body "1..1" *-- "0..9999" FairnessConstraint : fairnessConstraint61
+asmeta::basictransitionrules::ExtendRule "1..1" -- "1..1" domains::Domain : extendedDomain230
+FairnessConstraint "0..9999" --* "1..1" asmeta::structure::Body : fairnessConstraint61
 asmeta::basicterms::VariableTerm "1..1" -- "0..1" furtherterms::FiniteQuantificationTerm : finiteQuantificationTerm36
-asmeta::basicterms::FunctionTerm "1..1" -- "1..1" Function : function43
+Function "1..1" -- "1..1" asmeta::basicterms::FunctionTerm : function43
 Function "0..9999" --* "1..1" asmeta::structure::Signature : function85
 FunctionDefinition "0..9999" --* "1..1" asmeta::structure::Body : functionDefinition52
 FunctionInitialization "0..9999" --* "1..1" asmeta::structure::Initialization : functionInitialization122
-basicterms::Term "1..1" -- "1..1" asmeta::furtherterms::ConditionalTerm : guard12
-basicterms::Term "1..1" -- "1..1" asmeta::derivedtransitionrules::RecursiveWhileRule : guard174
-basicterms::Term "1..1" -- "1..1" asmeta::derivedtransitionrules::IterativeWhileRule : guard177
+asmeta::furtherterms::ConditionalTerm "1..1" -- "1..1" basicterms::Term : guard12
+asmeta::derivedtransitionrules::RecursiveWhileRule "1..1" -- "1..1" basicterms::Term : guard174
+asmeta::derivedtransitionrules::IterativeWhileRule "1..1" -- "1..1" basicterms::Term : guard177
 asmeta::basictransitionrules::ChooseRule "1..1" -- "1..1" basicterms::Term : guard198
-basicterms::Term "0..1" -- "1..1" asmeta::furtherterms::ComprehensionTerm : guard20
-basicterms::Term "1..1" -- "1..1" asmeta::basictransitionrules::ConditionalRule : guard206
-basicterms::Term "1..1" -- "1..1" asmeta::basictransitionrules::ForallRule : guard216
-basicterms::Term "0..1" -- "1..1" asmeta::furtherterms::FiniteQuantificationTerm : guard8
-asmeta::structure::Asm "1..1" *-- "1..1" Header : headerSection144
+asmeta::furtherterms::ComprehensionTerm "1..1" -- "0..1" basicterms::Term : guard20
+asmeta::basictransitionrules::ConditionalRule "1..1" -- "1..1" basicterms::Term : guard206
+asmeta::basictransitionrules::ForallRule "1..1" -- "1..1" basicterms::Term : guard216
+asmeta::furtherterms::FiniteQuantificationTerm "1..1" -- "0..1" basicterms::Term : guard8
+Header "1..1" --* "1..1" asmeta::structure::Asm : headerSection144
 Header "1..1" -- "1..1" asmeta::structure::Signature : headerSection88
-basictransitionrules::Rule "0..1" --* "1..1" asmeta::basictransitionrules::ChooseRule : ifnone193
-asmeta::structure::Header "1..1" *-- "0..9999" ImportClause : importClause129
-domains::Domain "0..9999" -- "1..1" asmeta::structure::ImportClause : importedDomain99
+asmeta::basictransitionrules::ChooseRule "1..1" *-- "0..1" basictransitionrules::Rule : ifnone193
+ImportClause "0..9999" --* "1..1" asmeta::structure::Header : importClause129
+asmeta::structure::ImportClause "1..1" -- "0..9999" domains::Domain : importedDomain99
 Function "0..9999" -- "1..1" asmeta::structure::ImportClause : importedFunction101
 RuleDeclaration "0..9999" -- "1..1" asmeta::structure::ImportClause : importedRule104
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::basictransitionrules::LetRule : inRule222
-basictransitionrules::Rule "1..9999" --* "1..1" asmeta::turbotransitionrules::TurboLocalStateRule : init151
+asmeta::basictransitionrules::LetRule "1..1" *-- "1..1" basictransitionrules::Rule : inRule222
+asmeta::turbotransitionrules::TurboLocalStateRule "1..1" *-- "1..9999" basictransitionrules::Rule : init151
 asmeta::basictransitionrules::LetRule "1..1" -- "1..9999" basicterms::Term : initExpression224
 Initialization "0..9999" --* "1..1" asmeta::structure::Asm : initialState137
 Initialization "1..1" -- "1..1" asmeta::structure::AgentInitialization : initialState51
 Initialization "1..1" -- "1..1" asmeta::structure::FunctionInitialization : initialState65
-asmeta::structure::DomainInitialization "1..1" -- "1..1" Initialization : initialState79
+Initialization "1..1" -- "1..1" asmeta::structure::DomainInitialization : initialState79
 FunctionInitialization "0..9999" -- "1..1" asmeta::definitions::DynamicFunction : initialization253
 DomainInitialization "0..9999" -- "1..1" asmeta::domains::ConcreteDomain : initialization308
-domains::ConcreteDomain "1..1" -- "1..1" asmeta::structure::DomainInitialization : initializedDomain75
-asmeta::structure::FunctionInitialization "1..1" -- "1..1" DynamicFunction : initializedFunction70
+asmeta::structure::DomainInitialization "1..1" -- "1..1" domains::ConcreteDomain : initializedDomain75
+DynamicFunction "1..1" -- "1..1" asmeta::structure::FunctionInitialization : initializedFunction70
 InvarConstraint "0..9999" --* "1..1" asmeta::structure::Body : invariantConstraint63
 LocalFunction "1..9999" --* "1..1" asmeta::turbotransitionrules::TurboLocalStateRule : localFunction155
-basicterms::Term "1..1" -- "1..1" asmeta::turbotransitionrules::TurboReturnRule : location158
-basicterms::Term "1..9999" -- "1..1" asmeta::turbotransitionrules::TryCatchRule : location162
-basicterms::Term "0..1" -- "1..1" asmeta::basictransitionrules::UpdateRule : location240
-basictransitionrules::MacroDeclaration "0..1" -- "1..1" asmeta::structure::Asm : mainrule147
-basictransitionrules::Rule "0..1" --* "1..1" asmeta::derivedtransitionrules::CaseRule : otherwiseBranch187
-basicterms::Term "0..1" -- "1..1" asmeta::furtherterms::CaseTerm : otherwiseTerm31
-basicterms::Term "1..1" --* "1..1" asmeta::definitions::CompassionConstraint : p287
-basicterms::TupleTerm "0..9999" -- "1..1" asmeta::furtherterms::MapTerm : pair0
+asmeta::turbotransitionrules::TurboReturnRule "1..1" -- "1..1" basicterms::Term : location158
+asmeta::turbotransitionrules::TryCatchRule "1..1" -- "1..9999" basicterms::Term : location162
+asmeta::basictransitionrules::UpdateRule "1..1" -- "0..1" basicterms::Term : location240
+asmeta::structure::Asm "1..1" -- "0..1" basictransitionrules::MacroDeclaration : mainrule147
+asmeta::derivedtransitionrules::CaseRule "1..1" *-- "0..1" basictransitionrules::Rule : otherwiseBranch187
+asmeta::furtherterms::CaseTerm "1..1" -- "0..1" basicterms::Term : otherwiseTerm31
+asmeta::definitions::CompassionConstraint "1..1" *-- "1..1" basicterms::Term : p287
+asmeta::furtherterms::MapTerm "1..1" -- "0..9999" basicterms::TupleTerm : pair0
 asmeta::structure::AgentInitialization "1..1" *-- "1..1" basictransitionrules::MacroCallRule : program47
-asmeta::structure::Body "1..1" *-- "0..9999" Property : property53
-basicterms::Term "1..1" --* "1..1" asmeta::definitions::CompassionConstraint : q289
-domains::Domain "0..1" -- "1..1" asmeta::turbotransitionrules::TurboDeclaration : resultType149
+Property "0..9999" --* "1..1" asmeta::structure::Body : property53
+asmeta::definitions::CompassionConstraint "1..1" *-- "1..1" basicterms::Term : q289
+asmeta::turbotransitionrules::TurboDeclaration "1..1" -- "0..1" domains::Domain : resultType149
 asmeta::turbotransitionrules::IterateRule "1..1" *-- "1..1" basictransitionrules::Rule : rule170
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::derivedtransitionrules::RecursiveWhileRule : rule172
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::derivedtransitionrules::IterativeWhileRule : rule179
+asmeta::derivedtransitionrules::RecursiveWhileRule "1..1" *-- "1..1" basictransitionrules::Rule : rule172
+asmeta::derivedtransitionrules::IterativeWhileRule "1..1" *-- "1..1" basictransitionrules::Rule : rule179
 RuleDeclaration "1..1" -- "1..1" asmeta::basicterms::RuleAsTerm : rule40
-basictransitionrules::Rule "1..1" -- "1..1" asmeta::definitions::RuleDeclaration : ruleBody247
+asmeta::definitions::RuleDeclaration "1..1" -- "1..1" basictransitionrules::Rule : ruleBody247
 RuleDeclaration "0..9999" --* "1..1" asmeta::structure::Body : ruleDeclaration57
-asmeta::structure::Header "1..1" *-- "1..1" Signature : signature130
+Signature "1..1" --* "1..1" asmeta::structure::Header : signature130
 Signature "0..1" -- "1..1" asmeta::definitions::Function : signature278
 Signature "0..1" -- "1..1" asmeta::domains::Domain : signature305
-domains::Domain "1..1" -- "1..1" asmeta::domains::MapDomain : sourceDomain296
-domains::StructuredTd "0..9999" --* "1..1" asmeta::structure::Signature : structuredDomain90
-domains::Domain "1..1" -- "1..1" asmeta::domains::MapDomain : targetDomain298
+asmeta::domains::MapDomain "1..1" -- "1..1" domains::Domain : sourceDomain296
+asmeta::structure::Signature "1..1" *-- "0..9999" domains::StructuredTd : structuredDomain90
+asmeta::domains::MapDomain "1..1" -- "1..1" domains::Domain : targetDomain298
 asmeta::derivedtransitionrules::CaseRule "1..1" -- "1..1" basicterms::Term : term182
-basicterms::Term "1..1" -- "1..1" asmeta::basictransitionrules::TermAsRule : term190
-basicterms::Term "1..1" -- "1..1" asmeta::furtherterms::ComprehensionTerm : term23
-basicterms::Term "0..9999" -- "1..1" asmeta::furtherterms::BagTerm : term34
-basicterms::Term "0..9999" -- "1..1" asmeta::basicterms::SetTerm : term38
-basictransitionrules::TermAsRule "0..9999" -- "1..1" asmeta::basicterms::Term : termAsRule46
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::basictransitionrules::ConditionalRule : thenRule211
-basicterms::Term "1..1" -- "1..1" asmeta::furtherterms::ConditionalTerm : thenTerm15
-basictransitionrules::Rule "1..1" --* "1..1" asmeta::turbotransitionrules::TryCatchRule : tryRule167
-domains::TypeDomain "1..1" -- "1..1" asmeta::domains::ConcreteDomain : typeDomain314
+asmeta::basictransitionrules::TermAsRule "1..1" -- "1..1" basicterms::Term : term190
+asmeta::furtherterms::ComprehensionTerm "1..1" -- "1..1" basicterms::Term : term23
+asmeta::furtherterms::BagTerm "1..1" -- "0..9999" basicterms::Term : term34
+asmeta::basicterms::SetTerm "1..1" -- "0..9999" basicterms::Term : term38
+asmeta::basicterms::Term "1..1" -- "0..9999" basictransitionrules::TermAsRule : termAsRule46
+asmeta::basictransitionrules::ConditionalRule "1..1" *-- "1..1" basictransitionrules::Rule : thenRule211
+asmeta::furtherterms::ConditionalTerm "1..1" -- "1..1" basicterms::Term : thenTerm15
+asmeta::turbotransitionrules::TryCatchRule "1..1" *-- "1..1" basictransitionrules::Rule : tryRule167
+asmeta::domains::ConcreteDomain "1..1" -- "1..1" domains::TypeDomain : typeDomain314
 asmeta::turbotransitionrules::TurboReturnRule "1..1" -- "1..1" turbotransitionrules::TurboCallRule : updateRule160
-basicterms::Term "1..1" -- "1..1" asmeta::basictransitionrules::UpdateRule : updatingTerm238
+asmeta::basictransitionrules::UpdateRule "1..1" -- "1..1" basicterms::Term : updatingTerm238
 asmeta::furtherterms::LetTerm "1..1" *-- "1..9999" basicterms::VariableTerm : variable1
 asmeta::structure::FunctionDefinition "1..1" -- "0..9999" basicterms::VariableTerm : variable109
 asmeta::furtherterms::ComprehensionTerm "1..1" *-- "1..9999" basicterms::VariableTerm : variable18
-basicterms::VariableTerm "1..9999" -- "1..1" asmeta::basictransitionrules::ChooseRule : variable201
+asmeta::basictransitionrules::ChooseRule "1..1" -- "1..9999" basicterms::VariableTerm : variable201
 asmeta::basictransitionrules::ForallRule "1..1" -- "1..9999" basicterms::VariableTerm : variable214
-basicterms::VariableTerm "1..9999" -- "1..1" asmeta::basictransitionrules::LetRule : variable227
-basicterms::VariableTerm "0..9999" -- "1..1" asmeta::definitions::RuleDeclaration : variable243
-basicterms::VariableTerm "1..9999" --* "1..1" asmeta::furtherterms::FiniteQuantificationTerm : variable7
-basicterms::VariableTerm "0..9999" --* "1..1" asmeta::structure::FunctionInitialization : variable72
+asmeta::basictransitionrules::LetRule "1..1" -- "1..9999" basicterms::VariableTerm : variable227
+asmeta::definitions::RuleDeclaration "1..1" -- "0..9999" basicterms::VariableTerm : variable243
+asmeta::furtherterms::FiniteQuantificationTerm "1..1" *-- "1..9999" basicterms::VariableTerm : variable7
+asmeta::structure::FunctionInitialization "1..1" *-- "0..9999" basicterms::VariableTerm : variable72
 @enduml

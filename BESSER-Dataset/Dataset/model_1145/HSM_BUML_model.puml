@@ -21,13 +21,13 @@ class hsm::Transition {
 AbstractState <|-- hsm::CompositeState
 AbstractState <|-- hsm::InitialState
 AbstractState <|-- hsm::RegularState
-hsm::CompositeState "0..1" -- "1..1" hsm::AbstractState : compositeStates10
+hsm::AbstractState "1..1" -- "0..1" hsm::CompositeState : compositeStates10
 hsm::AbstractState "1..1" -- "1..1" hsm::Transition : source4
-hsm::Transition "1..1" -- "1..1" hsm::StateMachine : stateMachine3
-hsm::StateMachine "1..1" -- "1..1" hsm::AbstractState : stateMachine8
+hsm::StateMachine "1..1" -- "1..1" hsm::Transition : stateMachine3
+hsm::AbstractState "1..1" -- "1..1" hsm::StateMachine : stateMachine8
 hsm::Root "1..1" *-- "0..9999" hsm::StateMachine : statemachines14
 hsm::AbstractState "0..9999" --* "1..1" hsm::StateMachine : states1
 hsm::AbstractState "0..9999" -- "1..1" hsm::CompositeState : states12
 hsm::AbstractState "1..1" -- "1..1" hsm::Transition : target5
-hsm::Transition "0..9999" --* "1..1" hsm::StateMachine : transitions0
+hsm::StateMachine "1..1" *-- "0..9999" hsm::Transition : transitions0
 @enduml

@@ -1,0 +1,252 @@
+@startuml
+class AbstractSimpleState {
+}
+class AbstractState {
+}
+enum AdapterToken {
+  DATAMODEL
+  DESCRIPTION
+}
+class Conditional {
+}
+class Data {
+}
+class DatamodelContainer {
+}
+class DescriptionContainer {
+}
+class Donedata {
+}
+class ExecutableContent {
+}
+enum ExmodeDatatype {
+  lax
+  strict
+}
+enum HistoryTypeDatatype {
+  deep
+  shallow
+}
+class IAdaptable {
+}
+class InitialState {
+}
+class Node {
+}
+class State {
+}
+class Transition {
+}
+class TransitionSource {
+}
+class TransitionTarget {
+}
+abstract class scxml::AbstractSimpleState {
+}
+abstract class scxml::AbstractState {
+}
+class scxml::Assign {
+  + expr : str
+  + location : str
+  + name : str
+}
+class scxml::Cancel {
+  + sendid : str
+  + sendidexpr : str
+}
+class scxml::CondEventTransition {
+  + cond : str
+  + event : str
+}
+class scxml::Conditional {
+  + cond : str
+}
+class scxml::Content {
+  + value : str
+}
+class scxml::Data {
+  + expr : str
+  + id : str
+  + src : str
+}
+class scxml::Datamodel {
+  + schema : str
+}
+abstract class scxml::DatamodelContainer {
+  + getAdapter(adapter : any) : str
+}
+class scxml::Description {
+  + value : str
+}
+abstract class scxml::DescriptionContainer {
+  + getAdapter(adapter : any) : str
+}
+class scxml::Donedata {
+}
+class scxml::EClass {
+}
+class scxml::EObject {
+}
+class scxml::Else {
+}
+class scxml::ElseIf {
+}
+class scxml::ExecutableContent {
+  + group : str
+}
+class scxml::FinalState {
+}
+class scxml::HistoryState {
+  + type : str
+}
+abstract class scxml::IAdaptable {
+}
+class scxml::If {
+}
+class scxml::InitialState {
+}
+class scxml::Invoke {
+  + autoforward : str
+  + id : str
+  + idlocation : str
+  + namelist : str
+  + src : str
+  + srcexpr : str
+  + type : str
+  + typeexpr : str
+}
+class scxml::Log {
+  + expr : str
+  + label : str
+  + level : str
+}
+class scxml::Node {
+}
+class scxml::OnEntry {
+}
+class scxml::OnExit {
+}
+class scxml::ParallelState {
+}
+class scxml::Param {
+  + expr : str
+  + name : str
+}
+class scxml::Raise {
+  + event : str
+}
+class scxml::Script {
+  + value : str
+}
+class scxml::Send {
+  + delay : str
+  + delayexpr : str
+  + event : str
+  + eventexpr : str
+  + hints : str
+  + hintsexpr : str
+  + id : str
+  + idlocation : str
+  + namelist : str
+  + target : str
+  + targetexpr : str
+  + type : str
+  + typeexpr : str
+}
+class scxml::SimpleState {
+}
+class scxml::State {
+}
+class scxml::StateChart {
+  + exmode : str
+  + id : str
+  + profile : str
+  + version : str
+  + xmlns : str
+}
+class scxml::Transition {
+}
+abstract class scxml::TransitionSource {
+}
+abstract class scxml::TransitionTarget {
+  + id : str
+}
+class scxml::Validate {
+  + location : str
+  + schema : str
+}
+class scxml::XData {
+}
+class scxml::XObject {
+  + classifierName : str
+  + exchange : bool
+  + nsUri : str
+  + registerAdapter() : void
+}
+AbstractSimpleState <|-- scxml::SimpleState
+AbstractSimpleState <|-- scxml::StateChart
+AbstractState <|-- scxml::State
+AbstractState <|-- scxml::StateChart
+Conditional <|-- scxml::ElseIf
+Conditional <|-- scxml::If
+Data <|-- scxml::XData
+DatamodelContainer <|-- scxml::State
+DatamodelContainer <|-- scxml::StateChart
+DescriptionContainer <|-- scxml::Data
+DescriptionContainer <|-- scxml::Datamodel
+DescriptionContainer <|-- scxml::InitialState
+DescriptionContainer <|-- scxml::Node
+DescriptionContainer <|-- scxml::StateChart
+DescriptionContainer <|-- scxml::Transition
+Donedata <|-- scxml::Invoke
+Donedata <|-- scxml::Raise
+Donedata <|-- scxml::Send
+ExecutableContent <|-- scxml::If
+ExecutableContent <|-- scxml::OnEntry
+ExecutableContent <|-- scxml::OnExit
+ExecutableContent <|-- scxml::Transition
+IAdaptable <|-- scxml::DatamodelContainer
+IAdaptable <|-- scxml::DescriptionContainer
+InitialState <|-- scxml::HistoryState
+Node <|-- scxml::TransitionSource
+Node <|-- scxml::TransitionTarget
+State <|-- scxml::ParallelState
+State <|-- scxml::SimpleState
+Transition <|-- scxml::CondEventTransition
+TransitionSource <|-- scxml::State
+TransitionTarget <|-- scxml::FinalState
+TransitionTarget <|-- scxml::HistoryState
+TransitionTarget <|-- scxml::State
+scxml::Assign "0..9999" --* "1..1" scxml::ExecutableContent : assign36
+scxml::Cancel "0..9999" --* "1..1" scxml::ExecutableContent : cancel34
+scxml::Donedata "1..1" *-- "0..1" scxml::EObject : content13
+scxml::Data "0..9999" --* "1..1" scxml::Datamodel : data53
+scxml::Datamodel "0..1" --* "1..1" scxml::DatamodelContainer : datamodel54
+scxml::Description "0..1" --* "1..1" scxml::DescriptionContainer : description56
+scxml::Donedata "0..1" --* "1..1" scxml::FinalState : donedata15
+scxml::Else "0..1" --* "1..1" scxml::If : else45
+scxml::ElseIf "0..9999" --* "1..1" scxml::If : elseif43
+scxml::AbstractSimpleState "1..1" *-- "0..9999" scxml::FinalState : final22
+scxml::ExecutableContent "0..1" --* "1..1" scxml::Invoke : finalize47
+scxml::HistoryState "0..1" --* "1..1" scxml::State : history8
+scxml::ExecutableContent "1..1" *-- "0..9999" scxml::If : if27
+scxml::AbstractSimpleState "1..1" -- "0..1" scxml::TransitionTarget : initial117
+scxml::AbstractSimpleState "1..1" *-- "0..1" scxml::InitialState : initial19
+scxml::Invoke "0..1" --* "1..1" scxml::SimpleState : invoke25
+scxml::ExecutableContent "1..1" *-- "0..9999" scxml::Log : log28
+scxml::EObject "0..1" --* "1..1" scxml::XData : object50
+scxml::Node "1..1" *-- "0..1" scxml::OnEntry : onentry1
+scxml::Node "1..1" *-- "0..1" scxml::OnExit : onexit2
+scxml::AbstractState "1..1" *-- "0..9999" scxml::ParallelState : parallel6
+scxml::Donedata "1..1" *-- "0..9999" scxml::Param : param12
+scxml::ExecutableContent "1..1" *-- "0..9999" scxml::Raise : raise30
+scxml::Script "0..9999" --* "1..1" scxml::StateChart : script0
+scxml::ExecutableContent "1..1" *-- "0..9999" scxml::Script : script40
+scxml::ExecutableContent "1..1" *-- "0..9999" scxml::Send : send32
+scxml::AbstractState "1..1" *-- "0..9999" scxml::SimpleState : state5
+scxml::Transition "1..1" -- "0..9999" scxml::TransitionTarget : target9
+scxml::InitialState "1..1" *-- "0..1" scxml::Transition : transition10
+scxml::CondEventTransition "0..9999" --* "1..1" scxml::TransitionSource : transition4
+scxml::EClass "0..1" -- "1..1" scxml::XObject : type52
+scxml::ExecutableContent "1..1" *-- "0..9999" scxml::Validate : validate38
+@enduml

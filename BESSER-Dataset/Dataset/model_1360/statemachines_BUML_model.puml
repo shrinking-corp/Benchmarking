@@ -101,12 +101,12 @@ class statemachines::Trigger {
 }
 abstract class statemachines::Vertex {
 }
-AttributeValue <|-- statemachines::BooleanAttributeValue
-AttributeValue <|-- statemachines::IntegerAttributeValue
-AttributeValue <|-- statemachines::StringAttributeValue
 Attribute <|-- statemachines::BooleanAttribute
 Attribute <|-- statemachines::IntegerAttribute
 Attribute <|-- statemachines::StringAttribute
+AttributeValue <|-- statemachines::BooleanAttributeValue
+AttributeValue <|-- statemachines::IntegerAttributeValue
+AttributeValue <|-- statemachines::StringAttributeValue
 Behavior <|-- statemachines::OperationBehavior
 EventOccurrence <|-- statemachines::CallEventOccurrence
 EventOccurrence <|-- statemachines::SignalEventOccurrence
@@ -125,16 +125,16 @@ State <|-- statemachines::FinalState
 Vertex <|-- statemachines::Pseudostate
 Vertex <|-- statemachines::State
 statemachines::BooleanAttribute "0..1" -- "1..1" statemachines::BooleanAttributeValue : attribute80
-statemachines::IntegerAttributeValue "1..1" -- "0..1" statemachines::IntegerAttribute : attribute81
+statemachines::IntegerAttribute "0..1" -- "1..1" statemachines::IntegerAttributeValue : attribute81
 statemachines::StringAttribute "0..1" -- "1..1" statemachines::StringAttributeValue : attribute82
 statemachines::AttributeValue "0..9999" --* "1..1" statemachines::OperationBehavior : attributeValues79
 statemachines::AttributeValue "0..9999" --* "1..1" statemachines::SignalEventOccurrence : attributeValues88
 statemachines::Attribute "0..9999" --* "1..1" statemachines::Signal : attributes5
 statemachines::Pseudostate "0..9999" --* "1..1" statemachines::State : connectionPoint58
 statemachines::Region "0..1" -- "1..1" statemachines::Vertex : container34
-statemachines::Transition "1..1" -- "1..1" statemachines::Region : container69
-statemachines::Trigger "0..9999" --* "1..1" statemachines::State : deferrableTriggers56
-statemachines::State "1..1" *-- "0..1" statemachines::Behavior : doActivity50
+statemachines::Region "1..1" -- "1..1" statemachines::Transition : container69
+statemachines::State "1..1" *-- "0..9999" statemachines::Trigger : deferrableTriggers56
+statemachines::Behavior "0..1" --* "1..1" statemachines::State : doActivity50
 statemachines::Behavior "0..1" --* "1..1" statemachines::Transition : effect72
 statemachines::Behavior "1..1" *-- "0..9999" statemachines::SignalEventOccurrence : emittedSignals77
 statemachines::Behavior "0..1" --* "1..1" statemachines::State : entry49
@@ -143,27 +143,27 @@ statemachines::Behavior "0..1" --* "1..1" statemachines::State : exit53
 statemachines::AttributeValue "0..9999" --* "1..1" statemachines::CallEventOccurrence : inParameterValues93
 statemachines::Attribute "0..9999" --* "1..1" statemachines::Operation : inParameters7
 statemachines::Transition "0..9999" -- "1..1" statemachines::Vertex : incomingTransitions40
-statemachines::Operation "1..1" -- "1..1" statemachines::CallEventType : operation18
-statemachines::Operation "1..1" -- "1..1" statemachines::CallEventOccurrence : operation91
+statemachines::CallEventType "1..1" -- "1..1" statemachines::Operation : operation18
+statemachines::CallEventOccurrence "1..1" -- "1..1" statemachines::Operation : operation91
 statemachines::CustomSystem "1..1" *-- "0..9999" statemachines::Operation : operations3
-statemachines::CallEventOccurrence "1..1" *-- "0..9999" statemachines::AttributeValue : outParameterValues96
+statemachines::AttributeValue "0..9999" --* "1..1" statemachines::CallEventOccurrence : outParameterValues96
 statemachines::Attribute "0..9999" --* "1..1" statemachines::Operation : outParameters10
 statemachines::Transition "0..9999" -- "1..1" statemachines::Vertex : outgoingTransitions37
 statemachines::Region "1..9999" --* "1..1" statemachines::StateMachine : regions20
 statemachines::Region "0..9999" --* "1..1" statemachines::State : regions46
-statemachines::Operation "1..1" *-- "0..1" statemachines::Attribute : return13
+statemachines::Attribute "0..1" --* "1..1" statemachines::Operation : return13
 statemachines::AttributeValue "0..1" --* "1..1" statemachines::CallEventOccurrence : returnValue99
 statemachines::Signal "1..1" -- "1..1" statemachines::SignalEventType : signal16
 statemachines::Signal "1..1" -- "1..1" statemachines::SignalEventOccurrence : signal85
-statemachines::Signal "0..9999" --* "1..1" statemachines::CustomSystem : signals1
+statemachines::CustomSystem "1..1" *-- "0..9999" statemachines::Signal : signals1
 statemachines::Transition "1..1" -- "1..1" statemachines::Vertex : source61
-statemachines::State "0..1" -- "1..1" statemachines::Region : state31
+statemachines::Region "1..1" -- "0..1" statemachines::State : state31
 statemachines::Pseudostate "1..1" -- "0..1" statemachines::State : state43
 statemachines::CompletionEventOccurrence "1..1" -- "0..1" statemachines::State : state83
 statemachines::Region "1..1" -- "0..1" statemachines::StateMachine : stateMachine28
-statemachines::StateMachine "1..1" --* "1..1" statemachines::CustomSystem : statemachine0
-statemachines::Vertex "1..1" -- "1..1" statemachines::Transition : target64
-statemachines::Transition "0..9999" --* "1..1" statemachines::Region : transitions25
-statemachines::Trigger "0..9999" --* "1..1" statemachines::Transition : triggers67
-statemachines::Vertex "0..9999" --* "1..1" statemachines::Region : vertice22
+statemachines::CustomSystem "1..1" *-- "1..1" statemachines::StateMachine : statemachine0
+statemachines::Transition "1..1" -- "1..1" statemachines::Vertex : target64
+statemachines::Region "1..1" *-- "0..9999" statemachines::Transition : transitions25
+statemachines::Transition "1..1" *-- "0..9999" statemachines::Trigger : triggers67
+statemachines::Region "1..1" *-- "0..9999" statemachines::Vertex : vertice22
 @enduml

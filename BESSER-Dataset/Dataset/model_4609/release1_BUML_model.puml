@@ -319,17 +319,17 @@ Identity <|-- gmfgraph::Canvas
 Identity <|-- gmfgraph::DiagramElement
 Identity <|-- gmfgraph::FigureDescriptor
 Identity <|-- gmfgraph::FigureGallery
-LayoutData <|-- gmfgraph::BorderLayoutData
-LayoutData <|-- gmfgraph::CustomLayoutData
-LayoutData <|-- gmfgraph::GridLayoutData
-LayoutData <|-- gmfgraph::XYLayoutData
-Layoutable <|-- gmfgraph::Figure
 Layout <|-- gmfgraph::BorderLayout
 Layout <|-- gmfgraph::CustomLayout
 Layout <|-- gmfgraph::FlowLayout
 Layout <|-- gmfgraph::GridLayout
 Layout <|-- gmfgraph::StackLayout
 Layout <|-- gmfgraph::XYLayout
+LayoutData <|-- gmfgraph::BorderLayoutData
+LayoutData <|-- gmfgraph::CustomLayoutData
+LayoutData <|-- gmfgraph::GridLayoutData
+LayoutData <|-- gmfgraph::XYLayoutData
+Layoutable <|-- gmfgraph::Figure
 Node <|-- gmfgraph::DiagramLabel
 Polygon <|-- gmfgraph::PolygonDecoration
 Polygon <|-- gmfgraph::ScalablePolygon
@@ -355,43 +355,43 @@ gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::Compartment : accessor19
 gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::DiagramLabel : accessor22
 gmfgraph::ChildAccess "0..9999" --* "1..1" gmfgraph::FigureDescriptor : accessors107
 gmfgraph::Figure "1..1" --* "1..1" gmfgraph::FigureDescriptor : actualFigure104
-gmfgraph::CustomClass "1..1" *-- "0..9999" gmfgraph::CustomAttribute : attributes28
+gmfgraph::CustomAttribute "0..9999" --* "1..1" gmfgraph::CustomClass : attributes28
 gmfgraph::Color "0..1" --* "1..1" gmfgraph::Figure : backgroundColor43
 gmfgraph::Border "0..1" --* "1..1" gmfgraph::Figure : border60
 gmfgraph::Figure "0..9999" --* "1..1" gmfgraph::RealFigure : children97
 gmfgraph::Color "0..1" --* "1..1" gmfgraph::LineBorder : color31
-gmfgraph::Compartment "0..9999" --* "1..1" gmfgraph::Canvas : compartments5
-gmfgraph::Connection "0..9999" --* "1..1" gmfgraph::Canvas : connections3
+gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::Compartment : compartments5
+gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::Connection : connections3
 gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::DiagramLabel : container25
 gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::Node : contentPane17
-gmfgraph::FigureAccessor "0..9999" --* "1..1" gmfgraph::CustomFigure : customChildren81
+gmfgraph::CustomFigure "1..1" *-- "0..9999" gmfgraph::FigureAccessor : customChildren81
 gmfgraph::DefaultSizeFacet "1..1" *-- "0..1" gmfgraph::Dimension : defaultSize95
-gmfgraph::FigureDescriptor "0..1" -- "1..1" gmfgraph::Figure : descriptor68
+gmfgraph::Figure "1..1" -- "0..1" gmfgraph::FigureDescriptor : descriptor68
 gmfgraph::FigureDescriptor "0..9999" --* "1..1" gmfgraph::FigureGallery : descriptors11
 gmfgraph::DiagramElement "1..1" *-- "0..9999" gmfgraph::VisualFacet : facets13
-gmfgraph::Figure "1..1" -- "1..1" gmfgraph::ChildAccess : figure100
+gmfgraph::ChildAccess "1..1" -- "1..1" gmfgraph::Figure : figure100
 gmfgraph::DiagramElement "1..1" -- "1..1" gmfgraph::FigureDescriptor : figure14
-gmfgraph::RealFigure "1..1" -- "1..1" gmfgraph::FigureRef : figure71
-gmfgraph::FigureGallery "0..9999" --* "1..1" gmfgraph::Canvas : figures0
+gmfgraph::FigureRef "1..1" -- "1..1" gmfgraph::RealFigure : figure71
+gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::FigureGallery : figures0
 gmfgraph::FigureGallery "1..1" *-- "0..9999" gmfgraph::RealFigure : figures9
-gmfgraph::Font "0..1" --* "1..1" gmfgraph::Figure : font55
+gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Font : font55
 gmfgraph::Color "0..1" --* "1..1" gmfgraph::Figure : foregroundColor41
 gmfgraph::Border "0..1" --* "1..1" gmfgraph::CompoundBorder : inner34
 gmfgraph::Insets "0..1" --* "1..1" gmfgraph::MarginBorder : insets32
-gmfgraph::Insets "0..1" --* "1..1" gmfgraph::Figure : insets57
-gmfgraph::DiagramLabel "0..9999" --* "1..1" gmfgraph::Canvas : labels7
+gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Insets : insets57
+gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::DiagramLabel : labels7
 gmfgraph::Layout "0..1" --* "1..1" gmfgraph::Layoutable : layout40
-gmfgraph::Layoutable "1..1" *-- "0..1" gmfgraph::LayoutData : layoutData39
-gmfgraph::Point "0..1" --* "1..1" gmfgraph::Figure : location63
-gmfgraph::GridLayout "1..1" *-- "0..1" gmfgraph::Dimension : margins83
+gmfgraph::LayoutData "0..1" --* "1..1" gmfgraph::Layoutable : layoutData39
+gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Point : location63
+gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::GridLayout : margins83
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::Figure : maximumSize46
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::Figure : minimumSize49
 gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::Node : nodes1
-gmfgraph::CompoundBorder "1..1" *-- "0..1" gmfgraph::Border : outer33
-gmfgraph::FigureDescriptor "1..1" -- "1..1" gmfgraph::ChildAccess : owner103
-gmfgraph::Layoutable "1..1" -- "1..1" gmfgraph::LayoutData : owner37
-gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Dimension : preferredSize52
-gmfgraph::Shape "1..1" -- "0..9999" gmfgraph::Figure : resolvedChildren73
+gmfgraph::Border "0..1" --* "1..1" gmfgraph::CompoundBorder : outer33
+gmfgraph::ChildAccess "1..1" -- "1..1" gmfgraph::FigureDescriptor : owner103
+gmfgraph::LayoutData "1..1" -- "1..1" gmfgraph::Layoutable : owner37
+gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::Figure : preferredSize52
+gmfgraph::Figure "0..9999" -- "1..1" gmfgraph::Shape : resolvedChildren73
 gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Point : size65
 gmfgraph::Dimension "1..1" --* "1..1" gmfgraph::XYLayoutData : size92
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::GridLayoutData : sizeHint38
@@ -399,7 +399,7 @@ gmfgraph::DecorationFigure "0..1" -- "1..1" gmfgraph::PolylineConnection : sourc
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::GridLayout : spacing85
 gmfgraph::BorderLayout "1..1" *-- "0..1" gmfgraph::Dimension : spacing88
 gmfgraph::DecorationFigure "0..1" -- "1..1" gmfgraph::PolylineConnection : targetDecoration78
-gmfgraph::Polyline "1..1" *-- "0..9999" gmfgraph::Point : template75
+gmfgraph::Point "0..9999" --* "1..1" gmfgraph::Polyline : template75
 gmfgraph::Point "1..1" --* "1..1" gmfgraph::XYLayoutData : topLeft90
-gmfgraph::RealFigure "1..1" --* "1..1" gmfgraph::FigureAccessor : typedFigure29
+gmfgraph::FigureAccessor "1..1" *-- "1..1" gmfgraph::RealFigure : typedFigure29
 @enduml

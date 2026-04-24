@@ -106,19 +106,19 @@ Statement <|-- gv::AttributeStatement
 Statement <|-- gv::EdgeStatement
 Statement <|-- gv::NodeStatement
 StrictIdentifiable <|-- gv::NodeID
-gv::Attribute "1..1" --* "1..1" gv::AList : attribute1
-gv::AttributeStatement "1..1" *-- "1..1" gv::AttributeList : attributes12
-gv::AttributeList "0..1" --* "1..1" gv::Attributable : attributes5
+gv::AList "1..1" *-- "1..1" gv::Attribute : attribute1
+gv::AttributeList "1..1" --* "1..1" gv::AttributeStatement : attributes12
+gv::Attributable "1..1" *-- "0..1" gv::AttributeList : attributes5
 gv::AList "1..1" --* "1..1" gv::AttributeList : list6
-gv::AttributeList "0..1" --* "1..1" gv::AttributeList : next10
+gv::AttributeList "1..1" *-- "0..1" gv::AttributeList : next10
 gv::Target "0..1" --* "1..1" gv::Target : next_target26
 gv::NodeID "1..1" --* "1..1" gv::NodeStatement : node_id17
-gv::Port "0..1" --* "1..1" gv::NodeID : port18
+gv::NodeID "1..1" *-- "0..1" gv::Port : port18
 gv::Connectable "1..1" --* "1..1" gv::EdgeStatement : source14
 gv::Statement "1..1" --* "1..1" gv::StatementList : statement20
 gv::AbstractGraph "1..1" *-- "0..1" gv::StatementList : statements0
-gv::StatementList "1..1" *-- "0..1" gv::StatementList : tail23
+gv::StatementList "0..1" --* "1..1" gv::StatementList : tail23
 gv::AList "0..1" --* "1..1" gv::AList : tail3
-gv::Target "1..1" --* "1..1" gv::EdgeStatement : target15
+gv::EdgeStatement "1..1" *-- "1..1" gv::Target : target15
 gv::Connectable "1..1" --* "1..1" gv::Target : target28
 @enduml

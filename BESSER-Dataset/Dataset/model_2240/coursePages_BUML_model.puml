@@ -86,24 +86,24 @@ enum personRoleType {
 Person <|-- coursePages::Employee
 Person <|-- coursePages::Student
 coursePages::Department "1..1" -- "1..1" coursePages::StudyPrograms : belongsToDepartment8
-coursePages::Student "1..1" -- "0..9999" coursePages::Course : course1
+coursePages::Course "0..9999" -- "1..1" coursePages::Student : course1
 coursePages::Course "0..9999" -- "1..1" coursePages::StudyPrograms : course12
 coursePages::Course "1..1" -- "1..1" coursePages::Precondition : course34
 coursePages::Course "1..1" -- "1..1" coursePages::Reduction : course37
-coursePages::Department "1..1" -- "0..9999" coursePages::Course : course6
-coursePages::CourseInstance "0..9999" --* "1..1" coursePages::Course : courseinstance16
+coursePages::Course "0..9999" -- "1..1" coursePages::Department : course6
+coursePages::Course "1..1" *-- "0..9999" coursePages::CourseInstance : courseinstance16
 coursePages::CourseInstance "1..1" *-- "1..1" coursePages::CourseWork : coursework26
-coursePages::CourseWorker "0..9999" --* "1..1" coursePages::Course : courseworker20
-coursePages::CourseWorkObject "1..9999" --* "1..1" coursePages::CourseWork : courseworkobject15
-coursePages::Employee "1..1" -- "1..1" coursePages::Department : department2
-coursePages::Employee "0..9999" -- "1..1" coursePages::Department : employee3
+coursePages::Course "1..1" *-- "0..9999" coursePages::CourseWorker : courseworker20
+coursePages::CourseWork "1..1" *-- "1..9999" coursePages::CourseWorkObject : courseworkobject15
+coursePages::Department "1..1" -- "1..1" coursePages::Employee : department2
+coursePages::Department "1..1" -- "0..9999" coursePages::Employee : employee3
 coursePages::CourseWorker "1..1" -- "0..1" coursePages::Employee : employee32
 coursePages::EvaluationObject "1..9999" --* "1..1" coursePages::Evaluations : evaluationobject14
-coursePages::Evaluations "1..1" --* "1..1" coursePages::CourseInstance : evaluations29
-coursePages::Precondition "0..9999" --* "1..1" coursePages::Course : precondition22
-coursePages::Reduction "0..9999" --* "1..1" coursePages::Course : reduction24
+coursePages::CourseInstance "1..1" *-- "1..1" coursePages::Evaluations : evaluations29
+coursePages::Course "1..1" *-- "0..9999" coursePages::Precondition : precondition22
+coursePages::Course "1..1" *-- "0..9999" coursePages::Reduction : reduction24
 coursePages::Student "0..9999" -- "1..1" coursePages::StudyPrograms : student10
 coursePages::Student "1..1" -- "1..1" coursePages::StudyPrograms : studyprograms0
 coursePages::Course "1..1" -- "0..9999" coursePages::StudyPrograms : studyprograms18
-coursePages::StudyPrograms "0..9999" -- "1..1" coursePages::Department : studyprograms4
+coursePages::Department "1..1" -- "0..9999" coursePages::StudyPrograms : studyprograms4
 @enduml

@@ -97,32 +97,32 @@ BaseElement <|-- failureLogic::State
 BaseElement <|-- failureLogic::Transition
 Cause <|-- failureLogic::Gate
 FMEAEntry <|-- failureLogic::FMEDAEntry
+Failure <|-- failureLogic::SecurityViolation
 FailureModel <|-- failureLogic::FMEA
 FailureModel <|-- failureLogic::FaultTree
 FailureModel <|-- failureLogic::MarkovChain
-Failure <|-- failureLogic::SecurityViolation
 ODEProductPackage <|-- failureLogic::FailureLogicPackage
 failureLogic::Cause "0..9999" --* "1..1" failureLogic::FaultTree : causes23
 failureLogic::Cause "0..9999" -- "1..1" failureLogic::Gate : causes27
 failureLogic::Failure "0..9999" -- "1..1" failureLogic::Failure : ccfFailures3
 failureLogic::MinimalCutSets "1..1" *-- "0..9999" failureLogic::MinimalCutset : cutsets13
-failureLogic::ProbDist "0..1" --* "1..1" failureLogic::FMEDAEntry : diagnosisProbDistribution51
-failureLogic::Failure "0..1" -- "1..1" failureLogic::FMEAEntry : effect45
-failureLogic::FMEAEntry "0..9999" --* "1..1" failureLogic::FMEA : entries44
-failureLogic::State "1..1" -- "0..1" failureLogic::Failure : failState32
+failureLogic::FMEDAEntry "1..1" *-- "0..1" failureLogic::ProbDist : diagnosisProbDistribution51
+failureLogic::FMEAEntry "1..1" -- "0..1" failureLogic::Failure : effect45
+failureLogic::FMEA "1..1" *-- "0..9999" failureLogic::FMEAEntry : entries44
+failureLogic::Failure "0..1" -- "1..1" failureLogic::State : failState32
 failureLogic::Cause "1..1" -- "0..1" failureLogic::Failure : failure24
 failureLogic::FailureLogicPackage "1..1" *-- "0..9999" failureLogic::FailureModel : failureModels0
-failureLogic::ProbDist "0..1" --* "1..1" failureLogic::Failure : failureProbDistribution1
+failureLogic::Failure "1..1" *-- "0..1" failureLogic::ProbDist : failureProbDistribution1
 failureLogic::Failure "0..9999" -- "1..1" failureLogic::MinimalCutSets : failures15
 failureLogic::Failure "0..9999" -- "1..1" failureLogic::MinimalCutset : failures18
-failureLogic::FailureModel "1..1" *-- "0..9999" failureLogic::Failure : failures7
+failureLogic::Failure "0..9999" --* "1..1" failureLogic::FailureModel : failures7
 failureLogic::State "0..9999" -- "1..1" failureLogic::Transition : fromStates38
-failureLogic::MinimalCutSets "0..9999" --* "1..1" failureLogic::FailureModel : minimalCutsets5
-failureLogic::Failure "0..1" -- "1..1" failureLogic::FMEAEntry : mode48
-failureLogic::ProbDistParam "0..9999" --* "1..1" failureLogic::ProbDist : parameters21
-failureLogic::State "0..9999" --* "1..1" failureLogic::MarkovChain : states30
+failureLogic::FailureModel "1..1" *-- "0..9999" failureLogic::MinimalCutSets : minimalCutsets5
+failureLogic::FMEAEntry "1..1" -- "0..1" failureLogic::Failure : mode48
+failureLogic::ProbDist "1..1" *-- "0..9999" failureLogic::ProbDistParam : parameters21
+failureLogic::MarkovChain "1..1" *-- "0..9999" failureLogic::State : states30
 failureLogic::FailureModel "0..9999" -- "1..1" failureLogic::FailureModel : subModels11
 failureLogic::State "0..9999" -- "1..1" failureLogic::Transition : toStates41
-failureLogic::Transition "1..1" *-- "0..1" failureLogic::ProbDist : transitionProbDistribution35
-failureLogic::Transition "0..9999" --* "1..1" failureLogic::MarkovChain : transitions29
+failureLogic::ProbDist "0..1" --* "1..1" failureLogic::Transition : transitionProbDistribution35
+failureLogic::MarkovChain "1..1" *-- "0..9999" failureLogic::Transition : transitions29
 @enduml

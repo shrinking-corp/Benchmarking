@@ -26,17 +26,17 @@ abstract class testmodel::NamedElement {
 }
 class testmodel::TypedElement {
 }
+Model <|-- testmodel::Group
 ModelElement <|-- testmodel::Association
 ModelElement <|-- testmodel::Class
 ModelElement <|-- testmodel::Group
-Model <|-- testmodel::Group
 NamedElement <|-- testmodel::ModelElement
 NamedElement <|-- testmodel::TypedElement
 TypedElement <|-- testmodel::Attribute
 testmodel::Attribute "0..9999" --* "1..1" testmodel::Class : attributes2
-testmodel::ModelElement "0..9999" --* "1..1" testmodel::Model : elements0
-testmodel::Class "1..1" -- "1..1" testmodel::Association : first4
+testmodel::Model "1..1" *-- "0..9999" testmodel::ModelElement : elements0
+testmodel::Association "1..1" -- "1..1" testmodel::Class : first4
 testmodel::Attribute "1..1" -- "1..1" testmodel::Class : owner3
-testmodel::Class "1..1" -- "1..1" testmodel::Association : second6
+testmodel::Association "1..1" -- "1..1" testmodel::Class : second6
 testmodel::Class "1..1" -- "1..1" testmodel::TypedElement : type1
 @enduml

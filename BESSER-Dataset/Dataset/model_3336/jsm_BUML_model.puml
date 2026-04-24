@@ -186,10 +186,10 @@ AbstractCStatement <|-- jsm::CDeclarationStatement
 AbstractCStatement <|-- jsm::CExpressionStatement
 AbstractCStatement <|-- jsm::CIfStatement
 AbstractCStatement <|-- jsm::CUnparsedStatement
-AbstractMClassFieldDeclaration <|-- jsm::MInstanceClassFieldDeclaration
-AbstractMClassFieldDeclaration <|-- jsm::MStaticClassFieldDeclaration
 AbstractMClass <|-- jsm::MDeclaredClass
 AbstractMClass <|-- jsm::MExternalClass
+AbstractMClassFieldDeclaration <|-- jsm::MInstanceClassFieldDeclaration
+AbstractMClassFieldDeclaration <|-- jsm::MStaticClassFieldDeclaration
 AbstractMDeclaredType <|-- jsm::MDeclaredClass
 AbstractMDeclaredType <|-- jsm::MDeclaredInterface
 AbstractMExternalType <|-- jsm::MExternalClass
@@ -211,6 +211,8 @@ AbstractMPackageContainer <|-- jsm::MPackage
 AbstractMPackageContainer <|-- jsm::MRoot
 AbstractMResource <|-- jsm::MCompilationUnit
 AbstractMResource <|-- jsm::MResource
+AbstractMType <|-- jsm::AbstractMClass
+AbstractMType <|-- jsm::AbstractMInterface
 AbstractMTypeContainer <|-- jsm::AbstractMDeclaredType
 AbstractMTypeContainer <|-- jsm::MCompilationUnit
 AbstractMTypeReference <|-- jsm::MDeclaredTypeReference
@@ -221,18 +223,16 @@ AbstractMTypeWithNameDeclaration <|-- jsm::AbstractMMethodDeclaration
 AbstractMTypeWithNameDeclaration <|-- jsm::CDeclarationStatement
 AbstractMTypeWithNameDeclaration <|-- jsm::MConstructorParameter
 AbstractMTypeWithNameDeclaration <|-- jsm::MMethodDeclarationParameter
-AbstractMType <|-- jsm::AbstractMClass
-AbstractMType <|-- jsm::AbstractMInterface
 AbstractModifiers <|-- jsm::AbstractMMethodLike
 MDeclaredClass <|-- jsm::MAbstractDeclaredClass
 jsm::MAbstractClassMethodDeclaration "0..9999" --* "1..1" jsm::MAbstractDeclaredClass : abstractMethods32
-jsm::CIfStatement "1..1" *-- "1..1" jsm::AbstractCExpression : condition76
-jsm::CConditionalExpression "1..1" *-- "1..1" jsm::AbstractCExpression : condition84
+jsm::AbstractCExpression "1..1" --* "1..1" jsm::CIfStatement : condition76
+jsm::AbstractCExpression "1..1" --* "1..1" jsm::CConditionalExpression : condition84
 jsm::MConstantInterfaceFieldDeclaration "0..9999" --* "1..1" jsm::MDeclaredInterface : constants36
 jsm::MConstructor "1..1" -- "1..1" jsm::MConstructorParameter : constructor67
 jsm::MConstructor "0..9999" --* "1..1" jsm::MDeclaredClass : constructors26
-jsm::MDeclaredMethodImplementation "1..1" -- "1..1" jsm::AbstractMImplementableMethodDeclaration : declaration58
-jsm::MImplicitMethodDeclaration "1..1" --* "1..1" jsm::MDirectMethodImplementation : declaration59
+jsm::AbstractMImplementableMethodDeclaration "1..1" -- "1..1" jsm::MDeclaredMethodImplementation : declaration58
+jsm::MDirectMethodImplementation "1..1" *-- "1..1" jsm::MImplicitMethodDeclaration : declaration59
 jsm::AbstractMResource "1..1" -- "0..9999" jsm::AbstractMResource : derivedFrom7
 jsm::AbstractCExpression "1..1" --* "1..1" jsm::CExpressionStatement : expression74
 jsm::AbstractMClass "0..1" -- "1..1" jsm::MDeclaredClass : extends20
@@ -240,43 +240,43 @@ jsm::AbstractMInterface "0..9999" -- "1..1" jsm::MDeclaredInterface : extends34
 jsm::AbstractMExternalType "0..9999" --* "1..1" jsm::MRoot : externalTypes1
 jsm::AbstractCExpression "0..1" --* "1..1" jsm::CConditionalExpression : falseExpression89
 jsm::AbstractCStatement "0..1" --* "1..1" jsm::CIfStatement : falseStatement81
-jsm::MDeclaredMethodImplementation "0..9999" -- "1..1" jsm::AbstractMImplementableMethodDeclaration : implementations48
+jsm::AbstractMImplementableMethodDeclaration "1..1" -- "0..9999" jsm::MDeclaredMethodImplementation : implementations48
 jsm::AbstractMMethodImplementation "0..9999" --* "1..1" jsm::MDeclaredClass : implementedMethods28
 jsm::AbstractMInterface "0..9999" -- "1..1" jsm::MDeclaredClass : implements21
 jsm::AbstractMType "0..9999" -- "1..1" jsm::MCompilationUnit : imports13
 jsm::AbstractCExpression "0..1" --* "1..1" jsm::AbstractMFieldDeclaration : initialValue40
-jsm::MInstanceClassFieldDeclaration "0..9999" --* "1..1" jsm::MDeclaredClass : instanceFields24
-jsm::MMethodDeclarationParameter "1..1" -- "1..1" jsm::AbstractMMethodDeclaration : methodDeclaration46
-jsm::MMethodImplementationParameter "1..1" -- "1..1" jsm::AbstractMMethodImplementation : methodImplementation61
+jsm::MDeclaredClass "1..1" *-- "0..9999" jsm::MInstanceClassFieldDeclaration : instanceFields24
+jsm::AbstractMMethodDeclaration "1..1" -- "1..1" jsm::MMethodDeclarationParameter : methodDeclaration46
+jsm::AbstractMMethodImplementation "1..1" -- "1..1" jsm::MMethodImplementationParameter : methodImplementation61
 jsm::MDeclaredInterface "1..1" *-- "0..9999" jsm::MInterfaceMethodDeclaration : methods38
-jsm::MNativeMethodDeclaration "0..9999" --* "1..1" jsm::MDeclaredClass : nativeMethods30
+jsm::MDeclaredClass "1..1" *-- "0..9999" jsm::MNativeMethodDeclaration : nativeMethods30
 jsm::MDeclaredClass "1..1" -- "1..1" jsm::MStaticClassFieldDeclaration : owner41
-jsm::MInstanceClassFieldDeclaration "1..1" -- "1..1" jsm::MDeclaredClass : owner42
-jsm::MDeclaredInterface "1..1" -- "1..1" jsm::MConstantInterfaceFieldDeclaration : owner44
+jsm::MDeclaredClass "1..1" -- "1..1" jsm::MInstanceClassFieldDeclaration : owner42
+jsm::MConstantInterfaceFieldDeclaration "1..1" -- "1..1" jsm::MDeclaredInterface : owner44
 jsm::MDirectMethodImplementation "1..1" -- "1..1" jsm::MImplicitMethodDeclaration : owner47
-jsm::MAbstractDeclaredClass "1..1" -- "1..1" jsm::MAbstractClassMethodDeclaration : owner50
-jsm::MInterfaceMethodDeclaration "1..1" -- "1..1" jsm::MDeclaredInterface : owner51
+jsm::MAbstractClassMethodDeclaration "1..1" -- "1..1" jsm::MAbstractDeclaredClass : owner50
+jsm::MDeclaredInterface "1..1" -- "1..1" jsm::MInterfaceMethodDeclaration : owner51
 jsm::MDeclaredClass "1..1" -- "1..1" jsm::MNativeMethodDeclaration : owner53
-jsm::MDeclaredClass "1..1" -- "1..1" jsm::AbstractMMethodImplementation : owner55
-jsm::MDeclaredClass "1..1" -- "1..1" jsm::MConstructor : owner64
-jsm::MPackage "1..1" -- "1..1" jsm::AbstractMResource : package4
-jsm::MPackage "1..1" -- "1..1" jsm::AbstractMPackageContainer : packageContainer2
+jsm::AbstractMMethodImplementation "1..1" -- "1..1" jsm::MDeclaredClass : owner55
+jsm::MConstructor "1..1" -- "1..1" jsm::MDeclaredClass : owner64
+jsm::AbstractMResource "1..1" -- "1..1" jsm::MPackage : package4
+jsm::AbstractMPackageContainer "1..1" -- "1..1" jsm::MPackage : packageContainer2
 jsm::AbstractMPackageContainer "1..1" *-- "0..9999" jsm::MPackage : packages0
-jsm::MMethodDeclarationParameter "0..9999" --* "1..1" jsm::AbstractMMethodDeclaration : parameters45
-jsm::MMethodImplementationParameter "0..9999" --* "1..1" jsm::AbstractMMethodImplementation : parameters57
-jsm::MConstructorParameter "0..9999" --* "1..1" jsm::MConstructor : parameters66
+jsm::AbstractMMethodDeclaration "1..1" *-- "0..9999" jsm::MMethodDeclarationParameter : parameters45
+jsm::AbstractMMethodImplementation "1..1" *-- "0..9999" jsm::MMethodImplementationParameter : parameters57
+jsm::MConstructor "1..1" *-- "0..9999" jsm::MConstructorParameter : parameters66
 jsm::AbstractMResource "0..9999" --* "1..1" jsm::MPackage : resources3
 jsm::AbstractMExternalType "1..1" -- "1..1" jsm::MRoot : root15
 jsm::AbstractCStatement "0..1" --* "1..1" jsm::AbstractMMethodLike : statement18
 jsm::AbstractCStatement "0..9999" --* "1..1" jsm::CBlockStatement : statements70
 jsm::MDeclaredClass "1..1" *-- "0..9999" jsm::MStaticClassFieldDeclaration : staticFields23
-jsm::AbstractMResource "0..9999" -- "1..1" jsm::AbstractMResource : superOf10
+jsm::AbstractMResource "1..1" -- "0..9999" jsm::AbstractMResource : superOf10
 jsm::AbstractCExpression "1..1" --* "1..1" jsm::CConditionalExpression : trueExpression86
 jsm::AbstractCStatement "1..1" --* "1..1" jsm::CIfStatement : trueStatement78
 jsm::AbstractMDeclaredType "1..1" -- "1..1" jsm::MDeclaredTypeReference : type16
 jsm::AbstractMExternalType "1..1" -- "1..1" jsm::MExternalTypeReference : type17
-jsm::AbstractMTypeWithNameDeclaration "1..1" *-- "1..1" jsm::AbstractMTypeReference : type19
-jsm::AbstractMTypeContainer "1..1" -- "1..1" jsm::AbstractMDeclaredType : typeContainer14
+jsm::AbstractMTypeReference "1..1" --* "1..1" jsm::AbstractMTypeWithNameDeclaration : type19
+jsm::AbstractMDeclaredType "1..1" -- "1..1" jsm::AbstractMTypeContainer : typeContainer14
 jsm::AbstractMDeclaredType "0..9999" --* "1..1" jsm::AbstractMTypeContainer : types12
 jsm::AbstractCExpression "0..1" --* "1..1" jsm::CDeclarationStatement : value72
 @enduml

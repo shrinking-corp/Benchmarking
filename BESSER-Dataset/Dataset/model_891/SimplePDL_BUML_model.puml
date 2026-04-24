@@ -32,13 +32,13 @@ ProcessElements <|-- simplepdl::Guidance
 ProcessElements <|-- simplepdl::Ressource
 ProcessElements <|-- simplepdl::WorkDefinition
 ProcessElements <|-- simplepdl::WorkSequence
-simplepdl::WorkDefinition "1..1" *-- "0..1" simplepdl::Allocation : allocation4
+simplepdl::Allocation "0..1" --* "1..1" simplepdl::WorkDefinition : allocation4
 simplepdl::WorkDefinition "1..1" -- "0..9999" simplepdl::WorkSequence : linksToPredecessors1
-simplepdl::WorkSequence "0..9999" -- "1..1" simplepdl::WorkDefinition : linksToSuccessors2
+simplepdl::WorkDefinition "1..1" -- "0..9999" simplepdl::WorkSequence : linksToSuccessors2
 simplepdl::WorkDefinition "1..1" -- "1..1" simplepdl::WorkSequence : predecessor5
-simplepdl::ProcessElements "0..9999" --* "1..1" simplepdl::Process : processelement0
-simplepdl::ProcessElements "0..1" -- "1..1" simplepdl::Guidance : processelement8
-simplepdl::Ressource "0..1" -- "1..1" simplepdl::Allocation : ressource10
+simplepdl::Process "1..1" *-- "0..9999" simplepdl::ProcessElements : processelement0
+simplepdl::Guidance "1..1" -- "0..1" simplepdl::ProcessElements : processelement8
+simplepdl::Allocation "1..1" -- "0..1" simplepdl::Ressource : ressource10
 simplepdl::WorkDefinition "1..1" -- "1..1" simplepdl::WorkSequence : successor6
 simplepdl::Allocation "1..1" -- "0..1" simplepdl::WorkDefinition : workdefinition12
 @enduml

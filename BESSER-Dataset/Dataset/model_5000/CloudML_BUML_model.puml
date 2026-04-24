@@ -77,10 +77,10 @@ class cloudml::UploadCommand {
 }
 abstract class cloudml::WithProperties {
 }
-ArtefactPortInstance <|-- cloudml::ClientPortInstance
-ArtefactPortInstance <|-- cloudml::ServerPortInstance
 ArtefactPort <|-- cloudml::ClientPort
 ArtefactPort <|-- cloudml::ServerPort
+ArtefactPortInstance <|-- cloudml::ClientPortInstance
+ArtefactPortInstance <|-- cloudml::ServerPortInstance
 CloudMLElement <|-- cloudml::NamedElement
 NamedElement <|-- cloudml::Composite
 NamedElement <|-- cloudml::Property
@@ -97,31 +97,31 @@ WithProperties <|-- cloudml::NodeInstance
 WithProperties <|-- cloudml::Provider
 WithProperties <|-- cloudml::Resource
 cloudml::ArtefactInstance "0..9999" --* "1..1" cloudml::DeploymentModel : artefactInstances9
-cloudml::DeploymentModel "1..1" *-- "0..9999" cloudml::Artefact : artefactTypes3
-cloudml::DeploymentModel "1..1" *-- "0..9999" cloudml::BindingInstance : bindingInstances13
+cloudml::Artefact "0..9999" --* "1..1" cloudml::DeploymentModel : artefactTypes3
+cloudml::BindingInstance "0..9999" --* "1..1" cloudml::DeploymentModel : bindingInstances13
 cloudml::Binding "0..9999" --* "1..1" cloudml::DeploymentModel : bindingTypes7
-cloudml::ClientPort "0..1" -- "1..1" cloudml::Binding : client44
-cloudml::ClientPortInstance "0..1" -- "1..1" cloudml::BindingInstance : client59
-cloudml::Resource "0..1" --* "1..1" cloudml::Binding : clientResource50
+cloudml::Binding "1..1" -- "0..1" cloudml::ClientPort : client44
+cloudml::BindingInstance "1..1" -- "0..1" cloudml::ClientPortInstance : client59
+cloudml::Binding "1..1" *-- "0..1" cloudml::Resource : clientResource50
 cloudml::Node "1..1" -- "1..1" cloudml::Provider : cloudProvider24
 cloudml::ArtefactInstance "0..9999" --* "1..1" cloudml::Composite : containedArtefacts42
 cloudml::Artefact "1..1" -- "0..1" cloudml::ArtefactPort : destination15
-cloudml::NodeInstance "0..1" -- "1..1" cloudml::ArtefactInstance : destination32
-cloudml::NodeInstance "0..9999" --* "1..1" cloudml::DeploymentModel : nodeInstances11
-cloudml::Node "0..9999" --* "1..1" cloudml::DeploymentModel : nodeTypes5
+cloudml::ArtefactInstance "1..1" -- "0..1" cloudml::NodeInstance : destination32
+cloudml::DeploymentModel "1..1" *-- "0..9999" cloudml::NodeInstance : nodeInstances11
+cloudml::DeploymentModel "1..1" *-- "0..9999" cloudml::Node : nodeTypes5
 cloudml::Property "0..9999" --* "1..1" cloudml::WithProperties : properties0
-cloudml::ServerPort "0..9999" --* "1..1" cloudml::Artefact : provided20
-cloudml::ServerPortInstance "0..9999" --* "1..1" cloudml::ArtefactInstance : provided35
-cloudml::Provider "0..9999" --* "1..1" cloudml::DeploymentModel : providers2
-cloudml::ClientPort "0..9999" --* "1..1" cloudml::Artefact : required22
+cloudml::Artefact "1..1" *-- "0..9999" cloudml::ServerPort : provided20
+cloudml::ArtefactInstance "1..1" *-- "0..9999" cloudml::ServerPortInstance : provided35
+cloudml::DeploymentModel "1..1" *-- "0..9999" cloudml::Provider : providers2
+cloudml::Artefact "1..1" *-- "0..9999" cloudml::ClientPort : required22
 cloudml::ArtefactInstance "1..1" *-- "0..9999" cloudml::ClientPortInstance : required37
-cloudml::Resource "0..1" --* "1..1" cloudml::Artefact : resource17
+cloudml::Artefact "1..1" *-- "0..1" cloudml::Resource : resource17
 cloudml::Binding "1..1" -- "0..1" cloudml::ServerPort : server47
-cloudml::ServerPortInstance "0..1" -- "1..1" cloudml::BindingInstance : server62
-cloudml::Resource "0..1" --* "1..1" cloudml::Binding : serverResource53
+cloudml::BindingInstance "1..1" -- "0..1" cloudml::ServerPortInstance : server62
+cloudml::Binding "1..1" *-- "0..1" cloudml::Resource : serverResource53
 cloudml::ArtefactPort "1..1" -- "1..1" cloudml::ArtefactPortInstance : type27
 cloudml::Artefact "1..1" -- "1..1" cloudml::ArtefactInstance : type29
 cloudml::Node "1..1" -- "1..1" cloudml::NodeInstance : type39
-cloudml::BindingInstance "1..1" -- "1..1" cloudml::Binding : type56
-cloudml::UploadCommand "0..9999" --* "1..1" cloudml::Resource : uploadCommand1
+cloudml::Binding "1..1" -- "1..1" cloudml::BindingInstance : type56
+cloudml::Resource "1..1" *-- "0..9999" cloudml::UploadCommand : uploadCommand1
 @enduml

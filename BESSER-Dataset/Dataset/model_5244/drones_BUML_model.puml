@@ -1,0 +1,43 @@
+@startuml
+class MovingObject {
+}
+class ProbableElement {
+}
+class surveillance::Clock {
+  + now : int
+}
+class surveillance::Coordinate {
+  + x : float
+  + y : float
+  + distance(other : any) : float
+}
+class surveillance::Drone {
+}
+class surveillance::GunShot {
+  + angle : float
+  + hitsTarget : bool
+}
+abstract class surveillance::MovingObject {
+  + angle : float
+  + speed : float
+  + width : float
+  + move(seconds : any) : void
+}
+abstract class surveillance::ProbableElement {
+  + confidence : float
+}
+class surveillance::UnidentifiedObject {
+}
+MovingObject <|-- surveillance::Drone
+MovingObject <|-- surveillance::UnidentifiedObject
+ProbableElement <|-- surveillance::GunShot
+ProbableElement <|-- surveillance::UnidentifiedObject
+surveillance::Coordinate "0..1" -- "1..1" surveillance::MovingObject : currentPosition2
+surveillance::Drone "1..1" -- "1..1" surveillance::GunShot : drone9
+surveillance::Coordinate "1..1" -- "1..1" surveillance::MovingObject : object1
+surveillance::Coordinate "1..1" -- "1..1" surveillance::GunShot : shootingPosition7
+surveillance::Coordinate "1..1" -- "0..1" surveillance::GunShot : shot0
+surveillance::Drone "1..1" -- "0..9999" surveillance::GunShot : shot3
+surveillance::GunShot "0..9999" -- "1..1" surveillance::UnidentifiedObject : shot5
+surveillance::GunShot "1..1" -- "1..1" surveillance::UnidentifiedObject : target11
+@enduml

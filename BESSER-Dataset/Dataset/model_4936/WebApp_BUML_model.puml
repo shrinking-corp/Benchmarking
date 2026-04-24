@@ -87,12 +87,12 @@ Page <|-- webapp::NormalPage
 TextBox <|-- webapp::DateBox
 TextBox <|-- webapp::EmailBox
 TextBox <|-- webapp::PasswordBox
-webapp::FormPage "1..1" *-- "1..9999" webapp::Control : controls4
+webapp::Control "1..9999" --* "1..1" webapp::FormPage : controls4
 webapp::NormalControl "0..9999" --* "1..1" webapp::NormalPage : controls6
-webapp::Page "1..1" -- "1..1" webapp::Link : destination7
-webapp::RadioButton "1..1" *-- "2..9999" webapp::ListElement : elements10
-webapp::ListElement "0..9999" --* "1..1" webapp::DropDownList : elements9
-webapp::Page "0..1" -- "1..1" webapp::FormPage : errorTarget1
-webapp::Page "1..9999" --* "1..1" webapp::DynamicWebApp : pages12
+webapp::Link "1..1" -- "1..1" webapp::Page : destination7
+webapp::ListElement "2..9999" --* "1..1" webapp::RadioButton : elements10
+webapp::DropDownList "1..1" *-- "0..9999" webapp::ListElement : elements9
+webapp::FormPage "1..1" -- "0..1" webapp::Page : errorTarget1
+webapp::DynamicWebApp "1..1" *-- "1..9999" webapp::Page : pages12
 webapp::FormPage "1..1" -- "0..1" webapp::Page : successTarget0
 @enduml

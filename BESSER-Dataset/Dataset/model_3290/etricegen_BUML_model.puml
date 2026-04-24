@@ -1,0 +1,195 @@
+@startuml
+class AbstractInstance {
+}
+class InstanceBase {
+}
+class InterfaceItemInstance {
+}
+enum PortKind {
+  external
+  interface
+  internal
+  relay
+}
+class StructureInstance {
+}
+class WiredStructureClass {
+}
+abstract class etricegen::AbstractInstance {
+}
+class etricegen::ActorClass {
+}
+class etricegen::ActorInstance {
+  + replIdx : int
+  + unindexedName : str
+}
+class etricegen::ActorInterfaceInstance {
+  + array : bool
+}
+class etricegen::Binding {
+}
+class etricegen::BindingInstance {
+}
+class etricegen::ConnectionInstance {
+}
+class etricegen::DataClass {
+}
+class etricegen::EnumerationType {
+}
+class etricegen::ExpandedActorClass {
+  + getInterfaceItemLocalId(ifitem : any) : int
+}
+class etricegen::GraphContainer {
+}
+abstract class etricegen::InstanceBase {
+  + nObjIDs : int
+  + name : str
+  + objId : int
+  + path : str
+  + threadId : int
+}
+class etricegen::InterfaceItemInstance {
+  + getInterfaceItem() : str
+  + isRelay() : bool
+  + isReplicated() : bool
+  + isSimple() : bool
+}
+class etricegen::LayerConnection {
+}
+class etricegen::LogicalSystem {
+}
+class etricegen::OpenBinding {
+  + path : str
+}
+class etricegen::OpenServiceConnection {
+  + path : str
+}
+class etricegen::OptionalActorInstance {
+}
+class etricegen::Port {
+}
+class etricegen::PortInstance {
+  + kind : str
+}
+class etricegen::ProtocolClass {
+}
+class etricegen::RoomModel {
+}
+class etricegen::Root {
+  + library : bool
+  + computeSubClasses() : void
+  + getExpandedActorClass(ac : any) : str
+  + getInstance(path : any) : str
+  + getReferencedActorClasses(cls : any) : str
+  + getReferencedDataClasses(cls : any) : str
+  + getReferencedEnumClasses(cls : any) : str
+  + getReferencedModels(cls : any) : str
+  + getReferencedProtocolClasses(cls : any) : str
+  + getSubClasses(ac : any) : str
+}
+class etricegen::SAP {
+}
+class etricegen::SAPInstance {
+}
+class etricegen::SPP {
+}
+class etricegen::SPPInstance {
+}
+class etricegen::ServiceImplInstance {
+}
+class etricegen::ServiceImplementation {
+}
+class etricegen::StructureInstance {
+  + getActorInstances() : str
+}
+class etricegen::SubSystemClass {
+}
+class etricegen::SubSystemInstance {
+  + maxObjId : int
+  + getThreadId(instance : any) : int
+}
+class etricegen::SystemInstance {
+}
+class etricegen::Wire {
+  + dataDriven : bool
+  + path1 : str
+  + path2 : str
+}
+class etricegen::WiredActorClass {
+}
+abstract class etricegen::WiredStructureClass {
+}
+class etricegen::WiredSubSystemClass {
+}
+AbstractInstance <|-- etricegen::ActorInterfaceInstance
+AbstractInstance <|-- etricegen::StructureInstance
+InstanceBase <|-- etricegen::AbstractInstance
+InstanceBase <|-- etricegen::InterfaceItemInstance
+InstanceBase <|-- etricegen::SPPInstance
+InstanceBase <|-- etricegen::SystemInstance
+InterfaceItemInstance <|-- etricegen::PortInstance
+InterfaceItemInstance <|-- etricegen::SAPInstance
+InterfaceItemInstance <|-- etricegen::ServiceImplInstance
+StructureInstance <|-- etricegen::ActorInstance
+StructureInstance <|-- etricegen::OptionalActorInstance
+StructureInstance <|-- etricegen::SubSystemInstance
+WiredStructureClass <|-- etricegen::WiredActorClass
+WiredStructureClass <|-- etricegen::WiredSubSystemClass
+etricegen::ActorClass "0..1" -- "1..1" etricegen::WiredActorClass : actorClass116
+etricegen::ActorClass "0..1" -- "1..1" etricegen::ExpandedActorClass : actorClass120
+etricegen::ActorClass "0..1" -- "1..1" etricegen::ActorInterfaceInstance : actorClass31
+etricegen::ActorClass "0..1" -- "1..1" etricegen::ActorInstance : actorClass63
+etricegen::ActorClass "0..1" -- "1..1" etricegen::OptionalActorInstance : actorClass66
+etricegen::ActorClass "0..9999" -- "1..1" etricegen::Root : actorClasses17
+etricegen::ActorInstance "0..9999" -- "1..1" etricegen::StructureInstance : allContainedInstances51
+etricegen::Binding "0..1" -- "1..1" etricegen::BindingInstance : binding82
+etricegen::BindingInstance "0..9999" --* "1..1" etricegen::StructureInstance : bindings47
+etricegen::BindingInstance "0..9999" -- "1..1" etricegen::PortInstance : bindings80
+etricegen::ConnectionInstance "1..1" -- "0..1" etricegen::LayerConnection : connection99
+etricegen::ConnectionInstance "0..9999" --* "1..1" etricegen::StructureInstance : connections49
+etricegen::DataClass "0..9999" -- "1..1" etricegen::Root : dataClasses13
+etricegen::EnumerationType "0..9999" -- "1..1" etricegen::Root : enumClasses19
+etricegen::AbstractInstance "0..1" -- "1..1" etricegen::ConnectionInstance : fromAI93
+etricegen::ConnectionInstance "1..1" -- "0..1" etricegen::SPPInstance : fromSPP96
+etricegen::ExpandedActorClass "1..1" *-- "0..1" etricegen::GraphContainer : graphContainer123
+etricegen::RoomModel "0..9999" -- "1..1" etricegen::Root : importedModels8
+etricegen::ConnectionInstance "0..9999" -- "1..1" etricegen::SPPInstance : incoming88
+etricegen::AbstractInstance "0..9999" --* "1..1" etricegen::StructureInstance : instances38
+etricegen::SubSystemInstance "0..9999" --* "1..1" etricegen::SystemInstance : instances55
+etricegen::LogicalSystem "0..1" -- "1..1" etricegen::SystemInstance : logicalSystem58
+etricegen::RoomModel "0..9999" -- "1..1" etricegen::Root : models6
+etricegen::OpenBinding "0..9999" --* "1..1" etricegen::WiredStructureClass : openBindings103
+etricegen::ActorClass "0..9999" -- "1..1" etricegen::Root : optionalActorClasses25
+etricegen::OptionalActorInstance "0..9999" --* "1..1" etricegen::Root : optionalInstances23
+etricegen::ActorInterfaceInstance "1..1" -- "0..9999" etricegen::OptionalActorInstance : optionalInstances35
+etricegen::InterfaceItemInstance "0..9999" -- "1..1" etricegen::StructureInstance : orderedIfItemInstances53
+etricegen::ConnectionInstance "0..1" -- "1..1" etricegen::SPPInstance : outgoing89
+etricegen::Root "1..1" *-- "0..9999" etricegen::SubSystemInstance : ownSubSystemInstances1
+etricegen::InterfaceItemInstance "0..9999" -- "1..1" etricegen::InterfaceItemInstance : peers76
+etricegen::OpenBinding "1..1" -- "0..1" etricegen::Port : port110
+etricegen::Port "0..1" -- "1..1" etricegen::PortInstance : port78
+etricegen::AbstractInstance "1..1" *-- "0..9999" etricegen::PortInstance : ports30
+etricegen::BindingInstance "1..1" -- "0..2" etricegen::PortInstance : ports81
+etricegen::OpenServiceConnection "1..1" -- "0..1" etricegen::ProtocolClass : protocol113
+etricegen::InterfaceItemInstance "1..1" -- "0..1" etricegen::ProtocolClass : protocol72
+etricegen::ProtocolClass "0..9999" -- "1..1" etricegen::Root : protocolClasses15
+etricegen::OpenServiceConnection "0..9999" --* "1..1" etricegen::WiredStructureClass : providedServices105
+etricegen::ActorInterfaceInstance "1..1" -- "0..9999" etricegen::ServiceImplInstance : providedServices33
+etricegen::OpenServiceConnection "0..9999" --* "1..1" etricegen::WiredStructureClass : requiredServices107
+etricegen::OptionalActorInstance "1..1" -- "0..9999" etricegen::SAPInstance : requiredServices69
+etricegen::SAP "0..1" -- "1..1" etricegen::SAPInstance : sap84
+etricegen::SAPInstance "0..9999" --* "1..1" etricegen::StructureInstance : saps40
+etricegen::ServiceImplInstance "0..9999" --* "1..1" etricegen::StructureInstance : services44
+etricegen::SPP "0..1" -- "1..1" etricegen::SPPInstance : spp86
+etricegen::SPPInstance "0..9999" --* "1..1" etricegen::StructureInstance : spps42
+etricegen::SubSystemClass "0..1" -- "1..1" etricegen::WiredSubSystemClass : subSystemClass118
+etricegen::SubSystemClass "0..1" -- "1..1" etricegen::SubSystemInstance : subSystemClass60
+etricegen::Root "1..1" -- "0..9999" etricegen::SubSystemClass : subSystemClasses21
+etricegen::Root "1..1" -- "0..9999" etricegen::SubSystemInstance : subSystemInstances3
+etricegen::ServiceImplInstance "1..1" -- "0..1" etricegen::ServiceImplementation : svcImpl91
+etricegen::Root "1..1" *-- "0..9999" etricegen::SystemInstance : systemInstances0
+etricegen::ConnectionInstance "1..1" -- "0..1" etricegen::SPPInstance : toSPP97
+etricegen::Root "1..1" *-- "0..9999" etricegen::WiredStructureClass : wiredInstances28
+etricegen::Wire "0..9999" --* "1..1" etricegen::WiredStructureClass : wires101
+etricegen::ExpandedActorClass "0..9999" --* "1..1" etricegen::Root : xpActorClasses11
+@enduml

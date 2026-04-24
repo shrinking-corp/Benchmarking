@@ -225,8 +225,6 @@ SymbolicDeclaration <|-- logiclanguage::DefinedElement
 SymbolicDeclaration <|-- logiclanguage::Function
 SymbolicDeclaration <|-- logiclanguage::Relation
 SymbolicDeclaration <|-- logiclanguage::Variable
-TermDescription <|-- logiclanguage::SymbolicDeclaration
-TermDescription <|-- logiclanguage::Term
 Term <|-- logiclanguage::AggregateExpression
 Term <|-- logiclanguage::AtomicTerm
 Term <|-- logiclanguage::BoolOperation
@@ -238,70 +236,72 @@ Term <|-- logiclanguage::QuantifiedExpression
 Term <|-- logiclanguage::SymbolicValue
 Term <|-- logiclanguage::TransitiveClosure
 Term <|-- logiclanguage::UnknownBecauseUninterpreted
+TermDescription <|-- logiclanguage::SymbolicDeclaration
+TermDescription <|-- logiclanguage::Term
+Type <|-- logiclanguage::TypeDeclaration
+Type <|-- logiclanguage::TypeDefinition
 TypeDescriptor <|-- logiclanguage::Type
 TypeDescriptor <|-- logiclanguage::TypeReference
 TypeReference <|-- logiclanguage::ComplexTypeReference
 TypeReference <|-- logiclanguage::PrimitiveTypeReference
-Type <|-- logiclanguage::TypeDeclaration
-Type <|-- logiclanguage::TypeDefinition
-logiclanguage::FunctionAnnotation "0..9999" -- "1..1" logiclanguage::Function : annotations13
-logiclanguage::AssertionAnnotation "0..9999" -- "1..1" logiclanguage::Assertion : annotations74
+logiclanguage::Function "1..1" -- "0..9999" logiclanguage::FunctionAnnotation : annotations13
+logiclanguage::Assertion "1..1" -- "0..9999" logiclanguage::AssertionAnnotation : annotations74
 logiclanguage::Relation "1..1" -- "0..9999" logiclanguage::RelationAnnotation : annotations78
-logiclanguage::ConstantAnnotation "0..9999" -- "1..1" logiclanguage::Constant : annotations82
-logiclanguage::Term "1..1" --* "1..1" logiclanguage::IfThenElse : condition102
-logiclanguage::TypeDefinition "0..9999" -- "1..1" logiclanguage::DefinedElement : definedInType5
+logiclanguage::Constant "1..1" -- "0..9999" logiclanguage::ConstantAnnotation : annotations82
+logiclanguage::IfThenElse "1..1" *-- "1..1" logiclanguage::Term : condition102
+logiclanguage::DefinedElement "1..1" -- "0..9999" logiclanguage::TypeDefinition : definedInType5
 logiclanguage::TypeDeclaration "0..1" -- "1..1" logiclanguage::TypeDefinition : defines7
 logiclanguage::ConstantDeclaration "0..1" -- "1..1" logiclanguage::ConstantDefinition : defines86
 logiclanguage::RelationDeclaration "0..1" -- "1..1" logiclanguage::RelationDefinition : defines93
-logiclanguage::FunctionDefinition "1..1" -- "0..1" logiclanguage::FunctionDeclaration : defines97
+logiclanguage::FunctionDeclaration "0..1" -- "1..1" logiclanguage::FunctionDefinition : defines97
 logiclanguage::DefinedElement "0..9999" -- "1..1" logiclanguage::TypeDefinition : elements6
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::QuantifiedExpression : expression21
+logiclanguage::QuantifiedExpression "1..1" *-- "0..1" logiclanguage::Term : expression21
 logiclanguage::IfThenElse "1..1" *-- "1..1" logiclanguage::Term : ifFalse107
-logiclanguage::Term "1..1" --* "1..1" logiclanguage::IfThenElse : ifTrue104
+logiclanguage::IfThenElse "1..1" *-- "1..1" logiclanguage::Term : ifTrue104
 logiclanguage::Term "0..1" --* "1..1" logiclanguage::TransitiveClosure : leftOperand115
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::Impl : leftOperand28
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::Iff : leftOperand35
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::Equals : leftOperand40
+logiclanguage::Impl "1..1" *-- "0..1" logiclanguage::Term : leftOperand28
+logiclanguage::Iff "1..1" *-- "0..1" logiclanguage::Term : leftOperand35
+logiclanguage::Equals "1..1" *-- "0..1" logiclanguage::Term : leftOperand40
 logiclanguage::LessThan "1..1" *-- "0..1" logiclanguage::Term : leftOperand47
 logiclanguage::MoreThan "1..1" *-- "0..1" logiclanguage::Term : leftOperand52
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::LessOrEqualThan : leftOperand57
+logiclanguage::LessOrEqualThan "1..1" *-- "0..1" logiclanguage::Term : leftOperand57
 logiclanguage::MoreOrEqualThan "1..1" *-- "0..1" logiclanguage::Term : leftOperand62
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::NumericOperation : leftOperand67
+logiclanguage::NumericOperation "1..1" *-- "0..1" logiclanguage::Term : leftOperand67
 logiclanguage::Not "1..1" *-- "0..1" logiclanguage::Term : operand33
 logiclanguage::And "1..1" *-- "0..9999" logiclanguage::Term : operands24
-logiclanguage::Term "0..9999" --* "1..1" logiclanguage::Or : operands26
-logiclanguage::Term "0..9999" --* "1..1" logiclanguage::Distinct : operands45
-logiclanguage::AggregatedParameterSubstitution "0..9999" --* "1..1" logiclanguage::AggregateExpression : parameterSubstitution125
+logiclanguage::Or "1..1" *-- "0..9999" logiclanguage::Term : operands26
+logiclanguage::Distinct "1..1" *-- "0..9999" logiclanguage::Term : operands45
+logiclanguage::AggregateExpression "1..1" *-- "0..9999" logiclanguage::AggregatedParameterSubstitution : parameterSubstitution125
 logiclanguage::SymbolicValue "1..1" *-- "0..9999" logiclanguage::Term : parameterSubstitutions15
-logiclanguage::TypeReference "0..9999" --* "1..1" logiclanguage::Function : parameters10
-logiclanguage::TypeReference "0..9999" --* "1..1" logiclanguage::Relation : parameters76
-logiclanguage::Variable "0..9999" --* "1..1" logiclanguage::QuantifiedExpression : quantifiedVariables19
-logiclanguage::TypeReference "1..1" --* "1..1" logiclanguage::InstanceOf : range112
+logiclanguage::Function "1..1" *-- "0..9999" logiclanguage::TypeReference : parameters10
+logiclanguage::Relation "1..1" *-- "0..9999" logiclanguage::TypeReference : parameters76
+logiclanguage::QuantifiedExpression "1..1" *-- "0..9999" logiclanguage::Variable : quantifiedVariables19
+logiclanguage::InstanceOf "1..1" *-- "1..1" logiclanguage::TypeReference : range112
 logiclanguage::TypeReference "1..1" --* "1..1" logiclanguage::Variable : range17
 logiclanguage::Function "1..1" *-- "1..1" logiclanguage::TypeReference : range9
-logiclanguage::Type "0..1" -- "1..1" logiclanguage::ComplexTypeReference : referred8
+logiclanguage::ComplexTypeReference "1..1" -- "0..1" logiclanguage::Type : referred8
 logiclanguage::Relation "0..1" -- "1..1" logiclanguage::TransitiveClosure : relation120
-logiclanguage::Relation "0..1" -- "1..1" logiclanguage::AggregateExpression : relation123
-logiclanguage::Variable "0..1" -- "1..1" logiclanguage::AggregateExpression : resultVariable127
+logiclanguage::AggregateExpression "1..1" -- "0..1" logiclanguage::Relation : relation123
+logiclanguage::AggregateExpression "1..1" -- "0..1" logiclanguage::Variable : resultVariable127
 logiclanguage::Term "0..1" --* "1..1" logiclanguage::TransitiveClosure : rightOperand117
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::Impl : rightOperand30
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::Iff : rightOperand37
+logiclanguage::Impl "1..1" *-- "0..1" logiclanguage::Term : rightOperand30
+logiclanguage::Iff "1..1" *-- "0..1" logiclanguage::Term : rightOperand37
 logiclanguage::Equals "1..1" *-- "0..1" logiclanguage::Term : rightOperand42
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::LessThan : rightOperand49
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::MoreThan : rightOperand54
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::LessOrEqualThan : rightOperand59
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::MoreOrEqualThan : rightOperand64
-logiclanguage::Term "0..1" --* "1..1" logiclanguage::NumericOperation : rightOperand69
-logiclanguage::Type "0..9999" -- "1..1" logiclanguage::Type : subtypes1
+logiclanguage::LessThan "1..1" *-- "0..1" logiclanguage::Term : rightOperand49
+logiclanguage::MoreThan "1..1" *-- "0..1" logiclanguage::Term : rightOperand54
+logiclanguage::LessOrEqualThan "1..1" *-- "0..1" logiclanguage::Term : rightOperand59
+logiclanguage::MoreOrEqualThan "1..1" *-- "0..1" logiclanguage::Term : rightOperand64
+logiclanguage::NumericOperation "1..1" *-- "0..1" logiclanguage::Term : rightOperand69
+logiclanguage::Type "1..1" -- "0..9999" logiclanguage::Type : subtypes1
 logiclanguage::Type "1..1" -- "0..9999" logiclanguage::Type : supertypes3
 logiclanguage::SymbolicDeclaration "0..1" -- "1..1" logiclanguage::SymbolicValue : symbolicReference14
-logiclanguage::TypeReference "1..1" --* "1..1" logiclanguage::Constant : type80
+logiclanguage::Constant "1..1" *-- "1..1" logiclanguage::TypeReference : type80
 logiclanguage::InstanceOf "1..1" *-- "1..1" logiclanguage::Term : value110
-logiclanguage::Term "1..1" --* "1..1" logiclanguage::Assertion : value72
-logiclanguage::Term "1..1" --* "1..1" logiclanguage::ConstantDefinition : value84
-logiclanguage::Term "1..1" --* "1..1" logiclanguage::RelationDefinition : value90
-logiclanguage::Term "1..1" --* "1..1" logiclanguage::FunctionDefinition : value99
+logiclanguage::Assertion "1..1" *-- "1..1" logiclanguage::Term : value72
+logiclanguage::ConstantDefinition "1..1" *-- "1..1" logiclanguage::Term : value84
+logiclanguage::RelationDefinition "1..1" *-- "1..1" logiclanguage::Term : value90
+logiclanguage::FunctionDefinition "1..1" *-- "1..1" logiclanguage::Term : value99
 logiclanguage::AggregatedParameterSubstitution "1..1" -- "0..1" logiclanguage::Variable : variable130
-logiclanguage::Variable "0..9999" --* "1..1" logiclanguage::FunctionDefinition : variable95
+logiclanguage::FunctionDefinition "1..1" *-- "0..9999" logiclanguage::Variable : variable95
 logiclanguage::RelationDefinition "1..1" *-- "0..9999" logiclanguage::Variable : variables88
 @enduml

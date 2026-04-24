@@ -57,8 +57,8 @@ abstract class uml::Type {
 }
 abstract class uml::TypedElement {
 }
-Classifier <|-- uml::Class
 Class <|-- uml::Behavior
+Classifier <|-- uml::Class
 Element <|-- uml::Classifier
 Element <|-- uml::Dependency
 Element <|-- uml::NamedElement
@@ -76,22 +76,22 @@ NamedElement <|-- uml::Package
 NamedElement <|-- uml::PackageableElement
 NamedElement <|-- uml::Property
 NamedElement <|-- uml::TypedElement
+Package <|-- uml::Model
 PackageableElement <|-- uml::Dependency
 PackageableElement <|-- uml::Package
 PackageableElement <|-- uml::Type
-Package <|-- uml::Model
+Type <|-- uml::Classifier
 TypedElement <|-- uml::Parameter
 TypedElement <|-- uml::Property
-Type <|-- uml::Classifier
 uml::Dependency "1..1" -- "1..9999" uml::NamedElement : client14
-uml::Classifier "0..9999" -- "1..1" uml::Class : generalizationGeneral9
-uml::Operation "1..1" -- "0..9999" uml::Behavior : method1
-uml::Classifier "0..9999" --* "1..1" uml::Class : nestedClassifier3
+uml::Class "1..1" -- "0..9999" uml::Classifier : generalizationGeneral9
+uml::Behavior "0..9999" -- "1..1" uml::Operation : method1
+uml::Class "1..1" *-- "0..9999" uml::Classifier : nestedClassifier3
 uml::Class "1..1" *-- "0..9999" uml::Property : ownedAttribute7
-uml::Operation "0..9999" --* "1..1" uml::Class : ownedOperation4
-uml::Parameter "0..9999" --* "1..1" uml::Operation : ownedParameter0
+uml::Class "1..1" *-- "0..9999" uml::Operation : ownedOperation4
+uml::Operation "1..1" *-- "0..9999" uml::Parameter : ownedParameter0
 uml::Element "1..1" -- "0..1" uml::Element : owner19
-uml::PackageableElement "0..9999" --* "1..1" uml::Package : packagedElement12
-uml::NamedElement "1..9999" -- "1..1" uml::Dependency : supplier13
+uml::Package "1..1" *-- "0..9999" uml::PackageableElement : packagedElement12
+uml::Dependency "1..1" -- "1..9999" uml::NamedElement : supplier13
 uml::Type "0..1" -- "1..1" uml::TypedElement : type17
 @enduml

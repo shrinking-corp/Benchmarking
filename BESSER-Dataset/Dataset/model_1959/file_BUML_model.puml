@@ -1,0 +1,65 @@
+@startuml
+class ByteFile {
+}
+class File {
+}
+enum FileEncoding {
+  ISO_8859_1
+  US_ASCII
+  UTF_16
+  UTF_16BE
+  UTF_16LE
+  UTF_8
+}
+class FileHandler {
+}
+class FileOwner {
+}
+abstract class file::ByteFile {
+  + Encoding : str
+}
+abstract class file::File {
+  + Name : str
+}
+abstract class file::FileHandler {
+}
+class file::FileInMemory {
+  + Content : str
+}
+class file::FileLocal {
+  + FilePath : str
+}
+abstract class file::FileOutput {
+}
+abstract class file::FileOwner {
+}
+abstract class file::FileReaderWriter {
+  + CloseFeedback : str
+  + Open : bool
+  + ReadFeedback : str
+  + WriteFeedback : str
+  + close() : void
+  + getReadFeedback(file : any) : str
+  + getWriteFeedback(file : any) : str
+  + readFile(file : any) : void
+  + writeFile(file : any) : void
+}
+class file::FileRemote {
+  + URL : str
+}
+class file::Files {
+  + Name : str
+}
+ByteFile <|-- file::FileLocal
+ByteFile <|-- file::FileRemote
+File <|-- file::ByteFile
+File <|-- file::FileInMemory
+FileHandler <|-- file::FileReaderWriter
+FileOwner <|-- file::FileHandler
+FileOwner <|-- file::FileOutput
+FileOwner <|-- file::Files
+file::File "0..9999" --* "1..1" file::FileOwner : Files4
+file::File "0..1" -- "1..1" file::FileHandler : HandledFile1
+file::File "0..1" -- "1..1" file::FileOutput : OutputFile6
+file::File "0..1" -- "1..1" file::FileHandler : SelectedFile0
+@enduml

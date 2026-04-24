@@ -279,13 +279,13 @@ IArrayElement <|-- dom::Elision
 IArrayElement <|-- dom::Expression
 IForInitializer <|-- dom::Expression
 IForInitializer <|-- dom::VariableStatement
+IProperty <|-- dom::Identifier
+IProperty <|-- dom::PropertyIdentifier
 IPropertyName <|-- dom::Identifier
 IPropertyName <|-- dom::NumericLiteral
 IPropertyName <|-- dom::StringLiteral
 IPropertySelector <|-- dom::Identifier
 IPropertySelector <|-- dom::WildcardIdentifier
-IProperty <|-- dom::Identifier
-IProperty <|-- dom::PropertyIdentifier
 ISelector <|-- dom::IUnqualifiedSelector
 ISelector <|-- dom::QualifiedIdentifier
 IUnqualifiedSelector <|-- dom::ExpressionSelector
@@ -338,81 +338,81 @@ SwitchElement <|-- dom::CaseClause
 SwitchElement <|-- dom::DefaultClause
 XmlFragment <|-- dom::XmlExpressionFragment
 XmlFragment <|-- dom::XmlTextFragment
-dom::Expression "1..1" --* "1..1" dom::ConditionalExpression : alternative42
-dom::Statement "0..1" --* "1..1" dom::IfStatement : alternative61
+dom::ConditionalExpression "1..1" *-- "1..1" dom::Expression : alternative42
+dom::IfStatement "1..1" *-- "0..1" dom::Statement : alternative61
 dom::CallExpression "1..1" *-- "1..1" dom::Expression : applicant25
 dom::Expression "1..1" --* "1..1" dom::UnaryExpression : argument30
 dom::Expression "0..9999" --* "1..1" dom::NewExpression : arguments22
-dom::Expression "0..9999" --* "1..1" dom::CallExpression : arguments27
-dom::Expression "1..1" --* "1..1" dom::ArrayAccessExpression : array11
+dom::CallExpression "1..1" *-- "0..9999" dom::Expression : arguments27
+dom::ArrayAccessExpression "1..1" *-- "1..1" dom::Expression : array11
 dom::BlockStatement "1..1" --* "1..1" dom::TryStatement : body108
 dom::BlockStatement "1..1" --* "1..1" dom::CatchClause : body120
-dom::FinallyClause "1..1" *-- "1..1" dom::BlockStatement : body123
-dom::FunctionExpression "1..1" *-- "1..1" dom::BlockStatement : body132
-dom::BlockStatement "1..1" --* "1..1" dom::AccessorAssignment : body6
+dom::BlockStatement "1..1" --* "1..1" dom::FinallyClause : body123
+dom::BlockStatement "1..1" --* "1..1" dom::FunctionExpression : body132
+dom::AccessorAssignment "1..1" *-- "1..1" dom::BlockStatement : body6
 dom::IterationStatement "1..1" *-- "1..1" dom::Statement : body64
 dom::CatchClause "0..9999" --* "1..1" dom::TryStatement : catches110
 dom::Expression "1..1" --* "1..1" dom::ForEachInStatement : collection165
 dom::Expression "1..1" --* "1..1" dom::ForInStatement : collection79
-dom::Expression "1..1" --* "1..1" dom::DoStatement : condition66
+dom::DoStatement "1..1" *-- "1..1" dom::Expression : condition66
 dom::Expression "1..1" --* "1..1" dom::WhileStatement : condition68
-dom::ForStatement "1..1" *-- "1..1" dom::Expression : condition71
-dom::Expression "1..1" --* "1..1" dom::ConditionalExpression : consequent39
-dom::Statement "1..1" --* "1..1" dom::IfStatement : consequent58
+dom::Expression "1..1" --* "1..1" dom::ForStatement : condition71
+dom::ConditionalExpression "1..1" *-- "1..1" dom::Expression : consequent39
+dom::IfStatement "1..1" *-- "1..1" dom::Statement : consequent58
 dom::Expression "1..1" --* "1..1" dom::NewExpression : constructor20
-dom::VariableDeclaration "1..9999" --* "1..1" dom::ConstStatement : declarations140
+dom::ConstStatement "1..1" *-- "1..9999" dom::VariableDeclaration : declarations140
 dom::VariableDeclaration "1..9999" --* "1..1" dom::VariableStatement : declarations47
 dom::Comment "0..1" -- "1..1" dom::FunctionExpression : documentation126
 dom::ArrayLiteral "1..1" *-- "0..9999" dom::IArrayElement : elements1
 dom::SwitchElement "0..9999" --* "1..1" dom::SwitchStatement : elements94
 dom::Expression "1..1" --* "1..1" dom::ParenthesizedExpression : enclosed9
 dom::Expression "1..1" --* "1..1" dom::ThrowStatement : exception106
-dom::Identifier "1..1" --* "1..1" dom::CatchClause : exception114
-dom::XmlExpressionFragment "1..1" *-- "1..1" dom::Expression : expression149
-dom::Expression "1..1" --* "1..1" dom::DefaultXmlNamespaceStatement : expression161
+dom::CatchClause "1..1" *-- "1..1" dom::Identifier : exception114
+dom::Expression "1..1" --* "1..1" dom::XmlExpressionFragment : expression149
+dom::DefaultXmlNamespaceStatement "1..1" *-- "1..1" dom::Expression : expression161
 dom::Expression "1..1" --* "1..1" dom::ExpressionStatement : expression54
 dom::Expression "0..1" --* "1..1" dom::ReturnStatement : expression85
-dom::WithStatement "1..1" *-- "1..1" dom::Expression : expression87
+dom::Expression "1..1" --* "1..1" dom::WithStatement : expression87
 dom::CaseClause "1..1" *-- "1..1" dom::Expression : expression99
-dom::Expression "0..1" --* "1..1" dom::CatchClause : filter117
+dom::CatchClause "1..1" *-- "0..1" dom::Expression : filter117
 dom::Expression "1..1" --* "1..1" dom::FilterExpression : filter158
-dom::TryStatement "1..1" *-- "0..1" dom::FinallyClause : finallyClause112
+dom::FinallyClause "0..1" --* "1..1" dom::TryStatement : finallyClause112
 dom::XmlFragment "1..9999" --* "1..1" dom::XmlInitializer : fragments142
-dom::Identifier "0..1" --* "1..1" dom::FunctionExpression : identifier127
+dom::FunctionExpression "1..1" *-- "0..1" dom::Identifier : identifier127
 dom::Identifier "1..1" --* "1..1" dom::VariableDeclaration : identifier48
 dom::Expression "1..1" --* "1..1" dom::ForStatement : increment74
-dom::Expression "1..1" --* "1..1" dom::ArrayAccessExpression : index13
-dom::ExpressionSelector "1..1" *-- "1..1" dom::Expression : index147
-dom::IForInitializer "1..1" --* "1..1" dom::ForStatement : initialization70
-dom::SimplePropertyAssignment "1..1" *-- "1..1" dom::Expression : initializer5
-dom::VariableDeclaration "1..1" *-- "0..1" dom::Expression : initializer51
-dom::IForInitializer "1..1" --* "1..1" dom::ForEachInStatement : item163
-dom::IForInitializer "1..1" --* "1..1" dom::ForInStatement : item77
+dom::ArrayAccessExpression "1..1" *-- "1..1" dom::Expression : index13
+dom::Expression "1..1" --* "1..1" dom::ExpressionSelector : index147
+dom::ForStatement "1..1" *-- "1..1" dom::IForInitializer : initialization70
+dom::Expression "1..1" --* "1..1" dom::SimplePropertyAssignment : initializer5
+dom::Expression "0..1" --* "1..1" dom::VariableDeclaration : initializer51
+dom::ForEachInStatement "1..1" *-- "1..1" dom::IForInitializer : item163
+dom::ForInStatement "1..1" *-- "1..1" dom::IForInitializer : item77
 dom::Label "1..1" --* "1..1" dom::LabeledStatement : label101
-dom::Label "0..1" --* "1..1" dom::ContinueStatement : label82
-dom::Label "0..1" --* "1..1" dom::BreakStatement : label83
-dom::Expression "1..1" --* "1..1" dom::BinaryExpression : left32
+dom::ContinueStatement "1..1" *-- "0..1" dom::Label : label82
+dom::BreakStatement "1..1" *-- "0..1" dom::Label : label83
+dom::BinaryExpression "1..1" *-- "1..1" dom::Expression : left32
 dom::IUnqualifiedSelector "1..1" --* "1..1" dom::QualifiedIdentifier : member145
 dom::Identifier "1..1" --* "1..1" dom::Parameter : name135
-dom::PropertyAssignment "1..1" *-- "1..1" dom::IPropertyName : name3
+dom::IPropertyName "1..1" --* "1..1" dom::PropertyAssignment : name3
 dom::IPropertySelector "1..1" --* "1..1" dom::QualifiedIdentifier : namespace144
-dom::Expression "1..1" --* "1..1" dom::DescendantAccessExpression : object151
+dom::DescendantAccessExpression "1..1" *-- "1..1" dom::Expression : object151
 dom::Expression "1..1" --* "1..1" dom::FilterExpression : object156
 dom::Expression "1..1" --* "1..1" dom::PropertyAccessExpression : object16
 dom::Identifier "1..1" --* "1..1" dom::SetterAssignment : parameter7
-dom::Parameter "0..9999" --* "1..1" dom::FunctionExpression : parameters130
+dom::FunctionExpression "1..1" *-- "0..9999" dom::Parameter : parameters130
 dom::ConditionalExpression "1..1" *-- "1..1" dom::Expression : predicate37
 dom::Expression "1..1" --* "1..1" dom::IfStatement : predicate56
-dom::PropertyAssignment "0..9999" --* "1..1" dom::ObjectLiteral : properties2
+dom::ObjectLiteral "1..1" *-- "0..9999" dom::PropertyAssignment : properties2
 dom::DescendantAccessExpression "1..1" *-- "1..1" dom::IProperty : property153
-dom::PropertyAccessExpression "1..1" *-- "1..1" dom::IProperty : property18
-dom::Expression "1..1" --* "1..1" dom::BinaryExpression : right34
-dom::ISelector "1..1" --* "1..1" dom::AttributeIdentifier : selector143
+dom::IProperty "1..1" --* "1..1" dom::PropertyAccessExpression : property18
+dom::BinaryExpression "1..1" *-- "1..1" dom::Expression : right34
+dom::AttributeIdentifier "1..1" *-- "1..1" dom::ISelector : selector143
 dom::Expression "1..1" --* "1..1" dom::SwitchStatement : selector92
-dom::Statement "1..1" --* "1..1" dom::LabeledStatement : statement103
+dom::LabeledStatement "1..1" *-- "1..1" dom::Statement : statement103
 dom::Statement "1..1" --* "1..1" dom::WithStatement : statement89
-dom::Statement "0..9999" --* "1..1" dom::Source : statements138
+dom::Source "1..1" *-- "0..9999" dom::Statement : statements138
 dom::BlockStatement "1..1" *-- "0..9999" dom::Statement : statements45
 dom::Statement "0..9999" --* "1..1" dom::SwitchElement : statements96
-dom::VariableReference "1..1" *-- "1..1" dom::Identifier : variable0
+dom::Identifier "1..1" --* "1..1" dom::VariableReference : variable0
 @enduml

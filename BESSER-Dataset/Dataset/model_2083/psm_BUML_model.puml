@@ -113,20 +113,20 @@ Simulator <|-- ws::tree::CDEVSSimulator
 Simulator <|-- ws::tree::P::Simulator
 Simulator <|-- ws::tree::PDEVSSimulator
 Coordinator "0..9999" --* "1..1" ws::tree::Tree : Coordinator10
-ws::bundle::Bundle "1..1" *-- "1..9999" Process : Process22
+Process "1..9999" --* "1..1" ws::bundle::Bundle : Process22
 Root "1..1" --* "1..1" ws::tree::Tree : Root9
-ws::tree::Tree "1..1" *-- "1..9999" Simulator : Simulator12
+Simulator "1..9999" --* "1..1" ws::tree::Tree : Simulator12
 BasicNode "1..1" -- "1..1" ws::tree::Root : child14
 BasicNode "1..9999" -- "1..1" ws::tree::Coordinator : children15
 ServiceImpl "1..1" -- "1..1" ws::middleware::Stub : impl7
-ws::bundle::Process "1..1" -- "1..1" Middleware : middleware26
+Middleware "1..1" -- "1..1" ws::bundle::Process : middleware26
 Node "1..9999" -- "1..1" ws::bundle::Process : nodes25
-ws::middleware::Middleware "1..1" -- "1..9999" Process : process1
-ws::middleware::VM "1..1" *-- "1..9999" Processor : processors6
-ws::middleware::WebService "1..1" -- "1..1" Repository : registry4
+Process "1..9999" -- "1..1" ws::middleware::Middleware : process1
+Processor "1..9999" --* "1..1" ws::middleware::VM : processors6
+Repository "1..1" -- "1..1" ws::middleware::WebService : registry4
 Root "1..9999" --* "1..1" ws::skeleton::Skeleton : rootskel18
 ServiceDescription "1..9999" --* "1..1" ws::middleware::Repository : services8
-ws::bundle::Bundle "1..1" -- "1..1" Skeleton : skeleton21
+Skeleton "1..1" -- "1..1" ws::bundle::Bundle : skeleton21
 Stub "1..9999" --* "1..1" ws::middleware::WebService : stubs3
 Tree "0..1" -- "1..1" ws::skeleton::Skeleton : tree17
 VM "0..1" -- "1..1" ws::middleware::Middleware : uses0

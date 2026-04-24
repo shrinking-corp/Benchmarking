@@ -69,20 +69,20 @@ uncertainty::aPerson <|-- UniverityU::Person
 uncertainty::aPerson <|-- UniverityU::uncertainty::uPerson
 uncertainty::aUniversity <|-- UniverityU::University
 uncertainty::aUniversity <|-- UniverityU::uncertainty::uUniversity
-aCourses "0..9999" --* "1..1" UniverityU::University : Courses8
-aPerson "0..1" --* "1..1" UniverityU::Courses : Professor1
-aPerson "0..9999" --* "1..1" UniverityU::Courses : Student3
+UniverityU::University "1..1" *-- "0..9999" aCourses : Courses8
+UniverityU::Courses "1..1" *-- "0..1" aPerson : Professor1
+UniverityU::Courses "1..1" *-- "0..9999" aPerson : Student3
 ModelElement "0..9999" -- "1..1" UniverityU::uncertainty::ModelElement : exclude11
-UniverityU::uncertainty::ModelElement "1..1" -- "0..9999" ModelElement : include10
-aCourses "0..9999" -- "1..1" UniverityU::Courses : links0
-aPerson "0..1" -- "1..1" UniverityU::Person : relatives6
-aCourses "0..9999" --* "1..1" UniverityU::uncertainty::uCourses : uleft14
+ModelElement "0..9999" -- "1..1" UniverityU::uncertainty::ModelElement : include10
+UniverityU::Courses "1..1" -- "0..9999" aCourses : links0
+UniverityU::Person "1..1" -- "0..1" aPerson : relatives6
+UniverityU::uncertainty::uCourses "1..1" *-- "0..9999" aCourses : uleft14
 UniverityU::uncertainty::uPerson "1..1" *-- "0..9999" aPerson : uleft21
-aUniversity "0..9999" --* "1..1" UniverityU::uncertainty::uUniversity : uleft28
-uCourses "0..9999" --* "1..1" UniverityU::uncertainty::uCourses : upoint19
-uPerson "0..9999" --* "1..1" UniverityU::uncertainty::uPerson : upoint26
-uUniversity "0..9999" --* "1..1" UniverityU::uncertainty::uUniversity : upoint32
+UniverityU::uncertainty::uUniversity "1..1" *-- "0..9999" aUniversity : uleft28
+UniverityU::uncertainty::uCourses "1..1" *-- "0..9999" uCourses : upoint19
+UniverityU::uncertainty::uPerson "1..1" *-- "0..9999" uPerson : upoint26
+UniverityU::uncertainty::uUniversity "1..1" *-- "0..9999" uUniversity : upoint32
 UniverityU::uncertainty::uCourses "1..1" *-- "0..9999" aCourses : uright16
 UniverityU::uncertainty::uPerson "1..1" *-- "0..9999" aPerson : uright23
-aUniversity "0..9999" --* "1..1" UniverityU::uncertainty::uUniversity : uright29
+UniverityU::uncertainty::uUniversity "1..1" *-- "0..9999" aUniversity : uright29
 @enduml

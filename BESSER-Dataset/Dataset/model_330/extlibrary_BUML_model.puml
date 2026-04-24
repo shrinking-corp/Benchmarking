@@ -72,17 +72,17 @@ Lendable <|-- extlibrary::CirculatingItem
 Person <|-- extlibrary::Borrower
 Person <|-- extlibrary::Employee
 Person <|-- extlibrary::Writer
-extlibrary::Writer "1..1" -- "1..1" extlibrary::Book : author0
-extlibrary::Writer "0..1" -- "1..1" extlibrary::BookOnTape : bookAuthor13
+extlibrary::Book "1..1" -- "1..1" extlibrary::Writer : author0
+extlibrary::BookOnTape "1..1" -- "0..1" extlibrary::Writer : bookAuthor13
 extlibrary::Book "0..9999" -- "1..1" extlibrary::Writer : books10
 extlibrary::Book "0..9999" -- "1..1" extlibrary::Library : books8
-extlibrary::Lendable "0..9999" -- "1..1" extlibrary::Borrower : borrowed18
+extlibrary::Borrower "1..1" -- "0..9999" extlibrary::Lendable : borrowed18
 extlibrary::Borrower "0..9999" -- "1..1" extlibrary::Lendable : borrowers11
 extlibrary::Borrower "0..9999" --* "1..1" extlibrary::Library : borrowers4
 extlibrary::Person "0..9999" -- "1..1" extlibrary::VideoCassette : cast16
-extlibrary::Library "1..1" *-- "0..9999" extlibrary::Employee : employees2
-extlibrary::Employee "1..1" -- "0..1" extlibrary::Employee : manager20
+extlibrary::Employee "0..9999" --* "1..1" extlibrary::Library : employees2
+extlibrary::Employee "0..1" -- "1..1" extlibrary::Employee : manager20
 extlibrary::BookOnTape "1..1" -- "0..1" extlibrary::Person : reader12
 extlibrary::Item "0..9999" --* "1..1" extlibrary::Library : stock6
-extlibrary::Writer "0..9999" --* "1..1" extlibrary::Library : writers1
+extlibrary::Library "1..1" *-- "0..9999" extlibrary::Writer : writers1
 @enduml

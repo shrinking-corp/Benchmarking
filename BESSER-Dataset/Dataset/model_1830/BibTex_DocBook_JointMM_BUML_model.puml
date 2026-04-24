@@ -118,10 +118,10 @@ SrcBibTeXEntry <|-- jointPackage::SrcBookTitledEntry
 SrcBibTeXEntry <|-- jointPackage::SrcDatedEntry
 SrcBibTeXEntry <|-- jointPackage::SrcMisc
 SrcBibTeXEntry <|-- jointPackage::SrcTitledEntry
-SrcBookTitledEntry <|-- jointPackage::SrcInCollection
-SrcBookTitledEntry <|-- jointPackage::SrcInProceedings
 SrcBook <|-- jointPackage::SrcInBook
 SrcBook <|-- jointPackage::SrcInCollection
+SrcBookTitledEntry <|-- jointPackage::SrcInCollection
+SrcBookTitledEntry <|-- jointPackage::SrcInProceedings
 SrcDatedEntry <|-- jointPackage::SrcArticle
 SrcDatedEntry <|-- jointPackage::SrcBook
 SrcDatedEntry <|-- jointPackage::SrcBooklet
@@ -144,12 +144,12 @@ TrgTitledElement <|-- jointPackage::TrgArticle
 TrgTitledElement <|-- jointPackage::TrgSection
 TrgArticle "1..9999" --* "1..1" jointPackage::TrgBook : articles6
 SrcAuthor "1..9999" --* "1..1" jointPackage::SrcAuthoredEntry : authors4
-jointPackage::TrgDocBook "1..1" *-- "1..9999" TrgBook : books5
-jointPackage::SrcBibTeXFile "1..1" *-- "0..9999" SrcBibTeXEntry : entries3
+TrgBook "1..9999" --* "1..1" jointPackage::TrgDocBook : books5
+SrcBibTeXEntry "0..9999" --* "1..1" jointPackage::SrcBibTeXFile : entries3
 TrgPara "1..9999" --* "1..1" jointPackage::TrgSection : paras8
 TrgSection "1..1" -- "1..1" jointPackage::TrgPara : section10
 TrgSect1 "1..9999" --* "1..1" jointPackage::TrgArticle : sections_17
-jointPackage::TrgSect1 "1..1" *-- "1..9999" TrgSect2 : sections_29
+TrgSect2 "1..9999" --* "1..1" jointPackage::TrgSect1 : sections_29
 SrcMasterThesis "1..1" --* "1..1" jointPackage::JointMM : sourceRoot0
 TrgDocBook "1..1" --* "1..1" jointPackage::JointMM : targetRoot1
 @enduml

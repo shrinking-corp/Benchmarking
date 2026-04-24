@@ -1,0 +1,246 @@
+@startuml
+enum BehaviorType {
+  ExternalInput
+  ExternalOutput
+  Guard
+  InternalInput
+  InternalOutput
+  Selection
+  StateRealization
+}
+enum Branch {
+  Alternative
+  Parallel
+}
+enum Composition {
+  Atomic
+  Sequential
+}
+enum EventType {
+  ExternalInput
+  ExternalOutput
+  InternalInput
+  InternalOutput
+}
+class GUI {
+}
+class GUIImplementable {
+}
+class Layout {
+}
+class Node {
+}
+enum Operator {
+  BranchKill
+  Conjunction
+  Disjunction
+  ExclusiveOR
+  NoOperator
+  Reference
+  Reversion
+  Synchronize
+}
+enum SpecialEdgeEnum {
+  BranchKill
+  Reference
+  Reversion
+  Synchronize
+}
+enum TraceabilityStatus {
+  Deleted
+  DesignRefinement
+  Implied
+  Missing
+  Original
+  Updated
+}
+class graphbt::AlternativeClass {
+  + alternativeAttribute : str
+}
+class graphbt::Attribute {
+  + name : str
+  + type : str
+  + value : str
+}
+class graphbt::Author {
+  + contact : str
+  + name : str
+  + role : str
+}
+class graphbt::AuthorList {
+}
+class graphbt::BEModel {
+  + name : str
+  + subtitle : str
+  + version : str
+}
+class graphbt::Behavior {
+  + behaviorDesc : str
+  + behaviorName : str
+  + behaviorRef : str
+  + behaviorType : str
+  + technicalDetail : str
+}
+class graphbt::BehaviorTree {
+  + name : str
+}
+class graphbt::Button {
+  + label : str
+}
+class graphbt::CTEdge {
+}
+class graphbt::Component {
+  + componentDesc : str
+  + componentName : str
+  + componentRef : str
+  + enumerated : bool
+  + id : int
+  + getAttribute(name : any) : str
+}
+class graphbt::ComponentList {
+}
+class graphbt::Edge {
+  + branch : str
+  + composition : str
+}
+class graphbt::EmptyNode {
+  + label : str
+}
+class graphbt::Formula {
+  + formulaName : str
+}
+class graphbt::FormulaList {
+}
+class graphbt::GUI {
+  + codeImplementation : str
+  + identifier : str
+}
+class graphbt::GUIImplementable {
+}
+class graphbt::Information {
+  + key : str
+  + value : str
+}
+class graphbt::InputGUI {
+}
+class graphbt::InputType {
+}
+class graphbt::Layout {
+  + cRef : str
+  + height : int
+  + width : int
+  + x : int
+  + y : int
+  + z : int
+}
+class graphbt::LayoutList {
+}
+class graphbt::Libraries {
+}
+class graphbt::Library {
+  + desc : str
+  + id : str
+  + location : str
+  + name : str
+  + text : str
+}
+class graphbt::Link {
+}
+class graphbt::MapInformation {
+  + getValue(key : any) : str
+  + setValue(key : any, value : any) : void
+}
+class graphbt::MethodDeclaration {
+  + name : str
+  + type : str
+}
+class graphbt::Node {
+  + id : str
+  + index : int
+}
+class graphbt::OperatorClass {
+  + operatorLiteral : str
+}
+class graphbt::OutputGUI {
+}
+class graphbt::OutputType {
+}
+class graphbt::Parameter {
+  + name : str
+  + type : str
+}
+class graphbt::Requirement {
+  + Description : str
+  + Id : str
+  + Key : str
+  + Requirement : str
+}
+class graphbt::RequirementList {
+  + projectId : str
+}
+class graphbt::SpecialEdge {
+  + destination : int
+  + type : str
+}
+class graphbt::StandardNode {
+  + behaviorRef : str
+  + componentRef : str
+  + label : str
+  + leaf : bool
+  + operator : str
+  + traceabilityLink : str
+  + traceabilityStatus : str
+}
+class graphbt::State {
+  + desc : str
+  + name : str
+  + ref : str
+}
+class graphbt::TraceabilityStatusClass {
+  + traceabilityStatusLiteral : str
+}
+GUI <|-- graphbt::InputGUI
+GUI <|-- graphbt::OutputGUI
+GUIImplementable <|-- graphbt::InputType
+GUIImplementable <|-- graphbt::OutputType
+Layout <|-- graphbt::Button
+Node <|-- graphbt::EmptyNode
+Node <|-- graphbt::StandardNode
+graphbt::Attribute "0..9999" --* "1..1" graphbt::Component : attributes32
+graphbt::MapInformation "1..1" --* "1..1" graphbt::State : attributes45
+graphbt::Attribute "0..9999" --* "1..1" graphbt::Library : attributes55
+graphbt::AuthorList "0..1" --* "1..1" graphbt::BEModel : authorList16
+graphbt::Author "0..9999" -- "1..1" graphbt::AuthorList : authors83
+graphbt::Behavior "0..9999" --* "1..1" graphbt::Component : behaviors41
+graphbt::Behavior "0..9999" --* "1..1" graphbt::Library : behaviors52
+graphbt::Edge "1..1" *-- "1..9999" graphbt::Link : childNode24
+graphbt::BEModel "1..1" *-- "1..1" graphbt::ComponentList : componentList1
+graphbt::Component "1..9999" --* "1..1" graphbt::ComponentList : components60
+graphbt::Edge "1..1" -- "0..1" graphbt::Node : container26
+graphbt::BEModel "1..1" *-- "1..1" graphbt::BehaviorTree : dbt0
+graphbt::Edge "0..1" --* "1..1" graphbt::Node : edge20
+graphbt::BEModel "1..1" -- "0..9999" graphbt::StandardNode : errorReversionNode11
+graphbt::Formula "0..9999" -- "1..1" graphbt::FormulaList : formula66
+graphbt::BEModel "1..1" *-- "1..1" graphbt::FormulaList : formulaList5
+graphbt::Libraries "1..1" *-- "0..9999" graphbt::Library : import76
+graphbt::Information "0..9999" --* "1..1" graphbt::MapInformation : info74
+graphbt::Component "1..1" -- "0..1" graphbt::State : initialState35
+graphbt::BEModel "1..1" *-- "0..1" graphbt::LayoutList : layoutList14
+graphbt::Layout "0..9999" --* "1..1" graphbt::LayoutList : layouts81
+graphbt::BEModel "1..1" *-- "1..1" graphbt::Libraries : libraries7
+graphbt::Library "1..1" *-- "0..9999" graphbt::MethodDeclaration : methods47
+graphbt::MethodDeclaration "1..1" *-- "0..9999" graphbt::Parameter : parameters79
+graphbt::StandardNode "0..1" -- "1..1" graphbt::StandardNode : parent30
+graphbt::Component "0..9999" -- "1..1" graphbt::Component : relatedTo39
+graphbt::BEModel "1..1" *-- "1..1" graphbt::RequirementList : requirementList3
+graphbt::Requirement "0..9999" --* "1..1" graphbt::RequirementList : requirements63
+graphbt::BEModel "1..1" -- "0..9999" graphbt::StandardNode : reversionNode9
+graphbt::BehaviorTree "1..1" -- "1..1" graphbt::Node : rootNode18
+graphbt::Link "1..1" -- "0..1" graphbt::Node : source71
+graphbt::Node "1..1" -- "0..1" graphbt::SpecialEdge : specialE22
+graphbt::Component "1..1" *-- "0..9999" graphbt::State : state33
+graphbt::Library "1..1" *-- "0..9999" graphbt::State : states49
+graphbt::Link "1..1" *-- "0..1" graphbt::Node : target68
+graphbt::Requirement "1..1" -- "0..9999" graphbt::StandardNode : traceabilityLink58
+graphbt::Component "1..1" *-- "0..9999" graphbt::Library : uses43
+@enduml

@@ -24,17 +24,17 @@ class petrinetDsl::Transaction {
   + name : str
 }
 petrinetDsl::AssureStatement "0..9999" --* "1..1" petrinetDsl::Transaction : assureStatements10
-petrinetDsl::Place "0..1" -- "1..1" petrinetDsl::AssureStatement : placeRef19
-petrinetDsl::TakeStatement "1..1" -- "0..1" petrinetDsl::Place : placeRef25
+petrinetDsl::AssureStatement "1..1" -- "0..1" petrinetDsl::Place : placeRef19
+petrinetDsl::Place "0..1" -- "1..1" petrinetDsl::TakeStatement : placeRef25
 petrinetDsl::Place "0..1" -- "1..1" petrinetDsl::PutStatement : placeRef31
-petrinetDsl::Place "0..9999" --* "1..1" petrinetDsl::PetriNet : places1
+petrinetDsl::PetriNet "1..1" *-- "0..9999" petrinetDsl::Place : places1
 petrinetDsl::PutStatement "0..9999" --* "1..1" petrinetDsl::Transaction : putStatements14
-petrinetDsl::Resource "0..1" -- "1..1" petrinetDsl::AssureStatement : resourceRef16
+petrinetDsl::AssureStatement "1..1" -- "0..1" petrinetDsl::Resource : resourceRef16
 petrinetDsl::Resource "0..1" -- "1..1" petrinetDsl::TakeStatement : resourceRef22
-petrinetDsl::Resource "0..1" -- "1..1" petrinetDsl::PutStatement : resourceRef28
+petrinetDsl::PutStatement "1..1" -- "0..1" petrinetDsl::Resource : resourceRef28
 petrinetDsl::Resource "0..1" -- "1..1" petrinetDsl::Storage : resourceRef7
-petrinetDsl::Resource "0..9999" --* "1..1" petrinetDsl::PetriNet : resources0
+petrinetDsl::PetriNet "1..1" *-- "0..9999" petrinetDsl::Resource : resources0
 petrinetDsl::Place "1..1" *-- "0..9999" petrinetDsl::Storage : storages5
-petrinetDsl::Transaction "1..1" *-- "0..9999" petrinetDsl::TakeStatement : takeStatements12
+petrinetDsl::TakeStatement "0..9999" --* "1..1" petrinetDsl::Transaction : takeStatements12
 petrinetDsl::PetriNet "1..1" *-- "0..9999" petrinetDsl::Transaction : transactions3
 @enduml

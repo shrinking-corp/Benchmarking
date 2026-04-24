@@ -154,10 +154,10 @@ Data <|-- simulink::LocalData
 Data <|-- simulink::OutputData
 InPort <|-- simulink::InputData
 OutPort <|-- simulink::OutputData
-PortBlock <|-- simulink::InPortBlock
-PortBlock <|-- simulink::OutPortBlock
 Port <|-- simulink::InPort
 Port <|-- simulink::OutPort
+PortBlock <|-- simulink::InPortBlock
+PortBlock <|-- simulink::OutPortBlock
 Reference <|-- simulink::BlockReference
 Reference <|-- simulink::ModelReference
 SimulinkElement <|-- simulink::Block
@@ -176,39 +176,39 @@ Vertex <|-- simulink::State
 simulink::ActionEntry "1..9999" --* "1..1" simulink::ActionTable : actionEntries53
 simulink::ActionTable "1..1" --* "1..1" simulink::TruthTable : actionTable45
 simulink::Block "0..1" -- "1..1" simulink::Port : block2
-simulink::ContainableStateflowElement "0..9999" --* "1..1" simulink::CompositeStateflowElement : children41
+simulink::CompositeStateflowElement "1..1" *-- "0..9999" simulink::ContainableStateflowElement : children41
 simulink::Condition "1..1" -- "1..1" simulink::DecisionEntry : condition57
-simulink::TruthTable "1..1" *-- "1..1" simulink::ConditionTable : conditionTable44
+simulink::ConditionTable "1..1" --* "1..1" simulink::TruthTable : conditionTable44
 simulink::Condition "1..9999" --* "1..1" simulink::ConditionTable : conditions51
-simulink::InPort "1..1" -- "0..1" simulink::Connection : connection4
+simulink::Connection "0..1" -- "1..1" simulink::InPort : connection4
 simulink::Connection "0..1" -- "1..1" simulink::OutPort : connection5
 simulink::Connection "0..9999" --* "1..1" simulink::SubSystem : connections9
 simulink::Data "0..9999" --* "1..1" simulink::TruthTable : data47
 simulink::Decision "1..1" *-- "1..9999" simulink::DecisionEntry : decisionEntries55
-simulink::Decision "1..9999" --* "1..1" simulink::ConditionTable : decisions49
-simulink::Vertex "1..1" -- "1..1" simulink::Transition : destination24
+simulink::ConditionTable "1..1" *-- "1..9999" simulink::Decision : decisions49
+simulink::Transition "1..1" -- "1..1" simulink::Vertex : destination24
 simulink::Action "0..9999" --* "1..1" simulink::State : duringActions19
 simulink::Action "0..9999" --* "1..1" simulink::State : entryActions18
 simulink::Action "0..9999" --* "1..1" simulink::State : exitActions21
-simulink::OutPort "0..1" -- "1..1" simulink::Connection : from12
+simulink::Connection "1..1" -- "0..1" simulink::OutPort : from12
 simulink::SFWGuard "0..1" --* "1..1" simulink::Transition : guard26
 simulink::Transition "1..9999" -- "1..1" simulink::Vertex : incomingTransitions15
-simulink::Vertex "1..1" -- "0..9999" simulink::Transition : outgoingTransitions16
-simulink::Port "0..9999" --* "1..1" simulink::Block : ownedPorts0
+simulink::Transition "0..9999" -- "1..1" simulink::Vertex : outgoingTransitions16
+simulink::Block "1..1" *-- "0..9999" simulink::Port : ownedPorts0
 simulink::Block "1..1" -- "0..1" simulink::SubSystem : parent1
 simulink::CompositeStateflowElement "0..1" -- "1..1" simulink::ContainableStateflowElement : parent43
-simulink::PortBlock "1..1" -- "0..1" simulink::Port : port10
-simulink::PortBlock "0..1" -- "1..1" simulink::Port : portBlock3
+simulink::Port "0..1" -- "1..1" simulink::PortBlock : port10
+simulink::Port "1..1" -- "0..1" simulink::PortBlock : portBlock3
 simulink::Transition "1..1" -- "0..1" simulink::Vertex : source23
 simulink::Block "0..1" -- "1..1" simulink::Reference : sourceBlock62
 simulink::Action "1..1" -- "0..1" simulink::State : stateDuring37
-simulink::State "0..1" -- "1..1" simulink::Action : stateEntry36
-simulink::State "0..1" -- "1..1" simulink::Action : stateExit39
+simulink::Action "1..1" -- "0..1" simulink::State : stateEntry36
+simulink::Action "1..1" -- "0..1" simulink::State : stateExit39
 simulink::Block "0..9999" --* "1..1" simulink::SubSystem : subBlocks7
-simulink::InPort "0..1" -- "1..1" simulink::Connection : to13
-simulink::Transition "0..1" -- "1..1" simulink::SFWGuard : transition32
-simulink::Transition "0..1" -- "1..1" simulink::Action : transition34
-simulink::Transition "0..1" -- "1..1" simulink::SFWTrigger : transition60
-simulink::Transition "1..1" *-- "0..1" simulink::SFWTrigger : trigger30
+simulink::Connection "1..1" -- "0..1" simulink::InPort : to13
+simulink::SFWGuard "1..1" -- "0..1" simulink::Transition : transition32
+simulink::Action "1..1" -- "0..1" simulink::Transition : transition34
+simulink::SFWTrigger "1..1" -- "0..1" simulink::Transition : transition60
+simulink::SFWTrigger "0..1" --* "1..1" simulink::Transition : trigger30
 simulink::Action "0..9999" --* "1..1" simulink::Transition : triggeredActions27
 @enduml

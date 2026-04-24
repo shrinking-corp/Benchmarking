@@ -52,16 +52,16 @@ Statement <|-- dot::AttributeStatement
 Statement <|-- dot::EdgeStatement
 Statement <|-- dot::NodeStatement
 Statement <|-- dot::Subgraph
-dot::EdgeStatement "1..1" *-- "0..9999" dot::Attribute : attributes12
+dot::Attribute "0..9999" --* "1..1" dot::EdgeStatement : attributes12
 dot::Attribute "0..9999" --* "1..1" dot::AttributeStatement : attributes20
 dot::Attribute "0..9999" --* "1..1" dot::NodeStatement : attributes4
 dot::EdgeStatement "1..1" *-- "0..9999" dot::EdgeTarget : edgeTargets10
 dot::Graph "0..9999" --* "1..1" dot::GraphvizModel : graphs0
 dot::Node "0..1" --* "1..1" dot::NodeStatement : node3
-dot::Port "0..1" --* "1..1" dot::Node : port6
-dot::Node "0..1" --* "1..1" dot::EdgeStatement : sourceNode8
+dot::Node "1..1" *-- "0..1" dot::Port : port6
+dot::EdgeStatement "1..1" *-- "0..1" dot::Node : sourceNode8
 dot::Graph "1..1" *-- "0..9999" dot::Statement : statements1
-dot::Subgraph "1..1" *-- "0..9999" dot::Statement : statements22
-dot::Subgraph "0..1" --* "1..1" dot::EdgeTarget : targetSubgraph15
-dot::Node "0..1" --* "1..1" dot::EdgeTarget : targetnode17
+dot::Statement "0..9999" --* "1..1" dot::Subgraph : statements22
+dot::EdgeTarget "1..1" *-- "0..1" dot::Subgraph : targetSubgraph15
+dot::EdgeTarget "1..1" *-- "0..1" dot::Node : targetnode17
 @enduml

@@ -97,20 +97,20 @@ Widget <|-- webapp::Text
 Widget <|-- webapp::Video
 webapp::Application "1..1" -- "1..1" webapp::Model : application12
 webapp::Application "1..1" -- "1..1" webapp::Collection : application20
-webapp::Router "1..1" -- "1..1" webapp::Application : application23
-webapp::Application "1..1" -- "1..1" webapp::AbstractView : application30
+webapp::Application "1..1" -- "1..1" webapp::Router : application23
+webapp::AbstractView "1..1" -- "1..1" webapp::Application : application30
 webapp::Attribute "0..9999" --* "1..1" webapp::Model : attributes7
-webapp::ModelView "1..1" -- "1..1" webapp::Collection : collection32
-webapp::Collection "0..9999" --* "1..1" webapp::Application : collections1
+webapp::Collection "1..1" -- "1..1" webapp::ModelView : collection32
+webapp::Application "1..1" *-- "0..9999" webapp::Collection : collections1
 webapp::Form "1..1" -- "1..1" webapp::FormWidget : form40
-webapp::FormWidget "1..9999" --* "1..1" webapp::Form : formWidgets39
-webapp::RouterMapping "1..9999" --* "1..1" webapp::Router : mappings22
-webapp::Model "1..1" -- "1..1" webapp::Collection : model18
+webapp::Form "1..1" *-- "1..9999" webapp::FormWidget : formWidgets39
+webapp::Router "1..1" *-- "1..9999" webapp::RouterMapping : mappings22
+webapp::Collection "1..1" -- "1..1" webapp::Model : model18
 webapp::Application "1..1" *-- "0..9999" webapp::Model : models5
 webapp::Model "1..1" *-- "0..9999" webapp::Operation : operations10
-webapp::Operation "0..9999" -- "1..1" webapp::AbstractView : operations27
-webapp::Parameter "0..9999" --* "1..1" webapp::Operation : parameters16
-webapp::Reference "0..9999" --* "1..1" webapp::Model : references8
+webapp::AbstractView "1..1" -- "0..9999" webapp::Operation : operations27
+webapp::Operation "1..1" *-- "0..9999" webapp::Parameter : parameters16
+webapp::Model "1..1" *-- "0..9999" webapp::Reference : references8
 webapp::Application "1..1" *-- "1..1" webapp::Router : router0
 webapp::Section "1..1" -- "1..1" webapp::Widget : section37
 webapp::Section "1..9999" --* "1..1" webapp::StaticView : sections34
@@ -118,5 +118,5 @@ webapp::Model "1..1" -- "1..1" webapp::Reference : type13
 webapp::AbstractView "1..1" -- "1..1" webapp::RouterMapping : view25
 webapp::Section "1..1" -- "1..1" webapp::StaticView : view36
 webapp::AbstractView "0..9999" --* "1..1" webapp::Application : views3
-webapp::Widget "1..9999" --* "1..1" webapp::Section : widgets35
+webapp::Section "1..1" *-- "1..9999" webapp::Widget : widgets35
 @enduml

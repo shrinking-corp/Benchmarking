@@ -1,0 +1,39 @@
+@startuml
+class Matter {
+}
+class school::Academy {
+  + name : str
+}
+class school::ClassRoom {
+  + number : int
+}
+class school::Math {
+}
+class school::Matter {
+}
+class school::Notation {
+  + value : int
+}
+class school::School {
+  + name : str
+  + rank : int
+}
+class school::Student {
+  + age : int
+  + name : str
+}
+class school::Teacher {
+  + name : str
+  + evaluate(student : any) : str
+}
+Matter <|-- school::Math
+school::ClassRoom "1..1" -- "1..9999" school::Student : children16
+school::Notation "0..9999" --* "1..1" school::Student : notations19
+school::ClassRoom "1..9999" --* "1..1" school::School : rooms5
+school::Academy "1..1" *-- "1..9999" school::School : schools3
+school::Academy "1..1" *-- "1..9999" school::Student : students1
+school::School "1..1" -- "1..9999" school::Student : students10
+school::ClassRoom "1..1" -- "1..1" school::Teacher : teacher13
+school::Academy "1..1" *-- "1..9999" school::Teacher : teachers0
+school::School "1..1" -- "1..9999" school::Teacher : teachers7
+@enduml

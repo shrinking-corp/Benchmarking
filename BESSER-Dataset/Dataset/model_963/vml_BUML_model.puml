@@ -104,34 +104,34 @@ class vml::Style {
 class vml::Table {
   + tableTitle : str
 }
-ChartElement <|-- vml::Bar
-ChartElement <|-- vml::Point
-ChartElement <|-- vml::StackBars
 Chart <|-- vml::BarChart
 Chart <|-- vml::LineChart
 Chart <|-- vml::Scatter
 Chart <|-- vml::StackBarChart
+ChartElement <|-- vml::Bar
+ChartElement <|-- vml::Point
+ChartElement <|-- vml::StackBars
+Diagram <|-- vml::Chart
+Diagram <|-- vml::Graph
+Diagram <|-- vml::Pie
 DiagramElement <|-- vml::ChartElement
 DiagramElement <|-- vml::Edge
 DiagramElement <|-- vml::Node
 DiagramElement <|-- vml::Slice
-Diagram <|-- vml::Chart
-Diagram <|-- vml::Graph
-Diagram <|-- vml::Pie
 GraphStyle <|-- vml::EdgeStyle
 GraphStyle <|-- vml::NodeStyle
 Style <|-- vml::ChartWithAxisStyle
 Style <|-- vml::ChartWithoutAxisStyle
 Style <|-- vml::GraphStyle
-vml::NodeStyle "1..1" -- "0..1" vml::Color : backgroundColor15
+vml::Color "0..1" -- "1..1" vml::NodeStyle : backgroundColor15
 vml::Bar "0..9999" --* "1..1" vml::BarChart : bars59
-vml::StackBars "1..1" *-- "0..9999" vml::Bar : bars66
+vml::Bar "0..9999" --* "1..1" vml::StackBars : bars66
 vml::Color "0..1" -- "1..1" vml::NodeStyle : borderColor22
-vml::NodeStyle "1..1" -- "0..1" vml::Color : borderHighlightColor25
+vml::Color "0..1" -- "1..1" vml::NodeStyle : borderHighlightColor25
 vml::Category "0..9999" --* "1..1" vml::StackBarChart : categories61
 vml::Category "0..1" -- "1..1" vml::StackBars : category63
 vml::Cell "0..9999" --* "1..1" vml::Row : cells7
-vml::Column "0..1" -- "1..1" vml::Cell : col9
+vml::Cell "1..1" -- "0..1" vml::Column : col9
 vml::Column "0..9999" --* "1..1" vml::Table : columns3
 vml::Diagram "0..9999" --* "1..1" vml::Model : diagrams0
 vml::Diagram "0..1" -- "1..1" vml::DiagramElement : diagrams38
@@ -139,23 +139,23 @@ vml::Diagram "0..9999" --* "1..1" vml::Diagram : digrams13
 vml::Edge "0..9999" --* "1..1" vml::Graph : edges48
 vml::Color "0..1" -- "1..1" vml::NodeStyle : foregroundColor16
 vml::Color "0..1" -- "1..1" vml::NodeStyle : highlightColor19
-vml::EdgeStyle "1..1" -- "0..1" vml::Color : highlightColor35
+vml::Color "0..1" -- "1..1" vml::EdgeStyle : highlightColor35
 vml::Edge "0..9999" -- "1..1" vml::Node : incoming53
 vml::Color "0..1" -- "1..1" vml::EdgeStyle : lineColor32
 vml::Graph "1..1" *-- "0..9999" vml::Node : nodes46
 vml::Edge "0..9999" -- "1..1" vml::Node : outgoing52
-vml::Point "0..9999" --* "1..1" vml::LineChart : points69
+vml::LineChart "1..1" *-- "0..9999" vml::Point : points69
 vml::Point "0..9999" --* "1..1" vml::Scatter : points70
-vml::Table "1..1" *-- "0..9999" vml::Row : rows5
-vml::Slice "0..9999" --* "1..1" vml::Pie : slices43
-vml::Node "0..1" -- "1..1" vml::EdgeStyle : source28
-vml::Node "0..1" -- "1..1" vml::Edge : source55
-vml::StackBars "0..9999" --* "1..1" vml::StackBarChart : stackBar60
-vml::Pie "1..1" *-- "0..1" vml::ChartWithoutAxisStyle : style44
-vml::GraphStyle "0..1" --* "1..1" vml::Graph : style50
+vml::Row "0..9999" --* "1..1" vml::Table : rows5
+vml::Pie "1..1" *-- "0..9999" vml::Slice : slices43
+vml::EdgeStyle "1..1" -- "0..1" vml::Node : source28
+vml::Edge "1..1" -- "0..1" vml::Node : source55
+vml::StackBarChart "1..1" *-- "0..9999" vml::StackBars : stackBar60
+vml::ChartWithoutAxisStyle "0..1" --* "1..1" vml::Pie : style44
+vml::Graph "1..1" *-- "0..1" vml::GraphStyle : style50
 vml::Chart "1..1" *-- "0..1" vml::ChartWithAxisStyle : style58
-vml::Table "0..1" -- "1..1" vml::DiagramElement : table40
+vml::DiagramElement "1..1" -- "0..1" vml::Table : table40
 vml::Model "1..1" *-- "0..9999" vml::Table : tables1
-vml::Node "0..1" -- "1..1" vml::EdgeStyle : target29
-vml::Node "0..1" -- "1..1" vml::Edge : target56
+vml::EdgeStyle "1..1" -- "0..1" vml::Node : target29
+vml::Edge "1..1" -- "0..1" vml::Node : target56
 @enduml

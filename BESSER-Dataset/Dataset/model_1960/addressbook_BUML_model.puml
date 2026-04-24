@@ -42,11 +42,11 @@ class addressbook::Relationship {
 }
 Contact <|-- addressbook::Company
 Contact <|-- addressbook::Person
-addressbook::Contact "0..9999" --* "1..1" addressbook::AddressBook : Contact9
-addressbook::Note "0..9999" --* "1..1" addressbook::Contact : Note7
+addressbook::AddressBook "1..1" *-- "0..9999" addressbook::Contact : Contact9
+addressbook::Contact "1..1" *-- "0..9999" addressbook::Note : Note7
 addressbook::Address "0..9999" --* "1..1" addressbook::Contact : address0
 addressbook::Contact "0..9999" -- "1..1" addressbook::Contact : inRelation2
-addressbook::Relationship "0..9999" -- "1..1" addressbook::Contact : isRelated5
+addressbook::Contact "1..1" -- "0..9999" addressbook::Relationship : isRelated5
 addressbook::Contact "1..1" *-- "0..9999" addressbook::Relationship : relates4
 addressbook::Contact "1..1" -- "1..1" addressbook::Relationship : source12
 addressbook::Contact "1..1" -- "1..1" addressbook::Relationship : target11

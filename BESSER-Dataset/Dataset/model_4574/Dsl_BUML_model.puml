@@ -86,7 +86,7 @@ Element <|-- dsl::Resource::Object
 Element <|-- dsl::SmallerElement
 Element <|-- dsl::SmallerEqualElement
 Element <|-- dsl::State::Object
-dsl::IfDoSpec "1..1" *-- "0..9999" dsl::Action : action22
+dsl::Action "0..9999" --* "1..1" dsl::IfDoSpec : action22
 dsl::Action "0..9999" --* "1..1" dsl::ElseIfDoSpec : action27
 dsl::Action "0..9999" --* "1..1" dsl::ElseDoSpec : action30
 dsl::AppMetaData "0..9999" --* "1..1" dsl::RunTimeModel : appData1
@@ -96,11 +96,11 @@ dsl::ElseDoSpec "0..1" --* "1..1" dsl::Specification : elseDo12
 dsl::ElseIfDoSpec "0..9999" --* "1..1" dsl::Specification : elseIfDo10
 dsl::EnvironmentMetaData "0..9999" --* "1..1" dsl::RunTimeModel : envData0
 dsl::Element "0..1" --* "1..1" dsl::NegateElement : exp111
-dsl::Specification "1..1" *-- "0..1" dsl::IfDoSpec : ifdo8
-dsl::ModuloElement "1..1" *-- "0..1" dsl::Element : left102
+dsl::IfDoSpec "0..1" --* "1..1" dsl::Specification : ifdo8
+dsl::Element "0..1" --* "1..1" dsl::ModuloElement : left102
 dsl::Element "0..1" --* "1..1" dsl::OrElement : left42
-dsl::Element "0..1" --* "1..1" dsl::AndElement : left47
-dsl::Element "0..1" --* "1..1" dsl::DiffElement : left52
+dsl::AndElement "1..1" *-- "0..1" dsl::Element : left47
+dsl::DiffElement "1..1" *-- "0..1" dsl::Element : left52
 dsl::Element "0..1" --* "1..1" dsl::EqualElement : left57
 dsl::Element "0..1" --* "1..1" dsl::LargerElement : left62
 dsl::Element "0..1" --* "1..1" dsl::LargerEqualElement : left67
@@ -109,28 +109,28 @@ dsl::Element "0..1" --* "1..1" dsl::SmallerEqualElement : left77
 dsl::Element "0..1" --* "1..1" dsl::PlusElement : left82
 dsl::Element "0..1" --* "1..1" dsl::MinusElement : left87
 dsl::Element "0..1" --* "1..1" dsl::MultiplicationElement : left92
-dsl::Element "0..1" --* "1..1" dsl::DivisionElement : left97
+dsl::DivisionElement "1..1" *-- "0..1" dsl::Element : left97
 dsl::Resource "0..1" -- "1..1" dsl::Trigger : resource14
-dsl::Resource "0..1" -- "1..1" dsl::Action : resource36
+dsl::Action "1..1" -- "0..1" dsl::Resource : resource36
 dsl::EnvironmentMetaData "1..1" *-- "0..9999" dsl::Resource : resources33
 dsl::Element "0..1" --* "1..1" dsl::ModuloElement : right104
-dsl::OrElement "1..1" *-- "0..1" dsl::Element : right44
-dsl::Element "0..1" --* "1..1" dsl::AndElement : right49
+dsl::Element "0..1" --* "1..1" dsl::OrElement : right44
+dsl::AndElement "1..1" *-- "0..1" dsl::Element : right49
 dsl::DiffElement "1..1" *-- "0..1" dsl::Element : right54
-dsl::EqualElement "1..1" *-- "0..1" dsl::Element : right59
+dsl::Element "0..1" --* "1..1" dsl::EqualElement : right59
 dsl::Element "0..1" --* "1..1" dsl::LargerElement : right64
-dsl::LargerEqualElement "1..1" *-- "0..1" dsl::Element : right69
+dsl::Element "0..1" --* "1..1" dsl::LargerEqualElement : right69
 dsl::Element "0..1" --* "1..1" dsl::SmallerElement : right74
-dsl::SmallerEqualElement "1..1" *-- "0..1" dsl::Element : right79
+dsl::Element "0..1" --* "1..1" dsl::SmallerEqualElement : right79
 dsl::Element "0..1" --* "1..1" dsl::PlusElement : right84
-dsl::MinusElement "1..1" *-- "0..1" dsl::Element : right89
+dsl::Element "0..1" --* "1..1" dsl::MinusElement : right89
 dsl::Element "0..1" --* "1..1" dsl::MultiplicationElement : right94
-dsl::Element "0..1" --* "1..1" dsl::DivisionElement : right99
-dsl::Specification "0..1" --* "1..1" dsl::AppMetaData : specification4
-dsl::Trigger "1..1" *-- "0..1" dsl::State : state17
-dsl::State "0..1" --* "1..1" dsl::Action : state39
+dsl::DivisionElement "1..1" *-- "0..1" dsl::Element : right99
+dsl::AppMetaData "1..1" *-- "0..1" dsl::Specification : specification4
+dsl::State "0..1" --* "1..1" dsl::Trigger : state17
+dsl::Action "1..1" *-- "0..1" dsl::State : state39
 dsl::Resource "1..1" *-- "0..9999" dsl::State : states3
-dsl::Trigger "0..9999" --* "1..1" dsl::Specification : trigger6
-dsl::Resource::Object "1..1" -- "0..1" dsl::Resource : value107
+dsl::Specification "1..1" *-- "0..9999" dsl::Trigger : trigger6
+dsl::Resource "0..1" -- "1..1" dsl::Resource::Object : value107
 dsl::State "0..1" --* "1..1" dsl::State::Object : value109
 @enduml

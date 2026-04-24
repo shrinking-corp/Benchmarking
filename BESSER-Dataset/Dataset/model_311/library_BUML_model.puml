@@ -26,12 +26,12 @@ class library::Writer {
 class library::WriterNameMap {
   + key : str
 }
-library::Writer "0..1" -- "1..1" library::Book : author0
-library::Writer "1..1" -- "0..9999" library::Book : books11
+library::Book "1..1" -- "0..1" library::Writer : author0
+library::Book "0..9999" -- "1..1" library::Writer : books11
 library::Book "0..9999" --* "1..1" library::Library : books2
 library::Book "0..9999" -- "1..1" library::Library : specialBooks4
 library::Writer "0..1" -- "1..1" library::WriterNameMap : value12
-library::MapOfDataTypes "0..9999" --* "1..1" library::Library : writerByIDMap9
-library::WriterNameMap "0..9999" --* "1..1" library::Library : writerByNameMap7
+library::Library "1..1" *-- "0..9999" library::MapOfDataTypes : writerByIDMap9
+library::Library "1..1" *-- "0..9999" library::WriterNameMap : writerByNameMap7
 library::Library "1..1" *-- "0..9999" library::Writer : writers1
 @enduml

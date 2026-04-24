@@ -47,19 +47,19 @@ RailwayElement <|-- railway::SwitchPosition
 RailwayElement <|-- railway::TrackElement
 TrackElement <|-- railway::Segment
 TrackElement <|-- railway::Switch
-railway::TrackElement "1..1" -- "0..9999" railway::TrackElement : connectsTo19
-railway::TrackElement "0..9999" --* "1..1" railway::Region : elements5
+railway::TrackElement "0..9999" -- "1..1" railway::TrackElement : connectsTo19
+railway::Region "1..1" *-- "0..9999" railway::TrackElement : elements5
 railway::Route "1..1" -- "0..1" railway::Semaphore : entry11
-railway::Semaphore "0..1" -- "1..1" railway::Route : exit13
-railway::SwitchPosition "0..9999" --* "1..1" railway::Route : follows7
+railway::Route "1..1" -- "0..1" railway::Semaphore : exit13
+railway::Route "1..1" *-- "0..9999" railway::SwitchPosition : follows7
 railway::Sensor "0..9999" -- "1..1" railway::TrackElement : monitoredBy17
 railway::Sensor "1..1" -- "0..9999" railway::TrackElement : monitors16
-railway::SwitchPosition "0..9999" -- "1..1" railway::Switch : positions23
+railway::Switch "1..1" -- "0..9999" railway::SwitchPosition : positions23
 railway::RailwayContainer "1..1" *-- "0..9999" railway::Region : regions1
-railway::Sensor "2..9999" -- "1..1" railway::Route : requires8
+railway::Route "1..1" -- "2..9999" railway::Sensor : requires8
 railway::Route "0..1" -- "1..1" railway::SwitchPosition : route25
-railway::Route "0..9999" --* "1..1" railway::RailwayContainer : routes0
-railway::Semaphore "0..9999" --* "1..1" railway::Segment : semaphores21
-railway::Sensor "0..9999" --* "1..1" railway::Region : sensors3
-railway::SwitchPosition "1..1" -- "0..1" railway::Switch : target26
+railway::RailwayContainer "1..1" *-- "0..9999" railway::Route : routes0
+railway::Segment "1..1" *-- "0..9999" railway::Semaphore : semaphores21
+railway::Region "1..1" *-- "0..9999" railway::Sensor : sensors3
+railway::Switch "0..1" -- "1..1" railway::SwitchPosition : target26
 @enduml

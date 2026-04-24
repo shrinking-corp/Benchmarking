@@ -1,0 +1,183 @@
+@startuml
+class Column {
+}
+class ColumnConstraint {
+}
+class ColumnMapping {
+}
+enum DataType {
+  BLOB
+  INTEGER
+  NULL
+  REAL
+  TEXT
+}
+class Expression {
+}
+class Index {
+}
+class IndexedColumn {
+}
+class NameProvider {
+}
+class StringToColumnMappingEntryMap {
+}
+class StringToTableMappingEntryMap {
+}
+class Table {
+}
+class TableConstraint {
+}
+class TableMapping {
+}
+class Trigger {
+}
+class View {
+}
+class index::model::Database {
+}
+class model::Database {
+}
+class model::DatabaseVersion {
+}
+class model::DatabaseVersions {
+  + fileName : str
+  + packageName : str
+  + createVersion() : str
+  + getFirstVersion() : str
+  + getLastVersion() : str
+}
+class model::column::CheckColumnConstraint {
+}
+class model::column::Column {
+  + type : str
+}
+abstract class model::column::ColumnConstraint {
+  + name : str
+}
+class model::column::DefaultExpressionValueColumnConstraint {
+}
+class model::column::DefaultIntegerValueColumnConstraint {
+}
+class model::column::DefaultRealValueColumnConstraint {
+}
+class model::column::DefaultStringValueColumnConstraint {
+}
+abstract class model::column::DefaultValueColumnConstraint {
+}
+class model::column::ForeignKeyColumnConstraint {
+}
+class model::column::IndexedColumn {
+}
+class model::column::NotNullColumnConstraint {
+}
+class model::column::PrimaryKeyColumnConstraint {
+}
+class model::column::UniqueColumnConstraint {
+}
+class model::common::ColumnMapping {
+  + entries() : void
+  + getAllCurrent() : void
+  + getAllPrevious() : void
+  + getCurrent(previous : any) : str
+  + getPrevious(current : any) : str
+  + put(current : any, previous : any) : void
+}
+class model::common::MappingEntry {
+  + current : str
+  + previous : str
+}
+abstract class model::common::NameProvider {
+  + name : str
+}
+class model::common::StringToColumnMappingEntryMap {
+  + key : str
+}
+class model::common::StringToTableMappingEntryMap {
+  + key : str
+}
+class model::common::TableMapping {
+  + entries() : void
+  + getAllCurrent() : void
+  + getAllPrevious() : void
+  + getCurrent(previous : any) : str
+  + getPrevious(current : any) : str
+  + put(current : any, previous : any) : void
+}
+abstract class model::expression::Expression {
+}
+abstract class model::index::Index {
+}
+class model::table::CheckTableConstraint {
+}
+class model::table::ForeignKeyTableConstraint {
+}
+class model::table::PrimaryKeyTableConstraint {
+}
+class model::table::Table {
+}
+abstract class model::table::TableConstraint {
+  + name : str
+}
+class model::table::UniqueTableConstraint {
+}
+class model::trigger::Trigger {
+}
+class model::view::View {
+}
+class table::model::Database {
+}
+class trigger::model::Database {
+}
+class view::model::Database {
+}
+ColumnConstraint <|-- model::column::CheckColumnConstraint
+ColumnConstraint <|-- model::column::DefaultValueColumnConstraint
+ColumnConstraint <|-- model::column::ForeignKeyColumnConstraint
+ColumnConstraint <|-- model::column::NotNullColumnConstraint
+ColumnConstraint <|-- model::column::PrimaryKeyColumnConstraint
+ColumnConstraint <|-- model::column::UniqueColumnConstraint
+NameProvider <|-- model::Database
+NameProvider <|-- model::column::Column
+NameProvider <|-- model::table::Table
+NameProvider <|-- model::trigger::Trigger
+NameProvider <|-- model::view::View
+TableConstraint <|-- model::table::CheckTableConstraint
+TableConstraint <|-- model::table::ForeignKeyTableConstraint
+TableConstraint <|-- model::table::PrimaryKeyTableConstraint
+TableConstraint <|-- model::table::UniqueTableConstraint
+Column "1..1" -- "1..1" model::column::IndexedColumn : column48
+Column "1..1" -- "1..1" model::column::ColumnConstraint : column50
+ColumnMapping "0..1" --* "1..1" model::DatabaseVersion : columnMapping10
+Column "0..9999" --* "1..1" model::table::Table : columns25
+IndexedColumn "1..9999" --* "1..1" model::table::PrimaryKeyTableConstraint : columns31
+IndexedColumn "1..9999" --* "1..1" model::table::UniqueTableConstraint : columns32
+Column "1..9999" -- "1..1" model::table::ForeignKeyTableConstraint : columns35
+TableConstraint "0..9999" --* "1..1" model::table::Table : constraints26
+ColumnConstraint "0..9999" --* "1..1" model::column::Column : constraints46
+StringToTableMappingEntryMap "0..9999" --* "1..1" model::common::TableMapping : curr2entryMap17
+StringToColumnMappingEntryMap "0..9999" --* "1..1" model::common::ColumnMapping : curr2entryMap21
+model::Database "1..1" --* "1..1" model::DatabaseVersion : database1
+model::table::Table "1..1" -- "1..1" table::model::Database : database24
+model::view::View "1..1" -- "1..1" view::model::Database : database60
+index::model::Database "1..1" -- "1..1" model::index::Index : database62
+model::trigger::Trigger "1..1" -- "1..1" trigger::model::Database : database64
+Expression "1..1" --* "1..1" model::table::CheckTableConstraint : expression34
+Expression "1..1" -- "1..1" model::column::CheckColumnConstraint : expression58
+Column "1..1" -- "1..1" model::column::ForeignKeyColumnConstraint : foreignColumn55
+Column "1..9999" -- "1..1" model::table::ForeignKeyTableConstraint : foreignColumns40
+Table "1..1" -- "1..1" model::table::ForeignKeyTableConstraint : foreignTable37
+Table "1..1" -- "1..1" model::column::ForeignKeyColumnConstraint : foreignTable53
+Index "0..9999" --* "1..1" model::Database : indexes15
+model::DatabaseVersion "1..1" -- "0..1" model::DatabaseVersion : nextVersion6
+StringToTableMappingEntryMap "0..9999" --* "1..1" model::common::TableMapping : prev2entryMap16
+StringToColumnMappingEntryMap "0..9999" --* "1..1" model::common::ColumnMapping : prev2entryMap20
+model::DatabaseVersion "1..1" -- "0..1" model::DatabaseVersion : previousVersion4
+Table "1..1" -- "1..1" model::table::TableConstraint : table28
+Table "1..1" -- "1..1" model::column::Column : table43
+TableMapping "0..1" --* "1..1" model::DatabaseVersion : tableMapping8
+Table "0..9999" --* "1..1" model::Database : tables12
+Trigger "0..9999" --* "1..1" model::Database : triggers14
+model::DatabaseVersion "1..9999" --* "1..1" model::DatabaseVersions : versions0
+View "0..9999" --* "1..1" model::Database : views13
+@enduml

@@ -58,28 +58,28 @@ abstract class oml::StructuralFeature {
   + isMany : str
 }
 AnnotatedElement <|-- oml::NamedElement
+Class <|-- oml::ExternalClass
 Classifier <|-- oml::Class
 Classifier <|-- oml::Datatype
-Class <|-- oml::ExternalClass
 Feature <|-- oml::Operation
 Feature <|-- oml::StructuralFeature
 NamedElement <|-- oml::Feature
 NamedElement <|-- oml::PackageableElement
 NamedElement <|-- oml::Parameter
+Package <|-- oml::Model
 PackageableElement <|-- oml::Classifier
 PackageableElement <|-- oml::Package
-Package <|-- oml::Model
 StructuralFeature <|-- oml::Attribute
 StructuralFeature <|-- oml::Reference
-oml::Annotation "0..9999" --* "1..1" oml::AnnotatedElement : annotations1
-oml::PackageableElement "0..9999" --* "1..1" oml::Package : contents2
+oml::AnnotatedElement "1..1" *-- "0..9999" oml::Annotation : annotations1
+oml::Package "1..1" *-- "0..9999" oml::PackageableElement : contents2
 oml::Class "1..1" -- "0..9999" oml::Class : extendedBy6
-oml::Class "0..1" -- "1..1" oml::Class : extends4
-oml::Feature "0..9999" --* "1..1" oml::Class : features8
-oml::Parameter "1..1" -- "0..1" oml::Operation : owner16
+oml::Class "1..1" -- "0..1" oml::Class : extends4
+oml::Class "1..1" *-- "0..9999" oml::Feature : features8
+oml::Operation "0..1" -- "1..1" oml::Parameter : owner16
 oml::Class "0..1" -- "1..1" oml::Feature : owner9
 oml::Package "0..1" -- "1..1" oml::PackageableElement : package0
-oml::Parameter "0..9999" --* "1..1" oml::Operation : parameters12
+oml::Operation "1..1" *-- "0..9999" oml::Parameter : parameters12
 oml::Classifier "0..1" -- "1..1" oml::Feature : type11
 oml::Classifier "0..1" -- "1..1" oml::Parameter : type14
 @enduml

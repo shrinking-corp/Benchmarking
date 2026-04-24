@@ -1,0 +1,58 @@
+@startuml
+class AttributeValue {
+}
+class fc::Attribute {
+}
+abstract class fc::AttributeValue {
+  + comment : str
+  + description : str
+  + id : str
+  + name : str
+}
+class fc::BooleanValue {
+  + value : bool
+}
+class fc::DoubleValue {
+  + value : float
+}
+class fc::Feature {
+}
+class fc::FeatureConfiguration {
+  + comment : str
+  + description : str
+  + name : str
+  + version : str
+  + getSelectionsById(id : any) : void
+}
+class fc::FeatureModel {
+}
+class fc::IntegerValue {
+  + value : int
+}
+class fc::Selection {
+  + comment : str
+  + description : str
+  + enabled : bool
+  + id : str
+  + name : str
+  + present : bool
+  + root : bool
+}
+class fc::StringValue {
+  + value : str
+}
+AttributeValue <|-- fc::BooleanValue
+AttributeValue <|-- fc::DoubleValue
+AttributeValue <|-- fc::IntegerValue
+AttributeValue <|-- fc::StringValue
+fc::Attribute "1..1" -- "1..1" fc::AttributeValue : attribute19
+fc::Feature "1..1" -- "1..1" fc::Selection : feature15
+fc::FeatureConfiguration "1..1" -- "1..1" fc::Selection : featureConfiguration12
+fc::FeatureConfiguration "1..1" -- "0..1" fc::FeatureModel : featureModel0
+fc::FeatureConfiguration "1..1" *-- "1..1" fc::FeatureModel : featureModelCopy1
+fc::Selection "1..1" -- "0..1" fc::Selection : parent7
+fc::FeatureConfiguration "1..1" *-- "1..1" fc::Selection : root4
+fc::AttributeValue "1..1" -- "1..1" fc::Selection : selection17
+fc::Selection "1..1" *-- "0..9999" fc::Selection : selections10
+fc::AttributeValue "0..9999" --* "1..1" fc::Selection : values8
+@enduml

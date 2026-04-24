@@ -19,12 +19,12 @@ class university::University {
   + name : str
   + numberOfStudents : int
 }
-university::University "1..1" *-- "0..9999" university::Certificate : certificates8
-university::Course "0..1" -- "1..1" university::Certificate : course13
+university::Certificate "0..9999" --* "1..1" university::University : certificates8
+university::Certificate "1..1" -- "0..1" university::Course : course13
 university::Certificate "0..9999" -- "1..1" university::Course : courseCertificates1
 university::Course "0..9999" -- "1..1" university::Professor : courses2
-university::University "1..1" *-- "0..9999" university::Course : courses4
-university::Professor "0..1" -- "1..1" university::Course : professor0
+university::Course "0..9999" --* "1..1" university::University : courses4
+university::Course "1..1" -- "0..1" university::Professor : professor0
 university::Professor "0..9999" --* "1..1" university::University : professors3
 university::Certificate "1..1" -- "0..1" university::Student : student12
 university::Certificate "0..9999" -- "1..1" university::Student : studentCertificates10

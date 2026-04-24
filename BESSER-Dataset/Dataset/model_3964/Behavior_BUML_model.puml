@@ -97,8 +97,8 @@ class behavior::Operation {
 }
 abstract class behavior::RedefinableElement {
 }
-BehavioralFeature <|-- behavior::Operation
 Behavior <|-- behavior::Interaction
+BehavioralFeature <|-- behavior::Operation
 BehavioredClassifier <|-- behavior::Class
 BehavioredClassifier <|-- behavior::Object
 Class <|-- behavior::Behavior
@@ -130,51 +130,51 @@ OccurrenceSpecification <|-- behavior::ExecutionOccurrenceSpecification
 OccurrenceSpecification <|-- behavior::MessageOccurrenceSpecification
 RedefinableElement <|-- behavior::Feature
 behavior::BehavioredClassifier "1..1" -- "1..1" behavior::Lifeline : actor46
-behavior::OccurrenceSpecification "1..1" -- "1..1" behavior::GeneralOrdering : after89
-behavior::Element "0..9999" -- "1..1" behavior::Comment : annotatedElement64
+behavior::GeneralOrdering "1..1" -- "1..1" behavior::OccurrenceSpecification : after89
+behavior::Comment "1..1" -- "0..9999" behavior::Element : annotatedElement64
 behavior::GeneralOrdering "1..1" -- "1..1" behavior::OccurrenceSpecification : before88
-behavior::Lifeline "1..1" *-- "0..9999" behavior::BehaviorExecutionSpecification : behaviorExecution47
+behavior::BehaviorExecutionSpecification "0..9999" --* "1..1" behavior::Lifeline : behaviorExecution47
 behavior::Behavior "0..1" -- "1..1" behavior::BehavioredClassifier : classifierBehavior6
 behavior::Connector "0..1" -- "1..1" behavior::Message : connector40
-behavior::BehavioredClassifier "0..1" -- "1..1" behavior::Behavior : context1
+behavior::Behavior "1..1" -- "0..1" behavior::BehavioredClassifier : context1
 behavior::Behavior "0..9999" -- "1..1" behavior::Connector : contract78
 behavior::InteractionFragment "1..1" -- "0..9999" behavior::Lifeline : covered59
-behavior::Lifeline "1..1" -- "0..9999" behavior::InteractionFragment : coveredBy42
+behavior::InteractionFragment "0..9999" -- "1..1" behavior::Lifeline : coveredBy42
 behavior::DestructionEvent "0..9999" --* "1..1" behavior::Interaction : destructionevent52
 behavior::Interaction "0..1" -- "1..1" behavior::InteractionFragment : enclosingInteraction61
-behavior::Lifeline "1..1" -- "1..1" behavior::DestructionEvent : end81
+behavior::DestructionEvent "1..1" -- "1..1" behavior::Lifeline : end81
 behavior::DestructionEvent "1..1" -- "1..1" behavior::Lifeline : endby45
 behavior::Event "1..1" -- "1..1" behavior::MessageOccurrenceSpecification : event85
-behavior::ExecutionSpecification "1..1" -- "1..1" behavior::ExecutionOccurrenceSpecification : execution86
-behavior::Feature "0..9999" -- "1..1" behavior::Classifier : feature20
-behavior::Feature "1..1" -- "0..9999" behavior::Classifier : featuringClassifier67
+behavior::ExecutionOccurrenceSpecification "1..1" -- "1..1" behavior::ExecutionSpecification : execution86
+behavior::Classifier "1..1" -- "0..9999" behavior::Feature : feature20
+behavior::Classifier "0..9999" -- "1..1" behavior::Feature : featuringClassifier67
 behavior::ExecutionSpecification "1..1" -- "1..1" behavior::OccurrenceSpecification : finish72
-behavior::InteractionFragment "0..9999" --* "1..1" behavior::Interaction : fragment48
+behavior::Interaction "1..1" *-- "0..9999" behavior::InteractionFragment : fragment48
 behavior::Classifier "0..9999" -- "1..1" behavior::Classifier : general18
-behavior::InteractionFragment "1..1" *-- "0..1" behavior::GeneralOrdering : generalOrdering63
-behavior::Lifeline "1..1" -- "1..1" behavior::BehavioredClassifier : include12
+behavior::GeneralOrdering "0..1" --* "1..1" behavior::InteractionFragment : generalOrdering63
+behavior::BehavioredClassifier "1..1" -- "1..1" behavior::Lifeline : include12
 behavior::Classifier "1..1" -- "0..9999" behavior::NamedElement : inheritedMember13
-behavior::Message "1..1" -- "1..1" behavior::Interaction : interaction35
+behavior::Interaction "1..1" -- "1..1" behavior::Message : interaction35
 behavior::Interaction "1..1" -- "1..1" behavior::Lifeline : interaction43
-behavior::Interaction "0..1" -- "1..1" behavior::DestructionEvent : interaction83
-behavior::Lifeline "0..9999" --* "1..1" behavior::Interaction : lifeline54
-behavior::Message "0..9999" --* "1..1" behavior::Interaction : message57
+behavior::DestructionEvent "1..1" -- "0..1" behavior::Interaction : interaction83
+behavior::Interaction "1..1" *-- "0..9999" behavior::Lifeline : lifeline54
+behavior::Interaction "1..1" *-- "0..9999" behavior::Message : message57
 behavior::Message "0..1" -- "1..1" behavior::MessageEnd : message75
 behavior::Behavior "0..9999" -- "1..1" behavior::BehavioralFeature : method0
 behavior::Class "1..1" -- "0..9999" behavior::Classifier : nestedClassifier21
-behavior::Interaction "1..1" *-- "0..9999" behavior::BehavioredClassifier : object50
+behavior::BehavioredClassifier "0..9999" --* "1..1" behavior::Interaction : object50
 behavior::Behavior "0..9999" --* "1..1" behavior::BehavioredClassifier : ownedBehavior9
 behavior::Comment "0..9999" --* "1..1" behavior::Element : ownedComment28
 behavior::Element "0..9999" -- "1..1" behavior::Element : ownedElement33
 behavior::Element "0..1" -- "1..1" behavior::Element : owner30
-behavior::MessageEnd "0..1" -- "1..1" behavior::Message : receiveEvent36
-behavior::RedefinableElement "1..1" -- "0..9999" behavior::RedefinableElement : redefinableELement26
-behavior::Behavior "1..1" -- "0..9999" behavior::Behavior : redefinedBehavior4
+behavior::Message "1..1" -- "0..1" behavior::MessageEnd : receiveEvent36
+behavior::RedefinableElement "0..9999" -- "1..1" behavior::RedefinableElement : redefinableELement26
+behavior::Behavior "0..9999" -- "1..1" behavior::Behavior : redefinedBehavior4
 behavior::Classifier "0..9999" -- "1..1" behavior::Classifier : redefinedClassifier15
 behavior::Classifier "0..9999" -- "1..1" behavior::RedefinableElement : redefinitionContext23
-behavior::MessageEnd "0..1" -- "1..1" behavior::Message : sendEvent37
-behavior::BehavioralFeature "0..1" -- "1..1" behavior::Behavior : specification2
-behavior::OccurrenceSpecification "1..1" -- "1..1" behavior::ExecutionSpecification : start71
+behavior::Message "1..1" -- "0..1" behavior::MessageEnd : sendEvent37
+behavior::Behavior "1..1" -- "0..1" behavior::BehavioralFeature : specification2
+behavior::ExecutionSpecification "1..1" -- "1..1" behavior::OccurrenceSpecification : start71
 behavior::GeneralOrdering "0..9999" -- "1..1" behavior::OccurrenceSpecification : toAfter68
 behavior::GeneralOrdering "0..9999" -- "1..1" behavior::OccurrenceSpecification : toBefore69
 @enduml

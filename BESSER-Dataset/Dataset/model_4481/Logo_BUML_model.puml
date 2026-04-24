@@ -107,23 +107,23 @@ Primitive <|-- Logo::Back
 Primitive <|-- Logo::Forward
 Primitive <|-- Logo::Left
 Primitive <|-- Logo::Right
-Logo::Left "1..1" *-- "1..1" Logo::Expression : angle4
+Logo::Expression "1..1" --* "1..1" Logo::Left : angle4
 Logo::Expression "1..1" --* "1..1" Logo::Right : angle6
 Logo::Block "0..1" --* "1..1" Logo::If : body12
-Logo::While "1..1" *-- "0..1" Logo::Block : body19
+Logo::Block "0..1" --* "1..1" Logo::While : body19
 Logo::Block "0..1" --* "1..1" Logo::Procedure : body29
 Logo::Expression "1..1" --* "1..1" Logo::If : condition13
-Logo::Expression "1..1" --* "1..1" Logo::Assignation : expr37
-Logo::VarDecl "1..1" *-- "1..1" Logo::Expression : expr8
+Logo::Assignation "1..1" *-- "1..1" Logo::Expression : expr37
+Logo::Expression "1..1" --* "1..1" Logo::VarDecl : expr8
 Logo::Expression "1..1" --* "1..1" Logo::While : guard21
 Logo::Instruction "0..9999" --* "1..1" Logo::LogoProgram : instructions0
-Logo::Instruction "0..9999" --* "1..1" Logo::Block : instructions16
+Logo::Block "1..1" *-- "0..9999" Logo::Instruction : instructions16
 Logo::BinaryExpr "1..1" *-- "1..1" Logo::Expression : leftExpr24
 Logo::VarDecl "1..1" -- "1..1" Logo::VarReference : ref10
-Logo::ProcedureCall "1..1" -- "0..1" Logo::Procedure : ref33
-Logo::VarDecl "1..1" -- "1..1" Logo::Assignation : ref35
+Logo::Procedure "0..1" -- "1..1" Logo::ProcedureCall : ref33
+Logo::Assignation "1..1" -- "1..1" Logo::VarDecl : ref35
 Logo::Literal "0..1" --* "1..1" Logo::Procedure : returnType31
-Logo::Expression "1..1" --* "1..1" Logo::BinaryExpr : rightExpr26
-Logo::Forward "1..1" *-- "1..1" Logo::Expression : steps1
-Logo::Expression "1..1" --* "1..1" Logo::Back : steps2
+Logo::BinaryExpr "1..1" *-- "1..1" Logo::Expression : rightExpr26
+Logo::Expression "1..1" --* "1..1" Logo::Forward : steps1
+Logo::Back "1..1" *-- "1..1" Logo::Expression : steps2
 @enduml

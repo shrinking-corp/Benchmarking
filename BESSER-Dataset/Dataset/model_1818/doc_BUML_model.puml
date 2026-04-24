@@ -1,0 +1,170 @@
+@startuml
+class Author {
+}
+class BookContainer {
+}
+class BookSection {
+}
+class Container {
+}
+class Content {
+}
+class Copyright {
+}
+class ExtensionMappingEntry {
+}
+class Import {
+}
+class Map {
+}
+class MapContainer {
+}
+class MapElement {
+}
+class NameRule {
+}
+enum NumberingStyle {
+  ARABIC
+  LATIN
+  ROMAN
+}
+class PatternRule {
+}
+class ResourceFactory {
+}
+enum RuleResult {
+  ACCEPT
+  REJECT
+}
+class Section {
+}
+class builder::PropertyEntry {
+}
+class doc::Test {
+}
+class doc::book::Book {
+  + copyrightMarker : str
+  + copyrightText : str
+  + title : str
+  + version : str
+}
+abstract class doc::book::BookContainer {
+  + numberingStyle : str
+}
+class doc::book::BookSection {
+  + fullNumber : str
+  + id : str
+  + number : int
+  + title : str
+}
+class doc::builder::BookBuilder {
+  + copyrightMarker : str
+  + license : str
+  + title : str
+  + version : str
+}
+class doc::builder::PropertyEntry {
+  + key : str
+  + value : str
+}
+class doc::fragment::Author {
+  + id : str
+  + name : str
+  + ref : str
+}
+abstract class doc::fragment::Container {
+  + content : str
+}
+abstract class doc::fragment::Content {
+}
+class doc::fragment::Copyright {
+  + year : int
+}
+class doc::fragment::Fragment {
+}
+class doc::fragment::PlainTextContent {
+  + value : str
+}
+abstract class doc::fragment::Section {
+  + title : str
+}
+abstract class doc::map::ContentGenerator {
+}
+class doc::map::ExcludePatternRule {
+  + checkRule(name : any) : str
+}
+class doc::map::ExtensionMappingEntry {
+  + extension : str
+}
+class doc::map::Feature {
+  + createSection : bool
+  + featureId : str
+}
+class doc::map::File {
+  + path : str
+}
+abstract class doc::map::Import {
+}
+class doc::map::IncludePatternRule {
+  + checkRule(name : any) : str
+}
+class doc::map::Map {
+  + visit(visitor : any) : void
+}
+abstract class doc::map::MapContainer {
+  + numberingStyle : str
+}
+abstract class doc::map::MapElement {
+  + visit(visitor : any) : void
+}
+class doc::map::MapSection {
+  + id : str
+  + title : str
+}
+abstract class doc::map::NameRule {
+  + checkRule(name : any) : str
+}
+abstract class doc::map::PatternRule {
+  + pattern : str
+}
+class doc::map::ResourceFactory {
+  + className : str
+}
+class fragment::Content {
+}
+class map::MapContainer {
+}
+class map::MapElement {
+}
+BookContainer <|-- doc::book::Book
+BookContainer <|-- doc::book::BookSection
+Container <|-- doc::fragment::Fragment
+Container <|-- doc::fragment::Section
+Content <|-- doc::fragment::PlainTextContent
+Import <|-- doc::map::Feature
+Import <|-- doc::map::File
+Map <|-- doc::builder::BookBuilder
+MapContainer <|-- doc::map::Map
+MapElement <|-- doc::map::Import
+NameRule <|-- doc::map::PatternRule
+PatternRule <|-- doc::map::ExcludePatternRule
+PatternRule <|-- doc::map::IncludePatternRule
+fragment::Content <|-- doc::map::ContentGenerator
+map::MapContainer <|-- doc::map::MapSection
+map::MapElement <|-- doc::map::ContentGenerator
+map::MapElement <|-- doc::map::MapSection
+Content "0..9999" --* "1..1" doc::fragment::Container : anyContent4
+Author "1..9999" -- "1..1" doc::fragment::Copyright : author7
+Author "0..9999" --* "1..1" doc::builder::BookBuilder : authors16
+Author "0..9999" --* "1..1" doc::book::Book : authors8
+Content "0..9999" --* "1..1" doc::book::BookContainer : content12
+Copyright "0..9999" --* "1..1" doc::book::Book : copyright10
+Copyright "0..9999" --* "1..1" doc::builder::BookBuilder : copyright18
+MapElement "0..9999" --* "1..1" doc::map::MapContainer : elements3
+ExtensionMappingEntry "0..9999" --* "1..1" doc::map::Map : extensionMappings0
+ResourceFactory "1..1" --* "1..1" doc::map::ExtensionMappingEntry : factory2
+NameRule "0..9999" --* "1..1" doc::map::Feature : fileNameRules1
+builder::PropertyEntry "0..9999" --* "1..1" doc::builder::BookBuilder : properties21
+Section "0..9999" --* "1..1" doc::fragment::Container : section5
+BookSection "0..9999" --* "1..1" doc::book::BookContainer : sections14
+@enduml

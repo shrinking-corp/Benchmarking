@@ -126,22 +126,22 @@ abstract class smm::SmmRelationship {
   + getTo() : SmmElement
 }
 BinaryMeasure <|-- smm::RatioMeasure
-DimensionalMeasurement <|-- smm::AggregatedMeasurement
-DimensionalMeasurement <|-- smm::CollectiveMeasurement
-DimensionalMeasurement <|-- smm::DirectMeasurement
-DimensionalMeasurement <|-- smm::NamedMeasurement
-DimensionalMeasurement <|-- smm::ReScaledMeasurement
 DimensionalMeasure <|-- smm::BinaryMeasure
 DimensionalMeasure <|-- smm::CollectiveMeasure
 DimensionalMeasure <|-- smm::DirectMeasure
 DimensionalMeasure <|-- smm::NamedMeasure
 DimensionalMeasure <|-- smm::RescaledMeasure
-DirectMeasurement <|-- smm::Count
+DimensionalMeasurement <|-- smm::AggregatedMeasurement
+DimensionalMeasurement <|-- smm::CollectiveMeasurement
+DimensionalMeasurement <|-- smm::DirectMeasurement
+DimensionalMeasurement <|-- smm::NamedMeasurement
+DimensionalMeasurement <|-- smm::ReScaledMeasurement
 DirectMeasure <|-- smm::Counting
-Measurement <|-- smm::DimensionalMeasurement
-Measurement <|-- smm::Grade
+DirectMeasurement <|-- smm::Count
 Measure <|-- smm::DimensionalMeasure
 Measure <|-- smm::Ranking
+Measurement <|-- smm::DimensionalMeasurement
+Measurement <|-- smm::Grade
 SmmElement <|-- smm::Annotation
 SmmElement <|-- smm::Attribute
 SmmElement <|-- smm::Category
@@ -156,45 +156,45 @@ SmmElement <|-- smm::SmmRelationship
 SmmRelationship <|-- smm::CategoryRelationship
 SmmRelationship <|-- smm::MeasureRelationship
 SmmRelationship <|-- smm::MeasurementRelationship
-smm::SmmElement "1..1" *-- "0..9999" smm::Annotation : annotation2
+smm::Annotation "0..9999" --* "1..1" smm::SmmElement : annotation2
 smm::Attribute "0..9999" --* "1..1" smm::SmmElement : attribute1
 smm::BinaryMeasure "1..1" -- "1..1" smm::DimensionalMeasure : baseMeasure157
-smm::DimensionalMeasure "1..1" -- "1..1" smm::BinaryMeasure : baseMeasure258
-smm::DimensionalMeasure "1..1" -- "1..1" smm::CollectiveMeasure : baseMeasure61
+smm::BinaryMeasure "1..1" -- "1..1" smm::DimensionalMeasure : baseMeasure258
+smm::CollectiveMeasure "1..1" -- "1..1" smm::DimensionalMeasure : baseMeasure61
 smm::DimensionalMeasurement "0..1" -- "1..1" smm::Grade : baseMeasurement63
-smm::DimensionalMeasurement "0..9999" -- "1..1" smm::CollectiveMeasurement : baseMeasurement68
-smm::DimensionalMeasurement "0..9999" -- "1..1" smm::AggregatedMeasurement : baseMeasurement70
+smm::CollectiveMeasurement "1..1" -- "0..9999" smm::DimensionalMeasurement : baseMeasurement68
+smm::AggregatedMeasurement "1..1" -- "0..9999" smm::DimensionalMeasurement : baseMeasurement70
 smm::Category "0..9999" -- "1..1" smm::Measure : category19
-smm::Category "0..9999" -- "1..1" smm::Category : category9
-smm::Category "0..9999" -- "1..1" smm::Category : categoryElement12
-smm::Measure "0..9999" -- "1..1" smm::Category : categoryMeasure17
+smm::Category "1..1" -- "0..9999" smm::Category : category9
+smm::Category "1..1" -- "0..9999" smm::Category : categoryElement12
+smm::Category "1..1" -- "0..9999" smm::Measure : categoryMeasure17
 smm::Characteristic "1..1" *-- "0..9999" smm::Measure : characteristics53
-smm::Measure "0..9999" -- "1..1" smm::Measure : equivalentFrom22
-smm::Measure "0..9999" -- "1..1" smm::Measure : equivalentTo25
+smm::Measure "1..1" -- "0..9999" smm::Measure : equivalentFrom22
+smm::Measure "1..1" -- "0..9999" smm::Measure : equivalentTo25
 smm::Measure "1..1" -- "1..1" smm::MeasureRelationship : from45
 smm::Category "1..1" -- "1..1" smm::CategoryRelationship : from5
-smm::MeasurementRelationship "1..1" -- "1..1" smm::Measurement : from64
+smm::Measurement "1..1" -- "1..1" smm::MeasurementRelationship : from64
 smm::Category "1..1" -- "0..9999" smm::CategoryRelationship : inCategory15
-smm::MeasureRelationship "0..9999" --* "1..1" smm::Measure : inMeasure32
-smm::MeasurementRelationship "0..9999" -- "1..1" smm::Measurement : inMeasurement42
-smm::RankingInterval "1..9999" --* "1..1" smm::Ranking : interval49
-smm::Measurement "1..1" -- "1..1" smm::Measure : measure37
-smm::Measurement "0..9999" --* "1..1" smm::Measure : measurement29
+smm::Measure "1..1" *-- "0..9999" smm::MeasureRelationship : inMeasure32
+smm::Measurement "1..1" -- "0..9999" smm::MeasurementRelationship : inMeasurement42
+smm::Ranking "1..1" *-- "1..9999" smm::RankingInterval : interval49
+smm::Measure "1..1" -- "1..1" smm::Measurement : measure37
+smm::Measure "1..1" *-- "0..9999" smm::Measurement : measurement29
 smm::Measure "0..9999" -- "1..1" smm::Scope : measures55
-smm::SmmModel "0..1" -- "1..1" smm::SmmElement : model0
+smm::SmmElement "1..1" -- "0..1" smm::SmmModel : model0
 smm::SmmElement "0..9999" --* "1..1" smm::SmmModel : modelElement4
 smm::Measurement "1..1" *-- "1..1" smm::Observation : observation39
-smm::CategoryRelationship "0..9999" -- "1..1" smm::Category : outCategory14
-smm::MeasureRelationship "0..9999" -- "1..1" smm::Measure : outMeasure30
-smm::MeasurementRelationship "0..9999" -- "1..1" smm::Measurement : outMeasurement40
+smm::Category "1..1" -- "0..9999" smm::CategoryRelationship : outCategory14
+smm::Measure "1..1" -- "0..9999" smm::MeasureRelationship : outMeasure30
+smm::Measurement "1..1" -- "0..9999" smm::MeasurementRelationship : outMeasurement40
 smm::Attribute "1..1" -- "0..1" smm::SmmElement : owner72
-smm::SmmElement "0..1" -- "1..1" smm::Annotation : owner74
-smm::Characteristic "0..1" -- "1..1" smm::Characteristic : parent52
+smm::Annotation "1..1" -- "0..1" smm::SmmElement : owner74
+smm::Characteristic "1..1" -- "0..1" smm::Characteristic : parent52
 smm::Ranking "0..1" -- "1..1" smm::RankingInterval : rank50
 smm::Measure "1..1" -- "0..9999" smm::Measure : refinement28
-smm::Scope "1..1" -- "1..1" smm::Measure : scope36
-smm::MeasureRelationship "1..1" -- "1..1" smm::Measure : to47
-smm::CategoryRelationship "1..1" -- "1..1" smm::Category : to6
+smm::Measure "1..1" -- "1..1" smm::Scope : scope36
+smm::Measure "1..1" -- "1..1" smm::MeasureRelationship : to47
+smm::Category "1..1" -- "1..1" smm::CategoryRelationship : to6
 smm::Measurement "1..1" -- "1..1" smm::MeasurementRelationship : to66
-smm::Measure "1..1" -- "1..1" smm::Characteristic : trait35
+smm::Characteristic "1..1" -- "1..1" smm::Measure : trait35
 @enduml

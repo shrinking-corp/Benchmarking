@@ -79,16 +79,16 @@ DurationArtifact <|-- MediaLibrary::MusicTrack
 DurationArtifact <|-- MediaLibrary::Video
 MediaSource <|-- MediaLibrary::ExternalSource
 MediaSource <|-- MediaLibrary::Store
-MediaLibrary::MediaCollection "0..9999" -- "1..1" MediaLibrary::Device : collections16
-MediaLibrary::MediaCollection "0..9999" --* "1..1" MediaLibrary::Library : collections7
+MediaLibrary::Device "1..1" -- "0..9999" MediaLibrary::MediaCollection : collections16
+MediaLibrary::Library "1..1" *-- "0..9999" MediaLibrary::MediaCollection : collections7
 MediaLibrary::Artifact "0..9999" -- "1..1" MediaLibrary::MediaSource : contents19
 MediaLibrary::Device "1..9999" --* "1..1" MediaLibrary::Ecosystem : devices1
 MediaLibrary::Device "1..1" -- "1..1" MediaLibrary::MediaCollection : host12
 MediaLibrary::Device "1..1" -- "0..9999" MediaLibrary::MediaCollection : hostOf15
-MediaLibrary::Library "1..9999" --* "1..1" MediaLibrary::Ecosystem : libraries0
+MediaLibrary::Ecosystem "1..1" *-- "1..9999" MediaLibrary::Library : libraries0
 MediaLibrary::Artifact "1..9999" --* "1..1" MediaLibrary::Ecosystem : mediaArtifacts5
 MediaLibrary::Ecosystem "1..1" *-- "1..9999" MediaLibrary::MediaSource : mediaSources3
-MediaLibrary::MediaCollection "1..1" -- "1..9999" MediaLibrary::Artifact : members9
-MediaLibrary::MediaSource "1..1" -- "1..1" MediaLibrary::Artifact : origin18
-MediaLibrary::MediaCollection "1..1" -- "1..9999" MediaLibrary::Device : syncedDevices13
+MediaLibrary::Artifact "1..9999" -- "1..1" MediaLibrary::MediaCollection : members9
+MediaLibrary::Artifact "1..1" -- "1..1" MediaLibrary::MediaSource : origin18
+MediaLibrary::Device "1..9999" -- "1..1" MediaLibrary::MediaCollection : syncedDevices13
 @enduml

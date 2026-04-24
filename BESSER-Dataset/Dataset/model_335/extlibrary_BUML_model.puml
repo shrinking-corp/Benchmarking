@@ -73,18 +73,18 @@ Person <|-- extlibrary::Borrower
 Person <|-- extlibrary::Employee
 Person <|-- extlibrary::Writer
 extlibrary::Book "1..1" -- "1..1" extlibrary::Writer : author0
-extlibrary::Writer "0..1" -- "1..1" extlibrary::BookOnTape : author18
+extlibrary::BookOnTape "1..1" -- "0..1" extlibrary::Writer : author18
 extlibrary::Book "0..9999" -- "1..1" extlibrary::Writer : books15
-extlibrary::Library "1..1" -- "0..9999" extlibrary::Book : books8
-extlibrary::Lendable "0..9999" -- "1..1" extlibrary::Borrower : borrowed23
-extlibrary::Lendable "1..1" -- "0..9999" extlibrary::Borrower : borrowers16
+extlibrary::Book "0..9999" -- "1..1" extlibrary::Library : books8
+extlibrary::Borrower "1..1" -- "0..9999" extlibrary::Lendable : borrowed23
+extlibrary::Borrower "0..9999" -- "1..1" extlibrary::Lendable : borrowers16
 extlibrary::Borrower "0..9999" --* "1..1" extlibrary::Library : borrowers4
-extlibrary::Library "0..9999" --* "1..1" extlibrary::Library : branches11
-extlibrary::VideoCassette "1..1" -- "0..9999" extlibrary::Person : cast21
+extlibrary::Library "1..1" *-- "0..9999" extlibrary::Library : branches11
+extlibrary::Person "0..9999" -- "1..1" extlibrary::VideoCassette : cast21
 extlibrary::Employee "0..9999" --* "1..1" extlibrary::Library : employees2
 extlibrary::Employee "0..1" -- "1..1" extlibrary::Employee : manager25
-extlibrary::Library "0..1" -- "1..1" extlibrary::Library : parentBranch13
-extlibrary::Person "0..1" -- "1..1" extlibrary::BookOnTape : reader17
-extlibrary::Library "1..1" *-- "0..9999" extlibrary::Item : stock6
-extlibrary::Writer "0..9999" --* "1..1" extlibrary::Library : writers1
+extlibrary::Library "1..1" -- "0..1" extlibrary::Library : parentBranch13
+extlibrary::BookOnTape "1..1" -- "0..1" extlibrary::Person : reader17
+extlibrary::Item "0..9999" --* "1..1" extlibrary::Library : stock6
+extlibrary::Library "1..1" *-- "0..9999" extlibrary::Writer : writers1
 @enduml

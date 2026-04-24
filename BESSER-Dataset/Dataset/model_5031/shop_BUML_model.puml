@@ -31,12 +31,12 @@ class shop::Transaction {
   + startDate : date
 }
 shop::Customer "0..1" -- "1..1" shop::Order : customer10
-shop::Transaction "1..1" -- "0..1" shop::Order : order11
-shop::ProductCategory "0..1" -- "1..1" shop::ProductCategory : parent7
-shop::Product "1..1" -- "0..1" shop::PriceCategory : priceCategory1
+shop::Order "0..1" -- "1..1" shop::Transaction : order11
+shop::ProductCategory "1..1" -- "0..1" shop::ProductCategory : parent7
+shop::PriceCategory "0..1" -- "1..1" shop::Product : priceCategory1
 shop::Product "0..1" -- "1..1" shop::Transaction : product12
-shop::ProductCategory "0..1" -- "1..1" shop::Product : productCategory0
+shop::Product "1..1" -- "0..1" shop::ProductCategory : productCategory0
 shop::Product "0..9999" --* "1..1" shop::ProductCategory : products2
-shop::ProductCategory "0..9999" --* "1..1" shop::ProductCategory : subCategorys4
-shop::Transaction "0..9999" --* "1..1" shop::Order : transactions9
+shop::ProductCategory "1..1" *-- "0..9999" shop::ProductCategory : subCategorys4
+shop::Order "1..1" *-- "0..9999" shop::Transaction : transactions9
 @enduml

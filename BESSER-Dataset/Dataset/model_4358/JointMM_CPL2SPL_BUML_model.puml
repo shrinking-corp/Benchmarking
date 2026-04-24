@@ -509,6 +509,10 @@ SrcAction <|-- jointPackage::CPL2SPL::SrcSignallingAction
 SrcElement <|-- jointPackage::CPL2SPL::SrcCPL
 SrcElement <|-- jointPackage::CPL2SPL::SrcNode
 SrcElement <|-- jointPackage::CPL2SPL::SrcNodeContainer
+SrcNode <|-- jointPackage::CPL2SPL::SrcAction
+SrcNode <|-- jointPackage::CPL2SPL::SrcLocation
+SrcNode <|-- jointPackage::CPL2SPL::SrcSubCall
+SrcNode <|-- jointPackage::CPL2SPL::SrcSwitch
 SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcBusy
 SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcDefault
 SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcFailure
@@ -525,10 +529,6 @@ SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedLanguage
 SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedPriority
 SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedString
 SrcNodeContainer <|-- jointPackage::CPL2SPL::SrcSwitchedTime
-SrcNode <|-- jointPackage::CPL2SPL::SrcAction
-SrcNode <|-- jointPackage::CPL2SPL::SrcLocation
-SrcNode <|-- jointPackage::CPL2SPL::SrcSubCall
-SrcNode <|-- jointPackage::CPL2SPL::SrcSwitch
 SrcSignallingAction <|-- jointPackage::CPL2SPL::SrcProxy
 SrcSignallingAction <|-- jointPackage::CPL2SPL::SrcRedirect
 SrcSignallingAction <|-- jointPackage::CPL2SPL::SrcReject
@@ -616,26 +616,26 @@ TrgVariablePlace <|-- jointPackage::CPL2SPL::TrgVariable
 SrcSwitchedAddress "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcAddressSwitch : addresses9
 TrgArgument "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgMethod : arguments50
 TrgArgument "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgFunctionDeclaration : arguments64
-jointPackage::CPL2SPL::TrgReturnStat "1..1" -- "0..1" TrgNamedBranch : branch85
-jointPackage::CPL2SPL::TrgMethod "1..1" *-- "1..9999" TrgBranch : branches54
+TrgNamedBranch "0..1" -- "1..1" jointPackage::CPL2SPL::TrgReturnStat : branch85
+TrgBranch "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgMethod : branches54
 SrcBusy "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : busy14
 TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgIfStat : condition87
-jointPackage::CPL2SPL::SrcNodeContainer "1..1" -- "0..1" SrcNode : contents23
+SrcNode "0..1" -- "1..1" jointPackage::CPL2SPL::SrcNodeContainer : contents23
 TrgDeclaration "1..1" --* "1..1" jointPackage::CPL2SPL::TrgDeclarationStat : declaration81
 TrgDeclaration "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgService : declarations29
-jointPackage::CPL2SPL::TrgRegistration "1..1" *-- "0..9999" TrgDeclaration : declarations32
+TrgDeclaration "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgRegistration : declarations32
 TrgDeclaration "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgDialog : declarations37
-jointPackage::CPL2SPL::TrgEvent "1..1" *-- "0..9999" TrgDeclaration : declarations41
+TrgDeclaration "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgEvent : declarations41
 SrcDefault "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : default21
 SrcElement "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcCPLModel : elements3
-jointPackage::CPL2SPL::TrgWhenStat "1..1" *-- "0..9999" TrgStatement : elseStatements101
+TrgStatement "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgWhenStat : elseStatements101
 TrgStatement "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgIfStat : elseStatements92
 TrgExpression "0..1" --* "1..1" jointPackage::CPL2SPL::TrgForwardExp : exp133
 TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgWithExp : exp135
 TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgBlockExp : exp139
-jointPackage::CPL2SPL::TrgMessageField "1..1" *-- "1..1" TrgExpression : exp148
+TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgMessageField : exp148
 SrcFailure "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : failure19
-jointPackage::CPL2SPL::TrgFunctionCall "1..1" -- "1..1" TrgFunctionDeclaration : function71
+TrgFunctionDeclaration "1..1" -- "1..1" jointPackage::CPL2SPL::TrgFunctionCall : function71
 TrgFunctionCall "1..1" --* "1..1" jointPackage::CPL2SPL::TrgFunctionCallStat : functionCall115
 TrgFunctionCall "1..1" --* "1..1" jointPackage::CPL2SPL::TrgFunctionCallExp : functionCall143
 TrgVariable "1..1" --* "1..1" jointPackage::CPL2SPL::TrgWhenStat : idExp95
@@ -648,7 +648,7 @@ TrgMethodName "1..1" --* "1..1" jointPackage::CPL2SPL::TrgMethod : methodName48
 TrgMethod "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgDialog : methods39
 TrgMethod "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgEvent : methods43
 TrgMessageField "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgWithExp : msgFields137
-jointPackage::CPL2SPL::SrcProxy "1..1" *-- "0..1" SrcNoAnswer : noAnswer15
+SrcNoAnswer "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : noAnswer15
 SrcNotPresent "0..1" --* "1..1" jointPackage::CPL2SPL::SrcSwitch : notPresent24
 SrcOtherwise "0..1" --* "1..1" jointPackage::CPL2SPL::SrcSwitch : otherwise25
 SrcOutgoing "0..1" --* "1..1" jointPackage::CPL2SPL::SrcCPL : outgoing5
@@ -658,39 +658,39 @@ TrgArgument "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgStructureDeclaration 
 TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgPushStat : pushedValue118
 SrcRedirection "0..1" --* "1..1" jointPackage::CPL2SPL::SrcProxy : redirection17
 TrgResponse "1..1" --* "1..1" jointPackage::CPL2SPL::TrgResponseConstant : response152
-jointPackage::CPL2SPL::TrgFunctionDeclaration "1..1" *-- "1..1" TrgTypeExpression : returnType62
+TrgTypeExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgFunctionDeclaration : returnType62
 TrgExpression "0..1" --* "1..1" jointPackage::CPL2SPL::TrgReturnStat : returnedValue83
-jointPackage::CPL2SPL::TrgOperatorExp "1..1" *-- "0..1" TrgExpression : rightExp130
-jointPackage::CPL2SPL::TrgSelectStat "1..1" *-- "0..9999" TrgSelectCase : selectCases111
+TrgExpression "0..1" --* "1..1" jointPackage::CPL2SPL::TrgOperatorExp : rightExp130
+TrgSelectCase "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgSelectStat : selectCases111
 TrgSelectDefault "0..1" --* "1..1" jointPackage::CPL2SPL::TrgSelectStat : selectDefault113
 TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgForeachStat : sequenceExp104
 TrgService "1..1" --* "1..1" jointPackage::CPL2SPL::TrgProgram : service27
 TrgSession "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgService : sessions30
 TrgSession "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgRegistration : sessions34
 TrgExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgSetStat : setValue78
-jointPackage::CPL2SPL::TrgPopExp "1..1" *-- "1..1" TrgPlace : source141
+TrgPlace "1..1" --* "1..1" jointPackage::CPL2SPL::TrgPopExp : source141
 TrgVariablePlace "1..1" --* "1..1" jointPackage::CPL2SPL::TrgPropertyCallPlace : source145
-jointPackage::CPL2SPL::TrgVariable "1..1" -- "1..1" TrgDeclaration : source146
-jointPackage::CPL2SPL::JointMM "1..1" *-- "1..1" SrcReject : sourceRoot0
+TrgDeclaration "1..1" -- "1..1" jointPackage::CPL2SPL::TrgVariable : source146
+SrcReject "1..1" --* "1..1" jointPackage::CPL2SPL::JointMM : sourceRoot0
 TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgForeachStat : statements106
 TrgStatement "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgSelectMember : statements122
 TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgMethod : statements52
-jointPackage::CPL2SPL::TrgBranch "1..1" *-- "1..9999" TrgStatement : statements56
+TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgBranch : statements56
 TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgLocalFunctionDeclaration : statements67
 TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgCompoundStat : statements75
-jointPackage::CPL2SPL::TrgWhenStat "1..1" *-- "1..9999" TrgStatement : statements98
+TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgWhenStat : statements98
 SrcSwitchedString "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcStringSwitch : strings10
-jointPackage::CPL2SPL::SrcCPL "1..1" *-- "0..9999" SrcSubAction : subActions4
+SrcSubAction "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcCPL : subActions4
 TrgPlace "1..1" --* "1..1" jointPackage::CPL2SPL::TrgPushStat : target116
 TrgPlace "1..1" --* "1..1" jointPackage::CPL2SPL::TrgSetStat : target77
 TrgServerErrorResponse "1..1" --* "1..1" jointPackage::CPL2SPL::JointMM : targetRoot1
-jointPackage::CPL2SPL::TrgIfStat "1..1" *-- "1..9999" TrgStatement : thenStatements89
-jointPackage::CPL2SPL::SrcTimeSwitch "1..1" *-- "0..9999" SrcSwitchedTime : times12
-jointPackage::CPL2SPL::TrgStructureProperty "1..1" *-- "1..1" TrgTypeExpression : type28
+TrgStatement "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgIfStat : thenStatements89
+SrcSwitchedTime "0..9999" --* "1..1" jointPackage::CPL2SPL::SrcTimeSwitch : times12
+TrgTypeExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgStructureProperty : type28
 TrgTypeExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgMethod : type46
 TrgTypeExpression "1..1" --* "1..1" jointPackage::CPL2SPL::TrgVariableDeclaration : type58
 TrgConstant "0..1" --* "1..1" jointPackage::CPL2SPL::TrgWhenHeader : value121
-jointPackage::CPL2SPL::TrgConstantExp "1..1" *-- "1..1" TrgConstant : value126
+TrgConstant "1..1" --* "1..1" jointPackage::CPL2SPL::TrgConstantExp : value126
 TrgConstant "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgSelectCase : values124
 TrgConstant "0..9999" --* "1..1" jointPackage::CPL2SPL::TrgSequenceConstant : values150
 TrgWhenHeader "1..9999" --* "1..1" jointPackage::CPL2SPL::TrgWhenStat : whenHeaders96

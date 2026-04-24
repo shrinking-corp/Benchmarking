@@ -1,0 +1,182 @@
+@startuml
+class AbstractEvent {
+}
+enum EventType {
+  CHECK_IN
+  CHECK_OUT
+}
+class IBooking {
+}
+class IEvent {
+}
+class IHotelCustomerProvides {
+}
+class IHotelRoomProvider {
+}
+class IRoom {
+}
+class IRoomType {
+}
+class bookingSystem::IBooking {
+}
+class bookingSystem::IEvent {
+}
+class bookingSystem::IHotelBookingManager {
+}
+class bookingSystem::IHotelCustomerProvides {
+}
+class roomManager::IHotelRoomManager {
+}
+class roomManager::IHotelRoomProvider {
+}
+class roomManager::IHotelStartupProvies {
+}
+class roomManager::IRoom {
+}
+class roomManager::IRoomType {
+}
+abstract class se::bookingSystem::AbstractEvent {
+  + bookingID : int
+  + eventType : str
+  + timestamp : str
+}
+class se::bookingSystem::Booking {
+  + endDate : str
+  + firstName : str
+  + id : int
+  + lastName : str
+  + startDate : str
+}
+class se::bookingSystem::BookingSystem {
+  + bookingId : int
+}
+class se::bookingSystem::CheckInEvent {
+}
+class se::bookingSystem::CheckOutEvent {
+}
+class se::bookingSystem::FreeRoomTypesDTO {
+  + numBeds : int
+  + numFreeRooms : int
+  + pricePerNight : float
+  + roomTypeDescription : str
+}
+abstract class se::bookingSystem::IBooking {
+  + addRoom(room : any) : bool
+  + checkInRoom(roomToCheckIn : any) : bool
+  + checkOutRoom(roomToCheckOut : any) : bool
+  + getCheckedInRooms() : str
+  + getEndDate() : str
+  + getFirstName() : str
+  + getID() : int
+  + getLastName() : str
+  + getRooms() : str
+  + getStartDate() : str
+  + setEndDate(endDate : any) : void
+  + setRooms(rooms : any) : void
+  + setStartDate(startDate : any) : void
+}
+abstract class se::bookingSystem::IEvent {
+  + getBookingId() : int
+  + getTimestamp() : str
+  + getType() : str
+}
+abstract class se::bookingSystem::IHotelBookingManager {
+  + addExtraCostToRoom(bookingId : any, descriptionOfCost : any, priceOfCost : any, roomNumber : any) : void
+  + cancelBooking(bookingId : any) : void
+  + editBookingPeriod(bookingId : any, endDate : any, startDate : any) : bool
+  + editBookingRooms(bookingID : any, numOfRooms : any, roomType : any) : void
+  + initiateCheckin(bookingId : any) : str
+  + listBooking() : str
+  + listCheckins(endTime : any, startTime : any) : str
+  + listCheckouts(endTime : any, startTime : any) : str
+  + listOccupiedRooms(date : any) : str
+}
+abstract class se::bookingSystem::IHotelCustomerProvides {
+  + addRoomToBooking(bookingID : any, roomTypeDescription : any) : bool
+  + checkInRoom(bookingId : any, roomTypeDescription : any) : int
+  + confirmBooking(bookingID : any) : bool
+  + getFreeRooms(endDate : any, numBeds : any, startDate : any) : str
+  + initiateBooking(endDate : any, firstName : any, lastName : any, startDate : any) : int
+  + initiateCheckout(bookingID : any) : float
+  + initiateRoomCheckout(bookingId : any, roomNumber : any) : float
+  + payDuringCheckout(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + payRoomDuringCheckout(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, roomNumber : any) : bool
+}
+abstract class se::roomManager::IHotelRoomManager {
+  + addRoom(roomNumber : any, roomType : any) : bool
+  + addRoomType(description : any, name : any, numberOfBeds : any, price : any) : bool
+  + blockRoom(roomNumber : any) : void
+  + changeRoomType(roomNumber : any, roomType : any) : bool
+  + getRoomTypes() : str
+  + removeRoom(roomNumber : any) : str
+  + removeRoomType(roomType : any) : str
+  + unblockRoom(roomNumber : any) : void
+  + updateRoomType(description : any, name : any, numberOfBeds : any, price : any, roomType : any) : void
+}
+abstract class se::roomManager::IHotelRoomProvider {
+  + getRooms() : str
+}
+abstract class se::roomManager::IHotelStartupProvies {
+  + startup(numRoom : any) : void
+}
+abstract class se::roomManager::IRoom {
+  + addExtraCost(extraCostPrice : any) : void
+  + getExtraCostDescription() : str
+  + getExtraCostPrice() : float
+  + getRoomNumber() : int
+  + getRoomType() : str
+  + isBlocked() : bool
+  + isOccupied() : bool
+  + setExtraCostDescription(extraCostDescription : any) : void
+  + setIsBlocked(blocked : any) : void
+  + setOccupied(status : any) : void
+  + setRoomType(roomType : any) : void
+}
+abstract class se::roomManager::IRoomType {
+  + getDescription() : str
+  + getName() : str
+  + getNumberOfBeds() : int
+  + getPrice() : float
+  + setDescription(description : any) : void
+  + setName(name : any) : void
+  + setNumberOfBeds(beds : any) : void
+  + setPrice(price : any) : void
+}
+class se::roomManager::Room {
+  + blocked : bool
+  + extraCostDescriptions : str
+  + extraCostPrice : float
+  + occupied : bool
+  + roomNumber : int
+}
+class se::roomManager::RoomManager {
+}
+class se::roomManager::RoomType {
+  + description : str
+  + name : str
+  + numberOfBeds : int
+  + price : float
+}
+AbstractEvent <|-- se::bookingSystem::CheckInEvent
+AbstractEvent <|-- se::bookingSystem::CheckOutEvent
+IBooking <|-- se::bookingSystem::Booking
+IEvent <|-- se::bookingSystem::AbstractEvent
+IHotelCustomerProvides <|-- se::bookingSystem::IHotelBookingManager
+IHotelRoomProvider <|-- se::roomManager::IHotelRoomManager
+IRoom <|-- se::roomManager::Room
+IRoomType <|-- se::roomManager::RoomType
+bookingSystem::IHotelBookingManager <|-- se::bookingSystem::BookingSystem
+bookingSystem::IHotelCustomerProvides <|-- se::bookingSystem::BookingSystem
+roomManager::IHotelRoomManager <|-- se::roomManager::RoomManager
+roomManager::IHotelRoomProvider <|-- se::roomManager::RoomManager
+roomManager::IHotelStartupProvies <|-- se::roomManager::RoomManager
+bookingSystem::IBooking "0..9999" -- "1..1" se::bookingSystem::BookingSystem : bookings1
+roomManager::IRoom "0..9999" -- "1..1" se::bookingSystem::Booking : checkedInRooms9
+bookingSystem::IEvent "0..9999" -- "1..1" se::bookingSystem::BookingSystem : events0
+roomManager::IRoom "0..9999" -- "1..1" se::bookingSystem::Booking : roomList7
+roomManager::IHotelRoomProvider "1..1" -- "1..1" se::bookingSystem::BookingSystem : roomProvider3
+roomManager::IRoomType "1..1" -- "1..1" se::roomManager::Room : roomType16
+roomManager::IRoomType "0..9999" -- "1..1" se::roomManager::RoomManager : roomTypes12
+roomManager::IRoom "0..9999" -- "1..1" se::roomManager::RoomManager : rooms13
+roomManager::IRoom "0..9999" -- "1..1" se::bookingSystem::BookingSystem : rooms5
+@enduml

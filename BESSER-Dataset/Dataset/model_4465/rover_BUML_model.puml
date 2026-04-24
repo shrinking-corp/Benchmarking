@@ -70,18 +70,18 @@ Sensor <|-- rover::DistanceSensor
 Sensor <|-- rover::GPS
 Sensor <|-- rover::directionFacing
 rover::Block "1..1" -- "1..1" rover::Program : block4
-rover::Command "1..9999" --* "1..1" rover::Block : command6
+rover::Block "1..1" *-- "1..9999" rover::Command : command6
 rover::Component "1..9999" --* "1..1" rover::Rover : component0
-rover::Tansition "0..1" -- "1..1" rover::Command : incomingTransition22
+rover::Command "1..1" -- "0..1" rover::Tansition : incomingTransition22
 rover::Command "1..1" -- "0..1" rover::Move : move15
 rover::Command "1..1" -- "0..1" rover::Tansition : outgoingTransition21
-rover::Rover "1..1" *-- "0..1" rover::Program : program1
+rover::Program "0..1" --* "1..1" rover::Rover : program1
 rover::Command "1..1" -- "0..1" rover::Repeate : repeate11
-rover::Rotate "0..1" -- "1..1" rover::Command : rotate13
-rover::SetLightColor "0..1" -- "1..1" rover::Command : setlightcolor19
-rover::Tansition "1..1" -- "0..1" rover::Command : sourceCommand24
-rover::Tansition "1..9999" --* "1..1" rover::Block : tansition8
+rover::Command "1..1" -- "0..1" rover::Rotate : rotate13
+rover::Command "1..1" -- "0..1" rover::SetLightColor : setlightcolor19
+rover::Command "0..1" -- "1..1" rover::Tansition : sourceCommand24
+rover::Block "1..1" *-- "1..9999" rover::Tansition : tansition8
 rover::Command "0..1" -- "1..1" rover::Tansition : targetCommand25
-rover::Tansition "0..1" -- "1..1" rover::Sensor : triggered3
-rover::Wait "0..1" -- "1..1" rover::Command : wait17
+rover::Sensor "1..1" -- "0..1" rover::Tansition : triggered3
+rover::Command "1..1" -- "0..1" rover::Wait : wait17
 @enduml

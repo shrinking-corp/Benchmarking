@@ -40,22 +40,22 @@ NamedElement <|-- tfsm::State
 NamedElement <|-- tfsm::TFSM
 NamedElement <|-- tfsm::TimedSystem
 NamedElement <|-- tfsm::Transition
-tfsm::Transition "1..1" -- "0..9999" tfsm::FSMEvent : generatedEvents18
+tfsm::FSMEvent "0..9999" -- "1..1" tfsm::Transition : generatedEvents18
 tfsm::FSMClock "0..9999" --* "1..1" tfsm::TimedSystem : globalClocks30
 tfsm::FSMEvent "0..9999" --* "1..1" tfsm::TimedSystem : globalEvents33
-tfsm::Transition "0..9999" -- "1..1" tfsm::State : incomingTransitions10
+tfsm::State "1..1" -- "0..9999" tfsm::Transition : incomingTransitions10
 tfsm::State "1..1" -- "1..1" tfsm::TFSM : initialState1
 tfsm::FSMClock "1..1" --* "1..1" tfsm::TFSM : localClock4
 tfsm::FSMEvent "0..9999" --* "1..1" tfsm::TFSM : localEvents2
 tfsm::FSMClock "1..1" -- "1..1" tfsm::TemporalGuard : onClock21
-tfsm::Transition "0..9999" -- "1..1" tfsm::State : outgoingTransitions9
+tfsm::State "1..1" -- "0..9999" tfsm::Transition : outgoingTransitions9
 tfsm::Guard "1..1" --* "1..1" tfsm::Transition : ownedGuard16
-tfsm::TFSM "1..1" *-- "0..9999" tfsm::State : ownedStates0
+tfsm::State "0..9999" --* "1..1" tfsm::TFSM : ownedStates0
 tfsm::TFSM "1..1" *-- "0..9999" tfsm::Transition : ownedTransitions6
-tfsm::TFSM "1..1" -- "1..1" tfsm::State : owningFSM8
-tfsm::Transition "0..9999" -- "1..1" tfsm::FSMEvent : sollicitingTransitions25
-tfsm::Transition "1..1" -- "1..1" tfsm::State : source12
+tfsm::State "1..1" -- "1..1" tfsm::TFSM : owningFSM8
+tfsm::FSMEvent "1..1" -- "0..9999" tfsm::Transition : sollicitingTransitions25
+tfsm::State "1..1" -- "1..1" tfsm::Transition : source12
 tfsm::State "1..1" -- "1..1" tfsm::Transition : target14
-tfsm::TimedSystem "1..1" *-- "0..9999" tfsm::TFSM : tfsms28
+tfsm::TFSM "0..9999" --* "1..1" tfsm::TimedSystem : tfsms28
 tfsm::EventGuard "1..1" -- "1..1" tfsm::FSMEvent : triggeringEvent23
 @enduml

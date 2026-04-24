@@ -49,20 +49,20 @@ NamedElement <|-- families::Person
 NamedElement <|-- families::Pet
 Pet <|-- families::Dog
 families::Account "0..9999" --* "1..1" families::Person : accounts8
-families::Person "1..1" -- "0..4" families::Person : allParents18
-families::NamedElement "0..9999" --* "1..1" families::Model : contents226
-families::NamedElement "0..9999" --* "1..1" families::Model : contents25
+families::Person "0..4" -- "1..1" families::Person : allParents18
+families::Model "1..1" *-- "0..9999" families::NamedElement : contents226
+families::Model "1..1" *-- "0..9999" families::NamedElement : contents25
 families::District "0..1" -- "1..1" families::Dog : district20
 families::District "0..1" -- "1..1" families::Family : district5
 families::District "1..1" *-- "1..9999" families::Dog : dogs23
 families::Dog "1..9999" -- "1..1" families::Family : dogs3
 families::District "1..1" *-- "1..9999" families::Family : families22
 families::Person "0..9999" -- "1..1" families::Person : friends12
-families::Person "0..9999" --* "1..1" families::Family : members1
-families::Person "3..9999" -- "1..1" families::Band : members34
+families::Family "1..1" *-- "0..9999" families::Person : members1
+families::Band "1..1" -- "3..9999" families::Person : members34
 families::Bike "1..1" -- "0..1" families::Family : owner31
 families::Person "0..2" -- "1..1" families::Person : parents15
 families::Family "1..1" -- "0..9999" families::Pet : pets0
-families::Person "0..1" --* "1..1" families::Bike : rider29
+families::Bike "1..1" *-- "0..1" families::Person : rider29
 families::Account "0..9999" -- "1..1" families::Person : sharedAccounts6
 @enduml

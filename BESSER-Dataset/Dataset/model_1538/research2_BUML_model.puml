@@ -71,11 +71,11 @@ Named <|-- research2::PublicationStructure
 Named <|-- research2::PublicationSystem
 Named <|-- research2::ReviewNote
 research2::Keyword "0..9999" --* "1..1" research2::KnowledgeManager : allkeywords48
-research2::Researcher "0..9999" -- "1..1" research2::Paper : authors11
+research2::Paper "1..1" -- "0..9999" research2::Researcher : authors11
 research2::Paper "0..1" -- "1..1" research2::Paper : citedBy14
-research2::Paper "1..1" -- "0..9999" research2::Keyword : keywords12
-research2::PublicationStructure "1..1" *-- "0..1" research2::KnowledgeManager : knowledgeMan33
-research2::Paper "0..9999" -- "1..1" research2::Keyword : kpapers46
+research2::Keyword "0..9999" -- "1..1" research2::Paper : keywords12
+research2::KnowledgeManager "0..1" --* "1..1" research2::PublicationStructure : knowledgeMan33
+research2::Keyword "1..1" -- "0..9999" research2::Paper : kpapers46
 research2::Paper "0..1" -- "1..1" research2::Progress : paper20
 research2::Paper "0..9999" --* "1..1" research2::PublicationStructure : papers30
 research2::Paragraph "0..1" -- "1..1" research2::Write : paragraph22
@@ -84,15 +84,15 @@ research2::Position "0..1" -- "1..1" research2::Position : parent44
 research2::Phase "0..9999" --* "1..1" research2::PublicationProcess : phases0
 research2::Position "0..9999" --* "1..1" research2::PublicationSystem : positions40
 research2::Progress "1..1" -- "0..1" research2::PublicationProcess : process18
-research2::PublicationSystem "1..1" *-- "0..1" research2::PublicationProcess : processView35
-research2::Progress "0..9999" --* "1..1" research2::Paper : progress10
+research2::PublicationProcess "0..1" --* "1..1" research2::PublicationSystem : processView35
+research2::Paper "1..1" *-- "0..9999" research2::Progress : progress10
 research2::Paper "0..9999" -- "1..1" research2::Researcher : res_papers4
 research2::Position "0..1" -- "1..1" research2::Researcher : res_position7
-research2::Researcher "0..9999" --* "1..1" research2::PublicationStructure : researchers28
-research2::ReviewNote "0..1" -- "1..1" research2::Review : reviewNote25
-research2::ReviewNote "0..9999" --* "1..1" research2::Paragraph : reviews16
-research2::Review "0..9999" --* "1..1" research2::Researcher : reviews2
+research2::PublicationStructure "1..1" *-- "0..9999" research2::Researcher : researchers28
+research2::Review "1..1" -- "0..1" research2::ReviewNote : reviewNote25
+research2::Paragraph "1..1" *-- "0..9999" research2::ReviewNote : reviews16
+research2::Researcher "1..1" *-- "0..9999" research2::Review : reviews2
 research2::Researcher "1..1" *-- "0..9999" research2::Skill : skills5
-research2::PublicationSystem "1..1" *-- "0..1" research2::PublicationStructure : structuralView37
-research2::Write "0..9999" --* "1..1" research2::Researcher : writes1
+research2::PublicationStructure "0..1" --* "1..1" research2::PublicationSystem : structuralView37
+research2::Researcher "1..1" *-- "0..9999" research2::Write : writes1
 @enduml

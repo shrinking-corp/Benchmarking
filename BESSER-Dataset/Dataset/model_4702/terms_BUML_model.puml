@@ -77,54 +77,54 @@ class terms::Variable {
 }
 class terms::VariableDecl {
 }
-OperatorDecl <|-- terms::NamedOperator
 Operator <|-- terms::BuiltInConstant
 Operator <|-- terms::BuiltInOperator
 Operator <|-- terms::MultisetOperator
 Operator <|-- terms::Tuple
 Operator <|-- terms::UserOperator
-SortDecl <|-- terms::NamedSort
+OperatorDecl <|-- terms::NamedOperator
 Sort <|-- terms::BuiltInSort
 Sort <|-- terms::MultisetSort
 Sort <|-- terms::ProductSort
 Sort <|-- terms::UserSort
+SortDecl <|-- terms::NamedSort
+Term <|-- terms::Operator
+Term <|-- terms::Variable
 TermsDeclaration <|-- terms::OperatorDecl
 TermsDeclaration <|-- terms::SortDecl
 TermsDeclaration <|-- terms::VariableDecl
-Term <|-- terms::Operator
-Term <|-- terms::Variable
 terms::MultisetSort "1..1" *-- "1..1" terms::Sort : basis19
-terms::Sort "1..1" -- "0..1" terms::All : containerAll9
+terms::All "0..1" -- "1..1" terms::Sort : containerAll9
 terms::Condition "0..1" -- "1..1" terms::Term : containerCondition26
 terms::Declaration "0..1" -- "1..1" terms::Declarations : containerDeclaration1
-terms::TermsDeclaration "1..1" -- "0..1" terms::Declarations : containerDeclarations2
+terms::Declarations "0..1" -- "1..1" terms::TermsDeclaration : containerDeclarations2
 terms::Empty "0..1" -- "1..1" terms::Sort : containerEmpty10
-terms::Sort "1..1" -- "0..1" terms::EmptyList : containerEmptyList15
+terms::EmptyList "0..1" -- "1..1" terms::Sort : containerEmptyList15
 terms::HLAnnotation "0..1" -- "1..1" terms::Term : containerHLAnnotation28
-terms::Term "1..1" -- "0..1" terms::HLMarking : containerHLMarking24
+terms::HLMarking "0..1" -- "1..1" terms::Term : containerHLMarking24
 terms::HLPNList "0..1" -- "1..1" terms::Sort : containerList13
 terms::MakeList "0..1" -- "1..1" terms::Sort : containerMakeList17
 terms::NamedOperator "0..1" -- "1..1" terms::Term : containerNamedOperator22
 terms::NamedOperator "0..1" -- "1..1" terms::VariableDecl : containerNamedOperator39
-terms::Sort "1..1" -- "0..1" terms::NamedSort : containerNamedSort4
+terms::NamedSort "0..1" -- "1..1" terms::Sort : containerNamedSort4
 terms::Operator "0..1" -- "1..1" terms::Term : containerOperator21
-terms::Sort "1..1" -- "0..1" terms::Partition : containerPartition12
+terms::Partition "0..1" -- "1..1" terms::Sort : containerPartition12
 terms::PartitionElement "0..1" -- "1..1" terms::Term : containerPartitionElement30
 terms::ProductSort "0..1" -- "1..1" terms::Sort : containerProductSort6
-terms::Type "0..1" -- "1..1" terms::Sort : containerType7
-terms::VariableDecl "0..1" -- "1..1" terms::Sort : containerVariableDecl5
-terms::TermsDeclaration "0..9999" --* "1..1" terms::Declarations : declaration0
+terms::Sort "1..1" -- "0..1" terms::Type : containerType7
+terms::Sort "1..1" -- "0..1" terms::VariableDecl : containerVariableDecl5
+terms::Declarations "1..1" *-- "0..9999" terms::TermsDeclaration : declaration0
 terms::SortDecl "1..1" -- "1..1" terms::UserSort : declaration46
-terms::UserOperator "1..1" -- "1..1" terms::OperatorDecl : declaration52
-terms::Term "1..1" --* "1..1" terms::NamedOperator : def47
-terms::Sort "0..9999" --* "1..1" terms::ProductSort : elementSort42
-terms::Sort "0..9999" -- "1..1" terms::Operator : input34
+terms::OperatorDecl "1..1" -- "1..1" terms::UserOperator : declaration52
+terms::NamedOperator "1..1" *-- "1..1" terms::Term : def47
+terms::ProductSort "1..1" *-- "0..9999" terms::Sort : elementSort42
+terms::Operator "1..1" -- "0..9999" terms::Sort : input34
 terms::MultisetSort "0..1" -- "1..1" terms::Sort : multi3
-terms::Sort "0..1" -- "1..1" terms::Operator : output32
+terms::Operator "1..1" -- "0..1" terms::Sort : output32
 terms::NamedOperator "1..1" *-- "0..9999" terms::VariableDecl : parameters49
 terms::Sort "0..1" -- "1..1" terms::Term : sort20
 terms::Sort "1..1" --* "1..1" terms::VariableDecl : sort37
-terms::Sort "1..1" --* "1..1" terms::NamedSort : sortdef44
+terms::NamedSort "1..1" *-- "1..1" terms::Sort : sortdef44
 terms::Operator "1..1" *-- "0..9999" terms::Term : subterm31
-terms::VariableDecl "1..1" -- "1..1" terms::Variable : variableDecl41
+terms::Variable "1..1" -- "1..1" terms::VariableDecl : variableDecl41
 @enduml

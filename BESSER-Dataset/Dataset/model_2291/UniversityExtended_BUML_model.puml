@@ -94,22 +94,22 @@ Person <|-- universityextended::people::Assistant
 Person <|-- universityextended::people::Professor
 Person <|-- universityextended::people::Student
 Course "1..1" -- "1..1" universityextended::administration::Lecture : course23
-universityextended::administration::Tutorial "1..1" -- "1..1" Course : course27
-universityextended::connection::Visits "1..1" -- "1..1" Course : course37
+Course "1..1" -- "1..1" universityextended::administration::Tutorial : course27
+Course "1..1" -- "1..1" universityextended::connection::Visits : course37
 Visits "0..9999" -- "1..1" universityextended::people::Student : courseVisit9
 Course "0..9999" --* "1..1" universityextended::University : courses3
 Lecture "1..1" --* "1..1" universityextended::administration::Course : lecture14
 Professor "1..1" -- "1..1" universityextended::administration::Lecture : lecturer26
 Lecture "0..9999" -- "1..1" universityextended::people::Professor : lectures11
-universityextended::University "1..1" *-- "0..9999" Person : persons0
+Person "0..9999" --* "1..1" universityextended::University : persons0
 Room "1..1" -- "1..1" universityextended::administration::Event : room34
-universityextended::University "1..1" *-- "0..9999" Room : rooms7
+Room "0..9999" --* "1..1" universityextended::University : rooms7
 Student "1..1" -- "1..1" universityextended::connection::Visits : student40
 Time "1..1" -- "1..1" universityextended::administration::Event : time32
 Time "0..9999" --* "1..1" universityextended::University : times5
 Assistant "1..1" -- "1..1" universityextended::administration::Tutorial : tutor30
 Tutorial "0..9999" -- "1..1" universityextended::people::Assistant : tutorial12
-universityextended::administration::Course "1..1" *-- "0..1" Tutorial : tutorial17
+Tutorial "0..1" --* "1..1" universityextended::administration::Course : tutorial17
 Visits "0..9999" -- "1..1" universityextended::administration::Course : visitor20
 Visits "0..9999" --* "1..1" universityextended::University : visits1
 @enduml

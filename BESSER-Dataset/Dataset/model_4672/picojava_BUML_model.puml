@@ -1,0 +1,115 @@
+@startuml
+class Access {
+}
+class BlockStmt {
+}
+class Decl {
+}
+class Exp {
+}
+class IdUse {
+}
+class Stmt {
+}
+class TypeDecl {
+}
+abstract class picojava::Access {
+}
+class picojava::AssignStmt {
+}
+class picojava::Block {
+  + localLookup(name : any) : str
+  + lookup(name : any) : str
+}
+abstract class picojava::BlockStmt {
+  + declarationOf(name : any) : str
+}
+class picojava::BooleanLiteral {
+  + Value : str
+}
+class picojava::ClassDecl {
+  + hasCycleOnSuperclassChain : bool
+}
+abstract class picojava::Decl {
+  + Name : str
+  + isUnknown : bool
+}
+class picojava::Dot {
+}
+abstract class picojava::Exp {
+  + isValue : bool
+}
+abstract class picojava::IdUse {
+  + Name : str
+  + isQualified : bool
+  + lookup(name : any) : Decl
+}
+class picojava::PrimitiveDecl {
+}
+class picojava::Program {
+  + localLookup(name : any) : str
+}
+abstract class picojava::Stmt {
+}
+abstract class picojava::TypeDecl {
+  + isQualified : bool
+  + isSubtypeOf(typeDecl : any) : void
+  + isSuperTypeOf(typeDecl : any) : void
+  + isSuperTypeOfClassDecl(typeDecl : any) : void
+  + lookup(name : any) : Decl
+  + remoteLookup(name : any) : Decl
+}
+class picojava::TypeUse {
+}
+class picojava::UnknownDecl {
+}
+class picojava::Use {
+}
+class picojava::VarDecl {
+}
+class picojava::VariableUse {
+}
+class picojava::WhileStmt {
+}
+Access <|-- picojava::Dot
+Access <|-- picojava::IdUse
+BlockStmt <|-- picojava::Decl
+BlockStmt <|-- picojava::Stmt
+Decl <|-- picojava::TypeDecl
+Decl <|-- picojava::VarDecl
+Exp <|-- picojava::Access
+Exp <|-- picojava::BooleanLiteral
+IdUse <|-- picojava::TypeUse
+IdUse <|-- picojava::Use
+IdUse <|-- picojava::VariableUse
+Stmt <|-- picojava::AssignStmt
+Stmt <|-- picojava::WhileStmt
+TypeDecl <|-- picojava::ClassDecl
+TypeDecl <|-- picojava::PrimitiveDecl
+TypeDecl <|-- picojava::UnknownDecl
+picojava::Block "1..1" --* "1..1" picojava::Program : Block0
+picojava::Block "1..1" *-- "0..9999" picojava::BlockStmt : BlockStmt7
+picojava::Block "1..1" --* "1..1" picojava::ClassDecl : Body23
+picojava::Stmt "1..1" --* "1..1" picojava::WhileStmt : Body37
+picojava::Exp "1..1" --* "1..1" picojava::WhileStmt : Condition35
+picojava::Dot "1..1" *-- "1..1" picojava::IdUse : IdUse53
+picojava::Access "1..1" --* "1..1" picojava::Dot : ObjectReference51
+picojava::Program "1..1" *-- "0..9999" picojava::TypeDecl : PredefinedType1
+picojava::ClassDecl "1..1" *-- "0..1" picojava::IdUse : Superclass22
+picojava::Access "1..1" --* "1..1" picojava::VarDecl : Type29
+picojava::AssignStmt "1..1" *-- "1..1" picojava::Exp : Value33
+picojava::Access "1..1" --* "1..1" picojava::AssignStmt : Variable31
+picojava::Decl "1..1" -- "0..1" picojava::PrimitiveDecl : booleanType14
+picojava::PrimitiveDecl "0..1" -- "1..1" picojava::WhileStmt : booleanType39
+picojava::PrimitiveDecl "0..1" -- "1..1" picojava::Program : booleanType5
+picojava::BooleanLiteral "1..1" -- "0..1" picojava::PrimitiveDecl : booleanType56
+picojava::Access "1..1" -- "0..1" picojava::Decl : decl45
+picojava::Access "0..1" -- "1..1" picojava::TypeDecl : qualifier17
+picojava::Access "0..1" -- "1..1" picojava::IdUse : qualifier48
+picojava::ClassDecl "0..1" -- "1..1" picojava::ClassDecl : superClass27
+picojava::Decl "1..1" -- "0..1" picojava::TypeDecl : type11
+picojava::Exp "1..1" -- "0..1" picojava::TypeDecl : type42
+picojava::Decl "0..1" -- "1..1" picojava::TypeDecl : unknownDecl19
+picojava::Program "1..1" -- "0..1" picojava::UnknownDecl : unknownDecl3
+picojava::Block "1..1" -- "0..1" picojava::Decl : unknownDecl9
+@enduml

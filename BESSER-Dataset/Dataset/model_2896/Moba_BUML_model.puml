@@ -394,11 +394,6 @@ MobaApplicationFeature <|-- moba::MobaSettings
 MobaApplicationFeature <|-- moba::MobaTemplate
 MobaApplicationFeature <|-- moba::MobaTransportSerializationType
 MobaApplicationFeature <|-- moba::MobaTrigger
-MobaConstraintable <|-- moba::MobaDataType
-MobaConstraintable <|-- moba::MobaDtoAttribute
-MobaConstraintable <|-- moba::MobaEntityAttribute
-MobaConstraintable <|-- moba::MobaSettingsAttribute
-MobaConstraintable <|-- moba::MobaSettingsEntityReference
 MobaConstraint <|-- moba::MobaDigitsConstraint
 MobaConstraint <|-- moba::MobaFutureConstraint
 MobaConstraint <|-- moba::MobaMaxConstraint
@@ -409,6 +404,11 @@ MobaConstraint <|-- moba::MobaNotNullConstraint
 MobaConstraint <|-- moba::MobaNullConstraint
 MobaConstraint <|-- moba::MobaPastConstraint
 MobaConstraint <|-- moba::MobaRegexpConstraint
+MobaConstraintable <|-- moba::MobaDataType
+MobaConstraintable <|-- moba::MobaDtoAttribute
+MobaConstraintable <|-- moba::MobaEntityAttribute
+MobaConstraintable <|-- moba::MobaSettingsAttribute
+MobaConstraintable <|-- moba::MobaSettingsEntityReference
 MobaData <|-- moba::MobaDto
 MobaData <|-- moba::MobaEntity
 MobaData <|-- moba::MobaQueue
@@ -443,11 +443,11 @@ MobaMultiplicityAble <|-- moba::MobaSettingsAttribute
 MobaMultiplicityAble <|-- moba::MobaSettingsEntityReference
 MobaPropertiesAble <|-- moba::MobaFriendsAble
 MobaQueueFeature <|-- moba::MobaQueueReference
-MobaRESTAbstractAttribute <|-- moba::MobaRESTAttribute
-MobaRESTAbstractAttribute <|-- moba::MobaRESTDtoAttribute
 MobaREST <|-- moba::MobaRESTCrud
 MobaREST <|-- moba::MobaRESTCustomService
 MobaREST <|-- moba::MobaRESTWorkflow
+MobaRESTAbstractAttribute <|-- moba::MobaRESTAttribute
+MobaRESTAbstractAttribute <|-- moba::MobaRESTDtoAttribute
 MobaSettingsFeature <|-- moba::MobaSettingsAttribute
 MobaSettingsFeature <|-- moba::MobaSettingsEntityReference
 MobaTrigger <|-- moba::MobaAppInstallTrigger
@@ -458,34 +458,34 @@ MobaTrigger <|-- moba::MobaGeofenceTrigger
 MobaTrigger <|-- moba::MobaPushTrigger
 MobaTrigger <|-- moba::MobaSMSTrigger
 MobaTrigger <|-- moba::MobaTimerTrigger
-moba::MobaRESTAbstractAttribute "1..1" -- "0..1" moba::MobaConstant : aliasConst117
-moba::MobaEntityIndex "1..1" -- "0..9999" moba::MobaEntityAttribute : attributes77
+moba::MobaConstant "0..1" -- "1..1" moba::MobaRESTAbstractAttribute : aliasConst117
+moba::MobaEntityAttribute "0..9999" -- "1..1" moba::MobaEntityIndex : attributes77
 moba::MobaAuthorization "0..1" -- "1..1" moba::MobaREST : authorization108
 moba::MobaAuthorization "0..1" -- "1..1" moba::MobaServer : authorization17
 moba::MobaApplication "0..1" -- "1..1" moba::MobaProject : backgroundApplication2
-moba::MobaEntity "1..1" -- "0..1" moba::MobaCache : cache70
+moba::MobaCache "0..1" -- "1..1" moba::MobaEntity : cache70
 moba::MobaCache "0..1" -- "1..1" moba::MobaQueue : cache90
-moba::MobaConstant "0..1" -- "1..1" moba::MobaCache : cacheIntervalConst39
-moba::MobaPersistenceType "0..1" -- "1..1" moba::MobaCache : cachePersistence42
-moba::MobaConstant "0..1" -- "1..1" moba::MobaCache : cacheStrategyConst36
-moba::MobaConstant "0..1" -- "1..1" moba::MobaCache : cacheTypeConst33
-moba::MobaConstraintable "1..1" *-- "0..9999" moba::MobaConstraint : constraints181
-moba::MobaRESTPayloadDefinition "0..1" --* "1..1" moba::MobaREST : contextDto103
+moba::MobaCache "1..1" -- "0..1" moba::MobaConstant : cacheIntervalConst39
+moba::MobaCache "1..1" -- "0..1" moba::MobaPersistenceType : cachePersistence42
+moba::MobaCache "1..1" -- "0..1" moba::MobaConstant : cacheStrategyConst36
+moba::MobaCache "1..1" -- "0..1" moba::MobaConstant : cacheTypeConst33
+moba::MobaConstraint "0..9999" --* "1..1" moba::MobaConstraintable : constraints181
+moba::MobaREST "1..1" *-- "0..1" moba::MobaRESTPayloadDefinition : contextDto103
 moba::MobaConstant "0..1" -- "1..1" moba::MobaDataType : dateFormatConst25
-moba::MobaCache "0..1" -- "1..1" moba::MobaApplication : defaultCache5
+moba::MobaApplication "1..1" -- "0..1" moba::MobaCache : defaultCache5
 moba::MobaDto "0..1" -- "1..1" moba::MobaRESTPayloadDefinition : dto111
 moba::MobaDtoFeature "0..1" -- "1..1" moba::MobaRESTDtoAttribute : dtoFeature130
 MobaIndexEntry "0..9999" --* "1..1" moba::index::MobaIndex : entries207
 moba::MobaDataType "1..1" *-- "0..1" moba::MobaEnum : enumAST24
 moba::MobaREST "1..1" *-- "0..1" moba::MobaRESTPayloadDefinition : errorDto100
 moba::MobaModel "1..1" *-- "0..9999" moba::MobaModelFeature : features0
-moba::MobaGeneratorFeature "0..9999" --* "1..1" moba::MobaGenerator : features19
-moba::MobaSettingsFeature "0..9999" --* "1..1" moba::MobaSettings : features59
+moba::MobaGenerator "1..1" *-- "0..9999" moba::MobaGeneratorFeature : features19
+moba::MobaSettings "1..1" *-- "0..9999" moba::MobaSettingsFeature : features59
 moba::MobaApplication "1..1" *-- "0..9999" moba::MobaApplicationFeature : features7
-moba::MobaEntityFeature "0..9999" --* "1..1" moba::MobaEntity : features73
-moba::MobaDtoFeature "0..9999" --* "1..1" moba::MobaDto : features84
-moba::MobaQueueFeature "0..9999" --* "1..1" moba::MobaQueue : features93
-moba::MobaRegexpConstraint "1..1" -- "0..1" moba::MobaConstant : filterConst182
+moba::MobaEntity "1..1" *-- "0..9999" moba::MobaEntityFeature : features73
+moba::MobaDto "1..1" *-- "0..9999" moba::MobaDtoFeature : features84
+moba::MobaQueue "1..1" *-- "0..9999" moba::MobaQueueFeature : features93
+moba::MobaConstant "0..1" -- "1..1" moba::MobaRegexpConstraint : filterConst182
 moba::MobaConstant "0..1" -- "1..1" moba::MobaMinConstraint : filterConst184
 moba::MobaConstant "0..1" -- "1..1" moba::MobaMaxConstraint : filterConst186
 moba::MobaConstant "0..1" -- "1..1" moba::MobaMinLengthConstraint : filterConst188
@@ -493,13 +493,13 @@ moba::MobaConstant "0..1" -- "1..1" moba::MobaMaxLengthConstraint : filterConst1
 moba::MobaConstant "0..1" -- "1..1" moba::MobaDigitsConstraint : filterFractionConst194
 moba::MobaConstant "0..1" -- "1..1" moba::MobaDigitsConstraint : filterIntegerConst192
 moba::MobaConstant "0..1" -- "1..1" moba::MobaRESTAttribute : formatConst127
-moba::MobaEntityAttribute "1..1" -- "0..1" moba::MobaConstant : formatConst156
+moba::MobaConstant "0..1" -- "1..1" moba::MobaEntityAttribute : formatConst156
 moba::MobaConstant "0..1" -- "1..1" moba::MobaDtoAttribute : formatConst169
 moba::MobaConstant "0..1" -- "1..1" moba::MobaSettingsAttribute : formatConst63
 moba::MobaFriend "0..9999" --* "1..1" moba::MobaFriendsAble : friends203
 moba::MobaGenerator "0..1" -- "1..1" moba::MobaGeneratorMixinFeature : generatorRef20
-moba::MobaRESTHeader "0..9999" --* "1..1" moba::MobaREST : headers106
-moba::MobaEntityIndex "0..9999" --* "1..1" moba::MobaEntity : indizes75
+moba::MobaREST "1..1" *-- "0..9999" moba::MobaRESTHeader : headers106
+moba::MobaEntity "1..1" *-- "0..9999" moba::MobaEntityIndex : indizes75
 moba::MobaConstant "0..1" -- "1..1" moba::MobaRESTAttribute : keyConst121
 moba::MobaConstant "0..1" -- "1..1" moba::MobaRESTHeader : keyConst132
 moba::MobaConstant "0..1" -- "1..1" moba::MobaProperty : keyConst51
@@ -508,37 +508,37 @@ moba::MobaRESTAbstractAttribute "0..9999" --* "1..1" moba::MobaRESTCustomService
 moba::MobaMuliplicity "0..1" --* "1..1" moba::MobaMultiplicityAble : multiplicity159
 moba::MobaEntityReference "0..1" -- "1..1" moba::MobaEntityReference : opposite163
 moba::MobaDtoReference "0..1" -- "1..1" moba::MobaDtoReference : opposite175
-moba::MobaRESTCustomService "1..1" *-- "0..9999" moba::MobaRESTAbstractAttribute : parameters138
+moba::MobaRESTAbstractAttribute "0..9999" --* "1..1" moba::MobaRESTCustomService : parameters138
 moba::MobaPropertiesAble "1..1" *-- "0..9999" moba::MobaProperty : properties50
-moba::MobaRESTPayloadDefinition "0..1" --* "1..1" moba::MobaREST : requestDto95
-moba::MobaRESTPayloadDefinition "0..1" --* "1..1" moba::MobaREST : responseDto97
-moba::MobaREST "0..1" -- "1..1" moba::MobaQueueReference : restService179
-moba::MobaTransportSerializationType "0..1" -- "1..1" moba::MobaRESTPayloadDefinition : serializationType114
+moba::MobaREST "1..1" *-- "0..1" moba::MobaRESTPayloadDefinition : requestDto95
+moba::MobaREST "1..1" *-- "0..1" moba::MobaRESTPayloadDefinition : responseDto97
+moba::MobaQueueReference "1..1" -- "0..1" moba::MobaREST : restService179
+moba::MobaRESTPayloadDefinition "1..1" -- "0..1" moba::MobaTransportSerializationType : serializationType114
 moba::MobaDto "1..1" -- "0..1" moba::MobaTransportSerializationType : serializationType86
 moba::MobaREST "0..9999" -- "1..1" moba::MobaRESTWorkflow : services146
 moba::MobaREST "0..9999" -- "1..1" moba::MobaServer : services15
-moba::MobaServer "1..1" -- "0..1" moba::MobaServer : superType13
+moba::MobaServer "0..1" -- "1..1" moba::MobaServer : superType13
 moba::MobaRESTCustomService "0..1" -- "1..1" moba::MobaRESTCustomService : superType141
-moba::MobaRESTWorkflow "1..1" -- "0..1" moba::MobaRESTWorkflow : superType149
-moba::MobaRESTCrud "0..1" -- "1..1" moba::MobaRESTCrud : superType152
-moba::MobaTrigger "0..1" -- "1..1" moba::MobaTrigger : superType200
+moba::MobaRESTWorkflow "0..1" -- "1..1" moba::MobaRESTWorkflow : superType149
+moba::MobaRESTCrud "1..1" -- "0..1" moba::MobaRESTCrud : superType152
+moba::MobaTrigger "1..1" -- "0..1" moba::MobaTrigger : superType200
 moba::MobaExternalModule "1..1" -- "0..1" moba::MobaExternalModule : superType206
-moba::MobaGeneratorSlot "0..1" -- "1..1" moba::MobaGeneratorSlot : superType23
+moba::MobaGeneratorSlot "1..1" -- "0..1" moba::MobaGeneratorSlot : superType23
 moba::MobaDataType "0..1" -- "1..1" moba::MobaDataType : superType29
-moba::MobaSettings "0..1" -- "1..1" moba::MobaSettings : superType58
+moba::MobaSettings "1..1" -- "0..1" moba::MobaSettings : superType58
 moba::MobaEntity "0..1" -- "1..1" moba::MobaEntity : superType68
-moba::MobaDto "0..1" -- "1..1" moba::MobaDto : superType80
-moba::MobaQueue "0..1" -- "1..1" moba::MobaQueue : superType89
+moba::MobaDto "1..1" -- "0..1" moba::MobaDto : superType80
+moba::MobaQueue "1..1" -- "0..1" moba::MobaQueue : superType89
 moba::MobaConstantValue "0..1" --* "1..1" moba::MobaConstantValue : tail48
 moba::MobaApplication "0..1" -- "1..1" moba::MobaTemplate : template9
 index::moba::MobaApplication "0..1" -- "1..1" moba::index::MobaIndexEntry : transientTemplate208
 moba::MobaDataType "0..1" -- "1..1" moba::MobaRESTAttribute : type119
-moba::MobaEntityAttribute "1..1" -- "0..1" moba::MobaDataType : type153
+moba::MobaDataType "0..1" -- "1..1" moba::MobaEntityAttribute : type153
 moba::MobaEntity "0..1" -- "1..1" moba::MobaEntityReference : type160
 moba::MobaEntity "0..1" -- "1..1" moba::MobaEntityEmbeddable : type165
 moba::MobaDataType "0..1" -- "1..1" moba::MobaDtoAttribute : type167
 moba::MobaDto "0..1" -- "1..1" moba::MobaDtoReference : type172
-moba::MobaDtoEmbeddable "1..1" -- "0..1" moba::MobaDto : type177
+moba::MobaDto "0..1" -- "1..1" moba::MobaDtoEmbeddable : type177
 moba::MobaDataType "0..1" -- "1..1" moba::MobaSettingsAttribute : type61
 moba::MobaEntity "0..1" -- "1..1" moba::MobaSettingsEntityReference : type66
 moba::MobaApplication "0..1" -- "1..1" moba::MobaProject : uiApplication1
@@ -547,7 +547,7 @@ moba::MobaConstant "1..1" *-- "0..1" moba::MobaConstantValue : valueAST31
 moba::MobaConstant "0..1" -- "1..1" moba::MobaRESTAttribute : valueConst124
 moba::MobaConstant "0..1" -- "1..1" moba::MobaRESTHeader : valueConst135
 moba::MobaConstant "0..1" -- "1..1" moba::MobaFriend : valueConst201
-moba::MobaConstantValue "1..1" -- "0..1" moba::MobaConstant : valueConst44
+moba::MobaConstant "0..1" -- "1..1" moba::MobaConstantValue : valueConst44
 moba::MobaConstant "0..1" -- "1..1" moba::MobaProperty : valueConst54
-moba::MobaEntity "0..1" -- "1..1" moba::MobaDto : wrappedEntity81
+moba::MobaDto "1..1" -- "0..1" moba::MobaEntity : wrappedEntity81
 @enduml

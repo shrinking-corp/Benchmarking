@@ -40,19 +40,19 @@ enum semesterType {
   fall
   spring
 }
-ntnustudies::StudyPlan "1..1" -- "0..9999" ntnustudies::ChosenSemester : chosenSemesters24
+ntnustudies::ChosenSemester "0..9999" -- "1..1" ntnustudies::StudyPlan : chosenSemesters24
 ntnustudies::ChosenSemester "1..1" *-- "0..9999" ntnustudies::Course : courses17
 ntnustudies::Course "0..9999" --* "1..1" ntnustudies::Department : courses27
-ntnustudies::Specialization "1..1" -- "0..9999" ntnustudies::Course : courses4
+ntnustudies::Course "0..9999" -- "1..1" ntnustudies::Specialization : courses4
 ntnustudies::Course "0..9999" -- "1..1" ntnustudies::Semester : possibleCourses10
 ntnustudies::Programme "0..1" -- "1..1" ntnustudies::Semester : programme13
 ntnustudies::Programme "0..1" -- "1..1" ntnustudies::StudyPlan : programme20
 ntnustudies::Programme "0..1" -- "1..1" ntnustudies::Specialization : programme3
-ntnustudies::Programme "0..9999" --* "1..1" ntnustudies::Department : programmes29
+ntnustudies::Department "1..1" *-- "0..9999" ntnustudies::Programme : programmes29
 ntnustudies::Specialization "0..1" -- "1..1" ntnustudies::Specialization : requiredSpecialization6
-ntnustudies::Semester "0..1" -- "1..1" ntnustudies::ChosenSemester : semester15
-ntnustudies::Semester "0..9999" --* "1..1" ntnustudies::Programme : semesters1
-ntnustudies::Specialization "1..1" *-- "0..9999" ntnustudies::Semester : semesters8
+ntnustudies::ChosenSemester "1..1" -- "0..1" ntnustudies::Semester : semester15
+ntnustudies::Programme "1..1" *-- "0..9999" ntnustudies::Semester : semesters1
+ntnustudies::Semester "0..9999" --* "1..1" ntnustudies::Specialization : semesters8
 ntnustudies::Programme "1..1" *-- "0..9999" ntnustudies::Specialization : specializations0
 ntnustudies::Specialization "0..9999" -- "1..1" ntnustudies::StudyPlan : specializations21
 @enduml

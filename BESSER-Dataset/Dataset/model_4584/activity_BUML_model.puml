@@ -89,6 +89,8 @@ abstract class activity::Pin {
 }
 class activity::SendSignalAction {
 }
+Activity <|-- activity::ActivityGroup
+Activity <|-- activity::ActivityParameterNode
 ActivityEdge <|-- activity::ControlFlow
 ActivityEdge <|-- activity::InterruptEdge
 ActivityEdge <|-- activity::ObjectFlow
@@ -97,8 +99,6 @@ ActivityGroup <|-- activity::InterruptibleActivityRegion
 ActivityNode <|-- activity::ControlNode
 ActivityNode <|-- activity::ExecutableNode
 ActivityNode <|-- activity::ObjectNode
-Activity <|-- activity::ActivityGroup
-Activity <|-- activity::ActivityParameterNode
 ControlNode <|-- activity::Connector
 ControlNode <|-- activity::DecisionNode
 ControlNode <|-- activity::FinalNode
@@ -120,18 +120,18 @@ ObjectNode <|-- activity::Object
 ObjectNode <|-- activity::Pin
 Pin <|-- activity::InputPin
 Pin <|-- activity::OutputPin
-activity::ActivityGroup "0..9999" --* "1..1" activity::Activity : activityGroups7
+activity::Activity "1..1" *-- "0..9999" activity::ActivityGroup : activityGroups7
 activity::Activity "1..1" -- "0..9999" activity::ActivityPartition : activityPartion5
 activity::ActivityPartition "0..9999" --* "1..1" activity::ActivityPartition : activityPartions19
-activity::ActivityParameterNode "0..1" --* "1..1" activity::Activity : activityparameternode3
-activity::Connector "0..1" -- "1..1" activity::Connector : connected22
-activity::ActivityEdge "0..9999" --* "1..1" activity::Activity : edges0
-activity::ActivityParameterNode "1..1" *-- "0..9999" activity::ActivityNode : inBorder9
+activity::Activity "1..1" *-- "0..1" activity::ActivityParameterNode : activityparameternode3
+activity::Connector "1..1" -- "0..1" activity::Connector : connected22
+activity::Activity "1..1" *-- "0..9999" activity::ActivityEdge : edges0
+activity::ActivityNode "0..9999" --* "1..1" activity::ActivityParameterNode : inBorder9
 activity::ActivityEdge "0..9999" -- "1..1" activity::ActivityNode : incoming15
-activity::InputPin "0..9999" --* "1..1" activity::Action : input24
-activity::ActivityNode "0..9999" --* "1..1" activity::Activity : nodes1
-activity::ActivityNode "1..1" -- "0..9999" activity::ActivityEdge : outgoing16
+activity::Action "1..1" *-- "0..9999" activity::InputPin : input24
+activity::Activity "1..1" *-- "0..9999" activity::ActivityNode : nodes1
+activity::ActivityEdge "0..9999" -- "1..1" activity::ActivityNode : outgoing16
 activity::Action "1..1" *-- "0..9999" activity::OutputPin : output23
-activity::ActivityNode "0..1" -- "1..1" activity::ActivityEdge : source13
-activity::ActivityNode "0..1" -- "1..1" activity::ActivityEdge : target12
+activity::ActivityEdge "1..1" -- "0..1" activity::ActivityNode : source13
+activity::ActivityEdge "1..1" -- "0..1" activity::ActivityNode : target12
 @enduml

@@ -69,23 +69,23 @@ Pseudostate <|-- fsm::ShallowHistory
 State <|-- fsm::FinalState
 Statement <|-- fsm::Program
 Trigger <|-- fsm::AndTrigger
-fsm::State "1..1" *-- "0..1" fsm::Program : doActivity17
-fsm::Transition "1..1" *-- "0..9999" fsm::Statement : effect35
+fsm::Program "0..1" --* "1..1" fsm::State : doActivity17
+fsm::Statement "0..9999" --* "1..1" fsm::Transition : effect35
 fsm::Program "0..1" --* "1..1" fsm::State : entry18
-fsm::State "1..1" *-- "0..1" fsm::Program : exit21
+fsm::Program "0..1" --* "1..1" fsm::State : exit21
 fsm::Constraint "1..1" --* "1..1" fsm::Transition : guard37
-fsm::Transition "0..9999" -- "1..1" fsm::AbstractState : incoming8
-fsm::Trigger "1..1" -- "1..1" fsm::AndTrigger : left39
-fsm::Transition "0..9999" -- "1..1" fsm::AbstractState : outgoing11
+fsm::AbstractState "1..1" -- "0..9999" fsm::Transition : incoming8
+fsm::AndTrigger "1..1" -- "1..1" fsm::Trigger : left39
+fsm::AbstractState "1..1" -- "0..9999" fsm::Transition : outgoing11
 fsm::Region "0..9999" --* "1..1" fsm::State : ownedRegions24
-fsm::Region "1..1" -- "1..1" fsm::AbstractState : ownerRegion14
+fsm::AbstractState "1..1" -- "1..1" fsm::Region : ownerRegion14
 fsm::Region "1..1" -- "0..1" fsm::State : ownerState5
-fsm::StateMachine "1..1" *-- "0..9999" fsm::Region : regions0
-fsm::Trigger "1..1" -- "1..1" fsm::AndTrigger : right41
+fsm::Region "0..9999" --* "1..1" fsm::StateMachine : regions0
+fsm::AndTrigger "1..1" -- "1..1" fsm::Trigger : right41
 fsm::AbstractState "1..1" -- "1..1" fsm::Transition : source32
 fsm::Program "1..1" *-- "0..9999" fsm::Statement : statements44
 fsm::AbstractState "0..9999" --* "1..1" fsm::Region : subvertex1
 fsm::AbstractState "1..1" -- "1..1" fsm::Transition : target29
-fsm::Transition "0..9999" --* "1..1" fsm::Region : transitions3
-fsm::Trigger "0..1" --* "1..1" fsm::Transition : trigger27
+fsm::Region "1..1" *-- "0..9999" fsm::Transition : transitions3
+fsm::Transition "1..1" *-- "0..1" fsm::Trigger : trigger27
 @enduml

@@ -1,0 +1,269 @@
+@startuml
+class  {
+}
+class Actuator {
+}
+class Comm {
+}
+enum CommType {
+  broadcast
+  logicast
+  unicast
+}
+class EnergySource {
+}
+class Event {
+}
+class Interface {
+}
+class Lifeline {
+}
+enum MoteType {
+  Iris
+  TelosB
+  Z1
+}
+class Node {
+}
+enum PlatformType {
+  Contiki
+  TinyOS
+}
+enum RoutingType {
+  ch2ch
+  node2node
+}
+class Sensor {
+}
+class State {
+}
+enum TimerType {
+  once
+  periodic
+}
+enum communication_mode {
+  broadcast
+  logicast
+  unicast
+}
+enum macType {
+}
+enum netstackType {
+}
+enum optimizationLevel {
+  critical
+  dontCare
+  high
+  medium
+}
+enum rdcType {
+}
+enum routingProtocol {
+}
+enum sleepType {
+}
+class wsn::Activity {
+}
+class wsn::Actuating {
+}
+class wsn::Actuator {
+  + data : float
+}
+class wsn::ActuatorRole {
+}
+class wsn::Battery {
+  + empty : float
+  + full : float
+}
+class wsn::Button {
+}
+class wsn::Cluster {
+}
+class wsn::ClusterHead {
+}
+class wsn::Comm {
+}
+class wsn::Communication {
+}
+class wsn::Data {
+}
+class wsn::Election {
+}
+abstract class wsn::EnergySource {
+}
+abstract class wsn::Event {
+}
+class wsn::FinalState {
+}
+class wsn::Formation {
+  + routing : str
+}
+class wsn::Harvester {
+}
+class wsn::IActuator {
+}
+class wsn::IData {
+}
+class wsn::ISensor {
+}
+class wsn::InitialLifeline {
+}
+class wsn::InitialState {
+}
+class wsn::InteractionMsg {
+}
+abstract class wsn::Interface {
+}
+class wsn::LED {
+}
+class wsn::Lifeline {
+}
+class wsn::Message {
+}
+class wsn::Mode {
+  + destination : float
+  + mode_t : str
+}
+class wsn::Network {
+}
+class wsn::Node {
+}
+class wsn::NodeRole {
+}
+class wsn::Objectives {
+  + delay : str
+  + lifetime : str
+  + memfootprint : str
+  + packetloss : str
+}
+class wsn::Parameters {
+  + macProtocol : str
+  + netStack : str
+  + rdcProtocol : str
+  + routingProtocol : str
+  + sleepScheduling : str
+}
+class wsn::Platform {
+  + mote : str
+  + platform : str
+}
+class wsn::Receiver {
+  + type : str
+}
+class wsn::Resource {
+  + flash : int
+  + memory : int
+}
+class wsn::Sender {
+  + type : str
+}
+class wsn::Sensing {
+}
+class wsn::Sensor {
+  + data : float
+}
+class wsn::SensorRole {
+}
+class wsn::Sink {
+}
+class wsn::State {
+}
+class wsn::StateMachine {
+}
+class wsn::Task {
+  + priority : int
+}
+class wsn::Timer {
+  + time : int
+  + type : str
+}
+class wsn::Timing {
+}
+class wsn::Transition {
+  + guard : str
+}
+class wsn::WirelessLink {
+}
+ <|-- wsn::ActuatorRole
+ <|-- wsn::Battery
+ <|-- wsn::Button
+ <|-- wsn::ClusterHead
+ <|-- wsn::Comm
+ <|-- wsn::FinalState
+ <|-- wsn::Harvester
+ <|-- wsn::IActuator
+ <|-- wsn::IData
+ <|-- wsn::ISensor
+ <|-- wsn::InitialLifeline
+ <|-- wsn::InitialState
+ <|-- wsn::LED
+ <|-- wsn::Message
+ <|-- wsn::NodeRole
+ <|-- wsn::Receiver
+ <|-- wsn::Sender
+ <|-- wsn::SensorRole
+ <|-- wsn::Sink
+ <|-- wsn::Timing
+Actuator <|-- wsn::LED
+Comm <|-- wsn::Receiver
+Comm <|-- wsn::Sender
+EnergySource <|-- wsn::Battery
+EnergySource <|-- wsn::Harvester
+Event <|-- wsn::Comm
+Event <|-- wsn::Message
+Event <|-- wsn::Timing
+Interface <|-- wsn::IActuator
+Interface <|-- wsn::IData
+Interface <|-- wsn::ISensor
+Lifeline <|-- wsn::ActuatorRole
+Lifeline <|-- wsn::InitialLifeline
+Lifeline <|-- wsn::NodeRole
+Lifeline <|-- wsn::SensorRole
+Node <|-- wsn::ClusterHead
+Node <|-- wsn::Sink
+Sensor <|-- wsn::Button
+State <|-- wsn::FinalState
+State <|-- wsn::InitialState
+wsn::Actuating "1..1" -- "0..1" wsn::Actuator : actuator3
+wsn::Actuator "0..1" -- "1..1" wsn::ActuatorRole : actuator91
+wsn::StateMachine "1..1" --* "1..1" wsn::Task : behavior8
+wsn::Comm "0..1" -- "1..1" wsn::WirelessLink : comm82
+wsn::Communication "1..1" -- "0..1" wsn::Node : commDestination34
+wsn::Communication "1..1" -- "0..1" wsn::Node : commSource32
+wsn::Data "0..1" -- "1..1" wsn::Sensing : data15
+wsn::Data "0..1" -- "1..1" wsn::Message : data25
+wsn::Actuating "1..1" -- "0..1" wsn::Data : data6
+wsn::Comm "1..1" -- "0..1" wsn::Data : data84
+wsn::Cluster "1..1" -- "0..1" wsn::Election : election62
+wsn::Activity "1..1" -- "1..1" wsn::Election : electionActivity70
+wsn::Activity "0..1" -- "1..1" wsn::State : entryActivity47
+wsn::Activity "0..1" -- "1..1" wsn::State : exitActivity48
+wsn::Cluster "1..1" -- "0..1" wsn::Formation : formation64
+wsn::Activity "1..1" -- "1..1" wsn::Formation : formationActivity73
+wsn::Cluster "1..1" *-- "1..1" wsn::ClusterHead : head60
+wsn::ISensor "0..1" -- "1..1" wsn::Sensor : interface0
+wsn::Actuator "1..1" -- "0..1" wsn::IActuator : interface1
+wsn::Data "1..1" -- "0..1" wsn::IData : interface45
+wsn::Communication "1..1" -- "0..1" wsn::Mode : mode43
+wsn::InteractionMsg "1..1" -- "0..1" wsn::Lifeline : msgFrom66
+wsn::Message "1..1" -- "0..1" wsn::Task : msgSource20
+wsn::Message "1..1" -- "0..1" wsn::Task : msgTarget22
+wsn::InteractionMsg "1..1" -- "0..1" wsn::Lifeline : msgTo67
+wsn::Cluster "1..1" -- "0..9999" wsn::Node : node58
+wsn::Node "0..1" -- "1..1" wsn::NodeRole : node87
+wsn::Network "1..1" *-- "0..10" wsn::Node : nodes29
+wsn::Network "1..1" -- "0..1" wsn::Objectives : objectives28
+wsn::Communication "1..1" -- "0..1" wsn::Task : originating37
+wsn::Communication "1..1" -- "0..1" wsn::Task : receiving40
+wsn::Sensing "1..1" -- "0..1" wsn::Sensor : sensor12
+wsn::Sensor "0..1" -- "1..1" wsn::SensorRole : sensor89
+wsn::Sensing "1..1" -- "0..1" wsn::Task : task10
+wsn::Node "1..1" *-- "1..10" wsn::Task : task18
+wsn::Actuating "1..1" -- "0..1" wsn::Task : task2
+wsn::Task "0..1" -- "1..1" wsn::Timing : task77
+wsn::Task "0..1" -- "1..1" wsn::WirelessLink : task80
+wsn::Timer "0..1" -- "1..1" wsn::Timing : timer76
+wsn::State "0..1" -- "1..1" wsn::Transition : transitionFrom51
+wsn::State "0..1" -- "1..1" wsn::Transition : transitionTo53
+wsn::Event "0..1" -- "1..1" wsn::Transition : trigger56
+@enduml

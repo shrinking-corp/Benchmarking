@@ -71,51 +71,51 @@ class terms::Variable {
 }
 class terms::VariableDecl {
 }
-OperatorDecl <|-- terms::NamedOperator
 Operator <|-- terms::BuiltInConstant
 Operator <|-- terms::BuiltInOperator
 Operator <|-- terms::MultisetOperator
 Operator <|-- terms::Tuple
 Operator <|-- terms::UserOperator
-SortDecl <|-- terms::NamedSort
+OperatorDecl <|-- terms::NamedOperator
 Sort <|-- terms::BuiltInSort
 Sort <|-- terms::MultisetSort
 Sort <|-- terms::ProductSort
 Sort <|-- terms::UserSort
+SortDecl <|-- terms::NamedSort
+Term <|-- terms::Operator
+Term <|-- terms::Variable
 TermsDeclaration <|-- terms::OperatorDecl
 TermsDeclaration <|-- terms::SortDecl
 TermsDeclaration <|-- terms::VariableDecl
-Term <|-- terms::Operator
-Term <|-- terms::Variable
 terms::MultisetSort "1..1" *-- "1..1" terms::Sort : basis13
 terms::All "0..1" -- "1..1" terms::Sort : containerAll9
 terms::Condition "0..1" -- "1..1" terms::Term : containerCondition20
 terms::Declaration "0..1" -- "1..1" terms::Declarations : containerDeclaration1
-terms::TermsDeclaration "1..1" -- "0..1" terms::Declarations : containerDeclarations2
+terms::Declarations "0..1" -- "1..1" terms::TermsDeclaration : containerDeclarations2
 terms::Empty "0..1" -- "1..1" terms::Sort : containerEmpty10
 terms::HLAnnotation "0..1" -- "1..1" terms::Term : containerHLAnnotation22
 terms::HLMarking "0..1" -- "1..1" terms::Term : containerHLMarking18
-terms::Term "1..1" -- "0..1" terms::NamedOperator : containerNamedOperator16
+terms::NamedOperator "0..1" -- "1..1" terms::Term : containerNamedOperator16
 terms::NamedOperator "0..1" -- "1..1" terms::VariableDecl : containerNamedOperator33
 terms::NamedSort "0..1" -- "1..1" terms::Sort : containerNamedSort4
 terms::Operator "0..1" -- "1..1" terms::Term : containerOperator15
 terms::Partition "0..1" -- "1..1" terms::Sort : containerPartition12
-terms::Term "1..1" -- "0..1" terms::PartitionElement : containerPartitionElement24
+terms::PartitionElement "0..1" -- "1..1" terms::Term : containerPartitionElement24
 terms::ProductSort "0..1" -- "1..1" terms::Sort : containerProductSort6
-terms::Type "0..1" -- "1..1" terms::Sort : containerType7
+terms::Sort "1..1" -- "0..1" terms::Type : containerType7
 terms::Sort "1..1" -- "0..1" terms::VariableDecl : containerVariableDecl5
-terms::TermsDeclaration "0..9999" --* "1..1" terms::Declarations : declaration0
-terms::UserSort "1..1" -- "1..1" terms::SortDecl : declaration40
+terms::Declarations "1..1" *-- "0..9999" terms::TermsDeclaration : declaration0
+terms::SortDecl "1..1" -- "1..1" terms::UserSort : declaration40
 terms::OperatorDecl "1..1" -- "1..1" terms::UserOperator : declaration46
-terms::Term "1..1" --* "1..1" terms::NamedOperator : def41
-terms::Sort "0..9999" --* "1..1" terms::ProductSort : elementSort36
-terms::Sort "0..9999" -- "1..1" terms::Operator : input28
+terms::NamedOperator "1..1" *-- "1..1" terms::Term : def41
+terms::ProductSort "1..1" *-- "0..9999" terms::Sort : elementSort36
+terms::Operator "1..1" -- "0..9999" terms::Sort : input28
 terms::MultisetSort "0..1" -- "1..1" terms::Sort : multi3
-terms::Sort "0..1" -- "1..1" terms::Operator : output26
-terms::VariableDecl "0..9999" --* "1..1" terms::NamedOperator : parameters43
+terms::Operator "1..1" -- "0..1" terms::Sort : output26
+terms::NamedOperator "1..1" *-- "0..9999" terms::VariableDecl : parameters43
 terms::Sort "0..1" -- "1..1" terms::Term : sort14
-terms::VariableDecl "1..1" *-- "1..1" terms::Sort : sort31
-terms::Sort "1..1" --* "1..1" terms::NamedSort : sortdef38
-terms::Term "0..9999" --* "1..1" terms::Operator : subterm25
-terms::VariableDecl "1..1" -- "1..1" terms::Variable : variableDecl35
+terms::Sort "1..1" --* "1..1" terms::VariableDecl : sort31
+terms::NamedSort "1..1" *-- "1..1" terms::Sort : sortdef38
+terms::Operator "1..1" *-- "0..9999" terms::Term : subterm25
+terms::Variable "1..1" -- "1..1" terms::VariableDecl : variableDecl35
 @enduml

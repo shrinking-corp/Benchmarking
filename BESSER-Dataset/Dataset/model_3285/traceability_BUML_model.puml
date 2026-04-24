@@ -13,13 +13,13 @@ class traceability::Identifiable {
 }
 class traceability::NamedEntity {
 }
-traceability::NamedEntity "0..9999" -- "1..1" traceability::EDFDGraphTrace : edfdElements10
-traceability::EDFDToGraph "1..1" *-- "0..9999" traceability::EDFDGraphTrace : edfdGraphTraces0
-traceability::EDFDToGraph "1..1" -- "0..1" traceability::EDFD : edfds1
-traceability::Identifiable "0..9999" -- "1..1" traceability::GraphEndToEndTrace : endtoendGraphElements14
-traceability::Graph "0..1" -- "1..1" traceability::EDFDToGraph : endtoendgraph5
+traceability::EDFDGraphTrace "1..1" -- "0..9999" traceability::NamedEntity : edfdElements10
+traceability::EDFDGraphTrace "0..9999" --* "1..1" traceability::EDFDToGraph : edfdGraphTraces0
+traceability::EDFD "0..1" -- "1..1" traceability::EDFDToGraph : edfds1
+traceability::GraphEndToEndTrace "1..1" -- "0..9999" traceability::Identifiable : endtoendGraphElements14
+traceability::EDFDToGraph "1..1" -- "0..1" traceability::Graph : endtoendgraph5
 traceability::EDFDGraphTrace "1..1" -- "0..9999" traceability::Identifiable : graphElements12
-traceability::Identifiable "0..9999" -- "1..1" traceability::GraphEndToEndTrace : graphElements17
-traceability::GraphEndToEndTrace "0..9999" --* "1..1" traceability::EDFDToGraph : graphEndToEndTrace8
-traceability::Graph "0..1" -- "1..1" traceability::EDFDToGraph : graphs3
+traceability::GraphEndToEndTrace "1..1" -- "0..9999" traceability::Identifiable : graphElements17
+traceability::EDFDToGraph "1..1" *-- "0..9999" traceability::GraphEndToEndTrace : graphEndToEndTrace8
+traceability::EDFDToGraph "1..1" -- "0..1" traceability::Graph : graphs3
 @enduml

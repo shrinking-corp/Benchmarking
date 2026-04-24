@@ -661,7 +661,6 @@ DelayMechanism <|-- vhdl::statement::RejectMechanism
 DelayMechanism <|-- vhdl::statement::TransportMechanism
 EntityReference <|-- vhdl::EntityResolvedReference
 EntityReference <|-- vhdl::Name
-ExpressionStatement <|-- vhdl::statement::ReturnStatement
 Expression <|-- vhdl::expression::AssociationExpression
 Expression <|-- vhdl::expression::BinaryExpression
 Expression <|-- vhdl::expression::IndicationExpression
@@ -673,6 +672,7 @@ Expression <|-- vhdl::expression::UnaffectedExpression
 Expression <|-- vhdl::expression::UnaryExpression
 Expression <|-- vhdl::expression::ValueExpression
 Expression <|-- vhdl::expression::WaveformExpression
+ExpressionStatement <|-- vhdl::statement::ReturnStatement
 GenerationScheme <|-- vhdl::statement::ForGenerationScheme
 GenerationScheme <|-- vhdl::statement::IfGenerationScheme
 IfStatement <|-- vhdl::statement::SimultaneousIfStatement
@@ -686,6 +686,8 @@ Module <|-- vhdl::Entity
 Module <|-- vhdl::Package
 Module <|-- vhdl::PackageBody
 Module <|-- vhdl::configuration::Configuration
+MultiName <|-- vhdl::Name
+MultiName <|-- vhdl::NameList
 MultiNamed <|-- vhdl::ams::QuantityAspect
 MultiNamed <|-- vhdl::declaration::FileDeclaration
 MultiNamed <|-- vhdl::declaration::FreeQuantityDeclaration
@@ -695,8 +697,17 @@ MultiNamed <|-- vhdl::declaration::TerminalDeclaration
 MultiNamed <|-- vhdl::declaration::ValueDeclaration
 MultiNamed <|-- vhdl::nature::RecordNatureElement
 MultiNamed <|-- vhdl::type::RecordTypeElement
-MultiName <|-- vhdl::Name
-MultiName <|-- vhdl::NameList
+Name <|-- vhdl::expression::AggregateExpression
+Name <|-- vhdl::expression::AllExpression
+Name <|-- vhdl::expression::AttributeExpression
+Name <|-- vhdl::expression::CharacterExpression
+Name <|-- vhdl::expression::IdentifierExpression
+Name <|-- vhdl::expression::NameExpression
+Name <|-- vhdl::expression::OthersExpression
+Name <|-- vhdl::expression::RangeExpression
+Name <|-- vhdl::expression::SignatureExpression
+Name <|-- vhdl::expression::StringExpression
+Name <|-- vhdl::expression::TypeQualificationExpression
 Named <|-- vhdl::Architecture
 Named <|-- vhdl::Component
 Named <|-- vhdl::Entity
@@ -714,17 +725,6 @@ Named <|-- vhdl::declaration::SubprogramDeclaration
 Named <|-- vhdl::declaration::SubtypeDeclaration
 Named <|-- vhdl::declaration::TypeDeclaration
 Named <|-- vhdl::expression::SubtypeIndicationExpression
-Name <|-- vhdl::expression::AggregateExpression
-Name <|-- vhdl::expression::AllExpression
-Name <|-- vhdl::expression::AttributeExpression
-Name <|-- vhdl::expression::CharacterExpression
-Name <|-- vhdl::expression::IdentifierExpression
-Name <|-- vhdl::expression::NameExpression
-Name <|-- vhdl::expression::OthersExpression
-Name <|-- vhdl::expression::RangeExpression
-Name <|-- vhdl::expression::SignatureExpression
-Name <|-- vhdl::expression::StringExpression
-Name <|-- vhdl::expression::TypeQualificationExpression
 NatureDefinition <|-- vhdl::nature::CompositeNatureDefinition
 NatureDefinition <|-- vhdl::nature::ScalarNatureDefinition
 PackageReference <|-- vhdl::Name
@@ -861,7 +861,7 @@ Expression "0..1" --* "1..1" vhdl::expression::IndicationExpression : across202
 QuantityAspect "0..1" --* "1..1" vhdl::declaration::BranchQuantityDeclaration : across237
 nature::vhdl::Name "0..1" --* "1..1" vhdl::nature::ScalarNatureDefinition : across317
 Expression "0..1" --* "1..1" vhdl::expression::WaveformExpression : after222
-vhdl::declaration::DisconnectionSpecification "1..1" *-- "0..1" Expression : after276
+Expression "0..1" --* "1..1" vhdl::declaration::DisconnectionSpecification : after276
 TypeReference "0..1" --* "1..1" vhdl::declaration::AliasDeclaration : alias229
 Expression "0..1" --* "1..1" vhdl::statement::BreakStatementItem : arrow140
 BlockConfiguration "0..1" --* "1..1" vhdl::configuration::ComponentConfiguration : block356
@@ -870,21 +870,21 @@ SubprogramBody "0..1" --* "1..1" vhdl::declaration::SubprogramDeclaration : body
 BreakStatementItem "0..9999" --* "1..1" vhdl::statement::BreakStatement : break129
 SubprogramDeclaration "0..1" -- "1..1" vhdl::CallResolvedReference : call45
 Expression "0..1" --* "1..1" vhdl::statement::CaseStatement : case73
-vhdl::expression::AssociationExpression "1..1" *-- "0..1" Expression : choice186
+Expression "0..1" --* "1..1" vhdl::expression::AssociationExpression : choice186
 Expression "0..1" --* "1..1" vhdl::statement::CaseAlternative : choice77
 declaration::vhdl::ComponentReference "0..1" --* "1..1" vhdl::declaration::ConfigurationSpecification : component263
-vhdl::configuration::ComponentConfiguration "1..1" *-- "0..1" configuration::vhdl::Name : component343
+configuration::vhdl::Name "0..1" --* "1..1" vhdl::configuration::ComponentConfiguration : component343
 vhdl::Component "0..1" -- "1..1" vhdl::ComponentResolvedReference : component43
 Expression "0..1" --* "1..1" vhdl::statement::AssertionStatement : condition105
 Expression "0..1" --* "1..1" vhdl::statement::WhileIterationScheme : condition174
 Expression "0..1" --* "1..1" vhdl::statement::IfGenerationScheme : condition182
 Expression "0..1" --* "1..1" vhdl::statement::IfStatementTest : condition86
-vhdl::declaration::ConfigurationSpecification "1..1" *-- "0..1" ConfigurationReference : configuration267
+ConfigurationReference "0..1" --* "1..1" vhdl::declaration::ConfigurationSpecification : configuration267
 configuration::vhdl::Name "0..1" --* "1..1" vhdl::configuration::ComponentConfiguration : configuration349
 Configuration "0..1" -- "1..1" vhdl::configuration::ConfigurationResolvedReference : configuration362
-vhdl::expression::IndicationExpression "1..1" *-- "0..1" Expression : constraint197
-vhdl::type::ConstrainedArrayTypeDefinition "1..1" *-- "0..1" Expression : constraint296
-vhdl::nature::ConstrainedArrayNatureDefinition "1..1" *-- "0..1" Expression : constraint313
+Expression "0..1" --* "1..1" vhdl::expression::IndicationExpression : constraint197
+Expression "0..1" --* "1..1" vhdl::type::ConstrainedArrayTypeDefinition : constraint296
+Expression "0..1" --* "1..1" vhdl::nature::ConstrainedArrayNatureDefinition : constraint313
 Declaration "0..9999" --* "1..1" vhdl::statement::BlockStatement : declaration123
 Declaration "0..9999" --* "1..1" vhdl::statement::GenerateStatement : declaration162
 Declaration "0..9999" --* "1..1" vhdl::Generics : declaration20
@@ -898,28 +898,28 @@ DelayMechanism "0..1" --* "1..1" vhdl::statement::SignalAssignmentStatement : de
 vhdl::DesignUnit "0..9999" --* "1..1" vhdl::Model : design23
 declaration::vhdl::MultiName "0..1" --* "1..1" vhdl::declaration::DisconnectionSpecification : disconnect274
 expression::vhdl::Name "0..9999" --* "1..1" vhdl::expression::NameExpression : element208
-vhdl::declaration::AttributeSpecification "1..1" *-- "0..1" declaration::vhdl::MultiName : entity233
+declaration::vhdl::MultiName "0..1" --* "1..1" vhdl::declaration::AttributeSpecification : entity233
 declaration::vhdl::EntityReference "0..1" --* "1..1" vhdl::declaration::ConfigurationSpecification : entity265
 configuration::vhdl::Name "0..1" --* "1..1" vhdl::configuration::ComponentConfiguration : entity346
 vhdl::Entity "0..1" -- "1..1" vhdl::EntityResolvedReference : entity40
 Expression "0..1" --* "1..1" vhdl::statement::ExpressionStatement : expression176
 Expression "0..1" --* "1..1" vhdl::expression::AssociationExpression : expression188
 Expression "0..1" --* "1..1" vhdl::expression::SignExpression : expression214
-vhdl::expression::UnaryExpression "1..1" *-- "0..1" Expression : expression216
+Expression "0..1" --* "1..1" vhdl::expression::UnaryExpression : expression216
 Expression "0..1" --* "1..1" vhdl::expression::WaveformExpression : expression220
 Expression "0..9999" --* "1..1" vhdl::expression::MultiExpression : expression225
-vhdl::expression::TypeQualificationExpression "1..1" *-- "0..1" Expression : expression227
-vhdl::ams::QuantityAspect "1..1" *-- "0..1" Expression : expression329
-vhdl::Generics "0..1" --* "1..1" vhdl::Entity : generic11
+Expression "0..1" --* "1..1" vhdl::expression::TypeQualificationExpression : expression227
+Expression "0..1" --* "1..1" vhdl::ams::QuantityAspect : expression329
+vhdl::Entity "1..1" *-- "0..1" vhdl::Generics : generic11
 statement::vhdl::Generics "0..1" --* "1..1" vhdl::statement::BlockStatement : generic115
-vhdl::GenericMaps "1..1" *-- "0..9999" Expression : generic19
-vhdl::Generics "0..1" --* "1..1" vhdl::Component : generic3
-vhdl::statement::BlockStatement "1..1" *-- "0..1" statement::vhdl::GenericMaps : genericMap117
+Expression "0..9999" --* "1..1" vhdl::GenericMaps : generic19
+vhdl::Component "1..1" *-- "0..1" vhdl::Generics : generic3
+statement::vhdl::GenericMaps "0..1" --* "1..1" vhdl::statement::BlockStatement : genericMap117
 statement::vhdl::GenericMaps "0..1" --* "1..1" vhdl::statement::InstantiationStatement : genericMap144
 declaration::vhdl::GenericMaps "0..1" --* "1..1" vhdl::declaration::ConfigurationSpecification : genericMap270
 configuration::vhdl::GenericMaps "0..1" --* "1..1" vhdl::configuration::ComponentConfiguration : genericMap352
 Expression "0..1" --* "1..1" vhdl::statement::BlockStatement : guard113
-vhdl::statement::ForGenerationScheme "1..1" *-- "0..1" Expression : in178
+Expression "0..1" --* "1..1" vhdl::statement::ForGenerationScheme : in178
 Expression "0..1" --* "1..1" vhdl::statement::ForIterationScheme : in180
 TypeReference "0..9999" --* "1..1" vhdl::type::UnconstrainedArrayTypeDefinition : index298
 TypeReference "0..9999" --* "1..1" vhdl::nature::UnconstrainedArrayNatureDefinition : index323
@@ -929,11 +929,11 @@ declaration::vhdl::Name "0..1" --* "1..1" vhdl::declaration::AliasDeclaration : 
 Expression "0..1" --* "1..1" vhdl::declaration::AttributeSpecification : is234
 Expression "0..1" --* "1..1" vhdl::declaration::FileDeclaration : is281
 TypeDefinition "0..1" --* "1..1" vhdl::declaration::TypeDeclaration : is284
-vhdl::declaration::GroupDeclaration "1..1" *-- "0..1" declaration::vhdl::Name : is285
+declaration::vhdl::Name "0..1" --* "1..1" vhdl::declaration::GroupDeclaration : is285
 NatureDefinition "0..1" --* "1..1" vhdl::declaration::NatureDeclaration : is290
 ConfigurationItem "0..9999" --* "1..1" vhdl::configuration::BlockConfiguration : item340
 IterationScheme "0..1" --* "1..1" vhdl::statement::LoopStatement : iteration168
-vhdl::statement::SimpleSimultaneousStatement "1..1" *-- "0..1" Expression : left151
+Expression "0..1" --* "1..1" vhdl::statement::SimpleSimultaneousStatement : left151
 Expression "0..1" --* "1..1" vhdl::expression::BinaryExpression : left192
 declaration::vhdl::Name "0..1" --* "1..1" vhdl::declaration::BranchQuantityDeclaration : left241
 Expression "0..1" --* "1..1" vhdl::type::RangeTypeDefinition : left306
@@ -944,74 +944,74 @@ EnumerationLiteral "0..9999" --* "1..1" vhdl::type::EnumerationTypeDefinition : 
 TypeReference "0..1" --* "1..1" vhdl::expression::SubtypeIndicationExpression : mark205
 NatureReference "0..1" --* "1..1" vhdl::expression::SubnatureIndicationExpression : mark207
 declaration::vhdl::MultiName "0..1" --* "1..1" vhdl::declaration::GroupDeclaration : member287
-vhdl::Module "0..1" --* "1..1" vhdl::DesignUnit : module7
+vhdl::DesignUnit "1..1" *-- "0..1" vhdl::Module : module7
 statement::vhdl::Name "0..1" --* "1..1" vhdl::statement::BreakStatementItem : name136
-vhdl::statement::ComponentInstantiationStatement "1..1" *-- "0..1" statement::vhdl::ComponentReference : name143
+statement::vhdl::ComponentReference "0..1" --* "1..1" vhdl::statement::ComponentInstantiationStatement : name143
 statement::vhdl::EntityReference "0..1" --* "1..1" vhdl::statement::EntityInstantiationStatement : name149
 ConfigurationReference "0..1" --* "1..1" vhdl::statement::ConfigurationInstantiationStatement : name150
 expression::vhdl::Name "0..1" --* "1..1" vhdl::expression::SignatureExpression : name211
 vhdl::PackageBody "1..1" *-- "0..1" vhdl::PackageReference : name25
-vhdl::nature::ScalarNatureDefinition "1..1" *-- "0..1" nature::vhdl::Name : name316
-vhdl::Named "1..1" *-- "0..1" vhdl::Name : name35
+nature::vhdl::Name "0..1" --* "1..1" vhdl::nature::ScalarNatureDefinition : name316
+vhdl::Name "0..1" --* "1..1" vhdl::Named : name35
 vhdl::MultiName "0..1" --* "1..1" vhdl::MultiNamed : name37
 vhdl::Name "0..9999" --* "1..1" vhdl::NameList : name38
 NatureReference "0..1" --* "1..1" vhdl::nature::Natured : nature325
 Expression "0..1" --* "1..1" vhdl::ams::Noise : noise337
-vhdl::EntityReference "0..1" --* "1..1" vhdl::Architecture : of0
-vhdl::type::PhysicalTypeDefinitionSecondary "1..1" *-- "0..1" type::vhdl::Name : of305
+vhdl::Architecture "1..1" *-- "0..1" vhdl::EntityReference : of0
+type::vhdl::Name "0..1" --* "1..1" vhdl::type::PhysicalTypeDefinitionSecondary : of305
 configuration::vhdl::EntityReference "0..1" --* "1..1" vhdl::configuration::Configuration : of358
 Expression "0..1" --* "1..1" vhdl::declaration::FileDeclaration : open279
-vhdl::PackageResolvedReference "1..1" -- "0..1" vhdl::Package : package42
-vhdl::declaration::SubprogramDeclaration "1..1" *-- "0..9999" Declaration : parameter252
+vhdl::Package "0..1" -- "1..1" vhdl::PackageResolvedReference : package42
+Declaration "0..9999" --* "1..1" vhdl::declaration::SubprogramDeclaration : parameter252
 TypeReference "0..9999" --* "1..1" vhdl::Signature : parameter31
 statement::vhdl::Ports "0..1" --* "1..1" vhdl::statement::BlockStatement : port119
 vhdl::Entity "1..1" *-- "0..1" vhdl::Ports : port13
 Expression "0..9999" --* "1..1" vhdl::PortMaps : port29
-vhdl::Ports "0..1" --* "1..1" vhdl::Component : port4
+vhdl::Component "1..1" *-- "0..1" vhdl::Ports : port4
 statement::vhdl::PortMaps "0..1" --* "1..1" vhdl::statement::BlockStatement : portMap121
 statement::vhdl::PortMaps "0..1" --* "1..1" vhdl::statement::InstantiationStatement : portMap146
 declaration::vhdl::PortMaps "0..1" --* "1..1" vhdl::declaration::ConfigurationSpecification : portMap272
-vhdl::configuration::ComponentConfiguration "1..1" *-- "0..1" configuration::vhdl::PortMaps : portMap354
-vhdl::statement::ProcedureCallStatement "1..1" *-- "0..1" statement::vhdl::CallReference : procedure91
-vhdl::declaration::FreeQuantityDeclaration "1..1" *-- "0..1" Expression : quantity247
+configuration::vhdl::PortMaps "0..1" --* "1..1" vhdl::configuration::ComponentConfiguration : portMap354
+statement::vhdl::CallReference "0..1" --* "1..1" vhdl::statement::ProcedureCallStatement : procedure91
+Expression "0..1" --* "1..1" vhdl::declaration::FreeQuantityDeclaration : quantity247
 Expression "0..1" --* "1..1" vhdl::type::PhysicalTypeDefinition : range301
 RecordNatureElement "0..9999" --* "1..1" vhdl::nature::RecordNatureDefinition : record315
 Expression "0..1" --* "1..1" vhdl::statement::RejectMechanism : reject184
-vhdl::statement::AssertionStatement "1..1" *-- "0..1" Expression : report107
-vhdl::statement::ReportStatement "1..1" *-- "0..1" Expression : report46
+Expression "0..1" --* "1..1" vhdl::statement::AssertionStatement : report107
+Expression "0..1" --* "1..1" vhdl::statement::ReportStatement : report46
 TypeReference "0..1" --* "1..1" vhdl::Signature : return32
 Expression "0..1" --* "1..1" vhdl::statement::SimpleSimultaneousStatement : right153
-vhdl::expression::BinaryExpression "1..1" *-- "0..1" Expression : right194
+Expression "0..1" --* "1..1" vhdl::expression::BinaryExpression : right194
 declaration::vhdl::Name "0..1" --* "1..1" vhdl::declaration::BranchQuantityDeclaration : right244
 Expression "0..1" --* "1..1" vhdl::type::RangeTypeDefinition : right308
 Expression "0..1" --* "1..1" vhdl::ams::Spectrum : right334
-vhdl::statement::GenerateStatement "1..1" *-- "0..1" GenerationScheme : scheme161
+GenerationScheme "0..1" --* "1..1" vhdl::statement::GenerateStatement : scheme161
 PhysicalTypeDefinitionSecondary "0..9999" --* "1..1" vhdl::type::PhysicalTypeDefinition : secondary303
 Expression "0..1" --* "1..1" vhdl::statement::SelectedSignalAssignmentStatement : selected53
-vhdl::statement::ProcessStatement "1..1" *-- "0..1" statement::vhdl::MultiName : sensitivity102
-vhdl::statement::BreakStatement "1..1" *-- "0..1" statement::vhdl::MultiName : sensitivity133
+statement::vhdl::MultiName "0..1" --* "1..1" vhdl::statement::ProcessStatement : sensitivity102
+statement::vhdl::MultiName "0..1" --* "1..1" vhdl::statement::BreakStatement : sensitivity133
 statement::vhdl::MultiName "0..1" --* "1..1" vhdl::statement::WaitStatement : sensitivity61
 Expression "0..1" --* "1..1" vhdl::statement::AssertionStatement : severity110
 Expression "0..1" --* "1..1" vhdl::statement::ReportStatement : severity48
 expression::vhdl::Signature "0..1" --* "1..1" vhdl::expression::AttributeExpression : signature191
 expression::vhdl::Signature "0..1" --* "1..1" vhdl::expression::SignatureExpression : signature209
-vhdl::declaration::SourceQuantityDeclaration "1..1" *-- "0..1" SourceAspect : source251
+SourceAspect "0..1" --* "1..1" vhdl::declaration::SourceQuantityDeclaration : source251
 Statement "0..9999" --* "1..1" vhdl::Architecture : statement1
-vhdl::statement::BlockStatement "1..1" *-- "0..9999" Statement : statement126
+Statement "0..9999" --* "1..1" vhdl::statement::BlockStatement : statement126
 Statement "0..9999" --* "1..1" vhdl::Entity : statement16
 Statement "0..9999" --* "1..1" vhdl::statement::GenerateStatement : statement165
-vhdl::statement::LoopStatement "1..1" *-- "0..9999" Statement : statement169
+Statement "0..9999" --* "1..1" vhdl::statement::LoopStatement : statement169
 Statement "0..9999" --* "1..1" vhdl::declaration::SubprogramBody : statement258
-vhdl::statement::CaseAlternative "1..1" *-- "0..9999" Statement : statement79
-vhdl::statement::IfStatement "1..1" *-- "0..9999" Statement : statement83
+Statement "0..9999" --* "1..1" vhdl::statement::CaseAlternative : statement79
+Statement "0..9999" --* "1..1" vhdl::statement::IfStatement : statement83
 Statement "0..9999" --* "1..1" vhdl::statement::IfStatementTest : statement88
 Statement "0..9999" --* "1..1" vhdl::statement::SimultaneousProceduralStatement : statement94
-vhdl::statement::ProcessStatement "1..1" *-- "0..9999" Statement : statement99
+Statement "0..9999" --* "1..1" vhdl::statement::ProcessStatement : statement99
 Expression "0..1" --* "1..1" vhdl::statement::SignalAssignmentStatement : target57
 Expression "0..1" --* "1..1" vhdl::statement::VariableAssignmentStatement : target68
 IfStatementTest "0..9999" --* "1..1" vhdl::statement::IfStatement : test82
 QuantityAspect "0..1" --* "1..1" vhdl::declaration::BranchQuantityDeclaration : through238
-vhdl::nature::ScalarNatureDefinition "1..1" *-- "0..1" nature::vhdl::Name : through320
+nature::vhdl::Name "0..1" --* "1..1" vhdl::nature::ScalarNatureDefinition : through320
 Expression "0..1" --* "1..1" vhdl::statement::WaitStatement : time65
 Expression "0..1" --* "1..1" vhdl::statement::SimpleSimultaneousStatement : tolerance156
 Expression "0..1" --* "1..1" vhdl::expression::IndicationExpression : tolerance199
@@ -1025,7 +1025,7 @@ configuration::vhdl::Name "0..9999" --* "1..1" vhdl::configuration::BlockConfigu
 vhdl::DesignUnit "1..1" *-- "0..9999" vhdl::Name : use6
 Expression "0..1" --* "1..1" vhdl::declaration::LimitDeclaration : value249
 Expression "0..9999" --* "1..1" vhdl::statement::ConditionalSignalAssignmentStatement : waveform51
-vhdl::statement::SequentialSignalAssignmentStatement "1..1" *-- "0..1" Expression : waveform55
+Expression "0..1" --* "1..1" vhdl::statement::SequentialSignalAssignmentStatement : waveform55
 Expression "0..1" --* "1..1" vhdl::statement::BreakStatement : when130
 Expression "0..1" --* "1..1" vhdl::statement::ExitStatement : when159
 Expression "0..1" --* "1..1" vhdl::statement::NextStatement : when172

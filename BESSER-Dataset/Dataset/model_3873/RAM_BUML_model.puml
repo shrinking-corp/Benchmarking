@@ -325,8 +325,8 @@ class ram::WovenAspect {
 AbstractMessageView <|-- ram::AspectMessageView
 AbstractMessageView <|-- ram::MessageView
 AbstractMessageView <|-- ram::MessageViewReference
-COREModelElement <|-- ram::MappableElement
 COREModel <|-- ram::Aspect
+COREModelElement <|-- ram::MappableElement
 CORENamedElement <|-- ram::NamedElement
 Classifier <|-- ram::Class
 Classifier <|-- ram::ImplementationClass
@@ -393,106 +393,106 @@ TemporaryProperty <|-- ram::Reference
 Traceable <|-- ram::Attribute
 Traceable <|-- ram::Classifier
 Traceable <|-- ram::Operation
-TypedElement <|-- ram::Parameter
-TypedElement <|-- ram::StructuralFeature
 Type <|-- ram::ObjectType
 Type <|-- ram::RAny
 Type <|-- ram::RCollection
 Type <|-- ram::RVoid
 Type <|-- ram::TypeParameter
+TypedElement <|-- ram::Parameter
+TypedElement <|-- ram::StructuralFeature
 ValueSpecification <|-- ram::EnumLiteralValue
 ValueSpecification <|-- ram::LiteralSpecification
 ValueSpecification <|-- ram::OpaqueExpression
 ValueSpecification <|-- ram::ParameterValue
 ValueSpecification <|-- ram::StructuralFeatureValue
-ram::ValueSpecification "1..1" --* "1..1" ram::Constraint : Specification152
+ram::Constraint "1..1" *-- "1..1" ram::ValueSpecification : Specification152
 ram::AspectMessageView "1..1" *-- "1..1" ram::Interaction : advice51
-ram::AspectMessageView "0..9999" -- "1..1" ram::AbstractMessageView : affectedBy33
-ram::ParameterValueMapping "0..9999" --* "1..1" ram::Message : arguments66
-ram::StructuralFeature "1..1" -- "1..1" ram::AssignmentStatement : assignTo174
-ram::StructuralFeature "0..1" -- "1..1" ram::Message : assignTo64
+ram::AbstractMessageView "1..1" -- "0..9999" ram::AspectMessageView : affectedBy33
+ram::Message "1..1" *-- "0..9999" ram::ParameterValueMapping : arguments66
+ram::AssignmentStatement "1..1" -- "1..1" ram::StructuralFeature : assignTo174
+ram::Message "1..1" -- "0..1" ram::StructuralFeature : assignTo64
 ram::Association "1..1" -- "1..1" ram::AssociationEnd : assoc18
 ram::AssociationEnd "0..9999" --* "1..1" ram::Classifier : associationEnds112
 ram::Association "0..9999" --* "1..1" ram::StructuralView : associations13
-ram::ClassifierMapping "1..1" *-- "0..9999" ram::AttributeMapping : attributeMappings123
+ram::AttributeMapping "0..9999" --* "1..1" ram::ClassifierMapping : attributeMappings123
 ram::Attribute "0..9999" --* "1..1" ram::Class : attributes17
 ram::WovenAspect "0..9999" --* "1..1" ram::WovenAspect : children169
-ram::StructuralView "1..1" *-- "0..9999" ram::Classifier : classes11
+ram::Classifier "0..9999" --* "1..1" ram::StructuralView : classes11
 ram::AssociationEnd "1..1" -- "1..1" ram::Classifier : classifier19
 ram::Aspect "1..1" -- "1..1" ram::WovenAspect : comesFrom165
 ram::FragmentContainer "1..1" -- "1..1" ram::InteractionFragment : container77
 ram::ContainerMap "1..9999" --* "1..1" ram::Layout : containers98
-ram::Lifeline "1..9999" -- "1..1" ram::InteractionFragment : covered76
+ram::InteractionFragment "1..1" -- "1..9999" ram::Lifeline : covered76
 ram::InteractionFragment "1..9999" -- "1..1" ram::Lifeline : coveredBy56
-ram::Transition "1..1" -- "1..1" ram::CheckState : endState141
-ram::AssociationEnd "2..2" -- "1..1" ram::Association : ends21
-ram::REnumLiteral "1..1" -- "1..1" ram::REnum : enum32
-ram::COREModelReuse "0..1" -- "1..1" ram::AssociationEnd : featureSelection20
+ram::CheckState "1..1" -- "1..1" ram::Transition : endState141
+ram::Association "1..1" -- "2..2" ram::AssociationEnd : ends21
+ram::REnum "1..1" -- "1..1" ram::REnumLiteral : enum32
+ram::AssociationEnd "1..1" -- "0..1" ram::COREModelReuse : featureSelection20
 ram::Gate "0..9999" --* "1..1" ram::Interaction : formalGates46
-ram::InteractionFragment "1..9999" --* "1..1" ram::FragmentContainer : fragments94
-ram::TransitionSubstitution "1..1" -- "1..1" ram::Transition : from155
+ram::FragmentContainer "1..1" *-- "1..9999" ram::InteractionFragment : fragments94
+ram::Transition "1..1" -- "1..1" ram::TransitionSubstitution : from155
 ram::ObjectType "0..1" -- "1..1" ram::TypeParameter : genericType160
 ram::Constraint "0..1" --* "1..1" ram::Transition : guard147
 ram::CheckState "1..1" -- "0..9999" ram::Transition : incomings149
-ram::Instantiation "0..9999" --* "1..1" ram::Aspect : instantiations3
-ram::Message "1..1" -- "1..1" ram::Interaction : interaction68
-ram::ValueSpecification "0..1" --* "1..1" ram::InteractionOperand : interactionConstraint81
-ram::EObject "1..1" -- "1..1" ram::ContainerMap : key100
-ram::ElementMap "1..1" -- "1..1" ram::EObject : key104
-ram::TracingMap "1..1" -- "1..1" ram::Traceable : key179
-ram::Layout "0..1" --* "1..1" ram::Aspect : layout5
-ram::Lifeline "1..9999" --* "1..1" ram::Interaction : lifelines41
-ram::REnumLiteral "1..9999" --* "1..1" ram::REnum : literals31
-ram::TemporaryProperty "0..9999" --* "1..1" ram::Message : localProperties71
+ram::Aspect "1..1" *-- "0..9999" ram::Instantiation : instantiations3
+ram::Interaction "1..1" -- "1..1" ram::Message : interaction68
+ram::InteractionOperand "1..1" *-- "0..1" ram::ValueSpecification : interactionConstraint81
+ram::ContainerMap "1..1" -- "1..1" ram::EObject : key100
+ram::EObject "1..1" -- "1..1" ram::ElementMap : key104
+ram::Traceable "1..1" -- "1..1" ram::TracingMap : key179
+ram::Aspect "1..1" *-- "0..1" ram::Layout : layout5
+ram::Interaction "1..1" *-- "1..9999" ram::Lifeline : lifelines41
+ram::REnum "1..1" *-- "1..9999" ram::REnumLiteral : literals31
+ram::Message "1..1" *-- "0..9999" ram::TemporaryProperty : localProperties71
 ram::Message "1..1" -- "1..1" ram::MessageEnd : message73
 ram::AbstractMessageView "0..9999" --* "1..1" ram::Aspect : messageViews1
 ram::Interaction "1..1" *-- "1..9999" ram::Message : messages43
-ram::InteractionOperand "1..9999" --* "1..1" ram::CombinedFragment : operands78
-ram::OperationMapping "0..9999" --* "1..1" ram::ClassifierMapping : operationMappings122
-ram::Operation "0..9999" --* "1..1" ram::Classifier : operations109
-ram::Transition "0..9999" -- "1..1" ram::CheckState : outgoings150
-ram::ParameterValueMapping "1..1" -- "1..1" ram::Parameter : parameter86
+ram::CombinedFragment "1..1" *-- "1..9999" ram::InteractionOperand : operands78
+ram::ClassifierMapping "1..1" *-- "0..9999" ram::OperationMapping : operationMappings122
+ram::Classifier "1..1" *-- "0..9999" ram::Operation : operations109
+ram::CheckState "1..1" -- "0..9999" ram::Transition : outgoings150
+ram::Parameter "1..1" -- "1..1" ram::ParameterValueMapping : parameter86
 ram::Parameter "1..1" -- "1..1" ram::ParameterValue : parameter92
-ram::ParameterMapping "0..9999" --* "1..1" ram::OperationMapping : parameterMappings125
+ram::OperationMapping "1..1" *-- "0..9999" ram::ParameterMapping : parameterMappings125
 ram::Operation "1..1" *-- "0..9999" ram::Parameter : parameters24
-ram::Operation "1..1" -- "1..1" ram::AspectMessageView : pointcut48
-ram::Reference "0..9999" --* "1..1" ram::Interaction : properties44
-ram::MessageEnd "1..1" -- "1..1" ram::Message : receiveEvent58
+ram::AspectMessageView "1..1" -- "1..1" ram::Operation : pointcut48
+ram::Interaction "1..1" *-- "0..9999" ram::Reference : properties44
+ram::Message "1..1" -- "1..1" ram::MessageEnd : receiveEvent58
 ram::MessageView "1..1" -- "1..1" ram::MessageViewReference : references39
-ram::TypedElement "1..1" -- "1..1" ram::Lifeline : represents54
-ram::Type "1..1" -- "1..1" ram::Operation : returnType22
-ram::ValueSpecification "0..1" --* "1..1" ram::Message : returns69
+ram::Lifeline "1..1" -- "1..1" ram::TypedElement : represents54
+ram::Operation "1..1" -- "1..1" ram::Type : returnType22
+ram::Message "1..1" *-- "0..1" ram::ValueSpecification : returns69
 ram::Message "1..1" -- "1..1" ram::MessageEnd : sendEvent57
 ram::Operation "0..1" -- "1..1" ram::Transition : signature144
-ram::Operation "1..1" -- "1..1" ram::Message : signature61
-ram::MessageView "1..1" *-- "0..1" ram::Interaction : specification37
+ram::Message "1..1" -- "1..1" ram::Operation : signature61
+ram::Interaction "0..1" --* "1..1" ram::MessageView : specification37
 ram::ExecutionStatement "1..1" *-- "1..1" ram::ValueSpecification : specification79
 ram::Classifier "1..1" -- "1..1" ram::StateView : specifies129
-ram::Operation "1..1" -- "1..1" ram::MessageView : specifies35
-ram::StateMachine "1..1" -- "1..1" ram::CheckState : start132
+ram::MessageView "1..1" -- "1..1" ram::Operation : specifies35
+ram::CheckState "1..1" -- "1..1" ram::StateMachine : start132
 ram::CheckState "1..1" -- "1..1" ram::Transition : startState142
 ram::StateMachine "1..9999" --* "1..1" ram::StateView : stateMachines127
-ram::StateView "0..9999" --* "1..1" ram::Aspect : stateViews7
+ram::Aspect "1..1" *-- "0..9999" ram::StateView : stateViews7
 ram::CheckState "0..9999" --* "1..1" ram::StateMachine : states134
 ram::Aspect "1..1" *-- "1..1" ram::StructuralView : structuralView0
-ram::Substitution "0..9999" --* "1..1" ram::StateMachine : substitutions139
+ram::StateMachine "1..1" *-- "0..9999" ram::Substitution : substitutions139
 ram::Classifier "0..9999" -- "1..1" ram::Classifier : superTypes117
 ram::Transition "1..9999" -- "1..1" ram::TransitionSubstitution : to157
-ram::Transition "0..9999" --* "1..1" ram::StateMachine : transitions137
-ram::Reference "1..1" -- "1..1" ram::ObjectType : type119
+ram::StateMachine "1..1" *-- "0..9999" ram::Transition : transitions137
+ram::ObjectType "1..1" -- "1..1" ram::Reference : type119
 ram::ObjectType "1..1" -- "1..1" ram::RArray : type163
-ram::ObjectType "1..1" -- "1..1" ram::Attribute : type26
-ram::Type "1..1" -- "1..1" ram::Parameter : type28
-ram::RCollection "1..1" -- "1..1" ram::ObjectType : type96
+ram::Attribute "1..1" -- "1..1" ram::ObjectType : type26
+ram::Parameter "1..1" -- "1..1" ram::Type : type28
+ram::ObjectType "1..1" -- "1..1" ram::RCollection : type96
 ram::Classifier "1..1" *-- "0..9999" ram::TypeParameter : typeParameters114
-ram::Type "0..9999" --* "1..1" ram::StructuralView : types15
-ram::ElementMap "1..9999" --* "1..1" ram::ContainerMap : value102
-ram::NewLayoutElement "1..1" --* "1..1" ram::ElementMap : value107
-ram::REnumLiteral "1..1" -- "1..1" ram::EnumLiteralValue : value173
-ram::ValueSpecification "1..1" --* "1..1" ram::AssignmentStatement : value176
+ram::StructuralView "1..1" *-- "0..9999" ram::Type : types15
+ram::ContainerMap "1..1" *-- "1..9999" ram::ElementMap : value102
+ram::ElementMap "1..1" *-- "1..1" ram::NewLayoutElement : value107
+ram::EnumLiteralValue "1..1" -- "1..1" ram::REnumLiteral : value173
+ram::AssignmentStatement "1..1" *-- "1..1" ram::ValueSpecification : value176
 ram::Traceable "1..1" -- "1..1" ram::TracingMap : value181
 ram::StructuralFeature "1..1" -- "1..1" ram::StructuralFeatureValue : value84
-ram::ValueSpecification "1..1" --* "1..1" ram::ParameterValueMapping : value89
+ram::ParameterValueMapping "1..1" *-- "1..1" ram::ValueSpecification : value89
 ram::Aspect "1..1" *-- "0..9999" ram::WovenAspect : wovenAspects9
-ram::WovenAspect "1..1" *-- "0..9999" ram::TracingMap : wovenElements171
+ram::TracingMap "0..9999" --* "1..1" ram::WovenAspect : wovenElements171
 @enduml

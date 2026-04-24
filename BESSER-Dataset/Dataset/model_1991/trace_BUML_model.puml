@@ -1,0 +1,59 @@
+@startuml
+class AbstractTrace {
+}
+class GenNodeTrace {
+}
+class MatchingTrace {
+}
+abstract class trace::AbstractTrace {
+  + processed : bool
+  + visualID : int
+}
+class trace::GenChildNodeTrace {
+}
+class trace::GenCompartmentTrace {
+  + setContext(genCompartment : any) : void
+}
+class trace::GenLinkLabelTrace {
+  + setContext(genLinkLabel : any) : void
+}
+class trace::GenLinkTrace {
+  + setContext(genLink : any) : void
+}
+class trace::GenNodeLabelTrace {
+  + setContext(genNodeLabel : any) : void
+}
+class trace::GenNodeTrace {
+  + setContext(genNode : any) : void
+}
+abstract class trace::MatchingTrace {
+  + queryText : str
+  + getEClassComparision(eClass : any, varName : any) : str
+  + getEStructuralFeatureComparison(feature : any, varName : any) : str
+  + getQueryContext() : str
+}
+class trace::ToolGroupTrace {
+  + setContext(toolGroup : any) : void
+}
+class trace::TraceModel {
+  + getAllAbstractTraces() : str
+  + getLinkTrace(visualID : any) : str
+  + getNodeTrace(visualID : any) : str
+  + purgeUnprocessedTraces() : void
+}
+AbstractTrace <|-- trace::MatchingTrace
+GenNodeTrace <|-- trace::GenChildNodeTrace
+MatchingTrace <|-- trace::GenCompartmentTrace
+MatchingTrace <|-- trace::GenLinkLabelTrace
+MatchingTrace <|-- trace::GenLinkTrace
+MatchingTrace <|-- trace::GenNodeLabelTrace
+MatchingTrace <|-- trace::GenNodeTrace
+MatchingTrace <|-- trace::ToolGroupTrace
+trace::GenChildNodeTrace "0..9999" --* "1..1" trace::TraceModel : childNodeTraces1
+trace::GenCompartmentTrace "0..9999" --* "1..1" trace::GenNodeTrace : compartmentTraces9
+trace::GenLinkLabelTrace "0..9999" --* "1..1" trace::GenLinkTrace : linkLabelTraces11
+trace::GenLinkTrace "0..9999" --* "1..1" trace::TraceModel : linkTraces3
+trace::GenNodeLabelTrace "0..9999" --* "1..1" trace::GenNodeTrace : nodeLabelTraces7
+trace::GenNodeTrace "0..9999" --* "1..1" trace::TraceModel : nodeTraces0
+trace::ToolGroupTrace "0..9999" --* "1..1" trace::TraceModel : toolGroupTraces5
+@enduml

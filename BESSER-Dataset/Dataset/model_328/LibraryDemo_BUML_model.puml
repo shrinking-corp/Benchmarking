@@ -19,10 +19,10 @@ class Library::Writer {
   + id : int
   + name : str
 }
-Library::Library "1..1" *-- "0..9999" Library::Book : books3
-Library::Writer "1..1" -- "0..9999" Library::Book : books7
-Library::Library "1..1" -- "1..1" Library::Book : library1
+Library::Book "0..9999" --* "1..1" Library::Library : books3
+Library::Book "0..9999" -- "1..1" Library::Writer : books7
+Library::Book "1..1" -- "1..1" Library::Library : library1
 Library::Library "1..1" -- "1..1" Library::Writer : library9
-Library::Writer "1..1" -- "1..1" Library::Book : writer0
-Library::Writer "0..9999" --* "1..1" Library::Library : writers4
+Library::Book "1..1" -- "1..1" Library::Writer : writer0
+Library::Library "1..1" *-- "0..9999" Library::Writer : writers4
 @enduml

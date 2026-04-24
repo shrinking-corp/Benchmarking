@@ -1,0 +1,829 @@
+@startuml
+enum AssociativityKind {
+  left
+  right
+}
+class Behavior {
+}
+class CallExp {
+}
+class Class {
+}
+enum CollectionKind {
+  Bag
+  Collection
+  OrderedSet
+  Sequence
+  Set
+}
+class CollectionLiteralPart {
+}
+class CollectionType {
+}
+class CompletePackage {
+}
+class DataType {
+}
+class DynamicElement {
+}
+class DynamicType {
+}
+class Element {
+}
+class Feature {
+}
+class FeatureCallExp {
+}
+class InstanceSpecification {
+}
+class LanguageExpression {
+}
+class LiteralExp {
+}
+class LoopExp {
+}
+class Nameable {
+}
+class NamedElement {
+}
+class Namespace {
+}
+class NavigationCallExp {
+}
+class NumericLiteralExp {
+}
+class OCLExpression {
+}
+class Operation {
+}
+class Package {
+}
+class PrimitiveLiteralExp {
+}
+enum PseudostateKind {
+  choice
+  deepHistory
+  entryPoint
+  exitPoint
+  fork
+  initial
+  join
+  junction
+  shallowHistory
+  terminate
+}
+class ReferringElement {
+}
+class State {
+}
+class TemplateableElement {
+}
+enum TransitionKind {
+  external
+  internal
+  local
+}
+class Type {
+}
+class TypedElement {
+}
+class ValueSpecification {
+}
+class VariableDeclaration {
+}
+class Vertex {
+}
+class Visitable {
+}
+class pivot::Annotation {
+}
+class pivot::AnyType {
+}
+class pivot::AssociationClass {
+}
+class pivot::AssociationClassCallExp {
+}
+class pivot::BagType {
+}
+abstract class pivot::Behavior {
+}
+class pivot::BooleanLiteralExp {
+  + booleanSymbol : str
+  + validateTypeIsBoolean(context : any, diagnostics : any) : bool
+}
+abstract class pivot::CallExp {
+  + isImplicit : str
+  + isSafe : str
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::CallOperationAction {
+}
+class pivot::Class {
+  + instanceClassName : str
+  + isAbstract : str
+  + isActive : str
+  + isInterface : str
+  + validateUniqueInvariantName(context : any, diagnostics : any) : bool
+}
+class pivot::CollectionItem {
+  + validateTypeIsItemType(context : any, diagnostics : any) : bool
+}
+class pivot::CollectionLiteralExp {
+  + kind : str
+  + validateBagKindIsBag(context : any, diagnostics : any) : bool
+  + validateCollectionKindIsConcrete(context : any, diagnostics : any) : bool
+  + validateOrderedSetKindIsOrderedSet(context : any, diagnostics : any) : bool
+  + validateSequenceKindIsSequence(context : any, diagnostics : any) : bool
+  + validateSetKindIsSet(context : any, diagnostics : any) : bool
+}
+abstract class pivot::CollectionLiteralPart {
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::CollectionRange {
+}
+class pivot::CollectionType {
+  + isNullFree : str
+  + lower : str
+  + upper : str
+}
+class pivot::Comment {
+  + body : str
+}
+class pivot::CompleteClass {
+}
+class pivot::CompleteEnvironment {
+}
+class pivot::CompleteModel {
+  + getOwnedCompletePackage(name : any) : str
+}
+class pivot::CompletePackage {
+  + getOwnedCompleteClass(name : any) : str
+}
+class pivot::ConnectionPointReference {
+}
+class pivot::Constraint {
+  + isCallable : str
+  + validateUniqueName(context : any, diagnostics : any) : bool
+}
+class pivot::DataType {
+  + isSerializable : str
+}
+class pivot::Detail {
+  + values : str
+}
+class pivot::DynamicBehavior {
+}
+class pivot::DynamicElement {
+}
+class pivot::DynamicProperty {
+  + default : str
+}
+class pivot::DynamicType {
+}
+class pivot::DynamicValueSpecification {
+}
+abstract class pivot::Element {
+  + allOwnedElements() : Element
+  + getValue(propertyName : any, stereotype : any) : Element
+}
+class pivot::ElementExtension {
+  + isApplied : str
+  + isRequired : str
+}
+class pivot::EnumLiteralExp {
+  + validateTypeIsEnumerationType(context : any, diagnostics : any) : bool
+}
+class pivot::Enumeration {
+}
+class pivot::EnumerationLiteral {
+  + value : str
+}
+class pivot::ExpressionInOCL {
+}
+abstract class pivot::Feature {
+  + implementation : str
+  + implementationClass : str
+  + isStatic : str
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+abstract class pivot::FeatureCallExp {
+  + isPre : str
+}
+class pivot::FinalState {
+}
+class pivot::IfExp {
+  + validateConditionTypeIsBoolean(context : any, diagnostics : any) : bool
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::Import {
+}
+class pivot::InstanceSpecification {
+}
+class pivot::IntegerLiteralExp {
+  + integerSymbol : str
+  + validateTypeIsInteger(context : any, diagnostics : any) : bool
+}
+class pivot::InvalidLiteralExp {
+}
+class pivot::InvalidType {
+}
+class pivot::IterateExp {
+  + validateBodyTypeConformsToResultType(context : any, diagnostics : any) : bool
+  + validateOneInitializer(context : any, diagnostics : any) : bool
+  + validateSafeIteratorIsRequired(context : any, diagnostics : any) : bool
+  + validateSafeSourceCanBeNull(context : any, diagnostics : any) : bool
+  + validateTypeIsResultType(context : any, diagnostics : any) : bool
+  + validateUnsafeSourceCanNotBeNull(context : any, diagnostics : any) : bool
+}
+class pivot::Iteration {
+}
+class pivot::IteratorExp {
+  + validateAnyBodyTypeIsBoolean(context : any, diagnostics : any) : bool
+  + validateAnyHasOneIterator(context : any, diagnostics : any) : bool
+  + validateAnyTypeIsSourceElementType(context : any, diagnostics : any) : bool
+  + validateClosureBodyTypeIsConformanttoIteratorType(context : any, diagnostics : any) : bool
+  + validateClosureElementTypeIsSourceElementType(context : any, diagnostics : any) : bool
+  + validateClosureHasOneIterator(context : any, diagnostics : any) : bool
+  + validateClosureSourceElementTypeIsBodyElementType(context : any, diagnostics : any) : bool
+  + validateClosureTypeIsUniqueCollection(context : any, diagnostics : any) : bool
+  + validateCollectElementTypeIsFlattenedBodyType(context : any, diagnostics : any) : bool
+  + validateCollectTypeIsUnordered(context : any, diagnostics : any) : bool
+  + validateIteratorTypeIsSourceElementType(context : any, diagnostics : any) : bool
+  + validateSafeIteratorIsRequired(context : any, diagnostics : any) : bool
+  + validateSafeSourceCanBeNull(context : any, diagnostics : any) : bool
+  + validateSortedByElementTypeIsSourceElementType(context : any, diagnostics : any) : bool
+  + validateSortedByIsOrderedIfSourceIsOrdered(context : any, diagnostics : any) : bool
+  + validateSortedByIteratorTypeIsComparable(context : any, diagnostics : any) : bool
+  + validateUnsafeSourceCanNotBeNull(context : any, diagnostics : any) : bool
+}
+class pivot::LambdaType {
+}
+abstract class pivot::LanguageExpression {
+  + body : str
+  + language : str
+}
+class pivot::LetExp {
+  + validateTypeIsInType(context : any, diagnostics : any) : bool
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::Library {
+}
+abstract class pivot::LiteralExp {
+}
+abstract class pivot::LoopExp {
+  + validateNoInitializers(context : any, diagnostics : any) : bool
+  + validateSourceIsCollection(context : any, diagnostics : any) : bool
+}
+class pivot::MapLiteralExp {
+}
+class pivot::MapLiteralPart {
+}
+class pivot::MapType {
+}
+class pivot::MessageExp {
+  + validateOneCallOrOneSend(context : any, diagnostics : any) : bool
+  + validateTargetIsNotACollection(context : any, diagnostics : any) : bool
+}
+class pivot::MessageType {
+}
+class pivot::Model {
+  + externalURI : str
+}
+abstract class pivot::MorePivotable {
+}
+abstract class pivot::Nameable {
+}
+abstract class pivot::NamedElement {
+  + name : str
+}
+abstract class pivot::Namespace {
+}
+abstract class pivot::NavigationCallExp {
+}
+class pivot::NullLiteralExp {
+}
+abstract class pivot::NumericLiteralExp {
+}
+abstract class pivot::OCLExpression {
+}
+class pivot::Operation {
+  + isInvalidating : str
+  + isTypeof : str
+  + isValidating : str
+  + validateCompatibleReturn(context : any, diagnostics : any) : bool
+  + validateLoadableImplementation(context : any, diagnostics : any) : bool
+  + validateUniquePostconditionName(context : any, diagnostics : any) : bool
+  + validateUniquePreconditionName(context : any, diagnostics : any) : bool
+}
+class pivot::OperationCallExp {
+  + validateArgumentCount(context : any, diagnostics : any) : bool
+  + validateArgumentTypeIsConformant(context : any, diagnostics : any) : bool
+  + validateSafeSourceCanBeNull(context : any, diagnostics : any) : bool
+}
+class pivot::OppositePropertyCallExp {
+}
+class pivot::OrderedSetType {
+}
+class pivot::OrphanCompletePackage {
+}
+class pivot::Package {
+  + URI : str
+  + nsPrefix : str
+}
+class pivot::Parameter {
+  + isTypeof : str
+}
+abstract class pivot::Pivotable {
+}
+class pivot::Precedence {
+  + associativity : str
+  + order : str
+}
+class pivot::PrimitiveCompletePackage {
+}
+abstract class pivot::PrimitiveLiteralExp {
+}
+class pivot::PrimitiveType {
+}
+class pivot::Profile {
+}
+class pivot::ProfileApplication {
+  + isStrict : str
+}
+class pivot::Property {
+  + defaultValue : str
+  + defaultValueString : str
+  + isComposite : str
+  + isDerived : str
+  + isID : str
+  + isImplicit : str
+  + isReadOnly : str
+  + isResolveProxies : str
+  + isTransient : str
+  + isUnsettable : str
+  + isVolatile : str
+  + isAttribute(p : any) : str
+  + validateCompatibleDefaultExpression(context : any, diagnostics : any) : bool
+}
+class pivot::PropertyCallExp {
+  + getSpecializedReferredPropertyOwningType() : Class
+  + getSpecializedReferredPropertyType() : Class
+  + validateCompatibleResultType(context : any, diagnostics : any) : bool
+  + validateNonStaticSourceTypeIsConformant(context : any, diagnostics : any) : bool
+  + validateSafeSourceCanBeNull(context : any, diagnostics : any) : bool
+  + validateUnsafeSourceCanNotBeNull(context : any, diagnostics : any) : bool
+}
+class pivot::Pseudostate {
+  + kind : str
+}
+class pivot::RealLiteralExp {
+  + realSymbol : str
+}
+abstract class pivot::ReferringElement {
+  + getReferredElement() : Element
+}
+class pivot::Region {
+}
+class pivot::SelfType {
+  + specializeIn(expr : any, selfType : any) : Type
+}
+class pivot::SendSignalAction {
+}
+class pivot::SequenceType {
+}
+class pivot::SetType {
+}
+class pivot::ShadowExp {
+  + value : str
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::ShadowPart {
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::Signal {
+}
+class pivot::Slot {
+}
+class pivot::StandardLibrary {
+}
+class pivot::State {
+  + isComposite : str
+  + isOrthogonal : str
+  + isSimple : str
+  + isSubmachineState : str
+}
+class pivot::StateExp {
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::StateMachine {
+}
+class pivot::Stereotype {
+}
+class pivot::StereotypeExtender {
+  + isRequired : str
+}
+class pivot::StringLiteralExp {
+  + stringSymbol : str
+}
+class pivot::TemplateBinding {
+}
+class pivot::TemplateParameter {
+}
+class pivot::TemplateParameterSubstitution {
+}
+class pivot::TemplateSignature {
+}
+abstract class pivot::TemplateableElement {
+}
+class pivot::Transition {
+  + kind : str
+}
+class pivot::Trigger {
+}
+class pivot::TupleLiteralExp {
+}
+class pivot::TupleLiteralPart {
+}
+class pivot::TupleType {
+}
+abstract class pivot::Type {
+  + flattenedType() : Type
+  + isClass() : Class
+  + isTemplateParameter() : str
+  + specializeIn(expr : any, selfType : any) : Type
+}
+class pivot::TypeExp {
+}
+abstract class pivot::TypedElement {
+  + isMany : str
+  + isRequired : str
+  + CompatibleBody(bodySpecification : any) : str
+}
+class pivot::UnlimitedNaturalLiteralExp {
+  + unlimitedNaturalSymbol : str
+}
+class pivot::UnspecifiedValueExp {
+}
+abstract class pivot::ValueSpecification {
+  + booleanValue() : str
+  + integerValue() : str
+  + isComputable() : str
+  + isNull() : str
+  + stringValue() : str
+  + unlimitedValue() : str
+}
+class pivot::Variable {
+  + isImplicit : str
+  + validateCompatibleInitialiserType(context : any, diagnostics : any) : bool
+}
+abstract class pivot::VariableDeclaration {
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+class pivot::VariableExp {
+  + isImplicit : str
+  + validateTypeIsNotInvalid(context : any, diagnostics : any) : bool
+}
+abstract class pivot::Vertex {
+}
+abstract class pivot::Visitable {
+}
+class pivot::VoidType {
+}
+class pivot::WildcardType {
+}
+Behavior <|-- pivot::DynamicBehavior
+Behavior <|-- pivot::StateMachine
+CallExp <|-- pivot::FeatureCallExp
+CallExp <|-- pivot::LoopExp
+Class <|-- pivot::AnyType
+Class <|-- pivot::AssociationClass
+Class <|-- pivot::Behavior
+Class <|-- pivot::DataType
+Class <|-- pivot::DynamicType
+Class <|-- pivot::ElementExtension
+Class <|-- pivot::InvalidType
+Class <|-- pivot::MessageType
+Class <|-- pivot::SelfType
+Class <|-- pivot::Signal
+Class <|-- pivot::Stereotype
+Class <|-- pivot::VoidType
+Class <|-- pivot::WildcardType
+CollectionLiteralPart <|-- pivot::CollectionItem
+CollectionLiteralPart <|-- pivot::CollectionRange
+CollectionType <|-- pivot::BagType
+CollectionType <|-- pivot::OrderedSetType
+CollectionType <|-- pivot::SequenceType
+CollectionType <|-- pivot::SetType
+CompletePackage <|-- pivot::OrphanCompletePackage
+CompletePackage <|-- pivot::PrimitiveCompletePackage
+DataType <|-- pivot::CollectionType
+DataType <|-- pivot::Enumeration
+DataType <|-- pivot::LambdaType
+DataType <|-- pivot::MapType
+DataType <|-- pivot::PrimitiveType
+DataType <|-- pivot::TupleType
+DynamicElement <|-- pivot::DynamicType
+DynamicType <|-- pivot::DynamicBehavior
+Element <|-- pivot::Comment
+Element <|-- pivot::CompleteEnvironment
+Element <|-- pivot::DynamicElement
+Element <|-- pivot::DynamicProperty
+Element <|-- pivot::MapLiteralPart
+Element <|-- pivot::NamedElement
+Element <|-- pivot::ProfileApplication
+Element <|-- pivot::Slot
+Element <|-- pivot::StandardLibrary
+Element <|-- pivot::StereotypeExtender
+Element <|-- pivot::TemplateBinding
+Element <|-- pivot::TemplateParameterSubstitution
+Element <|-- pivot::TemplateSignature
+Element <|-- pivot::TemplateableElement
+Feature <|-- pivot::Operation
+Feature <|-- pivot::Property
+FeatureCallExp <|-- pivot::NavigationCallExp
+FeatureCallExp <|-- pivot::OperationCallExp
+InstanceSpecification <|-- pivot::EnumerationLiteral
+LanguageExpression <|-- pivot::ExpressionInOCL
+LiteralExp <|-- pivot::CollectionLiteralExp
+LiteralExp <|-- pivot::EnumLiteralExp
+LiteralExp <|-- pivot::InvalidLiteralExp
+LiteralExp <|-- pivot::MapLiteralExp
+LiteralExp <|-- pivot::PrimitiveLiteralExp
+LiteralExp <|-- pivot::TupleLiteralExp
+LoopExp <|-- pivot::IterateExp
+LoopExp <|-- pivot::IteratorExp
+Nameable <|-- pivot::NamedElement
+NamedElement <|-- pivot::Annotation
+NamedElement <|-- pivot::CallOperationAction
+NamedElement <|-- pivot::CompleteClass
+NamedElement <|-- pivot::CompleteModel
+NamedElement <|-- pivot::CompletePackage
+NamedElement <|-- pivot::Constraint
+NamedElement <|-- pivot::Detail
+NamedElement <|-- pivot::Import
+NamedElement <|-- pivot::InstanceSpecification
+NamedElement <|-- pivot::Namespace
+NamedElement <|-- pivot::Precedence
+NamedElement <|-- pivot::SendSignalAction
+NamedElement <|-- pivot::Trigger
+NamedElement <|-- pivot::Type
+NamedElement <|-- pivot::TypedElement
+NamedElement <|-- pivot::Vertex
+Namespace <|-- pivot::Class
+Namespace <|-- pivot::Model
+Namespace <|-- pivot::Operation
+Namespace <|-- pivot::Package
+Namespace <|-- pivot::Region
+Namespace <|-- pivot::State
+Namespace <|-- pivot::Transition
+NavigationCallExp <|-- pivot::AssociationClassCallExp
+NavigationCallExp <|-- pivot::OppositePropertyCallExp
+NavigationCallExp <|-- pivot::PropertyCallExp
+NumericLiteralExp <|-- pivot::IntegerLiteralExp
+NumericLiteralExp <|-- pivot::RealLiteralExp
+NumericLiteralExp <|-- pivot::UnlimitedNaturalLiteralExp
+OCLExpression <|-- pivot::CallExp
+OCLExpression <|-- pivot::IfExp
+OCLExpression <|-- pivot::LetExp
+OCLExpression <|-- pivot::LiteralExp
+OCLExpression <|-- pivot::MessageExp
+OCLExpression <|-- pivot::ShadowExp
+OCLExpression <|-- pivot::StateExp
+OCLExpression <|-- pivot::TypeExp
+OCLExpression <|-- pivot::UnspecifiedValueExp
+OCLExpression <|-- pivot::VariableExp
+Operation <|-- pivot::Iteration
+Package <|-- pivot::Library
+Package <|-- pivot::Profile
+PrimitiveLiteralExp <|-- pivot::BooleanLiteralExp
+PrimitiveLiteralExp <|-- pivot::NullLiteralExp
+PrimitiveLiteralExp <|-- pivot::NumericLiteralExp
+PrimitiveLiteralExp <|-- pivot::StringLiteralExp
+ReferringElement <|-- pivot::IterateExp
+ReferringElement <|-- pivot::IteratorExp
+ReferringElement <|-- pivot::OperationCallExp
+ReferringElement <|-- pivot::PropertyCallExp
+ReferringElement <|-- pivot::TypeExp
+ReferringElement <|-- pivot::VariableExp
+State <|-- pivot::FinalState
+TemplateableElement <|-- pivot::Class
+TemplateableElement <|-- pivot::Operation
+Type <|-- pivot::Class
+Type <|-- pivot::TemplateParameter
+TypedElement <|-- pivot::CollectionLiteralPart
+TypedElement <|-- pivot::Feature
+TypedElement <|-- pivot::OCLExpression
+TypedElement <|-- pivot::ShadowPart
+TypedElement <|-- pivot::ValueSpecification
+TypedElement <|-- pivot::VariableDeclaration
+ValueSpecification <|-- pivot::DynamicValueSpecification
+ValueSpecification <|-- pivot::LanguageExpression
+VariableDeclaration <|-- pivot::Parameter
+VariableDeclaration <|-- pivot::TupleLiteralPart
+VariableDeclaration <|-- pivot::Variable
+Vertex <|-- pivot::ConnectionPointReference
+Vertex <|-- pivot::Pseudostate
+Vertex <|-- pivot::State
+Visitable <|-- pivot::Element
+pivot::TemplateParameterSubstitution "1..1" -- "1..1" pivot::Type : actual354
+pivot::Comment "1..1" -- "0..9999" pivot::Element : annotatedElements32
+pivot::Comment "0..9999" -- "1..1" pivot::Element : annotatingComments90
+pivot::Profile "1..1" -- "1..1" pivot::ProfileApplication : appliedProfile249
+pivot::AssociationClass "0..1" -- "1..1" pivot::Property : associationClass252
+pivot::Element "1..1" -- "1..1" pivot::ElementExtension : base97
+pivot::Class "0..1" -- "1..1" pivot::DataType : behavioralClass83
+pivot::LanguageExpression "0..1" --* "1..1" pivot::Operation : bodyExpression202
+pivot::Class "1..1" -- "1..1" pivot::StereotypeExtender : class344
+pivot::Class "0..9999" -- "1..1" pivot::InstanceSpecification : classes123
+pivot::Operation "0..9999" -- "1..1" pivot::PrimitiveType : coercions245
+pivot::Constraint "1..1" -- "0..9999" pivot::Element : constrainedElements66
+pivot::Class "0..9999" -- "1..1" pivot::TemplateParameter : constrainingClasses350
+pivot::Constraint "1..1" -- "0..1" pivot::Namespace : context69
+pivot::LambdaType "1..1" -- "1..1" pivot::Type : contextType136
+pivot::Property "1..1" -- "1..1" pivot::Slot : definingProperty300
+pivot::CollectionType "1..1" -- "1..1" pivot::Type : elementType31
+pivot::ConnectionPointReference "1..1" -- "0..9999" pivot::Pseudostate : entries61
+pivot::ConnectionPointReference "1..1" -- "0..9999" pivot::Pseudostate : exits62
+pivot::Region "1..1" -- "0..1" pivot::Region : extendedRegion280
+pivot::StateMachine "1..1" -- "0..9999" pivot::StateMachine : extendedStateMachines334
+pivot::Class "1..1" -- "0..9999" pivot::StereotypeExtender : extenders11
+pivot::TemplateParameter "1..1" -- "1..1" pivot::TemplateParameterSubstitution : formal356
+pivot::Import "1..1" -- "1..1" pivot::Namespace : importedNamespace121
+pivot::Package "0..9999" -- "1..1" pivot::Package : importedPackages228
+pivot::Transition "0..9999" -- "1..1" pivot::Vertex : incomingTransitions408
+pivot::MapType "1..1" -- "1..1" pivot::Type : keyType166
+pivot::Property "0..9999" -- "1..1" pivot::Property : keys254
+pivot::Type "0..1" -- "1..1" pivot::WildcardType : lowerBound414
+pivot::DynamicElement "1..1" -- "1..1" pivot::Type : metaType85
+pivot::NavigationCallExp "1..1" -- "0..1" pivot::Property : navigationSource194
+pivot::CallOperationAction "1..1" -- "1..1" pivot::Operation : operation10
+pivot::Property "0..1" -- "1..1" pivot::Property : opposite257
+pivot::CompleteModel "1..1" -- "0..1" pivot::OrphanCompletePackage : orphanCompletePackage41
+pivot::Transition "0..9999" -- "1..1" pivot::Vertex : outgoingTransitions410
+pivot::Iteration "1..1" *-- "0..9999" pivot::Parameter : ownedAccumulators132
+pivot::Element "0..9999" --* "1..1" pivot::Element : ownedAnnotations92
+pivot::MessageExp "1..1" *-- "0..9999" pivot::OCLExpression : ownedArguments171
+pivot::OCLExpression "0..9999" --* "1..1" pivot::OperationCallExp : ownedArguments220
+pivot::Behavior "0..9999" --* "1..1" pivot::Class : ownedBehaviors12
+pivot::TemplateBinding "0..9999" --* "1..1" pivot::TemplateableElement : ownedBindings365
+pivot::ExpressionInOCL "1..1" *-- "0..1" pivot::OCLExpression : ownedBody103
+pivot::LoopExp "1..1" *-- "1..1" pivot::OCLExpression : ownedBody151
+pivot::CallOperationAction "0..1" --* "1..1" pivot::MessageExp : ownedCalledOperation173
+pivot::Class "0..9999" --* "1..1" pivot::Package : ownedClasses230
+pivot::Comment "0..9999" --* "1..1" pivot::Element : ownedComments94
+pivot::CompleteClass "0..9999" --* "1..1" pivot::CompletePackage : ownedCompleteClasses49
+pivot::CompleteEnvironment "1..1" *-- "1..1" pivot::CompleteModel : ownedCompleteModel38
+pivot::CompleteModel "1..1" *-- "0..9999" pivot::CompletePackage : ownedCompletePackages42
+pivot::CompletePackage "1..1" *-- "0..9999" pivot::CompletePackage : ownedCompletePackages51
+pivot::IfExp "1..1" *-- "1..1" pivot::OCLExpression : ownedCondition113
+pivot::Pseudostate "0..9999" --* "1..1" pivot::State : ownedConnectionPoints308
+pivot::Pseudostate "0..9999" --* "1..1" pivot::StateMachine : ownedConnectionPoints335
+pivot::ConnectionPointReference "0..9999" --* "1..1" pivot::State : ownedConnections309
+pivot::Constraint "0..9999" --* "1..1" pivot::Namespace : ownedConstraints191
+pivot::Annotation "1..1" *-- "0..9999" pivot::Element : ownedContents0
+pivot::ExpressionInOCL "1..1" *-- "0..1" pivot::Variable : ownedContext105
+pivot::State "1..1" *-- "0..9999" pivot::Trigger : ownedDeferrableTriggers311
+pivot::Annotation "1..1" *-- "0..9999" pivot::Detail : ownedDetails1
+pivot::Behavior "0..1" --* "1..1" pivot::State : ownedDoActivity313
+pivot::DynamicProperty "0..9999" --* "1..1" pivot::DynamicType : ownedDynamicProperties88
+pivot::Behavior "0..1" --* "1..1" pivot::Transition : ownedEffect373
+pivot::IfExp "1..1" *-- "1..1" pivot::OCLExpression : ownedElse115
+pivot::Behavior "0..1" --* "1..1" pivot::State : ownedEntry315
+pivot::Behavior "0..1" --* "1..1" pivot::State : ownedExit318
+pivot::LanguageExpression "0..1" --* "1..1" pivot::Property : ownedExpression259
+pivot::Stereotype "1..1" *-- "0..9999" pivot::StereotypeExtender : ownedExtenders342
+pivot::Element "1..1" *-- "0..9999" pivot::ElementExtension : ownedExtensions96
+pivot::CollectionRange "1..1" *-- "1..1" pivot::OCLExpression : ownedFirst26
+pivot::Constraint "0..1" --* "1..1" pivot::Transition : ownedGuard374
+pivot::Import "0..9999" --* "1..1" pivot::Model : ownedImports185
+pivot::LetExp "1..1" *-- "1..1" pivot::OCLExpression : ownedIn145
+pivot::OCLExpression "1..1" --* "1..1" pivot::ShadowPart : ownedInit294
+pivot::OCLExpression "0..1" --* "1..1" pivot::TupleLiteralPart : ownedInit391
+pivot::OCLExpression "0..1" --* "1..1" pivot::Variable : ownedInit398
+pivot::InstanceSpecification "0..9999" --* "1..1" pivot::Package : ownedInstances232
+pivot::Class "1..1" *-- "0..9999" pivot::Constraint : ownedInvariants13
+pivot::CollectionItem "1..1" *-- "1..1" pivot::OCLExpression : ownedItem23
+pivot::Iteration "1..1" *-- "0..9999" pivot::Parameter : ownedIterators133
+pivot::LoopExp "1..1" *-- "0..9999" pivot::Variable : ownedIterators153
+pivot::MapLiteralPart "1..1" *-- "1..1" pivot::OCLExpression : ownedKey160
+pivot::CollectionRange "1..1" *-- "1..1" pivot::OCLExpression : ownedLast28
+pivot::Enumeration "1..1" *-- "0..9999" pivot::EnumerationLiteral : ownedLiterals101
+pivot::Class "1..1" *-- "0..9999" pivot::Operation : ownedOperations15
+pivot::Model "1..1" *-- "0..9999" pivot::Package : ownedPackages188
+pivot::Package "1..1" *-- "0..9999" pivot::Package : ownedPackages235
+pivot::ExpressionInOCL "1..1" *-- "0..9999" pivot::Variable : ownedParameters107
+pivot::Operation "1..1" *-- "0..9999" pivot::Parameter : ownedParameters205
+pivot::TemplateParameter "1..9999" --* "1..1" pivot::TemplateSignature : ownedParameters362
+pivot::MapLiteralExp "1..1" *-- "0..9999" pivot::MapLiteralPart : ownedParts159
+pivot::CollectionLiteralExp "1..1" *-- "0..9999" pivot::CollectionLiteralPart : ownedParts25
+pivot::ShadowExp "1..1" *-- "0..9999" pivot::ShadowPart : ownedParts293
+pivot::TupleLiteralExp "1..1" *-- "0..9999" pivot::TupleLiteralPart : ownedParts390
+pivot::Constraint "0..9999" --* "1..1" pivot::Operation : ownedPostconditions206
+pivot::Library "1..1" *-- "0..9999" pivot::Precedence : ownedPrecedences150
+pivot::Constraint "0..9999" --* "1..1" pivot::Operation : ownedPreconditions208
+pivot::Package "1..1" *-- "0..9999" pivot::ProfileApplication : ownedProfileApplications238
+pivot::Class "1..1" *-- "0..9999" pivot::Property : ownedProperties16
+pivot::Region "0..9999" --* "1..1" pivot::State : ownedRegions321
+pivot::Region "1..9999" --* "1..1" pivot::StateMachine : ownedRegions337
+pivot::ExpressionInOCL "1..1" *-- "0..1" pivot::Variable : ownedResult110
+pivot::IterateExp "1..1" *-- "0..1" pivot::Variable : ownedResult130
+pivot::MessageExp "1..1" *-- "0..1" pivot::SendSignalAction : ownedSentSignal176
+pivot::TemplateSignature "0..1" --* "1..1" pivot::TemplateableElement : ownedSignature368
+pivot::InstanceSpecification "1..1" *-- "0..9999" pivot::Slot : ownedSlots125
+pivot::CallExp "1..1" *-- "0..1" pivot::OCLExpression : ownedSource9
+pivot::InstanceSpecification "1..1" *-- "0..1" pivot::LanguageExpression : ownedSpecification126
+pivot::Constraint "1..1" *-- "1..1" pivot::LanguageExpression : ownedSpecification71
+pivot::CompleteEnvironment "1..1" *-- "1..1" pivot::StandardLibrary : ownedStandardLibrary39
+pivot::Constraint "0..1" --* "1..1" pivot::State : ownedStateInvariant323
+pivot::TemplateBinding "1..1" *-- "1..9999" pivot::TemplateParameterSubstitution : ownedSubstitutions347
+pivot::Region "1..1" *-- "0..9999" pivot::Vertex : ownedSubvertexes281
+pivot::MessageExp "1..1" *-- "1..1" pivot::OCLExpression : ownedTarget178
+pivot::IfExp "1..1" *-- "1..1" pivot::OCLExpression : ownedThen118
+pivot::Region "1..1" *-- "0..9999" pivot::Transition : ownedTransitions282
+pivot::Transition "1..1" *-- "0..9999" pivot::Trigger : ownedTriggers377
+pivot::MapLiteralPart "1..1" *-- "1..1" pivot::OCLExpression : ownedValue163
+pivot::Slot "1..1" *-- "0..9999" pivot::ValueSpecification : ownedValues302
+pivot::LetExp "1..1" *-- "1..1" pivot::Variable : ownedVariable147
+pivot::TemplateParameterSubstitution "1..1" *-- "0..1" pivot::WildcardType : ownedWildcard359
+pivot::TemplateBinding "1..1" -- "1..1" pivot::TemplateParameterSubstitution : owningBinding361
+pivot::Class "0..1" -- "1..1" pivot::Operation : owningClass210
+pivot::Class "0..1" -- "1..1" pivot::Property : owningClass262
+pivot::CompleteEnvironment "0..1" -- "1..1" pivot::StandardLibrary : owningCompleteEnvironment306
+pivot::CompleteEnvironment "0..1" -- "1..1" pivot::CompleteModel : owningCompleteEnvironment44
+pivot::CompleteModel "0..1" -- "1..1" pivot::CompletePackage : owningCompleteModel54
+pivot::CompleteClass "1..1" -- "0..1" pivot::CompletePackage : owningCompletePackage35
+pivot::CompletePackage "1..1" -- "0..1" pivot::CompletePackage : owningCompletePackage57
+pivot::Constraint "0..1" -- "1..1" pivot::LanguageExpression : owningConstraint144
+pivot::Comment "1..1" -- "0..1" pivot::Element : owningElement33
+pivot::TemplateBinding "1..1" -- "1..1" pivot::TemplateableElement : owningElement348
+pivot::TemplateSignature "1..1" -- "1..1" pivot::TemplateableElement : owningElement363
+pivot::Enumeration "1..1" -- "1..1" pivot::EnumerationLiteral : owningEnumeration102
+pivot::InstanceSpecification "1..1" -- "1..1" pivot::Slot : owningInstance304
+pivot::Operation "0..1" -- "1..1" pivot::Parameter : owningOperation243
+pivot::InstanceSpecification "1..1" -- "0..1" pivot::Package : owningPackage128
+pivot::Class "1..1" -- "0..1" pivot::Package : owningPackage19
+pivot::Package "1..1" -- "0..1" pivot::Package : owningPackage241
+pivot::Package "1..1" -- "1..1" pivot::ProfileApplication : owningPackage250
+pivot::Constraint "1..1" -- "0..1" pivot::Operation : owningPostContext72
+pivot::Constraint "1..1" -- "0..1" pivot::Operation : owningPreContext74
+pivot::Region "1..1" -- "1..1" pivot::Transition : owningRegion380
+pivot::Region "0..1" -- "1..1" pivot::Vertex : owningRegion412
+pivot::TemplateParameter "1..1" -- "1..1" pivot::TemplateSignature : owningSignature352
+pivot::Pseudostate "1..1" -- "0..1" pivot::State : owningState275
+pivot::Region "1..1" -- "0..1" pivot::State : owningState285
+pivot::State "0..1" -- "1..1" pivot::Trigger : owningState386
+pivot::ConnectionPointReference "1..1" -- "0..1" pivot::State : owningState65
+pivot::Constraint "1..1" -- "0..1" pivot::State : owningState76
+pivot::Pseudostate "1..1" -- "0..1" pivot::StateMachine : owningStateMachine277
+pivot::Region "1..1" -- "0..1" pivot::StateMachine : owningStateMachine287
+pivot::Stereotype "1..1" -- "1..1" pivot::StereotypeExtender : owningStereotype346
+pivot::Transition "0..1" -- "1..1" pivot::Trigger : owningTransition388
+pivot::Constraint "1..1" -- "0..1" pivot::Transition : owningTransition78
+pivot::Behavior "1..1" -- "0..1" pivot::Transition : owningTransition8
+pivot::LambdaType "1..1" -- "0..9999" pivot::Type : parameterType138
+pivot::Class "0..9999" -- "1..1" pivot::CompleteClass : partialClasses36
+pivot::CompleteModel "1..1" -- "0..9999" pivot::Model : partialModels45
+pivot::CompletePackage "1..1" -- "0..9999" pivot::Package : partialPackages60
+pivot::Operation "1..1" -- "0..1" pivot::Precedence : precedence211
+pivot::CompleteModel "1..1" -- "0..1" pivot::PrimitiveCompletePackage : primitiveCompletePackage47
+pivot::Profile "1..1" -- "0..9999" pivot::ProfileApplication : profileApplications247
+pivot::NavigationCallExp "1..1" -- "0..9999" pivot::OCLExpression : qualifiers196
+pivot::Operation "1..1" -- "0..9999" pivot::Type : raisedExceptions214
+pivot::Constraint "0..9999" -- "1..1" pivot::Constraint : redefinedConstraints81
+pivot::Operation "0..9999" -- "1..1" pivot::Operation : redefinedOperations218
+pivot::Property "0..9999" -- "1..1" pivot::Property : redefinedProperties265
+pivot::State "0..1" -- "1..1" pivot::State : redefinedState327
+pivot::Annotation "1..1" -- "0..9999" pivot::Element : references3
+pivot::AssociationClass "0..1" -- "1..1" pivot::AssociationClassCallExp : referredAssociationClass7
+pivot::Iteration "0..1" -- "1..1" pivot::LoopExp : referredIteration156
+pivot::EnumLiteralExp "1..1" -- "0..1" pivot::EnumerationLiteral : referredLiteral100
+pivot::MessageType "1..1" -- "0..1" pivot::Operation : referredOperation181
+pivot::Operation "0..1" -- "1..1" pivot::OperationCallExp : referredOperation222
+pivot::OppositePropertyCallExp "1..1" -- "0..1" pivot::Property : referredProperty225
+pivot::Property "0..1" -- "1..1" pivot::Property : referredProperty268
+pivot::Property "0..1" -- "1..1" pivot::PropertyCallExp : referredProperty273
+pivot::Property "1..1" -- "1..1" pivot::ShadowPart : referredProperty297
+pivot::DynamicProperty "1..1" -- "1..1" pivot::Property : referredProperty87
+pivot::MessageType "1..1" -- "0..1" pivot::Signal : referredSignal183
+pivot::State "0..1" -- "1..1" pivot::StateExp : referredState331
+pivot::Type "0..1" -- "1..1" pivot::TypeExp : referredType394
+pivot::VariableDeclaration "0..1" -- "1..1" pivot::VariableExp : referredVariable406
+pivot::Parameter "0..1" -- "1..1" pivot::Variable : representedParameter401
+pivot::LambdaType "1..1" -- "1..1" pivot::Type : resultType141
+pivot::SendSignalAction "1..1" -- "1..1" pivot::Signal : signal290
+pivot::Transition "1..1" -- "1..1" pivot::Vertex : source382
+pivot::ElementExtension "1..1" -- "1..1" pivot::Stereotype : stereotype99
+pivot::State "0..9999" -- "1..1" pivot::StateMachine : submachineStates340
+pivot::State "1..1" -- "0..1" pivot::StateMachine : submachines329
+pivot::Property "0..9999" -- "1..1" pivot::Property : subsettedProperty271
+pivot::Class "0..9999" -- "1..1" pivot::Class : superClasses21
+pivot::Transition "1..1" -- "1..1" pivot::Vertex : target384
+pivot::TemplateBinding "1..1" -- "1..1" pivot::TemplateSignature : templateSignature349
+pivot::Type "0..1" -- "1..1" pivot::TypedElement : type396
+pivot::OCLExpression "1..1" -- "0..1" pivot::Type : typeValue199
+pivot::Type "0..1" -- "1..1" pivot::VariableDeclaration : typeValue404
+pivot::AssociationClass "1..1" -- "0..9999" pivot::Property : unownedAttributes6
+pivot::TemplateableElement "1..1" -- "0..1" pivot::TemplateableElement : unspecializedElement372
+pivot::Type "0..1" -- "1..1" pivot::WildcardType : upperBound417
+pivot::MapType "1..1" -- "1..1" pivot::Type : valueType168
+@enduml

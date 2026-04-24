@@ -106,6 +106,7 @@ class eel::Variable {
   + value : str
   + vibility : str
 }
+Measure <|-- eel::TypedMeasure
 MeasureBinaryOperation <|-- eel::MeasureBinaryProductOperation
 MeasureBinaryOperation <|-- eel::MeasureBinarySumOperation
 MeasureBinaryProductOperation <|-- eel::EnergyComputation
@@ -115,7 +116,6 @@ MeasureUnboundOperation <|-- eel::MeasureUnboundSumOperation
 MeasureValue <|-- eel::MeasureAttribute
 MeasureValue <|-- eel::MeasureOCL
 MeasureValue <|-- eel::RealTimeDuration
-Measure <|-- eel::TypedMeasure
 MeasurementUncertaintyInformation <|-- eel::Integral
 MeasurementUncertaintyInformation <|-- eel::Interval
 MeasurementUncertaintyInformation <|-- eel::NormalDistribution
@@ -124,17 +124,17 @@ TypedMeasure <|-- eel::MeasureBinaryOperation
 TypedMeasure <|-- eel::MeasureCast
 TypedMeasure <|-- eel::MeasureUnboundOperation
 TypedMeasure <|-- eel::MeasureValue
-eel::MeasurementUncertaintyInformation "0..1" --* "1..1" eel::MeasurementUncertainty : information14
-eel::Interval "1..1" -- "1..1" eel::Integral : interval22
+eel::MeasurementUncertainty "1..1" *-- "0..1" eel::MeasurementUncertaintyInformation : information14
+eel::Integral "1..1" -- "1..1" eel::Interval : interval22
 eel::Measure "0..1" -- "1..1" eel::MeasureBinaryOperation : left7
 eel::Interval "1..1" *-- "1..1" eel::Measure : lowerEndpoint16
 eel::Measure "1..1" -- "1..1" eel::MeasureCast : measure5
-eel::Platform "1..1" *-- "0..9999" eel::Measure : measures1
-eel::MeasureUnboundOperation "1..1" -- "1..9999" eel::Measure : measures12
+eel::Measure "0..9999" --* "1..1" eel::Platform : measures1
+eel::Measure "1..9999" -- "1..1" eel::MeasureUnboundOperation : measures12
 eel::Measure "0..9999" --* "1..1" eel::Sample : quantity24
 eel::Measure "0..1" -- "1..1" eel::MeasureBinaryOperation : right9
 eel::Sample "0..9999" --* "1..1" eel::Sampling : samples21
-eel::MeasurementUncertainty "0..1" --* "1..1" eel::Measure : uncertainty3
-eel::Measure "1..1" --* "1..1" eel::Interval : upperEndpoint18
-eel::Variable "0..9999" --* "1..1" eel::Platform : variables0
+eel::Measure "1..1" *-- "0..1" eel::MeasurementUncertainty : uncertainty3
+eel::Interval "1..1" *-- "1..1" eel::Measure : upperEndpoint18
+eel::Platform "1..1" *-- "0..9999" eel::Variable : variables0
 @enduml

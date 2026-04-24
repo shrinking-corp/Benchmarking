@@ -94,20 +94,20 @@ Content <|-- web::ReleaseSection
 Content <|-- web::SocialBar
 Page <|-- web::ContentPage
 Page <|-- web::NewsFeedPage
-web::NewsEntry "1..1" -- "1..1" web::Author : author13
-web::Site "1..1" *-- "0..9999" web::Author : author4
-web::Content "0..9999" --* "1..1" web::Container : content16
-web::Site "1..1" *-- "0..9999" web::FooterEntry : footer1
+web::Author "1..1" -- "1..1" web::NewsEntry : author13
+web::Author "0..9999" --* "1..1" web::Site : author4
+web::Container "1..1" *-- "0..9999" web::Content : content16
+web::FooterEntry "0..9999" --* "1..1" web::Site : footer1
 web::Gallery "0..9999" --* "1..1" web::Site : galleries10
 web::Gallery "1..1" -- "1..1" web::GalleryContent : gallery22
 web::Gallery "1..1" *-- "0..9999" web::Image : images20
-web::SocialInformation "0..1" --* "1..1" web::SocialBar : information24
+web::SocialBar "1..1" *-- "0..1" web::SocialInformation : information24
 web::Link "0..9999" --* "1..1" web::Site : links6
 web::NewsEntry "0..9999" --* "1..1" web::Site : news2
 web::Page "0..9999" --* "1..1" web::Site : pages0
 web::Release "0..1" -- "1..1" web::ReleaseSection : release18
 web::Release "0..9999" --* "1..1" web::Version : releases19
-web::Site "0..1" -- "1..1" web::Page : site12
-web::Version "0..1" -- "1..1" web::Release : version17
-web::Version "0..9999" --* "1..1" web::Site : versions8
+web::Page "1..1" -- "0..1" web::Site : site12
+web::Release "1..1" -- "0..1" web::Version : version17
+web::Site "1..1" *-- "0..9999" web::Version : versions8
 @enduml

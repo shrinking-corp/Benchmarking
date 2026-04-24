@@ -1,0 +1,25 @@
+@startuml
+class fsm::FiniteStateMachine {
+  + consummedString : str
+  + name : str
+  + producedString : str
+  + unprocessedString : str
+  + initializeModel(args : any) : void
+  + main() : void
+}
+class fsm::State {
+  + isInitialState : bool
+  + name : str
+  + step(inputString : any) : void
+}
+class fsm::Transition {
+  + input : str
+  + name : str
+  + output : str
+  + fire() : void
+}
+fsm::FiniteStateMachine "1..1" -- "0..1" fsm::State : currentState1
+fsm::State "1..1" *-- "0..9999" fsm::Transition : outgoingTransitions4
+fsm::FiniteStateMachine "1..1" *-- "0..9999" fsm::State : states0
+fsm::State "1..1" -- "1..1" fsm::Transition : target6
+@enduml

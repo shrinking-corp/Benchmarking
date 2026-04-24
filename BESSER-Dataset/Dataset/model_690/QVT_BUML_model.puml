@@ -615,12 +615,12 @@ OclExpression <|-- essentialocl::TypeExp
 OclExpression <|-- essentialocl::VariableExp
 OclExpression <|-- imperativeocl::ImperativeExpression
 OpaqueExpression <|-- essentialocl::ExpressionInOcl
-OperationBody <|-- qvtoperational::ConstructorBody
-OperationBody <|-- qvtoperational::MappingBody
-OperationCallExp <|-- qvtoperational::ImperativeCallExp
 Operation <|-- qvtbase::Function
 Operation <|-- qvtoperational::ImperativeOperation
 Operation <|-- qvtoperational::MappingOperation
+OperationBody <|-- qvtoperational::ConstructorBody
+OperationBody <|-- qvtoperational::MappingBody
+OperationCallExp <|-- qvtoperational::ImperativeCallExp
 Package <|-- qvtbase::Transformation
 Package <|-- qvtoperational::Module
 Parameter <|-- qvtbase::FunctionParameter
@@ -637,6 +637,12 @@ Rule <|-- qvtrelation::Relation
 TemplateExp <|-- qvttemplate::CollectionTemplateExp
 TemplateExp <|-- qvttemplate::ObjectTemplateExp
 Transformation <|-- qvtrelation::RelationalTransformation
+Type <|-- emof::Class
+Type <|-- emof::DataType
+Type <|-- essentialocl::AnyType
+Type <|-- essentialocl::InvalidType
+Type <|-- essentialocl::VoidType
+Type <|-- imperativeocl::TemplateParameterType
 TypedElement <|-- emof::Operation
 TypedElement <|-- emof::Parameter
 TypedElement <|-- emof::Property
@@ -644,12 +650,6 @@ TypedElement <|-- essentialocl::CollectionLiteralPart
 TypedElement <|-- essentialocl::OclExpression
 TypedElement <|-- essentialocl::TupleLiteralPart
 TypedElement <|-- essentialocl::Variable
-Type <|-- emof::Class
-Type <|-- emof::DataType
-Type <|-- essentialocl::AnyType
-Type <|-- essentialocl::InvalidType
-Type <|-- essentialocl::VoidType
-Type <|-- imperativeocl::TemplateParameterType
 URIExtent <|-- qvtoperational::ModelType
 VarParameter <|-- qvtoperational::MappingParameter
 VarParameter <|-- qvtoperational::ModelParameter
@@ -658,49 +658,49 @@ Variable <|-- qvtcore::RealizedVariable
 Variable <|-- qvtoperational::VarParameter
 CollectionLiteralExp "1..1" -- "1..1" essentialocl::CollectionLiteralPart : CollectionLiteralExp422
 LetExp "0..1" -- "1..1" essentialocl::Variable : LetExp393
-essentialocl::TupleLiteralPart "1..1" -- "0..1" TupleLiteralExp : TupleLiteralExp446
+TupleLiteralExp "0..1" -- "1..1" essentialocl::TupleLiteralPart : TupleLiteralExp446
 OclExpression "0..9999" --* "1..1" qvtoperational::ModelType : additionalCondition218
 AltExp "0..9999" --* "1..1" imperativeocl::SwitchExp : alternativePart31
-emof::Comment "1..1" -- "0..9999" NamedElement : annotatedElement161
+NamedElement "0..9999" -- "1..1" emof::Comment : annotatedElement161
 Area "1..1" -- "1..1" qvtcore::BottomPattern : area269
 Area "1..1" -- "1..1" qvtcore::GuardPattern : area279
 OclExpression "0..9999" --* "1..1" essentialocl::OperationCallExp : argument412
-imperativeocl::InstantiationExp "1..1" *-- "0..9999" OclExpression : argument79
+OclExpression "0..9999" --* "1..1" imperativeocl::InstantiationExp : argument79
 OclExpression "1..1" --* "1..1" imperativeocl::AssertExp : assertion95
 Assignment "0..9999" --* "1..1" qvtcore::BottomPattern : assignment272
 Property "0..1" --* "1..1" essentialocl::TupleLiteralPart : attribute449
 Type "1..1" -- "1..1" imperativeocl::Typedef : base69
-essentialocl::Variable "1..1" -- "0..1" Parameter : bindParameter399
+Parameter "0..1" -- "1..1" essentialocl::Variable : bindParameter399
 ModelType "0..9999" -- "1..1" qvtoperational::ModuleImport : binding231
 Variable "0..1" --* "1..1" qvttemplate::TemplateExp : bindsTo0
 Variable "0..9999" --* "1..1" qvtbase::Pattern : bindsTo326
-qvtoperational::ImperativeOperation "1..1" *-- "0..1" OperationBody : body213
-qvtoperational::ObjectExp "1..1" *-- "1..1" ConstructorBody : body251
-imperativeocl::BlockExp "1..1" *-- "0..9999" OclExpression : body29
+OperationBody "0..1" --* "1..1" qvtoperational::ImperativeOperation : body213
+ConstructorBody "1..1" --* "1..1" qvtoperational::ObjectExp : body251
+OclExpression "0..9999" --* "1..1" imperativeocl::BlockExp : body29
 OclExpression "1..1" --* "1..1" imperativeocl::WhileExp : body39
 OclExpression "1..1" --* "1..1" essentialocl::LoopExp : body407
 OclExpression "1..1" --* "1..1" imperativeocl::ComputeExp : body44
 OclExpression "1..1" --* "1..1" imperativeocl::AltExp : body48
-essentialocl::ExpressionInOcl "1..1" *-- "1..1" OclExpression : bodyExpression435
-qvtcore::Area "1..1" *-- "1..1" BottomPattern : bottomPattern255
+OclExpression "1..1" --* "1..1" essentialocl::ExpressionInOcl : bodyExpression435
+BottomPattern "1..1" --* "1..1" qvtcore::Area : bottomPattern255
 BottomPattern "1..1" -- "1..1" qvtcore::Assignment : bottomPattern258
 BottomPattern "0..1" -- "1..1" qvtcore::EnforcementOperation : bottomPattern289
-emof::Operation "1..1" -- "1..1" Class : class130
+Class "1..1" -- "1..1" emof::Operation : class130
 Class "1..1" -- "1..1" emof::Property : class151
 ComputeExp "0..1" -- "1..1" essentialocl::Variable : computeOwner396
 OclExpression "0..1" --* "1..1" qvtoperational::ResolveExp : condition167
-imperativeocl::WhileExp "1..1" *-- "1..1" OclExpression : condition37
+OclExpression "1..1" --* "1..1" imperativeocl::WhileExp : condition37
 OclExpression "1..1" --* "1..1" essentialocl::IfExp : condition378
-imperativeocl::AltExp "1..1" *-- "1..1" OclExpression : condition46
-imperativeocl::Typedef "1..1" *-- "0..1" OclExpression : condition71
+OclExpression "1..1" --* "1..1" imperativeocl::AltExp : condition46
+OclExpression "0..1" --* "1..1" imperativeocl::Typedef : condition71
 OclExpression "0..1" --* "1..1" imperativeocl::LogExp : condition90
 OclExpression "0..1" --* "1..1" imperativeocl::ImperativeLoopExp : condition98
 OclExpression "1..1" --* "1..1" qvtbase::Predicate : conditionExpression333
-qvtoperational::Module "1..1" -- "0..9999" Property : configProperty224
+Property "0..9999" -- "1..1" qvtoperational::Module : configProperty224
 OclExpression "0..9999" --* "1..1" qvtoperational::OperationBody : content247
-qvtoperational::ContextualProperty "1..1" -- "1..1" Class : context201
+Class "1..1" -- "1..1" qvtoperational::ContextualProperty : context201
 VarParameter "0..1" --* "1..1" qvtoperational::ImperativeOperation : context206
-qvtcore::Mapping "1..1" -- "0..1" Mapping : context286
+Mapping "0..1" -- "1..1" qvtcore::Mapping : context286
 Variable "0..1" --* "1..1" essentialocl::ExpressionInOcl : context437
 ImperativeOperation "0..1" -- "1..1" qvtoperational::VarParameter : ctxOwner238
 OclExpression "0..1" --* "1..1" imperativeocl::AssignExp : defaultValue26
@@ -708,19 +708,19 @@ TypedModel "0..9999" -- "1..1" qvtbase::TypedModel : dependsOn313
 MappingOperation "0..9999" -- "1..1" qvtoperational::MappingOperation : disjunct187
 Domain "0..9999" --* "1..1" qvtbase::Rule : domain316
 Element "0..9999" -- "1..1" emof::Tag : element120
-imperativeocl::TupleExp "1..1" *-- "1..9999" OclExpression : element67
+OclExpression "1..9999" --* "1..1" imperativeocl::TupleExp : element67
 Element "0..1" -- "1..1" imperativeocl::LogExp : element92
 Type "0..9999" -- "1..1" imperativeocl::AnonymousTupleType : elementType104
 Type "0..1" -- "1..1" essentialocl::CollectionType : elementType451
 OclExpression "1..1" --* "1..1" essentialocl::IfExp : elseExpression383
 OclExpression "0..1" --* "1..1" imperativeocl::SwitchExp : elsePart32
 OclExpression "0..9999" --* "1..1" qvtoperational::MappingBody : endSection164
-qvtcore::BottomPattern "1..1" *-- "0..9999" EnforcementOperation : enforcementOperation276
+EnforcementOperation "0..9999" --* "1..1" qvtcore::BottomPattern : enforcementOperation276
 EntryOperation "0..1" -- "1..1" qvtoperational::OperationalTransformation : entry179
 Enumeration "0..1" -- "1..1" emof::EnumerationLiteral : enumeration148
 OclExpression "0..1" --* "1..1" imperativeocl::TryExp : exceptBody62
 Type "0..9999" -- "1..1" imperativeocl::TryExp : exception61
-imperativeocl::RaiseExp "1..1" -- "1..1" Type : exception65
+Type "1..1" -- "1..1" imperativeocl::RaiseExp : exception65
 Transformation "0..1" -- "1..1" qvtbase::Transformation : extends306
 ModelParameter "0..1" -- "1..1" qvtoperational::MappingParameter : extent184
 Variable "0..1" -- "1..1" imperativeocl::InstantiationExp : extent76
@@ -731,66 +731,66 @@ Operation "1..1" -- "1..1" qvtrelation::RelationImplementation : impl362
 Module "1..1" -- "1..1" qvtoperational::ModuleImport : importedModule236
 OclExpression "0..9999" --* "1..1" essentialocl::LetExp : in386
 TypedModel "1..1" -- "1..1" qvtrelation::RelationImplementation : inDirectionOf363
-qvtoperational::ResolveInExp "1..1" -- "0..1" MappingOperation : inMapping169
+MappingOperation "0..1" -- "1..1" qvtoperational::ResolveInExp : inMapping169
 MappingOperation "0..9999" -- "1..1" qvtoperational::MappingOperation : inherited195
 OclExpression "0..1" --* "1..1" essentialocl::Variable : initExpression391
 OclExpression "0..9999" --* "1..1" qvtoperational::MappingBody : initSection162
 Class "1..1" -- "1..1" imperativeocl::InstantiationExp : instantiatedClass74
 Class "0..9999" -- "1..1" qvtoperational::OperationalTransformation : intermediateClass170
 Property "0..9999" -- "1..1" qvtoperational::OperationalTransformation : intermediateProperty174
-essentialocl::CollectionItem "1..1" *-- "1..1" OclExpression : item425
+OclExpression "1..1" --* "1..1" essentialocl::CollectionItem : item425
 OclExpression "1..1" --* "1..1" imperativeocl::UnlinkExp : item53
-essentialocl::LoopExp "1..1" *-- "0..9999" Variable : iterator409
-imperativeocl::DictLiteralPart "1..1" *-- "1..1" OclExpression : key85
+Variable "0..9999" --* "1..1" essentialocl::LoopExp : iterator409
+OclExpression "1..1" --* "1..1" imperativeocl::DictLiteralPart : key85
 Type "0..1" -- "1..1" imperativeocl::DictionaryType : keyType82
 OclExpression "1..1" --* "1..1" essentialocl::CollectionRange : last429
 OclExpression "1..1" --* "1..1" imperativeocl::AssignExp : left23
 Mapping "0..9999" -- "1..1" qvtcore::Mapping : local283
-imperativeocl::AssertExp "1..1" *-- "0..1" LogExp : log94
-qvttemplate::CollectionTemplateExp "1..1" -- "0..1" OclExpression : match9
+LogExp "0..1" --* "1..1" imperativeocl::AssertExp : log94
+OclExpression "0..1" -- "1..1" qvttemplate::CollectionTemplateExp : match9
 MappingOperation "0..9999" -- "1..1" qvtoperational::MappingOperation : merged192
 Package "0..9999" -- "1..1" qvtoperational::ModelType : metamodel216
 ModelParameter "0..9999" --* "1..1" qvtoperational::OperationalTransformation : modelParameter177
 TypedModel "0..9999" --* "1..1" qvtbase::Transformation : modelParameter300
 Module "0..1" -- "1..1" emof::Property : module156
-qvtoperational::ModuleImport "1..1" -- "0..1" Module : module233
+Module "0..1" -- "1..1" qvtoperational::ModuleImport : module233
 ModuleImport "0..9999" --* "1..1" qvtoperational::Module : moduleImport227
 Package "0..9999" -- "1..1" emof::Package : nestedPackage141
 ObjectTemplateExp "1..1" -- "1..1" qvttemplate::PropertyTemplateItem : objContainer12
 Operation "0..1" -- "1..1" emof::Parameter : operation145
 ImperativeOperation "0..1" -- "1..1" qvtoperational::OperationBody : operation244
 OperationCallExp "1..1" -- "1..1" qvtcore::EnforcementOperation : operationCallExp292
-qvtrelation::Relation "1..1" -- "0..9999" RelationImplementation : operationalImpl345
-emof::Property "1..1" -- "0..1" Property : opposite153
+RelationImplementation "0..9999" -- "1..1" qvtrelation::Relation : operationalImpl345
+Property "0..1" -- "1..1" emof::Property : opposite153
 Property "0..1" -- "1..1" qvtoperational::ContextualProperty : overridden203
 ImperativeOperation "0..1" -- "1..1" qvtoperational::ImperativeOperation : overridden212
 Rule "0..1" -- "1..1" qvtbase::Rule : overrides322
-emof::Class "1..1" *-- "0..9999" Property : ownedAttribute109
-emof::Element "1..1" *-- "0..9999" Comment : ownedComment119
-qvtrelation::RelationalTransformation "1..1" *-- "0..9999" Key : ownedKey340
+Property "0..9999" --* "1..1" emof::Class : ownedAttribute109
+Comment "0..9999" --* "1..1" emof::Element : ownedComment119
+Key "0..9999" --* "1..1" qvtrelation::RelationalTransformation : ownedKey340
 EnumerationLiteral "0..9999" --* "1..1" emof::Enumeration : ownedLiteral127
 Operation "0..9999" --* "1..1" emof::Class : ownedOperation111
-emof::Operation "1..1" *-- "0..9999" Parameter : ownedParameter133
+Parameter "0..9999" --* "1..1" emof::Operation : ownedParameter133
 Tag "0..9999" --* "1..1" qvtoperational::Module : ownedTag221
 Tag "0..9999" --* "1..1" qvtbase::Transformation : ownedTag297
 Type "0..9999" --* "1..1" emof::Package : ownedType138
 Module "0..1" -- "1..1" emof::Tag : owner125
-emof::Type "1..1" -- "1..1" Package : package142
+Package "1..1" -- "1..1" emof::Type : package142
 Variable "0..1" --* "1..1" essentialocl::ExpressionInOcl : parameterVariable443
 AnonymousTupleLiteralPart "0..9999" --* "1..1" imperativeocl::AnonymousTupleLiteralExp : part106
 PropertyTemplateItem "0..9999" --* "1..1" qvttemplate::ObjectTemplateExp : part3
 Property "1..9999" -- "1..1" qvtrelation::Key : part368
-essentialocl::CollectionLiteralExp "1..1" *-- "0..9999" CollectionLiteralPart : part419
+CollectionLiteralPart "0..9999" --* "1..1" essentialocl::CollectionLiteralExp : part419
 TupleLiteralPart "0..9999" --* "1..1" essentialocl::TupleLiteralExp : part432
 OclExpression "0..9999" --* "1..1" qvttemplate::CollectionTemplateExp : part5
 DictLiteralPart "0..9999" --* "1..1" imperativeocl::DictLiteralExp : part84
-qvtbase::Predicate "1..1" -- "1..1" Pattern : pattern335
+Pattern "1..1" -- "1..1" qvtbase::Predicate : pattern335
 DomainPattern "1..1" --* "1..1" qvtrelation::RelationDomain : pattern354
 Predicate "0..9999" --* "1..1" qvtbase::Pattern : predicate323
 OclExpression "0..1" --* "1..1" qvtbase::Function : queryExpression338
 Type "0..9999" -- "1..1" emof::Operation : raisedException136
 RealizedVariable "0..9999" --* "1..1" qvtcore::BottomPattern : realizedVariable275
-qvttemplate::ObjectTemplateExp "1..1" -- "1..1" Class : referredClass4
+Class "1..1" -- "1..1" qvttemplate::ObjectTemplateExp : referredClass4
 CollectionType "0..1" -- "1..1" qvttemplate::CollectionTemplateExp : referredCollectionType7
 EnumerationLiteral "0..1" -- "1..1" essentialocl::EnumLiteralExp : referredEnumLiteral453
 Variable "0..1" -- "1..1" qvtoperational::ObjectExp : referredObject249
@@ -800,12 +800,12 @@ Property "0..1" -- "1..1" essentialocl::PropertyCallExp : referredProperty401
 Type "0..1" -- "1..1" essentialocl::TypeExp : referredType405
 Variable "1..1" --* "1..1" imperativeocl::VariableInitExp : referredVariable35
 Variable "0..1" -- "1..1" essentialocl::VariableExp : referredVariable403
-qvtoperational::OperationalTransformation "1..1" -- "0..1" Transformation : refined172
+Transformation "0..1" -- "1..1" qvtoperational::OperationalTransformation : refined172
 RelationDomain "0..1" -- "1..1" qvtoperational::MappingParameter : refinedDomain183
-qvtoperational::MappingOperation "1..1" -- "1..1" Relation : refinedRelation189
-qvtoperational::OperationalTransformation "1..1" -- "0..9999" Relation : relation181
-qvtrelation::RelationImplementation "1..1" -- "0..1" Relation : relation359
-qvtoperational::VarParameter "1..1" -- "0..1" ImperativeOperation : resOwner241
+Relation "1..1" -- "1..1" qvtoperational::MappingOperation : refinedRelation189
+Relation "0..9999" -- "1..1" qvtoperational::OperationalTransformation : relation181
+Relation "0..1" -- "1..1" qvtrelation::RelationImplementation : relation359
+ImperativeOperation "0..1" -- "1..1" qvtoperational::VarParameter : resOwner241
 VarParameter "0..9999" --* "1..1" qvtoperational::ImperativeOperation : result209
 Variable "0..1" --* "1..1" essentialocl::IterateExp : result417
 Variable "0..1" --* "1..1" essentialocl::ExpressionInOcl : resultVariable440
@@ -816,35 +816,35 @@ Rule "0..9999" --* "1..1" qvtbase::Transformation : rule303
 OclExpression "1..1" --* "1..1" qvtcore::Assignment : slotExpression261
 OclExpression "0..1" --* "1..1" essentialocl::CallExp : source374
 Mapping "0..9999" -- "1..1" qvtcore::Mapping : specification282
-emof::Class "1..1" -- "0..9999" Class : superClass113
-emof::Element "1..1" -- "0..9999" Tag : tag116
-imperativeocl::CollectorExp "1..1" *-- "1..1" Variable : target100
-imperativeocl::ImperativeIterateExp "1..1" *-- "1..1" Variable : target19
+Class "0..9999" -- "1..1" emof::Class : superClass113
+Tag "0..9999" -- "1..1" emof::Element : tag116
+Variable "1..1" --* "1..1" imperativeocl::CollectorExp : target100
+Variable "1..1" --* "1..1" imperativeocl::ImperativeIterateExp : target19
 OclExpression "1..1" --* "1..1" imperativeocl::UnlinkExp : target51
-qvtcore::Assignment "1..1" -- "1..1" Property : targetProperty266
+Property "1..1" -- "1..1" qvtcore::Assignment : targetProperty266
 TemplateExp "0..1" --* "1..1" qvtrelation::DomainPattern : templateExpression358
-essentialocl::IfExp "1..1" *-- "1..1" OclExpression : thenExpression380
+OclExpression "1..1" --* "1..1" essentialocl::IfExp : thenExpression380
 Transformation "0..1" -- "1..1" emof::Tag : transformation123
-qvtbase::TypedModel "1..1" -- "1..1" Transformation : transformation308
+Transformation "1..1" -- "1..1" qvtbase::TypedModel : transformation308
 Transformation "1..1" -- "1..1" qvtbase::Rule : transformation319
-qvtrelation::Key "1..1" -- "0..1" RelationalTransformation : transformation371
+RelationalTransformation "0..1" -- "1..1" qvtrelation::Key : transformation371
 OclExpression "1..1" --* "1..1" imperativeocl::TryExp : tryBody58
 TryExp "0..1" -- "1..1" essentialocl::OclExpression : tryBodyOwner376
 Type "0..1" -- "1..1" emof::TypedElement : type159
-qvtbase::Domain "1..1" -- "1..1" TypedModel : typedModel296
+TypedModel "1..1" -- "1..1" qvtbase::Domain : typedModel296
 ModelType "0..9999" -- "1..1" qvtoperational::Module : usedModelType230
 Package "1..9999" -- "1..1" qvtbase::TypedModel : usedPackage311
 OclExpression "0..9999" --* "1..1" imperativeocl::AnonymousTupleLiteralPart : value107
-qvttemplate::PropertyTemplateItem "1..1" *-- "1..1" OclExpression : value15
+OclExpression "1..1" --* "1..1" qvttemplate::PropertyTemplateItem : value15
 OclExpression "0..9999" --* "1..1" imperativeocl::AssignExp : value21
 OclExpression "1..1" --* "1..1" qvtcore::Assignment : value263
 OclExpression "1..1" --* "1..1" imperativeocl::ReturnExp : value56
 OclExpression "1..1" --* "1..1" imperativeocl::DictLiteralPart : value87
 Variable "1..9999" --* "1..1" imperativeocl::UnpackExp : variable102
 Variable "0..9999" --* "1..1" qvtrelation::Relation : variable343
-essentialocl::LetExp "1..1" *-- "1..1" Variable : variable388
+Variable "1..1" --* "1..1" essentialocl::LetExp : variable388
 OclExpression "0..9999" --* "1..1" qvtoperational::MappingOperation : when198
-qvtrelation::Relation "1..1" *-- "0..1" Pattern : when351
+Pattern "0..1" --* "1..1" qvtrelation::Relation : when351
 Relation "0..1" -- "1..1" qvtbase::Pattern : whenOwner328
 OclExpression "0..1" --* "1..1" qvttemplate::TemplateExp : where1
 Pattern "0..1" --* "1..1" qvtrelation::Relation : where348

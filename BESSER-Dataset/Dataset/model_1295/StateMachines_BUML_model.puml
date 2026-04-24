@@ -103,40 +103,40 @@ BehaviorStateMachines::Vertex <|-- StateMachines::BehaviorStateMachines::State
 Classifier <|-- StateMachines::ProtocolStateMachines::Interface
 DirectedRelationship <|-- StateMachines::ProtocolStateMachines::ProtocolConformance
 NamedElement <|-- StateMachines::BehaviorStateMachines::Vertex
-StateMachine <|-- StateMachines::ProtocolStateMachines::ProtocolStateMachine
 State <|-- StateMachines::BehaviorStateMachines::FinalState
+StateMachine <|-- StateMachines::ProtocolStateMachines::ProtocolStateMachine
 Transition <|-- StateMachines::ProtocolStateMachines::ProtocolTransition
 Vertex <|-- StateMachines::BehaviorStateMachines::ConnectionPointReference
 Vertex <|-- StateMachines::BehaviorStateMachines::Pseudostate
 ProtocolConformance "0..9999" --* "1..1" StateMachines::ProtocolStateMachines::ProtocolStateMachine : conformance85
-StateMachines::BehaviorStateMachines::State "1..1" *-- "0..9999" ConnectionPointReference : connection57
+ConnectionPointReference "0..9999" --* "1..1" StateMachines::BehaviorStateMachines::State : connection57
 Pseudostate "0..9999" --* "1..1" StateMachines::BehaviorStateMachines::StateMachine : connectionPoint2
 Pseudostate "0..9999" --* "1..1" StateMachines::BehaviorStateMachines::State : connectionPoint60
-StateMachines::BehaviorStateMachines::Vertex "1..1" -- "0..1" Region : container27
-StateMachines::BehaviorStateMachines::Transition "1..1" -- "0..1" Region : container41
+Region "0..1" -- "1..1" StateMachines::BehaviorStateMachines::Vertex : container27
+Region "0..1" -- "1..1" StateMachines::BehaviorStateMachines::Transition : container41
 StateMachines::BehaviorStateMachines::State "1..1" *-- "0..9999" Trigger : deferrableTrigger69
-StateMachines::BehaviorStateMachines::State "1..1" *-- "0..1" Behavior : doActivity74
+Behavior "0..1" --* "1..1" StateMachines::BehaviorStateMachines::State : doActivity74
 Behavior "0..1" --* "1..1" StateMachines::BehaviorStateMachines::Transition : effect36
-StateMachines::BehaviorStateMachines::ConnectionPointReference "1..1" -- "0..1" Pseudostate : entry51
+Pseudostate "0..1" -- "1..1" StateMachines::BehaviorStateMachines::ConnectionPointReference : entry51
 Behavior "0..1" --* "1..1" StateMachines::BehaviorStateMachines::State : entry77
 Pseudostate "0..1" -- "1..1" StateMachines::BehaviorStateMachines::ConnectionPointReference : exit49
 Behavior "0..1" --* "1..1" StateMachines::BehaviorStateMachines::State : exit71
-StateMachines::BehaviorStateMachines::Region "1..1" -- "0..1" Region : extendedRegion20
+Region "0..1" -- "1..1" StateMachines::BehaviorStateMachines::Region : extendedRegion20
 StateMachine "0..9999" -- "1..1" StateMachines::BehaviorStateMachines::StateMachine : extendedStateMachine6
-StateMachines::ProtocolStateMachines::ProtocolConformance "1..1" -- "1..1" ProtocolStateMachine : generalMachine91
+ProtocolStateMachine "1..1" -- "1..1" StateMachines::ProtocolStateMachines::ProtocolConformance : generalMachine91
 Constraint "0..1" --* "1..1" StateMachines::BehaviorStateMachines::Transition : guard39
-Transition "0..9999" -- "1..1" StateMachines::BehaviorStateMachines::Vertex : incoming24
-Transition "0..9999" -- "1..1" StateMachines::BehaviorStateMachines::Vertex : outgoing21
+StateMachines::BehaviorStateMachines::Vertex "1..1" -- "0..9999" Transition : incoming24
+StateMachines::BehaviorStateMachines::Vertex "1..1" -- "0..9999" Transition : outgoing21
 Constraint "0..1" --* "1..1" StateMachines::ProtocolStateMachines::ProtocolTransition : postCondition98
 Constraint "0..1" --* "1..1" StateMachines::ProtocolStateMachines::ProtocolTransition : preCondition96
 ProtocolStateMachine "0..1" -- "1..1" StateMachines::ProtocolStateMachines::Port : protocol92
-StateMachines::ProtocolStateMachines::Interface "1..1" *-- "0..1" ProtocolStateMachine : protocol94
+ProtocolStateMachine "0..1" --* "1..1" StateMachines::ProtocolStateMachines::Interface : protocol94
 State "0..1" -- "1..1" StateMachines::BehaviorStateMachines::State : redefinedState83
-Transition "0..1" -- "1..1" StateMachines::BehaviorStateMachines::Transition : redefinedTransition44
+StateMachines::BehaviorStateMachines::Transition "1..1" -- "0..1" Transition : redefinedTransition44
 Operation "0..9999" -- "1..1" StateMachines::ProtocolStateMachines::ProtocolTransition : referred101
 Region "1..9999" --* "1..1" StateMachines::BehaviorStateMachines::StateMachine : region0
 Region "0..9999" --* "1..1" StateMachines::BehaviorStateMachines::State : region66
-Vertex "1..1" -- "1..1" StateMachines::BehaviorStateMachines::Transition : source30
+StateMachines::BehaviorStateMachines::Transition "1..1" -- "1..1" Vertex : source30
 ProtocolStateMachine "1..1" -- "1..1" StateMachines::ProtocolStateMachines::ProtocolConformance : specificMachine88
 State "0..1" -- "1..1" StateMachines::BehaviorStateMachines::Region : state17
 State "0..1" -- "1..1" StateMachines::BehaviorStateMachines::Pseudostate : state46
@@ -144,9 +144,9 @@ State "0..1" -- "1..1" StateMachines::BehaviorStateMachines::ConnectionPointRefe
 Constraint "0..1" --* "1..1" StateMachines::BehaviorStateMachines::State : stateInvariant80
 StateMachine "0..1" -- "1..1" StateMachines::BehaviorStateMachines::Region : stateMachine11
 StateMachine "0..1" -- "1..1" StateMachines::BehaviorStateMachines::State : submachine63
-StateMachines::BehaviorStateMachines::StateMachine "1..1" -- "0..9999" State : submachineState3
+State "0..9999" -- "1..1" StateMachines::BehaviorStateMachines::StateMachine : submachineState3
 StateMachines::BehaviorStateMachines::Region "1..1" *-- "0..9999" Vertex : subvertex8
-Vertex "1..1" -- "1..1" StateMachines::BehaviorStateMachines::Transition : target33
-Transition "0..9999" --* "1..1" StateMachines::BehaviorStateMachines::Region : transition14
-Trigger "0..1" --* "1..1" StateMachines::BehaviorStateMachines::Transition : trigger37
+StateMachines::BehaviorStateMachines::Transition "1..1" -- "1..1" Vertex : target33
+StateMachines::BehaviorStateMachines::Region "1..1" *-- "0..9999" Transition : transition14
+StateMachines::BehaviorStateMachines::Transition "1..1" *-- "0..1" Trigger : trigger37
 @enduml

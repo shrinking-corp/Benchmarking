@@ -33,21 +33,21 @@ class tp6::Researcher {
 class tp6::Skill {
   + description : str
 }
-tp6::KnowledgeManager "1..1" *-- "0..9999" tp6::Keyword : allKeywords34
+tp6::Keyword "0..9999" --* "1..1" tp6::KnowledgeManager : allKeywords34
 tp6::Paper "1..1" -- "0..9999" tp6::Researcher : authors7
-tp6::Paper "0..1" -- "1..1" tp6::Paper : citedBy9
-tp6::Paper "0..1" -- "1..1" tp6::Collaboration : col_paper26
-tp6::Researcher "1..1" *-- "0..9999" tp6::Collaboration : collaborations4
-tp6::Paper "0..9999" -- "1..1" tp6::Keyword : kPapers29
+tp6::Paper "1..1" -- "0..1" tp6::Paper : citedBy9
+tp6::Collaboration "1..1" -- "0..1" tp6::Paper : col_paper26
+tp6::Collaboration "0..9999" --* "1..1" tp6::Researcher : collaborations4
+tp6::Keyword "1..1" -- "0..9999" tp6::Paper : kPapers29
 tp6::Keyword "0..1" -- "1..1" tp6::PaperKeywords : keyword31
-tp6::PaperKeywords "0..9999" --* "1..1" tp6::Paper : keywords11
-tp6::PublicationStructure "1..1" *-- "0..1" tp6::KnowledgeManager : knowledgeMan21
-tp6::PublicationStructure "1..1" *-- "0..9999" tp6::Paper : papers15
-tp6::Paragraph "0..9999" --* "1..1" tp6::Paper : paragraphs6
+tp6::Paper "1..1" *-- "0..9999" tp6::PaperKeywords : keywords11
+tp6::KnowledgeManager "0..1" --* "1..1" tp6::PublicationStructure : knowledgeMan21
+tp6::Paper "0..9999" --* "1..1" tp6::PublicationStructure : papers15
+tp6::Paper "1..1" *-- "0..9999" tp6::Paragraph : paragraphs6
 tp6::Position "0..1" -- "1..1" tp6::Position : parent24
 tp6::Position "0..9999" --* "1..1" tp6::PublicationStructure : positions18
-tp6::Researcher "1..1" -- "0..9999" tp6::Paper : res_papers0
+tp6::Paper "0..9999" -- "1..1" tp6::Researcher : res_papers0
 tp6::Position "0..1" -- "1..1" tp6::Researcher : res_position2
-tp6::Researcher "0..9999" --* "1..1" tp6::PublicationStructure : researchers13
+tp6::PublicationStructure "1..1" *-- "0..9999" tp6::Researcher : researchers13
 tp6::Researcher "1..1" *-- "0..9999" tp6::Skill : skills1
 @enduml

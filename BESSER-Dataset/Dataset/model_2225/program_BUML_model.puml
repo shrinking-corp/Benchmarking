@@ -32,12 +32,12 @@ enum SemesterStatus {
 }
 Program::Course "0..1" -- "1..1" Program::SemesterCourse : course10
 Program::Course "1..9999" --* "1..1" Program::Department : courses15
-Program::Department "0..1" -- "1..1" Program::Course : department12
-Program::Program "1..9999" --* "1..1" Program::Department : programs13
+Program::Course "1..1" -- "0..1" Program::Department : department12
+Program::Department "1..1" *-- "1..9999" Program::Program : programs13
 Program::Semester "0..1" -- "1..1" Program::SemesterCourse : semester11
 Program::Semester "1..1" *-- "0..9999" Program::SemesterCourse : semesterCourses9
-Program::Semester "0..9999" --* "1..1" Program::Program : semesters0
+Program::Program "1..1" *-- "0..9999" Program::Semester : semesters0
 Program::Semester "0..9999" --* "1..1" Program::Specialization : semesters3
 Program::Program "1..1" *-- "0..9999" Program::Specialization : specializations1
-Program::Specialization "1..1" *-- "0..9999" Program::Specialization : specializations7
+Program::Specialization "0..9999" --* "1..1" Program::Specialization : specializations7
 @enduml

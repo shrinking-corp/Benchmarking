@@ -552,10 +552,10 @@ class astm::sastm::DelphiWithStatement {
 AccessKind <|-- astm::gastm::Private
 AccessKind <|-- astm::gastm::Protected
 AccessKind <|-- astm::gastm::Public
-ActualParameterExpression <|-- astm::gastm::ByReferenceActualParameterExpression
-ActualParameterExpression <|-- astm::gastm::ByValueActualParameterExpression
 ActualParameter <|-- astm::gastm::ActualParameterExpression
 ActualParameter <|-- astm::gastm::MissingActualParameter
+ActualParameterExpression <|-- astm::gastm::ByReferenceActualParameterExpression
+ActualParameterExpression <|-- astm::gastm::ByValueActualParameterExpression
 AggregateType <|-- astm::gastm::AnnotationType
 AggregateType <|-- astm::gastm::ClassType
 AggregateType <|-- astm::gastm::StructureType
@@ -608,20 +608,20 @@ DataType <|-- astm::gastm::ExceptionType
 DataType <|-- astm::gastm::FormalParameterType
 DataType <|-- astm::gastm::NamedType
 DataType <|-- astm::gastm::PrimitiveType
-DeclarationOrDefinition <|-- astm::gastm::Declaration
-DeclarationOrDefinition <|-- astm::gastm::Definition
 Declaration <|-- astm::gastm::FormalParameterDeclaration
 Declaration <|-- astm::gastm::FunctionDeclaration
 Declaration <|-- astm::gastm::VariableDeclaration
-DefinitionObject <|-- astm::gastm::DeclarationOrDefinition
-DefinitionObject <|-- astm::gastm::LabelDefinition
-DefinitionObject <|-- astm::gastm::NameSpaceDefinition
-DefinitionObject <|-- astm::gastm::TypeDefinition
+DeclarationOrDefinition <|-- astm::gastm::Declaration
+DeclarationOrDefinition <|-- astm::gastm::Definition
 Definition <|-- astm::gastm::DataDefinition
 Definition <|-- astm::gastm::EntryDefinition
 Definition <|-- astm::gastm::EnumLiteralDefinition
 Definition <|-- astm::gastm::FunctionDefinition
 Definition <|-- astm::gastm::SpecificTriggerDefinition
+DefinitionObject <|-- astm::gastm::DeclarationOrDefinition
+DefinitionObject <|-- astm::gastm::LabelDefinition
+DefinitionObject <|-- astm::gastm::NameSpaceDefinition
+DefinitionObject <|-- astm::gastm::TypeDefinition
 Expression <|-- astm::gastm::AggregateExpression
 Expression <|-- astm::gastm::AnnotationExpression
 Expression <|-- astm::gastm::ArrayAccess
@@ -718,15 +718,15 @@ StorageSpecification <|-- astm::gastm::NoDef
 StorageSpecification <|-- astm::gastm::PerClassMember
 SwitchCase <|-- astm::gastm::CaseBlock
 SwitchCase <|-- astm::gastm::DefaultBlock
-TypeDefinition <|-- astm::gastm::AggregateTypeDefinition
-TypeDefinition <|-- astm::gastm::NamedTypeDefinition
-TypeReference <|-- astm::gastm::NamedTypeReference
-TypeReference <|-- astm::gastm::UnnamedTypeReference
 Type <|-- astm::gastm::DataType
 Type <|-- astm::gastm::FunctionType
 Type <|-- astm::gastm::LabelType
 Type <|-- astm::gastm::NameSpaceType
 Type <|-- astm::gastm::TypeReference
+TypeDefinition <|-- astm::gastm::AggregateTypeDefinition
+TypeDefinition <|-- astm::gastm::NamedTypeDefinition
+TypeReference <|-- astm::gastm::NamedTypeReference
+TypeReference <|-- astm::gastm::UnnamedTypeReference
 UnaryOperator <|-- astm::gastm::AddressOf
 UnaryOperator <|-- astm::gastm::BitNot
 UnaryOperator <|-- astm::gastm::Decrement
@@ -742,14 +742,14 @@ VirtualSpecification <|-- astm::gastm::PureVirtual
 VirtualSpecification <|-- astm::gastm::Virtual
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::DeclarationOrDefinition : accessKind17
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::DerivesFrom : accessKind97
-astm::gastm::FunctionCallExpression "1..1" *-- "0..9999" ActualParameter : actualParams225
+ActualParameter "0..9999" --* "1..1" astm::gastm::FunctionCallExpression : actualParams225
 OtherSyntaxObject "0..9999" --* "1..1" astm::gastm::NewExpression : actualParams231
 TypeReference "0..9999" --* "1..1" astm::gastm::TypeQualifiedIdentifierReference : aggregateType185
 AggregateType "0..1" --* "1..1" astm::gastm::AggregateTypeDefinition : aggregateType61
 TypeReference "0..1" --* "1..1" astm::gastm::AnnotationExpression : annotationType239
 AnnotationExpression "0..9999" --* "1..1" astm::gastm::GASTMSyntaxObject : annotations10
 DefinitionObject "0..1" -- "1..1" astm::sastm::DelphiFunctionCallExpression : applyTo263
-astm::gastm::ArrayAccess "1..1" *-- "0..1" Expression : arrayName176
+Expression "0..1" --* "1..1" astm::gastm::ArrayAccess : arrayName176
 TypeReference "0..1" --* "1..1" astm::gastm::ConstructedType : baseType77
 Expression "0..1" --* "1..1" astm::gastm::BitFieldDefinition : bitFieldSize54
 Statement "0..9999" --* "1..1" astm::gastm::SwitchCase : body139
@@ -757,34 +757,34 @@ Statement "0..1" --* "1..1" astm::gastm::LoopStatement : body147
 Statement "0..1" --* "1..1" astm::gastm::CatchBlock : body162
 Statement "0..9999" --* "1..1" astm::gastm::SpecificTriggerDefinition : body244
 Statement "0..9999" --* "1..1" astm::gastm::FunctionDefinition : body40
-astm::gastm::EntryDefinition "1..1" *-- "0..9999" Statement : body50
+Statement "0..9999" --* "1..1" astm::gastm::EntryDefinition : body50
 DefinitionObject "0..9999" --* "1..1" astm::gastm::NameSpaceDefinition : body64
-astm::gastm::NamedType "1..1" *-- "0..1" Type : body95
+Type "0..1" --* "1..1" astm::gastm::NamedType : body95
 Expression "0..1" --* "1..1" astm::gastm::FunctionCallExpression : calledFunction223
 Expression "0..9999" --* "1..1" astm::gastm::CaseBlock : caseExpressions141
-astm::gastm::SwitchStatement "1..1" *-- "0..1" SwitchCase : cases137
+SwitchCase "0..1" --* "1..1" astm::gastm::SwitchStatement : cases137
 TypeReference "0..1" -- "1..1" astm::gastm::CastExpression : castType190
 CatchBlock "0..9999" --* "1..1" astm::gastm::TryStatement : catchBlocks157
-astm::gastm::Scope "1..1" *-- "0..9999" Scope : childScope5
+Scope "0..9999" --* "1..1" astm::gastm::Scope : childScope5
 NamedType "0..1" --* "1..1" astm::gastm::DerivesFrom : className99
-astm::gastm::IfStatement "1..1" *-- "0..1" Expression : condition127
-astm::gastm::LoopStatement "1..1" *-- "0..1" Expression : condition145
+Expression "0..1" --* "1..1" astm::gastm::IfStatement : condition127
+Expression "0..1" --* "1..1" astm::gastm::LoopStatement : condition145
 Expression "0..1" --* "1..1" astm::gastm::ConditionalExpression : condition210
-astm::gastm::DeclarationOrDefinitionStatement "1..1" *-- "0..1" DefinitionObject : declOrDefn110
-astm::gastm::Declaration "1..1" *-- "0..1" TypeReference : declarationType27
-astm::sastm::DelphiBlockStatement "1..1" *-- "0..9999" DefinitionObject : declarations260
+DefinitionObject "0..1" --* "1..1" astm::gastm::DeclarationOrDefinitionStatement : declOrDefn110
+TypeReference "0..1" --* "1..1" astm::gastm::Declaration : declarationType27
+DefinitionObject "0..9999" --* "1..1" astm::sastm::DelphiBlockStatement : declarations260
 Definition "0..1" --* "1..1" astm::gastm::Declaration : defRef23
-astm::gastm::LabelAccess "1..1" *-- "0..1" LabelDefinition : definition236
+LabelDefinition "0..1" --* "1..1" astm::gastm::LabelAccess : definition236
 DefinitionObject "0..9999" --* "1..1" astm::gastm::Scope : definitionObject4
 TypeReference "0..1" --* "1..1" astm::gastm::Definition : definitionType21
 NamedType "0..1" --* "1..1" astm::gastm::NamedTypeDefinition : definitionType60
 DerivesFrom "0..9999" --* "1..1" astm::gastm::ClassType : derivesFrom96
-astm::gastm::IfStatement "1..1" *-- "0..1" Statement : elseBody132
+Statement "0..1" --* "1..1" astm::gastm::IfStatement : elseBody132
 EnumLiteralDefinition "0..9999" --* "1..1" astm::gastm::EnumType : enumLiterals76
 Expression "0..1" --* "1..1" astm::gastm::ThrowStatement : exception167
 DataDefinition "0..1" --* "1..1" astm::gastm::VariableCatchBlock : exceptionVariable166
-astm::gastm::TypesCatchBlock "1..1" *-- "0..9999" Type : exceptions164
-astm::sastm::DelphiImplementationSection "1..1" *-- "0..9999" NamedTypeReference : exports255
+Type "0..9999" --* "1..1" astm::gastm::TypesCatchBlock : exceptions164
+NamedTypeReference "0..9999" --* "1..1" astm::sastm::DelphiImplementationSection : exports255
 NamedTypeReference "0..9999" --* "1..1" astm::sastm::DelphiBlockStatement : exports258
 Expression "0..1" --* "1..1" astm::gastm::ExpressionStatement : expression112
 Expression "0..1" --* "1..1" astm::gastm::CastExpression : expression192
@@ -793,38 +793,38 @@ SourceFile "0..1" --* "1..1" astm::gastm::IncludeUnit : file73
 CompilationUnit "0..9999" --* "1..1" astm::gastm::Project : files1
 Statement "0..1" --* "1..1" astm::gastm::TryStatement : finalStatement159
 FormalParameterDeclaration "0..9999" --* "1..1" astm::gastm::FunctionDeclaration : formalParameters30
-astm::gastm::FunctionDefinition "1..1" *-- "0..9999" FormalParameterDefinition : formalParameters38
+FormalParameterDefinition "0..9999" --* "1..1" astm::gastm::FunctionDefinition : formalParameters38
 FormalParameterDefinition "0..9999" --* "1..1" astm::gastm::EntryDefinition : formalParameters48
 DefinitionObject "0..9999" --* "1..1" astm::gastm::CompilationUnit : fragments12
-astm::gastm::RangeExpression "1..1" *-- "0..1" Expression : fromExpression218
+Expression "0..1" --* "1..1" astm::gastm::RangeExpression : fromExpression218
 FunctionMemberAttributes "0..1" --* "1..1" astm::gastm::FunctionDeclaration : functionMemberAttributes31
-astm::gastm::FunctionDefinition "1..1" *-- "0..1" FunctionMemberAttributes : functionMemberAttributes42
+FunctionMemberAttributes "0..1" --* "1..1" astm::gastm::FunctionDefinition : functionMemberAttributes42
 Statement "0..1" --* "1..1" astm::gastm::TryStatement : guardedStatement155
-astm::gastm::Dimension "1..1" *-- "0..1" Expression : highBound86
-astm::gastm::Definition "1..1" *-- "0..1" Name : identifierName20
+Expression "0..1" --* "1..1" astm::gastm::Dimension : highBound86
+Name "0..1" --* "1..1" astm::gastm::Definition : identifierName20
 Name "0..1" --* "1..1" astm::gastm::Declaration : identifierName24
 DelphiImplementationSection "0..1" --* "1..1" astm::sastm::DelphiUnit : implementation250
-astm::gastm::SourceLocation "1..1" *-- "0..1" SourceFile : inSourceFile0
+SourceFile "0..1" --* "1..1" astm::gastm::SourceLocation : inSourceFile0
 Expression "0..1" --* "1..1" astm::gastm::ForStatement : initBody150
 Expression "0..1" --* "1..1" astm::gastm::DataDefinition : initialValue53
-astm::sastm::DelphiUnit "1..1" *-- "0..1" DelphiInterfaceSection : interface248
+DelphiInterfaceSection "0..1" --* "1..1" astm::sastm::DelphiUnit : interface248
 Expression "0..9999" --* "1..1" astm::gastm::ForStatement : iterationBody152
-astm::gastm::LabeledStatement "1..1" *-- "0..1" LabelDefinition : label119
+LabelDefinition "0..1" --* "1..1" astm::gastm::LabeledStatement : label119
 Name "0..1" --* "1..1" astm::gastm::LabelDefinition : labelName69
 LabelType "0..1" --* "1..1" astm::gastm::LabelDefinition : labelType71
 Expression "0..1" --* "1..1" astm::gastm::BinaryExpression : leftOperand202
 SourceLocation "0..1" --* "1..1" astm::gastm::GASTMSyntaxObject : locationInfo7
 Expression "0..1" --* "1..1" astm::gastm::Dimension : lowBound84
 IdentifierReference "0..1" --* "1..1" astm::gastm::QualifiedIdentifierReference : member183
-astm::gastm::TypeQualifiedIdentifierReference "1..1" *-- "0..1" IdentifierReference : member187
+IdentifierReference "0..1" --* "1..1" astm::gastm::TypeQualifiedIdentifierReference : member187
 Expression "0..9999" --* "1..1" astm::gastm::AnnotationExpression : memberValues241
-astm::gastm::AggregateType "1..1" *-- "0..9999" DefinitionObject : members79
+DefinitionObject "0..9999" --* "1..1" astm::gastm::AggregateType : members79
 Name "0..1" --* "1..1" astm::gastm::NamedTypeReference : name104
-astm::gastm::NameReference "1..1" *-- "0..1" Name : name171
+Name "0..1" --* "1..1" astm::gastm::NameReference : name171
 Name "0..1" --* "1..1" astm::gastm::LabelAccess : name234
 Name "0..1" --* "1..1" astm::sastm::DelphiUnit : name246
 Name "0..1" --* "1..1" astm::gastm::TypeDefinition : name58
-astm::gastm::NameSpaceDefinition "1..1" *-- "0..1" Name : nameSpace62
+Name "0..1" --* "1..1" astm::gastm::NameSpaceDefinition : nameSpace62
 NameSpaceType "0..1" --* "1..1" astm::gastm::NameSpaceDefinition : nameSpaceType67
 TypeReference "0..1" --* "1..1" astm::gastm::NewExpression : newType229
 Expression "0..1" --* "1..1" astm::gastm::ConditionalExpression : onFalseOperand215
@@ -834,18 +834,18 @@ ProgramScope "0..1" --* "1..1" astm::gastm::CompilationUnit : opensScope14
 FunctionScope "0..1" --* "1..1" astm::gastm::FunctionDefinition : opensScope45
 AggregateScope "0..1" --* "1..1" astm::gastm::AggregateType : opensScope81
 Expression "0..1" --* "1..1" astm::gastm::DeleteStatement : operand108
-astm::gastm::UnaryExpression "1..1" *-- "0..1" Expression : operand197
+Expression "0..1" --* "1..1" astm::gastm::UnaryExpression : operand197
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::UnaryExpression : operator195
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::BinaryExpression : operator200
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::OperatorAssign : operator208
 GlobalScope "0..1" --* "1..1" astm::gastm::Project : outerScope2
 FormalParameterType "0..9999" --* "1..1" astm::gastm::FunctionType : parameterTypes91
-astm::gastm::GASTMSyntaxObject "1..1" *-- "0..9999" PreprocessorElement : preProcessorElements8
-astm::gastm::QualifiedIdentifierReference "1..1" *-- "0..1" Expression : qualifiers181
-astm::gastm::ArrayType "1..1" *-- "0..9999" Dimension : ranks83
+PreprocessorElement "0..9999" --* "1..1" astm::gastm::GASTMSyntaxObject : preProcessorElements8
+Expression "0..1" --* "1..1" astm::gastm::QualifiedIdentifierReference : qualifiers181
+Dimension "0..9999" --* "1..1" astm::gastm::ArrayType : ranks83
 DefinitionObject "0..1" -- "1..1" astm::gastm::NameReference : refersTo173
 MacroDefinition "0..1" --* "1..1" astm::gastm::MacroCall : refersTo75
-astm::gastm::FunctionDeclaration "1..1" *-- "0..1" TypeReference : returnType33
+TypeReference "0..1" --* "1..1" astm::gastm::FunctionDeclaration : returnType33
 TypeReference "0..1" --* "1..1" astm::gastm::FunctionDefinition : returnType36
 TypeReference "0..1" --* "1..1" astm::gastm::FunctionType : returnType89
 Expression "0..1" --* "1..1" astm::gastm::ReturnStatement : returnValue143
@@ -861,12 +861,12 @@ LabelAccess "0..1" --* "1..1" astm::gastm::ContinueStatement : target117
 Statement "0..1" --* "1..1" astm::gastm::IfStatement : thenBody129
 Expression "0..1" --* "1..1" astm::gastm::RangeExpression : toExpression220
 Type "0..1" --* "1..1" astm::gastm::UnnamedTypeReference : type102
-astm::gastm::NamedTypeReference "1..1" -- "0..1" TypeDefinition : type106
+TypeDefinition "0..1" -- "1..1" astm::gastm::NamedTypeReference : type106
 TypeReference "0..1" --* "1..1" astm::gastm::FormalParameterType : type93
 NamedTypeReference "0..9999" --* "1..1" astm::sastm::DelphiInterfaceSection : uses252
 NamedTypeReference "0..9999" --* "1..1" astm::sastm::DelphiImplementationSection : uses253
-astm::gastm::ActualParameterExpression "1..1" *-- "0..1" Expression : value227
-astm::gastm::EnumLiteralDefinition "1..1" *-- "0..1" Expression : value56
+Expression "0..1" --* "1..1" astm::gastm::ActualParameterExpression : value227
+Expression "0..1" --* "1..1" astm::gastm::EnumLiteralDefinition : value56
 VirtualSpecification "0..1" --* "1..1" astm::gastm::FunctionMemberAttributes : virtualSpecifier47
 DefinitionObject "0..9999" -- "1..1" astm::sastm::DelphiWithStatement : withs265
 @enduml

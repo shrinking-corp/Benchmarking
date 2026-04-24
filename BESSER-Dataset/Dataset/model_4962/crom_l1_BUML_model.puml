@@ -111,19 +111,19 @@ Constraint <|-- crom::l1::Test
 Inheritance <|-- crom::l1::CompartmentInheritance
 Inheritance <|-- crom::l1::DataInheritance
 Inheritance <|-- crom::l1::NaturalInheritance
+Model <|-- crom::l1::Group
 ModelElement <|-- crom::l1::Group
 ModelElement <|-- crom::l1::RigidType
-Model <|-- crom::l1::Group
 NamedElement <|-- crom::l1::ModelElement
 NamedElement <|-- crom::l1::RelationTarget
 NamedElement <|-- crom::l1::TypedElement
 Player <|-- crom::l1::CompartmentType
 Player <|-- crom::l1::NaturalType
+Relation <|-- crom::l1::Fulfillment
+Relation <|-- crom::l1::Inheritance
 RelationTarget <|-- crom::l1::RoleGroup
 RelationTarget <|-- crom::l1::RoleType
 RelationTarget <|-- crom::l1::Type
-Relation <|-- crom::l1::Fulfillment
-Relation <|-- crom::l1::Inheritance
 RigidType <|-- crom::l1::CompartmentType
 RigidType <|-- crom::l1::DataType
 RigidType <|-- crom::l1::NaturalType
@@ -138,28 +138,28 @@ TypedElement <|-- crom::l1::Attribute
 TypedElement <|-- crom::l1::Operation
 TypedElement <|-- crom::l1::Parameter
 crom::l1::Attribute "0..9999" --* "1..1" crom::l1::Type : attributes7
-crom::l1::Constraint "0..9999" --* "1..1" crom::l1::CompartmentType : constraints30
+crom::l1::CompartmentType "1..1" *-- "0..9999" crom::l1::Constraint : constraints30
 crom::l1::CompartmentType "1..9999" --* "1..1" crom::l1::CompartmentType : contains32
 crom::l1::Model "1..1" *-- "0..9999" crom::l1::ModelElement : elements0
 crom::l1::RoleGroup "1..1" *-- "0..9999" crom::l1::RoleGroupElement : elements23
 crom::l1::AbstractRole "1..1" -- "1..1" crom::l1::Fulfillment : filled10
-crom::l1::Player "1..1" -- "1..1" crom::l1::Fulfillment : filler11
+crom::l1::Fulfillment "1..1" -- "1..1" crom::l1::Player : filler11
 crom::l1::Relation "0..9999" -- "1..1" crom::l1::RelationTarget : incoming17
-crom::l1::Type "1..1" *-- "0..9999" crom::l1::Operation : operations8
-crom::l1::RelationTarget "1..1" -- "0..9999" crom::l1::Relation : outgoing19
+crom::l1::Operation "0..9999" --* "1..1" crom::l1::Type : operations8
+crom::l1::Relation "0..9999" -- "1..1" crom::l1::RelationTarget : outgoing19
 crom::l1::Operation "1..1" -- "1..1" crom::l1::Type : owner4
-crom::l1::Type "1..1" -- "1..1" crom::l1::Attribute : owner5
-crom::l1::Parameter "0..9999" -- "1..1" crom::l1::Operation : params3
+crom::l1::Attribute "1..1" -- "1..1" crom::l1::Type : owner5
+crom::l1::Operation "1..1" -- "0..9999" crom::l1::Parameter : params3
 crom::l1::CompartmentType "1..1" *-- "0..9999" crom::l1::Part : parts29
 crom::l1::AbstractRole "1..1" -- "1..1" crom::l1::AbstractRoleRef : ref24
-crom::l1::Relation "0..9999" --* "1..1" crom::l1::Model : relations1
+crom::l1::Model "1..1" *-- "0..9999" crom::l1::Relation : relations1
 crom::l1::AbstractRole "1..1" --* "1..1" crom::l1::Part : roles26
-crom::l1::NaturalType "1..1" -- "1..1" crom::l1::NaturalInheritance : sub14
-crom::l1::DataType "1..1" -- "1..1" crom::l1::DataInheritance : sub35
+crom::l1::NaturalInheritance "1..1" -- "1..1" crom::l1::NaturalType : sub14
+crom::l1::DataInheritance "1..1" -- "1..1" crom::l1::DataType : sub35
 crom::l1::CompartmentInheritance "1..1" -- "1..1" crom::l1::CompartmentType : sub40
-crom::l1::NaturalType "1..1" -- "1..1" crom::l1::NaturalInheritance : super13
-crom::l1::DataType "1..1" -- "1..1" crom::l1::DataInheritance : super34
-crom::l1::CompartmentType "1..1" -- "1..1" crom::l1::CompartmentInheritance : super38
+crom::l1::NaturalInheritance "1..1" -- "1..1" crom::l1::NaturalType : super13
+crom::l1::DataInheritance "1..1" -- "1..1" crom::l1::DataType : super34
+crom::l1::CompartmentInheritance "1..1" -- "1..1" crom::l1::CompartmentType : super38
 crom::l1::Type "1..1" -- "1..1" crom::l1::TypedElement : type22
 crom::l1::CompartmentType "1..1" -- "1..1" crom::l1::Part : whole28
 @enduml

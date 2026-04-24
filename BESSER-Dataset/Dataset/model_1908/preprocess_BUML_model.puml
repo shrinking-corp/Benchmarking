@@ -357,8 +357,8 @@ water::PreprocessingUnitWater <|-- preprocess::operands::CobolWord
 water::PreprocessingUnitWater <|-- preprocess::statements::Execute
 water::ProcedureSegmentWater <|-- preprocess::water::DataSegmentWater
 water::Water <|-- preprocess::water::DataSegmentWater
-preprocess::literals::AllLiteral "1..1" *-- "1..1" Literal : constant22
-preprocess::containers::Copybook "1..1" *-- "0..9999" CopyUnit : copyUnits11
+Literal "1..1" --* "1..1" preprocess::literals::AllLiteral : constant22
+CopyUnit "0..9999" --* "1..1" preprocess::containers::Copybook : copyUnits11
 CopyUnit "0..9999" --* "1..1" preprocess::containers::Segment : copyUnits12
 DataSegment "1..1" --* "1..1" preprocess::containers::PreprocessingUnit : dataSegment3
 CobolWord "0..1" --* "1..1" preprocess::containers::PreprocessingUnit : ending1
@@ -366,11 +366,11 @@ CobolSourceFormat "1..1" --* "1..1" preprocess::layouts::CobolLine : lineFormat2
 CobolLine "0..1" --* "1..1" preprocess::containers::CobolRoot : lines9
 CobolLine "0..9999" -- "1..1" preprocess::commons::Element : location20
 PreprocessingUnit "0..9999" --* "1..1" preprocess::containers::PreprocessingUnit : nestedPreprocessingUnits0
-preprocess::containers::PreprocessingGroup "1..1" *-- "0..9999" PreprocessingUnit : preprocessingUnits7
+PreprocessingUnit "0..9999" --* "1..1" preprocess::containers::PreprocessingGroup : preprocessingUnits7
 ProcedureSegment "1..1" --* "1..1" preprocess::containers::PreprocessingUnit : procedureSegment5
 Replacing "0..9999" --* "1..1" preprocess::sentences::PreprocessingSentence : replacings19
 PreprocessingSentence "1..1" --* "1..1" preprocess::containers::CopyUnit : sentence10
-preprocess::sentences::Replacing "1..1" *-- "1..1" Operand : source15
+Operand "1..1" --* "1..1" preprocess::sentences::Replacing : source15
 Operand "1..1" --* "1..1" preprocess::sentences::Replacing : target16
 Water "0..9999" --* "1..1" preprocess::water::IncompleteElement : water14
 @enduml

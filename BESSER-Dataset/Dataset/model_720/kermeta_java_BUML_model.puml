@@ -296,7 +296,6 @@ NamedElement <|-- kermeta::structure::Constraint
 NamedElement <|-- kermeta::structure::EnumerationLiteral
 NamedElement <|-- kermeta::structure::TypeDefinition
 NamedElement <|-- kermeta::structure::TypeDefinitionContainer
-ObjectTypeVariable <|-- kermeta::structure::VirtualType
 Object <|-- kermeta::behavior::LambdaParameter
 Object <|-- kermeta::behavior::Rescue
 Object <|-- kermeta::structure::Filter
@@ -308,13 +307,14 @@ Object <|-- kermeta::structure::Tag
 Object <|-- kermeta::structure::Type
 Object <|-- kermeta::structure::TypeContainer
 Object <|-- kermeta::structure::Using
+ObjectTypeVariable <|-- kermeta::structure::VirtualType
 ParameterizedType <|-- kermeta::structure::Class
+Type <|-- kermeta::structure::ParameterizedType
+Type <|-- kermeta::structure::VoidType
 TypeDefinition <|-- kermeta::structure::GenericTypeDefinition
 TypeVariable <|-- kermeta::structure::ModelTypeVariable
 TypeVariable <|-- kermeta::structure::ObjectTypeVariable
 TypedElement <|-- kermeta::structure::MultiplicityElement
-Type <|-- kermeta::structure::ParameterizedType
-Type <|-- kermeta::structure::VoidType
 structure::DataType <|-- kermeta::structure::PrimitiveType
 structure::GenericTypeDefinition <|-- kermeta::structure::ClassDefinition
 structure::NamedElement <|-- kermeta::structure::Package
@@ -322,6 +322,11 @@ structure::NamedElement <|-- kermeta::structure::TypeVariable
 structure::NamedElement <|-- kermeta::structure::TypedElement
 structure::Object <|-- kermeta::behavior::Expression
 structure::Object <|-- kermeta::structure::TypeVariableBinding
+structure::Type <|-- kermeta::structure::DataType
+structure::Type <|-- kermeta::structure::FunctionType
+structure::Type <|-- kermeta::structure::ModelType
+structure::Type <|-- kermeta::structure::ProductType
+structure::Type <|-- kermeta::structure::TypeVariable
 structure::TypeContainer <|-- kermeta::behavior::Expression
 structure::TypeContainer <|-- kermeta::structure::ClassDefinition
 structure::TypeContainer <|-- kermeta::structure::FunctionType
@@ -330,97 +335,92 @@ structure::TypeContainer <|-- kermeta::structure::ProductType
 structure::TypeContainer <|-- kermeta::structure::TypeVariable
 structure::TypeContainer <|-- kermeta::structure::TypeVariableBinding
 structure::TypeContainer <|-- kermeta::structure::TypedElement
-structure::TypeDefinitionContainer <|-- kermeta::structure::Package
 structure::TypeDefinition <|-- kermeta::structure::DataType
 structure::TypeDefinition <|-- kermeta::structure::ModelType
-structure::Type <|-- kermeta::structure::DataType
-structure::Type <|-- kermeta::structure::FunctionType
-structure::Type <|-- kermeta::structure::ModelType
-structure::Type <|-- kermeta::structure::ProductType
-structure::Type <|-- kermeta::structure::TypeVariable
+structure::TypeDefinitionContainer <|-- kermeta::structure::Package
 behavior::Expression "1..1" --* "1..1" kermeta::structure::Constraint : body135
 behavior::Expression "1..9999" --* "1..1" kermeta::behavior::Rescue : body31
 behavior::Expression "1..1" --* "1..1" kermeta::behavior::LambdaExpression : body38
 behavior::Expression "0..1" --* "1..1" kermeta::behavior::Loop : body47
-kermeta::structure::Operation "1..1" *-- "0..1" behavior::Expression : body80
-structure::ClassDefinition "1..1" -- "1..1" kermeta::structure::VirtualType : classDefinition182
+behavior::Expression "0..1" --* "1..1" kermeta::structure::Operation : body80
+kermeta::structure::VirtualType "1..1" -- "1..1" structure::ClassDefinition : classDefinition182
 behavior::Expression "1..1" --* "1..1" kermeta::behavior::Conditional : condition26
-structure::Type "0..9999" --* "1..1" kermeta::structure::TypeContainer : containedType105
-structure::Object "0..9999" -- "1..1" kermeta::structure::Model : contents67
-kermeta::behavior::Conditional "1..1" *-- "0..1" behavior::Expression : elseBody23
-structure::Enumeration "0..1" -- "1..1" kermeta::structure::EnumerationLiteral : enumeration108
-kermeta::behavior::Rescue "1..1" *-- "1..1" behavior::TypeReference : exceptionType33
-structure::Filter "0..9999" --* "1..1" kermeta::structure::ModelingUnit : excludeFilters166
+kermeta::structure::TypeContainer "1..1" *-- "0..9999" structure::Type : containedType105
+kermeta::structure::Model "1..1" -- "0..9999" structure::Object : contents67
+behavior::Expression "0..1" --* "1..1" kermeta::behavior::Conditional : elseBody23
+kermeta::structure::EnumerationLiteral "1..1" -- "0..1" structure::Enumeration : enumeration108
+behavior::TypeReference "1..1" --* "1..1" kermeta::behavior::Rescue : exceptionType33
+kermeta::structure::ModelingUnit "1..1" *-- "0..9999" structure::Filter : excludeFilters166
 behavior::Expression "1..1" --* "1..1" kermeta::behavior::Raise : expression29
-kermeta::structure::Property "1..1" *-- "0..1" behavior::Expression : getterBody93
-structure::Filter "0..9999" --* "1..1" kermeta::structure::ModelingUnit : includeFilters164
-structure::TypeDefinition "0..9999" -- "1..1" kermeta::structure::ModelType : includedTypeDefinition68
-kermeta::behavior::Loop "1..1" *-- "0..1" behavior::Expression : initialization45
+behavior::Expression "0..1" --* "1..1" kermeta::structure::Property : getterBody93
+kermeta::structure::ModelingUnit "1..1" *-- "0..9999" structure::Filter : includeFilters164
+kermeta::structure::ModelType "1..1" -- "0..9999" structure::TypeDefinition : includedTypeDefinition68
+behavior::Expression "0..1" --* "1..1" kermeta::behavior::Loop : initialization45
 behavior::Expression "1..1" --* "1..1" kermeta::behavior::VariableDecl : initialization53
-structure::Type "0..1" -- "1..1" kermeta::structure::PrimitiveType : instanceType128
-structure::Constraint "0..9999" --* "1..1" kermeta::structure::ClassDefinition : inv146
-structure::ClassDefinition "0..1" -- "1..1" kermeta::structure::Constraint : invOwner137
-structure::Type "0..1" -- "1..1" kermeta::structure::FunctionType : left191
-structure::ModelTypeVariable "1..1" -- "1..1" kermeta::structure::VirtualType : modelType183
-structure::Package "0..9999" --* "1..1" kermeta::structure::Package : nestedPackage119
-structure::Package "0..1" -- "1..1" kermeta::structure::Package : nestingPackage122
-structure::Object "1..9999" -- "1..1" kermeta::structure::Tag : object132
-structure::Operation "0..1" -- "1..1" kermeta::structure::Parameter : operation125
-structure::Property "0..1" -- "1..1" kermeta::structure::Property : opposite91
-structure::Property "0..9999" --* "1..1" kermeta::structure::ClassDefinition : ownedAttribute149
-structure::Property "0..9999" -- "1..1" kermeta::structure::Class : ownedAttribute58
+kermeta::structure::PrimitiveType "1..1" -- "0..1" structure::Type : instanceType128
+kermeta::structure::ClassDefinition "1..1" *-- "0..9999" structure::Constraint : inv146
+kermeta::structure::Constraint "1..1" -- "0..1" structure::ClassDefinition : invOwner137
+kermeta::structure::FunctionType "1..1" -- "0..1" structure::Type : left191
+kermeta::structure::VirtualType "1..1" -- "1..1" structure::ModelTypeVariable : modelType183
+kermeta::structure::Package "1..1" *-- "0..9999" structure::Package : nestedPackage119
+kermeta::structure::Package "1..1" -- "0..1" structure::Package : nestingPackage122
+kermeta::structure::Tag "1..1" -- "1..9999" structure::Object : object132
+kermeta::structure::Parameter "1..1" -- "0..1" structure::Operation : operation125
+kermeta::structure::Property "1..1" -- "0..1" structure::Property : opposite91
+kermeta::structure::ClassDefinition "1..1" *-- "0..9999" structure::Property : ownedAttribute149
+kermeta::structure::Class "1..1" -- "0..9999" structure::Property : ownedAttribute58
 kermeta::structure::Enumeration "1..1" *-- "0..9999" structure::EnumerationLiteral : ownedLiteral116
 kermeta::structure::ClassDefinition "1..1" *-- "0..9999" structure::Operation : ownedOperation152
-structure::Operation "0..9999" -- "1..1" kermeta::structure::Class : ownedOperation60
-structure::Parameter "0..9999" --* "1..1" kermeta::structure::Operation : ownedParameter71
-structure::Tag "0..9999" --* "1..1" kermeta::structure::Object : ownedTags66
+kermeta::structure::Class "1..1" -- "0..9999" structure::Operation : ownedOperation60
+kermeta::structure::Operation "1..1" *-- "0..9999" structure::Parameter : ownedParameter71
+kermeta::structure::Object "1..1" *-- "0..9999" structure::Tag : ownedTags66
 kermeta::structure::TypeDefinitionContainer "1..1" *-- "0..9999" structure::TypeDefinition : ownedTypeDefinition196
-structure::ClassDefinition "0..1" -- "1..1" kermeta::structure::Operation : owningClass86
+kermeta::structure::Operation "1..1" -- "0..1" structure::ClassDefinition : owningClass86
 kermeta::structure::Property "1..1" -- "0..1" structure::ClassDefinition : owningClass99
-structure::Package "0..9999" --* "1..1" kermeta::structure::ModelingUnit : packages157
+kermeta::structure::ModelingUnit "1..1" *-- "0..9999" structure::Package : packages157
 behavior::Expression "0..9999" --* "1..1" kermeta::behavior::JavaStaticCall : parameters35
 behavior::LambdaParameter "0..9999" --* "1..1" kermeta::behavior::LambdaExpression : parameters37
 behavior::Expression "0..9999" --* "1..1" kermeta::behavior::CallExpression : parameters4
-structure::Constraint "0..9999" --* "1..1" kermeta::structure::Operation : post77
-structure::Operation "0..1" -- "1..1" kermeta::structure::Constraint : postOwner143
-structure::Constraint "0..9999" --* "1..1" kermeta::structure::Operation : pre74
+kermeta::structure::Operation "1..1" *-- "0..9999" structure::Constraint : post77
+kermeta::structure::Constraint "1..1" -- "0..1" structure::Operation : postOwner143
+kermeta::structure::Operation "1..1" *-- "0..9999" structure::Constraint : pre74
 kermeta::structure::Constraint "1..1" -- "0..1" structure::Operation : preOwner140
 kermeta::structure::Operation "1..1" -- "0..9999" structure::Type : raisedException69
-structure::ModelingUnit "0..9999" -- "1..1" kermeta::structure::ModelingUnit : referencedModelingUnits162
-structure::Require "0..9999" --* "1..1" kermeta::structure::ModelingUnit : requires158
+kermeta::structure::ModelingUnit "1..1" -- "0..9999" structure::ModelingUnit : referencedModelingUnits162
+kermeta::structure::ModelingUnit "1..1" *-- "0..9999" structure::Require : requires158
 behavior::Rescue "0..9999" --* "1..1" kermeta::behavior::Block : rescueBlock11
-structure::Type "0..1" -- "1..1" kermeta::structure::FunctionType : right193
+kermeta::structure::FunctionType "1..1" -- "0..1" structure::Type : right193
 behavior::Expression "0..1" --* "1..1" kermeta::structure::Property : setterBody96
 behavior::Expression "0..9999" --* "1..1" kermeta::behavior::Block : statement9
-structure::EnumerationLiteral "0..1" -- "1..1" kermeta::behavior::CallFeature : staticEnumLiteral19
-structure::Operation "0..1" -- "1..1" kermeta::behavior::CallFeature : staticOperation17
-structure::Property "0..1" -- "1..1" kermeta::behavior::CallFeature : staticProperty15
+kermeta::behavior::CallFeature "1..1" -- "0..1" structure::EnumerationLiteral : staticEnumLiteral19
+kermeta::behavior::CallFeature "1..1" -- "0..1" structure::Operation : staticOperation17
+kermeta::behavior::CallFeature "1..1" -- "0..1" structure::Property : staticProperty15
 kermeta::behavior::Expression "1..1" -- "0..1" structure::Type : staticType3
 kermeta::behavior::CallExpression "1..1" -- "0..9999" structure::Type : staticTypeVariableBindings6
 behavior::Expression "1..1" --* "1..1" kermeta::behavior::Loop : stopCondition50
 kermeta::structure::Class "1..1" -- "0..9999" structure::Class : superClass63
-structure::Operation "0..1" -- "1..1" kermeta::structure::Operation : superOperation83
-structure::Type "0..9999" -- "1..1" kermeta::structure::ClassDefinition : superType155
+kermeta::structure::Operation "1..1" -- "0..1" structure::Operation : superOperation83
+kermeta::structure::ClassDefinition "1..1" -- "0..9999" structure::Type : superType155
 kermeta::structure::TypeVariable "1..1" -- "0..1" structure::Type : supertype177
 kermeta::structure::Object "1..1" -- "0..9999" structure::Tag : tag65
 behavior::CallExpression "1..1" --* "1..1" kermeta::behavior::Assignment : target0
-kermeta::behavior::CallFeature "1..1" *-- "0..1" behavior::Expression : target13
+behavior::Expression "0..1" --* "1..1" kermeta::behavior::CallFeature : target13
 behavior::Expression "1..1" --* "1..1" kermeta::behavior::Conditional : thenBody21
 kermeta::structure::TypeVariableBinding "1..1" -- "1..1" structure::Type : type113
 kermeta::structure::TypedElement "1..1" -- "0..1" structure::Type : type130
-structure::Type "0..9999" -- "1..1" kermeta::structure::ProductType : type189
-kermeta::behavior::LambdaParameter "1..1" *-- "1..1" behavior::TypeReference : type41
+kermeta::structure::ProductType "1..1" -- "0..9999" structure::Type : type189
+behavior::TypeReference "1..1" --* "1..1" kermeta::behavior::LambdaParameter : type41
 behavior::TypeReference "1..1" --* "1..1" kermeta::behavior::VariableDecl : type55
-structure::TypeContainer "0..1" -- "1..1" kermeta::structure::Type : typeContainer102
-structure::GenericTypeDefinition "1..1" -- "1..1" kermeta::structure::ParameterizedType : typeDefinition175
-structure::TypeVariableBinding "0..9999" --* "1..1" kermeta::structure::ParameterizedType : typeParamBinding172
+kermeta::structure::Type "1..1" -- "0..1" structure::TypeContainer : typeContainer102
+kermeta::structure::ParameterizedType "1..1" -- "1..1" structure::GenericTypeDefinition : typeDefinition175
+kermeta::structure::ParameterizedType "1..1" *-- "0..9999" structure::TypeVariableBinding : typeParamBinding172
 kermeta::structure::VirtualType "1..1" *-- "0..9999" structure::TypeVariableBinding : typeParamBinding186
 kermeta::structure::GenericTypeDefinition "1..1" *-- "0..9999" structure::TypeVariable : typeParameter169
-structure::TypeVariable "0..9999" -- "1..1" kermeta::structure::Operation : typeParameter89
+kermeta::structure::Operation "1..1" -- "0..9999" structure::TypeVariable : typeParameter89
 behavior::TypeReference "1..1" --* "1..1" kermeta::behavior::TypeLiteral : typeref43
 kermeta::structure::ModelingUnit "1..1" *-- "0..9999" structure::Using : usings160
 behavior::Expression "1..1" --* "1..1" kermeta::behavior::Assignment : value1
-structure::TypeVariable "1..1" -- "1..1" kermeta::structure::TypeVariableBinding : variable111
-structure::VirtualType "0..9999" --* "1..1" kermeta::structure::ModelTypeVariable : virtualType179
-structure::TypeVariableBinding "0..9999" --* "1..1" kermeta::structure::ParameterizedType : virtualTypeBinding171
+kermeta::structure::TypeVariableBinding "1..1" -- "1..1" structure::TypeVariable : variable111
+kermeta::structure::ModelTypeVariable "1..1" *-- "0..9999" structure::VirtualType : virtualType179
+kermeta::structure::ParameterizedType "1..1" *-- "0..9999" structure::TypeVariableBinding : virtualTypeBinding171
 @enduml

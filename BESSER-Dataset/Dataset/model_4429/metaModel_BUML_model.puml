@@ -123,12 +123,12 @@ abstract class metamodel::UnaryOperator {
 class metamodel::Value {
   + name : str
 }
+Action <|-- metamodel::ActionWheel
 ActionWheel <|-- metamodel::Backward
 ActionWheel <|-- metamodel::Forward
 ActionWheel <|-- metamodel::Stopping
 ActionWheel <|-- metamodel::TurnLeft
 ActionWheel <|-- metamodel::TurnRight
-Action <|-- metamodel::ActionWheel
 Actuator <|-- metamodel::DifferentialWheel
 Actuator <|-- metamodel::Group
 BinaryCond <|-- metamodel::And
@@ -156,23 +156,23 @@ UnaryOperator <|-- metamodel::Negative
 UnaryOperator <|-- metamodel::Positive
 metamodel::BinaryOperator "1..1" *-- "1..1" metamodel::Operator : OperandRight40
 metamodel::Action "0..9999" --* "1..1" metamodel::Robot : actions5
-metamodel::Robot "1..1" *-- "0..9999" metamodel::Actuator : actuators3
-metamodel::Robot "1..1" *-- "0..9999" metamodel::Behaviour : behaviours0
+metamodel::Actuator "0..9999" --* "1..1" metamodel::Robot : actuators3
+metamodel::Behaviour "0..9999" --* "1..1" metamodel::Robot : behaviours0
 metamodel::Condition "1..1" --* "1..1" metamodel::UnaryCond : child48
-metamodel::Transition "1..1" *-- "1..1" metamodel::Condition : cond35
+metamodel::Condition "1..1" --* "1..1" metamodel::Transition : cond35
 metamodel::StateMachine "1..1" *-- "0..9999" metamodel::Value : constants18
 metamodel::State "1..1" -- "1..1" metamodel::Transition : dstId32
-metamodel::Group "1..1" -- "1..1" metamodel::ActionWheel : group8
+metamodel::ActionWheel "1..1" -- "1..1" metamodel::Group : group8
 metamodel::Action "0..1" -- "1..1" metamodel::State : onEnterAction26
-metamodel::State "1..1" -- "0..1" metamodel::Action : onLeaveAction29
-metamodel::Operator "1..1" --* "1..1" metamodel::BinaryOperator : operandLeft39
-metamodel::Condition "1..1" --* "1..1" metamodel::BinaryCond : operandLeft45
-metamodel::Condition "1..1" --* "1..1" metamodel::BinaryCond : operandRight43
-metamodel::Sensor "0..9999" --* "1..1" metamodel::Robot : sensors1
-metamodel::StateMachine "1..1" --* "1..1" metamodel::Behaviour : stateMachine14
+metamodel::Action "0..1" -- "1..1" metamodel::State : onLeaveAction29
+metamodel::BinaryOperator "1..1" *-- "1..1" metamodel::Operator : operandLeft39
+metamodel::BinaryCond "1..1" *-- "1..1" metamodel::Condition : operandLeft45
+metamodel::BinaryCond "1..1" *-- "1..1" metamodel::Condition : operandRight43
+metamodel::Robot "1..1" *-- "0..9999" metamodel::Sensor : sensors1
+metamodel::Behaviour "1..1" *-- "1..1" metamodel::StateMachine : stateMachine14
 metamodel::State "0..9999" --* "1..1" metamodel::StateMachine : states16
-metamodel::Transition "0..9999" --* "1..1" metamodel::State : transitions21
-metamodel::Value "1..1" -- "1..1" metamodel::UnaryOperator : valeur37
+metamodel::State "1..1" *-- "0..9999" metamodel::Transition : transitions21
+metamodel::UnaryOperator "1..1" -- "1..1" metamodel::Value : valeur37
 metamodel::Sensor "1..1" *-- "1..1" metamodel::Value : value10
 metamodel::Type "1..1" --* "1..1" metamodel::Value : value12
 metamodel::DifferentialWheel "2..2" -- "1..1" metamodel::Group : wheels7

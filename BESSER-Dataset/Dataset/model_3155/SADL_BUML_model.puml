@@ -284,10 +284,6 @@ class sADL::ValueTable {
 }
 AbstractSadlEquation <|-- sADL::EquationStatement
 AbstractSadlEquation <|-- sADL::ExternalEquationStatement
-ExpressionScope <|-- sADL::ExpressionStatement
-ExpressionScope <|-- sADL::QueryStatement
-ExpressionScope <|-- sADL::RuleStatement
-ExpressionScope <|-- sADL::TestStatement
 Expression <|-- sADL::AskExpression
 Expression <|-- sADL::BinaryOperation
 Expression <|-- sADL::BooleanLiteral
@@ -305,17 +301,21 @@ Expression <|-- sADL::Sublist
 Expression <|-- sADL::UnaryExpression
 Expression <|-- sADL::UnitExpression
 Expression <|-- sADL::ValueTable
+ExpressionScope <|-- sADL::ExpressionStatement
+ExpressionScope <|-- sADL::QueryStatement
+ExpressionScope <|-- sADL::RuleStatement
+ExpressionScope <|-- sADL::TestStatement
 SadlCondition <|-- sADL::SadlAllValuesCondition
 SadlCondition <|-- sADL::SadlCardinalityCondition
 SadlCondition <|-- sADL::SadlHasValueCondition
+SadlExplicitValue <|-- sADL::SadlExplicitValueLiteral
+SadlExplicitValue <|-- sADL::SadlUnaryExpression
 SadlExplicitValueLiteral <|-- sADL::SadlBooleanLiteral
 SadlExplicitValueLiteral <|-- sADL::SadlConstantLiteral
 SadlExplicitValueLiteral <|-- sADL::SadlNumberLiteral
 SadlExplicitValueLiteral <|-- sADL::SadlResource
 SadlExplicitValueLiteral <|-- sADL::SadlStringLiteral
 SadlExplicitValueLiteral <|-- sADL::SadlValueList
-SadlExplicitValue <|-- sADL::SadlExplicitValueLiteral
-SadlExplicitValue <|-- sADL::SadlUnaryExpression
 SadlInstance <|-- sADL::SadlNestedInstance
 SadlModelElement <|-- sADL::EndWriteStatement
 SadlModelElement <|-- sADL::EquationStatement
@@ -355,104 +355,104 @@ SadlTypeReference <|-- sADL::SadlUnionType
 sADL::SadlAnnotation "0..9999" --* "1..1" sADL::SadlModel : annotations0
 sADL::NamedStructureAnnotation "0..9999" --* "1..1" sADL::RuleStatement : annotations173
 sADL::NamedStructureAnnotation "0..9999" --* "1..1" sADL::QueryStatement : annotations184
-sADL::SadlResource "1..1" *-- "0..9999" sADL::SadlAnnotation : annotations47
-sADL::Expression "0..9999" --* "1..1" sADL::Declaration : arglist244
+sADL::SadlAnnotation "0..9999" --* "1..1" sADL::SadlResource : annotations47
+sADL::Declaration "1..1" *-- "0..9999" sADL::Expression : arglist244
 sADL::Expression "0..9999" --* "1..1" sADL::Name : arglist247
-sADL::Expression "0..1" --* "1..1" sADL::EquationStatement : body8
+sADL::EquationStatement "1..1" *-- "0..1" sADL::Expression : body8
 sADL::SadlClassOrPropertyDeclaration "1..1" *-- "0..9999" sADL::SadlResource : classOrProperty101
-sADL::SadlResource "0..9999" --* "1..1" sADL::SadlDisjointClasses : classes128
+sADL::SadlDisjointClasses "1..1" *-- "0..9999" sADL::SadlResource : classes128
 sADL::SadlCondition "0..9999" --* "1..1" sADL::SadlPropertyCondition : cond22
-sADL::SadlExplicitValue "0..9999" --* "1..1" sADL::NamedStructureAnnotation : contents81
-sADL::SadlExplicitValue "0..1" --* "1..1" sADL::SadlDefaultValue : defValue162
-sADL::SadlProperty "0..9999" --* "1..1" sADL::SadlClassOrPropertyDeclaration : describedBy109
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlTypeAssociation : domain153
+sADL::NamedStructureAnnotation "1..1" *-- "0..9999" sADL::SadlExplicitValue : contents81
+sADL::SadlDefaultValue "1..1" *-- "0..1" sADL::SadlExplicitValue : defValue162
+sADL::SadlClassOrPropertyDeclaration "1..1" *-- "0..9999" sADL::SadlProperty : describedBy109
+sADL::SadlTypeAssociation "1..1" *-- "0..1" sADL::SadlTypeReference : domain153
 sADL::ElementInList "1..1" *-- "0..1" sADL::Expression : element236
 sADL::SadlModel "1..1" *-- "0..9999" sADL::SadlModelElement : elements3
-sADL::SadlValueList "1..1" *-- "0..9999" sADL::SadlExplicitValue : explicitValues77
+sADL::SadlExplicitValue "0..9999" --* "1..1" sADL::SadlValueList : explicitValues77
 sADL::Expression "0..9999" --* "1..1" sADL::ValueRow : explicitValues98
 sADL::Expression "0..1" --* "1..1" sADL::ExpressionStatement : expr169
 sADL::Expression "0..1" --* "1..1" sADL::QueryStatement : expr187
 sADL::Expression "0..1" --* "1..1" sADL::UnaryExpression : expr240
-sADL::Expression "0..1" --* "1..1" sADL::ExplainStatement : expr84
-sADL::SadlDataTypeFacet "0..1" --* "1..1" sADL::SadlClassOrPropertyDeclaration : facet106
+sADL::ExplainStatement "1..1" *-- "0..1" sADL::Expression : expr84
+sADL::SadlClassOrPropertyDeclaration "1..1" *-- "0..1" sADL::SadlDataTypeFacet : facet106
 sADL::SadlDataTypeFacet "0..1" --* "1..1" sADL::SadlRangeRestriction : facet157
 sADL::SadlAllValuesCondition "1..1" *-- "0..1" sADL::SadlDataTypeFacet : facet68
-sADL::SadlDataTypeFacet "0..1" --* "1..1" sADL::SadlCardinalityCondition : facet74
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlProperty : from54
-sADL::RuleStatement "1..1" *-- "0..9999" sADL::Expression : ifs176
-sADL::SadlModel "0..1" -- "1..1" sADL::SadlImport : importedResource5
+sADL::SadlCardinalityCondition "1..1" *-- "0..1" sADL::SadlDataTypeFacet : facet74
+sADL::SadlProperty "1..1" *-- "0..1" sADL::SadlTypeReference : from54
+sADL::Expression "0..9999" --* "1..1" sADL::RuleStatement : ifs176
+sADL::SadlImport "1..1" -- "0..1" sADL::SadlModel : importedResource5
 sADL::SadlImport "0..9999" --* "1..1" sADL::SadlModel : imports1
-sADL::SadlResource "0..1" --* "1..1" sADL::SadlInstance : instance41
-sADL::SadlUnionType "1..1" *-- "0..1" sADL::SadlTypeReference : left141
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlIntersectionType : left146
-sADL::Expression "0..1" --* "1..1" sADL::BinaryOperation : left218
+sADL::SadlInstance "1..1" *-- "0..1" sADL::SadlResource : instance41
+sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlUnionType : left141
+sADL::SadlIntersectionType "1..1" *-- "0..1" sADL::SadlTypeReference : left146
+sADL::BinaryOperation "1..1" *-- "0..1" sADL::Expression : left218
 sADL::Expression "0..1" --* "1..1" sADL::PropOfSubject : left223
 sADL::Expression "0..1" --* "1..1" sADL::SubjHasProp : left228
 sADL::Expression "0..1" --* "1..1" sADL::UnitExpression : left238
 sADL::Expression "0..1" --* "1..1" sADL::Sublist : list213
 sADL::SadlInstance "1..1" *-- "0..1" sADL::SadlValueList : listInitializer36
-sADL::SadlResource "0..1" --* "1..1" sADL::SadlParameterDeclaration : name17
-sADL::SadlResource "0..1" --* "1..1" sADL::RuleStatement : name171
+sADL::SadlParameterDeclaration "1..1" *-- "0..1" sADL::SadlResource : name17
+sADL::RuleStatement "1..1" *-- "0..1" sADL::SadlResource : name171
 sADL::QueryStatement "1..1" *-- "0..1" sADL::SadlResource : name182
 sADL::SadlResource "0..1" -- "1..1" sADL::SadlResource : name45
-sADL::SadlResource "0..1" --* "1..1" sADL::AbstractSadlEquation : name9
-sADL::SadlResource "0..9999" --* "1..1" sADL::SadlProperty : nameDeclarations63
+sADL::AbstractSadlEquation "1..1" *-- "0..1" sADL::SadlResource : name9
+sADL::SadlProperty "1..1" *-- "0..9999" sADL::SadlResource : nameDeclarations63
 sADL::SadlResource "0..1" --* "1..1" sADL::SadlSameAs : nameOrRef115
-sADL::SadlResource "0..1" --* "1..1" sADL::SadlDifferentFrom : nameOrRef120
-sADL::SadlResource "0..1" --* "1..1" sADL::SadlInstance : nameOrRef31
-sADL::SadlResource "0..1" --* "1..1" sADL::SadlProperty : nameOrRef50
+sADL::SadlDifferentFrom "1..1" *-- "0..1" sADL::SadlResource : nameOrRef120
+sADL::SadlInstance "1..1" *-- "0..1" sADL::SadlResource : nameOrRef31
+sADL::SadlProperty "1..1" *-- "0..1" sADL::SadlResource : nameOrRef50
 sADL::SadlDifferentFrom "1..1" *-- "0..1" sADL::SadlTypeReference : notTheSameAs122
 sADL::ConstructExpression "1..1" *-- "0..1" sADL::SadlResource : obj195
-sADL::SadlResource "0..1" --* "1..1" sADL::SadlNecessaryAndSufficient : object135
-sADL::SadlResource "0..1" --* "1..1" sADL::OrderElement : orderBy89
+sADL::SadlNecessaryAndSufficient "1..1" *-- "0..1" sADL::SadlResource : object135
+sADL::OrderElement "1..1" *-- "0..1" sADL::SadlResource : orderBy89
 sADL::OrderElement "0..9999" --* "1..1" sADL::SelectExpression : orderList210
 sADL::SadlIsInverseOf "1..1" -- "0..1" sADL::SadlResource : otherProperty160
 sADL::AbstractSadlEquation "1..1" *-- "0..9999" sADL::SadlParameterDeclaration : parameter10
-sADL::SadlResource "0..1" --* "1..1" sADL::ConstructExpression : pred192
+sADL::ConstructExpression "1..1" *-- "0..1" sADL::SadlResource : pred192
 sADL::SadlResource "0..1" --* "1..1" sADL::SubjHasProp : prop230
-sADL::SadlPropertyCondition "0..9999" --* "1..1" sADL::SadlNecessaryAndSufficient : propConditions138
-sADL::SadlResource "0..1" -- "1..1" sADL::SadlPropertyCondition : property20
-sADL::SadlResource "0..1" -- "1..1" sADL::SadlPropertyInitializer : property24
-sADL::SadlResource "0..1" --* "1..1" sADL::SadlProperty : property60
-sADL::SadlPropertyInitializer "0..9999" --* "1..1" sADL::SadlInstance : propertyInitializers38
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlRangeRestriction : range155
+sADL::SadlNecessaryAndSufficient "1..1" *-- "0..9999" sADL::SadlPropertyCondition : propConditions138
+sADL::SadlPropertyCondition "1..1" -- "0..1" sADL::SadlResource : property20
+sADL::SadlPropertyInitializer "1..1" -- "0..1" sADL::SadlResource : property24
+sADL::SadlProperty "1..1" *-- "0..1" sADL::SadlResource : property60
+sADL::SadlInstance "1..1" *-- "0..9999" sADL::SadlPropertyInitializer : propertyInitializers38
+sADL::SadlRangeRestriction "1..1" *-- "0..1" sADL::SadlTypeReference : range155
 sADL::EObject "0..1" --* "1..1" sADL::SadlHasValueCondition : restriction70
 sADL::SadlClassOrPropertyDeclaration "1..1" *-- "0..9999" sADL::SadlPropertyRestriction : restrictions112
-sADL::SadlPropertyRestriction "0..9999" --* "1..1" sADL::SadlProperty : restrictions52
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::AbstractSadlEquation : returnType12
+sADL::SadlProperty "1..1" *-- "0..9999" sADL::SadlPropertyRestriction : restrictions52
+sADL::AbstractSadlEquation "1..1" *-- "0..1" sADL::SadlTypeReference : returnType12
 sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlUnionType : right143
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlIntersectionType : right148
-sADL::Expression "0..1" --* "1..1" sADL::BinaryOperation : right220
-sADL::PropOfSubject "1..1" *-- "0..1" sADL::Expression : right225
+sADL::SadlIntersectionType "1..1" *-- "0..1" sADL::SadlTypeReference : right148
+sADL::BinaryOperation "1..1" *-- "0..1" sADL::Expression : right220
+sADL::Expression "0..1" --* "1..1" sADL::PropOfSubject : right225
 sADL::Expression "0..1" --* "1..1" sADL::SubjHasProp : right233
 sADL::ValueRow "0..1" --* "1..1" sADL::ValueTable : row93
-sADL::ValueTable "1..1" *-- "0..9999" sADL::ValueRow : rows95
-sADL::SadlResource "0..1" --* "1..1" sADL::ExplainStatement : rulename86
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlSameAs : sameAs117
-sADL::SelectExpression "1..1" *-- "0..9999" sADL::SadlResource : selectFrom205
-sADL::SadlResource "0..1" --* "1..1" sADL::ConstructExpression : subj190
+sADL::ValueRow "0..9999" --* "1..1" sADL::ValueTable : rows95
+sADL::ExplainStatement "1..1" *-- "0..1" sADL::SadlResource : rulename86
+sADL::SadlSameAs "1..1" *-- "0..1" sADL::SadlTypeReference : sameAs117
+sADL::SadlResource "0..9999" --* "1..1" sADL::SelectExpression : selectFrom205
+sADL::ConstructExpression "1..1" *-- "0..1" sADL::SadlResource : subj190
 sADL::SadlNecessaryAndSufficient "1..1" *-- "0..1" sADL::SadlTypeReference : subject133
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlClassOrPropertyDeclaration : superElement103
+sADL::SadlClassOrPropertyDeclaration "1..1" *-- "0..1" sADL::SadlTypeReference : superElement103
 sADL::Expression "0..9999" --* "1..1" sADL::TestStatement : tests203
 sADL::Expression "0..9999" --* "1..1" sADL::RuleStatement : thens179
 sADL::SadlProperty "1..1" *-- "0..1" sADL::SadlTypeReference : to57
 sADL::SadlParameterDeclaration "1..1" *-- "0..1" sADL::SadlTypeReference : type14
-sADL::SadlSimpleTypeReference "1..1" -- "0..1" sADL::SadlResource : type151
+sADL::SadlResource "0..1" -- "1..1" sADL::SadlSimpleTypeReference : type151
 sADL::Declaration "1..1" *-- "0..1" sADL::SadlTypeReference : type242
-sADL::SadlResource "0..1" -- "1..1" sADL::SadlPropertyInitializer : type28
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlInstance : type33
-sADL::SadlTypeReference "0..1" --* "1..1" sADL::SadlAllValuesCondition : type66
+sADL::SadlPropertyInitializer "1..1" -- "0..1" sADL::SadlResource : type28
+sADL::SadlInstance "1..1" *-- "0..1" sADL::SadlTypeReference : type33
+sADL::SadlAllValuesCondition "1..1" *-- "0..1" sADL::SadlTypeReference : type66
 sADL::SadlCardinalityCondition "1..1" *-- "0..1" sADL::SadlTypeReference : type72
-sADL::SadlResource "0..1" --* "1..1" sADL::NamedStructureAnnotation : type79
+sADL::NamedStructureAnnotation "1..1" *-- "0..1" sADL::SadlResource : type79
 sADL::SadlClassOrPropertyDeclaration "0..9999" --* "1..1" sADL::SadlDifferentFrom : types125
 sADL::SadlClassOrPropertyDeclaration "0..9999" --* "1..1" sADL::SadlDisjointClasses : types130
-sADL::SadlUnaryExpression "1..1" *-- "0..1" sADL::SadlExplicitValueLiteral : value168
-sADL::SadlPropertyInitializer "1..1" *-- "0..1" sADL::EObject : value26
-sADL::ValueTable "0..1" --* "1..1" sADL::ValueTable : valueTable92
-sADL::SadlMustBeOneOf "1..1" *-- "0..9999" sADL::SadlExplicitValue : values164
-sADL::SadlExplicitValue "0..9999" --* "1..1" sADL::SadlCanOnlyBeOneOf : values166
-sADL::Sublist "1..1" *-- "0..1" sADL::Expression : where215
-sADL::Expression "0..1" --* "1..1" sADL::ConstructExpression : whereExpression198
-sADL::Expression "0..1" --* "1..1" sADL::AskExpression : whereExpression201
+sADL::SadlExplicitValueLiteral "0..1" --* "1..1" sADL::SadlUnaryExpression : value168
+sADL::EObject "0..1" --* "1..1" sADL::SadlPropertyInitializer : value26
+sADL::ValueTable "1..1" *-- "0..1" sADL::ValueTable : valueTable92
+sADL::SadlExplicitValue "0..9999" --* "1..1" sADL::SadlMustBeOneOf : values164
+sADL::SadlCanOnlyBeOneOf "1..1" *-- "0..9999" sADL::SadlExplicitValue : values166
+sADL::Expression "0..1" --* "1..1" sADL::Sublist : where215
+sADL::ConstructExpression "1..1" *-- "0..1" sADL::Expression : whereExpression198
+sADL::AskExpression "1..1" *-- "0..1" sADL::Expression : whereExpression201
 sADL::Expression "0..1" --* "1..1" sADL::SelectExpression : whereExpression207
 @enduml

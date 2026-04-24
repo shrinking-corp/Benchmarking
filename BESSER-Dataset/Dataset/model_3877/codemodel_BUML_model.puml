@@ -82,24 +82,24 @@ Statement <|-- codemodel::statements::IfStmt
 Variable <|-- codemodel::FunctionArgument
 Variable <|-- codemodel::GlobalVariable
 Variable <|-- codemodel::LocalVariable
-codemodel::FunctionArgument "0..9999" --* "1..1" codemodel::Function : arguments7
+codemodel::Function "1..1" *-- "0..9999" codemodel::FunctionArgument : arguments7
 Statement "0..9999" --* "1..1" codemodel::Function : body11
 Expression "1..1" --* "1..1" codemodel::statements::IfStmt : condition25
 Expression "1..1" --* "1..1" codemodel::statements::ForStmt : condition34
-codemodel::DataType "1..9999" --* "1..1" codemodel::CodeModule : dataTypes3
+codemodel::CodeModule "1..1" *-- "1..9999" codemodel::DataType : dataTypes3
 Statement "0..1" --* "1..1" codemodel::statements::IfStmt : elseStmt30
 Statement "1..1" --* "1..1" codemodel::statements::ForStmt : forStmt40
 codemodel::CodeModule "1..1" *-- "0..9999" codemodel::Function : functions1
-codemodel::GlobalVariable "0..9999" --* "1..1" codemodel::CodeModule : globalVariables0
+codemodel::CodeModule "1..1" *-- "0..9999" codemodel::GlobalVariable : globalVariables0
 Expression "1..1" --* "1..1" codemodel::statements::ForStmt : increment37
-codemodel::statements::ForStmt "1..1" *-- "1..1" AssignmentStmt : init33
+AssignmentStmt "1..1" --* "1..1" codemodel::statements::ForStmt : init33
 Expression "1..1" --* "1..1" codemodel::expressions::BinaryExp : left14
-codemodel::statements::AssignmentStmt "1..1" *-- "1..1" Expression : leftExp18
+Expression "1..1" --* "1..1" codemodel::statements::AssignmentStmt : leftExp18
 codemodel::Function "1..1" *-- "0..9999" codemodel::LocalVariable : localVariables9
-expressions::codemodel::Variable "1..1" -- "1..1" codemodel::expressions::VariableExp : referencedVariable13
+codemodel::expressions::VariableExp "1..1" -- "1..1" expressions::codemodel::Variable : referencedVariable13
 Expression "1..1" --* "1..1" codemodel::expressions::BinaryExp : right15
 Expression "1..1" --* "1..1" codemodel::statements::AssignmentStmt : rightExp20
-codemodel::statements::CompositeStmt "1..1" *-- "0..9999" Statement : statements23
+Statement "0..9999" --* "1..1" codemodel::statements::CompositeStmt : statements23
 Statement "1..1" --* "1..1" codemodel::statements::IfStmt : thenStmt27
 codemodel::DataType "1..1" -- "1..1" codemodel::Variable : type5
 @enduml

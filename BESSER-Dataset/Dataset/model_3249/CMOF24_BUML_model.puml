@@ -1,0 +1,502 @@
+@startuml
+enum AggregationKind {
+  composite
+  none
+  shared
+}
+class BehavioralFeature {
+}
+class Classifier {
+}
+class DataType {
+}
+class DirectedRelationship {
+}
+class Element {
+}
+class Extent {
+}
+class Feature {
+}
+class InstanceSpecification {
+}
+class LiteralSpecification {
+}
+class MultiplicityElement {
+}
+class NamedElement {
+}
+class Namespace {
+}
+class Object {
+}
+class PackageableElement {
+}
+enum ParameterDirectionKind {
+  in
+  inout
+  out
+  return
+}
+class RedefinableElement {
+}
+class ReflectiveCollection {
+}
+class Relationship {
+}
+class StructuralFeature {
+}
+class Type {
+}
+class TypedElement {
+}
+class ValueSpecification {
+}
+enum VisibilityKind {
+  package
+  private
+  protected
+  public
+}
+class cmof::Argument {
+  + name : str
+}
+class cmof::Association {
+  + isDerived : str
+  + association_ends(context : any, diagnostics : any) : bool
+  + binary_associations(context : any, diagnostics : any) : bool
+  + endType() : Type
+  + specialized_end_number(context : any, diagnostics : any) : bool
+  + specialized_end_types(context : any, diagnostics : any) : bool
+}
+abstract class cmof::BehavioralFeature {
+}
+class cmof::Class {
+  + superClass() : str
+}
+abstract class cmof::Classifier {
+  + isAbstract : str
+  + isFinalSpecialization : str
+  + allFeatures() : Feature
+  + allParents() : Classifier
+  + conformsTo(other : any) : str
+  + general() : Classifier
+  + hasVisibilityOf(n : any) : str
+  + inherit(inhs : any) : NamedElement
+  + inheritableMembers(c : any) : NamedElement
+  + inheritedMember() : NamedElement
+  + maySpecializeType(c : any) : str
+  + no_cycles_in_generalization(context : any, diagnostics : any) : bool
+  + non_final_parents(context : any, diagnostics : any) : bool
+  + parents() : Classifier
+  + specialize_type(context : any, diagnostics : any) : bool
+}
+class cmof::Comment {
+  + body : str
+}
+class cmof::Constraint {
+  + boolean_value(context : any, diagnostics : any) : bool
+  + no_side_effects(context : any, diagnostics : any) : bool
+  + not_apply_to_self(context : any, diagnostics : any) : bool
+  + value_specification_boolean(context : any, diagnostics : any) : bool
+}
+class cmof::DataType {
+}
+abstract class cmof::DirectedRelationship {
+}
+abstract class cmof::Element {
+  + allOwnedElements() : Element
+  + container() : Element
+  + delete() : void
+  + getMetaClass() : str
+  + has_owner(context : any, diagnostics : any) : bool
+  + isInstanceOfType(includesSubtypes : any, type : any) : str
+  + mustBeOwned() : str
+  + not_own_self(context : any, diagnostics : any) : bool
+}
+class cmof::ElementImport {
+  + alias : str
+  + visibility : str
+  + getName() : str
+  + imported_element_is_public(context : any, diagnostics : any) : bool
+  + visibility_public_or_private(context : any, diagnostics : any) : bool
+}
+class cmof::Enumeration {
+}
+class cmof::EnumerationLiteral {
+  + classifier() : str
+  + classifier_equals_owning_enumeration(context : any, diagnostics : any) : bool
+}
+class cmof::Exception {
+  + description : str
+}
+class cmof::Expression {
+  + symbol : str
+}
+class cmof::Extent {
+  + elements() : str
+  + elementsOfType(includesSubtypes : any, type : any) : Element
+  + linkExists(association : any, firstElement : any, secondElement : any) : str
+  + linkedElements(association : any, end1ToEnd2Direction : any, endElement : any) : Element
+  + linksOfType(type : any) : str
+  + useContainment() : str
+}
+class cmof::Factory {
+  + convertToString(dataType : any, object : any) : str
+  + create(metaClass : any) : Element
+  + createElement(arguments : any, class : any) : Element
+  + createFromString(dataType : any, string : any) : Object
+  + createLink(association : any, firstElement : any, secondElement : any) : str
+}
+abstract class cmof::Feature {
+  + isStatic : str
+}
+class cmof::Generalization {
+  + isSubstitutable : str
+}
+class cmof::InstanceSpecification {
+  + defining_feature(context : any, diagnostics : any) : bool
+  + structural_feature(context : any, diagnostics : any) : bool
+}
+class cmof::InstanceValue {
+}
+class cmof::Link {
+  + delete() : void
+  + equals(otherLink : any) : str
+}
+class cmof::LiteralBoolean {
+  + value : str
+}
+class cmof::LiteralInteger {
+  + value : str
+}
+class cmof::LiteralNull {
+}
+class cmof::LiteralReal {
+  + value : str
+}
+abstract class cmof::LiteralSpecification {
+}
+class cmof::LiteralString {
+  + value : str
+}
+class cmof::LiteralUnlimitedNatural {
+  + value : str
+}
+abstract class cmof::MultiplicityElement {
+  + isOrdered : str
+  + isUnique : str
+  + lower : str
+  + upper : str
+  + includesCardinality(C : any) : str
+  + includesMultiplicity(M : any) : str
+  + isMultivalued() : str
+  + lower() : str
+  + lowerBound() : str
+  + lower_ge_0(context : any, diagnostics : any) : bool
+  + upper() : str
+  + upperBound() : str
+  + upper_ge_lower(context : any, diagnostics : any) : bool
+  + value_specification_constant(context : any, diagnostics : any) : bool
+  + value_specification_no_side_effects(context : any, diagnostics : any) : bool
+}
+abstract class cmof::NamedElement {
+  + name : str
+  + qualifiedName : str
+  + visibility : str
+  + allNamespaces() : str
+  + has_no_qualified_name(context : any, diagnostics : any) : bool
+  + has_qualified_name(context : any, diagnostics : any) : bool
+  + isDistinguishableFrom(n : any, ns : any) : str
+  + qualifiedName() : str
+  + separator() : str
+  + visibility_needs_ownership(context : any, diagnostics : any) : bool
+}
+abstract class cmof::Namespace {
+  + excludeCollisions(imps : any) : PackageableElement
+  + getNamesOfMember(element : any) : str
+  + importMembers(imps : any) : PackageableElement
+  + importedMember() : PackageableElement
+  + membersAreDistinguishable() : str
+  + members_distinguishable(context : any, diagnostics : any) : bool
+}
+class cmof::Object {
+  + equals(element : any) : str
+  + get(property : any) : Object
+  + invoke(arguments : any, op : any) : Object
+  + isSet(property : any) : str
+  + set(property : any, value : any) : void
+  + unset(property : any) : void
+}
+class cmof::OpaqueExpression {
+  + body : str
+  + language : str
+  + isIntegral() : str
+  + isNonNegative() : str
+  + isPositive() : str
+  + language_body_size(context : any, diagnostics : any) : bool
+  + value() : str
+}
+class cmof::Operation {
+  + isOrdered : str
+  + isQuery : str
+  + isUnique : str
+  + lower : str
+  + upper : str
+  + at_most_one_return(context : any, diagnostics : any) : bool
+  + isOrdered() : str
+  + isUnique() : str
+  + lower() : str
+  + only_body_for_query(context : any, diagnostics : any) : bool
+  + returnResult() : str
+  + type() : Type
+  + upper() : str
+}
+class cmof::Package {
+  + URI : str
+  + elements_public_or_private(context : any, diagnostics : any) : bool
+  + makesVisible(el : any) : str
+  + nestedPackage() : str
+  + ownedType() : Type
+  + visibleMembers() : PackageableElement
+}
+class cmof::PackageImport {
+  + visibility : str
+  + public_or_private(context : any, diagnostics : any) : bool
+}
+class cmof::PackageMerge {
+}
+abstract class cmof::PackageableElement {
+}
+class cmof::Parameter {
+  + default : str
+  + direction : str
+  + default() : str
+}
+class cmof::PrimitiveType {
+}
+class cmof::Property {
+  + aggregation : str
+  + default : str
+  + isComposite : str
+  + isDerived : str
+  + isDerivedUnion : str
+  + isID : str
+  + default() : str
+  + derived_union_is_derived(context : any, diagnostics : any) : bool
+  + derived_union_is_read_only(context : any, diagnostics : any) : bool
+  + isAttribute(p : any) : str
+  + isComposite() : str
+  + isNavigable() : str
+  + multiplicity_of_composite(context : any, diagnostics : any) : bool
+  + opposite() : str
+  + redefined_property_inherited(context : any, diagnostics : any) : bool
+  + subsetted_property_names(context : any, diagnostics : any) : bool
+  + subsettingContext() : str
+  + subsetting_context_conforms(context : any, diagnostics : any) : bool
+  + subsetting_rules(context : any, diagnostics : any) : bool
+}
+abstract class cmof::RedefinableElement {
+  + isLeaf : str
+  + isConsistentWith(redefinee : any) : str
+  + isRedefinitionContextValid(redefined : any) : str
+  + non_leaf_redefinition(context : any, diagnostics : any) : bool
+  + redefinition_consistent(context : any, diagnostics : any) : bool
+  + redefinition_context_valid(context : any, diagnostics : any) : bool
+}
+class cmof::ReflectiveCollection {
+  + add(object : any) : str
+  + addAll(objects : any) : str
+  + clear() : void
+  + remove(object : any) : str
+  + size() : str
+}
+class cmof::ReflectiveSequence {
+  + add(index : any, object : any) : void
+  + get(index : any) : str
+  + remove(index : any) : str
+  + set(index : any, object : any) : str
+}
+abstract class cmof::Relationship {
+}
+class cmof::Slot {
+}
+abstract class cmof::StructuralFeature {
+  + isReadOnly : str
+}
+class cmof::Tag {
+  + name : str
+  + value : str
+}
+abstract class cmof::Type {
+  + conformsTo(other : any) : str
+  + isInstance(object : any) : str
+}
+abstract class cmof::TypedElement {
+}
+class cmof::URIExtent {
+  + contextURI() : str
+  + element(uri : any) : Element
+  + uri(object : any) : str
+}
+abstract class cmof::ValueSpecification {
+  + booleanValue() : str
+  + integerValue() : str
+  + isComputable() : str
+  + isNull() : str
+  + realValue() : str
+  + stringValue() : str
+  + unlimitedValue() : str
+}
+BehavioralFeature <|-- cmof::Operation
+Classifier <|-- cmof::Association
+Classifier <|-- cmof::Class
+Classifier <|-- cmof::DataType
+DataType <|-- cmof::Enumeration
+DataType <|-- cmof::PrimitiveType
+DirectedRelationship <|-- cmof::ElementImport
+DirectedRelationship <|-- cmof::Generalization
+DirectedRelationship <|-- cmof::PackageImport
+DirectedRelationship <|-- cmof::PackageMerge
+Element <|-- cmof::Comment
+Element <|-- cmof::Factory
+Element <|-- cmof::MultiplicityElement
+Element <|-- cmof::NamedElement
+Element <|-- cmof::Relationship
+Element <|-- cmof::Slot
+Element <|-- cmof::Tag
+Extent <|-- cmof::URIExtent
+Feature <|-- cmof::BehavioralFeature
+Feature <|-- cmof::StructuralFeature
+InstanceSpecification <|-- cmof::EnumerationLiteral
+LiteralSpecification <|-- cmof::LiteralBoolean
+LiteralSpecification <|-- cmof::LiteralInteger
+LiteralSpecification <|-- cmof::LiteralNull
+LiteralSpecification <|-- cmof::LiteralReal
+LiteralSpecification <|-- cmof::LiteralString
+LiteralSpecification <|-- cmof::LiteralUnlimitedNatural
+MultiplicityElement <|-- cmof::Parameter
+MultiplicityElement <|-- cmof::StructuralFeature
+NamedElement <|-- cmof::Namespace
+NamedElement <|-- cmof::PackageableElement
+NamedElement <|-- cmof::RedefinableElement
+NamedElement <|-- cmof::TypedElement
+Namespace <|-- cmof::BehavioralFeature
+Namespace <|-- cmof::Classifier
+Namespace <|-- cmof::Package
+Object <|-- cmof::Element
+Object <|-- cmof::Extent
+Object <|-- cmof::Link
+Object <|-- cmof::ReflectiveCollection
+PackageableElement <|-- cmof::Constraint
+PackageableElement <|-- cmof::InstanceSpecification
+PackageableElement <|-- cmof::Package
+PackageableElement <|-- cmof::Type
+PackageableElement <|-- cmof::ValueSpecification
+RedefinableElement <|-- cmof::Classifier
+RedefinableElement <|-- cmof::Feature
+ReflectiveCollection <|-- cmof::ReflectiveSequence
+Relationship <|-- cmof::Association
+Relationship <|-- cmof::DirectedRelationship
+StructuralFeature <|-- cmof::Property
+Type <|-- cmof::Classifier
+TypedElement <|-- cmof::Parameter
+TypedElement <|-- cmof::StructuralFeature
+TypedElement <|-- cmof::ValueSpecification
+ValueSpecification <|-- cmof::Expression
+ValueSpecification <|-- cmof::InstanceValue
+ValueSpecification <|-- cmof::LiteralSpecification
+ValueSpecification <|-- cmof::OpaqueExpression
+cmof::Comment "1..1" -- "0..9999" cmof::Element : annotatedElement30
+cmof::Association "1..1" -- "1..1" cmof::Link : association177
+cmof::Association "0..1" -- "1..1" cmof::Property : association3
+cmof::Classifier "1..1" -- "0..9999" cmof::Property : attribute42
+cmof::Constraint "0..1" -- "1..1" cmof::Operation : bodyCondition106
+cmof::Class "0..1" -- "1..1" cmof::Property : class0
+cmof::Class "0..1" -- "1..1" cmof::Operation : class122
+cmof::Classifier "0..9999" -- "1..1" cmof::InstanceSpecification : classifier157
+cmof::Constraint "1..1" -- "0..9999" cmof::Element : constrainedElement86
+cmof::Constraint "1..1" -- "0..1" cmof::Namespace : context91
+cmof::DataType "0..1" -- "1..1" cmof::Property : datatype1
+cmof::DataType "0..1" -- "1..1" cmof::Operation : datatype108
+cmof::Parameter "1..1" *-- "0..1" cmof::ValueSpecification : defaultValue129
+cmof::Property "1..1" *-- "0..1" cmof::ValueSpecification : defaultValue6
+cmof::Slot "1..1" -- "1..1" cmof::StructuralFeature : definingFeature163
+cmof::Element "0..9999" -- "1..1" cmof::Tag : element187
+cmof::ElementImport "0..9999" --* "1..1" cmof::Namespace : elementImport65
+cmof::Element "1..1" -- "1..1" cmof::Exception : elementInError184
+cmof::Association "1..1" -- "1..9999" cmof::Type : endType145
+cmof::Enumeration "0..1" -- "1..1" cmof::EnumerationLiteral : enumeration156
+cmof::Classifier "1..1" -- "0..9999" cmof::Feature : feature45
+cmof::Classifier "0..9999" -- "1..1" cmof::Feature : featuringClassifier16
+cmof::Element "1..1" -- "1..1" cmof::Link : firstElement172
+cmof::Classifier "1..1" -- "1..1" cmof::Generalization : general102
+cmof::Classifier "0..9999" -- "1..1" cmof::Classifier : general47
+cmof::Classifier "1..1" *-- "0..9999" cmof::Generalization : generalization49
+cmof::ElementImport "1..1" -- "1..1" cmof::PackageableElement : importedElement75
+cmof::Namespace "1..1" -- "0..9999" cmof::PackageableElement : importedMember66
+cmof::Package "1..1" -- "1..1" cmof::PackageImport : importedPackage94
+cmof::ElementImport "1..1" -- "1..1" cmof::Namespace : importingNamespace77
+cmof::Namespace "1..1" -- "1..1" cmof::PackageImport : importingNamespace96
+cmof::Classifier "1..1" -- "0..9999" cmof::NamedElement : inheritedMember50
+cmof::InstanceSpecification "1..1" -- "1..1" cmof::InstanceValue : instance170
+cmof::MultiplicityElement "1..1" *-- "0..1" cmof::ValueSpecification : lowerValue135
+cmof::NamedElement "0..9999" -- "1..1" cmof::Namespace : member68
+cmof::Association "1..1" -- "2..9999" cmof::Property : memberEnd152
+cmof::Package "1..1" -- "1..1" cmof::PackageMerge : mergedPackage98
+cmof::Class "1..1" -- "1..1" cmof::Element : metaclass28
+cmof::NamedElement "1..1" -- "0..1" cmof::Namespace : namespace21
+cmof::Association "1..1" -- "0..9999" cmof::Property : navigableOwnedEnd147
+cmof::Class "1..1" *-- "0..9999" cmof::Classifier : nestedClassifier33
+cmof::Package "1..1" -- "0..9999" cmof::Package : nestedPackage57
+cmof::Package "1..1" -- "0..1" cmof::Package : nestingPackage60
+cmof::Element "1..1" -- "1..1" cmof::Exception : objectInError182
+cmof::Expression "1..1" *-- "0..9999" cmof::ValueSpecification : operand168
+cmof::Operation "0..1" -- "1..1" cmof::Parameter : operation132
+cmof::Property "0..1" -- "1..1" cmof::Property : opposite8
+cmof::DataType "1..1" *-- "0..9999" cmof::Property : ownedAttribute140
+cmof::Class "1..1" *-- "0..9999" cmof::Property : ownedAttribute36
+cmof::Comment "0..9999" --* "1..1" cmof::Element : ownedComment22
+cmof::Element "1..1" -- "0..9999" cmof::Element : ownedElement24
+cmof::Association "1..1" *-- "0..9999" cmof::Property : ownedEnd150
+cmof::Enumeration "1..1" *-- "0..9999" cmof::EnumerationLiteral : ownedLiteral155
+cmof::NamedElement "0..9999" -- "1..1" cmof::Namespace : ownedMember71
+cmof::DataType "1..1" *-- "0..9999" cmof::Operation : ownedOperation142
+cmof::Class "1..1" *-- "0..9999" cmof::Operation : ownedOperation37
+cmof::BehavioralFeature "1..1" *-- "0..9999" cmof::Parameter : ownedParameter125
+cmof::Constraint "0..9999" --* "1..1" cmof::Namespace : ownedRule72
+cmof::Package "1..1" -- "0..9999" cmof::Type : ownedType64
+cmof::Element "1..1" -- "0..1" cmof::Element : owner26
+cmof::Association "0..1" -- "1..1" cmof::Property : owningAssociation4
+cmof::InstanceSpecification "1..1" -- "1..1" cmof::Slot : owningInstance167
+cmof::Factory "1..1" -- "1..1" cmof::Package : package180
+cmof::Package "0..1" -- "1..1" cmof::Type : package55
+cmof::Namespace "1..1" *-- "0..9999" cmof::PackageImport : packageImport73
+cmof::Package "1..1" *-- "0..9999" cmof::PackageMerge : packageMerge62
+cmof::Package "1..1" *-- "0..9999" cmof::PackageableElement : packagedElement63
+cmof::Constraint "0..9999" -- "1..1" cmof::Operation : postcondition110
+cmof::Constraint "0..9999" -- "1..1" cmof::Operation : precondition113
+cmof::BehavioralFeature "1..1" -- "0..9999" cmof::Type : raisedException126
+cmof::Package "1..1" -- "1..1" cmof::PackageMerge : receivingPackage100
+cmof::Classifier "0..9999" -- "1..1" cmof::Classifier : redefinedClassifier53
+cmof::RedefinableElement "1..1" -- "0..9999" cmof::RedefinableElement : redefinedElement18
+cmof::Operation "0..9999" -- "1..1" cmof::Operation : redefinedOperation117
+cmof::Property "0..9999" -- "1..1" cmof::Property : redefinedProperty11
+cmof::Classifier "0..9999" -- "1..1" cmof::RedefinableElement : redefinitionContext19
+cmof::Element "1..9999" -- "1..1" cmof::Relationship : relatedElement84
+cmof::Element "1..1" -- "1..1" cmof::Link : secondElement174
+cmof::InstanceSpecification "1..1" *-- "0..9999" cmof::Slot : slot159
+cmof::DirectedRelationship "1..1" -- "1..9999" cmof::Element : source79
+cmof::Classifier "1..1" -- "1..1" cmof::Generalization : specific104
+cmof::InstanceSpecification "1..1" *-- "0..1" cmof::ValueSpecification : specification160
+cmof::Constraint "1..1" *-- "1..1" cmof::ValueSpecification : specification88
+cmof::Property "0..9999" -- "1..1" cmof::Property : subsettedProperty14
+cmof::Class "0..9999" -- "1..1" cmof::Class : superClass40
+cmof::Element "0..1" -- "1..1" cmof::Tag : tagOwner189
+cmof::DirectedRelationship "1..1" -- "1..9999" cmof::Element : target81
+cmof::Operation "1..1" -- "0..1" cmof::Type : type119
+cmof::Type "0..1" -- "1..1" cmof::TypedElement : type93
+cmof::MultiplicityElement "1..1" *-- "0..1" cmof::ValueSpecification : upperValue137
+cmof::Argument "1..1" -- "1..1" cmof::Object : value154
+cmof::Slot "1..1" *-- "0..9999" cmof::ValueSpecification : value164
+@enduml

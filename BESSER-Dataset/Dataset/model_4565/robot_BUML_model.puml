@@ -1,0 +1,249 @@
+@startuml
+enum AccessType {
+  PRIVATE
+  PUBLIC
+}
+enum AudioMode {
+  MONO
+  STEREO
+}
+class Channel {
+}
+class ChannelDevice {
+}
+enum ColorMode {
+  BLUE
+  GRAY
+  GREEN
+  RED
+  RED_GREEN
+  RGB
+}
+enum DataType {
+  BYTE
+  FLOAT
+  IMAGE
+  INTEGER
+  SHORT
+  STRING
+  UNSIGNED_BYTE
+  UNSIGNED_SHORT
+}
+class Device {
+}
+class Findable {
+}
+enum IoMode {
+  ANALOG_INPUT
+  DIGITAL_INPUT
+  DIGITAL_OUTPUT
+  NONE
+  PWM_OUTPUT
+  SERVO_OUTPUT
+}
+class LinearChannel {
+}
+enum LinearMode {
+  LINEAR
+  SUSTAIN
+}
+class MotoringDevice {
+}
+class NamedElement {
+}
+class SensoryDevice {
+}
+class Simulacra {
+}
+class Storable {
+}
+class robot::AudioChannel {
+}
+abstract class robot::Channel {
+  + isEnabled() : bool
+}
+abstract class robot::ChannelDevice {
+}
+class robot::ColorChannel {
+  + mode : str
+}
+class robot::Command {
+  + id : int
+}
+class robot::CommandChannel {
+}
+class robot::Control {
+  + frameLimit : int
+  + version : str
+}
+abstract class robot::Device {
+  + access : str
+  + dataSize : int
+  + dataType : str
+  + default : str
+  + max : str
+  + min : str
+  + proxy : bool
+  + addDeviceListener(listener : any) : void
+  + e() : bool
+  + getDefault() : int
+  + getDefaultFloat() : float
+  + getDefaultImageData() : str
+  + getDefaultString() : str
+  + getDeviceListeners() : str
+  + getMax() : int
+  + getMaxFloat() : float
+  + getMaxString() : str
+  + getMin() : int
+  + getMinFloat() : float
+  + getMinString() : str
+  + getRootRoboid() : str
+  + isDataTypeOf(device : any) : bool
+  + read(data : any) : int
+  + readFloat(data : any) : int
+  + readImageData(imageData : any) : int
+  + readInt(index : any) : float
+  + readString(text : any) : int
+  + removeDeviceListener(listener : any) : void
+  + setEvent() : void
+  + setFired() : void
+  + write(data : any, index : any) : bool
+  + writeFloat(data : any) : bool
+  + writeImageData(imageData : any) : bool
+  + writeInt(data : any) : bool
+  + writeString(text : any) : bool
+}
+abstract class robot::DeviceListener {
+  + commandPerformed(device : any) : void
+  + effectPerformed(device : any) : void
+  + handleEvent(device : any) : void
+  + stateChanged(device : any) : void
+}
+class robot::Effector {
+  + sustain : int
+  + throttle : int
+  + hasNext() : bool
+}
+class robot::Event {
+  + id : int
+}
+class robot::FileChannel {
+}
+abstract class robot::Findable {
+  + findDevice(name : any) : str
+  + findRoboid(name : any) : str
+}
+class robot::LinearChannel {
+  + mode : str
+}
+class robot::MatrixChannel {
+}
+abstract class robot::MotoringDevice {
+}
+abstract class robot::NamedElement {
+  + comment : str
+  + literal : str
+  + name : str
+  + equalsContents(obj : any) : bool
+  + getChildren() : str
+  + getFullName() : str
+  + getParent() : str
+}
+class robot::Port {
+  + mode : str
+}
+class robot::Protocol {
+  + bufferSize : int
+  + remainingBuffer : int
+  + version : str
+  + clearBuffer() : void
+  + getBufferId() : int
+  + getSimulacrum() : str
+  + setEvents() : void
+  + setSimulacrum(isMaster : any, simulacrum : any) : void
+}
+class robot::Roboid {
+  + address : str
+  + id : str
+  + provider : str
+  + uid : str
+  + version : str
+  + collectAllDevices(devices : any) : str
+}
+class robot::Robot {
+  + provider : str
+  + standard : str
+  + version : str
+  + collectAllActiveDeviceNames(names : any) : str
+  + collectAllDeviceNames(names : any) : str
+  + collectAllDevices(devices : any) : str
+  + getProtocol() : str
+}
+class robot::Sensor {
+  + throttle : int
+}
+abstract class robot::SensoryDevice {
+  + addReceptor(receptor : any) : void
+  + removeReceptor(receptor : any) : void
+}
+abstract class robot::Simulacra {
+  + canSend() : bool
+  + getSimulacrum(deviceMap : any, payload : any) : void
+  + isReceived() : bool
+  + setDeviceMap(deviceMap : any, index : any, isMaster : any) : int
+  + setPayload(isMaster : any, simulacrum : any) : void
+  + updateDeviceState() : void
+}
+abstract class robot::Storable {
+  + clearDeviceMemory() : void
+  + createDeviceMemory() : void
+}
+class robot::TextChannel {
+}
+class robot::VoiceChannel {
+}
+Channel <|-- robot::AudioChannel
+Channel <|-- robot::ColorChannel
+Channel <|-- robot::CommandChannel
+Channel <|-- robot::FileChannel
+Channel <|-- robot::LinearChannel
+Channel <|-- robot::TextChannel
+Channel <|-- robot::VoiceChannel
+ChannelDevice <|-- robot::MotoringDevice
+ChannelDevice <|-- robot::Port
+Device <|-- robot::ChannelDevice
+Device <|-- robot::SensoryDevice
+Findable <|-- robot::Roboid
+Findable <|-- robot::Robot
+LinearChannel <|-- robot::MatrixChannel
+MotoringDevice <|-- robot::Command
+MotoringDevice <|-- robot::Effector
+NamedElement <|-- robot::Channel
+NamedElement <|-- robot::Control
+NamedElement <|-- robot::Device
+NamedElement <|-- robot::Protocol
+NamedElement <|-- robot::Roboid
+NamedElement <|-- robot::Robot
+SensoryDevice <|-- robot::Event
+SensoryDevice <|-- robot::Sensor
+Simulacra <|-- robot::Device
+Simulacra <|-- robot::Roboid
+Storable <|-- robot::Device
+Storable <|-- robot::Roboid
+Storable <|-- robot::Robot
+robot::Channel "0..9999" --* "1..1" robot::Control : channels13
+robot::Control "0..9999" --* "1..1" robot::Robot : controls1
+robot::Channel "1..1" -- "1..9999" robot::ChannelDevice : devices31
+robot::Device "0..9999" --* "1..1" robot::Roboid : devices8
+robot::Roboid "0..1" -- "1..1" robot::Roboid : hostRoboid11
+robot::Protocol "0..1" --* "1..1" robot::Roboid : protocol6
+robot::Sensor "1..1" -- "0..1" robot::Sensor : proxyFor16
+robot::Effector "0..1" -- "1..1" robot::Effector : proxyFor20
+robot::Command "1..1" -- "0..1" robot::Command : proxyFor23
+robot::Event "1..1" -- "0..1" robot::Event : proxyFor25
+robot::Port "1..1" -- "0..1" robot::Port : proxyFor30
+robot::Effector "0..9999" -- "1..1" robot::Sensor : receptors17
+robot::Command "0..9999" -- "1..1" robot::Event : receptors26
+robot::Roboid "1..9999" --* "1..1" robot::Robot : roboids0
+robot::Roboid "0..9999" --* "1..1" robot::Roboid : roboids4
+@enduml

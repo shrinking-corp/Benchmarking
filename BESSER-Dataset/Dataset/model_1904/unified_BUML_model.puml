@@ -214,10 +214,10 @@ class UnifiedMetamodel::::exchange {
 }
 class UnifiedMetamodel::::sale {
 }
-ComponentFront <|-- UnifiedMetamodel::::Container
-ComponentFront <|-- UnifiedMetamodel::::UIFront
 Component <|-- UnifiedMetamodel::::Back
 Component <|-- UnifiedMetamodel::::Front
+ComponentFront <|-- UnifiedMetamodel::::Container
+ComponentFront <|-- UnifiedMetamodel::::UIFront
 EClass <|-- UnifiedMetamodel::::AbstractClass
 EClass <|-- UnifiedMetamodel::::Annotation
 EClass <|-- UnifiedMetamodel::::GenericClass
@@ -228,6 +228,9 @@ File <|-- UnifiedMetamodel::::CSS
 File <|-- UnifiedMetamodel::::JS
 File <|-- UnifiedMetamodel::::JSON
 File <|-- UnifiedMetamodel::::MD
+Layer <|-- UnifiedMetamodel::::Ejb
+Layer <|-- UnifiedMetamodel::::JavaScript
+Layer <|-- UnifiedMetamodel::::War
 LayerSegment <|-- UnifiedMetamodel::::Actions
 LayerSegment <|-- UnifiedMetamodel::::Containers
 LayerSegment <|-- UnifiedMetamodel::::Dto
@@ -239,9 +242,6 @@ LayerSegment <|-- UnifiedMetamodel::::Services
 LayerSegment <|-- UnifiedMetamodel::::Store
 LayerSegment <|-- UnifiedMetamodel::::UI
 LayerSegment <|-- UnifiedMetamodel::::Util
-Layer <|-- UnifiedMetamodel::::Ejb
-Layer <|-- UnifiedMetamodel::::JavaScript
-Layer <|-- UnifiedMetamodel::::War
 ModuleFront <|-- UnifiedMetamodel::::APICall
 ModuleFront <|-- UnifiedMetamodel::::Design
 ModuleFront <|-- UnifiedMetamodel::::Redux
@@ -255,75 +255,75 @@ UIFront <|-- UnifiedMetamodel::::RouterComponent
 UIFront <|-- UnifiedMetamodel::::Visualizer
 UnifiedMetamodel::::Directory "1..1" -- "1..1" UnifiedMetamodel::::Functionality : IsOrganizedBy77
 UnifiedMetamodel::::AbstractMethod "0..9999" --* "1..1" UnifiedMetamodel::::EInterface : abstractmethod121
-UnifiedMetamodel::::AbstractMethod "0..9999" --* "1..1" UnifiedMetamodel::::AbstractClass : abstractmethod141
+UnifiedMetamodel::::AbstractClass "1..1" *-- "0..9999" UnifiedMetamodel::::AbstractMethod : abstractmethod141
 UnifiedMetamodel::::Action "1..9999" --* "1..1" UnifiedMetamodel::::State : action54
-UnifiedMetamodel::::Directory "1..1" -- "1..1" UnifiedMetamodel::::Action : actionDirectory86
-UnifiedMetamodel::::ActionCreator "0..9999" --* "1..1" UnifiedMetamodel::::Action : actioncreator83
+UnifiedMetamodel::::Action "1..1" -- "1..1" UnifiedMetamodel::::Directory : actionDirectory86
+UnifiedMetamodel::::Action "1..1" *-- "0..9999" UnifiedMetamodel::::ActionCreator : actioncreator83
 UnifiedMetamodel::::Action "1..1" *-- "0..9999" UnifiedMetamodel::::ActionDispatcher : actiondispatcher80
-UnifiedMetamodel::::LayerSegment "0..9999" -- "1..1" UnifiedMetamodel::::LayerSegment : allowToUse1
+UnifiedMetamodel::::LayerSegment "1..1" -- "0..9999" UnifiedMetamodel::::LayerSegment : allowToUse1
 UnifiedMetamodel::::Annotation "0..9999" --* "1..1" UnifiedMetamodel::::Library : annotation123
-UnifiedMetamodel::::Attribute "1..1" -- "0..1" UnifiedMetamodel::::Annotation : annotation125
-UnifiedMetamodel::::MethodBack "1..1" -- "0..1" UnifiedMetamodel::::Annotation : annotation133
-UnifiedMetamodel::::EClass "1..1" -- "0..1" UnifiedMetamodel::::Annotation : annotation152
+UnifiedMetamodel::::Annotation "0..1" -- "1..1" UnifiedMetamodel::::Attribute : annotation125
+UnifiedMetamodel::::Annotation "0..1" -- "1..1" UnifiedMetamodel::::MethodBack : annotation133
+UnifiedMetamodel::::Annotation "0..1" -- "1..1" UnifiedMetamodel::::EClass : annotation152
 UnifiedMetamodel::::EClass "0..9999" -- "1..1" UnifiedMetamodel::::MethodBack : arguments138
 UnifiedMetamodel::::AbstractMethod "1..1" -- "0..9999" UnifiedMetamodel::::EClass : arguments169
 UnifiedMetamodel::::ArquitectureMetamodel "1..1" --* "1..1" UnifiedMetamodel::::Metamodel : arquitecturemetamodel19
 UnifiedMetamodel::::Attribute "0..9999" --* "1..1" UnifiedMetamodel::::EClass : attribute146
 UnifiedMetamodel::::ActionCreator "0..9999" -- "1..1" UnifiedMetamodel::::Reducer : catches103
-UnifiedMetamodel::::Epackage "1..1" *-- "1..9999" UnifiedMetamodel::::EClass : class144
+UnifiedMetamodel::::EClass "1..9999" --* "1..1" UnifiedMetamodel::::Epackage : class144
 UnifiedMetamodel::::ArquitectureMetamodel "1..1" *-- "1..9999" UnifiedMetamodel::::Component : components17
 UnifiedMetamodel::::ComponentFront "1..9999" --* "1..1" UnifiedMetamodel::::Functionality : components70
-UnifiedMetamodel::::Descriptor "0..1" -- "1..1" UnifiedMetamodel::::Annotation : descriptor155
+UnifiedMetamodel::::Annotation "1..1" -- "0..1" UnifiedMetamodel::::Descriptor : descriptor155
 UnifiedMetamodel::::Descriptor "1..9999" --* "1..1" UnifiedMetamodel::::Subproject : descriptor157
-UnifiedMetamodel::::Directory "0..9999" --* "1..1" UnifiedMetamodel::::Directory : directories51
+UnifiedMetamodel::::Directory "1..1" *-- "0..9999" UnifiedMetamodel::::Directory : directories51
 UnifiedMetamodel::::Directory "1..9999" --* "1..1" UnifiedMetamodel::::ReactApp : directories94
-UnifiedMetamodel::::Container "1..1" -- "0..9999" UnifiedMetamodel::::ActionDispatcher : dispatches60
+UnifiedMetamodel::::ActionDispatcher "0..9999" -- "1..1" UnifiedMetamodel::::Container : dispatches60
 UnifiedMetamodel::::DomainMetamodel "1..1" --* "1..1" UnifiedMetamodel::::Metamodel : domainmetamodel21
 UnifiedMetamodel::::Entity "1..9999" --* "1..1" UnifiedMetamodel::::Submodule : entity40
 UnifiedMetamodel::::AbstractClass "0..1" -- "1..1" UnifiedMetamodel::::GenericClass : extends131
 UnifiedMetamodel::::Directory "1..1" *-- "0..9999" UnifiedMetamodel::::File : files52
 UnifiedMetamodel::::Functionality "1..9999" --* "1..1" UnifiedMetamodel::::ReactApp : functionalities89
 UnifiedMetamodel::::EInterface "0..9999" -- "1..1" UnifiedMetamodel::::GenericClass : implement129
-UnifiedMetamodel::::Directory "1..1" -- "1..1" UnifiedMetamodel::::ComponentFront : inWithin100
+UnifiedMetamodel::::ComponentFront "1..1" -- "1..1" UnifiedMetamodel::::Directory : inWithin100
 UnifiedMetamodel::::Directory "0..1" -- "1..1" UnifiedMetamodel::::ServicesFront : isOrganizedIn67
 UnifiedMetamodel::::Directory "1..1" -- "1..1" UnifiedMetamodel::::ModuleFront : isPresentIn109
 UnifiedMetamodel::::JEE::Project "1..9999" --* "1..1" UnifiedMetamodel::::JavaApp : jee_project117
 UnifiedMetamodel::::Layer "1..1" *-- "0..9999" UnifiedMetamodel::::LayerSegment : layerSegments5
-UnifiedMetamodel::::Layer "1..9999" --* "1..1" UnifiedMetamodel::::Component : layers7
-UnifiedMetamodel::::LayerSegment "1..1" *-- "0..9999" UnifiedMetamodel::::LayerSegment : layersegment3
-UnifiedMetamodel::::Subproject "1..1" *-- "1..9999" UnifiedMetamodel::::Library : library163
-UnifiedMetamodel::::Reducer "0..9999" -- "1..1" UnifiedMetamodel::::Container : maps62
-UnifiedMetamodel::::MethodBack "0..9999" --* "1..1" UnifiedMetamodel::::EClass : method149
-UnifiedMetamodel::::Module "1..9999" --* "1..1" UnifiedMetamodel::::DomainMetamodel : module43
-UnifiedMetamodel::::ReactApp "1..1" *-- "1..9999" UnifiedMetamodel::::ModuleFront : modules91
-UnifiedMetamodel::::NativeClass "0..9999" --* "1..1" UnifiedMetamodel::::Library : nativeclass122
+UnifiedMetamodel::::Component "1..1" *-- "1..9999" UnifiedMetamodel::::Layer : layers7
+UnifiedMetamodel::::LayerSegment "0..9999" --* "1..1" UnifiedMetamodel::::LayerSegment : layersegment3
+UnifiedMetamodel::::Library "1..9999" --* "1..1" UnifiedMetamodel::::Subproject : library163
+UnifiedMetamodel::::Container "1..1" -- "0..9999" UnifiedMetamodel::::Reducer : maps62
+UnifiedMetamodel::::EClass "1..1" *-- "0..9999" UnifiedMetamodel::::MethodBack : method149
+UnifiedMetamodel::::DomainMetamodel "1..1" *-- "1..9999" UnifiedMetamodel::::Module : module43
+UnifiedMetamodel::::ModuleFront "1..9999" --* "1..1" UnifiedMetamodel::::ReactApp : modules91
+UnifiedMetamodel::::Library "1..1" *-- "0..9999" UnifiedMetamodel::::NativeClass : nativeclass122
 UnifiedMetamodel::::Entity "1..1" -- "1..1" UnifiedMetamodel::::Operations : operates_on25
-UnifiedMetamodel::::Transaction "1..1" -- "1..9999" UnifiedMetamodel::::GeneralEntity : operates_on35
+UnifiedMetamodel::::GeneralEntity "1..9999" -- "1..1" UnifiedMetamodel::::Transaction : operates_on35
 UnifiedMetamodel::::Operations "1..9999" --* "1..1" UnifiedMetamodel::::Submodule : operations37
 UnifiedMetamodel::::Epackage "1..9999" --* "1..1" UnifiedMetamodel::::Subproject : package160
 UnifiedMetamodel::::Entity "1..1" *-- "1..9999" UnifiedMetamodel::::Property : property28
 UnifiedMetamodel::::Reducer "1..9999" --* "1..1" UnifiedMetamodel::::State : reducer55
-UnifiedMetamodel::::Reducer "1..1" -- "0..1" UnifiedMetamodel::::Directory : reducerDirectory106
+UnifiedMetamodel::::Directory "0..1" -- "1..1" UnifiedMetamodel::::Reducer : reducerDirectory106
 UnifiedMetamodel::::DomainMetamodel "1..1" *-- "1..9999" UnifiedMetamodel::::RelationDom : relationdom46
-UnifiedMetamodel::::RelationArch "1..9999" --* "1..1" UnifiedMetamodel::::Component : relations9
+UnifiedMetamodel::::Component "1..1" *-- "1..9999" UnifiedMetamodel::::RelationArch : relations9
 UnifiedMetamodel::::EClass "0..1" -- "1..1" UnifiedMetamodel::::MethodBack : return135
-UnifiedMetamodel::::EClass "0..1" -- "1..1" UnifiedMetamodel::::AbstractMethod : return166
-UnifiedMetamodel::::UIFront "1..9999" -- "1..1" UnifiedMetamodel::::RouterComponent : routes59
-UnifiedMetamodel::::ServicesFront "1..9999" --* "1..1" UnifiedMetamodel::::Functionality : services74
+UnifiedMetamodel::::AbstractMethod "1..1" -- "0..1" UnifiedMetamodel::::EClass : return166
+UnifiedMetamodel::::RouterComponent "1..1" -- "1..9999" UnifiedMetamodel::::UIFront : routes59
+UnifiedMetamodel::::Functionality "1..1" *-- "1..9999" UnifiedMetamodel::::ServicesFront : services74
 UnifiedMetamodel::::Layer "1..1" -- "1..1" UnifiedMetamodel::::RelationArch : source11
 UnifiedMetamodel::::Entity "1..1" -- "1..1" UnifiedMetamodel::::RelationDom : source30
 UnifiedMetamodel::::Functionality "1..1" *-- "1..1" UnifiedMetamodel::::State : state71
-UnifiedMetamodel::::Submodule "1..9999" --* "1..1" UnifiedMetamodel::::Module : submodule26
-UnifiedMetamodel::::Subproject "1..9999" --* "1..1" UnifiedMetamodel::::JEE::Project : subproject119
+UnifiedMetamodel::::Module "1..1" *-- "1..9999" UnifiedMetamodel::::Submodule : submodule26
+UnifiedMetamodel::::JEE::Project "1..1" *-- "1..9999" UnifiedMetamodel::::Subproject : subproject119
 UnifiedMetamodel::::Layer "1..1" -- "1..1" UnifiedMetamodel::::RelationArch : target14
 UnifiedMetamodel::::Entity "1..1" -- "1..1" UnifiedMetamodel::::RelationDom : target32
 UnifiedMetamodel::::JavaApp "1..1" --* "1..1" UnifiedMetamodel::::TechnologyMetamodel : techback112
-UnifiedMetamodel::::TechnologyMetamodel "1..1" *-- "1..1" UnifiedMetamodel::::ReactApp : techfront114
-UnifiedMetamodel::::TechnologyMetamodel "1..1" --* "1..1" UnifiedMetamodel::::Metamodel : technologymetamodel23
-UnifiedMetamodel::::Transaction "1..9999" --* "1..1" UnifiedMetamodel::::SpecialEntity : transaction27
-UnifiedMetamodel::::EClass "1..1" -- "1..1" UnifiedMetamodel::::Attribute : type127
+UnifiedMetamodel::::ReactApp "1..1" --* "1..1" UnifiedMetamodel::::TechnologyMetamodel : techfront114
+UnifiedMetamodel::::Metamodel "1..1" *-- "1..1" UnifiedMetamodel::::TechnologyMetamodel : technologymetamodel23
+UnifiedMetamodel::::SpecialEntity "1..1" *-- "1..9999" UnifiedMetamodel::::Transaction : transaction27
+UnifiedMetamodel::::Attribute "1..1" -- "1..1" UnifiedMetamodel::::EClass : type127
 UnifiedMetamodel::::ActionCreator "0..1" -- "1..1" UnifiedMetamodel::::ActionDispatcher : use49
 UnifiedMetamodel::::ModuleFront "1..9999" -- "1..1" UnifiedMetamodel::::State : use57
-UnifiedMetamodel::::ServicesFront "1..1" -- "1..9999" UnifiedMetamodel::::ModuleFront : use65
-UnifiedMetamodel::::ModuleFront "1..9999" -- "1..1" UnifiedMetamodel::::ComponentFront : use97
+UnifiedMetamodel::::ModuleFront "1..9999" -- "1..1" UnifiedMetamodel::::ServicesFront : use65
+UnifiedMetamodel::::ComponentFront "1..1" -- "1..9999" UnifiedMetamodel::::ModuleFront : use97
 @enduml

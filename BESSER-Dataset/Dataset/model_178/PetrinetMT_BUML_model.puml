@@ -1,0 +1,31 @@
+@startuml
+class petrinet::Net {
+  + fireEnabledTransition() : void
+  + initializeModel(args : any) : void
+  + run() : void
+  + stop() : void
+}
+class petrinet::NetStopEvent {
+}
+class petrinet::Place {
+  + initialTokens : int
+  + name : str
+}
+class petrinet::Token {
+}
+class petrinet::Transition {
+  + name : str
+  + fire() : void
+  + fire_PreCondition() : void
+  + isEnabled() : void
+}
+class petrinet::TransitionFireEvent {
+}
+petrinet::Place "1..9999" -- "1..1" petrinet::Transition : input3
+petrinet::Net "0..1" -- "1..1" petrinet::NetStopEvent : net11
+petrinet::Place "1..9999" -- "1..1" petrinet::Transition : output6
+petrinet::Net "1..1" *-- "0..9999" petrinet::Place : places0
+petrinet::Place "1..1" *-- "0..9999" petrinet::Token : tokens9
+petrinet::Transition "0..1" -- "1..1" petrinet::TransitionFireEvent : transition13
+petrinet::Net "1..1" *-- "0..9999" petrinet::Transition : transitions1
+@enduml

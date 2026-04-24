@@ -462,13 +462,13 @@ NamedExpression <|-- robochart::Field
 NamedExpression <|-- robochart::Function
 NamedExpression <|-- robochart::Literal
 NamedExpression <|-- robochart::Variable
-NodeContainer <|-- robochart::State
-NodeContainer <|-- robochart::StateMachineBody
 Node <|-- robochart::Junction
 Node <|-- robochart::State
-OperationSig <|-- robochart::OperationDef
+NodeContainer <|-- robochart::State
+NodeContainer <|-- robochart::StateMachineBody
 Operation <|-- robochart::OperationDef
 Operation <|-- robochart::OperationRef
+OperationSig <|-- robochart::OperationDef
 QuantifierExpression <|-- robochart::Exists
 QuantifierExpression <|-- robochart::Forall
 Reference <|-- robochart::OperationRef
@@ -478,10 +478,11 @@ RelationType <|-- robochart::FunctionType
 RoboticPlatform <|-- robochart::RoboticPlatformDef
 RoboticPlatform <|-- robochart::RoboticPlatformRef
 SetType <|-- robochart::SeqType
-StateMachineBody <|-- robochart::OperationDef
-StateMachineBody <|-- robochart::StateMachineDef
+State <|-- robochart::Final
 StateMachine <|-- robochart::StateMachineDef
 StateMachine <|-- robochart::StateMachineRef
+StateMachineBody <|-- robochart::OperationDef
+StateMachineBody <|-- robochart::StateMachineDef
 Statement <|-- robochart::Assignment
 Statement <|-- robochart::Call
 Statement <|-- robochart::ClockReset
@@ -492,7 +493,13 @@ Statement <|-- robochart::SeqStatement
 Statement <|-- robochart::Skip
 Statement <|-- robochart::TimedStatement
 Statement <|-- robochart::Wait
-State <|-- robochart::Final
+Type <|-- robochart::AnyType
+Type <|-- robochart::MatrixType
+Type <|-- robochart::ProductType
+Type <|-- robochart::RelationType
+Type <|-- robochart::SetType
+Type <|-- robochart::TypeRef
+Type <|-- robochart::VectorType
 TypeDecl <|-- robochart::Enumeration
 TypeDecl <|-- robochart::Literal
 TypeDecl <|-- robochart::NameType
@@ -501,58 +508,51 @@ TypeDecl <|-- robochart::RecordType
 TypedNamedElement <|-- robochart::Function
 TypedNamedElement <|-- robochart::Member
 TypedNamedElement <|-- robochart::Variable
-Type <|-- robochart::AnyType
-Type <|-- robochart::MatrixType
-Type <|-- robochart::ProductType
-Type <|-- robochart::RelationType
-Type <|-- robochart::SetType
-Type <|-- robochart::TypeRef
-Type <|-- robochart::VectorType
 Variable <|-- robochart::Parameter
-robochart::Variable "0..1" -- "1..1" robochart::Trigger : _from108
+robochart::Trigger "1..1" -- "0..1" robochart::Variable : _from108
 robochart::Expression "0..1" --* "1..1" robochart::Trigger : _predicate111
 robochart::Statement "0..1" --* "1..1" robochart::Transition : action100
-robochart::Statement "1..1" --* "1..1" robochart::Action : action125
-robochart::State "1..1" *-- "0..9999" robochart::Action : actions82
+robochart::Action "1..1" *-- "1..1" robochart::Statement : action125
+robochart::Action "0..9999" --* "1..1" robochart::State : actions82
 robochart::Call "1..1" *-- "0..9999" robochart::Expression : args183
-robochart::Expression "0..9999" --* "1..1" robochart::CallExp : args295
+robochart::CallExp "1..1" *-- "0..9999" robochart::Expression : args295
 robochart::Type "1..1" --* "1..1" robochart::VectorType : base317
 robochart::MatrixType "1..1" *-- "1..1" robochart::Type : base319
 robochart::Clock "1..1" -- "1..1" robochart::ClockReset : clock186
-robochart::ClockExp "1..1" -- "1..1" robochart::Clock : clock194
+robochart::Clock "1..1" -- "1..1" robochart::ClockExp : clock194
 robochart::Clock "0..9999" --* "1..1" robochart::StateMachineBody : clocks78
 robochart::Expression "1..1" --* "1..1" robochart::IfExpression : condition219
 robochart::Expression "0..1" --* "1..1" robochart::Transition : condition97
 robochart::Connection "0..9999" --* "1..1" robochart::ControllerDef : connections132
-robochart::RCModule "1..1" *-- "0..9999" robochart::Connection : connections147
+robochart::Connection "0..9999" --* "1..1" robochart::RCModule : connections147
 robochart::ControllerDef "0..9999" --* "1..1" robochart::RCPackage : controllers8
 robochart::Declaration "1..9999" --* "1..1" robochart::LetExpression : declarations229
 robochart::RelationType "1..1" *-- "1..1" robochart::Type : domain26
-robochart::Type "1..1" --* "1..1" robochart::SetType : domain31
+robochart::SetType "1..1" *-- "1..1" robochart::Type : domain31
 robochart::Expression "1..1" --* "1..1" robochart::Wait : duration161
 robochart::Connection "1..1" -- "1..1" robochart::Event : efrom139
 robochart::IfStmt "1..1" *-- "0..1" robochart::Statement : else168
-robochart::IfExpression "1..1" *-- "1..1" robochart::Expression : elseexp224
-robochart::TimedStatement "1..1" *-- "0..1" robochart::Expression : end158
+robochart::Expression "1..1" --* "1..1" robochart::IfExpression : elseexp224
+robochart::Expression "0..1" --* "1..1" robochart::TimedStatement : end158
 robochart::Expression "1..1" --* "1..1" robochart::SetRange : end283
 robochart::Expression "0..1" --* "1..1" robochart::Transition : end94
-robochart::Event "1..1" -- "1..1" robochart::Connection : eto142
-robochart::Trigger "1..1" -- "0..1" robochart::Event : event105
+robochart::Connection "1..1" -- "1..1" robochart::Event : eto142
+robochart::Event "0..1" -- "1..1" robochart::Trigger : event105
 robochart::BasicContext "1..1" *-- "0..9999" robochart::Event : events63
 robochart::Expression "1..1" --* "1..1" robochart::Not : exp234
 robochart::Expression "1..1" --* "1..1" robochart::Neg : exp243
-robochart::Expression "1..1" --* "1..1" robochart::AsExp : exp252
-robochart::IsExp "1..1" *-- "1..1" robochart::Expression : exp257
-robochart::ParExp "1..1" *-- "1..1" robochart::Expression : exp267
+robochart::AsExp "1..1" *-- "1..1" robochart::Expression : exp252
+robochart::Expression "1..1" --* "1..1" robochart::IsExp : exp257
+robochart::Expression "1..1" --* "1..1" robochart::ParExp : exp267
 robochart::Expression "1..1" --* "1..1" robochart::IfStmt : expression163
 robochart::Expression "1..1" --* "1..1" robochart::LambdaExp : expression216
-robochart::LetExpression "1..1" *-- "1..1" robochart::Expression : expression231
+robochart::Expression "1..1" --* "1..1" robochart::LetExpression : expression231
 robochart::Expression "0..1" --* "1..1" robochart::SetComp : expression278
 robochart::Expression "0..1" -- "1..1" robochart::WaitingCondition : expression310
 robochart::Field "1..9999" --* "1..1" robochart::RecordType : fields16
-robochart::ConnectionNode "1..1" -- "1..1" robochart::Connection : from134
-robochart::Expression "1..1" --* "1..1" robochart::CallExp : function293
-robochart::RCPackage "1..1" *-- "0..9999" robochart::Function : functions14
+robochart::Connection "1..1" -- "1..1" robochart::ConnectionNode : from134
+robochart::CallExp "1..1" *-- "1..1" robochart::Expression : function293
+robochart::Function "0..9999" --* "1..1" robochart::RCPackage : functions14
 robochart::Expression "1..1" --* "1..1" robochart::IfExpression : ifexp221
 robochart::BasicPackage "1..1" *-- "0..9999" robochart::Import : imports0
 robochart::Expression "0..1" --* "1..1" robochart::Variable : initial36
@@ -560,11 +560,11 @@ robochart::Interface "0..9999" --* "1..1" robochart::RCPackage : interfaces1
 robochart::Context "1..1" -- "0..9999" robochart::Interface : interfaces71
 robochart::ControllerDef "1..1" *-- "0..9999" robochart::Operation : lOperations130
 robochart::Assignable "1..1" --* "1..1" robochart::Assignment : left171
-robochart::Expression "1..1" --* "1..1" robochart::BinaryExpression : left198
-robochart::Literal "1..1" -- "1..1" robochart::EnumExp : literal264
-robochart::Literal "0..9999" --* "1..1" robochart::Enumeration : literals18
+robochart::BinaryExpression "1..1" *-- "1..1" robochart::Expression : left198
+robochart::EnumExp "1..1" -- "1..1" robochart::Literal : literal264
+robochart::Enumeration "1..1" *-- "0..9999" robochart::Literal : literals18
 robochart::Expression "1..1" --* "1..1" robochart::RangeExp : lrange288
-robochart::StateMachine "0..9999" --* "1..1" robochart::ControllerDef : machines128
+robochart::ControllerDef "1..1" *-- "0..9999" robochart::StateMachine : machines128
 robochart::RCPackage "1..1" *-- "0..9999" robochart::StateMachineDef : machines6
 robochart::Expression "1..1" --* "1..1" robochart::InExp : member236
 robochart::Member "1..1" -- "1..1" robochart::Selection : member247
@@ -573,37 +573,37 @@ robochart::RCModule "0..9999" --* "1..1" robochart::RCPackage : modules10
 robochart::VarRef "1..1" -- "1..1" robochart::Variable : name308
 robochart::ConnectionNode "0..9999" --* "1..1" robochart::RCModule : nodes150
 robochart::Node "0..9999" --* "1..1" robochart::NodeContainer : nodes79
-robochart::OperationSig "1..1" -- "1..1" robochart::Call : operation181
+robochart::Call "1..1" -- "1..1" robochart::OperationSig : operation181
 robochart::OperationDef "0..9999" --* "1..1" robochart::RCPackage : operations12
-robochart::OperationSig "0..9999" --* "1..1" robochart::BasicContext : operations60
+robochart::BasicContext "1..1" *-- "0..9999" robochart::OperationSig : operations60
 robochart::Context "1..1" -- "0..9999" robochart::Interface : pInterfaces66
-robochart::Variable "0..1" -- "1..1" robochart::Trigger : parameter114
-robochart::Expression "0..9999" --* "1..1" robochart::ArrayExp : parameters191
-robochart::Expression "1..9999" --* "1..1" robochart::ArrayAssignable : parameters305
-robochart::Parameter "0..9999" --* "1..1" robochart::Function : parameters40
-robochart::Parameter "0..9999" --* "1..1" robochart::OperationSig : parameters48
+robochart::Trigger "1..1" -- "0..1" robochart::Variable : parameter114
+robochart::ArrayExp "1..1" *-- "0..9999" robochart::Expression : parameters191
+robochart::ArrayAssignable "1..1" *-- "1..9999" robochart::Expression : parameters305
+robochart::Function "1..1" *-- "0..9999" robochart::Parameter : parameters40
+robochart::OperationSig "1..1" *-- "0..9999" robochart::Parameter : parameters48
 robochart::Expression "0..9999" --* "1..1" robochart::Function : postconditions45
 robochart::Expression "0..9999" --* "1..1" robochart::OperationSig : postconditions53
-robochart::Function "1..1" *-- "0..9999" robochart::Expression : preconditions42
+robochart::Expression "0..9999" --* "1..1" robochart::Function : preconditions42
 robochart::Expression "0..9999" --* "1..1" robochart::OperationSig : preconditions50
 robochart::Expression "1..1" --* "1..1" robochart::QuantifierExpression : predicate208
 robochart::Expression "0..1" --* "1..1" robochart::SetComp : predicate275
 robochart::Expression "0..1" --* "1..1" robochart::Transition : probability102
-robochart::Interface "0..9999" -- "1..1" robochart::Context : rInterfaces68
-robochart::Type "1..1" --* "1..1" robochart::RelationType : range28
-robochart::Selection "1..1" *-- "1..1" robochart::Expression : receiver245
-robochart::VarSelection "1..1" *-- "1..1" robochart::Assignable : receiver298
+robochart::Context "1..1" -- "0..9999" robochart::Interface : rInterfaces68
+robochart::RelationType "1..1" *-- "1..1" robochart::Type : range28
+robochart::Expression "1..1" --* "1..1" robochart::Selection : receiver245
+robochart::Assignable "1..1" --* "1..1" robochart::VarSelection : receiver298
 robochart::ControllerDef "1..1" -- "1..1" robochart::ControllerRef : ref145
-robochart::RefExp "1..1" -- "1..1" robochart::NamedExpression : ref251
+robochart::NamedExpression "1..1" -- "1..1" robochart::RefExp : ref251
 robochart::WaitingCondition "0..1" -- "1..1" robochart::WaitingConditionRef : ref315
 robochart::TypeDecl "1..1" -- "1..1" robochart::TypeRef : ref33
-robochart::OperationRef "1..1" -- "1..1" robochart::OperationDef : ref56
+robochart::OperationDef "1..1" -- "1..1" robochart::OperationRef : ref56
 robochart::RoboticPlatformDef "1..1" -- "1..1" robochart::RoboticPlatformRef : ref74
-robochart::StateMachineRef "1..1" -- "1..1" robochart::StateMachineDef : ref76
+robochart::StateMachineDef "1..1" -- "1..1" robochart::StateMachineRef : ref76
 robochart::ClockReset "0..9999" --* "1..1" robochart::Trigger : reset123
-robochart::Expression "1..1" --* "1..1" robochart::Assignment : right172
-robochart::Expression "1..1" --* "1..1" robochart::BinaryExpression : right200
-robochart::RoboticPlatformDef "0..9999" --* "1..1" robochart::RCPackage : robots2
+robochart::Assignment "1..1" *-- "1..1" robochart::Expression : right172
+robochart::BinaryExpression "1..1" *-- "1..1" robochart::Expression : right200
+robochart::RCPackage "1..1" *-- "0..9999" robochart::RoboticPlatformDef : robots2
 robochart::Expression "1..1" --* "1..1" robochart::RangeExp : rrange290
 robochart::Expression "1..1" --* "1..1" robochart::InExp : set238
 robochart::Node "1..1" -- "1..1" robochart::Transition : source83
@@ -613,37 +613,37 @@ robochart::Expression "0..1" --* "1..1" robochart::Transition : start89
 robochart::State "1..1" -- "1..1" robochart::StateClockExp : state196
 robochart::SeqStatement "1..1" *-- "2..9999" robochart::Statement : statements177
 robochart::Statement "1..1" --* "1..1" robochart::TimedStatement : stmt155
-robochart::Statement "1..1" --* "1..1" robochart::ParStmt : stmt179
+robochart::ParStmt "1..1" *-- "1..1" robochart::Statement : stmt179
 robochart::Expression "0..1" --* "1..1" robochart::QuantifierExpression : suchthat205
 robochart::Expression "0..1" --* "1..1" robochart::LambdaExp : suchthat213
 robochart::Node "1..1" -- "1..1" robochart::Transition : target86
-robochart::Statement "1..1" --* "1..1" robochart::IfStmt : then165
-robochart::Variable "0..1" -- "1..1" robochart::Trigger : time120
-robochart::ConnectionNode "1..1" -- "1..1" robochart::Connection : to136
+robochart::IfStmt "1..1" *-- "1..1" robochart::Statement : then165
+robochart::Trigger "1..1" -- "0..1" robochart::Variable : time120
+robochart::Connection "1..1" -- "1..1" robochart::ConnectionNode : to136
 robochart::Transition "0..9999" -- "1..1" robochart::WaitingCondition : transitions312
-robochart::Transition "0..9999" --* "1..1" robochart::NodeContainer : transitions80
-robochart::Trigger "1..1" --* "1..1" robochart::SendEvent : trigger175
+robochart::NodeContainer "1..1" *-- "0..9999" robochart::Transition : transitions80
+robochart::SendEvent "1..1" *-- "1..1" robochart::Trigger : trigger175
 robochart::Transition "1..1" *-- "0..1" robochart::Trigger : trigger92
-robochart::TypedNamedElement "1..1" *-- "1..1" robochart::Type : type17
-robochart::Type "1..1" --* "1..1" robochart::NameType : type22
-robochart::TypeExp "1..1" *-- "1..1" robochart::Type : type241
-robochart::Type "1..1" --* "1..1" robochart::AsExp : type254
-robochart::Type "1..1" --* "1..1" robochart::IsExp : type259
-robochart::Enumeration "1..1" -- "1..1" robochart::EnumExp : type262
-robochart::Type "0..1" --* "1..1" robochart::Event : type38
-robochart::Type "0..9999" --* "1..1" robochart::Literal : types19
+robochart::Type "1..1" --* "1..1" robochart::TypedNamedElement : type17
+robochart::NameType "1..1" *-- "1..1" robochart::Type : type22
+robochart::Type "1..1" --* "1..1" robochart::TypeExp : type241
+robochart::AsExp "1..1" *-- "1..1" robochart::Type : type254
+robochart::IsExp "1..1" *-- "1..1" robochart::Type : type259
+robochart::EnumExp "1..1" -- "1..1" robochart::Enumeration : type262
+robochart::Event "1..1" *-- "0..1" robochart::Type : type38
+robochart::Literal "1..1" *-- "0..9999" robochart::Type : types19
 robochart::ProductType "1..1" *-- "2..9999" robochart::Type : types24
-robochart::TypeDecl "0..9999" --* "1..1" robochart::RCPackage : types4
-robochart::Trigger "1..1" *-- "0..1" robochart::Expression : value117
-robochart::Expression "1..1" --* "1..1" robochart::ArrayExp : value189
-robochart::Expression "1..1" --* "1..1" robochart::Declaration : value227
-robochart::Variable "1..1" -- "1..1" robochart::VarExp : value249
-robochart::Assignable "1..1" --* "1..1" robochart::ArrayAssignable : value303
+robochart::RCPackage "1..1" *-- "0..9999" robochart::TypeDecl : types4
+robochart::Expression "0..1" --* "1..1" robochart::Trigger : value117
+robochart::ArrayExp "1..1" *-- "1..1" robochart::Expression : value189
+robochart::Declaration "1..1" *-- "1..1" robochart::Expression : value227
+robochart::VarExp "1..1" -- "1..1" robochart::Variable : value249
+robochart::ArrayAssignable "1..1" *-- "1..1" robochart::Assignable : value303
 robochart::Expression "0..9999" --* "1..1" robochart::SeqExp : values269
 robochart::Expression "0..9999" --* "1..1" robochart::SetExp : values271
-robochart::TupleExp "1..1" *-- "2..9999" robochart::Expression : values286
-robochart::VariableList "0..9999" --* "1..1" robochart::BasicContext : variableList58
-robochart::Variable "1..9999" --* "1..1" robochart::QuantifierExpression : variables203
+robochart::Expression "2..9999" --* "1..1" robochart::TupleExp : values286
+robochart::BasicContext "1..1" *-- "0..9999" robochart::VariableList : variableList58
+robochart::QuantifierExpression "1..1" *-- "1..9999" robochart::Variable : variables203
 robochart::LambdaExp "1..1" *-- "1..9999" robochart::Variable : variables211
 robochart::SetComp "1..1" *-- "1..9999" robochart::Variable : variables273
 robochart::Variable "1..9999" --* "1..1" robochart::VariableList : vars35

@@ -69,10 +69,10 @@ Command <|-- whileDsl::IfCommand
 Command <|-- whileDsl::NopCommand
 Command <|-- whileDsl::VarsCommand
 Command <|-- whileDsl::WhileCommand
-whileDsl::WhileCommand "1..1" *-- "0..1" whileDsl::Commands : body12
-whileDsl::ForCommand "1..1" *-- "0..1" whileDsl::Commands : body17
+whileDsl::Commands "0..1" --* "1..1" whileDsl::WhileCommand : body12
+whileDsl::Commands "0..1" --* "1..1" whileDsl::ForCommand : body17
 whileDsl::Commands "0..1" --* "1..1" whileDsl::ForeachCommand : body30
-whileDsl::Definition "1..1" *-- "0..1" whileDsl::Commands : body5
+whileDsl::Commands "0..1" --* "1..1" whileDsl::Definition : body5
 whileDsl::Command "0..9999" --* "1..1" whileDsl::Commands : commands9
 whileDsl::Expr "0..1" --* "1..1" whileDsl::WhileCommand : cond11
 whileDsl::Expr "0..1" --* "1..1" whileDsl::ForCommand : cond15
@@ -80,9 +80,9 @@ whileDsl::Expr "0..1" --* "1..1" whileDsl::IfCommand : cond20
 whileDsl::Commands "0..1" --* "1..1" whileDsl::IfCommand : elseBody25
 whileDsl::Expr "0..1" --* "1..1" whileDsl::ForeachCommand : expList28
 whileDsl::Expr "0..1" --* "1..1" whileDsl::ExprSimpleWithExpr : expr38
-whileDsl::ExprEq "1..1" *-- "0..1" whileDsl::Expr : expr62
-whileDsl::ExprSimple "0..1" --* "1..1" whileDsl::ExprEq : exprLSimple56
-whileDsl::ExprSimple "0..1" --* "1..1" whileDsl::ExprEq : exprRSimple59
+whileDsl::Expr "0..1" --* "1..1" whileDsl::ExprEq : expr62
+whileDsl::ExprEq "1..1" *-- "0..1" whileDsl::ExprSimple : exprLSimple56
+whileDsl::ExprEq "1..1" *-- "0..1" whileDsl::ExprSimple : exprRSimple59
 whileDsl::EObject "0..1" --* "1..1" whileDsl::ExprSimple : expression36
 whileDsl::EObject "0..1" --* "1..1" whileDsl::Expr : expression48
 whileDsl::ExprEq "0..1" --* "1..1" whileDsl::ExprNot : expressionEq54
@@ -91,12 +91,12 @@ whileDsl::Expr "0..9999" --* "1..1" whileDsl::Exprs : expressions45
 whileDsl::ExprNot "0..9999" --* "1..1" whileDsl::ExprOr : expressionsNot52
 whileDsl::ExprAnd "1..1" *-- "0..9999" whileDsl::ExprOr : expressionsOr51
 whileDsl::Definition "0..1" --* "1..1" whileDsl::Function : functionDefinition1
-whileDsl::Input "0..1" --* "1..1" whileDsl::Definition : intput3
-whileDsl::LExpr "0..1" --* "1..1" whileDsl::ExprSimpleWithLExpr : lexpr37
+whileDsl::Definition "1..1" *-- "0..1" whileDsl::Input : intput3
+whileDsl::ExprSimpleWithLExpr "1..1" *-- "0..1" whileDsl::LExpr : lexpr37
 whileDsl::ExprSimpleWithSymbolLExpr "1..1" *-- "0..1" whileDsl::LExpr : lexpr40
-whileDsl::Output "0..1" --* "1..1" whileDsl::Definition : output7
+whileDsl::Definition "1..1" *-- "0..1" whileDsl::Output : output7
 whileDsl::Function "0..9999" --* "1..1" whileDsl::Model : program0
 whileDsl::Commands "0..1" --* "1..1" whileDsl::IfCommand : thenBody22
-whileDsl::VarsCommand "1..1" *-- "0..1" whileDsl::Exprs : values34
+whileDsl::Exprs "0..1" --* "1..1" whileDsl::VarsCommand : values34
 whileDsl::Vars "0..1" --* "1..1" whileDsl::VarsCommand : variables33
 @enduml

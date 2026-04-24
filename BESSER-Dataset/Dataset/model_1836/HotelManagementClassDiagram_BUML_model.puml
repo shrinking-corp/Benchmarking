@@ -1,0 +1,226 @@
+@startuml
+class Costable {
+}
+class DBInterface {
+}
+enum EType {
+  Cleaner
+  Manager
+  Receptionist
+}
+class Extra {
+}
+class HotelManagementClassDiagram::Addon {
+}
+class HotelManagementClassDiagram::Bill {
+  + final : bool
+  + paid : bool
+  + totalPrice : float
+  + addCostable(costable : any) : void
+}
+class HotelManagementClassDiagram::Booking {
+  + bookingId : int
+  + checkedIn : bool
+  + checkedOut : bool
+  + created : date
+  + endDate : date
+  + externalComments : str
+  + internalComments : str
+  + roomTypes : str
+  + startDate : date
+  + addAddon(addon : any) : void
+  + addDiscount(discount : any) : void
+  + addRoom(room : any) : void
+  + checkIn() : void
+  + checkOut() : str
+  + generateBill() : str
+  + pay(bill : any) : bool
+  + removeAddon(addon : any) : void
+  + removeDiscount(discount : any) : void
+  + removeRoom(room : any) : void
+}
+class HotelManagementClassDiagram::BookingController {
+  + assignRoom(room : any) : void
+  + checkIn(booking : any) : void
+  + checkOut(booking : any) : void
+  + findCustomer(ssNumber : any) : void
+  + getAllBookings() : str
+  + getAllCustomers() : str
+  + getBooking(bookingId : any) : str
+  + getCustomer(SSN : any) : str
+  + saveCustomer(customer : any) : void
+  + searchAvailableRoomTypes(fromDate : any, nbrOfAdults : any, nbrOfChildren : any, toDate : any) : str
+  + sendConfirmation(booking : any) : bool
+  + updateOrAddBooking(booking : any) : void
+  + updateOrAddCustomer(customer : any) : void
+}
+abstract class HotelManagementClassDiagram::Costable {
+  + price : float
+  + addDiscount(discount : any) : void
+  + removeDiscount(discount : any) : void
+}
+class HotelManagementClassDiagram::Creditcard {
+  + cvc : int
+  + expirationMonth : int
+  + expirationYear : int
+  + number : str
+  + owner : str
+}
+class HotelManagementClassDiagram::Customer {
+  + bonusPoints : int
+  + customerID : int
+  + miscInfo : str
+  + addBonusPoints(bonusPoints : any) : void
+}
+abstract class HotelManagementClassDiagram::DBInterface {
+  + _getAllRooms() : str
+  + findBookings(customerName : any) : str
+  + findCustomers(partOfCustomerName : any) : str
+  + getAddon(addonName : any) : str
+  + getAllAddons() : str
+  + getAllBookings() : str
+  + getAllCleaners() : str
+  + getAllCustomers() : str
+  + getAllDiscounts() : str
+  + getAllEmployees() : str
+  + getAllManagers() : str
+  + getAllReceptionists() : str
+  + getAllRoomTypes() : str
+  + getAvailableRooms(from : any, to : any, type : any) : str
+  + getAvaliableRoomTypes(from : any, to : any) : str
+  + getBooking(bookingID : any) : str
+  + getBookings(fromDate : any, toDate : any) : str
+  + getCurrentBookings() : str
+  + getCustomer(customerSSNumber : any) : str
+  + getDiscount(discountName : any) : str
+  + getEmployee(employeeSSNumber : any) : str
+  + getFutureBookings() : str
+  + getPastBookings() : str
+  + getRoom(roomNumber : any) : str
+  + getRooms(type : any) : str
+  + updateOrAddAddon(addon : any) : void
+  + updateOrAddBooking(booking : any) : void
+  + updateOrAddCustomer(customer : any) : void
+  + updateOrAddDiscount(discount : any) : void
+  + updateOrAddEmployee(employee : any) : void
+  + updateOrAddEmployeeType(type : any) : void
+  + updateOrAddExtra(extra : any) : void
+  + updateOrAddRoom(room : any) : void
+  + updateOrAddRoomType(type : any) : void
+}
+class HotelManagementClassDiagram::Discount {
+  + amount : float
+  + isPercentage : str
+  + name : str
+}
+class HotelManagementClassDiagram::Employee {
+  + employeeID : int
+  + password : str
+  + salary : float
+  + workRate : float
+  + Booking() : void
+  + Boolean() : void
+  + roomTypes() : void
+}
+class HotelManagementClassDiagram::EmployeeType {
+  + acessLevel : int
+  + type : str
+}
+class HotelManagementClassDiagram::Extra {
+  + description : str
+  + name : str
+}
+class HotelManagementClassDiagram::FakeDBContext {
+}
+class HotelManagementClassDiagram::Hotel {
+  + address : str
+  + name : str
+  + rank : float
+  + logIn(SSN : any, password : any) : str
+}
+class HotelManagementClassDiagram::Interaction1 {
+}
+class HotelManagementClassDiagram::Interaction2 {
+}
+class HotelManagementClassDiagram::Interaction3 {
+}
+class HotelManagementClassDiagram::Interaction4 {
+}
+class HotelManagementClassDiagram::Interaction5 {
+}
+class HotelManagementClassDiagram::MaintenanceController {
+  + addToQueue(room : any) : void
+  + getNextRoomToClean() : str
+  + removeFromQueue(room : any) : void
+  + setCleanedStatus(room : any, status : any) : void
+  + setRepairedStatus(repaired : any, room : any) : void
+}
+class HotelManagementClassDiagram::ManagementController {
+  + getAllAddons() : str
+  + getAllDiscounts() : str
+  + getAllEmployees() : str
+  + getAllExtras() : Extra
+  + getEmployee(SSN : any) : str
+  + updateOrAddAddon(addon : any) : void
+  + updateOrAddDiscount(discount : any) : void
+  + updateOrAddEmployee(employee : any) : void
+  + updateOrAddEmployeeType(employeeType : any) : void
+  + updateOrAddExtra(extra : any) : void
+  + updateOrAddRoom(room : any) : void
+  + updateOrAddRoomType(roomType : any) : void
+}
+abstract class HotelManagementClassDiagram::Person {
+  + SSNumber : str
+  + city : str
+  + country : str
+  + gender : str
+  + name : str
+  + phoneNumber : str
+  + postalCode : str
+  + street : str
+  + title : str
+}
+class HotelManagementClassDiagram::Room {
+  + internalComment : str
+  + maxNbrPeople : int
+  + roomNumber : int
+  + size : float
+  + type : str
+  + underCleaning : bool
+  + underRepair : bool
+}
+class Person {
+}
+enum RoomType {
+  Double
+  Family
+  Single
+  Suite
+}
+Costable <|-- HotelManagementClassDiagram::Addon
+Costable <|-- HotelManagementClassDiagram::Room
+DBInterface <|-- HotelManagementClassDiagram::FakeDBContext
+Extra <|-- HotelManagementClassDiagram::Addon
+Person <|-- HotelManagementClassDiagram::Customer
+Person <|-- HotelManagementClassDiagram::Employee
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::Interaction1 : _31
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::Interaction2 : _33
+HotelManagementClassDiagram::Interaction3 "1..1" -- "1..1" HotelManagementClassDiagram::MaintenanceController : _35
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::Interaction4 : _37
+HotelManagementClassDiagram::Booking "1..1" -- "1..1" HotelManagementClassDiagram::Interaction5 : _39
+HotelManagementClassDiagram::Addon "0..9999" -- "1..1" HotelManagementClassDiagram::Booking : addons2
+HotelManagementClassDiagram::Booking "1..1" -- "1..9999" HotelManagementClassDiagram::Room : bookedRooms4
+HotelManagementClassDiagram::BookingController "1..1" -- "1..1" HotelManagementClassDiagram::Hotel : bookingController22
+HotelManagementClassDiagram::Bill "1..1" -- "1..9999" HotelManagementClassDiagram::Costable : costables14
+HotelManagementClassDiagram::Booking "1..1" -- "1..1" HotelManagementClassDiagram::Creditcard : creditCard1
+HotelManagementClassDiagram::Bill "1..1" -- "1..1" HotelManagementClassDiagram::Customer : customer17
+HotelManagementClassDiagram::Costable "1..1" -- "1..9999" HotelManagementClassDiagram::Discount : discounts12
+HotelManagementClassDiagram::Booking "1..1" -- "1..9999" HotelManagementClassDiagram::Discount : discounts8
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::EmployeeType : employeeType0
+HotelManagementClassDiagram::Bill "1..1" -- "1..1" HotelManagementClassDiagram::Booking : finalBill10
+HotelManagementClassDiagram::Hotel "1..1" -- "1..1" HotelManagementClassDiagram::MaintenanceController : maintenanceController23
+HotelManagementClassDiagram::Hotel "1..1" -- "1..1" HotelManagementClassDiagram::ManagementController : managementController26
+HotelManagementClassDiagram::Booking "1..1" -- "1..1" HotelManagementClassDiagram::Customer : paymentMaster6
+HotelManagementClassDiagram::MaintenanceController "1..1" -- "1..9999" HotelManagementClassDiagram::Room : roomQueue20
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::Hotel : user28
+@enduml

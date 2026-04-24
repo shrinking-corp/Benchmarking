@@ -105,10 +105,10 @@ class cloudml::core::UploadCommand {
 }
 abstract class cloudml::core::WithProperties {
 }
-ArtefactPortInstance <|-- cloudml::core::ClientPortInstance
-ArtefactPortInstance <|-- cloudml::core::ServerPortInstance
 ArtefactPort <|-- cloudml::core::ClientPort
 ArtefactPort <|-- cloudml::core::ServerPort
+ArtefactPortInstance <|-- cloudml::core::ClientPortInstance
+ArtefactPortInstance <|-- cloudml::core::ServerPortInstance
 CloudMLElement <|-- cloudml::core::NamedElement
 NamedElement <|-- cloudml::core::Composite
 NamedElement <|-- cloudml::core::Property
@@ -127,19 +127,19 @@ WithProperties <|-- cloudml::core::Resource
 ArtefactInstance "0..9999" --* "1..1" cloudml::core::DeploymentModel : artefactInstances9
 Artefact "0..9999" --* "1..1" cloudml::core::DeploymentModel : artefactTypes3
 BindingInstance "0..9999" --* "1..1" cloudml::core::DeploymentModel : bindingInstances13
-cloudml::core::DeploymentModel "1..1" *-- "0..9999" Binding : bindingTypes7
-cloudml::core::Binding "1..1" -- "0..1" ClientPort : client39
+Binding "0..9999" --* "1..1" cloudml::core::DeploymentModel : bindingTypes7
+ClientPort "0..1" -- "1..1" cloudml::core::Binding : client39
 ClientPortInstance "0..1" -- "1..1" cloudml::core::BindingInstance : client52
 Resource "0..1" --* "1..1" cloudml::core::Binding : clientResource44
-cloudml::core::Node "1..1" -- "1..1" Provider : cloudProvider22
+Provider "1..1" -- "1..1" cloudml::core::Node : cloudProvider22
 ArtefactInstance "0..9999" --* "1..1" cloudml::core::Composite : containedArtefacts37
-cloudml::core::Artefact "1..1" -- "0..1" ArtefactPort : destination15
+ArtefactPort "0..1" -- "1..1" cloudml::core::Artefact : destination15
 NodeInstance "0..1" -- "1..1" cloudml::core::ArtefactInstance : destination28
 NodeInstance "0..9999" --* "1..1" cloudml::core::DeploymentModel : nodeInstances11
 Node "0..9999" --* "1..1" cloudml::core::DeploymentModel : nodeTypes5
 Property "0..9999" --* "1..1" cloudml::core::WithProperties : properties0
 ServerPort "0..9999" --* "1..1" cloudml::core::Artefact : provided18
-cloudml::core::ArtefactInstance "1..1" *-- "0..9999" ServerPortInstance : provided31
+ServerPortInstance "0..9999" --* "1..1" cloudml::core::ArtefactInstance : provided31
 Provider "0..9999" --* "1..1" cloudml::core::DeploymentModel : providers2
 ClientPort "0..9999" --* "1..1" cloudml::core::Artefact : required20
 ClientPortInstance "0..9999" --* "1..1" cloudml::core::ArtefactInstance : required33
@@ -150,6 +150,6 @@ Resource "0..1" --* "1..1" cloudml::core::Binding : serverResource47
 ArtefactPort "1..1" -- "1..1" cloudml::core::ArtefactPortInstance : type24
 Artefact "1..1" -- "1..1" cloudml::core::ArtefactInstance : type26
 Node "1..1" -- "1..1" cloudml::core::NodeInstance : type35
-cloudml::core::BindingInstance "1..1" -- "1..1" Binding : type50
+Binding "1..1" -- "1..1" cloudml::core::BindingInstance : type50
 UploadCommand "0..9999" --* "1..1" cloudml::core::Resource : uploadCommand1
 @enduml

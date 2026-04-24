@@ -45,10 +45,10 @@ Lendable <|-- library::CirculatingItem
 Person <|-- library::Borrower
 Person <|-- library::Employee
 Person <|-- library::Writer
-library::Writer "1..9999" -- "1..1" library::IncBook : authors9
+library::IncBook "1..1" -- "1..9999" library::Writer : authors9
 library::IncBook "0..9999" -- "1..1" library::Writer : books7
 library::Borrower "0..9999" -- "1..1" library::Lendable : borrowers10
-library::Library "1..1" *-- "0..9999" library::Borrower : borrowers3
+library::Borrower "0..9999" --* "1..1" library::Library : borrowers3
 library::Borrower "1..1" -- "0..9999" library::Lendable : borrowing8
 library::Employee "0..9999" --* "1..1" library::Library : employees1
 library::Item "0..9999" --* "1..1" library::Library : stock5

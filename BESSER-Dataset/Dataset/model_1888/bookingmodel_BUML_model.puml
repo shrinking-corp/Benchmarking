@@ -1,0 +1,190 @@
+@startuml
+class BookingInfo {
+}
+class CustomerInfo {
+}
+enum GuestTypes {
+  BlackListed
+  Regular
+  VIP
+}
+class IBookingProvidesForCustomer {
+}
+class IBookingProvidesForGuest {
+}
+class IBookingProvidesForHost {
+}
+enum PaymentMethod {
+  bankcard
+  cash
+  voucher
+}
+class Person {
+}
+class bookingmodel::Booking {
+  + bookingRef : str
+  + endDate : str
+  + isPayed : str
+  + nrOfGuests : str
+  + paymentMethod : str
+  + serviceNotes : str
+  + startDate : str
+  + allExtrasPayed() : str
+  + checkedInAllRooms() : str
+  + checkedInRoom(roomID : any) : str
+  + checkedOutAllRooms() : str
+  + checkedOutRoom(roomID : any) : str
+  + getExtras() : str
+  + getNrOfRooms() : str
+  + getRoomIDs() : str
+  + getRoomTypes() : str
+  + getUnPayedExtras() : str
+  + isExtraPayed(extra : any) : str
+  + removeResponsibleGuest(guestEmail : any, roomID : any) : str
+  + removeResponsibleGuestToAllRooms(guestEmail : any) : str
+  + removeServiceNotes(serviceNotes : any) : str
+  + setExtras(extras : any) : str
+  + setExtrasAsPayed(extras : any) : str
+  + setResponsibleGuest(guestEmail : any, roomID : any) : str
+  + setResponsibleGuestToAllRooms(guestEmail : any) : str
+  + setRoomIDs(roomIDs : any) : str
+  + setRoomTypes(roomTypes : any) : str
+  + setServiceNotes(services : any) : str
+}
+class bookingmodel::BookingHandler {
+  + addBooking(endDate : any, extras : any, nrOfGuests : any, roomTypes : any, services : any, startDate : any) : str
+  + editBooking(bookingRef : any, endDate : any, extras : any, nrOfGuests : any, roomTypes : any, services : any, startDate : any) : str
+  + exists(bookingRef : any) : str
+  + getBooking(roomID : any) : str
+  + isActive(bookingRef : any) : str
+  + removeBooking(bookingRef : any) : str
+}
+abstract class bookingmodel::BookingInfo {
+  + getBookingRef(customerEmail : any) : str
+  + getEndDate(bookingRef : any) : str
+  + getExtras(bookingRef : any) : str
+  + getNrOfGuests(bookingRef : any) : str
+  + getPaymentMethod(bookingRef : any) : str
+  + getRoomTypes(bookingRef : any) : str
+  + getRooms(bookingRef : any) : str
+  + getServiceNotes(bookingRef : any) : str
+  + getStartDate(bookingRef : any) : str
+}
+class bookingmodel::BookingProvides {
+  + stringToList(text : any) : str
+}
+class bookingmodel::BookingRefToBookingEntry {
+  + key : str
+}
+class bookingmodel::Customer {
+}
+class bookingmodel::CustomerEmailToBookingRefEntry {
+  + key : str
+  + value : str
+}
+abstract class bookingmodel::CustomerInfo {
+  + getCardFirstName(bookingRef : any) : str
+  + getCardLastName(bookingRef : any) : str
+  + getCcNr(bookingRef : any) : str
+  + getCcV(bookingRef : any) : str
+  + getCustomerAge(bookingRef : any) : str
+  + getCustomerEmail(bookingRef : any) : str
+  + getCustomerLastName(bookingRef : any) : str
+  + getCustomerName(bookingRef : any) : str
+  + getExpMonth(bookingRef : any) : str
+  + getExpYear(bookingRef : any) : str
+}
+class bookingmodel::ExtraToIsPayedEntry {
+  + key : str
+  + value : str
+}
+class bookingmodel::Guest {
+  + guestTypes : str
+  + roomNr : str
+}
+class bookingmodel::GuestEmailToRoomIDEntry {
+  + key : str
+  + value : int
+}
+abstract class bookingmodel::IBookingProvidesForCustomer {
+  + addExtra(bookingRef : any, extraID : any) : str
+  + book(endDate : any, extras : any, nrOfGuests : any, roomTypes : any, services : any, startDate : any) : str
+  + editBooking(bookingRef : any, endDate : any, extras : any, nrOfGuests : any, roomTypes : any, services : any, startDate : any) : str
+  + editPaymentDetails(bookingRef : any, ccNumber : any, ccv : any, customerEmail : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : str
+  + getPrice(bookingRef : any) : str
+  + payBooking(bookingRef : any) : str
+  + removeBooking(bookingRef : any) : str
+  + removeExtra(extraID : any, roomID : any) : str
+  + setPaymentDetails(bookingRef : any, ccNumber : any, ccv : any, customerEmail : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : str
+  + setPaymentMethod(bookingRef : any, method : any) : str
+  + setPersonalDetails(age : any, bookingRef : any, email : any, firstName : any, lastName : any) : str
+}
+abstract class bookingmodel::IBookingProvidesForGuest {
+  + addExtra(extraIDs : any, roomID : any) : str
+  + checkIn(bookingRef : any, guestEmail : any, roomType : any) : str
+  + checkOut(roomID : any) : str
+  + payExtra(ccNumber : any, ccv : any, expMonth : any, expYear : any, extra : any, firstName : any, lastName : any, roomID : any) : str
+  + payRoom(ccNumber : any, ccv : any, expMonth : any, expYear : any, firstName : any, lastName : any, roomID : any) : str
+  + removeExtra(extraIDs : any, roomID : any) : str
+}
+abstract class bookingmodel::IBookingProvidesForHost {
+  + addServiceNotes(roomID : any, serviceNote : any) : str
+  + existBooking(bookingRef : any) : str
+  + getExistingBookings() : str
+  + getResponsibleGuest(roomID : any) : str
+  + getRoomID(guestEmail : any) : str
+  + isBookingPayed(bookingRef : any) : str
+  + isCheckedIn(roomID : any) : str
+  + isCheckedOut(roomID : any) : str
+  + isExtraPayed(roomID : any) : str
+  + isRoomPayed(roomID : any) : str
+  + removeServiceNotes(roomID : any, serviceNote : any) : str
+}
+class bookingmodel::PaymentDetails {
+  + ccNr : str
+  + ccV : str
+  + expMonth : str
+  + expYear : str
+  + firstName : str
+  + lastName : str
+}
+abstract class bookingmodel::Person {
+  + Address : str
+  + age : str
+  + email : str
+  + firstName : str
+  + lastName : str
+  + telephoneNr : str
+}
+class bookingmodel::RoomIDToBookingRefEntry {
+  + key : str
+  + value : str
+}
+class bookingmodel::RoomIDToRoomTypeEntry {
+  + key : str
+  + value : str
+}
+class bookingmodel::RoomToGuestIDEntry {
+  + key : str
+  + value : str
+}
+BookingInfo <|-- bookingmodel::IBookingProvidesForCustomer
+CustomerInfo <|-- bookingmodel::IBookingProvidesForCustomer
+IBookingProvidesForCustomer <|-- bookingmodel::BookingProvides
+IBookingProvidesForGuest <|-- bookingmodel::BookingProvides
+IBookingProvidesForHost <|-- bookingmodel::BookingProvides
+Person <|-- bookingmodel::Customer
+Person <|-- bookingmodel::Guest
+bookingmodel::BookingHandler "1..1" --* "1..1" bookingmodel::BookingProvides : bookingHandler21
+bookingmodel::BookingHandler "1..1" *-- "0..9999" bookingmodel::BookingRefToBookingEntry : bookingsMap13
+bookingmodel::Booking "1..1" *-- "1..1" bookingmodel::Customer : customer1
+bookingmodel::BookingHandler "1..1" *-- "0..9999" bookingmodel::CustomerEmailToBookingRefEntry : customerEmailToBookingRefEntry17
+bookingmodel::Booking "1..1" *-- "0..9999" bookingmodel::ExtraToIsPayedEntry : extraToIsPayedMap9
+bookingmodel::BookingHandler "1..1" *-- "0..9999" bookingmodel::GuestEmailToRoomIDEntry : guestEmailToRoomIDEntry19
+bookingmodel::Booking "1..1" *-- "1..9999" bookingmodel::Guest : guestList3
+bookingmodel::Customer "1..1" *-- "1..1" bookingmodel::PaymentDetails : paymentDetails11
+bookingmodel::BookingHandler "1..1" *-- "0..9999" bookingmodel::RoomIDToBookingRefEntry : roomIDToBookingRefMap15
+bookingmodel::Booking "1..1" *-- "0..9999" bookingmodel::RoomToGuestIDEntry : roomIDToGuestMap5
+bookingmodel::Booking "1..1" *-- "0..9999" bookingmodel::RoomIDToRoomTypeEntry : roomIDToRoomTypeMap7
+bookingmodel::Booking "1..1" -- "1..1" bookingmodel::BookingRefToBookingEntry : value0
+@enduml

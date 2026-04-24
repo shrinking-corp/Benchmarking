@@ -415,16 +415,16 @@ class uma::WorkProductDescriptor {
 }
 class uma::WorkProductType {
 }
-ActivityDescription <|-- uma::ProcessDescription
 Activity <|-- uma::Iteration
 Activity <|-- uma::Phase
 Activity <|-- uma::Process
-BreakdownElementDescription <|-- uma::ActivityDescription
-BreakdownElementDescription <|-- uma::DescriptorDescription
+ActivityDescription <|-- uma::ProcessDescription
 BreakdownElement <|-- uma::Descriptor
 BreakdownElement <|-- uma::ProcessComponentInterface
 BreakdownElement <|-- uma::TeamProfile
 BreakdownElement <|-- uma::WorkBreakdownElement
+BreakdownElementDescription <|-- uma::ActivityDescription
+BreakdownElementDescription <|-- uma::DescriptorDescription
 Classifier <|-- uma::ApplicableMetaClassInfo
 Classifier <|-- uma::DescribableElement
 Concept <|-- uma::Whitepaper
@@ -505,21 +505,21 @@ MethodUnit <|-- uma::ProcessComponent
 NamedElement <|-- uma::Namespace
 NamedElement <|-- uma::PackageableElement
 Namespace <|-- uma::Package
+Package <|-- uma::MethodLibrary
+Package <|-- uma::MethodPackage
+Package <|-- uma::MethodPlugin
 PackageableElement <|-- uma::MethodElement
 PackageableElement <|-- uma::MethodElementProperty
 PackageableElement <|-- uma::Package
 PackageableElement <|-- uma::Type
-Package <|-- uma::MethodLibrary
-Package <|-- uma::MethodPackage
-Package <|-- uma::MethodPlugin
+Process <|-- uma::CapabilityPattern
+Process <|-- uma::DeliveryProcess
+Process <|-- uma::ProcessPlanningTemplate
 ProcessDescription <|-- uma::DeliveryProcessDescription
 ProcessElement <|-- uma::BreakdownElement
 ProcessElement <|-- uma::PlanningData
 ProcessElement <|-- uma::WorkOrder
 ProcessPackage <|-- uma::ProcessComponent
-Process <|-- uma::CapabilityPattern
-Process <|-- uma::DeliveryProcess
-Process <|-- uma::ProcessPlanningTemplate
 RoleDescriptor <|-- uma::CompositeRole
 Section <|-- uma::Step
 SemanticModelBridge <|-- uma::CoreSemanticModelBridge
@@ -535,163 +535,163 @@ WorkBreakdownElement <|-- uma::TaskDescriptor
 WorkDefinition <|-- uma::Activity
 WorkDefinition <|-- uma::Step
 WorkDefinition <|-- uma::Task
-WorkProductDescription <|-- uma::ArtifactDescription
-WorkProductDescription <|-- uma::DeliverableDescription
 WorkProduct <|-- uma::Artifact
 WorkProduct <|-- uma::Deliverable
 WorkProduct <|-- uma::Outcome
+WorkProductDescription <|-- uma::ArtifactDescription
+WorkProductDescription <|-- uma::DeliverableDescription
 uma::Role "0..1" -- "1..1" uma::RoleDescriptor : Role184
 uma::Task "0..1" -- "1..1" uma::TaskDescriptor : Task196
 uma::WorkProduct "0..1" -- "1..1" uma::WorkProductDescriptor : WorkProduct160
 uma::ProcessComponent "1..1" -- "1..1" uma::ProcessComponentDescriptor : _processComponent289
 uma::Activity "0..9999" -- "1..1" uma::Practice : activityReferences286
-uma::MethodConfiguration "1..1" -- "0..9999" uma::ContentCategory : addedCategory270
-uma::TaskDescriptor "1..1" -- "0..9999" uma::RoleDescriptor : additionallyPerformedBy198
+uma::ContentCategory "0..9999" -- "1..1" uma::MethodConfiguration : addedCategory270
+uma::RoleDescriptor "0..9999" -- "1..1" uma::TaskDescriptor : additionallyPerformedBy198
 uma::Role "0..9999" -- "1..1" uma::Task : additionallyPerformedBy61
 uma::Role "0..9999" -- "1..1" uma::TaskDescriptor : additionallyPerformedByExclude225
-uma::Role "0..9999" -- "1..1" uma::CompositeRole : aggregatedRoles240
+uma::CompositeRole "1..1" -- "0..9999" uma::Role : aggregatedRoles240
 uma::GraphConnector "2..2" -- "1..1" uma::GraphEdge : anchor329
 uma::GraphConnector "0..9999" --* "1..1" uma::GraphElement : anchorage309
 uma::ApplicableMetaClassInfo "0..9999" --* "1..1" uma::Kind : applicableMetaClassInfo5
-uma::ReusableAsset "0..9999" -- "1..1" uma::ContentElement : assets16
+uma::ContentElement "1..1" -- "0..9999" uma::ReusableAsset : assets16
 uma::RoleDescriptor "0..9999" -- "1..1" uma::TaskDescriptor : assistedBy201
 uma::MethodConfiguration "0..9999" -- "1..1" uma::MethodConfiguration : baseConfigurations265
-uma::ProcessPlanningTemplate "1..1" -- "0..9999" uma::Process : basedOnProcesses279
+uma::Process "0..9999" -- "1..1" uma::ProcessPlanningTemplate : basedOnProcesses279
 uma::MethodPlugin "0..9999" -- "1..1" uma::MethodPlugin : bases277
-uma::BreakdownElement "0..9999" -- "1..1" uma::Activity : breakdownElements99
-uma::DescribableElement "0..9999" -- "1..1" uma::CustomCategory : categorizedElements148
-uma::Point "1..1" -- "1..1" uma::Ellipse : center346
-uma::ContentElement "1..1" -- "0..9999" uma::Checklist : checklists10
-uma::Checklist "0..9999" -- "1..1" uma::BreakdownElement : checklists111
+uma::Activity "1..1" -- "0..9999" uma::BreakdownElement : breakdownElements99
+uma::CustomCategory "1..1" -- "0..9999" uma::DescribableElement : categorizedElements148
+uma::Ellipse "1..1" -- "1..1" uma::Point : center346
+uma::Checklist "0..9999" -- "1..1" uma::ContentElement : checklists10
+uma::BreakdownElement "1..1" -- "0..9999" uma::Checklist : checklists111
 uma::MethodPackage "0..9999" --* "1..1" uma::MethodPackage : childPackages155
-uma::SupportingMaterial "0..9999" -- "1..1" uma::DeliveryProcess : communicationsMaterials244
+uma::DeliveryProcess "1..1" -- "0..9999" uma::SupportingMaterial : communicationsMaterials244
 uma::BreakdownElement "1..1" -- "0..9999" uma::Concept : concepts114
 uma::Concept "0..9999" -- "1..1" uma::ContentElement : conceptsAndPapers8
 uma::DiagramElement "0..9999" --* "1..1" uma::GraphElement : contained304
-uma::Artifact "0..9999" --* "1..1" uma::Artifact : containedArtifacts36
-uma::GraphElement "0..1" -- "1..1" uma::DiagramElement : container314
-uma::Artifact "0..1" -- "1..1" uma::Artifact : containerArtifact34
-uma::ContentPackage "1..1" *-- "0..9999" uma::ContentElement : contentElements157
+uma::Artifact "1..1" *-- "0..9999" uma::Artifact : containedArtifacts36
+uma::DiagramElement "1..1" -- "0..1" uma::GraphElement : container314
+uma::Artifact "1..1" -- "0..1" uma::Artifact : containerArtifact34
+uma::ContentElement "0..9999" --* "1..1" uma::ContentPackage : contentElements157
 uma::ContentElement "0..9999" -- "1..1" uma::Practice : contentReferences283
-uma::SupportingMaterial "0..1" -- "1..1" uma::MethodUnit : copyrightStatement23
-uma::Process "1..1" -- "1..1" uma::MethodConfiguration : defaultContext248
+uma::MethodUnit "1..1" -- "0..1" uma::SupportingMaterial : copyrightStatement23
+uma::MethodConfiguration "1..1" -- "1..1" uma::Process : defaultContext248
 uma::ContentCategory "1..1" -- "1..1" uma::MethodConfiguration : defaultView261
 uma::WorkProductDescriptor "0..9999" -- "1..1" uma::WorkProductDescriptor : deliverableParts169
 uma::WorkProduct "0..9999" -- "1..1" uma::WorkProductDescriptor : deliverablePartsExclude171
-uma::WorkProduct "0..9999" -- "1..1" uma::Deliverable : deliveredWorkProducts47
+uma::Deliverable "1..1" -- "0..9999" uma::WorkProduct : deliveredWorkProducts47
 uma::DeliveryProcess "0..9999" -- "1..1" uma::ProcessFamily : deliveryProcesses348
 uma::Diagram "1..1" -- "1..1" uma::DiagramLink : diagram321
 uma::Diagram "0..1" -- "1..1" uma::SemanticModelBridge : diagram331
-uma::DiagramLink "0..9999" -- "1..1" uma::Diagram : diagramLink298
+uma::Diagram "1..1" -- "0..9999" uma::DiagramLink : diagramLink298
 uma::Diagram "0..9999" --* "1..1" uma::ProcessPackage : diagrams296
 uma::Discipline "0..9999" -- "1..1" uma::DisciplineGrouping : disciplines90
-uma::SupportingMaterial "0..9999" -- "1..1" uma::DeliveryProcess : educationMaterials242
+uma::DeliveryProcess "1..1" -- "0..9999" uma::SupportingMaterial : educationMaterials242
 uma::MethodElement "1..1" -- "1..1" uma::UMASemanticModelBridge : element341
 uma::CoreSemanticModelBridge "1..1" -- "1..1" uma::Element : element343
 uma::EstimationConsiderations "0..9999" -- "1..1" uma::WorkProduct : estimationConsiderations43
-uma::Task "1..1" -- "0..9999" uma::EstimationConsiderations : estimationConsiderations72
-uma::EstimationConsiderations "0..9999" -- "1..1" uma::BreakdownElement : estimationconsiderations135
-uma::Example "0..9999" -- "1..1" uma::BreakdownElement : examples117
-uma::Example "0..9999" -- "1..1" uma::ContentElement : examples14
-uma::WorkProductDescriptor "0..9999" -- "1..1" uma::TaskDescriptor : externalInput204
+uma::EstimationConsiderations "0..9999" -- "1..1" uma::Task : estimationConsiderations72
+uma::BreakdownElement "1..1" -- "0..9999" uma::EstimationConsiderations : estimationconsiderations135
+uma::BreakdownElement "1..1" -- "0..9999" uma::Example : examples117
+uma::ContentElement "1..1" -- "0..9999" uma::Example : examples14
+uma::TaskDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : externalInput204
 uma::FulfillableElement "1..1" -- "0..9999" uma::FulfillableElement : fulfills46
-uma::GraphEdge "0..9999" -- "1..1" uma::GraphConnector : graphEdge324
-uma::GraphElement "1..1" -- "1..1" uma::DiagramLink : graphElement322
+uma::GraphConnector "1..1" -- "0..9999" uma::GraphEdge : graphEdge324
+uma::DiagramLink "1..1" -- "1..1" uma::GraphElement : graphElement322
 uma::GraphConnector "1..1" -- "1..1" uma::GraphElement : graphElement325
-uma::SemanticModelBridge "1..1" -- "0..1" uma::GraphElement : graphElement333
+uma::GraphElement "0..1" -- "1..1" uma::SemanticModelBridge : graphElement333
 uma::Descriptor "1..1" -- "0..9999" uma::Guidance : guidanceAdditional175
 uma::Descriptor "1..1" -- "0..9999" uma::Guidance : guidanceExclude174
-uma::Guideline "0..9999" -- "1..1" uma::ContentElement : guidelines12
-uma::Guideline "0..9999" -- "1..1" uma::BreakdownElement : guidelines120
+uma::ContentElement "1..1" -- "0..9999" uma::Guideline : guidelines12
+uma::BreakdownElement "1..1" -- "0..9999" uma::Guideline : guidelines120
 uma::WorkProductDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : impactedBy164
-uma::WorkProductDescriptor "0..9999" -- "1..1" uma::WorkProductDescriptor : impacts166
+uma::WorkProductDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : impacts166
 uma::CapabilityPattern "0..9999" -- "1..1" uma::Process : includesPatterns247
 uma::ProcessComponentInterface "1..1" *-- "0..9999" uma::WorkProductDescriptor : interfaceIO338
-uma::TaskDescriptor "0..9999" --* "1..1" uma::ProcessComponentInterface : interfaceSpecifications335
-uma::ProcessComponentInterface "1..9999" -- "1..1" uma::ProcessComponent : interfaces290
+uma::ProcessComponentInterface "1..1" *-- "0..9999" uma::TaskDescriptor : interfaceSpecifications335
+uma::ProcessComponent "1..1" -- "1..9999" uma::ProcessComponentInterface : interfaces290
 uma::Kind "0..9999" -- "1..1" uma::MethodElement : kind3
 uma::DiagramLink "0..9999" --* "1..1" uma::GraphElement : link307
-uma::WorkOrder "0..9999" -- "1..1" uma::WorkBreakdownElement : linkToPredecessor102
-uma::WorkProductDescriptor "0..9999" -- "1..1" uma::TaskDescriptor : mandatoryInput207
+uma::WorkBreakdownElement "1..1" -- "0..9999" uma::WorkOrder : linkToPredecessor102
+uma::TaskDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : mandatoryInput207
 uma::Task "1..1" -- "0..9999" uma::WorkProduct : mandatoryInput55
-uma::WorkProduct "0..9999" -- "1..1" uma::TaskDescriptor : mandatoryInputExclude228
+uma::TaskDescriptor "1..1" -- "0..9999" uma::WorkProduct : mandatoryInputExclude228
 uma::MethodElement "1..1" *-- "0..9999" uma::MethodElementProperty : methodElementProperty1
-uma::MethodPackage "1..9999" -- "1..1" uma::MethodConfiguration : methodPackageSelection255
+uma::MethodConfiguration "1..1" -- "1..9999" uma::MethodPackage : methodPackageSelection255
 uma::MethodPackage "1..9999" --* "1..1" uma::MethodPlugin : methodPackages273
-uma::MethodPlugin "1..9999" -- "1..1" uma::MethodConfiguration : methodPluginSelection253
-uma::MethodPlugin "0..9999" --* "1..1" uma::MethodLibrary : methodPlugins350
+uma::MethodConfiguration "1..1" -- "1..9999" uma::MethodPlugin : methodPluginSelection253
+uma::MethodLibrary "1..1" *-- "0..9999" uma::MethodPlugin : methodPlugins350
 uma::RoleDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : modifies187
-uma::WorkProduct "0..9999" -- "1..1" uma::Role : modifies75
+uma::Role "1..1" -- "0..9999" uma::WorkProduct : modifies75
 uma::Diagram "1..1" *-- "1..1" uma::SemanticModelBridge : namespace299
 uma::TaskDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : optionalInput210
-uma::WorkProduct "0..9999" -- "1..1" uma::Task : optionalInput64
+uma::Task "1..1" -- "0..9999" uma::WorkProduct : optionalInput64
 uma::TaskDescriptor "1..1" -- "0..9999" uma::WorkProduct : optionalInputExclude231
-uma::WorkProductDescriptor "0..9999" -- "1..1" uma::TaskDescriptor : output213
-uma::WorkProduct "0..9999" -- "1..1" uma::Task : output58
-uma::WorkProduct "0..9999" -- "1..1" uma::TaskDescriptor : outputExclude234
+uma::TaskDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : output213
+uma::Task "1..1" -- "0..9999" uma::WorkProduct : output58
+uma::TaskDescriptor "1..1" -- "0..9999" uma::WorkProduct : outputExclude234
 uma::Constraint "0..9999" --* "1..1" uma::MethodElement : ownedRules0
 uma::Role "0..9999" -- "1..1" uma::Task : performedBy54
 uma::RoleDescriptor "0..9999" -- "1..1" uma::TaskDescriptor : performedPrimarilyBy216
-uma::TaskDescriptor "1..1" -- "0..9999" uma::Role : performedPrimarilyByExcluded222
+uma::Role "0..9999" -- "1..1" uma::TaskDescriptor : performedPrimarilyByExcluded222
 uma::BreakdownElement "1..1" *-- "0..1" uma::PlanningData : planningData108
-uma::Point "1..1" -- "1..1" uma::GraphElement : position305
+uma::GraphElement "1..1" -- "1..1" uma::Point : position305
 uma::Constraint "0..1" --* "1..1" uma::WorkDefinition : postcondition51
 uma::Constraint "0..1" --* "1..1" uma::WorkDefinition : precondition49
 uma::WorkBreakdownElement "1..1" -- "1..1" uma::WorkOrder : pred141
 uma::Section "0..1" -- "1..1" uma::Section : predecessor29
 uma::MethodConfiguration "0..9999" --* "1..1" uma::MethodLibrary : predefinedConfigurations352
 uma::ContentDescription "0..1" --* "1..1" uma::DescribableElement : presentation20
-uma::BreakdownElement "0..1" -- "1..1" uma::BreakdownElement : presentedAfter104
+uma::BreakdownElement "1..1" -- "0..1" uma::BreakdownElement : presentedAfter104
 uma::BreakdownElement "0..1" -- "1..1" uma::BreakdownElement : presentedBefore106
-uma::ProcessComponent "1..1" *-- "1..1" uma::Process : process292
+uma::Process "1..1" --* "1..1" uma::ProcessComponent : process292
 uma::ProcessElement "0..9999" --* "1..1" uma::ProcessPackage : processElements295
-uma::MethodConfiguration "1..1" -- "0..9999" uma::ContentCategory : processViews258
-uma::Property "0..9999" --* "1..1" uma::DiagramElement : property316
+uma::ContentCategory "0..9999" -- "1..1" uma::MethodConfiguration : processViews258
+uma::DiagramElement "1..1" *-- "0..9999" uma::Property : property316
 uma::DiagramElement "1..1" -- "0..9999" uma::Reference : reference315
 uma::Activity "0..9999" -- "1..1" uma::Discipline : referenceWorkflows97
 uma::DiagramElement "1..1" -- "1..1" uma::Reference : referenced317
-uma::Report "0..9999" -- "1..1" uma::BreakdownElement : reports132
-uma::WorkProduct "1..1" -- "0..9999" uma::Report : reports38
-uma::WorkProductDescriptor "0..9999" -- "1..1" uma::Milestone : requiredResults159
-uma::WorkProductDescriptor "0..9999" -- "1..1" uma::RoleDescriptor : responsibleFor190
-uma::WorkProduct "0..9999" -- "1..1" uma::Role : responsibleFor78
-uma::WorkProduct "0..9999" -- "1..1" uma::RoleDescriptor : responsibleForExclude193
-uma::ReusableAsset "0..9999" -- "1..1" uma::BreakdownElement : reusableAssets123
-uma::MethodPackage "0..9999" -- "1..1" uma::MethodPackage : reusedPackages153
-uma::Roadmap "0..9999" -- "1..1" uma::Activity : roadmaps100
+uma::BreakdownElement "1..1" -- "0..9999" uma::Report : reports132
+uma::Report "0..9999" -- "1..1" uma::WorkProduct : reports38
+uma::Milestone "1..1" -- "0..9999" uma::WorkProductDescriptor : requiredResults159
+uma::RoleDescriptor "1..1" -- "0..9999" uma::WorkProductDescriptor : responsibleFor190
+uma::Role "1..1" -- "0..9999" uma::WorkProduct : responsibleFor78
+uma::RoleDescriptor "1..1" -- "0..9999" uma::WorkProduct : responsibleForExclude193
+uma::BreakdownElement "1..1" -- "0..9999" uma::ReusableAsset : reusableAssets123
+uma::MethodPackage "1..1" -- "0..9999" uma::MethodPackage : reusedPackages153
+uma::Activity "1..1" -- "0..9999" uma::Roadmap : roadmaps100
 uma::RoleSet "0..9999" -- "1..1" uma::RoleSetGrouping : roleSets146
-uma::RoleSet "1..1" -- "0..9999" uma::Role : roles81
-uma::Section "0..9999" --* "1..1" uma::ContentDescription : sections21
+uma::Role "0..9999" -- "1..1" uma::RoleSet : roles81
+uma::ContentDescription "1..1" *-- "0..9999" uma::Section : sections21
 uma::Section "0..9999" -- "1..1" uma::TaskDescriptor : selectedSteps219
 uma::Section "0..9999" -- "1..1" uma::TaskDescriptor : selectedStepsExclude237
 uma::GraphElement "1..1" *-- "1..1" uma::SemanticModelBridge : semanticModel311
 uma::Dimension "1..1" -- "1..1" uma::GraphNode : size303
 uma::Step "0..9999" -- "1..1" uma::Task : steps67
 uma::ContentCategory "0..9999" -- "1..1" uma::CustomCategory : subCategories150
-uma::Practice "0..9999" --* "1..1" uma::Practice : subPractices282
-uma::Section "1..1" *-- "0..9999" uma::Section : subSections26
-uma::TeamProfile "0..9999" -- "1..1" uma::TeamProfile : subTeam182
-uma::Discipline "1..1" *-- "0..9999" uma::Discipline : subdiscipline95
+uma::Practice "1..1" *-- "0..9999" uma::Practice : subPractices282
+uma::Section "0..9999" --* "1..1" uma::Section : subSections26
+uma::TeamProfile "1..1" -- "0..9999" uma::TeamProfile : subTeam182
+uma::Discipline "0..9999" --* "1..1" uma::Discipline : subdiscipline95
 uma::Domain "0..9999" --* "1..1" uma::Domain : subdomains86
 uma::ContentCategory "0..9999" -- "1..1" uma::MethodConfiguration : subtractedCategory267
 uma::Activity "1..1" -- "1..1" uma::BreakdownElement : superActivities110
 uma::TeamProfile "1..1" -- "1..1" uma::TeamProfile : superTeam180
 uma::BreakdownElement "1..1" -- "0..9999" uma::SupportingMaterial : supportingMaterials126
 uma::ContentElement "1..1" -- "0..9999" uma::SupportingMaterial : supportingMaterials7
-uma::Task "0..9999" -- "1..1" uma::Discipline : tasks91
+uma::Discipline "1..1" -- "0..9999" uma::Task : tasks91
 uma::RoleDescriptor "0..9999" -- "1..1" uma::TeamProfile : teamRoles178
-uma::Template "0..9999" -- "1..1" uma::BreakdownElement : templates129
+uma::BreakdownElement "1..1" -- "0..9999" uma::Template : templates129
 uma::Template "0..9999" -- "1..1" uma::WorkProduct : templates39
 uma::ContentElement "1..1" -- "0..9999" uma::TermDefinition : termdefinition18
-uma::ToolMentor "0..9999" -- "1..1" uma::Tool : toolMentors144
+uma::Tool "1..1" -- "0..9999" uma::ToolMentor : toolMentors144
 uma::ToolMentor "0..9999" -- "1..1" uma::WorkProduct : toolMentors41
-uma::ToolMentor "0..9999" -- "1..1" uma::Task : toolMentors69
-uma::ToolMentor "0..9999" -- "1..1" uma::BreakdownElement : toolmentor138
+uma::Task "1..1" -- "0..9999" uma::ToolMentor : toolMentors69
+uma::BreakdownElement "1..1" -- "0..9999" uma::ToolMentor : toolmentor138
 uma::MethodConfiguration "0..9999" -- "1..1" uma::Process : validContext250
 uma::VariabilityElement "1..1" -- "1..1" uma::VariabilityElement : variabilityBasedOnElement32
-uma::Point "1..1" -- "1..1" uma::Diagram : viewpoint301
-uma::Point "1..1" -- "1..1" uma::DiagramLink : viewport319
-uma::Point "2..9999" --* "1..1" uma::GraphEdge : waypoints327
+uma::Diagram "1..1" -- "1..1" uma::Point : viewpoint301
+uma::DiagramLink "1..1" -- "1..1" uma::Point : viewport319
+uma::GraphEdge "1..1" *-- "2..9999" uma::Point : waypoints327
 uma::Point "2..9999" --* "1..1" uma::Polyline : waypoints344
 uma::Domain "1..1" -- "0..9999" uma::WorkProduct : workProducts83
 uma::WorkProduct "0..9999" -- "1..1" uma::WorkProductType : workProducts88

@@ -1,0 +1,78 @@
+@startuml
+class Arrow {
+}
+class Category {
+}
+class NamedElement {
+}
+enum Scale {
+  four
+  nothing
+  one
+  three
+  two
+}
+class SourceNode {
+}
+class TargetNode {
+}
+abstract class relationpattern::Arrow {
+  + validate() : bool
+}
+abstract class relationpattern::Category {
+  + nom : str
+  + affectation(cible : any, source : any) : Arrow
+  + affectationInterval(target : any) : SourceNode
+  + compare(n1 : any, n2 : any) : int
+}
+class relationpattern::NamedElement {
+  + name : str
+}
+class relationpattern::RelatedTo {
+  + validate() : bool
+}
+abstract class relationpattern::SourceNode {
+  + compare(noeud : any) : int
+  + pred() : SourceNode
+  + succ() : SourceNode
+}
+abstract class relationpattern::TargetNode {
+  + compare(noeud : any) : int
+  + pred() : TargetNode
+  + succ() : TargetNode
+}
+class relationpattern::ThingA {
+  + since : date
+  + compare(personne : any) : int
+  + pred() : str
+  + succ() : str
+}
+class relationpattern::ThingB {
+  + step : str
+  + compare(role : any) : int
+  + pred() : str
+  + succ() : str
+}
+class relationpattern::World {
+  + affectation(personne : any, role : any) : str
+  + affectationInterval(thingb : any) : str
+  + compare(personne1 : any, personne2 : any) : int
+}
+Arrow <|-- relationpattern::RelatedTo
+Category <|-- relationpattern::World
+NamedElement <|-- relationpattern::RelatedTo
+NamedElement <|-- relationpattern::ThingA
+NamedElement <|-- relationpattern::ThingB
+SourceNode <|-- relationpattern::ThingA
+TargetNode <|-- relationpattern::ThingB
+relationpattern::Arrow "1..1" -- "0..1" relationpattern::TargetNode : cible12
+relationpattern::Arrow "0..9999" -- "1..1" relationpattern::Category : fleches16
+relationpattern::RelatedTo "0..9999" --* "1..1" relationpattern::World : relations8
+relationpattern::Arrow "1..1" -- "0..1" relationpattern::SourceNode : source11
+relationpattern::Category "1..1" -- "0..9999" relationpattern::SourceNode : sources14
+relationpattern::Category "1..1" -- "0..9999" relationpattern::TargetNode : targets19
+relationpattern::RelatedTo "1..1" -- "0..1" relationpattern::ThingA : thingA0
+relationpattern::RelatedTo "1..1" -- "0..1" relationpattern::ThingB : thingB1
+relationpattern::ThingA "0..9999" --* "1..1" relationpattern::World : thingsa3
+relationpattern::ThingB "0..9999" --* "1..1" relationpattern::World : thingsb5
+@enduml

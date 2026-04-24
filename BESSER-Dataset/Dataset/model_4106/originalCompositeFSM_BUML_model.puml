@@ -1,0 +1,36 @@
+@startuml
+class AbstractState {
+}
+class NamedElement {
+}
+enum PseudostateKind {
+  initial
+}
+abstract class compositestates::AbstractState {
+}
+abstract class compositestates::NamedElement {
+  + name : str
+}
+class compositestates::Pseudostate {
+  + kind : str
+}
+class compositestates::Region {
+  + initRegion(context : any) : void
+}
+class compositestates::State {
+  + evalState(context : any) : void
+}
+class compositestates::Transition {
+}
+AbstractState <|-- compositestates::Pseudostate
+AbstractState <|-- compositestates::State
+NamedElement <|-- compositestates::Region
+compositestates::AbstractState "1..1" -- "0..9999" compositestates::Transition : incoming8
+compositestates::AbstractState "1..1" -- "0..9999" compositestates::Transition : outgoing11
+compositestates::Region "0..9999" --* "1..1" compositestates::State : ownedRegions5
+compositestates::AbstractState "1..1" -- "1..1" compositestates::Region : ownerRegion14
+compositestates::Region "1..1" -- "0..1" compositestates::State : ownerState2
+compositestates::AbstractState "1..1" -- "1..1" compositestates::Transition : source17
+compositestates::AbstractState "0..9999" --* "1..1" compositestates::Region : subvertex0
+compositestates::AbstractState "1..1" -- "1..1" compositestates::Transition : target20
+@enduml

@@ -98,9 +98,9 @@ Action <|-- mindstorms::Grab
 Action <|-- mindstorms::Release
 Action <|-- mindstorms::ReturnToBase
 Action <|-- mindstorms::Rotate
+Condition <|-- mindstorms::Sensor
 ConditionalFlow <|-- mindstorms::If
 ConditionalFlow <|-- mindstorms::While
-Condition <|-- mindstorms::Sensor
 Flow <|-- mindstorms::Choregraphy
 Flow <|-- mindstorms::ConditionalFlow
 Instruction <|-- mindstorms::Action
@@ -110,10 +110,10 @@ Sensor <|-- mindstorms::ColorSensor
 Sensor <|-- mindstorms::TouchSensor
 Sensor <|-- mindstorms::UltrasonicSensor
 mindstorms::Choregraphy "0..1" -- "1..1" mindstorms::Reuse : choregraphy9
-mindstorms::ConditionalFlow "1..1" *-- "0..1" mindstorms::Condition : condition10
-mindstorms::If "0..1" --* "1..1" mindstorms::If : elsif12
-mindstorms::Instruction "0..1" -- "1..1" mindstorms::Flow : first5
-mindstorms::Instruction "0..9999" --* "1..1" mindstorms::Flow : instructions6
-mindstorms::Instruction "0..1" -- "1..1" mindstorms::Instruction : next1
-mindstorms::Instruction "0..1" -- "1..1" mindstorms::Instruction : previous3
+mindstorms::Condition "0..1" --* "1..1" mindstorms::ConditionalFlow : condition10
+mindstorms::If "1..1" *-- "0..1" mindstorms::If : elsif12
+mindstorms::Flow "1..1" -- "0..1" mindstorms::Instruction : first5
+mindstorms::Flow "1..1" *-- "0..9999" mindstorms::Instruction : instructions6
+mindstorms::Instruction "1..1" -- "0..1" mindstorms::Instruction : next1
+mindstorms::Instruction "1..1" -- "0..1" mindstorms::Instruction : previous3
 @enduml

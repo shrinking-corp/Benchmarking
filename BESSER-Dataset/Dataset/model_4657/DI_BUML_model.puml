@@ -1,0 +1,62 @@
+@startuml
+class DiagramElement {
+}
+class Edge {
+}
+class Node {
+}
+class Shape {
+}
+class di::Bounds {
+}
+abstract class di::Diagram {
+  + documentation : str
+  + name : str
+  + resolution : float
+}
+abstract class di::DiagramElement {
+}
+class di::EObject {
+}
+abstract class di::Edge {
+}
+abstract class di::Label {
+}
+abstract class di::LabeledEdge {
+}
+abstract class di::LabeledShape {
+}
+abstract class di::Node {
+}
+abstract class di::Plane {
+  + plane_element_type(context : any, diagnostics : any) : bool
+}
+class di::Point {
+}
+abstract class di::Shape {
+}
+abstract class di::Style {
+}
+DiagramElement <|-- di::Edge
+DiagramElement <|-- di::Node
+Edge <|-- di::LabeledEdge
+Node <|-- di::Label
+Node <|-- di::Plane
+Node <|-- di::Shape
+Shape <|-- di::LabeledShape
+di::Bounds "1..1" --* "1..1" di::Shape : bounds20
+di::Bounds "0..1" --* "1..1" di::Label : bounds22
+di::DiagramElement "1..1" -- "0..1" di::EObject : modelElement6
+di::DiagramElement "1..1" -- "0..9999" di::DiagramElement : ownedElement4
+di::Label "0..9999" -- "1..1" di::LabeledEdge : ownedLabel21
+di::Label "0..9999" -- "1..1" di::LabeledShape : ownedLabel25
+di::Diagram "1..1" -- "0..9999" di::Style : ownedStyle9
+di::Diagram "0..1" -- "1..1" di::DiagramElement : owningDiagram0
+di::DiagramElement "1..1" -- "0..1" di::DiagramElement : owningElement2
+di::DiagramElement "0..9999" --* "1..1" di::Plane : planeElement27
+di::Diagram "1..1" -- "1..1" di::DiagramElement : rootElement11
+di::DiagramElement "0..1" -- "1..1" di::Edge : source13
+di::DiagramElement "1..1" -- "0..1" di::Style : style7
+di::DiagramElement "0..1" -- "1..1" di::Edge : target15
+di::Edge "1..1" *-- "2..9999" di::Point : waypoint18
+@enduml

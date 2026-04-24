@@ -68,13 +68,13 @@ NamedElement <|-- model::OzobotProgram
 NamedElement <|-- model::Transition
 model::Block "1..1" --* "1..1" model::OzobotProgram : block0
 model::Block "1..1" --* "1..1" model::Repeat : block11
-model::Command "0..9999" --* "1..1" model::Block : commands15
-model::OzobotProgram "1..1" -- "1..1" model::Command : current1
+model::Block "1..1" *-- "0..9999" model::Command : commands15
+model::Command "1..1" -- "1..1" model::OzobotProgram : current1
 model::Command "0..1" -- "1..1" model::OzobotProgram : currentCommand3
 model::Command "1..1" -- "0..1" model::Transition : incoming8
-model::Transition "0..1" -- "1..1" model::Command : outgoing6
-model::OzobotProgram "0..9999" --* "1..1" model::Ozobot : programs13
+model::Command "1..1" -- "0..1" model::Transition : outgoing6
+model::Ozobot "1..1" *-- "0..9999" model::OzobotProgram : programs13
 model::Command "1..1" -- "1..1" model::Transition : source20
-model::Transition "1..1" -- "1..1" model::Command : target23
-model::Transition "0..9999" --* "1..1" model::Block : transitions18
+model::Command "1..1" -- "1..1" model::Transition : target23
+model::Block "1..1" *-- "0..9999" model::Transition : transitions18
 @enduml

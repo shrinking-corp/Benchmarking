@@ -476,10 +476,10 @@ class astm::WideCharacter {
 AccessKind <|-- astm::Private
 AccessKind <|-- astm::Protected
 AccessKind <|-- astm::Public
-ActualParameterExpression <|-- astm::ByReferenceActualParameterExpression
-ActualParameterExpression <|-- astm::ByValueActualParameterExpression
 ActualParameter <|-- astm::ActualParameterExpression
 ActualParameter <|-- astm::MissingActualParameter
+ActualParameterExpression <|-- astm::ByReferenceActualParameterExpression
+ActualParameterExpression <|-- astm::ByValueActualParameterExpression
 AggregateType <|-- astm::AnnotationType
 AggregateType <|-- astm::ClassType
 AggregateType <|-- astm::StructureType
@@ -523,19 +523,19 @@ DataType <|-- astm::ExceptionType
 DataType <|-- astm::FormalParameterType
 DataType <|-- astm::NamedType
 DataType <|-- astm::PrimitiveType
-DeclarationOrDefinition <|-- astm::Declaration
-DeclarationOrDefinition <|-- astm::Definition
 Declaration <|-- astm::FormalParameterDeclaration
 Declaration <|-- astm::FunctionDeclaration
 Declaration <|-- astm::VariableDeclaration
-DefinitionObject <|-- astm::DeclarationOrDefinition
-DefinitionObject <|-- astm::LabelDefinition
-DefinitionObject <|-- astm::NameSpaceDefinition
-DefinitionObject <|-- astm::TypeDefinition
+DeclarationOrDefinition <|-- astm::Declaration
+DeclarationOrDefinition <|-- astm::Definition
 Definition <|-- astm::DataDefinition
 Definition <|-- astm::EntryDefinition
 Definition <|-- astm::EnumLiteralDefinition
 Definition <|-- astm::FunctionDefinition
+DefinitionObject <|-- astm::DeclarationOrDefinition
+DefinitionObject <|-- astm::LabelDefinition
+DefinitionObject <|-- astm::NameSpaceDefinition
+DefinitionObject <|-- astm::TypeDefinition
 Expression <|-- astm::AggregateExpression
 Expression <|-- astm::AnnotationExpression
 Expression <|-- astm::ArrayAccess
@@ -629,14 +629,14 @@ StorageSpecification <|-- astm::NoDef
 StorageSpecification <|-- astm::PerClassMember
 SwitchCase <|-- astm::CaseBlock
 SwitchCase <|-- astm::DefaultBlock
-TypeDefinition <|-- astm::AggregateTypeDefinition
-TypeDefinition <|-- astm::NamedTypeDefinition
-TypeReference <|-- astm::NamedTypeReference
-TypeReference <|-- astm::UnnamedTypeReference
 Type <|-- astm::FunctionType
 Type <|-- astm::LabelType
 Type <|-- astm::NameSpaceType
 Type <|-- astm::TypeReference
+TypeDefinition <|-- astm::AggregateTypeDefinition
+TypeDefinition <|-- astm::NamedTypeDefinition
+TypeReference <|-- astm::NamedTypeReference
+TypeReference <|-- astm::UnnamedTypeReference
 UnaryOperator <|-- astm::AddressOf
 UnaryOperator <|-- astm::BitNot
 UnaryOperator <|-- astm::Decrement
@@ -650,121 +650,121 @@ UnaryOperator <|-- astm::UnaryPlus
 VirtualSpecification <|-- astm::NonVirtual
 VirtualSpecification <|-- astm::PureVirtual
 VirtualSpecification <|-- astm::Virtual
-astm::OtherSyntaxObject "0..1" --* "1..1" astm::DerivesFrom : accessKind104
-astm::OtherSyntaxObject "0..1" --* "1..1" astm::DeclarationOrDefinition : accessKind20
-astm::OtherSyntaxObject "0..9999" --* "1..1" astm::FunctionCallExpression : actualParams239
-astm::OtherSyntaxObject "0..9999" --* "1..1" astm::NewExpression : actualParams246
-astm::TypeReference "0..9999" --* "1..1" astm::TypeQualifiedIdentifierReference : aggregateType199
+astm::DerivesFrom "1..1" *-- "0..1" astm::OtherSyntaxObject : accessKind104
+astm::DeclarationOrDefinition "1..1" *-- "0..1" astm::OtherSyntaxObject : accessKind20
+astm::FunctionCallExpression "1..1" *-- "0..9999" astm::OtherSyntaxObject : actualParams239
+astm::NewExpression "1..1" *-- "0..9999" astm::OtherSyntaxObject : actualParams246
+astm::TypeQualifiedIdentifierReference "1..1" *-- "0..9999" astm::TypeReference : aggregateType199
 astm::AggregateType "0..1" --* "1..1" astm::AggregateTypeDefinition : aggregateType63
-astm::TypeReference "0..1" --* "1..1" astm::AnnotationExpression : annotationType255
+astm::AnnotationExpression "1..1" *-- "0..1" astm::TypeReference : annotationType255
 astm::AnnotationExpression "0..9999" --* "1..1" astm::GASTMSyntaxObject : annotations12
 astm::ArrayAccess "1..1" *-- "0..1" astm::Expression : arrayName190
-astm::TypeReference "0..1" --* "1..1" astm::ConstructedType : baseType80
-astm::Expression "0..1" --* "1..1" astm::BitFieldDefinition : bitFieldSize56
-astm::Type "0..1" --* "1..1" astm::NamedType : body101
+astm::ConstructedType "1..1" *-- "0..1" astm::TypeReference : baseType80
+astm::BitFieldDefinition "1..1" *-- "0..1" astm::Expression : bitFieldSize56
+astm::NamedType "1..1" *-- "0..1" astm::Type : body101
 astm::Statement "0..9999" --* "1..1" astm::SwitchCase : body149
-astm::Statement "0..1" --* "1..1" astm::LoopStatement : body158
-astm::Statement "0..1" --* "1..1" astm::CatchBlock : body173
-astm::Statement "0..9999" --* "1..1" astm::FunctionDefinition : body41
-astm::Statement "0..9999" --* "1..1" astm::EntryDefinition : body52
+astm::LoopStatement "1..1" *-- "0..1" astm::Statement : body158
+astm::CatchBlock "1..1" *-- "0..1" astm::Statement : body173
+astm::FunctionDefinition "1..1" *-- "0..9999" astm::Statement : body41
+astm::EntryDefinition "1..1" *-- "0..9999" astm::Statement : body52
 astm::DefinitionObject "0..9999" --* "1..1" astm::NameSpaceDefinition : body66
 astm::Expression "0..1" --* "1..1" astm::FunctionCallExpression : calledFunction237
-astm::Expression "0..9999" --* "1..1" astm::CaseBlock : caseExpressions152
+astm::CaseBlock "1..1" *-- "0..9999" astm::Expression : caseExpressions152
 astm::SwitchCase "0..1" --* "1..1" astm::SwitchStatement : cases147
-astm::TypeReference "0..1" -- "1..1" astm::CastExpression : castType204
+astm::CastExpression "1..1" -- "0..1" astm::TypeReference : castType204
 astm::CatchBlock "0..9999" --* "1..1" astm::TryStatement : catchBlocks168
 astm::Scope "0..9999" --* "1..1" astm::Scope : childScope6
 astm::DerivesFrom "1..1" *-- "0..1" astm::NamedType : className107
 astm::Expression "0..1" --* "1..1" astm::IfStatement : condition137
 astm::Expression "0..1" --* "1..1" astm::LoopStatement : condition156
-astm::Expression "0..1" --* "1..1" astm::ConditionalExpression : condition224
+astm::ConditionalExpression "1..1" *-- "0..1" astm::Expression : condition224
 astm::DeclarationOrDefinitionStatement "1..1" *-- "0..1" astm::DefinitionObject : declOrDefn119
-astm::TypeReference "0..1" --* "1..1" astm::Declaration : declarationType31
-astm::Definition "0..1" --* "1..1" astm::Declaration : defRef26
-astm::LabelDefinition "0..1" --* "1..1" astm::LabelAccess : definition252
+astm::Declaration "1..1" *-- "0..1" astm::TypeReference : declarationType31
+astm::Declaration "1..1" *-- "0..1" astm::Definition : defRef26
+astm::LabelAccess "1..1" *-- "0..1" astm::LabelDefinition : definition252
 astm::DefinitionObject "0..9999" --* "1..1" astm::Scope : definitionObject4
-astm::TypeReference "0..1" --* "1..1" astm::Definition : definitionType24
-astm::NamedTypeDefinition "1..1" *-- "0..1" astm::NamedType : definitionType62
-astm::DerivesFrom "0..9999" --* "1..1" astm::ClassType : derivesFrom103
-astm::Statement "0..1" --* "1..1" astm::IfStatement : elseBody142
+astm::Definition "1..1" *-- "0..1" astm::TypeReference : definitionType24
+astm::NamedType "0..1" --* "1..1" astm::NamedTypeDefinition : definitionType62
+astm::ClassType "1..1" *-- "0..9999" astm::DerivesFrom : derivesFrom103
+astm::IfStatement "1..1" *-- "0..1" astm::Statement : elseBody142
 astm::EnumLiteralDefinition "0..9999" --* "1..1" astm::EnumType : enumLiterals78
 astm::Expression "0..1" --* "1..1" astm::ThrowStatement : exception180
 astm::DataDefinition "0..1" --* "1..1" astm::VariableCatchBlock : exceptionVariable178
 astm::Type "0..9999" --* "1..1" astm::TypesCatchBlock : exceptions176
 astm::Expression "0..1" --* "1..1" astm::ExpressionStatement : expression121
-astm::Expression "0..1" --* "1..1" astm::CastExpression : expression206
-astm::TypeReference "0..1" --* "1..1" astm::Expression : expressionType182
-astm::SourceFile "0..1" --* "1..1" astm::IncludeUnit : file75
-astm::Project "1..1" *-- "0..9999" astm::CompilationUnit : files1
-astm::TryStatement "1..1" *-- "0..1" astm::Statement : finalStatement170
+astm::CastExpression "1..1" *-- "0..1" astm::Expression : expression206
+astm::Expression "1..1" *-- "0..1" astm::TypeReference : expressionType182
+astm::IncludeUnit "1..1" *-- "0..1" astm::SourceFile : file75
+astm::CompilationUnit "0..9999" --* "1..1" astm::Project : files1
+astm::Statement "0..1" --* "1..1" astm::TryStatement : finalStatement170
 astm::FormalParameterDeclaration "0..9999" --* "1..1" astm::FunctionDeclaration : formalParameters34
 astm::FormalParameterDefinition "0..9999" --* "1..1" astm::FunctionDefinition : formalParameters39
-astm::FormalParameterDefinition "0..9999" --* "1..1" astm::EntryDefinition : formalParameters50
+astm::EntryDefinition "1..1" *-- "0..9999" astm::FormalParameterDefinition : formalParameters50
 astm::CompilationUnit "1..1" *-- "0..9999" astm::DefinitionObject : fragments14
 astm::Expression "0..1" --* "1..1" astm::RangeExpression : fromExpression232
-astm::FunctionMemberAttributes "0..1" --* "1..1" astm::FunctionDeclaration : functionMemberAttributes35
-astm::FunctionMemberAttributes "0..1" --* "1..1" astm::FunctionDefinition : functionMemberAttributes43
+astm::FunctionDeclaration "1..1" *-- "0..1" astm::FunctionMemberAttributes : functionMemberAttributes35
+astm::FunctionDefinition "1..1" *-- "0..1" astm::FunctionMemberAttributes : functionMemberAttributes43
 astm::Statement "0..1" --* "1..1" astm::TryStatement : guardedStatement166
-astm::Expression "0..1" --* "1..1" astm::Dimension : highBound91
-astm::Name "0..1" --* "1..1" astm::Definition : identifierName23
+astm::Dimension "1..1" *-- "0..1" astm::Expression : highBound91
+astm::Definition "1..1" *-- "0..1" astm::Name : identifierName23
 astm::Declaration "1..1" *-- "0..1" astm::Name : identifierName28
 astm::SourceFile "0..1" --* "1..1" astm::SourceLocation : inSourceFile0
 astm::Expression "0..1" --* "1..1" astm::ForStatement : initBody161
-astm::Expression "0..1" --* "1..1" astm::DataDefinition : initialValue55
-astm::ForStatement "1..1" *-- "0..9999" astm::Expression : iterationBody163
+astm::DataDefinition "1..1" *-- "0..1" astm::Expression : initialValue55
+astm::Expression "0..9999" --* "1..1" astm::ForStatement : iterationBody163
 astm::LabelDefinition "0..1" --* "1..1" astm::LabeledStatement : label128
-astm::Name "0..1" --* "1..1" astm::LabelDefinition : labelName71
+astm::LabelDefinition "1..1" *-- "0..1" astm::Name : labelName71
 astm::LabelDefinition "1..1" *-- "0..1" astm::LabelType : labelType73
 astm::BinaryExpression "1..1" *-- "0..1" astm::Expression : leftOperand216
 astm::GASTMSyntaxObject "1..1" *-- "0..1" astm::SourceLocation : locationInfo8
 astm::Dimension "1..1" *-- "0..1" astm::Expression : lowBound88
 astm::IdentifierReference "0..1" --* "1..1" astm::QualifiedIdentifierReference : member197
-astm::TypeQualifiedIdentifierReference "1..1" *-- "0..1" astm::IdentifierReference : member201
-astm::Expression "0..9999" --* "1..1" astm::AnnotationExpression : memberValues258
+astm::IdentifierReference "0..1" --* "1..1" astm::TypeQualifiedIdentifierReference : member201
+astm::AnnotationExpression "1..1" *-- "0..9999" astm::Expression : memberValues258
 astm::AggregateType "1..1" *-- "0..9999" astm::DefinitionObject : members82
 astm::Name "0..1" --* "1..1" astm::NamedTypeReference : name112
 astm::Name "0..1" --* "1..1" astm::NameReference : name185
-astm::Name "0..1" --* "1..1" astm::LabelAccess : name249
+astm::LabelAccess "1..1" *-- "0..1" astm::Name : name249
 astm::Name "0..1" --* "1..1" astm::TypeDefinition : name60
-astm::NameSpaceDefinition "1..1" *-- "0..1" astm::Name : nameSpace64
-astm::NameSpaceType "0..1" --* "1..1" astm::NameSpaceDefinition : nameSpaceType69
+astm::Name "0..1" --* "1..1" astm::NameSpaceDefinition : nameSpace64
+astm::NameSpaceDefinition "1..1" *-- "0..1" astm::NameSpaceType : nameSpaceType69
 astm::NewExpression "1..1" *-- "0..1" astm::TypeReference : newType244
-astm::Expression "0..1" --* "1..1" astm::ConditionalExpression : onFalseOperand229
+astm::ConditionalExpression "1..1" *-- "0..1" astm::Expression : onFalseOperand229
 astm::ConditionalExpression "1..1" *-- "0..1" astm::Expression : onTrueOperand226
 astm::BlockScope "0..1" --* "1..1" astm::BlockStatement : opensScope135
-astm::ProgramScope "0..1" --* "1..1" astm::CompilationUnit : opensScope17
+astm::CompilationUnit "1..1" *-- "0..1" astm::ProgramScope : opensScope17
 astm::FunctionDefinition "1..1" *-- "0..1" astm::FunctionScope : opensScope46
 astm::AggregateScope "0..1" --* "1..1" astm::AggregateType : opensScope85
-astm::Expression "0..1" --* "1..1" astm::DeleteStatement : operand117
+astm::DeleteStatement "1..1" *-- "0..1" astm::Expression : operand117
 astm::Expression "0..1" --* "1..1" astm::UnaryExpression : operand211
 astm::OtherSyntaxObject "0..1" --* "1..1" astm::UnaryExpression : operator209
-astm::OtherSyntaxObject "0..1" --* "1..1" astm::BinaryExpression : operator214
+astm::BinaryExpression "1..1" *-- "0..1" astm::OtherSyntaxObject : operator214
 astm::OperatorAssign "1..1" *-- "0..1" astm::OtherSyntaxObject : operator222
 astm::GlobalScope "0..1" --* "1..1" astm::Project : outerScope2
 astm::FormalParameterType "0..9999" --* "1..1" astm::FunctionType : parameterTypes96
 astm::GASTMSyntaxObject "1..1" *-- "0..9999" astm::PreprocessorElement : preProcessorElements10
 astm::Expression "0..1" --* "1..1" astm::QualifiedIdentifierReference : qualifiers195
-astm::Dimension "0..9999" --* "1..1" astm::ArrayType : ranks87
-astm::NameReference "1..1" -- "0..1" astm::DefinitionObject : refersTo187
-astm::MacroDefinition "0..1" --* "1..1" astm::MacroCall : refersTo77
+astm::ArrayType "1..1" *-- "0..9999" astm::Dimension : ranks87
+astm::DefinitionObject "0..1" -- "1..1" astm::NameReference : refersTo187
+astm::MacroCall "1..1" *-- "0..1" astm::MacroDefinition : refersTo77
 astm::FunctionDefinition "1..1" *-- "0..1" astm::TypeReference : returnType37
-astm::TypeReference "0..1" --* "1..1" astm::FunctionType : returnType94
+astm::FunctionType "1..1" *-- "0..1" astm::TypeReference : returnType94
 astm::Expression "0..1" --* "1..1" astm::ReturnStatement : returnValue154
-astm::Expression "0..1" --* "1..1" astm::BinaryExpression : rightOperand219
+astm::BinaryExpression "1..1" *-- "0..1" astm::Expression : rightOperand219
 astm::LabeledStatement "1..1" *-- "0..1" astm::Statement : statement130
-astm::OtherSyntaxObject "0..1" --* "1..1" astm::DeclarationOrDefinition : storageSpecifiers19
-astm::Statement "0..9999" --* "1..1" astm::BlockStatement : subStatements133
-astm::Expression "0..9999" --* "1..1" astm::ArrayAccess : subscripts192
-astm::SwitchStatement "1..1" *-- "0..1" astm::Expression : switchExpression145
+astm::DeclarationOrDefinition "1..1" *-- "0..1" astm::OtherSyntaxObject : storageSpecifiers19
+astm::BlockStatement "1..1" *-- "0..9999" astm::Statement : subStatements133
+astm::ArrayAccess "1..1" *-- "0..9999" astm::Expression : subscripts192
+astm::Expression "0..1" --* "1..1" astm::SwitchStatement : switchExpression145
 astm::Expression "0..1" --* "1..1" astm::JumpStatement : target123
-astm::LabelAccess "0..1" --* "1..1" astm::BreakStatement : target125
+astm::BreakStatement "1..1" *-- "0..1" astm::LabelAccess : target125
 astm::ContinueStatement "1..1" *-- "0..1" astm::LabelAccess : target126
 astm::IfStatement "1..1" *-- "0..1" astm::Statement : thenBody139
-astm::RangeExpression "1..1" *-- "0..1" astm::Expression : toExpression234
+astm::Expression "0..1" --* "1..1" astm::RangeExpression : toExpression234
 astm::Type "0..1" --* "1..1" astm::UnnamedTypeReference : type110
-astm::TypeDefinition "0..1" -- "1..1" astm::NamedTypeReference : type114
+astm::NamedTypeReference "1..1" -- "0..1" astm::TypeDefinition : type114
 astm::FormalParameterType "1..1" *-- "0..1" astm::TypeReference : type98
-astm::Expression "0..1" --* "1..1" astm::ActualParameterExpression : value242
+astm::ActualParameterExpression "1..1" *-- "0..1" astm::Expression : value242
 astm::EnumLiteralDefinition "1..1" *-- "0..1" astm::Expression : value58
-astm::VirtualSpecification "0..1" --* "1..1" astm::FunctionMemberAttributes : virtualSpecifier48
+astm::FunctionMemberAttributes "1..1" *-- "0..1" astm::VirtualSpecification : virtualSpecifier48
 @enduml

@@ -1,0 +1,702 @@
+@startuml
+class Account {
+}
+enum AccountType {
+  CustomerService
+  Guest
+  Manager
+  Staff
+}
+class Accounts::IAccountsAccess {
+}
+class Accounts::IManageAccounts {
+}
+class Bill {
+}
+class Bookable {
+}
+class Booking {
+}
+class Classes::Accounts::Account {
+  + accountType : str
+  + password : str
+  + username : str
+}
+class Classes::Accounts::AccountsManager {
+}
+abstract class Classes::Accounts::IAccountsAccess {
+  + login(password : any, username : any) : str
+  + validateAccount(password : any, username : any) : str
+}
+abstract class Classes::Accounts::IManageAccounts {
+  + addAccount(password : any, type : any, username : any) : void
+  + changePassword(newPassword : any, username : any) : void
+  + deleteAccount(username : any) : void
+  + getAccountName(username : any) : str
+  + getAccountPassword(username : any) : str
+  + renameAccount(newUsername : any, oldUsername : any) : void
+  + searchAccounts(keyword : any) : str
+}
+abstract class Classes::Banking::AdministratorProvides {
+  + addCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + getBalance(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : float
+  + makeDeposit(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, sum : any) : float
+  + removeCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+}
+abstract class Classes::Banking::CustomerProvides {
+  + isCreditCardValid(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + makePayment(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, sum : any) : bool
+}
+class Classes::Bills::Bill {
+  + bookable : str
+  + id : str
+  + isPaid : str
+  + issueDate : date
+  + items : str
+  + paymentDate : date
+  + paymentType : str
+  + services : str
+  + totalAmount : float
+  + addItem(itemID : any) : void
+  + addService(serviceID : any) : void
+}
+class Classes::Bills::BillsManager {
+}
+abstract class Classes::Bills::IBills {
+  + addBill(bookable : any, items : any, services : any) : void
+  + getAllBillIDs() : str
+  + getAllBillsNotPaid() : str
+  + getAllPayedBills() : str
+  + getBillBookable(billID : any) : str
+  + getBillIssueDate(billID : any) : date
+  + getBillItems(billID : any) : str
+  + getBillPaymentDate(billID : any) : date
+  + getBillPaymentType(billID : any) : str
+  + getBillServices(billID : any) : str
+  + getBillTotalAmount(billID : any) : float
+  + getIsBillPaid(billID : any) : str
+  + payBillsWithCash(bills : any) : void
+  + payBillsWithCreditCard(bills : any, ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : void
+  + removeBill(billID : any) : void
+  + searchBills(keyword : any) : str
+  + sendInvoice(billID : any, email : any) : void
+}
+abstract class Classes::Bookables::Bookable {
+  + baseprice : float
+  + description : str
+  + id : str
+}
+class Classes::Bookables::BookablesManager {
+}
+class Classes::Bookables::ConferenceRoom {
+  + capacity : str
+  + category : str
+}
+class Classes::Bookables::HostelBed {
+}
+class Classes::Bookables::HotelRoom {
+  + category : str
+  + nbrBeds : str
+}
+abstract class Classes::Bookables::IBookablesAccess {
+  + getAllBookableIDs() : str
+  + getAllConferenceRoomIDs() : str
+  + getAllHostelBedIDs() : str
+  + getAllHotelRoomIDs() : str
+  + getBookableBasePrice(bookableID : any) : float
+  + getBookableDescription(bookableID : any) : str
+  + getConferenceRoomCapacity(roomID : any) : str
+  + getConferenceRoomCategory(roomID : any) : str
+  + getHotelRoomCategory(roomID : any) : str
+  + getHotelRoomNbrBeds(ID : any) : str
+  + getRoomLocationFloor(roomID : any) : str
+  + getRoomLocationInfo(roomID : any) : str
+  + getRoomOfHostelBed(hostelBedID : any) : str
+  + searchConferenceRooms(category : any, keyword : any) : str
+  + searchForBookable(keyword : any) : str
+  + searchHostelBeds(keyword : any) : str
+  + searchHotelRooms(category : any, keyword : any) : str
+}
+abstract class Classes::Bookables::IBookablesManage {
+  + addConferenceRoom(basePrice : any, capacity : any, category : any, description : any, floor : any, locationInfo : any, roomNumber : any) : str
+  + addHostelBed(basePrice : any, bedNumber : any, description : any, roomID : any) : str
+  + addHotelRoom(basePrice : any, category : any, description : any, floor : any, locationInfo : any, nbrBeds : any, roomNumber : any) : str
+  + changeBookableBasePrice(basePrice : any, bookableID : any) : void
+  + changeBookableDescription(bookableID : any, description : any) : void
+  + changeConferenceRoomCapacity(capacity : any, roomID : any) : void
+  + changeConferenceRoomCategory(category : any, roomID : any) : void
+  + changeHostelBedRoom(hostelBedID : any, roomID : any) : void
+  + changeHotelRoomCategory(category : any, roomID : any) : void
+  + changeHotelRoomNumberBeds(nbrBeds : any, roomID : any) : void
+  + changeRoomLocation(additionalInfo : any, floor : any, roomID : any) : void
+  + deleteBookable(bookableID : any) : void
+}
+abstract class Classes::Bookables::Room {
+}
+class Classes::Bookables::RoomLocation {
+  + addtionalInfo : str
+  + floor : str
+}
+class Classes::Bookings::Booking {
+  + bookedStays : str
+  + bookingNbr : str
+  + customer : str
+  + issueDate : date
+  + nbrGuests : str
+  + requests : str
+  + addBookedStay(stayID : any) : void
+  + addRequest(requestID : any) : void
+  + cancelBookedStay(stayID : any) : void
+  + removeRequest(requestID : any) : void
+}
+class Classes::Bookings::BookingsManager {
+}
+abstract class Classes::Bookings::IBookings {
+  + addBookedStayToBooking(bookingID : any, stayID : any) : void
+  + addBookingRequest(bookingID : any, requestID : any) : void
+  + cancelBooking(bookingID : any) : void
+  + cancelStayOfBooking(bookingID : any, stayID : any) : void
+  + changeNbrGuestsOfBooking(bookingID : any, nbrGuests : any) : void
+  + getAllBookings() : str
+  + getAllBookingsWithStaysInPeriod(from : any, to : any) : str
+  + getAllBookingsWithinPeriod(from : any, to : any) : str
+  + getAvailableBookablesInPeriod(from : any, to : any) : str
+  + getAvailableConferenceRoomsInPeriod(from : any, to : any) : str
+  + getAvailableHostelBedsInPeriod(from : any, to : any) : str
+  + getAvailableHotelRoomsInPeriod(from : any, to : any) : str
+  + getBookedStaysOfBooking(bookingID : any) : str
+  + getBookingRequests(bookingID : any) : str
+  + getCustomerOfBooking(bookingID : any) : str
+  + getNbrGuestOfBooking(bookingID : any) : str
+  + makeBooking(bookables : any, ccNumber : any, ccv : any, customerID : any, expiryMonth : any, expiryYear : any, firstName : any, guests : any, lastName : any, requests : any) : void
+  + payBookingBills(bookingID : any) : void
+  + payStayBills(bookingID : any, stayID : any) : void
+  + removeBookingRequest(bookingID : any, requestID : any) : void
+  + searchBookings(keyword : any) : str
+  + searchBookingsMadeInPeriod(from : any, keyword : any, to : any) : str
+  + searchBookingsWithStaysInPeriod(from : any, keyword : any, to : any) : str
+  + searchForAvailableBookablesInPeriod(from : any, keyword : any, to : any) : str
+  + searchForAvailableConferenceRoomsInPeriod(from : any, keyword : any, to : any) : str
+  + searchForAvailableHostelBedsInPeriod(from : any, keyword : any, to : any) : str
+  + searchForAvailableHotelRoomsInPeriod(from : any, keyword : any, to : any) : str
+}
+class Classes::Customers::Customer {
+  + bookings : str
+  + email : str
+  + firstname : str
+  + lastname : str
+  + phone : str
+  + requests : str
+  + ssid : str
+  + title : str
+  + addBooking() : void
+  + addRequest() : void
+  + removeBooking() : void
+  + removeRequest() : void
+}
+class Classes::Customers::CustomersManager {
+}
+abstract class Classes::Customers::ICustomers {
+  + addCustomer(SSID : any, email : any, firstname : any, lastname : any, phone : any, title : any) : void
+  + addCustomerBooking(SSID : any, bookingID : any) : void
+  + addCustomerRequest(SSID : any, description : any) : void
+  + changeCustomerEmail(SSID : any, eMail : any) : void
+  + changeCustomerFirstName(SSID : any, firstName : any) : void
+  + changeCustomerLastName(SSID : any, lastName : any) : void
+  + changeCustomerPhone(SSID : any, phoneNr : any) : void
+  + changeCustomerTitle(SSID : any, title : any) : void
+  + getAllCustomers() : str
+  + getCustomerBookings(SSID : any) : str
+  + getCustomerEmail(SSID : any) : str
+  + getCustomerFirstName(SSID : any) : str
+  + getCustomerLastName(SSID : any) : str
+  + getCustomerPhone(SSID : any) : str
+  + getCustomerRequests(SSID : any) : str
+  + getCustomerTitle(SSID : any) : str
+  + removeCustomerBooking(SSID : any, bookingID : any) : void
+  + removeCustomerRequest(SSID : any, requestID : any) : void
+  + searchCustomers(keyword : any) : str
+}
+class Classes::Feedback::Feedback {
+  + description : str
+  + id : str
+  + isNoted : str
+  + isResolved : str
+}
+class Classes::Feedback::FeedbackManager {
+}
+abstract class Classes::Feedback::IFeedback {
+  + addFeedback(desc : any) : void
+  + getAllFeedbackIDs() : str
+  + getFeedbackDescription(id : any) : str
+  + getFeedbackIsNoted(id : any) : str
+  + getFeedbackIsResolved(id : any) : str
+  + searchFeedback(keyword : any) : str
+  + setFeedbackDescription(desc : any, id : any) : void
+  + setFeedbackIsNoted(id : any, status : any) : void
+  + setFeedbackIsResolved(id : any, status : any) : void
+}
+class Classes::Guests::Guest {
+  + account : str
+  + email : str
+  + firstname : str
+  + lastname : str
+  + phone : str
+  + requests : str
+  + ssid : str
+  + stays : str
+  + title : str
+  + addRequest(description : any, requestID : any) : void
+  + addStay(bookableID : any, bookingID : any, fromDate : any, toDate : any) : void
+  + removeRequest(requestID : any) : void
+  + removeStay(stayID : any) : void
+}
+class Classes::Guests::GuestsManager {
+}
+abstract class Classes::Guests::IGuests {
+  + addGuest(SSID : any, email : any, firstname : any, lastname : any, phone : any, title : any) : void
+  + addGuestRequest(SSID : any, desctiption : any, requestID : any) : void
+  + changeGuestEmail(SSID : any, eMail : any) : void
+  + changeGuestFirstName(SSID : any, firstName : any) : void
+  + changeGuestLastName(SSID : any, lastName : any) : void
+  + changeGuestPhone(SSID : any, phoneNr : any) : void
+  + changeGuestTitle(SSID : any, title : any) : void
+  + generateGuestAccount(SSID : any) : void
+  + getAllGuestIDs() : str
+  + getGuestAccountPassword(SSID : any) : str
+  + getGuestAccountUsername(SSID : any) : str
+  + getGuestEmail(SSID : any) : str
+  + getGuestFirstName(SSID : any) : str
+  + getGuestLastName(SSID : any) : str
+  + getGuestPhone(SSID : any) : str
+  + getGuestRequests(SSID : any) : str
+  + getGuestStays(SSID : any) : str
+  + getGuestTitle(SSID : any) : str
+  + removeGuestAccount(SSID : any) : void
+  + removeGuestRequest(SSID : any, requestID : any) : void
+  + removeGuestStay(SSID : any, stayID : any) : void
+  + searchGuests(keyword : any) : str
+}
+abstract class Classes::Inventory::IInventoryAccess {
+  + changeItemStock(id : any, stock : any) : void
+  + getAllItemIDs() : str
+  + getItemExpense(id : any) : float
+  + getItemName(id : any) : str
+  + getItemPrice(id : any) : float
+  + getItemStock(id : any) : str
+  + searchItems(keyword : any) : str
+}
+abstract class Classes::Inventory::IManageInventory {
+  + addItem(expense : any, name : any, price : any, stock : any) : void
+  + changeItemExpense(expense : any, id : any) : void
+  + changeItemName(id : any, name : any) : void
+  + changeItemPrice(id : any, price : any) : void
+  + removeItem(id : any) : void
+}
+class Classes::Inventory::InventoryManager {
+}
+class Classes::Inventory::Item {
+  + expense : float
+  + id : str
+  + name : str
+  + price : float
+  + stock : str
+}
+abstract class Classes::Requests::IRequests {
+  + addRequest(description : any, specialRequestId : any) : void
+  + changeRequestDesc(description : any, specialRequestId : any) : void
+  + createRequest(description : any) : void
+  + deleteRequest(specialRequestId : any) : void
+  + getAllRequestIDs() : str
+  + getRequestDescription(specialRequestId : any) : str
+  + hasRequestBeenResolved(specialRequestId : any) : str
+  + searchRequests(keyword : any) : str
+  + setRequestDescription(description : any, specialRequestId : any) : void
+  + setRequestResolved(SpecialRequestId : any) : void
+}
+class Classes::Requests::Request {
+  + description : str
+  + id : str
+  + isResolved : str
+}
+class Classes::Requests::RequestsManager {
+}
+abstract class Classes::Restaurants::IRestaurantsAccess {
+  + cancelReservation(reservationID : any, restaurantID : any) : void
+  + changeReservedTables(reservationID : any, restaurantID : any, tables : any) : void
+  + getAllRestaurantNames() : str
+  + getAvailableTables(from : any, restaurantID : any, to : any) : str
+  + getAvailableTablesByNbrGuests(from : any, nbrGuests : any, restaurantID : any, to : any) : str
+  + getReservationFromTime(reservationID : any, restaurantID : any) : date
+  + getReservationGuest(reservationID : any, restaurantID : any) : str
+  + getReservationToTime(reservationID : any, restaurantID : any) : date
+  + getRestaurantMenuItems(restaurantID : any) : str
+  + getRestaurantMenuName(restaurantID : any) : str
+  + getRestaurantReservations(restaurantID : any) : str
+  + getRestaurantTableNumberOfSeats(restaurantID : any, tableNbr : any) : str
+  + getRestaurantTables(restaurantID : any) : str
+  + makeReservation(from : any, guestID : any, restaurantID : any, tables : any, to : any) : void
+  + searchRestaurantReservations(keyword : any, restaurantID : any) : str
+  + searchRestaurantReservationsWithTime(from : any, keyword : any, restaurantID : any, to : any) : str
+  + searchRestaurantTables(keyword : any, restaurantID : any) : str
+  + searchRestaurants(keyword : any) : str
+}
+abstract class Classes::Restaurants::IRestaurantsManage {
+  + addMenuItem(itemID : any, restaurantID : any) : void
+  + addRestaurant(name : any) : void
+  + addRestaurantTable(nbrSeats : any, restaurantID : any, tableNbr : any) : void
+  + changeMenuName(name : any, restaurantID : any) : void
+  + changeRestaurantName(name : any, restaurantID : any) : void
+  + changeTableNumber(newTableNbr : any, oldTableNbr : any, restaurantID : any) : void
+  + changeTableNumberOfSeats(nbrSeats : any, restaurantID : any, tableNbr : any) : void
+  + removeMenuItem(itemID : any, restaurantID : any) : void
+  + removeRestaurant(restaurantID : any) : void
+  + removeRestaurantTable(restaurantID : any, tableNbr : any) : void
+}
+class Classes::Restaurants::Reservation {
+  + from : date
+  + id : str
+  + reservedBy : str
+  + to : date
+}
+class Classes::Restaurants::Restaurant {
+  + name : str
+  + addReservation() : void
+  + getReservation(reservationID : any) : void
+}
+class Classes::Restaurants::RestaurantMenu {
+  + items : str
+  + name : str
+  + addItem(itemID : any) : void
+  + removeItem(itemID : any) : void
+}
+class Classes::Restaurants::RestaurantTable {
+  + numberOfSeats : str
+  + tableNumber : str
+}
+class Classes::Restaurants::RestaurantsManager {
+}
+abstract class Classes::Services::IServicesAccess {
+  + changeRSODeliveryDate(date : any, orderID : any) : void
+  + changeRSOISDelivered(isDelivered : any, orderID : any) : void
+  + getAllRoomServiceOrderIDs() : str
+  + getAllServiceIDs() : str
+  + getRSOBill(orderID : any) : str
+  + getRSOBookable(orderID : any) : str
+  + getRSODeliveryDate(orderID : any) : date
+  + getRSOItems(orderID : any) : str
+  + getRSOServices(orderID : any) : str
+  + getRoomServiceMenuItems() : str
+  + getRoomServiceMenuName() : str
+  + getServiceExpense(serviceID : any) : float
+  + getServiceName(serviceID : any) : str
+  + getServicePrice(serviceID : any) : float
+  + isRSODelivered(orderID : any) : str
+  + makeRoomServiceOrder(bill : any, bookable : any, deliveryDate : any, isDelivered : any, items : any, services : any) : void
+  + searchRoomServiceOrders(keyword : any) : str
+  + searchServices(keyword : any) : str
+  + setRSOBill(billID : any, orderID : any) : void
+}
+abstract class Classes::Services::IServicesManage {
+  + addRoomServiceMenuItem(itemID : any) : void
+  + addService(expense : any, name : any, price : any) : void
+  + changeRoomServiceMenuName(name : any) : void
+  + changeServiceExpense(expense : any, serviceID : any) : void
+  + changeServiceName(name : any, serviceID : any) : void
+  + changeServicePrice(price : any, serviceID : any) : void
+  + removeRoomServiceMenuItem(itemID : any) : void
+}
+class Classes::Services::RoomServiceMenu {
+  + items : str
+  + name : str
+  + addItem(itemID : any) : void
+  + removeItem(itemID : any) : void
+}
+class Classes::Services::RoomServiceOrder {
+  + bill : str
+  + bookable : str
+  + deliveryDate : date
+  + id : str
+  + isDelivered : str
+  + items : str
+  + addItem() : void
+  + addService() : void
+  + removeItem() : void
+  + removeService() : void
+}
+class Classes::Services::Service {
+  + expense : float
+  + id : str
+  + name : str
+  + price : float
+}
+class Classes::Services::ServiceManager {
+}
+class Classes::Staff::HourlySalaryContract {
+  + salary : float
+}
+abstract class Classes::Staff::IStaff {
+  + addEmployee(SSID : any, email : any, firstname : any, job : any, lastname : any, phone : any, salary : any, salaryContractType : any) : void
+  + changeStaffFirstName(SSID : any, firstName : any) : void
+  + changeStaffJob(SSID : any, job : any) : void
+  + changeStaffLastName(SSID : any, lastName : any) : void
+  + changeStaffPhone(SSID : any, phoneNumber : any) : void
+  + changeStaffSalaryContract(SSID : any, salaryContract : any) : void
+  + getAllStaff() : str
+  + getStaffEmail(SSID : any) : str
+  + getStaffFirstName(SSID : any) : str
+  + getStaffJob(SSID : any) : str
+  + getStaffLastName(SSID : any) : str
+  + getStaffPhone(SSID : any) : str
+  + getStaffSalary(SSID : any) : str
+  + getStaffSalaryContractType(SSID : any) : str
+  + scheduleStaff(from : any, to : any) : str
+  + searchStaff(keyword : any) : str
+}
+class Classes::Staff::MonthlySalaryContract {
+  + salary : float
+}
+abstract class Classes::Staff::SalaryContract {
+  + getSalary() : float
+  + getType() : str
+  + setSalary(salary : any) : void
+}
+class Classes::Staff::Staff {
+  + email : str
+  + firstName : str
+  + job : str
+  + lastName : str
+  + phone : str
+  + ssid : str
+}
+class Classes::Staff::StaffManager {
+}
+class Classes::Statistics::Date {
+}
+abstract class Classes::Statistics::IStatisticsGenerator {
+  + getOccupancyStatistics(from : any, to : any) : str
+  + getProfitStatistics(from : any, to : any) : str
+  + getRevenueStatistics(from : any, to : any) : str
+}
+class Classes::Statistics::Statistic {
+  + type : str
+}
+class Classes::Statistics::StatisticEntry {
+  + value : str
+}
+class Classes::Statistics::StatisticsGenerator {
+  + staticExpenses : float
+}
+class Classes::Stays::CreditCard {
+  + ccNumber : str
+  + ccv : str
+  + expiryMonth : str
+  + expiryYear : str
+  + firstName : str
+  + lastName : str
+}
+abstract class Classes::Stays::IStays {
+  + addBillToStay(billID : any, stayID : any) : void
+  + addNewStay(bookableID : any, bookingID : any, fromDate : any, toDate : any) : void
+  + addResponsibleCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, stayID : any) : void
+  + billCreditCardWithAllUnpaidBillsOfHotelStay(stayID : any) : void
+  + changeBookableOfStay(bookableID : any, stayID : any) : void
+  + changePeriodOfStay(from : any, stayID : any, to : any) : void
+  + changeResponsibleCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, stayID : any) : void
+  + checkInGuest(guestID : any, stayID : any) : void
+  + checkOutGuest(guestID : any, stayID : any) : void
+  + getAllHotelStayIDs() : str
+  + getAllHotelStaysWithinPeriod(from : any, to : any) : str
+  + getAllUnpayedBillsOfHotelStay(stayID : any) : str
+  + getBillsOfHotelStay(stayID : any) : str
+  + getBookableOfHotelStay(stayID : any) : str
+  + getBookingOfHotelStay(stayID : any) : str
+  + getCheckedInGuestsOfHotelStay(stayID : any) : str
+  + getCheckedOutGuestsOfHotelStay(stayID : any) : str
+  + getGuestsOfHotelStay(stayID : any) : str
+  + isResponsibleCreditCardAdded(stayID : any) : str
+  + removeBillFromStay(billID : any, stayID : any) : void
+  + removeStay(stayID : any) : void
+  + searchHotelStays(keyword : any) : str
+  + searchHotelStaysWithinPeriod(from : any, keyword : any, to : any) : str
+}
+class Classes::Stays::Stay {
+  + ID : str
+  + bills : str
+  + bookable : str
+  + booking : str
+  + checkedInGuests : str
+  + checkedOutGuests : str
+  + fromDate : date
+  + toDate : date
+  + addBill(billID : any) : void
+  + addCheckedInGuest(SSID : any) : void
+  + checkOutGuest() : void
+}
+class Classes::Stays::StaysManager {
+}
+enum ConferenceRoomCategory {
+  DiningRoom
+  LectureRoom
+  MeetingRoom
+  Other
+}
+class CreditCard {
+}
+class Customer {
+}
+class CustomerProvides {
+}
+class Date {
+}
+class Feedback {
+}
+class Guest {
+}
+class HotelRoom {
+}
+enum HotelRoomCategory {
+  FamilyRoom
+  StandardRoom
+  Suite
+}
+class IBills {
+}
+class IBookablesAccess {
+}
+class IBookablesManage {
+}
+class IBookings {
+}
+class ICustomers {
+}
+class IFeedback {
+}
+class IGuests {
+}
+class IInventoryAccess {
+}
+class IManageAccounts {
+}
+class IManageInventory {
+}
+class IRequests {
+}
+class IRestaurantsAccess {
+}
+class IRestaurantsManage {
+}
+class IServicesAccess {
+}
+class IServicesManage {
+}
+class IStaff {
+}
+class IStatisticsGenerator {
+}
+class IStays {
+}
+class Item {
+}
+class Request {
+}
+class Reservation {
+}
+class Restaurant {
+}
+class RestaurantMenu {
+}
+class RestaurantTable {
+}
+class Room {
+}
+class RoomLocation {
+}
+class RoomServiceMenu {
+}
+class RoomServiceOrder {
+}
+class SalaryContract {
+}
+class Service {
+}
+class Staff {
+}
+class StatisticEntry {
+}
+class Stay {
+}
+Accounts::IAccountsAccess <|-- Classes::Accounts::AccountsManager
+Accounts::IManageAccounts <|-- Classes::Accounts::AccountsManager
+Bookable <|-- Classes::Bookables::HostelBed
+Bookable <|-- Classes::Bookables::Room
+IBills <|-- Classes::Bills::BillsManager
+IBookablesAccess <|-- Classes::Bookables::IBookablesManage
+IBookablesManage <|-- Classes::Bookables::BookablesManager
+IBookings <|-- Classes::Bookings::BookingsManager
+ICustomers <|-- Classes::Customers::CustomersManager
+IFeedback <|-- Classes::Feedback::FeedbackManager
+IGuests <|-- Classes::Guests::GuestsManager
+IInventoryAccess <|-- Classes::Inventory::IManageInventory
+IManageInventory <|-- Classes::Inventory::InventoryManager
+IRequests <|-- Classes::Requests::RequestsManager
+IRestaurantsAccess <|-- Classes::Restaurants::IRestaurantsManage
+IRestaurantsManage <|-- Classes::Restaurants::RestaurantsManager
+IServicesAccess <|-- Classes::Services::IServicesManage
+IServicesManage <|-- Classes::Services::ServiceManager
+IStaff <|-- Classes::Staff::StaffManager
+IStatisticsGenerator <|-- Classes::Statistics::StatisticsGenerator
+IStays <|-- Classes::Stays::StaysManager
+Room <|-- Classes::Bookables::ConferenceRoom
+Room <|-- Classes::Bookables::HotelRoom
+SalaryContract <|-- Classes::Staff::HourlySalaryContract
+SalaryContract <|-- Classes::Staff::MonthlySalaryContract
+Account "0..9999" -- "1..1" Classes::Accounts::AccountsManager : accounts34
+Classes::Bookings::BookingsManager "1..1" -- "1..1" CustomerProvides : bank44
+Bill "0..9999" -- "1..1" Classes::Bills::BillsManager : bills13
+Bookable "0..9999" -- "1..1" Classes::Bookables::BookablesManager : bookables2
+Classes::Bills::BillsManager "1..1" -- "1..1" IBookablesAccess : bookablesAccess17
+Booking "0..9999" -- "1..1" Classes::Bookings::BookingsManager : booking37
+Classes::Bookings::Booking "1..1" -- "1..1" CreditCard : creditCard35
+Classes::Stays::Stay "1..1" -- "1..1" CreditCard : creditCard5
+Classes::Customers::CustomersManager "1..1" -- "0..9999" Customer : customer55
+Classes::Bills::BillsManager "1..1" -- "1..1" CustomerProvides : customerProvides14
+Classes::Stays::StaysManager "1..1" -- "1..1" CustomerProvides : customerProvides7
+Classes::Statistics::StatisticEntry "1..1" -- "1..1" Date : dateOfEntry62
+Classes::Staff::StaffManager "1..1" -- "0..9999" Staff : employees70
+Classes::Feedback::FeedbackManager "1..1" -- "0..9999" Feedback : feedbacks82
+Classes::Statistics::Statistic "1..1" -- "1..1" Date : fromDate57
+Classes::Guests::GuestsManager "1..1" -- "0..9999" Guest : guests31
+Classes::Bookings::BookingsManager "1..1" -- "1..1" IBills : iBills52
+Classes::Stays::StaysManager "1..1" -- "1..1" IBills : iBills9
+Classes::Statistics::StatisticsGenerator "1..1" -- "1..1" IBills : iBillsAccess64
+Classes::Bookings::BookingsManager "1..1" -- "1..1" IBookablesAccess : iBookableAccess38
+Classes::Statistics::StatisticsGenerator "1..1" -- "1..1" IBookings : iBooking66
+Classes::Bookings::BookingsManager "1..1" -- "1..1" ICustomers : iCustomer50
+Classes::Bookings::BookingsManager "1..1" -- "1..1" IGuests : iGuest47
+Classes::Stays::StaysManager "1..1" -- "1..1" IGuests : iGuests11
+Classes::Bookables::BookablesManager "1..1" -- "1..1" IStays : iHotelStayManager3
+Classes::Bookings::BookingsManager "1..1" -- "1..1" IStays : iHotelStayManager41
+Classes::Guests::GuestsManager "1..1" -- "1..1" IManageAccounts : iManageAccounts32
+Classes::Statistics::StatisticsGenerator "1..1" -- "1..1" IStaff : iStaff68
+Classes::Staff::StaffManager "1..1" -- "1..1" IStatisticsGenerator : iStatisticsGenerator71
+Classes::Bills::BillsManager "1..1" -- "1..1" IInventoryAccess : inventoryAccess19
+Classes::Inventory::InventoryManager "1..1" -- "0..9999" Item : items23
+Classes::Bookables::Room "1..1" -- "1..1" RoomLocation : location0
+Classes::Restaurants::Restaurant "1..1" -- "1..1" RestaurantMenu : menu78
+Classes::Restaurants::Restaurant "1..1" -- "0..9999" Reservation : reservation75
+Classes::Restaurants::RestaurantsManager "1..1" -- "0..9999" Restaurant : restaurant74
+Classes::Restaurants::Restaurant "1..1" -- "0..9999" RestaurantTable : restaurantTable76
+Classes::Restaurants::Reservation "1..1" -- "1..9999" RestaurantTable : restaurantTable80
+Classes::Bookables::HostelBed "1..1" -- "1..1" HotelRoom : room1
+Classes::Services::ServiceManager "1..1" -- "1..1" RoomServiceMenu : roomServiceMenu27
+Classes::Services::ServiceManager "1..1" -- "0..9999" RoomServiceOrder : roomServiceOrder25
+Classes::Staff::Staff "1..1" -- "1..1" SalaryContract : salaryContract73
+Classes::Services::ServiceManager "1..1" -- "0..9999" Service : service24
+Classes::Services::RoomServiceOrder "1..1" -- "0..9999" Service : service29
+Classes::Bills::BillsManager "1..1" -- "1..1" IServicesAccess : servicesAccess21
+Classes::Requests::RequestsManager "1..1" -- "0..9999" Request : specialRequest83
+Classes::Statistics::Statistic "1..1" -- "0..9999" StatisticEntry : statisticEntry56
+Classes::Stays::StaysManager "1..1" -- "0..9999" Stay : stays6
+Classes::Statistics::Statistic "1..1" -- "1..1" Date : toDate59
+@enduml

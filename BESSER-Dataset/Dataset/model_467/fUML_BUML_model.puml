@@ -537,11 +537,11 @@ ActivityEdge <|-- fuml::IntermediateActivities::ControlFlow
 ActivityEdge <|-- fuml::IntermediateActivities::ObjectFlow
 ActivityNode <|-- fuml::CompleteStructuredActivities::ExecutableNode
 ActivityNode <|-- fuml::IntermediateActivities::ControlNode
+Behavior <|-- fuml::BasicBehaviors::OpaqueBehavior
+Behavior <|-- fuml::IntermediateActivities::Activity
 BehavioralFeature <|-- fuml::Communications::Reception
 BehavioralFeature <|-- fuml::Kernel::Operation
 BehavioredClassifier <|-- fuml::Kernel::Class
-Behavior <|-- fuml::BasicBehaviors::OpaqueBehavior
-Behavior <|-- fuml::IntermediateActivities::Activity
 CallAction <|-- fuml::BasicActions::CallBehaviorAction
 CallAction <|-- fuml::BasicActions::CallOperationAction
 CallAction <|-- fuml::CompleteActions::StartObjectBehaviorAction
@@ -586,10 +586,10 @@ Kernel::MultiplicityElement <|-- fuml::Kernel::StructuralFeature
 Kernel::Namespace <|-- fuml::Kernel::Classifier
 Kernel::Namespace <|-- fuml::Kernel::Package
 Kernel::PackageableElement <|-- fuml::Kernel::Package
+Kernel::Type <|-- fuml::Kernel::Classifier
 Kernel::TypedElement <|-- fuml::IntermediateActivities::ObjectNode
 Kernel::TypedElement <|-- fuml::Kernel::Parameter
 Kernel::TypedElement <|-- fuml::Kernel::StructuralFeature
-Kernel::Type <|-- fuml::Kernel::Classifier
 LinkAction <|-- fuml::IntermediateActions::ReadLinkAction
 LinkAction <|-- fuml::IntermediateActions::WriteLinkAction
 LinkEndData <|-- fuml::IntermediateActions::LinkEndCreationData
@@ -621,50 +621,50 @@ RedefinableElement <|-- fuml::IntermediateActivities::ActivityEdge
 RedefinableElement <|-- fuml::IntermediateActivities::ActivityNode
 RedefinableElement <|-- fuml::Kernel::Feature
 SemanticVisitor <|-- fuml::Kernel::Value
+StructuralFeature <|-- fuml::Kernel::Property
 StructuralFeatureAction <|-- fuml::IntermediateActions::ClearStructuralFeatureAction
 StructuralFeatureAction <|-- fuml::IntermediateActions::ReadStructuralFeatureAction
 StructuralFeatureAction <|-- fuml::IntermediateActions::WriteStructuralFeatureAction
-StructuralFeature <|-- fuml::Kernel::Property
 StructuredActivityNode <|-- fuml::CompleteStructuredActivities::ConditionalNode
 StructuredActivityNode <|-- fuml::CompleteStructuredActivities::LoopNode
 StructuredActivityNode <|-- fuml::ExtraStructuredActivities::ExpansionRegion
 StructuredValue <|-- fuml::Kernel::CompoundValue
 StructuredValue <|-- fuml::Kernel::Reference
 TypedElement <|-- fuml::Kernel::ValueSpecification
-ValueSpecification <|-- fuml::Kernel::InstanceValue
-ValueSpecification <|-- fuml::Kernel::LiteralSpecification
 Value <|-- fuml::Kernel::EnumerationValue
 Value <|-- fuml::Kernel::PrimitiveValue
 Value <|-- fuml::Kernel::StructuredValue
+ValueSpecification <|-- fuml::Kernel::InstanceValue
+ValueSpecification <|-- fuml::Kernel::LiteralSpecification
 WriteLinkAction <|-- fuml::IntermediateActions::CreateLinkAction
 WriteLinkAction <|-- fuml::IntermediateActions::DestroyLinkAction
 WriteStructuralFeatureAction <|-- fuml::IntermediateActions::AddStructuralFeatureValueAction
 WriteStructuralFeatureAction <|-- fuml::IntermediateActions::RemoveStructuralFeatureValueAction
-fuml::IntermediateActivities::ActivityEdge "1..1" -- "0..1" IntermediateActivities::Activity : activity159
+IntermediateActivities::Activity "0..1" -- "1..1" fuml::IntermediateActivities::ActivityEdge : activity159
 IntermediateActivities::Activity "0..1" -- "1..1" fuml::IntermediateActivities::ActivityNode : activity181
 Kernel::Element "0..9999" -- "1..1" fuml::Kernel::Comment : annotatedElement24
-fuml::BasicActions::InvocationAction "1..1" *-- "0..9999" BasicActions::InputPin : argument366
+BasicActions::InputPin "0..9999" --* "1..1" fuml::BasicActions::InvocationAction : argument366
 Kernel::Association "1..1" -- "1..1" fuml::IntermediateActions::ClearAssociationAction : association304
-fuml::Kernel::Property "1..1" -- "0..1" Kernel::Association : association88
+Kernel::Association "0..1" -- "1..1" fuml::Kernel::Property : association88
 Kernel::Property "0..9999" -- "1..1" fuml::Kernel::Classifier : attribute74
 BasicBehaviors::Behavior "1..1" -- "1..1" fuml::BasicActions::CallBehaviorAction : behavior373
 CompleteStructuredActivities::ExecutableNode "0..9999" -- "1..1" fuml::CompleteStructuredActivities::Clause : body218
-fuml::CompleteStructuredActivities::LoopNode "1..1" -- "0..9999" BasicActions::OutputPin : bodyOutput199
+BasicActions::OutputPin "0..9999" -- "1..1" fuml::CompleteStructuredActivities::LoopNode : bodyOutput199
 BasicActions::OutputPin "0..9999" -- "1..1" fuml::CompleteStructuredActivities::Clause : bodyOutput230
 CompleteStructuredActivities::ExecutableNode "0..9999" -- "1..1" fuml::CompleteStructuredActivities::LoopNode : bodyPart204
-fuml::Kernel::Operation "1..1" -- "0..1" Kernel::Class : class121
+Kernel::Class "0..1" -- "1..1" fuml::Kernel::Operation : class121
 Kernel::Class "0..1" -- "1..1" fuml::Kernel::Property : class94
 Kernel::Classifier "0..9999" -- "1..1" fuml::Kernel::InstanceSpecification : classifier128
 Kernel::Classifier "1..1" -- "1..1" fuml::IntermediateActions::CreateObjectAction : classifier312
-fuml::CompleteActions::ReadExtentAction "1..1" -- "1..1" Kernel::Classifier : classifier333
+Kernel::Classifier "1..1" -- "1..1" fuml::CompleteActions::ReadExtentAction : classifier333
 Kernel::Classifier "1..1" -- "1..1" fuml::CompleteActions::ReadIsClassifiedObjectAction : classifier336
 BasicBehaviors::Behavior "0..1" -- "1..1" fuml::BasicBehaviors::BehavioredClassifier : classifierBehavior5
 CompleteStructuredActivities::Clause "1..9999" --* "1..1" fuml::CompleteStructuredActivities::ConditionalNode : clause233
 BasicActions::InputPin "1..1" --* "1..1" fuml::CompleteActions::ReduceAction : collection328
 BasicBehaviors::BehavioredClassifier "0..1" -- "1..1" fuml::BasicBehaviors::Behavior : context2
 Kernel::Classifier "0..1" -- "1..1" fuml::BasicActions::Action : context358
-fuml::Kernel::Property "1..1" -- "0..1" Kernel::DataType : datatype91
-fuml::CompleteStructuredActivities::LoopNode "1..1" -- "1..1" BasicActions::OutputPin : decider196
+Kernel::DataType "0..1" -- "1..1" fuml::Kernel::Property : datatype91
+BasicActions::OutputPin "1..1" -- "1..1" fuml::CompleteStructuredActivities::LoopNode : decider196
 BasicActions::OutputPin "1..1" -- "1..1" fuml::CompleteStructuredActivities::Clause : decider227
 BasicBehaviors::Behavior "0..1" -- "1..1" fuml::IntermediateActivities::DecisionNode : decisionInput190
 IntermediateActivities::ObjectFlow "0..1" -- "1..1" fuml::IntermediateActivities::DecisionNode : decisionInputFlow192
@@ -676,40 +676,40 @@ Kernel::ElementImport "0..9999" --* "1..1" fuml::Kernel::Namespace : elementImpo
 Kernel::Property "1..1" -- "1..1" fuml::IntermediateActions::LinkEndData : end284
 IntermediateActions::LinkEndData "2..9999" --* "1..1" fuml::IntermediateActions::LinkAction : endData278
 Kernel::Type "1..9999" -- "1..1" fuml::Kernel::Association : endType99
-fuml::Kernel::EnumerationLiteral "1..1" -- "0..1" Kernel::Enumeration : enumeration144
-fuml::Communications::Trigger "1..1" -- "1..1" Communications::Event : event8
+Kernel::Enumeration "0..1" -- "1..1" fuml::Kernel::EnumerationLiteral : enumeration144
+Communications::Event "1..1" -- "1..1" fuml::Communications::Trigger : event8
 Kernel::ExtensionalValue "0..9999" --* "1..1" fuml::LociL1::Locus : extensionalValues396
 Kernel::StructuralFeature "1..1" -- "1..1" fuml::Kernel::FeatureValue : feature380
 Kernel::Feature "0..9999" -- "1..1" fuml::Kernel::Classifier : feature69
 Kernel::FeatureValue "0..9999" --* "1..1" fuml::Kernel::CompoundValue : featureValues389
-fuml::Kernel::Feature "1..1" -- "0..9999" Kernel::Classifier : featuringClassifier60
+Kernel::Classifier "0..9999" -- "1..1" fuml::Kernel::Feature : featuringClassifier60
 BasicActions::InputPin "1..1" --* "1..1" fuml::IntermediateActions::TestIdentityAction : first270
-fuml::Kernel::Classifier "1..1" -- "0..9999" Kernel::Classifier : general77
+Kernel::Classifier "0..9999" -- "1..1" fuml::Kernel::Classifier : general77
 Kernel::Classifier "1..1" -- "1..1" fuml::Kernel::Generalization : general80
 Kernel::Generalization "0..9999" --* "1..1" fuml::Kernel::Classifier : generalization66
-fuml::IntermediateActivities::ActivityEdge "1..1" *-- "0..1" Kernel::ValueSpecification : guard170
+Kernel::ValueSpecification "0..1" --* "1..1" fuml::IntermediateActivities::ActivityEdge : guard170
 Kernel::PackageableElement "1..1" -- "1..1" fuml::Kernel::ElementImport : importedElement37
 Kernel::PackageableElement "0..9999" -- "1..1" fuml::Kernel::Namespace : importedMember32
 Kernel::Package "1..1" -- "1..1" fuml::Kernel::PackageImport : importedPackage42
-fuml::Kernel::ElementImport "1..1" -- "1..1" Kernel::Namespace : importingNamespace39
+Kernel::Namespace "1..1" -- "1..1" fuml::Kernel::ElementImport : importingNamespace39
 Kernel::Namespace "1..1" -- "1..1" fuml::Kernel::PackageImport : importingNamespace43
 CompleteStructuredActivities::StructuredActivityNode "0..1" -- "1..1" fuml::IntermediateActivities::ActivityEdge : inStructuredNode167
-fuml::IntermediateActivities::ActivityNode "1..1" -- "0..1" CompleteStructuredActivities::StructuredActivityNode : inStructuredNode178
+CompleteStructuredActivities::StructuredActivityNode "0..1" -- "1..1" fuml::IntermediateActivities::ActivityNode : inStructuredNode178
 IntermediateActivities::ActivityEdge "0..9999" -- "1..1" fuml::IntermediateActivities::ActivityNode : incoming187
 Kernel::NamedElement "0..9999" -- "1..1" fuml::Kernel::Classifier : inheritedMember72
 BasicActions::InputPin "0..9999" -- "1..1" fuml::BasicActions::Action : input361
-fuml::ExtraStructuredActivities::ExpansionRegion "1..1" -- "1..9999" ExtraStructuredActivities::ExpansionNode : inputElement254
+ExtraStructuredActivities::ExpansionNode "1..9999" -- "1..1" fuml::ExtraStructuredActivities::ExpansionRegion : inputElement254
 BasicActions::InputPin "1..9999" --* "1..1" fuml::IntermediateActions::LinkAction : inputValue279
 BasicActions::InputPin "0..1" -- "1..1" fuml::IntermediateActions::LinkEndCreationData : insertAt300
 BasicActions::InputPin "0..1" --* "1..1" fuml::IntermediateActions::AddStructuralFeatureValueAction : insertAt317
-fuml::Kernel::InstanceValue "1..1" -- "1..1" Kernel::InstanceSpecification : instance140
+Kernel::InstanceSpecification "1..1" -- "1..1" fuml::Kernel::InstanceValue : instance140
 Kernel::EnumerationLiteral "1..1" -- "1..1" fuml::Kernel::EnumerationValue : literal392
 LociL1::Locus "0..1" -- "1..1" fuml::Kernel::ExtensionalValue : locus388
 BasicActions::OutputPin "0..9999" -- "1..1" fuml::CompleteStructuredActivities::LoopNode : loopVariable210
 BasicActions::InputPin "0..9999" --* "1..1" fuml::CompleteStructuredActivities::LoopNode : loopVariableInput202
 Kernel::ValueSpecification "0..1" --* "1..1" fuml::Kernel::MultiplicityElement : lowerValue114
-fuml::Kernel::Namespace "1..1" -- "0..9999" Kernel::NamedElement : member25
-fuml::Kernel::Association "1..1" -- "2..9999" Kernel::Property : memberEnd101
+Kernel::NamedElement "0..9999" -- "1..1" fuml::Kernel::Namespace : member25
+Kernel::Property "2..9999" -- "1..1" fuml::Kernel::Association : memberEnd101
 BasicBehaviors::Behavior "0..9999" -- "1..1" fuml::Kernel::BehavioralFeature : method119
 Kernel::Namespace "0..1" -- "1..1" fuml::Kernel::NamedElement : namespace14
 Kernel::Property "0..9999" -- "1..1" fuml::Kernel::Association : navigableOwnedEnd104
@@ -718,15 +718,15 @@ Kernel::Package "0..9999" -- "1..1" fuml::Kernel::Package : nestedPackage51
 Kernel::Package "0..1" -- "1..1" fuml::Kernel::Package : nestingPackage54
 Kernel::Classifier "0..9999" -- "1..1" fuml::CompleteActions::ReclassifyObjectAction : newClassifier349
 IntermediateActivities::ActivityNode "0..9999" --* "1..1" fuml::IntermediateActivities::Activity : node172
-fuml::CompleteStructuredActivities::StructuredActivityNode "1..1" *-- "0..9999" IntermediateActivities::ActivityNode : node237
-fuml::IntermediateActions::StructuralFeatureAction "1..1" *-- "1..1" BasicActions::InputPin : object262
+IntermediateActivities::ActivityNode "0..9999" --* "1..1" fuml::CompleteStructuredActivities::StructuredActivityNode : node237
+BasicActions::InputPin "1..1" --* "1..1" fuml::IntermediateActions::StructuralFeatureAction : object262
 BasicActions::InputPin "1..1" --* "1..1" fuml::IntermediateActions::ClearAssociationAction : object305
 BasicActions::InputPin "1..1" --* "1..1" fuml::CompleteActions::StartClassifierBehaviorAction : object319
 BasicActions::InputPin "1..1" --* "1..1" fuml::CompleteActions::StartObjectBehaviorAction : object321
 BasicActions::InputPin "1..1" --* "1..1" fuml::CompleteActions::ReadIsClassifiedObjectAction : object341
-fuml::CompleteActions::ReclassifyObjectAction "1..1" *-- "1..1" BasicActions::InputPin : object346
+BasicActions::InputPin "1..1" --* "1..1" fuml::CompleteActions::ReclassifyObjectAction : object346
 Kernel::Classifier "0..9999" -- "1..1" fuml::CompleteActions::ReclassifyObjectAction : oldClassifier344
-fuml::BasicActions::CallOperationAction "1..1" -- "1..1" Kernel::Operation : operation375
+Kernel::Operation "1..1" -- "1..1" fuml::BasicActions::CallOperationAction : operation375
 Kernel::Property "0..1" -- "1..1" fuml::Kernel::Property : opposite97
 IntermediateActivities::ActivityEdge "0..9999" -- "1..1" fuml::IntermediateActivities::ActivityNode : outgoing184
 BasicActions::OutputPin "0..9999" -- "1..1" fuml::BasicActions::Action : output356
@@ -735,16 +735,16 @@ Kernel::Property "0..9999" --* "1..1" fuml::Kernel::DataType : ownedAttribute110
 Kernel::Property "0..9999" --* "1..1" fuml::Kernel::Class : ownedAttribute147
 Kernel::Property "0..9999" --* "1..1" fuml::Communications::Signal : ownedAttribute9
 BasicBehaviors::Behavior "0..9999" --* "1..1" fuml::BasicBehaviors::BehavioredClassifier : ownedBehavior4
-fuml::Kernel::Element "1..1" *-- "0..9999" Kernel::Comment : ownedComment23
+Kernel::Comment "0..9999" --* "1..1" fuml::Kernel::Element : ownedComment23
 Kernel::Element "0..9999" -- "1..1" fuml::Kernel::Element : ownedElement17
 Kernel::Property "0..9999" --* "1..1" fuml::Kernel::Association : ownedEnd107
 Kernel::EnumerationLiteral "0..9999" --* "1..1" fuml::Kernel::Enumeration : ownedLiteral141
-fuml::Kernel::Namespace "1..1" -- "0..9999" Kernel::NamedElement : ownedMember34
+Kernel::NamedElement "0..9999" -- "1..1" fuml::Kernel::Namespace : ownedMember34
 Kernel::Operation "0..9999" --* "1..1" fuml::Kernel::Class : ownedOperation150
-fuml::BasicBehaviors::Behavior "1..1" *-- "0..9999" Kernel::Parameter : ownedParameter1
+Kernel::Parameter "0..9999" --* "1..1" fuml::BasicBehaviors::Behavior : ownedParameter1
 Kernel::Parameter "0..9999" --* "1..1" fuml::Kernel::BehavioralFeature : ownedParameter117
 Communications::Reception "0..9999" --* "1..1" fuml::Kernel::Class : ownedReception154
-fuml::Kernel::Package "1..1" -- "0..9999" Kernel::Type : ownedType48
+Kernel::Type "0..9999" -- "1..1" fuml::Kernel::Package : ownedType48
 Kernel::Element "0..1" -- "1..1" fuml::Kernel::Element : owner20
 Kernel::Association "0..1" -- "1..1" fuml::Kernel::Property : owningAssociation85
 Kernel::InstanceSpecification "1..1" -- "1..1" fuml::Kernel::Slot : owningInstance137
@@ -757,59 +757,59 @@ CompleteStructuredActivities::Clause "0..9999" -- "1..1" fuml::CompleteStructure
 Kernel::RedefinableElement "0..9999" -- "1..1" fuml::Kernel::RedefinableElement : redefinedElement63
 Kernel::Operation "0..9999" -- "1..1" fuml::Kernel::Operation : redefinedOperation124
 Kernel::Classifier "0..9999" -- "1..1" fuml::Kernel::RedefinableElement : redefinitionContext64
-fuml::CompleteActions::ReduceAction "1..1" -- "1..1" BasicBehaviors::Behavior : reducer323
-fuml::Kernel::Reference "1..1" -- "1..1" Kernel::Object : referent385
+BasicBehaviors::Behavior "1..1" -- "1..1" fuml::CompleteActions::ReduceAction : reducer323
+Kernel::Object "1..1" -- "1..1" fuml::Kernel::Reference : referent385
 ExtraStructuredActivities::ExpansionRegion "0..1" -- "1..1" fuml::ExtraStructuredActivities::ExpansionNode : regionAsInput251
-fuml::ExtraStructuredActivities::ExpansionNode "1..1" -- "0..1" ExtraStructuredActivities::ExpansionRegion : regionAsOutput248
+ExtraStructuredActivities::ExpansionRegion "0..1" -- "1..1" fuml::ExtraStructuredActivities::ExpansionNode : regionAsOutput248
 BasicActions::InputPin "0..1" --* "1..1" fuml::IntermediateActions::RemoveStructuralFeatureValueAction : removeAt292
-fuml::CompleteStructuredActivities::LoopNode "1..1" *-- "0..9999" BasicActions::OutputPin : result207
+BasicActions::OutputPin "0..9999" --* "1..1" fuml::CompleteStructuredActivities::LoopNode : result207
 BasicActions::OutputPin "0..9999" --* "1..1" fuml::CompleteStructuredActivities::ConditionalNode : result234
 BasicActions::OutputPin "1..1" --* "1..1" fuml::IntermediateActions::TestIdentityAction : result267
-fuml::IntermediateActions::ValueSpecificationAction "1..1" *-- "1..1" BasicActions::OutputPin : result275
+BasicActions::OutputPin "1..1" --* "1..1" fuml::IntermediateActions::ValueSpecificationAction : result275
 BasicActions::OutputPin "0..1" --* "1..1" fuml::IntermediateActions::WriteStructuralFeatureAction : result289
 BasicActions::OutputPin "1..1" --* "1..1" fuml::IntermediateActions::ReadLinkAction : result294
-fuml::IntermediateActions::ReadSelfAction "1..1" *-- "1..1" BasicActions::OutputPin : result296
+BasicActions::OutputPin "1..1" --* "1..1" fuml::IntermediateActions::ReadSelfAction : result296
 BasicActions::OutputPin "0..1" --* "1..1" fuml::IntermediateActions::ReadStructuralFeatureAction : result298
-fuml::IntermediateActions::ClearStructuralFeatureAction "1..1" *-- "0..1" BasicActions::OutputPin : result308
+BasicActions::OutputPin "0..1" --* "1..1" fuml::IntermediateActions::ClearStructuralFeatureAction : result308
 BasicActions::OutputPin "1..1" --* "1..1" fuml::IntermediateActions::CreateObjectAction : result310
 BasicActions::OutputPin "1..1" --* "1..1" fuml::CompleteActions::ReduceAction : result325
 BasicActions::OutputPin "1..1" --* "1..1" fuml::CompleteActions::ReadExtentAction : result331
-fuml::CompleteActions::ReadIsClassifiedObjectAction "1..1" *-- "1..1" BasicActions::OutputPin : result338
+BasicActions::OutputPin "1..1" --* "1..1" fuml::CompleteActions::ReadIsClassifiedObjectAction : result338
 BasicActions::OutputPin "0..9999" -- "1..1" fuml::CompleteActions::AcceptEventAction : result352
 BasicActions::OutputPin "0..9999" --* "1..1" fuml::BasicActions::CallAction : result364
 BasicActions::InputPin "1..1" --* "1..1" fuml::IntermediateActions::TestIdentityAction : second265
-fuml::CompleteStructuredActivities::LoopNode "1..1" -- "0..9999" CompleteStructuredActivities::ExecutableNode : setupPart213
+CompleteStructuredActivities::ExecutableNode "0..9999" -- "1..1" fuml::CompleteStructuredActivities::LoopNode : setupPart213
 Communications::Signal "1..1" -- "1..1" fuml::Communications::SignalEvent : signal10
 Communications::Signal "1..1" -- "1..1" fuml::Communications::Reception : signal11
 Communications::Signal "1..1" -- "1..1" fuml::BasicActions::SendSignalAction : signal370
-fuml::Kernel::InstanceSpecification "1..1" *-- "0..9999" Kernel::Slot : slot130
+Kernel::Slot "0..9999" --* "1..1" fuml::Kernel::InstanceSpecification : slot130
 IntermediateActivities::ActivityNode "1..1" -- "1..1" fuml::IntermediateActivities::ActivityEdge : source161
 Kernel::Classifier "1..1" -- "1..1" fuml::Kernel::Generalization : specific82
-fuml::BasicBehaviors::Behavior "1..1" -- "0..1" Kernel::BehavioralFeature : specification0
+Kernel::BehavioralFeature "0..1" -- "1..1" fuml::BasicBehaviors::Behavior : specification0
 Kernel::StructuralFeature "1..1" -- "1..1" fuml::IntermediateActions::StructuralFeatureAction : structuralFeature260
 BasicActions::InputPin "0..9999" --* "1..1" fuml::CompleteStructuredActivities::StructuredActivityNode : structuredNodeInput245
 BasicActions::OutputPin "0..9999" --* "1..1" fuml::CompleteStructuredActivities::StructuredActivityNode : structuredNodeOutput243
-fuml::CompleteStructuredActivities::Clause "1..1" -- "0..9999" CompleteStructuredActivities::Clause : successorClause224
+CompleteStructuredActivities::Clause "0..9999" -- "1..1" fuml::CompleteStructuredActivities::Clause : successorClause224
 Kernel::Class "0..9999" -- "1..1" fuml::Kernel::Class : superClass153
 IntermediateActivities::ActivityNode "1..1" -- "1..1" fuml::IntermediateActivities::ActivityEdge : target164
 BasicActions::InputPin "1..1" --* "1..1" fuml::IntermediateActions::DestroyObjectAction : target315
 BasicActions::InputPin "1..1" --* "1..1" fuml::BasicActions::SendSignalAction : target368
-fuml::BasicActions::CallOperationAction "1..1" *-- "1..1" BasicActions::InputPin : target377
+BasicActions::InputPin "1..1" --* "1..1" fuml::BasicActions::CallOperationAction : target377
 CompleteStructuredActivities::ExecutableNode "1..9999" -- "1..1" fuml::CompleteStructuredActivities::LoopNode : test197
 CompleteStructuredActivities::ExecutableNode "1..9999" -- "1..1" fuml::CompleteStructuredActivities::Clause : test216
 Communications::Trigger "1..9999" --* "1..1" fuml::CompleteActions::AcceptEventAction : trigger354
-fuml::Kernel::Operation "1..1" -- "0..1" Kernel::Type : type125
-fuml::Kernel::TypedElement "1..1" -- "0..1" Kernel::Type : type13
+Kernel::Type "0..1" -- "1..1" fuml::Kernel::Operation : type125
+Kernel::Type "0..1" -- "1..1" fuml::Kernel::TypedElement : type13
 Kernel::PrimitiveType "1..1" -- "1..1" fuml::Kernel::PrimitiveValue : type384
-fuml::Kernel::Link "1..1" -- "0..1" Kernel::Association : type390
+Kernel::Association "0..1" -- "1..1" fuml::Kernel::Link : type390
 Kernel::Enumeration "1..1" -- "1..1" fuml::Kernel::EnumerationValue : type393
 Kernel::DataType "1..1" -- "1..1" fuml::Kernel::DataValue : type395
 Kernel::Class "0..9999" -- "1..1" fuml::Kernel::Object : types386
 Kernel::ValueSpecification "0..1" --* "1..1" fuml::Kernel::MultiplicityElement : upperValue113
 Kernel::ValueSpecification "0..9999" --* "1..1" fuml::Kernel::Slot : value134
-fuml::IntermediateActions::ValueSpecificationAction "1..1" *-- "1..1" Kernel::ValueSpecification : value273
+Kernel::ValueSpecification "1..1" --* "1..1" fuml::IntermediateActions::ValueSpecificationAction : value273
 BasicActions::InputPin "0..1" -- "1..1" fuml::IntermediateActions::LinkEndData : value282
-fuml::IntermediateActions::WriteStructuralFeatureAction "1..1" *-- "0..1" BasicActions::InputPin : value287
-fuml::Kernel::FeatureValue "1..1" *-- "0..9999" Kernel::Value : values382
-fuml::BasicBehaviors::ParameterValue "1..1" *-- "0..9999" Kernel::Value : values401
+BasicActions::InputPin "0..1" --* "1..1" fuml::IntermediateActions::WriteStructuralFeatureAction : value287
+Kernel::Value "0..9999" --* "1..1" fuml::Kernel::FeatureValue : values382
+Kernel::Value "0..9999" --* "1..1" fuml::BasicBehaviors::ParameterValue : values401
 @enduml

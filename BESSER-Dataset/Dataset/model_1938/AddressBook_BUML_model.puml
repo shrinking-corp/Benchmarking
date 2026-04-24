@@ -25,11 +25,11 @@ class addressbook::Person {
 addressbook::AddressBook "0..1" -- "1..1" addressbook::Country : addressBook11
 addressbook::AddressBook "0..1" -- "1..1" addressbook::Person : addressBook3
 addressbook::Address "0..9999" --* "1..1" addressbook::Person : addresses2
-addressbook::Country "0..9999" --* "1..1" addressbook::AddressBook : countries1
+addressbook::AddressBook "1..1" *-- "0..9999" addressbook::Country : countries1
 addressbook::Country "0..1" -- "1..1" addressbook::FederalState : country14
-addressbook::Country "0..1" -- "1..1" addressbook::Address : country4
+addressbook::Address "1..1" -- "0..1" addressbook::Country : country4
 addressbook::Address "1..1" -- "0..1" addressbook::FederalState : federalState6
 addressbook::Country "1..1" *-- "0..9999" addressbook::FederalState : federalStates10
-addressbook::Person "0..1" -- "1..1" addressbook::Address : person8
+addressbook::Address "1..1" -- "0..1" addressbook::Person : person8
 addressbook::AddressBook "1..1" *-- "0..9999" addressbook::Person : persons0
 @enduml

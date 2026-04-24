@@ -47,14 +47,14 @@ AbstractBehaviorModelGraph <|-- behavior::BehaviorModelAbsolute
 AbstractBehaviorModelGraph <|-- behavior::BehaviorModelRelative
 AbstractUseCaseExecution <|-- behavior::ObservedUseCaseExecution
 AbstractUseCaseExecution <|-- behavior::Vertex
-behavior::BehaviorModelRelative "1..1" -- "1..1" behavior::BehaviorMixEntry : behaviorModel16
-behavior::BehaviorMixEntry "1..9999" --* "1..1" behavior::BehaviorMix : entries15
+behavior::BehaviorMixEntry "1..1" -- "1..1" behavior::BehaviorModelRelative : behaviorModel16
+behavior::BehaviorMix "1..1" *-- "1..9999" behavior::BehaviorMixEntry : entries15
 behavior::ObservedUseCaseExecution "0..9999" --* "1..1" behavior::Session : observedUseCaseExecutions2
 behavior::Transition "0..9999" --* "1..1" behavior::Vertex : outgoingTransitions7
 behavior::Session "0..9999" --* "1..1" behavior::SessionRepository : sessions1
-behavior::Vertex "1..1" -- "1..1" behavior::Transition : sourceVertex12
+behavior::Transition "1..1" -- "1..1" behavior::Vertex : sourceVertex12
 behavior::Transition "1..1" -- "1..1" behavior::Vertex : targetVertex9
 behavior::AbstractUseCaseExecution "1..1" -- "1..1" behavior::UseCase : useCase4
 behavior::UseCase "0..9999" --* "1..1" behavior::UseCaseRepository : useCases0
-behavior::Vertex "0..9999" --* "1..1" behavior::AbstractBehaviorModelGraph : vertices6
+behavior::AbstractBehaviorModelGraph "1..1" *-- "0..9999" behavior::Vertex : vertices6
 @enduml

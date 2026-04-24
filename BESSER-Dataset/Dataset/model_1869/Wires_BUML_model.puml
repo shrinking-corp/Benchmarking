@@ -109,12 +109,12 @@ DataType <|-- Wires::ModelType
 FormalParameter <|-- Wires::InputFormalParameter
 FormalParameter <|-- Wires::OutputFormalParameter
 Query <|-- Wires::GenericQuery
-TransformationType <|-- Wires::AtomicModelTransfomationType
-TransformationType <|-- Wires::CompositeTransformationType
-TransformationType <|-- Wires::QueryType
 Transformation <|-- Wires::AtomicModelTransformation
 Transformation <|-- Wires::CompositeTransformation
 Transformation <|-- Wires::Query
+TransformationType <|-- Wires::AtomicModelTransfomationType
+TransformationType <|-- Wires::CompositeTransformationType
+TransformationType <|-- Wires::QueryType
 Type <|-- Wires::DataType
 Type <|-- Wires::FormalParameter
 Type <|-- Wires::TransformationType
@@ -129,22 +129,22 @@ WiresElement <|-- Wires::Library
 WiresSpecification <|-- Wires::CompositeTransformationType
 Wires::DecisionNode "0..1" -- "1..1" Wires::Transformation : controlNode3
 Wires::WiresElement "0..9999" --* "1..1" Wires::WiresSpecification : els27
-Wires::Transformation "0..9999" -- "1..1" Wires::DecisionNode : falseBranch9
+Wires::DecisionNode "1..1" -- "0..9999" Wires::Transformation : falseBranch9
 Wires::InputActualParameter "0..9999" --* "1..1" Wires::Transformation : inParams0
-Wires::InputActualParameter "1..9999" --* "1..1" Wires::DecisionNode : inParams12
+Wires::DecisionNode "1..1" *-- "1..9999" Wires::InputActualParameter : inParams12
 Wires::InputFormalParameter "0..9999" --* "1..1" Wires::TransformationType : inParams21
 Wires::ConnectableElement "1..1" -- "0..9999" Wires::DataFlow : incoming24
 Wires::LibraryRef "0..9999" --* "1..1" Wires::TransformationType : libraries19
 Wires::Library "1..1" *-- "0..9999" Wires::LibraryRef : libraries30
 Wires::Library "1..1" -- "1..1" Wires::LibraryRef : library28
-Wires::Transformation "1..1" *-- "0..9999" Wires::OutputActualParameter : outParams1
-Wires::TransformationType "1..1" *-- "0..9999" Wires::OutputFormalParameter : outParams18
-Wires::DataFlow "0..9999" -- "1..1" Wires::ConnectableElement : outgoing25
+Wires::OutputActualParameter "0..9999" --* "1..1" Wires::Transformation : outParams1
+Wires::OutputFormalParameter "0..9999" --* "1..1" Wires::TransformationType : outParams18
+Wires::ConnectableElement "1..1" -- "0..9999" Wires::DataFlow : outgoing25
 Wires::ConnectableElement "1..1" -- "1..1" Wires::DataFlow : src16
 Wires::ConnectableElement "1..1" -- "1..1" Wires::DataFlow : target15
-Wires::Transformation "0..9999" -- "1..1" Wires::DecisionNode : trueBranch6
-Wires::TypedElement "1..1" -- "0..1" Wires::Type : type5
+Wires::DecisionNode "1..1" -- "0..9999" Wires::Transformation : trueBranch6
+Wires::Type "0..1" -- "1..1" Wires::TypedElement : type5
 Wires::DataType "1..1" -- "1..1" Wires::FormalParameter : typeEl23
-Wires::TypeParameter "1..1" --* "1..1" Wires::GenericTransformation : typeParam33
-Wires::TypeParameter "1..1" --* "1..1" Wires::GenericQuery : typeParam34
+Wires::GenericTransformation "1..1" *-- "1..1" Wires::TypeParameter : typeParam33
+Wires::GenericQuery "1..1" *-- "1..1" Wires::TypeParameter : typeParam34
 @enduml

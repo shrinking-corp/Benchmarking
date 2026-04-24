@@ -86,11 +86,11 @@ TestClassifier <|-- pltest::TestClass
 TestClassifier <|-- pltest::TestInterface
 TestPackageableElement <|-- pltest::TestClassifier
 TestPackageableElement <|-- pltest::TestPackage
-pltest::Common "0..1" -- "1..1" pltest::Child1 : a10
+pltest::Child1 "1..1" -- "0..1" pltest::Common : a10
 pltest::Child2 "1..1" -- "0..1" pltest::Common : a21
-pltest::TestClassifier "0..9999" --* "1..1" pltest::TestClass : nestedClassifier10
-pltest::TestPackageableElement "0..9999" --* "1..1" pltest::TestPackage : ownedElements7
+pltest::TestClass "1..1" *-- "0..9999" pltest::TestClassifier : nestedClassifier10
+pltest::TestPackage "1..1" *-- "0..9999" pltest::TestPackageableElement : ownedElements7
 pltest::TestPackage "0..1" -- "1..1" pltest::TestPackageableElement : owningPackage6
-pltest::Red "0..9999" -- "1..1" pltest::Circle : red3
-pltest::WhatEver "1..1" -- "0..1" pltest::Circle : someRef4
+pltest::Circle "1..1" -- "0..9999" pltest::Red : red3
+pltest::Circle "0..1" -- "1..1" pltest::WhatEver : someRef4
 @enduml

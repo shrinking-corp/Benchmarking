@@ -67,18 +67,18 @@ Node <|-- sgf::tree::BasicNode
 Node <|-- sgf::tree::Root
 Coordinator "0..9999" --* "1..1" sgf::tree::Tree : Coordinator1
 Process "1..9999" --* "1..1" sgf::bundle::Bundle : Process13
-sgf::tree::Tree "1..1" *-- "1..1" Root : Root0
+Root "1..1" --* "1..1" sgf::tree::Tree : Root0
 Simulator "1..9999" --* "1..1" sgf::tree::Tree : Simulator3
 Bundle "1..1" -- "1..1" sgf::graph::Graph : bundle17
-sgf::tree::Root "1..1" -- "1..1" BasicNode : child5
+BasicNode "1..1" -- "1..1" sgf::tree::Root : child5
 BasicNode "1..9999" -- "1..1" sgf::tree::Coordinator : children6
 Mapping "1..9999" --* "1..1" sgf::graph::Graph : mappings20
-sgf::bundle::Process "1..1" -- "1..9999" Node : nodes15
+Node "1..9999" -- "1..1" sgf::bundle::Process : nodes15
 Process "1..9999" -- "1..1" sgf::graph::Mapping : processes22
 Processor "1..1" -- "1..1" sgf::graph::Mapping : processor24
-sgf::vm::VM "1..1" *-- "1..9999" Processor : processors16
+Processor "1..9999" --* "1..1" sgf::vm::VM : processors16
 Root "1..9999" --* "1..1" sgf::skeleton::Skeleton : rootskel9
-sgf::bundle::Bundle "1..1" -- "1..1" Skeleton : skeleton12
+Skeleton "1..1" -- "1..1" sgf::bundle::Bundle : skeleton12
 Tree "0..1" -- "1..1" sgf::skeleton::Skeleton : tree8
 VM "1..1" -- "1..1" sgf::graph::Graph : vm18
 @enduml

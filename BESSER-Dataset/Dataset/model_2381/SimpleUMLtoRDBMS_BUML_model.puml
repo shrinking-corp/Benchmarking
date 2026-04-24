@@ -58,10 +58,10 @@ abstract class simpleumltordbms::ToColumn {
 abstract class simpleumltordbms::UmlToRdbmsModelElement {
   + name : str
 }
-FromAttributeOwner <|-- simpleumltordbms::ClassToTable
-FromAttributeOwner <|-- simpleumltordbms::NonLeafAttribute
 FromAttribute <|-- simpleumltordbms::AttributeToColumn
 FromAttribute <|-- simpleumltordbms::NonLeafAttribute
+FromAttributeOwner <|-- simpleumltordbms::ClassToTable
+FromAttributeOwner <|-- simpleumltordbms::NonLeafAttribute
 PrimitiveToName <|-- simpleumltordbms::BooleanToBoolean
 PrimitiveToName <|-- simpleumltordbms::IntegerToNumber
 PrimitiveToName <|-- simpleumltordbms::StringToVarchar
@@ -73,24 +73,24 @@ UmlToRdbmsModelElement <|-- simpleumltordbms::ClassToTable
 UmlToRdbmsModelElement <|-- simpleumltordbms::FromAttribute
 UmlToRdbmsModelElement <|-- simpleumltordbms::PackageToSchema
 UmlToRdbmsModelElement <|-- simpleumltordbms::PrimitiveToName
-simpleumltordbms::AssociationToForeignKey "1..1" -- "0..1" simpleumltordbms::Association : association1
-simpleumltordbms::ClassToTable "1..1" *-- "0..9999" simpleumltordbms::AssociationToForeignKey : associationsToForeignKeys7
-simpleumltordbms::FromAttribute "1..1" -- "0..1" simpleumltordbms::Attribute : attribute15
+simpleumltordbms::Association "0..1" -- "1..1" simpleumltordbms::AssociationToForeignKey : association1
+simpleumltordbms::AssociationToForeignKey "0..9999" --* "1..1" simpleumltordbms::ClassToTable : associationsToForeignKeys7
+simpleumltordbms::Attribute "0..1" -- "1..1" simpleumltordbms::FromAttribute : attribute15
 simpleumltordbms::ClassToTable "1..9999" --* "1..1" simpleumltordbms::PackageToSchema : classesToTables22
 simpleumltordbms::Column "1..1" -- "1..1" simpleumltordbms::ToColumn : column34
-simpleumltordbms::ForeignKey "0..1" -- "1..1" simpleumltordbms::AssociationToForeignKey : foreignKey2
+simpleumltordbms::AssociationToForeignKey "1..1" -- "0..1" simpleumltordbms::ForeignKey : foreignKey2
 simpleumltordbms::FromAttribute "0..9999" --* "1..1" simpleumltordbms::FromAttributeOwner : fromAttributes20
 simpleumltordbms::AttributeToColumn "0..9999" -- "1..1" simpleumltordbms::FromAttribute : leafs16
-simpleumltordbms::FromAttributeOwner "1..1" -- "1..1" simpleumltordbms::FromAttribute : owner19
-simpleumltordbms::PrimitiveToName "1..1" -- "1..1" simpleumltordbms::PackageToSchema : owner30
-simpleumltordbms::ClassToTable "1..1" -- "1..1" simpleumltordbms::AssociationToForeignKey : owner4
-simpleumltordbms::PackageToSchema "1..1" -- "1..1" simpleumltordbms::ClassToTable : owner8
-simpleumltordbms::Key "0..1" -- "1..1" simpleumltordbms::ClassToTable : primaryKey9
+simpleumltordbms::FromAttribute "1..1" -- "1..1" simpleumltordbms::FromAttributeOwner : owner19
+simpleumltordbms::PackageToSchema "1..1" -- "1..1" simpleumltordbms::PrimitiveToName : owner30
+simpleumltordbms::AssociationToForeignKey "1..1" -- "1..1" simpleumltordbms::ClassToTable : owner4
+simpleumltordbms::ClassToTable "1..1" -- "1..1" simpleumltordbms::PackageToSchema : owner8
+simpleumltordbms::ClassToTable "1..1" -- "0..1" simpleumltordbms::Key : primaryKey9
 simpleumltordbms::PrimitiveDataType "1..1" -- "1..1" simpleumltordbms::PrimitiveToName : primitive32
 simpleumltordbms::PackageToSchema "1..1" *-- "0..9999" simpleumltordbms::PrimitiveToName : primitivesToNames25
-simpleumltordbms::ClassToTable "0..1" -- "1..1" simpleumltordbms::AssociationToForeignKey : referenced5
-simpleumltordbms::Schema "1..1" -- "1..1" simpleumltordbms::PackageToSchema : schema27
-simpleumltordbms::Table "0..1" -- "1..1" simpleumltordbms::ClassToTable : table11
+simpleumltordbms::AssociationToForeignKey "1..1" -- "0..1" simpleumltordbms::ClassToTable : referenced5
+simpleumltordbms::PackageToSchema "1..1" -- "1..1" simpleumltordbms::Schema : schema27
+simpleumltordbms::ClassToTable "1..1" -- "0..1" simpleumltordbms::Table : table11
 simpleumltordbms::AttributeToColumn "1..1" -- "0..1" simpleumltordbms::PrimitiveToName : type0
 simpleumltordbms::Class "0..1" -- "1..1" simpleumltordbms::ClassToTable : umlClass13
 simpleumltordbms::Package "1..1" -- "1..1" simpleumltordbms::PackageToSchema : umlPackage28

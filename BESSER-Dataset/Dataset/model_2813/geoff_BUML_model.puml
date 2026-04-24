@@ -211,13 +211,13 @@ TileSource <|-- geoff::source::TileImage
 XYZ <|-- geoff::source::BingMaps
 XYZ <|-- geoff::source::MapQuest
 XYZ <|-- geoff::source::OSM
-geoff::View "1..1" *-- "1..1" geoff::Location : center7
-style::geoff::Color "0..1" --* "1..1" geoff::style::Fill : color31
-style::geoff::Color "0..1" --* "1..1" geoff::style::Stroke : color32
-geom::geoff::Location "1..1" --* "1..1" geoff::geom::Point : coordinates19
-geom::geoff::Location "2..9999" --* "1..1" geoff::geom::LineString : coordinates20
+geoff::Location "1..1" --* "1..1" geoff::View : center7
+geoff::style::Fill "1..1" *-- "0..1" style::geoff::Color : color31
+geoff::style::Stroke "1..1" *-- "0..1" style::geoff::Color : color32
+geoff::geom::Point "1..1" *-- "1..1" geom::geoff::Location : coordinates19
+geoff::geom::LineString "1..1" *-- "2..9999" geom::geoff::Location : coordinates20
 geoff::geom::Polygon "1..1" *-- "2..9999" geom::geoff::Location : coordinates22
-source::geoff::Feature "0..9999" --* "1..1" geoff::source::VectorSource : features18
+geoff::source::VectorSource "1..1" *-- "0..9999" source::geoff::Feature : features18
 Fill "0..1" --* "1..1" geoff::style::Style : fill25
 Fill "0..1" --* "1..1" geoff::style::Circle : fill34
 Fill "0..1" --* "1..1" geoff::style::Text : fill39
@@ -225,15 +225,15 @@ Geometry "1..1" --* "1..1" geoff::Feature : geometry9
 Image "0..1" --* "1..1" geoff::style::Style : image24
 Interaction "0..9999" --* "1..1" geoff::GeoMap : interactions5
 Layer "0..9999" --* "1..1" geoff::GeoMap : layers0
-geoff::StringToStringMapEntry "0..9999" --* "1..1" geoff::Feature : properties12
-geoff::Script "0..9999" --* "1..1" geoff::GeoMap : scripts3
-geoff::layer::Layer "1..1" *-- "1..1" Source : source16
+geoff::Feature "1..1" *-- "0..9999" geoff::StringToStringMapEntry : properties12
+geoff::GeoMap "1..1" *-- "0..9999" geoff::Script : scripts3
+Source "1..1" --* "1..1" geoff::layer::Layer : source16
 Stroke "0..1" --* "1..1" geoff::style::Style : stroke27
-geoff::style::Circle "1..1" *-- "0..1" Stroke : stroke36
+Stroke "0..1" --* "1..1" geoff::style::Circle : stroke36
 Stroke "0..1" --* "1..1" geoff::style::Text : stroke41
 Style "0..1" --* "1..1" geoff::Feature : style10
-layer::geoff::StyleEntry "0..9999" --* "1..1" geoff::layer::VectorLayer : styles17
-geoff::style::Style "1..1" *-- "0..1" Text : text29
+geoff::layer::VectorLayer "1..1" *-- "0..9999" layer::geoff::StyleEntry : styles17
+Text "0..1" --* "1..1" geoff::style::Style : text29
 Style "0..1" --* "1..1" geoff::StyleEntry : value14
 geoff::GeoMap "1..1" *-- "0..1" geoff::View : view1
 @enduml

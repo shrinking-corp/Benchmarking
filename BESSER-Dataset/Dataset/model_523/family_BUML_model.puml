@@ -27,14 +27,14 @@ FNamedElement <|-- family::Person
 Person <|-- family::Child
 Person <|-- family::Father
 Person <|-- family::Mother
-family::Family "1..1" -- "0..9999" family::Child : children5
+family::Child "0..9999" -- "1..1" family::Family : children5
 family::Child "0..9999" -- "1..1" family::Father : children7
 family::Child "0..9999" -- "1..1" family::Mother : children9
-family::Father "0..1" -- "1..1" family::Family : father1
-family::Father "0..1" -- "1..1" family::Child : father14
+family::Family "1..1" -- "0..1" family::Father : father1
+family::Child "1..1" -- "0..1" family::Father : father14
 family::Father "0..1" -- "1..1" family::Mother : husband11
-family::Person "1..9999" --* "1..1" family::Family : members0
-family::Mother "0..1" -- "1..1" family::Child : mother12
-family::Mother "0..1" -- "1..1" family::Family : mother3
-family::Mother "0..1" -- "1..1" family::Father : wife8
+family::Family "1..1" *-- "1..9999" family::Person : members0
+family::Child "1..1" -- "0..1" family::Mother : mother12
+family::Family "1..1" -- "0..1" family::Mother : mother3
+family::Father "1..1" -- "0..1" family::Mother : wife8
 @enduml

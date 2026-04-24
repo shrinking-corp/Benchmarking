@@ -220,11 +220,11 @@ IntegerExpression <|-- arduino::IntegerConstant
 IntegerExpression <|-- arduino::IntegerModuleGet
 IntegerExpression <|-- arduino::IntegerVariable
 IntegerExpression <|-- arduino::UnaryIntegerExpression
+Module <|-- arduino::Actuator
+Module <|-- arduino::Sensor
 ModuleGet <|-- arduino::BooleanModuleGet
 ModuleGet <|-- arduino::IntegerModuleGet
 ModuleInstruction <|-- arduino::ModuleAssignment
-Module <|-- arduino::Actuator
-Module <|-- arduino::Sensor
 NamedElement <|-- arduino::Hardware
 NamedElement <|-- arduino::Instruction
 NamedElement <|-- arduino::Module
@@ -240,32 +240,32 @@ Variable <|-- arduino::BooleanVariable
 Variable <|-- arduino::IntegerVariable
 arduino::AnalogPin "0..9999" --* "1..1" arduino::Platform : analogPins7
 arduino::Expression "1..1" --* "1..1" arduino::While : condition44
-arduino::If "1..1" *-- "1..1" arduino::Expression : condition51
+arduino::Expression "1..1" --* "1..1" arduino::If : condition51
 arduino::Connector "0..9999" --* "1..1" arduino::Hardware : connectors3
 arduino::Instruction "0..1" -- "1..1" arduino::Instruction : dependency31
 arduino::DigitalPin "0..9999" --* "1..1" arduino::Platform : digitalPins5
 arduino::Hardware "0..1" --* "1..1" arduino::Project : hardware13
-arduino::Sketch "1..1" -- "1..1" arduino::Hardware : hardware9
+arduino::Hardware "1..1" -- "1..1" arduino::Sketch : hardware9
 arduino::Instruction "0..9999" --* "1..1" arduino::Sketch : instructions11
-arduino::Instruction "0..9999" --* "1..1" arduino::Control : instructions35
-arduino::Expression "1..1" --* "1..1" arduino::BinaryExpression : left45
+arduino::Control "1..1" *-- "0..9999" arduino::Instruction : instructions35
+arduino::BinaryExpression "1..1" *-- "1..1" arduino::Expression : left45
 arduino::Module "1..1" -- "1..1" arduino::ModuleInstruction : module33
-arduino::Module "0..1" -- "1..1" arduino::Connector : module39
+arduino::Connector "1..1" -- "0..1" arduino::Module : module39
 arduino::Module "1..1" -- "1..1" arduino::ModuleGet : module42
 arduino::Hardware "1..1" -- "0..9999" arduino::Module : modules1
-arduino::Project "1..1" *-- "0..9999" arduino::Module : modules15
-arduino::Instruction "1..1" -- "0..1" arduino::Instruction : next28
-arduino::Expression "1..1" --* "1..1" arduino::Assignment : operand53
+arduino::Module "0..9999" --* "1..1" arduino::Project : modules15
+arduino::Instruction "0..1" -- "1..1" arduino::Instruction : next28
+arduino::Assignment "1..1" *-- "1..1" arduino::Expression : operand53
 arduino::Expression "1..1" --* "1..1" arduino::UnaryExpression : operand55
 arduino::Connector "1..1" -- "0..1" arduino::Pin : pin37
 arduino::Platform "0..9999" --* "1..1" arduino::Project : platform18
-arduino::Platform "1..9999" -- "1..1" arduino::Hardware : platforms0
+arduino::Hardware "1..1" -- "1..9999" arduino::Platform : platforms0
 arduino::Instruction "0..1" -- "1..1" arduino::Instruction : previous25
-arduino::Expression "0..1" --* "1..1" arduino::BinaryExpression : right47
-arduino::Sketch "0..9999" --* "1..1" arduino::Project : sketchs21
-arduino::Synchro "0..9999" -- "1..1" arduino::Synchro : synchro62
+arduino::BinaryExpression "1..1" *-- "0..1" arduino::Expression : right47
+arduino::Project "1..1" *-- "0..9999" arduino::Sketch : sketchs21
+arduino::Synchro "1..1" -- "0..9999" arduino::Synchro : synchro62
 arduino::Synchro "1..1" -- "0..9999" arduino::Synchro : synchroeOpposite64
-arduino::VariableAssignment "1..1" -- "1..1" arduino::Variable : variable50
-arduino::VariableDeclaration "1..1" *-- "1..1" arduino::Variable : variable57
+arduino::Variable "1..1" -- "1..1" arduino::VariableAssignment : variable50
+arduino::Variable "1..1" --* "1..1" arduino::VariableDeclaration : variable57
 arduino::Variable "1..1" -- "1..1" arduino::VariableRef : variable59
 @enduml

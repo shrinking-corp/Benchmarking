@@ -50,10 +50,10 @@ class uml2rdbms::Table {
 }
 abstract class uml2rdbms::ToColumn {
 }
-FromAttributeOwner <|-- uml2rdbms::ClassToTable
-FromAttributeOwner <|-- uml2rdbms::NonLeafAttribute
 FromAttribute <|-- uml2rdbms::AttributeToColumn
 FromAttribute <|-- uml2rdbms::NonLeafAttribute
+FromAttributeOwner <|-- uml2rdbms::ClassToTable
+FromAttributeOwner <|-- uml2rdbms::NonLeafAttribute
 ToColumn <|-- uml2rdbms::AssociationToForeignKey
 ToColumn <|-- uml2rdbms::AttributeToColumn
 ToColumn <|-- uml2rdbms::ClassToTable
@@ -62,20 +62,20 @@ uml2rdbms::AssociationToForeignKey "0..9999" --* "1..1" uml2rdbms::ClassToTable 
 uml2rdbms::Attribute "0..1" -- "1..1" uml2rdbms::FromAttribute : attribute18
 uml2rdbms::ClassToTable "0..9999" --* "1..1" uml2rdbms::PackageToSchema : classesToTables22
 uml2rdbms::Column "0..1" -- "1..1" uml2rdbms::ToColumn : column34
-uml2rdbms::ForeignKey "0..1" -- "1..1" uml2rdbms::AssociationToForeignKey : foreignKey4
+uml2rdbms::AssociationToForeignKey "1..1" -- "0..1" uml2rdbms::ForeignKey : foreignKey4
 uml2rdbms::FromAttribute "0..9999" --* "1..1" uml2rdbms::FromAttributeOwner : fromAttributes20
 uml2rdbms::AttributeToColumn "0..9999" --* "1..1" uml2rdbms::FromAttribute : leafs16
-uml2rdbms::ClassToTable "0..1" -- "1..1" uml2rdbms::AssociationToForeignKey : owner1
+uml2rdbms::AssociationToForeignKey "1..1" -- "0..1" uml2rdbms::ClassToTable : owner1
 uml2rdbms::FromAttribute "1..1" -- "0..1" uml2rdbms::FromAttributeOwner : owner15
 uml2rdbms::PackageToSchema "0..1" -- "1..1" uml2rdbms::PrimitiveToName : owner30
-uml2rdbms::PackageToSchema "0..1" -- "1..1" uml2rdbms::ClassToTable : owner7
-uml2rdbms::Key "0..1" -- "1..1" uml2rdbms::ClassToTable : primaryKey13
+uml2rdbms::ClassToTable "1..1" -- "0..1" uml2rdbms::PackageToSchema : owner7
+uml2rdbms::ClassToTable "1..1" -- "0..1" uml2rdbms::Key : primaryKey13
 uml2rdbms::PrimitiveDataType "0..1" -- "1..1" uml2rdbms::PrimitiveToName : primitive32
-uml2rdbms::PrimitiveToName "0..9999" --* "1..1" uml2rdbms::PackageToSchema : primitivesToNames25
-uml2rdbms::ClassToTable "0..1" -- "1..1" uml2rdbms::AssociationToForeignKey : referenced0
+uml2rdbms::PackageToSchema "1..1" *-- "0..9999" uml2rdbms::PrimitiveToName : primitivesToNames25
+uml2rdbms::AssociationToForeignKey "1..1" -- "0..1" uml2rdbms::ClassToTable : referenced0
 uml2rdbms::PackageToSchema "1..1" -- "0..1" uml2rdbms::Schema : schema28
 uml2rdbms::ClassToTable "1..1" -- "0..1" uml2rdbms::Table : table11
-uml2rdbms::PrimitiveToName "0..1" -- "1..1" uml2rdbms::NonLeafAttribute : type35
+uml2rdbms::NonLeafAttribute "1..1" -- "0..1" uml2rdbms::PrimitiveToName : type35
 uml2rdbms::AttributeToColumn "1..1" -- "0..1" uml2rdbms::PrimitiveToName : type6
 uml2rdbms::Class "0..1" -- "1..1" uml2rdbms::ClassToTable : umlClass9
 uml2rdbms::Package "0..1" -- "1..1" uml2rdbms::PackageToSchema : umlPackage27

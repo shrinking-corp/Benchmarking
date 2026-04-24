@@ -1,0 +1,26 @@
+@startuml
+class employee::Company {
+  + name : str
+}
+class employee::Department {
+  + deptID : int
+  + name : str
+}
+class employee::Employee {
+  + empID : int
+  + isManager : bool
+  + name : str
+  + allReports() : str
+  + reportingChain() : str
+  + reportsTo(mgr : any) : bool
+}
+employee::Company "0..1" -- "1..1" employee::Employee : company15
+employee::Company "0..1" -- "1..1" employee::Department : company6
+employee::Department "0..1" -- "1..1" employee::Employee : department7
+employee::Company "1..1" *-- "0..9999" employee::Department : departments1
+employee::Employee "1..1" -- "0..9999" employee::Employee : directReports13
+employee::Company "1..1" *-- "0..9999" employee::Employee : employees0
+employee::Department "1..1" -- "0..9999" employee::Employee : employees4
+employee::Employee "1..1" -- "0..1" employee::Employee : manager10
+employee::Department "1..1" -- "0..1" employee::Employee : manager3
+@enduml

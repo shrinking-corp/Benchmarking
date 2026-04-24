@@ -400,8 +400,8 @@ ATL::LocatedElement <|-- atlext::OCL::VariableDeclaration
 ATL::ModuleCallable <|-- atlext::ATL::StaticHelper
 ATL::ModuleCallable <|-- atlext::ATL::StaticRule
 ATL::ModuleElement <|-- atlext::ATL::Helper
-ATL::RuleWithPattern <|-- atlext::ATL::LazyRule
 ATL::Rule <|-- atlext::ATL::StaticRule
+ATL::RuleWithPattern <|-- atlext::ATL::LazyRule
 ATL::StaticRule <|-- atlext::ATL::LazyRule
 Callable <|-- atlext::ATL::ModuleCallable
 CollectionExp <|-- atlext::OCL::BagExp
@@ -467,18 +467,18 @@ OutPatternElement <|-- atlext::ATL::ForEachOutPatternElement
 OutPatternElement <|-- atlext::ATL::SimpleOutPatternElement
 PatternElement <|-- atlext::ATL::InPatternElement
 PatternElement <|-- atlext::ATL::OutPatternElement
-PrimitiveExp <|-- atlext::OCL::BooleanExp
-PrimitiveExp <|-- atlext::OCL::NumericExp
-PrimitiveExp <|-- atlext::OCL::StringExp
 Primitive <|-- atlext::OCL::BooleanType
 Primitive <|-- atlext::OCL::NumericType
 Primitive <|-- atlext::OCL::StringType
+PrimitiveExp <|-- atlext::OCL::BooleanExp
+PrimitiveExp <|-- atlext::OCL::NumericExp
+PrimitiveExp <|-- atlext::OCL::StringExp
 PropertyCallExp <|-- atlext::OCL::LoopExp
 PropertyCallExp <|-- atlext::OCL::NavigationOrAttributeCallExp
 PropertyCallExp <|-- atlext::OCL::OperationCallExp
+Rule <|-- atlext::ATL::RuleWithPattern
 RuleResolutionInfo <|-- atlext::OCL::ResolveTempResolution
 RuleWithPattern <|-- atlext::ATL::MatchedRule
-Rule <|-- atlext::ATL::RuleWithPattern
 Statement <|-- atlext::ATL::BindingStat
 Statement <|-- atlext::ATL::ExpressionStat
 Statement <|-- atlext::ATL::ForStat
@@ -493,12 +493,12 @@ VariableDeclaration <|-- atlext::OCL::Iterator
 VariableDeclaration <|-- atlext::OCL::Parameter
 VariableDeclaration <|-- atlext::OCL::TuplePart
 ActionBlock "0..1" --* "1..1" atlext::ATL::Rule : actionBlock31
-atlext::ATL::RuleResolutionInfo "1..1" -- "1..9999" MatchedRule : allInvolvedRules133
+MatchedRule "1..9999" -- "1..1" atlext::ATL::RuleResolutionInfo : allInvolvedRules133
 StringToStringMap "0..9999" --* "1..1" atlext::ATL::LocatedElement : annotations1
 PropertyCallExp "0..1" -- "1..1" atlext::OCL::OclExpression : appliedProperty140
 OclExpression "0..9999" --* "1..1" atlext::OCL::OperationCallExp : arguments198
 Attribute "0..1" -- "1..1" atlext::OCL::OclType : attribute257
-atlext::OCL::TupleType "1..1" *-- "0..9999" TupleTypeAttribute : attributes270
+TupleTypeAttribute "0..9999" --* "1..1" atlext::OCL::TupleType : attributes270
 IterateExp "0..1" -- "1..1" atlext::OCL::VariableDeclaration : baseExp235
 Binding "0..9999" --* "1..1" atlext::ATL::OutPatternElement : bindings73
 OclExpression "1..1" --* "1..1" atlext::OCL::LoopExp : body202
@@ -508,19 +508,19 @@ CallableParameter "0..9999" --* "1..1" atlext::ATL::Callable : callableParameter
 PropertyCallExp "0..9999" -- "1..1" atlext::ATL::Callable : calledBy35
 RuleWithPattern "0..9999" -- "1..1" atlext::ATL::RuleWithPattern : children40
 OclExpression "1..1" --* "1..1" atlext::ATL::ForStat : collection122
-atlext::OCL::OclExpression "1..1" -- "0..1" CollectionExp : collection143
-atlext::ATL::ForEachOutPatternElement "1..1" *-- "1..1" OclExpression : collection79
-atlext::OCL::OclType "1..1" -- "0..1" CollectionType : collectionTypes263
+CollectionExp "0..1" -- "1..1" atlext::OCL::OclExpression : collection143
+OclExpression "1..1" --* "1..1" atlext::ATL::ForEachOutPatternElement : collection79
+CollectionType "0..1" -- "1..1" atlext::OCL::OclType : collectionTypes263
 OclExpression "1..1" --* "1..1" atlext::ATL::IfStat : condition112
-atlext::OCL::IfExp "1..1" *-- "1..1" OclExpression : condition220
+OclExpression "1..1" --* "1..1" atlext::OCL::IfExp : condition220
 ATL::atlext::Type "1..1" -- "1..1" atlext::ATL::ContextHelper : contextType26
 OclContextDefinition "0..1" --* "1..1" atlext::OCL::OclFeatureDefinition : context_289
 OclType "1..1" --* "1..1" atlext::OCL::OclContextDefinition : context_295
 OclFeatureDefinition "1..1" --* "1..1" atlext::ATL::Helper : definition20
-atlext::OCL::OclContextDefinition "1..1" -- "1..1" OclFeatureDefinition : definition292
+OclFeatureDefinition "1..1" -- "1..1" atlext::OCL::OclContextDefinition : definition292
 OclFeatureDefinition "0..1" -- "1..1" atlext::OCL::OclFeature : definition298
 OclContextDefinition "0..1" -- "1..1" atlext::OCL::OclType : definitions247
-atlext::ATL::OutPattern "1..1" *-- "0..1" DropPattern : dropPattern52
+DropPattern "0..1" --* "1..1" atlext::ATL::OutPattern : dropPattern52
 ContextHelper "0..9999" -- "1..1" atlext::OCL::PropertyCallExp : dynamicResolvers196
 OutPatternElement "1..1" -- "1..1" atlext::OCL::ResolveTempResolution : element325
 OclType "1..1" --* "1..1" atlext::OCL::CollectionType : elementType244
@@ -535,20 +535,20 @@ Statement "0..9999" --* "1..1" atlext::ATL::IfStat : elseStatements117
 OclExpression "1..1" --* "1..1" atlext::ATL::ExpressionStat : expression105
 OclFeature "1..1" --* "1..1" atlext::OCL::OclFeatureDefinition : feature287
 OclExpression "0..1" --* "1..1" atlext::ATL::InPattern : filter48
-atlext::ATL::Library "1..1" *-- "0..9999" Helper : helpers4
+Helper "0..9999" --* "1..1" atlext::ATL::Library : helpers4
 Helper "0..9999" --* "1..1" atlext::ATL::Query : helpers7
 IfExp "0..1" -- "1..1" atlext::OCL::OclExpression : ifExp1159
 IfExp "0..1" -- "1..1" atlext::OCL::OclExpression : ifExp2154
 IfExp "0..1" -- "1..1" atlext::OCL::OclExpression : ifExp3138
-atlext::ATL::Module "1..1" *-- "1..9999" OclModel : inModels10
+OclModel "1..9999" --* "1..1" atlext::ATL::Module : inModels10
 InPattern "0..1" --* "1..1" atlext::ATL::RuleWithPattern : inPattern39
-atlext::ATL::InPatternElement "1..1" -- "1..1" InPattern : inPattern62
-atlext::OCL::LetExp "1..1" *-- "1..1" OclExpression : in_214
-atlext::ATL::Helper "1..1" -- "0..1" ATL::atlext::Type : inferredReturnType21
-atlext::OCL::TypedElement "1..1" -- "0..1" OCL::atlext::Type : inferredType323
-atlext::OCL::VariableDeclaration "1..1" *-- "0..1" OclExpression : initExpression229
+InPattern "1..1" -- "1..1" atlext::ATL::InPatternElement : inPattern62
+OclExpression "1..1" --* "1..1" atlext::OCL::LetExp : in_214
+ATL::atlext::Type "0..1" -- "1..1" atlext::ATL::Helper : inferredReturnType21
+OCL::atlext::Type "0..1" -- "1..1" atlext::OCL::TypedElement : inferredType323
+OclExpression "0..1" --* "1..1" atlext::OCL::VariableDeclaration : initExpression229
 OclExpression "1..1" --* "1..1" atlext::OCL::Attribute : initExpression301
-atlext::OCL::OclExpression "1..1" -- "0..1" VariableDeclaration : initializedVariable151
+VariableDeclaration "0..1" -- "1..1" atlext::OCL::OclExpression : initializedVariable151
 Iterator "1..1" --* "1..1" atlext::ATL::ForStat : iterator120
 Iterator "1..1" --* "1..1" atlext::ATL::ForEachOutPatternElement : iterator81
 Iterator "1..9999" --* "1..1" atlext::OCL::LoopExp : iterators205
@@ -559,7 +559,7 @@ LetExp "0..1" -- "1..1" atlext::OCL::OclExpression : letExp145
 LetExp "0..1" -- "1..1" atlext::OCL::VariableDeclaration : letExp232
 LibraryRef "0..9999" --* "1..1" atlext::ATL::Unit : libraries3
 Library "0..1" -- "1..1" atlext::ATL::Helper : library18
-atlext::OCL::OclExpression "1..1" -- "0..1" LoopExp : loopExp147
+LoopExp "0..1" -- "1..1" atlext::OCL::OclExpression : loopExp147
 LoopExp "0..1" -- "1..1" atlext::OCL::Iterator : loopExpr241
 MapExp "1..1" -- "1..1" atlext::OCL::MapElement : map177
 MapType "0..1" -- "1..1" atlext::OCL::OclType : mapType2255
@@ -572,45 +572,45 @@ OclModel "0..1" -- "1..1" atlext::ATL::OutPatternElement : model75
 OclModel "0..9999" -- "1..1" atlext::ATL::InPatternElement : models65
 OCL::atlext::Type "0..1" -- "1..1" atlext::OCL::OclExpression : noCastedType164
 OclExpression "0..1" -- "1..1" atlext::OCL::OclType : oclExpression249
-atlext::OCL::OclType "1..1" -- "0..1" Operation : operation252
-atlext::ATL::Module "1..1" *-- "1..9999" OclModel : outModels11
-atlext::ATL::Rule "1..1" *-- "0..1" OutPattern : outPattern29
+Operation "0..1" -- "1..1" atlext::OCL::OclType : operation252
+OclModel "1..9999" --* "1..1" atlext::ATL::Module : outModels11
+OutPattern "0..1" --* "1..1" atlext::ATL::Rule : outPattern29
 OutPattern "1..1" -- "1..1" atlext::ATL::DropPattern : outPattern56
 OutPattern "1..1" -- "1..1" atlext::ATL::OutPatternElement : outPattern67
-atlext::ATL::Binding "1..1" -- "1..1" OutPatternElement : outPatternElement85
-atlext::OCL::OclExpression "1..1" -- "0..1" Attribute : owningAttribute162
+OutPatternElement "1..1" -- "1..1" atlext::ATL::Binding : outPatternElement85
+Attribute "0..1" -- "1..1" atlext::OCL::OclExpression : owningAttribute162
 Operation "0..1" -- "1..1" atlext::OCL::OclExpression : owningOperation157
-atlext::ATL::CallableParameter "1..1" -- "0..1" VariableDeclaration : paramDeclaration130
+VariableDeclaration "0..1" -- "1..1" atlext::ATL::CallableParameter : paramDeclaration130
 Parameter "0..9999" --* "1..1" atlext::OCL::Operation : parameters307
 Parameter "0..9999" --* "1..1" atlext::ATL::CalledRule : parameters45
 OperationCallExp "0..1" -- "1..1" atlext::OCL::OclExpression : parentOperation149
 PropertyCallExp "0..9999" -- "1..1" atlext::ATL::ContextHelper : polymorphicCalledBy28
 ATL::atlext::EObject "0..9999" -- "1..1" atlext::ATL::LocatedElement : problems0
-atlext::ATL::Helper "1..1" -- "0..1" Query : query16
+Query "0..1" -- "1..1" atlext::ATL::Helper : query16
 OCL::atlext::EObject "0..1" -- "1..1" atlext::OCL::PropertyCallExp : receptorType191
-atlext::OCL::VariableExp "1..1" -- "1..1" VariableDeclaration : referredVariable165
-atlext::OCL::OperationCallExp "1..1" *-- "0..9999" ResolveTempResolution : resolveTempResolvedBy201
+VariableDeclaration "1..1" -- "1..1" atlext::OCL::VariableExp : referredVariable165
+ResolveTempResolution "0..9999" --* "1..1" atlext::OCL::OperationCallExp : resolveTempResolvedBy201
 RuleResolutionInfo "0..9999" --* "1..1" atlext::ATL::Binding : resolvedBy94
 VariableDeclaration "1..1" --* "1..1" atlext::OCL::IterateExp : result208
-atlext::OCL::Operation "1..1" *-- "1..1" OclType : returnType309
+OclType "1..1" --* "1..1" atlext::OCL::Operation : returnType309
 OclExpression "0..9999" --* "1..1" atlext::ATL::SimpleOutPatternElement : reverseBindings77
 Rule "1..1" -- "1..1" atlext::ATL::ActionBlock : rule101
 MatchedRule "1..1" -- "1..1" atlext::ATL::RuleResolutionInfo : rule132
 Rule "1..1" -- "1..1" atlext::ATL::OutPattern : rule50
-atlext::ATL::RuleVariableDeclaration "1..1" -- "1..1" Rule : rule96
+Rule "1..1" -- "1..1" atlext::ATL::RuleVariableDeclaration : rule96
 OclExpression "1..1" --* "1..1" atlext::ATL::BindingStat : source107
 OclExpression "1..1" --* "1..1" atlext::OCL::PropertyCallExp : source184
-atlext::ATL::OutPatternElement "1..1" -- "0..1" InPatternElement : sourceElement70
-atlext::ATL::ActionBlock "1..1" *-- "0..9999" Statement : statements104
+InPatternElement "0..1" -- "1..1" atlext::ATL::OutPatternElement : sourceElement70
+Statement "0..9999" --* "1..1" atlext::ATL::ActionBlock : statements104
 Statement "0..9999" --* "1..1" atlext::ATL::ForStat : statements125
 Callable "1..1" -- "1..1" atlext::OCL::PropertyCallExp : staticResolver194
 ATL::atlext::Type "0..1" -- "1..1" atlext::ATL::Helper : staticReturnType23
 ATL::atlext::Type "1..1" -- "1..1" atlext::ATL::CallableParameter : staticType128
-atlext::OCL::VariableDeclaration "1..1" -- "0..1" OCL::atlext::Type : staticType239
+OCL::atlext::Type "0..1" -- "1..1" atlext::OCL::VariableDeclaration : staticType239
 OCL::atlext::EObject "0..9999" -- "1..1" atlext::OCL::PropertyCallExp : subtypeFeatures188
-atlext::ATL::RuleWithPattern "1..1" -- "0..1" RuleWithPattern : superRule42
+RuleWithPattern "0..1" -- "1..1" atlext::ATL::RuleWithPattern : superRule42
 OclExpression "1..1" --* "1..1" atlext::OCL::IfExp : thenExpression217
-atlext::ATL::IfStat "1..1" *-- "0..9999" Statement : thenStatements114
+Statement "0..9999" --* "1..1" atlext::ATL::IfStat : thenStatements114
 TupleExp "1..1" -- "1..1" atlext::OCL::TuplePart : tuple173
 TuplePart "0..9999" --* "1..1" atlext::OCL::TupleExp : tuplePart171
 TupleType "1..1" -- "1..1" atlext::OCL::TupleTypeAttribute : tupleType276
@@ -618,16 +618,16 @@ TupleTypeAttribute "0..1" -- "1..1" atlext::OCL::OclType : tupleTypeAttribute265
 OclType "0..1" --* "1..1" atlext::OCL::OclExpression : type136
 OclType "0..1" --* "1..1" atlext::OCL::VariableDeclaration : type226
 OclType "1..1" --* "1..1" atlext::OCL::TupleTypeAttribute : type273
-atlext::OCL::Attribute "1..1" *-- "1..1" OclType : type304
+OclType "1..1" --* "1..1" atlext::OCL::Attribute : type304
 Unit "1..1" -- "1..1" atlext::ATL::LibraryRef : unit99
-atlext::OCL::PropertyCallExp "1..1" -- "0..1" OCL::atlext::EObject : usedFeature187
+OCL::atlext::EObject "0..1" -- "1..1" atlext::OCL::PropertyCallExp : usedFeature187
 OclExpression "1..1" --* "1..1" atlext::ATL::BindingStat : value109
-atlext::OCL::MapElement "1..1" *-- "1..1" OclExpression : value181
+OclExpression "1..1" --* "1..1" atlext::OCL::MapElement : value181
 OclExpression "1..1" --* "1..1" atlext::ATL::Binding : value83
-atlext::OCL::MapType "1..1" *-- "1..1" OclType : valueType281
+OclType "1..1" --* "1..1" atlext::OCL::MapType : valueType281
 VariableDeclaration "1..1" --* "1..1" atlext::OCL::LetExp : variable211
 VariableDeclaration "0..1" -- "1..1" atlext::OCL::OclType : variableDeclaration267
 VariableExp "0..9999" -- "1..1" atlext::OCL::VariableDeclaration : variableExp237
-atlext::ATL::Rule "1..1" *-- "0..9999" RuleVariableDeclaration : variables33
+RuleVariableDeclaration "0..9999" --* "1..1" atlext::ATL::Rule : variables33
 ATL::atlext::EObject "1..1" -- "1..1" atlext::ATL::Binding : writtenFeature88
 @enduml

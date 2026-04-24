@@ -363,12 +363,12 @@ PredicateExpression <|-- model::ComparisonExpression
 PredicateExpression <|-- model::EquivalenceExpression
 QuantifierExpression <|-- model::ExistsExpression
 QuantifierExpression <|-- model::ForallExpression
+Type <|-- model::TypeDefinition
+Type <|-- model::TypeReference
 TypeDefinition <|-- model::BooleanTypeDefinition
 TypeDefinition <|-- model::CompositeTypeDefinition
 TypeDefinition <|-- model::NumericalTypeDefinition
 TypeDefinition <|-- model::VoidTypeDefinition
-Type <|-- model::TypeDefinition
-Type <|-- model::TypeReference
 UnaryExpression <|-- model::NotExpression
 UnaryExpression <|-- model::QuantifierExpression
 UnaryExpression <|-- model::UnaryMinusExpression
@@ -377,35 +377,35 @@ ValueDeclaration <|-- model::ConstantDeclaration
 ValueDeclaration <|-- model::FieldDeclaration
 ValueDeclaration <|-- model::ParameterDeclaration
 ValueDeclaration <|-- model::VariableDeclaration
-model::Expression "0..9999" --* "1..1" model::ArgumentedElement : arguments2
+model::ArgumentedElement "1..1" *-- "0..9999" model::Expression : arguments2
 model::BasicConstraintDefinition "0..9999" --* "1..1" model::ExpressionPackage : basicConstraintDefinitions8
 model::Comment "0..9999" --* "1..1" model::CommentableElement : comments0
 model::Expression "1..1" --* "1..1" model::IfThenElseExpression : condition53
 model::ConstantDeclaration "0..9999" --* "1..1" model::ExpressionPackage : constantDeclarations4
-model::ReferenceExpression "1..1" -- "1..1" model::Declaration : declaration51
+model::Declaration "1..1" -- "1..1" model::ReferenceExpression : declaration51
 model::ArrayTypeDefinition "1..1" *-- "1..1" model::Type : elementType21
 model::Expression "1..1" --* "1..1" model::IfThenElseExpression : else58
 model::Expression "0..1" --* "1..1" model::InitializableElement : expression10
-model::Expression "1..1" --* "1..1" model::ConstraintDefinition : expression32
+model::ConstraintDefinition "1..1" *-- "1..1" model::Expression : expression32
 model::FieldAssignment "0..9999" --* "1..1" model::RecordLiteralExpression : fieldAssignments45
 model::FieldDeclaration "0..9999" --* "1..1" model::RecordTypeDefinition : fieldDeclarations31
 model::ExpressionPackage "1..1" *-- "0..9999" model::FunctionDeclaration : functionDeclarations6
-model::Expression "1..1" --* "1..1" model::BinaryExpression : leftOperand36
+model::BinaryExpression "1..1" *-- "1..1" model::Expression : leftOperand36
 model::EnumerationLiteralDefinition "0..9999" --* "1..1" model::EnumerationTypeDefinition : literals20
 model::Expression "0..1" --* "1..1" model::SubrangeTypeDefinition : lowerBound15
-model::UnaryExpression "1..1" *-- "1..1" model::Expression : operand34
+model::Expression "1..1" --* "1..1" model::UnaryExpression : operand34
 model::AccessExpression "1..1" *-- "1..1" model::Expression : operand43
 model::Expression "0..9999" --* "1..1" model::MultiaryExpression : operands41
-model::ParametricElement "1..1" *-- "0..9999" model::ParameterDeclaration : parameterDeclarations1
+model::ParameterDeclaration "0..9999" --* "1..1" model::ParametricElement : parameterDeclarations1
 model::FunctionTypeDefinition "1..1" *-- "0..9999" model::Type : parameterTypes26
-model::TypeReference "1..1" -- "0..1" model::TypeDeclaration : reference13
+model::TypeDeclaration "0..1" -- "1..1" model::TypeReference : reference13
 model::EnumerationLiteralDefinition "1..1" -- "1..1" model::EnumerationLiteralExpression : reference46
-model::Type "1..1" --* "1..1" model::FunctionTypeDefinition : returnType28
-model::Expression "1..1" --* "1..1" model::BinaryExpression : rightOperand38
-model::Expression "0..1" --* "1..1" model::ArrayTypeDefinition : size23
+model::FunctionTypeDefinition "1..1" *-- "1..1" model::Type : returnType28
+model::BinaryExpression "1..1" *-- "1..1" model::Expression : rightOperand38
+model::ArrayTypeDefinition "1..1" *-- "0..1" model::Expression : size23
 model::Expression "1..1" --* "1..1" model::IfThenElseExpression : then55
-model::Type "0..1" --* "1..1" model::Declaration : type12
-model::TypeDeclaration "0..9999" --* "1..1" model::ExpressionPackage : typeDeclarations3
+model::Declaration "1..1" *-- "0..1" model::Type : type12
+model::ExpressionPackage "1..1" *-- "0..9999" model::TypeDeclaration : typeDeclarations3
 model::Expression "0..1" --* "1..1" model::SubrangeTypeDefinition : upperBound17
 model::Expression "1..1" --* "1..1" model::FieldAssignment : value48
 @enduml

@@ -267,20 +267,14 @@ InterfaceMemberDeclaration <|-- javaDsl::AbstractMethodDeclaration
 InterfaceMemberDeclaration <|-- javaDsl::ConstantDeclaration
 LeftHandSide <|-- javaDsl::ArrayAccess
 LeftHandSide <|-- javaDsl::FieldAccess
-NoArrayExpressionWithoutMinus <|-- javaDsl::CastExpression
-NoArrayExpressionWithoutMinus <|-- javaDsl::PostfixExpression
 NoArrayExpression <|-- javaDsl::NoArrayExpressionWithoutMinus
 NoArrayExpression <|-- javaDsl::PreDecrementExpression
 NoArrayExpression <|-- javaDsl::PreIncrementExpression
-PrimaryNoNewArray <|-- javaDsl::Expression
+NoArrayExpressionWithoutMinus <|-- javaDsl::CastExpression
+NoArrayExpressionWithoutMinus <|-- javaDsl::PostfixExpression
 Primary <|-- javaDsl::PrimaryNewArray
 Primary <|-- javaDsl::PrimaryNoNewArray
-StatementExpression <|-- javaDsl::Assignment
-StatementExpression <|-- javaDsl::ClassInstanceCreationExpression
-StatementExpression <|-- javaDsl::MethodInvocation
-StatementExpression <|-- javaDsl::PostfixExpression
-StatementExpression <|-- javaDsl::PreDecrementExpression
-StatementExpression <|-- javaDsl::PreIncrementExpression
+PrimaryNoNewArray <|-- javaDsl::Expression
 Statement <|-- javaDsl::Block
 Statement <|-- javaDsl::BreakStatement
 Statement <|-- javaDsl::ContinueStatement
@@ -295,100 +289,106 @@ Statement <|-- javaDsl::SynchronizedStatement
 Statement <|-- javaDsl::ThrowsStatement
 Statement <|-- javaDsl::TryStatement
 Statement <|-- javaDsl::WhileStatement
+StatementExpression <|-- javaDsl::Assignment
+StatementExpression <|-- javaDsl::ClassInstanceCreationExpression
+StatementExpression <|-- javaDsl::MethodInvocation
+StatementExpression <|-- javaDsl::PostfixExpression
+StatementExpression <|-- javaDsl::PreDecrementExpression
+StatementExpression <|-- javaDsl::PreIncrementExpression
 VariableInitializer <|-- javaDsl::ArrayInitializer
-javaDsl::MethodInvocation "1..1" *-- "0..1" javaDsl::ArgumentList : args176
-javaDsl::Primary "1..1" *-- "0..9999" javaDsl::ArgumentList : args183
-javaDsl::ClassInstanceCreationExpression "1..1" *-- "0..1" javaDsl::ArgumentList : args190
+javaDsl::ArgumentList "0..1" --* "1..1" javaDsl::MethodInvocation : args176
+javaDsl::ArgumentList "0..9999" --* "1..1" javaDsl::Primary : args183
+javaDsl::ArgumentList "0..1" --* "1..1" javaDsl::ClassInstanceCreationExpression : args190
 javaDsl::ArgumentList "0..1" --* "1..1" javaDsl::ExplicitConstructorInvocation : args34
 javaDsl::ArrayCreationExpression "0..1" --* "1..1" javaDsl::PrimaryNewArray : array189
-javaDsl::PrimaryNoNewArray "0..1" --* "1..1" javaDsl::ArrayAccess : array202
+javaDsl::ArrayAccess "1..1" *-- "0..1" javaDsl::PrimaryNoNewArray : array202
 javaDsl::ClassBody "0..1" --* "1..1" javaDsl::ClassDeclaration : body10
 javaDsl::Block "0..1" --* "1..1" javaDsl::SynchronizedStatement : body128
-javaDsl::ConstructorDeclaration "1..1" *-- "0..1" javaDsl::ConstructorBody : body24
+javaDsl::ConstructorBody "0..1" --* "1..1" javaDsl::ConstructorDeclaration : body24
 javaDsl::Block "0..1" --* "1..1" javaDsl::MethodDeclaration : body47
-javaDsl::InterfaceDeclaration "1..1" *-- "0..1" javaDsl::InterfaceBody : body64
+javaDsl::InterfaceBody "0..1" --* "1..1" javaDsl::InterfaceDeclaration : body64
 javaDsl::Block "0..9999" --* "1..1" javaDsl::TryStatement : catchesBody136
 javaDsl::ClassInstanceCreationExpression "0..1" --* "1..1" javaDsl::PrimaryNoNewArray : class188
 javaDsl::Block "0..1" --* "1..1" javaDsl::StaticInitializer : code20
-javaDsl::ConditionalOrExpression "0..1" --* "1..1" javaDsl::ConditionalExpression : condition145
-javaDsl::VariableDeclarator "0..1" --* "1..1" javaDsl::ConstantDeclaration : constant70
-javaDsl::SwitchStatement "1..1" *-- "0..9999" javaDsl::ConstantExpression : constants99
-javaDsl::ClassBodyDeclaration "0..9999" --* "1..1" javaDsl::ClassBody : declarations12
-javaDsl::Expression "0..9999" --* "1..1" javaDsl::ArgumentList : declarations193
-javaDsl::ConstructorBody "1..1" *-- "0..9999" javaDsl::BlockStatement : declarations32
-javaDsl::InterfaceMemberDeclaration "0..9999" --* "1..1" javaDsl::InterfaceBody : declarations66
-javaDsl::BlockStatement "0..9999" --* "1..1" javaDsl::Block : declarations83
+javaDsl::ConditionalExpression "1..1" *-- "0..1" javaDsl::ConditionalOrExpression : condition145
+javaDsl::ConstantDeclaration "1..1" *-- "0..1" javaDsl::VariableDeclarator : constant70
+javaDsl::ConstantExpression "0..9999" --* "1..1" javaDsl::SwitchStatement : constants99
+javaDsl::ClassBody "1..1" *-- "0..9999" javaDsl::ClassBodyDeclaration : declarations12
+javaDsl::ArgumentList "1..1" *-- "0..9999" javaDsl::Expression : declarations193
+javaDsl::BlockStatement "0..9999" --* "1..1" javaDsl::ConstructorBody : declarations32
+javaDsl::InterfaceBody "1..1" *-- "0..9999" javaDsl::InterfaceMemberDeclaration : declarations66
+javaDsl::Block "1..1" *-- "0..9999" javaDsl::BlockStatement : declarations83
 javaDsl::ArrayExpression "0..9999" --* "1..1" javaDsl::Primary : dimensions186
-javaDsl::ArrayExpression "0..9999" --* "1..1" javaDsl::ArrayCreationExpression : dimensions196
-javaDsl::ConditionalExpression "1..1" *-- "0..1" javaDsl::ConditionalExpression : else150
-javaDsl::Statement "0..1" --* "1..1" javaDsl::IfStatement : else94
+javaDsl::ArrayCreationExpression "1..1" *-- "0..9999" javaDsl::ArrayExpression : dimensions196
+javaDsl::ConditionalExpression "0..1" --* "1..1" javaDsl::ConditionalExpression : else150
+javaDsl::IfStatement "1..1" *-- "0..1" javaDsl::Statement : else94
 javaDsl::Expression "0..1" --* "1..1" javaDsl::VariableInitializer : exp43
-javaDsl::ReturnStatement "1..1" *-- "0..1" javaDsl::Expression : expression122
+javaDsl::Expression "0..1" --* "1..1" javaDsl::ReturnStatement : expression122
 javaDsl::Expression "0..1" --* "1..1" javaDsl::ThrowsStatement : expression124
 javaDsl::Expression "0..1" --* "1..1" javaDsl::SynchronizedStatement : expression126
 javaDsl::Expression "0..1" --* "1..1" javaDsl::SwitchStatement : expression97
-javaDsl::StatementExpression "0..9999" --* "1..1" javaDsl::ForInit : expressions114
-javaDsl::StatementExpression "0..9999" --* "1..1" javaDsl::ForUpdate : expressions119
+javaDsl::ForInit "1..1" *-- "0..9999" javaDsl::StatementExpression : expressions114
+javaDsl::ForUpdate "1..1" *-- "0..9999" javaDsl::StatementExpression : expressions119
 javaDsl::ExtendsInterfaces "0..1" --* "1..1" javaDsl::InterfaceDeclaration : extends63
-javaDsl::FieldDeclaration "0..1" --* "1..1" javaDsl::ClassMemberDeclaration : field16
+javaDsl::ClassMemberDeclaration "1..1" *-- "0..1" javaDsl::FieldDeclaration : field16
 javaDsl::ArrayAccess "1..1" *-- "0..1" javaDsl::ArrayExpression : field204
 javaDsl::Block "0..1" --* "1..1" javaDsl::TryStatement : finallyBody139
-javaDsl::ConstructorDeclarator "0..1" --* "1..1" javaDsl::ConstructorDeclaration : header21
+javaDsl::ConstructorDeclaration "1..1" *-- "0..1" javaDsl::ConstructorDeclarator : header21
 javaDsl::MethodDeclarator "0..1" --* "1..1" javaDsl::MethodHeader : header52
-javaDsl::MethodDeclarator "0..1" --* "1..1" javaDsl::AbstractMethodDeclaration : header75
-javaDsl::Interfaces "0..1" --* "1..1" javaDsl::ClassDeclaration : implements9
-javaDsl::ImportStatement "0..9999" --* "1..1" javaDsl::CompilationUnit : imports3
-javaDsl::Expression "0..1" --* "1..1" javaDsl::ArrayExpression : index199
+javaDsl::AbstractMethodDeclaration "1..1" *-- "0..1" javaDsl::MethodDeclarator : header75
+javaDsl::ClassDeclaration "1..1" *-- "0..1" javaDsl::Interfaces : implements9
+javaDsl::CompilationUnit "1..1" *-- "0..9999" javaDsl::ImportStatement : imports3
+javaDsl::ArrayExpression "1..1" *-- "0..1" javaDsl::Expression : index199
 javaDsl::ForInit "0..1" --* "1..1" javaDsl::ForStatement : initExpr108
-javaDsl::ExplicitConstructorInvocation "0..1" --* "1..1" javaDsl::ConstructorBody : invocation30
+javaDsl::ConstructorBody "1..1" *-- "0..1" javaDsl::ExplicitConstructorInvocation : invocation30
 javaDsl::ForInit "1..1" *-- "0..1" javaDsl::LocalVariableDeclaration : localVariable116
-javaDsl::ClassMemberDeclaration "0..1" --* "1..1" javaDsl::ClassBodyDeclaration : member14
+javaDsl::ClassBodyDeclaration "1..1" *-- "0..1" javaDsl::ClassMemberDeclaration : member14
 javaDsl::ClassMemberDeclaration "1..1" *-- "0..1" javaDsl::MethodDeclaration : method18
 javaDsl::EObject "0..1" --* "1..1" javaDsl::TypeDeclaration : name7
 javaDsl::Assignment "1..1" *-- "0..1" javaDsl::LeftHandSide : object142
-javaDsl::Primary "0..1" --* "1..1" javaDsl::PostfixExpression : object175
-javaDsl::Primary "0..1" --* "1..1" javaDsl::MethodInvocation : object178
-javaDsl::Primary "0..1" --* "1..1" javaDsl::FieldAccess : object181
-javaDsl::NoArrayExpression "1..1" *-- "0..1" javaDsl::NoArrayExpression : operand173
+javaDsl::PostfixExpression "1..1" *-- "0..1" javaDsl::Primary : object175
+javaDsl::MethodInvocation "1..1" *-- "0..1" javaDsl::Primary : object178
+javaDsl::FieldAccess "1..1" *-- "0..1" javaDsl::Primary : object181
+javaDsl::NoArrayExpression "0..1" --* "1..1" javaDsl::NoArrayExpression : operand173
 javaDsl::ConditionalAndExpression "0..9999" --* "1..1" javaDsl::ConditionalOrExpression : operands152
-javaDsl::InclusiveOrExpression "0..9999" --* "1..1" javaDsl::ConditionalAndExpression : operands154
+javaDsl::ConditionalAndExpression "1..1" *-- "0..9999" javaDsl::InclusiveOrExpression : operands154
 javaDsl::ExclusiveOrExpression "0..9999" --* "1..1" javaDsl::InclusiveOrExpression : operands156
 javaDsl::AndExpression "0..9999" --* "1..1" javaDsl::ExclusiveOrExpression : operands158
 javaDsl::AndExpression "1..1" *-- "0..9999" javaDsl::EqualityExpression : operands160
-javaDsl::RelationalExpression "0..9999" --* "1..1" javaDsl::EqualityExpression : operands162
-javaDsl::ShiftExpression "0..9999" --* "1..1" javaDsl::RelationalExpression : operands164
+javaDsl::EqualityExpression "1..1" *-- "0..9999" javaDsl::RelationalExpression : operands162
+javaDsl::RelationalExpression "1..1" *-- "0..9999" javaDsl::ShiftExpression : operands164
 javaDsl::AdditiveExpression "0..9999" --* "1..1" javaDsl::ShiftExpression : operands166
 javaDsl::AdditiveExpression "1..1" *-- "0..9999" javaDsl::MultiplicativeExpression : operands168
-javaDsl::NoArrayExpression "0..9999" --* "1..1" javaDsl::MultiplicativeExpression : operands170
-javaDsl::PackageStatement "0..1" --* "1..1" javaDsl::CompilationUnit : package1
+javaDsl::MultiplicativeExpression "1..1" *-- "0..9999" javaDsl::NoArrayExpression : operands170
+javaDsl::CompilationUnit "1..1" *-- "0..1" javaDsl::PackageStatement : package1
 javaDsl::FormalParameter "0..9999" --* "1..1" javaDsl::TryStatement : params133
-javaDsl::FormalParameter "0..9999" --* "1..1" javaDsl::ConstructorDeclarator : params26
+javaDsl::ConstructorDeclarator "1..1" *-- "0..9999" javaDsl::FormalParameter : params26
 javaDsl::FormalParameter "0..9999" --* "1..1" javaDsl::MethodDeclarator : params60
 javaDsl::CompilationUnit "0..1" --* "1..1" javaDsl::Head : program0
-javaDsl::ResultType "0..1" --* "1..1" javaDsl::MethodHeader : returnType50
+javaDsl::MethodHeader "1..1" *-- "0..1" javaDsl::ResultType : returnType50
 javaDsl::AbstractMethodDeclaration "1..1" *-- "0..1" javaDsl::ResultType : returnType73
 javaDsl::MethodDeclaration "1..1" *-- "0..1" javaDsl::MethodHeader : signature45
 javaDsl::Statement "0..1" --* "1..1" javaDsl::WhileStatement : statement104
-javaDsl::Statement "0..1" --* "1..1" javaDsl::DoStatement : statement106
-javaDsl::Statement "0..1" --* "1..1" javaDsl::ForStatement : statement111
-javaDsl::Statement "0..1" --* "1..1" javaDsl::LabeledStatement : statement91
+javaDsl::DoStatement "1..1" *-- "0..1" javaDsl::Statement : statement106
+javaDsl::ForStatement "1..1" *-- "0..1" javaDsl::Statement : statement111
+javaDsl::LabeledStatement "1..1" *-- "0..1" javaDsl::Statement : statement91
 javaDsl::BlockStatement "0..9999" --* "1..1" javaDsl::SwitchStatement : statements101
-javaDsl::Expression "0..1" --* "1..1" javaDsl::ConditionalExpression : then146
-javaDsl::Statement "0..1" --* "1..1" javaDsl::IfStatement : then92
-javaDsl::Exceptions "0..1" --* "1..1" javaDsl::ConstructorDeclaration : throws22
+javaDsl::ConditionalExpression "1..1" *-- "0..1" javaDsl::Expression : then146
+javaDsl::IfStatement "1..1" *-- "0..1" javaDsl::Statement : then92
+javaDsl::ConstructorDeclaration "1..1" *-- "0..1" javaDsl::Exceptions : throws22
 javaDsl::Exceptions "0..1" --* "1..1" javaDsl::MethodHeader : throws54
-javaDsl::Exceptions "0..1" --* "1..1" javaDsl::AbstractMethodDeclaration : throws78
-javaDsl::TryStatement "1..1" *-- "0..1" javaDsl::Block : tryBody131
-javaDsl::Type "0..1" --* "1..1" javaDsl::FormalParameter : type28
+javaDsl::AbstractMethodDeclaration "1..1" *-- "0..1" javaDsl::Exceptions : throws78
+javaDsl::Block "0..1" --* "1..1" javaDsl::TryStatement : tryBody131
+javaDsl::FormalParameter "1..1" *-- "0..1" javaDsl::Type : type28
 javaDsl::FieldDeclaration "1..1" *-- "0..1" javaDsl::Type : type36
 javaDsl::ResultType "1..1" *-- "0..1" javaDsl::Type : type57
-javaDsl::Type "0..1" --* "1..1" javaDsl::ConstantDeclaration : type68
-javaDsl::Type "0..1" --* "1..1" javaDsl::LocalVariableDeclaration : type86
+javaDsl::ConstantDeclaration "1..1" *-- "0..1" javaDsl::Type : type68
+javaDsl::LocalVariableDeclaration "1..1" *-- "0..1" javaDsl::Type : type86
 javaDsl::CompilationUnit "1..1" *-- "0..9999" javaDsl::TypeDeclaration : typeDeclarations5
-javaDsl::ForUpdate "0..1" --* "1..1" javaDsl::ForStatement : updateExpr109
-javaDsl::AssignmentExpression "0..1" --* "1..1" javaDsl::Assignment : value143
-javaDsl::VariableInitializer "0..1" --* "1..1" javaDsl::VariableDeclarator : value41
+javaDsl::ForStatement "1..1" *-- "0..1" javaDsl::ForUpdate : updateExpr109
+javaDsl::Assignment "1..1" *-- "0..1" javaDsl::AssignmentExpression : value143
+javaDsl::VariableDeclarator "1..1" *-- "0..1" javaDsl::VariableInitializer : value41
 javaDsl::ArrayInitializer "1..1" *-- "0..9999" javaDsl::VariableInitializer : values81
-javaDsl::VariableDeclarator "0..9999" --* "1..1" javaDsl::FieldDeclaration : variables39
+javaDsl::FieldDeclaration "1..1" *-- "0..9999" javaDsl::VariableDeclarator : variables39
 javaDsl::LocalVariableDeclaration "1..1" *-- "0..9999" javaDsl::VariableDeclarator : variables88
 @enduml

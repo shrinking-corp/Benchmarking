@@ -885,20 +885,25 @@ Artifact <|-- uml::DeploymentSpecification
 Association <|-- uml::AssociationClass
 Association <|-- uml::CommunicationPath
 Association <|-- uml::Extension
+Behavior <|-- uml::Activity
+Behavior <|-- uml::Interaction
+Behavior <|-- uml::OpaqueBehavior
+Behavior <|-- uml::StateMachine
 BehavioralFeature <|-- uml::Operation
 BehavioralFeature <|-- uml::Reception
 BehavioredClassifier <|-- uml::Actor
 BehavioredClassifier <|-- uml::Class
 BehavioredClassifier <|-- uml::Collaboration
 BehavioredClassifier <|-- uml::UseCase
-Behavior <|-- uml::Activity
-Behavior <|-- uml::Interaction
-Behavior <|-- uml::OpaqueBehavior
-Behavior <|-- uml::StateMachine
 CallAction <|-- uml::CallBehaviorAction
 CallAction <|-- uml::CallOperationAction
 CallAction <|-- uml::StartObjectBehaviorAction
 CentralBufferNode <|-- uml::DataStoreNode
+Class <|-- uml::AssociationClass
+Class <|-- uml::Behavior
+Class <|-- uml::Component
+Class <|-- uml::Node
+Class <|-- uml::Stereotype
 Classifier <|-- uml::Artifact
 Classifier <|-- uml::Association
 Classifier <|-- uml::BehavioredClassifier
@@ -907,11 +912,6 @@ Classifier <|-- uml::InformationItem
 Classifier <|-- uml::Interface
 Classifier <|-- uml::Signal
 Classifier <|-- uml::StructuredClassifier
-Class <|-- uml::AssociationClass
-Class <|-- uml::Behavior
-Class <|-- uml::Component
-Class <|-- uml::Node
-Class <|-- uml::Stereotype
 CombinedFragment <|-- uml::ConsiderIgnoreFragment
 ConnectableElement <|-- uml::Parameter
 ConnectableElement <|-- uml::Property
@@ -991,10 +991,10 @@ InteractionFragment <|-- uml::InteractionUse
 InteractionFragment <|-- uml::OccurrenceSpecification
 InteractionFragment <|-- uml::StateInvariant
 InteractionUse <|-- uml::PartDecomposition
-IntervalConstraint <|-- uml::DurationConstraint
-IntervalConstraint <|-- uml::TimeConstraint
 Interval <|-- uml::DurationInterval
 Interval <|-- uml::TimeInterval
+IntervalConstraint <|-- uml::DurationConstraint
+IntervalConstraint <|-- uml::TimeConstraint
 InvocationAction <|-- uml::BroadcastSignalAction
 InvocationAction <|-- uml::CallAction
 InvocationAction <|-- uml::SendObjectAction
@@ -1059,6 +1059,8 @@ Observation <|-- uml::TimeObservation
 OccurrenceSpecification <|-- uml::ExecutionOccurrenceSpecification
 OccurrenceSpecification <|-- uml::MessageOccurrenceSpecification
 OpaqueBehavior <|-- uml::FunctionBehavior
+Package <|-- uml::Model
+Package <|-- uml::Profile
 PackageableElement <|-- uml::Constraint
 PackageableElement <|-- uml::Dependency
 PackageableElement <|-- uml::Event
@@ -1069,8 +1071,6 @@ PackageableElement <|-- uml::Observation
 PackageableElement <|-- uml::Package
 PackageableElement <|-- uml::Type
 PackageableElement <|-- uml::ValueSpecification
-Package <|-- uml::Model
-Package <|-- uml::Profile
 ParameterableElement <|-- uml::ConnectableElement
 ParameterableElement <|-- uml::Operation
 ParameterableElement <|-- uml::PackageableElement
@@ -1092,12 +1092,12 @@ RedefinableElement <|-- uml::State
 RedefinableElement <|-- uml::Transition
 Relationship <|-- uml::Association
 Relationship <|-- uml::DirectedRelationship
-StateMachine <|-- uml::ProtocolStateMachine
 State <|-- uml::FinalState
+StateMachine <|-- uml::ProtocolStateMachine
+StructuralFeature <|-- uml::Property
 StructuralFeatureAction <|-- uml::ClearStructuralFeatureAction
 StructuralFeatureAction <|-- uml::ReadStructuralFeatureAction
 StructuralFeatureAction <|-- uml::WriteStructuralFeatureAction
-StructuralFeature <|-- uml::Property
 StructuredActivityNode <|-- uml::ConditionalNode
 StructuredActivityNode <|-- uml::ExpansionRegion
 StructuredActivityNode <|-- uml::LoopNode
@@ -1113,11 +1113,11 @@ TemplateableElement <|-- uml::Operation
 TemplateableElement <|-- uml::Package
 TemplateableElement <|-- uml::StringExpression
 Transition <|-- uml::ProtocolTransition
+Type <|-- uml::Classifier
 TypedElement <|-- uml::ConnectableElement
 TypedElement <|-- uml::ObjectNode
 TypedElement <|-- uml::StructuralFeature
 TypedElement <|-- uml::ValueSpecification
-Type <|-- uml::Classifier
 ValueSpecification <|-- uml::Duration
 ValueSpecification <|-- uml::Expression
 ValueSpecification <|-- uml::InstanceValue
@@ -1137,229 +1137,229 @@ WriteStructuralFeatureAction <|-- uml::AddStructuralFeatureValueAction
 WriteStructuralFeatureAction <|-- uml::RemoveStructuralFeatureValueAction
 WriteVariableAction <|-- uml::AddVariableValueAction
 WriteVariableAction <|-- uml::RemoveVariableValueAction
-uml::ComponentRealization "1..1" -- "0..1" uml::Component : abstraction772
-uml::Interaction "1..1" *-- "0..9999" uml::Action : action686
+uml::Component "0..1" -- "1..1" uml::ComponentRealization : abstraction772
+uml::Action "0..9999" --* "1..1" uml::Interaction : action686
 uml::Action "1..1" -- "1..1" uml::ActionExecutionSpecification : action742
 uml::Activity "0..1" -- "1..1" uml::ActivityNode : activity537
 uml::Activity "0..1" -- "1..1" uml::ActivityEdge : activity605
 uml::Activity "0..1" -- "1..1" uml::Variable : activityScope581
 uml::ParameterableElement "1..1" -- "1..1" uml::TemplateParameterSubstitution : actual121
-uml::InteractionUse "1..1" *-- "0..9999" uml::Gate : actualGate712
-uml::UseCase "1..1" -- "1..1" uml::Include : addition463
+uml::Gate "0..9999" --* "1..1" uml::InteractionUse : actualGate712
+uml::Include "1..1" -- "1..1" uml::UseCase : addition463
 uml::GeneralOrdering "1..1" -- "1..1" uml::OccurrenceSpecification : after719
-uml::Element "0..9999" -- "1..1" uml::Comment : annotatedElement0
-uml::ProfileApplication "1..1" -- "1..1" uml::Profile : appliedProfile499
+uml::Comment "1..1" -- "0..9999" uml::Element : annotatedElement0
+uml::Profile "1..1" -- "1..1" uml::ProfileApplication : appliedProfile499
 uml::Package "1..1" -- "1..1" uml::ProfileApplication : applyingPackage501
 uml::InputPin "0..9999" --* "1..1" uml::InvocationAction : argument644
 uml::Message "1..1" *-- "0..9999" uml::ValueSpecification : argument675
 uml::Action "0..9999" --* "1..1" uml::InteractionUse : argument715
-uml::Property "1..1" -- "0..1" uml::Association : association187
+uml::Association "0..1" -- "1..1" uml::Property : association187
 uml::Association "1..1" -- "1..1" uml::ClearAssociationAction : association854
-uml::Property "0..1" -- "1..1" uml::Property : associationEnd193
+uml::Property "1..1" -- "0..1" uml::Property : associationEnd193
 uml::Classifier "1..1" -- "0..9999" uml::Property : attribute78
-uml::OccurrenceSpecification "1..1" -- "1..1" uml::GeneralOrdering : before718
-uml::OpaqueExpression "1..1" -- "0..1" uml::Behavior : behavior148
-uml::CallBehaviorAction "1..1" -- "1..1" uml::Behavior : behavior659
+uml::GeneralOrdering "1..1" -- "1..1" uml::OccurrenceSpecification : before718
+uml::Behavior "0..1" -- "1..1" uml::OpaqueExpression : behavior148
+uml::Behavior "1..1" -- "1..1" uml::CallBehaviorAction : behavior659
 uml::Behavior "0..1" -- "1..1" uml::BehaviorExecutionSpecification : behavior744
-uml::ExecutableNode "0..9999" -- "1..1" uml::Clause : body1007
-uml::Operation "1..1" -- "0..1" uml::Constraint : bodyCondition232
-uml::OutputPin "0..9999" -- "1..1" uml::Clause : bodyOutput1018
-uml::OutputPin "0..9999" -- "1..1" uml::LoopNode : bodyOutput1038
+uml::Clause "1..1" -- "0..9999" uml::ExecutableNode : body1007
+uml::Constraint "0..1" -- "1..1" uml::Operation : bodyCondition232
+uml::Clause "1..1" -- "0..9999" uml::OutputPin : bodyOutput1018
+uml::LoopNode "1..1" -- "0..9999" uml::OutputPin : bodyOutput1038
 uml::ExecutableNode "0..9999" -- "1..1" uml::LoopNode : bodyPart1021
 uml::TemplateBinding "1..1" -- "1..1" uml::TemplateableElement : boundElement98
-uml::Gate "0..9999" --* "1..1" uml::CombinedFragment : cfragmentGate788
-uml::ValueSpecification "1..1" --* "1..1" uml::ChangeEvent : changeExpression758
+uml::CombinedFragment "1..1" *-- "0..9999" uml::Gate : cfragmentGate788
+uml::ChangeEvent "1..1" *-- "1..1" uml::ValueSpecification : changeExpression758
 uml::Class "0..1" -- "1..1" uml::Property : class171
 uml::Class "0..1" -- "1..1" uml::Operation : class218
 uml::Classifier "1..1" -- "1..1" uml::RedefinableTemplateSignature : classifier483
 uml::Classifier "0..9999" -- "1..1" uml::InstanceSpecification : classifier505
-uml::CreateObjectAction "1..1" -- "1..1" uml::Classifier : classifier793
+uml::Classifier "1..1" -- "1..1" uml::CreateObjectAction : classifier793
 uml::Classifier "1..1" -- "1..1" uml::ReadExtentAction : classifier926
-uml::ReadIsClassifiedObjectAction "1..1" -- "1..1" uml::Classifier : classifier937
+uml::Classifier "1..1" -- "1..1" uml::ReadIsClassifiedObjectAction : classifier937
 uml::Behavior "0..1" -- "1..1" uml::BehavioredClassifier : classifierBehavior277
 uml::Clause "1..9999" --* "1..1" uml::ConditionalNode : clause1000
-uml::NamedElement "1..9999" -- "1..1" uml::Dependency : client23
+uml::Dependency "1..1" -- "1..9999" uml::NamedElement : client23
 uml::Dependency "0..9999" -- "1..1" uml::NamedElement : clientDependency18
 uml::Collaboration "1..1" -- "0..9999" uml::ConnectableElement : collaborationRole453
-uml::CollaborationUse "0..9999" --* "1..1" uml::Classifier : collaborationUse83
+uml::Classifier "1..1" *-- "0..9999" uml::CollaborationUse : collaborationUse83
 uml::InputPin "1..1" --* "1..1" uml::ReduceAction : collection993
-uml::ParameterSet "1..1" *-- "0..9999" uml::Constraint : condition440
-uml::Extend "1..1" *-- "0..1" uml::Constraint : condition469
+uml::Constraint "0..9999" --* "1..1" uml::ParameterSet : condition440
+uml::Constraint "0..1" --* "1..1" uml::Extend : condition469
 uml::Deployment "1..1" *-- "0..9999" uml::DeploymentSpecification : configuration199
-uml::ProtocolStateMachine "1..1" *-- "0..9999" uml::ProtocolConformance : conformance306
-uml::State "1..1" *-- "0..9999" uml::ConnectionPointReference : connection366
+uml::ProtocolConformance "0..9999" --* "1..1" uml::ProtocolStateMachine : conformance306
+uml::ConnectionPointReference "0..9999" --* "1..1" uml::State : connection366
 uml::Pseudostate "0..9999" --* "1..1" uml::StateMachine : connectionPoint309
 uml::Pseudostate "0..9999" --* "1..1" uml::State : connectionPoint367
 uml::Connector "0..1" -- "1..1" uml::Message : connector671
-uml::Element "0..9999" -- "1..1" uml::Constraint : constrainedElement50
-uml::ClassifierTemplateParameter "1..1" -- "0..9999" uml::Classifier : constrainingClassifier486
+uml::Constraint "1..1" -- "0..9999" uml::Element : constrainedElement50
+uml::Classifier "0..9999" -- "1..1" uml::ClassifierTemplateParameter : constrainingClassifier486
 uml::ActivityEdge "0..9999" -- "1..1" uml::ActivityGroup : containedEdge562
 uml::ActivityGroup "1..1" -- "0..9999" uml::ActivityNode : containedNode564
 uml::Region "0..1" -- "1..1" uml::Vertex : container326
 uml::Region "1..1" -- "1..1" uml::Transition : container328
-uml::BehavioredClassifier "0..1" -- "1..1" uml::Behavior : context252
-uml::Classifier "0..1" -- "1..1" uml::Action : context526
+uml::Behavior "1..1" -- "0..1" uml::BehavioredClassifier : context252
+uml::Action "1..1" -- "0..1" uml::Classifier : context526
 uml::Constraint "1..1" -- "0..1" uml::Namespace : context54
-uml::Substitution "1..1" -- "1..1" uml::Classifier : contract141
+uml::Classifier "1..1" -- "1..1" uml::Substitution : contract141
 uml::Interface "1..1" -- "1..1" uml::InterfaceRealization : contract283
 uml::Behavior "0..9999" -- "1..1" uml::Connector : contract425
-uml::InformationFlow "1..1" -- "1..9999" uml::Classifier : conveyed906
-uml::Lifeline "0..9999" -- "1..1" uml::InteractionFragment : covered692
+uml::Classifier "1..9999" -- "1..1" uml::InformationFlow : conveyed906
+uml::InteractionFragment "1..1" -- "0..9999" uml::Lifeline : covered692
 uml::InteractionFragment "0..9999" -- "1..1" uml::Lifeline : coveredBy708
 uml::DataType "0..1" -- "1..1" uml::Property : datatype173
 uml::DataType "0..1" -- "1..1" uml::Operation : datatype229
-uml::OutputPin "1..1" -- "1..1" uml::Clause : decider1015
-uml::OutputPin "1..1" -- "1..1" uml::LoopNode : decider1026
-uml::DecisionNode "1..1" -- "0..1" uml::Behavior : decisionInput762
-uml::ObjectFlow "0..1" -- "1..1" uml::DecisionNode : decisionInputFlow764
-uml::PartDecomposition "0..1" -- "1..1" uml::Lifeline : decomposedAs706
+uml::Clause "1..1" -- "1..1" uml::OutputPin : decider1015
+uml::LoopNode "1..1" -- "1..1" uml::OutputPin : decider1026
+uml::Behavior "0..1" -- "1..1" uml::DecisionNode : decisionInput762
+uml::DecisionNode "1..1" -- "0..1" uml::ObjectFlow : decisionInputFlow764
+uml::Lifeline "1..1" -- "0..1" uml::PartDecomposition : decomposedAs706
 uml::ParameterableElement "0..1" -- "1..1" uml::TemplateParameter : default110
-uml::ValueSpecification "0..1" --* "1..1" uml::Parameter : defaultValue153
+uml::Parameter "1..1" *-- "0..1" uml::ValueSpecification : defaultValue153
 uml::Property "1..1" *-- "0..1" uml::ValueSpecification : defaultValue178
-uml::Trigger "0..9999" --* "1..1" uml::State : deferrableTrigger384
-uml::Property "0..1" -- "1..1" uml::ConnectorEnd : definingEnd162
+uml::State "1..1" *-- "0..9999" uml::Trigger : deferrableTrigger384
+uml::ConnectorEnd "1..1" -- "0..1" uml::Property : definingEnd162
 uml::Slot "1..1" -- "1..1" uml::StructuralFeature : definingFeature511
 uml::DeployedArtifact "0..9999" -- "1..1" uml::Deployment : deployedArtifact198
-uml::PackageableElement "0..9999" -- "1..1" uml::DeploymentTarget : deployedElement196
+uml::DeploymentTarget "1..1" -- "0..9999" uml::PackageableElement : deployedElement196
 uml::Deployment "0..9999" --* "1..1" uml::DeploymentTarget : deployment195
-uml::DeploymentSpecification "1..1" -- "0..1" uml::Deployment : deployment202
+uml::Deployment "0..1" -- "1..1" uml::DeploymentSpecification : deployment202
 uml::InputPin "0..1" -- "1..1" uml::LinkEndDestructionData : destroyAt850
-uml::State "1..1" *-- "0..1" uml::Behavior : doActivity381
-uml::StructuredActivityNode "1..1" *-- "0..9999" uml::ActivityEdge : edge550
-uml::ActivityEdge "0..9999" --* "1..1" uml::Activity : edge572
+uml::Behavior "0..1" --* "1..1" uml::State : doActivity381
+uml::ActivityEdge "0..9999" --* "1..1" uml::StructuredActivityNode : edge550
+uml::Activity "1..1" *-- "0..9999" uml::ActivityEdge : edge572
 uml::ActivityEdge "0..9999" -- "1..1" uml::ActivityPartition : edge619
-uml::Transition "1..1" *-- "0..1" uml::Behavior : effect342
+uml::Behavior "0..1" --* "1..1" uml::Transition : effect342
 uml::ElementImport "0..9999" --* "1..1" uml::Namespace : elementImport31
-uml::InteractionFragment "1..1" -- "0..1" uml::Interaction : enclosingInteraction695
-uml::InteractionOperand "0..1" -- "1..1" uml::InteractionFragment : enclosingOperand697
+uml::Interaction "0..1" -- "1..1" uml::InteractionFragment : enclosingInteraction695
+uml::InteractionFragment "1..1" -- "0..1" uml::InteractionOperand : enclosingOperand697
 uml::ConnectableElement "1..1" -- "0..9999" uml::ConnectorEnd : end161
-uml::ConnectorEnd "2..9999" --* "1..1" uml::Connector : end422
-uml::Property "1..1" -- "1..1" uml::LinkEndData : end835
+uml::Connector "1..1" *-- "2..9999" uml::ConnectorEnd : end422
+uml::LinkEndData "1..1" -- "1..1" uml::Property : end835
 uml::Property "1..1" -- "1..1" uml::ReadLinkObjectEndAction : end949
 uml::LinkAction "1..1" *-- "2..9999" uml::LinkEndData : endData828
-uml::Type "1..9999" -- "1..1" uml::Association : endType62
-uml::State "1..1" *-- "0..1" uml::Behavior : entry375
-uml::Pseudostate "0..9999" -- "1..1" uml::ConnectionPointReference : entry390
+uml::Association "1..1" -- "1..9999" uml::Type : endType62
+uml::Behavior "0..1" --* "1..1" uml::State : entry375
+uml::ConnectionPointReference "1..1" -- "0..9999" uml::Pseudostate : entry390
 uml::Enumeration "0..1" -- "1..1" uml::EnumerationLiteral : enumeration504
 uml::Event "1..1" -- "1..1" uml::Trigger : event348
 uml::Event "1..1" -- "1..1" uml::OccurrenceSpecification : event722
 uml::NamedElement "1..1" -- "1..1" uml::TimeObservation : event883
-uml::NamedElement "1..2" -- "1..1" uml::DurationObservation : event885
-uml::RaiseExceptionAction "1..1" *-- "1..1" uml::InputPin : exception898
-uml::ObjectNode "1..1" -- "1..1" uml::ExceptionHandler : exceptionInput627
+uml::DurationObservation "1..1" -- "1..2" uml::NamedElement : event885
+uml::InputPin "1..1" --* "1..1" uml::RaiseExceptionAction : exception898
+uml::ExceptionHandler "1..1" -- "1..1" uml::ObjectNode : exceptionInput627
 uml::Classifier "1..9999" -- "1..1" uml::ExceptionHandler : exceptionType629
 uml::ExecutableNode "0..9999" --* "1..1" uml::SequenceNode : executableNode661
 uml::ExecutionOccurrenceSpecification "1..1" -- "1..1" uml::ExecutionSpecification : execution750
 uml::Behavior "0..1" --* "1..1" uml::State : exit378
-uml::Pseudostate "0..9999" -- "1..1" uml::ConnectionPointReference : exit391
+uml::ConnectionPointReference "1..1" -- "0..9999" uml::Pseudostate : exit391
 uml::TimeExpression "1..1" *-- "0..1" uml::ValueSpecification : expr869
 uml::Duration "1..1" *-- "0..1" uml::ValueSpecification : expr873
-uml::UseCase "1..1" *-- "0..9999" uml::Extend : extend457
-uml::UseCase "1..1" -- "1..1" uml::Extend : extendedCase467
-uml::Region "0..1" -- "1..1" uml::Region : extendedRegion319
+uml::Extend "0..9999" --* "1..1" uml::UseCase : extend457
+uml::Extend "1..1" -- "1..1" uml::UseCase : extendedCase467
+uml::Region "1..1" -- "0..1" uml::Region : extendedRegion319
 uml::RedefinableTemplateSignature "1..1" -- "0..9999" uml::RedefinableTemplateSignature : extendedSignature479
-uml::StateMachine "0..9999" -- "1..1" uml::StateMachine : extendedStateMachine312
-uml::Extension "0..9999" -- "1..1" uml::Class : extension273
-uml::UseCase "1..1" -- "1..1" uml::Extend : extension474
-uml::ExtensionPoint "1..9999" -- "1..1" uml::Extend : extensionLocation472
+uml::StateMachine "1..1" -- "0..9999" uml::StateMachine : extendedStateMachine312
+uml::Class "1..1" -- "0..9999" uml::Extension : extension273
+uml::Extend "1..1" -- "1..1" uml::UseCase : extension474
+uml::Extend "1..1" -- "1..9999" uml::ExtensionPoint : extensionLocation472
 uml::ExtensionPoint "0..9999" --* "1..1" uml::UseCase : extensionPoint459
 uml::Classifier "1..1" -- "0..9999" uml::Feature : feature68
 uml::Classifier "0..9999" -- "1..1" uml::Feature : featuringClassifier139
-uml::OccurrenceSpecification "1..1" -- "1..1" uml::ExecutionSpecification : finish737
+uml::ExecutionSpecification "1..1" -- "1..1" uml::OccurrenceSpecification : finish737
 uml::InputPin "1..1" --* "1..1" uml::TestIdentityAction : first800
-uml::TemplateParameterSubstitution "1..1" -- "1..1" uml::TemplateParameter : formal119
+uml::TemplateParameter "1..1" -- "1..1" uml::TemplateParameterSubstitution : formal119
 uml::Gate "0..9999" --* "1..1" uml::Interaction : formalGate688
-uml::InteractionFragment "0..9999" --* "1..1" uml::Interaction : fragment685
+uml::Interaction "1..1" *-- "0..9999" uml::InteractionFragment : fragment685
 uml::InteractionFragment "0..9999" --* "1..1" uml::InteractionOperand : fragment727
 uml::Action "1..1" --* "1..1" uml::ActionInputPin : fromAction900
 uml::Classifier "1..1" -- "1..1" uml::Generalization : general129
 uml::Classifier "0..9999" -- "1..1" uml::Classifier : general75
-uml::ProtocolStateMachine "1..1" -- "1..1" uml::ProtocolConformance : generalMachine401
+uml::ProtocolConformance "1..1" -- "1..1" uml::ProtocolStateMachine : generalMachine401
 uml::GeneralOrdering "0..9999" --* "1..1" uml::InteractionFragment : generalOrdering694
-uml::GeneralizationSet "1..1" -- "0..9999" uml::Generalization : generalization137
-uml::Generalization "0..9999" --* "1..1" uml::Classifier : generalization66
-uml::GeneralizationSet "0..9999" -- "1..1" uml::Generalization : generalizationSet131
+uml::Generalization "0..9999" -- "1..1" uml::GeneralizationSet : generalization137
+uml::Classifier "1..1" *-- "0..9999" uml::Generalization : generalization66
+uml::Generalization "1..1" -- "0..9999" uml::GeneralizationSet : generalizationSet131
 uml::Activity "1..1" *-- "0..9999" uml::ActivityGroup : group577
 uml::Constraint "0..1" -- "1..1" uml::Transition : guard339
-uml::ValueSpecification "1..1" --* "1..1" uml::ActivityEdge : guard592
-uml::InteractionOperand "1..1" *-- "0..1" uml::InteractionConstraint : guard726
+uml::ActivityEdge "1..1" *-- "1..1" uml::ValueSpecification : guard592
+uml::InteractionConstraint "0..1" --* "1..1" uml::InteractionOperand : guard726
 uml::ExceptionHandler "0..9999" --* "1..1" uml::ExecutableNode : handler535
-uml::ExecutableNode "1..1" -- "1..1" uml::ExceptionHandler : handlerBody626
+uml::ExceptionHandler "1..1" -- "1..1" uml::ExecutableNode : handlerBody626
 uml::Image "0..9999" --* "1..1" uml::Stereotype : icon430
 uml::BehavioredClassifier "1..1" -- "1..1" uml::InterfaceRealization : implementingClassifier284
-uml::PackageableElement "1..1" -- "1..1" uml::ElementImport : importedElement42
-uml::PackageableElement "0..9999" -- "1..1" uml::Namespace : importedMember37
-uml::PackageImport "1..1" -- "1..1" uml::Package : importedPackage46
-uml::Namespace "1..1" -- "1..1" uml::ElementImport : importingNamespace44
+uml::ElementImport "1..1" -- "1..1" uml::PackageableElement : importedElement42
+uml::Namespace "1..1" -- "0..9999" uml::PackageableElement : importedMember37
+uml::Package "1..1" -- "1..1" uml::PackageImport : importedPackage46
+uml::ElementImport "1..1" -- "1..1" uml::Namespace : importingNamespace44
 uml::Namespace "1..1" -- "1..1" uml::PackageImport : importingNamespace48
 uml::Activity "0..1" -- "1..1" uml::ActivityGroup : inActivity560
 uml::ActivityGroup "0..9999" -- "1..1" uml::ActivityNode : inGroup546
-uml::ActivityGroup "0..9999" -- "1..1" uml::ActivityEdge : inGroup603
-uml::InterruptibleActivityRegion "0..9999" -- "1..1" uml::ActivityNode : inInterruptibleRegion544
+uml::ActivityEdge "1..1" -- "0..9999" uml::ActivityGroup : inGroup603
+uml::ActivityNode "1..1" -- "0..9999" uml::InterruptibleActivityRegion : inInterruptibleRegion544
 uml::ActivityNode "1..1" -- "0..9999" uml::ActivityPartition : inPartition542
-uml::ActivityPartition "0..9999" -- "1..1" uml::ActivityEdge : inPartition590
+uml::ActivityEdge "1..1" -- "0..9999" uml::ActivityPartition : inPartition590
 uml::ObjectNode "1..1" -- "0..9999" uml::State : inState636
 uml::ActivityNode "1..1" -- "0..1" uml::StructuredActivityNode : inStructuredNode536
 uml::ActivityEdge "1..1" -- "0..1" uml::StructuredActivityNode : inStructuredNode600
 uml::Include "0..9999" --* "1..1" uml::UseCase : include456
-uml::UseCase "1..1" -- "1..1" uml::Include : includingCase465
+uml::Include "1..1" -- "1..1" uml::UseCase : includingCase465
 uml::Transition "0..9999" -- "1..1" uml::Vertex : incoming323
 uml::ActivityEdge "0..9999" -- "1..1" uml::ActivityNode : incoming540
-uml::NamedElement "1..9999" -- "1..1" uml::InformationFlow : informationSource909
-uml::NamedElement "1..9999" -- "1..1" uml::InformationFlow : informationTarget912
-uml::NamedElement "0..9999" -- "1..1" uml::Classifier : inheritedMember69
-uml::TemplateParameter "0..9999" -- "1..1" uml::RedefinableTemplateSignature : inheritedParameter480
+uml::InformationFlow "1..1" -- "1..9999" uml::NamedElement : informationSource909
+uml::InformationFlow "1..1" -- "1..9999" uml::NamedElement : informationTarget912
+uml::Classifier "1..1" -- "0..9999" uml::NamedElement : inheritedMember69
+uml::RedefinableTemplateSignature "1..1" -- "0..9999" uml::TemplateParameter : inheritedParameter480
 uml::Action "1..1" -- "0..9999" uml::InputPin : input523
 uml::ExpansionNode "1..9999" -- "1..1" uml::ExpansionRegion : inputElement1047
 uml::InputPin "0..9999" --* "1..1" uml::OpaqueAction : inputValue518
-uml::LinkAction "1..1" *-- "1..9999" uml::InputPin : inputValue829
-uml::InputPin "0..1" --* "1..1" uml::AddStructuralFeatureValueAction : insertAt826
+uml::InputPin "1..9999" --* "1..1" uml::LinkAction : inputValue829
+uml::AddStructuralFeatureValueAction "1..1" *-- "0..1" uml::InputPin : insertAt826
 uml::InputPin "0..1" -- "1..1" uml::LinkEndCreationData : insertAt848
 uml::AddVariableValueAction "1..1" *-- "0..1" uml::InputPin : insertAt894
 uml::InstanceSpecification "1..1" -- "1..1" uml::InstanceValue : instance516
 uml::Interaction "1..1" -- "1..1" uml::Message : interaction674
 uml::Interaction "1..1" -- "1..1" uml::Lifeline : interaction701
 uml::Interface "0..1" -- "1..1" uml::Operation : interface217
-uml::InterfaceRealization "0..9999" --* "1..1" uml::BehavioredClassifier : interfaceRealization280
-uml::InterruptibleActivityRegion "1..1" -- "0..9999" uml::ActivityEdge : interruptingEdge624
-uml::InterruptibleActivityRegion "0..1" -- "1..1" uml::ActivityEdge : interrupts598
+uml::BehavioredClassifier "1..1" *-- "0..9999" uml::InterfaceRealization : interfaceRealization280
+uml::ActivityEdge "0..9999" -- "1..1" uml::InterruptibleActivityRegion : interruptingEdge624
+uml::ActivityEdge "1..1" -- "0..1" uml::InterruptibleActivityRegion : interrupts598
 uml::Constraint "1..1" --* "1..1" uml::StateInvariant : invariant740
-uml::ValueSpecification "1..1" --* "1..1" uml::JoinNode : joinSpec998
-uml::Lifeline "0..9999" --* "1..1" uml::Interaction : lifeline684
+uml::JoinNode "1..1" *-- "1..1" uml::ValueSpecification : joinSpec998
+uml::Interaction "1..1" *-- "0..9999" uml::Lifeline : lifeline684
 uml::Action "1..1" *-- "0..9999" uml::Constraint : localPostcondition532
 uml::Action "1..1" *-- "0..9999" uml::Constraint : localPrecondition529
-uml::DeploymentTarget "1..1" -- "1..1" uml::Deployment : location200
+uml::Deployment "1..1" -- "1..1" uml::DeploymentTarget : location200
 uml::LoopNode "1..1" -- "0..9999" uml::OutputPin : loopVariable1035
 uml::InputPin "0..9999" --* "1..1" uml::LoopNode : loopVariableInput1041
-uml::ValueSpecification "0..1" --* "1..1" uml::MultiplicityElement : lowerValue158
-uml::Manifestation "0..9999" --* "1..1" uml::Artifact : manifestation206
+uml::MultiplicityElement "1..1" *-- "0..1" uml::ValueSpecification : lowerValue158
+uml::Artifact "1..1" *-- "0..9999" uml::Manifestation : manifestation206
 uml::Abstraction "1..1" *-- "0..1" uml::OpaqueExpression : mapping145
-uml::ValueSpecification "1..1" -- "1..1" uml::Interval : max880
-uml::ValueSpecification "0..1" --* "1..1" uml::InteractionConstraint : maxint732
+uml::Interval "1..1" -- "1..1" uml::ValueSpecification : max880
+uml::InteractionConstraint "1..1" *-- "0..1" uml::ValueSpecification : maxint732
 uml::NamedElement "0..9999" -- "1..1" uml::Namespace : member35
 uml::Association "1..1" -- "2..9999" uml::Property : memberEnd60
 uml::Package "1..1" -- "1..1" uml::PackageMerge : mergedPackage495
 uml::Message "0..1" -- "1..1" uml::MessageEnd : message681
-uml::Message "0..9999" --* "1..1" uml::Interaction : message690
-uml::NamedElement "0..9999" -- "1..1" uml::ConsiderIgnoreFragment : message791
-uml::Extension "1..1" -- "1..1" uml::Class : metaclass428
-uml::Profile "1..1" -- "0..9999" uml::ElementImport : metaclassReference433
+uml::Interaction "1..1" *-- "0..9999" uml::Message : message690
+uml::ConsiderIgnoreFragment "1..1" -- "0..9999" uml::NamedElement : message791
+uml::Class "1..1" -- "1..1" uml::Extension : metaclass428
+uml::ElementImport "0..9999" -- "1..1" uml::Profile : metaclassReference433
 uml::PackageImport "0..9999" -- "1..1" uml::Profile : metamodelReference436
-uml::BehavioralFeature "1..1" -- "0..9999" uml::Behavior : method240
-uml::ValueSpecification "1..1" -- "1..1" uml::Interval : min878
-uml::ValueSpecification "0..1" --* "1..1" uml::InteractionConstraint : minint729
-uml::StringExpression "0..1" --* "1..1" uml::NamedElement : nameExpression20
+uml::Behavior "0..9999" -- "1..1" uml::BehavioralFeature : method240
+uml::Interval "1..1" -- "1..1" uml::ValueSpecification : min878
+uml::InteractionConstraint "1..1" *-- "0..1" uml::ValueSpecification : minint729
+uml::NamedElement "1..1" *-- "0..1" uml::StringExpression : nameExpression20
 uml::NamedElement "1..1" -- "0..1" uml::Namespace : namespace19
-uml::Property "0..9999" -- "1..1" uml::Association : navigableOwnedEnd64
+uml::Association "1..1" -- "0..9999" uml::Property : navigableOwnedEnd64
 uml::Artifact "1..1" *-- "0..9999" uml::Artifact : nestedArtifact205
-uml::Classifier "0..9999" --* "1..1" uml::Class : nestedClassifier264
-uml::Interface "1..1" *-- "0..9999" uml::Classifier : nestedClassifier290
-uml::Node "0..9999" --* "1..1" uml::Node : nestedNode785
-uml::Package "0..9999" -- "1..1" uml::Package : nestedPackage13
+uml::Class "1..1" *-- "0..9999" uml::Classifier : nestedClassifier264
+uml::Classifier "0..9999" --* "1..1" uml::Interface : nestedClassifier290
+uml::Node "1..1" *-- "0..9999" uml::Node : nestedNode785
+uml::Package "1..1" -- "0..9999" uml::Package : nestedPackage13
 uml::Package "1..1" -- "0..1" uml::Package : nestingPackage15
 uml::Classifier "0..9999" -- "1..1" uml::ReclassifyObjectAction : newClassifier931
 uml::ActivityNode "0..9999" --* "1..1" uml::StructuredActivityNode : node552
-uml::ActivityNode "0..9999" --* "1..1" uml::Activity : node570
+uml::Activity "1..1" *-- "0..9999" uml::ActivityNode : node570
 uml::ActivityNode "0..9999" -- "1..1" uml::ActivityPartition : node608
 uml::ActivityNode "0..9999" -- "1..1" uml::InterruptibleActivityRegion : node622
 uml::InputPin "1..1" --* "1..1" uml::StructuralFeatureAction : object812
@@ -1367,254 +1367,254 @@ uml::ClearAssociationAction "1..1" *-- "1..1" uml::InputPin : object852
 uml::InputPin "1..1" --* "1..1" uml::ReclassifyObjectAction : object934
 uml::InputPin "1..1" --* "1..1" uml::ReadIsClassifiedObjectAction : object942
 uml::InputPin "1..1" --* "1..1" uml::StartClassifierBehaviorAction : object945
-uml::ReadLinkObjectEndAction "1..1" *-- "1..1" uml::InputPin : object947
+uml::InputPin "1..1" --* "1..1" uml::ReadLinkObjectEndAction : object947
 uml::InputPin "1..1" --* "1..1" uml::ReadLinkObjectEndQualifierAction : object955
-uml::UnmarshallAction "1..1" *-- "1..1" uml::InputPin : object985
-uml::StartObjectBehaviorAction "1..1" *-- "1..1" uml::InputPin : object996
+uml::InputPin "1..1" --* "1..1" uml::UnmarshallAction : object985
+uml::InputPin "1..1" --* "1..1" uml::StartObjectBehaviorAction : object996
 uml::Observation "0..9999" -- "1..1" uml::TimeExpression : observation871
-uml::Observation "0..9999" -- "1..1" uml::Duration : observation875
+uml::Duration "1..1" -- "0..9999" uml::Observation : observation875
 uml::Classifier "0..9999" -- "1..1" uml::ReclassifyObjectAction : oldClassifier929
 uml::InvocationAction "1..1" -- "0..1" uml::Port : onPort646
-uml::ValueSpecification "0..9999" --* "1..1" uml::Expression : operand493
-uml::InteractionOperand "1..9999" --* "1..1" uml::CombinedFragment : operand786
+uml::Expression "1..1" *-- "0..9999" uml::ValueSpecification : operand493
+uml::CombinedFragment "1..1" *-- "1..9999" uml::InteractionOperand : operand786
 uml::Operation "0..1" -- "1..1" uml::Parameter : operation151
-uml::Operation "1..1" -- "1..1" uml::CallOperationAction : operation654
+uml::CallOperationAction "1..1" -- "1..1" uml::Operation : operation654
 uml::Operation "1..1" -- "1..1" uml::SendOperationEvent : operation746
 uml::Operation "1..1" -- "1..1" uml::ReceiveOperationEvent : operation752
 uml::CallEvent "1..1" -- "1..1" uml::Operation : operation756
 uml::Property "0..1" -- "1..1" uml::Property : opposite182
 uml::Transition "0..9999" -- "1..1" uml::Vertex : outgoing322
 uml::ActivityEdge "0..9999" -- "1..1" uml::ActivityNode : outgoing539
-uml::OutputPin "0..9999" -- "1..1" uml::Action : output521
+uml::Action "1..1" -- "0..9999" uml::OutputPin : output521
 uml::ExpansionNode "0..9999" -- "1..1" uml::ExpansionRegion : outputElement1048
-uml::OutputPin "0..9999" --* "1..1" uml::OpaqueAction : outputValue519
+uml::OpaqueAction "1..1" *-- "0..9999" uml::OutputPin : outputValue519
 uml::ParameterableElement "0..1" --* "1..1" uml::TemplateParameterSubstitution : ownedActual124
 uml::Artifact "1..1" *-- "0..9999" uml::Property : ownedAttribute211
-uml::Property "0..9999" --* "1..1" uml::Interface : ownedAttribute285
+uml::Interface "1..1" *-- "0..9999" uml::Property : ownedAttribute285
 uml::Property "0..9999" --* "1..1" uml::Signal : ownedAttribute303
 uml::Property "0..9999" --* "1..1" uml::StructuredClassifier : ownedAttribute406
-uml::Property "0..9999" --* "1..1" uml::DataType : ownedAttribute443
+uml::DataType "1..1" *-- "0..9999" uml::Property : ownedAttribute443
 uml::Behavior "0..9999" --* "1..1" uml::BehavioredClassifier : ownedBehavior274
 uml::Comment "0..9999" --* "1..1" uml::Element : ownedComment6
 uml::Connector "0..9999" --* "1..1" uml::StructuredClassifier : ownedConnector414
-uml::TemplateParameter "1..1" *-- "0..1" uml::ParameterableElement : ownedDefault112
-uml::Element "0..9999" -- "1..1" uml::Element : ownedElement2
-uml::Property "0..9999" --* "1..1" uml::Association : ownedEnd59
-uml::EnumerationLiteral "0..9999" --* "1..1" uml::Enumeration : ownedLiteral503
-uml::Namespace "1..1" -- "0..9999" uml::NamedElement : ownedMember40
+uml::ParameterableElement "0..1" --* "1..1" uml::TemplateParameter : ownedDefault112
+uml::Element "1..1" -- "0..9999" uml::Element : ownedElement2
+uml::Association "1..1" *-- "0..9999" uml::Property : ownedEnd59
+uml::Enumeration "1..1" *-- "0..9999" uml::EnumerationLiteral : ownedLiteral503
+uml::NamedElement "0..9999" -- "1..1" uml::Namespace : ownedMember40
 uml::Artifact "1..1" *-- "0..9999" uml::Operation : ownedOperation208
-uml::Operation "0..9999" --* "1..1" uml::Class : ownedOperation267
-uml::Operation "0..9999" --* "1..1" uml::Interface : ownedOperation288
-uml::Operation "0..9999" --* "1..1" uml::DataType : ownedOperation445
+uml::Class "1..1" *-- "0..9999" uml::Operation : ownedOperation267
+uml::Interface "1..1" *-- "0..9999" uml::Operation : ownedOperation288
+uml::DataType "1..1" *-- "0..9999" uml::Operation : ownedOperation445
 uml::TemplateParameter "0..9999" --* "1..1" uml::TemplateSignature : ownedParameter102
-uml::Parameter "0..9999" --* "1..1" uml::BehavioralFeature : ownedParameter238
-uml::Parameter "0..9999" --* "1..1" uml::Behavior : ownedParameter249
+uml::BehavioralFeature "1..1" *-- "0..9999" uml::Parameter : ownedParameter238
+uml::Behavior "1..1" *-- "0..9999" uml::Parameter : ownedParameter249
 uml::BehavioralFeature "1..1" *-- "0..9999" uml::ParameterSet : ownedParameterSet244
 uml::Behavior "1..1" *-- "0..9999" uml::ParameterSet : ownedParameterSet260
 uml::ParameterableElement "0..1" --* "1..1" uml::TemplateParameter : ownedParameteredElement108
 uml::EncapsulatedClassifier "1..1" -- "0..9999" uml::Port : ownedPort404
-uml::Reception "0..9999" --* "1..1" uml::Class : ownedReception271
-uml::Reception "0..9999" --* "1..1" uml::Interface : ownedReception296
+uml::Class "1..1" *-- "0..9999" uml::Reception : ownedReception271
+uml::Interface "1..1" *-- "0..9999" uml::Reception : ownedReception296
 uml::Constraint "0..9999" --* "1..1" uml::Namespace : ownedRule34
-uml::Stereotype "0..9999" -- "1..1" uml::Profile : ownedStereotype431
+uml::Profile "1..1" -- "0..9999" uml::Stereotype : ownedStereotype431
 uml::TemplateSignature "0..1" --* "1..1" uml::TemplateableElement : ownedTemplateSignature95
 uml::BehavioredClassifier "1..1" *-- "0..9999" uml::Trigger : ownedTrigger281
 uml::Package "1..1" -- "0..9999" uml::Type : ownedType9
-uml::UseCase "0..9999" --* "1..1" uml::Classifier : ownedUseCase86
+uml::Classifier "1..1" *-- "0..9999" uml::UseCase : ownedUseCase86
 uml::Element "1..1" -- "0..1" uml::Element : owner4
 uml::Association "0..1" -- "1..1" uml::Property : owningAssociation177
-uml::StringExpression "0..1" -- "1..1" uml::StringExpression : owningExpression491
+uml::StringExpression "1..1" -- "0..1" uml::StringExpression : owningExpression491
 uml::InstanceSpecification "1..1" -- "1..1" uml::Slot : owningInstance515
-uml::TemplateParameter "0..1" -- "1..1" uml::ParameterableElement : owningTemplateParameter115
+uml::ParameterableElement "1..1" -- "0..1" uml::TemplateParameter : owningTemplateParameter115
 uml::Package "0..1" -- "1..1" uml::Type : package57
-uml::PackageImport "0..9999" --* "1..1" uml::Namespace : packageImport32
-uml::PackageMerge "0..9999" --* "1..1" uml::Package : packageMerge10
-uml::PackageableElement "0..9999" --* "1..1" uml::Package : packagedElement11
+uml::Namespace "1..1" *-- "0..9999" uml::PackageImport : packageImport32
+uml::Package "1..1" *-- "0..9999" uml::PackageMerge : packageMerge10
+uml::Package "1..1" *-- "0..9999" uml::PackageableElement : packagedElement11
 uml::Component "1..1" *-- "0..9999" uml::PackageableElement : packagedElement780
 uml::TemplateParameter "1..9999" -- "1..1" uml::TemplateSignature : parameter100
 uml::Parameter "1..9999" -- "1..1" uml::ParameterSet : parameter439
-uml::Parameter "1..1" -- "1..1" uml::ActivityParameterNode : parameter663
-uml::ParameterSet "0..9999" -- "1..1" uml::Parameter : parameterSet150
+uml::ActivityParameterNode "1..1" -- "1..1" uml::Parameter : parameter663
+uml::Parameter "1..1" -- "0..9999" uml::ParameterSet : parameterSet150
 uml::TemplateBinding "1..1" *-- "0..9999" uml::TemplateParameterSubstitution : parameterSubstitution97
 uml::ParameterableElement "1..1" -- "1..1" uml::TemplateParameter : parameteredElement107
 uml::Property "0..9999" -- "1..1" uml::StructuredClassifier : part408
-uml::Property "0..1" -- "1..1" uml::ConnectorEnd : partWithPort168
+uml::ConnectorEnd "1..1" -- "0..1" uml::Property : partWithPort168
 uml::Activity "1..1" -- "0..9999" uml::ActivityPartition : partition575
 uml::Port "0..9999" -- "1..1" uml::Trigger : port350
-uml::ProtocolTransition "1..1" -- "0..1" uml::Constraint : postCondition1050
+uml::Constraint "0..1" -- "1..1" uml::ProtocolTransition : postCondition1050
 uml::Constraint "0..9999" -- "1..1" uml::Operation : postcondition223
-uml::Constraint "0..9999" -- "1..1" uml::Behavior : postcondition257
+uml::Behavior "1..1" -- "0..9999" uml::Constraint : postcondition257
 uml::Classifier "0..1" -- "1..1" uml::GeneralizationSet : powertype135
-uml::GeneralizationSet "0..9999" -- "1..1" uml::Classifier : powertypeExtent67
+uml::Classifier "1..1" -- "0..9999" uml::GeneralizationSet : powertypeExtent67
 uml::Constraint "0..1" -- "1..1" uml::ProtocolTransition : preCondition1055
 uml::Constraint "0..9999" -- "1..1" uml::Operation : precondition220
-uml::Constraint "0..9999" -- "1..1" uml::Behavior : precondition254
-uml::Clause "0..9999" -- "1..1" uml::Clause : predecessorClause1011
-uml::ProfileApplication "0..9999" --* "1..1" uml::Package : profileApplication17
-uml::ExecutableNode "1..1" -- "1..1" uml::ExceptionHandler : protectedNode632
-uml::ProtocolStateMachine "0..1" --* "1..1" uml::Interface : protocol299
-uml::ProtocolStateMachine "0..1" -- "1..1" uml::Port : protocol361
+uml::Behavior "1..1" -- "0..9999" uml::Constraint : precondition254
+uml::Clause "1..1" -- "0..9999" uml::Clause : predecessorClause1011
+uml::Package "1..1" *-- "0..9999" uml::ProfileApplication : profileApplication17
+uml::ExceptionHandler "1..1" -- "1..1" uml::ExecutableNode : protectedNode632
+uml::Interface "1..1" *-- "0..1" uml::ProtocolStateMachine : protocol299
+uml::Port "1..1" -- "0..1" uml::ProtocolStateMachine : protocol361
 uml::Interface "0..9999" -- "1..1" uml::Port : provided358
-uml::Interface "0..9999" -- "1..1" uml::Component : provided777
-uml::Property "0..9999" --* "1..1" uml::Property : qualifier190
-uml::QualifierValue "0..9999" --* "1..1" uml::LinkEndData : qualifier838
+uml::Component "1..1" -- "0..9999" uml::Interface : provided777
+uml::Property "1..1" *-- "0..9999" uml::Property : qualifier190
+uml::LinkEndData "1..1" *-- "0..9999" uml::QualifierValue : qualifier838
 uml::Property "1..1" -- "1..1" uml::QualifierValue : qualifier840
 uml::Property "1..1" -- "1..1" uml::ReadLinkObjectEndQualifierAction : qualifier960
-uml::Type "0..9999" -- "1..1" uml::BehavioralFeature : raisedException241
+uml::BehavioralFeature "1..1" -- "0..9999" uml::Type : raisedException241
 uml::Component "1..1" *-- "0..9999" uml::ComponentRealization : realization783
-uml::Relationship "0..9999" -- "1..1" uml::InformationFlow : realization904
+uml::InformationFlow "1..1" -- "0..9999" uml::Relationship : realization904
 uml::ActivityEdge "0..9999" -- "1..1" uml::InformationFlow : realizingActivityEdge915
 uml::Classifier "1..9999" -- "1..1" uml::ComponentRealization : realizingClassifier773
-uml::InformationFlow "1..1" -- "0..9999" uml::Connector : realizingConnector918
-uml::Message "0..9999" -- "1..1" uml::InformationFlow : realizingMessage921
+uml::Connector "0..9999" -- "1..1" uml::InformationFlow : realizingConnector918
+uml::InformationFlow "1..1" -- "0..9999" uml::Message : realizingMessage921
 uml::Message "1..1" -- "0..1" uml::MessageEnd : receiveEvent667
 uml::Package "1..1" -- "1..1" uml::PackageMerge : receivingPackage497
 uml::Behavior "0..9999" -- "1..1" uml::Behavior : redefinedBehavior247
 uml::Classifier "0..9999" -- "1..1" uml::Classifier : redefinedClassifier72
 uml::Connector "0..9999" -- "1..1" uml::Connector : redefinedConnector420
-uml::ActivityEdge "0..9999" -- "1..1" uml::ActivityEdge : redefinedEdge589
-uml::RedefinableElement "0..9999" -- "1..1" uml::RedefinableElement : redefinedElement90
+uml::ActivityEdge "1..1" -- "0..9999" uml::ActivityEdge : redefinedEdge589
+uml::RedefinableElement "1..1" -- "0..9999" uml::RedefinableElement : redefinedElement90
 uml::Interface "0..9999" -- "1..1" uml::Interface : redefinedInterface294
-uml::ActivityNode "0..9999" -- "1..1" uml::ActivityNode : redefinedNode548
+uml::ActivityNode "1..1" -- "0..9999" uml::ActivityNode : redefinedNode548
 uml::Operation "0..9999" -- "1..1" uml::Operation : redefinedOperation227
 uml::Port "0..9999" -- "1..1" uml::Port : redefinedPort356
-uml::Property "1..1" -- "0..9999" uml::Property : redefinedProperty175
-uml::State "0..1" -- "1..1" uml::State : redefinedState371
+uml::Property "0..9999" -- "1..1" uml::Property : redefinedProperty175
+uml::State "1..1" -- "0..1" uml::State : redefinedState371
 uml::Transition "0..1" -- "1..1" uml::Transition : redefinedTransition337
 uml::Classifier "0..9999" -- "1..1" uml::RedefinableElement : redefinitionContext91
 uml::Behavior "1..1" -- "1..1" uml::ReduceAction : reducer988
 uml::Operation "0..9999" -- "1..1" uml::ProtocolTransition : referred1052
 uml::Interaction "1..1" -- "1..1" uml::InteractionUse : refersTo710
-uml::StateMachine "1..1" *-- "1..9999" uml::Region : region307
+uml::Region "1..9999" --* "1..1" uml::StateMachine : region307
 uml::Region "0..9999" --* "1..1" uml::State : region387
 uml::ExpansionNode "1..1" -- "0..1" uml::ExpansionRegion : regionAsInput1045
-uml::ExpansionRegion "0..1" -- "1..1" uml::ExpansionNode : regionAsOutput1044
-uml::Relationship "1..1" -- "1..9999" uml::Element : relatedElement29
+uml::ExpansionNode "1..1" -- "0..1" uml::ExpansionRegion : regionAsOutput1044
+uml::Element "1..9999" -- "1..1" uml::Relationship : relatedElement29
 uml::InputPin "0..1" --* "1..1" uml::RemoveStructuralFeatureValueAction : removeAt824
 uml::InputPin "0..1" --* "1..1" uml::RemoveVariableValueAction : removeAt896
-uml::Trigger "1..1" -- "1..1" uml::ReplyAction : replyToCall972
+uml::ReplyAction "1..1" -- "1..1" uml::Trigger : replyToCall972
 uml::InputPin "0..9999" --* "1..1" uml::ReplyAction : replyValue977
 uml::Classifier "1..1" -- "0..1" uml::CollaborationUse : representation81
 uml::Classifier "0..9999" -- "1..1" uml::InformationItem : represented902
-uml::Element "0..1" -- "1..1" uml::ActivityPartition : represents616
+uml::ActivityPartition "1..1" -- "0..1" uml::Element : represents616
 uml::ConnectableElement "0..1" -- "1..1" uml::Lifeline : represents699
 uml::InputPin "1..1" --* "1..1" uml::SendObjectAction : request861
-uml::Port "1..1" -- "0..9999" uml::Interface : required352
-uml::Interface "0..9999" -- "1..1" uml::Component : required775
+uml::Interface "0..9999" -- "1..1" uml::Port : required352
+uml::Component "1..1" -- "0..9999" uml::Interface : required775
 uml::ConditionalNode "1..1" *-- "0..9999" uml::OutputPin : result1001
-uml::OutputPin "0..9999" --* "1..1" uml::LoopNode : result1032
-uml::Parameter "0..1" -- "1..1" uml::OpaqueExpression : result146
-uml::OutputPin "0..9999" --* "1..1" uml::CallAction : result642
-uml::OutputPin "1..1" --* "1..1" uml::CreateObjectAction : result795
+uml::LoopNode "1..1" *-- "0..9999" uml::OutputPin : result1032
+uml::OpaqueExpression "1..1" -- "0..1" uml::Parameter : result146
+uml::CallAction "1..1" *-- "0..9999" uml::OutputPin : result642
+uml::CreateObjectAction "1..1" *-- "1..1" uml::OutputPin : result795
 uml::OutputPin "1..1" --* "1..1" uml::TestIdentityAction : result805
 uml::OutputPin "1..1" --* "1..1" uml::ReadSelfAction : result808
 uml::OutputPin "1..1" --* "1..1" uml::ReadStructuralFeatureAction : result815
-uml::WriteStructuralFeatureAction "1..1" *-- "0..1" uml::OutputPin : result819
-uml::OutputPin "0..1" --* "1..1" uml::ClearStructuralFeatureAction : result822
+uml::OutputPin "0..1" --* "1..1" uml::WriteStructuralFeatureAction : result819
+uml::ClearStructuralFeatureAction "1..1" *-- "0..1" uml::OutputPin : result822
 uml::OutputPin "1..1" --* "1..1" uml::ReadLinkAction : result846
 uml::OutputPin "1..1" --* "1..1" uml::ValueSpecificationAction : result866
 uml::OutputPin "1..1" --* "1..1" uml::ReadVariableAction : result890
 uml::OutputPin "1..1" --* "1..1" uml::ReadExtentAction : result924
 uml::OutputPin "1..1" --* "1..1" uml::ReadIsClassifiedObjectAction : result939
-uml::ReadLinkObjectEndAction "1..1" *-- "1..1" uml::OutputPin : result952
-uml::ReadLinkObjectEndQualifierAction "1..1" *-- "1..1" uml::OutputPin : result957
-uml::OutputPin "1..1" --* "1..1" uml::CreateLinkObjectAction : result963
-uml::OutputPin "0..9999" --* "1..1" uml::AcceptEventAction : result965
-uml::UnmarshallAction "1..1" *-- "1..9999" uml::OutputPin : result980
+uml::OutputPin "1..1" --* "1..1" uml::ReadLinkObjectEndAction : result952
+uml::OutputPin "1..1" --* "1..1" uml::ReadLinkObjectEndQualifierAction : result957
+uml::CreateLinkObjectAction "1..1" *-- "1..1" uml::OutputPin : result963
+uml::AcceptEventAction "1..1" *-- "0..9999" uml::OutputPin : result965
+uml::OutputPin "1..9999" --* "1..1" uml::UnmarshallAction : result980
 uml::OutputPin "1..1" --* "1..1" uml::ReduceAction : result990
-uml::OutputPin "1..1" --* "1..1" uml::AcceptCallAction : returnInformation970
+uml::AcceptCallAction "1..1" *-- "1..1" uml::OutputPin : returnInformation970
 uml::InputPin "1..1" --* "1..1" uml::ReplyAction : returnInformation974
 uml::ConnectableElement "1..1" -- "1..1" uml::ConnectorEnd : role165
-uml::StructuredClassifier "1..1" -- "0..9999" uml::ConnectableElement : role411
-uml::Dependency "0..9999" --* "1..1" uml::CollaborationUse : roleBinding450
+uml::ConnectableElement "0..9999" -- "1..1" uml::StructuredClassifier : role411
+uml::CollaborationUse "1..1" *-- "0..9999" uml::Dependency : roleBinding450
 uml::StructuredActivityNode "0..1" -- "1..1" uml::Variable : scope579
-uml::TestIdentityAction "1..1" *-- "1..1" uml::InputPin : second802
+uml::InputPin "1..1" --* "1..1" uml::TestIdentityAction : second802
 uml::Behavior "0..1" -- "1..1" uml::ObjectNode : selection639
 uml::Behavior "0..1" -- "1..1" uml::ObjectFlow : selection769
 uml::Lifeline "1..1" *-- "0..1" uml::ValueSpecification : selector703
-uml::MessageEnd "0..1" -- "1..1" uml::Message : sendEvent668
+uml::Message "1..1" -- "0..1" uml::MessageEnd : sendEvent668
 uml::ExecutableNode "0..9999" -- "1..1" uml::LoopNode : setupPart1023
 uml::Reception "1..1" -- "0..1" uml::Signal : signal301
-uml::Signal "1..1" -- "1..1" uml::SendSignalAction : signal651
-uml::Signal "1..1" -- "1..1" uml::SendSignalEvent : signal748
+uml::SendSignalAction "1..1" -- "1..1" uml::Signal : signal651
+uml::SendSignalEvent "1..1" -- "1..1" uml::Signal : signal748
 uml::ReceiveSignalEvent "1..1" -- "1..1" uml::Signal : signal754
 uml::Signal "1..1" -- "1..1" uml::SignalEvent : signal760
-uml::Signal "1..1" -- "1..1" uml::BroadcastSignalAction : signal857
+uml::BroadcastSignalAction "1..1" -- "1..1" uml::Signal : signal857
 uml::TemplateParameter "1..1" -- "1..1" uml::TemplateSignature : signature105
-uml::NamedElement "0..1" -- "1..1" uml::Message : signature678
-uml::TemplateSignature "1..1" -- "1..1" uml::TemplateBinding : signature96
+uml::Message "1..1" -- "0..1" uml::NamedElement : signature678
+uml::TemplateBinding "1..1" -- "1..1" uml::TemplateSignature : signature96
 uml::InstanceSpecification "1..1" *-- "0..9999" uml::Slot : slot507
-uml::Element "1..9999" -- "1..1" uml::DirectedRelationship : source24
-uml::Vertex "1..1" -- "1..1" uml::Transition : source330
-uml::ActivityNode "1..1" -- "1..1" uml::ActivityEdge : source584
+uml::DirectedRelationship "1..1" -- "1..9999" uml::Element : source24
+uml::Transition "1..1" -- "1..1" uml::Vertex : source330
+uml::ActivityEdge "1..1" -- "1..1" uml::ActivityNode : source584
 uml::Classifier "1..1" -- "1..1" uml::Generalization : specific133
-uml::ProtocolStateMachine "1..1" -- "1..1" uml::ProtocolConformance : specificMachine403
-uml::BehavioralFeature "0..1" -- "1..1" uml::Behavior : specification263
-uml::ValueSpecification "0..1" --* "1..1" uml::InstanceSpecification : specification508
-uml::ValueSpecification "1..1" --* "1..1" uml::Constraint : specification52
+uml::ProtocolConformance "1..1" -- "1..1" uml::ProtocolStateMachine : specificMachine403
+uml::Behavior "1..1" -- "0..1" uml::BehavioralFeature : specification263
+uml::InstanceSpecification "1..1" *-- "0..1" uml::ValueSpecification : specification508
+uml::Constraint "1..1" *-- "1..1" uml::ValueSpecification : specification52
 uml::ExecutionSpecification "1..1" -- "1..1" uml::OccurrenceSpecification : start735
-uml::State "0..1" -- "1..1" uml::Region : state316
+uml::Region "1..1" -- "0..1" uml::State : state316
 uml::ConnectionPointReference "1..1" -- "0..1" uml::State : state394
-uml::State "0..1" -- "1..1" uml::Pseudostate : state398
+uml::Pseudostate "1..1" -- "0..1" uml::State : state398
 uml::Constraint "0..1" --* "1..1" uml::State : stateInvariant372
 uml::Region "1..1" -- "0..1" uml::StateMachine : stateMachine320
-uml::StateMachine "0..1" -- "1..1" uml::Pseudostate : stateMachine396
-uml::StructuralFeatureAction "1..1" -- "1..1" uml::StructuralFeature : structuralFeature810
+uml::Pseudostate "1..1" -- "0..1" uml::StateMachine : stateMachine396
+uml::StructuralFeature "1..1" -- "1..1" uml::StructuralFeatureAction : structuralFeature810
 uml::Activity "1..1" -- "0..9999" uml::StructuredActivityNode : structuredNode567
-uml::StringExpression "0..9999" --* "1..1" uml::StringExpression : subExpression489
+uml::StringExpression "1..1" *-- "0..9999" uml::StringExpression : subExpression489
 uml::ActivityGroup "1..1" -- "0..9999" uml::ActivityGroup : subgroup555
-uml::UseCase "1..1" -- "0..9999" uml::Classifier : subject460
-uml::StateMachine "0..1" -- "1..1" uml::State : submachine364
+uml::Classifier "0..9999" -- "1..1" uml::UseCase : subject460
+uml::State "1..1" -- "0..1" uml::StateMachine : submachine364
 uml::State "0..9999" -- "1..1" uml::StateMachine : submachineState308
 uml::ActivityPartition "1..1" *-- "0..9999" uml::ActivityPartition : subpartition611
-uml::Property "1..1" -- "0..9999" uml::Property : subsettedProperty185
+uml::Property "0..9999" -- "1..1" uml::Property : subsettedProperty185
 uml::Classifier "1..1" -- "1..1" uml::Substitution : substitutingClassifier143
 uml::Classifier "1..1" *-- "0..9999" uml::Substitution : substitution77
-uml::Vertex "0..9999" --* "1..1" uml::Region : subvertex313
+uml::Region "1..1" *-- "0..9999" uml::Vertex : subvertex313
 uml::Clause "1..1" -- "0..9999" uml::Clause : successorClause1013
-uml::Class "1..1" -- "0..9999" uml::Class : superClass269
-uml::ActivityGroup "0..1" -- "1..1" uml::ActivityGroup : superGroup558
+uml::Class "0..9999" -- "1..1" uml::Class : superClass269
+uml::ActivityGroup "1..1" -- "0..1" uml::ActivityGroup : superGroup558
 uml::ActivityPartition "1..1" -- "0..1" uml::ActivityPartition : superPartition614
 uml::Dependency "1..1" -- "1..9999" uml::NamedElement : supplier21
-uml::Element "1..9999" -- "1..1" uml::DirectedRelationship : target26
+uml::DirectedRelationship "1..1" -- "1..9999" uml::Element : target26
 uml::Transition "1..1" -- "1..1" uml::Vertex : target333
 uml::ActivityEdge "1..1" -- "1..1" uml::ActivityNode : target586
-uml::SendSignalAction "1..1" *-- "1..1" uml::InputPin : target649
-uml::InputPin "1..1" --* "1..1" uml::CallOperationAction : target656
-uml::InputPin "1..1" --* "1..1" uml::DestroyObjectAction : target798
-uml::SendObjectAction "1..1" *-- "1..1" uml::InputPin : target859
-uml::TemplateableElement "1..1" -- "1..1" uml::TemplateSignature : template103
+uml::InputPin "1..1" --* "1..1" uml::SendSignalAction : target649
+uml::CallOperationAction "1..1" *-- "1..1" uml::InputPin : target656
+uml::DestroyObjectAction "1..1" *-- "1..1" uml::InputPin : target798
+uml::InputPin "1..1" --* "1..1" uml::SendObjectAction : target859
+uml::TemplateSignature "1..1" -- "1..1" uml::TemplateableElement : template103
 uml::TemplateBinding "1..1" -- "1..1" uml::TemplateParameterSubstitution : templateBinding127
 uml::TemplateBinding "0..9999" --* "1..1" uml::TemplateableElement : templateBinding94
-uml::TemplateParameter "0..1" -- "1..1" uml::ParameterableElement : templateParameter117
-uml::ExecutableNode "0..9999" -- "1..1" uml::Clause : test1004
+uml::ParameterableElement "1..1" -- "0..1" uml::TemplateParameter : templateParameter117
+uml::Clause "1..1" -- "0..9999" uml::ExecutableNode : test1004
 uml::ExecutableNode "0..9999" -- "1..1" uml::LoopNode : test1029
 uml::GeneralOrdering "0..9999" -- "1..1" uml::OccurrenceSpecification : toAfter724
 uml::GeneralOrdering "0..9999" -- "1..1" uml::OccurrenceSpecification : toBefore721
 uml::Behavior "0..1" -- "1..1" uml::ObjectFlow : transformation766
-uml::Transition "0..9999" --* "1..1" uml::Region : transition314
-uml::Trigger "0..9999" --* "1..1" uml::Transition : trigger345
+uml::Region "1..1" *-- "0..9999" uml::Transition : transition314
+uml::Transition "1..1" *-- "0..9999" uml::Trigger : trigger345
 uml::AcceptEventAction "1..1" *-- "1..9999" uml::Trigger : trigger967
-uml::Type "0..1" -- "1..1" uml::Operation : type235
+uml::Operation "1..1" -- "0..1" uml::Type : type235
 uml::Association "0..1" -- "1..1" uml::Connector : type416
-uml::CollaborationUse "1..1" -- "1..1" uml::Collaboration : type448
+uml::Collaboration "1..1" -- "1..1" uml::CollaborationUse : type448
 uml::Type "0..1" -- "1..1" uml::TypedElement : type56
 uml::Classifier "1..1" -- "1..1" uml::UnmarshallAction : unmarshallType982
-uml::ValueSpecification "1..1" --* "1..1" uml::ObjectNode : upperBound633
-uml::ValueSpecification "0..1" --* "1..1" uml::MultiplicityElement : upperValue156
-uml::UseCase "1..1" -- "1..1" uml::ExtensionPoint : useCase476
-uml::UseCase "0..9999" -- "1..1" uml::Classifier : useCase88
-uml::PackageableElement "1..1" -- "1..1" uml::Manifestation : utilizedElement214
-uml::ValueSpecification "0..9999" --* "1..1" uml::Slot : value512
-uml::ValueSpecification "1..1" --* "1..1" uml::ValuePin : value665
+uml::ObjectNode "1..1" *-- "1..1" uml::ValueSpecification : upperBound633
+uml::MultiplicityElement "1..1" *-- "0..1" uml::ValueSpecification : upperValue156
+uml::ExtensionPoint "1..1" -- "1..1" uml::UseCase : useCase476
+uml::Classifier "1..1" -- "0..9999" uml::UseCase : useCase88
+uml::Manifestation "1..1" -- "1..1" uml::PackageableElement : utilizedElement214
+uml::Slot "1..1" *-- "0..9999" uml::ValueSpecification : value512
+uml::ValuePin "1..1" *-- "1..1" uml::ValueSpecification : value665
 uml::InputPin "1..1" --* "1..1" uml::WriteStructuralFeatureAction : value817
 uml::InputPin "0..1" -- "1..1" uml::LinkEndData : value832
-uml::QualifierValue "1..1" -- "1..1" uml::InputPin : value843
+uml::InputPin "1..1" -- "1..1" uml::QualifierValue : value843
 uml::ValueSpecification "1..1" --* "1..1" uml::ValueSpecificationAction : value864
 uml::InputPin "1..1" --* "1..1" uml::WriteVariableAction : value892
-uml::Variable "0..9999" --* "1..1" uml::StructuredActivityNode : variable549
-uml::Variable "0..9999" --* "1..1" uml::Activity : variable568
+uml::StructuredActivityNode "1..1" *-- "0..9999" uml::Variable : variable549
+uml::Activity "1..1" *-- "0..9999" uml::Variable : variable568
 uml::Variable "1..1" -- "1..1" uml::VariableAction : variable889
-uml::ValueSpecification "1..1" --* "1..1" uml::ActivityEdge : weight595
+uml::ActivityEdge "1..1" *-- "1..1" uml::ValueSpecification : weight595
 uml::TimeEvent "1..1" *-- "1..1" uml::TimeExpression : when887
 @enduml

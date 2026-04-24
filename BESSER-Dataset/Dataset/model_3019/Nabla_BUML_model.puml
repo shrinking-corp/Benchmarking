@@ -202,10 +202,10 @@ class nabla::VectorConstant {
 ArgOrVar <|-- nabla::Arg
 ArgOrVar <|-- nabla::TimeIterator
 ArgOrVar <|-- nabla::Var
-ConnectivityCall <|-- nabla::MultipleConnectivityCall
-ConnectivityCall <|-- nabla::SingleConnectivityCall
 Connectivity <|-- nabla::MultipleConnectivity
 Connectivity <|-- nabla::SingleConnectivity
+ConnectivityCall <|-- nabla::MultipleConnectivityCall
+ConnectivityCall <|-- nabla::SingleConnectivityCall
 Container <|-- nabla::MultipleConnectivityCall
 Container <|-- nabla::SetRef
 Expression <|-- nabla::And
@@ -253,96 +253,96 @@ TimeIteratorRef <|-- nabla::InitTimeIteratorRef
 TimeIteratorRef <|-- nabla::NextTimeIteratorRef
 Var <|-- nabla::ConnectivityVar
 Var <|-- nabla::SimpleVar
-nabla::Expression "0..1" --* "1..1" nabla::Div : Left184
+nabla::Div "1..1" *-- "0..1" nabla::Expression : Left184
 nabla::Expression "0..1" --* "1..1" nabla::ReductionCall : arg124
 nabla::Expression "0..9999" --* "1..1" nabla::FunctionCall : args202
-nabla::ItemRef "0..9999" --* "1..1" nabla::ConnectivityCall : args86
-nabla::Instruction "0..1" --* "1..1" nabla::FunctionOrReduction : body107
+nabla::ConnectivityCall "1..1" *-- "0..9999" nabla::ItemRef : args86
+nabla::FunctionOrReduction "1..1" *-- "0..1" nabla::Instruction : body107
 nabla::Instruction "0..1" --* "1..1" nabla::Loop : body44
-nabla::TimeIterator "1..1" *-- "0..1" nabla::Expression : cond96
-nabla::Expression "0..1" --* "1..1" nabla::ContractedIf : condition141
+nabla::Expression "0..1" --* "1..1" nabla::TimeIterator : cond96
+nabla::ContractedIf "1..1" *-- "0..1" nabla::Expression : condition141
 nabla::Expression "0..1" --* "1..1" nabla::If : condition50
 nabla::Connectivity "0..9999" --* "1..1" nabla::NablaModule : connectivities3
 nabla::MultipleConnectivity "0..1" -- "1..1" nabla::MultipleConnectivityCall : connectivity87
 nabla::SingleConnectivity "0..1" -- "1..1" nabla::SingleConnectivityCall : connectivity89
-nabla::Container "0..1" --* "1..1" nabla::Cardinality : container212
-nabla::SpaceIterator "1..1" *-- "0..1" nabla::Container : container71
-nabla::SpaceIterator "1..1" *-- "0..1" nabla::SimpleVar : counter68
+nabla::Cardinality "1..1" *-- "0..1" nabla::Container : container212
+nabla::Container "0..1" --* "1..1" nabla::SpaceIterator : container71
+nabla::SimpleVar "0..1" --* "1..1" nabla::SpaceIterator : counter68
 nabla::NablaModule "1..1" *-- "0..9999" nabla::VarGroupDeclaration : declarations13
-nabla::SimpleVarDefinition "0..9999" --* "1..1" nabla::NablaModule : definitions11
+nabla::NablaModule "1..1" *-- "0..9999" nabla::SimpleVarDefinition : definitions11
 nabla::ContractedIf "1..1" *-- "0..1" nabla::Expression : else146
 nabla::If "1..1" *-- "0..1" nabla::Instruction : else55
 nabla::Expression "0..1" --* "1..1" nabla::Parenthesis : expression194
 nabla::Expression "0..1" --* "1..1" nabla::UnaryMinus : expression196
-nabla::Not "1..1" *-- "0..1" nabla::Expression : expression198
+nabla::Expression "0..1" --* "1..1" nabla::Not : expression198
 nabla::Expression "0..1" --* "1..1" nabla::Return : expression62
 nabla::Function "0..1" -- "1..1" nabla::FunctionCall : function200
 nabla::Function "0..9999" --* "1..1" nabla::NablaModule : functions7
 nabla::Import "0..9999" --* "1..1" nabla::NablaModule : imports0
-nabla::FunctionOrReduction "1..1" *-- "0..9999" nabla::Arg : inArgs105
+nabla::Arg "0..9999" --* "1..1" nabla::FunctionOrReduction : inArgs105
 nabla::BaseType "0..9999" --* "1..1" nabla::Function : inTypes110
-nabla::ItemType "0..9999" -- "1..1" nabla::Connectivity : inTypes23
+nabla::Connectivity "1..1" -- "0..9999" nabla::ItemType : inTypes23
 nabla::Interval "1..1" *-- "0..1" nabla::SimpleVar : index81
 nabla::ArgOrVarRef "1..1" *-- "0..9999" nabla::Expression : indices135
 nabla::Instruction "0..1" --* "1..1" nabla::Job : instruction29
-nabla::InstructionBlock "1..1" *-- "0..9999" nabla::Instruction : instructions42
+nabla::Instruction "0..9999" --* "1..1" nabla::InstructionBlock : instructions42
 nabla::Item "0..1" --* "1..1" nabla::ItemDefinition : item58
 nabla::Item "0..1" --* "1..1" nabla::SpaceIterator : item66
 nabla::Item "0..1" --* "1..1" nabla::SingletonDefinition : item75
-nabla::NablaModule "1..1" *-- "0..9999" nabla::ItemType : itemTypes1
-nabla::TimeIteratorDefinition "0..1" --* "1..1" nabla::NablaModule : iteration15
-nabla::IterationBlock "0..1" --* "1..1" nabla::Iterable : iterationBlock31
+nabla::ItemType "0..9999" --* "1..1" nabla::NablaModule : itemTypes1
+nabla::NablaModule "1..1" *-- "0..1" nabla::TimeIteratorDefinition : iteration15
+nabla::Iterable "1..1" *-- "0..1" nabla::IterationBlock : iterationBlock31
 nabla::TimeIterator "0..9999" --* "1..1" nabla::TimeIteratorDefinition : iterators94
 nabla::Job "0..9999" --* "1..1" nabla::NablaModule : jobs17
 nabla::Expression "0..1" --* "1..1" nabla::Or : left149
 nabla::And "1..1" *-- "0..1" nabla::Expression : left154
-nabla::Expression "0..1" --* "1..1" nabla::Equality : left159
-nabla::Expression "0..1" --* "1..1" nabla::Comparison : left164
+nabla::Equality "1..1" *-- "0..1" nabla::Expression : left159
+nabla::Comparison "1..1" *-- "0..1" nabla::Expression : left164
 nabla::Expression "0..1" --* "1..1" nabla::Plus : left169
 nabla::Expression "0..1" --* "1..1" nabla::Minus : left174
 nabla::Expression "0..1" --* "1..1" nabla::Mul : left179
 nabla::Expression "0..1" --* "1..1" nabla::Modulo : left189
-nabla::ArgOrVarRef "0..1" --* "1..1" nabla::Affectation : left46
+nabla::Affectation "1..1" *-- "0..1" nabla::ArgOrVarRef : left46
 nabla::Expression "0..1" --* "1..1" nabla::Interval : nbElems83
 nabla::NablaModule "1..1" *-- "0..9999" nabla::OptDefinition : options9
 nabla::Reduction "0..1" -- "1..1" nabla::ReductionCall : reduction122
-nabla::Reduction "0..9999" --* "1..1" nabla::NablaModule : reductions5
+nabla::NablaModule "1..1" *-- "0..9999" nabla::Reduction : reductions5
 nabla::BaseType "0..1" --* "1..1" nabla::Function : returnType113
 nabla::Connectivity "1..1" -- "0..1" nabla::ItemType : returnType26
 nabla::Expression "0..1" --* "1..1" nabla::Or : right151
-nabla::Expression "0..1" --* "1..1" nabla::And : right156
-nabla::Expression "0..1" --* "1..1" nabla::Equality : right161
+nabla::And "1..1" *-- "0..1" nabla::Expression : right156
+nabla::Equality "1..1" *-- "0..1" nabla::Expression : right161
 nabla::Comparison "1..1" *-- "0..1" nabla::Expression : right166
 nabla::Expression "0..1" --* "1..1" nabla::Plus : right171
-nabla::Minus "1..1" *-- "0..1" nabla::Expression : right176
+nabla::Expression "0..1" --* "1..1" nabla::Minus : right176
 nabla::Expression "0..1" --* "1..1" nabla::Mul : right181
 nabla::Div "1..1" *-- "0..1" nabla::Expression : right186
 nabla::Expression "0..1" --* "1..1" nabla::Modulo : right191
-nabla::Expression "0..1" --* "1..1" nabla::Affectation : right47
-nabla::Reduction "1..1" *-- "0..1" nabla::Expression : seed116
+nabla::Affectation "1..1" *-- "0..1" nabla::Expression : right47
+nabla::Expression "0..1" --* "1..1" nabla::Reduction : seed116
 nabla::SingletonDefinition "0..9999" --* "1..1" nabla::SpaceIterator : singletons73
-nabla::Expression "0..9999" --* "1..1" nabla::BaseType : sizes138
-nabla::ItemRef "0..9999" --* "1..1" nabla::ArgOrVarRef : spaceIterators132
-nabla::MultipleConnectivity "0..9999" -- "1..1" nabla::ConnectivityVar : supports101
-nabla::ArgOrVarRef "1..1" -- "0..1" nabla::ArgOrVar : target127
+nabla::BaseType "1..1" *-- "0..9999" nabla::Expression : sizes138
+nabla::ArgOrVarRef "1..1" *-- "0..9999" nabla::ItemRef : spaceIterators132
+nabla::ConnectivityVar "1..1" -- "0..9999" nabla::MultipleConnectivity : supports101
+nabla::ArgOrVar "0..1" -- "1..1" nabla::ArgOrVarRef : target127
 nabla::SetDefinition "0..1" -- "1..1" nabla::SetRef : target64
 nabla::Item "0..1" -- "1..1" nabla::ItemRef : target91
 nabla::TimeIterator "0..1" -- "1..1" nabla::TimeIteratorRef : target99
-nabla::Expression "0..1" --* "1..1" nabla::ContractedIf : then143
-nabla::Instruction "0..1" --* "1..1" nabla::If : then52
-nabla::TimeIteratorRef "0..9999" --* "1..1" nabla::ArgOrVarRef : timeIterators129
+nabla::ContractedIf "1..1" *-- "0..1" nabla::Expression : then143
+nabla::If "1..1" *-- "0..1" nabla::Instruction : then52
+nabla::ArgOrVarRef "1..1" *-- "0..9999" nabla::TimeIteratorRef : timeIterators129
 nabla::BaseType "0..1" --* "1..1" nabla::Reduction : type119
-nabla::BaseTypeConstant "1..1" *-- "0..1" nabla::BaseType : type205
+nabla::BaseType "0..1" --* "1..1" nabla::BaseTypeConstant : type205
 nabla::BaseType "0..1" --* "1..1" nabla::VarGroupDeclaration : type38
-nabla::Expression "0..1" --* "1..1" nabla::BaseTypeConstant : value207
+nabla::BaseTypeConstant "1..1" *-- "0..1" nabla::Expression : value207
 nabla::Expression "0..1" --* "1..1" nabla::OptDefinition : value21
 nabla::Expression "0..1" --* "1..1" nabla::SimpleVarDefinition : value35
-nabla::SingleConnectivityCall "0..1" --* "1..1" nabla::ItemDefinition : value59
+nabla::ItemDefinition "1..1" *-- "0..1" nabla::SingleConnectivityCall : value59
 nabla::MultipleConnectivityCall "0..1" --* "1..1" nabla::SetDefinition : value61
-nabla::SingletonDefinition "1..1" *-- "0..1" nabla::SingleConnectivityCall : value78
+nabla::SingleConnectivityCall "0..1" --* "1..1" nabla::SingletonDefinition : value78
 nabla::Expression "0..9999" --* "1..1" nabla::VectorConstant : values210
 nabla::OptDefinition "1..1" *-- "0..1" nabla::SimpleVar : variable19
-nabla::SimpleVarDefinition "1..1" *-- "0..1" nabla::SimpleVar : variable32
+nabla::SimpleVar "0..1" --* "1..1" nabla::SimpleVarDefinition : variable32
 nabla::Var "0..9999" --* "1..1" nabla::VarGroupDeclaration : variables40
-nabla::SimpleVar "0..9999" --* "1..1" nabla::FunctionOrReduction : vars103
+nabla::FunctionOrReduction "1..1" *-- "0..9999" nabla::SimpleVar : vars103
 @enduml

@@ -478,7 +478,6 @@ EmbeddableExtensionsContainer <|-- dbl::Module
 ExpandableElement <|-- dbl::NamedElement
 ExpandableElement <|-- dbl::TypeAccess
 ExpandableElement <|-- dbl::VariableAccess
-ExpressionStatement <|-- dbl::DeprecatedProcedureCallStatement
 Expression <|-- dbl::BinaryOperator
 Expression <|-- dbl::CodeQuoteExpression
 Expression <|-- dbl::ElementAccess
@@ -487,6 +486,7 @@ Expression <|-- dbl::ExpandExpression
 Expression <|-- dbl::L1Expr
 Expression <|-- dbl::MetaExpr
 Expression <|-- dbl::UnaryOperator
+ExpressionStatement <|-- dbl::DeprecatedProcedureCallStatement
 ExtensibleElement <|-- dbl::NamedExtensible
 L1Expr <|-- dbl::ActiveLiteral
 L1Expr <|-- dbl::CreateObject
@@ -578,8 +578,6 @@ SimpleStatement <|-- dbl::Terminate
 SimpleStatement <|-- dbl::Wait
 SimpleStatement <|-- dbl::WaitUntil
 SimpleStatement <|-- dbl::Yield
-StatementExpression <|-- dbl::ExpandExpression
-StatementExpression <|-- dbl::ProcedureCall
 Statement <|-- dbl::CompositeStatement
 Statement <|-- dbl::ConsiderIdElements
 Statement <|-- dbl::ExpandStatement
@@ -591,141 +589,143 @@ Statement <|-- dbl::SimpleStatement
 Statement <|-- dbl::TargetStatement
 Statement <|-- dbl::TestStatement
 Statement <|-- dbl::Variable
+StatementExpression <|-- dbl::ExpandExpression
+StatementExpression <|-- dbl::ProcedureCall
 StructuredPropertyType <|-- dbl::CompositePropertyType
 StructuredPropertyType <|-- dbl::ReferencePropertyType
+Type <|-- dbl::Classifier
+Type <|-- dbl::PrimitiveType
 TypedElement <|-- dbl::AbstractVariable
 TypedElement <|-- dbl::Cast
 TypedElement <|-- dbl::CreateObject
 TypedElement <|-- dbl::ListDimension
 TypedElement <|-- dbl::Procedure
-Type <|-- dbl::Classifier
-Type <|-- dbl::PrimitiveType
 UnaryOperator <|-- dbl::Cast
 UnaryOperator <|-- dbl::Neg
 UnaryOperator <|-- dbl::Not
 VariableAccess <|-- dbl::MetaAccess
 dbl::Classifier "0..9999" --* "1..1" dbl::ExtensionDefinition : abstractSyntaxDef175
 dbl::ClassSimilar "1..1" *-- "0..1" dbl::StartCodeBlock : actionsBlock61
-dbl::AnnotationApplication "0..9999" --* "1..1" dbl::AnnotatableElement : annotationApplications41
+dbl::AnnotatableElement "1..1" *-- "0..9999" dbl::AnnotationApplication : annotationApplications41
 dbl::Annotation "1..1" -- "1..1" dbl::AnnotationApplication : annotationDef33
 dbl::Annotation "0..9999" --* "1..1" dbl::Module : annotationDefs12
-dbl::IdExpr "1..1" *-- "0..1" dbl::ArgumentExpression : arguments167
-dbl::Expression "0..9999" --* "1..1" dbl::ArgumentExpression : arguments170
-dbl::ArgumentExpression "0..1" --* "1..1" dbl::AddToSet : atIndex118
+dbl::ArgumentExpression "0..1" --* "1..1" dbl::IdExpr : arguments167
+dbl::ArgumentExpression "1..1" *-- "0..9999" dbl::Expression : arguments170
+dbl::AddToSet "1..1" *-- "0..1" dbl::ArgumentExpression : atIndex118
 dbl::ClassSimilar "1..1" *-- "0..9999" dbl::Variable : attributes47
 dbl::ClassAugment "1..1" -- "1..1" dbl::Clazz : augmentedClass78
-dbl::Expression "0..9999" --* "1..1" dbl::Clazz : baseConstructorArguments72
-dbl::NativeBinding "0..9999" --* "1..1" dbl::Classifier : bindings45
+dbl::Clazz "1..1" *-- "0..9999" dbl::Expression : baseConstructorArguments72
+dbl::Classifier "1..1" *-- "0..9999" dbl::NativeBinding : bindings45
 dbl::ClassAugment "0..9999" --* "1..1" dbl::Module : classAugments8
-dbl::TypedElement "1..1" *-- "0..1" dbl::IdExpr : classifierTypeExpr26
-dbl::Module "1..1" *-- "0..9999" dbl::Classifier : classifiers6
-dbl::StartCodeBlock "0..1" --* "1..1" dbl::ClassSimilar : clearBlock67
+dbl::IdExpr "0..1" --* "1..1" dbl::TypedElement : classifierTypeExpr26
+dbl::Classifier "0..9999" --* "1..1" dbl::Module : classifiers6
+dbl::ClassSimilar "1..1" *-- "0..1" dbl::StartCodeBlock : clearBlock67
 dbl::CodeBlock "1..1" --* "1..1" dbl::TargetStatement : codeBlock221
 dbl::CodeBlock "0..1" --* "1..1" dbl::ExpandSection : codeBlock243
-dbl::Pattern "1..1" *-- "1..1" dbl::CodeBlock : codeBlock258
+dbl::CodeBlock "1..1" --* "1..1" dbl::Pattern : codeBlock258
 dbl::CodeBlock "1..1" --* "1..1" dbl::PotentiallyHiddenIdElements : codeBlock261
 dbl::Expression "1..1" --* "1..1" dbl::WaitUntil : condition103
 dbl::Expression "1..1" --* "1..1" dbl::IfStatement : condition119
-dbl::WhileStatement "1..1" *-- "1..1" dbl::Expression : condition133
-dbl::Constructor "0..1" --* "1..1" dbl::Clazz : constructor70
+dbl::Expression "1..1" --* "1..1" dbl::WhileStatement : condition133
+dbl::Clazz "1..1" *-- "0..1" dbl::Constructor : constructor70
 dbl::CodeBlock "1..1" --* "1..1" dbl::FindContainer : containerBlock265
 dbl::Expression "1..1" --* "1..1" dbl::SetGenContextStatement : context228
 dbl::Parameter "1..1" --* "1..1" dbl::Pattern : context255
 dbl::Expression "1..1" --* "1..1" dbl::IncludePattern : context275
-dbl::Expression "1..1" --* "1..1" dbl::ConsiderIdElements : elementsQuery271
+dbl::ConsiderIdElements "1..1" *-- "1..1" dbl::Expression : elementsQuery271
 dbl::CodeBlock "0..9999" --* "1..1" dbl::IfStatement : elifCaseBlock127
 dbl::Expression "0..9999" --* "1..1" dbl::IfStatement : elifCondition124
-dbl::FindContainer "1..1" *-- "0..1" dbl::CodeBlock : elseBlock268
+dbl::CodeBlock "0..1" --* "1..1" dbl::FindContainer : elseBlock268
 dbl::CodeBlock "0..1" --* "1..1" dbl::IfStatement : elseCaseBlock130
 dbl::ExpandExpression "0..1" --* "1..1" dbl::ExpandableElement : expandExpression250
-dbl::Expression "1..1" --* "1..1" dbl::EvalExpr : expr156
+dbl::EvalExpr "1..1" *-- "1..1" dbl::Expression : expr156
 dbl::Expression "1..1" --* "1..1" dbl::MetaExpr : expr219
-dbl::Expression "1..1" --* "1..1" dbl::DynamicMappingPart : expr234
-dbl::RhsExpression "1..1" --* "1..1" dbl::OptionalExpr : expression195
+dbl::DynamicMappingPart "1..1" *-- "1..1" dbl::Expression : expr234
+dbl::OptionalExpr "1..1" *-- "1..1" dbl::RhsExpression : expression195
 dbl::RhsExpression "1..1" --* "1..1" dbl::RuntimeExpr : expression197
 dbl::AtLeastOneExpr "1..1" *-- "1..1" dbl::RhsExpression : expression199
-dbl::RhsExpression "1..1" --* "1..1" dbl::ArbitraryExpr : expression201
-dbl::QuotedExpression "1..1" *-- "1..1" dbl::Expression : expression246
-dbl::StatementExpression "1..1" --* "1..1" dbl::ExpressionStatement : expression91
-dbl::MappingStatement "1..1" *-- "0..9999" dbl::Expression : exprs225
-dbl::Module "1..1" *-- "0..9999" dbl::ExtensionDefinition : extensionDefs10
+dbl::ArbitraryExpr "1..1" *-- "1..1" dbl::RhsExpression : expression201
+dbl::Expression "1..1" --* "1..1" dbl::QuotedExpression : expression246
+dbl::ExpressionStatement "1..1" *-- "1..1" dbl::StatementExpression : expression91
+dbl::Expression "0..9999" --* "1..1" dbl::MappingStatement : exprs225
+dbl::ExtensionDefinition "0..9999" --* "1..1" dbl::Module : extensionDefs10
 dbl::ExtensionRule "1..1" --* "1..1" dbl::TextualSyntaxDef : extensionRule182
 dbl::EmbeddableExtensionsContainer "1..1" *-- "0..9999" dbl::ExtensibleElement : extensions20
-dbl::StartCodeBlock "0..1" --* "1..1" dbl::ClassSimilar : finalBlock58
+dbl::ClassSimilar "1..1" *-- "0..1" dbl::StartCodeBlock : finalBlock58
 dbl::ExtensionRule "1..1" *-- "1..1" dbl::RuleExpr : firstNewRule191
 dbl::CodeBlock "1..1" --* "1..1" dbl::ForEachStatement : forBlock146
 dbl::ElementAccess "1..1" *-- "0..1" dbl::IdExpr : idExpr173
 dbl::IdResolution "0..1" --* "1..1" dbl::Module : idRes18
-dbl::ReferencePropertyType "1..1" -- "0..1" dbl::Pattern : idResolutionPattern213
-dbl::IfStatement "1..1" *-- "1..1" dbl::CodeBlock : ifCaseBlock121
-dbl::Interface "0..9999" -- "1..1" dbl::ClassSimilar : implementedInterfaces54
+dbl::Pattern "0..1" -- "1..1" dbl::ReferencePropertyType : idResolutionPattern213
+dbl::CodeBlock "1..1" --* "1..1" dbl::IfStatement : ifCaseBlock121
+dbl::ClassSimilar "1..1" -- "0..9999" dbl::Interface : implementedInterfaces54
 dbl::Import "0..9999" --* "1..1" dbl::Model : imports0
-dbl::StartCodeBlock "0..1" --* "1..1" dbl::ClassSimilar : initialBlock56
-dbl::Variable "1..1" *-- "0..1" dbl::Expression : initialValue87
+dbl::ClassSimilar "1..1" *-- "0..1" dbl::StartCodeBlock : initialBlock56
+dbl::Expression "0..1" --* "1..1" dbl::Variable : initialValue87
 dbl::Classifier "0..1" -- "1..1" dbl::ExtensionRule : instantiableMetaClass188
 dbl::Expression "1..1" --* "1..1" dbl::ForEachStatement : iterableExpression143
-dbl::Variable "0..1" --* "1..1" dbl::ForEachStatement : iteratorVariableDefinition138
+dbl::ForEachStatement "1..1" *-- "0..1" dbl::Variable : iteratorVariableDefinition138
 dbl::ForEachStatement "1..1" *-- "0..1" dbl::VariableAccess : iteratorVariableReference140
-dbl::VariableAccess "1..1" --* "1..1" dbl::KeyValuePair : key37
+dbl::KeyValuePair "1..1" *-- "1..1" dbl::VariableAccess : key37
 dbl::AnnotationApplication "1..1" *-- "0..9999" dbl::KeyValuePair : keyValuePairs35
-dbl::Variable "0..9999" --* "1..1" dbl::Annotation : keys30
-dbl::RhsExpression "1..1" --* "1..1" dbl::AlternativeExpr : left203
+dbl::Annotation "1..1" *-- "0..9999" dbl::Variable : keys30
+dbl::AlternativeExpr "1..1" *-- "1..1" dbl::RhsExpression : left203
 dbl::ListDimension "0..9999" --* "1..1" dbl::TypedElement : listDims24
-dbl::Expression "0..1" --* "1..1" dbl::ExpandStatement : location240
+dbl::ExpandStatement "1..1" *-- "0..1" dbl::Expression : location240
 dbl::ExtensionDefinition "1..1" *-- "0..1" dbl::Mapping : mappingDef180
-dbl::Mapping "1..1" *-- "1..1" dbl::Expression : metaObject216
+dbl::Expression "1..1" --* "1..1" dbl::Mapping : metaObject216
 dbl::ExpandExpression "1..1" *-- "1..1" dbl::Expression : metaObject236
 dbl::ExpandStatement "1..1" *-- "1..1" dbl::Expression : metaObject238
-dbl::Procedure "0..9999" --* "1..1" dbl::ClassSimilar : methods49
-dbl::Procedure "0..9999" --* "1..1" dbl::Interface : methods81
-dbl::Model "0..1" -- "1..1" dbl::Import : model3
+dbl::ClassSimilar "1..1" *-- "0..9999" dbl::Procedure : methods49
+dbl::Interface "1..1" *-- "0..9999" dbl::Procedure : methods81
+dbl::Import "1..1" -- "0..1" dbl::Model : model3
 dbl::ExtensibleElement "0..9999" --* "1..1" dbl::ModifierExtensionsContainer : modifierExtensions21
-dbl::Module "0..9999" --* "1..1" dbl::Model : modules1
-dbl::TsRule "0..9999" --* "1..1" dbl::TextualSyntaxDef : newRules184
+dbl::Model "1..1" *-- "0..9999" dbl::Module : modules1
+dbl::TextualSyntaxDef "1..1" *-- "0..9999" dbl::TsRule : newRules184
 dbl::Expression "1..1" --* "1..1" dbl::SetStatement : object113
 dbl::Expression "1..1" --* "1..1" dbl::Reactivate : objectAccess105
-dbl::Expression "1..1" --* "1..1" dbl::ActivateObject : objectAccess107
-dbl::Expression "1..1" --* "1..1" dbl::BinaryOperator : op1149
+dbl::ActivateObject "1..1" *-- "1..1" dbl::Expression : objectAccess107
+dbl::BinaryOperator "1..1" *-- "1..1" dbl::Expression : op1149
 dbl::Expression "1..1" --* "1..1" dbl::UnaryOperator : op154
 dbl::BinaryOperator "1..1" *-- "1..1" dbl::Expression : op2151
 dbl::Expression "0..9999" --* "1..1" dbl::Print : outputs111
 dbl::Parameter "0..9999" --* "1..1" dbl::Procedure : parameters28
-dbl::Parameter "0..9999" --* "1..1" dbl::Constructor : parameters75
+dbl::Constructor "1..1" *-- "0..9999" dbl::Parameter : parameters75
 dbl::IdExpr "0..1" --* "1..1" dbl::IdExpr : parentIdExpr161
-dbl::MappingPart "0..9999" --* "1..1" dbl::Mapping : parts214
+dbl::Mapping "1..1" *-- "0..9999" dbl::MappingPart : parts214
 dbl::MappingPart "0..9999" --* "1..1" dbl::MappingStatement : parts223
-dbl::Pattern "1..1" -- "1..1" dbl::IncludePattern : pattern273
-dbl::Pattern "0..9999" --* "1..1" dbl::IdResolution : patterns252
-dbl::PredefinedId "0..1" --* "1..1" dbl::IdExpr : predefinedId165
+dbl::IncludePattern "1..1" -- "1..1" dbl::Pattern : pattern273
+dbl::IdResolution "1..1" *-- "0..9999" dbl::Pattern : patterns252
+dbl::IdExpr "1..1" *-- "0..1" dbl::PredefinedId : predefinedId165
 dbl::PrimitiveType "0..1" --* "1..1" dbl::TypedElement : primitiveType23
 dbl::Expression "1..1" --* "1..1" dbl::ProcedureCall : procedureAccess99
 dbl::DeprecatedProcedureCallStatement "1..1" *-- "1..1" dbl::Expression : procedureCall97
-dbl::Procedure "0..9999" --* "1..1" dbl::Module : procedures14
-dbl::PropertyType "1..1" --* "1..1" dbl::PropertyBindingExpr : propertyType208
-dbl::QuotedCode "1..1" --* "1..1" dbl::CodeQuoteExpression : quotedCode245
-dbl::NamedElement "0..1" -- "1..1" dbl::IdExpr : referencedElement163
-dbl::StartCodeBlock "0..1" --* "1..1" dbl::ClassSimilar : reportBlock64
+dbl::Module "1..1" *-- "0..9999" dbl::Procedure : procedures14
+dbl::PropertyBindingExpr "1..1" *-- "1..1" dbl::PropertyType : propertyType208
+dbl::CodeQuoteExpression "1..1" *-- "1..1" dbl::QuotedCode : quotedCode245
+dbl::IdExpr "1..1" -- "0..1" dbl::NamedElement : referencedElement163
+dbl::ClassSimilar "1..1" *-- "0..1" dbl::StartCodeBlock : reportBlock64
 dbl::RhsExpression "1..1" --* "1..1" dbl::TsRule : rhs186
 dbl::AlternativeExpr "1..1" *-- "1..1" dbl::RhsExpression : right205
-dbl::TsRule "1..1" -- "1..1" dbl::RuleExpr : rule209
+dbl::RuleExpr "1..1" -- "1..1" dbl::TsRule : rule209
 dbl::RhsExpression "0..9999" --* "1..1" dbl::SequenceExpr : sequence193
 dbl::Expression "1..1" --* "1..1" dbl::SetStatement : set115
-dbl::SetOp "1..1" *-- "0..1" dbl::Expression : set158
+dbl::Expression "0..1" --* "1..1" dbl::SetOp : set158
 dbl::AnnotatableElement "1..1" *-- "0..9999" dbl::SimpleAnnotation : simpleAnnotations43
 dbl::QuotedStatements "1..1" *-- "0..9999" dbl::Statement : statements248
 dbl::CodeBlock "1..1" *-- "0..9999" dbl::Statement : statements90
 dbl::ClassSimilar "1..1" -- "0..1" dbl::Clazz : superClass52
 dbl::Interface "0..9999" -- "1..1" dbl::Interface : superInterfaces85
-dbl::TextualSyntaxDef "1..1" --* "1..1" dbl::ExtensionDefinition : textualSyntaxDef178
+dbl::ExtensionDefinition "1..1" *-- "1..1" dbl::TextualSyntaxDef : textualSyntaxDef178
 dbl::Advance "1..1" *-- "1..1" dbl::Expression : time109
 dbl::ReferableRhsType "1..1" -- "1..1" dbl::StructuredPropertyType : type212
 dbl::Expression "1..1" --* "1..1" dbl::Return : value101
 dbl::Expression "1..1" --* "1..1" dbl::KeyValuePair : value39
-dbl::Expression "1..1" --* "1..1" dbl::Assignment : value94
+dbl::Assignment "1..1" *-- "1..1" dbl::Expression : value94
 dbl::Expression "1..1" --* "1..1" dbl::SaveGenStatement : variable230
 dbl::Expression "1..1" --* "1..1" dbl::ResumeGenStatement : variable232
-dbl::VariableAccess "1..1" --* "1..1" dbl::Assignment : variable92
-dbl::Parameter "1..1" --* "1..1" dbl::FindContainer : variableBinding263
-dbl::Variable "0..9999" --* "1..1" dbl::Module : variables16
+dbl::Assignment "1..1" *-- "1..1" dbl::VariableAccess : variable92
+dbl::FindContainer "1..1" *-- "1..1" dbl::Parameter : variableBinding263
+dbl::Module "1..1" *-- "0..9999" dbl::Variable : variables16
 dbl::CodeBlock "1..1" --* "1..1" dbl::WhileStatement : whileBlock135
 @enduml

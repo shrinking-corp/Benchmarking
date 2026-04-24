@@ -17,15 +17,15 @@ class projectPlanning::ProjectPlan {
 class projectPlanning::Rating {
   + rating : int
 }
-projectPlanning::ProjectPlan "1..1" *-- "0..9999" projectPlanning::Assignment : assignments7
+projectPlanning::Assignment "0..9999" --* "1..1" projectPlanning::ProjectPlan : assignments7
 projectPlanning::Capability "0..9999" --* "1..1" projectPlanning::ProjectPlan : capabilities0
 projectPlanning::Capability "0..1" -- "1..1" projectPlanning::Rating : capability18
-projectPlanning::Employee "0..1" -- "1..1" projectPlanning::Assignment : employee24
-projectPlanning::ProjectPlan "1..1" *-- "0..9999" projectPlanning::Employee : employees1
+projectPlanning::Assignment "1..1" -- "0..1" projectPlanning::Employee : employee24
+projectPlanning::Employee "0..9999" --* "1..1" projectPlanning::ProjectPlan : employees1
 projectPlanning::Capability "0..9999" -- "1..1" projectPlanning::Employee : hasCapabilities12
-projectPlanning::Project "0..1" -- "1..1" projectPlanning::Assignment : project21
+projectPlanning::Assignment "1..1" -- "0..1" projectPlanning::Project : project21
 projectPlanning::Project "0..9999" --* "1..1" projectPlanning::ProjectPlan : projects3
 projectPlanning::Employee "1..1" *-- "0..9999" projectPlanning::Rating : ratings15
-projectPlanning::Rating "0..9999" --* "1..1" projectPlanning::ProjectPlan : ratings5
+projectPlanning::ProjectPlan "1..1" *-- "0..9999" projectPlanning::Rating : ratings5
 projectPlanning::Capability "0..9999" -- "1..1" projectPlanning::Project : requiresCapabilities9
 @enduml

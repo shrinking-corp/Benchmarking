@@ -33,17 +33,17 @@ class calculatrice::VarCall {
   + varCall : str
 }
 BoolExpr <|-- calculatrice::Boolean
+Calc <|-- calculatrice::Condition
 CalcExpr <|-- calculatrice::Number
 CalcExpr <|-- calculatrice::VarCall
-Calc <|-- calculatrice::Condition
 Condition <|-- calculatrice::BoolExpr
-calculatrice::Calc "1..1" *-- "0..1" calculatrice::BoolExpr : b1
+calculatrice::BoolExpr "0..1" --* "1..1" calculatrice::Calc : b1
 calculatrice::Calc "0..9999" --* "1..1" calculatrice::Calculatrice : calculs0
-calculatrice::CalcExpr "0..1" --* "1..1" calculatrice::Calc : e3
-calculatrice::Calc "0..1" --* "1..1" calculatrice::BoolExpr : elseBlock14
-calculatrice::BoolExpr "1..1" *-- "0..1" calculatrice::BoolExpr : left18
+calculatrice::Calc "1..1" *-- "0..1" calculatrice::CalcExpr : e3
+calculatrice::BoolExpr "1..1" *-- "0..1" calculatrice::Calc : elseBlock14
+calculatrice::BoolExpr "0..1" --* "1..1" calculatrice::BoolExpr : left18
 calculatrice::CalcExpr "0..1" --* "1..1" calculatrice::CalcExpr : left6
 calculatrice::BoolExpr "0..1" --* "1..1" calculatrice::BoolExpr : right21
 calculatrice::CalcExpr "1..1" *-- "0..1" calculatrice::CalcExpr : right9
-calculatrice::Calc "0..1" --* "1..1" calculatrice::BoolExpr : thenBlock11
+calculatrice::BoolExpr "1..1" *-- "0..1" calculatrice::Calc : thenBlock11
 @enduml

@@ -220,8 +220,6 @@ Declaration <|-- ir::TypeDeclarationImport
 Declaration <|-- ir::Variable
 Declaration <|-- ir::VariableExternal
 Declaration <|-- ir::VariableImport
-ExpressionCall <|-- ir::FunctionCall
-ExpressionCall <|-- ir::TypeConstructorCall
 Expression <|-- ir::BinaryExpression
 Expression <|-- ir::ExpressionCall
 Expression <|-- ir::IfExpression
@@ -231,6 +229,8 @@ Expression <|-- ir::LiteralExpression
 Expression <|-- ir::ProcExpression
 Expression <|-- ir::UnaryExpression
 Expression <|-- ir::VariableExpression
+ExpressionCall <|-- ir::FunctionCall
+ExpressionCall <|-- ir::TypeConstructorCall
 LambdaExpression <|-- ir::Guard
 LiteralExpression <|-- ir::BooleanLiteral
 LiteralExpression <|-- ir::FloatLiteral
@@ -279,109 +279,109 @@ Type <|-- ir::TypeUndef
 Type <|-- ir::TypeUser
 Variable <|-- ir::ActorInstance
 ir::Action "0..9999" -- "1..1" ir::Actor : actions16
-ir::PortInstance "1..1" -- "0..1" ir::ActorInstance : actor46
+ir::ActorInstance "0..1" -- "1..1" ir::PortInstance : actor46
 ir::ActorInstance "0..9999" -- "1..1" ir::Network : actors23
 ir::AbstractActor "0..9999" -- "1..1" ir::Namespace : actors6
-ir::TaggedExpression "0..9999" -- "1..1" ir::ActorInstance : actualParameters41
+ir::ActorInstance "1..1" -- "0..9999" ir::TaggedExpression : actualParameters41
 ir::Annotation "0..9999" -- "1..1" ir::Node : annotations4
 ir::Annotation "1..1" -- "0..9999" ir::AnnotationArgument : arguments255
-ir::TaggedExpression "0..9999" -- "1..1" ir::Declaration : attributes174
+ir::Declaration "1..1" -- "0..9999" ir::TaggedExpression : attributes174
 ir::TaggedExpression "0..9999" -- "1..1" ir::TypeExternal : attributes212
 ir::Connection "1..1" -- "0..9999" ir::TaggedExpression : attributes94
-ir::WhileLoop "1..1" -- "0..1" ir::Block : body138
+ir::Block "0..1" -- "1..1" ir::WhileLoop : body138
 ir::Block "0..1" -- "1..1" ir::ForEach : body142
-ir::LambdaExpression "1..1" -- "0..1" ir::Expression : body190
+ir::Expression "0..1" -- "1..1" ir::LambdaExpression : body190
 ir::Block "0..1" -- "1..1" ir::ProcExpression : body198
 ir::Expression "0..1" -- "1..1" ir::WhileLoop : condition139
 ir::Expression "0..1" -- "1..1" ir::IfStatement : condition152
 ir::Expression "0..1" -- "1..1" ir::IfExpression : condition206
 ir::Connection "0..9999" -- "1..1" ir::Network : connections22
 ir::Connection "0..9999" -- "1..1" ir::PortInstance : connections43
-ir::TypeDeclaration "1..1" -- "0..1" ir::TypeConstructor : constructor244
+ir::TypeConstructor "0..1" -- "1..1" ir::TypeDeclaration : constructor244
 ir::Expression "1..1" -- "0..1" ir::Scope : context51
-ir::VariableReference "1..1" -- "0..1" ir::Variable : declaration112
+ir::Variable "0..1" -- "1..1" ir::VariableReference : declaration112
 ir::Declaration "0..1" -- "1..1" ir::ForwardDeclaration : declaration177
-ir::TypeUser "1..1" -- "0..1" ir::Declaration : declaration225
+ir::Declaration "0..1" -- "1..1" ir::TypeUser : declaration225
 ir::Declaration "0..9999" -- "1..1" ir::Scope : declarations0
 ir::Block "0..1" -- "1..1" ir::IfStatement : elseBlock149
-ir::IfExpression "1..1" -- "0..1" ir::Expression : elseExpression203
-ir::Expression "0..1" -- "1..1" ir::Assign : expression125
+ir::Expression "0..1" -- "1..1" ir::IfExpression : elseExpression203
+ir::Assign "1..1" -- "0..1" ir::Expression : expression125
 ir::Expression "0..1" -- "1..1" ir::TaggedExpression : expression54
 ir::Expression "0..9999" -- "1..1" ir::PortWrite : expressions163
 ir::Expression "0..9999" -- "1..1" ir::ListExpression : expressions65
 ir::Action "0..9999" -- "1..1" ir::Schedule : freeRunners249
 ir::Expression "0..1" -- "1..1" ir::FunctionCall : function86
-ir::Generator "0..9999" -- "1..1" ir::ForEach : generators144
+ir::ForEach "1..1" -- "0..9999" ir::Generator : generators144
 ir::Generator "0..9999" -- "1..1" ir::ListExpression : generators64
-ir::Guard "0..9999" -- "1..1" ir::Action : guards25
+ir::Action "1..1" -- "0..9999" ir::Guard : guards25
 ir::Expression "0..9999" -- "1..1" ir::ProcCall : inParameters130
 ir::Expression "0..9999" -- "1..1" ir::VariableReference : index114
 ir::Expression "0..9999" -- "1..1" ir::VariableExpression : index59
 ir::Expression "0..9999" -- "1..1" ir::Member : index71
-ir::Variable "1..1" -- "0..1" ir::Expression : initValue182
-ir::State "0..1" -- "1..1" ir::Schedule : initialState252
+ir::Expression "0..1" -- "1..1" ir::Variable : initValue182
+ir::Schedule "1..1" -- "0..1" ir::State : initialState252
 ir::Action "0..9999" -- "1..1" ir::Actor : initializers17
-ir::Port "0..9999" -- "1..1" ir::AbstractActor : inputPorts9
+ir::AbstractActor "1..1" -- "0..9999" ir::Port : inputPorts9
 ir::Type "0..9999" -- "1..1" ir::TypeLambda : inputTypes227
 ir::Type "0..9999" -- "1..1" ir::TypeProc : inputTypes232
-ir::PortRead "0..9999" -- "1..1" ir::Action : inputs29
+ir::Action "1..1" -- "0..9999" ir::PortRead : inputs29
 ir::ActorInstance "1..1" -- "0..9999" ir::PortInstance : inputs36
 ir::Member "0..9999" -- "1..1" ir::VariableReference : member117
-ir::VariableExpression "1..1" -- "0..9999" ir::Member : member62
-ir::Variable "0..9999" -- "1..1" ir::TypeRecord : members223
-ir::Expression "0..1" -- "1..1" ir::BinaryExpression : operand177
-ir::Expression "0..1" -- "1..1" ir::BinaryExpression : operand279
+ir::Member "0..9999" -- "1..1" ir::VariableExpression : member62
+ir::TypeRecord "1..1" -- "0..9999" ir::Variable : members223
+ir::BinaryExpression "1..1" -- "0..1" ir::Expression : operand177
+ir::BinaryExpression "1..1" -- "0..1" ir::Expression : operand279
 ir::Expression "0..1" -- "1..1" ir::UnaryExpression : operand82
 ir::ProcCall "1..1" -- "0..9999" ir::VariableReference : outParameters132
-ir::Scope "1..1" -- "0..1" ir::Scope : outer2
+ir::Scope "0..1" -- "1..1" ir::Scope : outer2
 ir::AbstractActor "1..1" -- "0..9999" ir::Port : outputPorts11
 ir::Type "0..1" -- "1..1" ir::TypeLambda : outputType229
-ir::TypeProc "1..1" -- "0..9999" ir::Type : outputTypes234
-ir::Variable "0..9999" -- "1..1" ir::ProcExpression : outputs195
+ir::Type "0..9999" -- "1..1" ir::TypeProc : outputTypes234
+ir::ProcExpression "1..1" -- "0..9999" ir::Variable : outputs195
 ir::Action "1..1" -- "0..9999" ir::PortWrite : outputs27
-ir::PortInstance "0..9999" -- "1..1" ir::ActorInstance : outputs38
-ir::Variable "0..9999" -- "1..1" ir::AbstractActor : parameters14
-ir::Variable "0..9999" -- "1..1" ir::LambdaExpression : parameters188
+ir::ActorInstance "1..1" -- "0..9999" ir::PortInstance : outputs38
+ir::AbstractActor "1..1" -- "0..9999" ir::Variable : parameters14
+ir::LambdaExpression "1..1" -- "0..9999" ir::Variable : parameters188
 ir::ProcExpression "1..1" -- "0..9999" ir::Variable : parameters193
-ir::Variable "0..9999" -- "1..1" ir::TypeConstructor : parameters238
-ir::FunctionCall "1..1" -- "0..9999" ir::Expression : parameters84
+ir::TypeConstructor "1..1" -- "0..9999" ir::Variable : parameters238
+ir::Expression "0..9999" -- "1..1" ir::FunctionCall : parameters84
 ir::Expression "0..9999" -- "1..1" ir::TypeConstructorCall : parameters89
-ir::PortPeek "0..9999" -- "1..1" ir::Guard : peeks209
+ir::Guard "1..1" -- "0..9999" ir::PortPeek : peeks209
 ir::Port "0..1" -- "1..1" ir::PortAccess : port158
 ir::Declaration "0..1" -- "1..1" ir::ProcCall : procedure135
-ir::PortAccess "1..1" -- "0..1" ir::Expression : repeat160
+ir::Expression "0..1" -- "1..1" ir::PortAccess : repeat160
 ir::Actor "1..1" -- "0..1" ir::Schedule : schedule20
 ir::Declaration "1..1" -- "0..1" ir::Scope : scope171
 ir::Port "0..1" -- "1..1" ir::ToSink : sink109
-ir::TypeInt "1..1" -- "0..1" ir::Expression : size214
+ir::Expression "0..1" -- "1..1" ir::TypeInt : size214
 ir::Expression "0..1" -- "1..1" ir::TypeList : size216
 ir::Expression "0..1" -- "1..1" ir::TypeUint : size221
 ir::FromSource "1..1" -- "0..1" ir::Port : source104
 ir::PortInstance "0..1" -- "1..1" ir::ToSink : source107
 ir::Expression "0..1" -- "1..1" ir::Generator : source68
-ir::PortInstance "0..1" -- "1..1" ir::Point2PointConnection : source97
-ir::Statement "0..9999" -- "1..1" ir::Block : statements155
-ir::Statement "0..9999" -- "1..1" ir::Action : statements31
-ir::State "0..9999" -- "1..1" ir::Schedule : states247
-ir::PortInstance "0..1" -- "1..1" ir::FromSource : target102
+ir::Point2PointConnection "1..1" -- "0..1" ir::PortInstance : source97
+ir::Block "1..1" -- "0..9999" ir::Statement : statements155
+ir::Action "1..1" -- "0..9999" ir::Statement : statements31
+ir::Schedule "1..1" -- "0..9999" ir::State : states247
+ir::FromSource "1..1" -- "0..1" ir::PortInstance : target102
 ir::Assign "1..1" -- "0..1" ir::VariableReference : target123
-ir::PortInstance "0..1" -- "1..1" ir::Point2PointConnection : target99
-ir::IfStatement "1..1" -- "0..1" ir::Block : thenBlock147
+ir::Point2PointConnection "1..1" -- "0..1" ir::PortInstance : target99
+ir::Block "0..1" -- "1..1" ir::IfStatement : thenBlock147
 ir::Expression "0..1" -- "1..1" ir::IfExpression : thenExpression201
 ir::Type "0..1" -- "1..1" ir::VariableReference : type120
-ir::Type "0..1" -- "1..1" ir::ForwardDeclaration : type179
+ir::ForwardDeclaration "1..1" -- "0..1" ir::Type : type179
 ir::Type "0..1" -- "1..1" ir::Variable : type185
 ir::Type "0..1" -- "1..1" ir::TypeList : type218
 ir::Type "0..1" -- "1..1" ir::TypeDeclaration : type241
-ir::Type "0..1" -- "1..1" ir::Port : type33
-ir::Type "0..1" -- "1..1" ir::Expression : type49
-ir::VariableExternal "1..1" -- "0..1" ir::Type : type5
-ir::TypeActor "0..1" -- "1..1" ir::AbstractActor : type7
+ir::Port "1..1" -- "0..1" ir::Type : type33
+ir::Expression "1..1" -- "0..1" ir::Type : type49
+ir::Type "0..1" -- "1..1" ir::VariableExternal : type5
+ir::AbstractActor "1..1" -- "0..1" ir::TypeActor : type7
 ir::Member "1..1" -- "0..1" ir::Type : type74
-ir::TypeDeclaration "0..1" -- "1..1" ir::TypeConstructor : typedef237
+ir::TypeConstructor "1..1" -- "0..1" ir::TypeDeclaration : typedef237
 ir::Declaration "0..1" -- "1..1" ir::TypeConstructorCall : typedef91
 ir::Expression "0..1" -- "1..1" ir::ReturnValue : value128
-ir::VariableReference "0..1" -- "1..1" ir::PortPeek : variable169
+ir::PortPeek "1..1" -- "0..1" ir::VariableReference : variable169
 ir::Declaration "0..1" -- "1..1" ir::VariableExpression : variable57
-ir::VariableReference "0..9999" -- "1..1" ir::PortRead : variables166
+ir::PortRead "1..1" -- "0..9999" ir::VariableReference : variables166
 @enduml

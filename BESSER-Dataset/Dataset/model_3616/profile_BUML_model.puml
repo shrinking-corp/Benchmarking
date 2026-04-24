@@ -1,0 +1,165 @@
+@startuml
+enum BindingKind {
+  Dynamic
+  Static
+}
+enum Extensibility {
+  CEA
+  NEA
+}
+enum Guidance {
+  CLOSED
+  EXTEND
+  FIXED
+  OPEN
+  RESTRICT
+}
+enum StatusKind {
+  Active
+  Inactive
+}
+enum ValueSetBinding {
+  Direct
+  Indirect
+}
+enum ValueSetType {
+  Extensional
+  Intensional
+}
+class profile::CD {
+  + code : str
+  + codeSystem : str
+  + codeSystemName : str
+  + codeSystemVersion : str
+  + displayName : str
+}
+class profile::CR {
+  + inverted : str
+}
+class profile::Class {
+}
+class profile::Classifier {
+}
+class profile::CodeSystemConstraint {
+  + binding : str
+  + code : str
+  + displayName : str
+  + identifier : str
+  + name : str
+  + version : str
+}
+class profile::CodeSystemVersion {
+  + effectiveDate : str
+  + fullName : str
+  + identifier : str
+  + releaseDate : str
+  + source : str
+  + status : str
+  + statusDate : str
+  + url : str
+  + version : str
+  + getEnumerationName() : str
+  + getEnumerationQualifiedName() : str
+  + setEnumerationName(name : any) : void
+}
+class profile::CodedType {
+}
+class profile::ConceptDomain {
+  + fullName : str
+  + identifier : str
+  + status : str
+  + statusDate : str
+}
+class profile::ConceptDomainConstraint {
+  + identifier : str
+  + name : str
+}
+class profile::Context {
+}
+class profile::ContextToValueSet {
+  + key : str
+  + value : str
+}
+class profile::Enumeration {
+}
+class profile::EnumerationLiteral {
+}
+class profile::NullValueSetConstraint {
+  + binding : str
+  + identifier : str
+  + name : str
+  + version : str
+}
+class profile::Property {
+}
+class profile::UsageContext {
+  + identifier : str
+  + status : str
+  + statusDate : str
+}
+class profile::ValueSetCode {
+  + conceptName : str
+  + usageNote : str
+}
+class profile::ValueSetConstraint {
+  + binding : str
+  + extensibility : str
+  + guidance : str
+  + identifier : str
+  + name : str
+  + uri : str
+  + version : str
+}
+class profile::ValueSetConstraints {
+}
+class profile::ValueSetContextBinding {
+  + effectiveDate : str
+}
+class profile::ValueSetVersion {
+  + binding : str
+  + definition : str
+  + effectiveDate : str
+  + expirationDate : str
+  + fullName : str
+  + identifier : str
+  + releaseDate : str
+  + revisionDate : str
+  + source : str
+  + status : str
+  + statusDate : str
+  + type : str
+  + url : str
+  + version : str
+  + getEnumerationName() : str
+  + getEnumerationQualifiedName() : str
+  + setEnumerationName(name : any) : void
+}
+profile::Class "1..1" -- "1..1" profile::ConceptDomain : base_Class13
+profile::Class "1..1" -- "1..1" profile::ValueSetContextBinding : base_Class45
+profile::Class "1..1" -- "1..1" profile::UsageContext : base_Class48
+profile::Classifier "1..1" -- "1..1" profile::CodedType : base_Classifier62
+profile::CodeSystemVersion "1..1" -- "1..1" profile::Enumeration : base_Enumeration22
+profile::Enumeration "1..1" -- "1..1" profile::ValueSetVersion : base_Enumeration31
+profile::Context "1..1" -- "1..1" profile::Enumeration : base_Enumeration60
+profile::EnumerationLiteral "1..1" -- "1..1" profile::ValueSetCode : base_EnumerationLiteral36
+profile::ConceptDomainConstraint "1..1" -- "1..1" profile::Property : base_Property11
+profile::CodeSystemConstraint "1..1" -- "1..1" profile::Property : base_Property19
+profile::Property "1..1" -- "1..1" profile::ValueSetConstraint : base_Property25
+profile::Property "1..1" -- "1..1" profile::ValueSetConstraints : base_Property51
+profile::NullValueSetConstraint "1..1" -- "1..1" profile::Property : base_Property57
+profile::CodeSystemVersion "0..1" -- "1..1" profile::ValueSetVersion : codeSystem28
+profile::CodeSystemVersion "0..1" -- "1..1" profile::ValueSetCode : codeSystem34
+profile::ConceptDomain "1..1" -- "1..1" profile::ValueSetContextBinding : conceptDomain38
+profile::ContextToValueSet "0..9999" --* "1..1" profile::ValueSetConstraints : constraints53
+profile::CD "0..1" --* "1..1" profile::CR : name4
+profile::CD "1..1" *-- "0..9999" profile::CR : qualifier0
+profile::CR "0..9999" -- "1..1" profile::CodeSystemConstraint : qualifier16
+profile::ConceptDomain "0..1" -- "1..1" profile::ConceptDomainConstraint : reference10
+profile::CodeSystemConstraint "1..1" -- "0..1" profile::CodeSystemVersion : reference15
+profile::ValueSetConstraint "1..1" -- "0..1" profile::ValueSetVersion : reference24
+profile::NullValueSetConstraint "1..1" -- "0..1" profile::ValueSetVersion : reference55
+profile::CD "0..9999" --* "1..1" profile::CD : translation2
+profile::UsageContext "1..1" -- "1..1" profile::ValueSetContextBinding : usageContext43
+profile::CD "0..1" --* "1..1" profile::CR : value7
+profile::ValueSetContextBinding "1..1" -- "1..1" profile::ValueSetVersion : valueSet40
+@enduml

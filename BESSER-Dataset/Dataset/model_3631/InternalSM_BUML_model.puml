@@ -61,21 +61,21 @@ class internalsm::TrapState {
 State <|-- internalsm::FinalState
 State <|-- internalsm::InitState
 State <|-- internalsm::TrapState
-internalsm::State "0..1" -- "1..1" internalsm::EventToken : currentState23
+internalsm::EventToken "1..1" -- "0..1" internalsm::State : currentState23
 internalsm::EventPattern "1..1" -- "1..1" internalsm::StateMachine : eventPattern15
-internalsm::InternalExecutionModel "1..1" *-- "0..9999" internalsm::EventToken : eventTokens21
+internalsm::EventToken "0..9999" --* "1..1" internalsm::InternalExecutionModel : eventTokens21
 internalsm::EventToken "0..9999" -- "1..1" internalsm::State : eventTokens3
 internalsm::AtomicEventPattern "1..1" -- "1..1" internalsm::Guard : eventType11
-internalsm::Transition "1..1" *-- "0..1" internalsm::Guard : guard8
-internalsm::Transition "0..9999" -- "1..1" internalsm::State : inTransitions1
+internalsm::Guard "0..1" --* "1..1" internalsm::Transition : guard8
+internalsm::State "1..1" -- "0..9999" internalsm::Transition : inTransitions1
 internalsm::Event "0..1" -- "1..1" internalsm::State : lastProcessedEvent5
 internalsm::Event "0..1" --* "1..1" internalsm::InternalExecutionModel : latestEvent18
-internalsm::Transition "0..9999" --* "1..1" internalsm::State : outTransitions0
-internalsm::Transition "1..1" -- "1..1" internalsm::State : postState9
+internalsm::State "1..1" *-- "0..9999" internalsm::Transition : outTransitions0
+internalsm::State "1..1" -- "1..1" internalsm::Transition : postState9
 internalsm::State "1..1" -- "1..1" internalsm::Transition : preState7
 internalsm::Event "0..9999" -- "1..1" internalsm::EventToken : recordedEvents25
 internalsm::InternalExecutionModel "1..1" *-- "0..9999" internalsm::StateMachine : stateMachines16
 internalsm::State "0..9999" --* "1..1" internalsm::StateMachine : states13
-internalsm::TimeConstraintSpecification "1..1" -- "1..1" internalsm::TimeConstraint : timeConstraintSpecification28
-internalsm::TimeConstraint "0..9999" --* "1..1" internalsm::State : timeConstraints4
+internalsm::TimeConstraint "1..1" -- "1..1" internalsm::TimeConstraintSpecification : timeConstraintSpecification28
+internalsm::State "1..1" *-- "0..9999" internalsm::TimeConstraint : timeConstraints4
 @enduml

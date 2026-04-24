@@ -33,19 +33,19 @@ NamedElement <|-- sihuhu::World
 Rail <|-- sihuhu::SwitchConnection
 TrackElement <|-- sihuhu::Rail
 TrackElement <|-- sihuhu::Switch
-sihuhu::SwitchConnection "0..1" -- "1..1" sihuhu::Switch : activeConnection23
+sihuhu::Switch "1..1" -- "0..1" sihuhu::SwitchConnection : activeConnection23
 sihuhu::Rail "1..1" *-- "1..1" sihuhu::Signal : allowedFrom10
-sihuhu::Signal "1..1" --* "1..1" sihuhu::Rail : allowedTo8
-sihuhu::Switch "1..1" -- "0..9999" sihuhu::Rail : connectedRails20
-sihuhu::SwitchConnection "0..9999" --* "1..1" sihuhu::Switch : connections18
-sihuhu::TrackElement "0..1" -- "1..1" sihuhu::Rail : from13
+sihuhu::Rail "1..1" *-- "1..1" sihuhu::Signal : allowedTo8
+sihuhu::Rail "0..9999" -- "1..1" sihuhu::Switch : connectedRails20
+sihuhu::Switch "1..1" *-- "0..9999" sihuhu::SwitchConnection : connections18
+sihuhu::Rail "1..1" -- "0..1" sihuhu::TrackElement : from13
 sihuhu::TrackElement "0..1" -- "1..1" sihuhu::Train : nextElement26
 sihuhu::Rail "0..1" -- "1..1" sihuhu::Signal : nextRail30
 sihuhu::TrackElement "0..9999" -- "1..1" sihuhu::Train : onTracks29
-sihuhu::Track "1..1" *-- "0..9999" sihuhu::Rail : rails3
+sihuhu::Rail "0..9999" --* "1..1" sihuhu::Track : rails3
 sihuhu::Switch "0..9999" --* "1..1" sihuhu::Track : switches5
-sihuhu::TrackElement "0..1" -- "1..1" sihuhu::Rail : to15
+sihuhu::Rail "1..1" -- "0..1" sihuhu::TrackElement : to15
 sihuhu::Track "0..9999" --* "1..1" sihuhu::World : tracks0
-sihuhu::Train "0..1" -- "1..1" sihuhu::TrackElement : train7
-sihuhu::World "1..1" *-- "0..9999" sihuhu::Train : trains1
+sihuhu::TrackElement "1..1" -- "0..1" sihuhu::Train : train7
+sihuhu::Train "0..9999" --* "1..1" sihuhu::World : trains1
 @enduml

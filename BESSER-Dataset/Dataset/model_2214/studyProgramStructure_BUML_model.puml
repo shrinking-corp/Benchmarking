@@ -50,25 +50,25 @@ class studyProgramStructure::StudyPlan {
 class studyProgramStructure::University {
   + name : str
 }
-studyProgramStructure::Specialization "0..1" -- "1..1" studyProgramStructure::Specialization : baseSpecialization7
+studyProgramStructure::Specialization "1..1" -- "0..1" studyProgramStructure::Specialization : baseSpecialization7
 studyProgramStructure::Course "0..1" -- "1..1" studyProgramStructure::CourseAllocation : course37
 studyProgramStructure::CourseAllocation "0..9999" --* "1..1" studyProgramStructure::StudyPlan : courseAllocation34
-studyProgramStructure::Semester "1..1" *-- "0..9999" studyProgramStructure::CourseGroup : courseGroups12
+studyProgramStructure::CourseGroup "0..9999" --* "1..1" studyProgramStructure::Semester : courseGroups12
 studyProgramStructure::Course "0..9999" -- "1..1" studyProgramStructure::CourseGroup : courses20
-studyProgramStructure::University "1..1" *-- "0..9999" studyProgramStructure::Course : courses22
+studyProgramStructure::Course "0..9999" --* "1..1" studyProgramStructure::University : courses22
 studyProgramStructure::Specialization "1..1" -- "0..9999" studyProgramStructure::Specialization : furtherSpecializations4
 studyProgramStructure::Program "1..1" -- "1..1" studyProgramStructure::Specialization : program11
 studyProgramStructure::Program "0..1" -- "1..1" studyProgramStructure::Semester : program13
 studyProgramStructure::Program "0..1" -- "1..1" studyProgramStructure::Student : program28
 studyProgramStructure::Program "0..9999" --* "1..1" studyProgramStructure::University : programs21
-studyProgramStructure::Semester "1..1" -- "1..1" studyProgramStructure::CourseGroup : semester18
-studyProgramStructure::Semester "0..9999" --* "1..1" studyProgramStructure::Program : semesters1
-studyProgramStructure::StudyPlan "1..1" -- "0..9999" studyProgramStructure::Semester : semesters33
+studyProgramStructure::CourseGroup "1..1" -- "1..1" studyProgramStructure::Semester : semester18
+studyProgramStructure::Program "1..1" *-- "0..9999" studyProgramStructure::Semester : semesters1
+studyProgramStructure::Semester "0..9999" -- "1..1" studyProgramStructure::StudyPlan : semesters33
 studyProgramStructure::Semester "0..9999" --* "1..1" studyProgramStructure::Specialization : semesters9
-studyProgramStructure::Specialization "0..1" -- "1..1" studyProgramStructure::Semester : specialization15
-studyProgramStructure::Specialization "0..9999" --* "1..1" studyProgramStructure::Program : specializations0
+studyProgramStructure::Semester "1..1" -- "0..1" studyProgramStructure::Specialization : specialization15
+studyProgramStructure::Program "1..1" *-- "0..9999" studyProgramStructure::Specialization : specializations0
 studyProgramStructure::Specialization "0..9999" -- "1..1" studyProgramStructure::Student : specializations31
 studyProgramStructure::Student "0..1" -- "1..1" studyProgramStructure::StudyPlan : student36
-studyProgramStructure::University "1..1" *-- "0..9999" studyProgramStructure::Student : students25
-studyProgramStructure::StudyPlan "0..1" --* "1..1" studyProgramStructure::Student : studyPlan27
+studyProgramStructure::Student "0..9999" --* "1..1" studyProgramStructure::University : students25
+studyProgramStructure::Student "1..1" *-- "0..1" studyProgramStructure::StudyPlan : studyPlan27
 @enduml

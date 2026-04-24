@@ -1,0 +1,31 @@
+@startuml
+abstract class statemachine::Set {
+}
+class statemachine::State {
+  + initial : bool
+  + terminal : bool
+}
+class statemachine::StateMachine {
+  + accept(word : any) : bool
+  + accessibleAndCoAccessibleStates() : void
+  + accessibleStates(states : any) : void
+  + addState(initial : any, terminal : any) : str
+  + addTransition(transition : any) : void
+  + alphabet() : void
+  + coAccessibleStates() : void
+  + delta(state : any) : void
+  + deltaFrom(from : any, to : any) : void
+  + deltaMinusOne(st : any) : void
+  + initials() : void
+  + step(o : any, s : any) : void
+  + steps(st : any, word : any) : void
+  + terminals() : void
+}
+class statemachine::Transition {
+  + label : str
+}
+statemachine::StateMachine "1..1" *-- "0..9999" statemachine::Transition : delta1
+statemachine::State "1..1" -- "1..1" statemachine::Transition : end6
+statemachine::State "1..1" -- "1..1" statemachine::Transition : start3
+statemachine::State "0..9999" --* "1..1" statemachine::StateMachine : states0
+@enduml

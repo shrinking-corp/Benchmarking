@@ -1,0 +1,224 @@
+@startuml
+class Article {
+}
+class Body {
+}
+class BodyElement {
+}
+class BodyElementContainer {
+}
+class Category {
+}
+class Chapter {
+}
+class EmbeddableElement {
+}
+class ExternalArticle {
+}
+class ExternalTarget {
+}
+class Factory {
+}
+class Formatter {
+}
+class Identifiable {
+}
+class LinkTarget {
+}
+class StructuralElement {
+}
+class article::Article {
+}
+abstract class article::Body {
+}
+abstract class article::BodyElement {
+  + tag : str
+}
+abstract class article::BodyElementContainer {
+}
+class article::Callout {
+}
+class article::Category {
+}
+class article::Chapter {
+}
+class article::Context {
+  + baseFolder : str
+  + project : str
+  + root : str
+}
+class article::Description {
+}
+class article::Diagram {
+}
+class article::Documentation {
+  + project : str
+}
+abstract class article::EmbeddableElement {
+  + doc : str
+}
+class article::Embedding {
+}
+class article::Excel {
+}
+class article::ExtensionPoint {
+  + name : str
+}
+class article::ExternalArticle {
+  + url : str
+}
+class article::ExternalTarget {
+  + url : str
+}
+abstract class article::Factory {
+}
+abstract class article::Formatter {
+}
+class article::HtmlFormatter {
+  + file : str
+}
+abstract class article::Identifiable {
+  + id : str
+}
+class article::Image {
+  + file : str
+}
+class article::ImageFactory {
+  + file : str
+}
+class article::ImageFormatter {
+  + file : str
+}
+class article::JavaElement {
+  + classFile : str
+}
+class article::JavaFormatter {
+}
+class article::JavaPackage {
+  + name : str
+}
+class article::Javadoc {
+}
+class article::Key {
+}
+class article::Link {
+}
+abstract class article::LinkTarget {
+  + defaultLabel : str
+  + tooltip : str
+  + linkFrom(source : any) : str
+}
+class article::Plugin {
+  + label : str
+  + name : str
+}
+class article::PluginResource {
+}
+class article::Schemadoc {
+}
+class article::Section {
+}
+class article::Selection {
+}
+class article::Snippet {
+  + title : str
+  + titleImage : str
+}
+class article::SourceCode {
+}
+abstract class article::StructuralElement {
+  + doc : str
+  + title : str
+}
+class article::Text {
+}
+class article::Toc {
+  + levels : int
+}
+class article::TreeFormatter {
+  + expandTo : int
+  + expanded : str
+  + file : str
+  + selected : str
+}
+class article::TreeNode {
+  + image : str
+  + label : str
+  + xmi_ID : str
+}
+class article::TreeNodeProperty {
+  + key : str
+  + value : str
+  + valueImage : str
+}
+class article::XmlFormatter {
+  + file : str
+}
+Article <|-- article::ExternalArticle
+Body <|-- article::Category
+Body <|-- article::Chapter
+BodyElement <|-- article::Diagram
+BodyElement <|-- article::Embedding
+BodyElement <|-- article::Excel
+BodyElement <|-- article::Image
+BodyElement <|-- article::Key
+BodyElement <|-- article::Link
+BodyElement <|-- article::Selection
+BodyElement <|-- article::Text
+BodyElement <|-- article::Toc
+BodyElementContainer <|-- article::Body
+BodyElementContainer <|-- article::Callout
+BodyElementContainer <|-- article::Description
+BodyElementContainer <|-- article::Section
+Category <|-- article::Javadoc
+Category <|-- article::Schemadoc
+Chapter <|-- article::Article
+EmbeddableElement <|-- article::Factory
+EmbeddableElement <|-- article::Snippet
+ExternalArticle <|-- article::PluginResource
+ExternalTarget <|-- article::SourceCode
+Factory <|-- article::ImageFactory
+Formatter <|-- article::HtmlFormatter
+Formatter <|-- article::ImageFormatter
+Formatter <|-- article::JavaFormatter
+Formatter <|-- article::TreeFormatter
+Formatter <|-- article::XmlFormatter
+Identifiable <|-- article::EmbeddableElement
+Identifiable <|-- article::LinkTarget
+LinkTarget <|-- article::ExternalTarget
+LinkTarget <|-- article::JavaElement
+LinkTarget <|-- article::Section
+LinkTarget <|-- article::StructuralElement
+StructuralElement <|-- article::Body
+StructuralElement <|-- article::Documentation
+article::Article "1..1" -- "1..1" article::Chapter : article7
+article::Callout "0..9999" --* "1..1" article::Snippet : callouts9
+article::Body "1..1" -- "0..1" article::Category : category25
+article::Chapter "1..1" -- "1..1" article::Section : chapter24
+article::StructuralElement "1..1" *-- "0..9999" article::StructuralElement : children15
+article::TreeNode "1..1" *-- "0..9999" article::TreeNode : children39
+article::BodyElement "1..1" -- "1..1" article::BodyElementContainer : container27
+article::Context "1..1" -- "1..1" article::Documentation : context0
+article::Documentation "1..1" -- "0..9999" article::Documentation : dependencies3
+article::Description "0..1" --* "1..1" article::Snippet : description12
+article::Documentation "1..1" -- "1..1" article::StructuralElement : documentation19
+article::Documentation "1..1" -- "1..1" article::EmbeddableElement : documentation22
+article::Context "1..1" *-- "1..9999" article::Documentation : documentations6
+article::EmbeddableElement "1..1" -- "1..1" article::Embedding : element29
+article::BodyElement "0..9999" --* "1..1" article::BodyElementContainer : elements26
+article::Documentation "1..1" *-- "0..9999" article::EmbeddableElement : embeddableElements1
+article::ExtensionPoint "0..9999" --* "1..1" article::Plugin : extensionPoints31
+article::Formatter "1..1" --* "1..1" article::Snippet : formatter10
+article::JavaPackage "1..9999" --* "1..1" article::Plugin : packages30
+article::StructuralElement "1..1" -- "0..1" article::StructuralElement : parent17
+article::JavaPackage "1..1" -- "1..1" article::Plugin : plugin33
+article::ExtensionPoint "1..1" -- "1..1" article::Plugin : plugin34
+article::Documentation "1..1" *-- "0..9999" article::Plugin : plugins4
+article::TreeNode "1..1" *-- "0..9999" article::TreeNodeProperty : properties40
+article::TreeNodeProperty "0..9999" --* "1..1" article::TreeNodeProperty : properties43
+article::Chapter "1..1" *-- "0..9999" article::Section : sections8
+article::Callout "1..1" -- "1..1" article::Snippet : snippet21
+article::Formatter "1..1" -- "1..1" article::Snippet : snippet36
+article::Description "1..1" -- "1..1" article::Snippet : snippet45
+article::Link "1..1" -- "0..1" article::LinkTarget : target28
+@enduml

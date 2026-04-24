@@ -47,15 +47,15 @@ class epo2::USAddress {
 Address <|-- epo2::GlobalAddress
 Address <|-- epo2::USAddress
 GlobalLocation <|-- epo2::GlobalAddress
-epo2::PurchaseOrder "1..1" *-- "1..1" epo2::Address : billTo2
+epo2::Address "1..1" --* "1..1" epo2::PurchaseOrder : billTo2
 epo2::Customer "1..1" -- "1..1" epo2::PurchaseOrder : customer6
 epo2::Customer "0..9999" --* "1..1" epo2::Supplier : customers10
 epo2::Item "0..9999" --* "1..1" epo2::PurchaseOrder : items1
-epo2::PurchaseOrder "1..1" -- "1..1" epo2::Item : order0
+epo2::Item "1..1" -- "1..1" epo2::PurchaseOrder : order0
 epo2::PurchaseOrder "0..9999" --* "1..1" epo2::Supplier : orders11
-epo2::PurchaseOrder "0..9999" -- "1..1" epo2::Customer : orders20
+epo2::Customer "1..1" -- "0..9999" epo2::PurchaseOrder : orders20
 epo2::PurchaseOrder "0..9999" -- "1..1" epo2::Supplier : pendingOrders14
 epo2::PurchaseOrder "0..1" -- "1..1" epo2::PurchaseOrder : previousOrder8
-epo2::PurchaseOrder "1..1" *-- "0..1" epo2::Address : shipTo3
-epo2::Supplier "1..1" -- "0..9999" epo2::PurchaseOrder : shippedOrders17
+epo2::Address "0..1" --* "1..1" epo2::PurchaseOrder : shipTo3
+epo2::PurchaseOrder "0..9999" -- "1..1" epo2::Supplier : shippedOrders17
 @enduml

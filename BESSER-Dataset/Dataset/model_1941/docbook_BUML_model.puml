@@ -66,14 +66,14 @@ class docbook::Warning {
 abstract class docbook::XMLElement {
   + id : str
 }
+Para <|-- docbook::ProgramListing
+Para <|-- docbook::Tip
+Para <|-- docbook::Warning
 ParaMixedContent <|-- docbook::Emphasis
 ParaMixedContent <|-- docbook::Figure
 ParaMixedContent <|-- docbook::Link
 ParaMixedContent <|-- docbook::SimpleText
 ParaMixedContent <|-- docbook::Ulink
-Para <|-- docbook::ProgramListing
-Para <|-- docbook::Tip
-Para <|-- docbook::Warning
 SectionMixedContent <|-- docbook::Para
 SectionMixedContent <|-- docbook::ParaMixedContent
 SectionMixedContent <|-- docbook::Section
@@ -84,34 +84,34 @@ XMLElement <|-- docbook::Book
 XMLElement <|-- docbook::Bookinfo
 XMLElement <|-- docbook::Chapter
 XMLElement <|-- docbook::Section
-docbook::Bookinfo "1..1" *-- "0..9999" docbook::Author : author6
+docbook::Author "0..9999" --* "1..1" docbook::Bookinfo : author6
 docbook::Book "0..1" -- "1..1" docbook::Chapter : book12
 docbook::Book "0..1" -- "1..1" docbook::Bookinfo : book3
-docbook::Bookinfo "0..1" --* "1..1" docbook::Book : bookinfo0
-docbook::Subtitle "1..1" -- "0..1" docbook::Bookinfo : bookinfo10
-docbook::Bookinfo "0..1" -- "1..1" docbook::Author : bookinfo8
-docbook::Chapter "0..9999" --* "1..1" docbook::Book : chapter1
+docbook::Book "1..1" *-- "0..1" docbook::Bookinfo : bookinfo0
+docbook::Bookinfo "0..1" -- "1..1" docbook::Subtitle : bookinfo10
+docbook::Author "1..1" -- "0..1" docbook::Bookinfo : bookinfo8
+docbook::Book "1..1" *-- "0..9999" docbook::Chapter : chapter1
 docbook::Chapter "0..1" -- "1..1" docbook::SectionMixedContent : chapter22
-docbook::Title "1..1" *-- "0..9999" docbook::ParaMixedContent : content17
-docbook::ParaMixedContent "0..9999" --* "1..1" docbook::Para : content18
+docbook::ParaMixedContent "0..9999" --* "1..1" docbook::Title : content17
+docbook::Para "1..1" *-- "0..9999" docbook::ParaMixedContent : content18
 docbook::Section "1..1" *-- "0..9999" docbook::SectionMixedContent : content20
-docbook::MediaObject "0..1" --* "1..1" docbook::Figure : content37
-docbook::ParaMixedContent "0..9999" --* "1..1" docbook::Emphasis : content38
+docbook::Figure "1..1" *-- "0..1" docbook::MediaObject : content37
+docbook::Emphasis "1..1" *-- "0..9999" docbook::ParaMixedContent : content38
 docbook::Link "1..1" *-- "0..9999" docbook::ParaMixedContent : content40
 docbook::ParaMixedContent "0..9999" --* "1..1" docbook::Ulink : content42
 docbook::ImageObject "0..1" --* "1..1" docbook::MediaObject : content46
 docbook::ImageData "0..1" --* "1..1" docbook::ImageObject : content50
 docbook::Emphasis "0..1" -- "1..1" docbook::ParaMixedContent : emphasis31
 docbook::Figure "0..1" -- "1..1" docbook::MediaObject : figure44
-docbook::ImageObject "0..1" -- "1..1" docbook::ImageData : imageObject51
+docbook::ImageData "1..1" -- "0..1" docbook::ImageObject : imageObject51
 docbook::Link "0..1" -- "1..1" docbook::ParaMixedContent : link35
 docbook::ImageObject "1..1" -- "0..1" docbook::MediaObject : mediaObject47
-docbook::SectionMixedContent "0..9999" --* "1..1" docbook::Chapter : mixedContent14
+docbook::Chapter "1..1" *-- "0..9999" docbook::SectionMixedContent : mixedContent14
 docbook::Para "0..1" -- "1..1" docbook::ParaMixedContent : para26
 docbook::Section "0..1" -- "1..1" docbook::SectionMixedContent : section24
-docbook::Subtitle "0..1" --* "1..1" docbook::Bookinfo : subtitle4
-docbook::TitledElement "1..1" *-- "0..1" docbook::Title : title25
-docbook::Title "0..1" -- "1..1" docbook::ParaMixedContent : titleElement28
-docbook::TitledElement "0..1" -- "1..1" docbook::Title : titledElement16
+docbook::Bookinfo "1..1" *-- "0..1" docbook::Subtitle : subtitle4
+docbook::Title "0..1" --* "1..1" docbook::TitledElement : title25
+docbook::ParaMixedContent "1..1" -- "0..1" docbook::Title : titleElement28
+docbook::Title "1..1" -- "0..1" docbook::TitledElement : titledElement16
 docbook::ParaMixedContent "1..1" -- "0..1" docbook::Ulink : ulink33
 @enduml

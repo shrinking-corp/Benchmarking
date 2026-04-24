@@ -1,0 +1,58 @@
+@startuml
+class DoorsObject {
+}
+class DoorsTreeNode {
+}
+class model::AttributeMap {
+  + key : str
+  + value : str
+}
+class model::DoorsFolder {
+  + project : bool
+}
+class model::DoorsLink {
+  + targetModule : str
+  + targetObject : str
+  + getLinkStatus() : str
+  + resolve(sourceOverride : any) : DoorsObject
+}
+class model::DoorsModule {
+  + getObjectAttributes() : str
+  + getView() : str
+  + setObjectAttributes(attrs : any) : void
+}
+class model::DoorsObject {
+  + absoluteNumber : int
+  + objectHeading : str
+  + objectIdentifier : str
+  + objectNumber : str
+  + objectShortText : str
+  + objectText : str
+  + text : str
+  + getObjectLevel() : int
+  + isHeading() : bool
+}
+class model::DoorsTableRow {
+}
+abstract class model::DoorsTreeNode {
+  + fullName : str
+  + fullNameSegments : str
+  + name : str
+  + canCopyFrom(node : any) : bool
+  + getChild(name : any) : DoorsTreeNode
+  + getTags() : str
+  + hasTag(pattern : any) : bool
+  + removeTag(pattern : any) : void
+  + setTag(tag : any) : void
+  + toString() : str
+}
+DoorsObject <|-- model::DoorsTableRow
+DoorsTreeNode <|-- model::DoorsFolder
+DoorsTreeNode <|-- model::DoorsModule
+DoorsTreeNode <|-- model::DoorsObject
+model::AttributeMap "0..9999" --* "1..1" model::DoorsTreeNode : attributes7
+model::DoorsTreeNode "1..1" *-- "0..9999" model::DoorsTreeNode : children3
+model::DoorsLink "0..9999" --* "1..1" model::DoorsObject : outgoingLinks0
+model::DoorsTreeNode "1..1" -- "0..1" model::DoorsTreeNode : parent5
+model::DoorsLink "1..1" -- "0..1" model::DoorsObject : source1
+@enduml

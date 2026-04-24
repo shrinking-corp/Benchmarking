@@ -76,32 +76,32 @@ Named <|-- publication101::PublicationProcess
 Named <|-- publication101::PublicationStructure
 Named <|-- publication101::PublicationSystem
 Named <|-- publication101::ReviewNote
-publication101::KnowledgeManager "1..1" *-- "0..9999" publication101::Keyword : allkeywords51
+publication101::Keyword "0..9999" --* "1..1" publication101::KnowledgeManager : allkeywords51
 publication101::Paper "1..1" -- "0..9999" publication101::Researcher : authors13
 publication101::Paper "0..1" -- "1..1" publication101::Paper : citedBy17
-publication101::Paper "0..1" -- "1..1" publication101::Collaboration : col_paper57
-publication101::Researcher "1..1" *-- "0..9999" publication101::Collaboration : collaborations9
+publication101::Collaboration "1..1" -- "0..1" publication101::Paper : col_paper57
+publication101::Collaboration "0..9999" --* "1..1" publication101::Researcher : collaborations9
 publication101::Keyword "0..1" -- "1..1" publication101::PaperKeyword : keyword54
-publication101::PaperKeyword "0..9999" --* "1..1" publication101::Paper : keywords14
-publication101::PublicationStructure "1..1" *-- "0..1" publication101::KnowledgeManager : knowledgeMan36
-publication101::Paper "0..9999" -- "1..1" publication101::Keyword : kpapers49
+publication101::Paper "1..1" *-- "0..9999" publication101::PaperKeyword : keywords14
+publication101::KnowledgeManager "0..1" --* "1..1" publication101::PublicationStructure : knowledgeMan36
+publication101::Keyword "1..1" -- "0..9999" publication101::Paper : kpapers49
 publication101::Paper "0..1" -- "1..1" publication101::Progress : paper23
 publication101::Paper "0..9999" --* "1..1" publication101::PublicationStructure : papers33
 publication101::Paragraph "0..1" -- "1..1" publication101::Write : paragraph25
-publication101::Paragraph "0..9999" --* "1..1" publication101::Paper : paragraphs11
-publication101::Position "1..1" -- "0..1" publication101::Position : parent47
+publication101::Paper "1..1" *-- "0..9999" publication101::Paragraph : paragraphs11
+publication101::Position "0..1" -- "1..1" publication101::Position : parent47
 publication101::Phase "0..9999" --* "1..1" publication101::PublicationProcess : phases0
 publication101::Position "0..9999" --* "1..1" publication101::PublicationSystem : positions43
 publication101::Progress "1..1" -- "0..1" publication101::PublicationProcess : process21
 publication101::PublicationProcess "0..1" --* "1..1" publication101::PublicationSystem : processView38
-publication101::Progress "0..9999" --* "1..1" publication101::Paper : progress12
+publication101::Paper "1..1" *-- "0..9999" publication101::Progress : progress12
 publication101::Paper "0..9999" -- "1..1" publication101::Researcher : res_papers4
 publication101::Position "0..1" -- "1..1" publication101::Researcher : res_position7
-publication101::Researcher "0..9999" --* "1..1" publication101::PublicationStructure : researchers31
-publication101::ReviewNote "0..1" -- "1..1" publication101::Review : reviewNote28
-publication101::ReviewNote "0..9999" --* "1..1" publication101::Paragraph : reviews19
-publication101::Review "0..9999" --* "1..1" publication101::Researcher : reviews2
-publication101::Skill "0..9999" --* "1..1" publication101::Researcher : skills5
-publication101::PublicationSystem "1..1" *-- "0..1" publication101::PublicationStructure : structuralView40
+publication101::PublicationStructure "1..1" *-- "0..9999" publication101::Researcher : researchers31
+publication101::Review "1..1" -- "0..1" publication101::ReviewNote : reviewNote28
+publication101::Paragraph "1..1" *-- "0..9999" publication101::ReviewNote : reviews19
+publication101::Researcher "1..1" *-- "0..9999" publication101::Review : reviews2
+publication101::Researcher "1..1" *-- "0..9999" publication101::Skill : skills5
+publication101::PublicationStructure "0..1" --* "1..1" publication101::PublicationSystem : structuralView40
 publication101::Researcher "1..1" *-- "0..9999" publication101::Write : writes1
 @enduml

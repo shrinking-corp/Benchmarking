@@ -1,0 +1,54 @@
+@startuml
+enum InvoiceState {
+  Invoiced
+  New
+  Paid
+}
+class NamedElement {
+}
+class accounting::Client {
+}
+class accounting::ClientDatabase {
+}
+class accounting::Deliverable {
+  + dueDate : date
+  + unitAmount : float
+}
+class accounting::Employee {
+  + emails : str
+}
+class accounting::EmployeeDatabase {
+}
+class accounting::Invoice {
+  + id : str
+  + invoiceDate : date
+  + state : str
+  + unitAmount : float
+}
+abstract class accounting::NamedElement {
+  + name : str
+}
+class accounting::Order {
+  + id : str
+  + paymentOffset : int
+  + pricePerUnit : float
+  + validateUnitAmount(context : any, diagnosticChain : any) : bool
+}
+class accounting::Project {
+}
+NamedElement <|-- accounting::Client
+NamedElement <|-- accounting::Employee
+NamedElement <|-- accounting::Project
+accounting::Employee "0..1" -- "1..1" accounting::Invoice : advisor5
+accounting::Client "1..1" -- "1..1" accounting::Project : client10
+accounting::Client "0..9999" --* "1..1" accounting::ClientDatabase : clients15
+accounting::Deliverable "0..9999" --* "1..1" accounting::Order : deliverables1
+accounting::Employee "0..9999" --* "1..1" accounting::EmployeeDatabase : employees16
+accounting::Invoice "0..9999" --* "1..1" accounting::Order : invoices2
+accounting::Employee "0..1" -- "1..1" accounting::Project : liason13
+accounting::Deliverable "1..1" -- "1..1" accounting::Order : order4
+accounting::Invoice "1..1" -- "1..1" accounting::Order : order6
+accounting::Order "0..9999" --* "1..1" accounting::Project : orders11
+accounting::Order "1..1" -- "1..1" accounting::Project : project0
+accounting::Client "1..1" *-- "1..9999" accounting::Project : projects8
+@enduml

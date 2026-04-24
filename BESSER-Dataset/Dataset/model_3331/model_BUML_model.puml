@@ -186,10 +186,10 @@ AbstractCStatement <|-- model::CDeclarationStatement
 AbstractCStatement <|-- model::CExpressionStatement
 AbstractCStatement <|-- model::CIfStatement
 AbstractCStatement <|-- model::CUnparsedStatement
-AbstractMClassFieldDeclaration <|-- model::MInstanceClassFieldDeclaration
-AbstractMClassFieldDeclaration <|-- model::MStaticClassFieldDeclaration
 AbstractMClass <|-- model::MDeclaredClass
 AbstractMClass <|-- model::MExternalClass
+AbstractMClassFieldDeclaration <|-- model::MInstanceClassFieldDeclaration
+AbstractMClassFieldDeclaration <|-- model::MStaticClassFieldDeclaration
 AbstractMDeclaredType <|-- model::MDeclaredClass
 AbstractMDeclaredType <|-- model::MDeclaredInterface
 AbstractMExternalType <|-- model::MExternalClass
@@ -211,6 +211,8 @@ AbstractMPackageContainer <|-- model::MPackage
 AbstractMPackageContainer <|-- model::MRoot
 AbstractMResource <|-- model::MCompilationUnit
 AbstractMResource <|-- model::MResource
+AbstractMType <|-- model::AbstractMClass
+AbstractMType <|-- model::AbstractMInterface
 AbstractMTypeContainer <|-- model::AbstractMDeclaredType
 AbstractMTypeContainer <|-- model::MCompilationUnit
 AbstractMTypeReference <|-- model::MDeclaredTypeReference
@@ -221,40 +223,38 @@ AbstractMTypeWithNameDeclaration <|-- model::AbstractMMethodDeclaration
 AbstractMTypeWithNameDeclaration <|-- model::CDeclarationStatement
 AbstractMTypeWithNameDeclaration <|-- model::MConstructorParameter
 AbstractMTypeWithNameDeclaration <|-- model::MMethodDeclarationParameter
-AbstractMType <|-- model::AbstractMClass
-AbstractMType <|-- model::AbstractMInterface
 AbstractModifiers <|-- model::AbstractMMethodLike
 MDeclaredClass <|-- model::MAbstractDeclaredClass
 model::MAbstractClassMethodDeclaration "0..9999" --* "1..1" model::MAbstractDeclaredClass : abstractMethods32
 model::AbstractCExpression "1..1" --* "1..1" model::CIfStatement : condition76
-model::CConditionalExpression "1..1" *-- "1..1" model::AbstractCExpression : condition84
+model::AbstractCExpression "1..1" --* "1..1" model::CConditionalExpression : condition84
 model::MConstantInterfaceFieldDeclaration "0..9999" --* "1..1" model::MDeclaredInterface : constants36
 model::MConstructor "1..1" -- "1..1" model::MConstructorParameter : constructor67
 model::MConstructor "0..9999" --* "1..1" model::MDeclaredClass : constructors26
 model::AbstractMImplementableMethodDeclaration "1..1" -- "1..1" model::MDeclaredMethodImplementation : declaration58
 model::MDirectMethodImplementation "1..1" *-- "1..1" model::MImplicitMethodDeclaration : declaration59
-model::AbstractMResource "0..9999" -- "1..1" model::AbstractMResource : derivedFrom7
-model::CExpressionStatement "1..1" *-- "1..1" model::AbstractCExpression : expression74
+model::AbstractMResource "1..1" -- "0..9999" model::AbstractMResource : derivedFrom7
+model::AbstractCExpression "1..1" --* "1..1" model::CExpressionStatement : expression74
 model::AbstractMClass "0..1" -- "1..1" model::MDeclaredClass : extends20
 model::AbstractMInterface "0..9999" -- "1..1" model::MDeclaredInterface : extends34
 model::AbstractMExternalType "0..9999" --* "1..1" model::MRoot : externalTypes1
 model::AbstractCExpression "0..1" --* "1..1" model::CConditionalExpression : falseExpression89
 model::AbstractCStatement "0..1" --* "1..1" model::CIfStatement : falseStatement81
-model::MDeclaredMethodImplementation "0..9999" -- "1..1" model::AbstractMImplementableMethodDeclaration : implementations48
-model::MDeclaredClass "1..1" *-- "0..9999" model::AbstractMMethodImplementation : implementedMethods28
-model::MDeclaredClass "1..1" -- "0..9999" model::AbstractMInterface : implements21
-model::MCompilationUnit "1..1" -- "0..9999" model::AbstractMType : imports13
+model::AbstractMImplementableMethodDeclaration "1..1" -- "0..9999" model::MDeclaredMethodImplementation : implementations48
+model::AbstractMMethodImplementation "0..9999" --* "1..1" model::MDeclaredClass : implementedMethods28
+model::AbstractMInterface "0..9999" -- "1..1" model::MDeclaredClass : implements21
+model::AbstractMType "0..9999" -- "1..1" model::MCompilationUnit : imports13
 model::AbstractCExpression "0..1" --* "1..1" model::AbstractMFieldDeclaration : initialValue40
-model::MInstanceClassFieldDeclaration "0..9999" --* "1..1" model::MDeclaredClass : instanceFields24
+model::MDeclaredClass "1..1" *-- "0..9999" model::MInstanceClassFieldDeclaration : instanceFields24
 model::AbstractMMethodDeclaration "1..1" -- "1..1" model::MMethodDeclarationParameter : methodDeclaration46
 model::AbstractMMethodImplementation "1..1" -- "1..1" model::MMethodImplementationParameter : methodImplementation61
 model::MDeclaredInterface "1..1" *-- "0..9999" model::MInterfaceMethodDeclaration : methods38
-model::MNativeMethodDeclaration "0..9999" --* "1..1" model::MDeclaredClass : nativeMethods30
+model::MDeclaredClass "1..1" *-- "0..9999" model::MNativeMethodDeclaration : nativeMethods30
 model::MDeclaredClass "1..1" -- "1..1" model::MStaticClassFieldDeclaration : owner41
 model::MDeclaredClass "1..1" -- "1..1" model::MInstanceClassFieldDeclaration : owner42
-model::MDeclaredInterface "1..1" -- "1..1" model::MConstantInterfaceFieldDeclaration : owner44
-model::MImplicitMethodDeclaration "1..1" -- "1..1" model::MDirectMethodImplementation : owner47
-model::MAbstractDeclaredClass "1..1" -- "1..1" model::MAbstractClassMethodDeclaration : owner50
+model::MConstantInterfaceFieldDeclaration "1..1" -- "1..1" model::MDeclaredInterface : owner44
+model::MDirectMethodImplementation "1..1" -- "1..1" model::MImplicitMethodDeclaration : owner47
+model::MAbstractClassMethodDeclaration "1..1" -- "1..1" model::MAbstractDeclaredClass : owner50
 model::MDeclaredInterface "1..1" -- "1..1" model::MInterfaceMethodDeclaration : owner51
 model::MDeclaredClass "1..1" -- "1..1" model::MNativeMethodDeclaration : owner53
 model::AbstractMMethodImplementation "1..1" -- "1..1" model::MDeclaredClass : owner55
@@ -263,20 +263,20 @@ model::AbstractMResource "1..1" -- "1..1" model::MPackage : package4
 model::AbstractMPackageContainer "1..1" -- "1..1" model::MPackage : packageContainer2
 model::AbstractMPackageContainer "1..1" *-- "0..9999" model::MPackage : packages0
 model::AbstractMMethodDeclaration "1..1" *-- "0..9999" model::MMethodDeclarationParameter : parameters45
-model::MMethodImplementationParameter "0..9999" --* "1..1" model::AbstractMMethodImplementation : parameters57
-model::MConstructorParameter "0..9999" --* "1..1" model::MConstructor : parameters66
-model::MPackage "1..1" *-- "0..9999" model::AbstractMResource : resources3
-model::MRoot "1..1" -- "1..1" model::AbstractMExternalType : root15
+model::AbstractMMethodImplementation "1..1" *-- "0..9999" model::MMethodImplementationParameter : parameters57
+model::MConstructor "1..1" *-- "0..9999" model::MConstructorParameter : parameters66
+model::AbstractMResource "0..9999" --* "1..1" model::MPackage : resources3
+model::AbstractMExternalType "1..1" -- "1..1" model::MRoot : root15
 model::AbstractCStatement "0..1" --* "1..1" model::AbstractMMethodLike : statement18
 model::AbstractCStatement "0..9999" --* "1..1" model::CBlockStatement : statements70
-model::MStaticClassFieldDeclaration "0..9999" --* "1..1" model::MDeclaredClass : staticFields23
-model::AbstractMResource "0..9999" -- "1..1" model::AbstractMResource : superOf10
+model::MDeclaredClass "1..1" *-- "0..9999" model::MStaticClassFieldDeclaration : staticFields23
+model::AbstractMResource "1..1" -- "0..9999" model::AbstractMResource : superOf10
 model::AbstractCExpression "1..1" --* "1..1" model::CConditionalExpression : trueExpression86
 model::AbstractCStatement "1..1" --* "1..1" model::CIfStatement : trueStatement78
 model::AbstractMDeclaredType "1..1" -- "1..1" model::MDeclaredTypeReference : type16
-model::MExternalTypeReference "1..1" -- "1..1" model::AbstractMExternalType : type17
+model::AbstractMExternalType "1..1" -- "1..1" model::MExternalTypeReference : type17
 model::AbstractMTypeReference "1..1" --* "1..1" model::AbstractMTypeWithNameDeclaration : type19
-model::AbstractMTypeContainer "1..1" -- "1..1" model::AbstractMDeclaredType : typeContainer14
+model::AbstractMDeclaredType "1..1" -- "1..1" model::AbstractMTypeContainer : typeContainer14
 model::AbstractMDeclaredType "0..9999" --* "1..1" model::AbstractMTypeContainer : types12
 model::AbstractCExpression "0..1" --* "1..1" model::CDeclarationStatement : value72
 @enduml

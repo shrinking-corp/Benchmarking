@@ -72,15 +72,15 @@ SMElement <|-- systemmodel::DataType
 SMElement <|-- systemmodel::Port
 SMElement <|-- systemmodel::Signal
 SMElement <|-- systemmodel::SystemModel
-systemmodel::SystemModel "1..1" *-- "0..9999" systemmodel::Block : blocks0
+systemmodel::Block "0..9999" --* "1..1" systemmodel::SystemModel : blocks0
 systemmodel::DataType "1..9999" --* "1..1" systemmodel::SystemModel : dataTypes3
-systemmodel::Signal "1..1" -- "1..1" systemmodel::Inport : dstPort10
-systemmodel::Signal "0..1" -- "1..1" systemmodel::Inport : inSignal12
-systemmodel::Inport "0..9999" --* "1..1" systemmodel::Block : inports5
-systemmodel::Signal "0..9999" -- "1..1" systemmodel::Outport : outSignals14
+systemmodel::Inport "1..1" -- "1..1" systemmodel::Signal : dstPort10
+systemmodel::Inport "1..1" -- "0..1" systemmodel::Signal : inSignal12
+systemmodel::Block "1..1" *-- "0..9999" systemmodel::Inport : inports5
+systemmodel::Outport "1..1" -- "0..9999" systemmodel::Signal : outSignals14
 systemmodel::Block "1..1" *-- "0..9999" systemmodel::Outport : outports6
 systemmodel::Block "1..1" -- "1..1" systemmodel::Inport : parentBlock13
-systemmodel::Outport "1..1" -- "1..1" systemmodel::Block : parentBlock16
+systemmodel::Block "1..1" -- "1..1" systemmodel::Outport : parentBlock16
 systemmodel::Signal "0..9999" --* "1..1" systemmodel::SystemModel : signals1
 systemmodel::Outport "1..1" -- "1..1" systemmodel::Signal : srcPort8
 systemmodel::DataType "1..1" -- "1..1" systemmodel::Port : type18

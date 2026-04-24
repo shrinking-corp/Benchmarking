@@ -1,0 +1,34 @@
+@startuml
+class NamedElement {
+}
+abstract class fsm::NamedElement {
+  + name : str
+}
+class fsm::State {
+  + step(inputString : any) : void
+}
+class fsm::StateMachine {
+  + consummedString : str
+  + producedString : str
+  + unprocessedString : str
+  + initializeModel(args : any) : void
+  + main() : void
+}
+class fsm::Transition {
+  + input : str
+  + output : str
+  + fire() : void
+}
+NamedElement <|-- fsm::State
+NamedElement <|-- fsm::StateMachine
+NamedElement <|-- fsm::Transition
+fsm::State "0..1" -- "1..1" fsm::StateMachine : currentState5
+fsm::State "1..1" -- "0..9999" fsm::Transition : incomingTransitions14
+fsm::State "1..1" -- "1..1" fsm::StateMachine : initialState2
+fsm::State "1..1" -- "0..9999" fsm::Transition : outgoingTransitions11
+fsm::State "0..9999" --* "1..1" fsm::StateMachine : ownedStates0
+fsm::StateMachine "1..1" *-- "0..9999" fsm::Transition : ownedTransitions3
+fsm::State "1..1" -- "1..1" fsm::StateMachine : owningFSM8
+fsm::State "1..1" -- "1..1" fsm::Transition : source17
+fsm::State "1..1" -- "1..1" fsm::Transition : target20
+@enduml

@@ -1,0 +1,196 @@
+@startuml
+class AnnotatedElement {
+}
+class Attribute {
+}
+class BasicType {
+}
+class Category {
+}
+class DataType {
+}
+class Entity {
+}
+enum NumericTypeEnum {
+  BigDecimal
+  Byte
+  Double
+  Float
+  Integer
+  Long
+  Short
+}
+class Type {
+}
+class occi::Action {
+}
+abstract class occi::AnnotatedElement {
+}
+class occi::Annotation {
+  + key : str
+  + value : str
+}
+class occi::ArrayType {
+}
+class occi::Attribute {
+  + default : str
+  + description : str
+  + mutable : str
+  + name : str
+  + required : str
+}
+class occi::AttributeState {
+  + name : str
+  + value : str
+}
+abstract class occi::BasicType {
+}
+class occi::BooleanType {
+}
+abstract class occi::Category {
+  + description : str
+  + name : str
+  + scheme : str
+  + term : str
+  + title : str
+}
+class occi::Configuration {
+  + description : str
+  + location : str
+}
+class occi::Constraint {
+  + body : str
+  + description : str
+  + name : str
+}
+abstract class occi::DataType {
+  + documentation : str
+  + name : str
+}
+class occi::EObjectType {
+  + instanceClassName : str
+}
+abstract class occi::Entity {
+  + id : str
+  + location : str
+  + title : str
+  + occiCreate() : void
+  + occiDelete() : void
+  + occiRetrieve() : void
+  + occiUpdate() : void
+}
+class occi::EnumerationLiteral {
+  + documentation : str
+  + name : str
+}
+class occi::EnumerationType {
+}
+class occi::Extension {
+  + description : str
+  + name : str
+  + scheme : str
+  + specification : str
+}
+class occi::FSM {
+}
+class occi::Kind {
+  + occiIsKindOf(kind : any) : str
+}
+class occi::Link {
+  + LinkSourceInvariant(linkInstanceKind : any, resourcekind : any) : str
+  + LinkTargetInvariant(linkInstanceKind : any, resourcekind : any) : str
+}
+class occi::Mixin {
+}
+class occi::MixinBase {
+}
+class occi::NumericType {
+  + maxExclusive : str
+  + maxInclusive : str
+  + minExclusive : str
+  + minInclusive : str
+  + totalDigits : str
+  + type : str
+}
+class occi::RecordField {
+}
+class occi::RecordType {
+}
+class occi::Resource {
+  + summary : str
+}
+class occi::State {
+  + final : str
+  + initial : str
+}
+class occi::StringType {
+  + length : str
+  + maxLength : str
+  + minLength : str
+  + pattern : str
+}
+class occi::Transition {
+}
+abstract class occi::Type {
+}
+AnnotatedElement <|-- occi::Attribute
+AnnotatedElement <|-- occi::Category
+Attribute <|-- occi::RecordField
+BasicType <|-- occi::BooleanType
+BasicType <|-- occi::EObjectType
+BasicType <|-- occi::NumericType
+BasicType <|-- occi::StringType
+Category <|-- occi::Action
+Category <|-- occi::Type
+DataType <|-- occi::ArrayType
+DataType <|-- occi::BasicType
+DataType <|-- occi::EnumerationType
+DataType <|-- occi::RecordType
+Entity <|-- occi::Link
+Entity <|-- occi::Resource
+Type <|-- occi::Kind
+Type <|-- occi::Mixin
+occi::Action "0..1" -- "1..1" occi::Transition : action18
+occi::Action "0..9999" --* "1..1" occi::Type : actions2
+occi::AnnotatedElement "1..1" *-- "0..9999" occi::Annotation : annotations0
+occi::Kind "0..9999" -- "1..1" occi::Mixin : applies35
+occi::Attribute "1..1" -- "1..1" occi::FSM : attribute8
+occi::Attribute "0..9999" --* "1..1" occi::Category : attributes1
+occi::AttributeState "0..9999" --* "1..1" occi::Entity : attributes44
+occi::AttributeState "0..9999" --* "1..1" occi::MixinBase : attributes53
+occi::Constraint "0..9999" --* "1..1" occi::Type : constraints3
+occi::Mixin "1..1" -- "0..9999" occi::Mixin : depends34
+occi::Entity "0..9999" -- "1..1" occi::Kind : entities25
+occi::Entity "0..9999" -- "1..1" occi::Mixin : entities38
+occi::Entity "1..1" -- "1..1" occi::MixinBase : entity52
+occi::EnumerationLiteral "1..1" -- "1..1" occi::EnumerationType : enumerationType82
+occi::FSM "0..1" --* "1..1" occi::Type : fsm5
+occi::Extension "1..1" -- "0..9999" occi::Extension : import64
+occi::Entity "1..1" -- "1..1" occi::Kind : kind41
+occi::Extension "1..1" *-- "0..9999" occi::Kind : kinds65
+occi::Link "0..9999" --* "1..1" occi::Resource : links56
+occi::EnumerationLiteral "0..1" -- "1..1" occi::State : literal11
+occi::EnumerationLiteral "1..9999" --* "1..1" occi::EnumerationType : literals81
+occi::Mixin "1..1" -- "1..1" occi::MixinBase : mixin50
+occi::Entity "1..1" -- "0..9999" occi::Mixin : mixins46
+occi::Extension "1..1" *-- "0..9999" occi::Mixin : mixins68
+occi::Configuration "1..1" *-- "0..9999" occi::Mixin : mixins78
+occi::State "1..1" *-- "0..9999" occi::Transition : outgoingTransition13
+occi::FSM "1..1" *-- "0..9999" occi::State : ownedState7
+occi::FSM "1..1" -- "1..1" occi::State : owningFSM12
+occi::Kind "1..1" -- "0..1" occi::Kind : parent24
+occi::Entity "1..1" *-- "0..9999" occi::MixinBase : parts49
+occi::RecordField "1..9999" --* "1..1" occi::RecordType : recordFields83
+occi::Configuration "1..1" *-- "0..9999" occi::Resource : resources76
+occi::Link "0..9999" -- "1..1" occi::Resource : rlinks58
+occi::State "1..1" -- "1..1" occi::Transition : source14
+occi::Kind "0..9999" -- "1..1" occi::Kind : source28
+occi::Link "1..1" -- "1..1" occi::Resource : source60
+occi::State "1..1" -- "1..1" occi::Transition : target16
+occi::Kind "0..9999" -- "1..1" occi::Kind : target31
+occi::Link "1..1" -- "1..1" occi::Resource : target61
+occi::Attribute "1..1" -- "0..1" occi::DataType : type21
+occi::ArrayType "1..1" -- "1..1" occi::DataType : type84
+occi::DataType "0..9999" --* "1..1" occi::Extension : types71
+occi::Configuration "1..1" -- "0..9999" occi::Extension : use74
+@enduml

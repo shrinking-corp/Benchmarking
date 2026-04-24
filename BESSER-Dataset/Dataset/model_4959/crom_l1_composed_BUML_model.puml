@@ -163,19 +163,19 @@ IntraRelationshipConstraint <|-- crom::l1::composed::Cyclic
 IntraRelationshipConstraint <|-- crom::l1::composed::Irreflexive
 IntraRelationshipConstraint <|-- crom::l1::composed::ParthoodConstraint
 IntraRelationshipConstraint <|-- crom::l1::composed::Total
+Model <|-- crom::l1::composed::Group
 ModelElement <|-- crom::l1::composed::Group
 ModelElement <|-- crom::l1::composed::RigidType
-Model <|-- crom::l1::composed::Group
 NamedElement <|-- crom::l1::composed::ModelElement
 NamedElement <|-- crom::l1::composed::RelationTarget
 NamedElement <|-- crom::l1::composed::Relationship
 NamedElement <|-- crom::l1::composed::TypedElement
-RelationTarget <|-- crom::l1::composed::RoleGroup
-RelationTarget <|-- crom::l1::composed::Type
 Relation <|-- crom::l1::composed::Constraint
 Relation <|-- crom::l1::composed::Fulfillment
 Relation <|-- crom::l1::composed::Inheritance
 Relation <|-- crom::l1::composed::Relationship
+RelationTarget <|-- crom::l1::composed::RoleGroup
+RelationTarget <|-- crom::l1::composed::Type
 RelationshipConstraint <|-- crom::l1::composed::InterRelationshipConstraint
 RelationshipConstraint <|-- crom::l1::composed::IntraRelationshipConstraint
 RigidType <|-- crom::l1::composed::CompartmentType
@@ -192,44 +192,44 @@ TypedElement <|-- crom::l1::composed::Attribute
 TypedElement <|-- crom::l1::composed::Operation
 TypedElement <|-- crom::l1::composed::Parameter
 crom::l1::composed::Attribute "0..9999" --* "1..1" crom::l1::composed::Type : attributes7
-crom::l1::composed::Constraint "0..9999" --* "1..1" crom::l1::composed::CompartmentType : constraints16
-crom::l1::composed::ModelElement "0..9999" --* "1..1" crom::l1::composed::Model : elements0
-crom::l1::composed::RoleGroupElement "1..9999" --* "1..1" crom::l1::composed::RoleGroup : elements76
-crom::l1::composed::Fulfillment "1..1" -- "1..1" crom::l1::composed::AbstractRole : filled30
-crom::l1::composed::RigidType "1..1" -- "1..1" crom::l1::composed::Fulfillment : filler31
+crom::l1::composed::CompartmentType "1..1" *-- "0..9999" crom::l1::composed::Constraint : constraints16
+crom::l1::composed::Model "1..1" *-- "0..9999" crom::l1::composed::ModelElement : elements0
+crom::l1::composed::RoleGroup "1..1" *-- "1..9999" crom::l1::composed::RoleGroupElement : elements76
+crom::l1::composed::AbstractRole "1..1" -- "1..1" crom::l1::composed::Fulfillment : filled30
+crom::l1::composed::Fulfillment "1..1" -- "1..1" crom::l1::composed::RigidType : filler31
 crom::l1::composed::Place "1..1" --* "1..1" crom::l1::composed::Relationship : first23
 crom::l1::composed::AbstractRole "1..1" -- "1..1" crom::l1::composed::RoleConstraint : first33
-crom::l1::composed::Relationship "1..1" -- "1..1" crom::l1::composed::InterRelationshipConstraint : first41
-crom::l1::composed::RoleType "1..1" -- "1..1" crom::l1::composed::Place : holder68
+crom::l1::composed::InterRelationshipConstraint "1..1" -- "1..1" crom::l1::composed::Relationship : first41
+crom::l1::composed::Place "1..1" -- "1..1" crom::l1::composed::RoleType : holder68
 crom::l1::composed::Relation "0..9999" -- "1..1" crom::l1::composed::RelationTarget : incoming71
 crom::l1::composed::Operation "0..9999" --* "1..1" crom::l1::composed::Type : operations8
-crom::l1::composed::RelationTarget "1..1" -- "0..9999" crom::l1::composed::Relation : outgoing73
+crom::l1::composed::Relation "0..9999" -- "1..1" crom::l1::composed::RelationTarget : outgoing73
 crom::l1::composed::Operation "1..1" -- "1..1" crom::l1::composed::Type : owner4
-crom::l1::composed::Type "1..1" -- "1..1" crom::l1::composed::Attribute : owner5
-crom::l1::composed::Parameter "0..9999" --* "1..1" crom::l1::composed::Operation : params3
+crom::l1::composed::Attribute "1..1" -- "1..1" crom::l1::composed::Type : owner5
+crom::l1::composed::Operation "1..1" *-- "0..9999" crom::l1::composed::Parameter : params3
 crom::l1::composed::CompartmentType "1..1" *-- "0..9999" crom::l1::composed::Part : parts14
 crom::l1::composed::AbstractRole "1..1" -- "1..1" crom::l1::composed::AbstractRoleRef : ref82
-crom::l1::composed::Relationship "0..1" -- "1..1" crom::l1::composed::IntraRelationshipConstraint : relation38
-crom::l1::composed::Relation "0..9999" --* "1..1" crom::l1::composed::Model : relations1
-crom::l1::composed::Relationship "0..9999" --* "1..1" crom::l1::composed::CompartmentType : relationships15
+crom::l1::composed::IntraRelationshipConstraint "1..1" -- "0..1" crom::l1::composed::Relationship : relation38
+crom::l1::composed::Model "1..1" *-- "0..9999" crom::l1::composed::Relation : relations1
+crom::l1::composed::CompartmentType "1..1" *-- "0..9999" crom::l1::composed::Relationship : relationships15
 crom::l1::composed::AbstractRole "1..1" --* "1..1" crom::l1::composed::Part : role78
 crom::l1::composed::Place "1..1" --* "1..1" crom::l1::composed::Relationship : second25
-crom::l1::composed::RoleConstraint "1..1" -- "1..1" crom::l1::composed::AbstractRole : second35
-crom::l1::composed::Relationship "1..1" -- "1..1" crom::l1::composed::InterRelationshipConstraint : second43
-crom::l1::composed::DataType "1..1" -- "1..1" crom::l1::composed::DataInheritance : sub50
+crom::l1::composed::AbstractRole "1..1" -- "1..1" crom::l1::composed::RoleConstraint : second35
+crom::l1::composed::InterRelationshipConstraint "1..1" -- "1..1" crom::l1::composed::Relationship : second43
+crom::l1::composed::DataInheritance "1..1" -- "1..1" crom::l1::composed::DataType : sub50
 crom::l1::composed::NaturalInheritance "1..1" -- "1..1" crom::l1::composed::NaturalType : sub55
 crom::l1::composed::CompartmentInheritance "1..1" -- "1..1" crom::l1::composed::CompartmentType : sub60
-crom::l1::composed::RoleType "1..1" -- "1..1" crom::l1::composed::RoleInheritance : sub65
-crom::l1::composed::DataType "1..1" -- "1..1" crom::l1::composed::DataInheritance : super48
-crom::l1::composed::NaturalType "1..1" -- "1..1" crom::l1::composed::NaturalInheritance : super53
-crom::l1::composed::CompartmentType "1..1" -- "1..1" crom::l1::composed::CompartmentInheritance : super58
+crom::l1::composed::RoleInheritance "1..1" -- "1..1" crom::l1::composed::RoleType : sub65
+crom::l1::composed::DataInheritance "1..1" -- "1..1" crom::l1::composed::DataType : super48
+crom::l1::composed::NaturalInheritance "1..1" -- "1..1" crom::l1::composed::NaturalType : super53
+crom::l1::composed::CompartmentInheritance "1..1" -- "1..1" crom::l1::composed::CompartmentType : super58
 crom::l1::composed::RoleInheritance "1..1" -- "1..1" crom::l1::composed::RoleType : super63
-crom::l1::composed::ComplexConstraint "1..1" -- "1..9999" crom::l1::composed::AbstractRole : targets46
+crom::l1::composed::AbstractRole "1..9999" -- "1..1" crom::l1::composed::ComplexConstraint : targets46
 crom::l1::composed::IntraRelationshipConstraint "0..9999" --* "1..1" crom::l1::composed::Relationship : tr_constraints28
 crom::l1::composed::DataType "1..1" -- "0..1" crom::l1::composed::DataType : tr_extends11
-crom::l1::composed::NaturalType "0..1" -- "1..1" crom::l1::composed::NaturalType : tr_extends13
+crom::l1::composed::NaturalType "1..1" -- "0..1" crom::l1::composed::NaturalType : tr_extends13
 crom::l1::composed::CompartmentType "0..1" -- "1..1" crom::l1::composed::CompartmentType : tr_extends19
 crom::l1::composed::RoleType "1..1" -- "0..1" crom::l1::composed::RoleType : tr_extends22
-crom::l1::composed::TypedElement "1..1" -- "1..1" crom::l1::composed::RigidType : type80
+crom::l1::composed::RigidType "1..1" -- "1..1" crom::l1::composed::TypedElement : type80
 crom::l1::composed::CompartmentType "1..1" -- "1..1" crom::l1::composed::Part : whole77
 @enduml

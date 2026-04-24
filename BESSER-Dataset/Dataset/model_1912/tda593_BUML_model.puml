@@ -1,0 +1,446 @@
+@startuml
+class BankingManager {
+}
+class Bill {
+}
+class BillManager {
+}
+class BookingManager {
+}
+class CreditCardManager {
+}
+enum DisabilityApproval {
+}
+class Discount {
+}
+class DiscountManager {
+}
+class KeyCardManager {
+}
+class LegalEntity {
+}
+class LegalEntityManager {
+}
+class Room {
+}
+enum RoomApproval {
+}
+class RoomManager {
+}
+class ServiceManager {
+}
+class billing::AdminDiscountManager {
+}
+class billing::AdminServiceManager {
+}
+class billing::Bill {
+}
+class billing::BillDataService {
+}
+class billing::CreditCardInformationDataService {
+}
+class billing::Discount {
+}
+class billing::DiscountDataService {
+}
+class billing::DiscountLimit {
+}
+class billing::DiscountManagerImpl {
+}
+class billing::Purchase {
+}
+class billing::Service {
+}
+class billing::ServiceDataService {
+}
+class billing::ServiceManagerImpl {
+}
+class booking::Booking {
+}
+class booking::BookingDataService {
+}
+class booking::BookingManager {
+}
+class booking::LegalEntity {
+}
+class booking::LegalEntityDataService {
+}
+class booking::Person {
+}
+class booking::RoomStay {
+}
+class booking::StayRequest {
+}
+class booking::TravelInformation {
+}
+class facilities::AdminKeyCardManager {
+}
+class facilities::AdminRoomManager {
+}
+class facilities::KeyCard {
+}
+class facilities::KeyCardDataService {
+}
+class facilities::KeyCardManager {
+}
+class facilities::KeyCardManagerImpl {
+}
+class facilities::Room {
+}
+class facilities::RoomDataService {
+}
+class facilities::RoomManager {
+}
+class facilities::RoomManagerImpl {
+}
+class facilities::RoomType {
+}
+class facilities::RoomTypeDataService {
+}
+abstract class tda593::billing::AdminDiscountManager {
+  + addAllowedUsers(discount : any, legalEntities : any) : void
+  + addPercentageDiscount(code : any, name : any, percentage : any) : str
+  + addSumDiscount(code : any, name : any, sum : any) : str
+  + createDiscountLimitForDiscount(discount : any, from : any, to : any, users : any, usesAmount : any) : void
+  + setAmountLimit(discount : any, usesAmount : any) : void
+  + setDateRangeLimit(discount : any, validFrom : any, validTo : any) : void
+}
+class tda593::billing::AdminDiscountManagerImpl {
+}
+abstract class tda593::billing::AdminServiceManager {
+  + createService(name : any, price : any) : str
+  + removeService(service : any) : void
+}
+class tda593::billing::AdminServiceManagerImpl {
+}
+abstract class tda593::billing::BankingManager {
+  + isCreditCardValid(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + makePayment(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, sum : any) : bool
+}
+class tda593::billing::BankingManagerImpl {
+}
+class tda593::billing::Bill {
+  + date : date
+  + id : int
+  + isPaid : bool
+  + isPublished : bool
+  + addSubBill(subBill : any) : void
+  + applyDiscount(discount : any) : void
+  + getPrice() : float
+  + publishBill() : void
+  + registerPurchase(purchase : any) : void
+  + removeDiscount(discount : any) : void
+  + removeSubBill(subBill : any) : void
+  + unPublishBill() : void
+  + unregisterPurchase(purchase : any) : void
+}
+class tda593::billing::BillDataService {
+  + getAll(customer : any) : str
+  + getBookingBill(booking : any) : str
+}
+abstract class tda593::billing::BillManager {
+  + addSubBill(subBill : any, toBill : any) : void
+  + applyDiscount(bill : any, discount : any) : void
+  + billItem(bill : any, quantity : any, service : any) : void
+  + createBill(customer : any) : str
+  + createBookingBill(booking : any, customer : any) : str
+  + getBill(id : any) : str
+  + getBills(customer : any) : str
+  + getBookingBill(booking : any) : str
+  + getUnpaidBills(customer : any) : str
+  + markBillAsPaid(bankingManager : any, bill : any, creditCardManager : any, isPaid : any) : bool
+  + publishBill(bill : any) : void
+}
+class tda593::billing::BillManagerImpl {
+}
+class tda593::billing::BookingBill {
+}
+class tda593::billing::CreditCardInformation {
+  + cardNumber : str
+  + ccv : str
+  + expirationDate : date
+  + firstName : str
+  + lastName : str
+}
+class tda593::billing::CreditCardInformationDataService {
+  + getByLegalEntity(legalEntityId : any) : str
+}
+abstract class tda593::billing::CreditCardManager {
+  + getCreditCardInformation(legalEntityId : any) : str
+  + revalidateCreditCardInformation(bankingManager : any, legalEntity : any) : bool
+  + setCreditCardInformation(cardNumber : any, ccv : any, expirationDate : any, firstname : any, lastname : any, legalEntity : any, validator : any) : bool
+}
+class tda593::billing::CreditCardManagerImpl {
+}
+abstract class tda593::billing::Discount {
+  + code : str
+  + name : str
+  + getPriceWithDiscount(price : any) : float
+}
+class tda593::billing::DiscountDataService {
+}
+class tda593::billing::DiscountLimit {
+  + endDate : date
+  + id : int
+  + startDate : date
+  + timesLeftToUse : int
+}
+abstract class tda593::billing::DiscountManager {
+  + getDiscount(code : any) : str
+}
+class tda593::billing::DiscountManagerImpl {
+}
+class tda593::billing::PercentageDiscount {
+  + percentage : float
+}
+class tda593::billing::Purchase {
+  + id : int
+  + price : float
+  + quantity : int
+}
+class tda593::billing::Service {
+  + id : int
+  + name : str
+  + price : float
+}
+class tda593::billing::ServiceDataService {
+}
+abstract class tda593::billing::ServiceManager {
+  + getAllServices() : str
+  + getService(id : any) : str
+}
+class tda593::billing::ServiceManagerImpl {
+}
+class tda593::billing::SumDiscount {
+  + discountSum : float
+}
+class tda593::booking::Booking {
+  + endDate : date
+  + id : int
+  + isCanceled : bool
+  + price : float
+  + specialRequest : str
+  + startDate : date
+  + getGuests() : str
+  + getStayRequests() : str
+  + registerTravelInformation(travelInformation : any) : void
+  + unregisterTravelInformation(travelInformation : any) : void
+}
+class tda593::booking::BookingDataService {
+  + beginTransaction() : void
+  + commitTransaction() : void
+  + getAll(from : any, legal : any, to : any) : str
+  + rollbackTransaction() : void
+}
+abstract class tda593::booking::BookingManager {
+  + addStayRequest(booking : any, stayRequest : any) : str
+  + cancelBooking(booking : any) : void
+  + changeBookingDates(booking : any, newEnd : any, newStart : any) : bool
+  + checkIn(booking : any, guests : any) : void
+  + checkOut(booking : any) : void
+  + createBooking(customer : any, from : any, room : any, to : any) : str
+  + getActiveBooking(roomNumber : any) : str
+  + getAvailableRoomTypeAmount(from : any, roomType : any, to : any) : int
+  + getAvailableRoomTypeAmounts(from : any, to : any) : void
+  + getAvailableRooms(from : any, roomType : any, to : any) : str
+  + getBooking(bookingId : any) : str
+  + getBookings(customer : any) : str
+  + getStayRequests() : void
+  + isRoomAvailable(from : any, roomNumber : any, to : any) : bool
+  + isRoomTypeAvailable(from : any, roomType : any, to : any) : bool
+  + registerRoom(booking : any, room : any) : void
+  + removeStayRequest(booking : any, stayRequest : any) : void
+  + setSpecialRequest(booking : any, specialRequest : any) : void
+}
+class tda593::booking::BookingManagerImpl {
+}
+abstract class tda593::booking::LegalEntity {
+  + email : str
+  + id : int
+  + phone : str
+  + getName() : str
+}
+class tda593::booking::LegalEntityDataService {
+  + findOrganization(name : any) : str
+  + findPerson(firstname : any, lastname : any) : str
+  + getOrganization(organizationNumber : any) : str
+  + getPerson(SSN : any) : str
+}
+abstract class tda593::booking::LegalEntityManager {
+  + createOrganization(email : any, name : any, organizationNumber : any, phone : any) : str
+  + createPerson(SSN : any, email : any, firstname : any, lastname : any, phone : any) : str
+  + findOrganization(name : any) : str
+  + findPerson(firstname : any, lastname : any) : str
+  + getLegalEntity(id : any) : str
+  + getOrganization(organizationNumber : any) : str
+  + getPerson(SSN : any) : str
+}
+class tda593::booking::LegalEntityManagerImpl {
+}
+class tda593::booking::Organization {
+  + name : str
+  + organizationNumber : str
+}
+class tda593::booking::Person {
+  + firstname : str
+  + lastname : str
+  + socialSecurityNumber : str
+}
+class tda593::booking::RoomStay {
+  + active : bool
+  + id : int
+}
+class tda593::booking::StayRequest {
+  + id : int
+  + text : str
+  + timeStamp : date
+}
+class tda593::booking::TravelInformation {
+  + comment : str
+  + id : int
+  + trackingId : str
+}
+abstract class tda593::california::DataService {
+  + count() : int
+  + delete(object : any) : void
+  + exist(object : any) : bool
+  + get(id : any) : void
+  + getAll() : void
+  + set(object : any) : void
+  + setAll(objects : any) : void
+}
+abstract class tda593::facilities::AdminKeyCardManager {
+  + addKeyCard(cardNumber : any) : void
+  + removeKeyCard(cardNumber : any) : void
+}
+class tda593::facilities::AdminKeyCardManagerImpl {
+}
+abstract class tda593::facilities::AdminRoomManager {
+  + addConferenceRoom(description : any, disabilityApprovals : any, equipment : any, floor : any, number : any, numberOfSeats : any, photos : any, roomType : any) : str
+  + addGuestRoom(description : any, disabilityApprovals : any, floor : any, number : any, numberOfBeds : any, numberOfExtraBeds : any, photos : any, roomType : any) : str
+  + addRoomType(description : any, name : any, price : any, roomApprovals : any) : str
+  + removeRoom(roomNumber : any) : bool
+  + removeRoomType(roomType : any) : bool
+}
+class tda593::facilities::AdminRoomManagerImpl {
+}
+class tda593::facilities::ConferenceRoom {
+  + equipment : str
+  + numberOfSeats : int
+}
+class tda593::facilities::GuestRoom {
+  + numberOfBeds : int
+  + numberOfExtrabeds : int
+}
+class tda593::facilities::KeyCard {
+  + id : str
+}
+class tda593::facilities::KeyCardDataService {
+}
+abstract class tda593::facilities::KeyCardManager {
+  + getKeyCard(keyCardNbr : any) : str
+}
+class tda593::facilities::KeyCardManagerImpl {
+}
+abstract class tda593::facilities::Room {
+  + description : str
+  + disabilityApprovals : str
+  + floor : int
+  + isBeingCleaned : bool
+  + isOperational : bool
+  + photos : str
+  + roomNumber : str
+  + registerKeyCard(keyCard : any) : void
+  + unregisterKeyCard(keyCard : any) : void
+  + unregisterKeyCards() : void
+}
+class tda593::facilities::RoomDataService {
+  + getAllConferenceRooms() : str
+  + getAllGuestRooms() : str
+  + getConferenceRoom(id : any) : str
+  + getGuestRoom(id : any) : str
+}
+abstract class tda593::facilities::RoomManager {
+  + getConferenceRooms() : str
+  + getGuestRooms() : str
+  + getRoom(roomNumber : any) : str
+  + getRoomType(name : any) : str
+  + getRoomTypeAmount(roomType : any) : int
+  + getRoomTypeAmounts() : void
+  + getRoomTypes() : str
+  + getRooms() : str
+  + registerKeyCard(keyCardNbr : any, roomNumber : any) : void
+  + setIsBeingCleaned(room : any, value : any) : void
+  + unregisterAllKeyCards(roomNumber : any) : void
+  + unregisterKeyCard(keyCardNbr : any, roomNumber : any) : void
+}
+class tda593::facilities::RoomManagerImpl {
+}
+class tda593::facilities::RoomType {
+  + description : str
+  + name : str
+  + price : float
+  + roomApprovals : str
+}
+class tda593::facilities::RoomTypeDataService {
+}
+BankingManager <|-- tda593::billing::BankingManagerImpl
+Bill <|-- tda593::billing::BookingBill
+BillManager <|-- tda593::billing::BillManagerImpl
+BookingManager <|-- tda593::booking::BookingManagerImpl
+CreditCardManager <|-- tda593::billing::CreditCardManagerImpl
+Discount <|-- tda593::billing::PercentageDiscount
+Discount <|-- tda593::billing::SumDiscount
+DiscountManager <|-- tda593::billing::AdminDiscountManager
+DiscountManager <|-- tda593::billing::DiscountManagerImpl
+KeyCardManager <|-- tda593::facilities::AdminKeyCardManager
+KeyCardManager <|-- tda593::facilities::KeyCardManagerImpl
+LegalEntity <|-- tda593::booking::Organization
+LegalEntity <|-- tda593::booking::Person
+LegalEntityManager <|-- tda593::booking::LegalEntityManagerImpl
+Room <|-- tda593::facilities::ConferenceRoom
+Room <|-- tda593::facilities::GuestRoom
+RoomManager <|-- tda593::facilities::AdminRoomManager
+RoomManager <|-- tda593::facilities::RoomManagerImpl
+ServiceManager <|-- tda593::billing::AdminServiceManager
+ServiceManager <|-- tda593::billing::ServiceManagerImpl
+billing::AdminDiscountManager <|-- tda593::billing::AdminDiscountManagerImpl
+billing::AdminServiceManager <|-- tda593::billing::AdminServiceManagerImpl
+billing::DiscountManagerImpl <|-- tda593::billing::AdminDiscountManagerImpl
+billing::ServiceManagerImpl <|-- tda593::billing::AdminServiceManagerImpl
+facilities::AdminKeyCardManager <|-- tda593::facilities::AdminKeyCardManagerImpl
+facilities::AdminRoomManager <|-- tda593::facilities::AdminRoomManagerImpl
+facilities::KeyCardManagerImpl <|-- tda593::facilities::AdminKeyCardManagerImpl
+facilities::RoomManagerImpl <|-- tda593::facilities::AdminRoomManagerImpl
+facilities::KeyCard "0..9999" -- "1..1" tda593::facilities::Room : allowedKeyCards0
+booking::LegalEntity "0..9999" -- "1..1" tda593::billing::DiscountLimit : allowedUsers10
+billing::BillDataService "1..1" -- "1..1" tda593::billing::BillManagerImpl : billDataService24
+booking::Booking "1..1" -- "1..1" tda593::billing::BookingBill : booking21
+booking::BookingDataService "1..1" -- "1..1" tda593::booking::BookingManagerImpl : bookingDataService45
+booking::BookingManager "1..1" -- "1..1" tda593::billing::BillManagerImpl : bookingManager25
+billing::CreditCardInformationDataService "1..1" -- "1..1" tda593::billing::CreditCardManagerImpl : creditCardInformationDataService27
+booking::LegalEntity "1..1" -- "1..1" tda593::billing::Bill : customer15
+billing::DiscountDataService "1..1" -- "1..1" tda593::billing::DiscountManagerImpl : discountDataService11
+billing::DiscountLimit "0..1" -- "1..1" tda593::billing::Discount : discountLimit9
+facilities::KeyCardDataService "1..1" -- "1..1" tda593::facilities::KeyCardManagerImpl : keyCardDataService8
+facilities::KeyCardManager "1..1" -- "1..1" tda593::facilities::RoomManagerImpl : keyCardManager6
+booking::LegalEntity "0..1" -- "1..1" tda593::billing::CreditCardInformation : legalEntity22
+booking::LegalEntityDataService "1..1" -- "1..1" tda593::booking::LegalEntityManagerImpl : legalEntityDataService48
+booking::TravelInformation "0..1" -- "1..1" tda593::booking::TravelInformation : predecessor38
+billing::Purchase "0..9999" -- "1..1" tda593::billing::Bill : purchases12
+booking::Person "0..9999" -- "1..1" tda593::booking::RoomStay : registeredPersons41
+booking::LegalEntity "1..1" -- "1..1" tda593::booking::Booking : responsible33
+facilities::Room "1..1" -- "1..1" tda593::booking::RoomStay : room43
+facilities::RoomDataService "1..1" -- "1..1" tda593::facilities::RoomManagerImpl : roomDataService3
+facilities::RoomManager "1..1" -- "1..1" tda593::booking::BookingManagerImpl : roomManager46
+booking::RoomStay "0..1" -- "1..1" tda593::booking::Booking : roomStay36
+facilities::RoomType "1..1" -- "1..1" tda593::facilities::Room : roomType1
+facilities::RoomType "1..1" -- "1..1" tda593::booking::Booking : roomType29
+facilities::RoomTypeDataService "1..1" -- "1..1" tda593::facilities::RoomManagerImpl : roomTypeDataService4
+billing::Service "1..1" -- "1..1" tda593::billing::Purchase : service20
+billing::ServiceDataService "1..1" -- "1..1" tda593::billing::ServiceManagerImpl : serviceDataService28
+booking::StayRequest "0..9999" -- "1..1" tda593::booking::RoomStay : stayRequest40
+billing::Bill "0..9999" -- "1..1" tda593::billing::Bill : subBills18
+booking::TravelInformation "0..1" -- "1..1" tda593::booking::Booking : travelInformation31
+billing::Discount "0..9999" -- "1..1" tda593::billing::Bill : usedDiscounts13
+@enduml

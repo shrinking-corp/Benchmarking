@@ -1,0 +1,663 @@
+@startuml
+class AbstractAction {
+}
+class AbstractBranchTransition {
+}
+class AbstractInternalControlFlowAction {
+}
+class AbstractLoopAction {
+}
+class AbstractUserAction {
+}
+class AllocationContext {
+}
+class BranchTransition {
+}
+class CommunicationLinkResourceSpecification {
+}
+class CommunicationLinkResourceType {
+}
+class CompleteComponentType {
+}
+class CompositeDataType {
+}
+class Connector {
+}
+class DataType {
+}
+class DelegationConnector {
+}
+class Entity {
+}
+class ExceptionType {
+}
+class ForkedBehaviour {
+}
+class Identifier {
+}
+class ImplementationComponentType {
+}
+class InnerDeclaration {
+}
+class Interface {
+}
+class InterfaceProvidingRequiringEntity {
+}
+class LinkingResource {
+}
+class NamedElement {
+}
+class PCMRandomVariable {
+}
+class Parameter {
+}
+enum ParameterModifier {
+  in
+  inout
+  none
+  out
+}
+class PassiveResource {
+}
+enum PrimitiveTypeEnum {
+  BOOL
+  BYTE
+  CHAR
+  DOUBLE
+  INT
+  LONG
+  STRING
+}
+class ProcessingResourceSpecification {
+}
+class ProcessingResourceType {
+}
+class Protocol {
+}
+class ProvidedRole {
+}
+class ProvidesComponentType {
+}
+class QoSAnnotations {
+}
+class RandomVariable {
+}
+class Repository {
+}
+class RepositoryComponent {
+}
+class RequiredRole {
+}
+class ResourceContainer {
+}
+class ResourceDemandingBehaviour {
+}
+class ResourceEnvironment {
+}
+class ResourceRequiredRole {
+}
+class ResourceType {
+}
+class Role {
+}
+class ScenarioBehaviour {
+}
+enum SchedulingPolicy {
+  DELAY
+  FCFS
+  PROCESSOR_SHARING
+}
+class ServiceEffectSpecification {
+}
+class Signature {
+}
+class SpecifiedOutputParameterAbstraction {
+}
+class SpecifiedQoSAnnotation {
+}
+class SynchronisationPoint {
+}
+class System {
+}
+class UnitCarryingElement {
+}
+class UsageScenario {
+}
+class UserData {
+}
+class Variable {
+}
+class VariableCharacterisation {
+}
+enum VariableCharacterisationType {
+  BYTESIZE
+  NUMBER_OF_ELEMENTS
+  STRUCTURE
+  TYPE
+  VALUE
+}
+class VariableUsage {
+}
+class Workload {
+}
+class composition::AssemblyConnector {
+}
+class composition::AssemblyContext {
+}
+class composition::ComposedStructure {
+}
+class composition::ProvidedDelegationConnector {
+}
+class composition::RequiredDelegationConnector {
+}
+class composition::ResourceRequiredDelegationConnector {
+}
+class entity::ComposedProvidingRequiringEntity {
+}
+class entity::Entity {
+}
+class entity::InterfaceProvidingEntity {
+}
+class entity::InterfaceProvidingRequiringEntity {
+}
+class entity::InterfaceRequiringEntity {
+}
+class entity::NamedElement {
+}
+class entity::ResourceInterfaceRequiringEntity {
+}
+class parameter::pcm::AbstractNamedReference {
+}
+class pcm::allocation::Allocation {
+  + EachAssemblyContextWithinSystemHasToBeAllocatedExactlyOnce(context : any, diagnostics : any) : bool
+}
+class pcm::allocation::AllocationContext {
+}
+class pcm::composition::AssemblyConnector {
+  + AssemblyConnectorsReferencedProvidedRolesAndChildContextMustMatch(context : any, diagnostics : any) : bool
+  + AssemblyConnectorsReferencedRequiredRoleAndChildContextMustMatch(context : any, diagnostics : any) : bool
+}
+class pcm::composition::AssemblyContext {
+}
+abstract class pcm::composition::ComposedStructure {
+}
+class pcm::composition::ProvidedDelegationConnector {
+  + ComponentOfAssemblyContextAndInnerRoleProvidingComponentNeedToBeTheSame(context : any, diagnostics : any) : bool
+  + ProvidedDelegationConnectorandtheconnectedComponentmustbepartofthesamecompositestructure(context : any, diagnostics : any) : bool
+}
+class pcm::composition::RequiredDelegationConnector {
+  + ComponentOfAssemblyContextAndInnerRoleRequiringComponentNeedToBeTheSame(context : any, diagnostics : any) : bool
+  + RequiredDelegationConnectorandtheconnectedComponentmustbepartofthesamecompositestructure(context : any, diagnostics : any) : bool
+}
+class pcm::composition::ResourceRequiredDelegationConnector {
+}
+abstract class pcm::connectors::Connector {
+}
+class pcm::core::PCMRandomVariable {
+  + SpecificationMustNotBeNULL(context : any, diagnostics : any) : bool
+}
+abstract class pcm::entity::ComposedProvidingRequiringEntity {
+  + ProvidedRolesMustBeBound(context : any, diagnostics : any) : bool
+}
+abstract class pcm::entity::Entity {
+}
+abstract class pcm::entity::InterfaceProvidingEntity {
+}
+abstract class pcm::entity::InterfaceProvidingRequiringEntity {
+}
+abstract class pcm::entity::InterfaceRequiringEntity {
+}
+abstract class pcm::entity::NamedElement {
+  + entityName : str
+}
+abstract class pcm::entity::ResourceInterfaceRequiringEntity {
+}
+class pcm::parameter::CharacterisedVariable {
+  + characterisationType : str
+}
+class pcm::parameter::VariableCharacterisation {
+  + type : str
+}
+class pcm::parameter::VariableUsage {
+}
+class pcm::performance::ComponentSpecifiedExecutionTime {
+}
+class pcm::performance::ParametricResourceDemand {
+}
+class pcm::performance::SystemSpecifiedExecutionTime {
+}
+abstract class pcm::protocol::Protocol {
+  + protocolTypeID : str
+}
+abstract class pcm::protocol::ServiceCall {
+}
+class pcm::qosannotations::QoSAnnotations {
+}
+abstract class pcm::qosannotations::SpecifiedOutputParameterAbstraction {
+}
+abstract class pcm::qosannotations::SpecifiedQoSAnnotation {
+}
+class pcm::reliability::SpecifiedFailureProbability {
+  + failureProbability : float
+}
+class pcm::repository::BasicComponent {
+  + NoSeffTypeUsedTwice(context : any, diagnostics : any) : bool
+  + ProvideSameInterfacesAsImplementationType(context : any, diagnostics : any) : bool
+  + RequireSameInterfacesAsImplementationType(context : any, diagnostics : any) : bool
+}
+class pcm::repository::CollectionDataType {
+}
+class pcm::repository::CompleteComponentType {
+  + AtLeastOneInterfaceHasToBeProvidedOrRequiredByAUsefullCompleteComponentType(context : any, diagnostics : any) : bool
+  + providedInterfacesHaveToConformToProvidedType2(context : any, diagnostics : any) : bool
+}
+class pcm::repository::CompositeComponent {
+  + ProvideSameInterfaces(context : any, diagnostics : any) : bool
+  + RequireSameInterfaces(context : any, diagnostics : any) : bool
+}
+class pcm::repository::CompositeDataType {
+}
+abstract class pcm::repository::DataType {
+}
+abstract class pcm::repository::DelegationConnector {
+}
+class pcm::repository::ExceptionType {
+  + exceptionMessage : str
+  + exceptionName : str
+}
+abstract class pcm::repository::ImplementationComponentType {
+  + RequiredInterfacesHaveToConformToCompleteType(context : any, diagnostics : any) : bool
+  + providedInterfacesHaveToConformToCompleteType(context : any, diagnostics : any) : bool
+}
+class pcm::repository::InnerDeclaration {
+}
+class pcm::repository::Interface {
+  + NoProtocolTypeIDUsedTwice(context : any, diagnostics : any) : bool
+  + SignaturesHaveToBeUniqueForAnInterface(context : any, diagnostics : any) : bool
+}
+class pcm::repository::Parameter {
+  + modifier__Parameter : str
+  + parameterName : str
+}
+class pcm::repository::PassiveResource {
+}
+class pcm::repository::PrimitiveDataType {
+  + type : str
+}
+class pcm::repository::ProvidedRole {
+}
+class pcm::repository::ProvidesComponentType {
+  + AtLeastOneInterfaceHasToBeProvidedByAUsefullProvidesComponentType(context : any, diagnostics : any) : bool
+}
+class pcm::repository::Repository {
+  + repositoryDescription : str
+}
+abstract class pcm::repository::RepositoryComponent {
+}
+class pcm::repository::RequiredRole {
+}
+class pcm::repository::ResourceRequiredRole {
+}
+abstract class pcm::repository::Role {
+}
+class pcm::repository::Signature {
+  + serviceName : str
+  + ParameterNamesHaveToBeUniqueForASignature(context : any, diagnostics : any) : bool
+}
+class pcm::resourceenvironment::CommunicationLinkResourceSpecification {
+  + failureProbability : float
+}
+class pcm::resourceenvironment::LinkingResource {
+}
+class pcm::resourceenvironment::ProcessingResourceSpecification {
+  + MTTF : float
+  + MTTR : float
+  + schedulingPolicy : str
+}
+class pcm::resourceenvironment::ResourceContainer {
+}
+class pcm::resourceenvironment::ResourceEnvironment {
+}
+class pcm::resourcetype::CommunicationLinkResourceType {
+}
+class pcm::resourcetype::ProcessingResourceType {
+}
+class pcm::resourcetype::ResourceRepository {
+}
+abstract class pcm::resourcetype::ResourceType {
+}
+abstract class pcm::seff::AbstractAction {
+}
+abstract class pcm::seff::AbstractBranchTransition {
+}
+abstract class pcm::seff::AbstractInternalControlFlowAction {
+}
+abstract class pcm::seff::AbstractLoopAction {
+}
+class pcm::seff::AcquireAction {
+}
+class pcm::seff::BranchAction {
+  + AllProbabilisticBranchProbabilitiesMustSumUpTo1(context : any, diagnostics : any) : bool
+  + EitherGuardedBranchesOrProbabilisiticBranchTransitions(context : any, diagnostics : any) : bool
+}
+class pcm::seff::CollectionIteratorAction {
+}
+class pcm::seff::ExternalCallAction {
+  + retryCount : int
+}
+class pcm::seff::ForkAction {
+}
+class pcm::seff::ForkedBehaviour {
+}
+class pcm::seff::GuardedBranchTransition {
+}
+class pcm::seff::InternalAction {
+  + failureProbability : float
+}
+class pcm::seff::LoopAction {
+}
+class pcm::seff::ProbabilisticBranchTransition {
+  + branchProbability : float
+}
+class pcm::seff::ReleaseAction {
+}
+class pcm::seff::ResourceDemandingBehaviour {
+  + EachActionExceptStartActionandStopActionMustHhaveAPredecessorAndSuccessor(context : any, diagnostics : any) : bool
+  + ExactlyOneStartAction(context : any, diagnostics : any) : bool
+  + ExactlyOneStopAction(context : any, diagnostics : any) : bool
+}
+class pcm::seff::ResourceDemandingSEFF {
+}
+abstract class pcm::seff::ServiceEffectSpecification {
+  + seffTypeID : str
+}
+class pcm::seff::SetVariableAction {
+}
+class pcm::seff::StartAction {
+  + StartActionPredecessorMustNotBeDefined(context : any, diagnostics : any) : bool
+}
+class pcm::seff::StopAction {
+  + StopActionSuccessorMustNotBeDefined(context : any, diagnostics : any) : bool
+}
+class pcm::seff::SynchronisationPoint {
+}
+class pcm::subsystem::SubSystem {
+}
+class pcm::system::System {
+}
+abstract class pcm::usagemodel::AbstractUserAction {
+}
+class pcm::usagemodel::Branch {
+  + AllBranchProbabilitiesMustSumUpTo1(context : any, diagnostics : any) : bool
+}
+class pcm::usagemodel::BranchTransition {
+  + branchProbability : float
+}
+class pcm::usagemodel::ClosedWorkload {
+  + population : int
+  + PopulationInClosedWorkloadNeedsToBeSpecified(context : any, diagnostics : any) : bool
+  + ThinkTimeInClosedWorkloadNeedsToBeSpecified(context : any, diagnostics : any) : bool
+}
+class pcm::usagemodel::Delay {
+}
+class pcm::usagemodel::EntryLevelSystemCall {
+}
+class pcm::usagemodel::Loop {
+}
+class pcm::usagemodel::OpenWorkload {
+  + InterArrivalTimeInOpenWorkloadNeedsToBeSpecified(context : any, diagnostics : any) : bool
+}
+class pcm::usagemodel::ScenarioBehaviour {
+  + EachuseractionexceptStartandStopmusthaveapredecessorandsuccessor(context : any, diagnostics : any) : bool
+  + Exactlyonestart(context : any, diagnostics : any) : bool
+  + Exactlyonestop(context : any, diagnostics : any) : bool
+}
+class pcm::usagemodel::Start {
+  + StartHasNoPredecessor(context : any, diagnostics : any) : bool
+}
+class pcm::usagemodel::Stop {
+  + StopHasNoSuccessor(context : any, diagnostics : any) : bool
+}
+class pcm::usagemodel::UsageModel {
+}
+class pcm::usagemodel::UsageScenario {
+}
+class pcm::usagemodel::UserData {
+}
+abstract class pcm::usagemodel::Workload {
+}
+class performance::ParametricResourceDemand {
+}
+class repository::DataType {
+}
+class repository::ImplementationComponentType {
+}
+class repository::RepositoryComponent {
+}
+class seff::ResourceDemandingBehaviour {
+}
+class seff::ServiceEffectSpecification {
+}
+AbstractAction <|-- pcm::seff::AbstractInternalControlFlowAction
+AbstractAction <|-- pcm::seff::ExternalCallAction
+AbstractBranchTransition <|-- pcm::seff::GuardedBranchTransition
+AbstractBranchTransition <|-- pcm::seff::ProbabilisticBranchTransition
+AbstractInternalControlFlowAction <|-- pcm::seff::AbstractLoopAction
+AbstractInternalControlFlowAction <|-- pcm::seff::AcquireAction
+AbstractInternalControlFlowAction <|-- pcm::seff::BranchAction
+AbstractInternalControlFlowAction <|-- pcm::seff::ForkAction
+AbstractInternalControlFlowAction <|-- pcm::seff::InternalAction
+AbstractInternalControlFlowAction <|-- pcm::seff::ReleaseAction
+AbstractInternalControlFlowAction <|-- pcm::seff::SetVariableAction
+AbstractInternalControlFlowAction <|-- pcm::seff::StartAction
+AbstractInternalControlFlowAction <|-- pcm::seff::StopAction
+AbstractLoopAction <|-- pcm::seff::CollectionIteratorAction
+AbstractLoopAction <|-- pcm::seff::LoopAction
+AbstractUserAction <|-- pcm::usagemodel::Branch
+AbstractUserAction <|-- pcm::usagemodel::Delay
+AbstractUserAction <|-- pcm::usagemodel::EntryLevelSystemCall
+AbstractUserAction <|-- pcm::usagemodel::Loop
+AbstractUserAction <|-- pcm::usagemodel::Start
+AbstractUserAction <|-- pcm::usagemodel::Stop
+Connector <|-- pcm::composition::AssemblyConnector
+Connector <|-- pcm::repository::DelegationConnector
+DataType <|-- pcm::repository::PrimitiveDataType
+DelegationConnector <|-- pcm::composition::ProvidedDelegationConnector
+DelegationConnector <|-- pcm::composition::RequiredDelegationConnector
+Entity <|-- pcm::allocation::Allocation
+Entity <|-- pcm::allocation::AllocationContext
+Entity <|-- pcm::composition::AssemblyContext
+Entity <|-- pcm::composition::ComposedStructure
+Entity <|-- pcm::connectors::Connector
+Entity <|-- pcm::entity::InterfaceProvidingEntity
+Entity <|-- pcm::entity::InterfaceRequiringEntity
+Entity <|-- pcm::entity::ResourceInterfaceRequiringEntity
+Entity <|-- pcm::qosannotations::QoSAnnotations
+Entity <|-- pcm::repository::Interface
+Entity <|-- pcm::repository::PassiveResource
+Entity <|-- pcm::repository::Repository
+Entity <|-- pcm::repository::Role
+Entity <|-- pcm::resourceenvironment::LinkingResource
+Entity <|-- pcm::resourceenvironment::ResourceContainer
+Entity <|-- pcm::seff::AbstractAction
+Entity <|-- pcm::usagemodel::AbstractUserAction
+Entity <|-- pcm::usagemodel::ScenarioBehaviour
+Entity <|-- pcm::usagemodel::UsageScenario
+Identifier <|-- pcm::entity::Entity
+Identifier <|-- pcm::seff::ResourceDemandingSEFF
+ImplementationComponentType <|-- pcm::repository::BasicComponent
+InterfaceProvidingRequiringEntity <|-- pcm::repository::RepositoryComponent
+NamedElement <|-- pcm::repository::InnerDeclaration
+NamedElement <|-- pcm::seff::AbstractBranchTransition
+ProcessingResourceType <|-- pcm::resourcetype::CommunicationLinkResourceType
+RandomVariable <|-- pcm::core::PCMRandomVariable
+RepositoryComponent <|-- pcm::repository::CompleteComponentType
+RepositoryComponent <|-- pcm::repository::ImplementationComponentType
+RepositoryComponent <|-- pcm::repository::ProvidesComponentType
+ResourceDemandingBehaviour <|-- pcm::seff::ForkedBehaviour
+ResourceType <|-- pcm::resourcetype::ProcessingResourceType
+Role <|-- pcm::repository::ProvidedRole
+Role <|-- pcm::repository::RequiredRole
+Role <|-- pcm::repository::ResourceRequiredRole
+SpecifiedQoSAnnotation <|-- pcm::performance::ComponentSpecifiedExecutionTime
+SpecifiedQoSAnnotation <|-- pcm::performance::SystemSpecifiedExecutionTime
+SpecifiedQoSAnnotation <|-- pcm::reliability::SpecifiedFailureProbability
+UnitCarryingElement <|-- pcm::resourcetype::ResourceType
+Variable <|-- pcm::parameter::CharacterisedVariable
+Workload <|-- pcm::usagemodel::ClosedWorkload
+Workload <|-- pcm::usagemodel::OpenWorkload
+composition::ComposedStructure <|-- pcm::entity::ComposedProvidingRequiringEntity
+entity::ComposedProvidingRequiringEntity <|-- pcm::repository::CompositeComponent
+entity::ComposedProvidingRequiringEntity <|-- pcm::subsystem::SubSystem
+entity::ComposedProvidingRequiringEntity <|-- pcm::system::System
+entity::Entity <|-- pcm::repository::CollectionDataType
+entity::Entity <|-- pcm::repository::CompositeDataType
+entity::Entity <|-- pcm::resourcetype::ResourceType
+entity::Entity <|-- pcm::system::System
+entity::InterfaceProvidingEntity <|-- pcm::entity::InterfaceProvidingRequiringEntity
+entity::InterfaceProvidingRequiringEntity <|-- pcm::entity::ComposedProvidingRequiringEntity
+entity::InterfaceRequiringEntity <|-- pcm::entity::InterfaceProvidingRequiringEntity
+entity::NamedElement <|-- pcm::entity::Entity
+entity::ResourceInterfaceRequiringEntity <|-- pcm::entity::InterfaceProvidingRequiringEntity
+repository::DataType <|-- pcm::repository::CollectionDataType
+repository::DataType <|-- pcm::repository::CompositeDataType
+repository::ImplementationComponentType <|-- pcm::repository::CompositeComponent
+repository::RepositoryComponent <|-- pcm::subsystem::SubSystem
+seff::ResourceDemandingBehaviour <|-- pcm::seff::ResourceDemandingSEFF
+seff::ServiceEffectSpecification <|-- pcm::seff::ResourceDemandingSEFF
+AbstractInternalControlFlowAction "1..1" -- "1..1" pcm::performance::ParametricResourceDemand : action_ParametricResourceDemand190
+AbstractUserAction "0..9999" --* "1..1" pcm::usagemodel::ScenarioBehaviour : actions_ScenarioBehaviour251
+ProcessingResourceSpecification "0..9999" --* "1..1" pcm::resourceenvironment::ResourceContainer : activeResourceSpecifications_ResourceContainer225
+ProcessingResourceType "1..1" -- "1..1" pcm::resourceenvironment::ProcessingResourceSpecification : activeResourceType_ActiveResourceSpecification220
+AllocationContext "0..9999" --* "1..1" pcm::allocation::Allocation : allocationContexts_Allocation197
+Interface "0..9999" -- "1..1" pcm::repository::Interface : ancestorInterfaces_Interface99
+composition::AssemblyConnector "0..9999" --* "1..1" pcm::composition::ComposedStructure : assemblyConnectors_ComposedStructure61
+composition::AssemblyContext "1..1" -- "1..1" pcm::allocation::AllocationContext : assemblyContext_AllocationContext194
+composition::AssemblyContext "1..1" -- "1..1" pcm::performance::ComponentSpecifiedExecutionTime : assemblyContext_ComponentSpecifiedExecutionTime246
+composition::AssemblyContext "1..1" -- "1..1" pcm::composition::ProvidedDelegationConnector : assemblyContext_ProvidedDelegationConnector10
+composition::AssemblyContext "1..1" -- "1..1" pcm::composition::RequiredDelegationConnector : assemblyContext_RequiredDelegationConnector24
+composition::AssemblyContext "1..1" -- "1..1" pcm::usagemodel::UserData : assemblyContext_userData262
+composition::AssemblyContext "0..9999" --* "1..1" pcm::composition::ComposedStructure : assemblyContexts_ComposedStructure52
+ForkedBehaviour "0..9999" --* "1..1" pcm::seff::ForkAction : asynchronousForkedBehaviours_ForkAction155
+ResourceType "0..9999" --* "1..1" pcm::resourcetype::ResourceRepository : availableResourceTypes_ResourceRepository192
+ResourceDemandingBehaviour "1..1" --* "1..1" pcm::seff::AbstractLoopAction : bodyBehaviour_Loop154
+ScenarioBehaviour "1..1" --* "1..1" pcm::usagemodel::Loop : bodyBehaviour_Loop267
+ResourceDemandingBehaviour "1..1" --* "1..1" pcm::seff::AbstractBranchTransition : branchBehaviour_BranchTransition173
+PCMRandomVariable "1..1" --* "1..1" pcm::seff::GuardedBranchTransition : branchCondition_GuardedBranchTransition180
+BranchTransition "0..9999" --* "1..1" pcm::usagemodel::Branch : branchTransitions_Branch285
+ScenarioBehaviour "1..1" --* "1..1" pcm::usagemodel::BranchTransition : branchedBehaviour_BranchTransition286
+AbstractBranchTransition "0..9999" --* "1..1" pcm::seff::BranchAction : branches_Branch175
+Signature "1..1" -- "1..1" pcm::seff::ExternalCallAction : calledService_ExternalService163
+PCMRandomVariable "1..1" --* "1..1" pcm::repository::PassiveResource : capacity_PassiveResource67
+CommunicationLinkResourceSpecification "1..1" --* "1..1" pcm::resourceenvironment::LinkingResource : communicationLinkResourceSpecifications_LinkingResource211
+CommunicationLinkResourceType "1..1" -- "1..1" pcm::resourceenvironment::CommunicationLinkResourceSpecification : communicationLinkResourceType_CommunicationLinkResourceSpecification213
+VariableUsage "0..9999" --* "1..1" pcm::repository::ImplementationComponentType : componentParameterUsage_ImplementationComponentType116
+RepositoryComponent "0..9999" --* "1..1" pcm::repository::Repository : components__Repository81
+VariableUsage "0..9999" --* "1..1" pcm::composition::AssemblyContext : configParameterUsages_AssemblyContext17
+DataType "1..1" -- "1..1" pcm::repository::InnerDeclaration : datatype_InnerDeclaration128
+DataType "1..1" -- "1..1" pcm::repository::Parameter : datatype__Parameter75
+DataType "0..9999" --* "1..1" pcm::repository::Repository : datatypes_Repository87
+Signature "1..1" -- "1..1" pcm::seff::ServiceEffectSpecification : describedService__SEFF184
+RepositoryComponent "1..1" -- "1..1" pcm::composition::AssemblyContext : encapsulatedComponent_AssemblyContext13
+ExceptionType "0..9999" --* "1..1" pcm::repository::Signature : exceptions__Signature73
+VariableUsage "0..9999" --* "1..1" pcm::qosannotations::SpecifiedOutputParameterAbstraction : expectedExternalOutputs_SpecifiedOutputParameterAbstraction240
+ResourceContainer "0..9999" -- "1..1" pcm::resourceenvironment::LinkingResource : fromResourceContainer_LinkingResource208
+InnerDeclaration "0..9999" --* "1..1" pcm::repository::CompositeDataType : innerDeclaration_CompositeDataType126
+ProvidedRole "1..1" -- "1..1" pcm::composition::ProvidedDelegationConnector : innerProvidedRole_ProvidedDelegationConnector5
+RequiredRole "1..1" -- "1..1" pcm::composition::RequiredDelegationConnector : innerRequiredRole_RequiredDelegationConnector19
+ResourceRequiredRole "1..1" -- "1..1" pcm::composition::ResourceRequiredDelegationConnector : innerResourceRequiredRole_ResourceRequiredDelegationConnector47
+DataType "1..1" -- "1..1" pcm::repository::CollectionDataType : innerType_CollectionDataType123
+VariableUsage "0..9999" --* "1..1" pcm::usagemodel::EntryLevelSystemCall : inputParameterUsages_EntryLevelSystemCall272
+VariableUsage "0..9999" --* "1..1" pcm::seff::ExternalCallAction : inputParameterUsages_ExternalCallAction165
+PCMRandomVariable "1..1" --* "1..1" pcm::usagemodel::OpenWorkload : interArrivalTime_OpenWorkload265
+Interface "1..1" -- "1..1" pcm::repository::Signature : interface_Signature70
+Interface "0..9999" --* "1..1" pcm::repository::Repository : interfaces__Repository84
+PCMRandomVariable "1..1" --* "1..1" pcm::seff::LoopAction : iterationCount_LoopAction152
+PCMRandomVariable "1..1" --* "1..1" pcm::resourceenvironment::CommunicationLinkResourceSpecification : latency_CommunicationLinkResourceSpecification214
+LinkingResource "0..9999" --* "1..1" pcm::resourceenvironment::ResourceEnvironment : linkingresource202
+VariableUsage "0..9999" --* "1..1" pcm::seff::SetVariableAction : localVariableUsages_SetVariableAction182
+PCMRandomVariable "1..1" --* "1..1" pcm::usagemodel::Loop : loopIteration_Loop269
+parameter::pcm::AbstractNamedReference "1..1" --* "1..1" pcm::parameter::VariableUsage : namedReference_VariableUsage140
+ProvidedRole "1..1" -- "1..1" pcm::composition::ProvidedDelegationConnector : outerProvidedRole_ProvidedDelegationConnector7
+RequiredRole "1..1" -- "1..1" pcm::composition::RequiredDelegationConnector : outerRequiredRole_RequiredDelegationConnector21
+ResourceRequiredRole "1..1" -- "1..1" pcm::composition::ResourceRequiredDelegationConnector : outerResourceRequiredRole_ResourceRequiredDelegationConnector49
+VariableUsage "0..9999" --* "1..1" pcm::seff::SynchronisationPoint : outputParameterUsage_SynchronisationPoint160
+VariableUsage "0..9999" --* "1..1" pcm::usagemodel::EntryLevelSystemCall : outputParameterUsages_EntryLevelSystemCall280
+VariableUsage "0..9999" --* "1..1" pcm::seff::ExternalCallAction : outputVariableUsages_ExternalCallAction168
+Parameter "1..1" -- "1..1" pcm::seff::CollectionIteratorAction : parameter_CollectionIteratorAction178
+Parameter "0..9999" --* "1..1" pcm::repository::Signature : parameters__Signature68
+CompleteComponentType "0..9999" -- "1..1" pcm::repository::ImplementationComponentType : parentCompleteComponentTypes115
+Interface "0..9999" -- "1..1" pcm::repository::Interface : parentInterface__Interface97
+ProvidesComponentType "0..9999" -- "1..1" pcm::repository::CompleteComponentType : parentProvidesComponentTypes119
+composition::ComposedStructure "1..1" -- "1..1" pcm::composition::AssemblyConnector : parentStructure_AssemblyConnector41
+composition::ComposedStructure "1..1" -- "1..1" pcm::composition::AssemblyContext : parentStructure_AssemblyContext14
+composition::ComposedStructure "1..1" -- "1..1" pcm::composition::ProvidedDelegationConnector : parentStructure_ProvidedDelegationConnector12
+composition::ComposedStructure "1..1" -- "1..1" pcm::composition::RequiredDelegationConnector : parentStructure_RequiredDelegationConnector27
+composition::ComposedStructure "1..1" -- "1..1" pcm::composition::ResourceRequiredDelegationConnector : parentStructure_ResourceRequiredDelegationConnector44
+CompositeDataType "0..9999" -- "1..1" pcm::repository::CompositeDataType : parentType_CompositeDataType125
+PassiveResource "0..9999" --* "1..1" pcm::repository::BasicComponent : passiveResource_BasicComponent121
+PassiveResource "1..1" -- "1..1" pcm::seff::ReleaseAction : passiveResource_ReleaseAction150
+PassiveResource "1..1" -- "1..1" pcm::seff::AcquireAction : passiveresource_AcquireAction176
+AbstractUserAction "0..1" -- "1..1" pcm::usagemodel::AbstractUserAction : predecessor254
+AbstractAction "0..1" -- "1..1" pcm::seff::AbstractAction : predecessor_AbstractAction143
+PCMRandomVariable "1..1" --* "1..1" pcm::resourceenvironment::ProcessingResourceSpecification : processingRate_ProcessingResourceSpecification222
+Protocol "0..9999" --* "1..1" pcm::repository::Interface : protocols__Interface102
+composition::ProvidedDelegationConnector "0..9999" --* "1..1" pcm::composition::ComposedStructure : providedDelegationConnectors_ComposedStructure55
+Interface "1..1" -- "1..1" pcm::repository::ProvidedRole : providedInterface__ProvidedRole130
+ProvidedRole "1..1" -- "1..1" pcm::composition::AssemblyConnector : providedRole_AssemblyConnector35
+ProvidedRole "1..1" -- "1..1" pcm::usagemodel::EntryLevelSystemCall : providedRole_EntryLevelSystemCall274
+ProvidedRole "0..9999" --* "1..1" pcm::entity::InterfaceProvidingEntity : providedRoles_InterfaceProvidingEntity0
+composition::AssemblyContext "1..1" -- "1..1" pcm::composition::AssemblyConnector : providingAssemblyContext_AssemblyConnector32
+entity::InterfaceProvidingEntity "1..1" -- "1..1" pcm::repository::ProvidedRole : providingEntity_ProvidedRole132
+QoSAnnotations "0..9999" --* "1..1" pcm::system::System : qosAnnotations_System226
+Repository "1..1" -- "1..1" pcm::repository::DataType : repository_DataType79
+Repository "1..1" -- "1..1" pcm::repository::Interface : repository_Interface107
+Repository "1..1" -- "1..1" pcm::repository::RepositoryComponent : repository_RepositoryComponent90
+composition::RequiredDelegationConnector "0..9999" --* "1..1" pcm::composition::ComposedStructure : requiredDelegationConnectors_ComposedStructure58
+Interface "1..1" -- "1..1" pcm::repository::ResourceRequiredRole : requiredInterface_ResourceRequiredRole110
+Interface "1..1" -- "1..1" pcm::repository::RequiredRole : requiredInterface__RequiredRole93
+ProcessingResourceType "1..1" -- "1..1" pcm::performance::ParametricResourceDemand : requiredResource_ParametricResourceDemand188
+RequiredRole "1..1" -- "1..1" pcm::composition::AssemblyConnector : requiredRole_AssemblyConnector38
+RequiredRole "0..9999" --* "1..1" pcm::entity::InterfaceRequiringEntity : requiredRoles_InterfaceRequiringEntity1
+composition::AssemblyContext "1..1" -- "1..1" pcm::composition::AssemblyConnector : requiringAssemblyContext_AssemblyConnector30
+entity::InterfaceRequiringEntity "1..1" -- "1..1" pcm::repository::RequiredRole : requiringEntity_RequiredRole95
+ResourceContainer "1..1" -- "1..1" pcm::allocation::AllocationContext : resourceContainer_AllocationContext193
+ResourceContainer "0..9999" --* "1..1" pcm::resourceenvironment::ResourceEnvironment : resourceContainer_ResourceEnvironment203
+pcm::seff::AbstractInternalControlFlowAction "1..1" *-- "0..9999" performance::ParametricResourceDemand : resourceDemand_Action142
+composition::ResourceRequiredDelegationConnector "0..9999" --* "1..1" pcm::composition::ComposedStructure : resourceRequiredDelegationConnectors_ComposedStructure64
+ResourceRequiredRole "0..9999" --* "1..1" pcm::entity::ResourceInterfaceRequiringEntity : resourceRequiredRoles_ResourceInterfaceRequiringEntity3
+entity::ResourceInterfaceRequiringEntity "1..1" -- "1..1" pcm::repository::ResourceRequiredRole : resourceRequiringEntity_ResourceRequiredRole112
+DataType "0..1" -- "1..1" pcm::repository::Signature : returntype__Signature72
+Role "1..1" -- "1..1" pcm::seff::ExternalCallAction : role_ExternalService171
+Role "1..1" -- "1..1" pcm::qosannotations::SpecifiedOutputParameterAbstraction : role_SpecifiedOutputParameterAbstraction237
+Role "1..1" -- "1..1" pcm::qosannotations::SpecifiedQoSAnnotation : role_SpecifiedQoSAnnotation229
+ScenarioBehaviour "1..1" --* "1..1" pcm::usagemodel::UsageScenario : scenarioBehaviour_UsageScenario249
+ServiceEffectSpecification "0..9999" --* "1..1" pcm::repository::BasicComponent : serviceEffectSpecifications__BasicComponent120
+Signature "1..1" -- "1..1" pcm::usagemodel::EntryLevelSystemCall : signature_EntryLevelSystemCall277
+Signature "1..1" -- "1..1" pcm::repository::Parameter : signature_Parameter77
+Signature "1..1" -- "1..1" pcm::qosannotations::SpecifiedOutputParameterAbstraction : signature_SpecifiedOutputParameterAbstraction235
+Signature "1..1" -- "1..1" pcm::qosannotations::SpecifiedQoSAnnotation : signature_SpecifiedQoSAnnation227
+Signature "1..1" -- "1..1" pcm::protocol::ServiceCall : signature__ServiceCall135
+Signature "0..9999" --* "1..1" pcm::repository::Interface : signatures__Interface104
+PCMRandomVariable "1..1" --* "1..1" pcm::performance::ParametricResourceDemand : specification_ParametericResourceDemand186
+PCMRandomVariable "1..1" --* "1..1" pcm::qosannotations::SpecifiedQoSAnnotation : specification_SpecifiedExecutionTime232
+PCMRandomVariable "1..1" --* "1..1" pcm::parameter::VariableCharacterisation : specification_VariableCharacterisation137
+SpecifiedOutputParameterAbstraction "0..9999" --* "1..1" pcm::qosannotations::QoSAnnotations : specifiedOutputParameterAbstractions_QoSAnnotations244
+SpecifiedQoSAnnotation "0..9999" --* "1..1" pcm::qosannotations::QoSAnnotations : specifiedQoSAnnotations_QoSAnnotations243
+AbstractAction "0..9999" --* "1..1" pcm::seff::ResourceDemandingBehaviour : steps_Behaviour148
+AbstractUserAction "0..1" -- "1..1" pcm::usagemodel::AbstractUserAction : successor252
+AbstractAction "0..1" -- "1..1" pcm::seff::AbstractAction : successor_AbstractAction145
+SynchronisationPoint "0..1" --* "1..1" pcm::seff::ForkAction : synchronisingBehaviours_ForkAction156
+ForkedBehaviour "1..9999" --* "1..1" pcm::seff::SynchronisationPoint : synchronousForkedBehaviours_SynchronisationPoint158
+System "1..1" -- "1..1" pcm::allocation::Allocation : system_Allocation200
+ResourceEnvironment "0..1" -- "1..1" pcm::allocation::Allocation : targetResourceEnvironment_Allocation198
+PCMRandomVariable "1..1" --* "1..1" pcm::usagemodel::ClosedWorkload : thinkTime_ClosedWorkload283
+PCMRandomVariable "1..1" --* "1..1" pcm::resourceenvironment::CommunicationLinkResourceSpecification : throughput_CommunicationLinkResourceSpecification217
+PCMRandomVariable "1..1" --* "1..1" pcm::usagemodel::Delay : timeSpecification_Delay288
+ResourceContainer "0..9999" -- "1..1" pcm::resourceenvironment::LinkingResource : toResourceContainer_LinkingResource206
+UsageScenario "0..9999" --* "1..1" pcm::usagemodel::UsageModel : usageScenario_UsageModel257
+VariableUsage "0..9999" --* "1..1" pcm::usagemodel::UserData : userDataParameterUsages_UserData260
+UserData "0..9999" --* "1..1" pcm::usagemodel::UsageModel : userData_UsageModel258
+VariableCharacterisation "0..9999" --* "1..1" pcm::parameter::VariableUsage : variableCharacterisation_VariableUsage139
+Workload "1..1" --* "1..1" pcm::usagemodel::UsageScenario : workload_UsageScenario248
+@enduml

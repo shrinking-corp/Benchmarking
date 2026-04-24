@@ -1,0 +1,284 @@
+@startuml
+class Adapter {
+}
+class BasicObject {
+}
+class BorderObject {
+}
+class Cloneable {
+}
+class DiagramModel {
+}
+class DiagramModelComponent {
+}
+class DiagramModelConnection {
+}
+class DiagramModelContainer {
+}
+class DiagramModelImageProvider {
+}
+class DiagramModelObject {
+}
+class Documentable {
+}
+class Folder {
+}
+class FolderContainer {
+}
+class FontAttribute {
+}
+class Identifier {
+}
+class JunctionElement {
+}
+class Nameable {
+}
+class Properties {
+}
+class TextContent {
+}
+class ZentaElement {
+}
+class ZentaModelElement {
+}
+abstract class model::Adapter {
+  + getAdapter(adapter : any) : str
+  + setAdapter(adapter : any, object : any) : void
+}
+class model::AndJunction {
+}
+class model::Attribute {
+  + maxOccurs : int
+  + minOccurs : int
+}
+class model::BasicObject {
+}
+class model::BasicRelationship {
+}
+abstract class model::BorderObject {
+  + borderColor : str
+}
+class model::Bounds {
+  + height : int
+  + width : int
+  + x : int
+  + y : int
+  + getCopy() : str
+}
+abstract class model::Cloneable {
+  + getCopy() : str
+}
+abstract class model::DiagramModel {
+  + connectionRouterType : int
+}
+class model::DiagramModelBendpoint {
+  + endX : int
+  + endY : int
+  + startX : int
+  + startY : int
+}
+abstract class model::DiagramModelComponent {
+  + lineColor : str
+  + lineWidth : int
+}
+class model::DiagramModelConnection {
+  + lineDecoration : str
+  + text : str
+  + type : int
+  + connect(source : any, target : any) : void
+  + disconnect() : void
+  + reconnect() : void
+}
+abstract class model::DiagramModelContainer {
+}
+class model::DiagramModelGroup {
+}
+class model::DiagramModelImage {
+}
+abstract class model::DiagramModelImageProvider {
+  + imagePath : str
+}
+class model::DiagramModelNote {
+}
+abstract class model::DiagramModelObject {
+  + elementShape : str
+  + fillColor : str
+  + addConnection(connection : any) : void
+  + removeConnection(connection : any) : void
+  + setBounds(height : any, width : any, x : any, y : any) : void
+}
+class model::DiagramModelReference {
+}
+class model::DiagramModelZentaConnection {
+  + addRelationshipToModel(parent : any) : void
+  + removeRelationshipFromModel() : void
+}
+class model::DiagramModelZentaObject {
+  + type : int
+  + addZentaElementToModel(parent : any) : void
+  + removeZentaElementFromModel() : void
+}
+abstract class model::Documentable {
+  + documentation : str
+}
+class model::Folder {
+}
+abstract class model::FolderContainer {
+}
+abstract class model::FontAttribute {
+  + font : str
+  + fontColor : str
+  + textAlignment : int
+  + textPosition : int
+  + getDefaultTextAlignment() : int
+}
+abstract class model::Identifier {
+  + id : str
+}
+abstract class model::InterfaceElement {
+  + interfaceType : int
+}
+class model::Junction {
+}
+abstract class model::JunctionElement {
+}
+abstract class model::Lockable {
+  + locked : bool
+}
+class model::Metamodel {
+}
+abstract class model::Nameable {
+  + name : str
+}
+class model::OrJunction {
+}
+abstract class model::Properties {
+}
+class model::Property {
+  + generated : bool
+  + key : str
+  + value : str
+}
+class model::SketchModel {
+  + background : int
+}
+class model::SketchModelActor {
+}
+class model::SketchModelSticky {
+}
+class model::Template {
+  + path : str
+}
+abstract class model::TextContent {
+  + content : str
+}
+class model::ZentaDiagramModel {
+  + viewpoint : int
+}
+abstract class model::ZentaElement {
+}
+class model::ZentaModel {
+  + file : str
+  + version : str
+  + getDefaultDiagramModel() : DiagramModel
+  + getDefaultFolderForElement(element : any) : Folder
+  + getDiagramModels() : DiagramModel
+}
+abstract class model::ZentaModelElement {
+}
+Adapter <|-- model::DiagramModelComponent
+Adapter <|-- model::ZentaModelElement
+BasicObject <|-- model::BasicRelationship
+BorderObject <|-- model::DiagramModelImage
+Cloneable <|-- model::DiagramModelBendpoint
+Cloneable <|-- model::DiagramModelComponent
+Cloneable <|-- model::ZentaElement
+DiagramModel <|-- model::SketchModel
+DiagramModel <|-- model::ZentaDiagramModel
+DiagramModelComponent <|-- model::DiagramModelConnection
+DiagramModelComponent <|-- model::DiagramModelContainer
+DiagramModelComponent <|-- model::DiagramModelObject
+DiagramModelConnection <|-- model::DiagramModelZentaConnection
+DiagramModelContainer <|-- model::DiagramModel
+DiagramModelContainer <|-- model::DiagramModelGroup
+DiagramModelContainer <|-- model::DiagramModelZentaObject
+DiagramModelContainer <|-- model::SketchModelSticky
+DiagramModelImageProvider <|-- model::DiagramModelImage
+DiagramModelObject <|-- model::DiagramModelGroup
+DiagramModelObject <|-- model::DiagramModelImage
+DiagramModelObject <|-- model::DiagramModelNote
+DiagramModelObject <|-- model::DiagramModelReference
+DiagramModelObject <|-- model::DiagramModelZentaObject
+DiagramModelObject <|-- model::SketchModelActor
+DiagramModelObject <|-- model::SketchModelSticky
+Documentable <|-- model::DiagramModel
+Documentable <|-- model::DiagramModelConnection
+Documentable <|-- model::DiagramModelGroup
+Documentable <|-- model::Folder
+Documentable <|-- model::SketchModelActor
+Documentable <|-- model::ZentaElement
+Documentable <|-- model::ZentaModel
+Folder <|-- model::ZentaModel
+FolderContainer <|-- model::Folder
+FolderContainer <|-- model::ZentaModel
+FontAttribute <|-- model::DiagramModelConnection
+FontAttribute <|-- model::DiagramModelObject
+Identifier <|-- model::DiagramModelComponent
+Identifier <|-- model::Folder
+Identifier <|-- model::ZentaElement
+Identifier <|-- model::ZentaModel
+JunctionElement <|-- model::AndJunction
+JunctionElement <|-- model::Junction
+JunctionElement <|-- model::OrJunction
+Nameable <|-- model::DiagramModelComponent
+Nameable <|-- model::Folder
+Nameable <|-- model::Identifier
+Nameable <|-- model::ZentaElement
+Nameable <|-- model::ZentaModel
+Properties <|-- model::DiagramModel
+Properties <|-- model::DiagramModelConnection
+Properties <|-- model::DiagramModelGroup
+Properties <|-- model::Folder
+Properties <|-- model::SketchModelActor
+Properties <|-- model::SketchModelSticky
+Properties <|-- model::ZentaElement
+Properties <|-- model::ZentaModel
+TextContent <|-- model::DiagramModelNote
+TextContent <|-- model::SketchModelSticky
+ZentaElement <|-- model::BasicObject
+ZentaElement <|-- model::InterfaceElement
+ZentaElement <|-- model::JunctionElement
+ZentaModelElement <|-- model::DiagramModel
+ZentaModelElement <|-- model::Folder
+ZentaModelElement <|-- model::ZentaElement
+ZentaModelElement <|-- model::ZentaModel
+model::BasicObject "1..1" -- "1..1" model::BasicObject : ancestor34
+model::Attribute "0..9999" --* "1..1" model::BasicObject : attributes32
+model::DiagramModelBendpoint "0..9999" --* "1..1" model::DiagramModelConnection : bendpoints22
+model::Bounds "1..1" --* "1..1" model::DiagramModelObject : bounds9
+model::BasicObject "1..1" -- "0..9999" model::BasicObject : children37
+model::DiagramModelContainer "1..1" *-- "0..9999" model::DiagramModelObject : children6
+model::BasicObject "0..9999" -- "1..1" model::Template : classes27
+model::Attribute "1..1" -- "1..1" model::BasicObject : connectedObject49
+model::BasicRelationship "1..1" -- "0..9999" model::DiagramModelZentaConnection : diagConnections45
+model::DiagramModelZentaObject "0..9999" -- "1..1" model::ZentaElement : diagObjects31
+model::DiagramModel "0..1" -- "1..1" model::Template : diagram29
+model::DiagramModel "0..1" -- "1..1" model::DiagramModelComponent : diagramModel5
+model::Folder "1..1" *-- "0..9999" model::Nameable : elements3
+model::Folder "0..9999" --* "1..1" model::FolderContainer : folders1
+model::Metamodel "1..1" -- "1..1" model::Template : metamodel28
+model::Properties "1..1" *-- "0..9999" model::Property : properties0
+model::DiagramModel "0..1" -- "1..1" model::DiagramModelReference : referencedModel7
+model::Attribute "1..1" -- "1..1" model::BasicRelationship : relation46
+model::BasicRelationship "0..1" -- "1..1" model::DiagramModelZentaConnection : relationship25
+model::DiagramModelConnection "1..1" -- "0..1" model::DiagramModelObject : source16
+model::BasicRelationship "1..1" -- "0..1" model::ZentaElement : source41
+model::DiagramModelConnection "0..9999" --* "1..1" model::DiagramModelObject : sourceConnections11
+model::DiagramModelConnection "1..1" -- "0..1" model::DiagramModelObject : target19
+model::BasicRelationship "1..1" -- "0..1" model::ZentaElement : target42
+model::DiagramModelConnection "0..9999" -- "1..1" model::DiagramModelObject : targetConnections13
+model::BasicObject "1..1" -- "0..1" model::Template : template39
+model::Metamodel "1..1" *-- "0..9999" model::Template : templates26
+model::DiagramModelZentaObject "1..1" -- "0..1" model::ZentaElement : zentaElement24
+model::ZentaModel "0..1" -- "1..1" model::ZentaModelElement : zentaModel2
+@enduml

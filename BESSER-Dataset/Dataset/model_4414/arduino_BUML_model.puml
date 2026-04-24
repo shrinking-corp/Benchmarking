@@ -82,20 +82,20 @@ Sensores <|-- arduino::LDR
 Sensores <|-- arduino::PIR
 Sensores <|-- arduino::Potenciometro
 Sensores <|-- arduino::Temperatura
-arduino::Sensores "1..1" -- "0..9999" arduino::Actuadores : act10
+arduino::Actuadores "0..9999" -- "1..1" arduino::Sensores : act10
 arduino::Actuadores "0..9999" --* "1..1" arduino::Sketch : actuadores1
-arduino::Instrucciones "0..1" -- "1..1" arduino::Actuadores : actuadorinstruccion7
+arduino::Actuadores "1..1" -- "0..1" arduino::Instrucciones : actuadorinstruccion7
 arduino::Apagar "0..1" -- "1..1" arduino::Esperar : apagar16
 arduino::Actuadores "0..9999" --* "1..1" arduino::Bloques : bactuadores27
-arduino::Instrucciones "0..9999" --* "1..1" arduino::Bloques : binstrucciones30
+arduino::Bloques "1..1" *-- "0..9999" arduino::Instrucciones : binstrucciones30
 arduino::Actuadores "0..1" -- "1..1" arduino::Bloques : bloacts36
 arduino::Bloques "0..9999" --* "1..1" arduino::Bloques : bloq25
-arduino::Sketch "1..1" *-- "0..9999" arduino::Bloques : bloques5
+arduino::Bloques "0..9999" --* "1..1" arduino::Sketch : bloques5
 arduino::Bloques "1..1" -- "0..1" arduino::Sensores : bsensores33
 arduino::Sensores "0..1" -- "1..1" arduino::Variar : datos14
 arduino::Encender "0..1" -- "1..1" arduino::Esperar : encender19
-arduino::Esperar "0..1" -- "1..1" arduino::Apagar : esperar113
+arduino::Apagar "1..1" -- "0..1" arduino::Esperar : esperar113
 arduino::Encender "1..1" -- "0..1" arduino::Esperar : esperar21
 arduino::Instrucciones "0..9999" --* "1..1" arduino::Sketch : instrucciones3
-arduino::Sketch "1..1" *-- "0..9999" arduino::Sensores : sensores0
+arduino::Sensores "0..9999" --* "1..1" arduino::Sketch : sensores0
 @enduml

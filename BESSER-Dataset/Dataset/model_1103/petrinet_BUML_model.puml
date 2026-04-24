@@ -1,0 +1,32 @@
+@startuml
+class Node {
+}
+class petrinet::Arc {
+  + weight : int
+  + isEnabled() : bool
+}
+abstract class petrinet::Node {
+}
+class petrinet::PetriNet {
+  + name : str
+}
+class petrinet::Place {
+  + capacity : int
+  + hasCapacity(amount : any) : bool
+}
+class petrinet::Token {
+}
+class petrinet::Transition {
+  + fire() : void
+  + isEnabled() : bool
+}
+Node <|-- petrinet::Place
+Node <|-- petrinet::Transition
+petrinet::Arc "0..9999" --* "1..1" petrinet::PetriNet : arcs1
+petrinet::Arc "0..9999" -- "1..1" petrinet::Node : in4
+petrinet::Node "0..9999" --* "1..1" petrinet::PetriNet : nodes0
+petrinet::Arc "0..9999" -- "1..1" petrinet::Node : out3
+petrinet::Arc "1..1" -- "1..1" petrinet::Node : source7
+petrinet::Arc "1..1" -- "1..1" petrinet::Node : target8
+petrinet::Place "1..1" *-- "0..9999" petrinet::Token : tokens6
+@enduml

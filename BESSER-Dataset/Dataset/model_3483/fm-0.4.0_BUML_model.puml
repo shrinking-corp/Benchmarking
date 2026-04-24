@@ -1,0 +1,66 @@
+@startuml
+enum AttributeType {
+  BOOLEAN
+  DOUBLE
+  INTEGER
+  STRING
+}
+class fm::Attribute {
+  + comment : str
+  + defaultValue : str
+  + description : str
+  + id : str
+  + name : str
+  + type : str
+}
+class fm::Constraint {
+  + comment : str
+  + description : str
+  + language : str
+  + value : str
+}
+class fm::EObject {
+}
+class fm::Feature {
+  + cloneable : bool
+  + comment : str
+  + description : str
+  + id : str
+  + lower : int
+  + mandatory : bool
+  + name : str
+  + optional : bool
+  + orphan : bool
+  + root : bool
+  + upper : int
+}
+class fm::FeatureModel {
+  + comment : str
+  + description : str
+  + name : str
+  + version : str
+  + getFeaturesById(id : any) : void
+}
+class fm::Group {
+  + comment : str
+  + description : str
+  + lower : int
+  + or : bool
+  + upper : int
+  + xor : bool
+}
+fm::Attribute "0..9999" --* "1..1" fm::Feature : attributes12
+fm::Constraint "0..9999" --* "1..1" fm::FeatureModel : constraints4
+fm::Attribute "1..1" -- "1..1" fm::Feature : feature25
+fm::Feature "1..1" -- "0..1" fm::FeatureModel : featureModel18
+fm::Constraint "1..1" -- "0..1" fm::FeatureModel : featureModel27
+fm::Feature "1..1" *-- "0..9999" fm::Feature : features14
+fm::Feature "0..9999" --* "1..1" fm::Group : features23
+fm::Feature "1..1" *-- "0..9999" fm::Group : groups16
+fm::Feature "0..9999" --* "1..1" fm::FeatureModel : orphans1
+fm::Feature "1..1" -- "1..1" fm::Group : parent21
+fm::EObject "0..1" -- "1..1" fm::Feature : parent6
+fm::Feature "1..1" -- "0..1" fm::Feature : parentFeature9
+fm::Feature "1..1" -- "0..1" fm::Group : parentGroup10
+fm::Feature "1..1" --* "1..1" fm::FeatureModel : root0
+@enduml

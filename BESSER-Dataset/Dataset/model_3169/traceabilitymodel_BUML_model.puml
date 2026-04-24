@@ -39,13 +39,13 @@ class traceabilitymodel::TraceableSegment {
   + startLine : str
   + startPos : str
 }
-traceabilitymodel::File "1..1" *-- "0..9999" traceabilitymodel::Block : blocks17
-traceabilitymodel::TraceModel "1..1" *-- "0..9999" traceabilitymodel::File : files9
+traceabilitymodel::Block "0..9999" --* "1..1" traceabilitymodel::File : blocks17
+traceabilitymodel::File "0..9999" --* "1..1" traceabilitymodel::TraceModel : files9
 traceabilitymodel::MetaModel "0..1" -- "1..1" traceabilitymodel::ModelElementRef : metaModel0
 traceabilitymodel::MetaModel "0..9999" --* "1..1" traceabilitymodel::TraceModel : metaModels14
 traceabilitymodel::ModelElementRef "0..9999" --* "1..1" traceabilitymodel::TraceModel : modelElementRefs11
 traceabilitymodel::ModelElementRef "1..1" -- "1..1" traceabilitymodel::Trace : originatinElement2
-traceabilitymodel::TraceableSegment "1..1" -- "1..1" traceabilitymodel::Trace : segment1
+traceabilitymodel::Trace "1..1" -- "1..1" traceabilitymodel::TraceableSegment : segment1
 traceabilitymodel::Trace "0..9999" --* "1..1" traceabilitymodel::TraceModel : trace7
-traceabilitymodel::TraceableSegment "1..9999" --* "1..1" traceabilitymodel::Block : traceablesegment5
+traceabilitymodel::Block "1..1" *-- "1..9999" traceabilitymodel::TraceableSegment : traceablesegment5
 @enduml

@@ -152,21 +152,21 @@ UnaryExpression <|-- logo::unary::Opposite
 Value <|-- logo::value::BoolValue
 Value <|-- logo::value::IntValue
 logo::statement::Right "1..1" *-- "1..1" statement::logo::Expression : angle1
-statement::logo::Expression "1..1" --* "1..1" logo::statement::Left : angle2
+logo::statement::Left "1..1" *-- "1..1" statement::logo::Expression : angle2
 Block "1..1" --* "1..1" logo::control::While : block21
-logo::control::Repeat "1..1" *-- "1..1" Block : block23
-statement::logo::Expression "1..1" --* "1..1" logo::statement::ControlStatement : condition15
-logo::statement::ProcedureCall "1..1" -- "1..1" ProcedureDefinition : definition11
+Block "1..1" --* "1..1" logo::control::Repeat : block23
+logo::statement::ControlStatement "1..1" *-- "1..1" statement::logo::Expression : condition15
+ProcedureDefinition "1..1" -- "1..1" logo::statement::ProcedureCall : definition11
 Block "0..1" --* "1..1" logo::control::If : elseBlock18
 expression::logo::Expression "1..1" --* "1..1" logo::expression::UnaryExpression : expression29
-logo::expression::ExtendedExpression "1..1" *-- "2..9999" expression::logo::Expression : expressions31
-logo::control::If "1..1" *-- "1..1" Block : ifBlock17
+expression::logo::Expression "2..9999" --* "1..1" logo::expression::ExtendedExpression : expressions31
+Block "1..1" --* "1..1" logo::control::If : ifBlock17
 expression::logo::Expression "1..1" --* "1..1" logo::expression::BinaryExpression : leftExpression25
-statement::logo::Expression "0..9999" --* "1..1" logo::statement::ProcedureCall : parameterValues9
-statement::logo::Parameter "0..9999" --* "1..1" logo::statement::ProcedureDefinition : parameters6
+logo::statement::ProcedureCall "1..1" *-- "0..9999" statement::logo::Expression : parameterValues9
+logo::statement::ProcedureDefinition "1..1" *-- "0..9999" statement::logo::Parameter : parameters6
 expression::logo::Expression "1..1" --* "1..1" logo::expression::BinaryExpression : rightExpression26
 logo::Logo "1..1" *-- "0..9999" logo::Statement : statements0
 logo::statement::Block "1..1" *-- "1..9999" statement::logo::Statement : statements13
-statement::logo::Statement "1..9999" --* "1..1" logo::statement::ProcedureDefinition : statements7
-statement::logo::Expression "1..1" --* "1..1" logo::statement::Forward : step4
+logo::statement::ProcedureDefinition "1..1" *-- "1..9999" statement::logo::Statement : statements7
+logo::statement::Forward "1..1" *-- "1..1" statement::logo::Expression : step4
 @enduml

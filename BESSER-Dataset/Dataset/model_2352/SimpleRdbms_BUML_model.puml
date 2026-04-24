@@ -22,16 +22,16 @@ RModelElement <|-- SimpleRDBMS::Key
 RModelElement <|-- SimpleRDBMS::Schema
 RModelElement <|-- SimpleRDBMS::Table
 SimpleRDBMS::Key "0..9999" --* "1..1" SimpleRDBMS::Table : _key3
-SimpleRDBMS::Key "0..9999" -- "1..1" SimpleRDBMS::Column : _key7
+SimpleRDBMS::Column "1..1" -- "0..9999" SimpleRDBMS::Key : _key7
 SimpleRDBMS::Column "0..9999" --* "1..1" SimpleRDBMS::Table : column0
-SimpleRDBMS::Key "1..1" -- "0..9999" SimpleRDBMS::Column : column13
+SimpleRDBMS::Column "0..9999" -- "1..1" SimpleRDBMS::Key : column13
 SimpleRDBMS::Column "0..9999" -- "1..1" SimpleRDBMS::ForeignKey : column18
-SimpleRDBMS::Table "1..1" *-- "0..9999" SimpleRDBMS::ForeignKey : foreignKey1
+SimpleRDBMS::ForeignKey "0..9999" --* "1..1" SimpleRDBMS::Table : foreignKey1
 SimpleRDBMS::Column "1..1" -- "0..9999" SimpleRDBMS::ForeignKey : foreignKey10
-SimpleRDBMS::Table "0..1" -- "1..1" SimpleRDBMS::Key : owner15
-SimpleRDBMS::Table "0..1" -- "1..1" SimpleRDBMS::ForeignKey : owner21
-SimpleRDBMS::Table "0..1" -- "1..1" SimpleRDBMS::Column : owner6
+SimpleRDBMS::Key "1..1" -- "0..1" SimpleRDBMS::Table : owner15
+SimpleRDBMS::ForeignKey "1..1" -- "0..1" SimpleRDBMS::Table : owner21
+SimpleRDBMS::Column "1..1" -- "0..1" SimpleRDBMS::Table : owner6
 SimpleRDBMS::ForeignKey "1..1" -- "0..1" SimpleRDBMS::Key : refersTo20
-SimpleRDBMS::Table "1..1" -- "0..1" SimpleRDBMS::Schema : schema5
-SimpleRDBMS::Table "0..9999" --* "1..1" SimpleRDBMS::Schema : tables24
+SimpleRDBMS::Schema "0..1" -- "1..1" SimpleRDBMS::Table : schema5
+SimpleRDBMS::Schema "1..1" *-- "0..9999" SimpleRDBMS::Table : tables24
 @enduml

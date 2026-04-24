@@ -1,0 +1,28 @@
+@startuml
+class BasicFMmetamodel::Alternative {
+}
+abstract class BasicFMmetamodel::CrossTreeConstraint {
+}
+class BasicFMmetamodel::Feature {
+  + id : str
+  + mandatory : bool
+  + name : str
+  + selected : bool
+  + isLeaf() : bool
+  + isRoot() : bool
+}
+class BasicFMmetamodel::FeatureModel {
+  + name : str
+  + getFeature(id : any) : str
+}
+class BasicFMmetamodel::OrGroup {
+}
+class Feature {
+}
+Feature <|-- BasicFMmetamodel::Alternative
+Feature <|-- BasicFMmetamodel::OrGroup
+BasicFMmetamodel::Feature "1..1" *-- "0..9999" BasicFMmetamodel::Feature : children4
+BasicFMmetamodel::CrossTreeConstraint "0..9999" --* "1..1" BasicFMmetamodel::FeatureModel : crossTreeConstraints1
+BasicFMmetamodel::Feature "1..1" -- "0..1" BasicFMmetamodel::Feature : parent6
+BasicFMmetamodel::Feature "0..1" --* "1..1" BasicFMmetamodel::FeatureModel : root0
+@enduml

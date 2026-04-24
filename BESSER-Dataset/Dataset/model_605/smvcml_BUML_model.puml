@@ -69,19 +69,19 @@ Component <|-- SMVC::EntityComponent
 Controller <|-- SMVC::EntityController
 EntityComponent <|-- SMVC::Form
 EntityComponent <|-- SMVC::List
-SMVC::Entity "1..1" *-- "0..9999" SMVC::Attribute : attributes18
-SMVC::Entity "0..1" -- "1..1" SMVC::Attribute : complexType20
+SMVC::Attribute "0..9999" --* "1..1" SMVC::Entity : attributes18
+SMVC::Attribute "1..1" -- "0..1" SMVC::Entity : complexType20
 SMVC::Component "0..9999" --* "1..1" SMVC::View : components27
-SMVC::SMVCApplication "1..1" *-- "0..9999" SMVC::Controller : controller1
-SMVC::EntityController "1..1" -- "1..1" SMVC::DataAccessObject : dao13
+SMVC::Controller "0..9999" --* "1..1" SMVC::SMVCApplication : controller1
+SMVC::DataAccessObject "1..1" -- "1..1" SMVC::EntityController : dao13
 SMVC::DataAccessObject "0..9999" --* "1..1" SMVC::SMVCApplication : daos4
 SMVC::Entity "0..9999" --* "1..1" SMVC::SMVCApplication : entities6
-SMVC::EntityComponent "1..1" -- "1..1" SMVC::Entity : entity29
-SMVC::Entity "1..1" -- "1..1" SMVC::DataAccessObject : forEntity15
-SMVC::SMVCApplication "1..1" *-- "1..1" SMVC::Controller : homeController0
+SMVC::Entity "1..1" -- "1..1" SMVC::EntityComponent : entity29
+SMVC::DataAccessObject "1..1" -- "1..1" SMVC::Entity : forEntity15
+SMVC::Controller "1..1" --* "1..1" SMVC::SMVCApplication : homeController0
 SMVC::Link "0..9999" --* "1..1" SMVC::Page : links23
-SMVC::Page "1..1" --* "1..1" SMVC::Controller : page11
-SMVC::Controller "0..9999" --* "1..1" SMVC::Controller : subController9
-SMVC::SupportedOperation "0..4" --* "1..1" SMVC::List : supportedOperations31
-SMVC::View "1..1" --* "1..1" SMVC::Page : view25
+SMVC::Controller "1..1" *-- "1..1" SMVC::Page : page11
+SMVC::Controller "1..1" *-- "0..9999" SMVC::Controller : subController9
+SMVC::List "1..1" *-- "0..4" SMVC::SupportedOperation : supportedOperations31
+SMVC::Page "1..1" *-- "1..1" SMVC::View : view25
 @enduml

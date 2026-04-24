@@ -1,0 +1,120 @@
+@startuml
+class AbstractResource {
+}
+class Slot {
+}
+abstract class migration::AbstractResource {
+  + encoding : str
+  + uri : str
+}
+class migration::AttributeSlot {
+  + values : str
+}
+class migration::EAttribute {
+}
+class migration::EClass {
+}
+class migration::EPackage {
+}
+class migration::EReference {
+}
+class migration::Instance {
+  + uri : str
+  + uuid : str
+  + add(featureName : any, index : any, value : any) : void
+  + copy() : str
+  + evaluate(expression : any) : void
+  + get(featureName : any) : void
+  + getContainer() : str
+  + getContainerReference() : str
+  + getContents() : str
+  + getEClass() : str
+  + getInverse(referenceName : any) : str
+  + getLink(reference : any) : str
+  + getLinks(reference : any) : str
+  + getResource() : str
+  + getSlot(feature : any) : str
+  + instanceOf(className : any) : bool
+  + isProxy() : bool
+  + isSet(feature : any) : bool
+  + migrate(className : any) : void
+  + remove(featureName : any, value : any) : void
+  + set(featureName : any, value : any) : void
+  + unset(feature : any) : void
+  + validate(chain : any) : bool
+}
+class migration::Metamodel {
+  + delete(metamodelElement : any) : void
+  + getEAllSubTypes(eClass : any) : str
+  + getEAttribute(name : any) : str
+  + getEClass(name : any) : str
+  + getEClassifier(name : any) : str
+  + getEDataType(name : any) : str
+  + getEEnum(name : any) : str
+  + getEEnumLiteral(name : any) : str
+  + getEFeature(name : any) : str
+  + getEPackage(name : any) : str
+  + getEPackages() : str
+  + getEReference(name : any) : str
+  + getESubTypes(eClass : any) : str
+  + getElement(name : any) : str
+  + getInverse(metamodelElement : any, reference : any) : void
+  + setDefaultPackage(packageName : any) : void
+  + setEOpposite(opposite : any, reference : any) : void
+  + validate() : void
+}
+class migration::MetamodelResource {
+}
+class migration::Model {
+  + reflection : bool
+  + checkConformance() : void
+  + commit() : void
+  + createExtentMap() : void
+  + delete(instance : any) : void
+  + getAllInstances(className : any) : str
+  + getInstances(className : any) : str
+  + getType(eClass : any) : str
+  + newInstance(eClass : any) : str
+  + newResource(uri : any) : str
+  + validate() : void
+}
+class migration::ModelResource {
+}
+class migration::ReferenceSlot {
+}
+class migration::Repository {
+}
+abstract class migration::Slot {
+  + getEFeature() : str
+}
+class migration::Type {
+  + newInstance() : str
+}
+AbstractResource <|-- migration::MetamodelResource
+AbstractResource <|-- migration::ModelResource
+Slot <|-- migration::AttributeSlot
+Slot <|-- migration::ReferenceSlot
+migration::EPackage "0..1" -- "1..1" migration::Metamodel : defaultPackage30
+migration::AttributeSlot "1..1" -- "1..1" migration::EAttribute : eAttribute22
+migration::EClass "1..1" -- "1..1" migration::Type : eClass12
+migration::EReference "1..1" -- "1..1" migration::ReferenceSlot : eReference23
+migration::Instance "1..1" -- "1..1" migration::Slot : instance20
+migration::Instance "0..9999" --* "1..1" migration::Type : instances13
+migration::Metamodel "1..1" --* "1..1" migration::Repository : metamodel1
+migration::Metamodel "0..1" -- "1..1" migration::Model : metamodel3
+migration::Metamodel "0..1" -- "1..1" migration::MetamodelResource : metamodel34
+migration::Model "1..1" --* "1..1" migration::Repository : model0
+migration::Model "0..1" -- "1..1" migration::ModelResource : model10
+migration::Model "1..1" -- "1..1" migration::Type : model14
+migration::Instance "1..1" -- "0..9999" migration::ReferenceSlot : references19
+migration::Metamodel "1..1" -- "0..1" migration::Repository : repository27
+migration::Model "1..1" -- "0..1" migration::Repository : repository7
+migration::Metamodel "1..1" *-- "0..9999" migration::MetamodelResource : resources26
+migration::Model "1..1" *-- "0..9999" migration::ModelResource : resources5
+migration::Instance "0..9999" -- "1..1" migration::ModelResource : rootInstances9
+migration::EPackage "0..9999" -- "1..1" migration::MetamodelResource : rootPackages32
+migration::Instance "1..1" *-- "0..9999" migration::Slot : slots16
+migration::Instance "1..1" -- "1..1" migration::Type : type17
+migration::Model "1..1" *-- "0..9999" migration::Type : types4
+migration::Instance "0..9999" -- "1..1" migration::ReferenceSlot : values24
+@enduml

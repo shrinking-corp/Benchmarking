@@ -1,0 +1,22 @@
+@startuml
+class PersonCompany::Company {
+  + name : str
+  + employee() : str
+}
+class PersonCompany::Job {
+  + salary : int
+  + bossPlus() : str
+  + workerPlus() : str
+  + workerPlusOnSet(s : any) : str
+}
+class PersonCompany::Person {
+  + name : str
+  + employer() : str
+}
+PersonCompany::Job "0..1" -- "1..1" PersonCompany::Job : BossWorker_Job_role_boss9
+PersonCompany::Job "0..9999" -- "1..1" PersonCompany::Job : BossWorker_Job_role_worker6
+PersonCompany::Company "1..1" -- "1..1" PersonCompany::Job : CompanyJob_Company_role_employer4
+PersonCompany::Company "1..1" -- "0..9999" PersonCompany::Job : CompanyJob_Job_role_job1
+PersonCompany::Job "0..9999" -- "1..1" PersonCompany::Person : PersonJob_Job_role_job0
+PersonCompany::Job "1..1" -- "1..1" PersonCompany::Person : PersonJob_Person_role_employee3
+@enduml

@@ -57,16 +57,16 @@ Feature <|-- domainmodel::Operation
 Feature <|-- domainmodel::StructuralFeature
 StructuralFeature <|-- domainmodel::Attribute
 StructuralFeature <|-- domainmodel::Reference
-TypedElement <|-- domainmodel::Feature
-TypedElement <|-- domainmodel::Parameter
 Type <|-- domainmodel::DataType
 Type <|-- domainmodel::Entity
-domainmodel::DomainModel "1..1" *-- "0..9999" domainmodel::AbstractElement : elements0
+TypedElement <|-- domainmodel::Feature
+TypedElement <|-- domainmodel::Parameter
+domainmodel::AbstractElement "0..9999" --* "1..1" domainmodel::DomainModel : elements0
 domainmodel::AbstractElement "0..9999" --* "1..1" domainmodel::PackageDeclaration : elements1
-domainmodel::Feature "0..9999" --* "1..1" domainmodel::Entity : features5
+domainmodel::Entity "1..1" *-- "0..9999" domainmodel::Feature : features5
 domainmodel::Reference "1..1" -- "0..1" domainmodel::Reference : opposite8
-domainmodel::Parameter "0..9999" --* "1..1" domainmodel::Operation : params9
+domainmodel::Operation "1..1" *-- "0..9999" domainmodel::Parameter : params9
 domainmodel::Type "0..1" -- "1..1" domainmodel::TypeRef : referenced11
-domainmodel::Entity "0..1" -- "1..1" domainmodel::Entity : superType4
+domainmodel::Entity "1..1" -- "0..1" domainmodel::Entity : superType4
 domainmodel::TypeRef "0..1" --* "1..1" domainmodel::TypedElement : type10
 @enduml

@@ -1,0 +1,57 @@
+@startuml
+class ASort {
+}
+class ATerm {
+}
+class adt::ADT {
+  + name : str
+}
+abstract class adt::ASort {
+  + name : str
+  + isSubSortOf(sort : any) : bool
+}
+abstract class adt::ATerm {
+  + symbol : str
+}
+class adt::Equation {
+}
+class adt::Operation {
+  + name : str
+}
+class adt::Signature {
+  + ops : str
+}
+class adt::Sort {
+}
+class adt::SubSort {
+}
+class adt::Term {
+}
+class adt::Variable {
+}
+class adt::VariableDeclaration {
+  + name : str
+}
+ASort <|-- adt::Sort
+ASort <|-- adt::SubSort
+ATerm <|-- adt::Term
+ATerm <|-- adt::Variable
+adt::ADT "1..1" -- "1..1" adt::ATerm : adt26
+adt::Operation "0..9999" -- "1..1" adt::Signature : allOperations6
+adt::Variable "1..1" -- "0..1" adt::VariableDeclaration : declaration36
+adt::ADT "1..1" *-- "0..9999" adt::Equation : equations3
+adt::ASort "0..9999" -- "1..1" adt::Operation : formalParameters23
+adt::Operation "1..9999" --* "1..1" adt::Signature : generators14
+adt::ATerm "1..1" --* "1..1" adt::Equation : leftHandTerm38
+adt::Operation "1..1" -- "1..1" adt::Term : operationSymbol31
+adt::Operation "0..9999" --* "1..1" adt::Signature : operations11
+adt::ASort "1..1" -- "1..1" adt::Operation : returnType20
+adt::ATerm "1..1" --* "1..1" adt::Equation : rightHandTerm41
+adt::ADT "1..1" *-- "1..1" adt::Signature : signature0
+adt::ASort "1..1" -- "1..1" adt::VariableDeclaration : sort17
+adt::ASort "1..1" -- "1..1" adt::ATerm : sort28
+adt::ASort "1..9999" --* "1..1" adt::Signature : sorts8
+adt::ATerm "0..9999" --* "1..1" adt::Term : subterms33
+adt::ASort "1..1" -- "1..1" adt::SubSort : superSort5
+adt::ADT "1..1" *-- "0..9999" adt::VariableDeclaration : variables1
+@enduml

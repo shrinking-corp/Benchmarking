@@ -431,15 +431,15 @@ NamedElement <|-- org::structure::EnumerationLiteral
 NamedElement <|-- org::structure::ModelElementTypeDefinitionContainer
 ObjectTypeVariable <|-- org::structure::VirtualType
 ParameterizedType <|-- org::structure::Class
+Type <|-- org::structure::ModelType
+Type <|-- org::structure::ParameterizedType
+Type <|-- org::structure::VoidType
 TypeDefinition <|-- org::structure::ModelElementTypeDefinition
 TypeDefinition <|-- org::structure::ModelTypeDefinition
 TypeVariable <|-- org::structure::ModelTypeVariable
 TypeVariable <|-- org::structure::ObjectTypeVariable
 TypedElement <|-- org::structure::AdaptationParameter
 TypedElement <|-- org::structure::MultiplicityElement
-Type <|-- org::structure::ModelType
-Type <|-- org::structure::ParameterizedType
-Type <|-- org::structure::VoidType
 behavior::CallExpression <|-- org::behavior::UnresolvedCall
 structure::AbstractOperation <|-- org::structure::Operation
 structure::AbstractOperation <|-- org::structure::UnresolvedOperation
@@ -450,12 +450,12 @@ structure::KermetaModelElement <|-- org::behavior::Expression
 structure::KermetaModelElement <|-- org::structure::Metamodel
 structure::KermetaModelElement <|-- org::structure::ModelTypeDefinitionBinding
 structure::KermetaModelElement <|-- org::structure::TypeVariableBinding
-structure::ModelElementTypeDefinitionContainer <|-- org::structure::Package
 structure::ModelElementTypeDefinition <|-- org::structure::DataType
+structure::ModelElementTypeDefinitionContainer <|-- org::structure::Package
 structure::ModelTransformation <|-- org::structure::UnresolvedModelTransformation
+structure::ModelTypeDefinition <|-- org::structure::UnresolvedModelTypeDefinition
 structure::ModelTypeDefinitionContainer <|-- org::structure::Metamodel
 structure::ModelTypeDefinitionContainer <|-- org::structure::ModelTypeDefinitionBinding
-structure::ModelTypeDefinition <|-- org::structure::UnresolvedModelTypeDefinition
 structure::MultiplicityElement <|-- org::structure::Operation
 structure::MultiplicityElement <|-- org::structure::Property
 structure::NamedElement <|-- org::structure::Metamodel
@@ -463,6 +463,12 @@ structure::NamedElement <|-- org::structure::Package
 structure::NamedElement <|-- org::structure::TypeDefinition
 structure::NamedElement <|-- org::structure::TypeVariable
 structure::NamedElement <|-- org::structure::TypedElement
+structure::Type <|-- org::structure::DataType
+structure::Type <|-- org::structure::FunctionType
+structure::Type <|-- org::structure::ProductType
+structure::Type <|-- org::structure::TypeVariable
+structure::Type <|-- org::structure::UnresolvedInferredType
+structure::Type <|-- org::structure::UnresolvedType
 structure::TypeContainer <|-- org::behavior::Expression
 structure::TypeContainer <|-- org::behavior::UnresolvedCall
 structure::TypeContainer <|-- org::structure::FunctionType
@@ -474,12 +480,6 @@ structure::TypeContainer <|-- org::structure::TypedElement
 structure::TypeContainer <|-- org::structure::UnresolvedOperation
 structure::TypeContainer <|-- org::structure::UnresolvedType
 structure::TypeVariable <|-- org::structure::UnresolvedTypeVariable
-structure::Type <|-- org::structure::DataType
-structure::Type <|-- org::structure::FunctionType
-structure::Type <|-- org::structure::ProductType
-structure::Type <|-- org::structure::TypeVariable
-structure::Type <|-- org::structure::UnresolvedInferredType
-structure::Type <|-- org::structure::UnresolvedType
 structure::UnresolvedReference <|-- org::behavior::UnresolvedCall
 structure::UnresolvedReference <|-- org::structure::UnresolvedAdaptationOperator
 structure::UnresolvedReference <|-- org::structure::UnresolvedInferredType
@@ -494,114 +494,114 @@ behavior::Expression "1..1" --* "1..1" org::structure::ModelTransformation : bod
 behavior::Expression "1..9999" --* "1..1" org::behavior::Rescue : body27
 behavior::Expression "1..1" --* "1..1" org::behavior::LambdaExpression : body34
 behavior::Expression "0..1" --* "1..1" org::behavior::Loop : body43
-org::structure::Operation "1..1" *-- "0..1" behavior::Expression : body81
-structure::ModelTypeDefinition "1..1" -- "1..1" org::structure::ModelTypeDefinitionBinding : boundModelTypeDefinition209
+behavior::Expression "0..1" --* "1..1" org::structure::Operation : body81
+org::structure::ModelTypeDefinitionBinding "1..1" -- "1..1" structure::ModelTypeDefinition : boundModelTypeDefinition209
 behavior::Expression "1..1" --* "1..1" org::behavior::Conditional : condition22
-structure::Type "0..9999" --* "1..1" org::structure::TypeContainer : containedType106
-structure::KermetaModelElement "0..9999" -- "1..1" org::structure::Model : contents191
-org::behavior::Conditional "1..1" *-- "0..1" behavior::Expression : elseBody19
-structure::Enumeration "0..1" -- "1..1" org::structure::EnumerationLiteral : enumeration109
-org::behavior::Rescue "1..1" *-- "1..1" behavior::TypeReference : exceptionType29
+org::structure::TypeContainer "1..1" *-- "0..9999" structure::Type : containedType106
+org::structure::Model "1..1" -- "0..9999" structure::KermetaModelElement : contents191
+behavior::Expression "0..1" --* "1..1" org::behavior::Conditional : elseBody19
+org::structure::EnumerationLiteral "1..1" -- "0..1" structure::Enumeration : enumeration109
+behavior::TypeReference "1..1" --* "1..1" org::behavior::Rescue : exceptionType29
 behavior::Expression "1..1" --* "1..1" org::behavior::Raise : expression25
-structure::Type "0..9999" -- "1..1" org::structure::UnresolvedType : generics194
-structure::Type "0..9999" -- "1..1" org::behavior::UnresolvedCall : generics61
-org::structure::Property "1..1" *-- "0..1" behavior::Expression : getterBody92
+org::structure::UnresolvedType "1..1" -- "0..9999" structure::Type : generics194
+org::behavior::UnresolvedCall "1..1" -- "0..9999" structure::Type : generics61
+behavior::Expression "0..1" --* "1..1" org::structure::Property : getterBody92
 behavior::Expression "0..1" --* "1..1" org::behavior::Loop : initialization41
 behavior::Expression "0..1" --* "1..1" org::behavior::VariableDecl : initialization49
-structure::Type "0..1" -- "1..1" org::structure::PrimitiveType : instanceType139
+org::structure::PrimitiveType "1..1" -- "0..1" structure::Type : instanceType139
 org::structure::ClassDefinition "1..1" *-- "0..9999" structure::Constraint : inv157
-structure::ClassDefinition "0..1" -- "1..1" org::structure::Constraint : invOwner148
-structure::Tag "0..9999" --* "1..1" org::structure::KermetaModelElement : kOwnedTags69
-structure::Tag "0..9999" -- "1..1" org::structure::KermetaModelElement : kTag68
-structure::Type "0..1" -- "1..1" org::structure::FunctionType : left199
-structure::Metamodel "1..1" -- "1..1" org::structure::FilteredMetamodelReference : metamodel250
-structure::Metamodel "1..1" -- "1..1" org::structure::ModelTypeDefinition : metamodel251
-structure::ModelTypeVariable "1..1" -- "1..1" org::structure::VirtualType : modelTypeVariable185
-structure::Package "0..9999" --* "1..1" org::structure::Package : nestedPackage129
-structure::Package "0..1" -- "1..1" org::structure::Package : nestingPackage132
+org::structure::Constraint "1..1" -- "0..1" structure::ClassDefinition : invOwner148
+org::structure::KermetaModelElement "1..1" *-- "0..9999" structure::Tag : kOwnedTags69
+org::structure::KermetaModelElement "1..1" -- "0..9999" structure::Tag : kTag68
+org::structure::FunctionType "1..1" -- "0..1" structure::Type : left199
+org::structure::FilteredMetamodelReference "1..1" -- "1..1" structure::Metamodel : metamodel250
+org::structure::ModelTypeDefinition "1..1" -- "1..1" structure::Metamodel : metamodel251
+org::structure::VirtualType "1..1" -- "1..1" structure::ModelTypeVariable : modelTypeVariable185
+org::structure::Package "1..1" *-- "0..9999" structure::Package : nestedPackage129
+org::structure::Package "1..1" -- "0..1" structure::Package : nestingPackage132
 org::structure::Tag "1..1" -- "1..9999" structure::KermetaModelElement : object143
-structure::Operation "0..1" -- "1..1" org::structure::Parameter : operation136
+org::structure::Parameter "1..1" -- "0..1" structure::Operation : operation136
 org::structure::Property "1..1" -- "0..1" structure::AbstractProperty : opposite91
 org::structure::Package "1..1" *-- "0..9999" structure::AdaptationOperator : ownedAdaptationOperators135
-structure::Property "0..9999" -- "1..1" org::structure::Class : ownedAttribute119
-structure::Property "0..9999" --* "1..1" org::structure::ClassDefinition : ownedAttribute160
-structure::ModelTypeDefinitionBinding "0..9999" --* "1..1" org::structure::ModelTypeDefinition : ownedBindings253
-structure::ClassDefinitionBinding "0..9999" --* "1..1" org::structure::ModelTypeDefinitionBinding : ownedClassDefinitionBindings204
-structure::EnumerationBinding "0..9999" --* "1..1" org::structure::ModelTypeDefinitionBinding : ownedEnumerationBindings207
-structure::EnumerationLiteral "0..9999" --* "1..1" org::structure::Enumeration : ownedLiteral126
-structure::ModelTypeDefinition "0..9999" --* "1..1" org::structure::ModelTypeDefinitionContainer : ownedModelTypeDefinitions273
-structure::Operation "0..9999" -- "1..1" org::structure::Class : ownedOperation121
+org::structure::Class "1..1" -- "0..9999" structure::Property : ownedAttribute119
+org::structure::ClassDefinition "1..1" *-- "0..9999" structure::Property : ownedAttribute160
+org::structure::ModelTypeDefinition "1..1" *-- "0..9999" structure::ModelTypeDefinitionBinding : ownedBindings253
+org::structure::ModelTypeDefinitionBinding "1..1" *-- "0..9999" structure::ClassDefinitionBinding : ownedClassDefinitionBindings204
+org::structure::ModelTypeDefinitionBinding "1..1" *-- "0..9999" structure::EnumerationBinding : ownedEnumerationBindings207
+org::structure::Enumeration "1..1" *-- "0..9999" structure::EnumerationLiteral : ownedLiteral126
+org::structure::ModelTypeDefinitionContainer "1..1" *-- "0..9999" structure::ModelTypeDefinition : ownedModelTypeDefinitions273
+org::structure::Class "1..1" -- "0..9999" structure::Operation : ownedOperation121
 org::structure::ClassDefinition "1..1" *-- "0..9999" structure::Operation : ownedOperation163
-structure::OperationBinding "0..9999" --* "1..1" org::structure::ClassDefinitionBinding : ownedOperationBindings215
+org::structure::ClassDefinitionBinding "1..1" *-- "0..9999" structure::OperationBinding : ownedOperationBindings215
 org::structure::ModelTransformation "1..1" *-- "0..9999" structure::Parameter : ownedParameter271
-structure::Parameter "0..9999" --* "1..1" org::structure::Operation : ownedParameter72
-structure::PropertyBinding "0..9999" --* "1..1" org::structure::ClassDefinitionBinding : ownedPropertyBindings214
-structure::ModelTransformation "0..9999" --* "1..1" org::structure::ModelTypeDefinition : ownedTransformations255
-structure::ModelElementTypeDefinition "0..9999" --* "1..1" org::structure::ModelElementTypeDefinitionContainer : ownedTypeDefinition169
-structure::UnresolvedReference "0..9999" --* "1..1" org::structure::UseAdaptationOperator : ownedUnresolved239
-structure::UnresolvedOperation "0..9999" --* "1..1" org::structure::Operation : ownedUnresolvedOperations84
-structure::UnresolvedProperty "0..9999" --* "1..1" org::structure::Property : ownedUnresolvedProperties98
-structure::ClassDefinition "0..1" -- "1..1" org::structure::Property : owningClass100
+org::structure::Operation "1..1" *-- "0..9999" structure::Parameter : ownedParameter72
+org::structure::ClassDefinitionBinding "1..1" *-- "0..9999" structure::PropertyBinding : ownedPropertyBindings214
+org::structure::ModelTypeDefinition "1..1" *-- "0..9999" structure::ModelTransformation : ownedTransformations255
+org::structure::ModelElementTypeDefinitionContainer "1..1" *-- "0..9999" structure::ModelElementTypeDefinition : ownedTypeDefinition169
+org::structure::UseAdaptationOperator "1..1" *-- "0..9999" structure::UnresolvedReference : ownedUnresolved239
+org::structure::Operation "1..1" *-- "0..9999" structure::UnresolvedOperation : ownedUnresolvedOperations84
+org::structure::Property "1..1" *-- "0..9999" structure::UnresolvedProperty : ownedUnresolvedProperties98
+org::structure::Property "1..1" -- "0..1" structure::ClassDefinition : owningClass100
 org::structure::Operation "1..1" -- "0..1" structure::ClassDefinition : owningClass86
-structure::ModelTypeDefinition "0..1" -- "1..1" org::structure::ModelTransformation : owningModelTypeDefinition268
-structure::Package "0..9999" --* "1..1" org::structure::Metamodel : packages166
-structure::AdaptationParameter "0..9999" -- "1..1" org::structure::AdaptationOperator : parameters236
+org::structure::ModelTransformation "1..1" -- "0..1" structure::ModelTypeDefinition : owningModelTypeDefinition268
+org::structure::Metamodel "1..1" *-- "0..9999" structure::Package : packages166
+org::structure::AdaptationOperator "1..1" -- "0..9999" structure::AdaptationParameter : parameters236
 org::structure::UseAdaptationOperator "1..1" -- "0..9999" structure::KermetaModelElement : parameters237
 behavior::Expression "0..9999" --* "1..1" org::behavior::JavaStaticCall : parameters31
 behavior::LambdaParameter "0..9999" --* "1..1" org::behavior::LambdaExpression : parameters33
-org::behavior::CallExpression "1..1" *-- "0..9999" behavior::Expression : parameters4
-structure::Constraint "0..9999" --* "1..1" org::structure::Operation : post78
-structure::Operation "0..1" -- "1..1" org::structure::Constraint : postOwner154
-structure::Constraint "0..9999" --* "1..1" org::structure::Operation : pre75
-structure::Operation "0..1" -- "1..1" org::structure::Constraint : preOwner151
-structure::Type "0..9999" -- "1..1" org::structure::Operation : raisedException70
-structure::FilteredMetamodelReference "0..9999" --* "1..1" org::structure::Metamodel : referencedMetamodels167
+behavior::Expression "0..9999" --* "1..1" org::behavior::CallExpression : parameters4
+org::structure::Operation "1..1" *-- "0..9999" structure::Constraint : post78
+org::structure::Constraint "1..1" -- "0..1" structure::Operation : postOwner154
+org::structure::Operation "1..1" *-- "0..9999" structure::Constraint : pre75
+org::structure::Constraint "1..1" -- "0..1" structure::Operation : preOwner151
+org::structure::Operation "1..1" -- "0..9999" structure::Type : raisedException70
+org::structure::Metamodel "1..1" *-- "0..9999" structure::FilteredMetamodelReference : referencedMetamodels167
 behavior::Rescue "0..9999" --* "1..1" org::behavior::Block : rescueBlock11
 org::structure::FunctionType "1..1" -- "0..1" structure::Type : right201
-structure::Operation "0..9999" -- "1..1" org::structure::ModelTransformation : rules265
+org::structure::ModelTransformation "1..1" -- "0..9999" structure::Operation : rules265
 behavior::Expression "0..1" --* "1..1" org::structure::Property : setterBody95
-structure::ClassDefinition "1..1" -- "1..1" org::structure::ClassDefinitionBinding : source217
-structure::Enumeration "1..1" -- "1..1" org::structure::EnumerationBinding : source222
-structure::Property "1..1" -- "1..1" org::structure::PropertyBinding : source226
-structure::Operation "1..1" -- "1..1" org::structure::OperationBinding : source231
+org::structure::ClassDefinitionBinding "1..1" -- "1..1" structure::ClassDefinition : source217
+org::structure::EnumerationBinding "1..1" -- "1..1" structure::Enumeration : source222
+org::structure::PropertyBinding "1..1" -- "1..1" structure::Property : source226
+org::structure::OperationBinding "1..1" -- "1..1" structure::Operation : source231
 behavior::Expression "0..9999" --* "1..1" org::behavior::Block : statement9
 org::behavior::CallEnumLiteral "1..1" -- "0..1" structure::EnumerationLiteral : staticEnumLiteral66
-structure::Operation "0..1" -- "1..1" org::behavior::CallOperation : staticOperation64
-structure::Property "0..1" -- "1..1" org::behavior::CallProperty : staticProperty65
-structure::ModelTransformation "0..1" -- "1..1" org::behavior::CallModelTransformation : staticTransformation67
-structure::Type "0..1" -- "1..1" org::behavior::Expression : staticType3
-structure::Type "0..9999" -- "1..1" org::behavior::CallExpression : staticTypeVariableBindings6
-org::behavior::Loop "1..1" *-- "1..1" behavior::Expression : stopCondition46
+org::behavior::CallOperation "1..1" -- "0..1" structure::Operation : staticOperation64
+org::behavior::CallProperty "1..1" -- "0..1" structure::Property : staticProperty65
+org::behavior::CallModelTransformation "1..1" -- "0..1" structure::ModelTransformation : staticTransformation67
+org::behavior::Expression "1..1" -- "0..1" structure::Type : staticType3
+org::behavior::CallExpression "1..1" -- "0..9999" structure::Type : staticTypeVariableBindings6
+behavior::Expression "1..1" --* "1..1" org::behavior::Loop : stopCondition46
 org::structure::Class "1..1" -- "0..9999" structure::Class : superClass124
-structure::Type "0..9999" -- "1..1" org::structure::TypeDefinition : superType117
-structure::Type "0..1" -- "1..1" org::behavior::CallSuperOperation : superType15
+org::structure::TypeDefinition "1..1" -- "0..9999" structure::Type : superType117
+org::behavior::CallSuperOperation "1..1" -- "0..1" structure::Type : superType15
 org::structure::TypeVariable "1..1" -- "0..1" structure::Type : supertype178
-org::behavior::Assignment "1..1" *-- "1..1" behavior::CallExpression : target0
-org::behavior::CallFeature "1..1" *-- "0..1" behavior::Expression : target13
+behavior::CallExpression "1..1" --* "1..1" org::behavior::Assignment : target0
+behavior::Expression "0..1" --* "1..1" org::behavior::CallFeature : target13
 org::structure::ClassDefinitionBinding "1..1" -- "1..1" structure::ClassDefinition : target219
-structure::Enumeration "1..1" -- "1..1" org::structure::EnumerationBinding : target223
+org::structure::EnumerationBinding "1..1" -- "1..1" structure::Enumeration : target223
 org::structure::PropertyBinding "1..1" -- "1..1" structure::Property : target228
-structure::Operation "1..1" -- "1..1" org::structure::OperationBinding : target233
-structure::Property "1..1" -- "1..1" org::structure::PropertyAdaptationOperator : target244
+org::structure::OperationBinding "1..1" -- "1..1" structure::Operation : target233
+org::structure::PropertyAdaptationOperator "1..1" -- "1..1" structure::Property : target244
 org::structure::OperationAdaptationOperator "1..1" -- "1..1" structure::Operation : target246
 behavior::Expression "0..1" --* "1..1" org::behavior::UnresolvedCall : target55
 org::behavior::UnresolvedCall "1..1" -- "0..1" structure::Type : targetParent58
 org::structure::ModelTypeDefinitionBinding "1..1" -- "0..9999" structure::ModelTransformation : targetedTransformations211
 behavior::Expression "1..1" --* "1..1" org::behavior::Conditional : thenBody17
-structure::Type "1..1" -- "1..1" org::structure::TypeVariableBinding : type114
-structure::Type "0..1" -- "1..1" org::structure::TypedElement : type141
-structure::Type "0..9999" -- "1..1" org::structure::ProductType : type197
-org::behavior::LambdaParameter "1..1" *-- "1..1" behavior::TypeReference : type37
+org::structure::TypeVariableBinding "1..1" -- "1..1" structure::Type : type114
+org::structure::TypedElement "1..1" -- "0..1" structure::Type : type141
+org::structure::ProductType "1..1" -- "0..9999" structure::Type : type197
+behavior::TypeReference "1..1" --* "1..1" org::behavior::LambdaParameter : type37
 behavior::TypeReference "1..1" --* "1..1" org::behavior::VariableDecl : type51
 org::structure::Type "1..1" -- "0..1" structure::TypeContainer : typeContainer103
-structure::GenericTypeDefinition "1..1" -- "1..1" org::structure::ParameterizedType : typeDefinition176
+org::structure::ParameterizedType "1..1" -- "1..1" structure::GenericTypeDefinition : typeDefinition176
 org::structure::VirtualType "1..1" -- "1..1" structure::ModelElementTypeDefinition : typeDefinition183
-structure::ModelTypeDefinition "1..1" -- "1..1" org::structure::ModelType : typeDefinition248
-structure::ModelElementTypeDefinition "0..9999" -- "1..1" org::structure::ModelTypeDefinition : typeDefinitions258
-structure::TypeVariableBinding "0..9999" --* "1..1" org::structure::ParameterizedType : typeParamBinding173
-structure::TypeVariableBinding "0..9999" --* "1..1" org::structure::VirtualType : typeParamBinding188
+org::structure::ModelType "1..1" -- "1..1" structure::ModelTypeDefinition : typeDefinition248
+org::structure::ModelTypeDefinition "1..1" -- "0..9999" structure::ModelElementTypeDefinition : typeDefinitions258
+org::structure::ParameterizedType "1..1" *-- "0..9999" structure::TypeVariableBinding : typeParamBinding173
+org::structure::VirtualType "1..1" *-- "0..9999" structure::TypeVariableBinding : typeParamBinding188
 org::structure::GenericTypeDefinition "1..1" -- "0..9999" structure::TypeVariable : typeParameter170
-structure::TypeVariable "0..9999" -- "1..1" org::structure::Operation : typeParameter89
+org::structure::Operation "1..1" -- "0..9999" structure::TypeVariable : typeParameter89
 org::structure::ModelTransformation "1..1" -- "0..9999" structure::ModelTypeVariable : typeParameters261
 behavior::TypeReference "1..1" --* "1..1" org::behavior::CallTypeLiteral : typeref39
 org::structure::ModelTypeDefinitionBinding "1..1" *-- "0..9999" structure::UseAdaptationOperator : usedAdaptationOperators205
@@ -609,7 +609,7 @@ org::structure::UseAdaptationOperator "1..1" -- "1..1" structure::AdaptationOper
 org::structure::UnresolvedType "1..1" *-- "0..9999" structure::Using : usings192
 org::behavior::UnresolvedCall "1..1" *-- "0..9999" structure::Using : usings54
 behavior::Expression "1..1" --* "1..1" org::behavior::Assignment : value1
-structure::TypeVariable "1..1" -- "1..1" org::structure::TypeVariableBinding : variable112
+org::structure::TypeVariableBinding "1..1" -- "1..1" structure::TypeVariable : variable112
 org::structure::ModelTypeVariable "1..1" -- "0..9999" structure::VirtualType : virtualType180
-structure::TypeVariableBinding "0..9999" --* "1..1" org::structure::ParameterizedType : virtualTypeBinding172
+org::structure::ParameterizedType "1..1" *-- "0..9999" structure::TypeVariableBinding : virtualTypeBinding172
 @enduml

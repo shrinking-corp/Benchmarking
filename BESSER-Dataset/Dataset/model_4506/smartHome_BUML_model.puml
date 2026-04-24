@@ -61,18 +61,18 @@ class smartHome::SmartHome {
 }
 Condition <|-- smartHome::BooleanCondition
 Condition <|-- smartHome::IntegerCondition
-SensorType <|-- smartHome::AnalogSensorType
-SensorType <|-- smartHome::BooleanSensorType
 Sensor <|-- smartHome::BooleanSensor
 Sensor <|-- smartHome::IntegerSensor
+SensorType <|-- smartHome::AnalogSensorType
+SensorType <|-- smartHome::BooleanSensorType
 smartHome::Condition "1..9999" --* "1..1" smartHome::Rule : conditions10
-smartHome::Rule "1..1" *-- "1..1" smartHome::Duration : duration14
+smartHome::Duration "1..1" --* "1..1" smartHome::Rule : duration14
 smartHome::Event "1..1" --* "1..1" smartHome::Rule : event12
 smartHome::Location "1..9999" --* "1..1" smartHome::SmartHome : locations3
 smartHome::Rule "1..9999" --* "1..1" smartHome::SmartHome : rules8
-smartHome::BooleanSensor "1..1" -- "1..1" smartHome::BooleanCondition : sensor16
+smartHome::BooleanCondition "1..1" -- "1..1" smartHome::BooleanSensor : sensor16
 smartHome::IntegerCondition "1..1" -- "1..1" smartHome::IntegerSensor : sensor17
-smartHome::SensorType "1..1" -- "1..1" smartHome::Sensor : sensorType0
-smartHome::SmartHome "1..1" *-- "1..9999" smartHome::SensorType : sensorTypes5
-smartHome::Sensor "0..9999" --* "1..1" smartHome::Location : sensors1
+smartHome::Sensor "1..1" -- "1..1" smartHome::SensorType : sensorType0
+smartHome::SensorType "1..9999" --* "1..1" smartHome::SmartHome : sensorTypes5
+smartHome::Location "1..1" *-- "0..9999" smartHome::Sensor : sensors1
 @enduml

@@ -54,26 +54,26 @@ ModelElement <|-- minuml1::Partition
 ModelElement <|-- minuml1::StateMachine
 ModelElement <|-- minuml1::StateVertex
 ModelElement <|-- minuml1::Transition
-StateMachine <|-- minuml1::ActivityGraph
-StateVertex <|-- minuml1::Pseudostate
-StateVertex <|-- minuml1::State
 State <|-- minuml1::ActionState
 State <|-- minuml1::CompositeState
 State <|-- minuml1::FinalState
 State <|-- minuml1::ObjectFlowState
-minuml1::Partition "1..1" -- "0..9999" minuml1::ModelElement : contents4
+StateMachine <|-- minuml1::ActivityGraph
+StateVertex <|-- minuml1::Pseudostate
+StateVertex <|-- minuml1::State
+minuml1::ModelElement "0..9999" -- "1..1" minuml1::Partition : contents4
 minuml1::BooleanExpression "1..1" --* "1..1" minuml1::Guard : expression17
 minuml1::Guard "0..1" --* "1..1" minuml1::Transition : guard15
-minuml1::Transition "0..9999" -- "1..1" minuml1::StateVertex : incoming7
-minuml1::Transition "0..9999" -- "1..1" minuml1::StateVertex : outgoing6
+minuml1::StateVertex "1..1" -- "0..9999" minuml1::Transition : incoming7
+minuml1::StateVertex "1..1" -- "0..9999" minuml1::Transition : outgoing6
 minuml1::Partition "0..9999" --* "1..1" minuml1::RootActivityGraph : partition24
-minuml1::Partition "0..9999" --* "1..1" minuml1::ActivityGraph : partition3
+minuml1::ActivityGraph "1..1" *-- "0..9999" minuml1::Partition : partition3
 minuml1::StateVertex "1..1" -- "1..1" minuml1::Transition : source12
-minuml1::StateVertex "0..9999" --* "1..1" minuml1::CompositeState : subvertex9
-minuml1::Transition "1..1" -- "1..1" minuml1::StateVertex : target13
+minuml1::CompositeState "1..1" *-- "0..9999" minuml1::StateVertex : subvertex9
+minuml1::StateVertex "1..1" -- "1..1" minuml1::Transition : target13
 minuml1::State "1..1" --* "1..1" minuml1::StateMachine : top0
-minuml1::State "1..1" --* "1..1" minuml1::RootActivityGraph : top21
+minuml1::RootActivityGraph "1..1" *-- "1..1" minuml1::State : top21
 minuml1::StateMachine "1..1" *-- "0..9999" minuml1::Transition : transitions1
-minuml1::Transition "0..9999" --* "1..1" minuml1::RootActivityGraph : transitions19
-minuml1::ObjectFlowState "1..1" *-- "0..1" minuml1::ModelElement : type10
+minuml1::RootActivityGraph "1..1" *-- "0..9999" minuml1::Transition : transitions19
+minuml1::ModelElement "0..1" --* "1..1" minuml1::ObjectFlowState : type10
 @enduml

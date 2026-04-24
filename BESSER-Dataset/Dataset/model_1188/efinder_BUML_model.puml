@@ -284,9 +284,9 @@ OclExpression <|-- ir::ocl::LiteralExp
 OclExpression <|-- ir::ocl::ModelElement
 OclExpression <|-- ir::ocl::UnsupportedExp
 OclExpression <|-- ir::ocl::VarExp
+Operation <|-- ir::ocl::OclOperation
 OperationFeatureRef <|-- ir::BuiltinOperationRef
 OperationFeatureRef <|-- ir::DefinedOperationRef
-Operation <|-- ir::ocl::OclOperation
 PropertyFeatureRef <|-- ir::BuiltinPropertyRef
 PropertyFeatureRef <|-- ir::DerivedPropertyRef
 PropertyFeatureRef <|-- ir::MetamodelFeatureRef
@@ -300,58 +300,58 @@ VariableDeclaration <|-- ir::ocl::Iterator
 ocl::WithContextVariable <|-- ir::ocl::OclDerivedProperty
 ocl::WithContextVariable <|-- ir::ocl::OclInvariant
 ocl::WithContextVariable <|-- ir::ocl::OclOperation
-ir::ocl::OperatorCallExp "1..1" *-- "0..1" OclExpression : argument90
-ir::ocl::AbstractOperationCallExp "1..1" *-- "0..9999" OclExpression : arguments61
-ir::ocl::OclDerivedProperty "1..1" *-- "1..1" OclExpression : body54
+OclExpression "0..1" --* "1..1" ir::ocl::OperatorCallExp : argument90
+OclExpression "0..9999" --* "1..1" ir::ocl::AbstractOperationCallExp : arguments61
+OclExpression "1..1" --* "1..1" ir::ocl::OclDerivedProperty : body54
 OclExpression "1..1" --* "1..1" ir::ocl::OclOperation : body56
 OclExpression "1..1" --* "1..1" ir::ocl::LoopExp : body66
 ir::EFClass "0..9999" --* "1..1" ir::EFPackage : classes30
 OclExpression "1..1" --* "1..1" ir::ocl::IfExp : condition74
-ir::Specification "1..1" *-- "0..9999" ir::Constraint : constaints1
-ir::TypeRef "1..1" --* "1..1" ir::CollectionTypeRef : containedType48
-ir::EFType "0..1" -- "1..1" ir::AbstractFunction : context14
-ocl::ir::VariableDeclaration "1..1" --* "1..1" ir::ocl::WithContextVariable : contextVariable50
-ir::TupleTypeElement "0..9999" --* "1..1" ir::EFTupleType : elements41
+ir::Constraint "0..9999" --* "1..1" ir::Specification : constaints1
+ir::CollectionTypeRef "1..1" *-- "1..1" ir::TypeRef : containedType48
+ir::AbstractFunction "1..1" -- "0..1" ir::EFType : context14
+ir::ocl::WithContextVariable "1..1" *-- "1..1" ocl::ir::VariableDeclaration : contextVariable50
+ir::EFTupleType "1..1" *-- "0..9999" ir::TupleTypeElement : elements41
 OclExpression "1..1" --* "1..1" ir::ocl::IfExp : else79
 ir::EEnum "1..1" -- "1..1" ir::EFEnum : enum_37
-ocl::ir::MetaTypeRef "1..1" --* "1..1" ir::ocl::EnumLiteralExp : enum_99
-ir::EFPackage "1..1" *-- "0..9999" ir::EFEnum : enumerations33
+ir::ocl::EnumLiteralExp "1..1" *-- "1..1" ocl::ir::MetaTypeRef : enum_99
+ir::EFEnum "0..9999" --* "1..1" ir::EFPackage : enumerations33
 OclExpression "1..1" --* "1..1" ir::ocl::OclInvariant : expression52
-ir::MetamodelFeatureRef "1..1" -- "1..1" ir::EStructuralFeature : feature23
-ocl::ir::OperationFeatureRef "0..1" --* "1..1" ir::ocl::OperationCallExp : feature63
-ocl::ir::PropertyFeatureRef "0..1" --* "1..1" ir::ocl::PropertyCallExp : feature64
+ir::EStructuralFeature "1..1" -- "1..1" ir::MetamodelFeatureRef : feature23
+ir::ocl::OperationCallExp "1..1" *-- "0..1" ocl::ir::OperationFeatureRef : feature63
+ir::ocl::PropertyCallExp "1..1" *-- "0..1" ocl::ir::PropertyFeatureRef : feature64
 OclExpression "1..1" --* "1..1" ir::ocl::LetExp : in87
 OclExpression "1..1" --* "1..1" ir::ocl::IterateExp : init71
 OclExpression "1..1" --* "1..1" ir::ocl::LetExp : init84
-ir::ocl::LoopExp "1..1" *-- "1..9999" Iterator : iterators65
+Iterator "1..9999" --* "1..1" ir::ocl::LoopExp : iterators65
 ir::EClass "1..1" -- "1..1" ir::EFClass : klass35
-ocl::ir::EFClass "1..1" -- "1..1" ir::ocl::OclInvariant : klass51
+ir::ocl::OclInvariant "1..1" -- "1..1" ocl::ir::EFClass : klass51
 ir::ocl::EnumLiteralExp "1..1" -- "1..1" ocl::ir::EFEnumLiteral : literal100
 ir::EFEnum "1..1" *-- "0..9999" ir::EFEnumLiteral : literals39
-ir::Specification "1..1" *-- "0..9999" ir::EFMetamodel : metamodels0
-ir::Operation "1..1" -- "1..1" ir::DefinedOperationRef : operation17
+ir::EFMetamodel "0..9999" --* "1..1" ir::Specification : metamodels0
+ir::DefinedOperationRef "1..1" -- "1..1" ir::Operation : operation17
 ir::Operation "0..9999" --* "1..1" ir::Specification : operations7
-ir::Parameter "0..9999" --* "1..1" ir::Operation : parameters15
-ir::ocl::CollectionLiteralExp "1..1" *-- "0..9999" OclExpression : parts102
+ir::Operation "1..1" *-- "0..9999" ir::Parameter : parameters15
+OclExpression "0..9999" --* "1..1" ir::ocl::CollectionLiteralExp : parts102
 TuplePart "0..9999" --* "1..1" ir::ocl::TupleLiteralExp : parts95
-ir::EPackage "1..1" -- "1..1" ir::EFPackage : pkg28
+ir::EFPackage "1..1" -- "1..1" ir::EPackage : pkg28
 ir::EFPrimitiveType "0..9999" --* "1..1" ir::Specification : primitiveTypes9
 ir::DerivedProperty "0..9999" --* "1..1" ir::Specification : properties5
 ir::DerivedProperty "1..1" -- "1..1" ir::DerivedPropertyRef : property21
-ocl::ir::VariableDeclaration "1..1" --* "1..1" ir::ocl::IterateExp : result69
+ir::ocl::IterateExp "1..1" *-- "1..1" ocl::ir::VariableDeclaration : result69
 ir::EFMetamodel "1..1" *-- "0..9999" ir::EFPackage : roots26
 OclExpression "1..1" --* "1..1" ir::ocl::CallExp : source59
 ir::EFClass "0..9999" --* "1..1" ir::Specification : temporary3
-ir::ocl::IfExp "1..1" *-- "1..1" OclExpression : then76
-ocl::ir::EFTupleType "1..1" -- "1..1" ir::ocl::TupleLiteralExp : tupleType94
+OclExpression "1..1" --* "1..1" ir::ocl::IfExp : then76
+ir::ocl::TupleLiteralExp "1..1" -- "1..1" ocl::ir::EFTupleType : tupleType94
 ir::EFTupleType "0..9999" --* "1..1" ir::Specification : tupleTypes11
-ir::TypedElement "1..1" *-- "1..1" ir::TypeRef : type13
-ir::TupleFieldRef "1..1" -- "1..1" ir::EFTupleType : type19
+ir::TypeRef "1..1" --* "1..1" ir::TypedElement : type13
+ir::EFTupleType "1..1" -- "1..1" ir::TupleFieldRef : type19
 ir::TypeRef "1..1" --* "1..1" ir::VariableDeclaration : type24
-ir::TypeRef "1..1" --* "1..1" ir::TupleTypeElement : type43
+ir::TupleTypeElement "1..1" *-- "1..1" ir::TypeRef : type43
 ir::EFType "1..1" -- "1..1" ir::MetaTypeRef : type46
-ocl::ir::TypeRef "0..1" --* "1..1" ir::ocl::OclExpression : type58
+ir::ocl::OclExpression "1..1" *-- "0..1" ocl::ir::TypeRef : type58
 OclExpression "1..1" --* "1..1" ir::ocl::TuplePart : value97
-ocl::ir::VariableDeclaration "1..1" --* "1..1" ir::ocl::LetExp : variable82
+ir::ocl::LetExp "1..1" *-- "1..1" ocl::ir::VariableDeclaration : variable82
 ir::ocl::VarExp "1..1" -- "1..1" ocl::ir::VariableDeclaration : variable92
 @enduml

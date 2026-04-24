@@ -150,11 +150,11 @@ class uml2CD::ValueSpecification {
 Abstraction <|-- uml2CD::Realization
 Association <|-- uml2CD::AssociationClass
 BehavioralFeature <|-- uml2CD::Operation
+Class <|-- uml2CD::AssociationClass
 Classifier <|-- uml2CD::Association
 Classifier <|-- uml2CD::Class
 Classifier <|-- uml2CD::DataType
 Classifier <|-- uml2CD::Interface
-Class <|-- uml2CD::AssociationClass
 DataType <|-- uml2CD::Enumeration
 DataType <|-- uml2CD::PrimitiveType
 Dependency <|-- uml2CD::Abstraction
@@ -197,74 +197,74 @@ uml2CD::Class "0..1" -- "1..1" uml2CD::Classifier : Class63
 uml2CD::Class "0..1" -- "1..1" uml2CD::Operation : Class78
 uml2CD::Class "0..1" -- "1..1" uml2CD::Property : Class92
 uml2CD::Association "0..1" -- "1..1" uml2CD::Property : association94
-uml2CD::Property "0..1" -- "1..1" uml2CD::Property : associationEnd101
+uml2CD::Property "1..1" -- "0..1" uml2CD::Property : associationEnd101
 uml2CD::Dependency "1..1" -- "1..9999" uml2CD::NamedElement : client114
 uml2CD::Dependency "0..9999" -- "1..1" uml2CD::NamedElement : clientDependency16
 uml2CD::Constraint "1..1" -- "0..9999" uml2CD::Element : constrainedElement51
 uml2CD::Constraint "1..1" -- "0..1" uml2CD::Namespace : context55
 uml2CD::Classifier "1..1" -- "1..1" uml2CD::Substitution : contract116
-uml2CD::InterfaceRealization "1..1" -- "1..1" uml2CD::Interface : contract122
-uml2CD::ValueSpecification "0..1" --* "1..1" uml2CD::Parameter : defaultValue74
+uml2CD::Interface "1..1" -- "1..1" uml2CD::InterfaceRealization : contract122
+uml2CD::Parameter "1..1" *-- "0..1" uml2CD::ValueSpecification : defaultValue74
 uml2CD::Property "1..1" *-- "0..1" uml2CD::ValueSpecification : defaultValue90
 uml2CD::ElementImport "0..9999" --* "1..1" uml2CD::Namespace : elementImport22
 uml2CD::Enumeration "0..1" -- "1..1" uml2CD::EnumerationLiteral : enumeration108
-uml2CD::Feature "0..9999" -- "1..1" uml2CD::Classifier : feature62
+uml2CD::Classifier "1..1" -- "0..9999" uml2CD::Feature : feature62
 uml2CD::Classifier "0..9999" -- "1..1" uml2CD::Feature : featuringClassifier67
 uml2CD::Classifier "1..1" -- "1..1" uml2CD::Generalization : general57
 uml2CD::Generalization "0..9999" -- "1..1" uml2CD::GeneralizationSet : generalization124
-uml2CD::Generalization "0..9999" --* "1..1" uml2CD::Classifier : generalization61
+uml2CD::Classifier "1..1" *-- "0..9999" uml2CD::Generalization : generalization61
 uml2CD::Generalization "1..1" -- "0..9999" uml2CD::GeneralizationSet : generalizationSet59
-uml2CD::PackageableElement "1..1" -- "1..1" uml2CD::ElementImport : importedElement25
-uml2CD::PackageableElement "0..9999" -- "1..1" uml2CD::Namespace : importedMember19
+uml2CD::ElementImport "1..1" -- "1..1" uml2CD::PackageableElement : importedElement25
+uml2CD::Namespace "1..1" -- "0..9999" uml2CD::PackageableElement : importedMember19
 uml2CD::Package "1..1" -- "1..1" uml2CD::PackageImport : importedPackage28
-uml2CD::Namespace "1..1" -- "1..1" uml2CD::ElementImport : importingNamespace27
-uml2CD::PackageImport "1..1" -- "1..1" uml2CD::Namespace : importingNamespace29
+uml2CD::ElementImport "1..1" -- "1..1" uml2CD::Namespace : importingNamespace27
+uml2CD::Namespace "1..1" -- "1..1" uml2CD::PackageImport : importingNamespace29
 uml2CD::MultiplicityElement "1..1" *-- "0..1" uml2CD::ValueSpecification : lowerValue39
-uml2CD::Property "1..9999" -- "1..1" uml2CD::Association : memberEnd103
-uml2CD::PackageMerge "1..1" -- "1..1" uml2CD::Package : mergedPackage111
-uml2CD::Namespace "0..1" -- "1..1" uml2CD::NamedElement : namespace14
-uml2CD::Classifier "0..9999" --* "1..1" uml2CD::Class : nestedClassifier82
-uml2CD::Package "0..9999" --* "1..1" uml2CD::Package : nestedPackage35
-uml2CD::Package "0..1" -- "1..1" uml2CD::Package : nestingPackage32
-uml2CD::Property "0..9999" --* "1..1" uml2CD::Class : ownedAttribute87
-uml2CD::Element "1..1" *-- "0..9999" uml2CD::Comment : ownedComment0
+uml2CD::Association "1..1" -- "1..9999" uml2CD::Property : memberEnd103
+uml2CD::Package "1..1" -- "1..1" uml2CD::PackageMerge : mergedPackage111
+uml2CD::NamedElement "1..1" -- "0..1" uml2CD::Namespace : namespace14
+uml2CD::Class "1..1" *-- "0..9999" uml2CD::Classifier : nestedClassifier82
+uml2CD::Package "1..1" *-- "0..9999" uml2CD::Package : nestedPackage35
+uml2CD::Package "1..1" -- "0..1" uml2CD::Package : nestingPackage32
+uml2CD::Class "1..1" *-- "0..9999" uml2CD::Property : ownedAttribute87
+uml2CD::Comment "0..9999" --* "1..1" uml2CD::Element : ownedComment0
 uml2CD::Element "1..1" *-- "0..9999" uml2CD::Element : ownedElement4
 uml2CD::Association "1..1" *-- "0..9999" uml2CD::Property : ownedEnd105
-uml2CD::EnumerationLiteral "0..9999" --* "1..1" uml2CD::Enumeration : ownedLiteral107
-uml2CD::Operation "0..9999" --* "1..1" uml2CD::Class : ownedOperation85
-uml2CD::Parameter "0..9999" --* "1..1" uml2CD::BehavioralFeature : ownedParameter69
-uml2CD::Namespace "1..1" *-- "0..9999" uml2CD::Constraint : ownedRule24
-uml2CD::Element "0..1" -- "1..1" uml2CD::Element : owner2
-uml2CD::Parameter "1..1" -- "0..1" uml2CD::BehavioralFeature : ownerFormalParam73
-uml2CD::Property "1..1" -- "0..1" uml2CD::Association : owningAssociation95
-uml2CD::ValueSpecification "1..1" -- "0..1" uml2CD::Constraint : owningConstraint45
-uml2CD::Element "0..1" -- "1..1" uml2CD::Comment : owningElement6
+uml2CD::Enumeration "1..1" *-- "0..9999" uml2CD::EnumerationLiteral : ownedLiteral107
+uml2CD::Class "1..1" *-- "0..9999" uml2CD::Operation : ownedOperation85
+uml2CD::BehavioralFeature "1..1" *-- "0..9999" uml2CD::Parameter : ownedParameter69
+uml2CD::Constraint "0..9999" --* "1..1" uml2CD::Namespace : ownedRule24
+uml2CD::Element "1..1" -- "0..1" uml2CD::Element : owner2
+uml2CD::BehavioralFeature "0..1" -- "1..1" uml2CD::Parameter : ownerFormalParam73
+uml2CD::Association "0..1" -- "1..1" uml2CD::Property : owningAssociation95
+uml2CD::Constraint "0..1" -- "1..1" uml2CD::ValueSpecification : owningConstraint45
+uml2CD::Comment "1..1" -- "0..1" uml2CD::Element : owningElement6
 uml2CD::MultiplicityElement "0..1" -- "1..1" uml2CD::ValueSpecification : owningLower42
-uml2CD::PackageableElement "1..1" -- "0..1" uml2CD::Package : owningPackage18
+uml2CD::Package "0..1" -- "1..1" uml2CD::PackageableElement : owningPackage18
 uml2CD::Parameter "0..1" -- "1..1" uml2CD::ValueSpecification : owningParameter47
 uml2CD::Property "0..1" -- "1..1" uml2CD::ValueSpecification : owningProperty48
 uml2CD::MultiplicityElement "0..1" -- "1..1" uml2CD::ValueSpecification : owningUpper43
-uml2CD::PackageImport "0..9999" --* "1..1" uml2CD::Namespace : packageImport21
-uml2CD::PackageMerge "0..9999" --* "1..1" uml2CD::Package : packageMerge38
-uml2CD::PackageableElement "0..9999" --* "1..1" uml2CD::Package : packagedElement37
+uml2CD::Namespace "1..1" *-- "0..9999" uml2CD::PackageImport : packageImport21
+uml2CD::Package "1..1" *-- "0..9999" uml2CD::PackageMerge : packageMerge38
+uml2CD::Package "1..1" *-- "0..9999" uml2CD::PackageableElement : packagedElement37
 uml2CD::Classifier "0..1" -- "1..1" uml2CD::GeneralizationSet : powertype126
 uml2CD::Classifier "1..1" -- "0..9999" uml2CD::GeneralizationSet : powertypeExtent64
-uml2CD::Property "0..9999" --* "1..1" uml2CD::Property : qualifier98
-uml2CD::Typpee "0..9999" -- "1..1" uml2CD::BehavioralFeature : raisedException71
+uml2CD::Property "1..1" *-- "0..9999" uml2CD::Property : qualifier98
+uml2CD::BehavioralFeature "1..1" -- "0..9999" uml2CD::Typpee : raisedException71
 uml2CD::Package "1..1" -- "1..1" uml2CD::PackageMerge : receivingPackage109
-uml2CD::RedefinableElement "0..9999" -- "1..1" uml2CD::RedefinableElement : redefinedElement129
-uml2CD::Interface "0..9999" -- "1..1" uml2CD::Interface : redefinedInterface121
-uml2CD::Operation "0..9999" -- "1..1" uml2CD::Operation : redefinedOperation77
+uml2CD::RedefinableElement "1..1" -- "0..9999" uml2CD::RedefinableElement : redefinedElement129
+uml2CD::Interface "1..1" -- "0..9999" uml2CD::Interface : redefinedInterface121
+uml2CD::Operation "1..1" -- "0..9999" uml2CD::Operation : redefinedOperation77
 uml2CD::Element "1..9999" -- "1..1" uml2CD::Relationship : relatedElement8
 uml2CD::DirectRelationship "1..1" -- "1..9999" uml2CD::Element : source11
 uml2CD::Classifier "1..1" -- "1..1" uml2CD::Generalization : specific58
-uml2CD::ValueSpecification "1..1" --* "1..1" uml2CD::Constraint : specification53
+uml2CD::Constraint "1..1" *-- "1..1" uml2CD::ValueSpecification : specification53
 uml2CD::Classifier "1..1" -- "1..1" uml2CD::Substitution : substitutingClassifier118
-uml2CD::Substitution "0..9999" --* "1..1" uml2CD::Classifier : substitution66
+uml2CD::Classifier "1..1" *-- "0..9999" uml2CD::Substitution : substitution66
 uml2CD::Class "1..1" -- "0..9999" uml2CD::Class : superClass81
-uml2CD::NamedElement "1..9999" -- "1..1" uml2CD::Dependency : supplier113
+uml2CD::Dependency "1..1" -- "1..9999" uml2CD::NamedElement : supplier113
 uml2CD::Dependency "0..9999" -- "1..1" uml2CD::NamedElement : supplierDependency15
-uml2CD::Element "1..9999" -- "1..1" uml2CD::DirectRelationship : target9
-uml2CD::Typpee "0..1" -- "1..1" uml2CD::TypedElement : type50
-uml2CD::ValueSpecification "0..1" --* "1..1" uml2CD::MultiplicityElement : upperValue40
+uml2CD::DirectRelationship "1..1" -- "1..9999" uml2CD::Element : target9
+uml2CD::TypedElement "1..1" -- "0..1" uml2CD::Typpee : type50
+uml2CD::MultiplicityElement "1..1" *-- "0..1" uml2CD::ValueSpecification : upperValue40
 @enduml

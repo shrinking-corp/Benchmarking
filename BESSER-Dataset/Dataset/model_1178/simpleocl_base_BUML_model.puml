@@ -295,12 +295,12 @@ OperatorCallExp <|-- simpleocl::IntOpCallExp
 OperatorCallExp <|-- simpleocl::MulOpCallExp
 OperatorCallExp <|-- simpleocl::NotOpCallExp
 OperatorCallExp <|-- simpleocl::RelOpCallExp
-PrimitiveExp <|-- simpleocl::BooleanExp
-PrimitiveExp <|-- simpleocl::NumericExp
-PrimitiveExp <|-- simpleocl::StringExp
 Primitive <|-- simpleocl::BooleanType
 Primitive <|-- simpleocl::NumericType
 Primitive <|-- simpleocl::StringType
+PrimitiveExp <|-- simpleocl::BooleanExp
+PrimitiveExp <|-- simpleocl::NumericExp
+PrimitiveExp <|-- simpleocl::StringExp
 PropertyCall <|-- simpleocl::LoopExp
 PropertyCall <|-- simpleocl::NavigationOrAttributeCall
 PropertyCall <|-- simpleocl::OperationCall
@@ -310,13 +310,13 @@ VariableDeclaration <|-- simpleocl::Iterator
 VariableDeclaration <|-- simpleocl::LocalVariable
 VariableDeclaration <|-- simpleocl::Parameter
 VariableExp <|-- simpleocl::LambdaCallExp
-simpleocl::OperatorCallExp "0..1" -- "1..1" simpleocl::OclExpression : appliedOperator24
-simpleocl::PropertyCallExp "0..1" -- "1..1" simpleocl::OclExpression : appliedProperty9
+simpleocl::OclExpression "1..1" -- "0..1" simpleocl::OperatorCallExp : appliedOperator24
+simpleocl::OclExpression "1..1" -- "0..1" simpleocl::PropertyCallExp : appliedProperty9
 simpleocl::OclExpression "0..1" --* "1..1" simpleocl::OperatorCallExp : argument50
-simpleocl::OclType "0..9999" --* "1..1" simpleocl::LambdaType : argumentTypes126
+simpleocl::LambdaType "1..1" *-- "0..9999" simpleocl::OclType : argumentTypes126
 simpleocl::OclExpression "0..9999" --* "1..1" simpleocl::StaticOperationCall : arguments41
 simpleocl::OclExpression "0..9999" --* "1..1" simpleocl::OperationCall : arguments48
-simpleocl::OclExpression "0..9999" --* "1..1" simpleocl::LambdaCallExp : arguments54
+simpleocl::LambdaCallExp "1..1" *-- "0..9999" simpleocl::OclExpression : arguments54
 simpleocl::Attribute "0..1" -- "1..1" simpleocl::OclType : attribute94
 simpleocl::TupleType "1..1" *-- "0..9999" simpleocl::TupleTypeAttribute : attributes113
 simpleocl::IterateExp "0..1" -- "1..1" simpleocl::LocalVariable : baseExp81
@@ -326,76 +326,76 @@ simpleocl::PropertyCall "1..1" -- "1..1" simpleocl::PropertyCallExp : callExp46
 simpleocl::PropertyCall "1..9999" --* "1..1" simpleocl::PropertyCallExp : calls43
 simpleocl::CollectionExp "0..1" -- "1..1" simpleocl::OclExpression : collection10
 simpleocl::CollectionType "0..1" -- "1..1" simpleocl::OclType : collectionTypes99
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::IfExp : condition70
+simpleocl::IfExp "1..1" *-- "1..1" simpleocl::OclExpression : condition70
 simpleocl::OclContextDefinition "0..1" --* "1..1" simpleocl::OclFeatureDefinition : context_129
 simpleocl::OclContextDefinition "1..1" *-- "1..1" simpleocl::OclType : context_134
-simpleocl::OclFeatureDefinition "1..1" -- "1..1" simpleocl::OclContextDefinition : definition132
-simpleocl::OclFeatureDefinition "0..1" -- "1..1" simpleocl::OclFeature : definition136
+simpleocl::OclContextDefinition "1..1" -- "1..1" simpleocl::OclFeatureDefinition : definition132
+simpleocl::OclFeature "1..1" -- "0..1" simpleocl::OclFeatureDefinition : definition136
 simpleocl::OclContextDefinition "0..1" -- "1..1" simpleocl::OclType : definitions88
 simpleocl::CollectionType "1..1" *-- "1..1" simpleocl::OclType : elementType86
-simpleocl::OclModelElement "0..9999" -- "1..1" simpleocl::OclModel : elements148
-simpleocl::ModuleElement "0..9999" --* "1..1" simpleocl::Module : elements2
-simpleocl::OclExpression "0..9999" --* "1..1" simpleocl::CollectionExp : elements27
+simpleocl::OclModel "1..1" -- "0..9999" simpleocl::OclModelElement : elements148
+simpleocl::Module "1..1" *-- "0..9999" simpleocl::ModuleElement : elements2
+simpleocl::CollectionExp "1..1" *-- "0..9999" simpleocl::OclExpression : elements27
 simpleocl::MapElement "0..9999" --* "1..1" simpleocl::MapExp : elements30
 simpleocl::IfExp "1..1" *-- "1..1" simpleocl::OclExpression : elseExpression72
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::BraceExp : exp56
+simpleocl::BraceExp "1..1" *-- "1..1" simpleocl::OclExpression : exp56
 simpleocl::OclFeature "1..1" --* "1..1" simpleocl::OclFeatureDefinition : feature128
 simpleocl::IfExp "0..1" -- "1..1" simpleocl::OclExpression : ifExp120
 simpleocl::IfExp "0..1" -- "1..1" simpleocl::OclExpression : ifExp216
-simpleocl::OclExpression "1..1" -- "0..1" simpleocl::IfExp : ifExp38
-simpleocl::Module "1..1" *-- "0..9999" simpleocl::Import : imports1
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::LetExp : in_65
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::Attribute : initExpression138
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::LocalVariable : initExpression79
+simpleocl::IfExp "0..1" -- "1..1" simpleocl::OclExpression : ifExp38
+simpleocl::Import "0..9999" --* "1..1" simpleocl::Module : imports1
+simpleocl::LetExp "1..1" *-- "1..1" simpleocl::OclExpression : in_65
+simpleocl::Attribute "1..1" *-- "1..1" simpleocl::OclExpression : initExpression138
+simpleocl::LocalVariable "1..1" *-- "1..1" simpleocl::OclExpression : initExpression79
 simpleocl::LocalVariable "0..1" -- "1..1" simpleocl::OclExpression : initializedVariable15
 simpleocl::Iterator "1..9999" --* "1..1" simpleocl::LoopExp : iterators60
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::MapElement : key33
+simpleocl::MapElement "1..1" *-- "1..1" simpleocl::OclExpression : key33
 simpleocl::MapType "1..1" *-- "1..1" simpleocl::OclType : keyType122
 simpleocl::LambdaType "0..1" -- "1..1" simpleocl::OclType : lambdaArgType107
 simpleocl::LambdaType "0..1" -- "1..1" simpleocl::OclType : lambdaReturnType105
 simpleocl::LetExp "0..1" -- "1..1" simpleocl::OclExpression : letExp12
 simpleocl::LetExp "0..1" -- "1..1" simpleocl::LocalVariable : letExp77
-simpleocl::OclExpression "1..1" -- "0..1" simpleocl::LoopExp : loopExp13
+simpleocl::LoopExp "0..1" -- "1..1" simpleocl::OclExpression : loopExp13
 simpleocl::Iterator "1..1" -- "0..1" simpleocl::LoopExp : loopExpr82
-simpleocl::MapExp "1..1" -- "1..1" simpleocl::MapElement : map31
+simpleocl::MapElement "1..1" -- "1..1" simpleocl::MapExp : map31
 simpleocl::MapType "0..1" -- "1..1" simpleocl::OclType : mapType293
 simpleocl::MapType "0..1" -- "1..1" simpleocl::OclType : mapType97
 simpleocl::OclInstanceModel "1..1" -- "1..1" simpleocl::OclMetamodel : metamodel150
-simpleocl::OclMetamodel "0..9999" --* "1..1" simpleocl::Module : metamodels0
+simpleocl::Module "1..1" *-- "0..9999" simpleocl::OclMetamodel : metamodels0
 simpleocl::OclModel "1..1" -- "1..1" simpleocl::OclModelElementExp : model112
 simpleocl::OclModel "1..1" -- "1..1" simpleocl::OclModelElement : model118
 simpleocl::OclInstanceModel "0..9999" -- "1..1" simpleocl::OclMetamodel : model149
 simpleocl::Module "1..1" -- "1..1" simpleocl::ModuleElement : module4
-simpleocl::Module "1..1" -- "1..1" simpleocl::Import : module5
+simpleocl::Import "1..1" -- "1..1" simpleocl::Module : module5
 simpleocl::OclExpression "0..1" -- "1..1" simpleocl::OclType : oclExpression89
 simpleocl::Operation "1..1" -- "1..1" simpleocl::Parameter : operation84
-simpleocl::Operation "0..1" -- "1..1" simpleocl::OclType : operation91
-simpleocl::OclExpression "1..1" -- "0..1" simpleocl::Attribute : owningAttribute22
+simpleocl::OclType "1..1" -- "0..1" simpleocl::Operation : operation91
+simpleocl::Attribute "0..1" -- "1..1" simpleocl::OclExpression : owningAttribute22
 simpleocl::OclExpression "1..1" -- "0..1" simpleocl::Operation : owningOperation18
-simpleocl::Parameter "0..9999" --* "1..1" simpleocl::Operation : parameters142
-simpleocl::OperationCall "0..1" -- "1..1" simpleocl::OclExpression : parentOperation14
-simpleocl::VariableExp "1..1" -- "1..1" simpleocl::VariableDeclaration : referredVariable26
-simpleocl::LocalVariable "1..1" --* "1..1" simpleocl::IterateExp : result61
-simpleocl::OclType "1..1" --* "1..1" simpleocl::LambdaType : returnType124
+simpleocl::Operation "1..1" *-- "0..9999" simpleocl::Parameter : parameters142
+simpleocl::OclExpression "1..1" -- "0..1" simpleocl::OperationCall : parentOperation14
+simpleocl::VariableDeclaration "1..1" -- "1..1" simpleocl::VariableExp : referredVariable26
+simpleocl::IterateExp "1..1" *-- "1..1" simpleocl::LocalVariable : result61
+simpleocl::LambdaType "1..1" *-- "1..1" simpleocl::OclType : returnType124
 simpleocl::OclType "1..1" --* "1..1" simpleocl::Operation : returnType143
 simpleocl::OclType "1..1" --* "1..1" simpleocl::StaticPropertyCallExp : source37
-simpleocl::PropertyCallExp "1..1" *-- "1..1" simpleocl::OclExpression : source44
-simpleocl::OperatorCallExp "1..1" *-- "1..1" simpleocl::OclExpression : source52
-simpleocl::StaticPropertyCallExp "1..1" *-- "1..1" simpleocl::StaticPropertyCall : staticCall39
-simpleocl::StaticPropertyCallExp "1..1" -- "1..1" simpleocl::StaticPropertyCall : staticCallExp40
+simpleocl::OclExpression "1..1" --* "1..1" simpleocl::PropertyCallExp : source44
+simpleocl::OclExpression "1..1" --* "1..1" simpleocl::OperatorCallExp : source52
+simpleocl::StaticPropertyCall "1..1" --* "1..1" simpleocl::StaticPropertyCallExp : staticCall39
+simpleocl::StaticPropertyCall "1..1" -- "1..1" simpleocl::StaticPropertyCallExp : staticCallExp40
 simpleocl::OclType "1..1" -- "0..1" simpleocl::StaticPropertyCallExp : staticPropertyCall109
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::IfExp : thenExpression68
+simpleocl::IfExp "1..1" *-- "1..1" simpleocl::OclExpression : thenExpression68
 simpleocl::TupleExp "1..1" -- "1..1" simpleocl::TuplePart : tuple29
-simpleocl::TuplePart "0..9999" --* "1..1" simpleocl::TupleExp : tuplePart28
+simpleocl::TupleExp "1..1" *-- "0..9999" simpleocl::TuplePart : tuplePart28
 simpleocl::TupleType "1..1" -- "1..1" simpleocl::TupleTypeAttribute : tupleType117
-simpleocl::TupleTypeAttribute "0..1" -- "1..1" simpleocl::OclType : tupleTypeAttribute100
+simpleocl::OclType "1..1" -- "0..1" simpleocl::TupleTypeAttribute : tupleTypeAttribute100
 simpleocl::OclType "1..1" --* "1..1" simpleocl::TupleTypeAttribute : type115
-simpleocl::OclType "1..1" --* "1..1" simpleocl::Attribute : type140
-simpleocl::OclType "0..1" --* "1..1" simpleocl::OclExpression : type7
+simpleocl::Attribute "1..1" *-- "1..1" simpleocl::OclType : type140
+simpleocl::OclExpression "1..1" *-- "0..1" simpleocl::OclType : type7
 simpleocl::OclType "0..1" --* "1..1" simpleocl::VariableDeclaration : type74
-simpleocl::OclExpression "1..1" --* "1..1" simpleocl::MapElement : value34
-simpleocl::OclType "1..1" --* "1..1" simpleocl::MapType : valueType120
-simpleocl::LocalVariable "1..1" --* "1..1" simpleocl::LetExp : variable63
+simpleocl::MapElement "1..1" *-- "1..1" simpleocl::OclExpression : value34
+simpleocl::MapType "1..1" *-- "1..1" simpleocl::OclType : valueType120
+simpleocl::LetExp "1..1" *-- "1..1" simpleocl::LocalVariable : variable63
 simpleocl::OclType "1..1" -- "0..1" simpleocl::VariableDeclaration : variableDeclaration102
 simpleocl::VariableDeclaration "1..1" -- "0..9999" simpleocl::VariableExp : variableExp76
 @enduml

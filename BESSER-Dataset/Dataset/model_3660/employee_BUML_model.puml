@@ -53,18 +53,18 @@ class employee::SmallProject {
 Project <|-- employee::LargeProject
 Project <|-- employee::SmallProject
 employee::Address "0..1" --* "1..1" employee::Employee : address13
-employee::Employee "1..1" -- "0..9999" employee::Degree : degrees25
-employee::Directory "1..1" *-- "0..9999" employee::Degree : degrees5
+employee::Degree "0..9999" -- "1..1" employee::Employee : degrees25
+employee::Degree "0..9999" --* "1..1" employee::Directory : degrees5
 employee::EmailAddress "0..9999" --* "1..1" employee::Employee : emailAddresses31
-employee::Employee "0..9999" --* "1..1" employee::Directory : employees1
-employee::JobTitle "0..1" -- "1..1" employee::Employee : jobTitle15
-employee::JobTitle "0..9999" --* "1..1" employee::Directory : jobs3
-employee::Employee "0..9999" -- "1..1" employee::Employee : managedEmployees22
-employee::Employee "0..1" -- "1..1" employee::Employee : manager19
-employee::PhoneNumber "1..1" -- "1..1" employee::Employee : owner10
-employee::EmploymentPeriod "0..1" --* "1..1" employee::Employee : period11
-employee::PhoneNumber "0..9999" --* "1..1" employee::Employee : phoneNumbers24
-employee::Project "0..9999" --* "1..1" employee::Directory : projects0
-employee::Project "0..9999" -- "1..1" employee::Employee : projects28
+employee::Directory "1..1" *-- "0..9999" employee::Employee : employees1
+employee::Employee "1..1" -- "0..1" employee::JobTitle : jobTitle15
+employee::Directory "1..1" *-- "0..9999" employee::JobTitle : jobs3
+employee::Employee "1..1" -- "0..9999" employee::Employee : managedEmployees22
+employee::Employee "1..1" -- "0..1" employee::Employee : manager19
+employee::Employee "1..1" -- "1..1" employee::PhoneNumber : owner10
+employee::Employee "1..1" *-- "0..1" employee::EmploymentPeriod : period11
+employee::Employee "1..1" *-- "0..9999" employee::PhoneNumber : phoneNumbers24
+employee::Directory "1..1" *-- "0..9999" employee::Project : projects0
+employee::Employee "1..1" -- "0..9999" employee::Project : projects28
 employee::Employee "0..1" -- "1..1" employee::Project : teamLeader7
 @enduml

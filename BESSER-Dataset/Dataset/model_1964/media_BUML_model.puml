@@ -1,0 +1,52 @@
+@startuml
+class BaseObject {
+}
+class MediaPlayer::BaseObject {
+  + id : int
+  + propertyChangeSupport : str
+  + addPropertyChangeListener(listener : any) : void
+  + removePropertyChangeListener(listener : any) : void
+}
+class MediaPlayer::Library {
+}
+abstract class MediaPlayer::MediaApi {
+  + canPlay(media : any) : bool
+  + dispose() : void
+  + init() : void
+  + pause(pauseMe : any) : void
+  + play(playMe : any) : void
+  + stop(stopMe : any) : void
+  + updateMediaObjectInfo(updateMe : any) : void
+}
+class MediaPlayer::MediaObject {
+  + album : str
+  + artist : str
+  + location : str
+  + state : str
+  + title : str
+  + year : int
+}
+class MediaPlayer::PlayLayer {
+  + registerApi(addMe : any) : void
+  + unregisterApi(unregisterMe : any) : void
+}
+class MediaPlayer::Playlist {
+  + name : str
+  + repeat : bool
+  + shuffle() : void
+}
+enum State {
+  PAUSED
+  PLAYING
+  STOPPED
+}
+BaseObject <|-- MediaPlayer::Library
+BaseObject <|-- MediaPlayer::MediaObject
+BaseObject <|-- MediaPlayer::Playlist
+MediaPlayer::MediaApi "1..1" -- "0..9999" MediaPlayer::MediaObject : currentlyPaused3
+MediaPlayer::MediaApi "1..1" -- "0..9999" MediaPlayer::MediaObject : currentlyPlaying1
+MediaPlayer::MediaApi "0..9999" -- "1..1" MediaPlayer::PlayLayer : installedApi6
+MediaPlayer::Library "1..1" *-- "0..9999" MediaPlayer::MediaObject : mediaLibrary10
+MediaPlayer::MediaObject "0..9999" -- "1..1" MediaPlayer::Playlist : mediaList0
+MediaPlayer::Library "0..1" -- "1..1" MediaPlayer::PlayLayer : myLibrary8
+@enduml

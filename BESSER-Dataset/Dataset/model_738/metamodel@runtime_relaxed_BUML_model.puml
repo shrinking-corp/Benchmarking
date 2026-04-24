@@ -183,10 +183,10 @@ AspectModelElement <|-- art::relaxed::instance::relaxed::AttributeInstance
 AspectModelElement <|-- art::relaxed::instance::relaxed::Binding
 AspectModelElement <|-- art::relaxed::instance::relaxed::Entry
 AspectModelElement <|-- art::relaxed::type::relaxed::DictionaryDefaultValue
-AttributeInstance <|-- art::relaxed::instance::relaxed::DictionaryValuedAttribute
-AttributeInstance <|-- art::relaxed::instance::relaxed::ValuedAttribute
 Attribute <|-- art::relaxed::type::relaxed::BasicAttribute
 Attribute <|-- art::relaxed::type::relaxed::Dictionary
+AttributeInstance <|-- art::relaxed::instance::relaxed::DictionaryValuedAttribute
+AttributeInstance <|-- art::relaxed::instance::relaxed::ValuedAttribute
 Binding <|-- art::relaxed::instance::relaxed::DelegationBinding
 Binding <|-- art::relaxed::instance::relaxed::TransmissionBinding
 CardinalityElement <|-- art::relaxed::type::relaxed::Port
@@ -220,7 +220,7 @@ TypedElement <|-- art::relaxed::type::relaxed::Attribute
 TypedElement <|-- art::relaxed::type::relaxed::Parameter
 type::relaxed::AbstractPort <|-- art::relaxed::type::relaxed::Port
 AttributeInstance "0..9999" --* "1..1" art::relaxed::instance::relaxed::ComponentInstance : attribute14
-art::relaxed::instance::relaxed::ValuedAttribute "1..1" -- "1..1" BasicAttribute : attribute35
+BasicAttribute "1..1" -- "1..1" art::relaxed::instance::relaxed::ValuedAttribute : attribute35
 Dictionary "1..1" -- "1..1" art::relaxed::instance::relaxed::DictionaryValuedAttribute : attribute37
 Attribute "0..9999" --* "1..1" art::relaxed::type::relaxed::ComponentType : attribute42
 TransmissionBinding "0..9999" --* "1..1" art::relaxed::instance::relaxed::ComponentInstance : binding16
@@ -230,12 +230,12 @@ art::relaxed::DataType "0..9999" --* "1..1" art::relaxed::System : dataTypes5
 DelegationBinding "0..9999" --* "1..1" art::relaxed::instance::relaxed::CompositeInstance : delegation23
 Entry "0..9999" --* "1..1" art::relaxed::instance::relaxed::DictionaryValuedAttribute : entries36
 AbstractPort "1..1" -- "1..1" art::relaxed::instance::relaxed::DelegationBinding : exported32
-art::relaxed::instance::relaxed::ComponentInstance "1..1" -- "0..9999" InstanceGroup : groups20
+InstanceGroup "0..9999" -- "1..1" art::relaxed::instance::relaxed::ComponentInstance : groups20
 TypeGroup "0..9999" -- "1..1" art::relaxed::type::relaxed::ComponentType : groups44
 Group "0..9999" --* "1..1" art::relaxed::System : groups7
 PortId "1..9999" --* "1..1" art::relaxed::type::relaxed::PortCollection : ids55
 ComponentImplementation "0..1" --* "1..1" art::relaxed::instance::relaxed::ComponentInstance : implem18
-art::relaxed::type::relaxed::ComponentType "1..1" *-- "0..1" TypeImplementation : implem46
+TypeImplementation "0..1" --* "1..1" art::relaxed::type::relaxed::ComponentType : implem46
 Parameter "0..9999" --* "1..1" art::relaxed::type::relaxed::Operation : input49
 ComponentInstance "0..9999" -- "1..1" art::relaxed::group::relaxed::InstanceGroup : instances64
 DictionaryDefaultValue "1..1" -- "1..1" art::relaxed::instance::relaxed::DefaultEntry : key39
@@ -244,18 +244,18 @@ Node "0..9999" --* "1..1" art::relaxed::System : nodes0
 Operation "0..9999" --* "1..1" art::relaxed::type::relaxed::Service : operation48
 Parameter "0..9999" --* "1..1" art::relaxed::type::relaxed::Operation : output50
 AbstractPort "0..9999" --* "1..1" art::relaxed::type::relaxed::ComponentType : port40
-art::relaxed::instance::relaxed::TransmissionBinding "1..1" -- "1..1" AbstractPort : server27
+AbstractPort "1..1" -- "1..1" art::relaxed::instance::relaxed::TransmissionBinding : server27
 ComponentInstance "1..1" -- "1..1" art::relaxed::instance::relaxed::Binding : serverInstance24
-art::relaxed::type::relaxed::AbstractPort "1..1" -- "1..1" Service : service53
+Service "1..1" -- "1..1" art::relaxed::type::relaxed::AbstractPort : service53
 Service "0..9999" --* "1..1" art::relaxed::System : services1
 AbstractPort "1..1" -- "1..1" art::relaxed::instance::relaxed::DelegationBinding : source30
 ComponentInstance "0..9999" --* "1..1" art::relaxed::instance::relaxed::CompositeInstance : subComponent21
-art::relaxed::group::relaxed::TypeGroup "1..1" *-- "0..9999" TypeGroup : subGroups62
+TypeGroup "0..9999" --* "1..1" art::relaxed::group::relaxed::TypeGroup : subGroups62
 InstanceGroup "0..9999" --* "1..1" art::relaxed::group::relaxed::InstanceGroup : subGroups67
-art::relaxed::instance::relaxed::ComponentInstance "1..1" -- "0..1" CompositeInstance : superComponent13
+CompositeInstance "0..1" -- "1..1" art::relaxed::instance::relaxed::ComponentInstance : superComponent13
 ComponentType "1..1" -- "1..1" art::relaxed::instance::relaxed::ComponentInstance : type11
 art::relaxed::DataType "1..1" -- "1..1" art::relaxed::TypedElement : type9
-art::relaxed::System "1..1" *-- "0..9999" ComponentType : types3
+ComponentType "0..9999" --* "1..1" art::relaxed::System : types3
 ComponentType "0..9999" -- "1..1" art::relaxed::group::relaxed::TypeGroup : types60
-type::relaxed::art::relaxed::DataType "1..1" -- "1..1" art::relaxed::type::relaxed::Dictionary : valueType56
+art::relaxed::type::relaxed::Dictionary "1..1" -- "1..1" type::relaxed::art::relaxed::DataType : valueType56
 @enduml

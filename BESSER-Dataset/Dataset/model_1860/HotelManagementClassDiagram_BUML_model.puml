@@ -1,0 +1,178 @@
+@startuml
+enum EType {
+  Cleaner
+  Manager
+  Receptionist
+}
+class HotelManagementClassDiagram::Addon {
+  + description : str
+  + name : str
+}
+class HotelManagementClassDiagram::Bill {
+  + final : bool
+  + paid : bool
+  + totalPrice : float
+  + valueAddedTax : float
+  + addCostable(costable : any) : void
+}
+class HotelManagementClassDiagram::BookedRoom {
+  + addAddon(addon : any) : void
+  + removeAddon(addon : any) : void
+}
+class HotelManagementClassDiagram::Booking {
+  + bookingId : int
+  + checkedIn : bool
+  + checkedOut : bool
+  + created : date
+  + endDate : date
+  + externalComments : str
+  + internalComments : str
+  + startDate : date
+  + addAddon(addon : any) : void
+  + addDiscount(discount : any) : void
+  + addRoom(room : any) : void
+  + checkIn() : void
+  + checkOut() : str
+  + generateBill() : str
+  + pay(bill : any) : bool
+  + removeAddon(addon : any) : void
+  + removeDiscount(discount : any) : void
+  + removeRoom(room : any) : void
+}
+class HotelManagementClassDiagram::BookingController {
+  + assignRoom(room : any) : void
+  + checkIn(booking : any) : void
+  + checkOut(booking : any) : void
+  + confirm(booking : any) : bool
+  + createBooking(roomTypes : any) : bool
+  + createKeyCard(room : any) : void
+  + findCustomer(ssNumber : any) : void
+  + getBooking(bookingId : any) : str
+  + saveCustomer(customer : any) : void
+  + searchAvailableRoomTypes(fromDate : any, nbrOfAdults : any, nbrOfChildren : any, toDate : any) : str
+  + sendConfirmation(booking : any) : bool
+  + updateBooking(booking : any) : bool
+}
+abstract class HotelManagementClassDiagram::Costable {
+  + price : float
+  + addDiscount() : void
+  + removeDiscount() : void
+}
+class HotelManagementClassDiagram::Creditcard {
+  + cvc : int
+  + expirationDay : int
+  + expirationMonth : int
+  + number : str
+  + owner : str
+}
+class HotelManagementClassDiagram::Customer {
+  + bonusPoints : int
+  + customerID : int
+  + miscInfo : str
+  + rank : float
+  + addBonusPoints(bonusPoints : any) : void
+}
+class HotelManagementClassDiagram::Discount {
+  + amount : float
+  + isPercentage : str
+}
+class HotelManagementClassDiagram::Employee {
+  + employeeID : int
+  + salary : float
+  + workRate : int
+  + Booking() : void
+  + Boolean() : void
+  + roomTypes() : void
+}
+class HotelManagementClassDiagram::EmployeeType {
+  + acessLevel : int
+  + type : str
+}
+class HotelManagementClassDiagram::Hotel {
+  + address : str
+  + name : str
+  + rank : float
+  + authenticate(login : any, password : any) : void
+  + getBookingController() : void
+  + getMaintenanceController() : void
+  + getManagementController() : void
+}
+class HotelManagementClassDiagram::Interaction1 {
+}
+class HotelManagementClassDiagram::Interaction2 {
+}
+class HotelManagementClassDiagram::Interaction3 {
+}
+class HotelManagementClassDiagram::Interaction4 {
+}
+class HotelManagementClassDiagram::Interaction5 {
+}
+class HotelManagementClassDiagram::MaintenanceController {
+  + addToStack(room : any) : void
+  + getNextRoomToClean(room : any) : void
+  + notifyWorker(worker : any) : void
+  + removeFromStack(room : any) : void
+  + setStatus(room : any, status : any) : void
+}
+class HotelManagementClassDiagram::ManagementController {
+  + modifyBooking(booking : any) : void
+  + registerAddon(addon : any) : void
+  + registerDiscount(discount : any) : void
+  + registerRoom(room : any) : void
+  + setDateSpecificPrices(costable : any, endDate : any, priceChange : any, startDate : any) : void
+  + updateAddon(addon : any) : void
+  + updateRoom(room : any) : void
+}
+abstract class HotelManagementClassDiagram::Person {
+  + SSNumber : str
+  + city : str
+  + country : str
+  + gender : str
+  + name : str
+  + phoneNumber : str
+  + postalCode : str
+  + street : str
+  + title : str
+}
+class HotelManagementClassDiagram::Room {
+  + booked : bool
+  + internalComment : str
+  + maxNbrPeople : int
+  + roomName : str
+  + roomNumber : int
+  + size : float
+  + types : str
+  + underCleaning : bool
+  + underRepair : bool
+}
+class Person {
+}
+class Room {
+}
+enum RoomType {
+  Double
+  Handicapable
+  Single
+  Suite
+}
+Person <|-- HotelManagementClassDiagram::Customer
+Person <|-- HotelManagementClassDiagram::Employee
+Room <|-- HotelManagementClassDiagram::BookedRoom
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::Interaction1 : _24
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::Interaction2 : _26
+HotelManagementClassDiagram::Interaction3 "1..1" -- "1..1" HotelManagementClassDiagram::MaintenanceController : _28
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::Interaction4 : _30
+HotelManagementClassDiagram::Booking "1..1" -- "1..1" HotelManagementClassDiagram::Interaction5 : _32
+HotelManagementClassDiagram::Addon "0..9999" -- "1..1" HotelManagementClassDiagram::BookedRoom : addons22
+HotelManagementClassDiagram::Addon "0..9999" -- "1..1" HotelManagementClassDiagram::Booking : addons4
+HotelManagementClassDiagram::Booking "1..1" -- "1..9999" HotelManagementClassDiagram::Room : bookedRooms6
+HotelManagementClassDiagram::Bill "1..1" -- "1..9999" HotelManagementClassDiagram::Costable : costables13
+HotelManagementClassDiagram::Booking "1..1" -- "1..1" HotelManagementClassDiagram::Creditcard : creditCard1
+HotelManagementClassDiagram::Bill "1..1" -- "1..1" HotelManagementClassDiagram::Customer : customer14
+HotelManagementClassDiagram::Booking "1..1" -- "1..1" HotelManagementClassDiagram::Customer : customer2
+HotelManagementClassDiagram::Booking "1..1" -- "1..9999" HotelManagementClassDiagram::Discount : discounts11
+HotelManagementClassDiagram::Costable "1..1" -- "1..9999" HotelManagementClassDiagram::Discount : discounts17
+HotelManagementClassDiagram::Employee "1..1" -- "1..1" HotelManagementClassDiagram::EmployeeType : employeeType0
+HotelManagementClassDiagram::Booking "1..1" -- "1..1" HotelManagementClassDiagram::Customer : paymentMaster8
+HotelManagementClassDiagram::MaintenanceController "1..1" -- "0..9999" HotelManagementClassDiagram::Room : roomStack20
+@enduml

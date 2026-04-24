@@ -1,0 +1,72 @@
+@startuml
+class ActionStep {
+}
+class CaseItem {
+}
+enum Day {
+  FRIDAY
+  MONDAY
+  SATURDAY
+  SUNDAY
+  THURSDAY
+  TUESDAY
+  WEDNESDAY
+}
+enum DayOccurrence {
+  FIRST
+  FOURTH
+  LAST
+  SECOND
+  THIRD
+}
+class DynamicValue {
+}
+enum OccursMode {
+  DAILY
+  MONTHLY
+  WEEKLY
+}
+class OccursModel {
+}
+class timeBasedRouting::DailyOccursModel {
+  + skipDays : int
+  + startDate : date
+}
+class timeBasedRouting::MonthlyOccursModel {
+  + byIndex : bool
+  + day : str
+  + dayIndex : int
+  + dayOccurence : str
+  + skipMonths : int
+  + startDate : date
+}
+class timeBasedRouting::OccursModel {
+  + description : str
+  + mode : str
+  + isMatch(date : any) : bool
+}
+class timeBasedRouting::TimeBasedRouting {
+}
+class timeBasedRouting::TimeItem {
+  + description : str
+}
+class timeBasedRouting::TimeRange {
+  + endRange : date
+  + name : str
+  + startRange : date
+  + isMatch(date : any) : bool
+}
+class timeBasedRouting::WeeklyOccursModel {
+  + days : str
+  + skipWeeks : int
+  + startDate : date
+}
+ActionStep <|-- timeBasedRouting::TimeBasedRouting
+CaseItem <|-- timeBasedRouting::TimeItem
+OccursModel <|-- timeBasedRouting::DailyOccursModel
+OccursModel <|-- timeBasedRouting::MonthlyOccursModel
+OccursModel <|-- timeBasedRouting::WeeklyOccursModel
+timeBasedRouting::OccursModel "0..1" --* "1..1" timeBasedRouting::TimeRange : occursModel3
+timeBasedRouting::TimeBasedRouting "1..1" *-- "0..9999" timeBasedRouting::TimeItem : times1
+DynamicValue "0..1" --* "1..1" timeBasedRouting::TimeBasedRouting : value0
+@enduml

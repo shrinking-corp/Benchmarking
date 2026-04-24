@@ -72,7 +72,7 @@ class operators::Warehouse {
 Company <|-- operators::Operator
 Relationship <|-- operators::EquipmentRelationship
 Relationship <|-- operators::FunctionRelationship
-operators::Person "0..1" -- "1..1" operators::Network : createdByRef31
+operators::Network "1..1" -- "0..1" operators::Person : createdByRef31
 operators::Node "1..1" -- "0..1" operators::Person : createdByRef37
 operators::DiagramInfo "0..9999" --* "1..1" operators::Network : diagrams17
 operators::Equipment "0..1" -- "1..1" operators::EquipmentRelationship : equipment1Ref0
@@ -83,10 +83,10 @@ operators::Equipment "0..9999" -- "1..1" operators::ResourceExpansion : equipmen
 operators::EquipmentRelationship "0..9999" --* "1..1" operators::Network : equipmentRelationships26
 operators::ExpansionExperience "0..9999" --* "1..1" operators::Operator : expansionExperiences55
 operators::Function "0..1" -- "1..1" operators::FunctionRelationship : function1Ref6
-operators::FunctionRelationship "1..1" -- "0..1" operators::Function : function2Ref7
+operators::Function "0..1" -- "1..1" operators::FunctionRelationship : function2Ref7
 operators::Function "0..1" -- "1..1" operators::Marker : functionRef12
 operators::Function "0..9999" -- "1..1" operators::ResourceExpansion : functionRefs71
-operators::Network "1..1" *-- "0..9999" operators::FunctionRelationship : functionRelationships23
+operators::FunctionRelationship "0..9999" --* "1..1" operators::Network : functionRelationships23
 operators::Lifecycle "0..1" --* "1..1" operators::Node : lifecycle33
 operators::Marker "1..1" -- "0..1" operators::NetXResource : markerResourceRef15
 operators::Marker "0..9999" --* "1..1" operators::ResourceForecast : markers74
@@ -96,15 +96,15 @@ operators::Network "0..9999" --* "1..1" operators::Network : networks21
 operators::Network "0..9999" --* "1..1" operators::Operator : networks45
 operators::Node "0..1" -- "1..1" operators::Relationship : nodeID1Ref58
 operators::Node "0..1" -- "1..1" operators::Relationship : nodeID2Ref60
-operators::ResourceExpansion "1..1" -- "0..9999" operators::Node : nodeRefs65
-operators::NodeType "0..9999" --* "1..1" operators::Node : nodeType35
+operators::Node "0..9999" -- "1..1" operators::ResourceExpansion : nodeRefs65
+operators::Node "1..1" *-- "0..9999" operators::NodeType : nodeType35
 operators::Network "1..1" *-- "0..9999" operators::Node : nodes18
-operators::Warehouse "1..1" *-- "0..9999" operators::Node : nodes78
-operators::NodeType "0..1" -- "1..1" operators::Node : originalNodeTypeRef40
-operators::Relationship "1..1" -- "0..1" operators::Protocol : protocolRef63
-operators::ResourceExpansion "0..9999" --* "1..1" operators::Operator : resourceExpansions53
-operators::Room "0..1" -- "1..1" operators::Node : roomRef43
-operators::ServiceUser "0..9999" --* "1..1" operators::Operator : serviceUsers51
-operators::Service "0..9999" --* "1..1" operators::Operator : services49
+operators::Node "0..9999" --* "1..1" operators::Warehouse : nodes78
+operators::Node "1..1" -- "0..1" operators::NodeType : originalNodeTypeRef40
+operators::Protocol "0..1" -- "1..1" operators::Relationship : protocolRef63
+operators::Operator "1..1" *-- "0..9999" operators::ResourceExpansion : resourceExpansions53
+operators::Node "1..1" -- "0..1" operators::Room : roomRef43
+operators::Operator "1..1" *-- "0..9999" operators::ServiceUser : serviceUsers51
+operators::Operator "1..1" *-- "0..9999" operators::Service : services49
 operators::Operator "1..1" *-- "0..9999" operators::Warehouse : warehouses47
 @enduml

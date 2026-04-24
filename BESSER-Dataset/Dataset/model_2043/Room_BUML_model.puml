@@ -218,114 +218,114 @@ SAPoint <|-- room::RefSAPoint
 SAPoint <|-- room::RelaySAPoint
 SemanticsRule <|-- room::SemanticsInRule
 SemanticsRule <|-- room::SemanticsOutRule
+State <|-- room::BaseState
+State <|-- room::RefinedState
 StateGraphItem <|-- room::StateGraphNode
 StateGraphItem <|-- room::Transition
 StateGraphNode <|-- room::ChoicePoint
 StateGraphNode <|-- room::State
 StateGraphNode <|-- room::TrPoint
-State <|-- room::BaseState
-State <|-- room::RefinedState
 StructureClass <|-- room::ActorContainerClass
 StructureClass <|-- room::LogicalSystem
 TrPoint <|-- room::EntryPoint
 TrPoint <|-- room::ExitPoint
 TrPoint <|-- room::TransitionPoint
+Transition <|-- room::InitialTransition
+Transition <|-- room::NonInitialTransition
 TransitionTerminal <|-- room::ChoicepointTerminal
 TransitionTerminal <|-- room::StateTerminal
 TransitionTerminal <|-- room::SubStateTrPointTerminal
 TransitionTerminal <|-- room::TrPointTerminal
-Transition <|-- room::InitialTransition
-Transition <|-- room::NonInitialTransition
-room::Transition "1..1" *-- "0..1" room::DetailCode : action187
+room::DetailCode "0..1" --* "1..1" room::Transition : action187
 room::ActorClass "0..9999" --* "1..1" room::RoomModel : actorClasses5
 room::ActorContainerRef "0..1" -- "1..1" room::BindingEndPoint : actorRef145
-room::ActorRef "0..9999" --* "1..1" room::ActorContainerClass : actorRefs15
+room::ActorContainerClass "1..1" *-- "0..9999" room::ActorRef : actorRefs15
 room::FreeTypedID "0..9999" --* "1..1" room::Operation : arguments35
-room::TypedID "0..9999" --* "1..1" room::Message : arguments64
+room::Message "1..1" *-- "0..9999" room::TypedID : arguments64
 room::ActorClass "1..1" *-- "0..9999" room::Attribute : attributes112
 room::Attribute "0..9999" --* "1..1" room::DataClass : attributes28
 room::Attribute "0..9999" --* "1..1" room::PortClass : attributes70
-room::RefinedState "1..1" -- "0..1" room::BaseState : base184
-room::DataClass "1..1" -- "0..1" room::DataClass : base23
+room::BaseState "0..1" -- "1..1" room::RefinedState : base184
+room::DataClass "0..1" -- "1..1" room::DataClass : base23
 room::ProtocolClass "0..1" -- "1..1" room::ProtocolClass : base44
 room::ActorClass "0..1" -- "1..1" room::ActorClass : base93
-room::StructureClass "1..1" *-- "0..9999" room::Binding : bindings11
+room::Binding "0..9999" --* "1..1" room::StructureClass : bindings11
 room::ChoicePoint "0..9999" --* "1..1" room::StateGraph : chPoints180
-room::DetailCode "0..1" --* "1..1" room::CPBranchTransition : condition193
-room::ProtocolClass "1..1" *-- "0..1" room::PortClass : conjugate59
+room::CPBranchTransition "1..1" *-- "0..1" room::DetailCode : condition193
+room::PortClass "0..1" --* "1..1" room::ProtocolClass : conjugate59
 room::LayerConnection "0..9999" --* "1..1" room::StructureClass : connections12
 room::ChoicePoint "0..1" -- "1..1" room::ChoicepointTerminal : cp204
-room::RoomModel "1..1" *-- "0..9999" room::DataClass : dataClasses1
+room::DataClass "0..9999" --* "1..1" room::RoomModel : dataClasses1
 room::DetailCode "0..1" --* "1..1" room::Operation : detailCode41
 room::DetailCode "0..1" --* "1..1" room::MessageHandler : detailCode81
-room::BindingEndPoint "0..1" --* "1..1" room::Binding : endpoint1140
-room::BindingEndPoint "0..1" --* "1..1" room::Binding : endpoint2142
-room::State "1..1" *-- "0..1" room::DetailCode : entryCode167
+room::Binding "1..1" *-- "0..1" room::BindingEndPoint : endpoint1140
+room::Binding "1..1" *-- "0..1" room::BindingEndPoint : endpoint2142
+room::DetailCode "0..1" --* "1..1" room::State : entryCode167
 room::DetailCode "0..1" --* "1..1" room::State : exitCode169
-room::ExternalPort "0..9999" --* "1..1" room::ActorClass : extPorts106
+room::ActorClass "1..1" *-- "0..9999" room::ExternalPort : extPorts106
 room::SemanticsRule "0..9999" --* "1..1" room::SemanticsRule : followUps90
 room::LayerConnection "1..1" *-- "0..1" room::SAPoint : from150
 room::NonInitialTransition "1..1" *-- "0..1" room::TransitionTerminal : from190
 room::InterfaceItem "0..1" -- "1..1" room::MessageFromIf : from213
-room::Trigger "1..1" *-- "0..1" room::Guard : guard208
+room::Guard "0..1" --* "1..1" room::Trigger : guard208
 room::DetailCode "0..1" --* "1..1" room::Guard : guard216
-room::Port "0..9999" --* "1..1" room::ActorClass : ifPorts95
-room::SPPRef "0..9999" --* "1..1" room::ActorContainerClass : ifSPPs14
-room::Port "0..1" -- "1..1" room::ExternalPort : ifport122
+room::ActorClass "1..1" *-- "0..9999" room::Port : ifPorts95
+room::ActorContainerClass "1..1" *-- "0..9999" room::SPPRef : ifSPPs14
+room::ExternalPort "1..1" -- "0..1" room::Port : ifport122
 room::Import "0..9999" --* "1..1" room::RoomModel : imports0
-room::Import "0..9999" --* "1..1" room::DataClass : imports25
+room::DataClass "1..1" *-- "0..9999" room::Import : imports25
 room::Message "0..9999" --* "1..1" room::ProtocolClass : incomingMessages52
-room::LogicalThread "1..1" *-- "0..9999" room::ActorInstancePath : instances138
-room::Port "0..9999" --* "1..1" room::ActorClass : intPorts103
+room::ActorInstancePath "0..9999" --* "1..1" room::LogicalThread : instances138
+room::ActorClass "1..1" *-- "0..9999" room::Port : intPorts103
 room::Message "0..1" -- "1..1" room::MessageFromIf : message210
 room::Message "0..1" -- "1..1" room::MessageHandler : msg78
-room::SemanticsRule "1..1" -- "0..1" room::Message : msg86
+room::Message "0..1" -- "1..1" room::SemanticsRule : msg86
 room::MessageFromIf "0..9999" --* "1..1" room::Trigger : msgFromIfPairs206
 room::MessageHandler "0..9999" --* "1..1" room::PortClass : msgHandlers76
-room::Operation "0..9999" --* "1..1" room::ActorClass : operations115
-room::Operation "0..9999" --* "1..1" room::DataClass : operations30
+room::ActorClass "1..1" *-- "0..9999" room::Operation : operations115
+room::DataClass "1..1" *-- "0..9999" room::Operation : operations30
 room::Operation "0..9999" --* "1..1" room::PortClass : operations73
 room::Message "0..9999" --* "1..1" room::ProtocolClass : outgoingMessages54
-room::Port "0..1" -- "1..1" room::BindingEndPoint : port147
-room::ProtocolClass "0..1" -- "1..1" room::InterfaceItem : protocol120
+room::BindingEndPoint "1..1" -- "0..1" room::Port : port147
+room::InterfaceItem "1..1" -- "0..1" room::ProtocolClass : protocol120
 room::ProtocolClass "0..9999" --* "1..1" room::RoomModel : protocolClasses3
 room::ActorContainerRef "0..1" -- "1..1" room::RefSAPoint : ref154
-room::SPPoint "1..1" -- "0..1" room::ActorContainerRef : ref158
+room::ActorContainerRef "0..1" -- "1..1" room::SPPoint : ref158
 room::PortClass "0..1" --* "1..1" room::ProtocolClass : regular57
-room::SPPRef "0..1" -- "1..1" room::RelaySAPoint : relay156
-room::SubSystemClass "1..1" *-- "0..9999" room::Port : relayPorts133
-room::Operation "1..1" *-- "0..1" room::FreeType : returntype38
-room::SemanticsRule "0..9999" --* "1..1" room::ProtocolSemantics : rules84
-room::ProtocolSemantics "0..1" --* "1..1" room::ProtocolClass : semantics62
+room::RelaySAPoint "1..1" -- "0..1" room::SPPRef : relay156
+room::Port "0..9999" --* "1..1" room::SubSystemClass : relayPorts133
+room::FreeType "0..1" --* "1..1" room::Operation : returntype38
+room::ProtocolSemantics "1..1" *-- "0..9999" room::SemanticsRule : rules84
+room::ProtocolClass "1..1" *-- "0..1" room::ProtocolSemantics : semantics62
 room::SPPRef "0..1" -- "1..1" room::SPPoint : service161
 room::ActorClass "1..1" *-- "0..9999" room::ServiceImplementation : serviceImplementations108
 room::SPPRef "0..1" -- "1..1" room::ServiceImplementation : spp125
 room::BaseState "0..1" -- "1..1" room::StateTerminal : state195
 room::BaseState "0..1" -- "1..1" room::SubStateTrPointTerminal : state201
-room::StateGraph "0..1" --* "1..1" room::ActorClass : stateMachine118
+room::ActorClass "1..1" *-- "0..1" room::StateGraph : stateMachine118
 room::State "0..9999" --* "1..1" room::StateGraph : states175
-room::SAPRef "0..9999" --* "1..1" room::ActorClass : strSAPs110
-room::SubSystemClass "0..9999" --* "1..1" room::RoomModel : subSystemClasses7
+room::ActorClass "1..1" *-- "0..9999" room::SAPRef : strSAPs110
+room::RoomModel "1..1" *-- "0..9999" room::SubSystemClass : subSystemClasses7
 room::LogicalSystem "1..1" *-- "0..9999" room::SubSystemRef : subSystems128
 room::State "1..1" *-- "0..1" room::StateGraph : subgraph172
 room::LogicalSystem "0..9999" --* "1..1" room::RoomModel : systems9
 room::LogicalThread "0..9999" --* "1..1" room::SubSystemClass : threads136
-room::SPPoint "0..1" --* "1..1" room::LayerConnection : to152
-room::TransitionTerminal "0..1" --* "1..1" room::Transition : to185
+room::LayerConnection "1..1" *-- "0..1" room::SPPoint : to152
+room::Transition "1..1" *-- "0..1" room::TransitionTerminal : to185
 room::TrPoint "0..1" -- "1..1" room::TrPointTerminal : trPoint197
 room::SubStateTrPointTerminal "1..1" -- "0..1" room::TrPoint : trPoint199
-room::TrPoint "0..9999" --* "1..1" room::StateGraph : trPoints178
-room::Transition "0..9999" --* "1..1" room::StateGraph : transitions182
-room::TriggeredTransition "1..1" *-- "0..9999" room::Trigger : triggers192
+room::StateGraph "1..1" *-- "0..9999" room::TrPoint : trPoints178
+room::StateGraph "1..1" *-- "0..9999" room::Transition : transitions182
+room::Trigger "0..9999" --* "1..1" room::TriggeredTransition : triggers192
 room::SubSystemClass "0..1" -- "1..1" room::SubSystemRef : type130
 room::ActorClass "0..1" -- "1..1" room::ActorRef : type164
-room::TypedID "1..1" *-- "0..1" room::Type : type17
+room::Type "0..1" --* "1..1" room::TypedID : type17
 room::FreeType "0..1" --* "1..1" room::FreeTypedID : type18
 room::DataClass "0..1" -- "1..1" room::Type : type19
 room::Attribute "1..1" *-- "0..1" room::Type : type32
 room::DetailCode "0..1" --* "1..1" room::ProtocolClass : userCode146
 room::ActorClass "1..1" *-- "0..1" room::DetailCode : userCode197
-room::DetailCode "0..1" --* "1..1" room::ActorClass : userCode2100
-room::ProtocolClass "1..1" *-- "0..1" room::DetailCode : userCode249
-room::PortClass "1..1" *-- "0..1" room::DetailCode : userCode67
+room::ActorClass "1..1" *-- "0..1" room::DetailCode : userCode2100
+room::DetailCode "0..1" --* "1..1" room::ProtocolClass : userCode249
+room::DetailCode "0..1" --* "1..1" room::PortClass : userCode67
 @enduml

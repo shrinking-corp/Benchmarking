@@ -34,10 +34,10 @@ Container <|-- filetree::Directory
 Container <|-- filetree::FileTree
 FileTreeElement <|-- filetree::Container
 FileTreeElement <|-- filetree::H2HFile
-filetree::FileTreeElement "1..1" -- "0..9999" filetree::AccessRight : accessRights2
-filetree::FileTreeElement "0..9999" --* "1..1" filetree::Container : children3
-filetree::PathToTreeElementMap "0..9999" --* "1..1" filetree::FileTree : elements0
-filetree::User "1..1" -- "0..1" filetree::FileTree : fileTree4
-filetree::FileTreeElement "1..1" -- "0..1" filetree::Container : parent1
+filetree::AccessRight "0..9999" -- "1..1" filetree::FileTreeElement : accessRights2
+filetree::Container "1..1" *-- "0..9999" filetree::FileTreeElement : children3
+filetree::FileTree "1..1" *-- "0..9999" filetree::PathToTreeElementMap : elements0
+filetree::FileTree "0..1" -- "1..1" filetree::User : fileTree4
+filetree::Container "0..1" -- "1..1" filetree::FileTreeElement : parent1
 filetree::FileTreeElement "1..1" -- "1..1" filetree::PathToTreeElementMap : value6
 @enduml

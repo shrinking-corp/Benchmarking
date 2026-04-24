@@ -342,7 +342,6 @@ class unaryExpressionNotPlusMinus {
 CaseStatement <|-- aS3::Expression
 Condition <|-- aS3::Expression
 DefaultXMLNamespaceStatement <|-- aS3::Expression
-ExpressionStatement <|-- aS3::expressionList
 Expression <|-- aS3::BoolConstant
 Expression <|-- aS3::Null
 Expression <|-- aS3::NumberConstant
@@ -353,6 +352,7 @@ Expression <|-- aS3::This
 Expression <|-- aS3::Undefined
 Expression <|-- aS3::XmlConstant
 Expression <|-- aS3::assignmentExpression
+ExpressionStatement <|-- aS3::expressionList
 Statement <|-- aS3::Block
 Statement <|-- aS3::DefaultXMLNamespaceStatement
 Statement <|-- aS3::DoWhileStatement
@@ -373,8 +373,8 @@ assignmentExpression <|-- aS3::conditionalExpression
 brackets <|-- aS3::expressionList
 catchBlock <|-- aS3::identi
 conditionalExpression <|-- aS3::logicalOrExpression
-elementList <|-- aS3::nonemptyElementList
 element <|-- aS3::assignmentExpression
+elementList <|-- aS3::nonemptyElementList
 encapsulatedExpression <|-- aS3::assignmentExpression
 exprOrObjectLiteral <|-- aS3::Expression
 exprOrObjectLiteral <|-- aS3::objectLiteral
@@ -396,13 +396,13 @@ qualifiedIdentifier <|-- aS3::nonAttributeQualifiedIdentifier
 qualifier <|-- aS3::propertyIdentifier
 unaryExpressionNotPlusMinus <|-- aS3::postfixExpression
 unaryExpressionNotPlusMinus <|-- aS3::unaryExpression
-aS3::assignmentExpression "0..1" --* "1..1" aS3::VariableDeclaration : Expression101
+aS3::VariableDeclaration "1..1" *-- "0..1" aS3::assignmentExpression : Expression101
 aS3::MemberVariableDeclaration "1..1" *-- "0..1" aS3::assignmentExpression : Expression97
 aS3::forInit "0..1" --* "1..1" aS3::traditionalForClause : a313
 aS3::AccessorRole "0..1" --* "1..1" aS3::InterfaceMethod : accessor40
-aS3::Method "1..1" *-- "0..1" aS3::AccessorRole : accessor75
+aS3::AccessorRole "0..1" --* "1..1" aS3::Method : accessor75
 aS3::Expression "0..9999" --* "1..1" aS3::conditionalExpression : aexpr148
-aS3::annotationFields "0..1" --* "1..1" aS3::Annotation : annonFields23
+aS3::Annotation "1..1" *-- "0..1" aS3::annotationFields : annonFields23
 aS3::annotationField "0..9999" --* "1..1" aS3::annotationFields : annonFields24
 aS3::Annotation "0..9999" --* "1..1" aS3::Interface : annotations28
 aS3::Annotation "0..9999" --* "1..1" aS3::InterfaceMethod : annotations35
@@ -414,136 +414,136 @@ aS3::arguments "0..9999" --* "1..1" aS3::newExpression : args235
 aS3::Condition "0..1" --* "1..1" aS3::Statement : assert273
 aS3::forCond "0..1" --* "1..1" aS3::traditionalForClause : b315
 aS3::Block "0..1" --* "1..1" aS3::identi : block125
-aS3::TryStatement "1..1" *-- "0..1" aS3::Block : block284
-aS3::functionCommon "1..1" *-- "0..1" aS3::Block : block50
+aS3::Block "0..1" --* "1..1" aS3::TryStatement : block284
+aS3::Block "0..1" --* "1..1" aS3::functionCommon : block50
 aS3::Block "0..1" --* "1..1" aS3::Method : body84
-aS3::simpleQualifiedIdentifier "1..1" *-- "0..1" aS3::brackets : bra138
-aS3::encapsulatedExpression "1..1" *-- "0..1" aS3::brackets : bra249
+aS3::brackets "0..1" --* "1..1" aS3::simpleQualifiedIdentifier : bra138
+aS3::brackets "0..1" --* "1..1" aS3::encapsulatedExpression : bra249
 aS3::brackets "0..9999" --* "1..1" aS3::fullNewSubexpression : brack243
-aS3::traditionalForClause "1..1" *-- "0..1" aS3::forIter : c317
-aS3::switchBlock "1..1" *-- "0..9999" aS3::CaseStatement : case292
-aS3::catchBlock "0..9999" --* "1..1" aS3::TryStatement : catch288
+aS3::forIter "0..1" --* "1..1" aS3::traditionalForClause : c317
+aS3::CaseStatement "0..9999" --* "1..1" aS3::switchBlock : case292
+aS3::TryStatement "1..1" *-- "0..9999" aS3::catchBlock : catch288
 aS3::EObject "0..9999" --* "1..1" aS3::Package : classes16
 aS3::EObject "0..9999" --* "1..1" aS3::Model : classes5
 aS3::Expression "0..1" --* "1..1" aS3::primaryExpression : con210
-aS3::logicalOrExpression "1..1" *-- "0..1" aS3::conditionalSubExpression : cond155
+aS3::conditionalSubExpression "0..1" --* "1..1" aS3::logicalOrExpression : cond155
 aS3::Condition "0..1" --* "1..1" aS3::IfStatement : cond276
-aS3::WhileStatement "1..1" *-- "0..1" aS3::Condition : cond335
-aS3::DoWhileStatement "1..1" *-- "0..1" aS3::Condition : cond342
+aS3::Condition "0..1" --* "1..1" aS3::WhileStatement : cond335
+aS3::Condition "0..1" --* "1..1" aS3::DoWhileStatement : cond342
 aS3::Condition "0..1" --* "1..1" aS3::WithStatement : cond345
 aS3::VariableDeclaration "0..1" --* "1..1" aS3::forInit : decl323
 aS3::DefaultStatement "0..1" --* "1..1" aS3::switchBlock : def294
-aS3::directive "0..9999" --* "1..1" aS3::Package : directives11
-aS3::postfixExpression "1..1" *-- "0..9999" aS3::e4xAttributeIdentifier : e4x194
-aS3::primaryExpression "1..1" *-- "0..1" aS3::e4xAttributeIdentifier : e4x223
+aS3::Package "1..1" *-- "0..9999" aS3::directive : directives11
+aS3::e4xAttributeIdentifier "0..9999" --* "1..1" aS3::postfixExpression : e4x194
+aS3::e4xAttributeIdentifier "0..1" --* "1..1" aS3::primaryExpression : e4x223
 aS3::element "0..1" --* "1..1" aS3::literalField : el117
-aS3::Statement "0..1" --* "1..1" aS3::IfStatement : else281
+aS3::IfStatement "1..1" *-- "0..1" aS3::Statement : else281
 aS3::encapsulatedExpression "0..1" --* "1..1" aS3::primaryExpression : encexpr221
 aS3::assignmentExpression "0..1" --* "1..1" aS3::conditionalSubExpression : expr1150
 aS3::assignmentExpression "0..9999" --* "1..1" aS3::expressionList : expr143
-aS3::assignmentExpression "1..1" *-- "0..9999" aS3::EObject : expr145
+aS3::EObject "0..9999" --* "1..1" aS3::assignmentExpression : expr145
 aS3::bitwiseOrExpression "0..9999" --* "1..1" aS3::logicalAndExpression : expr157
-aS3::bitwiseXorExpression "0..9999" --* "1..1" aS3::bitwiseOrExpression : expr158
+aS3::bitwiseOrExpression "1..1" *-- "0..9999" aS3::bitwiseXorExpression : expr158
 aS3::bitwiseAndExpression "0..9999" --* "1..1" aS3::bitwiseXorExpression : expr160
-aS3::equalityExpression "0..9999" --* "1..1" aS3::bitwiseAndExpression : expr162
+aS3::bitwiseAndExpression "1..1" *-- "0..9999" aS3::equalityExpression : expr162
 aS3::equalityExpression "1..1" *-- "0..9999" aS3::relationalExpression : expr164
-aS3::shiftExpression "0..9999" --* "1..1" aS3::relationalExpression : expr166
+aS3::relationalExpression "1..1" *-- "0..9999" aS3::shiftExpression : expr166
 aS3::additiveExpression "0..9999" --* "1..1" aS3::shiftExpression : expr168
 aS3::additiveExpression "1..1" *-- "0..9999" aS3::multiplicativeExpression : expr170
-aS3::unaryExpression "0..9999" --* "1..1" aS3::multiplicativeExpression : expr172
-aS3::unaryExpression "1..1" *-- "0..1" aS3::unaryExpression : expr175
+aS3::multiplicativeExpression "1..1" *-- "0..9999" aS3::unaryExpression : expr172
+aS3::unaryExpression "0..1" --* "1..1" aS3::unaryExpression : expr175
 aS3::Expression "0..9999" --* "1..1" aS3::postfixExpression : expr189
-aS3::e4xAttributeIdentifier "1..1" *-- "0..1" aS3::Expression : expr204
+aS3::Expression "0..1" --* "1..1" aS3::e4xAttributeIdentifier : expr204
 aS3::assignmentExpression "0..1" --* "1..1" aS3::conditionalSubExpression : expr2152
 aS3::fullNewSubexpression "1..1" *-- "0..9999" aS3::primaryExpression : expr238
-aS3::annotationField "1..1" *-- "0..1" aS3::Expression : expr26
+aS3::Expression "0..1" --* "1..1" aS3::annotationField : expr26
 aS3::Expression "0..1" --* "1..1" aS3::ReturnStatement : expr290
 aS3::expressionList "0..1" --* "1..1" aS3::forInit : expr326
 aS3::expressionList "0..1" --* "1..1" aS3::forCond : expr329
-aS3::expressionList "0..1" --* "1..1" aS3::arguments : exprList198
-aS3::Statement "0..1" --* "1..1" aS3::ForEachStatement : fes303
-aS3::forInClause "0..1" --* "1..1" aS3::ForEachStatement : fesfor302
+aS3::arguments "1..1" *-- "0..1" aS3::expressionList : exprList198
+aS3::ForEachStatement "1..1" *-- "0..1" aS3::Statement : fes303
+aS3::ForEachStatement "1..1" *-- "0..1" aS3::forInClause : fesfor302
 aS3::functionExpression "0..1" --* "1..1" aS3::primaryExpression : fexpr216
 aS3::forInClause "1..1" *-- "0..1" aS3::forInClauseDecl : ficdecl319
-aS3::forInClauseTail "0..1" --* "1..1" aS3::forInClause : fictail321
+aS3::forInClause "1..1" *-- "0..1" aS3::forInClauseTail : fictail321
 aS3::fieldList "0..9999" --* "1..1" aS3::objectLiteral : fields109
-aS3::literalField "0..9999" --* "1..1" aS3::fieldList : fields112
+aS3::fieldList "1..1" *-- "0..9999" aS3::literalField : fields112
 aS3::expressionList "0..1" --* "1..1" aS3::forIter : fiexpr332
-aS3::finallyBlock "0..1" --* "1..1" aS3::TryStatement : finally286
-aS3::forInClause "0..1" --* "1..1" aS3::ForStatement : forIn306
-aS3::Statement "0..1" --* "1..1" aS3::ForStatement : fsstate308
+aS3::TryStatement "1..1" *-- "0..1" aS3::finallyBlock : finally286
+aS3::ForStatement "1..1" *-- "0..1" aS3::forInClause : forIn306
+aS3::ForStatement "1..1" *-- "0..1" aS3::Statement : fsstate308
 aS3::functionCommon "0..1" --* "1..1" aS3::functionExpression : func47
 aS3::identi "0..1" --* "1..1" aS3::qualifiedIdent : ide121
-aS3::identi "0..1" --* "1..1" aS3::fieldName : identi119
+aS3::fieldName "1..1" *-- "0..1" aS3::identi : identi119
 aS3::EObject "0..1" -- "1..1" aS3::typeExpression : identi257
 aS3::Imports "0..1" --* "1..1" aS3::Model : imp1
-aS3::Package "1..1" *-- "0..1" aS3::Imports : imp8
-aS3::Imports "1..1" *-- "0..9999" aS3::Import : imports19
-aS3::switchStatementList "0..1" --* "1..1" aS3::Expression : l141
-aS3::switchStatementList "0..1" --* "1..1" aS3::DefaultStatement : l296
-aS3::literalField "0..1" --* "1..1" aS3::fieldList : lf110
-aS3::elementList "0..1" --* "1..1" aS3::arrayLiteral : list140
+aS3::Imports "0..1" --* "1..1" aS3::Package : imp8
+aS3::Import "0..9999" --* "1..1" aS3::Imports : imports19
+aS3::Expression "1..1" *-- "0..1" aS3::switchStatementList : l141
+aS3::DefaultStatement "1..1" *-- "0..1" aS3::switchStatementList : l296
+aS3::fieldList "1..1" *-- "0..1" aS3::literalField : lf110
+aS3::arrayLiteral "1..1" *-- "0..1" aS3::elementList : list140
 aS3::Parameter "1..1" *-- "0..1" aS3::exprOrObjectLiteral : lit107
-aS3::primaryExpression "1..1" *-- "0..1" aS3::EObject : lit213
+aS3::EObject "0..1" --* "1..1" aS3::primaryExpression : lit213
 aS3::EObject "0..9999" --* "1..1" aS3::Package : members13
 aS3::EObject "0..9999" --* "1..1" aS3::Model : members3
 aS3::Interface "1..1" *-- "0..9999" aS3::InterfaceMethod : members33
-aS3::Member "0..9999" --* "1..1" aS3::Class : members63
-aS3::Method "0..1" --* "1..1" aS3::Member : meth67
-aS3::Modifier "0..1" --* "1..1" aS3::InterfaceMethod : modifier38
-aS3::Modifier "0..1" --* "1..1" aS3::Class : modifier54
-aS3::Modifier "0..1" --* "1..1" aS3::Method : modifier72
-aS3::Modifier "0..1" --* "1..1" aS3::MemberVariableDeclaration : modifier91
-aS3::literalField "1..1" *-- "0..1" aS3::fieldName : name115
+aS3::Class "1..1" *-- "0..9999" aS3::Member : members63
+aS3::Member "1..1" *-- "0..1" aS3::Method : meth67
+aS3::InterfaceMethod "1..1" *-- "0..1" aS3::Modifier : modifier38
+aS3::Class "1..1" *-- "0..1" aS3::Modifier : modifier54
+aS3::Method "1..1" *-- "0..1" aS3::Modifier : modifier72
+aS3::MemberVariableDeclaration "1..1" *-- "0..1" aS3::Modifier : modifier91
+aS3::fieldName "0..1" --* "1..1" aS3::literalField : name115
 aS3::identi "0..1" --* "1..1" aS3::parameterDeclaration : name263
 aS3::newExpression "0..1" --* "1..1" aS3::primaryExpression : nexpr219
-aS3::Package "0..1" --* "1..1" aS3::Model : package0
-aS3::parameterDeclarationList "0..1" --* "1..1" aS3::functionSignature : param252
-aS3::parameterDefault "0..1" --* "1..1" aS3::basicParameterDeclaration : param267
-aS3::parameterDeclarationList "1..1" *-- "0..9999" aS3::Parameter : params260
+aS3::Model "1..1" *-- "0..1" aS3::Package : package0
+aS3::functionSignature "1..1" *-- "0..1" aS3::parameterDeclarationList : param252
+aS3::basicParameterDeclaration "1..1" *-- "0..1" aS3::parameterDefault : param267
+aS3::Parameter "0..9999" --* "1..1" aS3::parameterDeclarationList : params260
 aS3::InterfaceMethod "1..1" *-- "0..9999" aS3::Parameter : params42
-aS3::Parameter "0..9999" --* "1..1" aS3::Method : params78
-aS3::propertyIdentifier "0..1" --* "1..1" aS3::encapsulatedExpression : pden246
+aS3::Method "1..1" *-- "0..9999" aS3::Parameter : params78
+aS3::encapsulatedExpression "1..1" *-- "0..1" aS3::propertyIdentifier : pden246
 aS3::postfixExpression "1..1" *-- "0..1" aS3::primaryExpression : peexpr185
-aS3::propOrIdent "0..9999" --* "1..1" aS3::postfixExpression : pepoi186
-aS3::qualifiedIdentifier "0..9999" --* "1..1" aS3::postfixExpression : pewi192
-aS3::simpleQualifiedIdentifier "1..1" *-- "0..1" aS3::propertyIdentifier : piden135
-aS3::propOrIdent "0..9999" --* "1..1" aS3::identifier : poi130
+aS3::postfixExpression "1..1" *-- "0..9999" aS3::propOrIdent : pepoi186
+aS3::postfixExpression "1..1" *-- "0..9999" aS3::qualifiedIdentifier : pewi192
+aS3::propertyIdentifier "0..1" --* "1..1" aS3::simpleQualifiedIdentifier : piden135
+aS3::identifier "1..1" *-- "0..9999" aS3::propOrIdent : poi130
 aS3::propertyIdentifier "0..1" --* "1..1" aS3::simpleQualifiedIdentifier : proId132
-aS3::qualifiedIdent "0..1" --* "1..1" aS3::propOrIdent : propId229
-aS3::qualifiedIdent "0..1" --* "1..1" aS3::identifier : qual128
+aS3::propOrIdent "1..1" *-- "0..1" aS3::qualifiedIdent : propId229
+aS3::identifier "1..1" *-- "0..1" aS3::qualifiedIdent : qual128
 aS3::qualifier "0..1" --* "1..1" aS3::simpleQualifiedIdentifier : qual133
-aS3::qualifiedIdent "0..1" --* "1..1" aS3::e4xAttributeIdentifier : qual201
-aS3::qualifiedIdent "0..1" --* "1..1" aS3::primaryExpression : qual226
-aS3::qualifiedIdent "0..9999" --* "1..1" aS3::fullNewSubexpression : quali240
-aS3::functionSignature "0..1" --* "1..1" aS3::functionCommon : sig48
-aS3::Statement "0..1" --* "1..1" aS3::DoWhileStatement : state340
-aS3::Statement "0..1" --* "1..1" aS3::IfStatement : statement278
+aS3::e4xAttributeIdentifier "1..1" *-- "0..1" aS3::qualifiedIdent : qual201
+aS3::primaryExpression "1..1" *-- "0..1" aS3::qualifiedIdent : qual226
+aS3::fullNewSubexpression "1..1" *-- "0..9999" aS3::qualifiedIdent : quali240
+aS3::functionCommon "1..1" *-- "0..1" aS3::functionSignature : sig48
+aS3::DoWhileStatement "1..1" *-- "0..1" aS3::Statement : state340
+aS3::IfStatement "1..1" *-- "0..1" aS3::Statement : statement278
 aS3::Statement "0..1" --* "1..1" aS3::WhileStatement : statement337
 aS3::Statement "0..1" --* "1..1" aS3::WithStatement : statement347
 aS3::Block "1..1" *-- "0..9999" aS3::Statement : statements269
-aS3::switchStatementList "1..1" *-- "0..9999" aS3::Statement : statements299
-aS3::Statement "0..9999" --* "1..1" aS3::MethodBody : statements87
+aS3::Statement "0..9999" --* "1..1" aS3::switchStatementList : statements299
+aS3::MethodBody "1..1" *-- "0..9999" aS3::Statement : statements87
 aS3::Expression "0..1" --* "1..1" aS3::primaryExpression : superExpr207
 aS3::Interface "0..1" -- "1..1" aS3::Interface : superclass31
 aS3::Class "0..1" -- "1..1" aS3::Class : superclass58
-aS3::switchBlock "0..1" --* "1..1" aS3::Condition : switch272
+aS3::Condition "1..1" *-- "0..1" aS3::switchBlock : switch272
 aS3::EObject "0..1" -- "1..1" aS3::SymbolRef : symbol351
-aS3::traditionalForClause "0..1" --* "1..1" aS3::ForStatement : traditionalForClause311
+aS3::ForStatement "1..1" *-- "0..1" aS3::traditionalForClause : traditionalForClause311
 aS3::EObject "0..1" -- "1..1" aS3::Parameter : type104
 aS3::identi "1..1" *-- "0..1" aS3::typeExpression : type123
 aS3::EObject "0..1" -- "1..1" aS3::newExpression : type232
-aS3::typeExpression "0..1" --* "1..1" aS3::functionSignature : type254
-aS3::typeExpression "0..1" --* "1..1" aS3::basicParameterDeclaration : type265
+aS3::functionSignature "1..1" *-- "0..1" aS3::typeExpression : type254
+aS3::basicParameterDeclaration "1..1" *-- "0..1" aS3::typeExpression : type265
 aS3::EObject "0..1" -- "1..1" aS3::InterfaceMethod : type44
 aS3::EObject "0..1" -- "1..1" aS3::Method : type81
 aS3::EObject "0..1" -- "1..1" aS3::MemberVariableDeclaration : type94
 aS3::EObject "0..1" -- "1..1" aS3::VariableDeclaration : type99
 aS3::Class "1..1" -- "0..9999" aS3::Interface : types60
 aS3::unaryExpression "0..1" --* "1..1" aS3::unaryExpression : uaem178
-aS3::unaryExpressionNotPlusMinus "0..1" --* "1..1" aS3::unaryExpression : uaenpm183
+aS3::unaryExpression "1..1" *-- "0..1" aS3::unaryExpressionNotPlusMinus : uaenpm183
 aS3::unaryExpression "0..1" --* "1..1" aS3::unaryExpression : uaep181
 aS3::Uses "0..1" --* "1..1" aS3::directive : uses21
-aS3::regexpLiteral "0..1" --* "1..1" aS3::RegexpConstant : value350
+aS3::RegexpConstant "1..1" *-- "0..1" aS3::regexpLiteral : value350
 aS3::Member "1..1" *-- "0..1" aS3::MemberVariableDeclaration : var65
 @enduml

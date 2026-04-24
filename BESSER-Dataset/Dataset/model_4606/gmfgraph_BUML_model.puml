@@ -381,11 +381,6 @@ Identity <|-- gmfgraph::DiagramElement
 Identity <|-- gmfgraph::FigureDescriptor
 Identity <|-- gmfgraph::FigureGallery
 Identity <|-- gmfgraph::Pin
-LayoutData <|-- gmfgraph::BorderLayoutData
-LayoutData <|-- gmfgraph::CustomLayoutData
-LayoutData <|-- gmfgraph::GridLayoutData
-LayoutData <|-- gmfgraph::XYLayoutData
-Layoutable <|-- gmfgraph::Figure
 Layout <|-- gmfgraph::BorderLayout
 Layout <|-- gmfgraph::CenterLayout
 Layout <|-- gmfgraph::CustomLayout
@@ -394,11 +389,16 @@ Layout <|-- gmfgraph::GridLayout
 Layout <|-- gmfgraph::LayoutRef
 Layout <|-- gmfgraph::StackLayout
 Layout <|-- gmfgraph::XYLayout
+LayoutData <|-- gmfgraph::BorderLayoutData
+LayoutData <|-- gmfgraph::CustomLayoutData
+LayoutData <|-- gmfgraph::GridLayoutData
+LayoutData <|-- gmfgraph::XYLayoutData
+Layoutable <|-- gmfgraph::Figure
 Node <|-- gmfgraph::DiagramLabel
-PinOwner <|-- gmfgraph::RealFigure
 Pin <|-- gmfgraph::ColorPin
 Pin <|-- gmfgraph::CustomPin
 Pin <|-- gmfgraph::VisiblePin
+PinOwner <|-- gmfgraph::RealFigure
 Polygon <|-- gmfgraph::PolygonDecoration
 Polygon <|-- gmfgraph::ScalablePolygon
 Polyline <|-- gmfgraph::Polygon
@@ -423,55 +423,55 @@ VisualFacet <|-- gmfgraph::GeneralFacet
 VisualFacet <|-- gmfgraph::GradientFacet
 VisualFacet <|-- gmfgraph::LabelOffsetFacet
 gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::Compartment : accessor23
-gmfgraph::DiagramLabel "1..1" -- "0..1" gmfgraph::ChildAccess : accessor26
-gmfgraph::FigureDescriptor "1..1" *-- "0..9999" gmfgraph::ChildAccess : accessors64
-gmfgraph::LayoutRef "1..1" -- "1..1" gmfgraph::Layout : actual105
+gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::DiagramLabel : accessor26
+gmfgraph::ChildAccess "0..9999" --* "1..1" gmfgraph::FigureDescriptor : accessors64
+gmfgraph::Layout "1..1" -- "1..1" gmfgraph::LayoutRef : actual105
 gmfgraph::Border "1..1" -- "1..1" gmfgraph::BorderRef : actual87
 gmfgraph::Figure "1..1" --* "1..1" gmfgraph::FigureDescriptor : actualFigure61
 gmfgraph::Rectangle2D "0..1" --* "1..1" gmfgraph::SVGFigure : areaOfInterest120
 gmfgraph::CustomAttribute "0..9999" --* "1..1" gmfgraph::CustomAttributeOwner : attributes82
-gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Color : backgroundColor37
+gmfgraph::Color "0..1" --* "1..1" gmfgraph::Figure : backgroundColor37
 gmfgraph::Border "0..1" --* "1..1" gmfgraph::Figure : border53
 gmfgraph::Border "0..9999" --* "1..1" gmfgraph::FigureGallery : borders13
 gmfgraph::Figure "0..9999" --* "1..1" gmfgraph::RealFigure : children69
 gmfgraph::Color "0..1" --* "1..1" gmfgraph::LineBorder : color89
-gmfgraph::Compartment "0..9999" --* "1..1" gmfgraph::Canvas : compartments5
-gmfgraph::Connection "0..9999" --* "1..1" gmfgraph::Canvas : connections3
-gmfgraph::DiagramLabel "1..1" -- "0..1" gmfgraph::ChildAccess : container29
+gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::Compartment : compartments5
+gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::Connection : connections3
+gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::DiagramLabel : container29
 gmfgraph::ChildAccess "0..1" -- "1..1" gmfgraph::Node : contentPane21
 gmfgraph::CustomFigure "1..1" *-- "0..9999" gmfgraph::FigureAccessor : customChildren85
-gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::DefaultSizeFacet : defaultSize32
-gmfgraph::FigureDescriptor "0..1" -- "1..1" gmfgraph::Figure : descriptor33
-gmfgraph::FigureGallery "1..1" *-- "0..9999" gmfgraph::FigureDescriptor : descriptors11
+gmfgraph::DefaultSizeFacet "1..1" *-- "0..1" gmfgraph::Dimension : defaultSize32
+gmfgraph::Figure "1..1" -- "0..1" gmfgraph::FigureDescriptor : descriptor33
+gmfgraph::FigureDescriptor "0..9999" --* "1..1" gmfgraph::FigureGallery : descriptors11
 gmfgraph::DiagramElement "1..1" *-- "0..9999" gmfgraph::VisualFacet : facets19
-gmfgraph::FigureDescriptor "1..1" -- "1..1" gmfgraph::DiagramElement : figure17
-gmfgraph::Figure "1..1" -- "1..1" gmfgraph::ChildAccess : figure66
-gmfgraph::RealFigure "1..1" -- "1..1" gmfgraph::FigureRef : figure72
+gmfgraph::DiagramElement "1..1" -- "1..1" gmfgraph::FigureDescriptor : figure17
+gmfgraph::ChildAccess "1..1" -- "1..1" gmfgraph::Figure : figure66
+gmfgraph::FigureRef "1..1" -- "1..1" gmfgraph::RealFigure : figure72
 gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::FigureGallery : figures0
-gmfgraph::RealFigure "0..9999" --* "1..1" gmfgraph::FigureGallery : figures9
-gmfgraph::Font "0..1" --* "1..1" gmfgraph::Figure : font49
+gmfgraph::FigureGallery "1..1" *-- "0..9999" gmfgraph::RealFigure : figures9
+gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Font : font49
 gmfgraph::Color "0..1" --* "1..1" gmfgraph::Figure : foregroundColor35
 gmfgraph::Border "0..1" --* "1..1" gmfgraph::CompoundBorder : inner95
 gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Insets : insets51
-gmfgraph::MarginBorder "1..1" *-- "0..1" gmfgraph::Insets : insets91
-gmfgraph::DiagramLabel "0..9999" --* "1..1" gmfgraph::Canvas : labels7
+gmfgraph::Insets "0..1" --* "1..1" gmfgraph::MarginBorder : insets91
+gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::DiagramLabel : labels7
 gmfgraph::Layout "0..1" --* "1..1" gmfgraph::Layoutable : layout103
 gmfgraph::LayoutData "0..1" --* "1..1" gmfgraph::Layoutable : layoutData101
-gmfgraph::Layout "0..9999" --* "1..1" gmfgraph::FigureGallery : layouts15
-gmfgraph::Point "0..1" --* "1..1" gmfgraph::Figure : location56
+gmfgraph::FigureGallery "1..1" *-- "0..9999" gmfgraph::Layout : layouts15
+gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Point : location56
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::GridLayout : margins107
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::Figure : maximumSize40
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::Figure : minimumSize43
 gmfgraph::Canvas "1..1" *-- "0..9999" gmfgraph::Node : nodes1
 gmfgraph::Border "0..1" --* "1..1" gmfgraph::CompoundBorder : outer93
-gmfgraph::FigureDescriptor "1..1" -- "1..1" gmfgraph::ChildAccess : owner65
-gmfgraph::Layoutable "1..1" -- "1..1" gmfgraph::LayoutData : owner98
+gmfgraph::ChildAccess "1..1" -- "1..1" gmfgraph::FigureDescriptor : owner65
+gmfgraph::LayoutData "1..1" -- "1..1" gmfgraph::Layoutable : owner98
 gmfgraph::Pin "0..9999" --* "1..1" gmfgraph::PinOwner : pins122
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::Figure : preferredSize46
-gmfgraph::SVGProperty "0..9999" --* "1..1" gmfgraph::SVGFigure : properties119
+gmfgraph::SVGFigure "1..1" *-- "0..9999" gmfgraph::SVGProperty : properties119
 gmfgraph::Figure "0..9999" -- "1..1" gmfgraph::Shape : resolvedChildren74
-gmfgraph::XYLayoutData "1..1" *-- "1..1" gmfgraph::Dimension : size116
-gmfgraph::Point "0..1" --* "1..1" gmfgraph::Figure : size58
+gmfgraph::Dimension "1..1" --* "1..1" gmfgraph::XYLayoutData : size116
+gmfgraph::Figure "1..1" *-- "0..1" gmfgraph::Point : size58
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::GridLayoutData : sizeHint99
 gmfgraph::DecorationFigure "0..1" -- "1..1" gmfgraph::PolylineConnection : sourceDecoration78
 gmfgraph::Dimension "0..1" --* "1..1" gmfgraph::GridLayout : spacing109

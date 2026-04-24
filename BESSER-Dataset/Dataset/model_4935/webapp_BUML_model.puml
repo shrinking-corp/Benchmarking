@@ -47,20 +47,20 @@ UIElement <|-- webapp::Form
 UIElement <|-- webapp::ImageViewer
 UIElement <|-- webapp::Table
 UIElement <|-- webapp::TextArea
-webapp::DataStructure "1..1" -- "1..1" webapp::Attribute : attributeOf16
+webapp::Attribute "1..1" -- "1..1" webapp::DataStructure : attributeOf16
 webapp::ClientPage "1..9999" --* "1..1" webapp::WebApp : clientPages0
-webapp::UIElement "0..9999" --* "1..1" webapp::ClientPage : composedOf20
-webapp::ServerPage "1..1" -- "1..1" webapp::ClientPage : connectsTo22
+webapp::ClientPage "1..1" *-- "0..9999" webapp::UIElement : composedOf20
+webapp::ClientPage "1..1" -- "1..1" webapp::ServerPage : connectsTo22
 webapp::DataStructure "1..1" -- "1..1" webapp::UIElement : content24
-webapp::WebApp "1..1" *-- "0..9999" webapp::DataSourceManager : contentProviders5
+webapp::DataSourceManager "0..9999" --* "1..1" webapp::WebApp : contentProviders5
 webapp::DataStructure "0..9999" --* "1..1" webapp::WebApp : entities3
 webapp::ClientPage "1..1" -- "1..1" webapp::ServerPage : generates7
 webapp::DataSourceManager "1..9999" -- "1..1" webapp::ServerPage : getContents8
-webapp::DataStructure "0..9999" -- "1..1" webapp::Attribute : linkedBy18
+webapp::Attribute "1..1" -- "0..9999" webapp::DataStructure : linkedBy18
 webapp::Attribute "0..9999" -- "1..1" webapp::DataStructure : linkedTo12
-webapp::ServerPage "1..9999" -- "1..1" webapp::DataStructure : managedBy10
-webapp::ServerPage "1..1" -- "1..9999" webapp::DataStructure : manages9
+webapp::DataStructure "1..1" -- "1..9999" webapp::ServerPage : managedBy10
+webapp::DataStructure "1..9999" -- "1..1" webapp::ServerPage : manages9
 webapp::Attribute "0..9999" --* "1..1" webapp::DataStructure : parentOf11
 webapp::DataSourceManager "1..1" -- "1..9999" webapp::ServerPage : providesContent14
-webapp::WebApp "1..1" *-- "1..9999" webapp::ServerPage : serverPages1
+webapp::ServerPage "1..9999" --* "1..1" webapp::WebApp : serverPages1
 @enduml

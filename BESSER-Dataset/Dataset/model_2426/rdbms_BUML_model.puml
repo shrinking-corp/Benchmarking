@@ -82,21 +82,21 @@ ModelElement <|-- rdbms::Database
 ModelElement <|-- rdbms::Table
 PKeyAndUnique <|-- rdbms::PrimaryKeyCon
 PKeyAndUnique <|-- rdbms::UniqueCon
-rdbms::Table "1..1" -- "1..1" rdbms::ForeignKey : FKTable29
-rdbms::PKeyAndUnique "1..1" -- "1..9999" rdbms::Column : PKandUQColumns30
-rdbms::DataType "1..1" -- "1..1" rdbms::Column : columnDataType18
-rdbms::ForeignKey "0..1" -- "1..1" rdbms::Column : columnInFK16
-rdbms::PKeyAndUnique "0..1" -- "1..1" rdbms::Column : columnInPKandUQ14
+rdbms::ForeignKey "1..1" -- "1..1" rdbms::Table : FKTable29
+rdbms::Column "1..9999" -- "1..1" rdbms::PKeyAndUnique : PKandUQColumns30
+rdbms::Column "1..1" -- "1..1" rdbms::DataType : columnDataType18
+rdbms::Column "1..1" -- "0..1" rdbms::ForeignKey : columnInFK16
+rdbms::Column "1..1" -- "0..1" rdbms::PKeyAndUnique : columnInPKandUQ14
 rdbms::Column "1..9999" --* "1..1" rdbms::Table : columns10
 rdbms::SystemDataType "1..1" -- "1..1" rdbms::UserDefinedDataType : dataType33
 rdbms::Database "1..1" *-- "0..9999" rdbms::SystemDataType : dataTypes3
 rdbms::Column "1..9999" -- "1..1" rdbms::ForeignKey : lhsAttr23
-rdbms::Table "1..1" -- "1..1" rdbms::ForeignKey : refersTo26
+rdbms::ForeignKey "1..1" -- "1..1" rdbms::Table : refersTo26
 rdbms::ForeignKey "1..1" -- "1..1" rdbms::PKeyAndUnique : rhsKey20
-rdbms::Table "1..1" *-- "0..9999" rdbms::CheckCon : tableCHs12
+rdbms::CheckCon "0..9999" --* "1..1" rdbms::Table : tableCHs12
 rdbms::ForeignKey "0..9999" --* "1..1" rdbms::Table : tableFKs5
 rdbms::PrimaryKeyCon "1..1" --* "1..1" rdbms::Table : tablePK6
 rdbms::Table "1..1" *-- "0..9999" rdbms::UniqueCon : tableUQ8
-rdbms::Table "0..9999" --* "1..1" rdbms::Database : tables1
+rdbms::Database "1..1" *-- "0..9999" rdbms::Table : tables1
 rdbms::Database "1..1" *-- "0..9999" rdbms::UserDefinedDataType : userDefinedDataTypes0
 @enduml

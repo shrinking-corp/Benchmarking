@@ -78,30 +78,30 @@ class courceList::StudyProgram {
 class courceList::Work {
   + weight : int
 }
-courceList::Professor "0..1" -- "1..1" courceList::CourceSpecification : coordinator41
+courceList::CourceSpecification "1..1" -- "0..1" courceList::Professor : coordinator41
 courceList::Cource "1..1" *-- "1..9999" courceList::CourceSpecification : corseSpecifications6
-courceList::EvaluationForm "1..1" -- "0..1" courceList::CourceSpecification : cource18
+courceList::CourceSpecification "0..1" -- "1..1" courceList::EvaluationForm : cource18
 courceList::CourceSpecification "1..1" -- "1..1" courceList::StudyCourceRelation : cource23
 courceList::Specialisation "1..1" *-- "1..9999" courceList::StudyCourceRelation : cource29
-courceList::CourceSpecification "1..1" -- "1..1" courceList::Cource : cource39
+courceList::Cource "1..1" -- "1..1" courceList::CourceSpecification : cource39
 courceList::Specialisation "0..9999" --* "1..1" courceList::StudyProgram : cource8
-courceList::Department "1..1" *-- "1..9999" courceList::Cource : course1
+courceList::Cource "1..9999" --* "1..1" courceList::Department : course1
 courceList::Department "0..1" -- "1..1" courceList::Professor : department27
 courceList::Department "0..1" -- "1..1" courceList::StudyGeneralization : department48
-courceList::Department "0..1" -- "1..1" courceList::Cource : department5
+courceList::Cource "1..1" -- "0..1" courceList::Department : department5
 courceList::EvaluationForm "0..1" -- "1..1" courceList::Exam : evaluationForm14
 courceList::EvaluationForm "0..1" -- "1..1" courceList::Work : evaluationForm21
-courceList::EvaluationForm "0..1" --* "1..1" courceList::CourceSpecification : evaluationForm43
-courceList::Exam "0..1" --* "1..1" courceList::EvaluationForm : exam15
-courceList::Specialisation "0..9999" --* "1..1" courceList::Specialisation : furtherSpecialisation34
+courceList::CourceSpecification "1..1" *-- "0..1" courceList::EvaluationForm : evaluationForm43
+courceList::EvaluationForm "1..1" *-- "0..1" courceList::Exam : exam15
+courceList::Specialisation "1..1" *-- "0..9999" courceList::Specialisation : furtherSpecialisation34
 courceList::StudyGeneralization "0..1" -- "1..1" courceList::StudyProgram : generalization9
 courceList::Specialisation "1..1" -- "0..1" courceList::Specialisation : hostSpecialisation37
-courceList::Professor "1..9999" --* "1..1" courceList::Department : professor3
+courceList::Department "1..1" *-- "1..9999" courceList::Professor : professor3
 courceList::Specialisation "0..1" -- "1..1" courceList::StudyCourceRelation : specialisation24
-courceList::StudyProgram "1..1" *-- "0..9999" courceList::Student : student12
-courceList::StudyGeneralization "1..9999" --* "1..1" courceList::Department : studyProgram0
-courceList::StudyProgram "0..1" -- "1..1" courceList::Specialisation : studyProgram30
-courceList::StudyProgram "1..9999" --* "1..1" courceList::StudyGeneralization : studyProgram46
-courceList::StudyProgram "1..1" -- "1..1" courceList::Student : studyProgram7
-courceList::Work "0..1" --* "1..1" courceList::EvaluationForm : work16
+courceList::Student "0..9999" --* "1..1" courceList::StudyProgram : student12
+courceList::Department "1..1" *-- "1..9999" courceList::StudyGeneralization : studyProgram0
+courceList::Specialisation "1..1" -- "0..1" courceList::StudyProgram : studyProgram30
+courceList::StudyGeneralization "1..1" *-- "1..9999" courceList::StudyProgram : studyProgram46
+courceList::Student "1..1" -- "1..1" courceList::StudyProgram : studyProgram7
+courceList::EvaluationForm "1..1" *-- "0..1" courceList::Work : work16
 @enduml

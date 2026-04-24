@@ -36,16 +36,16 @@ ProcessElement <|-- simplepdl::RequeteDeRessource
 ProcessElement <|-- simplepdl::Resources
 ProcessElement <|-- simplepdl::WorkDefinition
 ProcessElement <|-- simplepdl::WorkSequence
-simplepdl::ProcessElement "0..9999" -- "1..1" simplepdl::Guidance : elements8
+simplepdl::Guidance "1..1" -- "0..9999" simplepdl::ProcessElement : elements8
 simplepdl::Guidance "1..1" -- "1..1" simplepdl::GuidanceLink : guidance16
 simplepdl::WorkDefinition "1..1" -- "0..9999" simplepdl::WorkSequence : linksToPredecessors1
-simplepdl::WorkSequence "0..9999" -- "1..1" simplepdl::WorkDefinition : linksToSuccessors2
-simplepdl::Resources "1..1" -- "0..9999" simplepdl::RequeteDeRessource : linktoresource10
+simplepdl::WorkDefinition "1..1" -- "0..9999" simplepdl::WorkSequence : linksToSuccessors2
+simplepdl::RequeteDeRessource "0..9999" -- "1..1" simplepdl::Resources : linktoresource10
 simplepdl::RequeteDeRessource "0..9999" -- "1..1" simplepdl::WorkDefinition : linktoresource4
 simplepdl::WorkDefinition "1..1" -- "1..1" simplepdl::WorkSequence : predecessor5
-simplepdl::ProcessElement "0..9999" --* "1..1" simplepdl::Process : processElements0
-simplepdl::Resources "1..1" -- "1..1" simplepdl::RequeteDeRessource : resources12
-simplepdl::WorkSequence "1..1" -- "1..1" simplepdl::WorkDefinition : successor6
-simplepdl::WorkDefinition "1..1" -- "1..1" simplepdl::RequeteDeRessource : workdefinition13
+simplepdl::Process "1..1" *-- "0..9999" simplepdl::ProcessElement : processElements0
+simplepdl::RequeteDeRessource "1..1" -- "1..1" simplepdl::Resources : resources12
+simplepdl::WorkDefinition "1..1" -- "1..1" simplepdl::WorkSequence : successor6
+simplepdl::RequeteDeRessource "1..1" -- "1..1" simplepdl::WorkDefinition : workdefinition13
 simplepdl::GuidanceLink "1..1" -- "1..1" simplepdl::WorkDefinition : workdefinition18
 @enduml

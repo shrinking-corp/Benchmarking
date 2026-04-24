@@ -50,15 +50,15 @@ Task <|-- mission::PointTask
 Task <|-- mission::PolygonTask
 mission::Drone "1..9999" --* "1..1" mission::Swarm : drones5
 mission::Task "1..1" -- "1..1" mission::TaskDependency : from11
-mission::Drone "1..1" *-- "1..1" mission::Coordinate : home7
-mission::PolygonTask "1..1" *-- "1..1" mission::Coordinate : initialPosition19
+mission::Coordinate "1..1" --* "1..1" mission::Drone : home7
+mission::Coordinate "1..1" --* "1..1" mission::PolygonTask : initialPosition19
 mission::Coordinate "1..1" --* "1..1" mission::LineTask : initialPosition26
 mission::Coordinate "1..1" --* "1..1" mission::PointTask : point22
 mission::Coordinate "1..9999" --* "1..1" mission::LineTask : points24
-mission::Coordinate "0..1" --* "1..1" mission::ControlTask : referencePosition9
+mission::ControlTask "1..1" *-- "0..1" mission::Coordinate : referencePosition9
 mission::Coordinate "3..9999" --* "1..1" mission::PolygonTask : shell17
-mission::Swarm "1..1" --* "1..1" mission::Mission : swarm3
-mission::TaskDependency "0..9999" --* "1..1" mission::Mission : taskDependencies1
+mission::Mission "1..1" *-- "1..1" mission::Swarm : swarm3
+mission::Mission "1..1" *-- "0..9999" mission::TaskDependency : taskDependencies1
 mission::Mission "1..1" *-- "1..9999" mission::Task : tasks0
 mission::Task "1..1" -- "1..1" mission::TaskDependency : to14
 @enduml

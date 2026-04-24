@@ -24,12 +24,12 @@ class trip::model::location {
 }
 Service <|-- trip::model::OtherService
 Service <|-- trip::model::TravelService
-trip::model::location "1..1" -- "1..1" trip::model::Trip : destination10
+trip::model::Trip "1..1" -- "1..1" trip::model::location : destination10
 trip::model::TravelService "1..1" -- "1..1" trip::model::location : destination3
-trip::model::location "1..1" -- "1..1" trip::model::OtherService : location0
-trip::model::location "0..9999" --* "1..1" trip::model::TripModel : location15
+trip::model::OtherService "1..1" -- "1..1" trip::model::location : location0
+trip::model::TripModel "1..1" *-- "0..9999" trip::model::location : location15
 trip::model::Service "0..9999" --* "1..1" trip::model::Trip : service6
-trip::model::location "1..1" -- "1..1" trip::model::TravelService : source1
-trip::model::location "1..1" -- "1..1" trip::model::Trip : source7
+trip::model::TravelService "1..1" -- "1..1" trip::model::location : source1
+trip::model::Trip "1..1" -- "1..1" trip::model::location : source7
 trip::model::Trip "0..9999" --* "1..1" trip::model::TripModel : trip13
 @enduml

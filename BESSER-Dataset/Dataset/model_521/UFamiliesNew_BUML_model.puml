@@ -72,25 +72,25 @@ uncertainty::aFamilyMember <|-- Families::FamilyMember
 uncertainty::aFamilyMember <|-- Families::uncertainty::uFamilyMember
 uncertainty::aFamilyRegister <|-- Families::FamilyRegister
 uncertainty::aFamilyRegister <|-- Families::uncertainty::uFamilyRegister
-aFamilyMember "0..9999" --* "1..1" Families::Family : daughters8
-aFamily "0..1" -- "1..1" Families::FamilyMember : daughtersInverse21
+Families::Family "1..1" *-- "0..9999" aFamilyMember : daughters8
+Families::FamilyMember "1..1" -- "0..1" aFamily : daughtersInverse21
 Families::uncertainty::ModelElement "1..1" -- "0..9999" ModelElement : exclude25
-aFamily "0..9999" --* "1..1" Families::FamilyRegister : families0
+Families::FamilyRegister "1..1" *-- "0..9999" aFamily : families0
 Families::Family "1..1" -- "0..1" aFamilyRegister : familiesInverse11
-aFamilyMember "0..1" --* "1..1" Families::Family : father1
-aFamily "0..1" -- "1..1" Families::FamilyMember : fatherInverse13
-ModelElement "0..9999" -- "1..1" Families::uncertainty::ModelElement : include24
-aFamilyMember "0..1" --* "1..1" Families::Family : mother2
-aFamily "0..1" -- "1..1" Families::FamilyMember : motherInverse15
+Families::Family "1..1" *-- "0..1" aFamilyMember : father1
+Families::FamilyMember "1..1" -- "0..1" aFamily : fatherInverse13
+Families::uncertainty::ModelElement "1..1" -- "0..9999" ModelElement : include24
+Families::Family "1..1" *-- "0..1" aFamilyMember : mother2
+Families::FamilyMember "1..1" -- "0..1" aFamily : motherInverse15
 Families::Family "1..1" *-- "0..9999" aFamilyMember : sons5
-aFamily "0..1" -- "1..1" Families::FamilyMember : sonsInverse18
-uncertainty::Families::FamilyRegister "0..9999" --* "1..1" Families::uncertainty::uFamilyRegister : uleft28
+Families::FamilyMember "1..1" -- "0..1" aFamily : sonsInverse18
+Families::uncertainty::uFamilyRegister "1..1" *-- "0..9999" uncertainty::Families::FamilyRegister : uleft28
 Families::uncertainty::uFamily "1..1" *-- "0..9999" uncertainty::Families::Family : uleft34
-uncertainty::Families::FamilyMember "0..9999" --* "1..1" Families::uncertainty::uFamilyMember : uleft40
-uFamilyRegister "0..9999" --* "1..1" Families::uncertainty::uFamilyRegister : upoint32
-uFamily "0..9999" --* "1..1" Families::uncertainty::uFamily : upoint38
-uFamilyMember "0..9999" --* "1..1" Families::uncertainty::uFamilyMember : upoint44
+Families::uncertainty::uFamilyMember "1..1" *-- "0..9999" uncertainty::Families::FamilyMember : uleft40
+Families::uncertainty::uFamilyRegister "1..1" *-- "0..9999" uFamilyRegister : upoint32
+Families::uncertainty::uFamily "1..1" *-- "0..9999" uFamily : upoint38
+Families::uncertainty::uFamilyMember "1..1" *-- "0..9999" uFamilyMember : upoint44
 Families::uncertainty::uFamilyRegister "1..1" *-- "0..9999" uncertainty::Families::FamilyRegister : uright29
-uncertainty::Families::Family "0..9999" --* "1..1" Families::uncertainty::uFamily : uright35
-uncertainty::Families::FamilyMember "0..9999" --* "1..1" Families::uncertainty::uFamilyMember : uright41
+Families::uncertainty::uFamily "1..1" *-- "0..9999" uncertainty::Families::Family : uright35
+Families::uncertainty::uFamilyMember "1..1" *-- "0..9999" uncertainty::Families::FamilyMember : uright41
 @enduml

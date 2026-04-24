@@ -1,0 +1,108 @@
+@startuml
+class Address {
+}
+class ContactInfo {
+}
+class DateEffectiveObject {
+}
+class Party {
+}
+class Tagged {
+}
+class URL {
+}
+abstract class party::Address {
+  + country : str
+}
+abstract class party::CommonObject {
+}
+abstract class party::ContactInfo {
+  + category : str
+}
+class party::Custom {
+  + location : str
+}
+abstract class party::DateEffectiveObject {
+  + end : date
+  + start : date
+  + isEffective(date : any) : bool
+  + isEffectiveNow() : bool
+}
+class party::EMail {
+}
+class party::Identity {
+  + comment : str
+  + type : str
+  + value : str
+}
+class party::MatrixRelationship {
+  + name : str
+}
+class party::Organization {
+  + organizationType : str
+}
+abstract class party::Party {
+  + name : str
+  + uid : str
+  + getPath() : str
+  + setExternalParent(externalParent : any) : void
+}
+class party::Person {
+  + title : str
+}
+class party::Phone {
+  + areaCode : int
+  + countryCode : str
+  + number : str
+}
+class party::Role {
+  + name : str
+}
+class party::Tag {
+  + comment : str
+  + name : str
+  + value : str
+}
+abstract class party::Tagged {
+  + comment : str
+}
+abstract class party::URL {
+  + address : str
+}
+class party::USAddress {
+  + city : str
+  + recipient : str
+  + state : str
+  + street1 : str
+  + street2 : str
+  + zip : str
+}
+class party::Web {
+}
+Address <|-- party::USAddress
+ContactInfo <|-- party::Address
+ContactInfo <|-- party::Custom
+ContactInfo <|-- party::Phone
+ContactInfo <|-- party::URL
+DateEffectiveObject <|-- party::ContactInfo
+DateEffectiveObject <|-- party::MatrixRelationship
+DateEffectiveObject <|-- party::Role
+Party <|-- party::Organization
+Party <|-- party::Person
+Tagged <|-- party::DateEffectiveObject
+Tagged <|-- party::Party
+URL <|-- party::EMail
+URL <|-- party::Web
+party::Organization "1..1" *-- "0..9999" party::Party : children5
+party::ContactInfo "0..9999" --* "1..1" party::Party : contactInfo0
+party::Organization "1..1" -- "0..9999" party::Party : externalChildren7
+party::Identity "0..9999" --* "1..1" party::Party : identity1
+party::MatrixRelationship "0..9999" --* "1..1" party::Organization : matrixedChildren9
+party::CommonObject "0..1" -- "1..1" party::Role : owner13
+party::ContactInfo "1..1" -- "1..1" party::Party : owner4
+party::Organization "0..1" -- "1..1" party::Party : parent2
+party::Party "0..9999" -- "1..1" party::Role : party11
+party::CommonObject "1..1" *-- "0..9999" party::Role : roles14
+party::Tag "0..9999" --* "1..1" party::Tagged : tags3
+party::MatrixRelationship "1..1" -- "1..1" party::Party : target16
+@enduml

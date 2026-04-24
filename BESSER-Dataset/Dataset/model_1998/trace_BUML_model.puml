@@ -1,0 +1,65 @@
+@startuml
+class TraceElement {
+}
+class trace::EObject {
+}
+class trace::SourceElement {
+  + mapsToSelf : bool
+}
+class trace::SourceElementList {
+  + getSourceObjects() : str
+}
+class trace::TargetElement {
+}
+abstract class trace::TraceElement {
+  + name : str
+  + runtimeObject : str
+}
+class trace::TraceLink {
+  + overridden : bool
+  + getSourceElement(create : any, name : any) : str
+  + getTargetElement(name : any) : str
+}
+class trace::TraceLinkSet {
+  + clear() : void
+  + getDefaultSourceElement(sourceElement : any) : str
+  + getDefaultSourceElements(sourceElements : any) : str
+  + getLinksByRule(create : any, rule : any) : str
+}
+class trace::TraceProperty {
+  + propertyName : str
+  + resolved : bool
+  + resolveBinding(traces : any) : void
+}
+class trace::TracedRule {
+  + rule : str
+  + getUniqueSourceElement(sourceElement : any) : str
+  + getUniqueSourceElements(sourceElements : any) : str
+}
+TraceElement <|-- trace::SourceElement
+TraceElement <|-- trace::TargetElement
+trace::TraceLink "0..1" -- "1..1" trace::TraceProperty : appliedAt40
+trace::SourceElement "1..1" -- "0..1" trace::TraceLinkSet : defaultFor22
+trace::SourceElementList "1..1" -- "0..1" trace::TraceLinkSet : defaultFor32
+trace::SourceElementList "0..9999" --* "1..1" trace::TraceLinkSet : defaultSourceElementLists2
+trace::SourceElement "0..9999" -- "1..1" trace::TraceLinkSet : defaultSourceElements1
+trace::TraceLinkSet "0..1" -- "1..1" trace::TracedRule : linkSet5
+trace::TraceLink "0..9999" --* "1..1" trace::TracedRule : links4
+trace::SourceElement "1..1" -- "0..9999" trace::TargetElement : mapsTo20
+trace::SourceElement "0..9999" -- "1..1" trace::TargetElement : mapsTo28
+trace::EObject "0..1" -- "1..1" trace::TraceElement : object17
+trace::TraceLink "1..1" *-- "0..9999" trace::TraceProperty : properties16
+trace::TargetElement "1..1" -- "1..1" trace::TraceProperty : resolvedFor36
+trace::EObject "0..9999" -- "1..1" trace::TraceProperty : resolvings37
+trace::TraceLink "1..1" -- "0..1" trace::TracedRule : rule14
+trace::TraceLinkSet "1..1" *-- "0..9999" trace::TracedRule : rules0
+trace::SourceElement "0..9999" --* "1..1" trace::TraceLink : sourceElements11
+trace::SourceElement "2..9999" -- "1..1" trace::SourceElementList : sourceElements31
+trace::SourceElement "1..1" -- "0..1" trace::TraceLink : sourceOf18
+trace::TargetElement "0..9999" --* "1..1" trace::TraceLink : targetElements13
+trace::TargetElement "1..1" -- "0..1" trace::TraceLink : targetOf26
+trace::SourceElement "1..1" -- "0..1" trace::TracedRule : uniqueFor24
+trace::SourceElementList "1..1" -- "0..1" trace::TracedRule : uniqueFor34
+trace::SourceElementList "0..9999" --* "1..1" trace::TracedRule : uniqueSourceElementLists8
+trace::SourceElement "0..9999" -- "1..1" trace::TracedRule : uniqueSourceElements6
+@enduml

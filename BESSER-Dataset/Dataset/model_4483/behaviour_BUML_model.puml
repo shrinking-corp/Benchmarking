@@ -67,17 +67,17 @@ Instruction <|-- behaviour::While
 NamedElement <|-- behaviour::DroneBehaviour
 behaviour::Action "1..1" -- "1..1" behaviour::PerformAction : action4
 behaviour::Condition "1..1" --* "1..1" behaviour::While : condition25
-behaviour::Condition "1..1" --* "1..1" behaviour::Choice : condition8
+behaviour::Choice "1..1" *-- "1..1" behaviour::Condition : condition8
 behaviour::Drone "1..9999" -- "1..1" behaviour::DroneBehaviour : drones1
-behaviour::Instruction "0..9999" --* "1..1" behaviour::Choice : falseBranch12
+behaviour::Choice "1..1" *-- "0..9999" behaviour::Instruction : falseBranch12
 behaviour::Condition "1..1" -- "1..1" behaviour::FieldObject : fieldObject15
-behaviour::MoveTo "1..1" -- "1..1" behaviour::FieldObject : fieldObject3
-behaviour::Instruction "1..9999" --* "1..1" behaviour::DroneBehaviour : instructions0
-behaviour::While "1..1" *-- "1..9999" behaviour::Instruction : instructions23
-behaviour::Instruction "1..9999" --* "1..1" behaviour::Instruct : instructions28
-behaviour::MovableObject "1..1" -- "1..1" behaviour::Lift : target30
-behaviour::PerformAction "1..1" -- "1..1" behaviour::FieldObject : target5
-behaviour::Instruction "1..9999" --* "1..1" behaviour::Choice : trueBranch9
+behaviour::FieldObject "1..1" -- "1..1" behaviour::MoveTo : fieldObject3
+behaviour::DroneBehaviour "1..1" *-- "1..9999" behaviour::Instruction : instructions0
+behaviour::Instruction "1..9999" --* "1..1" behaviour::While : instructions23
+behaviour::Instruct "1..1" *-- "1..9999" behaviour::Instruction : instructions28
+behaviour::Lift "1..1" -- "1..1" behaviour::MovableObject : target30
+behaviour::FieldObject "1..1" -- "1..1" behaviour::PerformAction : target5
+behaviour::Choice "1..1" *-- "1..9999" behaviour::Instruction : trueBranch9
 behaviour::Instruction "1..9999" --* "1..1" behaviour::WaitForMessage : whenArrived18
 behaviour::Instruction "1..9999" --* "1..1" behaviour::WaitForMessage : whenLost20
 @enduml

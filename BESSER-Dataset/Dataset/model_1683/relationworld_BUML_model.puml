@@ -1,0 +1,76 @@
+@startuml
+class Arrow {
+}
+class Category {
+}
+class NamedElement {
+}
+enum Scale {
+  four
+  nothing
+  one
+  three
+  two
+}
+class SourceNode {
+}
+class TargetNode {
+}
+abstract class relationworld::Arrow {
+  + validate() : bool
+}
+abstract class relationworld::Category {
+  + nom : str
+  + affectation(cible : any, source : any) : Arrow
+  + compare(n1 : any, n2 : any) : int
+}
+class relationworld::NamedElement {
+  + name : str
+}
+class relationworld::RelatedTo {
+  + validate() : bool
+}
+abstract class relationworld::SourceNode {
+  + compare(noeud : any) : int
+  + pred() : SourceNode
+  + succ() : SourceNode
+}
+abstract class relationworld::TargetNode {
+  + compare(noeud : any) : int
+  + pred() : TargetNode
+  + succ() : TargetNode
+}
+class relationworld::ThingA {
+  + since : date
+  + compare(personne : any) : int
+  + pred() : str
+  + succ() : str
+}
+class relationworld::ThingB {
+  + step : str
+  + compare(role : any) : int
+  + pred() : str
+  + succ() : str
+}
+class relationworld::World {
+  + affectation(personne : any, role : any) : str
+  + compare(personne1 : any, personne2 : any) : int
+}
+Arrow <|-- relationworld::RelatedTo
+Category <|-- relationworld::World
+NamedElement <|-- relationworld::RelatedTo
+NamedElement <|-- relationworld::ThingA
+NamedElement <|-- relationworld::ThingB
+SourceNode <|-- relationworld::ThingA
+TargetNode <|-- relationworld::ThingB
+relationworld::Arrow "1..1" -- "0..1" relationworld::TargetNode : cible12
+relationworld::Arrow "0..9999" -- "1..1" relationworld::Category : fleches16
+relationworld::RelatedTo "0..9999" --* "1..1" relationworld::World : relations8
+relationworld::Arrow "1..1" -- "0..1" relationworld::SourceNode : source11
+relationworld::Category "1..1" -- "0..9999" relationworld::SourceNode : sources14
+relationworld::Category "1..1" -- "0..9999" relationworld::TargetNode : targets19
+relationworld::RelatedTo "1..1" -- "0..1" relationworld::ThingA : thingA0
+relationworld::RelatedTo "1..1" -- "0..1" relationworld::ThingB : thingB1
+relationworld::ThingA "0..9999" --* "1..1" relationworld::World : thingsa3
+relationworld::ThingB "0..9999" --* "1..1" relationworld::World : thingsb5
+@enduml

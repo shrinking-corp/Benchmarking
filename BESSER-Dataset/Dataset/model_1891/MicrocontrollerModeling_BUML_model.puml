@@ -120,17 +120,17 @@ Function <|-- MicrocontrollerModeling::TimerConfig
 Memory <|-- MicrocontrollerModeling::RAM
 Memory <|-- MicrocontrollerModeling::ROM
 ROM <|-- MicrocontrollerModeling::EEPROM
-MicrocontrollerModeling::Microcontroller "1..1" *-- "1..1" MicrocontrollerModeling::CLanguage : clanguage1
+MicrocontrollerModeling::CLanguage "1..1" --* "1..1" MicrocontrollerModeling::Microcontroller : clanguage1
 MicrocontrollerModeling::Flash "0..1" --* "1..1" MicrocontrollerModeling::Microcontroller : flash7
-MicrocontrollerModeling::Instruction "1..9999" --* "1..1" MicrocontrollerModeling::Function : instructions22
-MicrocontrollerModeling::Library "0..9999" --* "1..1" MicrocontrollerModeling::CLanguage : libraries13
-MicrocontrollerModeling::Parameter "1..9999" --* "1..1" MicrocontrollerModeling::Function : parameters21
-MicrocontrollerModeling::PinMode "1..2" --* "1..1" MicrocontrollerModeling::CLanguage : pinmodes17
+MicrocontrollerModeling::Function "1..1" *-- "1..9999" MicrocontrollerModeling::Instruction : instructions22
+MicrocontrollerModeling::CLanguage "1..1" *-- "0..9999" MicrocontrollerModeling::Library : libraries13
+MicrocontrollerModeling::Function "1..1" *-- "1..9999" MicrocontrollerModeling::Parameter : parameters21
+MicrocontrollerModeling::CLanguage "1..1" *-- "1..2" MicrocontrollerModeling::PinMode : pinmodes17
 MicrocontrollerModeling::CLanguage "1..1" *-- "1..5" MicrocontrollerModeling::PinOperation : pinoperation19
-MicrocontrollerModeling::Pin "1..9999" --* "1..1" MicrocontrollerModeling::Microcontroller : pins0
-MicrocontrollerModeling::Processor "1..9999" --* "1..1" MicrocontrollerModeling::Microcontroller : processor3
+MicrocontrollerModeling::Microcontroller "1..1" *-- "1..9999" MicrocontrollerModeling::Pin : pins0
+MicrocontrollerModeling::Microcontroller "1..1" *-- "1..9999" MicrocontrollerModeling::Processor : processor3
 MicrocontrollerModeling::Microcontroller "1..1" *-- "1..1" MicrocontrollerModeling::RAM : ram9
-MicrocontrollerModeling::Register "0..9999" --* "1..1" MicrocontrollerModeling::Microcontroller : registers11
-MicrocontrollerModeling::ROM "0..1" --* "1..1" MicrocontrollerModeling::Microcontroller : rom5
+MicrocontrollerModeling::Microcontroller "1..1" *-- "0..9999" MicrocontrollerModeling::Register : registers11
+MicrocontrollerModeling::Microcontroller "1..1" *-- "0..1" MicrocontrollerModeling::ROM : rom5
 MicrocontrollerModeling::CLanguage "1..1" *-- "0..1" MicrocontrollerModeling::TimerConfig : timerconfig15
 @enduml

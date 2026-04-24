@@ -23,17 +23,17 @@ class graph::Node {
   + unitVersion : str
 }
 graph::Cause "0..9999" --* "1..1" graph::Dependency : cause0
-graph::DocumentRoot "1..1" *-- "0..9999" graph::Cause : cause10
+graph::Cause "0..9999" --* "1..1" graph::DocumentRoot : cause10
 graph::Dependency "0..9999" --* "1..1" graph::EnvironmentGraph : dependencies24
-graph::Node "1..1" -- "0..9999" graph::Dependency : dependencies30
+graph::Dependency "0..9999" -- "1..1" graph::Node : dependencies30
 graph::Dependency "0..9999" --* "1..1" graph::DocumentRoot : dependency13
-graph::Node "0..1" -- "1..1" graph::Dependency : destination1
-graph::EnvironmentGraph "0..9999" --* "1..1" graph::DocumentRoot : environmentGraph16
+graph::Dependency "1..1" -- "0..1" graph::Node : destination1
+graph::DocumentRoot "1..1" *-- "0..9999" graph::EnvironmentGraph : environmentGraph16
 graph::Dependency "0..9999" -- "1..1" graph::Node : isRequiredBy33
 graph::DocumentRoot "1..1" *-- "0..9999" graph::Node : node18
-graph::Node "1..9999" --* "1..1" graph::EnvironmentGraph : node21
-graph::Node "0..9999" -- "1..1" graph::EnvironmentGraph : origins27
+graph::EnvironmentGraph "1..1" *-- "1..9999" graph::Node : node21
+graph::EnvironmentGraph "1..1" -- "0..9999" graph::Node : origins27
 graph::Dependency "1..1" -- "0..1" graph::Node : source3
-graph::EStringToStringMapEntry "0..9999" --* "1..1" graph::DocumentRoot : xMLNSPrefixMap6
+graph::DocumentRoot "1..1" *-- "0..9999" graph::EStringToStringMapEntry : xMLNSPrefixMap6
 graph::DocumentRoot "1..1" *-- "0..9999" graph::EStringToStringMapEntry : xSISchemaLocation7
 @enduml

@@ -1,0 +1,236 @@
+@startuml
+class DContext {
+}
+class DExpression {
+}
+class DModel {
+}
+class DNavigableMember {
+}
+class DPrimitive {
+}
+enum DmxBaseType {
+  AGGREGATE
+  AMBIGUOUS
+  BOOLEAN
+  COMPLEX
+  ENUM
+  IDENTIFIER
+  NOTIFICATION
+  NUMBER
+  SERVICE
+  STATE
+  STATE_EVENT
+  TEXT
+  TIMEPOINT
+  UNDEFINED
+  VOID
+}
+enum DmxBinaryOperator {
+  ADD
+  AND
+  DIVIDE
+  DOUBLE_ARROW
+  EQUAL
+  GREATER
+  GREATER_OR_EQUAL
+  IN
+  LESS
+  LESS_OR_EQUAL
+  MODULO
+  MULTIPLY
+  NOT_EQUAL
+  OR
+  POWER
+  SINGLE_ARROW
+  SUBTRACT
+  UNTIL
+  XOR
+}
+class DmxComplexObject {
+}
+enum DmxUnaryOperator {
+  MINUS
+  NOT
+  PLUS
+}
+class INavigableMemberContainer {
+}
+class ITypeContainer {
+}
+class dmx::DComplexType {
+}
+class dmx::DExpression {
+}
+class dmx::DFeature {
+}
+class dmx::DNamedElement {
+}
+class dmx::DNavigableMember {
+}
+class dmx::DType {
+}
+class dmx::DmxArchetype {
+  + baseType : str
+}
+class dmx::DmxAssignment {
+}
+class dmx::DmxBaseTypeSet {
+  + members : str
+  + name : str
+}
+class dmx::DmxBinaryOperation {
+  + operator : str
+}
+class dmx::DmxBooleanLiteral {
+  + value : bool
+}
+class dmx::DmxCallArguments {
+}
+class dmx::DmxCastExpression {
+}
+class dmx::DmxComplexObject {
+}
+class dmx::DmxContextReference {
+  + all : bool
+  + before : bool
+}
+class dmx::DmxCorrelationVariable {
+}
+class dmx::DmxDateLiteral {
+  + value : date
+}
+class dmx::DmxDecimalLiteral {
+  + value : str
+}
+class dmx::DmxDetail {
+}
+class dmx::DmxEntity {
+}
+class dmx::DmxField {
+}
+class dmx::DmxFilter {
+}
+class dmx::DmxFilterParameter {
+  + name : str
+}
+class dmx::DmxFilterTypeDescriptor {
+  + collection : bool
+  + multiTyped : bool
+  + single : str
+  + isCompatible(type : any) : bool
+}
+class dmx::DmxFunctionCall {
+}
+class dmx::DmxIfExpression {
+}
+class dmx::DmxInstanceOfExpression {
+}
+class dmx::DmxListExpression {
+}
+class dmx::DmxMemberNavigation {
+  + before : bool
+  + explicitOperationCall : bool
+}
+class dmx::DmxModel {
+}
+class dmx::DmxNaturalLiteral {
+  + value : int
+}
+class dmx::DmxPredicateWithCorrelationVariable {
+}
+class dmx::DmxStaticReference {
+  + displayName : str
+  + plural : bool
+}
+class dmx::DmxStringLiteral {
+  + value : str
+}
+class dmx::DmxTest {
+  + name : str
+}
+class dmx::DmxTestContext {
+}
+class dmx::DmxUnaryOperation {
+  + operator : str
+}
+class dmx::DmxUndefinedLiteral {
+}
+class dmx::DmxUrlLiteral {
+  + display : str
+  + value : str
+}
+class dmx::IStaticReferenceTarget {
+}
+DContext <|-- dmx::DmxTestContext
+DExpression <|-- dmx::DmxAssignment
+DExpression <|-- dmx::DmxBinaryOperation
+DExpression <|-- dmx::DmxBooleanLiteral
+DExpression <|-- dmx::DmxCastExpression
+DExpression <|-- dmx::DmxComplexObject
+DExpression <|-- dmx::DmxContextReference
+DExpression <|-- dmx::DmxDateLiteral
+DExpression <|-- dmx::DmxDecimalLiteral
+DExpression <|-- dmx::DmxFunctionCall
+DExpression <|-- dmx::DmxIfExpression
+DExpression <|-- dmx::DmxInstanceOfExpression
+DExpression <|-- dmx::DmxListExpression
+DExpression <|-- dmx::DmxMemberNavigation
+DExpression <|-- dmx::DmxNaturalLiteral
+DExpression <|-- dmx::DmxPredicateWithCorrelationVariable
+DExpression <|-- dmx::DmxStaticReference
+DExpression <|-- dmx::DmxStringLiteral
+DExpression <|-- dmx::DmxUnaryOperation
+DExpression <|-- dmx::DmxUndefinedLiteral
+DExpression <|-- dmx::DmxUrlLiteral
+DModel <|-- dmx::DmxModel
+DNavigableMember <|-- dmx::DmxCorrelationVariable
+DNavigableMember <|-- dmx::DmxField
+DNavigableMember <|-- dmx::DmxFilter
+DPrimitive <|-- dmx::DmxArchetype
+DmxComplexObject <|-- dmx::DmxDetail
+DmxComplexObject <|-- dmx::DmxEntity
+INavigableMemberContainer <|-- dmx::DmxComplexObject
+INavigableMemberContainer <|-- dmx::DmxPredicateWithCorrelationVariable
+INavigableMemberContainer <|-- dmx::DmxTest
+ITypeContainer <|-- dmx::DmxModel
+dmx::DExpression "0..9999" --* "1..1" dmx::DmxCallArguments : arguments40
+dmx::DNavigableMember "0..1" -- "1..1" dmx::DmxAssignment : assignToMember24
+dmx::DmxCallArguments "0..1" --* "1..1" dmx::DmxMemberNavigation : callArguments38
+dmx::DmxCallArguments "0..1" --* "1..1" dmx::DmxFunctionCall : callArguments45
+dmx::DmxTest "1..1" *-- "0..9999" dmx::DmxTestContext : context3
+dmx::DmxCorrelationVariable "0..1" --* "1..1" dmx::DmxPredicateWithCorrelationVariable : correlationVariable29
+dmx::DExpression "0..9999" --* "1..1" dmx::DmxListExpression : elements64
+dmx::DExpression "0..1" --* "1..1" dmx::DmxIfExpression : else76
+dmx::DExpression "0..1" --* "1..1" dmx::DmxTest : expr5
+dmx::DExpression "0..1" --* "1..1" dmx::DmxInstanceOfExpression : expression53
+dmx::DFeature "0..1" -- "1..1" dmx::DmxField : feature82
+dmx::DmxComplexObject "1..1" *-- "0..9999" dmx::DmxField : fields80
+dmx::DmxFilter "0..9999" --* "1..1" dmx::DmxModel : filters0
+dmx::DmxFilter "0..1" -- "1..1" dmx::DmxFunctionCall : function43
+dmx::DExpression "0..1" --* "1..1" dmx::DmxIfExpression : if71
+dmx::DExpression "0..1" --* "1..1" dmx::DmxBinaryOperation : leftOperand48
+dmx::DNavigableMember "0..1" -- "1..1" dmx::DmxMemberNavigation : member33
+dmx::DNavigableMember "0..1" -- "1..1" dmx::DmxStaticReference : member67
+dmx::DmxBaseTypeSet "0..1" -- "1..1" dmx::DmxFilterTypeDescriptor : multiple16
+dmx::DExpression "0..1" --* "1..1" dmx::DmxUnaryOperation : operand57
+dmx::DmxFilter "1..1" *-- "0..9999" dmx::DmxFilterParameter : parameters10
+dmx::DExpression "0..1" --* "1..1" dmx::DmxAssignment : precedingNavigationSegment22
+dmx::DExpression "0..1" --* "1..1" dmx::DmxMemberNavigation : precedingNavigationSegment35
+dmx::DExpression "0..1" --* "1..1" dmx::DmxPredicateWithCorrelationVariable : predicate30
+dmx::DExpression "0..1" --* "1..1" dmx::DmxBinaryOperation : rightOperand50
+dmx::DExpression "0..1" --* "1..1" dmx::DmxCastExpression : target59
+dmx::DmxStaticReference "1..1" -- "0..1" dmx::IStaticReferenceTarget : target66
+dmx::DNamedElement "0..1" -- "1..1" dmx::DmxContextReference : target70
+dmx::DmxModel "1..1" *-- "0..9999" dmx::DmxTest : tests1
+dmx::DExpression "0..1" --* "1..1" dmx::DmxIfExpression : then73
+dmx::DType "0..1" -- "1..1" dmx::DmxInstanceOfExpression : type55
+dmx::DType "0..1" -- "1..1" dmx::DmxCastExpression : type61
+dmx::DComplexType "0..1" -- "1..1" dmx::DmxComplexObject : type79
+dmx::DmxFilter "1..1" *-- "0..1" dmx::DmxFilterTypeDescriptor : typeDesc12
+dmx::DmxFilterParameter "1..1" *-- "0..1" dmx::DmxFilterTypeDescriptor : typeDesc19
+dmx::DExpression "0..1" --* "1..1" dmx::DmxAssignment : value26
+dmx::DExpression "0..1" --* "1..1" dmx::DmxTestContext : value7
+dmx::DExpression "0..1" --* "1..1" dmx::DmxField : value84
+dmx::DmxBaseTypeSet "0..1" --* "1..1" dmx::DmxFilter : withTypeSet14
+@enduml

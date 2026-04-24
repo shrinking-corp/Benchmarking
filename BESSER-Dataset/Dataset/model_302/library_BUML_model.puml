@@ -72,14 +72,14 @@ Lendable <|-- library::CirculatingItem
 Person <|-- library::Borrower
 Person <|-- library::Employee
 Person <|-- library::Writer
-library::Writer "1..1" -- "1..1" library::Book : author0
-library::Writer "0..1" -- "1..1" library::BookOnTape : author18
+library::Book "1..1" -- "1..1" library::Writer : author0
+library::BookOnTape "1..1" -- "0..1" library::Writer : author18
 library::Book "0..9999" -- "1..1" library::Writer : books15
-library::Library "1..1" -- "0..9999" library::Book : books8
+library::Book "0..9999" -- "1..1" library::Library : books8
 library::Borrower "1..1" -- "0..9999" library::Lendable : borrowed23
 library::Borrower "0..9999" -- "1..1" library::Lendable : borrowers16
 library::Borrower "0..9999" --* "1..1" library::Library : borrowers4
-library::Library "0..9999" --* "1..1" library::Library : branches11
+library::Library "1..1" *-- "0..9999" library::Library : branches11
 library::Person "0..9999" -- "1..1" library::VideoCassette : cast21
 library::Employee "0..9999" --* "1..1" library::Library : employees2
 library::Employee "0..1" -- "1..1" library::Employee : manager25

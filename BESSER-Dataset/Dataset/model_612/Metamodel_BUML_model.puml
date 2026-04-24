@@ -162,19 +162,19 @@ MVCClass <|-- PHPMVC::coreMVC::Controller
 MVCClass <|-- PHPMVC::coreMVC::Model
 MVCClass <|-- PHPMVC::coreMVC::View
 ViewComponent <|-- PHPMVC::extPHP::HTMLElement
-PackageController "0..1" --* "1..1" PHPMVC::coreMVC::Application : aPackageController3
+PHPMVC::coreMVC::Application "1..1" *-- "0..1" PackageController : aPackageController3
 PHPMVC::coreMVC::Application "1..1" *-- "0..1" PackageModel : aPackageModel0
-PackageView "0..1" --* "1..1" PHPMVC::coreMVC::Application : aPackageView1
-PHPMVC::coreMVC::MVCClass "1..1" *-- "0..9999" Attribute : attributes8
+PHPMVC::coreMVC::Application "1..1" *-- "0..1" PackageView : aPackageView1
+Attribute "0..9999" --* "1..1" PHPMVC::coreMVC::MVCClass : attributes8
 Controller "0..9999" --* "1..1" PHPMVC::coreMVC::PackageController : controllers7
 Event "0..9999" --* "1..1" PHPMVC::coreMVC::ViewComponent : events20
 HTMLElement "0..9999" --* "1..1" PHPMVC::extPHP::HTMLElement : htmlElements21
-PHPMVC::coreMVC::Method "1..1" *-- "0..9999" Attribute : inParameters15
-View "0..9999" --* "1..1" PHPMVC::coreMVC::View : innerViews11
+Attribute "0..9999" --* "1..1" PHPMVC::coreMVC::Method : inParameters15
+PHPMVC::coreMVC::View "1..1" *-- "0..9999" View : innerViews11
 Method "0..9999" --* "1..1" PHPMVC::coreMVC::Controller : methods14
 Model "0..9999" --* "1..1" PHPMVC::coreMVC::PackageModel : models5
 Attribute "0..9999" --* "1..1" PHPMVC::coreMVC::Method : outParameters17
-PHPMVC::coreMVC::Model "1..1" *-- "1..9999" Identifier : primaryKeys9
-ViewComponent "0..9999" --* "1..1" PHPMVC::coreMVC::View : viewComponents10
-View "0..9999" --* "1..1" PHPMVC::coreMVC::PackageView : views6
+Identifier "1..9999" --* "1..1" PHPMVC::coreMVC::Model : primaryKeys9
+PHPMVC::coreMVC::View "1..1" *-- "0..9999" ViewComponent : viewComponents10
+PHPMVC::coreMVC::PackageView "1..1" *-- "0..9999" View : views6
 @enduml

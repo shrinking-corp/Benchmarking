@@ -1,0 +1,30 @@
+@startuml
+class Book {
+}
+enum BookType {
+  Child
+  Parent
+}
+class emftest::Author {
+  + name : str
+  + writeBook(pages : any, title : any, type : any) : Book
+}
+abstract class emftest::Book {
+  + pages : int
+  + title : str
+}
+class emftest::BookCollection {
+}
+class emftest::ChildBook {
+}
+class emftest::Library {
+}
+class emftest::ParentBook {
+}
+Book <|-- emftest::ChildBook
+Book <|-- emftest::ParentBook
+emftest::Author "1..9999" -- "1..1" emftest::Book : authors0
+emftest::Book "0..9999" --* "1..1" emftest::BookCollection : books1
+emftest::Author "1..1" -- "0..9999" emftest::Book : books5
+emftest::BookCollection "0..9999" --* "1..1" emftest::Library : collections3
+@enduml

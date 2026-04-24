@@ -496,10 +496,10 @@ class gastm::WhileStatement {
 AccessKind <|-- gastm::Private
 AccessKind <|-- gastm::Protected
 AccessKind <|-- gastm::Public
-ActualParameterExpression <|-- gastm::ByReferenceActualParameterExpression
-ActualParameterExpression <|-- gastm::ByValueActualParameterExpression
 ActualParameter <|-- gastm::ActualParameterExpression
 ActualParameter <|-- gastm::MissingActualParameter
+ActualParameterExpression <|-- gastm::ByReferenceActualParameterExpression
+ActualParameterExpression <|-- gastm::ByValueActualParameterExpression
 AggregateType <|-- gastm::AnnotationType
 AggregateType <|-- gastm::ClassType
 AggregateType <|-- gastm::StructureType
@@ -542,20 +542,20 @@ DataType <|-- gastm::ExceptionType
 DataType <|-- gastm::FormalParameterType
 DataType <|-- gastm::NamedType
 DataType <|-- gastm::PrimitiveType
-DeclarationOrDefinition <|-- gastm::Declaration
-DeclarationOrDefinition <|-- gastm::Definition
 Declaration <|-- gastm::FormalParameterDeclaration
 Declaration <|-- gastm::FunctionDeclaration
 Declaration <|-- gastm::VariableDeclaration
+DeclarationOrDefinition <|-- gastm::Declaration
+DeclarationOrDefinition <|-- gastm::Definition
+Definition <|-- gastm::DataDefinition
+Definition <|-- gastm::EntryDefinition
+Definition <|-- gastm::EnumLiteralDefinition
+Definition <|-- gastm::FunctionDefinition
 DefinitionObject <|-- gastm::DeclarationOrDefinition
 DefinitionObject <|-- gastm::LabelDefinition
 DefinitionObject <|-- gastm::NameSpaceDefinition
 DefinitionObject <|-- gastm::TypeDeclaration
 DefinitionObject <|-- gastm::TypeDefinition
-Definition <|-- gastm::DataDefinition
-Definition <|-- gastm::EntryDefinition
-Definition <|-- gastm::EnumLiteralDefinition
-Definition <|-- gastm::FunctionDefinition
 Expression <|-- gastm::AggregateExpression
 Expression <|-- gastm::AnnotationExpression
 Expression <|-- gastm::ArrayAccess
@@ -662,6 +662,11 @@ StorageSpecification <|-- gastm::NoDef
 StorageSpecification <|-- gastm::PerClassMember
 SwitchCase <|-- gastm::CaseBlock
 SwitchCase <|-- gastm::DefaultBlock
+Type <|-- gastm::DataType
+Type <|-- gastm::FunctionType
+Type <|-- gastm::LabelType
+Type <|-- gastm::NameSpaceType
+Type <|-- gastm::TypeReference
 TypeDeclaration <|-- gastm::AggregateTypeDeclaration
 TypeDeclaration <|-- gastm::EnumTypeDeclaration
 TypeDefinition <|-- gastm::AggregateTypeDefinition
@@ -669,11 +674,6 @@ TypeDefinition <|-- gastm::EnumTypeDefinition
 TypeDefinition <|-- gastm::NamedTypeDefinition
 TypeReference <|-- gastm::NamedTypeReference
 TypeReference <|-- gastm::UnnamedTypeReference
-Type <|-- gastm::DataType
-Type <|-- gastm::FunctionType
-Type <|-- gastm::LabelType
-Type <|-- gastm::NameSpaceType
-Type <|-- gastm::TypeReference
 UnaryOperator <|-- gastm::AddressOf
 UnaryOperator <|-- gastm::BitNot
 UnaryOperator <|-- gastm::Decrement
@@ -690,124 +690,124 @@ gastm::AccessKind "1..1" --* "1..1" gastm::DeclarationOrDefinition : accessKind4
 gastm::ActualParameter "0..9999" --* "1..1" gastm::FunctionCallExpression : actualParams231
 gastm::ActualParameter "0..9999" --* "1..1" gastm::NewExpression : actualParams235
 gastm::AggregateType "1..1" --* "1..1" gastm::AggregateTypeDefinition : aggregateType101
-gastm::TypeReference "1..9999" --* "1..1" gastm::TypeQualifiedIdentifierReference : aggregateType266
+gastm::TypeQualifiedIdentifierReference "1..1" *-- "1..9999" gastm::TypeReference : aggregateType266
 gastm::AnnotationExpression "1..1" *-- "0..1" gastm::TypeReference : annotationType254
-gastm::GASTMSyntaxObject "1..1" *-- "0..9999" gastm::AnnotationExpression : annotations3
-gastm::Expression "1..1" --* "1..1" gastm::ArrayAccess : arrayName249
+gastm::AnnotationExpression "0..9999" --* "1..1" gastm::GASTMSyntaxObject : annotations3
+gastm::ArrayAccess "1..1" *-- "1..1" gastm::Expression : arrayName249
 gastm::ConstructedType "1..1" *-- "1..1" gastm::TypeReference : baseType113
-gastm::Expression "1..1" --* "1..1" gastm::BitFieldDefinition : bitFieldSize98
-gastm::Type "1..1" --* "1..1" gastm::NamedType : body123
+gastm::BitFieldDefinition "1..1" *-- "1..1" gastm::Expression : bitFieldSize98
+gastm::NamedType "1..1" *-- "1..1" gastm::Type : body123
 gastm::LoopStatement "1..1" *-- "1..1" gastm::Statement : body170
 gastm::Statement "1..9999" -- "1..1" gastm::SwitchCase : body30
-gastm::Statement "1..1" --* "1..1" gastm::CatchBlock : body31
+gastm::CatchBlock "1..1" *-- "1..1" gastm::Statement : body31
 gastm::DefinitionObject "1..9999" --* "1..1" gastm::NameSpaceDefinition : body49
-gastm::Statement "0..9999" --* "1..1" gastm::FunctionDefinition : body77
-gastm::Statement "0..9999" --* "1..1" gastm::EntryDefinition : body87
-gastm::FunctionCallExpression "1..1" *-- "1..1" gastm::Expression : calledFunction229
+gastm::FunctionDefinition "1..1" *-- "0..9999" gastm::Statement : body77
+gastm::EntryDefinition "1..1" *-- "0..9999" gastm::Statement : body87
+gastm::Expression "1..1" --* "1..1" gastm::FunctionCallExpression : calledFunction229
 gastm::CaseBlock "1..1" *-- "1..9999" gastm::Expression : caseExpressions187
 gastm::SwitchCase "1..1" -- "1..1" gastm::SwitchStatement : cases163
 gastm::CastExpression "1..1" *-- "1..1" gastm::TypeReference : castType198
 gastm::CatchBlock "0..9999" --* "1..1" gastm::TryStatement : catchBlocks175
 gastm::Scope "0..9999" -- "1..1" gastm::Scope : childScope22
-gastm::NamedTypeReference "1..1" --* "1..1" gastm::DerivesFrom : className38
+gastm::DerivesFrom "1..1" *-- "1..1" gastm::NamedTypeReference : className38
 gastm::Expression "1..1" --* "1..1" gastm::IfStatement : condition153
 gastm::Expression "1..1" --* "1..1" gastm::LoopStatement : condition168
-gastm::Expression "1..1" --* "1..1" gastm::ConditionalExpression : condition216
+gastm::ConditionalExpression "1..1" *-- "1..1" gastm::Expression : condition216
 gastm::DeclarationOrDefinitionStatement "1..1" *-- "1..1" gastm::DefinitionObject : declOrDefn181
-gastm::TypeReference "1..1" --* "1..1" gastm::Declaration : declarationType70
+gastm::Declaration "1..1" *-- "1..1" gastm::TypeReference : declarationType70
 gastm::Declaration "1..1" -- "1..1" gastm::Definition : defRef65
 gastm::DefinitionObject "0..9999" --* "1..1" gastm::Scope : definitionObject19
-gastm::NamedTypeDefinition "1..1" *-- "1..1" gastm::NamedType : definitionType100
+gastm::NamedType "1..1" --* "1..1" gastm::NamedTypeDefinition : definitionType100
 gastm::EnumType "1..1" --* "1..1" gastm::EnumTypeDefinition : definitionType102
-gastm::TypeReference "0..1" --* "1..1" gastm::Definition : definitionType62
-gastm::DerivesFrom "0..9999" --* "1..1" gastm::ClassType : derivesFrom127
-gastm::Statement "0..1" --* "1..1" gastm::IfStatement : elseBody158
+gastm::Definition "1..1" *-- "0..1" gastm::TypeReference : definitionType62
+gastm::ClassType "1..1" *-- "0..9999" gastm::DerivesFrom : derivesFrom127
+gastm::IfStatement "1..1" *-- "0..1" gastm::Statement : elseBody158
 gastm::EnumLiteralDefinition "1..9999" --* "1..1" gastm::EnumType : enumLiterals110
 gastm::Expression "1..1" --* "1..1" gastm::ThrowStatement : exception183
 gastm::DataDefinition "1..1" --* "1..1" gastm::VariableCatchBlock : exceptionVariable196
 gastm::Type "1..9999" --* "1..1" gastm::TypesCatchBlock : exceptions194
 gastm::Expression "1..1" --* "1..1" gastm::ExpressionStatement : expression137
-gastm::Expression "1..1" --* "1..1" gastm::CastExpression : expression200
-gastm::Expression "0..9999" --* "1..1" gastm::CollectionExpression : expressionList260
-gastm::TypeReference "1..1" -- "1..1" gastm::Expression : expressionType24
-gastm::SourceFileReference "1..1" --* "1..1" gastm::IncludeUnit : file103
-gastm::Project "1..1" *-- "1..9999" gastm::CompilationUnit : files15
+gastm::CastExpression "1..1" *-- "1..1" gastm::Expression : expression200
+gastm::CollectionExpression "1..1" *-- "0..9999" gastm::Expression : expressionList260
+gastm::Expression "1..1" -- "1..1" gastm::TypeReference : expressionType24
+gastm::IncludeUnit "1..1" *-- "1..1" gastm::SourceFileReference : file103
+gastm::CompilationUnit "1..9999" --* "1..1" gastm::Project : files15
 gastm::Statement "0..1" --* "1..1" gastm::TryStatement : finalStatement178
 gastm::FormalParameterDefinition "0..9999" --* "1..1" gastm::FunctionDefinition : formalParameters75
-gastm::FormalParameterDefinition "0..9999" --* "1..1" gastm::EntryDefinition : formalParameters85
+gastm::EntryDefinition "1..1" *-- "0..9999" gastm::FormalParameterDefinition : formalParameters85
 gastm::FormalParameterDeclaration "0..9999" --* "1..1" gastm::FunctionDeclaration : formalParameters94
 gastm::CompilationUnit "1..1" *-- "0..9999" gastm::DefinitionObject : fragments7
 gastm::Expression "1..1" --* "1..1" gastm::RangeExpression : fromExpression224
-gastm::FunctionMemberAttributes "0..1" --* "1..1" gastm::FunctionDefinition : functionMemberAttributes80
-gastm::FunctionMemberAttributes "0..1" --* "1..1" gastm::FunctionDeclaration : functionMemberAttributes95
+gastm::FunctionDefinition "1..1" *-- "0..1" gastm::FunctionMemberAttributes : functionMemberAttributes80
+gastm::FunctionDeclaration "1..1" *-- "0..1" gastm::FunctionMemberAttributes : functionMemberAttributes95
 gastm::Statement "1..1" --* "1..1" gastm::TryStatement : guardedStatement173
-gastm::Expression "1..1" --* "1..1" gastm::Dimension : highBound27
-gastm::Name "1..1" --* "1..1" gastm::Definition : identifierName60
-gastm::Name "0..1" --* "1..1" gastm::Declaration : identifierName67
+gastm::Dimension "1..1" *-- "1..1" gastm::Expression : highBound27
+gastm::Definition "1..1" *-- "1..1" gastm::Name : identifierName60
+gastm::Declaration "1..1" *-- "0..1" gastm::Name : identifierName67
 gastm::SourceFile "1..1" --* "1..1" gastm::SourceLocation : inSourceFile5
 gastm::Expression "0..9999" --* "1..1" gastm::ForStatement : initBody189
 gastm::DataDefinition "1..1" *-- "0..1" gastm::Expression : initialValue90
 gastm::Expression "0..9999" --* "1..1" gastm::ForStatement : iterationBody191
 gastm::LabelDefinition "1..1" --* "1..1" gastm::LabeledStatement : label144
-gastm::LabelDefinition "1..1" -- "1..1" gastm::LabelAccess : labelDefinition246
-gastm::Name "1..1" --* "1..1" gastm::LabelAccess : labelName243
-gastm::Name "1..1" --* "1..1" gastm::LabelDefinition : labelName54
+gastm::LabelAccess "1..1" -- "1..1" gastm::LabelDefinition : labelDefinition246
+gastm::LabelAccess "1..1" *-- "1..1" gastm::Name : labelName243
+gastm::LabelDefinition "1..1" *-- "1..1" gastm::Name : labelName54
 gastm::LabelDefinition "1..1" *-- "1..1" gastm::LabelType : labelType56
 gastm::BinaryExpression "1..1" *-- "1..1" gastm::Expression : leftOperand210
-gastm::SourceLocation "1..1" --* "1..1" gastm::GASTMSyntaxObject : locationInfo0
-gastm::SourceLocation "1..1" --* "1..1" gastm::SourceFileReference : locationInfo10
+gastm::GASTMSyntaxObject "1..1" *-- "1..1" gastm::SourceLocation : locationInfo0
+gastm::SourceFileReference "1..1" *-- "1..1" gastm::SourceLocation : locationInfo10
 gastm::Dimension "1..1" *-- "0..1" gastm::Expression : lowBound25
 gastm::IdentifierReference "1..1" --* "1..1" gastm::QualifiedIdentifierReference : member264
 gastm::IdentifierReference "1..1" --* "1..1" gastm::TypeQualifiedIdentifierReference : member268
-gastm::MemberObject "1..1" *-- "1..1" gastm::DefinitionObject : member40
-gastm::Expression "0..9999" --* "1..1" gastm::AnnotationExpression : memberValues257
-gastm::MemberObject "1..9999" --* "1..1" gastm::AggregateType : members115
+gastm::DefinitionObject "1..1" --* "1..1" gastm::MemberObject : member40
+gastm::AnnotationExpression "1..1" *-- "0..9999" gastm::Expression : memberValues257
+gastm::AggregateType "1..1" *-- "1..9999" gastm::MemberObject : members115
 gastm::Name "1..1" --* "1..1" gastm::NameReference : name238
 gastm::Name "1..1" --* "1..1" gastm::NameSpaceDefinition : nameSpace47
-gastm::NameSpaceType "1..1" --* "1..1" gastm::NameSpaceDefinition : nameSpaceType52
-gastm::TypeReference "1..1" --* "1..1" gastm::NewExpression : newType233
+gastm::NameSpaceDefinition "1..1" *-- "1..1" gastm::NameSpaceType : nameSpaceType52
+gastm::NewExpression "1..1" *-- "1..1" gastm::TypeReference : newType233
 gastm::SourceFile "1..1" -- "1..1" gastm::SourceFileReference : ofSourceFile12
 gastm::ConditionalExpression "1..1" *-- "1..1" gastm::Expression : onFalseOperand221
-gastm::Expression "1..1" --* "1..1" gastm::ConditionalExpression : onTrueOperand218
-gastm::AggregateType "1..1" -- "1..1" gastm::AggregateScope : opensScope118
+gastm::ConditionalExpression "1..1" *-- "1..1" gastm::Expression : onTrueOperand218
+gastm::AggregateScope "1..1" -- "1..1" gastm::AggregateType : opensScope118
 gastm::BlockScope "1..1" -- "1..1" gastm::BlockStatement : opensScope151
-gastm::ProgramScope "0..1" -- "1..1" gastm::CompilationUnit : opensScope8
-gastm::FunctionScope "1..1" -- "1..1" gastm::FunctionDefinition : opensScope83
-gastm::Expression "1..1" --* "1..1" gastm::DeleteStatement : operand185
+gastm::CompilationUnit "1..1" -- "0..1" gastm::ProgramScope : opensScope8
+gastm::FunctionDefinition "1..1" -- "1..1" gastm::FunctionScope : opensScope83
+gastm::DeleteStatement "1..1" *-- "1..1" gastm::Expression : operand185
 gastm::Expression "1..1" --* "1..1" gastm::UnaryExpression : operand206
-gastm::UnaryOperator "1..1" --* "1..1" gastm::UnaryExpression : operator205
+gastm::UnaryExpression "1..1" *-- "1..1" gastm::UnaryOperator : operator205
 gastm::BinaryExpression "1..1" *-- "1..1" gastm::BinaryOperator : operator209
-gastm::OperatorAssign "1..1" *-- "1..1" gastm::BinaryOperator : operator271
+gastm::BinaryOperator "1..1" --* "1..1" gastm::OperatorAssign : operator271
 gastm::GlobalScope "0..1" -- "1..1" gastm::Project : outerScope17
 gastm::FormalParameterType "0..9999" --* "1..1" gastm::FunctionType : parameterTypes108
-gastm::PreprocessorElement "0..9999" --* "1..1" gastm::GASTMSyntaxObject : preProcessorElements1
-gastm::QualifiedIdentifierReference "1..1" *-- "1..1" gastm::Expression : qualifiers262
-gastm::Dimension "1..9999" --* "1..1" gastm::ArrayType : ranks125
+gastm::GASTMSyntaxObject "1..1" *-- "0..9999" gastm::PreprocessorElement : preProcessorElements1
+gastm::Expression "1..1" --* "1..1" gastm::QualifiedIdentifierReference : qualifiers262
+gastm::ArrayType "1..1" *-- "1..9999" gastm::Dimension : ranks125
 gastm::MacroCall "1..1" *-- "1..1" gastm::MacroDefinition : refersTo105
-gastm::NameReference "1..1" *-- "1..1" gastm::DefinitionObject : refersTo240
-gastm::TypeReference "0..1" --* "1..1" gastm::FunctionType : returnType106
+gastm::DefinitionObject "1..1" --* "1..1" gastm::NameReference : refersTo240
+gastm::FunctionType "1..1" *-- "0..1" gastm::TypeReference : returnType106
 gastm::FunctionDefinition "1..1" *-- "0..1" gastm::TypeReference : returnType73
 gastm::Expression "0..1" --* "1..1" gastm::ReturnStatement : returnValue166
-gastm::Expression "1..1" --* "1..1" gastm::BinaryExpression : rightOperand213
-gastm::Statement "0..1" --* "1..1" gastm::LabeledStatement : statement146
-gastm::StorageSpecification "1..1" --* "1..1" gastm::DeclarationOrDefinition : storageSpecifiers42
-gastm::Expression "0..9999" --* "1..1" gastm::AggregateExpression : subExpressions203
-gastm::Statement "0..9999" --* "1..1" gastm::BlockStatement : subStatements149
-gastm::Expression "1..9999" --* "1..1" gastm::ArrayAccess : subscripts251
-gastm::SwitchStatement "1..1" *-- "1..1" gastm::Expression : switchExpression161
-gastm::JumpStatement "1..1" *-- "1..1" gastm::Expression : target139
-gastm::LabelAccess "0..1" --* "1..1" gastm::BreakStatement : target141
+gastm::BinaryExpression "1..1" *-- "1..1" gastm::Expression : rightOperand213
+gastm::LabeledStatement "1..1" *-- "0..1" gastm::Statement : statement146
+gastm::DeclarationOrDefinition "1..1" *-- "1..1" gastm::StorageSpecification : storageSpecifiers42
+gastm::AggregateExpression "1..1" *-- "0..9999" gastm::Expression : subExpressions203
+gastm::BlockStatement "1..1" *-- "0..9999" gastm::Statement : subStatements149
+gastm::ArrayAccess "1..1" *-- "1..9999" gastm::Expression : subscripts251
+gastm::Expression "1..1" --* "1..1" gastm::SwitchStatement : switchExpression161
+gastm::Expression "1..1" --* "1..1" gastm::JumpStatement : target139
+gastm::BreakStatement "1..1" *-- "0..1" gastm::LabelAccess : target141
 gastm::ContinueStatement "1..1" *-- "0..1" gastm::LabelAccess : target142
-gastm::Statement "1..1" --* "1..1" gastm::IfStatement : thenBody155
+gastm::IfStatement "1..1" *-- "1..1" gastm::Statement : thenBody155
 gastm::Expression "1..1" --* "1..1" gastm::RangeExpression : toExpression226
-gastm::TypeReference "1..1" --* "1..1" gastm::FormalParameterType : type120
-gastm::UnnamedTypeReference "1..1" *-- "1..1" gastm::Type : type129
-gastm::TypeDefinition "1..1" --* "1..1" gastm::NamedTypeReference : type134
+gastm::FormalParameterType "1..1" *-- "1..1" gastm::TypeReference : type120
+gastm::Type "1..1" --* "1..1" gastm::UnnamedTypeReference : type129
+gastm::NamedTypeReference "1..1" *-- "1..1" gastm::TypeDefinition : type134
 gastm::Name "1..1" --* "1..1" gastm::NamedTypeReference : typeName131
-gastm::TypeDefinition "1..1" *-- "1..1" gastm::Name : typeName46
-gastm::TypeReference "1..1" --* "1..1" gastm::TypeDeclaration : typeRef58
-gastm::Expression "1..1" --* "1..1" gastm::ActualParameterExpression : value273
-gastm::Expression "0..1" --* "1..1" gastm::EnumLiteralDefinition : value92
+gastm::Name "1..1" --* "1..1" gastm::TypeDefinition : typeName46
+gastm::TypeDeclaration "1..1" *-- "1..1" gastm::TypeReference : typeRef58
+gastm::ActualParameterExpression "1..1" *-- "1..1" gastm::Expression : value273
+gastm::EnumLiteralDefinition "1..1" *-- "0..1" gastm::Expression : value92
 gastm::FunctionMemberAttributes "1..1" *-- "1..1" gastm::VirtualSpecification : virtualSpecifier33
-gastm::VirtualSpecification "0..1" --* "1..1" gastm::DerivesFrom : virtualSpecifier34
+gastm::DerivesFrom "1..1" *-- "0..1" gastm::VirtualSpecification : virtualSpecifier34
 @enduml

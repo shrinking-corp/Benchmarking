@@ -1,0 +1,133 @@
+@startuml
+class ActionRoot {
+}
+class ControlPath {
+}
+class EntryPoint {
+}
+class ExitPoint {
+}
+class LogicalRoot {
+}
+class Mode {
+}
+class Point {
+}
+enum PrimitiveTypes {
+  boolean
+  clock
+  float
+  integer
+  natural
+  string
+}
+class Referable {
+}
+class ResourceRoot {
+}
+enum ResourceTypes {
+  bandwidth
+  cpu
+  memory
+  port
+  power
+}
+class remes::CompositeEntryPoint {
+}
+class remes::CompositeExitPoint {
+}
+class remes::CompositeMode {
+}
+class remes::ConditionalConnector {
+}
+class remes::Constant {
+  + global : bool
+  + type : str
+  + value : str
+}
+abstract class remes::ControlPath {
+  + name : str
+}
+class remes::Edge {
+  + actionBody : str
+  + actionGuard : str
+}
+class remes::EntryPoint {
+}
+class remes::ExitPoint {
+}
+class remes::InitPoint {
+}
+abstract class remes::Mode {
+  + findConstantByName(name : any) : str
+  + findResourceByName(name : any) : str
+  + findVariableByName(name : any) : str
+}
+abstract class remes::Point {
+}
+abstract class remes::Referable {
+  + name : str
+}
+class remes::RemesDiagram {
+}
+class remes::Resource {
+  + expression : str
+  + type : str
+}
+class remes::SubMode {
+  + invariant : str
+  + isUrgent : bool
+}
+class remes::Variable {
+  + global : bool
+  + readable : bool
+  + type : str
+  + value : str
+  + vectorSize : int
+  + writable : bool
+}
+class remes::WritePoint {
+}
+ControlPath <|-- remes::ConditionalConnector
+ControlPath <|-- remes::Mode
+EntryPoint <|-- remes::CompositeExitPoint
+EntryPoint <|-- remes::WritePoint
+ExitPoint <|-- remes::CompositeEntryPoint
+ExitPoint <|-- remes::InitPoint
+Mode <|-- remes::CompositeMode
+Mode <|-- remes::SubMode
+Point <|-- remes::EntryPoint
+Point <|-- remes::ExitPoint
+Referable <|-- remes::Constant
+Referable <|-- remes::Resource
+Referable <|-- remes::Variable
+remes::CompositeEntryPoint "1..1" -- "0..1" remes::CompositeMode : composite28
+remes::CompositeExitPoint "1..1" -- "0..1" remes::CompositeMode : composite30
+remes::CompositeEntryPoint "1..1" --* "1..1" remes::CompositeMode : compositeEntryPoint13
+remes::CompositeExitPoint "1..1" --* "1..1" remes::CompositeMode : compositeExitPoint14
+remes::CompositeMode "1..1" *-- "0..9999" remes::ConditionalConnector : conditionalConnectors10
+remes::Edge "1..1" -- "1..1" remes::ExitPoint : connectFrom34
+remes::Edge "1..1" -- "1..1" remes::EntryPoint : connectTo36
+remes::Constant "0..9999" --* "1..1" remes::Mode : constants7
+remes::ControlPath "0..1" -- "1..1" remes::EntryPoint : container23
+remes::ControlPath "0..1" -- "1..1" remes::ExitPoint : container26
+remes::Edge "0..9999" -- "1..1" remes::EntryPoint : entryEdges22
+remes::ControlPath "1..1" *-- "1..1" remes::EntryPoint : entryPoint1
+remes::Edge "0..9999" --* "1..1" remes::ExitPoint : exitEdges24
+remes::ControlPath "1..1" *-- "1..1" remes::ExitPoint : exitPoint2
+remes::CompositeMode "1..1" *-- "1..1" remes::InitPoint : initPoint12
+remes::Mode "0..9999" --* "1..1" remes::RemesDiagram : modes0
+remes::CompositeMode "0..1" -- "1..1" remes::SubMode : parent18
+remes::CompositeMode "0..1" -- "1..1" remes::ConditionalConnector : parent20
+ActionRoot "0..1" --* "1..1" remes::Edge : parsedActionBody38
+LogicalRoot "0..1" --* "1..1" remes::Edge : parsedActionGuard32
+ResourceRoot "0..1" --* "1..1" remes::Resource : parsedExpression43
+LogicalRoot "0..1" --* "1..1" remes::SubMode : parsedInvariant19
+remes::Mode "1..1" *-- "0..9999" remes::Resource : resources5
+remes::Mode "1..1" -- "1..1" remes::Variable : scope40
+remes::Mode "1..1" -- "1..1" remes::Resource : scope41
+remes::Constant "1..1" -- "1..1" remes::Mode : scope44
+remes::CompositeMode "1..1" *-- "1..9999" remes::SubMode : subModes9
+remes::Mode "1..1" *-- "0..9999" remes::Variable : variables4
+remes::CompositeMode "1..1" *-- "1..1" remes::WritePoint : writePoint16
+@enduml

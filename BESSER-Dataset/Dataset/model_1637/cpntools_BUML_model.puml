@@ -1,0 +1,254 @@
+@startuml
+class Auxiliary {
+}
+class ColorSet {
+}
+enum Colour16 {
+  Aqua
+  Black
+  Blue
+  Fuchsia
+  Gray
+  Green
+  Lime
+  Maroon
+  Navy
+  Olive
+  Purple
+  Red
+  Silver
+  Teal
+  White
+  Yellow
+}
+class CompoundColorSet {
+}
+class Declaration {
+}
+class DiagramElement {
+}
+enum Orientation {
+  Inhibitor
+  PtoT
+  TtoP
+  undefined
+}
+class SimpleColorSet {
+}
+class cpntools::Alias {
+}
+class cpntools::Annot {
+  + text : str
+}
+class cpntools::Arc {
+  + currentcyckle : str
+  + headsize : float
+  + order : int
+  + orientation : str
+}
+class cpntools::AuxBox {
+  + height : int
+  + width : int
+}
+class cpntools::AuxEllipse {
+  + height : int
+  + width : int
+}
+class cpntools::AuxText {
+  + text : str
+}
+abstract class cpntools::Auxiliary {
+}
+class cpntools::Binder {
+  + height : int
+  + posx : int
+  + posy : int
+  + width : int
+}
+class cpntools::Block {
+  + idname : str
+}
+class cpntools::Boolean {
+  + with : str
+}
+abstract class cpntools::ColorSet {
+  + colorSetType : str
+  + declare : str
+  + idname : str
+  + timed : bool
+}
+abstract class cpntools::CompoundColorSet {
+}
+class cpntools::Cpnet {
+}
+abstract class cpntools::Declaration {
+}
+abstract class cpntools::DiagramElement {
+  + fillColour : str
+  + fillFilled : bool
+  + fillPattern : str
+  + lineColour : str
+  + lineThick : int
+  + lineType : str
+  + posx : int
+  + posy : int
+}
+class cpntools::Enumerated {
+  + with : str
+}
+class cpntools::Fusion {
+  + name : str
+}
+class cpntools::Globbox {
+  + name : str
+}
+class cpntools::Globref {
+  + idname : str
+}
+class cpntools::Group {
+  + name : str
+}
+class cpntools::Index {
+  + with : str
+}
+class cpntools::Initmark {
+  + expression : str
+}
+class cpntools::Integer {
+  + with : str
+}
+class cpntools::LargeInteger {
+  + with : str
+}
+class cpntools::List {
+}
+class cpntools::Ml {
+  + expression : str
+}
+class cpntools::Page {
+  + name : str
+  + layout() : void
+}
+class cpntools::Place {
+  + height : int
+  + text : str
+  + width : int
+}
+class cpntools::Port {
+  + portType : str
+}
+class cpntools::Product {
+}
+class cpntools::Real {
+  + with : str
+}
+class cpntools::Record {
+}
+abstract class cpntools::SimpleColorSet {
+}
+class cpntools::String {
+  + and : str
+  + with : str
+}
+class cpntools::Subset {
+}
+class cpntools::Time {
+}
+class cpntools::Trans {
+  + explicit : bool
+  + height : int
+  + text : str
+  + width : int
+}
+class cpntools::TransCond {
+  + text : str
+}
+class cpntools::TransPriority {
+  + text : str
+}
+class cpntools::TransTime {
+  + text : str
+}
+class cpntools::Union {
+}
+class cpntools::Unit {
+  + with : str
+}
+class cpntools::Var {
+  + idname : str
+}
+Auxiliary <|-- cpntools::AuxBox
+Auxiliary <|-- cpntools::AuxEllipse
+Auxiliary <|-- cpntools::AuxText
+ColorSet <|-- cpntools::CompoundColorSet
+ColorSet <|-- cpntools::SimpleColorSet
+CompoundColorSet <|-- cpntools::Alias
+CompoundColorSet <|-- cpntools::List
+CompoundColorSet <|-- cpntools::Product
+CompoundColorSet <|-- cpntools::Record
+CompoundColorSet <|-- cpntools::Subset
+CompoundColorSet <|-- cpntools::Union
+Declaration <|-- cpntools::Block
+Declaration <|-- cpntools::ColorSet
+Declaration <|-- cpntools::Globref
+Declaration <|-- cpntools::Ml
+Declaration <|-- cpntools::Var
+DiagramElement <|-- cpntools::Annot
+DiagramElement <|-- cpntools::Arc
+DiagramElement <|-- cpntools::Auxiliary
+DiagramElement <|-- cpntools::Initmark
+DiagramElement <|-- cpntools::Place
+DiagramElement <|-- cpntools::Port
+DiagramElement <|-- cpntools::Trans
+DiagramElement <|-- cpntools::TransCond
+DiagramElement <|-- cpntools::TransPriority
+DiagramElement <|-- cpntools::TransTime
+SimpleColorSet <|-- cpntools::Boolean
+SimpleColorSet <|-- cpntools::Enumerated
+SimpleColorSet <|-- cpntools::Index
+SimpleColorSet <|-- cpntools::Integer
+SimpleColorSet <|-- cpntools::LargeInteger
+SimpleColorSet <|-- cpntools::Real
+SimpleColorSet <|-- cpntools::String
+SimpleColorSet <|-- cpntools::Time
+SimpleColorSet <|-- cpntools::Unit
+cpntools::Annot "0..1" --* "1..1" cpntools::Arc : annot55
+cpntools::Arc "0..9999" --* "1..1" cpntools::Page : arcs12
+cpntools::Arc "0..9999" -- "1..1" cpntools::Place : arcs31
+cpntools::Arc "0..9999" -- "1..1" cpntools::Trans : arcs62
+cpntools::Auxiliary "0..9999" --* "1..1" cpntools::Page : auxiliarys8
+cpntools::Binder "0..1" -- "1..1" cpntools::Page : binder14
+cpntools::Binder "0..1" --* "1..1" cpntools::Cpnet : binder3
+cpntools::Block "0..1" -- "1..1" cpntools::Declaration : block35
+cpntools::Trans "1..1" *-- "0..1" cpntools::TransCond : cond59
+cpntools::Cpnet "0..1" -- "1..1" cpntools::Fusion : cpnet39
+cpntools::Cpnet "0..1" -- "1..1" cpntools::Globbox : cpnet42
+cpntools::Binder "1..1" -- "0..1" cpntools::Cpnet : cpnet69
+cpntools::Declaration "0..9999" --* "1..1" cpntools::Globbox : declarations44
+cpntools::Block "1..1" *-- "0..9999" cpntools::Declaration : declarations48
+cpntools::Fusion "0..1" -- "1..1" cpntools::Place : fusion26
+cpntools::Cpnet "1..1" *-- "0..9999" cpntools::Fusion : fusions0
+cpntools::Cpnet "1..1" *-- "0..1" cpntools::Globbox : globbox1
+cpntools::Declaration "1..1" -- "0..1" cpntools::Globbox : globbox33
+cpntools::DiagramElement "1..1" -- "0..1" cpntools::Group : group19
+cpntools::Group "0..9999" --* "1..1" cpntools::Page : group5
+cpntools::DiagramElement "0..9999" --* "1..1" cpntools::Group : groupElms16
+cpntools::Initmark "0..1" --* "1..1" cpntools::Place : initmark22
+cpntools::Group "1..1" -- "1..1" cpntools::Page : page17
+cpntools::Page "1..1" -- "1..1" cpntools::Place : page28
+cpntools::Auxiliary "1..1" -- "1..1" cpntools::Page : page40
+cpntools::Arc "1..1" -- "1..1" cpntools::Page : page56
+cpntools::Page "1..1" -- "1..1" cpntools::Trans : page60
+cpntools::Binder "1..1" *-- "0..9999" cpntools::Page : pages71
+cpntools::Arc "1..1" -- "1..1" cpntools::Place : place50
+cpntools::Fusion "1..1" -- "0..9999" cpntools::Place : places37
+cpntools::Page "1..1" *-- "0..9999" cpntools::Place : places6
+cpntools::Place "1..1" *-- "0..1" cpntools::Port : port24
+cpntools::Trans "1..1" *-- "0..1" cpntools::TransPriority : priority64
+cpntools::CompoundColorSet "1..1" -- "1..9999" cpntools::SimpleColorSet : simpleColors68
+cpntools::Trans "1..1" *-- "0..1" cpntools::TransTime : time66
+cpntools::Arc "1..1" -- "1..1" cpntools::Trans : trans52
+cpntools::Page "1..1" *-- "0..9999" cpntools::Trans : transs10
+cpntools::ColorSet "1..1" -- "1..1" cpntools::Place : type21
+cpntools::ColorSet "1..1" -- "1..1" cpntools::Var : type46
+@enduml

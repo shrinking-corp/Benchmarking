@@ -72,17 +72,17 @@ class metrics::ValueDataKind {
 }
 DataKind <|-- metrics::IdentifierDataKind
 DataKind <|-- metrics::ValueDataKind
-MappingRecord <|-- metrics::MappingRecordXLS
 Mapping <|-- metrics::MappingCSV
 Mapping <|-- metrics::MappingRDBMS
 Mapping <|-- metrics::MappingXLS
+MappingRecord <|-- metrics::MappingRecordXLS
 metrics::DataKind "0..9999" --* "1..1" metrics::MappingXLS : columnDataKind3
 metrics::MappingRecord "0..9999" --* "1..1" metrics::MappingStatistic : failedRecords0
-metrics::MappingStatistic "1..1" *-- "1..1" metrics::DateTimeRange : mappingDuration1
-metrics::MetricSource "1..1" *-- "0..1" metrics::Mapping : metricMapping8
+metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : mappingDuration1
+metrics::Mapping "0..1" --* "1..1" metrics::MetricSource : metricMapping8
 metrics::Metric "0..9999" -- "1..1" metrics::MetricSource : metricRefs7
-metrics::MetricSource "0..1" -- "1..1" metrics::Metric : metricSourceRef6
+metrics::Metric "1..1" -- "0..1" metrics::MetricSource : metricSourceRef6
 metrics::MetricValueRange "1..1" *-- "0..9999" metrics::Value : metricValues12
-metrics::Metric "0..9999" --* "1..1" metrics::Metric : metrics5
+metrics::Metric "1..1" *-- "0..9999" metrics::Metric : metrics5
 metrics::MappingStatistic "0..9999" --* "1..1" metrics::MetricSource : statistics9
 @enduml

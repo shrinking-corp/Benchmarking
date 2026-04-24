@@ -29,19 +29,19 @@ class types::TypeReference {
 }
 class types::UserType {
 }
-TypeReference <|-- types::ArrayType
 Type <|-- types::PrimitiveType
 Type <|-- types::UserType
+TypeReference <|-- types::ArrayType
 UserType <|-- types::ClassType
 UserType <|-- types::ServiceType
 types::Property "0..9999" --* "1..1" types::ServiceType : configurations11
 types::EObject "0..1" --* "1..1" types::Operation : expression21
-types::ServiceType "1..1" *-- "0..9999" types::Operation : operations13
-types::Property "0..9999" --* "1..1" types::Operation : parameters18
-types::ClassType "0..1" -- "1..1" types::ClassType : parent1
+types::Operation "0..9999" --* "1..1" types::ServiceType : operations13
+types::Operation "1..1" *-- "0..9999" types::Property : parameters18
+types::ClassType "1..1" -- "0..1" types::ClassType : parent1
 types::ClassType "1..1" *-- "0..9999" types::Property : properties2
-types::TypeReference "0..1" --* "1..1" types::TypeReference : remainder9
-types::TypeReference "1..1" --* "1..1" types::Operation : type15
-types::TypeReference "1..1" --* "1..1" types::Property : type4
+types::TypeReference "1..1" *-- "0..1" types::TypeReference : remainder9
+types::Operation "1..1" *-- "1..1" types::TypeReference : type15
+types::Property "1..1" *-- "1..1" types::TypeReference : type4
 types::Type "0..1" -- "1..1" types::TypeReference : type6
 @enduml

@@ -18,12 +18,12 @@ AbstractState <|-- hfsm::State
 NamedElement <|-- hfsm::AbstractState
 NamedElement <|-- hfsm::Region
 NamedElement <|-- hfsm::Transition
-hfsm::Transition "0..9999" -- "1..1" hfsm::AbstractState : incoming5
-hfsm::Transition "0..9999" -- "1..1" hfsm::AbstractState : outgoing6
+hfsm::AbstractState "1..1" -- "0..9999" hfsm::Transition : incoming5
+hfsm::AbstractState "1..1" -- "0..9999" hfsm::Transition : outgoing6
 hfsm::Region "0..9999" --* "1..1" hfsm::State : ownedRegions0
 hfsm::AbstractState "1..1" -- "1..1" hfsm::Region : ownerRegion8
-hfsm::State "0..1" -- "1..1" hfsm::Region : ownerState1
+hfsm::Region "1..1" -- "0..1" hfsm::State : ownerState1
 hfsm::AbstractState "1..1" -- "1..1" hfsm::Transition : source11
-hfsm::Region "1..1" *-- "0..9999" hfsm::AbstractState : subvertex4
+hfsm::AbstractState "0..9999" --* "1..1" hfsm::Region : subvertex4
 hfsm::AbstractState "1..1" -- "1..1" hfsm::Transition : target9
 @enduml

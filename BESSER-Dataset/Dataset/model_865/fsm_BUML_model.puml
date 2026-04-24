@@ -30,12 +30,12 @@ State <|-- fsm::SteadyState
 State <|-- fsm::TransientState
 SuperState <|-- fsm::InitialState
 SuperState <|-- fsm::State
-fsm::State "1..1" *-- "0..1" fsm::Action : entry3
-fsm::eAction "0..1" --* "1..1" fsm::State : exit5
+fsm::Action "0..1" --* "1..1" fsm::State : entry3
+fsm::State "1..1" *-- "0..1" fsm::eAction : exit5
 fsm::FSM "1..1" *-- "1..1" fsm::InitialState : intialState1
-fsm::Transition "0..9999" --* "1..1" fsm::SuperState : outTrans12
+fsm::SuperState "1..1" *-- "0..9999" fsm::Transition : outTrans12
 fsm::SuperState "1..1" -- "1..1" fsm::Transition : source9
-fsm::Transition "1..1" -- "0..1" fsm::SuperState : src11
-fsm::State "0..9999" --* "1..1" fsm::FSM : state0
+fsm::SuperState "0..1" -- "1..1" fsm::Transition : src11
+fsm::FSM "1..1" *-- "0..9999" fsm::State : state0
 fsm::State "1..1" -- "1..1" fsm::Transition : target7
 @enduml

@@ -60,23 +60,23 @@ NamedElement <|-- types::TypeConstraint
 PackageMember <|-- types::Type
 ParameterizedType <|-- types::ComplexType
 PrimitiveType <|-- types::EnumerationType
-TypedElement <|-- types::Feature
-TypedElement <|-- types::Parameter
 Type <|-- types::ParameterizedType
 Type <|-- types::PrimitiveType
 Type <|-- types::TypeParameter
-types::PrimitiveType "0..1" -- "1..1" types::PrimitiveType : baseType12
+TypedElement <|-- types::Feature
+TypedElement <|-- types::Parameter
+types::PrimitiveType "1..1" -- "0..1" types::PrimitiveType : baseType12
 types::Type "0..1" -- "1..1" types::TypeParameter : bound17
-types::TypeConstraint "0..9999" --* "1..1" types::Type : constraint1
+types::Type "1..1" *-- "0..9999" types::TypeConstraint : constraint1
 types::EnumerationType "1..1" *-- "0..9999" types::Enumerator : enumerator10
 types::ComplexType "1..1" *-- "0..9999" types::Feature : features13
 types::Package "1..1" *-- "0..9999" types::PackageMember : member0
 types::EnumerationType "0..1" -- "1..1" types::Enumerator : owningEnumeration16
 types::Operation "0..1" -- "1..1" types::Parameter : owningOperation4
 types::ComplexType "0..1" -- "1..1" types::Feature : owningType2
-types::TypeParameter "0..9999" --* "1..1" types::ParameterizedType : parameter19
+types::ParameterizedType "1..1" *-- "0..9999" types::TypeParameter : parameter19
 types::Operation "1..1" *-- "0..9999" types::Parameter : parameters3
-types::ComplexType "0..9999" -- "1..1" types::ComplexType : superTypes15
+types::ComplexType "1..1" -- "0..9999" types::ComplexType : superTypes15
 types::Type "0..1" -- "1..1" types::TypedElement : type5
-types::TypedElement "1..1" -- "0..9999" types::Type : typeArguments7
+types::Type "0..9999" -- "1..1" types::TypedElement : typeArguments7
 @enduml

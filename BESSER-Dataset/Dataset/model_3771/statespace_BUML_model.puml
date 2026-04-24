@@ -1,0 +1,91 @@
+@startuml
+class Storage {
+}
+class statespace::EAttribute {
+}
+class statespace::EClass {
+}
+class statespace::EObject {
+}
+class statespace::EObjectIntegerMapEntry {
+  + value : str
+}
+class statespace::EStringToStringMapEntry {
+}
+class statespace::EqualityHelper {
+  + checkLinkOrder : bool
+  + equals(model1 : any, model2 : any) : bool
+  + hashCode(model : any) : int
+  + setStateSpace(stateSpace : any) : void
+}
+class statespace::Model {
+  + eGraph : str
+  + objectCount : int
+  + objectKeys : str
+  + resource : str
+  + collectMissingRootObjects() : void
+  + getCopy(match : any) : str
+  + updateObjectKeys(identityTypes : any) : bool
+}
+class statespace::Rule {
+}
+class statespace::State {
+  + derivedFrom : int
+  + goal : bool
+  + hashCode : int
+  + index : int
+  + location : str
+  + objectCount : int
+  + objectKeys : str
+  + open : bool
+  + pruned : bool
+  + getOutgoing(match : any, paramIDs : any, rule : any, target : any) : str
+  + isInitial() : bool
+}
+class statespace::StateSpace {
+  + allParameterKeys : str
+  + layoutHideIndizes : bool
+  + layoutHideLabels : bool
+  + layoutStateRepulsion : int
+  + layoutTransitionAttraction : int
+  + layoutZoomLevel : int
+  + maxStateDistance : int
+  + stateCount : int
+  + transitionCount : int
+  + incTransitionCount() : int
+  + removeState(state : any) : bool
+  + updateEqualityHelper() : void
+}
+class statespace::Storage {
+  + data : str
+  + getData(beginIndex : any, endIndex : any) : str
+  + setData(index : any, value : any) : void
+}
+class statespace::Transition {
+  + match : int
+  + parameterCount : int
+  + parameterKeys : str
+  + getLabel() : str
+}
+Storage <|-- statespace::State
+Storage <|-- statespace::StateSpace
+Storage <|-- statespace::Transition
+statespace::EqualityHelper "0..1" --* "1..1" statespace::StateSpace : equalityHelper7
+statespace::EClass "1..9999" -- "1..1" statespace::EqualityHelper : identityTypes30
+statespace::EAttribute "1..9999" -- "1..1" statespace::EqualityHelper : ignoredAttributes28
+statespace::State "1..1" -- "0..9999" statespace::Transition : incoming11
+statespace::State "0..9999" -- "1..1" statespace::StateSpace : initialStates2
+statespace::EObject "0..1" -- "1..1" statespace::EObjectIntegerMapEntry : key32
+statespace::Model "0..1" --* "1..1" statespace::State : model15
+statespace::EObjectIntegerMapEntry "0..9999" --* "1..1" statespace::Model : objectHashCodes17
+statespace::EObjectIntegerMapEntry "0..9999" --* "1..1" statespace::Model : objectKeysMap19
+statespace::State "0..9999" -- "1..1" statespace::StateSpace : openStates4
+statespace::State "1..1" *-- "0..9999" statespace::Transition : outgoing12
+statespace::EStringToStringMapEntry "0..9999" --* "1..1" statespace::StateSpace : properties9
+statespace::Rule "0..1" -- "1..1" statespace::Transition : rule26
+statespace::Rule "0..9999" -- "1..1" statespace::StateSpace : rules0
+statespace::State "0..1" -- "1..1" statespace::Transition : source22
+statespace::State "1..1" -- "0..1" statespace::StateSpace : stateSpace14
+statespace::State "0..9999" --* "1..1" statespace::StateSpace : states1
+statespace::State "0..1" -- "1..1" statespace::Transition : target24
+@enduml

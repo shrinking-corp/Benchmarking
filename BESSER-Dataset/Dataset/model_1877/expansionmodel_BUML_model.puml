@@ -1,0 +1,49 @@
+@startuml
+class AbstractRepresentation {
+}
+class Representation {
+}
+abstract class expansionmodel::AbstractRepresentation {
+  + editPartQualifiedName : str
+  + name : str
+  + viewFactory : str
+  + validate(context : any, diagnostic : any) : bool
+}
+class expansionmodel::DiagramExpansion {
+  + ID : str
+}
+class expansionmodel::GMFT::BasedRepresentation {
+  + reusedID : str
+}
+class expansionmodel::GraphicalElementLibrary {
+  + name : str
+}
+class expansionmodel::InducedRepresentation {
+  + hint : str
+}
+class expansionmodel::Representation {
+  + graphicalElementType : str
+}
+class expansionmodel::RepresentationKind {
+  + editPartQualifiedName : str
+  + name : str
+  + viewFactory : str
+}
+class expansionmodel::UseContext {
+  + diagramType : str
+  + name : str
+}
+AbstractRepresentation <|-- expansionmodel::InducedRepresentation
+AbstractRepresentation <|-- expansionmodel::Representation
+Representation <|-- expansionmodel::GMFT::BasedRepresentation
+expansionmodel::InducedRepresentation "1..1" -- "0..9999" expansionmodel::Representation : children5
+expansionmodel::GMFT::BasedRepresentation "0..9999" --* "1..1" expansionmodel::UseContext : gmftRepresentations15
+expansionmodel::InducedRepresentation "0..9999" -- "1..1" expansionmodel::Representation : inducedRepresentations0
+expansionmodel::AbstractRepresentation "1..1" -- "0..1" expansionmodel::RepresentationKind : kind4
+expansionmodel::DiagramExpansion "1..1" *-- "0..9999" expansionmodel::GraphicalElementLibrary : libraries19
+expansionmodel::GraphicalElementLibrary "1..1" *-- "0..9999" expansionmodel::RepresentationKind : representationkinds8
+expansionmodel::AbstractRepresentation "0..9999" --* "1..1" expansionmodel::GraphicalElementLibrary : representations10
+expansionmodel::Representation "1..9999" -- "1..1" expansionmodel::UseContext : representations13
+expansionmodel::Representation "0..9999" -- "1..1" expansionmodel::Representation : subRepresentations2
+expansionmodel::DiagramExpansion "1..1" *-- "0..9999" expansionmodel::UseContext : usages17
+@enduml

@@ -53,20 +53,20 @@ Port <|-- WT::OutPort
 Vertex <|-- WT::InitialState
 Vertex <|-- WT::SimpleState
 WT::ControlSubsystem "0..9999" --* "1..1" WT::Subsystem : beh6
-WT::Connector "0..9999" --* "1..1" WT::Architecture : connectors10
+WT::Architecture "1..1" *-- "0..9999" WT::Connector : connectors10
 WT::Architecture "1..1" *-- "0..9999" WT::Component : elements8
 WT::Architecture "0..9999" --* "1..1" WT::Subsystem : ensembles4
-WT::InPort "0..1" -- "1..1" WT::Connector : inPort12
-WT::Vertex "1..1" -- "0..9999" WT::Edge : incoming23
-WT::OutPort "0..1" -- "1..1" WT::Connector : outPort14
+WT::Connector "1..1" -- "0..1" WT::InPort : inPort12
+WT::Edge "0..9999" -- "1..1" WT::Vertex : incoming23
+WT::Connector "1..1" -- "0..1" WT::OutPort : outPort14
 WT::Edge "0..9999" -- "1..1" WT::Vertex : outgoing22
-WT::Port "0..9999" --* "1..1" WT::Component : ports28
-WT::Vertex "1..1" -- "1..1" WT::Edge : source25
+WT::Component "1..1" *-- "0..9999" WT::Port : ports28
+WT::Edge "1..1" -- "1..1" WT::Vertex : source25
 WT::ControlSubsystem "1..1" *-- "0..9999" WT::StateMachine : states16
-WT::Vertex "0..9999" --* "1..1" WT::StateMachine : states18
+WT::StateMachine "1..1" *-- "0..9999" WT::Vertex : states18
 WT::Component "1..1" -- "0..9999" WT::StateMachine : states30
 WT::Subsystem "0..9999" --* "1..1" WT::WTComponents : subsystems0
 WT::Subsystem "0..9999" --* "1..1" WT::Subsystem : subsystems2
-WT::Vertex "1..1" -- "1..1" WT::Edge : target26
-WT::StateMachine "1..1" *-- "0..9999" WT::Edge : transitions20
+WT::Edge "1..1" -- "1..1" WT::Vertex : target26
+WT::Edge "0..9999" --* "1..1" WT::StateMachine : transitions20
 @enduml

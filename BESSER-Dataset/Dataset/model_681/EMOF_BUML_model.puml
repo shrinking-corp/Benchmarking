@@ -1,0 +1,163 @@
+@startuml
+class Class {
+}
+class Comment {
+}
+class DataType {
+}
+class EMOF::Class {
+  + isAbstract : str
+}
+class EMOF::Comment {
+  + body : str
+}
+class EMOF::DataType {
+}
+abstract class EMOF::Element {
+  + container() : str
+  + equals(object : any) : str
+  + get(property : any) : str
+  + getMetaClass() : str
+  + isSet(property : any) : str
+  + set(object : any, property : any) : void
+  + unset(property : any) : void
+}
+class EMOF::Enumeration {
+}
+class EMOF::EnumerationLiteral {
+}
+class EMOF::Extent {
+  + elements() : str
+  + useContainment() : str
+}
+class EMOF::Factory {
+  + convertToString(dataType : any, object : any) : str
+  + create(metaClass : any) : str
+  + createFromString(dataType : any, string : any) : str
+}
+abstract class EMOF::MultiplicityElement {
+  + isOrdered : str
+  + isUnique : str
+  + lower : str
+  + upper : str
+}
+abstract class EMOF::NamedElement {
+  + name : str
+}
+class EMOF::Object {
+}
+class EMOF::Operation {
+}
+class EMOF::Package {
+  + uri : str
+}
+class EMOF::Parameter {
+}
+class EMOF::PrimitiveType {
+}
+class EMOF::Property {
+  + default : str
+  + isComposite : str
+  + isDerived : str
+  + isID : str
+  + isReadOnly : str
+}
+class EMOF::ReflectiveCollection {
+  + add(object : any) : str
+  + addAll(objects : any) : str
+  + clear() : void
+  + remove(object : any) : str
+  + size() : str
+}
+class EMOF::ReflectiveSequence {
+  + add(index : any, object : any) : void
+  + get(index : any) : str
+  + remove(index : any) : str
+  + set(index : any, object : any) : str
+}
+class EMOF::Tag {
+  + name : str
+  + value : str
+}
+abstract class EMOF::Type {
+  + isInstance(object : any) : str
+}
+abstract class EMOF::TypedElement {
+}
+class EMOF::URIExtent {
+  + contextURI() : str
+  + element(uri : any) : str
+  + uri(element : any) : str
+}
+class Element {
+}
+class Enumeration {
+}
+class EnumerationLiteral {
+}
+class Extent {
+}
+class MultiplicityElement {
+}
+class NamedElement {
+}
+class Object {
+}
+class Operation {
+}
+class Package {
+}
+class Parameter {
+}
+class Property {
+}
+class ReflectiveCollection {
+}
+class Type {
+}
+class TypedElement {
+}
+DataType <|-- EMOF::Enumeration
+DataType <|-- EMOF::PrimitiveType
+Element <|-- EMOF::Comment
+Element <|-- EMOF::Factory
+Element <|-- EMOF::NamedElement
+Element <|-- EMOF::Tag
+Extent <|-- EMOF::URIExtent
+MultiplicityElement <|-- EMOF::Operation
+MultiplicityElement <|-- EMOF::Parameter
+MultiplicityElement <|-- EMOF::Property
+NamedElement <|-- EMOF::EnumerationLiteral
+NamedElement <|-- EMOF::Package
+NamedElement <|-- EMOF::Type
+NamedElement <|-- EMOF::TypedElement
+Object <|-- EMOF::Element
+Object <|-- EMOF::Extent
+Object <|-- EMOF::ReflectiveCollection
+ReflectiveCollection <|-- EMOF::ReflectiveSequence
+Type <|-- EMOF::Class
+Type <|-- EMOF::DataType
+TypedElement <|-- EMOF::Operation
+TypedElement <|-- EMOF::Parameter
+TypedElement <|-- EMOF::Property
+EMOF::Comment "1..1" -- "0..9999" NamedElement : annotatedElement5
+Class "0..1" -- "1..1" EMOF::Operation : class10
+Class "0..1" -- "1..1" EMOF::Property : class25
+EMOF::Tag "1..1" -- "0..9999" Element : element30
+EMOF::EnumerationLiteral "1..1" -- "0..1" Enumeration : enumeration8
+EMOF::Package "1..1" *-- "0..9999" Package : nestedPackage16
+EMOF::Package "1..1" -- "0..1" Package : nestingPackage18
+EMOF::Parameter "1..1" -- "0..1" Operation : operation23
+EMOF::Property "1..1" -- "0..1" Property : opposite27
+EMOF::Class "1..1" *-- "0..9999" Property : ownedAttribute0
+Comment "0..9999" --* "1..1" EMOF::Element : ownedComment6
+EMOF::Enumeration "1..1" *-- "0..9999" EnumerationLiteral : ownedLiteral7
+EMOF::Class "1..1" *-- "0..9999" Operation : ownedOperation1
+EMOF::Operation "1..1" *-- "0..9999" Parameter : ownedParameter12
+EMOF::Package "1..1" *-- "0..9999" Type : ownedType20
+EMOF::Type "1..1" -- "0..1" Package : package31
+EMOF::Factory "1..1" -- "1..1" Package : package9
+EMOF::Operation "1..1" -- "0..9999" Type : raisedException14
+Class "0..9999" -- "1..1" EMOF::Class : superClass3
+EMOF::TypedElement "1..1" -- "0..1" Type : type33
+@enduml

@@ -1,0 +1,148 @@
+@startuml
+class ArrayType {
+}
+class DataType {
+}
+class Expression {
+}
+class Literal {
+}
+class NumericLiteral {
+}
+class NumericType {
+}
+enum OperatorKind {
+  Add
+  Divide
+  ElementWiseDivide
+  ElementWiseMultiply
+  ElementWisePower
+  EqualTo
+  GreaterThan
+  GreaterThanOrEqualTo
+  Implies
+  LessThan
+  LessThanOrEqualTo
+  LogicalAnd
+  LogicalNot
+  LogicalOr
+  Multiply
+  Negate
+  NotEqualTo
+  Power
+  Root
+  Subtract
+  Transpose
+}
+class PrimitiveType {
+}
+class UnitProduct {
+}
+class typesystem::AnyDataType {
+}
+class typesystem::ArrayDimension {
+}
+class typesystem::ArrayType {
+  + dimensional : bool
+  + dimensionality : int
+  + multidimensional : bool
+}
+class typesystem::BooleanLiteral {
+  + true : bool
+}
+class typesystem::BooleanType {
+}
+class typesystem::ComplexType {
+}
+abstract class typesystem::DataType {
+  + evaluate(n : any, operator : any) : str
+  + isAssignableFrom(other : any) : bool
+  + isEquivalentTo(other : any) : bool
+}
+class typesystem::Expression {
+}
+class typesystem::GaussianType {
+}
+class typesystem::IntegerLiteral {
+  + data : str
+  + value : str
+}
+class typesystem::IntegerType {
+}
+class typesystem::InvalidDataType {
+}
+class typesystem::Literal {
+}
+class typesystem::NumericLiteral {
+  + isComplex() : bool
+}
+class typesystem::NumericType {
+}
+class typesystem::PrimitiveType {
+}
+class typesystem::RealLiteral {
+  + data : str
+  + value : float
+}
+class typesystem::RealType {
+}
+class typesystem::StringLiteral {
+  + value : str
+}
+class typesystem::StringType {
+}
+class typesystem::TensorType {
+  + matrix : bool
+  + vector : bool
+}
+class typesystem::Unit {
+  + scale : int
+  + wildcard : bool
+  + evaluate(n : any, operator : any) : str
+  + getNormalized() : str
+  + isEquivalentTo(ignoreScale : any, other : any) : bool
+}
+class typesystem::UnitDenominator {
+}
+class typesystem::UnitFactor {
+  + exponent : int
+  + symbol : str
+}
+class typesystem::UnitNumerator {
+}
+abstract class typesystem::UnitProduct {
+  + getFactor(symbol : any) : str
+}
+class typesystem::UnitType {
+}
+ArrayType <|-- typesystem::TensorType
+DataType <|-- typesystem::AnyDataType
+DataType <|-- typesystem::ArrayType
+DataType <|-- typesystem::InvalidDataType
+DataType <|-- typesystem::PrimitiveType
+DataType <|-- typesystem::UnitType
+Expression <|-- typesystem::Literal
+Literal <|-- typesystem::BooleanLiteral
+Literal <|-- typesystem::NumericLiteral
+Literal <|-- typesystem::StringLiteral
+NumericLiteral <|-- typesystem::IntegerLiteral
+NumericLiteral <|-- typesystem::RealLiteral
+NumericType <|-- typesystem::ComplexType
+NumericType <|-- typesystem::GaussianType
+NumericType <|-- typesystem::IntegerType
+NumericType <|-- typesystem::RealType
+PrimitiveType <|-- typesystem::BooleanType
+PrimitiveType <|-- typesystem::NumericType
+PrimitiveType <|-- typesystem::StringType
+UnitProduct <|-- typesystem::UnitDenominator
+UnitProduct <|-- typesystem::UnitNumerator
+typesystem::ArrayType "1..1" *-- "0..1" typesystem::DataType : definedElementType2
+typesystem::Unit "1..1" *-- "0..1" typesystem::UnitDenominator : denominator11
+typesystem::ArrayDimension "0..9999" --* "1..1" typesystem::ArrayType : dimensions5
+typesystem::ArrayType "1..1" -- "0..1" typesystem::DataType : elementType1
+typesystem::UnitFactor "0..9999" --* "1..1" typesystem::UnitProduct : factors13
+typesystem::Unit "1..1" *-- "0..1" typesystem::UnitNumerator : numerator9
+typesystem::ArrayDimension "1..1" *-- "0..1" typesystem::Expression : size7
+typesystem::NumericType "1..1" *-- "1..1" typesystem::Unit : unit0
+typesystem::NumericLiteral "1..1" *-- "1..1" typesystem::Unit : unit14
+@enduml

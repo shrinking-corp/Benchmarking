@@ -226,11 +226,11 @@ AnnotatedElement <|-- qm::Specialization
 CharacterizingElement <|-- qm::Factor
 CharacterizingElement <|-- qm::Measure
 DescribedElement <|-- qm::NamedElement
-EvaluationResult <|-- qm::MultiMeasureEvaluationResult
-EvaluationResult <|-- qm::SingleMeasureEvaluationResult
 Evaluation <|-- qm::FormBasedEvaluation
 Evaluation <|-- qm::ManualEvaluation
 Evaluation <|-- qm::TextEvaluation
+EvaluationResult <|-- qm::MultiMeasureEvaluationResult
+EvaluationResult <|-- qm::SingleMeasureEvaluationResult
 FactorAggregation <|-- qm::WeightedSumFactorAggregation
 FormBasedEvaluation <|-- qm::FactorAggregation
 FormBasedEvaluation <|-- qm::MultiMeasureEvaluation
@@ -242,6 +242,7 @@ Instrument <|-- qm::ManualInstrument
 Instrument <|-- qm::ToolBasedInstrument
 LinearFunction <|-- qm::LinearDecreasingFunction
 LinearFunction <|-- qm::LinearIncreasingFunction
+Measure <|-- qm::NormalizationMeasure
 MeasureAggregation <|-- qm::FormBasedMeasureAggregation
 MeasureAggregation <|-- qm::TextAggregation
 MeasureEvaluation <|-- qm::MeasureRanking
@@ -250,7 +251,6 @@ MeasurementMethod <|-- qm::Instrument
 MeasurementMethod <|-- qm::MeasureAggregation
 MeasurementResult <|-- qm::FindingsMeasurementResult
 MeasurementResult <|-- qm::NumberMeasurementResult
-Measure <|-- qm::NormalizationMeasure
 MultiMeasureEvaluation <|-- qm::WeightedSumMultiMeasureEvaluation
 NamedElement <|-- qm::CharacterizingElement
 NamedElement <|-- qm::Entity
@@ -269,68 +269,68 @@ Result <|-- qm::MeasurementResult
 TaggedElement <|-- qm::AnnotatedElement
 TextAggregation <|-- qm::QIESLAggregation
 TextEvaluation <|-- qm::QIESLEvaluation
-qm::AnnotationBase "0..9999" --* "1..1" qm::AnnotatedElement : advancedAnnotations20
-qm::Annotation "0..9999" --* "1..1" qm::AnnotatedElement : annotations19
-qm::Entity "0..1" -- "1..1" qm::CharacterizingElement : characterizes43
+qm::AnnotatedElement "1..1" *-- "0..9999" qm::AnnotationBase : advancedAnnotations20
+qm::AnnotatedElement "1..1" *-- "0..9999" qm::Annotation : annotations19
+qm::CharacterizingElement "1..1" -- "0..1" qm::Entity : characterizes43
 qm::Entity "1..1" -- "1..1" qm::Specialization : child37
 qm::Decomposition "1..1" -- "1..1" qm::Entity : child41
-qm::FactorRefinement "1..1" -- "1..1" qm::Factor : child63
+qm::Factor "1..1" -- "1..1" qm::FactorRefinement : child63
 qm::Measure "1..1" -- "1..1" qm::Measurement : child69
 qm::Measure "1..1" -- "1..1" qm::MeasureRefinement : child72
 qm::Measure "1..1" -- "1..1" qm::MeasurementMethod : determines88
-qm::QualityModel "1..1" *-- "0..9999" qm::Entity : entities0
-qm::Factor "1..1" -- "1..1" qm::Evaluation : evaluates59
+qm::Entity "0..9999" --* "1..1" qm::QualityModel : entities0
+qm::Evaluation "1..1" -- "1..1" qm::Factor : evaluates59
 qm::EvaluationResult "0..9999" --* "1..1" qm::QualityModelResult : evaluationResults107
 qm::MeasureRankingEvaluationResult "0..9999" --* "1..1" qm::MultiMeasureEvaluationResult : evaluationResults120
-qm::QualityModel "1..1" *-- "0..9999" qm::Evaluation : evaluations3
-qm::FactorRanking "1..1" -- "1..1" qm::Factor : factor95
+qm::Evaluation "0..9999" --* "1..1" qm::QualityModel : evaluations3
+qm::Factor "1..1" -- "1..1" qm::FactorRanking : factor95
 qm::Factor "0..9999" --* "1..1" qm::QualityModel : factors1
 qm::FindingMessage "0..9999" --* "1..1" qm::FindingsMeasurementResult : findingMessages113
-qm::MeasureEvaluation "1..1" *-- "1..1" qm::Function : function103
-qm::Impact "0..9999" --* "1..1" qm::Factor : influences45
+qm::Function "1..1" --* "1..1" qm::MeasureEvaluation : function103
+qm::Factor "1..1" *-- "0..9999" qm::Impact : influences45
 qm::Factor "1..1" -- "0..9999" qm::Factor : influencesDirect47
 qm::Entity "1..1" *-- "0..9999" qm::Specialization : isA25
-qm::Entity "0..9999" -- "1..1" qm::Entity : isADirect27
+qm::Entity "1..1" -- "0..9999" qm::Entity : isADirect27
 qm::Measure "1..1" -- "1..1" qm::MeasureEvaluation : measure99
 qm::MeasurementMethod "0..9999" --* "1..1" qm::QualityModel : measurementMethods7
 qm::MeasurementResult "0..9999" --* "1..1" qm::QualityModelResult : measurementResults106
 qm::Measure "0..9999" --* "1..1" qm::QualityModel : measures5
 qm::Measure "1..1" *-- "0..9999" qm::Measurement : measures75
 qm::Factor "0..9999" -- "1..1" qm::Measure : measuresDirect77
-qm::NormalizationMeasure "0..1" -- "1..1" qm::MeasureEvaluation : normlizationMeasure101
-qm::Source "0..9999" -- "1..1" qm::QualityModelElement : originatesFrom17
+qm::MeasureEvaluation "1..1" -- "0..1" qm::NormalizationMeasure : normlizationMeasure101
+qm::QualityModelElement "1..1" -- "0..9999" qm::Source : originatesFrom17
 qm::Entity "1..1" -- "1..1" qm::Specialization : parent35
-qm::Entity "1..1" -- "1..1" qm::Decomposition : parent39
+qm::Decomposition "1..1" -- "1..1" qm::Entity : parent39
 qm::Factor "1..1" -- "1..1" qm::FactorRefinement : parent65
 qm::Factor "1..1" -- "1..1" qm::Measurement : parent67
 qm::Measure "1..1" -- "1..1" qm::MeasureRefinement : parent71
 qm::Decomposition "0..1" --* "1..1" qm::Entity : partOf28
 qm::Entity "0..1" -- "1..1" qm::Entity : partOfDirect31
-qm::Source "1..1" -- "1..1" qm::QualityModel : qualityModel18
-qm::Tag "1..1" -- "1..1" qm::QualityModel : qualityModel22
+qm::QualityModel "1..1" -- "1..1" qm::Source : qualityModel18
+qm::QualityModel "1..1" -- "1..1" qm::Tag : qualityModel22
 qm::Entity "1..1" -- "1..1" qm::QualityModel : qualityModel33
-qm::QualityModel "1..1" -- "1..1" qm::Factor : qualityModel53
-qm::QualityModel "1..1" -- "1..1" qm::Evaluation : qualityModel61
-qm::QualityModel "1..1" -- "1..1" qm::Measure : qualityModel80
-qm::QualityModel "1..1" -- "1..1" qm::MeasurementMethod : qualityModel90
+qm::Factor "1..1" -- "1..1" qm::QualityModel : qualityModel53
+qm::Evaluation "1..1" -- "1..1" qm::QualityModel : qualityModel61
+qm::Measure "1..1" -- "1..1" qm::QualityModel : qualityModel80
+qm::MeasurementMethod "1..1" -- "1..1" qm::QualityModel : qualityModel90
 qm::QualityModel "1..1" -- "1..1" qm::Tool : qualityModel93
 qm::MeasureRanking "1..9999" --* "1..1" qm::WeightedSumMultiMeasureEvaluation : rankings105
-qm::WeightedSumFactorAggregation "1..1" *-- "1..9999" qm::FactorRanking : rankings97
-qm::FactorRefinement "0..9999" --* "1..1" qm::Factor : refines48
-qm::MeasureRefinement "0..9999" --* "1..1" qm::Measure : refines83
+qm::FactorRanking "1..9999" --* "1..1" qm::WeightedSumFactorAggregation : rankings97
+qm::Factor "1..1" *-- "0..9999" qm::FactorRefinement : refines48
+qm::Measure "1..1" *-- "0..9999" qm::MeasureRefinement : refines83
 qm::Factor "0..9999" -- "1..1" qm::Factor : refinesDirect51
-qm::Measure "1..1" -- "0..9999" qm::Measure : refinesDirect86
-qm::QualityModel "0..9999" -- "1..1" qm::QualityModel : requires16
-qm::MeasurementResult "1..1" -- "1..1" qm::MeasurementMethod : resultsFrom109
+qm::Measure "0..9999" -- "1..1" qm::Measure : refinesDirect86
+qm::QualityModel "1..1" -- "0..9999" qm::QualityModel : requires16
+qm::MeasurementMethod "1..1" -- "1..1" qm::MeasurementResult : resultsFrom109
 qm::Evaluation "1..1" -- "1..1" qm::EvaluationResult : resultsFrom117
-qm::MeasureRankingEvaluationResult "1..1" -- "1..1" qm::MeasureRanking : resultsFrom124
-qm::Impact "1..1" -- "1..1" qm::Factor : source55
-qm::Source "0..9999" --* "1..1" qm::QualityModel : sources13
+qm::MeasureRanking "1..1" -- "1..1" qm::MeasureRankingEvaluationResult : resultsFrom124
+qm::Factor "1..1" -- "1..1" qm::Impact : source55
+qm::QualityModel "1..1" *-- "0..9999" qm::Source : sources13
 qm::Tag "0..9999" -- "1..1" qm::TaggedElement : taggedBy24
 qm::QualityModel "1..1" *-- "0..9999" qm::Tag : tags11
 qm::Factor "1..1" -- "1..1" qm::Impact : target57
 qm::Tool "1..1" -- "1..1" qm::ToolBasedInstrument : tool92
-qm::Tool "0..9999" --* "1..1" qm::QualityModel : tools9
+qm::QualityModel "1..1" *-- "0..9999" qm::Tool : tools9
 qm::DoubleInterval "1..1" --* "1..1" qm::NumberMeasurementResult : value112
 qm::DoubleInterval "1..1" --* "1..1" qm::EvaluationResult : value114
 qm::DoubleInterval "1..1" --* "1..1" qm::MeasureRankingEvaluationResult : value121

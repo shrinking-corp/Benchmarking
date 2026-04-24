@@ -649,19 +649,19 @@ class website::WebsiteProperties {
   + topNavigationId : str
   + webmasterEmail : str
 }
-AssociationReference <|-- website::ChildPathAssociation
-AssociationReference <|-- website::FeaturePathAssociation
-AssociationReference <|-- website::UnitAssociation
 Association <|-- website::EncapsulatedAssociation
 Association <|-- website::EntityAssociation
 Association <|-- website::ViewAssociation
+AssociationReference <|-- website::ChildPathAssociation
+AssociationReference <|-- website::FeaturePathAssociation
+AssociationReference <|-- website::UnitAssociation
 Attribute <|-- website::EncapsulatedAttribute
 Attribute <|-- website::EntityAttribute
+Authentication <|-- website::CasAuthentication
+Authentication <|-- website::LocalAuthenticationSystem
 AuthenticationUnit <|-- website::ForgottenPasswordUnit
 AuthenticationUnit <|-- website::LoginUnit
 AuthenticationUnit <|-- website::RegistrationUnit
-Authentication <|-- website::CasAuthentication
-Authentication <|-- website::LocalAuthenticationSystem
 ChildPath <|-- website::ChildPathAssociation
 ChildPath <|-- website::ChildPathAttribute
 Classifier <|-- website::DataType
@@ -699,32 +699,32 @@ EntityFeature <|-- website::EntityAssociation
 EntityFeature <|-- website::EntityAttribute
 EntityOrView <|-- website::Entity
 EntityOrView <|-- website::View
-FeaturePath <|-- website::FeaturePathAssociation
-FeaturePath <|-- website::FeaturePathAttribute
 Feature <|-- website::Association
 Feature <|-- website::Attribute
 Feature <|-- website::EntityFeature
 Feature <|-- website::ViewFeature
+FeaturePath <|-- website::FeaturePathAssociation
+FeaturePath <|-- website::FeaturePathAttribute
 ImageFilter <|-- website::ThumbnailFilter
 ImageUnit <|-- website::GalleryUnit
 ImageUnit <|-- website::ImageIndexUnit
 ImageUnit <|-- website::SliderUnit
-InlineActionContainer <|-- website::ImageIndexUnit
-InlineActionContainer <|-- website::IndexUnit
-InlineActionContainer <|-- website::UnitFeature
 InlineAction <|-- website::DeleteAction
 InlineAction <|-- website::FeatureSupportAction
 InlineAction <|-- website::SelectAction
+InlineActionContainer <|-- website::ImageIndexUnit
+InlineActionContainer <|-- website::IndexUnit
+InlineActionContainer <|-- website::UnitFeature
 InterfaceField <|-- website::CaptchaField
 InterfaceField <|-- website::DataTypeField
 InterfaceField <|-- website::DateField
 Label <|-- website::Attribute
 Label <|-- website::ModelLabel
+Menu <|-- website::DynamicMenu
+Menu <|-- website::StaticMenu
 MenuEntry <|-- website::ActionMenuEntry
 MenuEntry <|-- website::EditStaticTextMenuEntry
 MenuEntry <|-- website::MenuFeature
-Menu <|-- website::DynamicMenu
-Menu <|-- website::StaticMenu
 ModelLabelFeature <|-- website::ModelLabelAssociation
 ModelLabelFeature <|-- website::ModelLabelAttribute
 NamedDisplayElement <|-- website::ActionMenuEntry
@@ -748,13 +748,13 @@ NamedElement <|-- website::NamedDisplayElement
 NamedElement <|-- website::Selection
 NamedElement <|-- website::SelectionParameter
 NamedElement <|-- website::Service
-PathElement <|-- website::DatePathElement
-PathElement <|-- website::StaticPathElement
 Path <|-- website::CurrentUserReference
 Path <|-- website::FeatureReference
 Path <|-- website::ModelReference
 Path <|-- website::ParameterReference
 Path <|-- website::RouteParameterReference
+PathElement <|-- website::DatePathElement
+PathElement <|-- website::StaticPathElement
 ResourceAttribute <|-- website::FileAttribute
 ResourceAttribute <|-- website::ImageAttribute
 SelectableUnit <|-- website::CollectionUnit
@@ -774,96 +774,96 @@ ViewFeature <|-- website::EncapsulatedFeature
 ViewFeature <|-- website::ViewAssociation
 website::InlineAction "0..9999" --* "1..1" website::InlineActionContainer : actions272
 website::Association "0..9999" -- "1..1" website::EntityOrView : allAssociations52
-website::Feature "0..9999" -- "1..1" website::EntityOrView : allFeatures44
+website::EntityOrView "1..1" -- "0..9999" website::Feature : allFeatures44
 website::EntityOrView "0..9999" -- "1..1" website::WebGenModel : allowTypeCustomisation9
-website::AssociationReference "1..1" -- "1..1" website::Association : association191
+website::Association "1..1" -- "1..1" website::AssociationReference : association191
 website::EntityAssociation "1..1" -- "1..1" website::ModelLabelAssociation : association70
-website::EncapsulatedAssociation "1..1" -- "1..1" website::Association : association95
+website::Association "1..1" -- "1..1" website::EncapsulatedAssociation : association95
 website::Entity "1..1" -- "0..9999" website::EntityAssociation : associationEnds75
 website::Association "0..9999" -- "1..1" website::EntityOrView : associations50
 website::Attribute "1..1" -- "1..1" website::UnitElement : attribute178
 website::Attribute "0..1" -- "1..1" website::FeaturePathAttribute : attribute255
 website::Attribute "0..1" -- "1..1" website::ChildPathAttribute : attribute263
-website::ModelLabelAttribute "1..1" -- "1..1" website::Attribute : attribute68
+website::Attribute "1..1" -- "1..1" website::ModelLabelAttribute : attribute68
 website::Attribute "1..1" -- "1..1" website::EncapsulatedAttribute : attribute93
-website::EntityOrView "1..1" -- "0..9999" website::Attribute : attributes47
-website::WebsiteProperties "1..1" -- "1..1" website::Authentication : authenticates17
+website::Attribute "0..9999" -- "1..1" website::EntityOrView : attributes47
+website::Authentication "1..1" -- "1..1" website::WebsiteProperties : authenticates17
 website::Authentication "0..1" --* "1..1" website::WebsiteProperties : authentication13
-website::LocalAuthenticationSystem "1..1" -- "0..1" website::EntityOrView : authentication22
-website::Page "0..1" -- "1..1" website::EditUnit : cancelDestination230
+website::EntityOrView "0..1" -- "1..1" website::LocalAuthenticationSystem : authentication22
+website::EditUnit "1..1" -- "0..1" website::Page : cancelDestination230
 website::ControlUnit "1..1" -- "0..1" website::Page : cancelDestination242
-website::ChildPath "0..1" --* "1..1" website::AssociationReference : childFeature196
+website::AssociationReference "1..1" *-- "0..1" website::ChildPath : childFeature196
 website::Page "1..1" -- "0..9999" website::PageLink : childPages131
-website::WebGenModel "1..1" *-- "0..9999" website::Classifier : classifiers1
-website::Page "0..1" -- "1..1" website::EditUnit : confirmDestination227
-website::Feature "0..9999" -- "1..1" website::EntityOrView : containerUnique36
-website::Feature "0..1" -- "1..1" website::CollectionUnit : containingFeature207
+website::Classifier "0..9999" --* "1..1" website::WebGenModel : classifiers1
+website::EditUnit "1..1" -- "0..1" website::Page : confirmDestination227
+website::EntityOrView "1..1" -- "0..9999" website::Feature : containerUnique36
+website::CollectionUnit "1..1" -- "0..1" website::Feature : containingFeature207
 website::EntityOrView "1..1" -- "1..1" website::SingletonUnit : contentType203
 website::CollectionUnit "1..1" -- "1..9999" website::EntityOrView : contentType205
-website::FilterParameter "1..1" -- "0..1" website::DataType : dataType156
+website::DataType "0..1" -- "1..1" website::FilterParameter : dataType156
 website::DataType "1..1" -- "1..1" website::DataTypeField : dataType199
-website::DataTypeAttribute "1..1" -- "1..1" website::DataType : dataType77
-website::Selection "0..1" -- "1..1" website::EditUnit : defaultSelection219
+website::DataType "1..1" -- "1..1" website::DataTypeAttribute : dataType77
+website::EditUnit "1..1" -- "0..1" website::Selection : defaultSelection219
 website::DataUnit "1..1" -- "0..1" website::Selection : defaultSelection237
-website::Selection "0..1" -- "1..1" website::ImageUnit : defaultSelection245
+website::ImageUnit "1..1" -- "0..1" website::Selection : defaultSelection245
 website::Expression "0..1" --* "1..1" website::UnitElement : defaultValue180
-website::Expression "0..1" --* "1..1" website::Attribute : defaultValue55
-website::ContentUnit "1..1" -- "1..1" website::ActionMenuEntry : destination139
+website::Attribute "1..1" *-- "0..1" website::Expression : defaultValue55
+website::ActionMenuEntry "1..1" -- "1..1" website::ContentUnit : destination139
 website::DeleteAction "1..1" -- "0..1" website::Page : destination282
-website::UnitField "0..9999" --* "1..1" website::DynamicUnit : displayFields171
-website::Predicate "0..1" --* "1..1" website::InlineAction : displayWhen277
-website::UnitContainer "1..1" -- "1..1" website::ContentUnit : displayedOn168
-website::UnitField "1..1" -- "1..1" website::DynamicUnit : displayedOn175
+website::DynamicUnit "1..1" *-- "0..9999" website::UnitField : displayFields171
+website::InlineAction "1..1" *-- "0..1" website::Predicate : displayWhen277
+website::ContentUnit "1..1" -- "1..1" website::UnitContainer : displayedOn168
+website::DynamicUnit "1..1" -- "1..1" website::UnitField : displayedOn175
 website::ModelLabel "0..1" -- "1..1" website::ModelLabelAssociation : dynamicLabel71
-website::Predicate "0..1" --* "1..1" website::EditUnit : enableWhen224
-website::Predicate "0..1" --* "1..1" website::InlineAction : enableWhen275
-website::EncapsulatedAssociation "0..9999" -- "1..1" website::Association : encapsulatedBy57
-website::EncapsulatedAssociation "0..1" -- "1..1" website::EncapsulatedAssociation : encapsulatedTarget97
-website::View "1..1" -- "0..9999" website::EntityOrView : encapsulates88
-website::EntityOrView "0..9999" -- "1..1" website::DynamicUnit : entities169
-website::EntityFeature "0..9999" --* "1..1" website::Entity : entityFeatures73
+website::EditUnit "1..1" *-- "0..1" website::Predicate : enableWhen224
+website::InlineAction "1..1" *-- "0..1" website::Predicate : enableWhen275
+website::Association "1..1" -- "0..9999" website::EncapsulatedAssociation : encapsulatedBy57
+website::EncapsulatedAssociation "1..1" -- "0..1" website::EncapsulatedAssociation : encapsulatedTarget97
+website::EntityOrView "0..9999" -- "1..1" website::View : encapsulates88
+website::DynamicUnit "1..1" -- "0..9999" website::EntityOrView : entities169
+website::Entity "1..1" *-- "0..9999" website::EntityFeature : entityFeatures73
 website::DynamicMenu "1..1" -- "1..1" website::EntityOrView : entityOrView142
-website::MenuEntry "0..9999" --* "1..1" website::Menu : entries136
-website::EnumerationType "1..1" *-- "0..9999" website::EnumerationLiteral : enumerations30
+website::Menu "1..1" *-- "0..9999" website::MenuEntry : entries136
+website::EnumerationLiteral "0..9999" --* "1..1" website::EnumerationType : enumerations30
 website::Feature "1..1" -- "1..1" website::FeatureReference : feature288
-website::Feature "0..9999" -- "1..1" website::EntityOrView : features41
-website::ModelLabelFeature "0..9999" --* "1..1" website::ModelLabel : features65
+website::EntityOrView "1..1" -- "0..9999" website::Feature : features41
+website::ModelLabel "1..1" *-- "0..9999" website::ModelLabelFeature : features65
 website::Feature "0..9999" -- "1..1" website::Selection : fields112
 website::Predicate "0..1" --* "1..1" website::Selection : filter118
-website::Query "1..1" -- "1..1" website::Filter : filter159
+website::Filter "1..1" -- "1..1" website::Query : filter159
 website::ImageFilter "0..9999" --* "1..1" website::ImageManipulation : filters127
-website::Filter "0..9999" --* "1..1" website::CollectionUnit : filters213
+website::CollectionUnit "1..1" *-- "0..9999" website::Filter : filters213
 website::Expression "0..1" --* "1..1" website::UnitFeature : forcedValue176
 website::ForgottenPasswordUnit "0..1" -- "1..1" website::LocalAuthenticationSystem : forgottenPasswordUnit28
 website::FilterParameter "1..1" -- "0..1" website::SelectionParameter : formal155
-website::QueryParameter "1..1" -- "1..1" website::FilterParameter : formal164
-website::SelectionParameter "1..1" -- "1..1" website::Selection : formalFor122
-website::ImageManipulation "0..1" -- "1..1" website::GalleryUnit : fullSizeFilter270
+website::FilterParameter "1..1" -- "1..1" website::QueryParameter : formal164
+website::Selection "1..1" -- "1..1" website::SelectionParameter : formalFor122
+website::GalleryUnit "1..1" -- "0..1" website::ImageManipulation : fullSizeFilter270
 website::ImageManipulation "1..1" -- "1..1" website::ImageUnit : imageFilter252
-website::WebGenModel "1..1" *-- "0..9999" website::ImageManipulation : imageManipulations11
-website::ImageUnit "1..1" *-- "1..1" website::FeaturePath : imagePathFeature247
+website::ImageManipulation "0..9999" --* "1..1" website::WebGenModel : imageManipulations11
+website::FeaturePath "1..1" --* "1..1" website::ImageUnit : imagePathFeature247
 website::Association "0..9999" -- "1..1" website::Selection : joins115
-website::EntityAssociation "1..1" -- "1..1" website::AssociationKey : keyFor82
-website::Feature "0..9999" -- "1..1" website::EntityOrView : keys31
-website::EntityAssociation "1..1" *-- "0..9999" website::AssociationKey : keys79
+website::AssociationKey "1..1" -- "1..1" website::EntityAssociation : keyFor82
+website::EntityOrView "1..1" -- "0..9999" website::Feature : keys31
+website::AssociationKey "0..9999" --* "1..1" website::EntityAssociation : keys79
 website::EntityOrView "1..1" -- "1..1" website::ModelLabel : labelFor64
-website::ModelLabel "0..9999" --* "1..1" website::EntityOrView : labels40
+website::EntityOrView "1..1" *-- "0..9999" website::ModelLabel : labels40
 website::LocationAttribute "1..1" -- "1..1" website::MapUnit : location233
-website::LoginUnit "0..1" -- "1..1" website::LocalAuthenticationSystem : loginUnit26
+website::LocalAuthenticationSystem "1..1" -- "0..1" website::LoginUnit : loginUnit26
 website::Menu "0..9999" --* "1..1" website::WebGenModel : menus7
-website::UnitField "0..1" -- "1..1" website::InterfaceField : mustMatch198
+website::InterfaceField "1..1" -- "0..1" website::UnitField : mustMatch198
 website::BusinessOperation "1..1" -- "1..1" website::FeatureSupportAction : operation284
 website::BusinessOperation "0..9999" --* "1..1" website::Service : operations108
 website::EncapsulatedAssociation "1..1" -- "1..1" website::ViewAssociation : opposite103
 website::Order "0..9999" --* "1..1" website::Selection : ordering120
 website::Page "0..9999" --* "1..1" website::WebGenModel : pages5
 website::CollectionUnit "1..1" -- "0..1" website::Filter : pagination216
-website::RouteParameterReference "1..1" -- "1..1" website::Attribute : parameter290
-website::SelectionParameter "1..1" -- "1..1" website::ParameterReference : parameter292
+website::Attribute "1..1" -- "1..1" website::RouteParameterReference : parameter290
+website::ParameterReference "1..1" -- "1..1" website::SelectionParameter : parameter292
 website::Selection "1..1" *-- "0..9999" website::SelectionParameter : parameters114
-website::FilterParameter "0..9999" --* "1..1" website::Filter : parameters149
-website::QueryParameter "0..9999" --* "1..1" website::Query : parameters162
-website::PageLink "0..1" --* "1..1" website::Page : parentPage129
+website::Filter "1..1" *-- "0..9999" website::FilterParameter : parameters149
+website::Query "1..1" *-- "0..9999" website::QueryParameter : parameters162
+website::Page "1..1" *-- "0..1" website::PageLink : parentPage129
 website::Menu "1..1" -- "1..1" website::MenuEntry : partOf138
 website::Filter "0..1" -- "1..1" website::FilterParameter : partOf153
 website::AssociationReference "0..1" -- "1..1" website::ChildPath : partOf262
@@ -871,51 +871,51 @@ website::ModelLabel "1..1" -- "1..1" website::ModelLabelFeature : partOf66
 website::Entity "1..1" -- "1..1" website::EntityFeature : partOf76
 website::View "1..1" -- "1..1" website::ViewFeature : partOf92
 website::Attribute "0..1" -- "1..1" website::MapUnit : placeName234
-website::Query "0..1" --* "1..1" website::ActionMenuEntry : query140
-website::RegistrationUnit "0..1" -- "1..1" website::LocalAuthenticationSystem : registrationUnit24
-website::SearchUnit "1..1" -- "1..1" website::IndexUnit : resultsDestination244
-website::Selection "1..1" -- "1..1" website::DynamicMenu : selection144
+website::ActionMenuEntry "1..1" *-- "0..1" website::Query : query140
+website::LocalAuthenticationSystem "1..1" -- "0..1" website::RegistrationUnit : registrationUnit24
+website::IndexUnit "1..1" -- "1..1" website::SearchUnit : resultsDestination244
+website::DynamicMenu "1..1" -- "1..1" website::Selection : selection144
 website::Filter "1..1" -- "0..1" website::Selection : selection151
 website::Selection "0..1" -- "1..1" website::UnitAssociation : selection188
-website::Selection "0..1" -- "1..1" website::CollectionUnit : selection210
-website::SelectableUnit "1..1" -- "0..1" website::EntityOrView : selectionType201
-website::Service "1..1" *-- "0..9999" website::Selection : selections107
-website::Service "0..9999" -- "1..1" website::EntityOrView : servedBy39
+website::CollectionUnit "1..1" -- "0..1" website::Selection : selection210
+website::EntityOrView "0..1" -- "1..1" website::SelectableUnit : selectionType201
+website::Selection "0..9999" --* "1..1" website::Service : selections107
+website::EntityOrView "1..1" -- "0..9999" website::Service : servedBy39
 website::EntityOrView "1..1" -- "1..1" website::Service : serves105
 website::Service "0..9999" --* "1..1" website::WebGenModel : services3
 website::Menu "0..1" -- "1..1" website::Page : sideMenu132
-website::WebsiteProperties "1..1" -- "0..1" website::Menu : sideMenu14
+website::Menu "0..1" -- "1..1" website::WebsiteProperties : sideMenu14
 website::EntityOrView "0..1" -- "1..1" website::UnitAssociation : sourceEntity183
-website::FeaturePathAssociation "1..1" -- "0..1" website::EntityOrView : sourceEntity257
-website::EntityOrView "0..1" -- "1..1" website::ChildPathAssociation : sourceEntity265
+website::EntityOrView "0..1" -- "1..1" website::FeaturePathAssociation : sourceEntity257
+website::ChildPathAssociation "1..1" -- "0..1" website::EntityOrView : sourceEntity265
 website::EncapsulatedAssociation "1..1" -- "1..1" website::Entity : sourceEntity98
-website::EntityOrView "1..1" -- "1..1" website::Association : sourceEntityX58
-website::EntityFeature "1..1" -- "1..1" website::AssociationKey : sourceFeature84
-website::UnitSupportAction "0..9999" --* "1..1" website::DynamicUnit : supportActions173
-website::SelectableUnit "1..1" -- "1..1" website::SelectAction : target280
-website::Entity "1..1" -- "1..1" website::EncapsulatedAssociation : targetEntity100
-website::UnitAssociation "1..1" -- "0..1" website::EntityOrView : targetEntity185
+website::Association "1..1" -- "1..1" website::EntityOrView : sourceEntityX58
+website::AssociationKey "1..1" -- "1..1" website::EntityFeature : sourceFeature84
+website::DynamicUnit "1..1" *-- "0..9999" website::UnitSupportAction : supportActions173
+website::SelectAction "1..1" -- "1..1" website::SelectableUnit : target280
+website::EncapsulatedAssociation "1..1" -- "1..1" website::Entity : targetEntity100
+website::EntityOrView "0..1" -- "1..1" website::UnitAssociation : targetEntity185
 website::EntityOrView "0..1" -- "1..1" website::FeaturePathAssociation : targetEntity259
-website::EntityOrView "0..1" -- "1..1" website::ChildPathAssociation : targetEntity267
+website::ChildPathAssociation "1..1" -- "0..1" website::EntityOrView : targetEntity267
 website::Entity "1..1" -- "1..1" website::EntityAssociation : targetEntity80
 website::Association "1..1" -- "1..1" website::EntityOrView : targetEntityX61
-website::EntityFeature "0..1" -- "1..1" website::AssociationKey : targetFeature85
+website::AssociationKey "1..1" -- "0..1" website::EntityFeature : targetFeature85
 website::Page "1..1" -- "1..1" website::PageLink : targetPage135
-website::Label "0..1" -- "1..1" website::DynamicMenu : title147
-website::Label "0..1" -- "1..1" website::EditUnit : title221
-website::Label "0..1" -- "1..1" website::DataUnit : title239
+website::DynamicMenu "1..1" -- "0..1" website::Label : title147
+website::EditUnit "1..1" -- "0..1" website::Label : title221
+website::DataUnit "1..1" -- "0..1" website::Label : title239
 website::FeaturePath "1..1" --* "1..1" website::ImageUnit : titleFeature249
 website::EntityOrView "1..1" -- "0..9999" website::Feature : unique33
 website::DynamicUnit "1..1" -- "1..1" website::ModelReference : unit286
 website::ContentUnit "0..9999" --* "1..1" website::UnitContainer : units167
 website::PathElement "0..9999" --* "1..1" website::ResourceAttribute : uploadPath78
-website::Service "1..1" -- "1..1" website::Selection : usedBy110
+website::Selection "1..1" -- "1..1" website::Service : usedBy110
 website::InlineAction "1..1" -- "1..1" website::InlineActionContainer : usedBy274
-website::EntityOrView "1..1" -- "1..1" website::Authentication : user18
+website::Authentication "1..1" -- "1..1" website::EntityOrView : user18
 website::Attribute "1..1" -- "1..1" website::Authentication : userKey20
-website::EntityOrView "1..1" -- "1..1" website::CurrentUserReference : userModel294
-website::Service "0..9999" -- "1..1" website::BusinessOperation : uses124
-website::Label "0..1" -- "1..1" website::AssociationReference : valueDisplay193
-website::ViewFeature "0..9999" --* "1..1" website::View : viewFeatures90
+website::CurrentUserReference "1..1" -- "1..1" website::EntityOrView : userModel294
+website::BusinessOperation "1..1" -- "0..9999" website::Service : uses124
+website::AssociationReference "1..1" -- "0..1" website::Label : valueDisplay193
+website::View "1..1" *-- "0..9999" website::ViewFeature : viewFeatures90
 website::WebGenModel "1..1" *-- "1..1" website::WebsiteProperties : websiteProperties0
 @enduml

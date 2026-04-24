@@ -1,0 +1,68 @@
+@startuml
+class ModelElement {
+}
+class Object {
+}
+class hutn::AttributeSlot {
+}
+class hutn::ClassObject {
+  + findOrCreateAttributeSlot(feature : any) : str
+  + findOrCreateContainmentSlot(feature : any) : str
+  + findOrCreateReferenceSlot(feature : any) : str
+  + findSlot(feature : any) : void
+  + getEClass() : str
+  + getPackageObject() : str
+  + hasEClass() : bool
+  + typeCompatibleWith(eClass : any) : bool
+}
+abstract class hutn::ClassObjectSlot {
+  + addClassObject(classObject : any) : void
+  + getClassObjects() : str
+  + setClassObjects(classObjects : any) : void
+}
+class hutn::ContainmentSlot {
+}
+class hutn::EPackage {
+}
+class hutn::ModelElement {
+  + col : int
+  + line : int
+}
+class hutn::NsUri {
+  + value : str
+}
+abstract class hutn::Object {
+  + identifier : str
+  + type : str
+}
+class hutn::PackageObject {
+  + getAllEClasses() : str
+}
+class hutn::ReferenceSlot {
+}
+abstract class hutn::Slot {
+  + feature : str
+  + values : str
+  + compatibleWith(eStructuralFeature : any) : bool
+  + getEStructuralFeature() : str
+  + hasEStructuralFeature() : bool
+  + multiplicityCompatibleWith(eStructuralFeature : any) : bool
+  + setValues(values : any) : void
+  + typeCompatibleWith(eStructuralFeature : any) : bool
+}
+class hutn::Spec {
+  + modelFile : str
+  + sourceFile : str
+}
+ModelElement <|-- hutn::NsUri
+ModelElement <|-- hutn::Object
+ModelElement <|-- hutn::Slot
+Object <|-- hutn::ClassObject
+Object <|-- hutn::PackageObject
+hutn::ClassObject "0..9999" --* "1..1" hutn::PackageObject : classObjects5
+hutn::ClassObject "0..9999" --* "1..1" hutn::ContainmentSlot : classObjects8
+hutn::EPackage "0..9999" -- "1..1" hutn::PackageObject : metamodel3
+hutn::NsUri "0..9999" --* "1..1" hutn::Spec : nsUris0
+hutn::PackageObject "0..9999" --* "1..1" hutn::Spec : objects1
+hutn::ClassObject "1..1" -- "1..1" hutn::Slot : owner7
+@enduml

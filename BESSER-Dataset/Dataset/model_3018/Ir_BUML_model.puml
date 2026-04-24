@@ -252,26 +252,26 @@ IterableInstruction <|-- ir::Loop
 IterableInstruction <|-- ir::ReductionInstruction
 IterationBlock <|-- ir::Interval
 IterationBlock <|-- ir::Iterator
-JobContainer <|-- ir::IrModule
-JobContainer <|-- ir::TimeLoopJob
 Job <|-- ir::InstructionJob
 Job <|-- ir::TimeLoopCopyJob
+JobContainer <|-- ir::IrModule
+JobContainer <|-- ir::TimeLoopJob
 TimeLoopCopyJob <|-- ir::AfterTimeLoopJob
 TimeLoopCopyJob <|-- ir::BeforeTimeLoopJob
 TimeLoopCopyJob <|-- ir::TimeLoopJob
 Variable <|-- ir::ConnectivityVariable
 Variable <|-- ir::SimpleVariable
-ir::IrAnnotation "0..9999" --* "1..1" ir::IrAnnotable : annotations0
+ir::IrAnnotable "1..1" *-- "0..9999" ir::IrAnnotation : annotations0
 ir::Expression "0..9999" --* "1..1" ir::FunctionCall : args172
-ir::ItemId "0..9999" -- "1..1" ir::ConnectivityCall : args210
+ir::ConnectivityCall "1..1" -- "0..9999" ir::ItemId : args210
 ir::TimeLoop "1..1" -- "1..1" ir::TimeLoopJob : associatedJob50
 ir::BaseType "1..1" --* "1..1" ir::ConnectivityType : base195
-ir::ReductionInstruction "1..1" -- "1..1" ir::Function : binaryFunction111
-ir::Loop "1..1" *-- "1..1" ir::Instruction : body120
+ir::Function "1..1" -- "1..1" ir::ReductionInstruction : binaryFunction111
+ir::Instruction "1..1" --* "1..1" ir::Loop : body120
 ir::Function "1..1" *-- "0..1" ir::Instruction : body75
 ir::ConnectivityCall "1..1" --* "1..1" ir::ItemIdValueCall : call217
-ir::If "1..1" *-- "1..1" ir::Expression : condition129
-ir::Expression "1..1" --* "1..1" ir::ContractedIf : condition153
+ir::Expression "1..1" --* "1..1" ir::If : condition129
+ir::ContractedIf "1..1" *-- "1..1" ir::Expression : condition153
 ir::Connectivity "0..9999" -- "1..1" ir::ConnectivityType : connectivities192
 ir::Connectivity "0..9999" --* "1..1" ir::IrModule : connectivities9
 ir::Connectivity "1..1" -- "1..1" ir::ConnectivityCall : connectivity207
@@ -279,82 +279,82 @@ ir::Container "1..1" --* "1..1" ir::Iterator : container141
 ir::Cardinality "1..1" *-- "1..1" ir::Container : container179
 ir::ConnectivityCall "1..1" --* "1..1" ir::ItemIndexValue : container222
 ir::TimeLoopCopy "0..9999" --* "1..1" ir::TimeLoopCopyJob : copies86
-ir::SimpleVariable "0..1" --* "1..1" ir::Iterator : counter143
+ir::Iterator "1..1" *-- "0..1" ir::SimpleVariable : counter143
 ir::TimeLoopVariable "1..1" -- "1..1" ir::Variable : current201
 ir::Expression "0..1" --* "1..1" ir::SimpleVariable : defaultValue59
-ir::ConnectivityVariable "1..1" *-- "0..1" ir::ArgOrVarRef : defaultValue64
-ir::SimpleVariable "1..1" -- "1..1" ir::IrModule : deltatVariable23
-ir::Variable "1..1" -- "1..1" ir::TimeLoopCopy : destination90
-ir::IrAnnotation "1..1" *-- "0..9999" ir::EStringToStringMapEntry : details1
-ir::Expression "1..1" --* "1..1" ir::ContractedIf : elseExpression158
-ir::Instruction "0..1" --* "1..1" ir::If : elseInstruction134
+ir::ArgOrVarRef "0..1" --* "1..1" ir::ConnectivityVariable : defaultValue64
+ir::IrModule "1..1" -- "1..1" ir::SimpleVariable : deltatVariable23
+ir::TimeLoopCopy "1..1" -- "1..1" ir::Variable : destination90
+ir::EStringToStringMapEntry "0..9999" --* "1..1" ir::IrAnnotation : details1
+ir::ContractedIf "1..1" *-- "1..1" ir::Expression : elseExpression158
+ir::If "1..1" *-- "0..1" ir::Instruction : elseInstruction134
 ir::Expression "1..1" --* "1..1" ir::Return : expression137
 ir::Expression "1..1" --* "1..1" ir::UnaryExpression : expression166
 ir::Expression "1..1" --* "1..1" ir::Parenthesis : expression168
-ir::FunctionCall "1..1" -- "1..1" ir::Function : function170
-ir::IrModule "1..1" *-- "0..9999" ir::Function : functions7
+ir::Function "1..1" -- "1..1" ir::FunctionCall : function170
+ir::Function "0..9999" --* "1..1" ir::IrModule : functions7
 ir::ItemId "1..1" --* "1..1" ir::ItemIdDefinition : id125
-ir::ItemIndexValue "1..1" -- "1..1" ir::ItemId : id219
+ir::ItemId "1..1" -- "1..1" ir::ItemIndexValue : id219
 ir::Import "0..9999" --* "1..1" ir::IrModule : imports4
 ir::Arg "0..9999" --* "1..1" ir::Function : inArgs72
-ir::ItemType "0..9999" -- "1..1" ir::Connectivity : inTypes77
+ir::Connectivity "1..1" -- "0..9999" ir::ItemType : inTypes77
 ir::ItemIndex "1..1" --* "1..1" ir::ItemIndexDefinition : index122
-ir::Iterator "1..1" *-- "1..1" ir::ItemIndex : index139
-ir::SimpleVariable "1..1" --* "1..1" ir::Interval : index146
-ir::Expression "0..9999" --* "1..1" ir::ArgOrVarRef : indices186
-ir::Variable "0..1" -- "1..1" ir::TimeLoopVariable : init198
-ir::IrModule "1..1" -- "1..1" ir::ConnectivityVariable : initNodeCoordVariable15
+ir::ItemIndex "1..1" --* "1..1" ir::Iterator : index139
+ir::Interval "1..1" *-- "1..1" ir::SimpleVariable : index146
+ir::ArgOrVarRef "1..1" *-- "0..9999" ir::Expression : indices186
+ir::TimeLoopVariable "1..1" -- "0..1" ir::Variable : init198
+ir::ConnectivityVariable "1..1" -- "1..1" ir::IrModule : initNodeCoordVariable15
 ir::Instruction "0..9999" --* "1..1" ir::ReductionInstruction : innerInstructions109
 ir::Job "0..9999" -- "1..1" ir::JobContainer : innerJobs3
 ir::TimeLoop "1..1" *-- "0..1" ir::TimeLoop : innerTimeLoop42
-ir::InstructionJob "1..1" *-- "1..1" ir::Instruction : instruction84
+ir::Instruction "1..1" --* "1..1" ir::InstructionJob : instruction84
 ir::Instruction "1..9999" --* "1..1" ir::InstructionBlock : instructions98
-ir::ItemType "0..9999" --* "1..1" ir::IrModule : itemTypes5
-ir::IterationBlock "1..1" --* "1..1" ir::IterableInstruction : iterationBlock108
+ir::IrModule "1..1" *-- "0..9999" ir::ItemType : itemTypes5
+ir::IterableInstruction "1..1" *-- "1..1" ir::IterationBlock : iterationBlock108
 ir::SimpleVariable "1..1" -- "1..1" ir::TimeLoop : iterationCounter52
 ir::ItemIdValueIterator "1..1" -- "1..1" ir::Iterator : iterator215
-ir::ItemIndex "0..9999" -- "1..1" ir::ArgOrVarRef : iterators183
-ir::JobContainer "1..1" -- "1..1" ir::Job : jobContainer83
+ir::ArgOrVarRef "1..1" -- "0..9999" ir::ItemIndex : iterators183
+ir::Job "1..1" -- "1..1" ir::JobContainer : jobContainer83
 ir::IrModule "1..1" *-- "0..9999" ir::Job : jobs26
 ir::Expression "1..1" --* "1..1" ir::ReductionInstruction : lambda114
-ir::SimpleVariable "1..1" -- "1..1" ir::PostProcessingInfo : lastDumpVariable38
+ir::PostProcessingInfo "1..1" -- "1..1" ir::SimpleVariable : lastDumpVariable38
 ir::Affectation "1..1" *-- "1..1" ir::ArgOrVarRef : left103
 ir::BinaryExpression "1..1" *-- "1..1" ir::Expression : left161
-ir::TimeLoop "0..1" --* "1..1" ir::IrModule : mainTimeLoop28
+ir::IrModule "1..1" *-- "0..1" ir::TimeLoop : mainTimeLoop28
 ir::Expression "1..1" --* "1..1" ir::Interval : nbElems148
-ir::Variable "1..1" -- "1..1" ir::TimeLoopVariable : next204
+ir::TimeLoopVariable "1..1" -- "1..1" ir::Variable : next204
 ir::ConnectivityVariable "1..1" -- "1..1" ir::IrModule : nodeCoordVariable17
-ir::SimpleVariable "0..9999" --* "1..1" ir::IrModule : options11
-ir::TimeLoop "0..1" -- "1..1" ir::TimeLoop : outerTimeLoop44
-ir::SimpleVariable "1..1" -- "1..1" ir::PostProcessingInfo : periodVariable35
-ir::Variable "0..9999" -- "1..1" ir::PostProcessingInfo : postProcessedVariables32
+ir::IrModule "1..1" *-- "0..9999" ir::SimpleVariable : options11
+ir::TimeLoop "1..1" -- "0..1" ir::TimeLoop : outerTimeLoop44
+ir::PostProcessingInfo "1..1" -- "1..1" ir::SimpleVariable : periodVariable35
+ir::PostProcessingInfo "1..1" -- "0..9999" ir::Variable : postProcessedVariables32
 ir::IrModule "1..1" *-- "0..1" ir::PostProcessingInfo : postProcessingInfo30
-ir::SimpleVariable "1..1" --* "1..1" ir::ReductionInstruction : result117
+ir::ReductionInstruction "1..1" *-- "1..1" ir::SimpleVariable : result117
 ir::BaseType "0..1" --* "1..1" ir::Function : returnType66
-ir::ItemType "0..1" -- "1..1" ir::Connectivity : returnType80
-ir::Expression "1..1" --* "1..1" ir::Affectation : right105
-ir::Expression "1..1" --* "1..1" ir::BinaryExpression : right163
+ir::Connectivity "1..1" -- "0..1" ir::ItemType : returnType80
+ir::Affectation "1..1" *-- "1..1" ir::Expression : right105
+ir::BinaryExpression "1..1" *-- "1..1" ir::Expression : right163
 ir::BaseType "1..1" *-- "0..9999" ir::Expression : sizes189
 ir::TimeLoopCopy "1..1" -- "1..1" ir::Variable : source93
 ir::ArgOrVar "1..1" -- "1..1" ir::ArgOrVarRef : target181
 ir::SetDefinition "1..1" -- "1..1" ir::SetRef : target213
-ir::Expression "1..1" --* "1..1" ir::ContractedIf : thenExpression155
-ir::Instruction "1..1" --* "1..1" ir::If : thenInstruction131
+ir::ContractedIf "1..1" *-- "1..1" ir::Expression : thenExpression155
+ir::If "1..1" *-- "1..1" ir::Instruction : thenInstruction131
 ir::TimeLoop "1..1" -- "1..1" ir::TimeLoopCopyJob : timeLoop87
-ir::SimpleVariable "1..1" -- "1..1" ir::IrModule : timeVariable20
+ir::IrModule "1..1" -- "1..1" ir::SimpleVariable : timeVariable20
 ir::Expression "1..1" *-- "1..1" ir::IrType : type151
 ir::Arg "1..1" *-- "1..1" ir::BaseType : type55
 ir::BaseType "1..1" --* "1..1" ir::SimpleVariable : type56
 ir::ConnectivityType "1..1" --* "1..1" ir::ConnectivityVariable : type62
-ir::ItemIndexValue "1..1" --* "1..1" ir::ItemIndexDefinition : value123
+ir::ItemIndexDefinition "1..1" *-- "1..1" ir::ItemIndexValue : value123
 ir::ItemIdDefinition "1..1" *-- "1..1" ir::ItemIdValue : value126
 ir::ConnectivityCall "1..1" --* "1..1" ir::SetDefinition : value128
-ir::Expression "1..1" --* "1..1" ir::BaseTypeConstant : value175
+ir::BaseTypeConstant "1..1" *-- "1..1" ir::Expression : value175
 ir::Expression "0..9999" --* "1..1" ir::VectorConstant : values177
 ir::Variable "1..1" --* "1..1" ir::VariableDefinition : variable101
-ir::Variable "0..9999" --* "1..1" ir::IrModule : variables13
-ir::TimeLoopVariable "0..9999" --* "1..1" ir::TimeLoop : variables46
-ir::SimpleVariable "0..9999" --* "1..1" ir::Function : variables69
-ir::Variable "0..9999" --* "1..1" ir::InstructionBlock : variables96
+ir::IrModule "1..1" *-- "0..9999" ir::Variable : variables13
+ir::TimeLoop "1..1" *-- "0..9999" ir::TimeLoopVariable : variables46
+ir::Function "1..1" *-- "0..9999" ir::SimpleVariable : variables69
+ir::InstructionBlock "1..1" *-- "0..9999" ir::Variable : variables96
 ir::Expression "1..1" --* "1..1" ir::TimeLoop : whileCondition48
 @enduml

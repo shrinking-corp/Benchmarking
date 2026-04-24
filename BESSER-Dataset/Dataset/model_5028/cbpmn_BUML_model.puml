@@ -1,0 +1,117 @@
+@startuml
+enum ActivityType {
+  BUSINESSRULE
+  MANUAL
+  RECEIVE
+  SEND
+  SERVICE
+  USER
+}
+enum DataObjectType {
+  INFORMATIONAL
+  PHYSICAL
+}
+enum DecisionType {
+  EXCLUSIVE
+  INCLUSIVE
+}
+class EObject {
+}
+enum EventType {
+  EEnumLiteral0
+}
+class FlowNode {
+}
+enum FlowNodeInstanceStatus {
+  FAILED
+  INIT
+  INTERRUPTED
+  STARTED
+  SUCCESS
+}
+enum GatewayType {
+  JOIN
+  SPLIT
+}
+class OCLConstraint {
+}
+class SplitGateway {
+}
+class cbpmn::Activity {
+  + type : str
+}
+class cbpmn::Branch {
+}
+class cbpmn::DataObject {
+}
+class cbpmn::DataObjectReference {
+  + higherBound : int
+  + lowerBound : int
+  + name : str
+}
+class cbpmn::DecisionCondition {
+  + isDefault : bool
+}
+class cbpmn::DecisionGateway {
+  + type : str
+  + addBranchWithCondition(branch : any, condition : any, default : any) : void
+}
+class cbpmn::EClass {
+}
+class cbpmn::EObject {
+}
+class cbpmn::Event {
+}
+abstract class cbpmn::FlowNode {
+  + name : str
+}
+class cbpmn::FlowNodeInstance {
+  + status : str
+}
+class cbpmn::OCLConstraint {
+  + constraintName : str
+  + constraintStr : str
+}
+class cbpmn::ParallelGateway {
+}
+class cbpmn::ProcessInstance {
+  + id : str
+}
+class cbpmn::ProcessModel {
+  + name : str
+}
+abstract class cbpmn::SplitGateway {
+}
+EObject <|-- cbpmn::DataObject
+FlowNode <|-- cbpmn::Activity
+FlowNode <|-- cbpmn::Event
+FlowNode <|-- cbpmn::SplitGateway
+OCLConstraint <|-- cbpmn::DecisionCondition
+SplitGateway <|-- cbpmn::DecisionGateway
+SplitGateway <|-- cbpmn::ParallelGateway
+cbpmn::Branch "1..1" -- "1..1" cbpmn::DecisionCondition : branch21
+cbpmn::Branch "0..1" -- "1..1" cbpmn::FlowNode : branch24
+cbpmn::Branch "0..9999" --* "1..1" cbpmn::SplitGateway : branches33
+cbpmn::DecisionCondition "1..9999" --* "1..1" cbpmn::DecisionGateway : conditions19
+cbpmn::DataObjectReference "1..1" -- "1..1" cbpmn::EClass : dataObjectClass35
+cbpmn::EObject "0..9999" --* "1..1" cbpmn::ProcessInstance : dataObjects40
+cbpmn::Branch "1..1" -- "0..1" cbpmn::DecisionCondition : entryConditions16
+cbpmn::FlowNodeInstance "0..9999" --* "1..1" cbpmn::ProcessInstance : executedNodes39
+cbpmn::EObject "0..9999" -- "1..1" cbpmn::FlowNodeInstance : inputs43
+cbpmn::Activity "1..1" *-- "0..9999" cbpmn::DataObjectReference : inputs8
+cbpmn::Activity "1..1" *-- "0..9999" cbpmn::OCLConstraint : invariabilityClauses13
+cbpmn::Branch "1..1" --* "1..1" cbpmn::ProcessModel : mainBranch0
+cbpmn::FlowNode "1..1" -- "0..1" cbpmn::FlowNode : next26
+cbpmn::FlowNode "1..1" -- "1..1" cbpmn::FlowNodeInstance : nodeDef42
+cbpmn::Branch "1..1" *-- "1..9999" cbpmn::FlowNode : nodes18
+cbpmn::Activity "1..1" *-- "0..9999" cbpmn::DataObjectReference : outputs10
+cbpmn::EObject "0..9999" -- "1..1" cbpmn::FlowNodeInstance : outputs46
+cbpmn::Activity "1..1" *-- "0..9999" cbpmn::OCLConstraint : postConditions5
+cbpmn::Activity "1..1" *-- "0..9999" cbpmn::OCLConstraint : preConditions3
+cbpmn::FlowNode "1..1" -- "0..1" cbpmn::FlowNode : previous29
+cbpmn::FlowNodeInstance "1..1" -- "1..1" cbpmn::ProcessInstance : processInstance49
+cbpmn::OCLConstraint "0..9999" --* "1..1" cbpmn::ProcessModel : processInvariants1
+cbpmn::ProcessInstance "1..1" -- "1..1" cbpmn::ProcessModel : processModel37
+cbpmn::Event "1..1" -- "0..1" cbpmn::OCLConstraint : trigger31
+cbpmn::DataObject "1..1" -- "1..1" cbpmn::EClass : type50
+@enduml

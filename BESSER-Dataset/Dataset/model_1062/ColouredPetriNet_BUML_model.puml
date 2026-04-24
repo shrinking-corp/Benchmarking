@@ -35,15 +35,15 @@ Arc <|-- PetriNet::TransToPlaceArc
 IdentifiableElement <|-- PetriNet::PetriNet
 IdentifiableElement <|-- PetriNet::Place
 IdentifiableElement <|-- PetriNet::Transition
-PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Arc : arcs3
+PetriNet::Arc "0..9999" --* "1..1" PetriNet::PetriNet : arcs3
 PetriNet::PrimitiveAttribute "0..9999" --* "1..1" PetriNet::Type : components7
 PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Place : places0
-PetriNet::PlaceToTransArc "1..1" -- "1..1" PetriNet::Place : source14
-PetriNet::Transition "1..1" -- "1..1" PetriNet::TransToPlaceArc : source19
-PetriNet::Transition "1..1" -- "1..1" PetriNet::PlaceToTransArc : target16
+PetriNet::Place "1..1" -- "1..1" PetriNet::PlaceToTransArc : source14
+PetriNet::TransToPlaceArc "1..1" -- "1..1" PetriNet::Transition : source19
+PetriNet::PlaceToTransArc "1..1" -- "1..1" PetriNet::Transition : target16
 PetriNet::Place "1..1" -- "1..1" PetriNet::TransToPlaceArc : target21
 PetriNet::Place "1..1" *-- "0..9999" PetriNet::Token : tokens9
 PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Transition : transitions1
-PetriNet::Type "1..1" -- "1..1" PetriNet::Place : type11
-PetriNet::Type "0..9999" --* "1..1" PetriNet::PetriNet : types5
+PetriNet::Place "1..1" -- "1..1" PetriNet::Type : type11
+PetriNet::PetriNet "1..1" *-- "0..9999" PetriNet::Type : types5
 @enduml

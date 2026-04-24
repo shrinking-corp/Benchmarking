@@ -290,10 +290,10 @@ IntegerExpression <|-- arduino::IntegerConstant
 IntegerExpression <|-- arduino::IntegerModuleGet
 IntegerExpression <|-- arduino::IntegerVariableRef
 IntegerExpression <|-- arduino::UnaryIntegerExpression
+Module <|-- arduino::ArduinoModule
 ModuleGet <|-- arduino::BooleanModuleGet
 ModuleGet <|-- arduino::IntegerModuleGet
 ModuleInstruction <|-- arduino::ModuleAssignment
-Module <|-- arduino::ArduinoModule
 NamedElement <|-- arduino::Board
 NamedElement <|-- arduino::Module
 NamedElement <|-- arduino::Pin
@@ -304,34 +304,34 @@ Pin <|-- arduino::DigitalPin
 UnaryExpression <|-- arduino::UnaryBooleanExpression
 UnaryExpression <|-- arduino::UnaryIntegerExpression
 Utilities <|-- arduino::Delay
-VariableRef <|-- arduino::BooleanVariableRef
-VariableRef <|-- arduino::IntegerVariableRef
 Variable <|-- arduino::BooleanVariable
 Variable <|-- arduino::IntegerVariable
+VariableRef <|-- arduino::BooleanVariableRef
+VariableRef <|-- arduino::IntegerVariableRef
 arduino::AnalogPin "0..9999" --* "1..1" arduino::ArduinoBoard : analogPins43
 arduino::Block "1..1" --* "1..1" arduino::Control : block17
 arduino::Block "0..1" --* "1..1" arduino::Sketch : block7
 arduino::Board "0..1" -- "1..1" arduino::Sketch : board8
-arduino::Project "1..1" *-- "0..9999" arduino::Board : boards10
+arduino::Board "0..9999" --* "1..1" arduino::Project : boards10
 arduino::BooleanExpression "1..1" --* "1..1" arduino::While : condition21
 arduino::BooleanExpression "1..1" --* "1..1" arduino::If : condition27
-arduino::BluetoothTransceiver "0..9999" -- "1..1" arduino::BluetoothTransceiver : connectedTransceiver48
-arduino::DigitalPin "0..9999" --* "1..1" arduino::ArduinoBoard : digitalPins41
+arduino::BluetoothTransceiver "1..1" -- "0..9999" arduino::BluetoothTransceiver : connectedTransceiver48
+arduino::ArduinoBoard "1..1" *-- "0..9999" arduino::DigitalPin : digitalPins41
 arduino::Block "0..1" --* "1..1" arduino::If : elseBlock29
-arduino::Instruction "0..9999" --* "1..1" arduino::Block : instructions39
-arduino::Expression "1..1" --* "1..1" arduino::BinaryExpression : left22
+arduino::Block "1..1" *-- "0..9999" arduino::Instruction : instructions39
+arduino::BinaryExpression "1..1" *-- "1..1" arduino::Expression : left22
 arduino::Module "1..1" -- "1..1" arduino::ModuleInstruction : module16
 arduino::Module "1..1" -- "1..1" arduino::ModuleGet : module19
 arduino::ArduinoDigitalModule "0..1" --* "1..1" arduino::DigitalPin : module2
-arduino::ArduinoAnalogModule "0..1" --* "1..1" arduino::AnalogPin : module3
-arduino::Expression "1..1" --* "1..1" arduino::Assignment : operand32
-arduino::UnaryExpression "1..1" *-- "1..1" arduino::Expression : operand34
+arduino::AnalogPin "1..1" *-- "0..1" arduino::ArduinoAnalogModule : module3
+arduino::Assignment "1..1" *-- "1..1" arduino::Expression : operand32
+arduino::Expression "1..1" --* "1..1" arduino::UnaryExpression : operand34
 arduino::Board "1..1" -- "1..1" arduino::Project : project0
-arduino::Sketch "1..1" -- "1..1" arduino::Project : project4
+arduino::Project "1..1" -- "1..1" arduino::Sketch : project4
 arduino::BinaryExpression "1..1" *-- "0..1" arduino::Expression : right23
-arduino::Sketch "0..9999" --* "1..1" arduino::Project : sketches13
+arduino::Project "1..1" *-- "0..9999" arduino::Sketch : sketches13
 arduino::Variable "1..1" -- "1..1" arduino::VariableAssignment : variable26
 arduino::Variable "1..1" --* "1..1" arduino::VariableDeclaration : variable36
-arduino::IntegerVariableRef "1..1" -- "1..1" arduino::IntegerVariable : variable38
+arduino::IntegerVariable "1..1" -- "1..1" arduino::IntegerVariableRef : variable38
 arduino::BooleanVariable "1..1" -- "1..1" arduino::BooleanVariableRef : variable46
 @enduml

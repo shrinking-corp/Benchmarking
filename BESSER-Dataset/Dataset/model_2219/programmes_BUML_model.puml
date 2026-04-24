@@ -42,12 +42,12 @@ class programmes::University {
 Programme <|-- programmes::Specialization
 programmes::Semester "1..1" -- "1..1" programmes::Specialization : chosenIn4
 programmes::CourseGroup "0..9999" --* "1..1" programmes::Programme : courseGroups2
-programmes::University "1..1" *-- "0..9999" programmes::Course : courses14
+programmes::Course "0..9999" --* "1..1" programmes::University : courses14
 programmes::Course "0..9999" -- "1..1" programmes::Semester : courses7
 programmes::Course "0..9999" -- "1..1" programmes::CourseGroup : courses9
-programmes::Semester "1..1" -- "1..1" programmes::Programme : programme5
-programmes::Semester "0..9999" --* "1..1" programmes::Programme : programmeSemester1
-programmes::Specialization "0..9999" --* "1..1" programmes::Programme : specializations0
+programmes::Programme "1..1" -- "1..1" programmes::Semester : programme5
+programmes::Programme "1..1" *-- "0..9999" programmes::Semester : programmeSemester1
+programmes::Programme "1..1" *-- "0..9999" programmes::Specialization : specializations0
 programmes::Programme "0..1" -- "1..1" programmes::Specialization : specializesIn3
 programmes::Programme "0..9999" --* "1..1" programmes::University : studyProgrammes12
 @enduml

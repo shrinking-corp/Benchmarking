@@ -74,12 +74,12 @@ SizedElement <|-- drones::FieldObject
 TemporalContainmentProxy <|-- drones::Action
 TemporalContainmentProxy <|-- drones::Battery
 TemporalContainmentProxy <|-- drones::Parameter
-drones::Mission "1..1" *-- "0..9999" drones::Action : actions13
-drones::Drone "1..1" *-- "1..1" drones::Battery : battery1
+drones::Action "0..9999" --* "1..1" drones::Mission : actions13
+drones::Battery "1..1" --* "1..1" drones::Drone : battery1
 drones::ChargeStation "1..1" -- "1..1" drones::Drone : chargeStation2
 drones::Drone "1..9999" --* "1..1" drones::Mission : drones8
 drones::FieldObject "1..9999" --* "1..1" drones::Mission : fieldObjects6
-drones::Parameter "0..9999" --* "1..1" drones::FieldObject : parameters0
-drones::Drone "1..1" -- "0..9999" drones::Action : supportedActions4
-drones::TemporalContainmentProxy "0..9999" --* "1..1" drones::Mission : temporalObjects11
+drones::FieldObject "1..1" *-- "0..9999" drones::Parameter : parameters0
+drones::Action "0..9999" -- "1..1" drones::Drone : supportedActions4
+drones::Mission "1..1" *-- "0..9999" drones::TemporalContainmentProxy : temporalObjects11
 @enduml

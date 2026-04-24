@@ -1,0 +1,51 @@
+@startuml
+class FlowDesigner::ActionState {
+}
+class FlowDesigner::Event {
+  + action : str
+  + event : str
+  + guard : str
+}
+class FlowDesigner::FinalState {
+  + finalize : str
+}
+class FlowDesigner::Flow {
+  + findStateByName(name : any) : NamedState
+  + hasLastState() : bool
+}
+class FlowDesigner::InitialState {
+  + initialize : str
+}
+abstract class FlowDesigner::NamedState {
+  + activity : str
+  + entry : str
+  + exit : str
+  + name : str
+}
+abstract class FlowDesigner::Source {
+  + canBeSource(target : any) : bool
+}
+abstract class FlowDesigner::Target {
+  + canBeTarget(source : any) : bool
+}
+class FlowDesigner::ViewState {
+  + view : str
+}
+class NamedState {
+}
+class Source {
+}
+class Target {
+}
+NamedState <|-- FlowDesigner::ActionState
+NamedState <|-- FlowDesigner::ViewState
+Source <|-- FlowDesigner::InitialState
+Source <|-- FlowDesigner::NamedState
+Target <|-- FlowDesigner::FinalState
+Target <|-- FlowDesigner::NamedState
+FlowDesigner::Event "0..9999" --* "1..1" FlowDesigner::Source : events1
+FlowDesigner::FinalState "0..1" --* "1..1" FlowDesigner::Flow : finalState6
+FlowDesigner::Flow "1..1" *-- "1..1" FlowDesigner::InitialState : initialState3
+FlowDesigner::Event "1..1" -- "1..1" FlowDesigner::Target : nextState0
+FlowDesigner::Flow "1..1" *-- "0..9999" FlowDesigner::NamedState : states4
+@enduml

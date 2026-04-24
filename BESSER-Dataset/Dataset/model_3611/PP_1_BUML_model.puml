@@ -218,9 +218,6 @@ BinaryOpExpression <|-- pp1::RelationalExpression
 BinaryOpExpression <|-- pp1::RelationshipExpression
 BinaryOpExpression <|-- pp1::ShiftExpression
 Definition <|-- pp1::HostClassDefinition
-ExpressionBlock <|-- pp1::ElseExpression
-ExpressionBlock <|-- pp1::Lambda
-ExpressionBlock <|-- pp1::PuppetManifest
 Expression <|-- pp1::BinaryExpression
 Expression <|-- pp1::CaseExpression
 Expression <|-- pp1::CollectExpression
@@ -240,6 +237,9 @@ Expression <|-- pp1::StringExpression
 Expression <|-- pp1::UnaryExpression
 Expression <|-- pp1::UnlessExpression
 Expression <|-- pp1::VariableExpression
+ExpressionBlock <|-- pp1::ElseExpression
+ExpressionBlock <|-- pp1::Lambda
+ExpressionBlock <|-- pp1::PuppetManifest
 ICollectQuery <|-- pp1::ExportedCollectQuery
 ICollectQuery <|-- pp1::VirtualCollectQuery
 IQuotedString <|-- pp1::DoubleQuotedString
@@ -273,49 +273,49 @@ UnaryExpression <|-- pp1::VirtualCollectQuery
 WithLambdaExpression <|-- pp1::FunctionCall
 WithLambdaExpression <|-- pp1::MethodCall
 pp1::DefinitionArgument "0..9999" --* "1..1" pp1::DefinitionArgumentList : arguments13
-pp1::DefinitionArgumentList "0..1" --* "1..1" pp1::Definition : arguments9
+pp1::Definition "1..1" *-- "0..1" pp1::DefinitionArgumentList : arguments9
 pp1::DefinitionArgumentList "0..1" --* "1..1" pp1::Lambda : arguments97
-pp1::ResourceBody "1..1" *-- "0..1" pp1::AttributeOperations : attributes0
+pp1::AttributeOperations "0..1" --* "1..1" pp1::ResourceBody : attributes0
 pp1::AttributeOperation "0..9999" --* "1..1" pp1::AttributeOperations : attributes5
 pp1::AttributeOperations "0..1" --* "1..1" pp1::CollectExpression : attributes55
-pp1::CaseExpression "1..1" *-- "0..9999" pp1::Case : cases20
+pp1::Case "0..9999" --* "1..1" pp1::CaseExpression : cases20
 pp1::CollectExpression "1..1" *-- "0..1" pp1::Expression : classReference51
 pp1::Expression "0..1" --* "1..1" pp1::IfExpression : condExpr28
-pp1::UnlessExpression "1..1" *-- "0..1" pp1::Expression : condExpr89
+pp1::Expression "0..1" --* "1..1" pp1::UnlessExpression : condExpr89
 pp1::Expression "0..9999" --* "1..1" pp1::LiteralList : elements42
 pp1::HashEntry "0..9999" --* "1..1" pp1::LiteralHash : elements44
 pp1::Expression "0..1" --* "1..1" pp1::IfExpression : elseStatement33
 pp1::Expression "0..1" --* "1..1" pp1::UnlessExpression : elseStatement94
-pp1::UnaryExpression "1..1" *-- "0..1" pp1::Expression : expr76
+pp1::Expression "0..1" --* "1..1" pp1::UnaryExpression : expr76
 pp1::Expression "0..1" --* "1..1" pp1::ParenthesisedExpression : expr80
 pp1::Expression "0..1" --* "1..1" pp1::UnquotedString : expression85
 pp1::Expression "0..1" --* "1..1" pp1::ExpressionTE : expression87
-pp1::Expression "0..9999" --* "1..1" pp1::ExprList : expressions82
+pp1::ExprList "1..1" *-- "0..9999" pp1::Expression : expressions82
 pp1::Expression "0..9999" --* "1..1" pp1::NodeDefinition : hostNames68
 pp1::Expression "0..1" --* "1..1" pp1::HashEntry : key45
 pp1::Lambda "0..1" --* "1..1" pp1::WithLambdaExpression : lambda101
-pp1::Expression "0..1" --* "1..1" pp1::BinaryExpression : leftExpr58
+pp1::BinaryExpression "1..1" *-- "0..1" pp1::Expression : leftExpr58
 pp1::Expression "0..1" --* "1..1" pp1::ParameterizedExpression : leftExpr63
-pp1::MethodCall "1..1" *-- "1..1" pp1::Expression : methodExpr99
+pp1::Expression "1..1" --* "1..1" pp1::MethodCall : methodExpr99
 pp1::Expression "0..1" --* "1..1" pp1::ResourceBody : nameExpr1
-pp1::ParameterizedExpression "1..1" *-- "0..9999" pp1::Expression : parameters65
-pp1::LiteralExpression "0..1" --* "1..1" pp1::HostClassDefinition : parent8
+pp1::Expression "0..9999" --* "1..1" pp1::ParameterizedExpression : parameters65
+pp1::HostClassDefinition "1..1" *-- "0..1" pp1::LiteralExpression : parent8
 pp1::Expression "0..1" --* "1..1" pp1::NodeDefinition : parentName70
-pp1::ICollectQuery "0..1" --* "1..1" pp1::CollectExpression : query53
+pp1::CollectExpression "1..1" *-- "0..1" pp1::ICollectQuery : query53
 pp1::ResourceBody "0..9999" --* "1..1" pp1::ResourceExpression : resourceData38
 pp1::Expression "0..1" --* "1..1" pp1::ResourceExpression : resourceExpr36
 pp1::BinaryExpression "1..1" *-- "0..1" pp1::Expression : rightExpr60
 pp1::Definition "1..1" *-- "0..9999" pp1::Expression : statements10
-pp1::Expression "0..9999" --* "1..1" pp1::Case : statements22
+pp1::Case "1..1" *-- "0..9999" pp1::Expression : statements22
 pp1::Expression "0..9999" --* "1..1" pp1::NodeDefinition : statements73
 pp1::Expression "0..9999" --* "1..1" pp1::ExpressionBlock : statements78
 pp1::DoubleQuotedString "1..1" *-- "0..9999" pp1::TextExpression : stringPart84
-pp1::Expression "0..1" --* "1..1" pp1::CaseExpression : switchExpr18
-pp1::IfExpression "1..1" *-- "0..9999" pp1::Expression : thenStatements30
+pp1::CaseExpression "1..1" *-- "0..1" pp1::Expression : switchExpr18
+pp1::Expression "0..9999" --* "1..1" pp1::IfExpression : thenStatements30
 pp1::Expression "0..9999" --* "1..1" pp1::UnlessExpression : thenStatements91
-pp1::Expression "0..1" --* "1..1" pp1::DefinitionArgument : value15
+pp1::DefinitionArgument "1..1" *-- "0..1" pp1::Expression : value15
 pp1::AttributeOperation "1..1" *-- "0..1" pp1::Expression : value3
-pp1::HashEntry "1..1" *-- "0..1" pp1::Expression : value48
-pp1::Expression "0..9999" --* "1..1" pp1::Case : values25
-pp1::ImportExpression "1..1" *-- "0..9999" pp1::IQuotedString : values41
+pp1::Expression "0..1" --* "1..1" pp1::HashEntry : value48
+pp1::Case "1..1" *-- "0..9999" pp1::Expression : values25
+pp1::IQuotedString "0..9999" --* "1..1" pp1::ImportExpression : values41
 @enduml

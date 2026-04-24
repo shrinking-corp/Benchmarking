@@ -1,0 +1,174 @@
+@startuml
+class Account {
+}
+class Bill {
+}
+class Booking {
+}
+class Classes::mdsdAccount::Account {
+  + accountID : str
+  + email : str
+  + isLoggedIn : bool
+  + name : str
+  + password : str
+}
+class Classes::mdsdAccount::AccountController {
+}
+abstract class Classes::mdsdAccount::BookingToAccount {
+  + getAccount(email : any) : str
+  + isUserLoggedIn(accountId : any) : bool
+}
+abstract class Classes::mdsdAccount::CustomerAccount {
+  + addPet(accountID : any, name : any, type : any) : void
+  + createAccount(customerEmail : any, customerName : any, password : any) : str
+  + login(email : any, password : any) : void
+  + logout(accountId : any) : void
+  + removePet(accountID : any, name : any, type : any) : void
+}
+class Classes::mdsdAccount::Pet {
+  + name : str
+  + type : str
+}
+abstract class Classes::mdsdAdmin::Admin {
+  + addRoom(room : any, status : any, type : any) : str
+  + createStaff(SSN : any, name : any, password : any, rank : any) : str
+  + modifyStaff(SSN : any, newName : any, newRank : any) : void
+  + removeRoom(number : any) : void
+  + removeStaff(SSN : any) : void
+}
+class Classes::mdsdAdmin::AdminController {
+  + isLoggedIn(ssn : any) : bool
+}
+abstract class Classes::mdsdAdmin::BookingToAdmin {
+  + getPetTypes() : str
+}
+class Classes::mdsdAdmin::HotelStaff {
+  + Name : str
+  + SSN : str
+  + isLoggedIn : bool
+  + password : str
+  + rank : int
+}
+class Classes::mdsdAdmin::Room {
+  + number : int
+  + status : str
+  + type : str
+}
+abstract class Classes::mdsdAdmin::Staff {
+  + changeRoomStatus(roomNumber : any, status : any) : void
+  + staffLogin(password : any, ssn : any) : void
+  + staffLogout(ssn : any) : void
+}
+class Classes::mdsdBilling::Bill {
+  + ID : str
+  + isPaid : bool
+  + getTotalAmount() : float
+}
+class Classes::mdsdBilling::BillingController {
+}
+abstract class Classes::mdsdBilling::BookingToBill {
+  + addTransaction(amount : any, booking : any, description : any) : void
+}
+abstract class Classes::mdsdBilling::CustomerBilling {
+}
+abstract class Classes::mdsdBilling::StaffBilling {
+  + giveRefund(billId : any, transaction : any) : void
+  + isPaid(billID : any) : bool
+  + modifyBill(billID : any, newPrice : any, transaction : any) : void
+  + printReceipt(billID : any) : void
+}
+class Classes::mdsdBilling::Transaction {
+  + description : str
+  + price : float
+}
+class Classes::mdsdBooking::Booking {
+  + bill_Id : str
+  + bookingId : str
+  + customerEmail : str
+  + customerName : str
+  + dateFrom : date
+  + dateTo : date
+  + isCheckedIn : bool
+  + isCheckedOut : bool
+  + petName : str
+  + roomNumber : int
+}
+class Classes::mdsdBooking::BookingController {
+  + getBookingList(email : any) : str
+}
+class Classes::mdsdBooking::Meal {
+  + amountOfFood : float
+  + foodType : str
+  + price : float
+  + schedule : str
+}
+class Classes::mdsdBooking::Service {
+  + description : str
+  + price : float
+}
+abstract class Classes::mdsdBooking::StaffBooking {
+  + addNewService(description : any, price : any) : void
+  + checkIn(bookingID : any, rooms : any) : void
+  + checkOut(bills : any, bookingID : any, rooms : any) : bool
+}
+abstract class Classes::mdsdBooking::UserBooking {
+  + cancelBooking(bookingId : any) : void
+  + enterCustomerInfo(booking : any, customerEmail : any, customerName : any, petName : any, rooms : any) : void
+  + enterDatesOfStay(petType : any, rooms : any, stayFrom : any, stayTo : any) : str
+  + enterMealInfo(amountOfFood : any, bookingId : any, foodType : any, price : any, schedule : any) : void
+  + enterService(bookingId : any, service : any) : void
+  + modifyBooking(bookingId : any) : void
+}
+class HotelStaff {
+}
+class Meal {
+}
+class Pet {
+}
+class Room {
+}
+class Service {
+}
+class Transaction {
+}
+class mdsdAccount::BookingToAccount {
+}
+class mdsdAccount::CustomerAccount {
+}
+class mdsdAdmin::Admin {
+}
+class mdsdAdmin::BookingToAdmin {
+}
+class mdsdAdmin::Staff {
+}
+class mdsdBilling::BookingToBill {
+}
+class mdsdBilling::CustomerBilling {
+}
+class mdsdBilling::StaffBilling {
+}
+class mdsdBooking::StaffBooking {
+}
+class mdsdBooking::UserBooking {
+}
+mdsdAccount::BookingToAccount <|-- Classes::mdsdAccount::AccountController
+mdsdAccount::CustomerAccount <|-- Classes::mdsdAccount::AccountController
+mdsdAdmin::Admin <|-- Classes::mdsdAdmin::AdminController
+mdsdAdmin::BookingToAdmin <|-- Classes::mdsdAdmin::AdminController
+mdsdAdmin::Staff <|-- Classes::mdsdAdmin::AdminController
+mdsdBilling::BookingToBill <|-- Classes::mdsdBilling::BillingController
+mdsdBilling::CustomerBilling <|-- Classes::mdsdBilling::BillingController
+mdsdBilling::StaffBilling <|-- Classes::mdsdBilling::BillingController
+mdsdBooking::StaffBooking <|-- Classes::mdsdBooking::BookingController
+mdsdBooking::UserBooking <|-- Classes::mdsdBooking::BookingController
+Account "0..9999" --* "1..1" Classes::mdsdAccount::AccountController : accounts13
+Bill "0..9999" --* "1..1" Classes::mdsdBilling::BillingController : bills0
+Classes::mdsdBooking::Booking "1..1" -- "0..9999" Service : bookedServices5
+Booking "0..9999" --* "1..1" Classes::mdsdBooking::BookingController : bookings2
+Classes::mdsdBooking::Booking "1..1" *-- "1..1" Meal : mealInfo7
+Classes::mdsdAccount::Account "1..1" -- "0..9999" Pet : pets12
+Classes::mdsdAdmin::AdminController "1..1" *-- "0..9999" Room : rooms9
+Classes::mdsdBooking::BookingController "1..1" *-- "0..9999" Service : services3
+Classes::mdsdAdmin::AdminController "1..1" *-- "0..9999" HotelStaff : staff10
+Classes::mdsdBilling::Bill "1..1" *-- "0..9999" Transaction : transactions1
+@enduml

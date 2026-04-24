@@ -36,17 +36,17 @@ Graph <|-- GraphWiki::CategoryGraph
 Graph <|-- GraphWiki::ClassificationGraph
 Graph <|-- GraphWiki::IndexGraph
 GraphWiki::Edge "0..9999" -- "1..1" GraphWiki::Graph : edges15
-GraphWiki::Wiki "1..1" *-- "0..9999" GraphWiki::Edge : edges9
-GraphWiki::Node "1..1" -- "1..1" GraphWiki::Edge : from22
+GraphWiki::Edge "0..9999" --* "1..1" GraphWiki::Wiki : edges9
+GraphWiki::Edge "1..1" -- "1..1" GraphWiki::Node : from22
 GraphWiki::ArticleGraph "0..1" --* "1..1" GraphWiki::Wiki : graphArticles3
-GraphWiki::Wiki "1..1" *-- "0..1" GraphWiki::CategoryGraph : graphCategories1
+GraphWiki::CategoryGraph "0..1" --* "1..1" GraphWiki::Wiki : graphCategories1
 GraphWiki::ClassificationGraph "0..1" --* "1..1" GraphWiki::Wiki : graphClassification5
 GraphWiki::IndexGraph "0..1" --* "1..1" GraphWiki::Wiki : graphIndex0
 GraphWiki::Node "1..1" -- "0..1" GraphWiki::Revision : lastRevision18
 GraphWiki::Node "0..1" -- "1..1" GraphWiki::Revision : node28
-GraphWiki::Node "0..9999" -- "1..1" GraphWiki::Graph : nodes13
+GraphWiki::Graph "1..1" -- "0..9999" GraphWiki::Node : nodes13
 GraphWiki::Node "0..9999" --* "1..1" GraphWiki::Wiki : nodes7
 GraphWiki::Revision "0..9999" --* "1..1" GraphWiki::Wiki : revisions11
-GraphWiki::Revision "0..9999" -- "1..1" GraphWiki::Node : revisions21
-GraphWiki::Node "1..1" -- "1..1" GraphWiki::Edge : to25
+GraphWiki::Node "1..1" -- "0..9999" GraphWiki::Revision : revisions21
+GraphWiki::Edge "1..1" -- "1..1" GraphWiki::Node : to25
 @enduml

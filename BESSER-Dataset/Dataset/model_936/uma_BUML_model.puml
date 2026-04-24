@@ -458,16 +458,16 @@ class uma::WorkProductType {
   + group2 : str
   + workProduct : str
 }
-ActivityDescription <|-- uma::ProcessDescription
 Activity <|-- uma::Iteration
 Activity <|-- uma::Phase
 Activity <|-- uma::Process
-BreakdownElementDescription <|-- uma::ActivityDescription
-BreakdownElementDescription <|-- uma::DescriptorDescription
+ActivityDescription <|-- uma::ProcessDescription
 BreakdownElement <|-- uma::Descriptor
 BreakdownElement <|-- uma::ProcessComponentInterface
 BreakdownElement <|-- uma::TeamProfile
 BreakdownElement <|-- uma::WorkBreakdownElement
+BreakdownElementDescription <|-- uma::ActivityDescription
+BreakdownElementDescription <|-- uma::DescriptorDescription
 Concept <|-- uma::Whitepaper
 ContentCategory <|-- uma::CustomCategory
 ContentCategory <|-- uma::Discipline
@@ -526,49 +526,49 @@ NamedElement <|-- uma::PackageableElement
 PackageableElement <|-- uma::ApplicableMetaClassInfo
 PackageableElement <|-- uma::MethodElement
 PackageableElement <|-- uma::MethodElementProperty
+Process <|-- uma::CapabilityPattern
+Process <|-- uma::DeliveryProcess
+Process <|-- uma::ProcessPlanningTemplate
 ProcessDescription <|-- uma::DeliveryProcessDescription
 ProcessElement <|-- uma::BreakdownElement
 ProcessElement <|-- uma::PlanningData
 ProcessPackage <|-- uma::ProcessComponent
-Process <|-- uma::CapabilityPattern
-Process <|-- uma::DeliveryProcess
-Process <|-- uma::ProcessPlanningTemplate
 RoleDescriptor <|-- uma::CompositeRole
 WorkBreakdownElement <|-- uma::Activity
 WorkBreakdownElement <|-- uma::Milestone
 WorkBreakdownElement <|-- uma::TaskDescriptor
-WorkProductDescription <|-- uma::ArtifactDescription
-WorkProductDescription <|-- uma::DeliverableDescription
 WorkProduct <|-- uma::Artifact
 WorkProduct <|-- uma::Deliverable
 WorkProduct <|-- uma::Outcome
+WorkProductDescription <|-- uma::ArtifactDescription
+WorkProductDescription <|-- uma::DeliverableDescription
 uma::CompositeRole "1..1" *-- "0..9999" uma::Role : aggregatedRole2
-uma::BreakdownElement "0..9999" --* "1..1" uma::Activity : breakdownElement5
-uma::Artifact "0..9999" --* "1..1" uma::Artifact : containedArtifact1
+uma::Activity "1..1" *-- "0..9999" uma::BreakdownElement : breakdownElement5
+uma::Artifact "1..1" *-- "0..9999" uma::Artifact : containedArtifact1
 uma::ContentCategory "0..9999" --* "1..1" uma::ContentCategoryPackage : contentCategory3
-uma::ContentPackage "1..1" *-- "0..9999" uma::ContentElement : contentElement6
+uma::ContentElement "0..9999" --* "1..1" uma::ContentPackage : contentElement6
 uma::ProcessComponent "1..1" *-- "0..1" uma::ProcessComponentInterface : interface39
-uma::WorkProductDescriptor "0..9999" --* "1..1" uma::ProcessComponentInterface : interfaceIO44
-uma::TaskDescriptor "0..9999" --* "1..1" uma::ProcessComponentInterface : interfaceSpecification42
-uma::MethodConfiguration "0..9999" --* "1..1" uma::DocumentRoot : methodConfiguration15
-uma::MethodLibrary "1..1" *-- "0..9999" uma::MethodConfiguration : methodConfiguration29
-uma::MethodElementProperty "0..9999" --* "1..1" uma::MethodElement : methodElementProperty24
-uma::MethodLibrary "0..9999" --* "1..1" uma::DocumentRoot : methodLibrary17
-uma::MethodPackage "0..9999" --* "1..1" uma::MethodPackage : methodPackage33
+uma::ProcessComponentInterface "1..1" *-- "0..9999" uma::WorkProductDescriptor : interfaceIO44
+uma::ProcessComponentInterface "1..1" *-- "0..9999" uma::TaskDescriptor : interfaceSpecification42
+uma::DocumentRoot "1..1" *-- "0..9999" uma::MethodConfiguration : methodConfiguration15
+uma::MethodConfiguration "0..9999" --* "1..1" uma::MethodLibrary : methodConfiguration29
+uma::MethodElement "1..1" *-- "0..9999" uma::MethodElementProperty : methodElementProperty24
+uma::DocumentRoot "1..1" *-- "0..9999" uma::MethodLibrary : methodLibrary17
+uma::MethodPackage "1..1" *-- "0..9999" uma::MethodPackage : methodPackage33
 uma::MethodPackage "0..9999" --* "1..1" uma::MethodPlugin : methodPackage34
 uma::DocumentRoot "1..1" *-- "0..9999" uma::MethodPlugin : methodPlugin19
-uma::MethodPlugin "0..9999" --* "1..1" uma::MethodLibrary : methodPlugin26
+uma::MethodLibrary "1..1" *-- "0..9999" uma::MethodPlugin : methodPlugin26
 uma::Constraint "0..9999" --* "1..1" uma::MethodElement : ownedRule23
-uma::WorkOrder "0..9999" --* "1..1" uma::WorkBreakdownElement : predecessor53
+uma::WorkBreakdownElement "1..1" *-- "0..9999" uma::WorkOrder : predecessor53
 uma::ContentDescription "0..1" --* "1..1" uma::DescribableElement : presentation7
 uma::Process "1..1" --* "1..1" uma::ProcessComponent : process40
-uma::ProcessPackage "1..1" *-- "0..9999" uma::ProcessElement : processElement46
-uma::Section "0..9999" --* "1..1" uma::ContentDescription : section4
-uma::TaskDescriptor "1..1" *-- "0..9999" uma::Section : step50
+uma::ProcessElement "0..9999" --* "1..1" uma::ProcessPackage : processElement46
+uma::ContentDescription "1..1" *-- "0..9999" uma::Section : section4
+uma::Section "0..9999" --* "1..1" uma::TaskDescriptor : step50
 uma::Discipline "1..1" *-- "0..9999" uma::Discipline : subDiscipline10
-uma::Practice "0..9999" --* "1..1" uma::Practice : subPractice38
+uma::Practice "1..1" *-- "0..9999" uma::Practice : subPractice38
 uma::Section "0..1" --* "1..1" uma::Section : subSection48
-uma::Domain "0..9999" --* "1..1" uma::Domain : subdomain22
-uma::EStringToStringMapEntry "0..9999" --* "1..1" uma::DocumentRoot : xMLNSPrefixMap11
-uma::EStringToStringMapEntry "0..9999" --* "1..1" uma::DocumentRoot : xSISchemaLocation12
+uma::Domain "1..1" *-- "0..9999" uma::Domain : subdomain22
+uma::DocumentRoot "1..1" *-- "0..9999" uma::EStringToStringMapEntry : xMLNSPrefixMap11
+uma::DocumentRoot "1..1" *-- "0..9999" uma::EStringToStringMapEntry : xSISchemaLocation12
 @enduml

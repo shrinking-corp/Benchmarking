@@ -66,27 +66,27 @@ OCLNamedElement <|-- library::OCLTypedElement
 OCLPackageParent <|-- library::OCLLibrary
 OCLPackageParent <|-- library::OCLPackage
 OCLRoot <|-- library::OCLLibrary
+OCLType <|-- library::OCLTypeDefinition
+OCLType <|-- library::OCLTypeParameter
 OCLTypeValue <|-- library::OCLBoundType
 OCLTypeValue <|-- library::OCLTypeReference
 OCLTypedElement <|-- library::OCLLibraryIteration
 OCLTypedElement <|-- library::OCLLibraryOperation
 OCLTypedElement <|-- library::OCLLibraryProperty
 OCLTypedElement <|-- library::OCLParameter
-OCLType <|-- library::OCLTypeDefinition
-OCLType <|-- library::OCLTypeParameter
-library::OCLTypeValue "0..9999" --* "1..1" library::OCLTypeDefinition : conformsTo17
+library::OCLTypeDefinition "1..1" *-- "0..9999" library::OCLTypeValue : conformsTo17
 library::OCLLibrary "1..1" -- "0..9999" library::OCLLibrary : imports4
-library::OCLTypeDefinition "1..1" *-- "0..9999" library::OCLLibraryIteration : iteration20
+library::OCLLibraryIteration "0..9999" --* "1..1" library::OCLTypeDefinition : iteration20
 library::OCLLibraryOperation "0..9999" --* "1..1" library::OCLTypeDefinition : operation22
-library::OCLPackageParent "1..1" *-- "0..9999" library::OCLPackage : package10
-library::OCLParameter "0..9999" --* "1..1" library::OCLLibraryOperation : parameter6
+library::OCLPackage "0..9999" --* "1..1" library::OCLPackageParent : package10
+library::OCLLibraryOperation "1..1" *-- "0..9999" library::OCLParameter : parameter6
 library::OCLLibraryProperty "0..9999" --* "1..1" library::OCLTypeDefinition : property25
-library::OCLTypeDefinition "0..1" -- "1..1" library::OCLBoundType : type0
+library::OCLBoundType "1..1" -- "0..1" library::OCLTypeDefinition : type0
 library::OCLTypeValue "0..1" --* "1..1" library::OCLTypedElement : type27
 library::OCLType "0..1" -- "1..1" library::OCLTypeReference : type29
-library::OCLTypeDefinition "0..9999" --* "1..1" library::OCLPackage : type8
+library::OCLPackage "1..1" *-- "0..9999" library::OCLTypeDefinition : type8
 library::OCLBoundType "1..1" *-- "0..9999" library::OCLTypeBinding : typeBinding1
-library::OCLTypeValue "0..1" --* "1..1" library::OCLTypeBinding : typeParameter12
-library::OCLTypeParameter "0..9999" --* "1..1" library::OCLTypeDefinition : typeParameter14
-library::OCLTypeParameter "0..9999" --* "1..1" library::OCLLibraryOperation : typeParameter5
+library::OCLTypeBinding "1..1" *-- "0..1" library::OCLTypeValue : typeParameter12
+library::OCLTypeDefinition "1..1" *-- "0..9999" library::OCLTypeParameter : typeParameter14
+library::OCLLibraryOperation "1..1" *-- "0..9999" library::OCLTypeParameter : typeParameter5
 @enduml

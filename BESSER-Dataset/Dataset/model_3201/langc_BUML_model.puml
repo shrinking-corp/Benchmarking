@@ -259,10 +259,9 @@ CodeBlock <|-- langc::WhileStatement
 Dependency <|-- langc::DependencyBlob
 Dependency <|-- langc::FileDependency
 Directive <|-- langc::Macro
-ElementAccess <|-- langc::MemberAccess
 Element <|-- langc::BuiltInType
 Element <|-- langc::UserElement
-ExpressionStatement <|-- langc::ReturnStatement
+ElementAccess <|-- langc::MemberAccess
 Expression <|-- langc::AddressOfExpr
 Expression <|-- langc::BinaryOperation
 Expression <|-- langc::BlockInitializer
@@ -277,19 +276,20 @@ Expression <|-- langc::Literal
 Expression <|-- langc::LogicalComparison
 Expression <|-- langc::Sizeof
 Expression <|-- langc::StringLiteral
+ExpressionStatement <|-- langc::ReturnStatement
 FileDependency <|-- langc::SystemInclude
 FileDependency <|-- langc::UserInclude
 FileName <|-- langc::SystemFileName
 Literal <|-- langc::CharacterLiteral
 Literal <|-- langc::FloatingLiteral
 Literal <|-- langc::IntegralLiteral
+Name <|-- langc::FileName
+Name <|-- langc::FolderName
 NamedElement <|-- langc::Enum
 NamedElement <|-- langc::Function
 NamedElement <|-- langc::Structure
 NamedElement <|-- langc::Typedef
 NamedElement <|-- langc::VariableDeclaration
-Name <|-- langc::FileName
-Name <|-- langc::FolderName
 Sizeof <|-- langc::SizeofExpr
 Sizeof <|-- langc::SizeofType
 Statement <|-- langc::BreakStatement
@@ -303,73 +303,73 @@ SwitchClause <|-- langc::LabeledClause
 UserElement <|-- langc::FunctionImplementation
 UserElement <|-- langc::FunctionPointer
 UserElement <|-- langc::NamedElement
-langc::FunctionCall "1..1" *-- "0..9999" langc::Expression : arguments24
+langc::Expression "0..9999" --* "1..1" langc::FunctionCall : arguments24
 langc::Expression "1..1" --* "1..1" langc::IndexExpr : array124
-langc::Expression "0..9999" --* "1..1" langc::ElementReference : arrayBounds17
+langc::ElementReference "1..1" *-- "0..9999" langc::Expression : arrayBounds17
 langc::LinkableArtifact "0..9999" --* "1..1" langc::System : artifacts145
 langc::CodeBlock "1..1" --* "1..1" langc::FunctionImplementation : body134
 langc::SwitchClause "0..9999" --* "1..1" langc::SwitchStatement : clauses100
 langc::Expression "1..1" --* "1..1" langc::SwitchStatement : condition101
 langc::Expression "1..1" --* "1..1" langc::WhileStatement : condition108
 langc::ConditionalStatement "1..1" *-- "1..1" langc::Expression : condition154
-langc::MemberAccess "1..1" *-- "1..1" langc::Expression : container69
+langc::Expression "1..1" --* "1..1" langc::MemberAccess : container69
 langc::DependencyList "1..1" --* "1..1" langc::ElementList : declIncludes35
-langc::FunctionImplementation "0..1" --* "1..1" langc::Function : defaultImpl7
-langc::UserElement "1..1" -- "0..1" langc::FileName : defn91
+langc::Function "1..1" *-- "0..1" langc::FunctionImplementation : defaultImpl7
+langc::FileName "0..1" -- "1..1" langc::UserElement : defn91
 langc::DependencyList "1..1" --* "1..1" langc::ElementList : defnIncludes37
-langc::DependencyBlob "1..1" --* "1..1" langc::CodeBlob : dependencies147
-langc::DependencyList "1..1" *-- "0..9999" langc::Dependency : dependencies94
-langc::ElementReference "1..1" -- "1..1" langc::Element : element15
+langc::CodeBlob "1..1" *-- "1..1" langc::DependencyBlob : dependencies147
+langc::Dependency "0..9999" --* "1..1" langc::DependencyList : dependencies94
+langc::Element "1..1" -- "1..1" langc::ElementReference : element15
 langc::ElementReference "1..1" --* "1..1" langc::VariableDeclaration : element62
 langc::ElementReference "1..1" --* "1..1" langc::Typedef : element67
 langc::ElementReference "1..1" -- "1..1" langc::SizeofType : element96
-langc::UserElement "0..9999" --* "1..1" langc::ElementList : elements29
-langc::Enumerator "0..9999" --* "1..1" langc::Enum : enumerators78
+langc::ElementList "1..1" *-- "0..9999" langc::UserElement : elements29
+langc::Enum "1..1" *-- "0..9999" langc::Enumerator : enumerators78
 langc::AddressOfExpr "1..1" *-- "1..1" langc::Expression : expr104
-langc::Expression "1..1" --* "1..1" langc::DereferenceExpr : expr106
+langc::DereferenceExpr "1..1" *-- "1..1" langc::Expression : expr106
 langc::Expression "1..1" --* "1..1" langc::SizeofExpr : expr132
-langc::ExpressionStatement "1..1" *-- "0..1" langc::Expression : expr45
-langc::Expression "1..1" --* "1..1" langc::CastExpr : expr88
-langc::Expression "0..9999" --* "1..1" langc::BlockInitializer : exprs120
-langc::FileName "1..1" -- "1..1" langc::FileDependency : filename84
+langc::Expression "0..1" --* "1..1" langc::ExpressionStatement : expr45
+langc::CastExpr "1..1" *-- "1..1" langc::Expression : expr88
+langc::BlockInitializer "1..1" *-- "0..9999" langc::Expression : exprs120
+langc::FileDependency "1..1" -- "1..1" langc::FileName : filename84
 langc::ElementList "0..9999" -- "1..1" langc::SubSystem : files71
-langc::SubSystem "1..1" *-- "0..9999" langc::FolderName : folders73
-langc::FunctionImplementation "1..1" -- "1..1" langc::Function : function137
+langc::FolderName "0..9999" --* "1..1" langc::SubSystem : folders73
+langc::Function "1..1" -- "1..1" langc::FunctionImplementation : function137
 langc::Function "1..1" -- "1..1" langc::FunctionCall : function22
-langc::FunctionAddress "1..1" -- "1..1" langc::Function : function60
+langc::Function "1..1" -- "1..1" langc::FunctionAddress : function60
 langc::FunctionImplementation "0..9999" -- "1..1" langc::LinkableArtifact : functionImplementations148
 langc::Expression "1..1" --* "1..1" langc::IndexExpr : index122
 langc::Expression "0..1" --* "1..1" langc::VariableDeclaration : initializer64
 langc::Expression "1..9999" --* "1..1" langc::LabeledClause : labels98
-langc::LogicalComparison "1..1" *-- "1..1" langc::Expression : lhs127
-langc::Expression "1..1" --* "1..1" langc::BinaryOperation : lhs48
+langc::Expression "1..1" --* "1..1" langc::LogicalComparison : lhs127
+langc::BinaryOperation "1..1" *-- "1..1" langc::Expression : lhs48
 langc::NamedReference "0..9999" --* "1..1" langc::Structure : members53
 langc::Name "1..1" --* "1..1" langc::NamedElement : name0
-langc::Name "1..1" --* "1..1" langc::Macro : name115
-langc::Name "1..1" -- "1..1" langc::ElementAccess : name27
-langc::FileName "1..1" --* "1..1" langc::ElementList : name30
+langc::Macro "1..1" *-- "1..1" langc::Name : name115
+langc::ElementAccess "1..1" -- "1..1" langc::Name : name27
+langc::ElementList "1..1" *-- "1..1" langc::FileName : name30
 langc::Enumerator "1..1" *-- "1..1" langc::Name : name81
 langc::Name "1..1" -- "1..1" langc::NamedReference : name9
-langc::Name "0..9999" --* "1..1" langc::Macro : parameters110
+langc::Macro "1..1" *-- "0..9999" langc::Name : parameters110
 langc::Function "1..1" *-- "0..9999" langc::NamedReference : parameters5
 langc::ElementReference "0..9999" --* "1..1" langc::FunctionPointer : parameters57
-langc::Name "1..1" -- "0..1" langc::Name : parent2
+langc::Name "0..1" -- "1..1" langc::Name : parent2
 langc::Directive "0..9999" --* "1..1" langc::ElementList : privateDirectives42
-langc::ElementList "1..1" *-- "0..9999" langc::Directive : publicDirectives40
+langc::Directive "0..9999" --* "1..1" langc::ElementList : publicDirectives40
 langc::FolderName "0..9999" --* "1..1" langc::System : publicFolders142
 langc::FolderName "0..9999" --* "1..1" langc::SubSystem : publicFolders75
-langc::Macro "1..1" *-- "0..1" langc::Expression : replacement112
+langc::Expression "0..1" --* "1..1" langc::Macro : replacement112
 langc::ElementReference "1..1" --* "1..1" langc::Function : returnType4
 langc::ElementReference "1..1" --* "1..1" langc::FunctionPointer : returnType55
 langc::Expression "1..1" --* "1..1" langc::LogicalComparison : rhs129
 langc::BinaryOperation "1..1" *-- "1..1" langc::Expression : rhs50
-langc::UserElement "0..9999" -- "1..1" langc::LinkableArtifact : rootElements151
-langc::Statement "0..9999" --* "1..1" langc::CodeBlock : statements47
+langc::LinkableArtifact "1..1" -- "0..9999" langc::UserElement : rootElements151
+langc::CodeBlock "1..1" *-- "0..9999" langc::Statement : statements47
 langc::SubSystem "0..9999" --* "1..1" langc::System : subSystems140
-langc::ElementReference "1..1" --* "1..1" langc::CastExpr : targetType86
+langc::CastExpr "1..1" *-- "1..1" langc::ElementReference : targetType86
 langc::ElementReference "1..1" --* "1..1" langc::NamedReference : type12
 langc::ElementReference "1..1" -- "1..1" langc::Expression : type19
 langc::Element "0..9999" --* "1..1" langc::ElementList : types32
-langc::IntegralLiteral "0..1" --* "1..1" langc::Enumerator : value79
-langc::VariableDeclarationStatement "1..1" *-- "1..1" langc::VariableDeclaration : variable118
+langc::Enumerator "1..1" *-- "0..1" langc::IntegralLiteral : value79
+langc::VariableDeclaration "1..1" --* "1..1" langc::VariableDeclarationStatement : variable118
 @enduml

@@ -1,0 +1,115 @@
+@startuml
+class ExtendedAnnotationType {
+}
+class Extensible {
+}
+enum ModeType {
+  IN
+  INOUT
+  OUT
+}
+enum TypeType {
+  BOOLEAN
+  DATETIME
+  FLOAT
+  INTEGER
+  PERFORMER
+  REFERENCE
+  STRING
+}
+class XSDAnnotation {
+}
+class XpdlTypeType {
+}
+class xpdl::BasicTypeType {
+  + type : str
+}
+class xpdl::DataTypeType {
+  + carnotType : str
+  + getDataType() : XpdlTypeType
+}
+class xpdl::DeclaredTypeType {
+  + id : str
+}
+class xpdl::ExtendedAttributeType {
+  + any : str
+  + group : str
+  + mixed : str
+  + name : str
+  + value : str
+}
+class xpdl::ExtendedAttributesType {
+}
+abstract class xpdl::Extensible {
+}
+class xpdl::ExternalPackage {
+  + href : str
+  + id : str
+  + name : str
+}
+class xpdl::ExternalPackages {
+  + getExternalPackage(packageId : any) : str
+}
+class xpdl::ExternalReferenceType {
+  + location : str
+  + namespace : str
+  + xref : str
+  + getSchema() : str
+}
+class xpdl::FormalParameterType {
+  + description : str
+  + id : str
+  + mode : str
+  + name : str
+}
+class xpdl::FormalParametersType {
+  + addFormalParameter(parameter : any) : void
+  + getFormalParameter(parameterId : any) : str
+}
+class xpdl::SchemaTypeType {
+}
+class xpdl::ScriptType {
+  + grammar : str
+  + type : str
+  + version : str
+}
+class xpdl::TypeDeclarationType {
+  + description : str
+  + id : str
+  + name : str
+  + getDataType() : XpdlTypeType
+  + getSchema() : str
+}
+class xpdl::TypeDeclarationsType {
+  + getTypeDeclaration(typeId : any) : str
+}
+class xpdl::XSDSchema {
+}
+abstract class xpdl::XpdlTypeType {
+}
+class xpdl::extensions::ExtendedAnnotationType {
+}
+Extensible <|-- xpdl::ExternalPackage
+Extensible <|-- xpdl::TypeDeclarationType
+XSDAnnotation <|-- xpdl::extensions::ExtendedAnnotationType
+XpdlTypeType <|-- xpdl::BasicTypeType
+XpdlTypeType <|-- xpdl::DeclaredTypeType
+XpdlTypeType <|-- xpdl::ExternalReferenceType
+XpdlTypeType <|-- xpdl::SchemaTypeType
+xpdl::BasicTypeType "0..1" --* "1..1" xpdl::DataTypeType : basicType0
+xpdl::BasicTypeType "0..1" --* "1..1" xpdl::TypeDeclarationType : basicType20
+xpdl::DataTypeType "0..1" --* "1..1" xpdl::FormalParameterType : dataType14
+xpdl::DataTypeType "1..1" *-- "0..1" xpdl::DeclaredTypeType : declaredType1
+xpdl::DeclaredTypeType "0..1" --* "1..1" xpdl::TypeDeclarationType : declaredType23
+ExtendedAnnotationType "0..1" --* "1..1" xpdl::ExtendedAttributeType : extendedAnnotation8
+xpdl::ExtendedAttributeType "0..9999" --* "1..1" xpdl::ExtendedAttributesType : extendedAttribute7
+xpdl::ExtendedAttributesType "0..1" --* "1..1" xpdl::Extensible : extendedAttributes10
+xpdl::ExternalPackage "0..9999" --* "1..1" xpdl::ExternalPackages : externalPackage12
+xpdl::ExternalReferenceType "0..1" --* "1..1" xpdl::TypeDeclarationType : externalReference29
+xpdl::DataTypeType "1..1" *-- "0..1" xpdl::ExternalReferenceType : externalReference5
+xpdl::FormalParameterType "0..9999" --* "1..1" xpdl::FormalParametersType : formalParameter13
+xpdl::SchemaTypeType "1..1" *-- "0..1" xpdl::XSDSchema : schema17
+xpdl::SchemaTypeType "0..1" --* "1..1" xpdl::TypeDeclarationType : schemaType26
+xpdl::DataTypeType "1..1" *-- "0..1" xpdl::SchemaTypeType : schemaType3
+xpdl::TypeDeclarationType "0..9999" --* "1..1" xpdl::TypeDeclarationsType : typeDeclaration19
+@enduml

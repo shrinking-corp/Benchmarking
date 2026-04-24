@@ -1,0 +1,54 @@
+@startuml
+class ConsoleOutput {
+}
+class Expression {
+}
+class Statement {
+}
+class simpleimperative::Assignation {
+}
+class simpleimperative::Conditional {
+}
+class simpleimperative::ConsoleOutput {
+  + input : str
+}
+abstract class simpleimperative::Expression {
+  + eval(context : any) : void
+}
+class simpleimperative::Loop {
+}
+class simpleimperative::Print {
+}
+class simpleimperative::Println {
+}
+class simpleimperative::Program {
+}
+abstract class simpleimperative::Statement {
+}
+class simpleimperative::VarDecl {
+  + name : str
+}
+class simpleimperative::VarRef {
+  + varRef : str
+}
+class simpleimperative::Wait {
+  + miliseconds : str
+}
+ConsoleOutput <|-- simpleimperative::Print
+ConsoleOutput <|-- simpleimperative::Println
+Expression <|-- simpleimperative::VarRef
+Statement <|-- simpleimperative::Assignation
+Statement <|-- simpleimperative::Conditional
+Statement <|-- simpleimperative::ConsoleOutput
+Statement <|-- simpleimperative::Loop
+Statement <|-- simpleimperative::VarDecl
+Statement <|-- simpleimperative::Wait
+simpleimperative::Conditional "1..1" *-- "0..9999" simpleimperative::Statement : body2
+simpleimperative::Loop "1..1" *-- "0..9999" simpleimperative::Statement : body7
+simpleimperative::Conditional "1..1" *-- "1..1" simpleimperative::Expression : condition1
+simpleimperative::Expression "1..1" --* "1..1" simpleimperative::VarDecl : expr10
+simpleimperative::Assignation "1..1" *-- "1..1" simpleimperative::Expression : expression14
+simpleimperative::Expression "1..1" --* "1..1" simpleimperative::Loop : guard5
+simpleimperative::Program "1..1" *-- "0..9999" simpleimperative::Statement : statements0
+simpleimperative::Assignation "1..1" -- "1..1" simpleimperative::VarDecl : varRef12
+@enduml

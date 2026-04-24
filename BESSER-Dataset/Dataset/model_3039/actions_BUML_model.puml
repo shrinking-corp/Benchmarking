@@ -123,26 +123,26 @@ core::AbstractModelElement <|-- actions::TimedConditionAction
 core::ITopLevelElement <|-- actions::StandAloneAction
 core::ITopLevelElement <|-- actions::TimedConditionAction
 rules::IRealTimeConsumer <|-- actions::TimedConditionAction
-actions::StandAloneAction "1..1" -- "1..1" actions::ActionReference : action0
+actions::ActionReference "1..1" -- "1..1" actions::StandAloneAction : action0
 actions::PreGenerationAction "1..1" --* "1..1" actions::StandAloneAction : action3
 actions::PreGenerationAction "1..1" --* "1..1" actions::TimedConditionAction : action7
 actions::PreGenerationAction "0..9999" --* "1..1" actions::PreGenerationSequence : actions11
 actions::PostGenerationAction "0..9999" --* "1..1" actions::PostGenerationSequence : actions13
 DataBag "1..1" -- "1..1" actions::RemoveBagAction : bag20
 ILogicFunction "1..1" --* "1..1" actions::TimedConditionAction : condition9
-actions::TimeAction "1..1" -- "0..1" ITimeConsumer : consumer31
+ITimeConsumer "0..1" -- "1..1" actions::TimeAction : consumer31
 IFeature "1..1" -- "1..1" actions::ActivateFeatureAction : feature23
 IFeature "1..1" -- "1..1" actions::DeactivateFeatureAction : feature26
 IFeature "1..1" -- "1..1" actions::GetFeatureStateAction : feature34
-actions::RemoveBagAction "1..1" *-- "1..1" IArithmetricFunction : index21
+IArithmetricFunction "1..1" --* "1..1" actions::RemoveBagAction : index21
 IDataNodeFunction "1..1" --* "1..1" actions::SetDataAction : node16
 IDataNodeFunction "1..1" --* "1..1" actions::GetDataAction : node18
-actions::EObject "0..9999" --* "1..1" actions::ActionReference : parameters1
-actions::StandAloneAction "1..1" *-- "0..9999" IContextVariable : parameters5
+actions::ActionReference "1..1" *-- "0..9999" actions::EObject : parameters1
+IContextVariable "0..9999" --* "1..1" actions::StandAloneAction : parameters5
 DataLeaf "1..1" -- "1..1" actions::SetPropertyAction : property28
-actions::GetPropertyAction "1..1" -- "1..1" DataLeaf : property32
+DataLeaf "1..1" -- "1..1" actions::GetPropertyAction : property32
 actions::Term "1..1" --* "1..1" actions::TermAction : term14
 DataElement "1..1" -- "1..1" actions::SetPropertyAction : value29
-actions::SetDataAction "1..1" *-- "1..1" IValueFunction : values15
+IValueFunction "1..1" --* "1..1" actions::SetDataAction : values15
 FeatureVersion "0..1" -- "1..1" actions::ActivateFeatureAction : version24
 @enduml

@@ -143,19 +143,19 @@ metrics::Mapping "1..1" *-- "0..9999" metrics::MappingColumn : dataMappingColumn
 metrics::DataKind "0..1" --* "1..1" metrics::MappingColumn : dataType4
 metrics::Expression "0..1" -- "1..1" metrics::Metric : expressionRef17
 metrics::MappingRecord "0..9999" --* "1..1" metrics::MappingStatistic : failedRecords6
-metrics::MappingColumn "0..9999" --* "1..1" metrics::Mapping : headerMappingColumns0
-metrics::MappingStatistic "1..1" *-- "1..1" metrics::DateTimeRange : mappingDuration7
-metrics::MetricAggregationRules "1..1" *-- "0..9999" metrics::MetricAggregationRule : metricAggregationRules25
-metrics::RuleSet "0..1" -- "1..1" metrics::MetricSource : metricAggregationRules34
+metrics::Mapping "1..1" *-- "0..9999" metrics::MappingColumn : headerMappingColumns0
+metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : mappingDuration7
+metrics::MetricAggregationRule "0..9999" --* "1..1" metrics::MetricAggregationRules : metricAggregationRules25
+metrics::MetricSource "1..1" -- "0..1" metrics::RuleSet : metricAggregationRules34
 metrics::Mapping "0..1" --* "1..1" metrics::MetricSource : metricMapping28
 metrics::Metric "0..1" -- "1..1" metrics::ValueDataKind : metricRef40
 metrics::MetricRetentionRule "0..9999" --* "1..1" metrics::MetricRetentionRules : metricRetentionRules27
 metrics::MetricSource "1..1" -- "0..1" metrics::RuleSet : metricRetentionRules36
-metrics::MetricSource "0..1" -- "1..1" metrics::Metric : metricSourceRef19
-metrics::Value "0..9999" --* "1..1" metrics::MetricValueRange : metricValues39
+metrics::Metric "1..1" -- "0..1" metrics::MetricSource : metricSourceRef19
+metrics::MetricValueRange "1..1" *-- "0..9999" metrics::Value : metricValues39
 metrics::Metric "1..1" *-- "0..9999" metrics::Metric : metrics16
 metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : periodEstimate9
 metrics::MappingStatistic "0..9999" --* "1..1" metrics::MetricSource : statistics31
 metrics::MappingStatistic "0..9999" --* "1..1" metrics::MappingStatistic : subStatistics13
-metrics::Unit "0..1" -- "1..1" metrics::Metric : unitRef21
+metrics::Metric "1..1" -- "0..1" metrics::Unit : unitRef21
 @enduml

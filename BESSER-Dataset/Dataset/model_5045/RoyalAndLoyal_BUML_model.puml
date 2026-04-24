@@ -1,0 +1,152 @@
+@startuml
+enum Gender {
+  female
+  male
+}
+class RandL::Burning {
+}
+class RandL::Container::RandL {
+}
+class RandL::Customer {
+  + age : str
+  + gender : str
+  + isMale : str
+  + name : str
+  + title : str
+  + age() : str
+  + birthdayHappens() : void
+}
+class RandL::CustomerCard {
+  + color : str
+  + printedName : str
+  + valid : str
+  + getTransactions(from : any, until : any) : Transaction
+}
+class RandL::Date {
+  + day : str
+  + month : str
+  + year : str
+  + fromYMD(k : any, m : any, y : any) : str
+  + isAfter(t : any) : str
+  + isBefore(t : any) : str
+  + isEqual(t : any) : str
+}
+class RandL::Earning {
+}
+class RandL::LoyaltyAccount {
+  + number : str
+  + points : str
+  + totalPointsEarned : str
+  + burn(i : any) : void
+  + earn(i : any) : void
+  + getCustomerName() : str
+  + isEmpty() : str
+}
+class RandL::LoyaltyProgram {
+  + name : str
+  + addService(l : any, p : any, s : any) : void
+  + addTransaction(accNr : any, amnt : any, d : any, pName : any, servId : any) : void
+  + enroll(c : any) : void
+  + enrollAndCreateCustomer(d : any, n : any) : str
+  + getServices() : str
+  + selectPopularPartners(d : any) : str
+}
+class RandL::Membership {
+}
+class RandL::ProgramPartner {
+  + name : str
+  + numberOfCustomers : str
+}
+class RandL::Service {
+  + condition : str
+  + description : str
+  + pointsBurned : str
+  + pointsEarned : str
+  + serviceNr : str
+  + calcPoints() : str
+  + upgradePointsEarned(amount : any) : void
+}
+class RandL::ServiceLevel {
+  + name : str
+}
+abstract class RandL::Transaction {
+  + amount : str
+  + points : str
+  + program() : str
+}
+class RandL::TransactionReport {
+  + balance : str
+  + name : str
+  + number : str
+  + totalBurned : str
+  + totalEarned : str
+}
+class RandL::TransactionReportLine {
+  + amount : str
+  + partnerName : str
+  + points : str
+  + serviceDesc : str
+}
+enum RandLColor {
+  gold
+  silver
+}
+class Transaction {
+}
+Transaction <|-- RandL::Burning
+Transaction <|-- RandL::Earning
+RandL::LoyaltyAccount "1..1" -- "0..1" RandL::Membership : Membership11
+RandL::Membership "0..9999" -- "1..1" RandL::ServiceLevel : Membership2
+RandL::CustomerCard "1..1" -- "0..1" RandL::Membership : Membership36
+RandL::LoyaltyAccount "0..1" -- "1..1" RandL::Transaction : account4
+RandL::LoyaltyAccount "0..1" -- "1..1" RandL::Membership : account46
+RandL::Service "0..9999" -- "1..1" RandL::ServiceLevel : availableServices1
+RandL::CustomerCard "0..1" -- "1..1" RandL::TransactionReport : card25
+RandL::CustomerCard "0..1" -- "1..1" RandL::Membership : card43
+RandL::CustomerCard "0..1" -- "1..1" RandL::Transaction : card8
+RandL::Customer "1..1" -- "0..9999" RandL::CustomerCard : cards96
+RandL::Membership "1..1" -- "0..1" RandL::ServiceLevel : currentLevel41
+RandL::Date "0..1" --* "1..1" RandL::TransactionReportLine : date101
+RandL::Date "0..1" --* "1..1" RandL::Transaction : date3
+RandL::Customer "1..1" *-- "0..1" RandL::Date : dateOfBirth91
+RandL::ProgramPartner "1..1" -- "0..9999" RandL::Service : deliveredServices15
+RandL::Date "0..1" --* "1..1" RandL::TransactionReport : from21
+RandL::Service "0..1" -- "1..1" RandL::Transaction : generatedBy5
+RandL::CustomerCard "1..1" *-- "0..1" RandL::Date : goodThru27
+RandL::Service "1..1" -- "0..1" RandL::ServiceLevel : level89
+RandL::LoyaltyProgram "1..1" -- "1..9999" RandL::ServiceLevel : levels110
+RandL::TransactionReport "1..1" -- "0..9999" RandL::TransactionReportLine : lines24
+RandL::LoyaltyProgram "1..1" -- "0..9999" RandL::Membership : memberships115
+RandL::Customer "1..1" -- "0..9999" RandL::Membership : memberships98
+RandL::CustomerCard "1..1" *-- "0..1" RandL::ServiceLevel : myLevel33
+RandL::Customer "0..1" -- "1..1" RandL::CustomerCard : owner35
+RandL::Customer "0..9999" -- "1..1" RandL::LoyaltyProgram : participants112
+RandL::Customer "1..1" -- "1..1" RandL::Membership : participants50
+RandL::ProgramPartner "0..1" -- "1..1" RandL::Service : partner86
+RandL::LoyaltyProgram "1..1" -- "1..9999" RandL::ProgramPartner : partners108
+RandL::LoyaltyProgram "0..1" -- "1..1" RandL::ServiceLevel : program0
+RandL::LoyaltyProgram "1..9999" -- "1..1" RandL::ProgramPartner : programs17
+RandL::LoyaltyProgram "1..1" -- "1..1" RandL::Membership : programs49
+RandL::Customer "1..1" -- "0..9999" RandL::LoyaltyProgram : programs94
+RandL::Burning "0..9999" --* "1..1" RandL::Container::RandL : ref_RandL_Burning82
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::Customer : ref_RandL_Customer52
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::CustomerCard : ref_RandL_CustomerCard57
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::Date : ref_RandL_Date54
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::Earning : ref_RandL_Earning69
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::LoyaltyAccount : ref_RandL_LoyaltyAccount71
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::LoyaltyProgram : ref_RandL_LoyaltyProgram66
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::Membership : ref_RandL_Membership60
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::ProgramPartner : ref_RandL_ProgramPartner80
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::Service : ref_RandL_Service63
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::ServiceLevel : ref_RandL_ServiceLevel74
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::TransactionReport : ref_RandL_TransactionReport77
+RandL::Container::RandL "1..1" *-- "0..9999" RandL::TransactionReportLine : ref_RandL_TransactionReportLine84
+RandL::TransactionReport "0..1" -- "1..1" RandL::TransactionReportLine : report107
+RandL::Transaction "0..1" -- "1..1" RandL::TransactionReportLine : transaction104
+RandL::LoyaltyAccount "1..1" -- "0..9999" RandL::Transaction : transactions13
+RandL::CustomerCard "1..1" -- "0..9999" RandL::Transaction : transactions38
+RandL::Service "1..1" -- "0..9999" RandL::Transaction : transactions87
+RandL::Date "0..1" --* "1..1" RandL::TransactionReport : until19
+RandL::LoyaltyAccount "1..1" -- "0..9999" RandL::Service : usedServices10
+RandL::CustomerCard "1..1" *-- "0..1" RandL::Date : validFrom30
+@enduml

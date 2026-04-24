@@ -1,0 +1,43 @@
+@startuml
+class Index {
+}
+class NamedElement {
+}
+class database::Column {
+  + collation : str
+  + default : str
+  + length : int
+  + nullable : bool
+  + type : str
+}
+class database::DataBase {
+  + getTable(tableName : any) : str
+}
+class database::Index {
+}
+abstract class database::NamedElement {
+  + name : str
+}
+class database::PrimaryKey {
+}
+class database::Table {
+  + collation : str
+  + storageEngine : str
+  + getColumn(columnName : any) : str
+  + getIndex(indexName : any) : str
+}
+class database::Unique {
+}
+Index <|-- database::PrimaryKey
+Index <|-- database::Unique
+NamedElement <|-- database::Column
+NamedElement <|-- database::Index
+NamedElement <|-- database::Table
+database::Column "1..9999" -- "1..1" database::Index : columns12
+database::Column "1..9999" --* "1..1" database::Table : columns4
+database::DataBase "0..1" -- "1..1" database::Table : dataBase1
+database::Index "0..9999" --* "1..1" database::Table : indexes6
+database::PrimaryKey "0..1" -- "1..1" database::Table : primaryKey8
+database::DataBase "1..1" *-- "0..9999" database::Table : tables0
+database::Table "1..1" -- "0..9999" database::Unique : uniques10
+@enduml

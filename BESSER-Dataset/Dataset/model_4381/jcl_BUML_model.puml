@@ -287,13 +287,13 @@ class statements::Statement {
 }
 class statements::StatementContainer {
 }
+Condition <|-- jcl::conditions::PrimaryCondition
 ConditionalAndExpressionChild <|-- jcl::expressions::RelationalExpression
 ConditionalAndExpressionChild <|-- jcl::expressions::RelationalExpressionChild
 ConditionalExpression <|-- jcl::expressions::ConditionalOrExpression
 ConditionalExpression <|-- jcl::expressions::ConditionalOrExpressionChild
 ConditionalOrExpressionChild <|-- jcl::expressions::ConditionalAndExpression
 ConditionalOrExpressionChild <|-- jcl::expressions::ConditionalAndExpressionChild
-Condition <|-- jcl::conditions::PrimaryCondition
 Execute <|-- jcl::statements::ExecuteProcedure
 Execute <|-- jcl::statements::ExecuteProgram
 Expression <|-- jcl::expressions::ConditionalExpression
@@ -371,35 +371,35 @@ parameters::Parameter <|-- jcl::parameters::Condition
 parameters::Parameter <|-- jcl::parameters::Other
 references::ElementReference <|-- jcl::conditions::RelationalCondition
 references::ElementReference <|-- jcl::references::IdentifierReference
-statements::StatementContainer <|-- jcl::statements::Condition
 statements::Statement <|-- jcl::statements::Condition
 statements::Statement <|-- jcl::statements::DataDefinition
+statements::StatementContainer <|-- jcl::statements::Condition
 Literal "0..1" --* "1..1" jcl::containers::JobUnit : accountInfos13
-jcl::expressions::ConditionalAndExpression "1..1" *-- "0..9999" And : andOperators25
+And "0..9999" --* "1..1" jcl::expressions::ConditionalAndExpression : andOperators25
 UnaryExpressionChild "1..1" --* "1..1" jcl::expressions::UnaryExpression : child27
 RelationalExpressionChild "1..9999" --* "1..1" jcl::expressions::RelationalExpression : children18
 ConditionalOrExpressionChild "1..9999" --* "1..1" jcl::expressions::ConditionalOrExpression : children21
 ConditionalAndExpressionChild "1..9999" --* "1..1" jcl::expressions::ConditionalAndExpression : children24
 Condition "1..1" --* "1..1" jcl::parameters::Condition : condition2
 Expression "1..1" --* "1..1" jcl::statements::Condition : condition7
-jcl::conditions::NestedCondition "1..1" *-- "1..9999" Condition : conditions37
+Condition "1..9999" --* "1..1" jcl::conditions::NestedCondition : conditions37
 Statement "1..9999" --* "1..1" jcl::statements::Condition : elseStatements5
 EndControl "1..1" --* "1..1" jcl::statements::Control : endControl9
-jcl::containers::JobUnit "1..1" *-- "0..9999" ExecuteProgram : executes16
+ExecuteProgram "0..9999" --* "1..1" jcl::containers::JobUnit : executes16
 Expression "1..1" --* "1..1" jcl::expressions::NestedExpression : expression30
-jcl::containers::JCLRoot "1..1" *-- "0..9999" Member : members10
+Member "0..9999" --* "1..1" jcl::containers::JCLRoot : members10
 Reference "0..1" --* "1..1" jcl::references::Reference : next35
 UnaryOperator "0..1" --* "1..1" jcl::expressions::UnaryExpression : operator28
-jcl::expressions::ConditionalOrExpression "1..1" *-- "0..9999" Or : orOperators22
+Or "0..9999" --* "1..1" jcl::expressions::ConditionalOrExpression : orOperators22
 Parameter "1..9999" --* "1..1" jcl::containers::JobUnit : parameters11
-jcl::statements::Statement "1..1" *-- "0..9999" Parameter : parameters3
+Parameter "0..9999" --* "1..1" jcl::statements::Statement : parameters3
 RelationOperator "1..1" --* "1..1" jcl::conditions::RelationalCondition : relationOperator39
 RelationOperator "0..9999" --* "1..1" jcl::expressions::RelationalExpression : relationOperators19
 ReturnCode "1..1" --* "1..1" jcl::conditions::RelationalCondition : returnCode41
 Statement "1..9999" --* "1..1" jcl::statements::StatementContainer : statements4
-jcl::expressions::Abend "1..1" *-- "1..1" IdentifierReference : step32
+IdentifierReference "1..1" --* "1..1" jcl::expressions::Abend : step32
 IdentifierReference "1..1" --* "1..1" jcl::expressions::Run : step33
 ReferenceableElement "1..1" -- "1..1" jcl::references::ElementReference : target36
 Literal "1..9999" --* "1..1" jcl::parameters::AccountInfo : values1
-jcl::commons::IncompleteElement "1..1" *-- "0..9999" Water : waters0
+Water "0..9999" --* "1..1" jcl::commons::IncompleteElement : waters0
 @enduml

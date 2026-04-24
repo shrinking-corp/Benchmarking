@@ -72,13 +72,13 @@ CommandeRobot <|-- robotG::robot::Move
 CommandeRobot <|-- robotG::robot::SetTurnAngle
 CommandeRobot <|-- robotG::robot::StopEngine
 CommandeRobot <|-- robotG::robot::Turn
-ExprBool <|-- robotG::flow::OpBinaire
-ExprBool <|-- robotG::flow::OpUnaire
 Expr <|-- robotG::flow::ExprBool
 Expr <|-- robotG::flow::If
 Expr <|-- robotG::flow::StopProgram
 Expr <|-- robotG::flow::While
 Expr <|-- robotG::robot::CommandeRobot
+ExprBool <|-- robotG::flow::OpBinaire
+ExprBool <|-- robotG::flow::OpUnaire
 OpBinaire <|-- robotG::flow::And
 OpBinaire <|-- robotG::flow::Or
 OpUnaire <|-- robotG::flow::Not
@@ -88,10 +88,10 @@ robot::CommandeRobot <|-- robotG::robot::HasTurned
 robot::CommandeRobot <|-- robotG::robot::Obstacle
 ExprBool "1..1" --* "1..1" robotG::flow::While : condition0
 ExprBool "1..1" --* "1..1" robotG::flow::If : condition3
-robotG::flow::OpUnaire "1..1" *-- "1..1" ExprBool : expression8
-robotG::flow::OpBinaire "1..1" *-- "1..1" ExprBool : filsDroit12
+ExprBool "1..1" --* "1..1" robotG::flow::OpUnaire : expression8
+ExprBool "1..1" --* "1..1" robotG::flow::OpBinaire : filsDroit12
 ExprBool "1..1" --* "1..1" robotG::flow::OpBinaire : filsGauche10
-robotG::flow::While "1..1" *-- "0..9999" Expr : instructions1
+Expr "0..9999" --* "1..1" robotG::flow::While : instructions1
 Expr "0..9999" --* "1..1" robotG::flow::If : instructions5
 Expr "0..9999" --* "1..1" robotG::flow::Programme : programme15
 @enduml

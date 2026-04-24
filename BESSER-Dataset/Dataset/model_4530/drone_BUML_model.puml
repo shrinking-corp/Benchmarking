@@ -93,12 +93,12 @@ NamedElement <|-- drone::Property
 NamedElement <|-- drone::ROSDriver
 drone::Battery "0..9999" --* "1..1" drone::Drone : batteries3
 drone::Device "0..9999" --* "1..1" drone::Drone : dataEquipment9
-drone::FlightPerformance "1..1" --* "1..1" drone::Drone : flightPerf1
+drone::Drone "1..1" *-- "1..1" drone::FlightPerformance : flightPerf1
 drone::Drone "1..1" *-- "1..9999" drone::Memory : memory7
-drone::Parameter "0..9999" --* "1..1" drone::Action : parameters17
-drone::Processor "1..9999" --* "1..1" drone::Drone : processors5
-drone::Property "0..9999" --* "1..1" drone::Device : properties15
-drone::ROSDriver "0..1" --* "1..1" drone::Drone : rosDriver11
+drone::Action "1..1" *-- "0..9999" drone::Parameter : parameters17
+drone::Drone "1..1" *-- "1..9999" drone::Processor : processors5
+drone::Device "1..1" *-- "0..9999" drone::Property : properties15
+drone::Drone "1..1" *-- "0..1" drone::ROSDriver : rosDriver11
 drone::Drone "1..1" *-- "1..1" drone::Size : size0
-drone::Device "1..1" *-- "0..9999" drone::Action : supportedActions13
+drone::Action "0..9999" --* "1..1" drone::Device : supportedActions13
 @enduml

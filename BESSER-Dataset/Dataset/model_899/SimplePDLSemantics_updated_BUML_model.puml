@@ -74,20 +74,20 @@ ProcessElement <|-- SimplePDLSemantics::DDMMSimplePDL::Guidance
 ProcessElement <|-- SimplePDLSemantics::DDMMSimplePDL::WorkDefinition
 ProcessElement <|-- SimplePDLSemantics::DDMMSimplePDL::WorkSequence
 SPDLSimEvent <|-- SimplePDLSemantics::EDMMSimplePDL::Event
+WorkDefinition <|-- SimplePDLSemantics::SDMMSimplePDL::DynamicWorkDefinition
 WorkDefinitionEvent <|-- SimplePDLSemantics::EDMMSimplePDL::FinishWD
 WorkDefinitionEvent <|-- SimplePDLSemantics::EDMMSimplePDL::StartWD
-WorkDefinition <|-- SimplePDLSemantics::SDMMSimplePDL::DynamicWorkDefinition
-SimplePDLSemantics::DDMMSimplePDL::Guidance "1..1" -- "0..9999" ProcessElement : element19
-WorkDefinition "0..1" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::Process : from1
-WorkSequence "0..9999" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkDefinition : linksToPredecessors3
-WorkSequence "0..9999" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkDefinition : linksToSuccessors5
-SimplePDLSemantics::DDMMSimplePDL::ProcessElement "1..1" -- "1..1" Process : parent16
-WorkDefinition "1..1" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkSequence : predecessor10
-SimplePDLSemantics::DDMMSimplePDL::WorkDefinition "1..1" *-- "0..1" Process : process8
+ProcessElement "0..9999" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::Guidance : element19
+SimplePDLSemantics::DDMMSimplePDL::Process "1..1" -- "0..1" WorkDefinition : from1
+SimplePDLSemantics::DDMMSimplePDL::WorkDefinition "1..1" -- "0..9999" WorkSequence : linksToPredecessors3
+SimplePDLSemantics::DDMMSimplePDL::WorkDefinition "1..1" -- "0..9999" WorkSequence : linksToSuccessors5
+Process "1..1" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::ProcessElement : parent16
+SimplePDLSemantics::DDMMSimplePDL::WorkSequence "1..1" -- "1..1" WorkDefinition : predecessor10
+Process "0..1" --* "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkDefinition : process8
 ProcessElement "0..9999" --* "1..1" SimplePDLSemantics::DDMMSimplePDL::Process : processElements0
 SPDLScenario "1..1" -- "1..1" SimplePDLSemantics::TM3SimplePDL::SPDLTrace : scenario25
 SPDLSimEvent "0..9999" --* "1..1" SimplePDLSemantics::TM3SimplePDL::SPDLScenario : simEvents24
-WorkDefinition "1..1" -- "1..1" SimplePDLSemantics::DDMMSimplePDL::WorkSequence : successor13
+SimplePDLSemantics::DDMMSimplePDL::WorkSequence "1..1" -- "1..1" WorkDefinition : successor13
 SPDLTrace "0..9999" -- "1..1" SimplePDLSemantics::TM3SimplePDL::SPDLScenario : traces23
-WorkDefinition "1..1" -- "1..1" SimplePDLSemantics::EDMMSimplePDL::WorkDefinitionEvent : workdefinition21
+SimplePDLSemantics::EDMMSimplePDL::WorkDefinitionEvent "1..1" -- "1..1" WorkDefinition : workdefinition21
 @enduml

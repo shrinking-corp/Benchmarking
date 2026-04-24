@@ -224,15 +224,15 @@ CreateTool <|-- table::description::CreateCrossColumnTool
 CreateTool <|-- table::description::CreateLineTool
 DColumn <|-- table::DFeatureColumn
 DColumn <|-- table::DTargetColumn
-DRepresentationElement <|-- table::DTableElement
 DRepresentation <|-- table::DTable
+DRepresentationElement <|-- table::DTableElement
 DSemanticDecorator <|-- table::DCell
 DSemanticDecorator <|-- table::DTargetColumn
 DSemanticDecorator <|-- table::LineContainer
-DTableElementStyle <|-- table::DCellStyle
 DTableElement <|-- table::DCell
 DTableElement <|-- table::DColumn
 DTableElement <|-- table::DLine
+DTableElementStyle <|-- table::DCellStyle
 DeleteTool <|-- table::description::DeleteColumnTool
 DeleteTool <|-- table::description::DeleteLineTool
 LineContainer <|-- table::DLine
@@ -268,25 +268,25 @@ tool::VariableContainer <|-- table::description::TableVariable
 FeatureColumnMapping "1..9999" -- "1..1" table::description::EditionTableDescription : allColumnMappings76
 CreateLineTool "0..9999" -- "1..1" table::description::TableDescription : allCreateLine67
 LineMapping "1..9999" -- "1..1" table::description::TableDescription : allLineMappings59
-tool::RepresentationCreationDescription "0..9999" -- "1..1" table::description::TableDescription : allRepresentationCreationDescriptions42
-tool::RepresentationNavigationDescription "0..9999" -- "1..1" table::description::TableDescription : allRepresentationNavigationDescriptions50
-table::description::LineMapping "1..1" -- "0..9999" LineMapping : allSubLines89
-table::description::BackgroundStyleDescription "1..1" -- "1..1" ColorDescription : backgroundColor142
+table::description::TableDescription "1..1" -- "0..9999" tool::RepresentationCreationDescription : allRepresentationCreationDescriptions42
+table::description::TableDescription "1..1" -- "0..9999" tool::RepresentationNavigationDescription : allRepresentationNavigationDescriptions50
+LineMapping "0..9999" -- "1..1" table::description::LineMapping : allSubLines89
+ColorDescription "1..1" -- "1..1" table::description::BackgroundStyleDescription : backgroundColor142
 BackgroundConditionalStyle "0..9999" --* "1..1" table::description::StyleUpdater : backgroundConditionalStyle110
-table::DCellStyle "1..1" -- "0..1" TableMapping : backgroundStyleOrigin25
+TableMapping "0..1" -- "1..1" table::DCellStyle : backgroundStyleOrigin25
 table::DCell "0..9999" -- "1..1" table::DColumn : cells28
 table::DCell "0..9999" --* "1..1" table::DLine : cells5
 table::DCell "1..1" -- "0..1" table::DColumn : column13
-table::description::IntersectionMapping "1..1" -- "1..1" ColumnMapping : columnMapping114
+ColumnMapping "1..1" -- "1..1" table::description::IntersectionMapping : columnMapping114
 table::DColumn "0..9999" --* "1..1" table::DTable : columns0
 table::DLine "1..1" -- "0..1" table::LineContainer : container6
 CreateColumnTool "0..9999" --* "1..1" table::description::ElementColumnMapping : create100
-table::description::IntersectionMapping "1..1" *-- "0..1" CreateCellTool : create117
+CreateCellTool "0..1" --* "1..1" table::description::IntersectionMapping : create117
 CreateLineTool "0..9999" --* "1..1" table::description::LineMapping : create95
-table::description::CrossTableDescription "1..1" *-- "0..9999" CreateCrossColumnTool : createColumn83
-table::DCellStyle "0..1" --* "1..1" table::DCell : currentStyle16
-table::DTableElementStyle "0..1" --* "1..1" table::DColumn : currentStyle35
-table::DTableElementStyle "0..1" --* "1..1" table::DLine : currentStyle9
+CreateCrossColumnTool "0..9999" --* "1..1" table::description::CrossTableDescription : createColumn83
+table::DCell "1..1" *-- "0..1" table::DCellStyle : currentStyle16
+table::DColumn "1..1" *-- "0..1" table::DTableElementStyle : currentStyle35
+table::DLine "1..1" *-- "0..1" table::DTableElementStyle : currentStyle9
 BackgroundStyleDescription "0..1" --* "1..1" table::description::StyleUpdater : defaultBackground108
 ForegroundStyleDescription "0..1" --* "1..1" table::description::StyleUpdater : defaultForeground105
 DeleteColumnTool "0..1" --* "1..1" table::description::ElementColumnMapping : delete102
@@ -300,41 +300,41 @@ TableMapping "0..1" -- "1..1" table::DCellStyle : foregroundStyleOrigin22
 description::table::EObject "0..9999" --* "1..1" table::description::TableDescription : importedElements70
 IntersectionMapping "0..9999" --* "1..1" table::description::CrossTableDescription : intersection80
 IntersectionMapping "0..1" -- "1..1" table::DCell : intersectionMapping20
-table::DLine "0..1" -- "1..1" table::DCell : line11
+table::DCell "1..1" -- "0..1" table::DLine : line11
 LineMapping "1..9999" -- "1..1" table::description::IntersectionMapping : lineMapping112
 table::DLine "0..9999" --* "1..1" table::LineContainer : lines3
 ElementColumnMapping "1..1" -- "1..1" table::description::CreateColumnTool : mapping123
 ElementColumnMapping "1..1" -- "1..1" table::description::CreateCrossColumnTool : mapping126
-table::description::CreateLineTool "1..1" -- "0..1" LineMapping : mapping128
-table::description::CreateCellTool "1..1" -- "1..1" IntersectionMapping : mapping132
+LineMapping "0..1" -- "1..1" table::description::CreateLineTool : mapping128
+IntersectionMapping "1..1" -- "1..1" table::description::CreateCellTool : mapping132
 ElementColumnMapping "1..1" -- "1..1" table::description::DeleteColumnTool : mapping135
 LineMapping "1..1" -- "1..1" table::description::DeleteLineTool : mapping138
-tool::EditMaskVariables "1..1" --* "1..1" table::description::LabelEditTool : mask122
-tool::EditMaskVariables "1..1" --* "1..1" table::description::CreateCellTool : mask130
-table::DColumn "1..1" -- "0..9999" table::DCell : orderedCells32
+table::description::LabelEditTool "1..1" *-- "1..1" tool::EditMaskVariables : mask122
+table::description::CreateCellTool "1..1" *-- "1..1" tool::EditMaskVariables : mask130
+table::DCell "0..9999" -- "1..1" table::DColumn : orderedCells32
 table::DCell "0..9999" -- "1..1" table::DLine : orderedCells7
 ColumnMapping "1..1" -- "1..1" table::DColumn : originMapping30
 LineMapping "1..1" -- "1..1" table::DLine : originMapping4
-table::description::EditionTableDescription "1..1" *-- "1..9999" FeatureColumnMapping : ownedColumnMappings72
+FeatureColumnMapping "1..9999" --* "1..1" table::description::EditionTableDescription : ownedColumnMappings72
 ElementColumnMapping "1..9999" --* "1..1" table::description::CrossTableDescription : ownedColumnMappings79
 CreateLineTool "0..9999" --* "1..1" table::description::TableDescription : ownedCreateLine62
 LineMapping "1..9999" --* "1..1" table::description::TableDescription : ownedLineMappings53
-tool::RepresentationCreationDescription "0..9999" --* "1..1" table::description::TableDescription : ownedRepresentationCreationDescriptions38
+table::description::TableDescription "1..1" *-- "0..9999" tool::RepresentationCreationDescription : ownedRepresentationCreationDescriptions38
 table::description::TableDescription "1..1" *-- "0..9999" tool::RepresentationNavigationDescription : ownedRepresentationNavigationDescriptions45
 LineMapping "0..9999" --* "1..1" table::description::LineMapping : ownedSubLines85
-table::description::EditionTableDescription "1..1" -- "0..9999" FeatureColumnMapping : reusedColumnMappings73
+FeatureColumnMapping "0..9999" -- "1..1" table::description::EditionTableDescription : reusedColumnMappings73
 CreateLineTool "0..9999" -- "1..1" table::description::TableDescription : reusedCreateLine64
 LineMapping "0..9999" -- "1..1" table::description::LineMapping : reusedInMappings92
-table::description::TableDescription "1..1" -- "0..9999" LineMapping : reusedLineMappings56
-tool::RepresentationCreationDescription "0..9999" -- "1..1" table::description::TableDescription : reusedRepresentationCreationDescriptions39
-tool::RepresentationNavigationDescription "0..9999" -- "1..1" table::description::TableDescription : reusedRepresentationNavigationDescriptions47
+LineMapping "0..9999" -- "1..1" table::description::TableDescription : reusedLineMappings56
+table::description::TableDescription "1..1" -- "0..9999" tool::RepresentationCreationDescription : reusedRepresentationCreationDescriptions39
+table::description::TableDescription "1..1" -- "0..9999" tool::RepresentationNavigationDescription : reusedRepresentationNavigationDescriptions47
 LineMapping "0..9999" -- "1..1" table::description::LineMapping : reusedSubLines87
 ForegroundStyleDescription "0..1" --* "1..1" table::description::ForegroundConditionalStyle : style144
-table::description::BackgroundConditionalStyle "1..1" *-- "0..1" BackgroundStyleDescription : style146
-table::DTable "0..1" -- "1..1" table::DColumn : table31
+BackgroundStyleDescription "0..1" --* "1..1" table::description::BackgroundConditionalStyle : style146
+table::DColumn "1..1" -- "0..1" table::DTable : table31
 TableDescription "1..1" -- "1..1" table::description::TableCreationDescription : tableDescription148
 TableDescription "1..1" -- "1..1" table::description::TableNavigationDescription : tableDescription150
-table::DTableElement "1..1" -- "0..1" TableMapping : tableElementMapping2
+TableMapping "0..1" -- "1..1" table::DTableElement : tableElementMapping2
 CellUpdater "0..1" -- "1..1" table::DCell : updater18
 TableVariable "0..9999" --* "1..1" table::description::TableTool : variables119
 @enduml

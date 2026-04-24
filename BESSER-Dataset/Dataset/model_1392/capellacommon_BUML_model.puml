@@ -119,29 +119,29 @@ Pseudostate <|-- capellacommon::InitialPseudoState
 Pseudostate <|-- capellacommon::JoinPseudoState
 Pseudostate <|-- capellacommon::ShallowHistoryPseudoState
 Pseudostate <|-- capellacommon::TerminatePseudoState
-StateEvent <|-- capellacommon::ChangeEvent
-StateEvent <|-- capellacommon::TimeEvent
 State <|-- capellacommon::FinalState
 State <|-- capellacommon::Mode
+StateEvent <|-- capellacommon::ChangeEvent
+StateEvent <|-- capellacommon::TimeEvent
 Structure <|-- capellacommon::AbstractCapabilityPkg
 TraceableElement <|-- capellacommon::GenericTrace
-capellacommon::State "1..1" -- "0..9999" capellacommon::AbstractCapability : availableAbstractCapabilities18
+capellacommon::AbstractCapability "0..9999" -- "1..1" capellacommon::State : availableAbstractCapabilities18
 capellacommon::AbstractFunction "0..9999" -- "1..1" capellacommon::State : availableAbstractFunctions14
 capellacommon::FunctionalChain "0..9999" -- "1..1" capellacommon::State : availableFunctionalChains16
 capellacommon::Constraint "0..1" -- "1..1" capellacommon::StateEvent : condition42
-capellacommon::State "1..1" -- "0..1" capellacommon::AbstractEvent : doActivity20
+capellacommon::AbstractEvent "0..1" -- "1..1" capellacommon::State : doActivity20
 capellacommon::AbstractEvent "0..1" -- "1..1" capellacommon::StateTransition : effect33
 capellacommon::Constraint "0..1" -- "1..1" capellacommon::StateTransition : guard25
 capellacommon::AbstractState "0..9999" -- "1..1" capellacommon::Region : involvedStates9
 capellacommon::Region "0..9999" --* "1..1" capellacommon::State : ownedRegions12
 capellacommon::Region "0..9999" --* "1..1" capellacommon::StateMachine : ownedRegions4
-capellacommon::Region "1..1" *-- "0..9999" capellacommon::AbstractState : ownedStates5
-capellacommon::StateTransition "0..9999" --* "1..1" capellacommon::Region : ownedTransitions7
+capellacommon::AbstractState "0..9999" --* "1..1" capellacommon::Region : ownedStates5
+capellacommon::Region "1..1" *-- "0..9999" capellacommon::StateTransition : ownedTransitions7
 capellacommon::AbstractState "0..9999" -- "1..1" capellacommon::AbstractState : realizedAbstractStates23
 capellacommon::StateTransition "0..9999" -- "1..1" capellacommon::StateTransition : realizedStateTransitions40
-capellacommon::TraceableElement "1..1" -- "1..1" capellacommon::GenericTrace : source0
-capellacommon::StateTransition "1..1" -- "1..1" capellacommon::AbstractState : source27
-capellacommon::TraceableElement "1..1" -- "1..1" capellacommon::GenericTrace : target1
+capellacommon::GenericTrace "1..1" -- "1..1" capellacommon::TraceableElement : source0
+capellacommon::AbstractState "1..1" -- "1..1" capellacommon::StateTransition : source27
+capellacommon::GenericTrace "1..1" -- "1..1" capellacommon::TraceableElement : target1
 capellacommon::AbstractState "1..1" -- "1..1" capellacommon::StateTransition : target30
 capellacommon::AbstractEvent "0..9999" -- "1..1" capellacommon::StateTransition : triggers36
 @enduml

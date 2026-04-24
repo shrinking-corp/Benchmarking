@@ -22,16 +22,16 @@ class grammar::Rule {
 }
 Named <|-- grammar::Grammar
 grammar::Embedding "1..1" --* "1..1" grammar::Rule : EmbeddingMechanism5
-grammar::Rule "1..1" -- "1..1" grammar::Embedding : ParentRule12
+grammar::Embedding "1..1" -- "1..1" grammar::Rule : ParentRule12
 grammar::ConnexionInstruction "1..1" -- "0..1" grammar::Node : d17
-grammar::Embedding "1..1" *-- "0..9999" grammar::ConnexionInstruction : instructions14
+grammar::ConnexionInstruction "0..9999" --* "1..1" grammar::Embedding : instructions14
 grammar::LHS "1..1" --* "1..1" grammar::Rule : lhs2
 grammar::LHS "1..1" -- "1..1" grammar::Node : node8
-grammar::Embedding "1..1" -- "1..1" grammar::ConnexionInstruction : parentEmbedding15
+grammar::ConnexionInstruction "1..1" -- "1..1" grammar::Embedding : parentEmbedding15
 grammar::Grammar "1..1" -- "1..1" grammar::Rule : parentGrammar1
-grammar::Rule "1..1" -- "1..1" grammar::LHS : parentRule6
-grammar::Rule "1..1" -- "1..1" grammar::RHS : parentRule9
-grammar::Rule "1..1" *-- "1..1" grammar::RHS : rhs3
+grammar::LHS "1..1" -- "1..1" grammar::Rule : parentRule6
+grammar::RHS "1..1" -- "1..1" grammar::Rule : parentRule9
+grammar::RHS "1..1" --* "1..1" grammar::Rule : rhs3
 grammar::Grammar "1..1" *-- "0..9999" grammar::Rule : rules0
 grammar::Graph "1..1" -- "1..1" grammar::RHS : subGraph11
 @enduml

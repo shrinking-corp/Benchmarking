@@ -25,11 +25,11 @@ class bowling::Tournament {
   + title : str
   + type : str
 }
-bowling::Player "1..1" -- "0..9999" bowling::Game : games0
-bowling::Matchup "1..1" *-- "0..2" bowling::Game : games6
+bowling::Game "0..9999" -- "1..1" bowling::Player : games0
+bowling::Game "0..2" --* "1..1" bowling::Matchup : games6
 bowling::League "0..1" -- "1..1" bowling::Tournament : league3
-bowling::Matchup "1..1" -- "1..1" bowling::Game : matchup8
+bowling::Game "1..1" -- "1..1" bowling::Matchup : matchup8
 bowling::Matchup "0..9999" --* "1..1" bowling::Tournament : matchups2
-bowling::Player "0..1" -- "1..1" bowling::Game : player9
-bowling::Player "0..9999" --* "1..1" bowling::League : players1
+bowling::Game "1..1" -- "0..1" bowling::Player : player9
+bowling::League "1..1" *-- "0..9999" bowling::Player : players1
 @enduml

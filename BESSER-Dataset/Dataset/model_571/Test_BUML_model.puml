@@ -1,0 +1,53 @@
+@startuml
+class Employee {
+}
+class Library {
+}
+class Organization::tutorial::Item {
+}
+class SubOrg1::sb1C {
+}
+class SubOrg2::sb2C {
+}
+enum Type {
+  asd
+}
+class tutorial::Book {
+  + copies : str
+  + name : str
+  + isAvailable(param1 : any, param2 : any) : bool
+}
+class tutorial::Library {
+  + name : str
+}
+class tutorial::Loan {
+  + date : date
+}
+class tutorial::Member {
+  + name : str
+  + tespOP() : void
+}
+class tutorial::Organization::Librarian {
+  + orgOpp() : str
+}
+class tutorial::Organization::Ref {
+}
+class tutorial::SubOrg1::sb1C {
+}
+class tutorial::SubOrg2::sb2C {
+}
+Employee <|-- tutorial::Organization::Librarian
+Library <|-- tutorial::Organization::Ref
+Organization::tutorial::Item "0..1" -- "1..1" tutorial::Organization::Ref : RefOutsideEcore20
+SubOrg1::sb1C "1..1" -- "1..1" tutorial::Loan : book14
+tutorial::Book "0..9999" --* "1..1" tutorial::Library : books0
+tutorial::Book "0..9999" -- "1..1" tutorial::Member : books11
+tutorial::Book "1..1" -- "0..1" tutorial::Library : library4
+tutorial::Library "0..1" -- "1..1" tutorial::Member : library7
+tutorial::Library "1..1" *-- "0..9999" tutorial::Loan : loans1
+tutorial::Book "1..1" -- "0..9999" tutorial::Loan : loans5
+tutorial::Loan "0..9999" -- "1..1" tutorial::Member : loans9
+tutorial::Loan "1..1" -- "1..1" tutorial::Member : member16
+tutorial::Library "1..1" *-- "0..9999" tutorial::Member : members2
+SubOrg2::sb2C "0..1" -- "1..1" tutorial::Organization::Librarian : workOn19
+@enduml

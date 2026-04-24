@@ -40,22 +40,22 @@ class metricDSL::StepwiseMetric {
 }
 class metricDSL::WeightedMetric {
 }
+Metric <|-- metricDSL::ExternalMetric
+Metric <|-- metricDSL::InternalMetric
 MetricDefinition <|-- metricDSL::RatioMetric
 MetricDefinition <|-- metricDSL::StepwiseMetric
 MetricDefinition <|-- metricDSL::WeightedMetric
-Metric <|-- metricDSL::ExternalMetric
-Metric <|-- metricDSL::InternalMetric
 Number <|-- metricDSL::Constant
 Number <|-- metricDSL::Parameter
-metricDSL::MetricDefinition "0..1" --* "1..1" metricDSL::InternalMetric : definition2
+metricDSL::InternalMetric "1..1" *-- "0..1" metricDSL::MetricDefinition : definition2
 metricDSL::Metric "0..1" -- "1..1" metricDSL::RatioMetric : denominatorMetric11
 metricDSL::Metric "0..1" -- "1..1" metricDSL::StepwiseMetric : innerMetric5
 metricDSL::Metric "0..1" -- "1..1" metricDSL::MetricAndWeight : metric20
 metricDSL::Metric "0..9999" --* "1..1" metricDSL::MetricModel : metrics0
 metricDSL::Metric "0..1" -- "1..1" metricDSL::RatioMetric : nominatorMetric9
 metricDSL::InternalMetric "1..1" *-- "0..9999" metricDSL::Number : parameter1
-metricDSL::StepwiseMetric "1..1" *-- "0..9999" metricDSL::BoundAndWeight : steps7
-metricDSL::Number "0..1" -- "1..1" metricDSL::BoundAndWeight : upperBound14
+metricDSL::BoundAndWeight "0..9999" --* "1..1" metricDSL::StepwiseMetric : steps7
+metricDSL::BoundAndWeight "1..1" -- "0..1" metricDSL::Number : upperBound14
 metricDSL::BoundAndWeight "1..1" -- "0..1" metricDSL::Number : weight17
 metricDSL::MetricAndWeight "1..1" -- "0..1" metricDSL::Number : weight23
 metricDSL::MetricAndWeight "0..9999" --* "1..1" metricDSL::WeightedMetric : weights4

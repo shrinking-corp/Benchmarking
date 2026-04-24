@@ -60,8 +60,6 @@ Port <|-- effbd201::InputPort
 Port <|-- effbd201::OutputPort
 ProcessNode <|-- effbd201::Flow
 ProcessNode <|-- effbd201::Function
-SequenceNode <|-- effbd201::Function
-SequenceNode <|-- effbd201::Sequence
 Sequence <|-- effbd201::And
 Sequence <|-- effbd201::Final
 Sequence <|-- effbd201::Iteration
@@ -69,15 +67,17 @@ Sequence <|-- effbd201::Loop
 Sequence <|-- effbd201::LoopExit
 Sequence <|-- effbd201::Or
 Sequence <|-- effbd201::Start
-effbd201::SequenceNode "0..9999" -- "1..1" effbd201::SequenceNode : controlFlowEdge15
-effbd201::Function "0..9999" --* "1..1" effbd201::Function : decompositions1
-effbd201::Function "1..1" *-- "0..9999" effbd201::Description : descriptions10
+SequenceNode <|-- effbd201::Function
+SequenceNode <|-- effbd201::Sequence
+effbd201::SequenceNode "1..1" -- "0..9999" effbd201::SequenceNode : controlFlowEdge15
+effbd201::Function "1..1" *-- "0..9999" effbd201::Function : decompositions1
+effbd201::Description "0..9999" --* "1..1" effbd201::Function : descriptions10
 effbd201::Flow "0..9999" --* "1..1" effbd201::Function : flows4
-effbd201::InputPort "0..9999" --* "1..1" effbd201::Function : inputPorts8
+effbd201::Function "1..1" *-- "0..9999" effbd201::InputPort : inputPorts8
 effbd201::Flow "1..1" -- "0..9999" effbd201::Port : inputflowEdge18
-effbd201::Item "0..9999" --* "1..1" effbd201::Flow : items21
-effbd201::OutputPort "0..9999" --* "1..1" effbd201::Function : outputPorts6
+effbd201::Flow "1..1" *-- "0..9999" effbd201::Item : items21
+effbd201::Function "1..1" *-- "0..9999" effbd201::OutputPort : outputPorts6
 effbd201::Flow "0..9999" -- "1..1" effbd201::Port : outputflowEdge16
 effbd201::Function "1..1" *-- "0..9999" effbd201::Sequence : sequenceNodes2
-effbd201::Token "0..9999" --* "1..1" effbd201::Function : tokens12
+effbd201::Function "1..1" *-- "0..9999" effbd201::Token : tokens12
 @enduml

@@ -32,22 +32,22 @@ class library::Review {
 class library::Writer {
   + name : str
 }
-library::Writer "1..1" -- "1..1" library::Book : author10
+library::Book "1..1" -- "1..1" library::Writer : author10
 library::Book "1..1" -- "1..1" library::Review : book17
 library::Book "1..1" -- "1..1" library::Opinion : book21
 library::Book "0..9999" --* "1..1" library::Library : books1
 library::Book "0..9999" -- "1..1" library::Writer : books4
-library::Writer "1..1" *-- "0..2" library::Book : brochures5
-library::Chapter "0..9999" --* "1..1" library::Book : chapters12
-library::Library "1..1" *-- "0..9999" library::Community : communities3
-library::CommunityRole "1..1" -- "0..1" library::Community : community27
-library::Library "0..1" -- "1..1" library::Community : library26
-library::Opinion "0..2" -- "1..1" library::Book : opinions14
+library::Book "0..2" --* "1..1" library::Writer : brochures5
+library::Book "1..1" *-- "0..9999" library::Chapter : chapters12
+library::Community "0..9999" --* "1..1" library::Library : communities3
+library::Community "0..1" -- "1..1" library::CommunityRole : community27
+library::Community "1..1" -- "0..1" library::Library : library26
+library::Book "1..1" -- "0..2" library::Opinion : opinions14
 library::Opinion "0..2" --* "1..1" library::Writer : opinions8
-library::Writer "0..9999" -- "1..1" library::CommunityRole : participants29
+library::CommunityRole "1..1" -- "0..9999" library::Writer : participants29
 library::CommunityRole "0..9999" -- "1..1" library::Writer : participates9
 library::Book "1..1" *-- "0..9999" library::Review : reviews11
-library::CommunityRole "1..9999" --* "1..1" library::Community : roles24
-library::Writer "1..1" -- "1..1" library::Opinion : writer19
+library::Community "1..1" *-- "1..9999" library::CommunityRole : roles24
+library::Opinion "1..1" -- "1..1" library::Writer : writer19
 library::Library "1..1" *-- "0..9999" library::Writer : writers0
 @enduml

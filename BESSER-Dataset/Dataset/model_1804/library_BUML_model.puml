@@ -147,9 +147,6 @@ class library::Value {
 }
 class library::Vendor {
 }
-BaseExpressionResult <|-- library::ExpressionResult
-BaseExpressionResult <|-- library::LastEvaluationExpressionResult
-BaseResource <|-- library::NetXResource
 Base <|-- library::BaseResource
 Base <|-- library::Component
 Base <|-- library::EquipmentGroup
@@ -161,70 +158,73 @@ Base <|-- library::ReferenceNetwork
 Base <|-- library::ReferenceRelationship
 Base <|-- library::Tolerance
 Base <|-- library::Unit
+BaseExpressionResult <|-- library::ExpressionResult
+BaseExpressionResult <|-- library::LastEvaluationExpressionResult
+BaseResource <|-- library::NetXResource
 Company <|-- library::Vendor
 Component <|-- library::Equipment
 Component <|-- library::Function
-library::NetXResource "0..9999" -- "1..1" library::EquipmentGroup : allEquipmentResources48
-library::Equipment "1..1" -- "0..9999" library::Equipment : allEquipments31
-library::EquipmentGroup "1..1" -- "0..9999" library::Equipment : allEquipments51
+library::EquipmentGroup "1..1" -- "0..9999" library::NetXResource : allEquipmentResources48
+library::Equipment "0..9999" -- "1..1" library::Equipment : allEquipments31
+library::Equipment "0..9999" -- "1..1" library::EquipmentGroup : allEquipments51
 library::Function "0..9999" -- "1..1" library::Function : allFunctions65
-library::NetXResource "0..9999" -- "1..1" library::Component : allResources18
-library::Expression "0..1" -- "1..1" library::Component : capacityExpressionRef7
-library::Value "0..9999" --* "1..1" library::NetXResource : capacityValues99
+library::Component "1..1" -- "0..9999" library::NetXResource : allResources18
+library::Component "1..1" -- "0..1" library::Expression : capacityExpressionRef7
+library::NetXResource "1..1" *-- "0..9999" library::Value : capacityValues99
 library::Component "1..1" -- "1..1" library::NetXResource : componentRef93
-library::ConfigAttribute "0..9999" --* "1..1" library::Component : configAttributes3
+library::Component "1..1" *-- "0..9999" library::ConfigAttribute : configAttributes3
 library::DiagramInfo "0..9999" --* "1..1" library::ReferenceNetwork : diagrams128
-library::DiagramInfo "0..9999" --* "1..1" library::Component : diagrams20
+library::Component "1..1" *-- "0..9999" library::DiagramInfo : diagrams20
 library::DiagramInfo "0..9999" --* "1..1" library::EquipmentGroup : diagrams33
-library::NetXResource "0..9999" --* "1..1" library::EquipmentGroup : equipmentGroupResources36
-library::EquipmentGroup "0..9999" --* "1..1" library::Equipment : equipmentGroups26
+library::EquipmentGroup "1..1" *-- "0..9999" library::NetXResource : equipmentGroupResources36
+library::Equipment "1..1" *-- "0..9999" library::EquipmentGroup : equipmentGroups26
 library::Equipment "0..9999" -- "1..1" library::ProductInfo : equipmentRef120
-library::EquipmentGroup "1..1" -- "0..9999" library::Equipment : equipmentRefs42
-library::EquipmentRelationship "0..9999" -- "1..1" library::Equipment : equipmentRelationshipRefs28
+library::Equipment "0..9999" -- "1..1" library::EquipmentGroup : equipmentRefs42
+library::Equipment "1..1" -- "0..9999" library::EquipmentRelationship : equipmentRelationshipRefs28
 library::Equipment "0..9999" --* "1..1" library::NodeType : equipments117
-library::Equipment "0..9999" --* "1..1" library::Equipment : equipments25
+library::Equipment "1..1" *-- "0..9999" library::Equipment : equipments25
 library::Equipment "0..9999" --* "1..1" library::Library : equipments71
 library::EObject "0..1" -- "1..1" library::Expression : evaluationObject54
 library::Expression "0..1" -- "1..1" library::Tolerance : expressionRef147
-library::Expression "0..9999" -- "1..1" library::EquipmentGroup : expressionRefs39
+library::EquipmentGroup "1..1" -- "0..9999" library::Expression : expressionRefs39
 library::Expression "0..9999" --* "1..1" library::Library : expressions85
 library::NetXResource "1..1" *-- "0..9999" library::Value : forecastCapacityValues105
-library::Value "0..9999" --* "1..1" library::NetXResource : forecastValues108
+library::NetXResource "1..1" *-- "0..9999" library::Value : forecastValues108
 library::Function "1..1" -- "0..9999" library::FunctionRelationship : functionRelationshipRefs62
 library::Function "0..9999" --* "1..1" library::NodeType : functions114
-library::Function "0..9999" --* "1..1" library::Function : functions61
+library::Function "1..1" *-- "0..9999" library::Function : functions61
 library::Function "0..9999" --* "1..1" library::Library : functions67
-library::Unit "1..1" *-- "0..1" library::MultiImage : icons150
-library::MultiImage "0..1" --* "1..1" library::Component : icons22
+library::MultiImage "0..1" --* "1..1" library::Unit : icons150
+library::Component "1..1" *-- "0..1" library::MultiImage : icons22
 library::Function "0..9999" -- "1..1" library::ProductInfo : licensedFunctionRef122
-library::Lifecycle "0..1" --* "1..1" library::Component : lifecycle1
+library::Component "1..1" *-- "0..1" library::Lifecycle : lifecycle1
 library::Metric "0..1" -- "1..1" library::NetXResource : metricRef94
-library::Metric "0..9999" -- "1..1" library::Component : metricRefs5
-library::MetricSource "0..9999" --* "1..1" library::Library : metricSources77
-library::NetXResource "1..1" *-- "0..9999" library::MetricValueRange : metricValueRanges97
-library::Metric "0..9999" --* "1..1" library::Library : metrics74
-library::ProductInfo "1..1" -- "0..9999" library::NodeType : nodeTypeRef125
+library::Component "1..1" -- "0..9999" library::Metric : metricRefs5
+library::Library "1..1" *-- "0..9999" library::MetricSource : metricSources77
+library::MetricValueRange "0..9999" --* "1..1" library::NetXResource : metricValueRanges97
+library::Library "1..1" *-- "0..9999" library::Metric : metrics74
+library::NodeType "0..9999" -- "1..1" library::ProductInfo : nodeTypeRef125
 library::NodeType "0..9999" --* "1..1" library::ReferenceNetwork : nodeTypes130
 library::Library "1..1" *-- "0..9999" library::NodeType : nodeTypes69
 library::Component "1..1" -- "0..9999" library::Parameter : parameterRefs16
-library::Parameter "0..9999" -- "1..1" library::EquipmentGroup : parameterRefs45
-library::Parameter "0..9999" --* "1..1" library::Library : parameters79
-library::Vendor "1..1" *-- "0..9999" library::ProductInfo : products153
-library::ReferenceRelationship "1..1" -- "0..1" library::Protocol : protocolRef138
-library::Protocol "0..9999" -- "1..1" library::Component : protocolRefs14
+library::EquipmentGroup "1..1" -- "0..9999" library::Parameter : parameterRefs45
+library::Library "1..1" *-- "0..9999" library::Parameter : parameters79
+library::ProductInfo "0..9999" --* "1..1" library::Vendor : products153
+library::Protocol "0..1" -- "1..1" library::ReferenceRelationship : protocolRef138
+library::Component "1..1" -- "0..9999" library::Protocol : protocolRefs14
 library::NodeType "0..1" -- "1..1" library::ReferenceRelationship : refInterface1Ref141
 library::NodeType "0..1" -- "1..1" library::ReferenceRelationship : refInterface2Ref144
-library::ReferenceRelationship "0..9999" --* "1..1" library::ReferenceNetwork : refRelationships136
+library::ReferenceNetwork "1..1" *-- "0..9999" library::ReferenceRelationship : refRelationships136
 library::ReferenceNetwork "0..9999" --* "1..1" library::ReferenceNetwork : referenceNetworks134
 library::Component "1..1" -- "0..9999" library::NetXResource : resourceRefs2
 library::BaseResource "0..1" -- "1..1" library::ExpressionResult : targetResource56
 library::ExpressionResult "1..1" *-- "0..9999" library::Value : targetValues58
-library::Tolerance "0..9999" -- "1..1" library::Component : toleranceRefs12
-library::Tolerance "0..9999" --* "1..1" library::Library : tolerances82
+library::Component "1..1" -- "0..9999" library::Tolerance : toleranceRefs12
+library::Library "1..1" *-- "0..9999" library::Tolerance : tolerances82
 library::NetXResource "1..1" *-- "0..9999" library::Value : trendedValues111
 library::BaseResource "1..1" -- "0..1" library::Unit : unitRef0
-library::Unit "0..9999" --* "1..1" library::Library : units88
-library::Expression "0..1" -- "1..1" library::Component : utilizationExpressionRef9
-library::Value "0..9999" --* "1..1" library::NetXResource : utilizationValues102
+library::Library "1..1" *-- "0..9999" library::Unit : units88
+library::Component "1..1" -- "0..1" library::Expression : utilizationExpressionRef9
+library::NetXResource "1..1" *-- "0..9999" library::Value : utilizationValues102
 library::Library "1..1" *-- "0..1" library::Meta : version91
 @enduml

@@ -83,16 +83,16 @@ Condition <|-- arduinoml::DigitalCondition
 Condition <|-- arduinoml::TimeCondition
 NamedElement <|-- arduinoml::AMLState
 NamedElement <|-- arduinoml::Brick
-arduinoml::Action "0..9999" --* "1..1" arduinoml::AMLState : actions8
+arduinoml::AMLState "1..1" *-- "0..9999" arduinoml::Action : actions8
 arduinoml::DigitalAction "1..1" -- "1..1" arduinoml::DigitalActuator : actuator16
-arduinoml::AnalogActuator "1..1" -- "1..1" arduinoml::AnalogAction : actuator18
-arduinoml::Brick "0..9999" --* "1..1" arduinoml::AMLMachine : bricks0
+arduinoml::AnalogAction "1..1" -- "1..1" arduinoml::AnalogActuator : actuator18
+arduinoml::AMLMachine "1..1" *-- "0..9999" arduinoml::Brick : bricks0
 arduinoml::Condition "1..9999" --* "1..1" arduinoml::Transition : conditions13
-arduinoml::Transition "1..1" -- "1..1" arduinoml::AMLState : goto10
-arduinoml::DigitalSensor "1..1" -- "1..1" arduinoml::DigitalCondition : sensor15
-arduinoml::AnalogSensor "1..1" -- "1..1" arduinoml::AnalogCondition : sensor17
+arduinoml::AMLState "1..1" -- "1..1" arduinoml::Transition : goto10
+arduinoml::DigitalCondition "1..1" -- "1..1" arduinoml::DigitalSensor : sensor15
+arduinoml::AnalogCondition "1..1" -- "1..1" arduinoml::AnalogSensor : sensor17
 arduinoml::AnalogActionSensor "1..1" -- "1..1" arduinoml::AnalogSensor : sensor19
 arduinoml::AMLMachine "1..1" -- "1..1" arduinoml::AMLState : start3
-arduinoml::AMLState "1..9999" --* "1..1" arduinoml::AMLMachine : states1
-arduinoml::Transition "0..9999" --* "1..1" arduinoml::AMLState : transitions6
+arduinoml::AMLMachine "1..1" *-- "1..9999" arduinoml::AMLState : states1
+arduinoml::AMLState "1..1" *-- "0..9999" arduinoml::Transition : transitions6
 @enduml

@@ -55,23 +55,23 @@ class ordersystem::special::PreferredCustomer {
 }
 Customer <|-- ordersystem::special::PreferredCustomer
 Product <|-- ordersystem::special::LimitedEditionProduct
-ordersystem::Warehouse "0..1" -- "1..1" ordersystem::InventoryItem : Warehouse17
+ordersystem::InventoryItem "1..1" -- "0..1" ordersystem::Warehouse : Warehouse17
 ordersystem::Account "0..9999" --* "1..1" ordersystem::Customer : account24
-ordersystem::Address "1..1" --* "1..1" ordersystem::Account : billingAddress31
+ordersystem::Account "1..1" *-- "1..1" ordersystem::Address : billingAddress31
 ordersystem::Customer "0..9999" --* "1..1" ordersystem::OrderSystem : customer7
 ordersystem::LineItem "0..9999" --* "1..1" ordersystem::Order : item1
 ordersystem::InventoryItem "0..9999" --* "1..1" ordersystem::Warehouse : item5
-ordersystem::Warehouse "1..1" *-- "1..1" ordersystem::Address : location6
-ordersystem::Order "0..9999" --* "1..1" ordersystem::Customer : order26
+ordersystem::Address "1..1" --* "1..1" ordersystem::Warehouse : location6
+ordersystem::Customer "1..1" *-- "0..9999" ordersystem::Order : order26
 ordersystem::Customer "0..1" -- "1..1" ordersystem::Order : owner0
-ordersystem::Order "0..1" -- "1..1" ordersystem::LineItem : owner15
-ordersystem::Product "1..1" -- "0..1" ordersystem::OrderSystem : owner2
+ordersystem::LineItem "1..1" -- "0..1" ordersystem::Order : owner15
+ordersystem::OrderSystem "0..1" -- "1..1" ordersystem::Product : owner2
 ordersystem::Customer "1..1" -- "0..1" ordersystem::OrderSystem : owner22
 ordersystem::Account "1..1" -- "0..1" ordersystem::Customer : owner29
 ordersystem::OrderSystem "0..1" -- "1..1" ordersystem::Warehouse : owner3
-ordersystem::Product "0..9999" --* "1..1" ordersystem::OrderSystem : product10
-ordersystem::Product "1..1" -- "1..1" ordersystem::LineItem : product16
-ordersystem::Product "1..1" -- "1..1" ordersystem::InventoryItem : product20
-ordersystem::Address "1..1" --* "1..1" ordersystem::Account : shippingAddress33
-ordersystem::Warehouse "0..9999" --* "1..1" ordersystem::OrderSystem : warehouse12
+ordersystem::OrderSystem "1..1" *-- "0..9999" ordersystem::Product : product10
+ordersystem::LineItem "1..1" -- "1..1" ordersystem::Product : product16
+ordersystem::InventoryItem "1..1" -- "1..1" ordersystem::Product : product20
+ordersystem::Account "1..1" *-- "1..1" ordersystem::Address : shippingAddress33
+ordersystem::OrderSystem "1..1" *-- "0..9999" ordersystem::Warehouse : warehouse12
 @enduml

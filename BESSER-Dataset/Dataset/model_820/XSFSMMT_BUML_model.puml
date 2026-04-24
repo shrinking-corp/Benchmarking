@@ -1,0 +1,89 @@
+@startuml
+class Action {
+}
+class Guard {
+}
+class NamedElement {
+}
+class NumberGuard {
+}
+class Variable {
+}
+abstract class fsm::Action {
+  + execute() : void
+}
+class fsm::AssignValueAction {
+  + value : bool
+  + execute() : void
+}
+class fsm::DecreaseValueAction {
+  + stepValue : int
+  + execute() : void
+}
+class fsm::EqualNumberGuard {
+  + holds() : void
+}
+class fsm::GreaterThanNumberGuard {
+  + holds() : void
+}
+abstract class fsm::Guard {
+  + not : bool
+  + holds() : void
+}
+class fsm::IncreaseValueAction {
+  + stepValue : int
+  + execute() : void
+}
+class fsm::LessThanNumberGuard {
+  + holds() : void
+}
+abstract class fsm::NamedElement {
+  + name : str
+}
+abstract class fsm::NumberGuard {
+  + value : bool
+  + holds() : void
+}
+class fsm::NumberVariable {
+  + initialValue : int
+  + value : bool
+}
+class fsm::State {
+}
+class fsm::StateMachine {
+  + assignInitialValues(arguments : any) : void
+  + main() : void
+  + step() : void
+}
+class fsm::Transition {
+  + fire() : void
+}
+abstract class fsm::Variable {
+  + name : str
+}
+Action <|-- fsm::AssignValueAction
+Action <|-- fsm::DecreaseValueAction
+Action <|-- fsm::IncreaseValueAction
+Guard <|-- fsm::NumberGuard
+NamedElement <|-- fsm::State
+NamedElement <|-- fsm::StateMachine
+NamedElement <|-- fsm::Transition
+NumberGuard <|-- fsm::EqualNumberGuard
+NumberGuard <|-- fsm::GreaterThanNumberGuard
+NumberGuard <|-- fsm::LessThanNumberGuard
+Variable <|-- fsm::NumberVariable
+fsm::Action "1..1" --* "1..1" fsm::Transition : action27
+fsm::State "0..1" -- "1..1" fsm::StateMachine : currentState7
+fsm::Guard "1..1" --* "1..1" fsm::Transition : guard25
+fsm::State "1..1" -- "0..9999" fsm::Transition : incomingTransitions16
+fsm::State "1..1" -- "1..1" fsm::StateMachine : initialState2
+fsm::State "1..1" -- "0..9999" fsm::Transition : outgoingTransitions13
+fsm::State "0..9999" --* "1..1" fsm::StateMachine : ownedStates0
+fsm::StateMachine "1..1" *-- "0..9999" fsm::Transition : ownedTransitions3
+fsm::State "1..1" -- "1..1" fsm::StateMachine : owningFSM10
+fsm::State "1..1" -- "1..1" fsm::Transition : source19
+fsm::NumberGuard "1..1" -- "1..1" fsm::NumberVariable : source29
+fsm::State "1..1" -- "1..1" fsm::Transition : target22
+fsm::Action "1..1" -- "1..1" fsm::NumberVariable : target30
+fsm::StateMachine "1..1" *-- "0..9999" fsm::Variable : variables5
+@enduml

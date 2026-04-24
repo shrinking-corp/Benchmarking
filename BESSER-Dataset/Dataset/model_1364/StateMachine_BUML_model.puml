@@ -59,10 +59,10 @@ class statemachine::Trigger {
 }
 abstract class statemachine::Vertex {
 }
-BehavioralFeature <|-- statemachine::Operation
-BehavioredClassifier <|-- statemachine::Class
 Behavior <|-- statemachine::OpaqueBehavior
 Behavior <|-- statemachine::StateMachine
+BehavioralFeature <|-- statemachine::Operation
+BehavioredClassifier <|-- statemachine::Class
 Event <|-- statemachine::MessageEvent
 MessageEvent <|-- statemachine::CallEvent
 NamedElement <|-- statemachine::Transition
@@ -73,24 +73,24 @@ Vertex <|-- statemachine::State
 statemachine::Behavior "0..1" -- "1..1" statemachine::BehavioralFeature : behavior27
 statemachine::Behavior "1..1" -- "0..1" statemachine::Transition : behaviortransition7
 statemachine::Constraint "1..1" -- "0..1" statemachine::Transition : constrainttransition33
-statemachine::BehavioredClassifier "0..1" -- "1..1" statemachine::Behavior : context6
+statemachine::Behavior "1..1" -- "0..1" statemachine::BehavioredClassifier : context6
 statemachine::Behavior "0..1" --* "1..1" statemachine::Transition : effect17
 statemachine::Event "1..1" -- "1..1" statemachine::Trigger : event32
-statemachine::Trigger "0..1" -- "1..1" statemachine::Event : eventtrigger25
+statemachine::Event "1..1" -- "0..1" statemachine::Trigger : eventtrigger25
 statemachine::Constraint "0..1" --* "1..1" statemachine::Transition : guard9
 statemachine::Transition "0..9999" -- "1..1" statemachine::Vertex : incoming21
-statemachine::StateMachine "0..1" -- "1..1" statemachine::Region : machine2
-statemachine::Operation "1..1" -- "1..1" statemachine::CallEvent : operation26
+statemachine::Region "1..1" -- "0..1" statemachine::StateMachine : machine2
+statemachine::CallEvent "1..1" -- "1..1" statemachine::Operation : operation26
 statemachine::Transition "0..9999" -- "1..1" statemachine::Vertex : outgoing19
-statemachine::BehavioredClassifier "1..1" *-- "0..9999" statemachine::Behavior : ownedBehavior1
+statemachine::Behavior "0..9999" --* "1..1" statemachine::BehavioredClassifier : ownedBehavior1
 statemachine::Region "1..9999" --* "1..1" statemachine::StateMachine : region0
-statemachine::Vertex "1..1" -- "0..1" statemachine::Region : regionvertex23
-statemachine::Vertex "1..1" -- "1..1" statemachine::Transition : source10
+statemachine::Region "0..1" -- "1..1" statemachine::Vertex : regionvertex23
+statemachine::Transition "1..1" -- "1..1" statemachine::Vertex : source10
 statemachine::Behavior "1..1" -- "0..1" statemachine::BehavioralFeature : specification5
-statemachine::Vertex "0..9999" --* "1..1" statemachine::Region : subvertex3
-statemachine::Vertex "1..1" -- "1..1" statemachine::Transition : target12
-statemachine::Transition "0..9999" --* "1..1" statemachine::Region : transition4
+statemachine::Region "1..1" *-- "0..9999" statemachine::Vertex : subvertex3
+statemachine::Transition "1..1" -- "1..1" statemachine::Vertex : target12
+statemachine::Region "1..1" *-- "0..9999" statemachine::Transition : transition4
 statemachine::Region "1..1" -- "1..1" statemachine::Transition : transitionregion14
 statemachine::Transition "1..1" *-- "0..9999" statemachine::Trigger : trigger16
-statemachine::Trigger "1..1" -- "0..1" statemachine::Transition : triggertransition29
+statemachine::Transition "0..1" -- "1..1" statemachine::Trigger : triggertransition29
 @enduml

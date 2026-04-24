@@ -1,0 +1,51 @@
+@startuml
+class ItemsCollection {
+}
+class collection::Category {
+}
+class collection::DataSet {
+}
+class collection::Item {
+}
+abstract class collection::ItemsCollection {
+}
+class collection::ManualCollection {
+  + addItem(item : any) : str
+  + removeItem(item : any) : str
+}
+class collection::MetaTag {
+}
+class collection::Organisation {
+}
+class collection::Person {
+}
+class collection::RemoteCollection {
+  + remoteURL : str
+}
+class collection::SmartInformationObjectCollection {
+  + includeContents : str
+  + includeOrganisations : str
+  + includePersons : str
+  + minimumAge : date
+  + addNegative(item : any) : str
+  + addPositive(item : any) : str
+  + remove(item : any) : str
+}
+class collection::Tag {
+}
+ItemsCollection <|-- collection::ManualCollection
+ItemsCollection <|-- collection::RemoteCollection
+ItemsCollection <|-- collection::SmartInformationObjectCollection
+collection::DataSet "1..1" -- "1..1" collection::ItemsCollection : dataSet1
+collection::Item "0..9999" -- "1..1" collection::ItemsCollection : items0
+collection::Category "0..9999" -- "1..1" collection::SmartInformationObjectCollection : negativeCategories16
+collection::MetaTag "0..9999" -- "1..1" collection::SmartInformationObjectCollection : negativeMetaTags13
+collection::Organisation "0..9999" -- "1..1" collection::SmartInformationObjectCollection : negativeOrganisations24
+collection::Person "0..9999" -- "1..1" collection::SmartInformationObjectCollection : negativePersons19
+collection::SmartInformationObjectCollection "1..1" -- "0..9999" collection::Tag : negativeTags4
+collection::Category "0..9999" -- "1..1" collection::SmartInformationObjectCollection : positiveCategories9
+collection::MetaTag "0..9999" -- "1..1" collection::SmartInformationObjectCollection : positiveMetaTags7
+collection::Organisation "0..9999" -- "1..1" collection::SmartInformationObjectCollection : positiveOrganisations22
+collection::Person "0..9999" -- "1..1" collection::SmartInformationObjectCollection : positivePersons11
+collection::SmartInformationObjectCollection "1..1" -- "0..9999" collection::Tag : positiveTags3
+@enduml

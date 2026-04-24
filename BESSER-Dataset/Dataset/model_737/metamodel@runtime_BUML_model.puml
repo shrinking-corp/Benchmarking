@@ -171,10 +171,10 @@ class type::AbstractPort {
 class type::art::DataType {
 }
 AbstractPort <|-- art::type::PortCollection
-AttributeInstance <|-- art::instance::DictionaryValuedAttribute
-AttributeInstance <|-- art::instance::ValuedAttribute
 Attribute <|-- art::type::BasicAttribute
 Attribute <|-- art::type::Dictionary
+AttributeInstance <|-- art::instance::DictionaryValuedAttribute
+AttributeInstance <|-- art::instance::ValuedAttribute
 Binding <|-- art::instance::DelegationBinding
 Binding <|-- art::instance::TransmissionBinding
 CardinalityElement <|-- art::type::Port
@@ -207,14 +207,14 @@ TypeImplementation <|-- art::implem::OSGiType
 TypedElement <|-- art::type::Attribute
 TypedElement <|-- art::type::Parameter
 type::AbstractPort <|-- art::type::Port
-art::instance::ComponentInstance "1..1" *-- "0..9999" AttributeInstance : attribute14
+AttributeInstance "0..9999" --* "1..1" art::instance::ComponentInstance : attribute14
 BasicAttribute "1..1" -- "1..1" art::instance::ValuedAttribute : attribute35
 Dictionary "1..1" -- "1..1" art::instance::DictionaryValuedAttribute : attribute37
 Attribute "0..9999" --* "1..1" art::type::ComponentType : attribute42
 TransmissionBinding "0..9999" --* "1..1" art::instance::ComponentInstance : binding16
 AbstractPort "1..1" -- "1..1" art::instance::TransmissionBinding : client26
-art::distrib::Node "1..1" *-- "0..9999" ComponentInstance : components69
-art::System "1..1" *-- "0..9999" art::DataType : dataTypes5
+ComponentInstance "0..9999" --* "1..1" art::distrib::Node : components69
+art::DataType "0..9999" --* "1..1" art::System : dataTypes5
 DelegationBinding "0..9999" --* "1..1" art::instance::CompositeInstance : delegation23
 Entry "0..9999" --* "1..1" art::instance::DictionaryValuedAttribute : entries36
 AbstractPort "1..1" -- "1..1" art::instance::DelegationBinding : exported32
@@ -229,21 +229,21 @@ ComponentInstance "0..9999" -- "1..1" art::group::InstanceGroup : instances64
 DictionaryDefaultValue "1..1" -- "1..1" art::instance::DefaultEntry : key39
 DictionaryDefaultValue "0..9999" --* "1..1" art::type::Dictionary : keys57
 Node "0..9999" --* "1..1" art::System : nodes0
-art::type::Service "1..1" *-- "0..9999" Operation : operation48
-art::type::Operation "1..1" *-- "0..9999" Parameter : output50
-art::type::ComponentType "1..1" *-- "0..9999" AbstractPort : port40
-art::instance::TransmissionBinding "1..1" -- "1..1" AbstractPort : server27
+Operation "0..9999" --* "1..1" art::type::Service : operation48
+Parameter "0..9999" --* "1..1" art::type::Operation : output50
+AbstractPort "0..9999" --* "1..1" art::type::ComponentType : port40
+AbstractPort "1..1" -- "1..1" art::instance::TransmissionBinding : server27
 ComponentInstance "1..1" -- "1..1" art::instance::Binding : serverInstance24
-art::type::AbstractPort "1..1" -- "1..1" Service : service53
+Service "1..1" -- "1..1" art::type::AbstractPort : service53
 Service "0..9999" --* "1..1" art::System : services1
 AbstractPort "1..1" -- "1..1" art::instance::DelegationBinding : source30
-art::instance::CompositeInstance "1..1" *-- "0..9999" ComponentInstance : subComponent21
+ComponentInstance "0..9999" --* "1..1" art::instance::CompositeInstance : subComponent21
 TypeGroup "0..9999" --* "1..1" art::group::TypeGroup : subGroups62
 InstanceGroup "0..9999" --* "1..1" art::group::InstanceGroup : subGroups67
 CompositeInstance "0..1" -- "1..1" art::instance::ComponentInstance : superComponent13
-art::instance::ComponentInstance "1..1" -- "1..1" ComponentType : type11
+ComponentType "1..1" -- "1..1" art::instance::ComponentInstance : type11
 art::DataType "1..1" -- "1..1" art::TypedElement : type9
 ComponentType "0..9999" --* "1..1" art::System : types3
-art::group::TypeGroup "1..1" -- "0..9999" ComponentType : types60
-type::art::DataType "1..1" -- "1..1" art::type::Dictionary : valueType56
+ComponentType "0..9999" -- "1..1" art::group::TypeGroup : types60
+art::type::Dictionary "1..1" -- "1..1" type::art::DataType : valueType56
 @enduml

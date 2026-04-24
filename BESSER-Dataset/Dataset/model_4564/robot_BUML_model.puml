@@ -50,11 +50,11 @@ class robot::UntilStatement {
 }
 class robot::WhileStatement {
 }
+Condition <|-- robot::ObjectAheadCondition
+Condition <|-- robot::TrueCondition
 ConditionalStatement <|-- robot::IfStatement
 ConditionalStatement <|-- robot::UntilStatement
 ConditionalStatement <|-- robot::WhileStatement
-Condition <|-- robot::ObjectAheadCondition
-Condition <|-- robot::TrueCondition
 ControlStatement <|-- robot::ForwardStatement
 ControlStatement <|-- robot::RightStatement
 NamedElement <|-- robot::Robot
@@ -65,11 +65,11 @@ Statement <|-- robot::ExecuteStatement
 Statement <|-- robot::PrintStatement
 robot::Condition "1..1" --* "1..1" robot::ConditionalStatement : condition11
 robot::Connection "0..1" --* "1..1" robot::Robot : connection6
-robot::Scenario "1..1" -- "1..1" robot::ExecuteStatement : destination15
-robot::StatementBlock "1..1" --* "1..1" robot::Robot : global1
+robot::ExecuteStatement "1..1" -- "1..1" robot::Scenario : destination15
+robot::Robot "1..1" *-- "1..1" robot::StatementBlock : global1
 robot::Robot "1..1" -- "0..1" robot::Scenario : initial3
 robot::Robot "1..1" *-- "0..9999" robot::Scenario : scenarii0
 robot::ConditionalStatement "1..1" *-- "1..1" robot::StatementBlock : statementBlock12
-robot::StatementBlock "1..1" --* "1..1" robot::Scenario : statementBlock8
+robot::Scenario "1..1" *-- "1..1" robot::StatementBlock : statementBlock8
 robot::Statement "0..9999" --* "1..1" robot::StatementBlock : statements17
 @enduml

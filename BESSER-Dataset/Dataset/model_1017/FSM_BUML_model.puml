@@ -22,12 +22,12 @@ class FSM::Transition {
 AbstractState <|-- FSM::CompositeState
 AbstractState <|-- FSM::InitialState
 AbstractState <|-- FSM::RegularState
-FSM::CompositeState "0..1" -- "1..1" FSM::AbstractState : compositeState10
-FSM::Transition "1..1" -- "1..1" FSM::AbstractState : source4
+FSM::AbstractState "1..1" -- "0..1" FSM::CompositeState : compositeState10
+FSM::AbstractState "1..1" -- "1..1" FSM::Transition : source4
 FSM::StateMachine "0..1" -- "1..1" FSM::Transition : stateMachine3
 FSM::AbstractState "1..1" -- "0..1" FSM::StateMachine : stateMachine8
-FSM::StateMachine "1..1" *-- "0..9999" FSM::AbstractState : states1
+FSM::AbstractState "0..9999" --* "1..1" FSM::StateMachine : states1
 FSM::AbstractState "0..9999" -- "1..1" FSM::CompositeState : states12
 FSM::AbstractState "1..1" -- "1..1" FSM::Transition : target5
-FSM::Transition "0..9999" --* "1..1" FSM::StateMachine : transitions0
+FSM::StateMachine "1..1" *-- "0..9999" FSM::Transition : transitions0
 @enduml

@@ -558,8 +558,6 @@ Element <|-- r1::SortClause
 Element <|-- r1::TupleElementDefinition
 Element <|-- r1::TypeSpecifier
 Element <|-- r1::ValueSetDef
-ExpressionDef <|-- r1::FunctionDef
-ExpressionRef <|-- r1::FunctionRef
 Expression <|-- r1::AggregateExpression
 Expression <|-- r1::AliasRef
 Expression <|-- r1::BinaryExpression
@@ -608,6 +606,8 @@ Expression <|-- r1::Today
 Expression <|-- r1::Tuple
 Expression <|-- r1::UnaryExpression
 Expression <|-- r1::ValueSetRef
+ExpressionDef <|-- r1::FunctionDef
+ExpressionRef <|-- r1::FunctionRef
 NaryExpression <|-- r1::Coalesce
 NaryExpression <|-- r1::Concatenate
 RelationshipClause <|-- r1::With
@@ -654,74 +654,74 @@ r1::EObject "0..9999" --* "1..1" r1::Element : annotation56
 r1::As "1..1" *-- "0..1" r1::TypeSpecifier : asTypeSpecifier3
 r1::Sort "1..1" *-- "1..9999" r1::SortByItem : by173
 r1::SortByItem "1..9999" --* "1..1" r1::SortClause : by175
-r1::CaseItem "1..9999" --* "1..1" r1::Case : caseItem10
+r1::Case "1..1" *-- "1..9999" r1::CaseItem : caseItem10
 r1::Expression "1..1" --* "1..1" r1::InValueSet : code109
 r1::Code "1..9999" --* "1..1" r1::Concept : code27
 r1::Expression "1..1" --* "1..1" r1::InCodeSystem : code82
-r1::ValueSetDef "1..1" *-- "0..9999" r1::CodeSystemRef : codeSystem217
+r1::CodeSystemRef "0..9999" --* "1..1" r1::ValueSetDef : codeSystem217
 r1::Expression "0..1" --* "1..1" r1::Retrieve : codes158
 r1::CodeSystemRef "1..1" --* "1..1" r1::InCodeSystem : codesystem84
 r1::Case "1..1" *-- "0..1" r1::Expression : comparand8
 r1::Expression "1..1" --* "1..1" r1::Filter : condition61
 r1::Expression "1..1" --* "1..1" r1::If : condition74
 r1::Expression "0..1" --* "1..1" r1::Retrieve : dateRange160
-r1::Expression "0..1" --* "1..1" r1::DateTime : day36
+r1::DateTime "1..1" *-- "0..1" r1::Expression : day36
 r1::Expression "0..1" --* "1..1" r1::ParameterDef : default129
 r1::DefineClause "0..9999" --* "1..1" r1::Query : define143
 r1::Expression "0..9999" --* "1..1" r1::List : element119
-r1::TupleElement "0..9999" --* "1..1" r1::Tuple : element207
+r1::Tuple "1..1" *-- "0..9999" r1::TupleElement : element207
 r1::TupleElementDefinition "0..9999" --* "1..1" r1::TupleTypeSpecifier : element213
 r1::Expression "1..1" --* "1..1" r1::ForEach : element68
 r1::Expression "1..1" --* "1..1" r1::IndexOf : element89
 r1::Instance "1..1" *-- "0..9999" r1::InstanceElement : element92
-r1::TypeSpecifier "1..1" --* "1..1" r1::ListTypeSpecifier : elementType122
-r1::Expression "1..1" --* "1..1" r1::Case : else12
-r1::If "1..1" *-- "1..1" r1::Expression : else79
+r1::ListTypeSpecifier "1..1" *-- "1..1" r1::TypeSpecifier : elementType122
+r1::Case "1..1" *-- "1..1" r1::Expression : else12
+r1::Expression "1..1" --* "1..1" r1::If : else79
 r1::AliasedQuerySource "1..1" *-- "1..1" r1::Expression : expression1
 r1::Expression "1..1" --* "1..1" r1::ReturnClause : expression163
 r1::DefineClause "1..1" *-- "1..1" r1::Expression : expression54
 r1::Expression "1..1" --* "1..1" r1::ExpressionDef : expression57
-r1::Expression "1..1" --* "1..1" r1::ByExpression : expression6
+r1::ByExpression "1..1" *-- "1..1" r1::Expression : expression6
 r1::Expression "0..1" --* "1..1" r1::Interval : high101
 r1::Expression "0..1" --* "1..1" r1::Interval : highClosedExpression104
 r1::Expression "1..1" --* "1..1" r1::Time : hour193
-r1::Expression "0..1" --* "1..1" r1::DateTime : hour39
-r1::TypeSpecifier "0..1" --* "1..1" r1::Is : isTypeSpecifier113
+r1::DateTime "1..1" *-- "0..1" r1::Expression : hour39
+r1::Is "1..1" *-- "0..1" r1::TypeSpecifier : isTypeSpecifier113
 r1::EObject "0..1" --* "1..1" r1::Substring : length188
-r1::Interval "1..1" *-- "0..1" r1::Expression : low96
+r1::Expression "0..1" --* "1..1" r1::Interval : low96
 r1::Expression "0..1" --* "1..1" r1::Interval : lowClosedExpression98
 r1::Expression "0..1" --* "1..1" r1::Time : millisecond201
-r1::Expression "0..1" --* "1..1" r1::DateTime : millisecond48
+r1::DateTime "1..1" *-- "0..1" r1::Expression : millisecond48
 r1::Expression "0..1" --* "1..1" r1::Time : minute195
-r1::Expression "0..1" --* "1..1" r1::DateTime : minute42
+r1::DateTime "1..1" *-- "0..1" r1::Expression : minute42
 r1::DateTime "1..1" *-- "0..1" r1::Expression : month33
-r1::NaryExpression "1..1" *-- "0..9999" r1::Expression : operand124
-r1::Round "1..1" *-- "1..1" r1::Expression : operand166
-r1::TernaryExpression "1..1" *-- "3..3" r1::Expression : operand191
+r1::Expression "0..9999" --* "1..1" r1::NaryExpression : operand124
+r1::Expression "1..1" --* "1..1" r1::Round : operand166
+r1::Expression "3..3" --* "1..1" r1::TernaryExpression : operand191
 r1::Expression "1..1" --* "1..1" r1::UnaryExpression : operand215
-r1::Expression "2..2" --* "1..1" r1::BinaryExpression : operand4
-r1::OperandDef "0..9999" --* "1..1" r1::FunctionDef : operand71
+r1::BinaryExpression "1..1" *-- "2..2" r1::Expression : operand4
+r1::FunctionDef "1..1" *-- "0..9999" r1::OperandDef : operand71
 r1::Expression "0..9999" --* "1..1" r1::FunctionRef : operand72
-r1::TypeSpecifier "0..1" --* "1..1" r1::OperandDef : operandTypeSpecifier126
-r1::TypeSpecifier "0..1" --* "1..1" r1::ParameterDef : parameterTypeSpecifier131
-r1::PositionOf "1..1" *-- "1..1" r1::Expression : pattern134
-r1::TypeSpecifier "1..1" --* "1..1" r1::IntervalTypeSpecifier : pointType107
+r1::OperandDef "1..1" *-- "0..1" r1::TypeSpecifier : operandTypeSpecifier126
+r1::ParameterDef "1..1" *-- "0..1" r1::TypeSpecifier : parameterTypeSpecifier131
+r1::Expression "1..1" --* "1..1" r1::PositionOf : pattern134
+r1::IntervalTypeSpecifier "1..1" *-- "1..1" r1::TypeSpecifier : pointType107
 r1::Expression "0..1" --* "1..1" r1::Round : precision168
 r1::Query "1..1" *-- "0..9999" r1::RelationshipClause : relationship146
-r1::ReturnClause "0..1" --* "1..1" r1::Query : return151
+r1::Query "1..1" *-- "0..1" r1::ReturnClause : return151
 r1::Expression "0..1" --* "1..1" r1::Time : second198
-r1::Expression "0..1" --* "1..1" r1::DateTime : second45
-r1::Split "1..1" *-- "0..1" r1::Expression : separator180
-r1::Expression "0..1" --* "1..1" r1::Combine : separator24
-r1::SortClause "0..1" --* "1..1" r1::Query : sort153
-r1::Expression "1..1" --* "1..1" r1::AggregateExpression : source0
+r1::DateTime "1..1" *-- "0..1" r1::Expression : second45
+r1::Expression "0..1" --* "1..1" r1::Split : separator180
+r1::Combine "1..1" *-- "0..1" r1::Expression : separator24
+r1::Query "1..1" *-- "0..1" r1::SortClause : sort153
+r1::AggregateExpression "1..1" *-- "1..1" r1::Expression : source0
 r1::Expression "1..1" --* "1..1" r1::Last : source115
 r1::Expression "0..1" --* "1..1" r1::Property : source139
 r1::AliasedQuerySource "1..9999" --* "1..1" r1::Query : source141
 r1::Expression "1..1" --* "1..1" r1::Sort : source171
-r1::Expression "1..1" --* "1..1" r1::Combine : source22
+r1::Combine "1..1" *-- "1..1" r1::Expression : source22
 r1::Expression "1..1" --* "1..1" r1::Filter : source59
-r1::First "1..1" *-- "1..1" r1::Expression : source64
+r1::Expression "1..1" --* "1..1" r1::First : source64
 r1::Expression "1..1" --* "1..1" r1::ForEach : source66
 r1::Expression "1..1" --* "1..1" r1::IndexOf : source87
 r1::EObject "1..1" --* "1..1" r1::Substring : startIndex185
@@ -729,18 +729,18 @@ r1::Expression "1..1" --* "1..1" r1::PositionOf : string136
 r1::Expression "1..1" --* "1..1" r1::Split : stringToSplit178
 r1::EObject "1..1" --* "1..1" r1::Substring : stringToSub183
 r1::Expression "1..1" --* "1..1" r1::RelationshipClause : suchThat155
-r1::CodeSystemRef "1..1" --* "1..1" r1::Code : system21
+r1::Code "1..1" *-- "1..1" r1::CodeSystemRef : system21
 r1::CaseItem "1..1" *-- "1..1" r1::Expression : then18
-r1::If "1..1" *-- "1..1" r1::Expression : then76
+r1::Expression "1..1" --* "1..1" r1::If : then76
 r1::Expression "0..1" --* "1..1" r1::Time : timezoneOffset204
-r1::Expression "0..1" --* "1..1" r1::DateTime : timezoneOffset51
-r1::TypeSpecifier "0..1" --* "1..1" r1::Convert : toTypeSpecifier29
-r1::TypeSpecifier "0..1" --* "1..1" r1::TupleElementDefinition : type211
-r1::TypeSpecifier "0..1" --* "1..1" r1::List : typeSpecifier117
-r1::TupleElement "1..1" *-- "1..1" r1::Expression : value208
+r1::DateTime "1..1" *-- "0..1" r1::Expression : timezoneOffset51
+r1::Convert "1..1" *-- "0..1" r1::TypeSpecifier : toTypeSpecifier29
+r1::TupleElementDefinition "1..1" *-- "0..1" r1::TypeSpecifier : type211
+r1::List "1..1" *-- "0..1" r1::TypeSpecifier : typeSpecifier117
+r1::Expression "1..1" --* "1..1" r1::TupleElement : value208
 r1::Expression "1..1" --* "1..1" r1::InstanceElement : value93
 r1::InValueSet "1..1" *-- "1..1" r1::ValueSetRef : valueset111
-r1::Expression "1..1" --* "1..1" r1::CaseItem : when15
-r1::Query "1..1" *-- "0..1" r1::Expression : where148
+r1::CaseItem "1..1" *-- "1..1" r1::Expression : when15
+r1::Expression "0..1" --* "1..1" r1::Query : where148
 r1::DateTime "1..1" *-- "1..1" r1::Expression : year31
 @enduml

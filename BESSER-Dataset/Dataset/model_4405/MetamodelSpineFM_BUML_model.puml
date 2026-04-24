@@ -1,0 +1,415 @@
+@startuml
+class ActionAbstractRename {
+}
+enum ActionMode {
+  AUTOMATIC
+  FM
+  MANUAL
+}
+class ActionOnFM {
+}
+enum CPSStatus {
+  Configured
+  PartiallyConfigured
+  Unconfigurable
+}
+class CompositeConfiguration {
+}
+class Configuration {
+}
+class ConfigurationProcessStep {
+}
+class ConfigurationState {
+}
+class Constraint {
+}
+class Context {
+}
+class ContextManager {
+}
+class DEAssociation {
+}
+class DEAssociationEnd {
+}
+class DomainElement {
+}
+class Feature {
+}
+class FeatureModel {
+}
+class GlobalContext {
+}
+class Group {
+}
+enum GroupState {
+  ALTERNATIVE
+  MANDATORY
+  MUTEX
+  OPTIONAL
+  OR
+}
+class Link {
+}
+class LocalContext {
+}
+class MultipleSoftwareProductLine {
+}
+class MultiplicityElement {
+}
+class Past {
+}
+class RestrictionFunction {
+}
+class Rule {
+}
+class Step {
+}
+class SystemAction {
+}
+class SystemActionModel::ActionOnFM {
+}
+class SystemActionModel::SystemAction {
+}
+class UserAction {
+}
+class UserActionModel::UserAction {
+}
+class UserActionModel::spinefm::EObject {
+}
+class spinefm::ConfigurationModel::CompositeConfiguration {
+  + description : str
+  + name : str
+  + addConfiguration(conf : any) : void
+  + createConfigurationLink(asso : any, confSource : any, confTarget : any) : void
+  + getCompatibleConfigurations(asso : any, confSource : any) : str
+  + getConfigurationByName(confName : any) : str
+  + isValid() : bool
+}
+class spinefm::ConfigurationModel::Configuration {
+  + description : str
+  + id : str
+  + canBeLinked(association : any) : bool
+  + getAllCPS() : str
+  + getFeatureModel() : str
+  + getLinkedConfigurationsOfDomainElement(de : any) : str
+  + isCompletlyLinked() : bool
+}
+class spinefm::ConfigurationModel::Link {
+  + id : str
+  + getAssociatedConfiguration(conf : any) : str
+}
+class spinefm::FMModel::Constraint {
+  + Rule : str
+}
+class spinefm::FMModel::Feature {
+  + id : str
+  + name : str
+  + getAllChildrenFeatures() : str
+}
+class spinefm::FMModel::FeatureModel {
+  + id : str
+  + name : str
+  + addFeature(feature : any, name : any, state : any) : void
+  + getFeatureFromName(name : any) : str
+  + getStateFT(feature : any) : str
+}
+class spinefm::FMModel::Group {
+  + state : str
+  + getAllChildren() : str
+}
+class spinefm::HistoryModel::Past {
+  + description : str
+  + id : str
+  + modelPath : str
+  + rootPath : str
+  + clonePastWithoutSystemActions() : str
+  + createStep(action : any) : str
+  + getStepFromId(stepId : any) : str
+  + undoAction(step : any) : void
+  + undoLastAction() : void
+}
+class spinefm::HistoryModel::Step {
+  + id : str
+  + cloneStepWithoutSystemActions() : str
+  + getDescription() : str
+  + undoActions() : void
+}
+class spinefm::MSPLModel::DEAssociation {
+  + id : str
+  + computeActionsToDo(CPSSource : any, CPSTarget : any) : str
+  + createAndAssociateInverseAssociation() : void
+  + getExtremityOfDE(de : any) : str
+  + getOppositeExtremity(source : any) : str
+  + isLinkBetweenDEs(firstExtremity : any, secondExtremity : any) : bool
+}
+class spinefm::MSPLModel::DEAssociationEnd {
+  + id : str
+}
+class spinefm::MSPLModel::DomainElement {
+  + id : str
+}
+class spinefm::MSPLModel::MultipleSoftwareProductLine {
+  + id : str
+  + getAssociationByName(assoName : any) : str
+  + getDomainElementByName(name : any) : str
+  + getValidAssociationsForDEs(source : any, target : any) : str
+}
+class spinefm::MSPLModel::MultiplicityElement {
+  + id : str
+  + lowerBound : int
+  + upperBound : int
+  + isExactlyOne() : bool
+  + isLowerThanUpperBound(value : any) : bool
+  + respectBoundaries(value : any) : bool
+}
+class spinefm::ProcessModel::ConfigurationProcessStep {
+  + description : str
+  + history : str
+  + id : str
+  + status : str
+  + userConfig : bool
+  + alreadyHaveAction(a : any) : bool
+  + captureImplicitActions(aof : any, step : any) : void
+  + getConfName() : str
+  + isComplete() : bool
+  + isMergeableWithCPS(cps : any) : bool
+  + mergeWithExternalCPS(cm : any, confCPS : any, step : any) : void
+  + recordActionDone(aof : any, feature : any) : void
+  + setFMA(fma : any, step : any) : void
+  + setFeatureUnselected(feature : any) : void
+}
+abstract class spinefm::ProcessModel::Context {
+  + id : str
+  + addCPS(cps : any) : void
+  + getCPSOfDE(de : any) : str
+  + mergeExternalCPS(cm : any, externalCPS : any, step : any) : void
+}
+class spinefm::ProcessModel::ContextManager {
+  + fma : str
+  + id : str
+  + cloningExistingContext(contextSource : any) : str
+  + createNewContext(step : any) : str
+  + getCPSFromId(id : any) : str
+  + getContextFromId(id : any) : str
+  + init(step : any) : void
+  + propagate(CPS : any, context : any, step : any) : void
+  + removeContext(context : any) : void
+  + restoreContext(context : any) : void
+}
+class spinefm::ProcessModel::DeletedContextInformations {
+  + deletedContext : str
+}
+class spinefm::ProcessModel::GlobalContext {
+}
+class spinefm::ProcessModel::LocalContext {
+}
+class spinefm::RFModel::ConfigurationState {
+  + id : str
+  + isIncludedIn(otherState : any) : bool
+}
+class spinefm::RFModel::RestrictionFunction {
+  + id : str
+  + createAndAssociateInverseRestFunc() : str
+}
+class spinefm::RFModel::Rule {
+  + id : str
+  + createInverseRule() : str
+}
+class spinefm::SystemActionModel::ActionAbstractRename {
+  + newName : str
+  + oldName : str
+}
+class spinefm::SystemActionModel::ActionAddCTConstraint {
+}
+class spinefm::SystemActionModel::ActionCreateConfiguration {
+}
+class spinefm::SystemActionModel::ActionCreateContext {
+}
+class spinefm::SystemActionModel::ActionDeleteContext {
+}
+class spinefm::SystemActionModel::ActionDeselect {
+}
+class spinefm::SystemActionModel::ActionLink {
+}
+class spinefm::SystemActionModel::ActionMoveConfiguration {
+}
+abstract class spinefm::SystemActionModel::ActionOnFM {
+  + fma : str
+  + cloneAction() : str
+}
+class spinefm::SystemActionModel::ActionRenameCPS {
+}
+class spinefm::SystemActionModel::ActionRenameConfig {
+}
+class spinefm::SystemActionModel::ActionRenameProduct {
+}
+class spinefm::SystemActionModel::ActionSelect {
+}
+class spinefm::SystemActionModel::ActionSetProductDescription {
+}
+abstract class spinefm::SystemActionModel::SystemAction {
+  + cpsHistory : str
+  + type : str
+  + apply() : void
+  + isSameObject(o : any) : bool
+  + undo() : void
+}
+abstract class spinefm::UserActionModel::UserAction {
+  + type : str
+  + apply() : void
+  + cloneActionWithStringAttributes() : str
+  + getDescription() : str
+  + initManualAction(contextManager : any) : void
+  + postcondition() : void
+  + precondition() : str
+  + transformContextNameToSave(contextID : any) : str
+}
+class spinefm::UserActionModel::UserCloneContext {
+  + contextID : str
+}
+class spinefm::UserActionModel::UserCreateContext {
+}
+class spinefm::UserActionModel::UserDeselect {
+  + contextID : str
+  + domainElementName : str
+  + featureName : str
+}
+class spinefm::UserActionModel::UserGenerate {
+  + path : str
+}
+class spinefm::UserActionModel::UserInit {
+  + confDescription : str
+  + filePath : str
+  + pastPath : str
+}
+class spinefm::UserActionModel::UserLinkConfiguration {
+  + assoName : str
+  + confSourceName : str
+  + confTargetName : str
+}
+class spinefm::UserActionModel::UserPropagate {
+  + contextID : str
+  + domainElementName : str
+}
+class spinefm::UserActionModel::UserRenameElement {
+  + elementID : str
+  + elementType : str
+  + name : str
+}
+class spinefm::UserActionModel::UserSavePast {
+  + destPath : str
+}
+class spinefm::UserActionModel::UserSelect {
+  + contextID : str
+  + domainElementName : str
+  + featureName : str
+}
+class spinefm::UserActionModel::UserValidConfiguration {
+  + contextID : str
+  + domainElementName : str
+}
+ActionAbstractRename <|-- spinefm::SystemActionModel::ActionRenameCPS
+ActionAbstractRename <|-- spinefm::SystemActionModel::ActionRenameConfig
+ActionAbstractRename <|-- spinefm::SystemActionModel::ActionRenameProduct
+ActionAbstractRename <|-- spinefm::SystemActionModel::ActionSetProductDescription
+ActionOnFM <|-- spinefm::SystemActionModel::ActionAddCTConstraint
+ActionOnFM <|-- spinefm::SystemActionModel::ActionDeselect
+ActionOnFM <|-- spinefm::SystemActionModel::ActionSelect
+Context <|-- spinefm::ProcessModel::GlobalContext
+Context <|-- spinefm::ProcessModel::LocalContext
+SystemAction <|-- spinefm::SystemActionModel::ActionAbstractRename
+SystemAction <|-- spinefm::SystemActionModel::ActionCreateConfiguration
+SystemAction <|-- spinefm::SystemActionModel::ActionCreateContext
+SystemAction <|-- spinefm::SystemActionModel::ActionDeleteContext
+SystemAction <|-- spinefm::SystemActionModel::ActionLink
+SystemAction <|-- spinefm::SystemActionModel::ActionMoveConfiguration
+SystemAction <|-- spinefm::SystemActionModel::ActionOnFM
+UserAction <|-- spinefm::UserActionModel::UserCloneContext
+UserAction <|-- spinefm::UserActionModel::UserCreateContext
+UserAction <|-- spinefm::UserActionModel::UserDeselect
+UserAction <|-- spinefm::UserActionModel::UserGenerate
+UserAction <|-- spinefm::UserActionModel::UserInit
+UserAction <|-- spinefm::UserActionModel::UserLinkConfiguration
+UserAction <|-- spinefm::UserActionModel::UserPropagate
+UserAction <|-- spinefm::UserActionModel::UserRenameElement
+UserAction <|-- spinefm::UserActionModel::UserSavePast
+UserAction <|-- spinefm::UserActionModel::UserSelect
+UserAction <|-- spinefm::UserActionModel::UserValidConfiguration
+ConfigurationProcessStep "1..9999" --* "1..1" spinefm::ProcessModel::Context : CPS58
+ConfigurationProcessStep "1..1" -- "1..1" spinefm::ConfigurationModel::Configuration : CPSRef23
+MultiplicityElement "1..1" --* "1..1" spinefm::MSPLModel::DEAssociationEnd : LinkMultiplicity12
+MultiplicityElement "1..1" --* "1..1" spinefm::MSPLModel::DomainElement : MultiplicityElement16
+SystemActionModel::ActionOnFM "1..1" -- "1..1" spinefm::RFModel::Rule : action162
+SystemActionModel::ActionOnFM "0..9999" -- "1..1" spinefm::ProcessModel::ConfigurationProcessStep : actionsDone56
+DomainElement "1..1" -- "1..1" spinefm::MSPLModel::DEAssociationEnd : apply_on13
+DEAssociation "1..1" -- "1..1" spinefm::SystemActionModel::ActionLink : asso84
+DEAssociation "0..9999" --* "1..1" spinefm::MSPLModel::MultipleSoftwareProductLine : associations7
+DEAssociation "0..9999" -- "1..1" spinefm::MSPLModel::DomainElement : belongs_to20
+Link "0..9999" -- "1..1" spinefm::ConfigurationModel::Configuration : belongs_to24
+Group "0..9999" --* "1..1" spinefm::FMModel::Feature : children3
+ConfigurationProcessStep "0..9999" -- "1..1" spinefm::ConfigurationModel::Configuration : clonedCPS30
+CompositeConfiguration "1..1" -- "1..1" spinefm::SystemActionModel::ActionCreateConfiguration : compconf76
+Configuration "1..1" -- "1..1" spinefm::SystemActionModel::ActionLink : confSource79
+Configuration "1..1" -- "1..1" spinefm::SystemActionModel::ActionLink : confTarget81
+Configuration "1..1" -- "1..1" spinefm::SystemActionModel::ActionRenameConfig : config123
+Configuration "0..1" -- "1..1" spinefm::ProcessModel::ConfigurationProcessStep : configuration51
+CompositeConfiguration "1..1" --* "1..1" spinefm::ProcessModel::GlobalContext : configuration60
+Configuration "1..1" -- "1..1" spinefm::SystemActionModel::ActionMoveConfiguration : configuration97
+Configuration "1..9999" -- "1..1" spinefm::ProcessModel::LocalContext : configurations61
+Constraint "1..1" --* "1..1" spinefm::SystemActionModel::ActionAddCTConstraint : constraint119
+Constraint "0..9999" --* "1..1" spinefm::FMModel::FeatureModel : constraints1
+Context "1..1" -- "1..1" spinefm::SystemActionModel::ActionDeleteContext : context107
+Context "1..1" -- "1..1" spinefm::ProcessModel::ConfigurationProcessStep : context49
+Context "1..1" -- "1..1" spinefm::SystemActionModel::ActionCreateContext : context94
+ContextManager "1..1" -- "1..1" spinefm::SystemActionModel::ActionDeleteContext : contextManager105
+ContextManager "1..1" -- "1..1" spinefm::UserActionModel::UserAction : contextManager132
+ContextManager "1..1" -- "1..1" spinefm::SystemActionModel::ActionLink : contextManager90
+ContextManager "1..1" -- "1..1" spinefm::SystemActionModel::ActionCreateContext : contextManager92
+ConfigurationProcessStep "1..1" -- "1..1" spinefm::SystemActionModel::ActionOnFM : cps112
+ConfigurationProcessStep "1..1" -- "1..1" spinefm::SystemActionModel::ActionRenameCPS : cps121
+ConfigurationProcessStep "1..1" -- "1..1" spinefm::SystemActionModel::ActionCreateConfiguration : cps74
+ConfigurationProcessStep "1..1" -- "1..1" spinefm::SystemActionModel::ActionMoveConfiguration : cpsSource99
+ConfigurationProcessStep "1..1" -- "1..1" spinefm::SystemActionModel::ActionMoveConfiguration : cpsTarget102
+LocalContext "0..9999" --* "1..1" spinefm::HistoryModel::Past : deletedContext141
+Feature "0..9999" -- "1..1" spinefm::RFModel::ConfigurationState : deselectedFeatures156
+DomainElement "1..1" -- "1..1" spinefm::ConfigurationModel::Configuration : domainElement27
+DomainElement "1..1" -- "1..1" spinefm::ProcessModel::ConfigurationProcessStep : domainElement47
+DomainElement "1..9999" --* "1..1" spinefm::MSPLModel::MultipleSoftwareProductLine : domainElements6
+DEAssociationEnd "2..2" --* "1..1" spinefm::MSPLModel::DEAssociation : extremity10
+Feature "1..1" -- "1..1" spinefm::SystemActionModel::ActionSelect : feature115
+Feature "1..1" -- "1..1" spinefm::SystemActionModel::ActionDeselect : feature117
+Feature "1..9999" --* "1..1" spinefm::FMModel::Group : features4
+FeatureModel "1..1" -- "1..1" spinefm::SystemActionModel::ActionOnFM : fm110
+FeatureModel "1..1" -- "1..1" spinefm::RFModel::ConfigurationState : fm159
+GlobalContext "1..1" --* "1..1" spinefm::ProcessModel::ContextManager : globalContext65
+RestrictionFunction "1..1" -- "1..1" spinefm::RFModel::RestrictionFunction : inverse145
+SystemActionModel::SystemAction "0..9999" --* "1..1" spinefm::HistoryModel::Step : launchedActions137
+UserActionModel::UserAction "1..1" --* "1..1" spinefm::HistoryModel::Step : launchingAction136
+Link "1..1" -- "1..1" spinefm::SystemActionModel::ActionLink : link87
+Link "0..9999" --* "1..1" spinefm::ConfigurationModel::CompositeConfiguration : links42
+LocalContext "0..9999" --* "1..1" spinefm::ProcessModel::ContextManager : localContexts67
+MultipleSoftwareProductLine "1..1" -- "1..1" spinefm::ConfigurationModel::CompositeConfiguration : mspl45
+MultipleSoftwareProductLine "1..1" -- "1..1" spinefm::ProcessModel::ContextManager : mspl63
+Past "1..1" --* "1..1" spinefm::ProcessModel::ContextManager : past69
+CompositeConfiguration "1..1" -- "1..1" spinefm::SystemActionModel::ActionRenameProduct : product125
+CompositeConfiguration "1..1" -- "1..1" spinefm::SystemActionModel::ActionSetProductDescription : product127
+FeatureModel "1..1" --* "1..1" spinefm::MSPLModel::DomainElement : refers_on18
+DEAssociation "1..1" -- "1..1" spinefm::ConfigurationModel::Link : relatedAssociation34
+Context "0..1" -- "1..1" spinefm::ProcessModel::DeletedContextInformations : replacedBy71
+RestrictionFunction "0..9999" --* "1..1" spinefm::MSPLModel::DEAssociation : restrictionFunction9
+UserActionModel::spinefm::EObject "1..1" -- "1..1" spinefm::UserActionModel::UserAction : result134
+Feature "1..1" --* "1..1" spinefm::FMModel::FeatureModel : root0
+Rule "1..9999" --* "1..1" spinefm::RFModel::RestrictionFunction : rules144
+Feature "1..9999" -- "1..1" spinefm::RFModel::ConfigurationState : selectedFeatures154
+DomainElement "1..1" -- "1..1" spinefm::RFModel::RestrictionFunction : source148
+Configuration "1..1" -- "1..1" spinefm::ConfigurationModel::Link : source33
+ConfigurationState "1..1" --* "1..1" spinefm::RFModel::Rule : state164
+ConfigurationState "1..1" -- "1..1" spinefm::ConfigurationModel::Configuration : state25
+ConfigurationState "1..1" --* "1..1" spinefm::ProcessModel::ConfigurationProcessStep : state53
+Step "0..1" -- "1..1" spinefm::UserActionModel::UserAction : step129
+Step "1..1" -- "1..1" spinefm::SystemActionModel::SystemAction : step73
+Step "0..9999" --* "1..1" spinefm::HistoryModel::Past : steps139
+Configuration "0..9999" --* "1..1" spinefm::ConfigurationModel::CompositeConfiguration : subConfigurations40
+DomainElement "1..1" -- "1..1" spinefm::RFModel::RestrictionFunction : target151
+Configuration "1..1" -- "1..1" spinefm::ConfigurationModel::Link : target37
+@enduml

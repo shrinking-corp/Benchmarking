@@ -32,13 +32,13 @@ class raspduinoDSL::Timer {
 }
 AbstractDevice <|-- raspduinoDSL::Actuator
 AbstractDevice <|-- raspduinoDSL::Sensor
-raspduinoDSL::ChangeActuator "1..1" -- "0..1" raspduinoDSL::Actuator : actuator9
+raspduinoDSL::Actuator "0..1" -- "1..1" raspduinoDSL::ChangeActuator : actuator9
 raspduinoDSL::ChangeActuator "0..9999" --* "1..1" raspduinoDSL::EventHandler : changeActuators7
 raspduinoDSL::AbstractDevice "0..9999" --* "1..1" raspduinoDSL::Model : devices0
 raspduinoDSL::EventHandler "0..1" -- "1..1" raspduinoDSL::SensorListener : eventHandler13
 raspduinoDSL::EventHandler "0..1" -- "1..1" raspduinoDSL::Timer : eventHandler16
-raspduinoDSL::Model "1..1" *-- "0..9999" raspduinoDSL::EventHandler : eventHandlers1
+raspduinoDSL::EventHandler "0..9999" --* "1..1" raspduinoDSL::Model : eventHandlers1
 raspduinoDSL::Sensor "0..1" -- "1..1" raspduinoDSL::SensorListener : sensor11
-raspduinoDSL::SensorListener "0..9999" --* "1..1" raspduinoDSL::Model : sensorListeners3
-raspduinoDSL::Timer "0..9999" --* "1..1" raspduinoDSL::Model : timers5
+raspduinoDSL::Model "1..1" *-- "0..9999" raspduinoDSL::SensorListener : sensorListeners3
+raspduinoDSL::Model "1..1" *-- "0..9999" raspduinoDSL::Timer : timers5
 @enduml

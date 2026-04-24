@@ -41,13 +41,13 @@ Parameter <|-- workflow::OutputParameter
 Statement <|-- workflow::Condition
 Statement <|-- workflow::ForEach
 Statement <|-- workflow::SimpleCommand
-workflow::Statement "0..9999" --* "1..1" workflow::Recipe : commands1
-workflow::Statement "1..1" --* "1..1" workflow::Condition : else_branch5
+workflow::Recipe "1..1" *-- "0..9999" workflow::Statement : commands1
+workflow::Condition "1..1" *-- "1..1" workflow::Statement : else_branch5
 workflow::InputParameter "0..1" -- "1..1" workflow::OutputParameter : link_to_inputparameter12
-workflow::OutputParameter "0..1" -- "1..1" workflow::InputParameter : link_to_outputparameter11
+workflow::InputParameter "1..1" -- "0..1" workflow::OutputParameter : link_to_outputparameter11
 workflow::Parameter "0..9999" --* "1..1" workflow::Program : parameters8
 workflow::Program "0..9999" --* "1..1" workflow::SimpleCommand : programs9
-workflow::Workflow "1..1" *-- "0..9999" workflow::Recipe : recipes0
+workflow::Recipe "0..9999" --* "1..1" workflow::Workflow : recipes0
 workflow::ForEach "1..1" *-- "0..9999" workflow::Statement : statements15
 workflow::Condition "1..1" *-- "1..1" workflow::Statement : then_branch3
 @enduml

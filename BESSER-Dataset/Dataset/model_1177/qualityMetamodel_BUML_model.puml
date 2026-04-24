@@ -363,8 +363,8 @@ LocatedElement <|-- QualityMetamodel::QMM::OCL::TupleTypeAttribute
 LocatedElement <|-- QualityMetamodel::QMM::OCL::VariableDeclaration
 LoopExp <|-- QualityMetamodel::QMM::OCL::IterateExp
 LoopExp <|-- QualityMetamodel::QMM::OCL::IteratorExp
-ModuleElement <|-- QualityMetamodel::QMM::OCL::OclFeatureDefinition
 Module <|-- QualityMetamodel::QualityModel
+ModuleElement <|-- QualityMetamodel::QMM::OCL::OclFeatureDefinition
 NamedElement <|-- QualityMetamodel::QMM::OCL::Import
 NamedElement <|-- QualityMetamodel::QMM::OCL::Module
 NamedElement <|-- QualityMetamodel::QMM::OCL::OclFeature
@@ -409,12 +409,12 @@ OperatorCallExp <|-- QualityMetamodel::QMM::OCL::IntOpCallExp
 OperatorCallExp <|-- QualityMetamodel::QMM::OCL::MulOpCallExp
 OperatorCallExp <|-- QualityMetamodel::QMM::OCL::NotOpCallExp
 OperatorCallExp <|-- QualityMetamodel::QMM::OCL::RelOpCallExp
-PrimitiveExp <|-- QualityMetamodel::QMM::OCL::BooleanExp
-PrimitiveExp <|-- QualityMetamodel::QMM::OCL::NumericExp
-PrimitiveExp <|-- QualityMetamodel::QMM::OCL::StringExp
 Primitive <|-- QualityMetamodel::QMM::OCL::BooleanType
 Primitive <|-- QualityMetamodel::QMM::OCL::NumericType
 Primitive <|-- QualityMetamodel::QMM::OCL::StringType
+PrimitiveExp <|-- QualityMetamodel::QMM::OCL::BooleanExp
+PrimitiveExp <|-- QualityMetamodel::QMM::OCL::NumericExp
+PrimitiveExp <|-- QualityMetamodel::QMM::OCL::StringExp
 PropertyCall <|-- QualityMetamodel::QMM::OCL::LoopExp
 PropertyCall <|-- QualityMetamodel::QMM::OCL::NavigationOrAttributeCall
 PropertyCall <|-- QualityMetamodel::QMM::OCL::OperationCall
@@ -436,31 +436,31 @@ VariableDeclaration <|-- QualityMetamodel::QualityAttribute
 VariableDeclaration <|-- QualityMetamodel::Value
 VariableDeclaration <|-- QualityMetamodel::ValueType
 VariableExp <|-- QualityMetamodel::QMM::OCL::LambdaCallExp
-QualityMetamodel::Value "1..9999" -- "1..1" QualityMetamodel::Operation : aggregatedValues18
+QualityMetamodel::Operation "1..1" -- "1..9999" QualityMetamodel::Value : aggregatedValues18
 OperatorCallExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : appliedOperator60
 PropertyCallExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : appliedProperty40
-QualityMetamodel::QMM::OCL::OperatorCallExp "1..1" *-- "0..1" OclExpression : argument108
+OclExpression "0..1" --* "1..1" QualityMetamodel::QMM::OCL::OperatorCallExp : argument108
 OclType "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::LambdaType : argumentTypes214
 OclExpression "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::OperationCall : arguments105
 OclExpression "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::LambdaCallExp : arguments113
 OclExpression "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::StaticOperationCall : arguments95
-QualityMetamodel::QMM::OCL::OclType "1..1" -- "0..1" Attribute : attribute172
-TupleTypeAttribute "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::TupleType : attributes194
+Attribute "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : attribute172
+QualityMetamodel::QMM::OCL::TupleType "1..1" *-- "0..9999" TupleTypeAttribute : attributes194
 IterateExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::LocalVariable : baseExp151
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::LoopExp : body117
-QualityMetamodel::QMM::OCL::Operation "1..1" *-- "1..1" OclExpression : body241
-QualityMetamodel::Operation "1..1" --* "1..1" QualityMetamodel::AggregatedValue : calculatedBy17
+OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::Operation : body241
+QualityMetamodel::AggregatedValue "1..1" *-- "1..1" QualityMetamodel::Operation : calculatedBy17
 PropertyCallExp "1..1" -- "1..1" QualityMetamodel::QMM::OCL::PropertyCall : callExp102
-QualityMetamodel::QMM::OCL::PropertyCallExp "1..1" *-- "1..9999" PropertyCall : calls97
+PropertyCall "1..9999" --* "1..1" QualityMetamodel::QMM::OCL::PropertyCallExp : calls97
 CollectionExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::CollectionPart : collection66
-QualityMetamodel::QMM::OCL::OclType "1..1" -- "0..1" CollectionType : collectionTypes178
-QualityMetamodel::QMM::OCL::IfExp "1..1" *-- "1..1" OclExpression : condition134
+CollectionType "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : collectionTypes178
+OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::IfExp : condition134
 OclContextDefinition "0..1" --* "1..1" QualityMetamodel::QMM::OCL::OclFeatureDefinition : context_219
-QualityMetamodel::QMM::OCL::OclContextDefinition "1..1" *-- "1..1" OclType : context_224
+OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::OclContextDefinition : context_224
 OclFeatureDefinition "1..1" -- "1..1" QualityMetamodel::QMM::OCL::OclContextDefinition : definition222
 OclFeatureDefinition "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclFeature : definition227
 OclContextDefinition "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : definitions162
-QualityMetamodel::QMM::OCL::CollectionType "1..1" *-- "1..1" OclType : elementType159
+OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::CollectionType : elementType159
 OclModelElement "0..9999" -- "1..1" QualityMetamodel::QMM::OCL::OclModel : elements244
 ModuleElement "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::Module : elements29
 MapElement "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::MapExp : elements79
@@ -475,70 +475,70 @@ Import "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::Module : imports28
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::LetExp : in_128
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::LocalVariable : initExpression148
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::Attribute : initExpression230
-QualityMetamodel::QMM::OCL::OclExpression "1..1" -- "0..1" LocalVariable : initializedVariable48
+LocalVariable "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : initializedVariable48
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::CollectionItem : item73
 Iterator "1..9999" --* "1..1" QualityMetamodel::QMM::OCL::LoopExp : iterators120
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::MapElement : key83
-QualityMetamodel::QMM::OCL::MapType "1..1" *-- "1..1" OclType : keyType208
-QualityMetamodel::QMM::OCL::OclType "1..1" -- "0..1" LambdaType : lambdaArgType187
+OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::MapType : keyType208
+LambdaType "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : lambdaArgType187
 LambdaType "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : lambdaReturnType185
-QualityMetamodel::QMM::OCL::CollectionRange "1..1" *-- "1..1" OclExpression : last70
-QualityMetamodel::QMM::OCL::LocalVariable "1..1" -- "0..1" LetExp : letExp145
+OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::CollectionRange : last70
+LetExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::LocalVariable : letExp145
 LetExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : letExp42
 LoopExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : loopExp44
 LoopExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::Iterator : loopExpr153
-QualityMetamodel::QMM::OCL::MapElement "1..1" -- "1..1" MapExp : map81
+MapExp "1..1" -- "1..1" QualityMetamodel::QMM::OCL::MapElement : map81
 MapType "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : mapType175
 MapType "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : mapType2170
 QualityMetamodel::MetricProvider "1..1" -- "1..1" QualityMetamodel::SingleValue : measuredBy15
 OclMetamodel "1..1" -- "1..1" QualityMetamodel::QMM::OCL::OclInstanceModel : metamodel248
-QualityMetamodel::QMM::OCL::Module "1..1" *-- "0..9999" OclMetamodel : metamodels27
+OclMetamodel "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::Module : metamodels27
 QualityMetamodel::MetricProvider "0..9999" --* "1..1" QualityMetamodel::QualityModel : metricProviders0
 OclModel "1..1" -- "1..1" QualityMetamodel::QMM::OCL::OclModelElementExp : model193
 OclModel "1..1" -- "1..1" QualityMetamodel::QMM::OCL::OclModelElement : model202
 OclInstanceModel "0..9999" -- "1..1" QualityMetamodel::QMM::OCL::OclMetamodel : model246
 Module "1..1" -- "1..1" QualityMetamodel::QMM::OCL::ModuleElement : module31
-QualityMetamodel::QMM::OCL::Import "1..1" -- "1..1" Module : module33
+Module "1..1" -- "1..1" QualityMetamodel::QMM::OCL::Import : module33
 OclExpression "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : oclExpression164
-QualityMetamodel::QMM::OCL::Parameter "1..1" -- "1..1" Operation : operation156
+Operation "1..1" -- "1..1" QualityMetamodel::QMM::OCL::Parameter : operation156
 Operation "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : operation167
-QualityMetamodel::QMM::OCL::OclExpression "1..1" -- "0..1" Attribute : owningAttribute58
+Attribute "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : owningAttribute58
 Operation "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : owningOperation53
 Parameter "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::Operation : parameters236
 OperationCall "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclExpression : parentOperation46
 CollectionPart "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::CollectionExp : parts64
-QualityMetamodel::QualityAttribute "1..1" -- "0..9999" QualityMetamodel::QualityAttribute : qualityAttributes11
+QualityMetamodel::QualityAttribute "0..9999" -- "1..1" QualityMetamodel::QualityAttribute : qualityAttributes11
 QualityMetamodel::QualityAttribute "0..9999" --* "1..1" QualityMetamodel::QualityModel : qualityAttributes3
 QualityMetamodel::QualityModel "1..1" *-- "0..9999" QualityMetamodel::ValueType : qualityTypes1
-QualityMetamodel::Value "0..9999" --* "1..1" QualityMetamodel::QualityModel : qualityValues5
+QualityMetamodel::QualityModel "1..1" *-- "0..9999" QualityMetamodel::Value : qualityValues5
 OclExpression "0..1" --* "1..1" QualityMetamodel::Operation : ref21
-VariableDeclaration "1..1" -- "1..1" QualityMetamodel::QMM::OCL::VariableExp : referredVariable62
-QualityMetamodel::QMM::OCL::IterateExp "1..1" *-- "1..1" LocalVariable : result122
-QualityMetamodel::QMM::OCL::LambdaType "1..1" *-- "1..1" OclType : returnType211
-QualityMetamodel::QMM::OCL::Operation "1..1" *-- "1..1" OclType : returnType238
+QualityMetamodel::QMM::OCL::VariableExp "1..1" -- "1..1" VariableDeclaration : referredVariable62
+LocalVariable "1..1" --* "1..1" QualityMetamodel::QMM::OCL::IterateExp : result122
+OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::LambdaType : returnType211
+OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::Operation : returnType238
 QualityMetamodel::EnumerationItem "1..9999" --* "1..1" QualityMetamodel::EnumerationMetric : set23
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::OperatorCallExp : source110
 OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::StaticPropertyCallExp : source88
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::PropertyCallExp : source99
-StaticPropertyCall "1..1" --* "1..1" QualityMetamodel::QMM::OCL::StaticPropertyCallExp : staticCall91
-StaticPropertyCallExp "1..1" -- "1..1" QualityMetamodel::QMM::OCL::StaticPropertyCall : staticCallExp93
-StaticPropertyCallExp "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : staticPropertyCall190
+QualityMetamodel::QMM::OCL::StaticPropertyCallExp "1..1" *-- "1..1" StaticPropertyCall : staticCall91
+QualityMetamodel::QMM::OCL::StaticPropertyCall "1..1" -- "1..1" StaticPropertyCallExp : staticCallExp93
+QualityMetamodel::QMM::OCL::OclType "1..1" -- "0..1" StaticPropertyCallExp : staticPropertyCall190
 OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::IfExp : thenExpression131
 QualityMetamodel::QMM::OCL::TuplePart "1..1" -- "1..1" TupleExp : tuple77
-TuplePart "0..9999" --* "1..1" QualityMetamodel::QMM::OCL::TupleExp : tuplePart75
+QualityMetamodel::QMM::OCL::TupleExp "1..1" *-- "0..9999" TuplePart : tuplePart75
 QualityMetamodel::QMM::OCL::TupleTypeAttribute "1..1" -- "1..1" TupleType : tupleType200
-TupleTypeAttribute "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : tupleTypeAttribute180
+QualityMetamodel::QMM::OCL::OclType "1..1" -- "0..1" TupleTypeAttribute : tupleTypeAttribute180
 OclType "0..1" --* "1..1" QualityMetamodel::QMM::OCL::VariableDeclaration : type140
 OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::TupleTypeAttribute : type197
 OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::Attribute : type233
 OclType "0..1" --* "1..1" QualityMetamodel::QMM::OCL::OclExpression : type36
-QualityMetamodel::ValueType "1..1" -- "1..1" QualityMetamodel::Value : val14
-QualityMetamodel::EnumerationMetric "1..1" -- "0..1" QualityMetamodel::EnumerationItem : value24
-QualityMetamodel::Value "1..1" -- "1..1" QualityMetamodel::QualityAttribute : value7
-QualityMetamodel::QMM::OCL::MapElement "1..1" *-- "1..1" OclExpression : value85
-QualityMetamodel::ValueType "1..1" -- "1..1" QualityMetamodel::Value : valueType13
+QualityMetamodel::Value "1..1" -- "1..1" QualityMetamodel::ValueType : val14
+QualityMetamodel::EnumerationItem "0..1" -- "1..1" QualityMetamodel::EnumerationMetric : value24
+QualityMetamodel::QualityAttribute "1..1" -- "1..1" QualityMetamodel::Value : value7
+OclExpression "1..1" --* "1..1" QualityMetamodel::QMM::OCL::MapElement : value85
+QualityMetamodel::Value "1..1" -- "1..1" QualityMetamodel::ValueType : valueType13
 OclType "1..1" --* "1..1" QualityMetamodel::QMM::OCL::MapType : valueType205
 LocalVariable "1..1" --* "1..1" QualityMetamodel::QMM::OCL::LetExp : variable125
-VariableDeclaration "0..1" -- "1..1" QualityMetamodel::QMM::OCL::OclType : variableDeclaration182
-VariableExp "0..9999" -- "1..1" QualityMetamodel::QMM::OCL::VariableDeclaration : variableExp143
+QualityMetamodel::QMM::OCL::OclType "1..1" -- "0..1" VariableDeclaration : variableDeclaration182
+QualityMetamodel::QMM::OCL::VariableDeclaration "1..1" -- "0..9999" VariableExp : variableExp143
 @enduml

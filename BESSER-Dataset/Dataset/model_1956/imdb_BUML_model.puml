@@ -40,14 +40,14 @@ class imdb::db {
   + bestOf2014 : str
   + sam() : str
 }
-imdb::Person "0..9999" -- "1..1" imdb::Movie : actors4
+imdb::Movie "1..1" -- "0..9999" imdb::Person : actors4
 imdb::Person "0..9999" --* "1..1" imdb::db : allActors12
 imdb::Person "0..9999" --* "1..1" imdb::db : allDirectors7
 imdb::Movie "0..9999" --* "1..1" imdb::db : allMovies15
 imdb::StaffList "0..9999" --* "1..1" imdb::db : allStaffLists18
-imdb::db "1..1" *-- "0..9999" imdb::User : allUsers20
+imdb::User "0..9999" --* "1..1" imdb::db : allUsers20
 imdb::Person "0..9999" --* "1..1" imdb::db : allWriters9
 imdb::Movie "1..1" -- "0..1" imdb::Person : director0
-imdb::User "0..1" -- "1..1" imdb::StaffList : user22
-imdb::Person "0..9999" -- "1..1" imdb::Movie : writers1
+imdb::StaffList "1..1" -- "0..1" imdb::User : user22
+imdb::Movie "1..1" -- "0..9999" imdb::Person : writers1
 @enduml

@@ -1,0 +1,71 @@
+@startuml
+class Guard {
+}
+class NamedElement {
+}
+class tfsm::EvaluateGuard {
+  + condition : str
+  + evaluate() : void
+}
+class tfsm::EventGuard {
+}
+class tfsm::FSMClock {
+  + numberOfTicks : bool
+  + ticks() : void
+}
+class tfsm::FSMEvent {
+  + occurs() : void
+}
+abstract class tfsm::Guard {
+}
+abstract class tfsm::NamedElement {
+  + name : str
+}
+class tfsm::State {
+  + onEnter() : void
+  + onLeave() : void
+}
+class tfsm::TFSM {
+  + changeCurrentState(newState : any) : void
+  + initialize() : void
+}
+class tfsm::TemporalGuard {
+  + afterDuration : str
+}
+class tfsm::TimedSystem {
+  + initialize() : void
+}
+class tfsm::Transition {
+  + action : str
+  + fire() : void
+}
+Guard <|-- tfsm::EvaluateGuard
+Guard <|-- tfsm::EventGuard
+Guard <|-- tfsm::TemporalGuard
+NamedElement <|-- tfsm::FSMClock
+NamedElement <|-- tfsm::FSMEvent
+NamedElement <|-- tfsm::Guard
+NamedElement <|-- tfsm::State
+NamedElement <|-- tfsm::TFSM
+NamedElement <|-- tfsm::TimedSystem
+NamedElement <|-- tfsm::Transition
+tfsm::State "0..1" -- "1..1" tfsm::TFSM : currentState9
+tfsm::FSMEvent "0..9999" -- "1..1" tfsm::Transition : generatedEvents29
+tfsm::FSMClock "0..9999" --* "1..1" tfsm::TimedSystem : globalClocks41
+tfsm::FSMEvent "0..9999" --* "1..1" tfsm::TimedSystem : globalEvents44
+tfsm::State "1..1" -- "0..9999" tfsm::Transition : incomingTransitions18
+tfsm::State "1..1" -- "1..1" tfsm::TFSM : initialState2
+tfsm::FSMClock "1..1" --* "1..1" tfsm::TFSM : localClock5
+tfsm::FSMEvent "0..9999" --* "1..1" tfsm::TFSM : localEvents3
+tfsm::FSMClock "1..1" -- "1..1" tfsm::TemporalGuard : onClock32
+tfsm::State "1..1" -- "0..9999" tfsm::Transition : outgoingTransitions15
+tfsm::Guard "1..1" --* "1..1" tfsm::Transition : ownedGuard27
+tfsm::State "0..9999" --* "1..1" tfsm::TFSM : ownedStates0
+tfsm::TFSM "1..1" *-- "0..9999" tfsm::Transition : ownedTransitions7
+tfsm::State "1..1" -- "1..1" tfsm::TFSM : owningFSM12
+tfsm::FSMEvent "1..1" -- "0..9999" tfsm::Transition : sollicitingTransitions36
+tfsm::State "1..1" -- "1..1" tfsm::Transition : source21
+tfsm::State "1..1" -- "1..1" tfsm::Transition : target24
+tfsm::TFSM "0..9999" --* "1..1" tfsm::TimedSystem : tfsms39
+tfsm::EventGuard "1..1" -- "1..1" tfsm::FSMEvent : triggeringEvent34
+@enduml

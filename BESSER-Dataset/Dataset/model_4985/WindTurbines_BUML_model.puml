@@ -48,17 +48,17 @@ Port <|-- dslComponent::InPort
 Port <|-- dslComponent::OutPort
 Vertex <|-- dslComponent::InitialState
 Vertex <|-- dslComponent::SimpleState
-dslComponent::Subsystem "1..1" *-- "0..9999" dslComponent::ControlSubsystem : beh1
+dslComponent::ControlSubsystem "0..9999" --* "1..1" dslComponent::Subsystem : beh1
 dslComponent::Component "0..9999" --* "1..1" dslComponent::Subsystem : components3
 dslComponent::Edge "0..9999" -- "1..1" dslComponent::Vertex : incoming17
-dslComponent::StateMachine "0..9999" -- "1..1" dslComponent::Component : machines10
+dslComponent::Component "1..1" -- "0..9999" dslComponent::StateMachine : machines10
 dslComponent::ControlSubsystem "1..1" *-- "0..9999" dslComponent::StateMachine : machines22
 dslComponent::Edge "0..9999" -- "1..1" dslComponent::Vertex : outgoing16
-dslComponent::Port "0..9999" --* "1..1" dslComponent::Component : ports8
+dslComponent::Component "1..1" *-- "0..9999" dslComponent::Port : ports8
 dslComponent::Edge "1..1" -- "1..1" dslComponent::Vertex : source19
-dslComponent::Vertex "0..9999" --* "1..1" dslComponent::StateMachine : states12
+dslComponent::StateMachine "1..1" *-- "0..9999" dslComponent::Vertex : states12
 dslComponent::Subsystem "0..9999" --* "1..1" dslComponent::WTComponents : subsystems0
 dslComponent::Subsystem "0..9999" --* "1..1" dslComponent::Subsystem : subsystems6
-dslComponent::Vertex "1..1" -- "1..1" dslComponent::Edge : target20
-dslComponent::StateMachine "1..1" *-- "0..9999" dslComponent::Edge : transitions14
+dslComponent::Edge "1..1" -- "1..1" dslComponent::Vertex : target20
+dslComponent::Edge "0..9999" --* "1..1" dslComponent::StateMachine : transitions14
 @enduml

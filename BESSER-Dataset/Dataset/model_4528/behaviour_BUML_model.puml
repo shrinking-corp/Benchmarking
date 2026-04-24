@@ -100,7 +100,6 @@ Action <|-- behaviour::DeviceAction
 CommunicationAction <|-- behaviour::CheckNotification
 CommunicationAction <|-- behaviour::Feedback
 CommunicationAction <|-- behaviour::Notify
-MoveTransition <|-- behaviour::Choice
 Move <|-- behaviour::Circle
 Move <|-- behaviour::GoTo
 Move <|-- behaviour::HeadTo
@@ -109,6 +108,7 @@ Move <|-- behaviour::Land
 Move <|-- behaviour::Start
 Move <|-- behaviour::Stop
 Move <|-- behaviour::TakeOff
+MoveTransition <|-- behaviour::Choice
 NamedElement <|-- behaviour::Action
 NamedElement <|-- behaviour::Behaviour
 NamedElement <|-- behaviour::Drone
@@ -117,23 +117,23 @@ NamedElement <|-- behaviour::Slot
 Notify <|-- behaviour::BroadcastNotify
 Notify <|-- behaviour::MulticastNotify
 Notify <|-- behaviour::UnicastNotify
-behaviour::Drone "1..9999" --* "1..1" behaviour::Behaviour : drones0
-behaviour::Move "1..1" -- "1..1" behaviour::Choice : falseBranch9
+behaviour::Behaviour "1..1" *-- "1..9999" behaviour::Drone : drones0
+behaviour::Choice "1..1" -- "1..1" behaviour::Move : falseBranch9
 behaviour::Move "1..1" -- "1..1" behaviour::MoveTransition : from32
 behaviour::Coordinate "1..1" --* "1..1" behaviour::Drone : home1
 behaviour::Drone "1..1" *-- "0..9999" behaviour::MoveTransition : moveTransitions5
-behaviour::Move "0..9999" --* "1..1" behaviour::Drone : movements3
-behaviour::Parameter "0..9999" --* "1..1" behaviour::DeviceAction : parameters28
-behaviour::Parameter "0..9999" --* "1..1" behaviour::Feedback : parameters38
+behaviour::Drone "1..1" *-- "0..9999" behaviour::Move : movements3
+behaviour::DeviceAction "1..1" *-- "0..9999" behaviour::Parameter : parameters28
+behaviour::Feedback "1..1" *-- "0..9999" behaviour::Parameter : parameters38
 behaviour::Action "0..9999" --* "1..1" behaviour::Move : postActions13
 behaviour::Action "0..9999" --* "1..1" behaviour::Move : preActions11
 behaviour::Drone "1..1" -- "1..1" behaviour::UnicastNotify : receiver22
 behaviour::Drone "1..9999" -- "1..1" behaviour::MulticastNotify : receiver24
-behaviour::Slot "1..1" -- "1..1" behaviour::Notify : slot20
+behaviour::Notify "1..1" -- "1..1" behaviour::Slot : slot20
 behaviour::CheckNotification "1..1" -- "1..1" behaviour::Slot : slot26
-behaviour::Slot "0..9999" --* "1..1" behaviour::Drone : slots7
-behaviour::GoTo "1..1" *-- "1..1" behaviour::Coordinate : targetPosition16
+behaviour::Drone "1..1" *-- "0..9999" behaviour::Slot : slots7
+behaviour::Coordinate "1..1" --* "1..1" behaviour::GoTo : targetPosition16
 behaviour::Circle "1..1" *-- "1..1" behaviour::Coordinate : targetPosition18
-behaviour::MoveTransition "1..1" -- "1..1" behaviour::Move : to35
-behaviour::Slot "0..9999" -- "1..1" behaviour::MoveTransition : waitFor29
+behaviour::Move "1..1" -- "1..1" behaviour::MoveTransition : to35
+behaviour::MoveTransition "1..1" -- "0..9999" behaviour::Slot : waitFor29
 @enduml

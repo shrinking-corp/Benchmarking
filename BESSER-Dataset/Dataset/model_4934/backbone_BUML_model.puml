@@ -43,19 +43,19 @@ NamedElement <|-- backbone::Router
 NamedElement <|-- backbone::View
 backbone::Application "1..1" -- "1..1" backbone::Model : application12
 backbone::Application "1..1" -- "1..1" backbone::Collection : application20
-backbone::Router "1..1" -- "1..1" backbone::Application : application23
+backbone::Application "1..1" -- "1..1" backbone::Router : application23
 backbone::Application "1..1" -- "1..1" backbone::View : application30
 backbone::Attribute "0..9999" --* "1..1" backbone::Model : attributes7
-backbone::Collection "0..9999" --* "1..1" backbone::Application : collections1
+backbone::Application "1..1" *-- "0..9999" backbone::Collection : collections1
 backbone::Router "1..1" *-- "0..9999" backbone::RouterMapping : mappings22
 backbone::Collection "1..1" -- "0..1" backbone::Model : model18
 backbone::Application "1..1" *-- "0..9999" backbone::Model : models0
-backbone::Operation "0..9999" --* "1..1" backbone::Model : operations10
+backbone::Model "1..1" *-- "0..9999" backbone::Operation : operations10
 backbone::Operation "0..9999" -- "1..1" backbone::View : operations27
-backbone::Parameter "0..9999" --* "1..1" backbone::Operation : parameters16
-backbone::Reference "0..9999" --* "1..1" backbone::Model : references8
-backbone::Router "1..1" --* "1..1" backbone::Application : router3
+backbone::Operation "1..1" *-- "0..9999" backbone::Parameter : parameters16
+backbone::Model "1..1" *-- "0..9999" backbone::Reference : references8
+backbone::Application "1..1" *-- "1..1" backbone::Router : router3
 backbone::Model "1..1" -- "1..1" backbone::Reference : type13
-backbone::View "1..1" -- "1..1" backbone::RouterMapping : view25
-backbone::View "0..9999" --* "1..1" backbone::Application : views5
+backbone::RouterMapping "1..1" -- "1..1" backbone::View : view25
+backbone::Application "1..1" *-- "0..9999" backbone::View : views5
 @enduml

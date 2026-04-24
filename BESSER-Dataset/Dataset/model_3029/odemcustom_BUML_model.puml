@@ -470,7 +470,6 @@ EmbeddableExtensionsContainer <|-- odemcustom::Module
 ExpandableElement <|-- odemcustom::NamedElement
 ExpandableElement <|-- odemcustom::TypeAccess
 ExpandableElement <|-- odemcustom::VariableAccess
-ExpressionStatement <|-- odemcustom::DeprecatedProcedureCallStatement
 Expression <|-- odemcustom::ActiveLiteral
 Expression <|-- odemcustom::BinaryOperator
 Expression <|-- odemcustom::CodeQuoteExpression
@@ -489,6 +488,7 @@ Expression <|-- odemcustom::StringLiteral
 Expression <|-- odemcustom::TimeLiteral
 Expression <|-- odemcustom::TrueLiteral
 Expression <|-- odemcustom::UnaryOperator
+ExpressionStatement <|-- odemcustom::DeprecatedProcedureCallStatement
 Extension <|-- odemcustom::NamedExtension
 MappingPart <|-- odemcustom::DynamicMappingPart
 MappingPart <|-- odemcustom::FixedMappingPart
@@ -569,8 +569,6 @@ SimpleStatement <|-- odemcustom::SetStatement
 SimpleStatement <|-- odemcustom::Terminate
 SimpleStatement <|-- odemcustom::Wait
 SimpleStatement <|-- odemcustom::WaitUntil
-StatementExpression <|-- odemcustom::ExpandExpression
-StatementExpression <|-- odemcustom::ProcedureCall
 Statement <|-- odemcustom::CompositeStatement
 Statement <|-- odemcustom::ConsiderIdElements
 Statement <|-- odemcustom::ExpandStatement
@@ -582,139 +580,141 @@ Statement <|-- odemcustom::SimpleStatement
 Statement <|-- odemcustom::TargetStatement
 Statement <|-- odemcustom::TestStatement
 Statement <|-- odemcustom::Variable
+StatementExpression <|-- odemcustom::ExpandExpression
+StatementExpression <|-- odemcustom::ProcedureCall
 StructuredPropertyType <|-- odemcustom::CompositePropertyType
 StructuredPropertyType <|-- odemcustom::ReferencePropertyType
+Type <|-- odemcustom::Classifier
+Type <|-- odemcustom::PrimitiveType
 TypedElement <|-- odemcustom::AbstractVariable
 TypedElement <|-- odemcustom::Cast
 TypedElement <|-- odemcustom::CreateObject
 TypedElement <|-- odemcustom::Procedure
-Type <|-- odemcustom::Classifier
-Type <|-- odemcustom::PrimitiveType
 UnaryOperator <|-- odemcustom::Cast
 UnaryOperator <|-- odemcustom::Neg
 UnaryOperator <|-- odemcustom::Not
 VariableAccess <|-- odemcustom::MetaAccess
-odemcustom::ExtensionDefinition "1..1" *-- "0..9999" odemcustom::Classifier : abstractSyntaxDef173
-odemcustom::StartCodeBlock "0..1" --* "1..1" odemcustom::ClassSimilar : actionsBlock59
-odemcustom::AnnotationApplication "0..9999" --* "1..1" odemcustom::AnnotatableElement : annotationApplications39
+odemcustom::Classifier "0..9999" --* "1..1" odemcustom::ExtensionDefinition : abstractSyntaxDef173
+odemcustom::ClassSimilar "1..1" *-- "0..1" odemcustom::StartCodeBlock : actionsBlock59
+odemcustom::AnnotatableElement "1..1" *-- "0..9999" odemcustom::AnnotationApplication : annotationApplications39
 odemcustom::Annotation "1..1" -- "1..1" odemcustom::AnnotationApplication : annotationDef31
-odemcustom::Module "1..1" *-- "0..9999" odemcustom::Annotation : annotationDefs12
+odemcustom::Annotation "0..9999" --* "1..1" odemcustom::Module : annotationDefs12
 odemcustom::ArgumentExpression "0..1" --* "1..1" odemcustom::IdExpr : arguments166
-odemcustom::Expression "0..9999" --* "1..1" odemcustom::ArgumentExpression : arguments168
-odemcustom::Expression "0..1" --* "1..1" odemcustom::AddToSet : atIndex116
-odemcustom::Variable "0..9999" --* "1..1" odemcustom::ClassSimilar : attributes45
+odemcustom::ArgumentExpression "1..1" *-- "0..9999" odemcustom::Expression : arguments168
+odemcustom::AddToSet "1..1" *-- "0..1" odemcustom::Expression : atIndex116
+odemcustom::ClassSimilar "1..1" *-- "0..9999" odemcustom::Variable : attributes45
 odemcustom::ClassAugment "1..1" -- "1..1" odemcustom::Clazz : augmentedClass76
-odemcustom::Expression "0..9999" --* "1..1" odemcustom::Clazz : baseConstructorArguments70
+odemcustom::Clazz "1..1" *-- "0..9999" odemcustom::Expression : baseConstructorArguments70
 odemcustom::Classifier "1..1" *-- "0..9999" odemcustom::NativeBinding : bindings43
 odemcustom::ClassAugment "0..9999" --* "1..1" odemcustom::Module : classAugments8
 odemcustom::IdExpr "0..1" --* "1..1" odemcustom::TypedElement : classifierTypeExpr24
 odemcustom::Classifier "0..9999" --* "1..1" odemcustom::Module : classifiers6
-odemcustom::StartCodeBlock "0..1" --* "1..1" odemcustom::ClassSimilar : clearBlock65
+odemcustom::ClassSimilar "1..1" *-- "0..1" odemcustom::StartCodeBlock : clearBlock65
 odemcustom::CodeBlock "1..1" --* "1..1" odemcustom::TargetStatement : codeBlock219
 odemcustom::CodeBlock "0..1" --* "1..1" odemcustom::ExpandSection : codeBlock241
 odemcustom::CodeBlock "1..1" --* "1..1" odemcustom::Pattern : codeBlock256
 odemcustom::CodeBlock "1..1" --* "1..1" odemcustom::PotentiallyHiddenIdElements : codeBlock259
 odemcustom::Expression "1..1" --* "1..1" odemcustom::WaitUntil : condition101
-odemcustom::IfStatement "1..1" *-- "1..1" odemcustom::Expression : condition118
-odemcustom::WhileStatement "1..1" *-- "1..1" odemcustom::Expression : condition132
-odemcustom::Constructor "0..1" --* "1..1" odemcustom::Clazz : constructor68
-odemcustom::FindContainer "1..1" *-- "1..1" odemcustom::CodeBlock : containerBlock263
+odemcustom::Expression "1..1" --* "1..1" odemcustom::IfStatement : condition118
+odemcustom::Expression "1..1" --* "1..1" odemcustom::WhileStatement : condition132
+odemcustom::Clazz "1..1" *-- "0..1" odemcustom::Constructor : constructor68
+odemcustom::CodeBlock "1..1" --* "1..1" odemcustom::FindContainer : containerBlock263
 odemcustom::Expression "1..1" --* "1..1" odemcustom::SetGenContextStatement : context226
 odemcustom::Parameter "1..1" --* "1..1" odemcustom::Pattern : context253
 odemcustom::Expression "1..1" --* "1..1" odemcustom::IncludePattern : context273
-odemcustom::Expression "1..1" --* "1..1" odemcustom::ConsiderIdElements : elementsQuery269
+odemcustom::ConsiderIdElements "1..1" *-- "1..1" odemcustom::Expression : elementsQuery269
 odemcustom::CodeBlock "0..9999" --* "1..1" odemcustom::IfStatement : elifCaseBlock126
 odemcustom::Expression "0..9999" --* "1..1" odemcustom::IfStatement : elifCondition123
 odemcustom::CodeBlock "0..1" --* "1..1" odemcustom::FindContainer : elseBlock266
-odemcustom::IfStatement "1..1" *-- "0..1" odemcustom::CodeBlock : elseCaseBlock129
+odemcustom::CodeBlock "0..1" --* "1..1" odemcustom::IfStatement : elseCaseBlock129
 odemcustom::ExpandExpression "0..1" --* "1..1" odemcustom::ExpandableElement : expandExpression248
-odemcustom::Expression "1..1" --* "1..1" odemcustom::EvalExpr : expr155
+odemcustom::EvalExpr "1..1" *-- "1..1" odemcustom::Expression : expr155
 odemcustom::Expression "1..1" --* "1..1" odemcustom::MetaExpr : expr217
-odemcustom::Expression "1..1" --* "1..1" odemcustom::DynamicMappingPart : expr232
-odemcustom::RhsExpression "1..1" --* "1..1" odemcustom::OptionalExpr : expression193
+odemcustom::DynamicMappingPart "1..1" *-- "1..1" odemcustom::Expression : expr232
+odemcustom::OptionalExpr "1..1" *-- "1..1" odemcustom::RhsExpression : expression193
 odemcustom::RhsExpression "1..1" --* "1..1" odemcustom::RuntimeExpr : expression195
-odemcustom::RhsExpression "1..1" --* "1..1" odemcustom::AtLeastOneExpr : expression197
-odemcustom::RhsExpression "1..1" --* "1..1" odemcustom::ArbitraryExpr : expression199
+odemcustom::AtLeastOneExpr "1..1" *-- "1..1" odemcustom::RhsExpression : expression197
+odemcustom::ArbitraryExpr "1..1" *-- "1..1" odemcustom::RhsExpression : expression199
 odemcustom::Expression "1..1" --* "1..1" odemcustom::QuotedExpression : expression244
-odemcustom::StatementExpression "1..1" --* "1..1" odemcustom::ExpressionStatement : expression89
+odemcustom::ExpressionStatement "1..1" *-- "1..1" odemcustom::StatementExpression : expression89
 odemcustom::Expression "0..9999" --* "1..1" odemcustom::MappingStatement : exprs223
 odemcustom::ExtensionDefinition "0..9999" --* "1..1" odemcustom::Module : extensionDefs10
 odemcustom::ExtensionRule "1..1" --* "1..1" odemcustom::TextualSyntaxDef : extensionRule180
-odemcustom::Extension "0..9999" --* "1..1" odemcustom::EmbeddableExtensionsContainer : extensions20
-odemcustom::StartCodeBlock "0..1" --* "1..1" odemcustom::ClassSimilar : finalBlock56
-odemcustom::RuleExpr "1..1" --* "1..1" odemcustom::ExtensionRule : firstNewRule189
+odemcustom::EmbeddableExtensionsContainer "1..1" *-- "0..9999" odemcustom::Extension : extensions20
+odemcustom::ClassSimilar "1..1" *-- "0..1" odemcustom::StartCodeBlock : finalBlock56
+odemcustom::ExtensionRule "1..1" *-- "1..1" odemcustom::RuleExpr : firstNewRule189
 odemcustom::CodeBlock "1..1" --* "1..1" odemcustom::ForEachStatement : forBlock145
-odemcustom::IdExpr "0..1" --* "1..1" odemcustom::ElementAccess : idExpr171
+odemcustom::ElementAccess "1..1" *-- "0..1" odemcustom::IdExpr : idExpr171
 odemcustom::IdResolution "0..1" --* "1..1" odemcustom::Module : idRes18
 odemcustom::Pattern "0..1" -- "1..1" odemcustom::ReferencePropertyType : idResolutionPattern211
 odemcustom::CodeBlock "1..1" --* "1..1" odemcustom::IfStatement : ifCaseBlock120
-odemcustom::Interface "0..9999" -- "1..1" odemcustom::ClassSimilar : implementedInterfaces52
+odemcustom::ClassSimilar "1..1" -- "0..9999" odemcustom::Interface : implementedInterfaces52
 odemcustom::Import "0..9999" --* "1..1" odemcustom::Model : imports0
-odemcustom::StartCodeBlock "0..1" --* "1..1" odemcustom::ClassSimilar : initialBlock54
+odemcustom::ClassSimilar "1..1" *-- "0..1" odemcustom::StartCodeBlock : initialBlock54
 odemcustom::Expression "0..1" --* "1..1" odemcustom::Variable : initialValue85
 odemcustom::Classifier "0..1" -- "1..1" odemcustom::ExtensionRule : instantiableMetaClass186
-odemcustom::ForEachStatement "1..1" *-- "1..1" odemcustom::Expression : iterableExpression142
-odemcustom::Variable "0..1" --* "1..1" odemcustom::ForEachStatement : iteratorVariableDefinition137
-odemcustom::VariableAccess "0..1" --* "1..1" odemcustom::ForEachStatement : iteratorVariableReference139
+odemcustom::Expression "1..1" --* "1..1" odemcustom::ForEachStatement : iterableExpression142
+odemcustom::ForEachStatement "1..1" *-- "0..1" odemcustom::Variable : iteratorVariableDefinition137
+odemcustom::ForEachStatement "1..1" *-- "0..1" odemcustom::VariableAccess : iteratorVariableReference139
 odemcustom::KeyValuePair "1..1" *-- "1..1" odemcustom::VariableAccess : key35
-odemcustom::KeyValuePair "0..9999" --* "1..1" odemcustom::AnnotationApplication : keyValuePairs33
-odemcustom::Variable "0..9999" --* "1..1" odemcustom::Annotation : keys28
-odemcustom::RhsExpression "1..1" --* "1..1" odemcustom::AlternativeExpr : left201
+odemcustom::AnnotationApplication "1..1" *-- "0..9999" odemcustom::KeyValuePair : keyValuePairs33
+odemcustom::Annotation "1..1" *-- "0..9999" odemcustom::Variable : keys28
+odemcustom::AlternativeExpr "1..1" *-- "1..1" odemcustom::RhsExpression : left201
 odemcustom::ExpandStatement "1..1" *-- "0..1" odemcustom::Expression : location238
-odemcustom::Mapping "0..1" --* "1..1" odemcustom::ExtensionDefinition : mappingDef178
+odemcustom::ExtensionDefinition "1..1" *-- "0..1" odemcustom::Mapping : mappingDef178
 odemcustom::Expression "1..1" --* "1..1" odemcustom::Mapping : metaObject214
-odemcustom::Expression "1..1" --* "1..1" odemcustom::ExpandExpression : metaObject234
-odemcustom::Expression "1..1" --* "1..1" odemcustom::ExpandStatement : metaObject236
-odemcustom::Procedure "0..9999" --* "1..1" odemcustom::ClassSimilar : methods47
-odemcustom::Procedure "0..9999" --* "1..1" odemcustom::Interface : methods79
+odemcustom::ExpandExpression "1..1" *-- "1..1" odemcustom::Expression : metaObject234
+odemcustom::ExpandStatement "1..1" *-- "1..1" odemcustom::Expression : metaObject236
+odemcustom::ClassSimilar "1..1" *-- "0..9999" odemcustom::Procedure : methods47
+odemcustom::Interface "1..1" *-- "0..9999" odemcustom::Procedure : methods79
 odemcustom::Import "1..1" -- "0..1" odemcustom::Model : model3
-odemcustom::ModifierExtensionsContainer "1..1" *-- "0..9999" odemcustom::Extension : modifierExtensions21
-odemcustom::Module "0..9999" --* "1..1" odemcustom::Model : modules1
+odemcustom::Extension "0..9999" --* "1..1" odemcustom::ModifierExtensionsContainer : modifierExtensions21
+odemcustom::Model "1..1" *-- "0..9999" odemcustom::Module : modules1
 odemcustom::TextualSyntaxDef "1..1" *-- "0..9999" odemcustom::TsRule : newRules182
-odemcustom::SetStatement "1..1" *-- "1..1" odemcustom::Expression : object111
-odemcustom::Reactivate "1..1" *-- "1..1" odemcustom::Expression : objectAccess103
-odemcustom::Expression "1..1" --* "1..1" odemcustom::ActivateObject : objectAccess105
-odemcustom::Expression "1..1" --* "1..1" odemcustom::BinaryOperator : op1148
+odemcustom::Expression "1..1" --* "1..1" odemcustom::SetStatement : object111
+odemcustom::Expression "1..1" --* "1..1" odemcustom::Reactivate : objectAccess103
+odemcustom::ActivateObject "1..1" *-- "1..1" odemcustom::Expression : objectAccess105
+odemcustom::BinaryOperator "1..1" *-- "1..1" odemcustom::Expression : op1148
 odemcustom::Expression "1..1" --* "1..1" odemcustom::UnaryOperator : op153
-odemcustom::Expression "1..1" --* "1..1" odemcustom::BinaryOperator : op2150
+odemcustom::BinaryOperator "1..1" *-- "1..1" odemcustom::Expression : op2150
 odemcustom::Expression "0..9999" --* "1..1" odemcustom::Print : outputs109
-odemcustom::Procedure "1..1" *-- "0..9999" odemcustom::Parameter : parameters26
-odemcustom::Parameter "0..9999" --* "1..1" odemcustom::Constructor : parameters73
+odemcustom::Parameter "0..9999" --* "1..1" odemcustom::Procedure : parameters26
+odemcustom::Constructor "1..1" *-- "0..9999" odemcustom::Parameter : parameters73
 odemcustom::IdExpr "0..1" --* "1..1" odemcustom::IdExpr : parentIdExpr160
 odemcustom::Mapping "1..1" *-- "0..9999" odemcustom::MappingPart : parts212
-odemcustom::MappingStatement "1..1" *-- "0..9999" odemcustom::MappingPart : parts221
+odemcustom::MappingPart "0..9999" --* "1..1" odemcustom::MappingStatement : parts221
 odemcustom::IncludePattern "1..1" -- "1..1" odemcustom::Pattern : pattern271
 odemcustom::IdResolution "1..1" *-- "0..9999" odemcustom::Pattern : patterns250
 odemcustom::IdExpr "1..1" *-- "0..1" odemcustom::PredefinedId : predefinedId164
 odemcustom::PrimitiveType "0..1" --* "1..1" odemcustom::TypedElement : primitiveType23
 odemcustom::Expression "1..1" --* "1..1" odemcustom::ProcedureCall : procedureAccess97
 odemcustom::DeprecatedProcedureCallStatement "1..1" *-- "1..1" odemcustom::Expression : procedureCall95
-odemcustom::Procedure "0..9999" --* "1..1" odemcustom::Module : procedures14
+odemcustom::Module "1..1" *-- "0..9999" odemcustom::Procedure : procedures14
 odemcustom::PropertyBindingExpr "1..1" *-- "1..1" odemcustom::PropertyType : propertyType206
 odemcustom::CodeQuoteExpression "1..1" *-- "1..1" odemcustom::QuotedCode : quotedCode243
-odemcustom::NamedElement "0..1" -- "1..1" odemcustom::IdExpr : referencedElement162
-odemcustom::StartCodeBlock "0..1" --* "1..1" odemcustom::ClassSimilar : reportBlock62
+odemcustom::IdExpr "1..1" -- "0..1" odemcustom::NamedElement : referencedElement162
+odemcustom::ClassSimilar "1..1" *-- "0..1" odemcustom::StartCodeBlock : reportBlock62
 odemcustom::RhsExpression "1..1" --* "1..1" odemcustom::TsRule : rhs184
-odemcustom::RhsExpression "1..1" --* "1..1" odemcustom::AlternativeExpr : right203
-odemcustom::TsRule "1..1" -- "1..1" odemcustom::RuleExpr : rule207
-odemcustom::SequenceExpr "1..1" *-- "0..9999" odemcustom::RhsExpression : sequence191
+odemcustom::AlternativeExpr "1..1" *-- "1..1" odemcustom::RhsExpression : right203
+odemcustom::RuleExpr "1..1" -- "1..1" odemcustom::TsRule : rule207
+odemcustom::RhsExpression "0..9999" --* "1..1" odemcustom::SequenceExpr : sequence191
 odemcustom::Expression "1..1" --* "1..1" odemcustom::SetStatement : set113
 odemcustom::Expression "0..1" --* "1..1" odemcustom::SetOp : set157
-odemcustom::SimpleAnnotation "0..9999" --* "1..1" odemcustom::AnnotatableElement : simpleAnnotations41
-odemcustom::Statement "0..9999" --* "1..1" odemcustom::QuotedStatements : statements246
-odemcustom::Statement "0..9999" --* "1..1" odemcustom::CodeBlock : statements88
+odemcustom::AnnotatableElement "1..1" *-- "0..9999" odemcustom::SimpleAnnotation : simpleAnnotations41
+odemcustom::QuotedStatements "1..1" *-- "0..9999" odemcustom::Statement : statements246
+odemcustom::CodeBlock "1..1" *-- "0..9999" odemcustom::Statement : statements88
 odemcustom::ClassSimilar "1..1" -- "0..1" odemcustom::Clazz : superClass50
-odemcustom::Interface "1..1" -- "0..9999" odemcustom::Interface : superInterfaces83
-odemcustom::TextualSyntaxDef "1..1" --* "1..1" odemcustom::ExtensionDefinition : textualSyntaxDef176
-odemcustom::Expression "1..1" --* "1..1" odemcustom::Advance : time107
+odemcustom::Interface "0..9999" -- "1..1" odemcustom::Interface : superInterfaces83
+odemcustom::ExtensionDefinition "1..1" *-- "1..1" odemcustom::TextualSyntaxDef : textualSyntaxDef176
+odemcustom::Advance "1..1" *-- "1..1" odemcustom::Expression : time107
 odemcustom::ReferableRhsType "1..1" -- "1..1" odemcustom::StructuredPropertyType : type210
 odemcustom::Expression "1..1" --* "1..1" odemcustom::KeyValuePair : value37
-odemcustom::Expression "1..1" --* "1..1" odemcustom::Assignment : value92
+odemcustom::Assignment "1..1" *-- "1..1" odemcustom::Expression : value92
 odemcustom::Expression "1..1" --* "1..1" odemcustom::Return : value99
 odemcustom::Expression "1..1" --* "1..1" odemcustom::SaveGenStatement : variable228
-odemcustom::ResumeGenStatement "1..1" *-- "1..1" odemcustom::Expression : variable230
-odemcustom::VariableAccess "1..1" --* "1..1" odemcustom::Assignment : variable90
-odemcustom::Parameter "1..1" --* "1..1" odemcustom::FindContainer : variableBinding261
-odemcustom::Variable "0..9999" --* "1..1" odemcustom::Module : variables16
+odemcustom::Expression "1..1" --* "1..1" odemcustom::ResumeGenStatement : variable230
+odemcustom::Assignment "1..1" *-- "1..1" odemcustom::VariableAccess : variable90
+odemcustom::FindContainer "1..1" *-- "1..1" odemcustom::Parameter : variableBinding261
+odemcustom::Module "1..1" *-- "0..9999" odemcustom::Variable : variables16
 odemcustom::CodeBlock "1..1" --* "1..1" odemcustom::WhileStatement : whileBlock134
 @enduml

@@ -1,0 +1,118 @@
+@startuml
+class Booking {
+}
+class Crew {
+}
+class Person {
+}
+class reservationsystem::Airport {
+  + abbr : str
+  + id : int
+  + name : str
+}
+class reservationsystem::Attendant {
+}
+class reservationsystem::Booking {
+  + baggageInfo : str
+  + bookNo : str
+  + bookingStatus : int
+}
+class reservationsystem::City {
+  + abbr : str
+  + id : int
+  + name : str
+}
+abstract class reservationsystem::Crew {
+  + employeeId : str
+  + setLeader() : void
+}
+class reservationsystem::GeneralFlight {
+  + arrivalTime : str
+  + departureTime : str
+  + flightNo : str
+}
+class reservationsystem::Passenger {
+  + foodPref : str
+  + specialNeeds : str
+}
+class reservationsystem::PaymentInfo {
+  + cardAddr : str
+  + cardNo : str
+  + cardOwner : str
+  + createTime : date
+  + id : str
+  + payTime : date
+  + status : int
+  + type : int
+}
+abstract class reservationsystem::Person {
+  + FamilyName : str
+  + addr : str
+  + birthDate : date
+  + citizenship : str
+  + email : str
+  + gender : int
+  + id : int
+  + middleName : str
+  + name : str
+  + passportId : str
+  + phone : str
+  + residence : str
+}
+class reservationsystem::Pilot {
+  + certificationId : str
+  + experience : int
+}
+class reservationsystem::Plane {
+  + capacity : int
+  + crewNum : int
+  + id : str
+  + model : str
+}
+class reservationsystem::Seat {
+  + isExit : bool
+  + no : str
+  + type : int
+}
+class reservationsystem::SpecificFlight {
+  + date : date
+  + id : int
+  + realArriTime : date
+  + realDepTime : date
+  + status : int
+  + assignAttd(personId : any) : void
+  + assignPilot(personId : any) : void
+}
+class reservationsystem::User {
+  + md5Pwd : str
+  + userName : str
+  + userType : str
+}
+Booking <|-- reservationsystem::PaymentInfo
+Crew <|-- reservationsystem::Attendant
+Crew <|-- reservationsystem::Pilot
+Person <|-- reservationsystem::Crew
+Person <|-- reservationsystem::Passenger
+reservationsystem::Crew "1..1" -- "1..1" reservationsystem::Crew : Leader2
+reservationsystem::Airport "0..9999" -- "1..1" reservationsystem::City : airport33
+reservationsystem::Person "1..1" -- "1..1" reservationsystem::User : belongsTo0
+reservationsystem::Booking "1..1" -- "1..1" reservationsystem::Seat : book36
+reservationsystem::Booking "0..9999" -- "1..1" reservationsystem::SpecificFlight : booking24
+reservationsystem::Booking "1..1" -- "1..1" reservationsystem::Passenger : booking5
+reservationsystem::Airport "1..1" -- "1..1" reservationsystem::City : city32
+reservationsystem::Crew "1..9999" -- "1..1" reservationsystem::SpecificFlight : crew22
+reservationsystem::Airport "1..1" -- "1..1" reservationsystem::GeneralFlight : from15
+reservationsystem::GeneralFlight "1..1" -- "1..1" reservationsystem::SpecificFlight : generalFlight19
+reservationsystem::Booking "0..1" -- "1..1" reservationsystem::Passenger : passenger4
+reservationsystem::Booking "1..1" -- "1..9999" reservationsystem::Passenger : passenger8
+reservationsystem::Booking "1..1" -- "0..9999" reservationsystem::PaymentInfo : paymentInfo6
+reservationsystem::Plane "1..1" -- "1..1" reservationsystem::SpecificFlight : plane20
+reservationsystem::Plane "1..1" -- "1..1" reservationsystem::Seat : plane34
+reservationsystem::Booking "1..1" -- "1..9999" reservationsystem::Seat : seats12
+reservationsystem::Plane "1..1" -- "1..9999" reservationsystem::Seat : seats29
+reservationsystem::GeneralFlight "1..1" -- "1..9999" reservationsystem::SpecificFlight : specificFlight13
+reservationsystem::Plane "1..1" -- "0..9999" reservationsystem::SpecificFlight : specificFlight27
+reservationsystem::Crew "1..1" -- "0..9999" reservationsystem::SpecificFlight : specificFlight3
+reservationsystem::Booking "1..1" -- "1..9999" reservationsystem::SpecificFlight : specificFlight9
+reservationsystem::Airport "1..1" -- "1..1" reservationsystem::GeneralFlight : to16
+@enduml

@@ -1,0 +1,160 @@
+@startuml
+class JDTJavaElement {
+}
+class JDTMember {
+}
+class JDTMethodBody {
+}
+class JDTParent {
+}
+class JDTParentJavaElement {
+}
+class JDTType {
+}
+class JDTTypeRoot {
+}
+enum TrueFalseDefault {
+  default
+  false
+  true
+}
+enum VisibilityKind {
+  private
+  protected
+  public
+}
+class jdtmm::JDTClass {
+}
+class jdtmm::JDTCompilationUnit {
+}
+class jdtmm::JDTEnum {
+}
+class jdtmm::JDTException {
+}
+class jdtmm::JDTField {
+  + abstract : str
+  + final : str
+  + generateGetter : str
+  + generateSetter : str
+  + isMultiValued : str
+  + static : str
+  + value : str
+}
+class jdtmm::JDTImportContainer {
+}
+class jdtmm::JDTImportDeclaration {
+}
+class jdtmm::JDTInterface {
+}
+abstract class jdtmm::JDTJavaElement {
+  + comment : str
+  + elementName : str
+  + elementType : str
+  + generated : str
+  + accept(visitor : any) : void
+  + getJDTSignature() : str
+  + getQualifiedName() : str
+}
+class jdtmm::JDTJavaModel {
+}
+class jdtmm::JDTJavaProject {
+}
+abstract class jdtmm::JDTMember {
+  + explicitPlainTextRequiredImports : str
+  + visibility : str
+}
+class jdtmm::JDTMethod {
+  + abstract : str
+  + constructor : str
+  + final : str
+  + static : str
+  + synchronized : str
+}
+abstract class jdtmm::JDTMethodBody {
+  + asText() : str
+}
+class jdtmm::JDTOpaqueBody {
+  + _body : str
+}
+class jdtmm::JDTPackageFragment {
+}
+class jdtmm::JDTPackageFragmentRoot {
+}
+class jdtmm::JDTParameter {
+  + final : str
+  + isMultiValued : str
+}
+abstract class jdtmm::JDTParent {
+  + flags : str
+  + isFlagSet(flag : any) : str
+  + setFlag(flag : any, value : any) : void
+}
+abstract class jdtmm::JDTParentJavaElement {
+}
+abstract class jdtmm::JDTType {
+  + abstract : str
+  + class : str
+  + enum : str
+  + final : str
+  + interface : str
+  + static : str
+  + superClassName : str
+  + superInterfaceNames : str
+}
+class jdtmm::JDTTypeParameter {
+}
+abstract class jdtmm::JDTTypeRoot {
+}
+JDTJavaElement <|-- jdtmm::JDTImportDeclaration
+JDTJavaElement <|-- jdtmm::JDTParentJavaElement
+JDTJavaElement <|-- jdtmm::JDTTypeParameter
+JDTMember <|-- jdtmm::JDTField
+JDTMember <|-- jdtmm::JDTMethod
+JDTMember <|-- jdtmm::JDTParameter
+JDTMember <|-- jdtmm::JDTType
+JDTMethodBody <|-- jdtmm::JDTOpaqueBody
+JDTParent <|-- jdtmm::JDTParentJavaElement
+JDTParentJavaElement <|-- jdtmm::JDTImportContainer
+JDTParentJavaElement <|-- jdtmm::JDTJavaModel
+JDTParentJavaElement <|-- jdtmm::JDTJavaProject
+JDTParentJavaElement <|-- jdtmm::JDTMember
+JDTParentJavaElement <|-- jdtmm::JDTPackageFragment
+JDTParentJavaElement <|-- jdtmm::JDTPackageFragmentRoot
+JDTParentJavaElement <|-- jdtmm::JDTTypeRoot
+JDTType <|-- jdtmm::JDTClass
+JDTType <|-- jdtmm::JDTEnum
+JDTType <|-- jdtmm::JDTInterface
+JDTTypeRoot <|-- jdtmm::JDTCompilationUnit
+jdtmm::JDTMethod "1..1" *-- "0..9999" jdtmm::JDTMethodBody : bodies6
+jdtmm::JDTJavaElement "0..9999" -- "1..1" jdtmm::JDTParent : children10
+jdtmm::JDTCompilationUnit "0..1" -- "1..1" jdtmm::JDTType : compilationUnit18
+jdtmm::JDTCompilationUnit "0..9999" --* "1..1" jdtmm::JDTPackageFragment : compilationUnits41
+jdtmm::JDTMember "0..1" -- "1..1" jdtmm::JDTTypeParameter : declaringMember12
+jdtmm::JDTMethod "1..1" -- "0..9999" jdtmm::JDTType : exceptions5
+jdtmm::JDTMember "1..1" -- "0..9999" jdtmm::JDTType : explicitRequiredImports8
+jdtmm::JDTField "0..9999" --* "1..1" jdtmm::JDTType : fields16
+jdtmm::JDTJavaModel "0..1" -- "1..1" jdtmm::JDTJavaProject : javaModel46
+jdtmm::JDTJavaProject "0..1" -- "1..1" jdtmm::JDTPackageFragmentRoot : javaProject43
+jdtmm::JDTJavaModel "1..1" *-- "0..9999" jdtmm::JDTJavaProject : javaProject50
+jdtmm::JDTMethod "0..9999" --* "1..1" jdtmm::JDTType : methods13
+jdtmm::JDTMethod "1..1" -- "1..1" jdtmm::JDTMethodBody : owner0
+jdtmm::JDTMethod "1..1" -- "1..1" jdtmm::JDTType : owner1
+jdtmm::JDTType "1..1" -- "0..1" jdtmm::JDTType : owner24
+jdtmm::JDTField "1..1" -- "1..1" jdtmm::JDTType : owner35
+jdtmm::JDTCompilationUnit "1..1" -- "0..1" jdtmm::JDTPackageFragment : packageFragment37
+jdtmm::JDTPackageFragment "1..1" -- "0..1" jdtmm::JDTPackageFragmentRoot : packageFragmentRoot40
+jdtmm::JDTJavaProject "1..1" *-- "0..9999" jdtmm::JDTPackageFragmentRoot : packageFragmentRoots47
+jdtmm::JDTPackageFragment "0..9999" --* "1..1" jdtmm::JDTPackageFragmentRoot : packageFragments44
+jdtmm::JDTMethod "0..1" -- "1..1" jdtmm::JDTParameter : parameterOwner52
+jdtmm::JDTMethod "1..1" *-- "0..9999" jdtmm::JDTParameter : parameters3
+jdtmm::JDTJavaElement "1..1" -- "0..1" jdtmm::JDTParent : parent11
+jdtmm::JDTMethod "0..1" -- "1..1" jdtmm::JDTParameter : returnOwner56
+jdtmm::JDTMethod "1..1" *-- "0..1" jdtmm::JDTParameter : returnType2
+jdtmm::JDTType "0..1" -- "1..1" jdtmm::JDTType : superClass31
+jdtmm::JDTType "0..9999" -- "1..1" jdtmm::JDTType : superInterfaces28
+jdtmm::JDTField "1..1" -- "0..1" jdtmm::JDTType : type33
+jdtmm::JDTParameter "1..1" -- "0..1" jdtmm::JDTType : type54
+jdtmm::JDTMember "1..1" *-- "0..9999" jdtmm::JDTTypeParameter : typeParameters7
+jdtmm::JDTType "1..1" *-- "0..9999" jdtmm::JDTType : types20
+jdtmm::JDTCompilationUnit "1..1" *-- "0..9999" jdtmm::JDTType : types38
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+class graphdom::Edge {
+  + guid : str
+  + marked : bool
+  + weight : int
+  + flip() : bool
+}
+class graphdom::Graph {
+  + graphName : str
+  + checkNodesDomination() : void
+  + findNodeById(id : any) : str
+  + getDominatingSet() : str
+  + getNextNodeId() : int
+  + isConnectedDomination() : bool
+  + isDominated() : bool
+  + isIndependentlyDominated() : bool
+  + isTotallyDominated() : bool
+  + removeNode(node : any) : void
+  + unmarkAllNodes() : void
+}
+class graphdom::Node {
+  + color : str
+  + dominated : bool
+  + dominating : bool
+  + grade : str
+  + guid : str
+  + nodeName : str
+  + xCoord : int
+  + yCoord : int
+  + getAdjacentNodes() : str
+}
+graphdom::Edge "0..9999" -- "1..1" graphdom::Node : connectedEdges3
+graphdom::Edge "1..1" -- "2..2" graphdom::Node : connectedNodes4
+graphdom::Edge "0..9999" --* "1..1" graphdom::Graph : edges1
+graphdom::Graph "1..1" *-- "0..9999" graphdom::Node : nodes0
+@enduml

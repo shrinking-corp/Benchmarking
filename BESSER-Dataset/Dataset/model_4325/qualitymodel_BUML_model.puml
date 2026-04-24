@@ -1,0 +1,65 @@
+@startuml
+class Attribute {
+}
+enum AttributeAggregationOperator {
+  NEUTRALITY
+  REPLACEABILITY
+  SIMULTANEITY
+}
+enum MetricAggregationOperator {
+  AVERAGE
+  MAXIMUM
+  MINIMUM
+  SUM
+}
+enum MetricNormalizationKind {
+  BENEFIT
+  COST
+}
+abstract class qualitymodel::Attribute {
+  + name : str
+  + calculate(profile : any) : str
+}
+class qualitymodel::CompositeAttribute {
+  + operator : str
+  + calculateNeutrality(profile : any) : float
+  + calculateReplaceability(profile : any) : float
+  + calculateSimultaneity(profile : any) : float
+}
+class qualitymodel::ConfigurationProfile {
+  + ID : int
+}
+class qualitymodel::HistoricalData {
+  + instant : str
+  + value : float
+}
+class qualitymodel::LeafAttribute {
+  + normalizationKind : str
+  + normalizationMax : float
+  + normalizationMin : float
+  + numSamples : int
+  + operator : str
+  + calculateAverage(profile : any) : float
+  + calculateMaximum(profile : any) : float
+  + calculateMinimum(profile : any) : float
+  + calculateSum(profile : any) : float
+}
+class qualitymodel::Metric {
+  + data : str
+  + descriptionName : str
+  + probeName : str
+  + resourceName : str
+}
+class qualitymodel::Preference {
+  + threshold : float
+  + weight : float
+}
+Attribute <|-- qualitymodel::CompositeAttribute
+Attribute <|-- qualitymodel::LeafAttribute
+qualitymodel::LeafAttribute "1..1" -- "1..1" qualitymodel::Metric : attribute0
+qualitymodel::Attribute "1..1" -- "1..1" qualitymodel::HistoricalData : attribute2
+qualitymodel::Attribute "1..1" -- "1..1" qualitymodel::Preference : attribute4
+qualitymodel::Attribute "1..9999" --* "1..1" qualitymodel::CompositeAttribute : children1
+qualitymodel::ConfigurationProfile "1..1" *-- "1..9999" qualitymodel::Metric : metric8
+qualitymodel::ConfigurationProfile "1..1" *-- "0..9999" qualitymodel::Preference : preference6
+@enduml

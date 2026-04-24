@@ -108,6 +108,9 @@ FileRegion <|-- types::Case
 FileRegion <|-- types::CaseLabel
 FileRegion <|-- types::ElementSpec
 FileRegion <|-- types::Switch
+IdlType <|-- types::PrimitiveType
+IdlType <|-- types::TemplateType
+IdlType <|-- types::VoidType
 IdlTypeDcl <|-- types::EnumType
 IdlTypeDcl <|-- types::Enumeration
 IdlTypeDcl <|-- types::StructForwardDcl
@@ -115,9 +118,6 @@ IdlTypeDcl <|-- types::StructType
 IdlTypeDcl <|-- types::TypeDef
 IdlTypeDcl <|-- types::UnionForwardDcl
 IdlTypeDcl <|-- types::UnionType
-IdlType <|-- types::PrimitiveType
-IdlType <|-- types::TemplateType
-IdlType <|-- types::VoidType
 MemberContainer <|-- types::StructType
 PrimitiveType <|-- types::Any
 PrimitiveType <|-- types::Boolean
@@ -140,23 +140,23 @@ TemplateType <|-- types::FixedPtType
 TemplateType <|-- types::IdlString
 TemplateType <|-- types::SequenceType
 TemplateType <|-- types::WString
-TypedElement <|-- types::TypeDef
 Typed <|-- types::SequenceType
-types::Switch "1..1" *-- "0..9999" types::Case : cases4
-types::ElementSpec "1..1" *-- "0..1" types::Declarator : declarator14
-types::Enumeration "0..9999" --* "1..1" types::EnumType : enumerators16
-types::Expression "0..1" --* "1..1" types::ExprCaseLabel : expr10
+TypedElement <|-- types::TypeDef
+types::Case "0..9999" --* "1..1" types::Switch : cases4
+types::Declarator "0..1" --* "1..1" types::ElementSpec : declarator14
+types::EnumType "1..1" *-- "0..9999" types::Enumeration : enumerators16
+types::ExprCaseLabel "1..1" *-- "0..1" types::Expression : expr10
 types::Expression "0..1" --* "1..1" types::FixedPtType : expr125
 types::Expression "0..1" --* "1..1" types::FixedPtType : expr227
 types::UnionForwardDcl "0..1" -- "1..1" types::UnionType : forwardDcl0
 types::StructForwardDcl "0..1" -- "1..1" types::StructType : forwardDcl18
 types::ForwardDcl "0..1" --* "1..1" types::StructType : forwardDeclaration17
-types::UnionType "1..1" *-- "0..1" types::Switch : idlSwitch1
-types::UnionType "0..1" -- "1..1" types::UnionForwardDcl : implementation22
-types::StructType "0..1" -- "1..1" types::StructForwardDcl : implementation23
-types::CaseLabel "0..9999" --* "1..1" types::Case : labels6
-types::TemplateType "1..1" *-- "0..1" types::Expression : size20
-types::ElementSpec "0..1" --* "1..1" types::Case : spec8
-types::IdlType "0..1" -- "1..1" types::ElementSpec : type11
+types::Switch "0..1" --* "1..1" types::UnionType : idlSwitch1
+types::UnionForwardDcl "1..1" -- "0..1" types::UnionType : implementation22
+types::StructForwardDcl "1..1" -- "0..1" types::StructType : implementation23
+types::Case "1..1" *-- "0..9999" types::CaseLabel : labels6
+types::Expression "0..1" --* "1..1" types::TemplateType : size20
+types::Case "1..1" *-- "0..1" types::ElementSpec : spec8
+types::ElementSpec "1..1" -- "0..1" types::IdlType : type11
 types::IdlType "0..1" -- "1..1" types::Switch : type2
 @enduml

@@ -362,8 +362,6 @@ HaxeConstant <|-- haxe::HaxeRegexLiteral
 HaxeConstant <|-- haxe::HaxeStringLiteral
 HaxeDependencyDeclaration <|-- haxe::HaxeImportDeclaration
 HaxeDependencyDeclaration <|-- haxe::HaxeUsingDeclaration
-HaxeExpressionStatement <|-- haxe::HaxeReturn
-HaxeExpressionStatement <|-- haxe::HaxeThrowExpression
 HaxeExpression <|-- haxe::HaxeArrayAccess
 HaxeExpression <|-- haxe::HaxeArrayCreation
 HaxeExpression <|-- haxe::HaxeArrayInitializer
@@ -398,11 +396,13 @@ HaxeExpression <|-- haxe::HaxeTypeCheckExpression
 HaxeExpression <|-- haxe::HaxeUnaryExpression
 HaxeExpression <|-- haxe::HaxeUnsafeCastExpression
 HaxeExpression <|-- haxe::HaxeVariableDeclarationExpression
-HaxeFieldContainer <|-- haxe::HaxeClassifier
+HaxeExpressionStatement <|-- haxe::HaxeReturn
+HaxeExpressionStatement <|-- haxe::HaxeThrowExpression
 HaxeField <|-- haxe::HaxeAttribute
 HaxeField <|-- haxe::HaxeConstructor
 HaxeField <|-- haxe::HaxeEnumConstructor
 HaxeField <|-- haxe::HaxeOperation
+HaxeFieldContainer <|-- haxe::HaxeClassifier
 HaxeLoopStatement <|-- haxe::HaxeDoWhileStatement
 HaxeLoopStatement <|-- haxe::HaxeForStatement
 HaxeLoopStatement <|-- haxe::HaxeWhileStatement
@@ -426,127 +426,127 @@ HaxePathReference <|-- haxe::HaxePackageAccess
 HaxePathReferentiable <|-- haxe::HaxePackage
 HaxePathReferentiable <|-- haxe::HaxeType
 HaxeSingleVariableDeclaration <|-- haxe::HaxeAttribute
+HaxeType <|-- haxe::HaxeClassifier
+HaxeType <|-- haxe::HaxeTypeParameter
+HaxeType <|-- haxe::HaxeTypedef
 HaxeTypeAccess <|-- haxe::HaxeClassifierAccess
 HaxeTypeAccess <|-- haxe::HaxeFunctionTypeAccess
 HaxeTypedElement <|-- haxe::HaxeFieldDeclaration
 HaxeTypedElement <|-- haxe::HaxeOperation
 HaxeTypedElement <|-- haxe::HaxeSingleVariableDeclaration
 HaxeTypedElement <|-- haxe::HaxeVariableDeclarationGroup
-HaxeType <|-- haxe::HaxeClassifier
-HaxeType <|-- haxe::HaxeTypeParameter
-HaxeType <|-- haxe::HaxeTypedef
 HaxeUnaryExpression <|-- haxe::HaxePostfixExpression
 HaxeUnaryExpression <|-- haxe::HaxePrefixExpression
 HaxeVariableDeclaration <|-- haxe::HaxeEnumConstructor
 HaxeVariableDeclaration <|-- haxe::HaxeSingleVariableDeclaration
 HaxeVariableDeclaration <|-- haxe::HaxeVariableDeclarationFragment
-haxe::HaxeTypeAccess "0..9999" -- "1..1" haxe::HaxeFunctionTypeAccess : argumentTypes177
-haxe::HaxeExpression "0..9999" --* "1..1" haxe::HaxeAbstractMethodInvocation : arguments123
+haxe::HaxeFunctionTypeAccess "1..1" -- "0..9999" haxe::HaxeTypeAccess : argumentTypes177
+haxe::HaxeAbstractMethodInvocation "1..1" *-- "0..9999" haxe::HaxeExpression : arguments123
 haxe::HaxeCallExpression "1..1" *-- "0..9999" haxe::HaxeExpression : arguments82
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeArrayAccess : array62
+haxe::HaxeArrayAccess "1..1" *-- "1..1" haxe::HaxeExpression : array62
 haxe::HaxeTypeAccess "0..9999" --* "1..1" haxe::HaxeTypeParameter : bounds172
-haxe::HaxeSwitch "1..1" *-- "0..9999" haxe::HaxeCase : cases69
+haxe::HaxeCase "0..9999" --* "1..1" haxe::HaxeSwitch : cases69
 haxe::HaxeCatchClause "0..1" -- "1..1" haxe::HaxeSingleVariableDeclaration : catchClause139
 haxe::HaxeCatchClause "0..9999" --* "1..1" haxe::HaxeTryExpression : catchClauses94
-haxe::HaxePackage "0..9999" -- "1..1" haxe::HaxePackage : childrenPackages143
-haxe::HaxePathReferentiable "0..9999" --* "1..1" haxe::HaxePackage : childrenReferences140
+haxe::HaxePackage "1..1" -- "0..9999" haxe::HaxePackage : childrenPackages143
+haxe::HaxePackage "1..1" *-- "0..9999" haxe::HaxePathReferentiable : childrenReferences140
 haxe::HaxeComment "0..9999" -- "1..1" haxe::HaxeModule : commentList146
 haxe::HaxeASTNode "1..1" *-- "0..9999" haxe::HaxeComment : comments8
 haxe::HaxeComment "0..9999" --* "1..1" haxe::HaxeType : commentsAfterDeclaration156
 haxe::HaxeComment "0..9999" --* "1..1" haxe::HaxeType : commentsBeforeDeclaration159
 haxe::HaxeClass "1..1" -- "1..1" haxe::HaxeConstructor : constructedClass216
-haxe::HaxeType "0..9999" -- "1..1" haxe::HaxePackage : containedTypes144
-haxe::HaxeVariableDeclarationGroup "1..1" -- "1..1" haxe::HaxeVariableDeclarationExpression : container132
+haxe::HaxePackage "1..1" -- "0..9999" haxe::HaxeType : containedTypes144
+haxe::HaxeVariableDeclarationExpression "1..1" -- "1..1" haxe::HaxeVariableDeclarationGroup : container132
 haxe::HaxeModule "0..1" -- "1..1" haxe::HaxeType : containerModule155
-haxe::HaxePackage "0..1" -- "1..1" haxe::HaxeClassifier : containerPackage164
+haxe::HaxeClassifier "1..1" -- "0..1" haxe::HaxePackage : containerPackage164
 haxe::HaxeExpression "0..9999" --* "1..1" haxe::HaxeSwitch : default71
 haxe::HaxeDependencyDeclaration "0..9999" --* "1..1" haxe::HaxeModule : dependencies149
-haxe::HaxeExpression "0..9999" --* "1..1" haxe::HaxeArrayCreation : dimensions55
+haxe::HaxeArrayCreation "1..1" *-- "0..9999" haxe::HaxeExpression : dimensions55
 haxe::HaxeAbstract "1..1" *-- "0..1" haxe::HaxeTypeAccess : directCastingFromType192
-haxe::HaxeTypeAccess "0..1" --* "1..1" haxe::HaxeAbstract : directCastingToType195
+haxe::HaxeAbstract "1..1" *-- "0..1" haxe::HaxeTypeAccess : directCastingToType195
 haxe::HaxeModel "1..1" *-- "0..9999" haxe::HaxePathReferentiable : elements1
-haxe::HaxeTernaryExpression "1..1" *-- "1..1" haxe::HaxeExpression : elseExpression37
+haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeTernaryExpression : elseExpression37
 haxe::HaxeExpression "0..1" --* "1..1" haxe::HaxeIfStatement : elseStatement35
-haxe::HaxeSingleVariableDeclaration "1..1" --* "1..1" haxe::HaxeCatchClause : exception96
+haxe::HaxeCatchClause "1..1" *-- "1..1" haxe::HaxeSingleVariableDeclaration : exception96
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeExpressionStatement : expression100
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeCastingExpression : expression102
+haxe::HaxeCastingExpression "1..1" *-- "1..1" haxe::HaxeExpression : expression102
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeUnsafeCastExpression : expression107
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeTypeCheckExpression : expression109
 haxe::HaxeExpression "0..1" --* "1..1" haxe::HaxeMethodInvocation : expression114
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeLoopStatement : expression18
 haxe::HaxeConditionalExpression "1..1" *-- "1..1" haxe::HaxeExpression : expression30
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeInExpression : expression42
-haxe::HaxeFieldAccess "1..1" *-- "1..1" haxe::HaxeExpression : expression48
+haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeFieldAccess : expression48
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeParenthizedExpression : expression51
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeSwitch : expression67
 haxe::HaxeCase "1..1" *-- "1..1" haxe::HaxeExpression : expression77
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeCallExpression : expression80
-haxe::HaxeExpression "1..9999" --* "1..1" haxe::HaxeArrayInitializer : expressions53
-haxe::HaxeInfixExpression "1..1" *-- "0..9999" haxe::HaxeExpression : extendedSide45
-haxe::HaxeTypeAccess "0..1" --* "1..1" haxe::HaxeObjectDeclaration : extendsType85
-haxe::HaxeSingleVariableAccess "1..1" --* "1..1" haxe::HaxeFieldAccess : field47
+haxe::HaxeCallExpression "1..1" *-- "1..1" haxe::HaxeExpression : expression80
+haxe::HaxeArrayInitializer "1..1" *-- "1..9999" haxe::HaxeExpression : expressions53
+haxe::HaxeExpression "0..9999" --* "1..1" haxe::HaxeInfixExpression : extendedSide45
+haxe::HaxeObjectDeclaration "1..1" *-- "0..1" haxe::HaxeTypeAccess : extendsType85
+haxe::HaxeFieldAccess "1..1" *-- "1..1" haxe::HaxeSingleVariableAccess : field47
 haxe::HaxeField "1..1" -- "1..1" haxe::HaxeFieldContainer : fieldContainer201
 haxe::HaxeFieldDeclaration "1..9999" --* "1..1" haxe::HaxeObjectDeclaration : fields87
-haxe::HaxeSingleVariableDeclaration "0..9999" --* "1..1" haxe::HaxeAbstractFunction : formalParameters208
+haxe::HaxeAbstractFunction "1..1" *-- "0..9999" haxe::HaxeSingleVariableDeclaration : formalParameters208
 haxe::HaxeASTNode "0..9999" --* "1..1" haxe::HaxeTagElement : fragments10
-haxe::HaxeVariableDeclarationGroup "1..1" *-- "0..9999" haxe::HaxeVariableDeclarationFragment : fragments135
-haxe::HaxeClassifierAccess "0..1" --* "1..1" haxe::HaxeClass : generalization184
-haxe::HaxeOperation "0..1" -- "1..1" haxe::HaxeAttribute : getter202
+haxe::HaxeVariableDeclarationFragment "0..9999" --* "1..1" haxe::HaxeVariableDeclarationGroup : fragments135
+haxe::HaxeClass "1..1" *-- "0..1" haxe::HaxeClassifierAccess : generalization184
+haxe::HaxeAttribute "1..1" -- "0..1" haxe::HaxeOperation : getter202
 haxe::HaxeVariableDeclarationExpression "1..1" *-- "1..9999" haxe::HaxeVariableDeclarationGroup : groups137
-haxe::HaxeClassifier "1..1" -- "0..9999" haxe::HaxeAttribute : haxeAttribute168
+haxe::HaxeAttribute "0..9999" -- "1..1" haxe::HaxeClassifier : haxeAttribute168
 haxe::HaxeClassifier "1..1" -- "0..9999" haxe::HaxeConstructor : haxeConstructors170
 haxe::HaxeField "0..9999" --* "1..1" haxe::HaxeFieldContainer : haxeFields16
-haxe::HaxeModule "0..9999" --* "1..1" haxe::HaxeModel : haxeModules6
-haxe::HaxeOperation "0..9999" -- "1..1" haxe::HaxeClassifier : haxeOperations166
-haxe::HaxeClassifierAccess "0..9999" --* "1..1" haxe::HaxeClass : implementation187
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeArrayAccess : index64
+haxe::HaxeModel "1..1" *-- "0..9999" haxe::HaxeModule : haxeModules6
+haxe::HaxeClassifier "1..1" -- "0..9999" haxe::HaxeOperation : haxeOperations166
+haxe::HaxeClass "1..1" *-- "0..9999" haxe::HaxeClassifierAccess : implementation187
+haxe::HaxeArrayAccess "1..1" *-- "1..1" haxe::HaxeExpression : index64
 haxe::HaxeExpression "0..1" --* "1..1" haxe::HaxeVariableDeclaration : initializer130
 haxe::HaxeExpression "0..1" --* "1..1" haxe::HaxeVariableDeclarationGroup : initializer133
 haxe::HaxeArrayCreation "1..1" *-- "0..1" haxe::HaxeArrayInitializer : initializer57
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeBinaryExpression : leftSide23
-haxe::HaxeEnumConstructor "0..9999" -- "1..1" haxe::HaxeEnum : literals198
+haxe::HaxeBinaryExpression "1..1" *-- "1..1" haxe::HaxeExpression : leftSide23
+haxe::HaxeEnum "1..1" -- "0..9999" haxe::HaxeEnumConstructor : literals198
 haxe::HaxeClass "1..1" -- "1..1" haxe::HaxeModel : mainClass0
 haxe::HaxeMetadata "0..9999" --* "1..1" haxe::HaxeMetadataContainer : metadata228
-haxe::HaxeAbstractOperation "1..1" -- "1..1" haxe::HaxeAbstractMethodInvocation : method122
+haxe::HaxeAbstractMethodInvocation "1..1" -- "1..1" haxe::HaxeAbstractOperation : method122
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeUnaryExpression : operand21
-haxe::HaxeSingleVariableDeclaration "1..1" --* "1..1" haxe::HaxeForStatement : parameter39
-haxe::HaxeTypeAccess "0..9999" --* "1..1" haxe::HaxeClassifierAccess : parameterMapping180
+haxe::HaxeForStatement "1..1" *-- "1..1" haxe::HaxeSingleVariableDeclaration : parameter39
+haxe::HaxeClassifierAccess "1..1" *-- "0..9999" haxe::HaxeTypeAccess : parameterMapping180
 haxe::HaxeEnumConstructor "1..1" *-- "0..9999" haxe::HaxeSingleVariableDeclaration : parameters219
 haxe::HaxeExpression "0..9999" --* "1..1" haxe::HaxeMetadata : parameters226
-haxe::HaxePathReferentiable "1..1" -- "0..1" haxe::HaxePackage : parentReference13
-haxe::HaxeSingleVariableAccess "1..1" *-- "0..1" haxe::HaxeExpression : qualifier116
-haxe::HaxePackageAccess "0..1" --* "1..1" haxe::HaxePackageAccess : qualifier121
-haxe::HaxeTypedef "1..1" *-- "1..1" haxe::HaxeTypeAccess : refType199
-haxe::HaxePathReferentiable "0..9999" --* "1..1" haxe::HaxeModel : referenced3
+haxe::HaxePackage "0..1" -- "1..1" haxe::HaxePathReferentiable : parentReference13
+haxe::HaxeExpression "0..1" --* "1..1" haxe::HaxeSingleVariableAccess : qualifier116
+haxe::HaxePackageAccess "1..1" *-- "0..1" haxe::HaxePackageAccess : qualifier121
+haxe::HaxeTypeAccess "1..1" --* "1..1" haxe::HaxeTypedef : refType199
+haxe::HaxeModel "1..1" *-- "0..9999" haxe::HaxePathReferentiable : referenced3
 haxe::HaxePathReference "0..9999" -- "1..1" haxe::HaxePathReferentiable : referencedIn14
-haxe::HaxePathReferentiable "0..1" -- "1..1" haxe::HaxePathReference : referencedTerminal15
-haxe::HaxeTypeAccess "1..1" -- "1..1" haxe::HaxeFunctionTypeAccess : returnType175
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeBinaryExpression : rightSide25
-haxe::HaxeOperation "0..1" -- "1..1" haxe::HaxeAttribute : setter205
-haxe::HaxeExpression "0..9999" --* "1..1" haxe::HaxeBlock : statements28
+haxe::HaxePathReference "1..1" -- "0..1" haxe::HaxePathReferentiable : referencedTerminal15
+haxe::HaxeFunctionTypeAccess "1..1" -- "1..1" haxe::HaxeTypeAccess : returnType175
+haxe::HaxeBinaryExpression "1..1" *-- "1..1" haxe::HaxeExpression : rightSide25
+haxe::HaxeAttribute "1..1" -- "0..1" haxe::HaxeOperation : setter205
+haxe::HaxeBlock "1..1" *-- "0..9999" haxe::HaxeExpression : statements28
 haxe::HaxeField "0..1" -- "1..1" haxe::HaxeImportDeclaration : staticElement222
-haxe::HaxeUsingDeclaration "1..1" -- "1..1" haxe::HaxeField : staticField223
-haxe::HaxeTagElement "0..9999" --* "1..1" haxe::HaxeHaxedocComment : tags9
+haxe::HaxeField "1..1" -- "1..1" haxe::HaxeUsingDeclaration : staticField223
+haxe::HaxeHaxedocComment "1..1" *-- "0..9999" haxe::HaxeTagElement : tags9
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeLoopStatement : theBody17
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeAbstractFunction : theBody213
+haxe::HaxeAbstractFunction "1..1" *-- "1..1" haxe::HaxeExpression : theBody213
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeTryExpression : theBody92
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeCatchClause : theBody97
-haxe::HaxeType "0..9999" -- "1..1" haxe::HaxeModule : theElements154
+haxe::HaxeCatchClause "1..1" *-- "1..1" haxe::HaxeExpression : theBody97
+haxe::HaxeModule "1..1" -- "0..9999" haxe::HaxeType : theElements154
 haxe::HaxeModule "1..1" -- "0..1" haxe::HaxePackage : thePackage151
-haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeConditionalExpression : thenStatement32
+haxe::HaxeConditionalExpression "1..1" *-- "1..1" haxe::HaxeExpression : thenStatement32
 haxe::HaxeCastingExpression "1..1" *-- "1..1" haxe::HaxeTypeAccess : type104
-haxe::HaxeTypeCheckExpression "1..1" *-- "1..1" haxe::HaxeTypeAccess : type111
+haxe::HaxeTypeAccess "1..1" --* "1..1" haxe::HaxeTypeCheckExpression : type111
 haxe::HaxeTypeAccess "0..1" --* "1..1" haxe::HaxeTypedElement : type182
-haxe::HaxeTypeAccess "1..1" --* "1..1" haxe::HaxeArrayCreation : type60
-haxe::HaxeTypeAccess "0..9999" --* "1..1" haxe::HaxeAbstractMethodInvocation : typeArguments126
+haxe::HaxeArrayCreation "1..1" *-- "1..1" haxe::HaxeTypeAccess : type60
+haxe::HaxeAbstractMethodInvocation "1..1" *-- "0..9999" haxe::HaxeTypeAccess : typeArguments126
 haxe::HaxeType "1..1" *-- "0..9999" haxe::HaxeTypeParameter : typeParameters162
 haxe::HaxeAbstractFunction "1..1" *-- "0..9999" haxe::HaxeTypeParameter : typeParameters210
-haxe::HaxeTypeAccess "0..1" --* "1..1" haxe::HaxeAbstract : underlyingType190
+haxe::HaxeAbstract "1..1" *-- "0..1" haxe::HaxeTypeAccess : underlyingType190
 haxe::HaxeSingleVariableAccess "0..9999" -- "1..1" haxe::HaxeVariableDeclaration : usageInVariableAccess129
-haxe::HaxeMetadataContainer "1..1" -- "1..1" haxe::HaxeMetadata : usedIn225
+haxe::HaxeMetadata "1..1" -- "1..1" haxe::HaxeMetadataContainer : usedIn225
 haxe::HaxeExpression "1..1" --* "1..1" haxe::HaxeFieldDeclaration : value89
-haxe::HaxeExpression "1..9999" --* "1..1" haxe::HaxeCase : values74
-haxe::HaxeVariableDeclaration "1..1" -- "1..1" haxe::HaxeSingleVariableAccess : variable119
-haxe::HaxeSingleVariableDeclaration "1..1" --* "1..1" haxe::HaxeInExpression : variable40
-haxe::HaxeVariableDeclarationGroup "0..1" -- "1..1" haxe::HaxeVariableDeclarationFragment : variablesContainer136
+haxe::HaxeCase "1..1" *-- "1..9999" haxe::HaxeExpression : values74
+haxe::HaxeSingleVariableAccess "1..1" -- "1..1" haxe::HaxeVariableDeclaration : variable119
+haxe::HaxeInExpression "1..1" *-- "1..1" haxe::HaxeSingleVariableDeclaration : variable40
+haxe::HaxeVariableDeclarationFragment "1..1" -- "0..1" haxe::HaxeVariableDeclarationGroup : variablesContainer136
 @enduml

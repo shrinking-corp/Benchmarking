@@ -211,9 +211,9 @@ NamedElement <|-- classes::RedefinableElement
 NamedElement <|-- classes::TypedElement
 Namespace <|-- classes::Classifier
 Namespace <|-- classes::Package
+Package <|-- classes::Model
 PackageableElement <|-- classes::Package
 PackageableElement <|-- classes::Type
-Package <|-- classes::Model
 RedefinableElement <|-- classes::Feature
 StructuralFeature <|-- classes::Property
 Type <|-- classes::Classifier
@@ -222,60 +222,60 @@ TypedElement <|-- classes::StructuralFeature
 TypedElement <|-- classes::ValueSpecification
 ValueSpecification <|-- classes::InstanceValue
 ValueSpecification <|-- classes::LiteralSpecification
-classes::Element "0..9999" -- "1..1" classes::Comment : annotatedElement8
+classes::Comment "1..1" -- "0..9999" classes::Element : annotatedElement8
 classes::Association "0..1" -- "1..1" classes::Property : association56
-classes::Property "0..9999" -- "1..1" classes::Classifier : attribute46
+classes::Classifier "1..1" -- "0..9999" classes::Property : attribute46
 classes::Class "0..1" -- "1..1" classes::Property : class59
-classes::Operation "1..1" -- "0..1" classes::Class : class79
+classes::Class "0..1" -- "1..1" classes::Operation : class79
 classes::Classifier "0..9999" -- "1..1" classes::InstanceSpecification : classifier86
 classes::DataType "0..1" -- "1..1" classes::Property : datatype58
-classes::StructuralFeature "1..1" -- "1..1" classes::Slot : definingFeature89
-classes::Namespace "1..1" *-- "0..9999" classes::ElementImport : elementImport12
-classes::Type "1..9999" -- "1..1" classes::Association : endType64
-classes::EnumerationLiteral "1..1" -- "0..1" classes::Enumeration : enumeration97
+classes::Slot "1..1" -- "1..1" classes::StructuralFeature : definingFeature89
+classes::ElementImport "0..9999" --* "1..1" classes::Namespace : elementImport12
+classes::Association "1..1" -- "1..9999" classes::Type : endType64
+classes::Enumeration "0..1" -- "1..1" classes::EnumerationLiteral : enumeration97
 classes::Classifier "1..1" -- "0..9999" classes::Feature : feature42
 classes::Classifier "0..9999" -- "1..1" classes::Feature : featuringClassifier36
 classes::Classifier "0..9999" -- "1..1" classes::Classifier : general49
-classes::Generalization "1..1" -- "1..1" classes::Classifier : general51
-classes::Generalization "0..9999" --* "1..1" classes::Classifier : generalization41
-classes::PackageableElement "1..1" -- "1..1" classes::ElementImport : importedElement18
-classes::PackageableElement "0..9999" -- "1..1" classes::Namespace : importedMember15
+classes::Classifier "1..1" -- "1..1" classes::Generalization : general51
+classes::Classifier "1..1" *-- "0..9999" classes::Generalization : generalization41
+classes::ElementImport "1..1" -- "1..1" classes::PackageableElement : importedElement18
+classes::Namespace "1..1" -- "0..9999" classes::PackageableElement : importedMember15
 classes::Package "1..1" -- "1..1" classes::PackageImport : importedPackage22
 classes::ElementImport "1..1" -- "1..1" classes::Namespace : importingNamespace20
 classes::Namespace "1..1" -- "1..1" classes::PackageImport : importingNamespace23
-classes::NamedElement "0..9999" -- "1..1" classes::Classifier : inheritedMember43
+classes::Classifier "1..1" -- "0..9999" classes::NamedElement : inheritedMember43
 classes::InstanceSpecification "1..1" -- "1..1" classes::InstanceValue : instance94
-classes::ValueSpecification "0..1" --* "1..1" classes::MultiplicityElement : lowerValue75
+classes::MultiplicityElement "1..1" *-- "0..1" classes::ValueSpecification : lowerValue75
 classes::NamedElement "0..9999" -- "1..1" classes::Namespace : member11
-classes::Property "2..9999" -- "1..1" classes::Association : memberEnd66
+classes::Association "1..1" -- "2..9999" classes::Property : memberEnd66
 classes::NamedElement "1..1" -- "0..1" classes::Namespace : namespace1
 classes::Association "1..1" -- "0..9999" classes::Property : navigableOwnedEnd67
 classes::Class "1..1" *-- "0..9999" classes::Classifier : nestedClassifier104
 classes::Package "1..1" -- "0..9999" classes::Package : nestedPackage30
-classes::Package "0..1" -- "1..1" classes::Package : nestingPackage32
+classes::Package "1..1" -- "0..1" classes::Package : nestingPackage32
 classes::Property "0..1" -- "1..1" classes::Property : opposite62
-classes::Property "0..9999" --* "1..1" classes::DataType : ownedAttribute72
-classes::Property "0..9999" --* "1..1" classes::Class : ownedAttribute98
+classes::DataType "1..1" *-- "0..9999" classes::Property : ownedAttribute72
+classes::Class "1..1" *-- "0..9999" classes::Property : ownedAttribute98
 classes::Comment "0..9999" --* "1..1" classes::Element : ownedComment7
 classes::Element "1..1" -- "0..9999" classes::Element : ownedElement3
-classes::Property "0..9999" --* "1..1" classes::Association : ownedEnd70
-classes::EnumerationLiteral "0..9999" --* "1..1" classes::Enumeration : ownedLiteral96
+classes::Association "1..1" *-- "0..9999" classes::Property : ownedEnd70
+classes::Enumeration "1..1" *-- "0..9999" classes::EnumerationLiteral : ownedLiteral96
 classes::NamedElement "0..9999" -- "1..1" classes::Namespace : ownedMember17
-classes::Operation "0..9999" --* "1..1" classes::Class : ownedOperation100
-classes::Parameter "0..9999" --* "1..1" classes::BehavioralFeature : ownedParameter78
-classes::Type "0..9999" -- "1..1" classes::Package : ownedType28
-classes::Element "0..1" -- "1..1" classes::Element : owner5
+classes::Class "1..1" *-- "0..9999" classes::Operation : ownedOperation100
+classes::BehavioralFeature "1..1" *-- "0..9999" classes::Parameter : ownedParameter78
+classes::Package "1..1" -- "0..9999" classes::Type : ownedType28
+classes::Element "1..1" -- "0..1" classes::Element : owner5
 classes::Association "0..1" -- "1..1" classes::Property : owningAssociation55
 classes::InstanceSpecification "1..1" -- "1..1" classes::Slot : owningInstance93
-classes::Type "1..1" -- "0..1" classes::Package : package34
-classes::PackageImport "0..9999" --* "1..1" classes::Namespace : packageImport13
-classes::PackageableElement "0..9999" --* "1..1" classes::Package : packagedElement25
-classes::RedefinableElement "0..9999" -- "1..1" classes::RedefinableElement : redefinedElement38
-classes::Operation "0..9999" -- "1..1" classes::Operation : redefinedOperation82
-classes::RedefinableElement "1..1" -- "0..9999" classes::Classifier : redefinitionContext39
-classes::Slot "0..9999" --* "1..1" classes::InstanceSpecification : slot88
-classes::Generalization "1..1" -- "1..1" classes::Classifier : specific53
-classes::Class "0..9999" -- "1..1" classes::Class : superClass103
+classes::Package "0..1" -- "1..1" classes::Type : package34
+classes::Namespace "1..1" *-- "0..9999" classes::PackageImport : packageImport13
+classes::Package "1..1" *-- "0..9999" classes::PackageableElement : packagedElement25
+classes::RedefinableElement "1..1" -- "0..9999" classes::RedefinableElement : redefinedElement38
+classes::Operation "1..1" -- "0..9999" classes::Operation : redefinedOperation82
+classes::Classifier "0..9999" -- "1..1" classes::RedefinableElement : redefinitionContext39
+classes::InstanceSpecification "1..1" *-- "0..9999" classes::Slot : slot88
+classes::Classifier "1..1" -- "1..1" classes::Generalization : specific53
+classes::Class "1..1" -- "0..9999" classes::Class : superClass103
 classes::Type "0..1" -- "1..1" classes::TypedElement : type0
 classes::Operation "1..1" -- "0..1" classes::Type : type83
 classes::MultiplicityElement "1..1" *-- "0..1" classes::ValueSpecification : upperValue74

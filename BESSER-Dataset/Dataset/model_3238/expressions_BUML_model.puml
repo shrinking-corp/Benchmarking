@@ -1,0 +1,142 @@
+@startuml
+class AbstractRoot {
+}
+class BaseType {
+}
+enum BinaryOperation {
+  ADD
+  AND
+  ASSIGN
+  ASSIGN_ADD
+  ASSIGN_DIV
+  ASSIGN_MOD
+  ASSIGN_MUL
+  ASSIGN_SUB
+  DIFF
+  DIV
+  EQ
+  GE
+  GT
+  LE
+  LT
+  MOD
+  MUL
+  NE
+  OR
+  SUB
+}
+class Expression {
+}
+enum ResolvedType {
+  boolean
+  clock
+  float
+  integer
+  natural
+  resource
+  unknown
+}
+enum TernaryOperation {
+  QUESTION
+}
+class Type {
+}
+enum UnaryOperation {
+  MINUS
+  NOT
+  PLUS
+}
+class VariableReference {
+}
+class ast::expressions::EObject {
+}
+abstract class expressions::ast::AbstractRoot {
+  + type : str
+}
+class expressions::ast::ActionRoot {
+}
+abstract class expressions::ast::AstVisitor {
+  + visitBinaryExpression(node : any) : void
+  + visitConstant(node : any) : void
+  + visitLiteral(node : any) : void
+  + visitTernaryExpression(node : any) : void
+  + visitUnaryExpression(node : any) : void
+  + visitVariableReference(node : any) : void
+}
+class expressions::ast::BinaryExpression {
+  + operation : str
+}
+class expressions::ast::Constant {
+  + value : str
+}
+abstract class expressions::ast::Expression {
+  + text : str
+  + type : str
+  + visit(visitor : any) : void
+}
+class expressions::ast::Literal {
+  + value : str
+}
+class expressions::ast::LogicalRoot {
+}
+class expressions::ast::ResourceRoot {
+}
+class expressions::ast::TernaryExpression {
+  + operation : str
+}
+class expressions::ast::UnaryExpression {
+  + operation : str
+}
+class expressions::ast::VariableReference {
+  + name : str
+}
+class expressions::type::AnyType {
+}
+abstract class expressions::type::BaseType {
+}
+class expressions::type::BooleanType {
+}
+class expressions::type::ClockType {
+}
+class expressions::type::FloatType {
+}
+class expressions::type::IntegerType {
+}
+class expressions::type::NaturalType {
+}
+class expressions::type::ResourceType {
+}
+abstract class expressions::type::Type {
+  + add(rightArgument : any) : str
+  + getPrimitiveTypeIndex() : int
+}
+AbstractRoot <|-- expressions::ast::ActionRoot
+AbstractRoot <|-- expressions::ast::LogicalRoot
+AbstractRoot <|-- expressions::ast::ResourceRoot
+BaseType <|-- expressions::type::AnyType
+BaseType <|-- expressions::type::BooleanType
+BaseType <|-- expressions::type::ClockType
+BaseType <|-- expressions::type::FloatType
+BaseType <|-- expressions::type::IntegerType
+BaseType <|-- expressions::type::NaturalType
+BaseType <|-- expressions::type::ResourceType
+Expression <|-- expressions::ast::BinaryExpression
+Expression <|-- expressions::ast::Constant
+Expression <|-- expressions::ast::Literal
+Expression <|-- expressions::ast::TernaryExpression
+Expression <|-- expressions::ast::UnaryExpression
+Expression <|-- expressions::ast::VariableReference
+Type <|-- expressions::type::BaseType
+Expression "0..1" --* "1..1" expressions::ast::VariableReference : arrayIndex21
+Expression "1..1" --* "1..1" expressions::ast::LogicalRoot : expression2
+Expression "1..1" --* "1..1" expressions::ast::ResourceRoot : expression4
+Expression "1..9999" --* "1..1" expressions::ast::ActionRoot : expressions1
+Expression "1..1" --* "1..1" expressions::ast::BinaryExpression : param114
+Expression "1..1" --* "1..1" expressions::ast::UnaryExpression : param119
+Expression "1..1" --* "1..1" expressions::ast::TernaryExpression : param16
+Expression "1..1" --* "1..1" expressions::ast::BinaryExpression : param216
+Expression "1..1" --* "1..1" expressions::ast::TernaryExpression : param28
+Expression "1..1" --* "1..1" expressions::ast::TernaryExpression : param311
+VariableReference "0..9999" -- "1..1" expressions::ast::AbstractRoot : referencedVariables0
+ast::expressions::EObject "1..1" -- "1..1" expressions::ast::VariableReference : resolved23
+@enduml

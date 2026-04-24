@@ -51,21 +51,21 @@ Named <|-- publication105::Paragraph
 Named <|-- publication105::Position
 Named <|-- publication105::PublicationStructure
 Named <|-- publication105::ReviewNote
-publication105::Researcher "0..9999" -- "1..1" publication105::Paper : authors11
+publication105::Paper "1..1" -- "0..9999" publication105::Researcher : authors11
 publication105::Paper "0..1" -- "1..1" publication105::Paper : citedBy13
-publication105::Paper "0..1" -- "1..1" publication105::Collaboration : col_paper34
+publication105::Collaboration "1..1" -- "0..1" publication105::Paper : col_paper34
 publication105::Collaboration "0..9999" --* "1..1" publication105::Researcher : collaborations8
 publication105::Paper "0..9999" --* "1..1" publication105::PublicationStructure : papers25
 publication105::Paragraph "0..1" -- "1..1" publication105::Write : paragraph17
 publication105::Paper "1..1" *-- "0..9999" publication105::Paragraph : paragraphs10
 publication105::Position "0..1" -- "1..1" publication105::Position : parent32
-publication105::PublicationStructure "1..1" *-- "0..9999" publication105::Position : positions28
+publication105::Position "0..9999" --* "1..1" publication105::PublicationStructure : positions28
 publication105::Paper "0..9999" -- "1..1" publication105::Researcher : res_papers3
-publication105::Researcher "1..1" -- "0..1" publication105::Position : res_position6
-publication105::Researcher "0..9999" --* "1..1" publication105::PublicationStructure : researchers23
-publication105::ReviewNote "0..1" -- "1..1" publication105::Review : reviewNote20
-publication105::Review "0..9999" --* "1..1" publication105::Researcher : reviews1
-publication105::ReviewNote "0..9999" --* "1..1" publication105::Paragraph : reviews15
-publication105::Skill "0..9999" --* "1..1" publication105::Researcher : skills4
+publication105::Position "0..1" -- "1..1" publication105::Researcher : res_position6
+publication105::PublicationStructure "1..1" *-- "0..9999" publication105::Researcher : researchers23
+publication105::Review "1..1" -- "0..1" publication105::ReviewNote : reviewNote20
+publication105::Researcher "1..1" *-- "0..9999" publication105::Review : reviews1
+publication105::Paragraph "1..1" *-- "0..9999" publication105::ReviewNote : reviews15
+publication105::Researcher "1..1" *-- "0..9999" publication105::Skill : skills4
 publication105::Researcher "1..1" *-- "0..9999" publication105::Write : writes0
 @enduml

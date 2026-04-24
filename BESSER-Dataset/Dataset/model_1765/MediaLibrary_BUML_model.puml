@@ -77,15 +77,15 @@ NamedElement <|-- MediaLibrary::Device
 NamedElement <|-- MediaLibrary::Library
 NamedElement <|-- MediaLibrary::MediaCollection
 NamedElement <|-- MediaLibrary::MediaSource
-MediaLibrary::MediaCollection "0..9999" -- "1..1" MediaLibrary::Device : collections13
-MediaLibrary::MediaCollection "0..9999" --* "1..1" MediaLibrary::Library : collections5
+MediaLibrary::Device "1..1" -- "0..9999" MediaLibrary::MediaCollection : collections13
+MediaLibrary::Library "1..1" *-- "0..9999" MediaLibrary::MediaCollection : collections5
 MediaLibrary::Artifact "0..9999" -- "1..1" MediaLibrary::MediaSource : contents16
-MediaLibrary::Ecosystem "1..1" *-- "1..9999" MediaLibrary::Device : devices1
+MediaLibrary::Device "1..9999" --* "1..1" MediaLibrary::Ecosystem : devices1
 MediaLibrary::Device "1..1" -- "1..1" MediaLibrary::MediaCollection : host9
-MediaLibrary::MediaCollection "0..9999" -- "1..1" MediaLibrary::Device : hostOf12
-MediaLibrary::Library "1..9999" --* "1..1" MediaLibrary::Ecosystem : libraries0
-MediaLibrary::MediaSource "1..9999" --* "1..1" MediaLibrary::Ecosystem : mediaSources3
+MediaLibrary::Device "1..1" -- "0..9999" MediaLibrary::MediaCollection : hostOf12
+MediaLibrary::Ecosystem "1..1" *-- "1..9999" MediaLibrary::Library : libraries0
+MediaLibrary::Ecosystem "1..1" *-- "1..9999" MediaLibrary::MediaSource : mediaSources3
 MediaLibrary::Artifact "1..9999" --* "1..1" MediaLibrary::MediaCollection : members7
 MediaLibrary::Artifact "1..1" -- "1..1" MediaLibrary::MediaSource : origin15
-MediaLibrary::MediaCollection "1..1" -- "1..9999" MediaLibrary::Device : syncedDevices10
+MediaLibrary::Device "1..9999" -- "1..1" MediaLibrary::MediaCollection : syncedDevices10
 @enduml

@@ -271,18 +271,18 @@ TABLEElement <|-- html::TABLE
 TABLEElement <|-- html::TD
 TABLEElement <|-- html::TR
 TD <|-- html::TH
-html::HTML "1..1" *-- "1..1" html::BODY : body1
-html::BODYElement "1..1" -- "0..1" html::BODY : body17
-html::BODYElement "0..9999" --* "1..1" html::BODY : bodyElements13
-html::HTMLElement "0..9999" --* "1..1" html::HTMLElement : children4
+html::BODY "1..1" --* "1..1" html::HTML : body1
+html::BODY "0..1" -- "1..1" html::BODYElement : body17
+html::BODY "1..1" *-- "0..9999" html::BODYElement : bodyElements13
+html::HTMLElement "1..1" *-- "0..9999" html::HTMLElement : children4
 html::HEAD "1..1" --* "1..1" html::HTML : head0
 html::HEAD "1..1" -- "1..1" html::HEADElement : head11
 html::HEAD "1..1" *-- "0..9999" html::HEADElement : headElements8
-html::HTML "1..1" -- "1..1" html::BODY : html14
-html::HTML "1..1" -- "1..1" html::HEAD : html9
-html::HTMLElement "0..1" -- "1..1" html::HTMLElement : parent6
-html::TR "1..1" -- "1..1" html::TABLE : table20
+html::BODY "1..1" -- "1..1" html::HTML : html14
+html::HEAD "1..1" -- "1..1" html::HTML : html9
+html::HTMLElement "1..1" -- "0..1" html::HTMLElement : parent6
+html::TABLE "1..1" -- "1..1" html::TR : table20
 html::TD "0..9999" --* "1..1" html::TR : tds21
-html::TR "1..1" -- "1..1" html::TD : tr22
-html::TR "0..9999" --* "1..1" html::TABLE : trs19
+html::TD "1..1" -- "1..1" html::TR : tr22
+html::TABLE "1..1" *-- "0..9999" html::TR : trs19
 @enduml

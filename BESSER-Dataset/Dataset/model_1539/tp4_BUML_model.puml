@@ -67,26 +67,26 @@ Named <|-- tp4::PublicationProcess
 Named <|-- tp4::PublicationStructure
 Named <|-- tp4::PublicationSystem
 Named <|-- tp4::ReviewNote
-tp4::PublicationSystem "1..1" *-- "0..9999" tp4::Keyword : allKeywords39
-tp4::Researcher "0..9999" -- "1..1" tp4::Paper : authors11
-tp4::Paper "1..1" -- "0..9999" tp4::Keyword : keywords12
+tp4::Keyword "0..9999" --* "1..1" tp4::PublicationSystem : allKeywords39
+tp4::Paper "1..1" -- "0..9999" tp4::Researcher : authors11
+tp4::Keyword "0..9999" -- "1..1" tp4::Paper : keywords12
 tp4::Paper "0..1" -- "1..1" tp4::Progress : paper18
 tp4::Paper "0..9999" --* "1..1" tp4::PublicationStructure : papers28
 tp4::Paragraph "0..1" -- "1..1" tp4::Write : paragraph20
-tp4::Paragraph "0..9999" --* "1..1" tp4::Paper : paragraphs9
+tp4::Paper "1..1" *-- "0..9999" tp4::Paragraph : paragraphs9
 tp4::Position "0..1" -- "1..1" tp4::Position : parent43
 tp4::Phases "0..9999" --* "1..1" tp4::PublicationProcess : phases0
-tp4::Researcher "1..1" -- "0..1" tp4::Position : position7
+tp4::Position "0..1" -- "1..1" tp4::Researcher : position7
 tp4::Position "0..9999" --* "1..1" tp4::PublicationSystem : positions36
 tp4::Progress "1..1" -- "0..1" tp4::PublicationProcess : process16
 tp4::PublicationProcess "0..1" --* "1..1" tp4::PublicationSystem : processView31
 tp4::Paper "1..1" *-- "0..9999" tp4::Progress : progress10
 tp4::Paper "0..9999" -- "1..1" tp4::Researcher : res_papers4
-tp4::Researcher "0..9999" --* "1..1" tp4::PublicationStructure : researchers26
+tp4::PublicationStructure "1..1" *-- "0..9999" tp4::Researcher : researchers26
 tp4::Review "1..1" -- "0..1" tp4::ReviewNote : reviewNote23
-tp4::ReviewNote "0..9999" --* "1..1" tp4::Paragraph : reviews14
-tp4::Review "0..9999" --* "1..1" tp4::Researcher : reviews2
-tp4::Skill "0..9999" --* "1..1" tp4::Researcher : skills5
+tp4::Paragraph "1..1" *-- "0..9999" tp4::ReviewNote : reviews14
+tp4::Researcher "1..1" *-- "0..9999" tp4::Review : reviews2
+tp4::Researcher "1..1" *-- "0..9999" tp4::Skill : skills5
 tp4::PublicationStructure "0..1" --* "1..1" tp4::PublicationSystem : structuralView33
-tp4::Write "0..9999" --* "1..1" tp4::Researcher : writes1
+tp4::Researcher "1..1" *-- "0..9999" tp4::Write : writes1
 @enduml

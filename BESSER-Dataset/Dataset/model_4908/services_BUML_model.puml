@@ -74,7 +74,6 @@ class services::Tolerance {
 }
 class services::Value {
 }
-BaseResource <|-- services::DerivedResource
 Base <|-- services::CIID
 Base <|-- services::DistributionEntry
 Base <|-- services::Service
@@ -84,32 +83,33 @@ Base <|-- services::ServiceForecastUsers
 Base <|-- services::ServiceMonitor
 Base <|-- services::ServiceProfile
 Base <|-- services::ServiceUser
+BaseResource <|-- services::DerivedResource
 Service <|-- services::CFSService
 Service <|-- services::RFSService
-services::Service "1..1" *-- "0..9999" services::CIID : cIID14
+services::CIID "0..9999" --* "1..1" services::Service : cIID14
 services::DerivedResource "0..1" --* "1..1" services::DistributionEntry : distribution8
 services::DistributionEntry "0..9999" --* "1..1" services::ServiceDistribution : distributionEntries28
 services::Expression "0..1" -- "1..1" services::ServiceUser : expressionRef55
 services::Expression "0..9999" -- "1..1" services::ServiceDistribution : expressionRefs31
-services::Value "0..9999" --* "1..1" services::DerivedResource : forecastValues1
+services::DerivedResource "1..1" *-- "0..9999" services::Value : forecastValues1
 services::Lifecycle "0..1" --* "1..1" services::Service : lifecycle15
 services::Node "0..9999" -- "1..1" services::RFSService : nodes11
 services::DateTimeRange "0..1" --* "1..1" services::ServiceForecast : period33
 services::DateTimeRange "0..1" --* "1..1" services::ServiceMonitor : period45
-services::ServiceProfile "1..1" *-- "0..9999" services::DerivedResource : profileResources50
-services::ServiceForecast "1..1" *-- "0..9999" services::ResourceForecast : resourceForecasts37
-services::ServiceMonitor "1..1" *-- "0..9999" services::ResourceMonitor : resourceMonitors48
+services::DerivedResource "0..9999" --* "1..1" services::ServiceProfile : profileResources50
+services::ResourceForecast "0..9999" --* "1..1" services::ServiceForecast : resourceForecasts37
+services::ResourceMonitor "0..9999" --* "1..1" services::ServiceMonitor : resourceMonitors48
 services::DistributionEntry "1..1" -- "0..1" services::NetXResource : resourceRef7
-services::ServiceDistribution "0..1" --* "1..1" services::Service : serviceDistribution26
-services::ServiceForecastUsers "0..9999" --* "1..1" services::ServiceForecast : serviceForecastUsers35
-services::ServiceForecast "0..9999" --* "1..1" services::Service : serviceForecasts20
+services::Service "1..1" *-- "0..1" services::ServiceDistribution : serviceDistribution26
+services::ServiceForecast "1..1" *-- "0..9999" services::ServiceForecastUsers : serviceForecastUsers35
+services::Service "1..1" *-- "0..9999" services::ServiceForecast : serviceForecasts20
 services::Service "1..1" *-- "0..9999" services::ServiceMonitor : serviceMonitors22
 services::ServiceProfile "0..1" --* "1..1" services::ServiceUser : serviceProfile52
-services::ServiceUser "0..1" -- "1..1" services::ServiceForecastUsers : serviceUserRef42
-services::ServiceUser "0..9999" -- "1..1" services::Service : serviceUserRefs24
+services::ServiceForecastUsers "1..1" -- "0..1" services::ServiceUser : serviceUserRef42
+services::Service "1..1" -- "0..9999" services::ServiceUser : serviceUserRefs24
 services::Service "0..9999" --* "1..1" services::Service : services18
-services::Tolerance "0..9999" -- "1..1" services::RFSService : toleranceRefs12
-services::Value "0..9999" --* "1..1" services::DerivedResource : trendedValues4
-services::Value "0..9999" --* "1..1" services::ServiceForecastUsers : userValues39
+services::RFSService "1..1" -- "0..9999" services::Tolerance : toleranceRefs12
+services::DerivedResource "1..1" *-- "0..9999" services::Value : trendedValues4
+services::ServiceForecastUsers "1..1" *-- "0..9999" services::Value : userValues39
 services::DerivedResource "1..1" *-- "0..9999" services::Value : values0
 @enduml

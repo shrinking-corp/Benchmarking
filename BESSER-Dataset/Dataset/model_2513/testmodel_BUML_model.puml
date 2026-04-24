@@ -1,0 +1,54 @@
+@startuml
+class A {
+}
+class AbstractD {
+}
+class B {
+}
+class C {
+}
+class D {
+}
+abstract class test::ast::AbstractD {
+  + derivedString : str
+}
+class test::ast::D {
+  + index : int
+  + name : str
+  + someBool : bool
+  + someCollection : str
+  + someOtherBool : str
+  + someQCollection : str
+  + operationAttribute(param : any) : str
+}
+class test::ast::E {
+  + derivedBool : bool
+  + lazyBool : bool
+}
+class test::ntas::A {
+  + name : str
+}
+class test::ntas::B {
+}
+class test::ntas::C {
+  + someTerminal : str
+}
+class test::ntas::Root {
+}
+AbstractD <|-- test::ast::D
+D <|-- test::ast::E
+C "0..9999" --* "1..1" test::ast::D : DerivedMultipleUpperC24
+D "1..1" --* "1..1" test::ast::D : DerivedUpperD21
+C "0..9999" --* "1..1" test::ast::D : MultipleUpperC18
+A "1..1" --* "1..1" test::ast::D : UpperA27
+C "1..1" --* "1..1" test::ast::D : UpperC12
+C "1..1" --* "1..1" test::ntas::Root : containmentC3
+D "0..9999" --* "1..1" test::ntas::Root : containmentD5
+A "1..1" --* "1..1" test::ntas::Root : derivedA0
+B "0..9999" --* "1..1" test::ntas::Root : derivedB1
+A "0..9999" --* "1..1" test::ast::D : derivedMultipleLowerA30
+D "1..1" --* "1..1" test::ast::D : lowerD10
+D "0..9999" --* "1..1" test::ast::D : multipleLowerD15
+A "0..1" --* "1..1" test::ntas::Root : myA7
+A "1..1" -- "1..1" test::ast::AbstractD : refToSomeA33
+@enduml

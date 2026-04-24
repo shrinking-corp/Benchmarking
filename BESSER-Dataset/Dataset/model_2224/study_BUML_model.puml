@@ -31,13 +31,13 @@ class study::Specialization {
 }
 class study::StudyPlan {
 }
-study::Department "1..1" *-- "0..9999" study::Course : course1
+study::Course "0..9999" --* "1..1" study::Department : course1
 study::CourseSlot "0..9999" --* "1..1" study::Semester : courseSlot12
 study::Course "0..9999" -- "1..1" study::CourseSlot : electiveCourses17
-study::CourseSlot "1..1" -- "0..1" study::Course : mandatoryCourse14
-study::Programme "0..9999" --* "1..1" study::Department : programme0
+study::Course "0..1" -- "1..1" study::CourseSlot : mandatoryCourse14
+study::Department "1..1" *-- "0..9999" study::Programme : programme0
 study::Semester "0..9999" --* "1..1" study::StudyPlan : semester7
-study::Specialization "1..1" *-- "0..9999" study::Semester : semester9
+study::Semester "0..9999" --* "1..1" study::Specialization : semester9
 study::Specialization "0..9999" --* "1..1" study::StudyPlan : spesialization5
-study::StudyPlan "0..9999" --* "1..1" study::Programme : studyPlan3
+study::Programme "1..1" *-- "0..9999" study::StudyPlan : studyPlan3
 @enduml

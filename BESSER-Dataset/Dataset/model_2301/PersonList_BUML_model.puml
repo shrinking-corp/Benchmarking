@@ -30,13 +30,13 @@ Person <|-- PersonList::Female
 Person <|-- PersonList::Male
 Place <|-- PersonList::LivingPlace
 Place <|-- PersonList::WorkPlace
-PersonList::Person "1..1" -- "1..1" PersonList::LivingPlace : home4
-PersonList::Person "1..1" -- "1..1" PersonList::List : list2
-PersonList::Person "0..9999" --* "1..1" PersonList::List : members0
+PersonList::LivingPlace "1..1" -- "1..1" PersonList::Person : home4
+PersonList::List "1..1" -- "1..1" PersonList::Person : list2
+PersonList::List "1..1" *-- "0..9999" PersonList::Person : members0
 PersonList::Person "1..1" -- "1..1" PersonList::WorkingPosition : persons11
-PersonList::Person "0..9999" -- "1..1" PersonList::LivingPlace : persons8
-PersonList::Place "0..1" -- "1..1" PersonList::List : places1
-PersonList::WorkingPosition "0..1" -- "1..1" PersonList::WorkPlace : position6
-PersonList::WorkingPosition "1..1" -- "1..1" PersonList::WorkPlace : works10
-PersonList::WorkingPosition "1..1" --* "1..1" PersonList::Person : works3
+PersonList::LivingPlace "1..1" -- "0..9999" PersonList::Person : persons8
+PersonList::List "1..1" -- "0..1" PersonList::Place : places1
+PersonList::WorkPlace "1..1" -- "0..1" PersonList::WorkingPosition : position6
+PersonList::WorkPlace "1..1" -- "1..1" PersonList::WorkingPosition : works10
+PersonList::Person "1..1" *-- "1..1" PersonList::WorkingPosition : works3
 @enduml

@@ -32,15 +32,15 @@ TreeElement <|-- MocaTree::Link
 TreeElement <|-- MocaTree::Text
 MocaTree::Attribute "0..9999" --* "1..1" MocaTree::Link : attribute13
 MocaTree::Attribute "0..9999" --* "1..1" MocaTree::Node : attribute18
-MocaTree::Text "0..9999" --* "1..1" MocaTree::Node : children17
+MocaTree::Node "1..1" *-- "0..9999" MocaTree::Text : children17
 MocaTree::File "0..9999" --* "1..1" MocaTree::Folder : file11
-MocaTree::Node "1..1" -- "0..1" MocaTree::File : file15
+MocaTree::File "0..1" -- "1..1" MocaTree::Node : file15
 MocaTree::File "1..1" -- "1..1" MocaTree::Folder : folder1
 MocaTree::Link "0..9999" --* "1..1" MocaTree::TreeElement : links21
-MocaTree::Node "0..1" -- "1..1" MocaTree::Attribute : node0
+MocaTree::Attribute "1..1" -- "0..1" MocaTree::Node : node0
 MocaTree::Folder "1..1" -- "1..1" MocaTree::Folder : parentFolder9
-MocaTree::Text "1..1" -- "0..1" MocaTree::Node : parentNode19
-MocaTree::Node "1..1" --* "1..1" MocaTree::File : rootNode2
-MocaTree::Folder "0..9999" --* "1..1" MocaTree::Folder : subFolder6
-MocaTree::TreeElement "0..9999" -- "1..1" MocaTree::Link : targets12
+MocaTree::Node "0..1" -- "1..1" MocaTree::Text : parentNode19
+MocaTree::File "1..1" *-- "1..1" MocaTree::Node : rootNode2
+MocaTree::Folder "1..1" *-- "0..9999" MocaTree::Folder : subFolder6
+MocaTree::Link "1..1" -- "0..9999" MocaTree::TreeElement : targets12
 @enduml

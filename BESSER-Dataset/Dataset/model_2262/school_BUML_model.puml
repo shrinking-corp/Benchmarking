@@ -26,19 +26,19 @@ class school::Year {
 }
 Course <|-- school::SpecialisationCourse
 school::Course "0..9999" -- "1..1" school::SchoolClass : courses14
-school::Teacher "1..1" -- "0..9999" school::Course : courses22
+school::Course "0..9999" -- "1..1" school::Teacher : courses22
 school::Course "0..9999" --* "1..1" school::School : courses9
 school::SchoolClass "1..1" -- "0..1" school::Teacher : homeroomTeacher17
 school::SchoolClass "0..1" -- "1..1" school::Teacher : homeroomedClass24
-school::School "0..1" -- "1..1" school::Course : school0
-school::Teacher "1..1" -- "0..1" school::School : school20
+school::Course "1..1" -- "0..1" school::School : school0
+school::School "0..1" -- "1..1" school::Teacher : school20
 school::School "0..1" -- "1..1" school::Year : school27
 school::SchoolClass "0..1" -- "1..1" school::Student : schoolClass18
-school::SchoolClass "0..1" -- "1..1" school::Course : schoolClass3
+school::Course "1..1" -- "0..1" school::SchoolClass : schoolClass3
 school::SchoolClass "0..9999" --* "1..1" school::Year : schoolClasses29
-school::Student "0..9999" --* "1..1" school::SchoolClass : students13
+school::SchoolClass "1..1" *-- "0..9999" school::Student : students13
 school::Course "1..1" -- "0..1" school::Teacher : teacher1
-school::Teacher "0..9999" --* "1..1" school::School : teachers6
-school::Year "0..1" -- "1..1" school::SchoolClass : year11
-school::Year "0..9999" --* "1..1" school::School : years5
+school::School "1..1" *-- "0..9999" school::Teacher : teachers6
+school::SchoolClass "1..1" -- "0..1" school::Year : year11
+school::School "1..1" *-- "0..9999" school::Year : years5
 @enduml

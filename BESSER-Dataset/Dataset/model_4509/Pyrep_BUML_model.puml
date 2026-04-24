@@ -62,14 +62,14 @@ Entity <|-- PyDslRep::Robot
 Entity <|-- PyDslRep::Sensor
 Entity <|-- PyDslRep::TypeSensor
 Entity <|-- PyDslRep::Wheel
-PyDslRep::Model "1..1" *-- "0..9999" PyDslRep::Entity : environment0
+PyDslRep::Entity "0..9999" --* "1..1" PyDslRep::Model : environment0
 PyDslRep::Environment "1..1" -- "0..1" PyDslRep::IP : ip1
-PyDslRep::MoveCollection "1..1" *-- "0..9999" PyDslRep::AbstractDataMove : moves11
-PyDslRep::MoveCollection "0..9999" -- "1..1" PyDslRep::Environment : moves4
-PyDslRep::Robot "0..1" -- "1..1" PyDslRep::MoveCollection : robot8
-PyDslRep::Robot "0..9999" -- "1..1" PyDslRep::Environment : robots2
+PyDslRep::AbstractDataMove "0..9999" --* "1..1" PyDslRep::MoveCollection : moves11
+PyDslRep::Environment "1..1" -- "0..9999" PyDslRep::MoveCollection : moves4
+PyDslRep::MoveCollection "1..1" -- "0..1" PyDslRep::Robot : robot8
+PyDslRep::Environment "1..1" -- "0..9999" PyDslRep::Robot : robots2
 PyDslRep::Sensor "1..1" *-- "0..1" PyDslRep::TypeSensor : type16
-PyDslRep::DataMove "0..1" --* "1..1" PyDslRep::AbstractMove : typeM13
-PyDslRep::DataMove "0..1" -- "1..1" PyDslRep::AbstractCrossMove : typeM14
-PyDslRep::Wheel "0..9999" -- "1..1" PyDslRep::Robot : wheels6
+PyDslRep::AbstractMove "1..1" *-- "0..1" PyDslRep::DataMove : typeM13
+PyDslRep::AbstractCrossMove "1..1" -- "0..1" PyDslRep::DataMove : typeM14
+PyDslRep::Robot "1..1" -- "0..9999" PyDslRep::Wheel : wheels6
 @enduml

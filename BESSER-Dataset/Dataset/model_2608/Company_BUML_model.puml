@@ -48,17 +48,17 @@ Division <|-- Company::Unit
 Project <|-- Company::European
 Project <|-- Company::National
 Company::Address "1..9999" --* "1..1" Company::CompanyModel : address23
-Company::Company "1..1" -- "0..1" Company::Address : address8
-Company::Project "0..9999" -- "1..1" Company::Person : assignedTo0
+Company::Address "0..1" -- "1..1" Company::Company : address8
+Company::Person "1..1" -- "0..9999" Company::Project : assignedTo0
 Company::Category "0..9999" --* "1..1" Company::CompanyModel : categories18
 Company::Category "1..1" -- "1..1" Company::Topic : category15
-Company::CompanyModel "1..1" *-- "1..9999" Company::Company : company16
-Company::Division "0..9999" --* "1..1" Company::CompanyModel : division26
+Company::Company "1..9999" --* "1..1" Company::CompanyModel : company16
+Company::CompanyModel "1..1" *-- "0..9999" Company::Division : division26
 Company::Person "1..1" -- "0..1" Company::ServiceLine : employed1
-Company::Division "0..9999" --* "1..1" Company::Company : lines10
-Company::Person "0..9999" --* "1..1" Company::Company : persons3
-Company::Project "0..9999" --* "1..1" Company::Company : projects5
-Company::Project "1..1" -- "1..1" Company::Category : related12
-Company::Topic "0..9999" -- "1..1" Company::Category : topics14
-Company::Topic "0..9999" --* "1..1" Company::CompanyModel : topics21
+Company::Company "1..1" *-- "0..9999" Company::Division : lines10
+Company::Company "1..1" *-- "0..9999" Company::Person : persons3
+Company::Company "1..1" *-- "0..9999" Company::Project : projects5
+Company::Category "1..1" -- "1..1" Company::Project : related12
+Company::Category "1..1" -- "0..9999" Company::Topic : topics14
+Company::CompanyModel "1..1" *-- "0..9999" Company::Topic : topics21
 @enduml

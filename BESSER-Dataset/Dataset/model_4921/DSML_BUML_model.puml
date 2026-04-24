@@ -1,0 +1,180 @@
+@startuml
+class Button {
+}
+class Error {
+}
+class Field {
+}
+class Form {
+}
+class FormElement {
+}
+class Item {
+}
+class Link {
+}
+class ListField {
+}
+class Page {
+}
+class Success {
+}
+class Text {
+}
+enum Type {
+  float
+  int
+}
+class Validator {
+}
+class Visitor {
+}
+class dsml::visitor::JSPVisitor {
+}
+class dsml::visitor::POJOVisitor {
+}
+class dsml::visitor::ResourceVisitor {
+}
+abstract class dsml::visitor::Visitor {
+  + tag : str
+}
+class dsml::web::BetweenValidator {
+  + valueG : int
+  + valueL : int
+}
+abstract class dsml::web::Button {
+}
+class dsml::web::CancelButton {
+}
+class dsml::web::CheckBox {
+}
+class dsml::web::DateValidator {
+}
+class dsml::web::EmailValidator {
+}
+class dsml::web::Error {
+}
+abstract class dsml::web::Field {
+}
+class dsml::web::Form {
+  + action : str
+  + accept(visitor : any) : str
+}
+abstract class dsml::web::FormElement {
+  + name : str
+  + value : str
+  + accept(visitor : any) : str
+}
+class dsml::web::GreaterThanValidator {
+  + value : int
+}
+class dsml::web::Hidden {
+}
+class dsml::web::Item {
+  + value : str
+}
+class dsml::web::Label {
+}
+class dsml::web::LessThanValidator {
+  + value : int
+}
+class dsml::web::Link {
+  + value : str
+  + accept(visitor : any) : str
+}
+abstract class dsml::web::ListField {
+}
+class dsml::web::Page {
+  + name : str
+  + title : str
+}
+class dsml::web::PasswordField {
+  + maxlength : int
+  + size : int
+}
+class dsml::web::RadioButton {
+}
+class dsml::web::RegexValidator {
+  + regex : str
+}
+class dsml::web::Required {
+}
+class dsml::web::ResetButton {
+}
+class dsml::web::Select {
+  + size : int
+}
+class dsml::web::StringLengthValidator {
+  + max : int
+  + min : int
+}
+class dsml::web::SubmitButton {
+}
+class dsml::web::Success {
+}
+class dsml::web::Text {
+  + value : str
+  + accept(visitor : any) : str
+}
+class dsml::web::TextArea {
+  + cols : int
+  + rows : int
+}
+class dsml::web::TextField {
+  + maxlength : int
+  + size : int
+}
+class dsml::web::TimeValidator {
+}
+class dsml::web::TypeValidator {
+  + type : str
+}
+class dsml::web::URLValidator {
+}
+abstract class dsml::web::Validator {
+  + accept(visitor : any) : str
+}
+class dsml::web::Website {
+  + name : str
+}
+Button <|-- dsml::web::CancelButton
+Button <|-- dsml::web::ResetButton
+Button <|-- dsml::web::SubmitButton
+Field <|-- dsml::web::PasswordField
+Field <|-- dsml::web::TextArea
+Field <|-- dsml::web::TextField
+FormElement <|-- dsml::web::Button
+FormElement <|-- dsml::web::CheckBox
+FormElement <|-- dsml::web::Field
+FormElement <|-- dsml::web::Hidden
+FormElement <|-- dsml::web::Label
+FormElement <|-- dsml::web::ListField
+ListField <|-- dsml::web::RadioButton
+ListField <|-- dsml::web::Select
+Validator <|-- dsml::web::BetweenValidator
+Validator <|-- dsml::web::DateValidator
+Validator <|-- dsml::web::EmailValidator
+Validator <|-- dsml::web::GreaterThanValidator
+Validator <|-- dsml::web::LessThanValidator
+Validator <|-- dsml::web::RegexValidator
+Validator <|-- dsml::web::Required
+Validator <|-- dsml::web::StringLengthValidator
+Validator <|-- dsml::web::TimeValidator
+Validator <|-- dsml::web::TypeValidator
+Validator <|-- dsml::web::URLValidator
+Visitor <|-- dsml::visitor::JSPVisitor
+Visitor <|-- dsml::visitor::POJOVisitor
+Visitor <|-- dsml::visitor::ResourceVisitor
+Error "0..1" --* "1..1" dsml::web::Form : Error13
+Page "0..1" -- "1..1" dsml::web::Error : ErrorPage17
+Form "0..1" --* "1..1" dsml::web::Page : Form1
+FormElement "0..9999" --* "1..1" dsml::web::Form : FormElements10
+Item "0..9999" --* "1..1" dsml::web::ListField : Items7
+Page "0..1" -- "1..1" dsml::web::Link : LinkedPage8
+Link "0..9999" --* "1..1" dsml::web::Page : Links4
+Page "1..9999" --* "1..1" dsml::web::Website : Pages0
+Success "0..1" --* "1..1" dsml::web::Form : Success11
+Page "0..1" -- "1..1" dsml::web::Success : SuccessPage15
+Text "0..9999" --* "1..1" dsml::web::Page : Texts2
+Validator "0..9999" --* "1..1" dsml::web::Field : Validator6
+@enduml

@@ -19,19 +19,19 @@ class fsm::Transition {
   + name : str
   + trigger : str
 }
-fsm::State "0..1" -- "1..1" fsm::FSM : currentState12
+fsm::FSM "1..1" -- "0..1" fsm::State : currentState12
 fsm::FSM "0..1" -- "1..1" fsm::State : fsm21
-fsm::Transition "1..1" -- "0..1" fsm::FSM : fsm36
-fsm::Transition "0..9999" -- "1..1" fsm::State : incoming15
-fsm::FSM "0..1" -- "1..1" fsm::Buffer : incomingFSM27
-fsm::State "0..1" -- "1..1" fsm::FSM : initialState11
+fsm::FSM "0..1" -- "1..1" fsm::Transition : fsm36
+fsm::State "1..1" -- "0..9999" fsm::Transition : incoming15
+fsm::Buffer "1..1" -- "0..1" fsm::FSM : incomingFSM27
+fsm::FSM "1..1" -- "0..1" fsm::State : initialState11
 fsm::Buffer "0..1" -- "1..1" fsm::FSM : inputBuffer5
-fsm::Transition "0..9999" -- "1..1" fsm::State : outgoing18
+fsm::State "1..1" -- "0..9999" fsm::Transition : outgoing18
 fsm::Buffer "1..1" -- "0..1" fsm::FSM : outgoingFSM24
-fsm::FSM "1..1" -- "0..1" fsm::Buffer : outputBuffer8
-fsm::System "1..1" *-- "0..9999" fsm::Buffer : ownedBuffers41
+fsm::Buffer "0..1" -- "1..1" fsm::FSM : outputBuffer8
+fsm::Buffer "0..9999" --* "1..1" fsm::System : ownedBuffers41
 fsm::FSM "0..9999" --* "1..1" fsm::System : ownedFsms39
-fsm::State "0..9999" --* "1..1" fsm::FSM : ownedStates0
+fsm::FSM "1..1" *-- "0..9999" fsm::State : ownedStates0
 fsm::FSM "1..1" *-- "0..9999" fsm::Transition : ownedTransitions2
 fsm::State "0..1" -- "1..1" fsm::Transition : src33
 fsm::State "0..1" -- "1..1" fsm::Transition : tgt30

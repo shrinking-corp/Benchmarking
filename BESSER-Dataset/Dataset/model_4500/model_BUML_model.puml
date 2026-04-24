@@ -158,18 +158,6 @@ abstract class model::Unit {
   + name : str
   + symbol : str
 }
-BaseQuantityUnit <|-- model::AmountOfSubstanceUnit
-BaseQuantityUnit <|-- model::AngleUnit
-BaseQuantityUnit <|-- model::DataStorageCapacityUnit
-BaseQuantityUnit <|-- model::ElectricCurrentUnit
-BaseQuantityUnit <|-- model::EntropyUnit
-BaseQuantityUnit <|-- model::LengthUnit
-BaseQuantityUnit <|-- model::LevelUnit
-BaseQuantityUnit <|-- model::LuminousIntensityUnit
-BaseQuantityUnit <|-- model::MassUnit
-BaseQuantityUnit <|-- model::ThermodynamicTemperatureUnit
-BaseQuantityUnit <|-- model::TimeUnit
-BaseQuantityUnit <|-- model::TrafficIntensityUnit
 BaseQuantity <|-- model::AmountOfSubstance
 BaseQuantity <|-- model::Angle
 BaseQuantity <|-- model::DataStorageCapacity
@@ -182,6 +170,18 @@ BaseQuantity <|-- model::Mass
 BaseQuantity <|-- model::ThermodynamicTemperature
 BaseQuantity <|-- model::Time
 BaseQuantity <|-- model::TrafficIntensity
+BaseQuantityUnit <|-- model::AmountOfSubstanceUnit
+BaseQuantityUnit <|-- model::AngleUnit
+BaseQuantityUnit <|-- model::DataStorageCapacityUnit
+BaseQuantityUnit <|-- model::ElectricCurrentUnit
+BaseQuantityUnit <|-- model::EntropyUnit
+BaseQuantityUnit <|-- model::LengthUnit
+BaseQuantityUnit <|-- model::LevelUnit
+BaseQuantityUnit <|-- model::LuminousIntensityUnit
+BaseQuantityUnit <|-- model::MassUnit
+BaseQuantityUnit <|-- model::ThermodynamicTemperatureUnit
+BaseQuantityUnit <|-- model::TimeUnit
+BaseQuantityUnit <|-- model::TrafficIntensityUnit
 ConversionFactor <|-- model::AmountOfSubstanceConversionFactor
 ConversionFactor <|-- model::AngleConversionFactor
 ConversionFactor <|-- model::DataStorageCapacityConversionFactor
@@ -213,16 +213,16 @@ Quantity <|-- model::BaseQuantity
 Quantity <|-- model::DerivedQuantity
 Unit <|-- model::BaseQuantityUnit
 Unit <|-- model::DerivedQuantityUnit
-model::Unit "1..1" -- "1..1" model::ConversionFactor : baseUnit9
-model::Unit "1..1" *-- "0..9999" model::ConversionFactor : conversionFactors5
+model::ConversionFactor "1..1" -- "1..1" model::Unit : baseUnit9
+model::ConversionFactor "0..9999" --* "1..1" model::Unit : conversionFactors5
 model::Dimension "0..9999" --* "1..1" model::Unit : dimensions3
 model::MeasurementUncertainty "1..1" *-- "0..1" model::MeasurementUncertaintyInformation : information14
-model::Quantity "1..1" --* "1..1" model::Interval : lowerEndpoint16
-model::Sample "1..1" *-- "0..9999" model::Quantity : quantity22
+model::Interval "1..1" *-- "1..1" model::Quantity : lowerEndpoint16
+model::Quantity "0..9999" --* "1..1" model::Sample : quantity22
 model::Sample "0..9999" --* "1..1" model::Sampling : samples21
 model::MeasurementUncertainty "1..1" --* "1..1" model::QuantityValue : uncertainty12
 model::Quantity "1..1" -- "1..1" model::Unit : unit0
-model::Unit "0..9999" --* "1..1" model::SystemOfUnits : units7
-model::Quantity "1..1" --* "1..1" model::Interval : upperEndpoint18
-model::QuantityValue "1..1" --* "1..1" model::Quantity : value1
+model::SystemOfUnits "1..1" *-- "0..9999" model::Unit : units7
+model::Interval "1..1" *-- "1..1" model::Quantity : upperEndpoint18
+model::Quantity "1..1" *-- "1..1" model::QuantityValue : value1
 @enduml

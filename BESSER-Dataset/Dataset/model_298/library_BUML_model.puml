@@ -1,0 +1,23 @@
+@startuml
+enum BookCategory {
+  Biography
+  Mystery
+  ScienceFiction
+}
+class library::Book {
+  + category : str
+  + pages : int
+  + title : str
+}
+class library::Library {
+  + name : str
+}
+class library::Writer {
+  + name : str
+  + writeBook(booksname : any, category : any, pages : any) : void
+}
+library::Book "1..1" -- "1..1" library::Writer : author0
+library::Book "0..9999" --* "1..1" library::Library : books2
+library::Book "0..9999" -- "1..1" library::Writer : books4
+library::Library "1..1" *-- "0..9999" library::Writer : writers1
+@enduml

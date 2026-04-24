@@ -15,12 +15,12 @@ class DictionaryLanguage::Library {
 class DictionaryLanguage::Shelf {
   + description : str
 }
-DictionaryLanguage::Dictionary "1..1" -- "1..1" DictionaryLanguage::Author : author4
+DictionaryLanguage::Author "1..1" -- "1..1" DictionaryLanguage::Dictionary : author4
 DictionaryLanguage::Author "0..9999" --* "1..1" DictionaryLanguage::Library : author8
 DictionaryLanguage::Author "1..1" -- "0..9999" DictionaryLanguage::Dictionary : dictionary1
 DictionaryLanguage::Dictionary "0..9999" --* "1..1" DictionaryLanguage::Shelf : dictionary10
-DictionaryLanguage::Entry "0..9999" --* "1..1" DictionaryLanguage::Dictionary : entry6
-DictionaryLanguage::Library "1..1" -- "1..1" DictionaryLanguage::Author : library0
-DictionaryLanguage::Shelf "1..1" -- "1..1" DictionaryLanguage::Dictionary : shelf3
+DictionaryLanguage::Dictionary "1..1" *-- "0..9999" DictionaryLanguage::Entry : entry6
+DictionaryLanguage::Author "1..1" -- "1..1" DictionaryLanguage::Library : library0
+DictionaryLanguage::Dictionary "1..1" -- "1..1" DictionaryLanguage::Shelf : shelf3
 DictionaryLanguage::Library "1..1" *-- "0..9999" DictionaryLanguage::Shelf : shelf7
 @enduml

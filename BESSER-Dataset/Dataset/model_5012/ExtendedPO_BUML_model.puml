@@ -54,13 +54,13 @@ Address <|-- epo::CanadianAddress
 Address <|-- epo::GlobalAddress
 Address <|-- epo::USAddress
 GlobalLocation <|-- epo::GlobalAddress
-epo::PurchaseOrder "1..1" *-- "1..1" epo::Address : billTo2
-epo::PurchaseOrder "1..1" -- "1..1" epo::Customer : customer6
+epo::Address "1..1" --* "1..1" epo::PurchaseOrder : billTo2
+epo::Customer "1..1" -- "1..1" epo::PurchaseOrder : customer6
 epo::Customer "0..9999" --* "1..1" epo::Supplier : customers10
 epo::Item "0..9999" --* "1..1" epo::PurchaseOrder : items1
 epo::Item "1..1" -- "1..1" epo::PurchaseOrder : order0
-epo::Supplier "1..1" *-- "0..9999" epo::PurchaseOrder : orders11
-epo::PurchaseOrder "0..9999" -- "1..1" epo::Customer : orders20
+epo::PurchaseOrder "0..9999" --* "1..1" epo::Supplier : orders11
+epo::Customer "1..1" -- "0..9999" epo::PurchaseOrder : orders20
 epo::PurchaseOrder "0..9999" -- "1..1" epo::Supplier : pendingOrders14
 epo::PurchaseOrder "0..1" -- "1..1" epo::PurchaseOrder : previousOrder8
 epo::Address "0..1" --* "1..1" epo::PurchaseOrder : shipTo3

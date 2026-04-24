@@ -27,13 +27,13 @@ class bowling::Tournament {
   + type : str
 }
 bowling::Game "0..9999" -- "1..1" bowling::Player : game0
-bowling::Matchup "1..1" *-- "0..2" bowling::Game : game6
-bowling::Matchup "0..1" -- "1..1" bowling::Game : matchup4
-bowling::Tournament "1..1" *-- "0..9999" bowling::Matchup : matchups14
+bowling::Game "0..2" --* "1..1" bowling::Matchup : game6
+bowling::Game "1..1" -- "0..1" bowling::Matchup : matchup4
+bowling::Matchup "0..9999" --* "1..1" bowling::Tournament : matchups14
 bowling::Game "1..1" -- "0..1" bowling::Player : player3
 bowling::Player "0..9999" --* "1..1" bowling::Playerlist : player9
-bowling::Playerlist "0..1" -- "1..1" bowling::Player : playerlist1
+bowling::Player "1..1" -- "0..1" bowling::Playerlist : playerlist1
 bowling::Playerlist "0..1" -- "1..1" bowling::Tournament : playerlist16
-bowling::Tournament "0..1" -- "1..1" bowling::Playerlist : tournament11
-bowling::Tournament "0..1" -- "1..1" bowling::Matchup : tournament8
+bowling::Playerlist "1..1" -- "0..1" bowling::Tournament : tournament11
+bowling::Matchup "1..1" -- "0..1" bowling::Tournament : tournament8
 @enduml

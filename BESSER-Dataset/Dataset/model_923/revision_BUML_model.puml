@@ -85,21 +85,21 @@ PlaceHolder <|-- revision::PlaceHolderPP
 PlaceHolder <|-- revision::PlaceHolderRn
 PlaceHolder <|-- revision::PlaceHolderRs
 PlaceHolder <|-- revision::PlaceHolderRule
-revision::Researcher "0..9999" -- "1..1" revision::Paper : authors28
-revision::Sequence "0..9999" --* "1..1" revision::PublicationPhase : linksToSuccessors3
-revision::Researcher "0..9999" -- "1..1" revision::PublicationPhase : neededPerson5
+revision::Paper "1..1" -- "0..9999" revision::Researcher : authors28
+revision::PublicationPhase "1..1" *-- "0..9999" revision::Sequence : linksToSuccessors3
+revision::PublicationPhase "1..1" -- "0..9999" revision::Researcher : neededPerson5
 revision::Paper "0..1" -- "1..1" revision::Progress : paper36
 revision::Paper "0..9999" -- "1..1" revision::Researcher : papers23
 revision::Paper "0..9999" --* "1..1" revision::PublicationStructure : papers46
 revision::Paragraph "0..1" -- "1..1" revision::Write : paragraph38
-revision::Paragraph "0..9999" --* "1..1" revision::Paper : paragraphs26
+revision::Paper "1..1" *-- "0..9999" revision::Paragraph : paragraphs26
 revision::PublicationPhase "0..9999" -- "1..1" revision::Researcher : phaseParticipation19
 revision::PublicationPhase "0..9999" --* "1..1" revision::PublicationProcess : phases0
 revision::PlaceHolderRule "0..1" --* "1..1" revision::Rule : placeholder17
 revision::PlaceHolderRs "0..1" --* "1..1" revision::Researcher : placeholder24
 revision::PlaceHolderRn "0..1" --* "1..1" revision::ReviewNote : placeholder32
 revision::PlaceHolderPP "0..1" --* "1..1" revision::PublicationPhase : placeholder9
-revision::Sequence "1..1" -- "1..1" revision::PublicationPhase : predecessor14
+revision::PublicationPhase "1..1" -- "1..1" revision::Sequence : predecessor14
 revision::Progress "1..1" -- "0..1" revision::PublicationProcess : process34
 revision::PublicationProcess "0..1" --* "1..1" revision::PublicationSystem : processView49
 revision::Paper "1..1" *-- "0..9999" revision::Progress : progress27
@@ -107,9 +107,9 @@ revision::PublicationProcess "1..1" *-- "0..9999" revision::Rule : publicationRu
 revision::PublicationStructure "1..1" *-- "0..9999" revision::Researcher : researchers44
 revision::Review "1..1" -- "0..1" revision::ReviewNote : reviewNote41
 revision::Researcher "1..1" *-- "0..9999" revision::Review : reviews21
-revision::ReviewNote "0..9999" --* "1..1" revision::Paragraph : reviews30
+revision::Paragraph "1..1" *-- "0..9999" revision::ReviewNote : reviews30
 revision::PublicationPhase "1..1" -- "0..9999" revision::Rule : rules6
 revision::PublicationStructure "0..1" --* "1..1" revision::PublicationSystem : structuralView51
 revision::PublicationPhase "1..1" -- "1..1" revision::Sequence : successor11
-revision::Write "0..9999" --* "1..1" revision::Researcher : writes20
+revision::Researcher "1..1" *-- "0..9999" revision::Write : writes20
 @enduml

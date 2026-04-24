@@ -23,12 +23,12 @@ class tp5::Researcher {
 class tp5::Skill {
   + description : str
 }
-tp5::Researcher "0..9999" -- "1..1" tp5::Paper : authors7
-tp5::Paper "0..1" -- "1..1" tp5::Paper : citedBy9
+tp5::Paper "1..1" -- "0..9999" tp5::Researcher : authors7
+tp5::Paper "1..1" -- "0..1" tp5::Paper : citedBy9
 tp5::Collaboration "1..1" -- "0..1" tp5::Paper : col_paper22
-tp5::Researcher "1..1" *-- "0..9999" tp5::Collaboration : collaborations4
+tp5::Collaboration "0..9999" --* "1..1" tp5::Researcher : collaborations4
 tp5::Paper "0..9999" --* "1..1" tp5::PublicationStructure : papers13
-tp5::Paragraph "0..9999" --* "1..1" tp5::Paper : paragraphs6
+tp5::Paper "1..1" *-- "0..9999" tp5::Paragraph : paragraphs6
 tp5::Position "0..1" -- "1..1" tp5::Position : parent20
 tp5::Position "0..9999" --* "1..1" tp5::PublicationStructure : positions16
 tp5::Paper "0..9999" -- "1..1" tp5::Researcher : res_papers0

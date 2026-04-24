@@ -1,0 +1,92 @@
+@startuml
+enum PrimitiveTypeEnum {
+  Boolean
+  Integer
+  Real
+  String
+  UnlimitedNatural
+}
+class VSpec {
+}
+class VSpecResolution {
+}
+class VariationPoint {
+}
+class cvlmodel::CVLModel {
+  + name : str
+}
+class cvlmodel::Choice {
+}
+class cvlmodel::ChoiceResolution {
+  + decision : str
+}
+class cvlmodel::MOFRef {
+  + id : str
+}
+class cvlmodel::Multiplicity {
+  + max : str
+  + min : str
+}
+class cvlmodel::ObjectExistence {
+  + target : str
+}
+class cvlmodel::ResolutionModel {
+  + name : str
+  + getVSpecResolutionsForVSpec(vspec : any) : str
+}
+class cvlmodel::StringToMOFRefMap {
+  + key : str
+}
+class cvlmodel::VClassifier {
+}
+class cvlmodel::VClassifierResolution {
+  + instance : str
+}
+abstract class cvlmodel::VSpec {
+  + mandatory : str
+  + name : str
+  + isClon() : str
+  + isCloneable() : str
+  + isRoot() : str
+}
+abstract class cvlmodel::VSpecResolution {
+  + name : str
+  + isPossitivelyResolved() : str
+}
+class cvlmodel::VSpecTree {
+}
+class cvlmodel::Variable {
+  + type : str
+}
+class cvlmodel::VariableResolution {
+  + value : str
+}
+abstract class cvlmodel::VariationPoint {
+  + modelTransformationSourceURL : str
+  + modelTransformationURL : str
+  + name : str
+  + negativeVariability : str
+}
+VSpec <|-- cvlmodel::Choice
+VSpec <|-- cvlmodel::VClassifier
+VSpec <|-- cvlmodel::Variable
+VSpecResolution <|-- cvlmodel::ChoiceResolution
+VSpecResolution <|-- cvlmodel::VClassifierResolution
+VSpecResolution <|-- cvlmodel::VariableResolution
+VariationPoint <|-- cvlmodel::ObjectExistence
+cvlmodel::VSpec "1..1" -- "1..1" cvlmodel::VariationPoint : binding14
+cvlmodel::VSpec "0..9999" -- "1..1" cvlmodel::VSpec : children5
+cvlmodel::Multiplicity "1..1" -- "0..9999" cvlmodel::VSpec : children7
+cvlmodel::Multiplicity "0..1" --* "1..1" cvlmodel::VSpec : groupMultiplicity0
+cvlmodel::Multiplicity "0..1" --* "1..1" cvlmodel::VClassifier : instanceMultiplicity10
+cvlmodel::VSpec "0..1" -- "1..1" cvlmodel::VSpec : parent2
+cvlmodel::StringToMOFRefMap "0..9999" --* "1..1" cvlmodel::VariationPoint : references16
+cvlmodel::ResolutionModel "1..1" *-- "0..9999" cvlmodel::VSpecResolution : resolutions25
+cvlmodel::VSpec "1..1" -- "1..1" cvlmodel::VSpecResolution : resolvedVSpec12
+cvlmodel::ResolutionModel "1..1" -- "1..1" cvlmodel::VSpecTree : resolvedVSpec27
+cvlmodel::VSpec "0..1" -- "1..1" cvlmodel::VSpecTree : root22
+cvlmodel::MOFRef "1..1" --* "1..1" cvlmodel::StringToMOFRefMap : value18
+cvlmodel::CVLModel "1..1" *-- "0..9999" cvlmodel::VariationPoint : variationPoints32
+cvlmodel::CVLModel "1..1" *-- "1..1" cvlmodel::VSpecTree : vspecTree30
+cvlmodel::VSpec "0..9999" --* "1..1" cvlmodel::VSpecTree : vspecs20
+@enduml

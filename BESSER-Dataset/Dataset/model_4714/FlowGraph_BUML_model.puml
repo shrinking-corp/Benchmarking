@@ -71,22 +71,22 @@ Stmt <|-- flowgraph::Label
 Stmt <|-- flowgraph::Return
 Stmt <|-- flowgraph::SimpleStmt
 Var <|-- flowgraph::Param
-flowgraph::Stmt "1..1" --* "1..1" flowgraph::Loop : body8
-flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::FlowInstr : cfNext13
-flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::FlowInstr : cfPrev15
-flowgraph::Var "0..9999" -- "1..1" flowgraph::FlowInstr : def17
+flowgraph::Loop "1..1" *-- "1..1" flowgraph::Stmt : body8
+flowgraph::FlowInstr "1..1" -- "0..9999" flowgraph::FlowInstr : cfNext13
+flowgraph::FlowInstr "1..1" -- "0..9999" flowgraph::FlowInstr : cfPrev15
+flowgraph::FlowInstr "1..1" -- "0..9999" flowgraph::Var : def17
 flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::Var : definers23
-flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::FlowInstr : dfNext22
-flowgraph::Stmt "0..1" --* "1..1" flowgraph::If : else3
+flowgraph::FlowInstr "1..1" -- "0..9999" flowgraph::FlowInstr : dfNext22
+flowgraph::If "1..1" *-- "0..1" flowgraph::Stmt : else3
 flowgraph::Exit "1..1" --* "1..1" flowgraph::Method : exit6
 flowgraph::Conditional "1..1" *-- "1..1" flowgraph::Expr : expr10
-flowgraph::Label "1..1" -- "0..9999" flowgraph::JumpStmt : jumps30
-flowgraph::Label "0..1" -- "1..1" flowgraph::JumpStmt : label11
-flowgraph::Var "1..1" -- "0..1" flowgraph::Method : method27
-flowgraph::Stmt "1..1" --* "1..1" flowgraph::Label : stmt28
+flowgraph::JumpStmt "0..9999" -- "1..1" flowgraph::Label : jumps30
+flowgraph::JumpStmt "1..1" -- "0..1" flowgraph::Label : label11
+flowgraph::Method "0..1" -- "1..1" flowgraph::Var : method27
+flowgraph::Label "1..1" *-- "1..1" flowgraph::Stmt : stmt28
 flowgraph::Block "1..1" *-- "0..9999" flowgraph::Stmt : stmts0
-flowgraph::Stmt "1..1" --* "1..1" flowgraph::If : then1
+flowgraph::If "1..1" *-- "1..1" flowgraph::Stmt : then1
 flowgraph::FlowInstr "1..1" -- "0..9999" flowgraph::Var : use19
 flowgraph::FlowInstr "0..9999" -- "1..1" flowgraph::Var : users25
-flowgraph::Var "0..9999" --* "1..1" flowgraph::Method : vars7
+flowgraph::Method "1..1" *-- "0..9999" flowgraph::Var : vars7
 @enduml

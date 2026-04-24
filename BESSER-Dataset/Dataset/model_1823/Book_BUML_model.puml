@@ -95,15 +95,15 @@ Control <|-- book::Media
 Node <|-- book::Control
 Node <|-- book::Shape
 Page <|-- book::Splash
-book::Node "0..9999" --* "1..1" book::Group : children15
+book::Group "1..1" *-- "0..9999" book::Node : children15
 book::Control "0..1" --* "1..1" book::Layer : control8
 book::Animation "0..1" --* "1..1" book::ImageFlash : in17
-book::Page "1..1" *-- "0..9999" book::Layer : layers6
-book::Page "0..1" --* "1..1" book::Book : main3
+book::Layer "0..9999" --* "1..1" book::Page : layers6
+book::Book "1..1" *-- "0..1" book::Page : main3
 book::Action "0..9999" --* "1..1" book::Control : onExposed10
-book::Control "1..1" *-- "0..9999" book::Action : onTouched12
-book::ImageFlash "1..1" *-- "0..1" book::Animation : out16
-book::Page "0..1" -- "1..1" book::OpenPage : page20
-book::Page "0..9999" --* "1..1" book::Book : pages0
-book::Splash "0..1" --* "1..1" book::Book : splash1
+book::Action "0..9999" --* "1..1" book::Control : onTouched12
+book::Animation "0..1" --* "1..1" book::ImageFlash : out16
+book::OpenPage "1..1" -- "0..1" book::Page : page20
+book::Book "1..1" *-- "0..9999" book::Page : pages0
+book::Book "1..1" *-- "0..1" book::Splash : splash1
 @enduml

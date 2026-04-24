@@ -43,21 +43,21 @@ class actions::Participant {
 }
 class actions::Role {
 }
-ActionResult <|-- actions::AtomicActionResult
 Action <|-- actions::AtomicAction
 Action <|-- actions::CompositeAction
+ActionResult <|-- actions::AtomicActionResult
 AtomicProcess <|-- actions::AtomicAction
 CompositeProcess <|-- actions::CompositeAction
 Process <|-- actions::Action
 actions::Action "0..9999" --* "1..1" actions::ActionsCollection : actions16
-actions::Expression "0..9999" --* "1..1" actions::ActionResult : hasAddEffect3
+actions::ActionResult "1..1" *-- "0..9999" actions::Expression : hasAddEffect3
 actions::AtomicAction "1..1" *-- "0..9999" actions::AtomicActionResult : hasAtomicActionResult1
-actions::Distribution "0..9999" --* "1..1" actions::AtomicActionResult : hasCostDistribution8
-actions::Expression "0..9999" --* "1..1" actions::ActionResult : hasDeleteEffect5
-actions::Distribution "0..9999" --* "1..1" actions::AtomicActionResult : hasDurationDistribution10
+actions::AtomicActionResult "1..1" *-- "0..9999" actions::Distribution : hasCostDistribution8
+actions::ActionResult "1..1" *-- "0..9999" actions::Expression : hasDeleteEffect5
+actions::AtomicActionResult "1..1" *-- "0..9999" actions::Distribution : hasDurationDistribution10
 actions::AtomicActionResult "1..1" *-- "0..9999" actions::Distribution : hasQualityDistribution13
-actions::Condition "0..9999" --* "1..1" actions::ActionResult : inCondition2
-actions::Parameter "0..9999" --* "1..1" actions::ActionsCollection : parameters20
-actions::Participant "0..9999" --* "1..1" actions::ActionsCollection : participants18
-actions::Role "0..9999" -- "1..1" actions::Action : performedByRole0
+actions::ActionResult "1..1" *-- "0..9999" actions::Condition : inCondition2
+actions::ActionsCollection "1..1" *-- "0..9999" actions::Parameter : parameters20
+actions::ActionsCollection "1..1" *-- "0..9999" actions::Participant : participants18
+actions::Action "1..1" -- "0..9999" actions::Role : performedByRole0
 @enduml

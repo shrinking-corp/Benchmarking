@@ -1,0 +1,235 @@
+@startuml
+class AdministratorProvides {
+}
+class Biller {
+}
+class Booker {
+}
+class Customer {
+}
+class CustomerProvides {
+}
+class DB::interface {
+}
+class GuestBiller {
+}
+class GuestInterface {
+}
+class ManagerInterface {
+}
+class Receipt {
+}
+class RoomHandlerInterface {
+}
+class RoomProvider {
+}
+class RoomType {
+}
+class ServiceHandlerInterface {
+}
+class ServiceProvider {
+}
+class ServiceType {
+}
+class Validator {
+}
+abstract class newClasses::AdministratorProvides {
+  + addCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + getBalance(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : float
+  + makeDeposit(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, sum : any) : float
+  + removeCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+}
+class newClasses::BankComponent {
+}
+abstract class newClasses::Biller {
+  + calculateBill(addedServices : any, bookingCost : any, extraDays : any, isPaid : any) : str
+  + calculateCost(checkInDate : any, checkOutDate : any, roomType : any, services : any) : str
+  + pay(addedServices : any, bookingCost : any, creditCardNum : any, cvc : any, extraDays : any, firstName : any, isPaid : any, lastName : any, month : any, year : any) : str
+}
+class newClasses::Billing {
+  + isPaid : str
+  + totalCost : str
+}
+abstract class newClasses::Booker {
+  + cancelBooking(conformationNum : any) : void
+  + createBooking(checkInDate : any, checkOutDate : any, roomType : any, services : any) : str
+  + generateConfirmNum() : str
+  + reBook(checkInDate : any, checkOutDate : any, comformationNum : any, roomType : any, serviceType : any) : void
+}
+class newClasses::Booking {
+  + checkInDate : str
+  + checkOutDate : str
+  + conformationNum : str
+  + cost : str
+  + isPaid : str
+  + roomType : str
+  + services : str
+}
+class newClasses::CreditCard {
+  + creditCardNumber : str
+  + cvc : str
+  + firstName : str
+  + lastName : str
+  + month : str
+  + year : str
+}
+class newClasses::Customer {
+  + address : str
+  + bookingCost : str
+  + bookingNum : str
+  + city : str
+  + country : str
+  + email : str
+  + firstName : str
+  + lastName : str
+  + personalNum : str
+  + phoneNum : str
+  + zipCode : str
+}
+abstract class newClasses::CustomerProvides {
+  + isCreditCardValid(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + makePayment(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, sum : any) : bool
+}
+abstract class newClasses::DB::interface {
+  + connect() : void
+  + registerCustomerPayment(bookingCost : any, customer : any) : void
+  + registerGuestPayment(guest : any, totalBillCost : any) : void
+  + storeBooking(booking : any) : void
+  + storeCustomer(customer : any) : void
+  + storeGuest(guest : any) : void
+}
+class newClasses::Database {
+}
+class newClasses::Guest {
+  + addedServices : str
+  + bookingPaid : str
+  + checkInDate : str
+  + checkOutDate : str
+  + checkedIn : str
+  + checkedOut : str
+  + cost : str
+  + extraDays : str
+  + roomNum : str
+}
+abstract class newClasses::GuestBiller {
+  + addServiceToBill(guest : any, type : any) : str
+  + checkOut(checkOutDate : any, cost : any, creditCardNum : any, cvc : any, firstName : any, lastName : any, month : any, roomNum : any, year : any) : str
+}
+abstract class newClasses::GuestInterface {
+  + changeRoom(guest : any, newRoomType : any, roomNum : any) : void
+  + checkIn(checkInDate : any, conformationNum : any) : str
+  + extendStay(guest : any, newCheckOutDate : any, roomNum : any) : void
+}
+class newClasses::InformationValidator {
+}
+class newClasses::LoginChecker {
+}
+class newClasses::Manager {
+  + password : str
+  + userName : str
+}
+abstract class newClasses::ManagerInterface {
+  + SessionData() : void
+  + login(password : any, userName : any) : void
+  + logout() : void
+  + validateLogin(password : any, userName : any) : str
+}
+abstract class newClasses::Receipt {
+  + createCustomerReceipt(booking : any, bookingCost : any, customer : any) : void
+  + createGuestReceipt(booking : any, guest : any, totalBillCost : any) : void
+}
+class newClasses::ReceiptCreator {
+}
+class newClasses::Room {
+  + roomNum : str
+  + status : str
+}
+class newClasses::RoomHandler {
+}
+abstract class newClasses::RoomHandlerInterface {
+  + addRoom(price : any, roomNum : any, roomType : any) : void
+  + changeRoomPrice(newPrice : any, roomNum : any) : void
+  + changeRoomType(roomNum : any, roomType : any) : void
+  + removeRoom(roomNum : any) : void
+}
+abstract class newClasses::RoomProvider {
+  + checkAvalibility(checkInDate : any, checkOutDate : any, roomType : any) : str
+  + dateChecker(DBcheckIn : any, DBcheckOut : any, checkInDate : any, checkOutDate : any) : str
+  + setAvalibility(checkInDate : any, checkOutDate : any, roomType : any, status : any) : void
+}
+class newClasses::RoomType {
+  + price : str
+  + type : str
+}
+class newClasses::Service {
+  + id : str
+  + status : str
+}
+class newClasses::ServiceHandler {
+}
+abstract class newClasses::ServiceHandlerInterface {
+  + addService(ID : any, price : any, type : any) : void
+  + changeServicePrice(ID : any, newPrice : any) : void
+  + changeServiceType(ID : any, newType : any) : void
+  + removeService(ID : any) : void
+}
+abstract class newClasses::ServiceProvider {
+  + checkAvalibility(checkInDate : any, checkOutDate : any, service : any) : str
+  + setAvalibility(service : any, status : any) : void
+}
+class newClasses::ServiceType {
+  + price : str
+  + type : str
+}
+abstract class newClasses::Validator {
+  + checkAge(day : any, month : any, year : any) : str
+  + checkAgeRestriction(personalNum : any) : str
+  + checkDateOrder(checkInDate : any, checkOutDate : any) : str
+  + validateAddress(address : any, city : any, country : any, zipCode : any) : str
+  + validateConfirmationNum(conformationNum : any) : str
+  + validateDates(checkInDate : any, checkOutDate : any) : str
+  + validateEmail(email : any) : str
+  + validateNames(firstName : any, lastName : any) : str
+  + validatePersonalNum(personalNum : any) : str
+  + validatePhoneNum(phoneNum : any) : str
+}
+AdministratorProvides <|-- newClasses::BankComponent
+Biller <|-- newClasses::Billing
+Biller <|-- newClasses::Booking
+Booker <|-- newClasses::Booking
+Booker <|-- newClasses::Customer
+Customer <|-- newClasses::Guest
+CustomerProvides <|-- newClasses::BankComponent
+CustomerProvides <|-- newClasses::Billing
+CustomerProvides <|-- newClasses::Booking
+DB::interface <|-- newClasses::Database
+GuestBiller <|-- newClasses::Billing
+GuestBiller <|-- newClasses::Guest
+GuestInterface <|-- newClasses::Guest
+GuestInterface <|-- newClasses::RoomHandler
+ManagerInterface <|-- newClasses::LoginChecker
+ManagerInterface <|-- newClasses::Manager
+Receipt <|-- newClasses::ReceiptCreator
+RoomHandlerInterface <|-- newClasses::Manager
+RoomHandlerInterface <|-- newClasses::RoomHandler
+RoomProvider <|-- newClasses::Booking
+RoomProvider <|-- newClasses::RoomHandler
+RoomType <|-- newClasses::Room
+ServiceHandlerInterface <|-- newClasses::Manager
+ServiceHandlerInterface <|-- newClasses::ServiceHandler
+ServiceProvider <|-- newClasses::Booking
+ServiceProvider <|-- newClasses::ServiceHandler
+ServiceType <|-- newClasses::Service
+Validator <|-- newClasses::Booking
+Validator <|-- newClasses::InformationValidator
+newClasses::Booking "1..1" -- "1..1" newClasses::Customer : booking0
+newClasses::CreditCard "1..1" -- "1..1" newClasses::Customer : creditCard1
+newClasses::Database "1..1" -- "1..1" newClasses::RoomHandler : database14
+newClasses::Booking "1..1" -- "1..1" newClasses::Database : databaseHandler5
+newClasses::LoginChecker "1..1" -- "1..1" newClasses::Manager : manager17
+newClasses::Booking "1..1" -- "1..1" newClasses::ReceiptCreator : receiptCreator3
+newClasses::Room "1..1" -- "1..1" newClasses::RoomHandler : room12
+newClasses::Manager "1..1" -- "1..1" newClasses::RoomHandler : roomHandler8
+newClasses::Service "1..1" -- "1..1" newClasses::ServiceHandler : service7
+newClasses::Manager "1..1" -- "1..1" newClasses::ServiceHandler : serviceHandler9
+@enduml

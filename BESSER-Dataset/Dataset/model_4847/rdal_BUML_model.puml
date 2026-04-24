@@ -1,0 +1,251 @@
+@startuml
+class AbstractRequirement {
+}
+class Actor {
+}
+enum AgregationType {
+  Alternative
+  Composition
+}
+enum AssumptionType {
+  Managerial
+  Organizational
+  Technical
+}
+enum ContainerType {
+  And
+  Or
+}
+class ContractualElement {
+}
+enum Direction {
+  In
+  InOut
+  Out
+}
+class IdentifiedElement {
+}
+class ModelElementReference {
+}
+class ReferencedModelElements {
+}
+class RequirementsCoverageData {
+}
+enum RiskKind {
+  High
+  Low
+  Medium
+}
+enum VariableType {
+  Both
+  Controlled
+  Monitored
+}
+class VerifiableElement {
+}
+enum VerificationMethod {
+  Analysis
+  Demonstration
+  Inspection
+  Test
+}
+abstract class core::AbstractRequirement {
+  + risk : str
+}
+class core::Actor {
+  + address : str
+  + email : str
+  + phoneNumber : str
+}
+class core::Assumption {
+  + type : str
+}
+class core::Category {
+}
+class core::Conflict {
+  + degree : str
+}
+class core::ConstraintLanguagesSpecification {
+}
+abstract class core::ContractualElement {
+  + dropped : bool
+  + droppingReason : str
+  + originDate : str
+  + satisfactionLevel : str
+  + scheduleDate : str
+  + sources : str
+  + timeCriticality : str
+}
+class core::EObject {
+}
+class core::Expression {
+}
+class core::FormalLanguageExpression {
+}
+class core::Goal {
+  + priority : str
+}
+abstract class core::IdentifiedElement {
+  + description : str
+  + id : str
+  + name : str
+}
+class core::Interaction {
+  + direction : str
+}
+class core::ModelElementReference {
+  + reason : str
+  + satisfactionLevel : str
+  + verifies : str
+  + weight : str
+}
+class core::Rationale {
+}
+class core::RefDerivedModelElements {
+}
+class core::RefExpressionCollectedModelElements {
+}
+class core::RefUserSelectedModelElements {
+}
+abstract class core::ReferencedModelElements {
+  + agregationType : str
+}
+class core::Requirement {
+}
+class core::RequirementsContainer {
+  + type : str
+}
+class core::RequirementsCoverageData {
+  + nbRequirements : int
+  + verificationLevel : str
+}
+class core::RequirementsGroup {
+}
+class core::Specification {
+  + version : str
+}
+class core::StakeHolder {
+}
+class core::SystemContext {
+}
+class core::SystemOverview {
+  + capabilities : str
+  + purpose : str
+}
+class core::Trace {
+  + modelElementReference(modelElement : any) : str
+}
+class core::TraceModelElementReference {
+  + container : bool
+  + merge(modelElementReference : any) : void
+}
+class core::Uncertainty {
+  + costsImpact : str
+  + maturityIndex : str
+  + precedence : str
+  + propRiskIndex : str
+  + riskIndex : str
+  + scheduleImpact : str
+  + volatility : str
+}
+class core::Variable {
+  + type : str
+}
+abstract class core::VerifiableElement {
+  + verified : str
+}
+class core::VerificationActivity {
+  + passed : bool
+  + verificationMethod : str
+}
+AbstractRequirement <|-- core::Assumption
+AbstractRequirement <|-- core::Requirement
+Actor <|-- core::StakeHolder
+ContractualElement <|-- core::Goal
+ContractualElement <|-- core::SystemOverview
+ContractualElement <|-- core::VerifiableElement
+IdentifiedElement <|-- core::Actor
+IdentifiedElement <|-- core::Conflict
+IdentifiedElement <|-- core::ContractualElement
+IdentifiedElement <|-- core::Interaction
+IdentifiedElement <|-- core::ModelElementReference
+IdentifiedElement <|-- core::Rationale
+IdentifiedElement <|-- core::ReferencedModelElements
+IdentifiedElement <|-- core::RequirementsContainer
+IdentifiedElement <|-- core::RequirementsCoverageData
+IdentifiedElement <|-- core::SystemContext
+IdentifiedElement <|-- core::Uncertainty
+IdentifiedElement <|-- core::Variable
+IdentifiedElement <|-- core::VerificationActivity
+ModelElementReference <|-- core::TraceModelElementReference
+ReferencedModelElements <|-- core::RefDerivedModelElements
+ReferencedModelElements <|-- core::RefExpressionCollectedModelElements
+ReferencedModelElements <|-- core::RefUserSelectedModelElements
+ReferencedModelElements <|-- core::Trace
+RequirementsCoverageData <|-- core::TraceModelElementReference
+VerifiableElement <|-- core::AbstractRequirement
+VerifiableElement <|-- core::RequirementsGroup
+VerifiableElement <|-- core::Specification
+core::Actor "0..9999" --* "1..1" core::Specification : actors28
+core::Actor "0..9999" -- "1..1" core::SystemContext : actors57
+core::ContractualElement "1..1" -- "0..9999" core::EObject : agents11
+core::AbstractRequirement "1..1" -- "0..1" core::Variable : assignedVariable85
+core::Assumption "0..9999" -- "1..1" core::Requirement : assumptions93
+core::Category "0..1" -- "1..1" core::ContractualElement : category7
+core::ContractualElement "1..1" *-- "1..1" core::Uncertainty : changeUncertainty0
+core::ContractualElement "1..1" *-- "0..1" core::Expression : condition22
+core::AbstractRequirement "1..1" -- "0..9999" core::Variable : conditionVariables88
+core::Conflict "0..9999" --* "1..1" core::Specification : conflicts35
+core::Conflict "0..9999" -- "1..1" core::Goal : conflicts74
+core::ConstraintLanguagesSpecification "1..1" -- "1..1" core::Specification : constraintLanguagesSpecification37
+core::Actor "0..9999" -- "1..1" core::ContractualElement : contactInformation18
+core::AbstractRequirement "1..1" -- "0..9999" core::AbstractRequirement : containedRequirements81
+core::SystemContext "1..9999" --* "1..1" core::SystemOverview : contexts50
+core::ContractualElement "1..1" -- "1..1" core::Rationale : contract123
+core::ContractualElement "1..9999" -- "1..1" core::StakeHolder : contractualElements76
+core::Requirement "0..9999" -- "1..1" core::Requirement : derivations98
+core::ContractualElement "1..1" -- "0..9999" core::EObject : derivedFrom14
+core::EObject "1..1" -- "1..1" core::Interaction : entity71
+core::ContractualElement "0..9999" -- "1..1" core::ContractualElement : evolvedTo3
+core::Expression "1..1" --* "1..1" core::VerificationActivity : expression110
+core::ContractualElement "1..1" *-- "1..1" core::Expression : expression20
+core::EObject "0..9999" -- "1..1" core::VerificationActivity : externalRef107
+core::EObject "1..1" -- "1..1" core::Variable : feature120
+core::EObject "1..1" -- "1..1" core::SystemContext : globalSystem54
+core::Goal "1..9999" --* "1..1" core::SystemOverview : goals45
+core::Conflict "1..1" -- "2..2" core::Goal : goals75
+core::AbstractRequirement "1..1" -- "1..1" core::RequirementsGroup : group83
+core::Assumption "0..1" -- "1..1" core::Requirement : imageAssumption95
+core::Assumption "1..1" -- "0..1" core::Requirement : imageRequirement103
+core::Actor "1..1" -- "0..9999" core::EObject : images66
+core::Actor "1..1" *-- "0..9999" core::Interaction : interactions69
+core::EObject "1..1" -- "1..1" core::ModelElementReference : modelElement115
+core::ModelElementReference "0..9999" --* "1..1" core::ReferencedModelElements : modelElementReferences114
+core::ContractualElement "1..1" -- "0..9999" core::EObject : modes25
+core::ModelElementReference "1..1" -- "1..1" core::ReferencedModelElements : parent117
+core::EObject "0..9999" -- "1..1" core::Specification : primaryActors42
+core::FormalLanguageExpression "1..1" --* "1..1" core::RefExpressionCollectedModelElements : queryExpression113
+core::ContractualElement "1..1" *-- "1..9999" core::Rationale : rationales17
+core::Rationale "0..9999" -- "1..1" core::StakeHolder : rationales77
+core::Requirement "1..1" -- "0..9999" core::Requirement : refinedBY92
+core::AbstractRequirement "0..1" -- "1..1" core::VerificationActivity : requirement105
+core::Requirement "0..1" -- "1..1" core::RequirementsContainer : requirement125
+core::RequirementsGroup "1..9999" --* "1..1" core::Specification : requirementGroups32
+core::Assumption "1..1" -- "0..1" core::Requirement : requirements102
+core::Requirement "0..9999" -- "1..1" core::RequirementsContainer : requirements128
+core::AbstractRequirement "1..9999" --* "1..1" core::RequirementsGroup : requirements78
+core::ContractualElement "1..1" *-- "0..9999" core::ReferencedModelElements : satisfiedBy9
+core::RequirementsGroup "1..1" -- "1..1" core::Specification : specification79
+core::Specification "0..9999" -- "1..1" core::Trace : specifications118
+core::EObject "1..9999" -- "1..1" core::Specification : specifies39
+core::ContractualElement "1..1" -- "0..9999" core::StakeHolder : stakeholders1
+core::Requirement "1..1" *-- "0..1" core::RequirementsContainer : subRequirements100
+core::Specification "1..1" *-- "1..1" core::SystemOverview : systOverview30
+core::SystemOverview "1..1" *-- "1..9999" core::Variable : systemBoundary52
+core::SystemContext "1..1" -- "1..9999" core::Variable : systemBoundary60
+core::EObject "0..9999" -- "1..1" core::SystemContext : systemModes63
+core::EObject "1..1" -- "1..1" core::SystemOverview : systemToBe47
+core::ContractualElement "1..1" -- "0..9999" core::EObject : tracedTo5
+core::Specification "1..1" *-- "0..9999" core::VerificationActivity : verificationActivities33
+core::AbstractRequirement "1..1" -- "0..9999" core::VerificationActivity : verifiedBy82
+@enduml

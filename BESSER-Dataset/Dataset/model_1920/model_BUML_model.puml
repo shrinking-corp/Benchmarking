@@ -1,0 +1,244 @@
+@startuml
+class AdminInterface {
+}
+class BookingController {
+}
+class CustomerInterface {
+}
+class DatabaseInterface {
+}
+class ReceptionistInterface {
+}
+class model::Admin {
+}
+class model::AdminController {
+  + AdminController(expenseExpert : any, promotionExpert : any, roomExpert : any, userExpert : any) : void
+}
+abstract class model::AdminInterface {
+  + AdminController(expenseExpert : any, promotionExpert : any, roomExpert : any, userExpert : any) : void
+  + createExpense(expense : any) : str
+  + createPromotion(promotion : any) : str
+  + createRoom(room : any) : str
+  + createUser(user : any) : str
+  + login(name : any, password : any) : str
+  + removeExpense(expense : any) : str
+  + removePromotion(promotion : any) : str
+  + removeRoom(room : any) : str
+  + removeUser(user : any) : str
+  + updateExpense(expense : any) : str
+  + updatePromotion(promotion : any) : str
+  + updateRoom(room : any) : bool
+  + updateUser(user : any) : str
+  + viewExpenses() : str
+  + viewPromotions() : str
+  + viewRooms() : str
+  + viewUsers() : str
+}
+class model::BankComponent {
+}
+abstract class model::BankInterface {
+}
+class model::Booking {
+  + checkedIn : str
+  + fromDate : date
+  + id : int
+  + promotion : str
+  + roomTypes : str
+  + toDate : date
+  + wishes : str
+  + Booking(customer : any, fromDate : any, id : any, promotionCode : any, receipt : any, roomTypes : any, rooms : any, toDate : any, wishes : any) : void
+}
+class model::BookingController {
+  + BookingController(bookingExpert : any, expenseExpert : any, promotionExpert : any, receiptExpert : any, roomExpert : any) : void
+}
+class model::BookingExpert {
+  + BookingExpert(database : any) : void
+  + addBooking(booking : any) : str
+  + checkIn(booking : any, rooms : any) : bool
+  + checkOut(booking : any) : bool
+  + getAllBookings(dateFrom : any, dateTo : any) : str
+  + getBooking(ID : any) : str
+  + removeBooking(booking : any) : bool
+  + updateBooking(booking : any) : bool
+}
+class model::Customer {
+  + adress : str
+  + ccNumber : str
+  + ccv : str
+  + email : str
+  + expiringMonth : str
+  + expiringYear : str
+  + firstName : str
+  + surname : str
+  + Customer(address : any, ccExpiringMonth : any, ccExpiringYear : any, ccNumber : any, ccv : any, email : any, firstName : any, surname : any) : void
+}
+abstract class model::CustomerInterface {
+  + createBooking(customer : any, fromDate : any, promotion : any, receipt : any, roomTypes : any, toDate : any, wishes : any) : bool
+  + createCustomer(address : any, ccNumber : any, ccv : any, email : any, expiringMonth : any, expriningYear : any, firstName : any, surname : any) : str
+  + pay(customer : any, receipt : any) : bool
+  + searchRooms(dateFrom : any, dateTo : any, numberOfGuests : any, numberOfRooms : any) : str
+  + validateCard(customer : any) : bool
+}
+class model::Customers {
+}
+abstract class model::DatabaseInterface {
+  + query(query : any) : str
+  + send(query : any) : bool
+}
+class model::EmailSender {
+  + send(booking : any) : bool
+}
+class model::Expense {
+  + date : date
+  + description : str
+  + fixed : bool
+  + id : int
+  + name : str
+  + price : float
+  + receiptId : int
+  + Expense(date : any, description : any, id : any, isFixed : any, name : any, price : any, receiptID : any) : void
+}
+class model::ExpenseExpert {
+  + ExpenseExpert(database : any) : void
+  + addExpense(expense : any) : str
+  + getAllExpense(receiptID : any) : str
+  + getExpense(ID : any) : str
+  + removeExpense(ID : any) : bool
+  + updateExpense(expense : any) : bool
+}
+class model::HotelComponent {
+}
+class model::MSAccessDB {
+  + closeConnection() : void
+  + openConnection() : bool
+}
+class model::Payment {
+  + isCreditCardValid(customer : any) : bool
+  + makePayment(amount : any, customer : any) : bool
+}
+class model::Promotion {
+  + code : str
+  + description : str
+  + expirationDate : date
+  + percentage : str
+  + roomType : str
+  + validFrom : date
+  + validTo : date
+  + Promotion(code : any, description : any, expirationDate : any, percentage : any, roomType : any, vaildFrom : any, vaildTo : any) : void
+  + calculateDiscount(room : any) : float
+}
+class model::PromotionExpert {
+  + PromotionExpert(database : any) : void
+  + addPromotion(promotion : any) : str
+  + getAllPromotions() : str
+  + getPromotion(promotionCode : any) : str
+  + removePromotion(code : any) : bool
+  + updatePromotion(promotion : any) : bool
+}
+class model::Receipt {
+  + Date : date
+  + id : int
+  + totalCost : float
+  + Receipt(date : any, expenses : any, id : any) : void
+  + addExpense(expense : any) : bool
+  + getAllExpenses() : str
+  + removeExpense(expense : any) : bool
+}
+class model::ReceiptExpert {
+  + ReceiptExpert(database : any) : void
+  + addReceipt(receipt : any) : str
+  + combine(receiptList : any) : str
+  + getAllReceipt() : str
+  + getReceipt(ID : any) : str
+  + removeReceipt(receipt : any) : bool
+  + updateReceipt(receipt : any) : bool
+}
+class model::Receptionist {
+}
+class model::ReceptionistController {
+  + ReceptionistController(bookingExpert : any, expenseExpert : any, promotionExpert : any, receiptExpert : any, roomExpert : any, userExpert : any) : void
+}
+abstract class model::ReceptionistInterface {
+  + checkIn(booking : any, rooms : any) : bool
+  + checkOut(booking : any) : bool
+  + createResident(firstName : any, passportNumber : any, surname : any) : str
+  + getBooking(bookingNumber : any) : str
+  + login(name : any, password : any) : bool
+  + removeBooking(booking : any) : str
+  + viewAllBookings(dateFrom : any, dateTo : any, surname : any) : str
+  + viewUnOccupiedRooms(roomType : any) : str
+}
+class model::Resident {
+  + firstName : str
+  + id : str
+  + surname : str
+  + Resident(firstName : any, id : any, surname : any) : void
+}
+class model::Room {
+  + beds : str
+  + clean : str
+  + description : str
+  + number : str
+  + status : str
+  + type : str
+  + Room(beds : any, description : any, number : any, price : any, receipt : any, status : any, type : any) : void
+}
+class model::RoomExpert {
+  + RoomExpert(database : any) : void
+  + addRoom(room : any) : str
+  + getAllRooms() : str
+  + getAvailableRoomTypes(from : any, numberOfGuests : any, numberOfRooms : any, to : any) : str
+  + getRoom(roomNumber : any) : str
+  + getUnoccupiedRooms() : str
+  + removeRoom(room : any) : bool
+  + updateRoom(room : any) : bool
+}
+class model::User {
+  + administrator : str
+  + firstName : str
+  + id : str
+  + password : str
+  + receptionist : str
+  + surname : str
+  + User(administrator : any, firstName : any, id : any, password : any, receptionist : any, surname : any) : void
+}
+class model::UserExpert {
+  + UserExpert(database : any) : void
+  + addUser(user : any) : str
+  + getAllUsers() : str
+  + getUser(ID : any) : str
+  + login(name : any, password : any) : bool
+  + removeUser(ID : any) : bool
+  + updateUser(user : any) : bool
+}
+AdminInterface <|-- model::AdminController
+BookingController <|-- model::ReceptionistController
+CustomerInterface <|-- model::BookingController
+DatabaseInterface <|-- model::MSAccessDB
+ReceptionistInterface <|-- model::ReceptionistController
+model::BookingController "1..1" -- "1..1" model::BookingExpert : bookingExpert28
+model::Booking "1..1" -- "1..1" model::Customer : customer8
+model::DatabaseInterface "1..1" -- "1..1" model::RoomExpert : database15
+model::DatabaseInterface "1..1" -- "1..1" model::ExpenseExpert : database16
+model::DatabaseInterface "1..1" -- "1..1" model::UserExpert : database18
+model::DatabaseInterface "1..1" -- "1..1" model::PromotionExpert : database20
+model::BookingExpert "1..1" -- "1..1" model::DatabaseInterface : database22
+model::DatabaseInterface "1..1" -- "1..1" model::ReceiptExpert : database24
+model::BookingController "1..1" -- "1..1" model::DatabaseInterface : databaseInterface34
+model::AdminController "1..1" -- "1..1" model::DatabaseInterface : databaseInterface51
+model::BookingController "1..1" -- "1..1" model::ExpenseExpert : expenseExpert37
+model::AdminController "1..1" -- "1..1" model::ExpenseExpert : expenseExpert45
+model::Expense "0..9999" -- "1..1" model::Receipt : expenses5
+model::Expense "1..1" -- "1..1" model::Room : price0
+model::AdminController "1..1" -- "1..1" model::PromotionExpert : promoExpert48
+model::BookingController "1..1" -- "1..1" model::PromotionExpert : promotionExpert31
+model::Receipt "1..1" -- "1..1" model::Room : receipt1
+model::Booking "1..1" -- "1..1" model::Receipt : receipt9
+model::BookingController "1..1" -- "1..1" model::ReceiptExpert : receiptExpert40
+model::Resident "0..9999" -- "1..1" model::Room : residents3
+model::Booking "1..1" -- "0..9999" model::Room : room12
+model::BookingController "1..1" -- "1..1" model::RoomExpert : room26
+model::AdminController "1..1" -- "1..1" model::RoomExpert : roomExpert54
+model::AdminController "1..1" -- "1..1" model::UserExpert : userExpert43
+model::ReceptionistController "1..1" -- "1..1" model::UserExpert : userExpert57
+@enduml

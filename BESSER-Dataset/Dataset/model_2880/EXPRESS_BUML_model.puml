@@ -175,9 +175,9 @@ DataType <|-- express::ReferenceType
 DataType <|-- express::SelectType
 ExpressConcept <|-- express::Entity
 ExpressConcept <|-- express::Type
+Index <|-- express::IndexTerminal
 IndexTerminal <|-- express::IntLiteral
 IndexTerminal <|-- express::VarLiteral
-Index <|-- express::IndexTerminal
 Statement <|-- express::Assignment
 Statement <|-- express::CaseStatement
 Statement <|-- express::EscapeStatement
@@ -188,56 +188,56 @@ Statement <|-- express::SequenceStatement
 VarOrAttrib <|-- express::AttributeVar
 VarOrAttrib <|-- express::IndexedVar
 VarOrAttrib <|-- express::SimpleVar
-express::ParameterList "0..1" --* "1..1" express::FunctionExpression : argument53
-express::VarOrAttrib "0..1" --* "1..1" express::Assignment : assignTo105
+express::FunctionExpression "1..1" *-- "0..1" express::ParameterList : argument53
+express::Assignment "1..1" *-- "0..1" express::VarOrAttrib : assignTo105
 express::Attribute "0..9999" --* "1..1" express::Entity : attribute19
-express::VarOrAttrib "0..9999" --* "1..1" express::AttributeVar : component109
+express::AttributeVar "1..1" *-- "0..9999" express::VarOrAttrib : component109
 express::IfStatement "1..1" *-- "0..1" express::Line : condition111
 express::ConstantVal "0..9999" --* "1..1" express::Rule : constant33
 express::ConstantVal "0..9999" --* "1..1" express::Function : constant69
-express::Type "1..1" *-- "0..1" express::DataType : datatype8
+express::DataType "0..1" --* "1..1" express::Type : datatype8
 express::Entity "0..9999" -- "1..1" express::Entity : disjointSubtype11
-express::Statement "0..9999" --* "1..1" express::IfStatement : elseStatement116
-express::Schema "1..1" *-- "0..9999" express::Entity : entity1
-express::Line "0..1" --* "1..1" express::ConstantVal : expression45
+express::IfStatement "1..1" *-- "0..9999" express::Statement : elseStatement116
+express::Entity "0..9999" --* "1..1" express::Schema : entity1
+express::ConstantVal "1..1" *-- "0..1" express::Line : expression45
 express::Line "0..1" --* "1..1" express::LocalVar : expression50
-express::ParameterList "1..1" *-- "0..9999" express::FormalParam : formalParam78
+express::FormalParam "0..9999" --* "1..1" express::ParameterList : formalParam78
 express::Function "0..9999" --* "1..1" express::Schema : function3
 express::Index "0..9999" --* "1..1" express::IndexedVar : index107
 express::ExpressConcept "0..1" -- "1..1" express::ReferenceType : instance85
 express::Intervall "0..1" --* "1..1" express::WhereRule : interval83
 express::EnumType "1..1" *-- "0..9999" express::LiteralType : literal95
-express::LocalVar "0..9999" --* "1..1" express::FunctionExpression : local57
+express::FunctionExpression "1..1" *-- "0..9999" express::LocalVar : local57
 express::LocalVar "0..9999" --* "1..1" express::Rule : localVar35
 express::Function "1..1" *-- "0..9999" express::LocalVar : localVar72
-express::CollectionType "1..1" -- "0..1" express::Attribute : lowerRef87
+express::Attribute "0..1" -- "1..1" express::CollectionType : lowerRef87
 express::Attribute "0..1" -- "1..1" express::Attribute : opposite27
 express::CaseStatement "1..1" *-- "0..9999" express::Statement : otherwise99
-express::ParameterList "0..1" --* "1..1" express::Function : params63
-express::FunctionExpression "1..1" *-- "0..1" express::DataType : return54
+express::Function "1..1" *-- "0..1" express::ParameterList : params63
+express::DataType "0..1" --* "1..1" express::FunctionExpression : return54
 express::DataType "0..1" --* "1..1" express::Function : returnType66
 express::Rule "0..9999" --* "1..1" express::Schema : rule5
 express::ExpressConcept "0..9999" -- "1..1" express::SelectType : select96
 express::CaseAction "0..9999" --* "1..1" express::CaseStatement : slot98
 express::CaseAction "1..1" *-- "0..1" express::Statement : statement102
-express::Statement "0..9999" --* "1..1" express::IfStatement : statement113
-express::Statement "0..9999" --* "1..1" express::RepeatStatement : statement119
+express::IfStatement "1..1" *-- "0..9999" express::Statement : statement113
+express::RepeatStatement "1..1" *-- "0..9999" express::Statement : statement119
 express::Rule "1..1" *-- "0..9999" express::Statement : statement37
 express::FunctionExpression "1..1" *-- "0..9999" express::Statement : statement60
-express::Statement "0..9999" --* "1..1" express::Function : statement75
+express::Function "1..1" *-- "0..9999" express::Statement : statement75
 express::Entity "0..9999" -- "1..1" express::Entity : subtype14
 express::Entity "0..9999" -- "1..1" express::Entity : supertype17
-express::TypeNameList "0..1" --* "1..1" express::Rule : target31
-express::Type "0..9999" --* "1..1" express::Schema : type0
-express::DataType "0..1" --* "1..1" express::Attribute : type23
-express::Reference "1..1" -- "0..1" express::Entity : type29
-express::DataType "0..1" --* "1..1" express::ConstantVal : type42
+express::Rule "1..1" *-- "0..1" express::TypeNameList : target31
+express::Schema "1..1" *-- "0..9999" express::Type : type0
+express::Attribute "1..1" *-- "0..1" express::DataType : type23
+express::Entity "0..1" -- "1..1" express::Reference : type29
+express::ConstantVal "1..1" *-- "0..1" express::DataType : type42
 express::DataType "0..1" --* "1..1" express::LocalVar : type47
 express::DataType "0..1" --* "1..1" express::FormalParam : type80
-express::DataType "0..1" --* "1..1" express::CollectionType : type92
+express::CollectionType "1..1" *-- "0..1" express::DataType : type92
 express::Entity "1..1" *-- "0..9999" express::UniqueRule : uniqueRule21
 express::Attribute "0..1" -- "1..1" express::CollectionType : upperRef89
-express::SimpleVar "0..1" --* "1..1" express::IndexedVar : variable106
-express::WhereRule "0..9999" --* "1..1" express::Rule : whereRule39
-express::WhereRule "0..9999" --* "1..1" express::ExpressConcept : whereRule7
+express::IndexedVar "1..1" *-- "0..1" express::SimpleVar : variable106
+express::Rule "1..1" *-- "0..9999" express::WhereRule : whereRule39
+express::ExpressConcept "1..1" *-- "0..9999" express::WhereRule : whereRule7
 @enduml

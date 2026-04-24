@@ -1,0 +1,73 @@
+@startuml
+class AbstractState {
+}
+class NamedElement {
+}
+enum PseudostateKind {
+  initial
+}
+class State {
+}
+class Statement {
+}
+abstract class fsmcore::AbstractState {
+}
+class fsmcore::Conditional {
+}
+class fsmcore::Constraint {
+  + evalConstraint(context : any) : void
+}
+class fsmcore::FinalState {
+}
+class fsmcore::Loop {
+}
+class fsmcore::NamedElement {
+  + name : str
+}
+class fsmcore::Program {
+  + eval(context : any) : void
+}
+class fsmcore::Pseudostate {
+  + kind : str
+}
+class fsmcore::Region {
+}
+class fsmcore::State {
+}
+class fsmcore::StateMachine {
+}
+abstract class fsmcore::Statement {
+  + eval(context : any) : void
+}
+class fsmcore::Transition {
+}
+class fsmcore::Trigger {
+  + expression : bool
+}
+class fsmcore::VarDecl {
+}
+AbstractState <|-- fsmcore::Pseudostate
+AbstractState <|-- fsmcore::State
+NamedElement <|-- fsmcore::AbstractState
+NamedElement <|-- fsmcore::Region
+NamedElement <|-- fsmcore::StateMachine
+NamedElement <|-- fsmcore::Transition
+State <|-- fsmcore::FinalState
+Statement <|-- fsmcore::Conditional
+Statement <|-- fsmcore::Loop
+Statement <|-- fsmcore::VarDecl
+fsmcore::Program "0..1" --* "1..1" fsmcore::State : doActivity14
+fsmcore::Program "0..1" --* "1..1" fsmcore::State : entry15
+fsmcore::Program "0..1" --* "1..1" fsmcore::State : exit18
+fsmcore::Constraint "0..1" --* "1..1" fsmcore::Transition : guard29
+fsmcore::AbstractState "1..1" -- "0..9999" fsmcore::Transition : incoming5
+fsmcore::AbstractState "1..1" -- "0..9999" fsmcore::Transition : outgoing8
+fsmcore::AbstractState "1..1" -- "1..1" fsmcore::Region : ownerRegion11
+fsmcore::Region "1..9999" --* "1..1" fsmcore::StateMachine : regions0
+fsmcore::AbstractState "1..1" -- "1..1" fsmcore::Transition : source26
+fsmcore::Program "1..1" *-- "0..9999" fsmcore::Statement : statements31
+fsmcore::AbstractState "0..9999" --* "1..1" fsmcore::Region : subvertex1
+fsmcore::AbstractState "1..1" -- "1..1" fsmcore::Transition : target23
+fsmcore::Region "1..1" *-- "0..9999" fsmcore::Transition : transitions3
+fsmcore::Transition "1..1" *-- "0..1" fsmcore::Trigger : trigger21
+@enduml

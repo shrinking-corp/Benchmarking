@@ -1,0 +1,194 @@
+@startuml
+class ClassDiagram::ApplianceAdministration {
+  + addAppliance(room : any) : void
+  + addApplianceService(applianceService : any) : void
+  + addApplianceType(name : any) : void
+  + editAppliance(appliance : any) : void
+  + editApplianceService(applianceService : any) : void
+  + editApplianceType(applianceType : any) : void
+  + removeAppliance(appliance : any) : void
+  + removeApplianceServer(applianceService : any) : void
+  + removeApplianceType(applianceType : any) : void
+}
+class ClassDiagram::ApplianceType::ApplianceService {
+  + name : str
+  + price : float
+}
+class ClassDiagram::BillManager {
+  + addPurchasedService(amount : any, bookingID : any, item : any) : void
+  + createReceipt(bookingID : any) : void
+  + findBill(bookingID : any) : void
+  + getAmount(bookingID : any) : void
+  + pay(bookingID : any) : void
+}
+class ClassDiagram::Booking::Bill {
+  + paidAmount : float
+}
+class ClassDiagram::Booking::BookedService {
+  + date : date
+}
+class ClassDiagram::Booking::PurchasedService {
+  + name : str
+  + price : float
+}
+class ClassDiagram::BookingManager {
+  + assignKey(booking : any, expirationDate : any, room : any) : void
+  + cancelBooking(bookingId : any) : void
+  + checkIn(bookingID : any) : void
+  + checkOut(bookingID : any) : void
+  + createBooking(end : any, guest : any, numberOfPeople : any, rooms : any, start : any) : void
+  + editBooking(bookingId : any) : void
+  + findAvailableRoomTypes(end : any, start : any) : void
+  + findAvailableRooms(_people : any, end : any, roomType : any, start : any) : void
+  + findBooking(bookingID : any) : void
+  + getBookings(ssn : any) : void
+  + initBooking() : void
+}
+class ClassDiagram::Company {
+  + name : str
+}
+class ClassDiagram::Company::GuestRecord {
+  + adress : str
+  + name : str
+  + paymentInformation : str
+  + phoneNumber : str
+  + ssn : str
+}
+class ClassDiagram::Company::Hotel {
+  + name : str
+}
+class ClassDiagram::Facility::FacilityService {
+  + name : str
+  + price : float
+}
+class ClassDiagram::Facility::FacilityType {
+  + name : str
+}
+class ClassDiagram::FacilityAdministration {
+  + addFacility(facilityType : any, name : any) : void
+  + addFacilityType(name : any) : void
+  + addService(facility : any, name : any, price : any) : void
+  + editFacility(facility : any) : void
+  + editFacilityType(facility : any) : void
+  + editService(service : any) : void
+  + removeFacility(facility : any) : void
+  + removeFacilityType(facility : any) : void
+  + removeService(service : any) : void
+}
+class ClassDiagram::FacilityManager {
+  + findBookedServices(guest : any) : void
+  + findServices(date : any) : void
+}
+class ClassDiagram::GuestManager {
+  + createGuestRecord(adress : any, firstName : any, lastName : any, paymentInformation : any, phoneNumber : any, ssn : any) : void
+  + editGuestRecord(ssn : any) : void
+  + findGuestRecord(ssn : any) : void
+  + findGuestRecords(firstName : any, lastName : any) : void
+  + removeGuestRecord(ssn : any) : void
+}
+class ClassDiagram::Hotel::Booking {
+  + bookingID : int
+  + checkedIn : bool
+  + endDate : date
+  + price : float
+  + startDate : date
+}
+class ClassDiagram::Hotel::Facility {
+  + name : str
+}
+class ClassDiagram::Hotel::Room {
+  + cleaningStatus : bool
+  + maintenceStatus : bool
+  + roomNumber : int
+}
+class ClassDiagram::Hotel::Staff {
+  + firstName : str
+  + hasWorkTitel : str
+  + lastName : str
+  + ssn : str
+}
+class ClassDiagram::HotelAdministration {
+  + addHotel(name : any) : void
+  + editHotel(hotel : any) : void
+  + removeHotel(hotel : any) : void
+}
+abstract class ClassDiagram::IServiceBooking {
+  + bookFacilityService(booking : any, date : any, facility : any, guest : any, service : any) : void
+  + cancelBookedService(service : any) : void
+  + findAvailableServices(date : any, facility : any) : void
+  + findBookedService(bookedServiceID : any) : void
+  + getBookedServices(booking : any) : void
+}
+class ClassDiagram::Room::RoomAppliance {
+  + name : str
+}
+class ClassDiagram::Room::RoomKey {
+  + expirationDate : date
+}
+class ClassDiagram::Room::RoomType {
+  + area : float
+  + maxNumberOfGuests : int
+  + name : str
+  + price : float
+}
+class ClassDiagram::RoomAdministration {
+  + addRoom(appliances : any, roomNumber : any, roomType : any) : void
+  + createRoomType(applianceTypes : any, area : any, maxNumberOfGuests : any, price : any) : void
+  + editRoom(room : any) : void
+  + editRoomType(roomType : any) : void
+  + removeRoom(room : any) : void
+  + removeRoomType(roomType : any) : void
+}
+class ClassDiagram::RoomAppliance::ApplianceType {
+  + name : str
+}
+class ClassDiagram::RoomManager {
+  + cleaningStatus(room : any) : void
+  + findRoom(roomNumber : any) : void
+  + getRoomsToClean() : void
+  + getRoomsToMaintain() : void
+  + maintenanceStatus(room : any) : void
+  + roomExists(roomNumber : any, rooms : any) : void
+}
+class ClassDiagram::StaffAdministration {
+  + addStaff(firstName : any, lastName : any, ssn : any, workTitel : any) : void
+  + editStaff(staff : any) : void
+  + removeStaff(staff : any) : void
+}
+enum StaffType {
+  HouseKeeper
+  Janitor
+  Manager
+  Receptionist
+}
+ClassDiagram::Hotel::Room "1..1" -- "0..9999" ClassDiagram::Room::RoomKey : accessedBy11
+ClassDiagram::Room::RoomType "1..1" -- "0..9999" ClassDiagram::RoomAppliance::ApplianceType : applianceType16
+ClassDiagram::Room::RoomAppliance "1..1" -- "1..1" ClassDiagram::RoomAppliance::ApplianceType : applianceType18
+ClassDiagram::Booking::Bill "1..1" -- "1..1" ClassDiagram::Hotel::Booking : bill28
+ClassDiagram::BillManager "1..1" -- "1..1" ClassDiagram::BookingManager : billManager41
+ClassDiagram::Company "1..1" -- "1..1" ClassDiagram::GuestManager : company46
+ClassDiagram::Company "1..1" -- "1..1" ClassDiagram::HotelAdministration : company60
+ClassDiagram::Booking::Bill "1..1" -- "0..9999" ClassDiagram::Booking::PurchasedService : contains32
+ClassDiagram::Company::Hotel "1..1" -- "0..9999" ClassDiagram::Hotel::Staff : employees5
+ClassDiagram::Booking::BookedService "1..1" -- "1..1" ClassDiagram::Facility::FacilityService : facilityService30
+ClassDiagram::Facility::FacilityType "1..1" -- "1..1" ClassDiagram::Hotel::Facility : facilityType34
+ClassDiagram::BookingManager "1..1" -- "1..1" ClassDiagram::GuestManager : guestManager39
+ClassDiagram::BookingManager "1..1" -- "1..1" ClassDiagram::Company::Hotel : hotel35
+ClassDiagram::Company::Hotel "1..1" -- "1..1" ClassDiagram::RoomManager : hotel43
+ClassDiagram::BillManager "1..1" -- "1..1" ClassDiagram::Company::Hotel : hotel49
+ClassDiagram::Company::Hotel "1..1" -- "1..1" ClassDiagram::StaffAdministration : hotel52
+ClassDiagram::Company::Hotel "1..1" -- "1..1" ClassDiagram::RoomAdministration : hotel54
+ClassDiagram::ApplianceAdministration "1..1" -- "1..1" ClassDiagram::Company::Hotel : hotel56
+ClassDiagram::Company::Hotel "1..1" -- "1..1" ClassDiagram::FacilityAdministration : hotel58
+ClassDiagram::Company::Hotel "1..1" -- "1..1" ClassDiagram::FacilityManager : hotel62
+ClassDiagram::Booking::BookedService "0..9999" -- "1..1" ClassDiagram::Hotel::Booking : includes20
+ClassDiagram::Company::Hotel "1..1" -- "0..9999" ClassDiagram::Hotel::Booking : listOfBookings7
+ClassDiagram::Company::Hotel "1..1" -- "0..9999" ClassDiagram::Room::RoomType : listOfRoomTypes9
+ClassDiagram::Company::Hotel "1..1" -- "0..9999" ClassDiagram::Hotel::Room : listOfRooms3
+ClassDiagram::Company "1..1" -- "1..9999" ClassDiagram::Company::Hotel : owns0
+ClassDiagram::Company "1..1" -- "0..9999" ClassDiagram::Company::GuestRecord : recordsOf1
+ClassDiagram::Company::GuestRecord "1..1" -- "1..1" ClassDiagram::Hotel::Booking : responsibleGuest25
+ClassDiagram::BookingManager "1..1" -- "1..1" ClassDiagram::RoomManager : roomManager37
+ClassDiagram::Hotel::Room "1..1" -- "1..1" ClassDiagram::Room::RoomType : roomType13
+ClassDiagram::Hotel::Booking "1..1" -- "1..9999" ClassDiagram::Hotel::Room : rooms22
+@enduml

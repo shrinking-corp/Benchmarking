@@ -67,15 +67,15 @@ ValueType <|-- QualityMetamodel::RangeValueType
 ValueType <|-- QualityMetamodel::RealValueType
 ValueType <|-- QualityMetamodel::TextValueType
 QualityMetamodel::Operation "1..1" -- "1..9999" QualityMetamodel::Value : aggregatedValues18
-QualityMetamodel::Operation "1..1" --* "1..1" QualityMetamodel::AggregatedValue : calculatedBy17
-QualityMetamodel::SingleValue "1..1" -- "1..1" QualityMetamodel::MetricProvider : measuredBy15
+QualityMetamodel::AggregatedValue "1..1" *-- "1..1" QualityMetamodel::Operation : calculatedBy17
+QualityMetamodel::MetricProvider "1..1" -- "1..1" QualityMetamodel::SingleValue : measuredBy15
 QualityMetamodel::MetricProvider "0..9999" --* "1..1" QualityMetamodel::QualityModel : metricProviders0
 QualityMetamodel::QualityAttribute "0..9999" -- "1..1" QualityMetamodel::QualityAttribute : qualityAttributes11
 QualityMetamodel::QualityAttribute "0..9999" --* "1..1" QualityMetamodel::QualityModel : qualityAttributes3
-QualityMetamodel::ValueType "0..9999" --* "1..1" QualityMetamodel::QualityModel : qualityTypes1
-QualityMetamodel::Value "0..9999" --* "1..1" QualityMetamodel::QualityModel : qualityValues5
+QualityMetamodel::QualityModel "1..1" *-- "0..9999" QualityMetamodel::ValueType : qualityTypes1
+QualityMetamodel::QualityModel "1..1" *-- "0..9999" QualityMetamodel::Value : qualityValues5
 QualityMetamodel::EnumerationItem "1..9999" --* "1..1" QualityMetamodel::EnumerationMetric : set21
-QualityMetamodel::ValueType "1..1" -- "1..1" QualityMetamodel::Value : type13
+QualityMetamodel::Value "1..1" -- "1..1" QualityMetamodel::ValueType : type13
 QualityMetamodel::Value "1..1" -- "1..1" QualityMetamodel::ValueType : val14
 QualityMetamodel::EnumerationItem "0..1" -- "1..1" QualityMetamodel::EnumerationMetric : value22
 QualityMetamodel::QualityAttribute "1..1" -- "1..1" QualityMetamodel::Value : value7

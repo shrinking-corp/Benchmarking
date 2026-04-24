@@ -1,0 +1,93 @@
+@startuml
+class CORECompositionSpecification {
+}
+enum COREFeatureRelationshipType {
+  Mandatory
+  OR
+  Optional
+  XOR
+}
+class COREModel {
+}
+class COREModelElement {
+}
+class CORENamedElement {
+}
+abstract class core::COREBinding {
+}
+abstract class core::CORECompositionSpecification {
+}
+class core::COREConcern {
+}
+abstract class core::COREConfiguration {
+}
+abstract class core::COREFeature {
+  + addFeature(association : any, child_name : any) : void
+  + addRealizedBy(model : any) : void
+  + changeLink(new_association : any) : void
+  + changeParent(feature : any, new_association : any) : void
+  + delete() : void
+  + excludes(feature : any) : void
+  + removeConstraint(feature : any) : void
+  + rename(core_feature_name : any) : void
+  + requires(feature : any) : void
+}
+abstract class core::COREFeatureModel {
+  + getGlobalRoot() : str
+  + getLocalRoot() : str
+}
+abstract class core::COREImpactModel {
+}
+abstract class core::COREImpactModelElement {
+}
+class core::COREInterface {
+}
+class core::COREMapping {
+}
+abstract class core::COREModel {
+}
+abstract class core::COREModelElement {
+}
+abstract class core::CORENamedElement {
+  + name : str
+}
+abstract class core::COREPattern {
+}
+class core::COREReuse {
+}
+abstract class core::COREStrategy {
+}
+CORECompositionSpecification <|-- core::COREBinding
+CORECompositionSpecification <|-- core::COREPattern
+COREModel <|-- core::COREFeatureModel
+COREModel <|-- core::COREImpactModel
+COREModelElement <|-- core::COREFeature
+COREModelElement <|-- core::COREImpactModelElement
+CORENamedElement <|-- core::COREConcern
+CORENamedElement <|-- core::COREConfiguration
+CORENamedElement <|-- core::COREModel
+CORENamedElement <|-- core::COREModelElement
+CORENamedElement <|-- core::COREStrategy
+core::CORECompositionSpecification "0..9999" -- "1..1" core::COREReuse : compositions38
+core::COREConfiguration "0..9999" --* "1..1" core::COREFeature : configurations10
+core::COREConfiguration "0..9999" -- "1..1" core::COREStrategy : configurations21
+core::COREBinding "1..1" -- "0..9999" core::COREMapping : coreMappings12
+core::COREInterface "1..1" -- "0..9999" core::COREModelElement : customizable27
+core::COREImpactModelElement "0..9999" -- "1..1" core::COREInterface : impacted33
+core::COREConcern "1..1" *-- "1..1" core::COREInterface : interface6
+core::COREMapping "1..1" -- "1..1" core::COREModelElement : mappedFrom18
+core::COREMapping "1..1" -- "1..1" core::COREModelElement : mappedTo15
+core::COREModel "1..1" -- "0..9999" core::COREModelElement : modelElements1
+core::COREConcern "1..1" -- "2..9999" core::COREModel : models4
+core::COREFeature "1..1" -- "0..9999" core::COREModel : realizedBy8
+core::COREFeature "0..9999" -- "1..1" core::COREModel : realizes3
+core::COREConcern "1..1" -- "1..1" core::COREReuse : reusedConcern35
+core::COREConcern "0..9999" -- "1..1" core::COREConfiguration : reusedConcern44
+core::COREModel "1..1" *-- "0..9999" core::COREReuse : reuses0
+core::COREFeature "0..9999" -- "1..1" core::COREInterface : selectable24
+core::COREFeature "1..9999" -- "1..1" core::COREReuse : selected41
+core::COREConfiguration "1..1" -- "1..9999" core::COREFeature : selected47
+core::CORECompositionSpecification "1..1" -- "1..1" core::COREModel : source13
+core::COREFeature "1..1" *-- "0..9999" core::COREStrategy : strategies9
+core::COREInterface "1..1" -- "0..9999" core::COREModelElement : usable30
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+class FeatureTreeNode {
+}
+class feature::Annotation {
+}
+class feature::Attribute {
+  + name : str
+  + type : str
+  + value : str
+}
+class feature::Constraint {
+  + expression : str
+  + language : str
+}
+class feature::Feature {
+  + name : str
+  + isMandatory() : bool
+}
+class feature::FeatureModel {
+  + name : str
+  + getAllFeatures() : str
+  + getFeatureRecursive(base : any) : str
+  + getMandatoryFeatures() : str
+}
+abstract class feature::FeatureTreeNode {
+  + maxCardinality : int
+  + minCardinality : int
+}
+class feature::Group {
+}
+FeatureTreeNode <|-- feature::Feature
+FeatureTreeNode <|-- feature::Group
+feature::Annotation "0..9999" --* "1..1" feature::Feature : annotations15
+feature::Attribute "0..9999" --* "1..1" feature::Feature : attributes11
+feature::Feature "1..9999" --* "1..1" feature::Group : childFeatures19
+feature::FeatureModel "1..1" *-- "0..9999" feature::FeatureModel : children4
+feature::Constraint "1..1" -- "1..9999" feature::Feature : constrainedFeatures21
+feature::FeatureModel "1..1" -- "0..1" feature::FeatureModel : constrainingFeatureModel9
+feature::Constraint "0..9999" --* "1..1" feature::FeatureModel : constraints0
+feature::Constraint "0..9999" -- "1..1" feature::Feature : constraints17
+feature::Attribute "1..1" -- "1..1" feature::Feature : feature23
+feature::Annotation "1..1" -- "1..1" feature::Feature : feature25
+feature::Feature "1..1" *-- "0..9999" feature::Group : groups12
+feature::FeatureModel "1..1" -- "0..1" feature::FeatureModel : parent6
+feature::Feature "1..1" -- "1..1" feature::Group : parentFeature18
+feature::Feature "1..1" -- "0..1" feature::Group : parentGroup13
+feature::Feature "0..1" --* "1..1" feature::FeatureModel : root1
+@enduml

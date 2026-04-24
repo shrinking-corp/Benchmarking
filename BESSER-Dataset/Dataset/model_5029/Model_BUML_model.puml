@@ -1,0 +1,43 @@
+@startuml
+enum ShipmentStatus {
+  ASSIGNED
+  DELIVERED
+  NEW
+  UNDERWAY
+}
+class pickupnet::Address {
+  + text : str
+}
+class pickupnet::Customer {
+  + id : str
+  + name : str
+  + twitterUserName : str
+}
+class pickupnet::Driver {
+  + id : str
+  + name : str
+}
+class pickupnet::GeoLocation {
+  + lat : float
+  + lon : float
+}
+class pickupnet::Shipment {
+  + id : str
+  + status : str
+}
+class pickupnet::Station {
+  + acceptShipment(shipment : any) : void
+  + registerCustomer(customer : any) : void
+  + registerDriver(driver : any) : void
+}
+pickupnet::Driver "1..1" -- "0..9999" pickupnet::Shipment : assignments5
+pickupnet::Customer "0..9999" --* "1..1" pickupnet::Station : customers0
+pickupnet::Driver "0..1" -- "1..1" pickupnet::Shipment : driver8
+pickupnet::Driver "0..9999" --* "1..1" pickupnet::Station : drivers1
+pickupnet::Address "1..1" *-- "1..1" pickupnet::GeoLocation : geoLocation15
+pickupnet::Customer "1..1" -- "1..1" pickupnet::Shipment : orderer9
+pickupnet::Customer "1..1" *-- "0..9999" pickupnet::Shipment : orders6
+pickupnet::Address "1..1" --* "1..1" pickupnet::Shipment : pickUpAddress12
+pickupnet::Address "1..1" --* "1..1" pickupnet::Shipment : shipToAddress10
+pickupnet::Shipment "0..9999" -- "1..1" pickupnet::Station : shipments3
+@enduml

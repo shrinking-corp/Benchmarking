@@ -66,18 +66,18 @@ stmt <|-- dot::edge::stmt::node
 stmt <|-- dot::edge::stmt::subgraph
 stmt <|-- dot::node::stmt
 stmt <|-- dot::subgraph
-dot::attr::list "1..1" *-- "0..9999" dot::a::list : a_list19
+dot::a::list "0..9999" --* "1..1" dot::attr::list : a_list19
 dot::attr::list "0..9999" --* "1..1" dot::edge::stmt::subgraph : attributes12
-dot::node::stmt "1..1" *-- "0..9999" dot::attr::list : attributes15
+dot::attr::list "0..9999" --* "1..1" dot::node::stmt : attributes15
 dot::attr::list "0..9999" --* "1..1" dot::attr::stmt : attributes17
 dot::attr::list "0..9999" --* "1..1" dot::edge::stmt::node : attributes6
-dot::edgeRHS "0..9999" --* "1..1" dot::edge::stmt::node : edgeRHS4
-dot::edgeRHS "0..1" --* "1..1" dot::edge::stmt::subgraph : edgeRHS9
+dot::edge::stmt::node "1..1" *-- "0..9999" dot::edgeRHS : edgeRHS4
+dot::edge::stmt::subgraph "1..1" *-- "0..1" dot::edgeRHS : edgeRHS9
 dot::graph "0..9999" --* "1..1" dot::graphvizmodel : graphs0
-dot::node::id "0..1" --* "1..1" dot::edgeRHS::node : node24
-dot::node::id "0..1" --* "1..1" dot::edge::stmt::node : node_id3
+dot::edgeRHS::node "1..1" *-- "0..1" dot::node::id : node24
+dot::edge::stmt::node "1..1" *-- "0..1" dot::node::id : node_id3
 dot::graph "1..1" *-- "0..9999" dot::stmt : stmts1
 dot::stmt "0..9999" --* "1..1" dot::subgraph : stmts21
-dot::subgraph "0..1" --* "1..1" dot::edgeRHS::subgraph : subgraph26
-dot::subgraph "0..1" --* "1..1" dot::edge::stmt::subgraph : subgraph8
+dot::edgeRHS::subgraph "1..1" *-- "0..1" dot::subgraph : subgraph26
+dot::edge::stmt::subgraph "1..1" *-- "0..1" dot::subgraph : subgraph8
 @enduml

@@ -1,0 +1,76 @@
+@startuml
+class Automaton {
+}
+class ExtendibleElement {
+}
+class ExtensionElement {
+}
+class IExtendible {
+}
+class IExtension {
+}
+class Module {
+}
+class State {
+}
+class Transition {
+}
+class ea::automata::Automaton {
+  + id : str
+  + name : str
+  + usedExtensionIds : str
+}
+class ea::automata::Module {
+}
+class ea::automata::State {
+  + id : str
+  + name : str
+}
+class ea::automata::Transition {
+  + id : str
+}
+class ea::extensions::BooleanExtension {
+  + value : bool
+}
+abstract class ea::extensions::ExtendibleElement {
+}
+abstract class ea::extensions::ExtensionElement {
+}
+abstract class ea::extensions::IExtendible {
+  + findExtension(id : any) : str
+  + updateExtension(extension : any) : void
+}
+abstract class ea::extensions::IExtension {
+  + id : str
+}
+class ea::extensions::IntegerExtension {
+  + value : int
+}
+class ea::extensions::StringExtension {
+  + value : str
+}
+class ea::extensions::StringListExtension {
+  + values : str
+}
+ExtendibleElement <|-- ea::automata::Automaton
+ExtendibleElement <|-- ea::automata::State
+ExtendibleElement <|-- ea::automata::Transition
+ExtensionElement <|-- ea::extensions::BooleanExtension
+ExtensionElement <|-- ea::extensions::IntegerExtension
+ExtensionElement <|-- ea::extensions::StringExtension
+ExtensionElement <|-- ea::extensions::StringListExtension
+IExtendible <|-- ea::extensions::ExtendibleElement
+IExtension <|-- ea::extensions::ExtensionElement
+Automaton "0..9999" --* "1..1" ea::automata::Module : automata22
+Automaton "0..1" -- "1..1" ea::automata::Transition : automaton13
+Automaton "0..1" -- "1..1" ea::automata::State : automaton5
+IExtension "0..9999" --* "1..1" ea::extensions::IExtendible : extensions25
+Transition "0..9999" -- "1..1" ea::automata::State : incoming7
+Module "0..1" -- "1..1" ea::automata::Automaton : module3
+Transition "0..9999" -- "1..1" ea::automata::State : outgoing10
+IExtendible "0..1" -- "1..1" ea::extensions::IExtension : owner26
+State "0..1" -- "1..1" ea::automata::Transition : source16
+State "0..9999" --* "1..1" ea::automata::Automaton : states0
+State "0..1" -- "1..1" ea::automata::Transition : target19
+Transition "0..9999" --* "1..1" ea::automata::Automaton : transitions1
+@enduml

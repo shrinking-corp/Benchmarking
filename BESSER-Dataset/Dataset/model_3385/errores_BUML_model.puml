@@ -17,9 +17,9 @@ class errors::ForeignError {
 class errors::Table {
 }
 Error <|-- errors::ForeignError
-errors::Errores "1..1" *-- "0..9999" errors::Error : errores0
-errors::ForeignError "1..1" -- "0..1" errors::Fk : fk7
+errors::Error "0..9999" --* "1..1" errors::Errores : errores0
+errors::Fk "0..1" -- "1..1" errors::ForeignError : fk7
 errors::Column "0..9999" -- "1..1" errors::ForeignError : fkColumns5
-errors::Table "0..1" -- "1..1" errors::ForeignError : tableCont1
-errors::Table "0..1" -- "1..1" errors::ForeignError : tableRef2
+errors::ForeignError "1..1" -- "0..1" errors::Table : tableCont1
+errors::ForeignError "1..1" -- "0..1" errors::Table : tableRef2
 @enduml

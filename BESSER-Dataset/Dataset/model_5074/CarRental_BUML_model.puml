@@ -1,0 +1,65 @@
+@startuml
+enum CarGroupKind {
+  compact
+  intermediate
+  luxury
+}
+class CarRental::Branch {
+  + location : str
+}
+class CarRental::Car {
+  + id : str
+}
+class CarRental::CarGroup {
+  + kind : str
+}
+class CarRental::Check {
+  + description : str
+}
+class CarRental::Customer {
+  + address : str
+}
+class CarRental::Employee {
+  + salary : float
+  + raiseSalary(amount : any) : float
+}
+class CarRental::Person {
+  + age : int
+  + firstname : str
+  + isMarried : bool
+  + lastname : str
+  + email() : str
+  + updateAge(newAge : any) : void
+}
+class CarRental::Rental {
+  + framDate : str
+  + untilDate : str
+}
+class CarRental::ServiceDepot {
+  + location : str
+}
+class Person {
+}
+Person <|-- CarRental::Customer
+Person <|-- CarRental::Employee
+CarRental::Branch "1..1" -- "1..1" CarRental::Rental : branch21
+CarRental::Branch "0..9999" -- "1..1" CarRental::CarGroup : branch26
+CarRental::Branch "1..1" -- "1..1" CarRental::Car : branch40
+CarRental::Branch "1..1" -- "0..9999" CarRental::Car : car11
+CarRental::Car "0..1" -- "1..1" CarRental::Rental : car17
+CarRental::Car "0..9999" -- "1..1" CarRental::CarGroup : car28
+CarRental::Branch "1..1" -- "0..9999" CarRental::CarGroup : carGroup12
+CarRental::CarGroup "1..1" -- "1..1" CarRental::Rental : carGroup23
+CarRental::Car "1..1" -- "1..1" CarRental::CarGroup : carGroup42
+CarRental::Customer "1..1" -- "1..1" CarRental::Rental : customer19
+CarRental::Branch "1..1" -- "0..9999" CarRental::Employee : employee8
+CarRental::Branch "1..1" -- "1..1" CarRental::Employee : employer2
+CarRental::CarGroup "1..1" -- "0..1" CarRental::CarGroup : higher35
+CarRental::CarGroup "1..1" -- "0..1" CarRental::CarGroup : lower38
+CarRental::Branch "0..1" -- "1..1" CarRental::Employee : managedBranch1
+CarRental::Branch "1..1" -- "1..1" CarRental::Employee : manager5
+CarRental::Customer "1..1" -- "0..9999" CarRental::Rental : rental0
+CarRental::Branch "1..1" -- "0..9999" CarRental::Rental : rental14
+CarRental::CarGroup "1..1" -- "0..9999" CarRental::Rental : rental31
+CarRental::Car "1..1" -- "0..1" CarRental::Rental : rental45
+@enduml

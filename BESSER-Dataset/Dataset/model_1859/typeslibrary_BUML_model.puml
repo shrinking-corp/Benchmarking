@@ -1,0 +1,64 @@
+@startuml
+enum NativeTypeKind {
+  Enum
+  Length
+  LengthAndPrecision
+  Simple
+}
+class Type {
+}
+class TypesLibrary {
+}
+enum TypesLibraryKind {
+  logicalTypes
+  physicalTypes
+}
+class UserDefinedType {
+}
+class typeslibrary::ComplexNamedType {
+}
+class typeslibrary::NativeType {
+  + name : str
+  + spec : str
+}
+class typeslibrary::NativeTypesLibrary {
+  + name : str
+  + findTypeByName(name : any) : str
+}
+class typeslibrary::SimpleNamedType {
+}
+abstract class typeslibrary::Type {
+}
+class typeslibrary::TypeInstance {
+  + length : int
+  + literals : str
+  + precision : int
+}
+abstract class typeslibrary::TypesLibrary {
+  + kind : str
+}
+abstract class typeslibrary::TypesLibraryUser {
+}
+abstract class typeslibrary::UserDefinedType {
+  + name : str
+}
+class typeslibrary::UserDefinedTypeRef {
+}
+class typeslibrary::UserDefinedTypesLibrary {
+  + name : str
+}
+Type <|-- typeslibrary::TypeInstance
+Type <|-- typeslibrary::UserDefinedTypeRef
+TypesLibrary <|-- typeslibrary::NativeTypesLibrary
+TypesLibrary <|-- typeslibrary::UserDefinedTypesLibrary
+UserDefinedType <|-- typeslibrary::ComplexNamedType
+UserDefinedType <|-- typeslibrary::SimpleNamedType
+typeslibrary::NativeType "0..1" -- "1..1" typeslibrary::NativeType : mapsTo4
+typeslibrary::NativeType "1..1" -- "1..1" typeslibrary::TypeInstance : nativeType1
+typeslibrary::NativeType "0..9999" --* "1..1" typeslibrary::NativeTypesLibrary : nativeTypes0
+typeslibrary::SimpleNamedType "1..1" -- "1..1" typeslibrary::TypeInstance : type7
+typeslibrary::UserDefinedType "1..1" -- "1..1" typeslibrary::UserDefinedTypeRef : type9
+typeslibrary::ComplexNamedType "1..1" *-- "0..9999" typeslibrary::UserDefinedType : types6
+typeslibrary::TypesLibrary "0..9999" -- "1..1" typeslibrary::TypesLibraryUser : usedLibraries13
+typeslibrary::UserDefinedType "0..9999" --* "1..1" typeslibrary::UserDefinedTypesLibrary : userDefinedTypes11
+@enduml

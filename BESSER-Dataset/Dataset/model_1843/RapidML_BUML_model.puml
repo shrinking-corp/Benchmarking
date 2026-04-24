@@ -1,0 +1,562 @@
+@startuml
+enum AuthenticationFlows {
+  ACCESS_CODE
+  APPLICATION
+  IMPLICIT
+  PASSWORD
+}
+enum AuthenticationTypes {
+  BASIC
+  CUSTOM
+  OAUTH2
+}
+enum CollectionRealizationEnum {
+  EMBEDDED_OBJECT_LIST
+  REFERENCE_LINK_LIST
+}
+enum CollectionRealizationLevelEnum {
+  COLLECTION_LEVEL
+  ITEM_LEVEL
+}
+class ConstrainableType {
+}
+class Constraint {
+}
+class DataExample {
+}
+class DataType {
+}
+class Documentable {
+}
+class Element {
+}
+class Example {
+}
+class Extensible {
+}
+class Feature {
+}
+enum HTTPMethods {
+  CONNECT
+  DELETE
+  GET
+  HEAD
+  OPTIONS
+  PATCH
+  POST
+  PUT
+  TRACE
+}
+class HasSecurityValue {
+}
+class HasStringValue {
+}
+class HasTitle {
+}
+enum HttpMessageParameterLocation {
+  HEADER
+  NONE
+  QUERY
+}
+class Inheritable {
+}
+class ObjectRealization {
+}
+class Parameter {
+}
+class RESTElement {
+}
+class RealizationContainer {
+}
+class ReferenceElement {
+}
+enum ReferenceRealizationEnum {
+  EMBED
+  LINK
+}
+class ReferenceTreatment {
+}
+class ResourceDefinition {
+}
+class ServiceDataResource {
+}
+class SimpleType {
+}
+class SingleValueType {
+}
+class SourceReference {
+}
+class TypedMessage {
+}
+class URIParameter {
+}
+class URISegment {
+}
+class WithDataExamples {
+}
+class WithExamples {
+}
+class rapidml::AuthenticationMethod {
+}
+class rapidml::CollectionParameter {
+}
+class rapidml::CollectionReferenceElement {
+  + getName() : str
+}
+class rapidml::CollectionResource {
+  + resourceRealizationKind : str
+}
+abstract class rapidml::ConstrainableType {
+  + getAllConstraints() : Constraint
+  + getConstrainableParent() : ConstrainableType
+}
+abstract class rapidml::Constraint {
+  + supports(type : any) : bool
+}
+abstract class rapidml::DataExample {
+}
+class rapidml::DataModel {
+  + name : str
+}
+abstract class rapidml::DataType {
+  + name : str
+}
+class rapidml::Documentable {
+}
+class rapidml::Documentation {
+  + text : str
+}
+abstract class rapidml::Element {
+  + cardinality : str
+  + getDataType() : str
+  + getMaxOccurs() : int
+  + getMinOccurs() : int
+  + isMultiValued() : bool
+}
+class rapidml::EnumConstant {
+  + integerValue : int
+  + literalValue : str
+  + name : str
+  + getImplicitIntegerValue() : int
+}
+class rapidml::Enumeration {
+  + getPrimitiveType() : str
+}
+abstract class rapidml::Example {
+  + getBody() : str
+}
+abstract class rapidml::Extensible {
+}
+class rapidml::Extension {
+  + name : str
+  + value : str
+}
+class rapidml::ExternalExample {
+  + path : str
+  + getBody() : str
+}
+abstract class rapidml::Feature {
+  + key : bool
+  + name : str
+  + readOnly : bool
+  + restriction : bool
+  + getMaxOccurs() : int
+  + getMinOccurs() : int
+}
+abstract class rapidml::HasSecurityValue {
+}
+abstract class rapidml::HasStringValue {
+  + toString() : str
+}
+abstract class rapidml::HasTitle {
+  + title : str
+}
+class rapidml::ImportDeclaration {
+  + alias : str
+  + importURI : str
+  + importedNamespace : str
+}
+abstract class rapidml::Inheritable {
+}
+class rapidml::InlineDataExample {
+  + body : str
+}
+class rapidml::InlineExample {
+  + body : str
+}
+class rapidml::LengthConstraint {
+  + length : int
+  + maxLength : int
+  + minLength : int
+}
+class rapidml::LinkRelation {
+  + name : str
+  + specURL : str
+}
+class rapidml::LinkRelationsLibrary {
+  + name : str
+}
+class rapidml::MatrixParameter {
+}
+class rapidml::MediaType {
+  + name : str
+  + specURL : str
+  + equals(other : any) : bool
+  + hashCode() : int
+}
+class rapidml::MediaTypesLibrary {
+}
+class rapidml::MessageParameter {
+  + httpLocation : str
+}
+class rapidml::Method {
+  + httpMethod : str
+  + id : str
+  + getName() : str
+}
+class rapidml::NamedLinkDescriptor {
+  + default : bool
+  + name : str
+}
+class rapidml::ObjectRealization {
+  + getAllIncludedProperties() : str
+  + getDataType() : str
+}
+class rapidml::ObjectResource {
+}
+class rapidml::Operation {
+  + name : str
+}
+abstract class rapidml::Parameter {
+  + default : str
+  + fixed : str
+  + name : str
+  + required : bool
+  + getConstraints() : str
+  + getPrimitiveType() : str
+  + getType() : str
+}
+abstract class rapidml::PathSegment {
+}
+class rapidml::PrimitiveProperty {
+  + getPrimitiveType() : str
+}
+class rapidml::PrimitiveType {
+  + getPrimitiveType() : str
+}
+class rapidml::PrimitiveTypeSourceReference {
+  + getConstraints() : str
+  + getType() : str
+}
+class rapidml::PrimitiveTypesLibrary {
+  + name : str
+}
+class rapidml::PropertyRealization {
+  + cardinality : str
+  + getMaxOccurs() : int
+  + getMinOccurs() : int
+  + getPrimitiveType() : str
+}
+class rapidml::PropertyReference {
+  + getConstraints() : str
+  + getType() : str
+}
+class rapidml::RESTElement {
+}
+abstract class rapidml::RealizationContainer {
+  + effectiveRealization : str
+  + realizationName : str
+  + withDefaultRealization : bool
+  + getActualType() : str
+}
+class rapidml::RealizationModelLocation {
+  + uri : str
+  + getRealizationModel() : str
+}
+abstract class rapidml::ReferenceElement {
+  + getName() : str
+}
+class rapidml::ReferenceEmbed {
+  + getAllNestedReferenceTreatments() : ReferenceTreatment
+  + getNestedReferenceTreatments() : ReferenceTreatment
+}
+class rapidml::ReferenceLink {
+  + collectionRealizationLevel : str
+  + name : str
+  + getTargetResource() : ResourceDefinition
+}
+class rapidml::ReferenceProperty {
+  + container : bool
+  + containment : bool
+}
+class rapidml::ReferenceRealization {
+  + multiValued : bool
+  + realizationType : str
+  + getLinkDescriptor() : str
+}
+class rapidml::ReferenceTreatment {
+  + getEmbedHierarchy() : str
+  + getLinkDescriptor() : str
+}
+class rapidml::RegExConstraint {
+  + pattern : str
+}
+class rapidml::ResourceAPI {
+  + baseURI : str
+  + name : str
+  + version : str
+}
+abstract class rapidml::ResourceDefinition {
+  + name : str
+}
+class rapidml::SecurityScheme {
+  + flow : str
+  + name : str
+  + type : str
+}
+class rapidml::SecuritySchemeLibrary {
+  + name : str
+}
+class rapidml::SecuritySchemeParameter {
+  + name : str
+  + value : str
+}
+class rapidml::SecurityScope {
+  + name : str
+}
+class rapidml::ServiceDataResource {
+  + default : bool
+  + getAllReferenceTreatments() : str
+  + getDefaultLinkDescriptor() : str
+  + getIncludedProperties() : str
+  + getReferenceLinks() : str
+  + isIncluded(feature : any) : bool
+}
+abstract class rapidml::SimpleType {
+}
+abstract class rapidml::SingleValueType {
+  + getPrimitiveType() : str
+}
+abstract class rapidml::SourceReference {
+  + getConstraints() : str
+  + getPrimitiveType() : str
+  + getType() : str
+}
+class rapidml::Structure {
+  + getAllPrimitiveProperties() : str
+  + getPrimitiveProperties() : str
+  + getReferenceProperties() : str
+}
+class rapidml::TemplateParameter {
+}
+abstract class rapidml::TypedMessage {
+  + useParentTypeReference : bool
+  + getActualType() : str
+  + getAllExamples() : str
+  + getIncludedProperties() : str
+  + getReferenceLinks() : str
+  + isIncluded(feature : any) : bool
+}
+class rapidml::TypedRequest {
+}
+class rapidml::TypedResponse {
+  + statusCode : int
+}
+class rapidml::URI {
+}
+abstract class rapidml::URIParameter {
+  + getName() : str
+}
+class rapidml::URISegment {
+  + name : str
+}
+class rapidml::URISegmentWithParameter {
+}
+class rapidml::UserDefinedType {
+  + getPrimitiveType() : str
+}
+class rapidml::ValueRangeConstraint {
+  + maxValue : str
+  + maxValueExclusive : bool
+  + minValue : str
+  + minValueExclusive : bool
+}
+abstract class rapidml::WithDataExamples {
+}
+abstract class rapidml::WithExamples {
+}
+class rapidml::ZenModel {
+  + name : str
+  + namespace : str
+}
+ConstrainableType <|-- rapidml::PrimitiveProperty
+ConstrainableType <|-- rapidml::PropertyRealization
+ConstrainableType <|-- rapidml::UserDefinedType
+Constraint <|-- rapidml::LengthConstraint
+Constraint <|-- rapidml::RegExConstraint
+Constraint <|-- rapidml::ValueRangeConstraint
+DataExample <|-- rapidml::InlineDataExample
+DataType <|-- rapidml::SingleValueType
+DataType <|-- rapidml::Structure
+Documentable <|-- rapidml::DataModel
+Documentable <|-- rapidml::DataType
+Documentable <|-- rapidml::EnumConstant
+Documentable <|-- rapidml::Feature
+Documentable <|-- rapidml::LinkRelation
+Documentable <|-- rapidml::Operation
+Documentable <|-- rapidml::RESTElement
+Documentable <|-- rapidml::SecurityScheme
+Documentable <|-- rapidml::SecuritySchemeLibrary
+Documentable <|-- rapidml::SecuritySchemeParameter
+Documentable <|-- rapidml::SecurityScope
+Documentable <|-- rapidml::ZenModel
+Element <|-- rapidml::Feature
+Element <|-- rapidml::ReferenceElement
+Example <|-- rapidml::ExternalExample
+Example <|-- rapidml::InlineExample
+Extensible <|-- rapidml::ConstrainableType
+Extensible <|-- rapidml::Constraint
+Extensible <|-- rapidml::DataType
+Extensible <|-- rapidml::Feature
+Extensible <|-- rapidml::Method
+Extensible <|-- rapidml::ObjectRealization
+Extensible <|-- rapidml::Parameter
+Extensible <|-- rapidml::RESTElement
+Extensible <|-- rapidml::RealizationContainer
+Extensible <|-- rapidml::ReferenceTreatment
+Extensible <|-- rapidml::ZenModel
+Feature <|-- rapidml::PrimitiveProperty
+Feature <|-- rapidml::ReferenceProperty
+HasSecurityValue <|-- rapidml::Method
+HasSecurityValue <|-- rapidml::ResourceAPI
+HasSecurityValue <|-- rapidml::ResourceDefinition
+HasStringValue <|-- rapidml::PrimitiveProperty
+HasStringValue <|-- rapidml::URI
+HasStringValue <|-- rapidml::URISegment
+HasTitle <|-- rapidml::DataModel
+HasTitle <|-- rapidml::ResourceAPI
+HasTitle <|-- rapidml::ZenModel
+Inheritable <|-- rapidml::Structure
+ObjectRealization <|-- rapidml::NamedLinkDescriptor
+Parameter <|-- rapidml::CollectionParameter
+Parameter <|-- rapidml::MessageParameter
+Parameter <|-- rapidml::URIParameter
+RESTElement <|-- rapidml::MediaType
+RESTElement <|-- rapidml::Method
+RESTElement <|-- rapidml::Parameter
+RESTElement <|-- rapidml::ResourceAPI
+RESTElement <|-- rapidml::ResourceDefinition
+RESTElement <|-- rapidml::SecurityScheme
+RESTElement <|-- rapidml::TypedMessage
+RealizationContainer <|-- rapidml::ReferenceRealization
+RealizationContainer <|-- rapidml::ServiceDataResource
+RealizationContainer <|-- rapidml::TypedMessage
+ReferenceElement <|-- rapidml::CollectionReferenceElement
+ReferenceElement <|-- rapidml::ReferenceProperty
+ReferenceTreatment <|-- rapidml::ReferenceEmbed
+ReferenceTreatment <|-- rapidml::ReferenceLink
+ResourceDefinition <|-- rapidml::ServiceDataResource
+ServiceDataResource <|-- rapidml::CollectionResource
+ServiceDataResource <|-- rapidml::ObjectResource
+SimpleType <|-- rapidml::PrimitiveType
+SimpleType <|-- rapidml::UserDefinedType
+SingleValueType <|-- rapidml::Enumeration
+SingleValueType <|-- rapidml::SimpleType
+SourceReference <|-- rapidml::PrimitiveTypeSourceReference
+SourceReference <|-- rapidml::PropertyReference
+TypedMessage <|-- rapidml::TypedRequest
+TypedMessage <|-- rapidml::TypedResponse
+URIParameter <|-- rapidml::MatrixParameter
+URIParameter <|-- rapidml::TemplateParameter
+URISegment <|-- rapidml::URISegmentWithParameter
+WithDataExamples <|-- rapidml::Structure
+WithExamples <|-- rapidml::ResourceDefinition
+WithExamples <|-- rapidml::TypedMessage
+rapidml::ResourceDefinition "1..1" *-- "0..1" rapidml::URI : URI5
+rapidml::MediaType "0..9999" -- "1..1" rapidml::ResourceDefinition : allMediaTypes2
+rapidml::Inheritable "0..9999" -- "1..1" rapidml::Structure : allSupertypes150
+rapidml::RealizationModelLocation "0..9999" --* "1..1" rapidml::ResourceAPI : autoRealizations64
+rapidml::Feature "1..1" -- "1..1" rapidml::PropertyRealization : baseProperty85
+rapidml::Enumeration "1..1" -- "1..1" rapidml::PrimitiveType : baseType157
+rapidml::SimpleType "1..1" -- "1..1" rapidml::UserDefinedType : baseType160
+rapidml::CollectionParameter "0..9999" --* "1..1" rapidml::CollectionResource : collectionParameters28
+rapidml::PrimitiveProperty "0..1" -- "1..1" rapidml::PropertyReference : conceptualFeature32
+rapidml::ConstrainableType "1..1" *-- "0..9999" rapidml::Constraint : constraints164
+rapidml::Feature "1..1" -- "0..1" rapidml::Structure : containingDataType134
+rapidml::MessageParameter "1..1" -- "0..1" rapidml::TypedMessage : containingMessage34
+rapidml::Method "0..1" -- "1..1" rapidml::TypedRequest : containingMethod22
+rapidml::Method "0..1" -- "1..1" rapidml::TypedResponse : containingMethod24
+rapidml::Parameter "0..1" -- "1..1" rapidml::SourceReference : containingParameter33
+rapidml::Method "1..1" -- "0..1" rapidml::ResourceDefinition : containingResourceDefinition16
+rapidml::CollectionParameter "1..1" -- "0..1" rapidml::CollectionResource : containingResourceDefinition31
+rapidml::URI "0..1" -- "1..1" rapidml::URIParameter : containingURI27
+rapidml::DataExample "0..9999" --* "1..1" rapidml::WithDataExamples : dataExamples155
+rapidml::DataModel "0..9999" --* "1..1" rapidml::ZenModel : dataModels36
+rapidml::RealizationContainer "1..1" -- "0..1" rapidml::Structure : dataType122
+rapidml::ReferenceElement "1..1" -- "0..1" rapidml::Structure : dataType161
+rapidml::ReferenceRealization "0..9999" --* "1..1" rapidml::ResourceAPI : defaultReferenceRealizations62
+rapidml::NamedLinkDescriptor "0..9999" --* "1..1" rapidml::ServiceDataResource : definedLinkDescriptors66
+rapidml::LinkRelation "0..9999" --* "1..1" rapidml::LinkRelationsLibrary : definedLinkRelations128
+rapidml::LinkRelation "0..9999" --* "1..1" rapidml::ResourceAPI : definedLinkRelations60
+rapidml::MediaType "0..9999" --* "1..1" rapidml::ResourceAPI : definedMediaTypes57
+rapidml::MediaType "0..9999" -- "1..1" rapidml::MediaType : derivedFrom20
+rapidml::Documentable "1..1" *-- "0..1" rapidml::Documentation : documentation18
+rapidml::EnumConstant "0..9999" --* "1..1" rapidml::Enumeration : enumConstants156
+rapidml::EnumConstant "1..1" -- "0..1" rapidml::Enumeration : enumeration159
+rapidml::SecurityScheme "1..1" *-- "0..9999" rapidml::TypedResponse : errorResponses105
+rapidml::Example "0..9999" --* "1..1" rapidml::WithExamples : examples86
+rapidml::Feature "0..9999" -- "1..1" rapidml::ObjectRealization : excludedProperties95
+rapidml::ObjectRealization "1..1" *-- "0..9999" rapidml::PropertyRealization : exclusivePropertyList90
+rapidml::Extensible "1..1" *-- "0..9999" rapidml::Extension : extensions124
+rapidml::MediaType "0..9999" -- "1..1" rapidml::ResourceAPI : formats54
+rapidml::ImportDeclaration "1..1" -- "0..1" rapidml::ZenModel : importedModel87
+rapidml::ImportDeclaration "0..9999" --* "1..1" rapidml::ZenModel : imports44
+rapidml::ObjectRealization "0..1" --* "1..1" rapidml::RealizationContainer : inlineObjectRealization116
+rapidml::ReferenceProperty "0..1" -- "1..1" rapidml::ReferenceProperty : inverse138
+rapidml::LinkRelation "0..1" -- "1..1" rapidml::ReferenceLink : linkRelation77
+rapidml::LinkRelationsLibrary "0..1" --* "1..1" rapidml::ZenModel : linkRelationsLibrary40
+rapidml::MediaType "0..9999" -- "1..1" rapidml::ResourceDefinition : mediaTypes1
+rapidml::MediaType "0..9999" -- "1..1" rapidml::TypedMessage : mediaTypes10
+rapidml::MediaType "1..9999" --* "1..1" rapidml::MediaTypesLibrary : mediaTypes125
+rapidml::MediaTypesLibrary "0..1" --* "1..1" rapidml::ZenModel : mediaTypesLibrary38
+rapidml::Method "0..9999" --* "1..1" rapidml::ResourceDefinition : methods0
+rapidml::ObjectRealization "1..1" *-- "0..9999" rapidml::PropertyRealization : overriddenPropertyList92
+rapidml::DataModel "1..1" *-- "0..9999" rapidml::DataType : ownedDataTypes153
+rapidml::Structure "0..9999" --* "1..1" rapidml::Structure : ownedElements144
+rapidml::Feature "0..9999" --* "1..1" rapidml::Structure : ownedFeatures142
+rapidml::Operation "0..9999" --* "1..1" rapidml::Structure : ownedOperations146
+rapidml::ReferenceRealization "0..1" --* "1..1" rapidml::ReferenceTreatment : ownedReferenceRealization71
+rapidml::ResourceAPI "1..1" *-- "0..9999" rapidml::ResourceDefinition : ownedResourceDefinitions48
+rapidml::MessageParameter "0..9999" --* "1..1" rapidml::SecurityScheme : parameters103
+rapidml::MessageParameter "0..9999" --* "1..1" rapidml::TypedMessage : parameters7
+rapidml::PrimitiveType "0..9999" --* "1..1" rapidml::PrimitiveTypesLibrary : primitiveTypes131
+rapidml::PrimitiveTypesLibrary "0..1" --* "1..1" rapidml::ZenModel : primitiveTypesLibrary42
+rapidml::ObjectRealization "0..1" -- "1..1" rapidml::RealizationContainer : properties117
+rapidml::ObjectRealization "1..1" -- "0..1" rapidml::RealizationContainer : realizationContainer98
+rapidml::ReferenceElement "0..1" -- "1..1" rapidml::ReferenceTreatment : referenceElement67
+rapidml::PathSegment "1..1" -- "0..1" rapidml::ReferenceElement : referenceElement79
+rapidml::CollectionReferenceElement "0..9999" --* "1..1" rapidml::CollectionResource : referenceElements30
+rapidml::ReferenceRealization "0..1" -- "1..1" rapidml::ReferenceTreatment : referenceRealization68
+rapidml::RealizationContainer "1..1" *-- "0..9999" rapidml::ReferenceTreatment : referenceTreatments119
+rapidml::Method "1..1" *-- "0..1" rapidml::TypedRequest : request13
+rapidml::ResourceAPI "0..9999" --* "1..1" rapidml::ZenModel : resourceAPIs35
+rapidml::ResourceDefinition "0..1" -- "1..1" rapidml::TypedMessage : resourceType8
+rapidml::Method "1..1" *-- "0..9999" rapidml::TypedResponse : responses14
+rapidml::AuthenticationMethod "1..1" -- "1..1" rapidml::SecurityScheme : scheme107
+rapidml::SecurityScheme "1..1" *-- "0..9999" rapidml::SecurityScope : scopes100
+rapidml::AuthenticationMethod "1..1" -- "0..9999" rapidml::SecurityScope : scopes110
+rapidml::AuthenticationMethod "0..9999" --* "1..1" rapidml::HasSecurityValue : securedBy99
+rapidml::SecurityScheme "0..9999" --* "1..1" rapidml::SecuritySchemeLibrary : securitySchemes113
+rapidml::SecuritySchemeLibrary "0..1" --* "1..1" rapidml::ZenModel : securitySchemesLibrary46
+rapidml::URI "1..1" *-- "1..9999" rapidml::URISegment : segments82
+rapidml::DataModel "0..9999" -- "1..1" rapidml::ResourceAPI : serviceDataModels51
+rapidml::SecurityScheme "1..1" *-- "0..9999" rapidml::SecuritySchemeParameter : settings101
+rapidml::PrimitiveType "0..1" -- "1..1" rapidml::PrimitiveTypeSourceReference : simpleType81
+rapidml::Parameter "1..1" *-- "0..1" rapidml::SourceReference : sourceReference17
+rapidml::Inheritable "0..9999" -- "1..1" rapidml::Structure : supertypes148
+rapidml::ReferenceRealization "1..1" -- "0..1" rapidml::ResourceDefinition : targetResource74
+rapidml::ReferenceProperty "1..1" -- "1..1" rapidml::Structure : type135
+rapidml::PrimitiveProperty "1..1" -- "1..1" rapidml::SingleValueType : type140
+rapidml::URI "1..1" *-- "0..9999" rapidml::URIParameter : uriParameters84
+rapidml::URIParameter "1..1" -- "0..1" rapidml::URISegmentWithParameter : uriSegment26
+@enduml

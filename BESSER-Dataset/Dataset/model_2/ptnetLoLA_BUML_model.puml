@@ -70,26 +70,26 @@ class ptnetLoLA::TransitionExt {
   + minTime : int
   + probability : float
 }
-ArcToPlace <|-- ptnetLoLA::ArcToPlaceExt
-ArcToTransition <|-- ptnetLoLA::ArcToTransitionExt
 Arc <|-- ptnetLoLA::ArcToPlace
 Arc <|-- ptnetLoLA::ArcToTransition
+ArcToPlace <|-- ptnetLoLA::ArcToPlaceExt
+ArcToTransition <|-- ptnetLoLA::ArcToTransitionExt
 Node <|-- ptnetLoLA::Place
 Node <|-- ptnetLoLA::Transition
-PlaceReference <|-- ptnetLoLA::RefMarkedPlace
 Place <|-- ptnetLoLA::PlaceExt
+PlaceReference <|-- ptnetLoLA::RefMarkedPlace
 Transition <|-- ptnetLoLA::TransitionExt
-ptnetLoLA::Node "1..1" *-- "0..1" ptnetLoLA::Annotation : annotation12
+ptnetLoLA::Annotation "0..1" --* "1..1" ptnetLoLA::Node : annotation12
 ptnetLoLA::Annotation "0..1" --* "1..1" ptnetLoLA::PtNet : annotation5
-ptnetLoLA::PtNet "1..1" *-- "0..9999" ptnetLoLA::Arc : arcs7
+ptnetLoLA::Arc "0..9999" --* "1..1" ptnetLoLA::PtNet : arcs7
 ptnetLoLA::Marking "0..1" --* "1..1" ptnetLoLA::PtNet : finalMarking9
 ptnetLoLA::Arc "0..9999" -- "1..1" ptnetLoLA::Node : incoming14
-ptnetLoLA::PtNet "1..1" *-- "1..1" ptnetLoLA::Marking : initialMarking3
+ptnetLoLA::Marking "1..1" --* "1..1" ptnetLoLA::PtNet : initialMarking3
 ptnetLoLA::Arc "0..9999" -- "1..1" ptnetLoLA::Node : outgoing15
-ptnetLoLA::PlaceReference "1..1" -- "1..1" ptnetLoLA::Place : place19
+ptnetLoLA::Place "1..1" -- "1..1" ptnetLoLA::PlaceReference : place19
 ptnetLoLA::Place "0..9999" --* "1..1" ptnetLoLA::PtNet : places0
-ptnetLoLA::RefMarkedPlace "0..9999" --* "1..1" ptnetLoLA::Marking : places17
-ptnetLoLA::Node "1..1" -- "1..1" ptnetLoLA::Arc : source21
-ptnetLoLA::Node "1..1" -- "1..1" ptnetLoLA::Arc : target22
-ptnetLoLA::Transition "0..9999" --* "1..1" ptnetLoLA::PtNet : transitions1
+ptnetLoLA::Marking "1..1" *-- "0..9999" ptnetLoLA::RefMarkedPlace : places17
+ptnetLoLA::Arc "1..1" -- "1..1" ptnetLoLA::Node : source21
+ptnetLoLA::Arc "1..1" -- "1..1" ptnetLoLA::Node : target22
+ptnetLoLA::PtNet "1..1" *-- "0..9999" ptnetLoLA::Transition : transitions1
 @enduml

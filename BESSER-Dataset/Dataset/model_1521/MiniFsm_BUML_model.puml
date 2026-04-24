@@ -1,0 +1,26 @@
+@startuml
+class State {
+}
+class minifsm::FSM {
+  + handle(event : any) : void
+}
+class minifsm::Initial {
+}
+class minifsm::State {
+  + name : str
+  + execute() : void
+}
+class minifsm::Terminal {
+}
+class minifsm::Transition {
+  + event : str
+  + isActivated() : bool
+}
+State <|-- minifsm::Initial
+State <|-- minifsm::Terminal
+minifsm::FSM "0..1" -- "1..1" minifsm::Transition : fsm7
+minifsm::State "0..1" -- "1..1" minifsm::Transition : incoming2
+minifsm::State "0..1" -- "1..1" minifsm::Transition : outgoing4
+minifsm::FSM "1..1" *-- "0..9999" minifsm::State : states0
+minifsm::FSM "1..1" *-- "0..9999" minifsm::Transition : transitions1
+@enduml

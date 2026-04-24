@@ -1,0 +1,261 @@
+@startuml
+enum BookingStatus {
+  BOOKED
+  CHECKED_IN
+  CHECKED_OUT
+  NONE
+}
+class Cleaning {
+}
+class Clerk {
+}
+class FeedbackReader {
+}
+class FeedbackWriter {
+}
+class HotelSystem {
+}
+class MakeBooking {
+}
+class Payment {
+}
+class ReceptionHandling {
+}
+class RoomAttributeHandling {
+}
+class RoomBooking {
+}
+class RoomFetcher {
+}
+class RoomHandling {
+}
+class RoomTypeHandling {
+}
+class RootElement::Booking {
+  + bookingID : str
+  + calculateCost() : str
+}
+class RootElement::BookingHandler {
+}
+abstract class RootElement::Cleaning {
+  + checkIfRoomCleaned(roomName : any) : str
+  + getListOfUncleanRooms() : str
+  + markRoomAsCleaned(room : any) : void
+}
+class RootElement::CleaningHandler {
+}
+class RootElement::Clerk {
+}
+class RootElement::DailyRoomBooking {
+  + nbrOfGuests : str
+}
+class RootElement::Feedback {
+  + feedbackDescription : str
+  + rating : str
+  + read : str
+}
+class RootElement::FeedbackHandler {
+}
+abstract class RootElement::FeedbackReader {
+  + getAllFeedback() : str
+  + getUnreadFeedback() : str
+}
+abstract class RootElement::FeedbackWriter {
+  + giveFeedback(feedback : any, rating : any) : void
+}
+class RootElement::Guest {
+  + mail : str
+  + name : str
+  + nationality : str
+  + nextDestination : str
+  + phoneNumber : str
+  + socialSecurityNumber : str
+}
+class RootElement::Hotel {
+}
+abstract class RootElement::HotelSystem {
+  + getClerk(staffID : any) : Clerk
+  + getGuest() : str
+  + getManager(staffID : any) : str
+  + getName() : str
+  + getNationality() : str
+  + getStaff(staffID : any) : Staff
+  + getSystemAdministrator() : SysAdmin
+}
+class RootElement::HourlyRoomBooking {
+}
+abstract class RootElement::MakeBooking {
+  + addRoom(booking : any, endDate : any, nbrOfAdults : any, nbrOfChildren : any, room : any, startDate : any) : str
+  + cancelBooking(booking : any) : str
+  + confirmBooking(booking : any, mail : any, name : any, nationality : any, nextDestination : any, passportNr : any, phone : any) : str
+  + createBooking() : str
+  + getAvailableRooms(endDate : any, nbrOfAdults : any, nbrOfChildren : any, startDate : any) : str
+  + lookupBooking(name : any, phoneNumber : any) : str
+}
+class RootElement::Manager {
+}
+abstract class RootElement::Payment {
+  + debitCard(amount : any, creditCard : any) : str
+  + verifyCreditCard(creditCard : any) : str
+}
+class RootElement::PaymentHandler {
+}
+abstract class RootElement::ReceptionHandling {
+  + checkIn(booking : any) : str
+  + checkOut(booking : any) : str
+  + findActiveBooking(roomName : any) : str
+  + findBookings(name : any) : str
+}
+class RootElement::Room {
+  + isOccupied : str
+  + name : str
+  + needCleaning : str
+}
+class RootElement::RoomAttribute {
+  + description : str
+  + id : str
+  + name : str
+}
+abstract class RootElement::RoomAttributeHandling {
+  + addRoomAttribute(description : any, name : any) : str
+  + editRoomAttribute(newDescription : any, newName : any, roomAttribute : any) : str
+  + findRoomAttribute(name : any) : str
+  + getAllRoomAttributes() : str
+  + removeRoomAttribute(roomAttribute : any) : str
+}
+abstract class RootElement::RoomBooking {
+  + bookingStatus : str
+  + endDate : date
+  + startDate : date
+  + calculateCost() : str
+}
+abstract class RootElement::RoomFetcher {
+  + getAllCleanableRooms() : str
+  + getAvailableRooms() : str
+  + getBookableRooms() : str
+}
+abstract class RootElement::RoomHandling {
+  + addRoom(roomName : any, roomType : any) : str
+  + editRoom(newRoomName : any, newRoomType : any, room : any) : str
+  + findRoom(roomName : any) : str
+  + getAllRooms() : str
+  + removeRoom(room : any) : str
+}
+class RootElement::RoomStructure {
+}
+class RootElement::RoomType {
+  + capacity : str
+  + name : str
+  + price : str
+  + addRoomAttribute(roomAttribute : any) : bool
+  + removeRoomAttribute(roomAttribute : any) : bool
+}
+abstract class RootElement::RoomTypeHandling {
+  + addAttributeToRoomType(roomAttribute : any, roomType : any) : str
+  + addRoomType(capacity : any, cost : any, name : any) : str
+  + editRoomType(newCapacity : any, newCost : any, newName : any, roomType : any) : str
+  + findRoomType(name : any) : str
+  + getAllRoomTypes() : str
+  + removeAttributeFromRoomType(roomAttribute : any, roomType : any) : str
+  + removeRoomType(roomType : any) : str
+}
+class RootElement::ServiceItem {
+  + description : str
+  + name : str
+  + price : str
+}
+abstract class RootElement::ServiceItemHandling {
+  + addServiceItem(booking : any, description : any, name : any, price : any) : void
+  + findAllServiceItems(booking : any) : str
+  + removeServiceItem(booking : any, serviceItem : any) : void
+}
+class RootElement::Staff {
+  + name : str
+  + staffID : str
+}
+class RootElement::SupportTicket {
+  + fixed : str
+  + problemDescription : str
+  + roomName : str
+}
+class RootElement::SupportTicketHandler {
+}
+abstract class RootElement::SupportTicketReader {
+  + getSupportTicketsForRoom(roomName : any) : str
+  + getUnfixedTickets() : str
+  + markAsCompleted(supportTicket : any) : void
+}
+abstract class RootElement::SupportTicketWriter {
+  + newSupportTicket(description : any, roomName : any) : void
+}
+class RootElement::SysAdmin {
+}
+class ServiceItemHandling {
+}
+class Staff {
+}
+class SupportTicketReader {
+}
+class SupportTicketWriter {
+}
+class SysAdmin {
+}
+Cleaning <|-- RootElement::CleaningHandler
+Cleaning <|-- RootElement::Staff
+Clerk <|-- RootElement::Manager
+FeedbackReader <|-- RootElement::FeedbackHandler
+FeedbackReader <|-- RootElement::Manager
+FeedbackWriter <|-- RootElement::FeedbackHandler
+FeedbackWriter <|-- RootElement::Guest
+HotelSystem <|-- RootElement::Hotel
+MakeBooking <|-- RootElement::BookingHandler
+MakeBooking <|-- RootElement::Clerk
+MakeBooking <|-- RootElement::Guest
+Payment <|-- RootElement::Clerk
+Payment <|-- RootElement::PaymentHandler
+ReceptionHandling <|-- RootElement::BookingHandler
+ReceptionHandling <|-- RootElement::Clerk
+RoomAttributeHandling <|-- RootElement::RoomStructure
+RoomAttributeHandling <|-- RootElement::SysAdmin
+RoomBooking <|-- RootElement::DailyRoomBooking
+RoomBooking <|-- RootElement::HourlyRoomBooking
+RoomFetcher <|-- RootElement::RoomStructure
+RoomHandling <|-- RootElement::RoomStructure
+RoomHandling <|-- RootElement::SysAdmin
+RoomTypeHandling <|-- RootElement::RoomStructure
+RoomTypeHandling <|-- RootElement::SysAdmin
+ServiceItemHandling <|-- RootElement::BookingHandler
+ServiceItemHandling <|-- RootElement::Clerk
+Staff <|-- RootElement::Clerk
+SupportTicketReader <|-- RootElement::Staff
+SupportTicketReader <|-- RootElement::SupportTicketHandler
+SupportTicketWriter <|-- RootElement::Guest
+SupportTicketWriter <|-- RootElement::Staff
+SupportTicketWriter <|-- RootElement::SupportTicketHandler
+SysAdmin <|-- RootElement::Manager
+RootElement::Booking "0..9999" -- "1..1" RootElement::BookingHandler : booking32
+RootElement::Cleaning "1..1" -- "1..1" RootElement::Staff : cleaning17
+RootElement::Feedback "0..9999" -- "1..1" RootElement::FeedbackHandler : feedback44
+RootElement::FeedbackReader "1..1" -- "1..1" RootElement::Manager : feedbackReader31
+RootElement::FeedbackWriter "1..1" -- "1..1" RootElement::Guest : feedbackWriter3
+RootElement::Booking "1..1" -- "1..1" RootElement::Guest : guest6
+RootElement::Guest "1..1" -- "1..1" RootElement::MakeBooking : makeBooking1
+RootElement::Clerk "1..1" -- "1..1" RootElement::MakeBooking : makeBooking26
+RootElement::Clerk "1..1" -- "1..1" RootElement::Payment : payment29
+RootElement::Clerk "1..1" -- "1..1" RootElement::ReceptionHandling : receptionHandling23
+RootElement::Room "1..1" -- "1..1" RootElement::RoomBooking : room11
+RootElement::RoomAttribute "0..9999" -- "1..1" RootElement::RoomType : roomAttributes15
+RootElement::RoomAttribute "0..9999" -- "1..1" RootElement::RoomStructure : roomAttributes41
+RootElement::BookingHandler "1..1" -- "1..1" RootElement::RoomFetcher : roomFetcher34
+RootElement::CleaningHandler "1..1" -- "1..1" RootElement::RoomFetcher : roomFetcher46
+RootElement::Room "1..1" -- "1..1" RootElement::RoomType : roomType13
+RootElement::RoomStructure "1..1" -- "0..9999" RootElement::RoomType : roomTypes38
+RootElement::Booking "1..1" -- "0..9999" RootElement::RoomBooking : roombooking5
+RootElement::Room "0..9999" -- "1..1" RootElement::RoomStructure : rooms36
+RootElement::Clerk "1..1" -- "1..1" RootElement::ServiceItemHandling : serviceItemHandling24
+RootElement::Booking "1..1" -- "0..9999" RootElement::ServiceItem : serviceitem9
+RootElement::Staff "1..1" -- "1..1" RootElement::SupportTicketReader : supportTicketReader18
+RootElement::Guest "1..1" -- "1..1" RootElement::SupportTicketWriter : supportTicketWriter0
+RootElement::Staff "1..1" -- "1..1" RootElement::SupportTicketWriter : supportTicketWriter20
+RootElement::SupportTicket "0..9999" -- "1..1" RootElement::SupportTicketHandler : supportticket45
+@enduml

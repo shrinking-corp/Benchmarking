@@ -67,24 +67,24 @@ NamedElement <|-- state::Vertex
 State <|-- state::FinalState
 Vertex <|-- state::PseudoState
 Vertex <|-- state::State
-state::Trigger "1..9999" --* "1..1" state::State : defferableTrigger1
+state::State "1..1" *-- "1..9999" state::Trigger : defferableTrigger1
 state::Behaviour "0..1" --* "1..1" state::State : doActivity3
 state::Behaviour "0..1" --* "1..1" state::Transition : effect34
 state::Behaviour "0..1" --* "1..1" state::State : entry5
 state::Event "1..1" --* "1..1" state::Trigger : event39
-state::State "1..1" *-- "0..1" state::Behaviour : exit8
+state::Behaviour "0..1" --* "1..1" state::State : exit8
 state::Constraint "0..1" --* "1..1" state::Transition : guard32
 state::Transition "1..9999" -- "1..1" state::Vertex : incoming24
-state::Vertex "1..1" -- "1..9999" state::Transition : outgoing23
+state::Transition "1..9999" -- "1..1" state::Vertex : outgoing23
 state::NamedElement "1..1" --* "1..1" state::StateModel : packagedElment41
-state::State "1..1" *-- "1..9999" state::Region : region0
+state::Region "1..9999" --* "1..1" state::State : region0
 state::Region "1..9999" --* "1..1" state::StateMachine : region20
 state::Transition "1..1" -- "1..1" state::Vertex : source26
-state::OpaqueExpression "1..1" --* "1..1" state::Constraint : specification37
-state::State "0..1" -- "1..1" state::Region : state11
-state::StateMachine "0..1" -- "1..1" state::Region : stateMachine16
+state::Constraint "1..1" *-- "1..1" state::OpaqueExpression : specification37
+state::Region "1..1" -- "0..1" state::State : state11
+state::Region "1..1" -- "0..1" state::StateMachine : stateMachine16
 state::Region "1..1" *-- "1..9999" state::Vertex : subVertex14
-state::Vertex "1..1" -- "1..1" state::Transition : target27
-state::Transition "1..9999" --* "1..1" state::Region : transition18
+state::Transition "1..1" -- "1..1" state::Vertex : target27
+state::Region "1..1" *-- "1..9999" state::Transition : transition18
 state::Transition "1..1" *-- "1..1" state::Trigger : trigger29
 @enduml

@@ -20,10 +20,10 @@ class bowling::Player {
 class bowling::Tournament {
   + type : str
 }
-bowling::Player "1..1" -- "0..9999" bowling::Game : games0
+bowling::Game "0..9999" -- "1..1" bowling::Player : games0
 bowling::Game "2..2" --* "1..1" bowling::Matchup : games4
 bowling::Game "1..1" -- "0..1" bowling::Matchup : matchup5
 bowling::Matchup "0..1" --* "1..1" bowling::Tournament : matchups3
-bowling::Player "0..9999" --* "1..1" bowling::League : player1
-bowling::Player "0..1" -- "1..1" bowling::Game : player6
+bowling::League "1..1" *-- "0..9999" bowling::Player : player1
+bowling::Game "1..1" -- "0..1" bowling::Player : player6
 @enduml

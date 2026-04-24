@@ -1,0 +1,698 @@
+@startuml
+class Action {
+}
+class ActivityEdge {
+}
+class ActivityNode {
+}
+enum BoardType {
+  Arduino
+  BeagleBoard
+  RaspberryPi
+}
+enum BooleanBinaryOperator {
+  AND
+  OR
+}
+class BooleanExpression {
+}
+enum BooleanUnaryOperator {
+  NOT
+}
+class Chunk {
+}
+class Contained {
+}
+class ControlNode {
+}
+class ExecutableNode {
+}
+class Expression {
+}
+class Field {
+}
+class FinalNode {
+}
+class HWComponent {
+}
+class IDLType {
+}
+enum IntegerCalculationOperator {
+  ADD
+  SUBRACT
+}
+enum IntegerComparisonOperator {
+  EQUALS
+  GREATER
+  GREATER_EQUALS
+  SMALLER
+  SMALLER_EQUALS
+}
+class IntegerExpression {
+}
+class LastStatement {
+}
+class LastStatement::Return {
+}
+class NamedElement {
+}
+enum ParameterMode {
+  PARAM_IN
+  PARAM_INOUT
+  PARAM_OUT
+}
+enum PrimitiveKind {
+  PK_ANY
+  PK_BOOLEAN
+  PK_CHAR
+  PK_DOUBLE
+  PK_FLOAT
+  PK_LONG
+  PK_LONGDOUBLE
+  PK_LONGLONG
+  PK_NULL
+  PK_OBJREF
+  PK_OCTET
+  PK_PRINCIPAL
+  PK_SHORT
+  PK_STRING
+  PK_TYPECODE
+  PK_ULONG
+  PK_ULONGLONG
+  PK_USHORT
+  PK_VOID
+  PK_WCHAR
+  PK_WSTRING
+}
+class Statement {
+}
+class Statement::FunctioncallOrAssignment {
+}
+class Token {
+}
+class Typed {
+}
+class Value {
+}
+class Variable {
+}
+abstract class iot2::Action {
+}
+class iot2::Activity {
+  + execute(c : any) : void
+  + getBooleanVariableValue(variableName : any) : void
+  + getIntegerVariableValue(variableName : any) : void
+  + getVariable(variableName : any) : str
+  + getVariableValue(variableName : any) : str
+  + main(value : any) : void
+  + printTrace() : void
+  + reset() : void
+  + writeToFile() : void
+  + writeTrace() : void
+}
+abstract class iot2::ActivityEdge {
+  + hasOffer() : void
+  + sendOffer(tokens : any) : void
+  + takeOfferedTokens() : str
+}
+class iot2::ActivityFinalNode {
+  + execute(c : any) : void
+}
+class iot2::ActivityNode {
+  + running : str
+  + addTokens(tokens : any) : void
+  + execute(c : any) : void
+  + hasOffers() : void
+  + isReady() : void
+  + removeToken(token : any) : void
+  + sendOffers(tokens : any) : void
+  + takeOfferdTokens() : str
+  + terminate() : void
+}
+class iot2::Actuator {
+}
+class iot2::Block {
+  + execute(c : any) : void
+}
+class iot2::Board {
+  + name : str
+  + type : str
+}
+class iot2::BooleanBinaryExpression {
+  + operator : bool
+  + execute(c : any) : void
+}
+abstract class iot2::BooleanExpression {
+}
+class iot2::BooleanUnaryExpression {
+  + operator : str
+  + execute(c : any) : void
+}
+class iot2::BooleanValue {
+  + value : bool
+}
+class iot2::BooleanVariable {
+  + execute(c : any) : void
+  + print() : void
+}
+class iot2::Chunk {
+  + execute(c : any) : void
+}
+abstract class iot2::Contained {
+  + absoluteName : str
+  + repositoryId : str
+  + version : str
+}
+abstract class iot2::Container {
+}
+class iot2::Context {
+}
+class iot2::ControlFlow {
+}
+abstract class iot2::ControlNode {
+}
+class iot2::ControlToken {
+}
+class iot2::DecisionNode {
+  + execute(c : any) : void
+  + sendOffers(tokens : any) : void
+}
+class iot2::Environment {
+  + getFunction(s : any) : str
+  + getFunctions() : void
+  + getValues() : str
+  + getVariable(s : any) : str
+  + getVariables() : void
+  + popValue() : str
+  + pushAllValues(v : any) : void
+  + pushValue(o : any) : void
+  + putAllFunctions(f : any) : void
+  + putAllVariables(v : any) : void
+  + putFunction(f : any, s : any) : void
+  + putVariable(o : any, s : any) : void
+}
+class iot2::ExceptionDef {
+  + typeCode : str
+}
+abstract class iot2::ExecutableNode {
+}
+class iot2::Expression {
+  + execute(c : any) : void
+}
+class iot2::Expression::AccessArray {
+  + execute(c : any) : void
+}
+class iot2::Expression::AccessMember {
+  + memberName : str
+  + execute(c : any) : void
+}
+class iot2::Expression::And {
+  + execute(c : any) : void
+}
+class iot2::Expression::CallFunction {
+  + execute(c : any) : void
+}
+class iot2::Expression::CallMemberFunction {
+  + memberFunctionName : str
+  + execute(c : any) : void
+}
+class iot2::Expression::Concatenation {
+  + execute(c : any) : void
+}
+class iot2::Expression::Division {
+  + execute(c : any) : void
+}
+class iot2::Expression::Equal {
+  + execute(c : any) : void
+}
+class iot2::Expression::Exponentiation {
+  + execute(c : any) : void
+}
+class iot2::Expression::False {
+  + execute(c : any) : void
+}
+class iot2::Expression::Function {
+  + execute(c : any) : void
+}
+class iot2::Expression::Invert {
+  + execute(c : any) : void
+}
+class iot2::Expression::Larger {
+  + execute(c : any) : void
+}
+class iot2::Expression::Larger::Equal {
+  + execute(c : any) : void
+}
+class iot2::Expression::Length {
+  + execute(c : any) : void
+}
+class iot2::Expression::Minus {
+  + execute(c : any) : void
+}
+class iot2::Expression::Modulo {
+  + execute(c : any) : void
+}
+class iot2::Expression::Multiplication {
+  + execute(c : any) : void
+}
+class iot2::Expression::Negate {
+  + execute(c : any) : void
+}
+class iot2::Expression::Nil {
+  + execute(c : any) : void
+}
+class iot2::Expression::Not::Equal {
+  + execute(c : any) : void
+}
+class iot2::Expression::Number {
+  + value : float
+  + execute(c : any) : void
+}
+class iot2::Expression::Or {
+  + execute(c : any) : void
+}
+class iot2::Expression::Plus {
+  + execute(c : any) : void
+}
+class iot2::Expression::Smaller {
+  + execute(c : any) : void
+}
+class iot2::Expression::Smaller::Equal {
+  + execute(c : any) : void
+}
+class iot2::Expression::String {
+  + value : str
+  + execute(c : any) : void
+}
+class iot2::Expression::TableConstructor {
+  + execute(c : any) : void
+}
+class iot2::Expression::True {
+  + execute(c : any) : void
+}
+class iot2::Expression::VarArgs {
+  + execute(c : any) : void
+}
+class iot2::Expression::VariableName {
+  + variable : bool
+  + execute(c : any) : void
+}
+class iot2::Field {
+  + identifier : str
+  + execute(c : any) : void
+}
+class iot2::Field::AddEntryToTable {
+  + key : str
+  + execute(c : any) : void
+}
+class iot2::Field::AddEntryToTable::Brackets {
+  + execute(c : any) : void
+}
+class iot2::Field::AppendEntryToTable {
+  + execute(c : any) : void
+}
+abstract class iot2::FinalNode {
+}
+class iot2::ForkNode {
+  + execute(c : any) : void
+}
+class iot2::ForkedToken {
+  + remainingOffersCount : str
+}
+class iot2::Function {
+  + parameters : str
+  + varArgs : bool
+  + execute(c : any) : void
+}
+class iot2::Functioncall::Arguments {
+  + execute(c : any) : void
+}
+abstract class iot2::HWComponent {
+  + name : bool
+}
+abstract class iot2::IDLType {
+  + typeCode : str
+}
+class iot2::InitialNode {
+  + execute(c : any) : void
+  + hasOffers() : void
+}
+class iot2::Input {
+}
+class iot2::InputValue {
+}
+class iot2::IntegerCalculationExpression {
+  + operator : str
+  + execute(c : any) : void
+}
+class iot2::IntegerComparisonExpression {
+  + operator : str
+  + execute(c : any) : void
+}
+abstract class iot2::IntegerExpression {
+}
+class iot2::IntegerValue {
+  + value : int
+}
+class iot2::IntegerVariable {
+  + execute(c : any) : void
+  + print() : void
+}
+class iot2::JoinNode {
+  + execute(c : any) : void
+}
+class iot2::LastStatement {
+  + execute(c : any) : void
+}
+class iot2::LastStatement::Break {
+}
+class iot2::LastStatement::Return {
+  + execute(c : any) : void
+}
+class iot2::LastStatement::ReturnWithValue {
+  + execute(c : any) : void
+}
+class iot2::MergeNode {
+  + execute(c : any) : void
+  + hasOffers() : void
+}
+abstract class iot2::NamedElement {
+  + identifier : str
+  + name : str
+  + execute(c : any) : void
+}
+class iot2::Offer {
+  + hasTokens() : void
+  + removeWithdrawnTokens() : void
+}
+class iot2::OpaqueAction {
+  + execute(c : any) : void
+  + getValueAsString(v : any) : void
+}
+class iot2::OperationDef {
+  + contexts : str
+  + isOneway : bool
+  + execute(c : any) : void
+}
+class iot2::ParameterDef {
+  + direction : str
+  + identifier : str
+}
+class iot2::PrimitiveDef {
+  + kind : str
+}
+class iot2::Sensor {
+}
+class iot2::Sketch {
+}
+class iot2::Statement {
+  + execute(c : any) : void
+}
+class iot2::Statement::Assignment {
+  + execute(c : any) : void
+}
+class iot2::Statement::Block {
+  + execute(c : any) : void
+}
+class iot2::Statement::CallFunction {
+  + execute(c : any) : void
+}
+class iot2::Statement::CallMemberFunction {
+  + memberFunctionName : str
+  + execute(c : any) : void
+}
+class iot2::Statement::For::Generic {
+  + names : str
+  + execute(c : any) : void
+}
+class iot2::Statement::For::Numeric {
+  + iteratorName : str
+  + execute(c : any) : void
+}
+class iot2::Statement::FunctioncallOrAssignment {
+  + execute(c : any) : void
+}
+class iot2::Statement::GlobalFunction::Declaration {
+  + functionName : str
+  + prefix : str
+  + execute(c : any) : void
+}
+class iot2::Statement::If::Then::Else {
+  + execute(c : any) : void
+}
+class iot2::Statement::If::Then::Else::ElseIfPart {
+  + execute(c : any) : void
+}
+class iot2::Statement::Local::Variable::Declaration {
+  + variableNames : str
+  + execute(c : any) : void
+}
+class iot2::Statement::LocalFunction::Declaration {
+  + functionName : str
+  + execute(c : any) : void
+}
+class iot2::Statement::Repeat {
+  + execute(c : any) : void
+}
+class iot2::Statement::While {
+  + execute(c : any) : void
+}
+class iot2::System {
+  + name : str
+}
+class iot2::Token {
+  + isWithdrawn() : void
+  + transfer(holder : any) : str
+  + withdraw() : void
+}
+class iot2::Trace {
+}
+abstract class iot2::Typed {
+}
+abstract class iot2::TypedefDef {
+}
+class iot2::Value {
+}
+class iot2::Variable {
+  + name : str
+  + execute(c : any) : void
+  + init(c : any) : void
+  + print() : void
+}
+Action <|-- iot2::OpaqueAction
+ActivityEdge <|-- iot2::ControlFlow
+ActivityNode <|-- iot2::ControlNode
+ActivityNode <|-- iot2::ExecutableNode
+BooleanExpression <|-- iot2::BooleanBinaryExpression
+BooleanExpression <|-- iot2::BooleanUnaryExpression
+Chunk <|-- iot2::Block
+Contained <|-- iot2::Container
+Contained <|-- iot2::ExceptionDef
+Contained <|-- iot2::OperationDef
+Contained <|-- iot2::TypedefDef
+ControlNode <|-- iot2::DecisionNode
+ControlNode <|-- iot2::FinalNode
+ControlNode <|-- iot2::ForkNode
+ControlNode <|-- iot2::InitialNode
+ControlNode <|-- iot2::JoinNode
+ControlNode <|-- iot2::MergeNode
+ExecutableNode <|-- iot2::Action
+Expression <|-- iot2::BooleanExpression
+Expression <|-- iot2::Expression::AccessArray
+Expression <|-- iot2::Expression::AccessMember
+Expression <|-- iot2::Expression::And
+Expression <|-- iot2::Expression::CallFunction
+Expression <|-- iot2::Expression::CallMemberFunction
+Expression <|-- iot2::Expression::Concatenation
+Expression <|-- iot2::Expression::Division
+Expression <|-- iot2::Expression::Equal
+Expression <|-- iot2::Expression::Exponentiation
+Expression <|-- iot2::Expression::False
+Expression <|-- iot2::Expression::Function
+Expression <|-- iot2::Expression::Invert
+Expression <|-- iot2::Expression::Larger
+Expression <|-- iot2::Expression::Larger::Equal
+Expression <|-- iot2::Expression::Length
+Expression <|-- iot2::Expression::Minus
+Expression <|-- iot2::Expression::Modulo
+Expression <|-- iot2::Expression::Multiplication
+Expression <|-- iot2::Expression::Negate
+Expression <|-- iot2::Expression::Nil
+Expression <|-- iot2::Expression::Not::Equal
+Expression <|-- iot2::Expression::Number
+Expression <|-- iot2::Expression::Or
+Expression <|-- iot2::Expression::Plus
+Expression <|-- iot2::Expression::Smaller
+Expression <|-- iot2::Expression::Smaller::Equal
+Expression <|-- iot2::Expression::String
+Expression <|-- iot2::Expression::TableConstructor
+Expression <|-- iot2::Expression::True
+Expression <|-- iot2::Expression::VarArgs
+Expression <|-- iot2::Expression::VariableName
+Expression <|-- iot2::IntegerExpression
+Field <|-- iot2::Field::AddEntryToTable
+Field <|-- iot2::Field::AddEntryToTable::Brackets
+Field <|-- iot2::Field::AppendEntryToTable
+FinalNode <|-- iot2::ActivityFinalNode
+HWComponent <|-- iot2::Actuator
+HWComponent <|-- iot2::Sensor
+IDLType <|-- iot2::PrimitiveDef
+IDLType <|-- iot2::TypedefDef
+IntegerExpression <|-- iot2::IntegerCalculationExpression
+IntegerExpression <|-- iot2::IntegerComparisonExpression
+LastStatement::Return <|-- iot2::LastStatement::ReturnWithValue
+LastStatement <|-- iot2::LastStatement::Break
+LastStatement <|-- iot2::LastStatement::Return
+NamedElement <|-- iot2::Activity
+NamedElement <|-- iot2::ActivityEdge
+NamedElement <|-- iot2::ActivityNode
+NamedElement <|-- iot2::Contained
+Statement::FunctioncallOrAssignment <|-- iot2::Expression
+Statement::FunctioncallOrAssignment <|-- iot2::Statement::Assignment
+Statement::FunctioncallOrAssignment <|-- iot2::Statement::CallFunction
+Statement::FunctioncallOrAssignment <|-- iot2::Statement::CallMemberFunction
+Statement <|-- iot2::Statement::Block
+Statement <|-- iot2::Statement::For::Generic
+Statement <|-- iot2::Statement::For::Numeric
+Statement <|-- iot2::Statement::FunctioncallOrAssignment
+Statement <|-- iot2::Statement::GlobalFunction::Declaration
+Statement <|-- iot2::Statement::If::Then::Else
+Statement <|-- iot2::Statement::Local::Variable::Declaration
+Statement <|-- iot2::Statement::LocalFunction::Declaration
+Statement <|-- iot2::Statement::Repeat
+Statement <|-- iot2::Statement::While
+Token <|-- iot2::ControlToken
+Token <|-- iot2::ForkedToken
+Typed <|-- iot2::Field
+Typed <|-- iot2::OperationDef
+Typed <|-- iot2::ParameterDef
+Value <|-- iot2::BooleanValue
+Value <|-- iot2::IntegerValue
+Variable <|-- iot2::BooleanVariable
+Variable <|-- iot2::IntegerVariable
+iot2::Activity "1..1" -- "1..1" iot2::ActivityNode : activity227
+iot2::Activity "0..1" -- "1..1" iot2::Context : activity278
+iot2::Activity "0..1" --* "1..1" iot2::Sketch : activity8
+iot2::Expression "0..9999" --* "1..1" iot2::Functioncall::Arguments : arguments100
+iot2::Functioncall::Arguments "0..1" --* "1..1" iot2::Statement::CallMemberFunction : arguments113
+iot2::Functioncall::Arguments "0..1" --* "1..1" iot2::Statement::CallFunction : arguments118
+iot2::Expression::CallMemberFunction "1..1" *-- "0..1" iot2::Functioncall::Arguments : arguments204
+iot2::Expression::CallFunction "1..1" *-- "0..1" iot2::Functioncall::Arguments : arguments209
+iot2::Expression "0..1" --* "1..1" iot2::Expression::AccessArray : array212
+iot2::BooleanExpression "1..1" -- "1..1" iot2::BooleanVariable : assignee253
+iot2::IntegerCalculationExpression "1..1" -- "1..1" iot2::IntegerVariable : assignee255
+iot2::BooleanVariable "1..1" -- "1..1" iot2::IntegerComparisonExpression : assignee257
+iot2::ForkedToken "1..1" -- "0..1" iot2::Token : baseToken292
+iot2::Block "0..1" --* "1..1" iot2::Statement::Block : block44
+iot2::Block "0..1" --* "1..1" iot2::Statement::While : block48
+iot2::Block "0..1" --* "1..1" iot2::Statement::Repeat : block51
+iot2::Block "0..1" --* "1..1" iot2::Statement::For::Numeric : block80
+iot2::Block "0..1" --* "1..1" iot2::Statement::For::Generic : block85
+iot2::Board "0..9999" --* "1..1" iot2::System : boards1
+iot2::Block "0..1" --* "1..1" iot2::Function : body97
+iot2::ExceptionDef "0..9999" -- "1..1" iot2::OperationDef : canRaise23
+iot2::HWComponent "0..9999" --* "1..1" iot2::System : components0
+iot2::Board "1..1" -- "0..9999" iot2::HWComponent : components5
+iot2::IDLType "0..1" --* "1..1" iot2::Typed : containedType33
+iot2::Contained "0..9999" --* "1..1" iot2::Container : contains30
+iot2::Value "0..1" --* "1..1" iot2::Variable : currentValue246
+iot2::Contained "1..1" -- "0..1" iot2::Container : definedIn27
+iot2::Activity "1..1" *-- "0..9999" iot2::ActivityEdge : edges14
+iot2::Block "0..1" --* "1..1" iot2::Statement::If::Then::Else : elseBlock63
+iot2::Statement::If::Then::Else "1..1" *-- "0..9999" iot2::Statement::If::Then::Else::ElseIfPart : elseIf61
+iot2::Block "0..1" --* "1..1" iot2::Statement::If::Then::Else::ElseIfPart : elseifBlock69
+iot2::Expression "0..1" --* "1..1" iot2::Statement::If::Then::Else::ElseIfPart : elseifExpression66
+iot2::ActivityNode "0..9999" -- "1..1" iot2::Trace : executedNodes289
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Negate : exp191
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Length : exp193
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Invert : exp195
+iot2::Expression "0..1" --* "1..1" iot2::Statement::While : expression46
+iot2::Expression "0..1" --* "1..1" iot2::Statement::Repeat : expression53
+iot2::Expression "0..9999" -- "1..1" iot2::OpaqueAction : expressions239
+iot2::Expression "0..9999" --* "1..1" iot2::Statement::For::Generic : expressions83
+iot2::Expression::TableConstructor "1..1" *-- "0..9999" iot2::Field : fields95
+iot2::Function "0..1" --* "1..1" iot2::Statement::GlobalFunction::Declaration : function88
+iot2::Function "0..1" --* "1..1" iot2::Statement::LocalFunction::Declaration : function89
+iot2::Expression::Function "1..1" *-- "0..1" iot2::Function : function93
+iot2::BooleanVariable "0..1" -- "1..1" iot2::ControlFlow : guard238
+iot2::ActivityNode "0..1" -- "1..1" iot2::Token : holder275
+iot2::Block "0..1" --* "1..1" iot2::Statement::If::Then::Else : ifBlock58
+iot2::Expression "0..1" --* "1..1" iot2::Statement::If::Then::Else : ifExpression56
+iot2::ActivityEdge "0..9999" -- "1..1" iot2::ActivityNode : incoming224
+iot2::Expression "0..1" --* "1..1" iot2::Expression::AccessArray : index214
+iot2::Expression "0..1" --* "1..1" iot2::Field::AddEntryToTable::Brackets : indexExpression102
+iot2::Value "0..1" --* "1..1" iot2::Variable : initialValue244
+iot2::Expression "0..9999" --* "1..1" iot2::Statement::Local::Variable::Declaration : initialValue91
+iot2::Input "1..1" *-- "0..9999" iot2::InputValue : inputValues271
+iot2::Context "1..1" -- "0..9999" iot2::InputValue : inputValues284
+iot2::Activity "1..1" *-- "0..9999" iot2::Variable : inputs18
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Or : left121
+iot2::Expression "0..1" --* "1..1" iot2::Expression::And : left126
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Larger : left131
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Larger::Equal : left136
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Smaller : left141
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Smaller::Equal : left146
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Equal : left151
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Not::Equal : left156
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Concatenation : left161
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Plus : left166
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Minus : left171
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Multiplication : left176
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Division : left181
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Modulo : left186
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Exponentiation : left197
+iot2::Activity "1..1" *-- "0..9999" iot2::Variable : locals16
+iot2::Block "0..1" --* "1..1" iot2::OperationDef : lua25
+iot2::ExceptionDef "1..1" *-- "0..9999" iot2::Field : members36
+iot2::Context "1..1" -- "0..1" iot2::JoinNode : node287
+iot2::Activity "1..1" *-- "0..9999" iot2::ActivityNode : nodes12
+iot2::Expression "0..1" --* "1..1" iot2::Statement::CallMemberFunction : object111
+iot2::Expression "0..1" --* "1..1" iot2::Statement::CallFunction : object116
+iot2::Expression "0..1" --* "1..1" iot2::Expression::CallMemberFunction : object202
+iot2::Expression "0..1" --* "1..1" iot2::Expression::CallFunction : object207
+iot2::Expression "0..1" --* "1..1" iot2::Expression::AccessMember : object217
+iot2::Offer "1..1" -- "0..9999" iot2::Token : offeredTokens273
+iot2::ActivityEdge "1..1" -- "0..9999" iot2::Offer : offers236
+iot2::IntegerExpression "1..1" -- "0..1" iot2::IntegerVariable : operand1250
+iot2::BooleanBinaryExpression "1..1" -- "1..1" iot2::BooleanVariable : operand1261
+iot2::IntegerExpression "1..1" -- "0..1" iot2::IntegerVariable : operand2249
+iot2::BooleanBinaryExpression "1..1" -- "1..1" iot2::BooleanVariable : operand2263
+iot2::BooleanUnaryExpression "1..1" -- "1..1" iot2::BooleanVariable : operand259
+iot2::ActivityEdge "0..9999" -- "1..1" iot2::ActivityNode : outgoing221
+iot2::Context "1..1" -- "0..1" iot2::Trace : output277
+iot2::OperationDef "1..1" *-- "0..9999" iot2::ParameterDef : parameters21
+iot2::Environment "1..1" -- "0..1" iot2::Environment : parent220
+iot2::Context "0..1" -- "1..1" iot2::Context : parent282
+iot2::Block "1..1" *-- "0..1" iot2::LastStatement : returnValue42
+iot2::Expression "0..9999" --* "1..1" iot2::LastStatement::ReturnWithValue : returnValues104
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Or : right123
+iot2::Expression "0..1" --* "1..1" iot2::Expression::And : right128
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Larger : right133
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Larger::Equal : right138
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Smaller : right143
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Smaller::Equal : right148
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Equal : right153
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Not::Equal : right158
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Concatenation : right163
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Plus : right168
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Minus : right173
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Multiplication : right178
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Division : right183
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Modulo : right188
+iot2::Expression "0..1" --* "1..1" iot2::Expression::Exponentiation : right199
+iot2::OpaqueAction "1..1" -- "0..1" iot2::OperationDef : service241
+iot2::HWComponent "1..1" *-- "0..9999" iot2::OperationDef : services10
+iot2::Typed "1..1" -- "0..1" iot2::TypedefDef : sharedType34
+iot2::Sketch "0..1" --* "1..1" iot2::System : sketch3
+iot2::ActivityEdge "1..1" -- "1..1" iot2::ActivityNode : source230
+iot2::Expression "0..1" --* "1..1" iot2::Statement::For::Numeric : startExpr72
+iot2::Block "1..1" *-- "0..9999" iot2::Statement : statements40
+iot2::Expression "0..1" --* "1..1" iot2::Statement::For::Numeric : stepExpr77
+iot2::ActivityEdge "1..1" -- "1..1" iot2::ActivityNode : target233
+iot2::Expression "0..1" --* "1..1" iot2::Statement::For::Numeric : untilExpr74
+iot2::InputValue "1..1" *-- "1..1" iot2::Value : value266
+iot2::Expression "0..1" --* "1..1" iot2::Field : value38
+iot2::Expression "0..9999" --* "1..1" iot2::Statement::Assignment : values108
+iot2::Expression "0..9999" --* "1..1" iot2::Statement::Assignment : variable106
+iot2::InputValue "1..1" -- "1..1" iot2::Variable : variable268
+@enduml

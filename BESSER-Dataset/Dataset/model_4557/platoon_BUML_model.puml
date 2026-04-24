@@ -36,11 +36,11 @@ routeCommand <|-- platoon::Forward
 routeCommand <|-- platoon::TurnLeft
 routeCommand <|-- platoon::TurnRight
 platoon::Constraints "1..1" --* "1..1" platoon::Root : constraints3
-platoon::Vehicle "1..1" -- "1..1" platoon::FollowingVehicle : following11
-platoon::Platoon "1..1" *-- "0..9999" platoon::FollowingVehicle : followingVehicle9
+platoon::FollowingVehicle "1..1" -- "1..1" platoon::Vehicle : following11
+platoon::FollowingVehicle "0..9999" --* "1..1" platoon::Platoon : followingVehicle9
 platoon::LeaderVehicle "1..1" --* "1..1" platoon::Platoon : leaderVehicle7
-platoon::Root "1..1" *-- "1..1" platoon::Platoon : platoon0
-platoon::Route "1..1" --* "1..1" platoon::Root : route1
-platoon::Route "1..1" -- "1..1" platoon::LeaderVehicle : route13
-platoon::routeCommand "1..9999" --* "1..1" platoon::Route : routeCommands5
+platoon::Platoon "1..1" --* "1..1" platoon::Root : platoon0
+platoon::Root "1..1" *-- "1..1" platoon::Route : route1
+platoon::LeaderVehicle "1..1" -- "1..1" platoon::Route : route13
+platoon::Route "1..1" *-- "1..9999" platoon::routeCommand : routeCommands5
 @enduml

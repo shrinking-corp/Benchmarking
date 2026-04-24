@@ -64,23 +64,23 @@ EsmState <|-- esm::EsmDerivedState
 IDiagramRoot <|-- esm::EsmEntityStateModel
 IEsmLayout <|-- esm::EsmTransition
 IEsmLayout <|-- esm::IEsmStateModel
-IEsmStateModel <|-- esm::EsmCompositeState
-IEsmStateModel <|-- esm::EsmEntityStateModel
-IEsmStateModel <|-- esm::EsmSubStateModel
 IEsmState <|-- esm::EsmCompositeState
 IEsmState <|-- esm::EsmConcurrentState
 IEsmState <|-- esm::EsmState
+IEsmStateModel <|-- esm::EsmCompositeState
+IEsmStateModel <|-- esm::EsmEntityStateModel
+IEsmStateModel <|-- esm::EsmSubStateModel
 INavigableMemberContainer <|-- esm::EsmEntityStateModel
 IStaticReferenceTarget <|-- esm::EsmEntityStateModel
 esm::DRichText "0..1" --* "1..1" esm::IEsmState : description6
 esm::DStateEvent "0..1" -- "1..1" esm::EsmTransition : event16
-esm::EsmDerivedState "1..1" *-- "0..1" esm::DExpression : expression8
-esm::EsmEntityStateModel "1..1" -- "0..1" esm::DEntityType : forType0
+esm::DExpression "0..1" --* "1..1" esm::EsmDerivedState : expression8
+esm::DEntityType "0..1" -- "1..1" esm::EsmEntityStateModel : forType0
 esm::DState "0..1" -- "1..1" esm::EsmTransition : from10
-esm::EsmTransition "1..1" *-- "0..1" esm::DExpression : guard18
-esm::IEsmState "1..1" -- "0..1" esm::DState : state4
+esm::DExpression "0..1" --* "1..1" esm::EsmTransition : guard18
+esm::DState "0..1" -- "1..1" esm::IEsmState : state4
 esm::IEsmState "0..9999" --* "1..1" esm::IEsmStateModel : states1
-esm::EsmSubStateModel "0..9999" --* "1..1" esm::EsmConcurrentState : subStates9
+esm::EsmConcurrentState "1..1" *-- "0..9999" esm::EsmSubStateModel : subStates9
 esm::DState "0..1" -- "1..1" esm::EsmTransition : to13
-esm::IEsmStateModel "1..1" *-- "0..9999" esm::EsmTransition : transitions2
+esm::EsmTransition "0..9999" --* "1..1" esm::IEsmStateModel : transitions2
 @enduml

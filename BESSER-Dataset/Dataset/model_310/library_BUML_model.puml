@@ -23,13 +23,13 @@ class library::Library {
 class library::Writer {
   + name : str
 }
-library::Writer "0..1" -- "1..1" library::Book : author0
-library::Library "1..1" *-- "0..9999" library::EStringToBookMapEntry : bookByTitleMap7
-library::Writer "1..1" -- "0..9999" library::Book : books11
+library::Book "1..1" -- "0..1" library::Writer : author0
+library::EStringToBookMapEntry "0..9999" --* "1..1" library::Library : bookByTitleMap7
+library::Book "0..9999" -- "1..1" library::Writer : books11
 library::Book "0..9999" --* "1..1" library::Library : books2
 library::Book "0..9999" -- "1..1" library::Library : specialBooks4
-library::EStringToBookMapEntry "1..1" -- "0..1" library::Book : value12
-library::Writer "0..1" -- "1..1" library::EStringToWriterMapEntry : value15
+library::Book "0..1" -- "1..1" library::EStringToBookMapEntry : value12
+library::EStringToWriterMapEntry "1..1" -- "0..1" library::Writer : value15
 library::EStringToWriterMapEntry "0..9999" --* "1..1" library::Library : writerByNameMap9
 library::Library "1..1" *-- "0..9999" library::Writer : writers1
 @enduml

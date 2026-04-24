@@ -371,9 +371,9 @@ ColumnFull <|-- sql::Col
 ColumnFull <|-- sql::DbObjectName
 FromValuesColumnNames <|-- sql::ColumnNames
 FromValuesColumnNames <|-- sql::abc
-OpFunctionArgAgregate <|-- sql::Operands
 OpFunctionArg <|-- sql::OpFList
 OpFunctionArg <|-- sql::OpFunctionArgOperand
+OpFunctionArgAgregate <|-- sql::Operands
 OperandList <|-- sql::OpList
 OperandList <|-- sql::ScalarOperand
 Operands <|-- sql::Concat
@@ -407,106 +407,106 @@ SQLCaseWhens <|-- sql::WhenList
 SelectQuery <|-- sql::Select
 TableFull <|-- sql::DbObjectName
 TableFull <|-- sql::tbls
+UnpivotInClause <|-- sql::UnipivotInClause
 UnpivotInClauseArgs <|-- sql::UnpivotInClauseArg
 UnpivotInClauseArgs <|-- sql::uicargs
-UnpivotInClause <|-- sql::UnipivotInClause
 UsingCols <|-- sql::DbObjectName
 WindowingClause <|-- sql::WindowingClauseBetween
 WindowingClause <|-- sql::WindowingClauseOperandPreceding
 WithColumns <|-- sql::UsingCols
-sql::QueryPartitionClause "0..1" --* "1..1" sql::AnalyticClause : abc229
+sql::AnalyticClause "1..1" *-- "0..1" sql::QueryPartitionClause : abc229
 sql::AnalyticClause "0..1" --* "1..1" sql::FunctionAnalytical : anClause227
-sql::OpFunctionArg "0..1" --* "1..1" sql::OpFunction : args220
-sql::OrderByClauseArgs "0..1" --* "1..1" sql::OrderByClause : args243
+sql::OpFunction "1..1" *-- "0..1" sql::OpFunctionArg : args220
+sql::OrderByClause "1..1" *-- "0..1" sql::OrderByClauseArgs : args243
 sql::AnalyticExprArgs "0..1" --* "1..1" sql::QueryPartitionClause : args247
 sql::UnipivotInClause "1..1" *-- "0..1" sql::UnpivotInClauseArgs : args287
-sql::UnpivotInClauseArgs "0..1" --* "1..1" sql::PivotInClause : args96
+sql::PivotInClause "1..1" *-- "0..1" sql::UnpivotInClauseArgs : args96
 sql::Between "0..1" --* "1..1" sql::FullExpression : between140
-sql::FromValuesColumns "0..1" --* "1..1" sql::FromValues : c75
+sql::FromValues "1..1" *-- "0..1" sql::FromValuesColumns : c75
 sql::AnalyticExprArg "1..1" *-- "0..1" sql::Operands : ce249
-sql::Operands "0..1" --* "1..1" sql::ColumnOrAlias : ce35
-sql::ColumnOperand "1..1" *-- "0..1" sql::ColumnFull : cfull259
-sql::UnpivotInClauseArg "1..1" *-- "0..1" sql::PivotColumns : cfuls107
-sql::XExpr "1..1" *-- "0..1" sql::Operands : col149
+sql::ColumnOrAlias "1..1" *-- "0..1" sql::Operands : ce35
+sql::ColumnFull "0..1" --* "1..1" sql::ColumnOperand : cfull259
+sql::PivotColumns "0..1" --* "1..1" sql::UnpivotInClauseArg : cfuls107
+sql::Operands "0..1" --* "1..1" sql::XExpr : col149
 sql::AnalyticExprArg "0..1" --* "1..1" sql::OrderByClauseArg : col245
-sql::DbObjectName "0..1" --* "1..1" sql::AnalyticExprArg : colAlias252
-sql::DbObjectName "0..1" --* "1..1" sql::ColumnOrAlias : colAlias37
+sql::AnalyticExprArg "1..1" *-- "0..1" sql::DbObjectName : colAlias252
+sql::ColumnOrAlias "1..1" *-- "0..1" sql::DbObjectName : colAlias37
 sql::ColumnFull "0..1" --* "1..1" sql::GroupByColumnFull : colGrBy116
-sql::OrderByColumnFull "1..1" *-- "0..1" sql::ColumnFull : colOrder112
+sql::ColumnFull "0..1" --* "1..1" sql::OrderByColumnFull : colOrder112
 sql::OrColumn "0..1" --* "1..1" sql::Select : cols13
 sql::ColumnOperand "0..1" --* "1..1" sql::Operand : column195
 sql::Comparison "0..1" --* "1..1" sql::FullExpression : comp144
-sql::DbObjectNameAll "0..1" --* "1..1" sql::ColumnOrAlias : dbAllCols39
-sql::SqlCaseWhen "1..1" *-- "0..1" sql::Operands : eexp281
-sql::FullExpression "1..1" *-- "0..1" sql::FullExpression : efrag124
-sql::OrderByColumnFull "0..9999" --* "1..1" sql::OrOrderByColumn : entries110
+sql::ColumnOrAlias "1..1" *-- "0..1" sql::DbObjectNameAll : dbAllCols39
+sql::Operands "0..1" --* "1..1" sql::SqlCaseWhen : eexp281
+sql::FullExpression "0..1" --* "1..1" sql::FullExpression : efrag124
+sql::OrOrderByColumn "1..1" *-- "0..9999" sql::OrderByColumnFull : entries110
 sql::GroupByColumnFull "0..9999" --* "1..1" sql::OrGroupByColumn : entries114
 sql::FullExpression "0..9999" --* "1..1" sql::OrExpr : entries121
 sql::JRParameter "0..9999" --* "1..1" sql::Prms : entries154
-sql::DbObjectName "0..9999" --* "1..1" sql::Col : entries284
+sql::Col "1..1" *-- "0..9999" sql::DbObjectName : entries284
 sql::ColumnNames "0..9999" --* "1..1" sql::abc : entries286
 sql::UnpivotInClauseArg "0..9999" --* "1..1" sql::uicargs : entries289
 sql::PivotCol "0..9999" --* "1..1" sql::pvcs : entries291
 sql::DbObjectName "0..9999" --* "1..1" sql::pcols : entries292
-sql::tbls "1..1" *-- "0..9999" sql::DbObjectName : entries294
-sql::ScalarOperand "0..9999" --* "1..1" sql::OpList : entries296
-sql::OrderByClauseArg "0..9999" --* "1..1" sql::OBCArgs : entries298
-sql::AnalyticExprArg "0..9999" --* "1..1" sql::AExpArgs : entries300
-sql::OpFunctionArgOperand "0..9999" --* "1..1" sql::OpFList : entries302
-sql::WhenList "1..1" *-- "0..9999" sql::SqlCaseWhen : entries304
-sql::OrColumn "1..1" *-- "0..9999" sql::ColumnOrAlias : entries33
+sql::DbObjectName "0..9999" --* "1..1" sql::tbls : entries294
+sql::OpList "1..1" *-- "0..9999" sql::ScalarOperand : entries296
+sql::OBCArgs "1..1" *-- "0..9999" sql::OrderByClauseArg : entries298
+sql::AExpArgs "1..1" *-- "0..9999" sql::AnalyticExprArg : entries300
+sql::OpFList "1..1" *-- "0..9999" sql::OpFunctionArgOperand : entries302
+sql::SqlCaseWhen "0..9999" --* "1..1" sql::WhenList : entries304
+sql::ColumnOrAlias "0..9999" --* "1..1" sql::OrColumn : entries33
 sql::FromTable "0..9999" --* "1..1" sql::OrTable : entries41
 sql::DbObjectName "0..9999" --* "1..1" sql::UsingCols : entries57
 sql::Row "0..9999" --* "1..1" sql::Rows : entries81
-sql::RowValues "1..1" *-- "0..9999" sql::RowValue : entries85
+sql::RowValue "0..9999" --* "1..1" sql::RowValues : entries85
 sql::ExpOperand "0..1" --* "1..1" sql::Operand : eparam216
 sql::ExistsOper "0..1" --* "1..1" sql::FullExpression : exists135
 sql::FullExpression "0..1" --* "1..1" sql::FullExpression : exp129
 sql::AnalyticExprArg "0..1" --* "1..1" sql::WindowingClauseOperandFollowing : exp238
 sql::ExprGroup "0..1" --* "1..1" sql::FullExpression : expgroup126
-sql::OrExpr "0..1" --* "1..1" sql::ExprGroup : expr146
-sql::WindowingClauseOperandPreceding "1..1" *-- "0..1" sql::AnalyticExprArg : expr240
-sql::SQLCaseOperand "1..1" *-- "0..1" sql::OrExpr : expr268
+sql::ExprGroup "1..1" *-- "0..1" sql::OrExpr : expr146
+sql::AnalyticExprArg "0..1" --* "1..1" sql::WindowingClauseOperandPreceding : expr240
+sql::OrExpr "0..1" --* "1..1" sql::SQLCaseOperand : expr268
 sql::OrExpr "0..1" --* "1..1" sql::SqlCaseWhen : expr275
 sql::FunctionAnalytical "0..1" --* "1..1" sql::OpFunction : fan222
-sql::OpFunctionCast "0..1" --* "1..1" sql::LikeOperand : fcast164
+sql::LikeOperand "1..1" *-- "0..1" sql::OpFunctionCast : fcast164
 sql::OpFunctionCast "0..1" --* "1..1" sql::Operand : fcast203
 sql::FetchFirst "0..1" --* "1..1" sql::Select : fetchFirst30
-sql::UnsignedValue "0..1" --* "1..1" sql::FetchFirst : fetchFirst8
+sql::FetchFirst "1..1" *-- "0..1" sql::UnsignedValue : fetchFirst8
 sql::FunctionExtract "0..1" --* "1..1" sql::Operand : fext206
-sql::FromTableJoin "0..9999" --* "1..1" sql::FromTable : fjoin45
-sql::OpFunction "0..1" --* "1..1" sql::LikeOperand : fop2161
+sql::FromTable "1..1" *-- "0..9999" sql::FromTableJoin : fjoin45
+sql::LikeOperand "1..1" *-- "0..1" sql::OpFunction : fop2161
 sql::LikeOperand "1..1" *-- "0..1" sql::POperand : fparam166
 sql::OpFunction "0..1" --* "1..1" sql::Operand : func208
-sql::FromValuesColumns "1..1" *-- "0..1" sql::FromValuesColumnNames : fvCols77
-sql::OpFunction "0..1" --* "1..1" sql::GroupByColumnFull : gbFunction119
+sql::FromValuesColumnNames "0..1" --* "1..1" sql::FromValuesColumns : fvCols77
+sql::GroupByColumnFull "1..1" *-- "0..1" sql::OpFunction : gbFunction119
 sql::OrGroupByColumn "0..1" --* "1..1" sql::Select : groupByEntry19
 sql::OrExpr "0..1" --* "1..1" sql::Select : havingEntry21
-sql::InOper "0..1" --* "1..1" sql::FullExpression : in133
-sql::UnpivotTable "1..1" *-- "0..1" sql::UnpivotInClause : inop103
-sql::JoinCondition "0..1" --* "1..1" sql::FromTableJoin : joinCond53
-sql::OrExpr "0..1" --* "1..1" sql::FromTableJoin : joinExpr50
+sql::FullExpression "1..1" *-- "0..1" sql::InOper : in133
+sql::UnpivotInClause "0..1" --* "1..1" sql::UnpivotTable : inop103
+sql::FromTableJoin "1..1" *-- "0..1" sql::JoinCondition : joinCond53
+sql::FromTableJoin "1..1" *-- "0..1" sql::OrExpr : joinExpr50
 sql::Operands "0..1" --* "1..1" sql::Operands : left190
-sql::Like "0..1" --* "1..1" sql::FullExpression : like142
+sql::FullExpression "1..1" *-- "0..1" sql::Like : like142
 sql::Limit "0..1" --* "1..1" sql::Select : lim26
-sql::OrderByClause "0..1" --* "1..1" sql::AnalyticClause : obc231
+sql::AnalyticClause "1..1" *-- "0..1" sql::OrderByClause : obc231
 sql::Offset "0..1" --* "1..1" sql::Select : offset28
 sql::FromTableJoin "1..1" *-- "0..1" sql::TableOrAlias : onTable47
-sql::SelectSubSet "0..9999" --* "1..1" sql::Select : op10
+sql::Select "1..1" *-- "0..9999" sql::SelectSubSet : op10
 sql::FullExpression "1..1" *-- "0..1" sql::Operands : op1137
-sql::Operands "1..1" *-- "0..1" sql::Operand : op1187
+sql::Operand "0..1" --* "1..1" sql::Operands : op1187
 sql::Comparison "1..1" *-- "0..1" sql::Operands : op2156
-sql::LikeOperand "0..1" --* "1..1" sql::Like : op2159
-sql::Operands "0..1" --* "1..1" sql::Between : op2168
+sql::Like "1..1" *-- "0..1" sql::LikeOperand : op2159
+sql::Between "1..1" *-- "0..1" sql::Operands : op2168
 sql::OpFunctionArgAgregate "0..1" --* "1..1" sql::OpFunctionArgOperand : op255
-sql::Operands "0..1" --* "1..1" sql::OpFunctionCast : op256
-sql::Operands "0..1" --* "1..1" sql::Between : op3171
+sql::OpFunctionCast "1..1" *-- "0..1" sql::Operands : op256
+sql::Between "1..1" *-- "0..1" sql::Operands : op3171
 sql::OperandList "0..1" --* "1..1" sql::OperandListGroup : opGroup185
 sql::InOper "1..1" *-- "0..1" sql::OperandListGroup : opList177
-sql::OperandListGroup "0..1" --* "1..1" sql::ExistsOper : opList182
+sql::ExistsOper "1..1" *-- "0..1" sql::OperandListGroup : opList182
 sql::FunctionExtract "1..1" *-- "0..1" sql::Operands : operand224
-sql::Select "1..1" *-- "0..1" sql::OrOrderByColumn : orderByEntry24
-sql::POperand "0..1" --* "1..1" sql::Operand : param213
+sql::OrOrderByColumn "0..1" --* "1..1" sql::Select : orderByEntry24
+sql::Operand "1..1" *-- "0..1" sql::POperand : param213
 sql::PivotColumns "0..1" --* "1..1" sql::UnpivotInClauseArg : pcols105
 sql::PivotColumns "0..1" --* "1..1" sql::UnpivotTable : pcols98
 sql::PivotForClause "0..1" --* "1..1" sql::UnpivotTable : pfor100
@@ -516,37 +516,37 @@ sql::PivotInClause "0..1" --* "1..1" sql::PivotTable : pin91
 sql::PivotTable "0..1" --* "1..1" sql::TableOrAlias : pivot66
 sql::Prms "0..1" --* "1..1" sql::XExpr : prm152
 sql::Model "1..1" *-- "0..1" sql::SelectQuery : query1
-sql::WithQuery "1..1" *-- "0..1" sql::SelectQuery : query5
+sql::SelectQuery "0..1" --* "1..1" sql::WithQuery : query5
 sql::Select "0..1" --* "1..1" sql::SelectSubSet : query9
 sql::Operand "0..1" --* "1..1" sql::Operands : right192
-sql::RowValues "0..1" --* "1..1" sql::Row : rowValues83
+sql::Row "1..1" *-- "0..1" sql::RowValues : rowValues83
 sql::Rows "0..1" --* "1..1" sql::Values : rows79
 sql::Operand "1..1" *-- "0..1" sql::ScalarOperand : scalar218
 sql::SelectQuery "0..1" --* "1..1" sql::SubQueryOperand : sel262
-sql::TableOrAlias "1..1" *-- "0..1" sql::SubQueryOperand : sq62
+sql::SubQueryOperand "0..1" --* "1..1" sql::TableOrAlias : sq62
 sql::PivotInClause "1..1" *-- "0..1" sql::SubQueryOperand : sq93
 sql::Operand "1..1" *-- "0..1" sql::SQLCaseOperand : sqlcase211
 sql::Operand "1..1" *-- "0..1" sql::SubQueryOperand : subq200
-sql::SubQueryOperand "0..1" --* "1..1" sql::InOper : subquery174
-sql::SubQueryOperand "0..1" --* "1..1" sql::ExistsOper : subquery179
-sql::TableOrAlias "0..1" --* "1..1" sql::FromTable : table43
-sql::Select "1..1" *-- "0..1" sql::OrTable : tbl15
-sql::TableOrAlias "1..1" *-- "0..1" sql::DbObjectName : tblAlias70
+sql::InOper "1..1" *-- "0..1" sql::SubQueryOperand : subquery174
+sql::ExistsOper "1..1" *-- "0..1" sql::SubQueryOperand : subquery179
+sql::FromTable "1..1" *-- "0..1" sql::TableOrAlias : table43
+sql::OrTable "0..1" --* "1..1" sql::Select : tbl15
+sql::DbObjectName "0..1" --* "1..1" sql::TableOrAlias : tblAlias70
 sql::Operands "0..1" --* "1..1" sql::SqlCaseWhen : texp278
 sql::TableFull "0..1" --* "1..1" sql::TableOrAlias : tfull60
-sql::UnpivotTable "0..1" --* "1..1" sql::TableOrAlias : unpivot68
+sql::TableOrAlias "1..1" *-- "0..1" sql::UnpivotTable : unpivot68
 sql::JoinCondition "1..1" *-- "0..1" sql::UsingCols : useCols55
 sql::FromValues "0..1" --* "1..1" sql::TableOrAlias : values64
-sql::Values "0..1" --* "1..1" sql::FromValues : values73
-sql::WindowingClauseOperandFollowing "0..1" --* "1..1" sql::WindowingClauseBetween : wcoF236
-sql::WindowingClauseOperandPreceding "0..1" --* "1..1" sql::WindowingClauseBetween : wcoP235
-sql::SQLCaseWhens "0..1" --* "1..1" sql::SQLCaseOperand : when271
+sql::FromValues "1..1" *-- "0..1" sql::Values : values73
+sql::WindowingClauseBetween "1..1" *-- "0..1" sql::WindowingClauseOperandFollowing : wcoF236
+sql::WindowingClauseBetween "1..1" *-- "0..1" sql::WindowingClauseOperandPreceding : wcoP235
+sql::SQLCaseOperand "1..1" *-- "0..1" sql::SQLCaseWhens : when271
 sql::OrExpr "0..1" --* "1..1" sql::Select : whereExpression17
 sql::AnalyticClause "1..1" *-- "0..1" sql::WindowingClause : winc233
 sql::WithColumns "0..1" --* "1..1" sql::WithQuery : withCols3
 sql::Operands "0..1" --* "1..1" sql::SQLCaseOperand : wop265
 sql::Operands "0..1" --* "1..1" sql::SqlCaseWhen : wop273
-sql::WithQuery "0..1" --* "1..1" sql::Model : wq0
+sql::Model "1..1" *-- "0..1" sql::WithQuery : wq0
 sql::FullExpression "1..1" *-- "0..1" sql::XExpr : xexp131
 sql::Operand "0..1" --* "1..1" sql::Operand : xop198
 @enduml

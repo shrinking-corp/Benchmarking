@@ -1,0 +1,85 @@
+@startuml
+class ElementWithResources {
+}
+enum Environment {
+  DOCKER_SWARM
+  KUBERNETES
+}
+class Service {
+}
+class model::Affinity {
+  + degree : str
+}
+class model::Application {
+  + name : str
+  + totalData : str
+  + totalMessages : str
+  + weight : str
+}
+class model::Cluster {
+  + environment : str
+  + move(application : any, destinationHost : any, serviceId : any, sourceHost : any) : void
+}
+abstract class model::ElementWithResources {
+}
+class model::Host {
+  + cores : str
+  + hostAddress : str
+  + name : str
+}
+class model::Message {
+  + avgResponseTime : str
+  + messageSize : str
+  + name : str
+  + timestamp : str
+  + uid : str
+}
+abstract class model::Service {
+  + application : str
+  + name : str
+  + stateful : str
+}
+class model::ServiceInstance {
+  + address : str
+  + containers : str
+  + id : str
+  + totalData : str
+  + totalMessages : str
+}
+class model::StringToApplication {
+  + key : str
+}
+class model::StringToDoubleMap {
+  + key : str
+  + value : str
+}
+class model::StringToHost {
+  + key : str
+}
+class model::StringToService {
+  + key : str
+}
+class model::StringToServiceInstance {
+  + key : str
+}
+ElementWithResources <|-- model::Host
+ElementWithResources <|-- model::ServiceInstance
+Service <|-- model::ServiceInstance
+model::Cluster "1..1" *-- "0..9999" model::StringToApplication : applications1
+model::Message "1..1" -- "0..1" model::ServiceInstance : destination13
+model::Affinity "0..9999" --* "1..1" model::Service : hasAffinities3
+model::Host "0..1" -- "1..1" model::ServiceInstance : host8
+model::Cluster "1..1" *-- "0..9999" model::StringToHost : hosts0
+model::Message "0..9999" --* "1..1" model::ServiceInstance : messages7
+model::ElementWithResources "1..1" *-- "0..9999" model::StringToDoubleMap : metrics22
+model::ElementWithResources "1..1" *-- "0..9999" model::StringToDoubleMap : resourceLimit20
+model::Host "1..1" *-- "0..9999" model::StringToDoubleMap : resourceReserved18
+model::Host "1..1" *-- "0..9999" model::StringToServiceInstance : services16
+model::Application "1..1" *-- "0..9999" model::StringToService : services33
+model::Message "1..1" -- "0..1" model::ServiceInstance : source10
+model::Service "0..1" --* "1..1" model::StringToService : value25
+model::Host "0..1" --* "1..1" model::StringToHost : value27
+model::ServiceInstance "0..1" -- "1..1" model::StringToServiceInstance : value30
+model::Application "0..1" --* "1..1" model::StringToApplication : value35
+model::Affinity "1..1" -- "0..1" model::Service : with4
+@enduml

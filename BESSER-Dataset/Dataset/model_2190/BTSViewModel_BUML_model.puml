@@ -1,0 +1,48 @@
+@startuml
+enum MessageType {
+  ERROR
+  FILTERED
+  INFORMATION
+  LOCKED
+  NO_EDITING_RIGHTS
+  UPDATE
+  WARNING
+}
+class btsviewmodel::BTSObjectTypeTreeNode {
+  + selected : bool
+  + value : str
+}
+class btsviewmodel::DBCollectionStatusInformation {
+  + dbCollectionName : str
+  + dbDiskSize : str
+  + dbDocCount : str
+  + dbDocDelCount : str
+  + dbPurgeSeq : str
+  + dbUpdateSeq : str
+  + indexDocCount : str
+  + indexStatus : str
+  + indexUpdateSeq : str
+  + syncStatusFromRemote : str
+  + syncStatusToRemote : str
+}
+class btsviewmodel::StatusMessage {
+  + creationTime : date
+  + message : str
+  + messageType : str
+  + userId : str
+}
+class btsviewmodel::TreeNodeWrapper {
+  + childrenLoaded : bool
+  + label : str
+  + object : str
+  + parentObject : str
+  + propertyChangeSupport : str
+  + addPropertyChangeListener(propertyChangeListener : any) : void
+  + removePropertyChangeListener(propertyChangeListener : any) : void
+}
+btsviewmodel::TreeNodeWrapper "0..9999" -- "1..1" btsviewmodel::TreeNodeWrapper : children3
+btsviewmodel::StatusMessage "1..1" -- "0..9999" btsviewmodel::StatusMessage : children6
+btsviewmodel::BTSObjectTypeTreeNode "1..1" *-- "0..9999" btsviewmodel::BTSObjectTypeTreeNode : children8
+btsviewmodel::TreeNodeWrapper "1..1" -- "0..1" btsviewmodel::TreeNodeWrapper : parent1
+btsviewmodel::BTSObjectTypeTreeNode "1..1" -- "0..1" btsviewmodel::BTSObjectTypeTreeNode : referencedTypesPath10
+@enduml

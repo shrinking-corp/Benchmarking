@@ -94,27 +94,27 @@ class iTrace::iTraceModel {
 }
 Artefact <|-- iTrace::Code
 Artefact <|-- iTrace::Model
-TraceLinkElement <|-- iTrace::SourceElement
-TraceLinkElement <|-- iTrace::TargetElement
 TraceLink <|-- iTrace::M2MLink
 TraceLink <|-- iTrace::M2TLink
+TraceLinkElement <|-- iTrace::SourceElement
+TraceLinkElement <|-- iTrace::TargetElement
 iTrace::Artefact "1..9999" --* "1..1" iTrace::iTraceModel : artefacts1
 iTrace::Block "0..9999" -- "1..1" iTrace::Code : blocks16
-iTrace::Code "1..1" -- "1..1" iTrace::Block : code18
+iTrace::Block "1..1" -- "1..1" iTrace::Code : code18
 iTrace::Model "1..1" -- "0..9999" iTrace::TraceLinkElement : elements20
 iTrace::Feature "1..9999" --* "1..1" iTrace::SpecificFeature : features26
 iTrace::Artefact "1..1" -- "1..1" iTrace::iTraceModel : iTraceModel14
-iTrace::iTraceModel "1..1" -- "1..1" iTrace::SpecificFeature : iTraceModel27
-iTrace::iTraceModel "1..1" -- "1..1" iTrace::TraceLink : iTraceModel6
+iTrace::SpecificFeature "1..1" -- "1..1" iTrace::iTraceModel : iTraceModel27
+iTrace::TraceLink "1..1" -- "1..1" iTrace::iTraceModel : iTraceModel6
 iTrace::Model "1..1" -- "1..1" iTrace::TraceLinkElement : model8
 iTrace::EObject "0..1" -- "1..1" iTrace::TraceLinkElement : object9
 iTrace::SourceElement "0..9999" --* "1..1" iTrace::TraceLink : sourceElements5
-iTrace::SpecificFeature "1..1" -- "1..1" iTrace::Feature : specificFeature24
-iTrace::iTraceModel "1..1" *-- "0..1" iTrace::SpecificFeature : specificFeatures3
-iTrace::M2TLink "1..1" *-- "0..9999" iTrace::Block : targetBlocks12
-iTrace::TargetElement "0..9999" --* "1..1" iTrace::M2MLink : targetElements10
-iTrace::M2TLink "1..1" -- "1..1" iTrace::Block : traceLink19
-iTrace::TraceLink "1..1" -- "1..1" iTrace::SourceElement : traceLink21
-iTrace::TargetElement "1..1" -- "1..1" iTrace::M2MLink : traceLink23
-iTrace::iTraceModel "1..1" *-- "1..9999" iTrace::TraceLink : traceLinks0
+iTrace::Feature "1..1" -- "1..1" iTrace::SpecificFeature : specificFeature24
+iTrace::SpecificFeature "0..1" --* "1..1" iTrace::iTraceModel : specificFeatures3
+iTrace::Block "0..9999" --* "1..1" iTrace::M2TLink : targetBlocks12
+iTrace::M2MLink "1..1" *-- "0..9999" iTrace::TargetElement : targetElements10
+iTrace::Block "1..1" -- "1..1" iTrace::M2TLink : traceLink19
+iTrace::SourceElement "1..1" -- "1..1" iTrace::TraceLink : traceLink21
+iTrace::M2MLink "1..1" -- "1..1" iTrace::TargetElement : traceLink23
+iTrace::TraceLink "1..9999" --* "1..1" iTrace::iTraceModel : traceLinks0
 @enduml

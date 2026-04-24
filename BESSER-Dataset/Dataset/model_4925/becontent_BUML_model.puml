@@ -409,13 +409,13 @@ ContentCommand <|-- becontent::Trigger
 ContentCommand <|-- becontent::UnsetParameter
 DefinitionItem <|-- becontent::Entity
 DefinitionItem <|-- becontent::Relation
-EntityField <|-- becontent::Reference
-EntityField <|-- becontent::TypedAttribute
 Entity <|-- becontent::CustomEntity
 Entity <|-- becontent::SystemEntity
+EntityField <|-- becontent::Reference
+EntityField <|-- becontent::TypedAttribute
+Form <|-- becontent::ExtendedForm
 FormElement <|-- becontent::Form
 FormElement <|-- becontent::NotStructuredElement
-Form <|-- becontent::ExtendedForm
 NotStructuredElement <|-- becontent::Checkbox
 NotStructuredElement <|-- becontent::Color
 NotStructuredElement <|-- becontent::Date
@@ -468,39 +468,39 @@ ViewItem <|-- becontent::Content
 ViewItem <|-- becontent::Skin
 ViewItem <|-- becontent::Skinlet
 ViewItem <|-- becontent::Template
-becontent::Entity "1..1" -- "1..1" becontent::Channel : channel24
-becontent::ContentCommand "0..9999" --* "1..1" becontent::Content : commands38
-becontent::Content "1..1" *-- "0..1" becontent::ConditionalTemplate : conditionalTemplate40
+becontent::Channel "1..1" -- "1..1" becontent::Entity : channel24
+becontent::Content "1..1" *-- "0..9999" becontent::ContentCommand : commands38
+becontent::ConditionalTemplate "0..1" --* "1..1" becontent::Content : conditionalTemplate40
 becontent::CustomPager "0..1" -- "1..1" becontent::Form : customPager59
-becontent::EntityManagerPage "1..1" *-- "0..9999" becontent::CustomPager : customPagers51
-becontent::FormElement "0..9999" --* "1..1" becontent::Form : elements57
-becontent::EntityField "0..9999" --* "1..1" becontent::Entity : fields1
+becontent::CustomPager "0..9999" --* "1..1" becontent::EntityManagerPage : customPagers51
+becontent::Form "1..1" *-- "0..9999" becontent::FormElement : elements57
+becontent::Entity "1..1" *-- "0..9999" becontent::EntityField : fields1
 becontent::AttributeFileToFolder "1..1" -- "0..9999" becontent::FileToFolderExtension : fileExtensions19
 becontent::FileToFolderExtension "0..9999" -- "1..1" becontent::SystemAttributeFileToFolder : fileExtensions22
 becontent::NotStructuredElement "1..1" -- "1..1" becontent::Validation : firstElement65
-becontent::Form "0..9999" --* "1..1" becontent::EntityManagerPage : forms50
-becontent::Handler "0..1" -- "1..1" becontent::Entity : handler4
-becontent::JoinEntity "0..9999" --* "1..1" becontent::Content : joinEntities36
+becontent::EntityManagerPage "1..1" *-- "0..9999" becontent::Form : forms50
+becontent::Entity "1..1" -- "0..1" becontent::Handler : handler4
+becontent::Content "1..1" *-- "0..9999" becontent::JoinEntity : joinEntities36
 becontent::JoinEntity "0..1" -- "1..1" becontent::JoinEntity : joinRule43
 becontent::SystemEntity "1..1" -- "1..1" becontent::SystemRelation : leftForeignkey12
-becontent::Entity "1..1" -- "1..1" becontent::CustomRelation : leftForeignkey7
-becontent::Entity "1..1" -- "1..1" becontent::Content : mainEntity34
-becontent::Form "1..1" -- "1..1" becontent::DefinitionItem : mainEntity55
+becontent::CustomRelation "1..1" -- "1..1" becontent::Entity : leftForeignkey7
+becontent::Content "1..1" -- "1..1" becontent::Entity : mainEntity34
+becontent::DefinitionItem "1..1" -- "1..1" becontent::Form : mainEntity55
 becontent::Handler "1..1" -- "1..1" becontent::Skin : mainSkin29
-becontent::ViewItem "1..1" -- "1..1" becontent::Handler : mainSkinGetContent31
+becontent::Handler "1..1" -- "1..1" becontent::ViewItem : mainSkinGetContent31
 becontent::BeContentElement "0..9999" --* "1..1" becontent::BeContentModel : modelElements0
 becontent::Entity "1..1" -- "1..1" becontent::Reference : referredEntity17
-becontent::SystemReference "1..1" -- "1..1" becontent::SystemEntity : referredEntity20
+becontent::SystemEntity "1..1" -- "1..1" becontent::SystemReference : referredEntity20
 becontent::Entity "1..1" -- "1..1" becontent::JoinEntity : referredEntity45
 becontent::Entity "1..1" -- "1..1" becontent::SelectFromReference : referredEntity70
 becontent::Entity "1..1" -- "1..1" becontent::RadioFromReference : referredEntity72
-becontent::SystemRelation "1..1" -- "1..1" becontent::SystemEntity : rightForeignkey14
-becontent::Entity "1..1" -- "1..1" becontent::CustomRelation : rightForeignkey9
+becontent::SystemEntity "1..1" -- "1..1" becontent::SystemRelation : rightForeignkey14
+becontent::CustomRelation "1..1" -- "1..1" becontent::Entity : rightForeignkey9
 becontent::Channel "0..1" -- "1..1" becontent::Entity : rss2
-becontent::Validation "1..1" -- "1..1" becontent::NotStructuredElement : secondElement67
+becontent::NotStructuredElement "1..1" -- "1..1" becontent::Validation : secondElement67
 becontent::SystemEntity "1..1" *-- "0..9999" becontent::SystemEntityField : systemFields6
-becontent::Validation "0..9999" --* "1..1" becontent::EntityManagerPage : validations53
-becontent::Validation "0..9999" -- "1..1" becontent::Form : validations62
-becontent::ViewItem "1..1" -- "1..1" becontent::ApplyCommand : viewItem48
-becontent::ViewItem "1..9999" --* "1..1" becontent::Handler : viewItems27
+becontent::EntityManagerPage "1..1" *-- "0..9999" becontent::Validation : validations53
+becontent::Form "1..1" -- "0..9999" becontent::Validation : validations62
+becontent::ApplyCommand "1..1" -- "1..1" becontent::ViewItem : viewItem48
+becontent::Handler "1..1" *-- "1..9999" becontent::ViewItem : viewItems27
 @enduml

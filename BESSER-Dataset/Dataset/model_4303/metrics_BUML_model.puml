@@ -121,7 +121,7 @@ DataKind <|-- metrics::ValueDataKind
 Mapping <|-- metrics::MappingCSV
 Mapping <|-- metrics::MappingRDBMS
 Mapping <|-- metrics::MappingXLS
-metrics::MappingColumn "0..9999" --* "1..1" metrics::Mapping : dataMappingColumns1
+metrics::Mapping "1..1" *-- "0..9999" metrics::MappingColumn : dataMappingColumns1
 metrics::DataKind "0..1" --* "1..1" metrics::MappingColumn : dataType4
 metrics::Expression "0..1" -- "1..1" metrics::Metric : expressionRef17
 metrics::MappingRecord "0..9999" --* "1..1" metrics::MappingStatistic : failedRecords6
@@ -130,12 +130,12 @@ metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : mappingDura
 metrics::Mapping "0..1" --* "1..1" metrics::MetricSource : metricMapping27
 metrics::Metric "0..1" -- "1..1" metrics::ValueDataKind : metricRef34
 metrics::MetricRetentionRule "0..9999" --* "1..1" metrics::MetricRetentionRules : metricRetentionRules25
-metrics::MetricSource "0..1" -- "1..1" metrics::Metric : metricSourceRef19
+metrics::Metric "1..1" -- "0..1" metrics::MetricSource : metricSourceRef19
 metrics::MetricValueRange "1..1" *-- "0..9999" metrics::Value : metricValues33
 metrics::Metric "1..1" *-- "0..9999" metrics::Metric : metrics16
 metrics::DateTimeRange "1..1" --* "1..1" metrics::MappingStatistic : periodEstimate9
-metrics::MetricRetentionRule "1..1" -- "0..1" metrics::Expression : retentionExpression23
-metrics::MetricSource "1..1" *-- "0..9999" metrics::MappingStatistic : statistics30
-metrics::MappingStatistic "1..1" *-- "0..9999" metrics::MappingStatistic : subStatistics13
-metrics::Unit "0..1" -- "1..1" metrics::Metric : unitRef21
+metrics::Expression "0..1" -- "1..1" metrics::MetricRetentionRule : retentionExpression23
+metrics::MappingStatistic "0..9999" --* "1..1" metrics::MetricSource : statistics30
+metrics::MappingStatistic "0..9999" --* "1..1" metrics::MappingStatistic : subStatistics13
+metrics::Metric "1..1" -- "0..1" metrics::Unit : unitRef21
 @enduml

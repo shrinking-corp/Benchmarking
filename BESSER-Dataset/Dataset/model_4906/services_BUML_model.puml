@@ -59,24 +59,24 @@ class services::Value {
 }
 Service <|-- services::CFSService
 Service <|-- services::RFSService
-services::Service "1..1" *-- "0..9999" services::CIID : cIID3
+services::CIID "0..9999" --* "1..1" services::Service : cIID3
 services::Expression "0..9999" -- "1..1" services::ServiceDistribution : expressionRefs17
 services::Expression "0..9999" -- "1..1" services::ServiceUser : expressionRefs40
 services::Node "0..9999" -- "1..1" services::RFSService : nodes0
 services::DateTimeRange "0..1" --* "1..1" services::ServiceForecast : period19
 services::DateTimeRange "0..1" --* "1..1" services::ServiceMonitor : period30
-services::ServiceProfile "1..1" *-- "0..9999" services::NetXResource : profileResources35
-services::ServiceForecast "1..1" *-- "0..9999" services::ResourceForecast : resourceForecasts23
-services::ServiceMonitor "1..1" *-- "0..9999" services::ResourceMonitor : resourceMonitors33
-services::ServiceDistribution "0..1" --* "1..1" services::Service : serviceDistribution13
+services::NetXResource "0..9999" --* "1..1" services::ServiceProfile : profileResources35
+services::ResourceForecast "0..9999" --* "1..1" services::ServiceForecast : resourceForecasts23
+services::ResourceMonitor "0..9999" --* "1..1" services::ServiceMonitor : resourceMonitors33
+services::Service "1..1" *-- "0..1" services::ServiceDistribution : serviceDistribution13
 services::ServiceForecast "1..1" *-- "0..9999" services::ServiceForecastUsers : serviceForecastUsers21
-services::ServiceForecast "0..9999" --* "1..1" services::Service : serviceForecasts7
-services::ServiceMonitor "0..9999" --* "1..1" services::Service : serviceMonitors9
+services::Service "1..1" *-- "0..9999" services::ServiceForecast : serviceForecasts7
+services::Service "1..1" *-- "0..9999" services::ServiceMonitor : serviceMonitors9
 services::ServiceProfile "0..1" --* "1..1" services::ServiceUser : serviceProfile37
-services::ServiceDistribution "1..1" *-- "0..9999" services::NetXResource : serviceResources15
-services::ServiceUser "0..1" -- "1..1" services::ServiceForecastUsers : serviceUserRef27
+services::NetXResource "0..9999" --* "1..1" services::ServiceDistribution : serviceResources15
+services::ServiceForecastUsers "1..1" -- "0..1" services::ServiceUser : serviceUserRef27
 services::Service "1..1" -- "0..9999" services::ServiceUser : serviceUserRefs11
 services::Service "0..9999" --* "1..1" services::Service : services5
-services::Tolerance "0..9999" -- "1..1" services::RFSService : toleranceRefs1
-services::Value "0..9999" --* "1..1" services::ServiceForecastUsers : userValues25
+services::RFSService "1..1" -- "0..9999" services::Tolerance : toleranceRefs1
+services::ServiceForecastUsers "1..1" *-- "0..9999" services::Value : userValues25
 @enduml

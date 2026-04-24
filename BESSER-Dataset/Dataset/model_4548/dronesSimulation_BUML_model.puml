@@ -47,18 +47,18 @@ class dronesSimulation::TaskInstance {
 Observation <|-- dronesSimulation::DroneObservation
 Observation <|-- dronesSimulation::ObstacleObservation
 dronesSimulation::DroneInstance "0..1" -- "1..1" dronesSimulation::RoleInstance : allocatedDrone18
-dronesSimulation::RoleInstance "0..1" -- "1..1" dronesSimulation::DroneInstance : currentRole9
+dronesSimulation::DroneInstance "1..1" -- "0..1" dronesSimulation::RoleInstance : currentRole9
 dronesSimulation::Drone "1..1" -- "1..1" dronesSimulation::DroneObservation : drone20
 dronesSimulation::Drone "1..1" -- "1..1" dronesSimulation::DroneInstance : drone5
 dronesSimulation::DroneInstance "0..9999" --* "1..1" dronesSimulation::DronesSimulation : droneInstances3
 dronesSimulation::DroneInstance "1..1" *-- "0..9999" dronesSimulation::Observation : observations10
-dronesSimulation::ObstacleObservation "1..1" -- "1..1" dronesSimulation::Obstacle : obstacle19
-dronesSimulation::Position "1..1" --* "1..1" dronesSimulation::DroneObservation : position22
-dronesSimulation::Position "1..1" --* "1..1" dronesSimulation::DroneInstance : position7
+dronesSimulation::Obstacle "1..1" -- "1..1" dronesSimulation::ObstacleObservation : obstacle19
+dronesSimulation::DroneObservation "1..1" *-- "1..1" dronesSimulation::Position : position22
+dronesSimulation::DroneInstance "1..1" *-- "1..1" dronesSimulation::Position : position7
 dronesSimulation::Role "0..1" -- "1..1" dronesSimulation::RoleInstance : role16
 dronesSimulation::RoleInstance "1..9999" --* "1..1" dronesSimulation::TaskInstance : roleInstances14
 dronesSimulation::DronesSimulation "1..1" -- "1..1" dronesSimulation::Scenario : scenario0
 dronesSimulation::Task "0..1" -- "1..1" dronesSimulation::TaskInstance : task12
-dronesSimulation::TaskInstance "1..1" -- "1..1" dronesSimulation::RoleInstance : taskInstance17
-dronesSimulation::TaskInstance "0..9999" --* "1..1" dronesSimulation::DronesSimulation : taskInstances1
+dronesSimulation::RoleInstance "1..1" -- "1..1" dronesSimulation::TaskInstance : taskInstance17
+dronesSimulation::DronesSimulation "1..1" *-- "0..9999" dronesSimulation::TaskInstance : taskInstances1
 @enduml

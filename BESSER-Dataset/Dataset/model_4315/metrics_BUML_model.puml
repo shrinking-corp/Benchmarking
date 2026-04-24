@@ -38,15 +38,15 @@ Base <|-- metrics::Metric
 Base <|-- metrics::MetricSource
 Rule <|-- metrics::MetricAggregationRule
 Rule <|-- metrics::MetricRetentionRule
-metrics::MetricAggregationRule "1..1" -- "0..1" metrics::EObject : aggregationExpression13
+metrics::EObject "0..1" -- "1..1" metrics::MetricAggregationRule : aggregationExpression13
 metrics::MetricAggregationRules "0..1" -- "1..1" metrics::MetricSource : metricAggregationRuleSet19
-metrics::MetricAggregationRules "0..1" -- "1..1" metrics::Metric : metricAggregationRuleSet7
+metrics::Metric "1..1" -- "0..1" metrics::MetricAggregationRules : metricAggregationRuleSet7
 metrics::Addon "1..1" *-- "0..9999" metrics::MetricAggregationRules : metricAggregationRuleSets5
 metrics::MetricAggregationRule "0..9999" --* "1..1" metrics::MetricAggregationRules : metricAggregationRules14
-metrics::MetricRetentionRules "0..1" -- "1..1" metrics::Metric : metricRetentionRuleSet10
+metrics::Metric "1..1" -- "0..1" metrics::MetricRetentionRules : metricRetentionRuleSet10
 metrics::MetricRetentionRules "0..1" -- "1..1" metrics::MetricSource : metricRetentionRuleSet22
-metrics::MetricRetentionRules "0..9999" --* "1..1" metrics::Addon : metricRetentionRuleSets3
+metrics::Addon "1..1" *-- "0..9999" metrics::MetricRetentionRules : metricRetentionRuleSets3
 metrics::MetricRetentionRule "0..9999" --* "1..1" metrics::MetricRetentionRules : metricRetentionRules17
-metrics::MetricSource "0..9999" --* "1..1" metrics::Addon : metricSources1
-metrics::Metric "0..9999" --* "1..1" metrics::Addon : metrics0
+metrics::Addon "1..1" *-- "0..9999" metrics::MetricSource : metricSources1
+metrics::Addon "1..1" *-- "0..9999" metrics::Metric : metrics0
 @enduml

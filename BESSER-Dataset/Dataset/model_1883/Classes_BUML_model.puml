@@ -1,0 +1,145 @@
+@startuml
+enum ChargeType {
+  Breakfast
+  CancellationFee
+  DoubleRoom
+  FamilySuite
+  LateCheckOutFee
+  SingleRoom
+}
+abstract class Classes::AdministratorProvides {
+  + addCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + getBalance(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : float
+  + makeDeposit(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, sum : any) : float
+  + removeCreditCard(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+}
+class Classes::Bill {
+}
+class Classes::Booking {
+  + bookingID : str
+  + checkIn : date
+  + checkOut : date
+  + numberOfGuests : str
+}
+class Classes::Charge {
+  + amount : int
+  + chargeType : str
+  + date : date
+}
+class Classes::Customer {
+}
+abstract class Classes::CustomerProvides {
+  + isCreditCardValid(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : bool
+  + makePayment(ccNumber : any, ccv : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any, sum : any) : bool
+}
+abstract class Classes::IBookingManagement {
+  + addCustomerInformationToBooking(bookingID : any, email : any, firstName : any, lastName : any, ph : any) : bool
+  + addExtraCharge(bookingID : any, charge : any, quantity : any) : str
+  + addRoomPending(bookingID : any, room : any) : str
+  + cancelBooking(bookingID : any) : str
+  + confirmBooking(bookingID : any) : str
+  + createPendingBooking(checkIn : any, checkOut : any, guestCount : any) : int
+  + getRoomsOfBooking(bookingID : any) : str
+  + searchRoom(checkIn : any, checkOut : any, maximumPrice : any, numberOfGuests : any, roomType : any) : str
+  + sendConfirmation(bookingID : any, message : any) : str
+  + updateBooking(bookingID : any, checkIn : any, checkOut : any, nrOfGuests : any, roomID : any) : str
+}
+class Classes::IBookingManagementImpl {
+}
+abstract class Classes::IFinance {
+  + bankSendInvoice() : void
+  + calculatePayment(bookingID : any) : int
+  + payBill(bookingID : any, ccNumber : any, ccv : any, cost : any, expiryMonth : any, expiryYear : any, firstName : any, lastName : any) : str
+}
+class Classes::IFinanceImpl {
+}
+abstract class Classes::IHotelManager {
+  + addStaffMember(address : any, admin : any, adminUsername : any, email : any, firstName : any, lastName : any, password : any, phoneNumber : any, username : any) : bool
+  + changeStatusOfRoom(roomID : any, staffMemberUsername : any, status : any) : str
+  + checkInBooking(bookingID : any, staffMemberUsername : any) : str
+  + checkOut(bookingID : any, staffMemberUsername : any) : str
+  + getStaffMemberAddress(username : any) : str
+  + getStaffMemberEmail(username : any) : str
+  + getStaffMemberFirstName(username : any) : str
+  + getStaffMemberLastName(username : any) : str
+  + getStaffMemberPassword(username : any) : str
+  + getStaffMemberPhoneNumber(username : any) : str
+  + isPasswordSecure(password : any) : bool
+  + isStaffMemberAdmin(username : any) : str
+  + isStaffMemberLoggedIn(username : any) : str
+  + isValidUsername(username : any) : bool
+  + login(password : any, username : any) : bool
+  + logout(username : any) : bool
+}
+class Classes::IHotelManagerImpl {
+}
+abstract class Classes::IPerson {
+  + address : str
+  + email : str
+  + firstName : str
+  + lastName : str
+  + phoneNumber : str
+}
+class Classes::Room {
+  + roomNumber : str
+  + status : str
+}
+class Classes::RoomType {
+  + description : str
+  + features : str
+  + numberOfGuests : str
+  + price : str
+  + roomTypeName : str
+}
+class Classes::StaffMember {
+  + admin : str
+  + isLoggedIn : bool
+  + password : str
+  + username : str
+}
+class IBookingManagement {
+}
+class IFinance {
+}
+class IHotelManager {
+}
+class IPerson {
+}
+enum RoomStatus {
+  Available
+  Cleaning
+  Maintenance
+  Occupied
+}
+enum RoomTypeName {
+  DoubleRoom
+  FamilySuite
+  SingleRoom
+}
+IBookingManagement <|-- Classes::IBookingManagementImpl
+IFinance <|-- Classes::IFinanceImpl
+IHotelManager <|-- Classes::IHotelManagerImpl
+IPerson <|-- Classes::Customer
+IPerson <|-- Classes::StaffMember
+Classes::Bill "1..1" -- "1..1" Classes::Booking : bill8
+Classes::Booking "0..9999" -- "1..1" Classes::Customer : booking11
+Classes::Booking "0..9999" -- "1..1" Classes::IBookingManagementImpl : bookingHistory21
+Classes::Booking "0..9999" -- "1..1" Classes::Room : bookings1
+Classes::Bill "1..1" -- "1..9999" Classes::Charge : charge35
+Classes::Booking "0..9999" -- "1..1" Classes::IBookingManagementImpl : confirmedBookings26
+Classes::Customer "0..9999" -- "1..1" Classes::IBookingManagementImpl : customer13
+Classes::Booking "1..1" -- "1..1" Classes::Customer : customer5
+Classes::CustomerProvides "1..1" -- "1..1" Classes::IFinanceImpl : customerProvides32
+Classes::IBookingManagementImpl "1..1" -- "1..1" Classes::Room : iBookingManagementImpl2
+Classes::IBookingManagementImpl "1..1" -- "1..1" Classes::IHotelManagerImpl : iBookingManagementImpl30
+Classes::IBookingManagementImpl "1..1" -- "1..1" Classes::IFinanceImpl : iBookingManagementImpl33
+Classes::Booking "1..1" -- "1..1" Classes::IBookingManagementImpl : iBookingManagementImpl6
+Classes::IBookingManagementImpl "1..1" -- "1..1" Classes::IFinanceImpl : iFinanceImpl24
+Classes::IBookingManagementImpl "1..1" -- "1..1" Classes::IHotelManagerImpl : iHotelManagerImpl19
+Classes::Booking "0..9999" -- "1..1" Classes::IBookingManagementImpl : pendingBookings16
+Classes::IBookingManagementImpl "1..1" -- "0..9999" Classes::Room : room14
+Classes::Room "0..9999" -- "1..1" Classes::RoomType : room4
+Classes::Room "1..1" -- "1..1" Classes::RoomType : roomType0
+Classes::Booking "1..1" -- "0..9999" Classes::Room : rooms9
+Classes::IHotelManagerImpl "1..1" -- "0..9999" Classes::StaffMember : staff29
+@enduml

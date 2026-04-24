@@ -65,7 +65,7 @@ class rdb::View {
 }
 ERDInfo <|-- rdb::DB
 Table <|-- rdb::View
-rdb::UserComment "0..1" -- "1..1" rdb::DB : DBComment3
+rdb::DB "1..1" -- "0..1" rdb::UserComment : DBComment3
 rdb::Table "1..1" -- "0..100" rdb::UserComment : UserCommentReference12
 rdb::Column "1..9999" --* "1..1" rdb::Table : columns6
 rdb::DB "1..1" -- "1..1" rdb::Relation : db20
@@ -73,10 +73,10 @@ rdb::DB "1..1" -- "1..1" rdb::Style : db25
 rdb::DB "1..1" -- "1..1" rdb::Table : db7
 rdb::Relation "0..9999" -- "1..1" rdb::Table : incomingLinks8
 rdb::Relation "0..9999" -- "1..1" rdb::Table : outgoingLinks10
-rdb::Relation "0..9999" --* "1..1" rdb::DB : references1
-rdb::Table "0..1" -- "1..1" rdb::Relation : source16
+rdb::DB "1..1" *-- "0..9999" rdb::Relation : references1
+rdb::Relation "1..1" -- "0..1" rdb::Table : source16
 rdb::ERDInfo "1..1" -- "1..1" rdb::Style : style24
-rdb::Style "0..9999" --* "1..1" rdb::DB : styledReference4
+rdb::DB "1..1" *-- "0..9999" rdb::Style : styledReference4
 rdb::Column "1..1" -- "1..1" rdb::Table : table14
 rdb::Table "1..1" -- "1..1" rdb::View : tableName22
 rdb::DB "1..1" *-- "0..9999" rdb::Table : tables0

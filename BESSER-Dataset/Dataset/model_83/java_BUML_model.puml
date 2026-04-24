@@ -522,8 +522,6 @@ Statement <|-- java::TryStatement
 Statement <|-- java::TypeDeclarationStatement
 Statement <|-- java::VariableDeclarationStatement
 Statement <|-- java::WhileStatement
-TypeDeclaration <|-- java::ClassDeclaration
-TypeDeclaration <|-- java::InterfaceDeclaration
 Type <|-- java::AbstractTypeDeclaration
 Type <|-- java::ArrayType
 Type <|-- java::ParameterizedType
@@ -531,6 +529,8 @@ Type <|-- java::PrimitiveType
 Type <|-- java::TypeParameter
 Type <|-- java::UnresolvedType
 Type <|-- java::WildCardType
+TypeDeclaration <|-- java::ClassDeclaration
+TypeDeclaration <|-- java::InterfaceDeclaration
 UnresolvedItem <|-- java::UnresolvedAnnotationDeclaration
 UnresolvedItem <|-- java::UnresolvedAnnotationTypeMemberDeclaration
 UnresolvedItem <|-- java::UnresolvedClassDeclaration
@@ -542,103 +542,103 @@ UnresolvedItem <|-- java::UnresolvedSingleVariableDeclaration
 UnresolvedItem <|-- java::UnresolvedType
 UnresolvedItem <|-- java::UnresolvedTypeDeclaration
 UnresolvedItem <|-- java::UnresolvedVariableDeclarationFragment
-VariableDeclarationFragment <|-- java::UnresolvedVariableDeclarationFragment
 VariableDeclaration <|-- java::EnumConstantDeclaration
 VariableDeclaration <|-- java::SingleVariableDeclaration
 VariableDeclaration <|-- java::VariableDeclarationFragment
+VariableDeclarationFragment <|-- java::UnresolvedVariableDeclarationFragment
 java::AbstractTypeDeclaration "0..1" -- "1..1" java::BodyDeclaration : abstractTypeDeclaration84
-java::SingleVariableDeclaration "1..1" *-- "0..9999" java::Annotation : annotations296
-java::VariableDeclarationExpression "1..1" *-- "0..9999" java::Annotation : annotations355
+java::Annotation "0..9999" --* "1..1" java::SingleVariableDeclaration : annotations296
+java::Annotation "0..9999" --* "1..1" java::VariableDeclarationExpression : annotations355
 java::Annotation "0..9999" --* "1..1" java::VariableDeclarationStatement : annotations360
 java::Annotation "0..9999" --* "1..1" java::BodyDeclaration : annotations85
 java::AnonymousClassDeclaration "0..1" --* "1..1" java::ClassInstanceCreation : anonymousClassDeclaration110
 java::AnonymousClassDeclaration "0..1" --* "1..1" java::EnumConstantDeclaration : anonymousClassDeclaration152
 java::AnonymousClassDeclaration "0..1" -- "1..1" java::BodyDeclaration : anonymousClassDeclarationOwner87
-java::Model "1..1" *-- "0..9999" java::Archive : archives246
+java::Archive "0..9999" --* "1..1" java::Model : archives246
 java::EnumConstantDeclaration "1..1" *-- "0..9999" java::Expression : arguments153
-java::Expression "0..9999" --* "1..1" java::AbstractMethodInvocation : arguments8
-java::Expression "1..1" --* "1..1" java::ArrayAccess : array60
-java::Expression "1..1" --* "1..1" java::ArrayLengthAccess : array75
-java::CompilationUnit "0..1" -- "1..1" java::ClassFile : attachedSource105
+java::AbstractMethodInvocation "1..1" *-- "0..9999" java::Expression : arguments8
+java::ArrayAccess "1..1" *-- "1..1" java::Expression : array60
+java::ArrayLengthAccess "1..1" *-- "1..1" java::Expression : array75
+java::ClassFile "1..1" -- "0..1" java::CompilationUnit : attachedSource105
 java::ManifestAttribute "0..9999" --* "1..1" java::ManifestEntry : attributes208
 java::AbstractMethodDeclaration "1..1" *-- "0..1" java::Block : body0
 java::Block "1..1" --* "1..1" java::CatchClause : body100
-java::Statement "1..1" --* "1..1" java::DoStatement : body142
-java::Statement "1..1" --* "1..1" java::EnhancedForStatement : body145
+java::DoStatement "1..1" *-- "1..1" java::Statement : body142
+java::EnhancedForStatement "1..1" *-- "1..1" java::Statement : body145
 java::ForStatement "1..1" *-- "1..1" java::Statement : body172
 java::Block "1..1" --* "1..1" java::Initializer : body193
-java::Statement "1..1" --* "1..1" java::LabeledStatement : body201
+java::LabeledStatement "1..1" *-- "1..1" java::Statement : body201
 java::Block "1..1" --* "1..1" java::SynchronizedStatement : body313
 java::Block "1..1" --* "1..1" java::TryStatement : body323
 java::Statement "1..1" --* "1..1" java::WhileStatement : body366
-java::Modifier "1..1" -- "0..1" java::BodyDeclaration : bodyDeclaration249
-java::BodyDeclaration "0..9999" --* "1..1" java::AbstractTypeDeclaration : bodyDeclarations13
-java::BodyDeclaration "0..9999" --* "1..1" java::AnonymousClassDeclaration : bodyDeclarations57
-java::WildCardType "1..1" *-- "0..1" java::TypeAccess : bound362
+java::BodyDeclaration "0..1" -- "1..1" java::Modifier : bodyDeclaration249
+java::AbstractTypeDeclaration "1..1" *-- "0..9999" java::BodyDeclaration : bodyDeclarations13
+java::AnonymousClassDeclaration "1..1" *-- "0..9999" java::BodyDeclaration : bodyDeclarations57
+java::TypeAccess "0..1" --* "1..1" java::WildCardType : bound362
 java::TypeAccess "0..9999" --* "1..1" java::TypeParameter : bounds342
 java::CatchClause "0..1" -- "1..1" java::SingleVariableDeclaration : catchClause300
 java::CatchClause "0..9999" --* "1..1" java::TryStatement : catchClauses328
 java::ClassFile "0..9999" --* "1..1" java::Model : classFiles243
 java::Archive "1..1" *-- "0..9999" java::ClassFile : classFiles31
-java::ClassInstanceCreation "0..1" -- "1..1" java::AnonymousClassDeclaration : classInstanceCreation59
+java::AnonymousClassDeclaration "1..1" -- "0..1" java::ClassInstanceCreation : classInstanceCreation59
 java::Comment "0..9999" -- "1..1" java::CompilationUnit : commentList127
 java::ASTNode "1..1" *-- "0..9999" java::Comment : comments39
-java::Comment "0..9999" --* "1..1" java::AbstractTypeDeclaration : commentsAfterBody15
-java::Comment "0..9999" --* "1..1" java::AbstractTypeDeclaration : commentsBeforeBody14
+java::AbstractTypeDeclaration "1..1" *-- "0..9999" java::Comment : commentsAfterBody15
+java::AbstractTypeDeclaration "1..1" *-- "0..9999" java::Comment : commentsBeforeBody14
 java::CompilationUnit "0..9999" --* "1..1" java::Model : compilationUnits240
 java::AbstractTypeDeclaration "1..1" --* "1..1" java::TypeDeclarationStatement : declaration338
 java::AnnotationTypeMemberDeclaration "1..1" *-- "0..1" java::Expression : default51
 java::ArrayCreation "1..1" *-- "0..9999" java::Expression : dimensions65
-java::UnresolvedItemAccess "1..1" -- "0..1" java::UnresolvedItem : element345
-java::TypeAccess "1..1" --* "1..1" java::ArrayType : elementType77
-java::Expression "1..1" --* "1..1" java::ConditionalExpression : elseExpression117
+java::UnresolvedItem "0..1" -- "1..1" java::UnresolvedItemAccess : element345
+java::ArrayType "1..1" *-- "1..1" java::TypeAccess : elementType77
+java::ConditionalExpression "1..1" *-- "1..1" java::Expression : elseExpression117
 java::IfStatement "1..1" *-- "0..1" java::Statement : elseStatement180
 java::EnhancedForStatement "0..1" -- "1..1" java::SingleVariableDeclaration : enhancedForStatement301
 java::Manifest "1..1" *-- "0..9999" java::ManifestEntry : entryAttributes206
 java::EnumConstantDeclaration "0..9999" --* "1..1" java::EnumDeclaration : enumConstants156
 java::CatchClause "1..1" *-- "1..1" java::SingleVariableDeclaration : exception98
-java::Expression "0..1" --* "1..1" java::ClassInstanceCreation : expression112
+java::ClassInstanceCreation "1..1" *-- "0..1" java::Expression : expression112
 java::ConditionalExpression "1..1" *-- "1..1" java::Expression : expression119
-java::Expression "1..1" --* "1..1" java::DoStatement : expression140
-java::Expression "1..1" --* "1..1" java::EnhancedForStatement : expression147
+java::DoStatement "1..1" *-- "1..1" java::Expression : expression140
+java::EnhancedForStatement "1..1" *-- "1..1" java::Expression : expression147
 java::Expression "1..1" --* "1..1" java::ExpressionStatement : expression158
 java::Expression "1..1" --* "1..1" java::FieldAccess : expression161
 java::Expression "0..1" --* "1..1" java::ForStatement : expression164
 java::Expression "1..1" --* "1..1" java::IfStatement : expression175
 java::Expression "0..1" --* "1..1" java::MethodInvocation : expression223
-java::ParenthesizedExpression "1..1" *-- "1..1" java::Expression : expression279
+java::Expression "1..1" --* "1..1" java::ParenthesizedExpression : expression279
 java::Expression "0..1" --* "1..1" java::ReturnStatement : expression285
 java::Expression "0..1" --* "1..1" java::SuperConstructorInvocation : expression302
-java::SwitchCase "1..1" *-- "0..1" java::Expression : expression306
+java::Expression "0..1" --* "1..1" java::SwitchCase : expression306
 java::Expression "1..1" --* "1..1" java::SwitchStatement : expression308
-java::SynchronizedStatement "1..1" *-- "1..1" java::Expression : expression315
+java::Expression "1..1" --* "1..1" java::SynchronizedStatement : expression315
 java::Expression "1..1" --* "1..1" java::ThrowStatement : expression321
-java::Expression "1..1" --* "1..1" java::AssertStatement : expression36
+java::AssertStatement "1..1" *-- "1..1" java::Expression : expression36
 java::Expression "1..1" --* "1..1" java::WhileStatement : expression364
-java::Expression "1..1" --* "1..1" java::CastExpression : expression93
-java::Expression "0..9999" --* "1..1" java::ArrayInitializer : expressions72
+java::CastExpression "1..1" *-- "1..1" java::Expression : expression93
+java::ArrayInitializer "1..1" *-- "0..9999" java::Expression : expressions72
 java::Expression "0..9999" --* "1..1" java::InfixExpression : extendedOperands190
 java::FieldAccess "1..1" *-- "1..1" java::SingleVariableAccess : field160
 java::SingleVariableAccess "1..1" --* "1..1" java::SuperFieldAccess : field304
-java::TryStatement "1..1" *-- "0..1" java::Block : finally325
-java::VariableDeclarationFragment "0..9999" --* "1..1" java::AbstractVariablesContainer : fragments26
+java::Block "0..1" --* "1..1" java::TryStatement : finally325
+java::AbstractVariablesContainer "1..1" *-- "0..9999" java::VariableDeclarationFragment : fragments26
 java::ASTNode "0..9999" --* "1..1" java::TagElement : fragments318
-java::NamedElement "1..1" -- "1..1" java::ImportDeclaration : importedElement183
+java::ImportDeclaration "1..1" -- "1..1" java::NamedElement : importedElement183
 java::CompilationUnit "1..1" *-- "0..9999" java::ImportDeclaration : imports130
-java::Expression "1..1" --* "1..1" java::ArrayAccess : index62
+java::ArrayAccess "1..1" *-- "1..1" java::Expression : index62
 java::Expression "0..1" --* "1..1" java::VariableDeclaration : initializer350
-java::ArrayInitializer "0..1" --* "1..1" java::ArrayCreation : initializer67
+java::ArrayCreation "1..1" *-- "0..1" java::ArrayInitializer : initializer67
 java::Expression "0..9999" --* "1..1" java::ForStatement : initializers169
-java::LabeledStatement "0..1" -- "1..1" java::ContinueStatement : label138
-java::LabeledStatement "0..1" -- "1..1" java::BreakStatement : label92
+java::ContinueStatement "1..1" -- "0..1" java::LabeledStatement : label138
+java::BreakStatement "1..1" -- "0..1" java::LabeledStatement : label92
 java::Assignment "1..1" *-- "1..1" java::Expression : leftHandSide79
-java::InfixExpression "1..1" *-- "1..1" java::Expression : leftOperand187
-java::InstanceofExpression "1..1" *-- "1..1" java::Expression : leftOperand197
-java::ManifestAttribute "0..9999" --* "1..1" java::Manifest : mainAttributes204
+java::Expression "1..1" --* "1..1" java::InfixExpression : leftOperand187
+java::Expression "1..1" --* "1..1" java::InstanceofExpression : leftOperand197
+java::Manifest "1..1" *-- "0..9999" java::ManifestAttribute : mainAttributes204
 java::Archive "1..1" *-- "0..1" java::Manifest : manifest32
-java::NamedElement "1..1" -- "1..1" java::MemberRef : member211
-java::AnnotationTypeMemberDeclaration "0..1" -- "1..1" java::AnnotationMemberValuePair : member46
-java::Expression "0..1" --* "1..1" java::AssertStatement : message34
+java::MemberRef "1..1" -- "1..1" java::NamedElement : member211
+java::AnnotationMemberValuePair "1..1" -- "0..1" java::AnnotationTypeMemberDeclaration : member46
+java::AssertStatement "1..1" *-- "0..1" java::Expression : message34
 java::AbstractMethodDeclaration "1..1" -- "1..1" java::MethodRef : method225
 java::AbstractMethodDeclaration "1..1" -- "1..1" java::AbstractMethodInvocation : method6
 java::AbstractMethodDeclaration "0..1" -- "1..1" java::SingleVariableDeclaration : methodDeclaration299
@@ -646,68 +646,68 @@ java::Model "0..1" -- "1..1" java::Package : model260
 java::Modifier "0..1" --* "1..1" java::SingleVariableDeclaration : modifier292
 java::Modifier "0..1" --* "1..1" java::VariableDeclarationExpression : modifier353
 java::Modifier "0..1" --* "1..1" java::VariableDeclarationStatement : modifier358
-java::Modifier "0..1" --* "1..1" java::BodyDeclaration : modifier89
+java::BodyDeclaration "1..1" *-- "0..1" java::Modifier : modifier89
 java::Expression "1..1" --* "1..1" java::PostfixExpression : operand281
 java::Expression "1..1" --* "1..1" java::PrefixExpression : operand283
-java::ClassFile "0..1" -- "1..1" java::ASTNode : originalClassFile43
+java::ASTNode "1..1" -- "0..1" java::ClassFile : originalClassFile43
 java::ASTNode "1..1" -- "0..1" java::CompilationUnit : originalCompilationUnit41
 java::Model "1..1" *-- "0..9999" java::Type : orphanTypes237
-java::Package "0..9999" --* "1..1" java::Model : ownedElements235
+java::Model "1..1" *-- "0..9999" java::Package : ownedElements235
 java::AbstractTypeDeclaration "0..9999" --* "1..1" java::Package : ownedElements258
-java::Package "0..9999" --* "1..1" java::Package : ownedPackages263
-java::Package "0..1" -- "1..1" java::ClassFile : package108
-java::Package "0..1" -- "1..1" java::CompilationUnit : package132
+java::Package "1..1" *-- "0..9999" java::Package : ownedPackages263
+java::ClassFile "1..1" -- "0..1" java::Package : package108
+java::CompilationUnit "1..1" -- "0..1" java::Package : package132
 java::AbstractTypeDeclaration "1..1" -- "0..1" java::Package : package18
 java::Package "1..1" -- "0..1" java::Package : package267
 java::Package "1..1" -- "1..1" java::PackageAccess : package269
-java::SingleVariableDeclaration "1..1" --* "1..1" java::EnhancedForStatement : parameter150
-java::SingleVariableDeclaration "0..9999" --* "1..1" java::AbstractMethodDeclaration : parameters1
-java::MethodRefParameter "0..9999" --* "1..1" java::MethodRef : parameters230
-java::TypeAccess "0..1" --* "1..1" java::MemberRef : qualifier213
+java::EnhancedForStatement "1..1" *-- "1..1" java::SingleVariableDeclaration : parameter150
+java::AbstractMethodDeclaration "1..1" *-- "0..9999" java::SingleVariableDeclaration : parameters1
+java::MethodRef "1..1" *-- "0..9999" java::MethodRefParameter : parameters230
+java::MemberRef "1..1" *-- "0..1" java::TypeAccess : qualifier213
 java::AbstractTypeQualifiedExpression "1..1" *-- "0..1" java::TypeAccess : qualifier22
 java::MethodRef "1..1" *-- "0..1" java::TypeAccess : qualifier227
 java::PackageAccess "0..1" --* "1..1" java::PackageAccess : qualifier272
 java::Expression "0..1" --* "1..1" java::SingleVariableAccess : qualifier289
 java::NamespaceAccess "0..1" --* "1..1" java::TypeAccess : qualifier334
 java::ASTNode "0..1" --* "1..1" java::UnresolvedItemAccess : qualifier347
-java::MethodDeclaration "0..1" -- "1..1" java::MethodDeclaration : redefinedMethodDeclaration219
-java::MethodDeclaration "0..9999" -- "1..1" java::MethodDeclaration : redefinitions221
+java::MethodDeclaration "1..1" -- "0..1" java::MethodDeclaration : redefinedMethodDeclaration219
+java::MethodDeclaration "1..1" -- "0..9999" java::MethodDeclaration : redefinitions221
 java::MethodDeclaration "1..1" *-- "0..1" java::TypeAccess : returnType216
-java::Expression "1..1" --* "1..1" java::Assignment : rightHandSide81
+java::Assignment "1..1" *-- "1..1" java::Expression : rightHandSide81
 java::Expression "1..1" --* "1..1" java::InfixExpression : rightOperand185
-java::TypeAccess "1..1" --* "1..1" java::InstanceofExpression : rightOperand195
-java::SingleVariableDeclaration "0..1" -- "1..1" java::Modifier : singleVariableDeclaration251
+java::InstanceofExpression "1..1" *-- "1..1" java::TypeAccess : rightOperand195
+java::Modifier "1..1" -- "0..1" java::SingleVariableDeclaration : singleVariableDeclaration251
 java::Statement "0..9999" --* "1..1" java::SwitchStatement : statements310
 java::Block "1..1" *-- "0..9999" java::Statement : statements90
 java::ClassDeclaration "1..1" *-- "0..1" java::TypeAccess : superClass125
-java::TypeAccess "0..9999" --* "1..1" java::AbstractTypeDeclaration : superInterfaces19
-java::TagElement "0..9999" --* "1..1" java::Javadoc : tags200
-java::Expression "1..1" --* "1..1" java::ConditionalExpression : thenExpression122
-java::Statement "1..1" --* "1..1" java::IfStatement : thenStatement177
-java::TypeAccess "0..9999" --* "1..1" java::AbstractMethodDeclaration : thrownExceptions2
+java::AbstractTypeDeclaration "1..1" *-- "0..9999" java::TypeAccess : superInterfaces19
+java::Javadoc "1..1" *-- "0..9999" java::TagElement : tags200
+java::ConditionalExpression "1..1" *-- "1..1" java::Expression : thenExpression122
+java::IfStatement "1..1" *-- "1..1" java::Statement : thenStatement177
+java::AbstractMethodDeclaration "1..1" *-- "0..9999" java::TypeAccess : thrownExceptions2
 java::AbstractTypeDeclaration "0..1" -- "1..1" java::ClassFile : type102
-java::TypeAccess "1..1" --* "1..1" java::ClassInstanceCreation : type114
-java::TypeAccess "1..1" --* "1..1" java::MethodRefParameter : type232
-java::TypeAccess "0..1" --* "1..1" java::AbstractVariablesContainer : type24
-java::TypeAccess "1..1" --* "1..1" java::Annotation : type27
+java::ClassInstanceCreation "1..1" *-- "1..1" java::TypeAccess : type114
+java::MethodRefParameter "1..1" *-- "1..1" java::TypeAccess : type232
+java::AbstractVariablesContainer "1..1" *-- "0..1" java::TypeAccess : type24
+java::Annotation "1..1" *-- "1..1" java::TypeAccess : type27
 java::ParameterizedType "1..1" *-- "1..1" java::TypeAccess : type274
-java::TypeAccess "1..1" --* "1..1" java::SingleVariableDeclaration : type294
+java::SingleVariableDeclaration "1..1" *-- "1..1" java::TypeAccess : type294
 java::Type "1..1" -- "1..1" java::TypeAccess : type331
 java::TypeAccess "1..1" --* "1..1" java::TypeLiteral : type340
-java::TypeAccess "1..1" --* "1..1" java::AnnotationTypeMemberDeclaration : type54
-java::TypeAccess "1..1" --* "1..1" java::ArrayCreation : type69
+java::AnnotationTypeMemberDeclaration "1..1" *-- "1..1" java::TypeAccess : type54
+java::ArrayCreation "1..1" *-- "1..1" java::TypeAccess : type69
 java::CastExpression "1..1" *-- "1..1" java::TypeAccess : type95
 java::AbstractMethodInvocation "1..1" *-- "0..9999" java::TypeAccess : typeArguments10
-java::TypeAccess "0..9999" --* "1..1" java::ParameterizedType : typeArguments276
+java::ParameterizedType "1..1" *-- "0..9999" java::TypeAccess : typeArguments276
 java::TypeDeclaration "1..1" *-- "0..9999" java::TypeParameter : typeParameters336
-java::TypeParameter "0..9999" --* "1..1" java::AbstractMethodDeclaration : typeParameters4
+java::AbstractMethodDeclaration "1..1" *-- "0..9999" java::TypeParameter : typeParameters4
 java::AbstractTypeDeclaration "0..9999" -- "1..1" java::CompilationUnit : types135
-java::UnresolvedItem "0..9999" --* "1..1" java::Model : unresolvedItems238
+java::Model "1..1" *-- "0..9999" java::UnresolvedItem : unresolvedItems238
 java::Expression "0..9999" --* "1..1" java::ForStatement : updaters166
-java::Expression "1..1" --* "1..1" java::AnnotationMemberValuePair : value48
-java::AnnotationMemberValuePair "0..9999" --* "1..1" java::Annotation : values29
+java::AnnotationMemberValuePair "1..1" *-- "1..1" java::Expression : value48
+java::Annotation "1..1" *-- "0..9999" java::AnnotationMemberValuePair : values29
 java::SingleVariableAccess "1..1" -- "1..1" java::VariableDeclaration : variable287
-java::VariableDeclarationExpression "0..1" -- "1..1" java::Modifier : variableDeclarationExpression256
-java::VariableDeclarationStatement "0..1" -- "1..1" java::Modifier : variableDeclarationStatement254
+java::Modifier "1..1" -- "0..1" java::VariableDeclarationExpression : variableDeclarationExpression256
+java::Modifier "1..1" -- "0..1" java::VariableDeclarationStatement : variableDeclarationStatement254
 java::AbstractVariablesContainer "0..1" -- "1..1" java::VariableDeclarationFragment : variablesContainer357
 @enduml

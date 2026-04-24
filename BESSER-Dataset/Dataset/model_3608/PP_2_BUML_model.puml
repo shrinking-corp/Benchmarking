@@ -218,14 +218,6 @@ BinaryOpExpression <|-- pp2::RelationalExpression
 BinaryOpExpression <|-- pp2::RelationshipExpression
 BinaryOpExpression <|-- pp2::ShiftExpression
 Definition <|-- pp2::HostClassDefinition
-ExpressionBlock <|-- pp2::Case
-ExpressionBlock <|-- pp2::Definition
-ExpressionBlock <|-- pp2::ElseExpression
-ExpressionBlock <|-- pp2::IfExpression
-ExpressionBlock <|-- pp2::Lambda
-ExpressionBlock <|-- pp2::NodeDefinition
-ExpressionBlock <|-- pp2::PuppetManifest
-ExpressionBlock <|-- pp2::UnlessExpression
 Expression <|-- pp2::BinaryExpression
 Expression <|-- pp2::CaseExpression
 Expression <|-- pp2::CollectExpression
@@ -241,6 +233,14 @@ Expression <|-- pp2::SeparatorExpression
 Expression <|-- pp2::StringExpression
 Expression <|-- pp2::UnaryExpression
 Expression <|-- pp2::VariableExpression
+ExpressionBlock <|-- pp2::Case
+ExpressionBlock <|-- pp2::Definition
+ExpressionBlock <|-- pp2::ElseExpression
+ExpressionBlock <|-- pp2::IfExpression
+ExpressionBlock <|-- pp2::Lambda
+ExpressionBlock <|-- pp2::NodeDefinition
+ExpressionBlock <|-- pp2::PuppetManifest
+ExpressionBlock <|-- pp2::UnlessExpression
 ICollectQuery <|-- pp2::ExportedCollectQuery
 ICollectQuery <|-- pp2::VirtualCollectQuery
 IQuotedString <|-- pp2::DoubleQuotedString
@@ -275,44 +275,44 @@ WithLambdaExpression <|-- pp2::FunctionCall
 WithLambdaExpression <|-- pp2::MethodCall
 pp2::DefinitionArgument "0..9999" --* "1..1" pp2::DefinitionArgumentList : arguments10
 pp2::DefinitionArgumentList "0..1" --* "1..1" pp2::Lambda : arguments85
-pp2::DefinitionArgumentList "0..1" --* "1..1" pp2::Definition : arguments9
+pp2::Definition "1..1" *-- "0..1" pp2::DefinitionArgumentList : arguments9
 pp2::AttributeOperations "0..1" --* "1..1" pp2::ResourceBody : attributes0
-pp2::CollectExpression "1..1" *-- "0..1" pp2::AttributeOperations : attributes49
+pp2::AttributeOperations "0..1" --* "1..1" pp2::CollectExpression : attributes49
 pp2::AttributeOperation "0..9999" --* "1..1" pp2::AttributeOperations : attributes5
-pp2::CaseExpression "1..1" *-- "0..9999" pp2::Case : cases20
-pp2::Expression "0..1" --* "1..1" pp2::CollectExpression : classReference45
+pp2::Case "0..9999" --* "1..1" pp2::CaseExpression : cases20
+pp2::CollectExpression "1..1" *-- "0..1" pp2::Expression : classReference45
 pp2::Expression "0..1" --* "1..1" pp2::IfExpression : condExpr25
-pp2::UnlessExpression "1..1" *-- "0..1" pp2::Expression : condExpr80
+pp2::Expression "0..1" --* "1..1" pp2::UnlessExpression : condExpr80
 pp2::Expression "0..9999" --* "1..1" pp2::LiteralList : elements36
 pp2::HashEntry "0..9999" --* "1..1" pp2::LiteralHash : elements38
-pp2::IfExpression "1..1" *-- "0..1" pp2::Expression : elseStatement27
+pp2::Expression "0..1" --* "1..1" pp2::IfExpression : elseStatement27
 pp2::Expression "0..1" --* "1..1" pp2::UnlessExpression : elseStatement82
 pp2::Expression "0..1" --* "1..1" pp2::UnaryExpression : expr67
 pp2::Expression "0..1" --* "1..1" pp2::ParenthesisedExpression : expr71
-pp2::UnquotedString "1..1" *-- "0..1" pp2::Expression : expression76
+pp2::Expression "0..1" --* "1..1" pp2::UnquotedString : expression76
 pp2::Expression "0..1" --* "1..1" pp2::ExpressionTE : expression78
-pp2::Expression "0..9999" --* "1..1" pp2::ExprList : expressions73
+pp2::ExprList "1..1" *-- "0..9999" pp2::Expression : expressions73
 pp2::Expression "0..9999" --* "1..1" pp2::NodeDefinition : hostNames62
 pp2::Expression "0..1" --* "1..1" pp2::HashEntry : key39
-pp2::WithLambdaExpression "1..1" *-- "0..1" pp2::Lambda : lambda89
+pp2::Lambda "0..1" --* "1..1" pp2::WithLambdaExpression : lambda89
 pp2::BinaryExpression "1..1" *-- "0..1" pp2::Expression : leftExpr52
 pp2::Expression "0..1" --* "1..1" pp2::ParameterizedExpression : leftExpr57
 pp2::Expression "1..1" --* "1..1" pp2::MethodCall : methodExpr87
-pp2::ResourceBody "1..1" *-- "0..1" pp2::Expression : nameExpr1
+pp2::Expression "0..1" --* "1..1" pp2::ResourceBody : nameExpr1
 pp2::Expression "0..9999" --* "1..1" pp2::ParameterizedExpression : parameters59
-pp2::LiteralExpression "0..1" --* "1..1" pp2::HostClassDefinition : parent8
+pp2::HostClassDefinition "1..1" *-- "0..1" pp2::LiteralExpression : parent8
 pp2::Expression "0..1" --* "1..1" pp2::NodeDefinition : parentName64
-pp2::Expression "0..1" --* "1..1" pp2::DefinitionArgument : puppetType12
-pp2::ICollectQuery "0..1" --* "1..1" pp2::CollectExpression : query47
+pp2::DefinitionArgument "1..1" *-- "0..1" pp2::Expression : puppetType12
+pp2::CollectExpression "1..1" *-- "0..1" pp2::ICollectQuery : query47
 pp2::ResourceBody "0..9999" --* "1..1" pp2::ResourceExpression : resourceData32
-pp2::ResourceExpression "1..1" *-- "0..1" pp2::Expression : resourceExpr30
-pp2::Expression "0..1" --* "1..1" pp2::BinaryExpression : rightExpr54
-pp2::ExpressionBlock "1..1" *-- "0..9999" pp2::Expression : statements69
-pp2::TextExpression "0..9999" --* "1..1" pp2::DoubleQuotedString : stringPart75
-pp2::Expression "0..1" --* "1..1" pp2::CaseExpression : switchExpr18
-pp2::Expression "0..1" --* "1..1" pp2::DefinitionArgument : value15
+pp2::Expression "0..1" --* "1..1" pp2::ResourceExpression : resourceExpr30
+pp2::BinaryExpression "1..1" *-- "0..1" pp2::Expression : rightExpr54
+pp2::Expression "0..9999" --* "1..1" pp2::ExpressionBlock : statements69
+pp2::DoubleQuotedString "1..1" *-- "0..9999" pp2::TextExpression : stringPart75
+pp2::CaseExpression "1..1" *-- "0..1" pp2::Expression : switchExpr18
+pp2::DefinitionArgument "1..1" *-- "0..1" pp2::Expression : value15
 pp2::AttributeOperation "1..1" *-- "0..1" pp2::Expression : value3
 pp2::Expression "0..1" --* "1..1" pp2::HashEntry : value42
-pp2::Expression "0..9999" --* "1..1" pp2::Case : values22
-pp2::ImportExpression "1..1" *-- "0..9999" pp2::IQuotedString : values35
+pp2::Case "1..1" *-- "0..9999" pp2::Expression : values22
+pp2::IQuotedString "0..9999" --* "1..1" pp2::ImportExpression : values35
 @enduml

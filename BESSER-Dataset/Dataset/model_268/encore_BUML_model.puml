@@ -1,0 +1,186 @@
+@startuml
+class EClassifier {
+}
+class EDataType {
+}
+class EModelElement {
+}
+class ENamedElement {
+}
+class EStructuralFeature {
+}
+class ETypedElement {
+}
+class encore::EAnnotation {
+  + source : str
+}
+class encore::EAttribute {
+  + iD : bool
+}
+class encore::EClass {
+  + abstract : bool
+  + interface : bool
+  + getEOperation(operationID : any) : str
+  + getEStructuralFeature(featureName : any) : EStructuralFeature
+  + getFeatureCount() : int
+  + getFeatureID(feature : any) : int
+  + getOperationCount() : int
+  + getOperationID(operation : any) : int
+  + getOverride(operation : any) : str
+  + isSuperTypeOf(someClass : any) : bool
+}
+abstract class encore::EClassifier {
+  + defaultValue : str
+  + instanceClass : str
+  + instanceClassName : str
+  + instanceTypeName : str
+  + getClassifierID() : int
+  + isInstance(object : any) : bool
+}
+class encore::EDataType {
+  + serializable : bool
+}
+class encore::EEnum {
+  + getEEnumLiteral(value : any) : str
+  + getEEnumLiteralByLiteral(literal : any) : str
+}
+class encore::EEnumLiteral {
+  + instance : str
+  + literal : str
+  + value : int
+}
+class encore::EFactory {
+  + convertToString(eDataType : any, instanceValue : any) : str
+  + create(eClass : any) : str
+  + createFromString(eDataType : any, literalValue : any) : str
+}
+class encore::EGenericType {
+}
+abstract class encore::EModelElement {
+  + getEAnnotation(source : any) : str
+}
+abstract class encore::ENamedElement {
+  + name : str
+}
+class encore::EObject {
+  + eAllContents() : void
+  + eClass() : str
+  + eContainer() : str
+  + eContainingFeature() : EStructuralFeature
+  + eContainmentFeature() : str
+  + eContents() : void
+  + eCrossReferences() : void
+  + eGet(feature : any, resolve : any) : str
+  + eInvoke(arguments : any, operation : any) : str
+  + eIsProxy() : bool
+  + eIsSet(feature : any) : bool
+  + eResource() : str
+  + eSet(feature : any, newValue : any) : void
+  + eUnset(feature : any) : void
+}
+class encore::EOperation {
+  + getOperationID() : int
+  + isOverrideOf(someOperation : any) : bool
+}
+class encore::EPackage {
+  + nsPrefix : str
+  + nsURI : str
+  + getEClassifier(name : any) : EClassifier
+}
+class encore::EParameter {
+}
+class encore::EReference {
+  + container : bool
+  + containment : bool
+  + resolveProxies : bool
+}
+class encore::EStringToStringMapEntry {
+  + key : str
+  + value : str
+}
+abstract class encore::EStructuralFeature {
+  + changeable : bool
+  + defaultValue : str
+  + defaultValueLiteral : str
+  + derived : bool
+  + transient : bool
+  + unsettable : bool
+  + volatile : bool
+  + getContainerClass() : void
+  + getFeatureID() : int
+}
+class encore::ETypeParameter {
+}
+abstract class encore::ETypedElement {
+  + lowerBound : int
+  + many : bool
+  + ordered : bool
+  + required : bool
+  + unique : bool
+  + upperBound : int
+}
+EClassifier <|-- encore::EClass
+EClassifier <|-- encore::EDataType
+EDataType <|-- encore::EEnum
+EModelElement <|-- encore::EAnnotation
+EModelElement <|-- encore::EFactory
+EModelElement <|-- encore::ENamedElement
+ENamedElement <|-- encore::EClassifier
+ENamedElement <|-- encore::EEnumLiteral
+ENamedElement <|-- encore::EPackage
+ENamedElement <|-- encore::ETypeParameter
+ENamedElement <|-- encore::ETypedElement
+EStructuralFeature <|-- encore::EAttribute
+EStructuralFeature <|-- encore::EReference
+ETypedElement <|-- encore::EOperation
+ETypedElement <|-- encore::EParameter
+ETypedElement <|-- encore::EStructuralFeature
+encore::EAnnotation "1..1" *-- "0..9999" encore::EObject : contents3
+encore::EAnnotation "1..1" *-- "0..9999" encore::EStringToStringMapEntry : details1
+encore::EAttribute "0..9999" -- "1..1" encore::EClass : eAllAttributes11
+encore::EClass "1..1" -- "0..9999" encore::EReference : eAllContainments22
+encore::EClass "1..1" -- "0..9999" encore::EGenericType : eAllGenericSuperTypes39
+encore::EClass "1..1" -- "0..9999" encore::EOperation : eAllOperations25
+encore::EClass "1..1" -- "0..9999" encore::EReference : eAllReferences14
+encore::EClass "1..1" -- "0..9999" encore::EStructuralFeature : eAllStructuralFeatures27
+encore::EClass "0..9999" -- "1..1" encore::EClass : eAllSuperTypes30
+encore::EAnnotation "0..9999" --* "1..1" encore::EModelElement : eAnnotations48
+encore::EAttribute "1..1" -- "1..1" encore::EDataType : eAttributeType0
+encore::EAttribute "0..9999" -- "1..1" encore::EClass : eAttributes19
+encore::EGenericType "0..9999" --* "1..1" encore::ETypeParameter : eBounds106
+encore::EClassifier "0..1" -- "1..1" encore::EGenericType : eClassifier103
+encore::EClassifier "0..9999" --* "1..1" encore::EPackage : eClassifiers61
+encore::EClass "0..1" -- "1..1" encore::EOperation : eContainingClass49
+encore::EClass "0..1" -- "1..1" encore::EStructuralFeature : eContainingClass81
+encore::EEnum "0..1" -- "1..1" encore::EEnumLiteral : eEnum46
+encore::EClassifier "0..9999" -- "1..1" encore::EOperation : eExceptions54
+encore::EFactory "1..1" -- "1..1" encore::EPackage : eFactoryInstance60
+encore::EGenericType "0..9999" --* "1..1" encore::EOperation : eGenericExceptions57
+encore::EClass "1..1" *-- "0..9999" encore::EGenericType : eGenericSuperTypes37
+encore::EGenericType "0..1" --* "1..1" encore::ETypedElement : eGenericType85
+encore::EAttribute "0..1" -- "1..1" encore::EClass : eIDAttribute32
+encore::EAttribute "0..9999" -- "1..1" encore::EReference : eKeys78
+encore::EEnum "1..1" *-- "0..9999" encore::EEnumLiteral : eLiterals45
+encore::EGenericType "0..1" --* "1..1" encore::EGenericType : eLowerBound98
+encore::EAnnotation "1..1" -- "0..1" encore::EModelElement : eModelElement2
+encore::EOperation "0..1" -- "1..1" encore::EParameter : eOperation70
+encore::EClass "1..1" *-- "0..9999" encore::EOperation : eOperations10
+encore::EReference "0..1" -- "1..1" encore::EReference : eOpposite73
+encore::EClassifier "1..1" -- "0..1" encore::EPackage : ePackage42
+encore::EFactory "1..1" -- "1..1" encore::EPackage : ePackage47
+encore::EOperation "1..1" *-- "0..9999" encore::EParameter : eParameters53
+encore::EClassifier "1..1" -- "1..1" encore::EGenericType : eRawType94
+encore::EClass "1..1" -- "1..1" encore::EReference : eReferenceType75
+encore::EClass "1..1" -- "0..9999" encore::EReference : eReferences16
+encore::EClass "1..1" *-- "0..9999" encore::EStructuralFeature : eStructuralFeatures35
+encore::EPackage "0..9999" --* "1..1" encore::EPackage : eSubpackages65
+encore::EPackage "0..1" -- "1..1" encore::EPackage : eSuperPackage68
+encore::EClass "1..1" -- "0..9999" encore::EClass : eSuperTypes9
+encore::EClassifier "0..1" -- "1..1" encore::ETypedElement : eType83
+encore::EGenericType "0..9999" --* "1..1" encore::EGenericType : eTypeArguments92
+encore::EGenericType "1..1" -- "0..1" encore::ETypeParameter : eTypeParameter100
+encore::EClassifier "1..1" *-- "0..9999" encore::ETypeParameter : eTypeParameters43
+encore::EOperation "1..1" *-- "0..9999" encore::ETypeParameter : eTypeParameters50
+encore::EGenericType "0..1" --* "1..1" encore::EGenericType : eUpperBound89
+encore::EAnnotation "1..1" -- "0..9999" encore::EObject : references5
+@enduml

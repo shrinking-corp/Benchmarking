@@ -1,0 +1,107 @@
+@startuml
+class Action {
+}
+enum BooleanOperator {
+  Equal
+  Unequal
+}
+class Guard {
+}
+enum NumberOperator {
+  Equal
+  GreaterOrEqualThan
+  GreaterThan
+  LessOrEqualThan
+  LessThan
+  Unequal
+}
+enum StringOperator {
+  Equal
+  Unequal
+}
+class Variable {
+}
+abstract class automata::Action {
+  + execute() : void
+}
+class automata::Automaton {
+  + assignInitialValues() : void
+  + determineInitialState() : void
+  + initializeModel(args : any) : void
+  + main() : void
+}
+class automata::BooleanAction {
+  + value : bool
+  + execute() : void
+}
+class automata::BooleanGuard {
+  + operator : bool
+  + value : bool
+  + holds() : void
+}
+class automata::BooleanVariable {
+  + initialValue : bool
+  + value : bool
+}
+class automata::Guard {
+  + holds() : void
+}
+class automata::NumberAction {
+  + value : str
+  + execute() : void
+}
+class automata::NumberGuard {
+  + operator : str
+  + value : str
+  + holds() : void
+}
+class automata::NumberVariable {
+  + initialValue : str
+  + value : str
+}
+class automata::State {
+  + initial : bool
+  + name : str
+}
+class automata::StringAction {
+  + value : str
+  + execute() : void
+}
+class automata::StringGuard {
+  + operator : bool
+  + value : str
+  + holds() : void
+}
+class automata::StringVariable {
+  + initialValue : str
+  + value : str
+}
+class automata::Transition {
+  + execute() : void
+}
+abstract class automata::Variable {
+  + name : str
+}
+Action <|-- automata::BooleanAction
+Action <|-- automata::NumberAction
+Action <|-- automata::StringAction
+Guard <|-- automata::BooleanGuard
+Guard <|-- automata::NumberGuard
+Guard <|-- automata::StringGuard
+Variable <|-- automata::BooleanVariable
+Variable <|-- automata::NumberVariable
+Variable <|-- automata::StringVariable
+automata::Action "1..1" --* "1..1" automata::Transition : action13
+automata::Guard "1..1" --* "1..1" automata::Transition : guard11
+automata::BooleanGuard "1..1" -- "1..1" automata::BooleanVariable : source15
+automata::StringGuard "1..1" -- "1..1" automata::StringVariable : source16
+automata::NumberGuard "1..1" -- "1..1" automata::NumberVariable : source17
+automata::State "1..1" -- "1..1" automata::Transition : source5
+automata::Automaton "1..1" *-- "0..9999" automata::State : states0
+automata::StringAction "1..1" -- "1..1" automata::StringVariable : target18
+automata::NumberAction "1..1" -- "1..1" automata::NumberVariable : target20
+automata::BooleanAction "1..1" -- "1..1" automata::BooleanVariable : target22
+automata::State "1..1" -- "1..1" automata::Transition : target8
+automata::Automaton "1..1" *-- "0..9999" automata::Transition : transitions1
+automata::Automaton "1..1" *-- "0..9999" automata::Variable : variables3
+@enduml

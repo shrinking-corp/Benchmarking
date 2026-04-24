@@ -1,0 +1,374 @@
+@startuml
+enum DataCriterion {
+  Library
+  None
+  Readgroup
+  Sample
+}
+enum DataFormat {
+  BAI
+  BAM
+  BCF
+  BWT
+  CSV
+  DICT
+  FAI
+  FASTA
+  FASTQ
+  IntervalList
+  None
+  SAI
+  SAM
+  TXT
+  VCF
+  VCF_IDX
+}
+class EasyFlowMetadata {
+}
+class GroupingCriterion {
+}
+class ITraversal {
+}
+class Traversal {
+}
+enum TraversalCriterion {
+  Contig
+  IntervalList
+  Library
+  Locus
+  None
+  Read
+  ReadEnd
+  ReadMappingFlag
+  Readgroup
+  Readpair
+  Sample
+  SplitRead
+}
+class easyflow::Argument {
+  + arg : str
+  + name : str
+  + sep : str
+}
+class easyflow::Chunk {
+  + argument : str
+  + name : str
+  + tool : str
+}
+class easyflow::CommandArgument {
+  + arg : str
+  + name : str
+  + named : bool
+  + required : bool
+  + sep : str
+  + printArgument(fileName : any) : str
+  + printGenericArg(generica : any) : str
+  + printStaticArg() : str
+  + setCmdProperties(parameterConfigMap : any) : void
+  + setGlobalCmdProperties(parameterConfigMap : any) : void
+}
+class easyflow::Contig {
+  + readChunks() : void
+}
+class easyflow::DataFormatToTaskList {
+  + key : str
+}
+class easyflow::DataProcessingType {
+  + dataFormatIn : str
+  + dataFormatOut : str
+  + isConvertableTo(dataProcessingTypeOut : any) : bool
+}
+class easyflow::DataProcessingTypeToTask {
+}
+class easyflow::EasyFlowConfiguration {
+  + configMap : str
+  + fileName : str
+  + configFileReader() : void
+}
+class easyflow::EasyFlowImplementationTemplate {
+  + fileName : str
+  + globalOptions : str
+  + jsonRootNode : str
+  + parameterConfigFileName : str
+  + parameterConfigMap : str
+  + initJsonRootNode() : void
+  + readParameterConfig(toolName : any) : void
+  + templateFileParser(dag : any) : void
+}
+class easyflow::EasyFlowMetadata {
+  + contrast : bool
+  + name : str
+  + refData : str
+}
+class easyflow::EasyFlowMetadataReader {
+  + fileName : str
+  + metadataFileReader() : void
+}
+class easyflow::EasyFlowTemplate {
+  + fileName : str
+  + generateDAGFromTemplateFile() : str
+  + generateGraphFromTemplateFile() : str
+}
+class easyflow::GenericTraversalCriterion {
+}
+class easyflow::Group {
+  + name : str
+}
+class easyflow::GroupingCriterion {
+  + id : str
+  + equalsParent(map : any) : bool
+  + getGroupString(groupingCriterion : any) : void
+  + getGroupingCriterion(dataCriterion : any, group : any, key : any) : str
+  + getKeysForGroupingCriterion(dataCriterion : any, group : any) : void
+  + getLibraryString(groupingCriterion : any) : void
+  + getMap(groupCritMap : any) : void
+  + getReadgroupString(groupingCriterion : any) : void
+  + getRecordString(groupingCriterion : any) : void
+  + getSampleString(groupingCriterion : any) : void
+  + getUniqueStringForParent(parentGroupingCriterion : any) : void
+}
+class easyflow::GroupingEvent {
+  + dagIn : str
+  + dagOut : str
+  + applyGroupingCriterion(metadata : any) : str
+}
+abstract class easyflow::ITraversal {
+  + getChunksAsString() : str
+  + readChunks() : void
+  + readTemplate(fileName : any) : void
+}
+abstract class easyflow::IWorkflowUtil {
+  + addTaskListToDAG(curTask : any, dag : any, lastTasks : any) : void
+  + addTaskListToGraph(curTask : any, graph : any, lastTasks : any) : void
+  + convertDagToGraph(dag : any, graph : any) : str
+  + convertGraphToDag(graph : any) : str
+  + getAllTasks() : str
+  + getGroupingCriterion(dataCriterion : any, group : any, key : any) : str
+  + getKeysForGroupingCriterion(dataCriterion : any, group : any) : void
+  + getTaskByName(taskNames : any, tasks : any) : void
+  + writeDagToDot(dag : any, fileName : any) : void
+}
+class easyflow::Interpreter {
+  + exe : str
+  + name : str
+  + options : str
+  + subCmd : str
+}
+class easyflow::Job {
+  + dependencies : str
+  + exe : str
+  + genericArgs : str
+  + inputArgs : str
+  + interpreterOption : str
+  + name : str
+  + outputArgs : str
+  + source : str
+  + staticArgs : str
+  + subCmd : str
+  + targetPlatform : str
+  + targetPlatformOptions : str
+  + targets : str
+  + writeMakeflowRule() : str
+}
+class easyflow::Library {
+  + insertSize : int
+  + name : str
+  + readLength : int
+}
+class easyflow::Locus {
+  + readChunks() : void
+}
+class easyflow::ReadEnd {
+  + readChunks() : void
+}
+class easyflow::Readgroup {
+  + description : str
+  + name : str
+  + platform : str
+  + platformUnit : str
+}
+class easyflow::Record {
+  + fileNames : str
+  + refData : str
+}
+class easyflow::Sample {
+  + name : str
+}
+class easyflow::SplittingEvent {
+  + dag : str
+  + processedTask : str
+  + traversalChunks : str
+  + traversalCriterion : str
+  + traversalImplDir : str
+  + applyTraversalCriterion(metadata : any) : void
+  + getTraversalImplementation(metadata : any) : ITraversal
+  + insertPathToDag(chunks : any) : void
+  + removePath() : void
+}
+class easyflow::StringToChunkMap {
+  + key : str
+}
+class easyflow::StringToGroupMap {
+  + key : str
+}
+class easyflow::StringToGroupingCriterionMap {
+  + key : str
+}
+class easyflow::StringToLibraryMap {
+  + key : str
+}
+class easyflow::StringToReadgroupMap {
+  + key : str
+}
+class easyflow::StringToRecordMap {
+  + key : str
+}
+class easyflow::StringToSampleMap {
+  + key : str
+}
+class easyflow::StringToTaskMap {
+  + key : str
+}
+class easyflow::StringToToolMap {
+  + key : str
+}
+class easyflow::StringToTraversalCriterionMap {
+  + key : str
+  + value : str
+}
+class easyflow::Task {
+  + cardinalityIn : str
+  + cardinalityOut : str
+  + contrast : bool
+  + dataCriterion : str
+  + dataFormatIn : str
+  + dataFormatOut : str
+  + depricated : bool
+  + isMultipleInstancesOfDataCriterion : str
+  + jexlString : str
+  + mergeCriterion : str
+  + name : str
+  + skipGroupingCriterion : str
+  + splitCriterion : str
+  + static : bool
+  + traversalCriterion : str
+  + util : bool
+  + copy() : str
+  + evaluateJexlExp(map : any) : bool
+  + fitsToGroupingCriterionOf(task : any) : bool
+  + getParentForTask(dag : any) : str
+  + getSampleUniqueString() : str
+  + getUniqueString() : str
+  + isConvertableTo(dataFormat : any) : bool
+  + isMarkedToSkip() : bool
+  + readTask(wtplLine : any) : void
+}
+class easyflow::TaskToDataProcessingType {
+}
+class easyflow::Tool {
+  + category : str
+  + pattern : str
+  + refData : str
+  + source : str
+  + subCmd : str
+  + subCmdPrefix : str
+  + toolName : str
+  + type : str
+  + applyGlobalOptions(globalOptions : any) : void
+  + createJob(groupingId : any) : str
+}
+class easyflow::Traversal {
+  + tarversalCriterion : str
+}
+class easyflow::Workflow {
+  + dag : str
+  + graph : str
+  + jobDag : str
+  + name : str
+  + checkDag() : void
+  + createJobDag() : void
+  + createTaskDag() : void
+  + getNextSplittingEvent(processedTasks : any) : void
+  + getTasksFromLastTaskClass(dataFormatIn : any, dataFormatOut : any, strategy : any) : str
+  + getTasksFromLastTaskClassMap(dataProcessingTypeIn : any, strategy : any) : void
+  + iterateByGroup(dag : any, dataCriterion : any, group : any, task : any) : str
+  + printLastTaskClassMap() : void
+  + printLastTaskMap() : void
+  + processMetadata(metadata : any, task : any) : void
+  + processMetadataSet(task : any) : void
+  + resolveStaticDependencies() : void
+  + updateLastTaskClass(dataFormatIn : any, dataFormatOut : any, task : any) : void
+  + updateLastTaskClassMap(dataProcessingType : any, task : any) : void
+  + writeAWSCloudFormation() : void
+  + writeMakeflow() : void
+}
+EasyFlowMetadata <|-- easyflow::EasyFlowMetadataReader
+GroupingCriterion <|-- easyflow::Group
+GroupingCriterion <|-- easyflow::Library
+GroupingCriterion <|-- easyflow::Readgroup
+GroupingCriterion <|-- easyflow::Record
+GroupingCriterion <|-- easyflow::Sample
+ITraversal <|-- easyflow::Traversal
+Traversal <|-- easyflow::Contig
+Traversal <|-- easyflow::GenericTraversalCriterion
+Traversal <|-- easyflow::Locus
+Traversal <|-- easyflow::ReadEnd
+easyflow::EasyFlowConfiguration "0..1" --* "1..1" easyflow::Workflow : Configuration1
+easyflow::DataProcessingType "0..1" --* "1..1" easyflow::Workflow : DataProcessingType7
+easyflow::EasyFlowImplementationTemplate "0..1" --* "1..1" easyflow::Workflow : ImplementationTemplate5
+easyflow::DataProcessingTypeToTask "0..9999" --* "1..1" easyflow::Workflow : LastTaskClassMap9
+easyflow::EasyFlowTemplate "0..1" --* "1..1" easyflow::Workflow : WorkflowTemplate0
+easyflow::CommandArgument "0..9999" -- "1..1" easyflow::Tool : argIn39
+easyflow::CommandArgument "0..9999" -- "1..1" easyflow::Tool : argOut40
+easyflow::StringToChunkMap "0..9999" --* "1..1" easyflow::Traversal : chunks120
+easyflow::StringToTraversalCriterionMap "0..9999" --* "1..1" easyflow::Task : chunks20
+easyflow::CommandArgument "0..9999" -- "1..1" easyflow::Tool : genericArg46
+easyflow::StringToGroupingCriterionMap "0..9999" --* "1..1" easyflow::Task : groupingCriterionMap18
+easyflow::EasyFlowMetadata "1..1" *-- "0..9999" easyflow::StringToGroupMap : groups31
+easyflow::Interpreter "0..1" --* "1..1" easyflow::Tool : interpreter49
+easyflow::Task "0..1" -- "1..1" easyflow::TaskToDataProcessingType : key132
+easyflow::Task "1..1" -- "0..1" easyflow::TaskToDataProcessingType : key25
+easyflow::DataProcessingType "0..1" -- "1..1" easyflow::DataProcessingTypeToTask : key33
+easyflow::DataFormatToTaskList "0..9999" --* "1..1" easyflow::Workflow : lastTaskMap13
+easyflow::Group "1..1" *-- "0..9999" easyflow::StringToLibraryMap : libraries59
+easyflow::Sample "1..1" *-- "0..9999" easyflow::StringToLibraryMap : libraries63
+easyflow::Readgroup "1..1" *-- "0..9999" easyflow::StringToLibraryMap : libraries73
+easyflow::Library "0..1" -- "1..1" easyflow::Record : library89
+easyflow::SplittingEvent "1..1" -- "0..1" easyflow::Task : mergingChildTask126
+easyflow::EasyFlowMetadata "0..1" -- "1..1" easyflow::Job : metadata116
+easyflow::EasyFlowMetadata "1..9999" --* "1..1" easyflow::Workflow : metadata3
+easyflow::EasyFlowMetadata "0..1" -- "1..1" easyflow::GroupingCriterion : metadata54
+easyflow::SplittingEvent "1..1" -- "0..1" easyflow::Task : parentTask121
+easyflow::StringToTaskMap "0..9999" --* "1..1" easyflow::Task : parentTasks16
+easyflow::Readgroup "0..1" -- "1..1" easyflow::Record : readgroup86
+easyflow::Group "1..1" *-- "0..9999" easyflow::StringToReadgroupMap : readgroups57
+easyflow::Sample "1..1" *-- "0..9999" easyflow::StringToReadgroupMap : readgroups68
+easyflow::Library "1..1" *-- "0..9999" easyflow::StringToReadgroupMap : readgroups81
+easyflow::Group "1..1" *-- "0..9999" easyflow::StringToRecordMap : records61
+easyflow::Sample "1..1" *-- "0..9999" easyflow::StringToRecordMap : records65
+easyflow::Library "1..1" *-- "0..9999" easyflow::StringToRecordMap : records78
+easyflow::Record "1..1" -- "0..1" easyflow::Sample : sample84
+easyflow::Group "1..1" *-- "0..9999" easyflow::StringToSampleMap : samples56
+easyflow::Readgroup "1..1" *-- "0..9999" easyflow::StringToSampleMap : samples71
+easyflow::Library "1..1" *-- "0..9999" easyflow::StringToSampleMap : samples76
+easyflow::StringToTraversalCriterionMap "0..9999" --* "1..1" easyflow::Task : sortOrder22
+easyflow::ITraversal "1..1" -- "0..1" easyflow::Task : splittingTask118
+easyflow::SplittingEvent "1..1" -- "0..1" easyflow::Task : splittingTask123
+easyflow::CommandArgument "0..9999" -- "1..1" easyflow::Tool : staticArg43
+easyflow::Task "0..1" -- "1..1" easyflow::Tool : task51
+easyflow::TaskToDataProcessingType "0..9999" --* "1..1" easyflow::Workflow : taskMap11
+easyflow::StringToToolMap "0..9999" --* "1..1" easyflow::Task : tool15
+easyflow::Library "0..1" -- "1..1" easyflow::StringToLibraryMap : value101
+easyflow::StringToToolMap "1..1" *-- "0..1" easyflow::Tool : value104
+easyflow::StringToTaskMap "1..1" -- "0..1" easyflow::Task : value107
+easyflow::Record "0..1" -- "1..1" easyflow::StringToRecordMap : value110
+easyflow::GroupingCriterion "0..1" -- "1..1" easyflow::StringToGroupingCriterionMap : value113
+easyflow::DataProcessingType "0..1" -- "1..1" easyflow::TaskToDataProcessingType : value129
+easyflow::DataFormatToTaskList "1..1" -- "0..9999" easyflow::Task : value135
+easyflow::Chunk "0..1" --* "1..1" easyflow::StringToChunkMap : value138
+easyflow::DataProcessingTypeToTask "1..1" -- "0..9999" easyflow::Task : value36
+easyflow::Group "0..1" -- "1..1" easyflow::StringToGroupMap : value92
+easyflow::Sample "0..1" -- "1..1" easyflow::StringToSampleMap : value95
+easyflow::Readgroup "0..1" -- "1..1" easyflow::StringToReadgroupMap : value98
+easyflow::EasyFlowTemplate "1..1" -- "0..1" easyflow::Workflow : workflow28
+@enduml

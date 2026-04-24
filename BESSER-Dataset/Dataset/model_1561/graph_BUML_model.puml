@@ -1,0 +1,145 @@
+@startuml
+class DynamicLabel {
+}
+class EdgeLabel {
+}
+class Identifiable {
+}
+class Label {
+}
+class Modifiable {
+}
+class NodeLabel {
+}
+class SanityChecker {
+}
+class StaticLabel {
+}
+class graph::Decorator {
+}
+abstract class graph::DynamicEdgeLabel {
+}
+abstract class graph::DynamicLabel {
+  + nextValueValid : bool
+  + reset() : void
+  + switchToNextValue() : void
+}
+abstract class graph::DynamicNodeLabel {
+}
+class graph::Edge {
+  + directed : bool
+  + nodeAURI : str
+  + nodeBURI : str
+  + getOtherNode(node : any) : str
+  + isDirectedAt(node : any) : bool
+}
+abstract class graph::EdgeLabel {
+}
+class graph::Graph {
+  + numDynamicLabels : int
+  + numEdges : int
+  + numGraphLabels : int
+  + numNodeLabels : int
+  + numNodes : int
+  + addDynamicLabel(dynamiclabel : any) : void
+  + addGraph(filter : any, graph : any) : void
+  + getEdge(uri : any) : str
+  + getGraphLabel(uri : any) : Label
+  + getNode(uri : any) : str
+  + getNodeLabel(uri : any) : NodeLabel
+  + getNodeLabelsByTypeURI(typeURI : any) : NodeLabel
+  + putEdge(edge : any) : void
+  + putGraphLabel(label : any) : void
+  + putNode(node : any) : void
+  + putNodeLabel(label : any) : void
+  + switchToNextValue(currentTime : any) : void
+}
+class graph::Identifiable {
+}
+abstract class graph::Label {
+  + uRIOfIdentifiableToBeLabeled : str
+}
+abstract class graph::LabelValue {
+  + reset() : void
+}
+class graph::Node {
+}
+abstract class graph::NodeLabel {
+}
+class graph::STEMTime {
+}
+abstract class graph::SanityChecker {
+}
+abstract class graph::StaticEdgeLabel {
+}
+abstract class graph::StaticLabel {
+}
+abstract class graph::StaticNodeLabel {
+}
+class graph::URIToEdgeMapEntry {
+  + key : str
+}
+class graph::URIToIdentifiableMapEntry {
+  + key : str
+}
+class graph::URIToLabelMapEntry {
+  + key : str
+}
+class graph::URIToNodeLabelMapEntry {
+  + key : str
+}
+class graph::URIToNodeMapEntry {
+  + key : str
+}
+class graph::UnresolvedIdentifiable {
+  + fieldName : str
+  + unresolvedURI : str
+}
+DynamicLabel <|-- graph::DynamicEdgeLabel
+DynamicLabel <|-- graph::DynamicNodeLabel
+EdgeLabel <|-- graph::DynamicEdgeLabel
+EdgeLabel <|-- graph::StaticEdgeLabel
+Identifiable <|-- graph::Edge
+Identifiable <|-- graph::Graph
+Identifiable <|-- graph::Label
+Identifiable <|-- graph::Node
+Label <|-- graph::DynamicLabel
+Label <|-- graph::EdgeLabel
+Label <|-- graph::NodeLabel
+Label <|-- graph::StaticLabel
+Modifiable <|-- graph::Edge
+Modifiable <|-- graph::StaticLabel
+NodeLabel <|-- graph::DynamicNodeLabel
+NodeLabel <|-- graph::StaticNodeLabel
+SanityChecker <|-- graph::LabelValue
+StaticLabel <|-- graph::StaticEdgeLabel
+StaticLabel <|-- graph::StaticNodeLabel
+graph::Edge "1..1" -- "0..1" graph::Node : a2
+graph::Edge "1..1" -- "0..1" graph::Node : b3
+graph::Label "1..1" *-- "1..1" graph::LabelValue : currentValue23
+graph::Decorator "0..1" -- "1..1" graph::DynamicLabel : decorator1
+graph::Decorator "0..9999" --* "1..1" graph::Graph : decorators19
+graph::DynamicLabel "0..9999" -- "1..1" graph::Graph : dynamicLabels14
+graph::Edge "0..1" -- "1..1" graph::EdgeLabel : edge46
+graph::Edge "0..9999" -- "1..1" graph::Node : edges27
+graph::Graph "1..1" *-- "0..9999" graph::URIToEdgeMapEntry : edges7
+graph::Identifiable "0..1" -- "1..1" graph::UnresolvedIdentifiable : graph38
+graph::Graph "1..1" *-- "0..9999" graph::URIToLabelMapEntry : graphLabels10
+graph::Identifiable "0..1" -- "1..1" graph::Label : identifiable25
+graph::Identifiable "0..1" -- "1..1" graph::UnresolvedIdentifiable : identifiable41
+graph::Edge "1..1" *-- "0..1" graph::EdgeLabel : label6
+graph::Node "1..1" -- "0..9999" graph::NodeLabel : labels30
+graph::Identifiable "0..1" -- "1..1" graph::UnresolvedIdentifiable : model35
+graph::DynamicLabel "1..1" *-- "1..1" graph::LabelValue : nextValue0
+graph::Node "0..1" -- "1..1" graph::NodeLabel : node31
+graph::Graph "1..1" *-- "0..9999" graph::URIToNodeLabelMapEntry : nodeLabels12
+graph::Graph "1..1" *-- "0..9999" graph::URIToNodeMapEntry : nodes8
+graph::Identifiable "0..1" -- "1..1" graph::UnresolvedIdentifiable : scenario32
+graph::Graph "1..1" *-- "0..1" graph::STEMTime : time21
+graph::Graph "1..1" *-- "0..9999" graph::UnresolvedIdentifiable : unresolvedIdentifiables17
+graph::Identifiable "0..1" --* "1..1" graph::URIToIdentifiableMapEntry : value44
+graph::Edge "0..1" --* "1..1" graph::URIToEdgeMapEntry : value47
+graph::Node "0..1" --* "1..1" graph::URIToNodeMapEntry : value50
+graph::Label "0..1" --* "1..1" graph::URIToLabelMapEntry : value53
+graph::NodeLabel "0..1" --* "1..1" graph::URIToNodeLabelMapEntry : value56
+@enduml

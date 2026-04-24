@@ -19,13 +19,13 @@ class project::Project {
   + shortname : str
   + start : date
 }
-project::Project "1..1" *-- "0..9999" project::CommitterShip : committers5
-project::Person "1..1" -- "0..9999" project::CommitterShip : committerships15
-project::Project "0..1" -- "1..1" project::Project : parent7
-project::Person "0..1" -- "1..1" project::CommitterShip : person14
-project::Person "0..9999" --* "1..1" project::Foundation : persons1
-project::Project "0..1" -- "1..1" project::CommitterShip : project12
+project::CommitterShip "0..9999" --* "1..1" project::Project : committers5
+project::CommitterShip "0..9999" -- "1..1" project::Person : committerships15
+project::Project "1..1" -- "0..1" project::Project : parent7
+project::CommitterShip "1..1" -- "0..1" project::Person : person14
+project::Foundation "1..1" *-- "0..9999" project::Person : persons1
+project::CommitterShip "1..1" -- "0..1" project::Project : project12
 project::Person "0..9999" -- "1..1" project::Project : projectleads9
-project::Project "0..9999" --* "1..1" project::Foundation : projects0
+project::Foundation "1..1" *-- "0..9999" project::Project : projects0
 project::Project "1..1" *-- "0..9999" project::Project : subprojects4
 @enduml

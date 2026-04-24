@@ -65,15 +65,15 @@ IOInstruction <|-- llp::WriteInstruction
 SynchronisationInstruction <|-- llp::LockInstruction
 SynchronisationInstruction <|-- llp::UnlockInstruction
 llp::Block "1..1" --* "1..1" llp::RepetitionInstruction : block18
-llp::ParenthesisInstruction "1..1" *-- "1..1" llp::Block : block22
-llp::Task "1..1" *-- "1..1" llp::Block : block3
-llp::DataAccessPattern "0..9999" --* "1..1" llp::Block : dataAccessPatterns6
-llp::ControlFlowBranchingInstruction "1..1" *-- "1..1" llp::Block : leftHandSideBlock13
+llp::Block "1..1" --* "1..1" llp::ParenthesisInstruction : block22
+llp::Block "1..1" --* "1..1" llp::Task : block3
+llp::Block "1..1" *-- "0..9999" llp::DataAccessPattern : dataAccessPatterns6
+llp::Block "1..1" --* "1..1" llp::ControlFlowBranchingInstruction : leftHandSideBlock13
 llp::Block "1..1" --* "1..1" llp::LowLevelProgram : mainBlock1
 llp::MemoryReference "1..1" --* "1..1" llp::SynchronisationInstruction : memoryReference20
 llp::IOInstruction "1..1" *-- "1..1" llp::MemoryReference : memoryReference8
-llp::MemoryReference "0..1" --* "1..1" llp::CommitInstruction : memoryReference9
+llp::CommitInstruction "1..1" *-- "0..1" llp::MemoryReference : memoryReference9
 llp::Block "1..1" --* "1..1" llp::ControlFlowBranchingInstruction : rightHandSideBlock15
-llp::Task "1..1" -- "1..1" llp::SpawnInstruction : task11
+llp::SpawnInstruction "1..1" -- "1..1" llp::Task : task11
 llp::LowLevelProgram "1..1" *-- "0..9999" llp::Task : tasks0
 @enduml

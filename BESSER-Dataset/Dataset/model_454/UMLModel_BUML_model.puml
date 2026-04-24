@@ -1290,10 +1290,10 @@ InteractionFragment <|-- UMLModel::InteractionUse
 InteractionFragment <|-- UMLModel::OccurrenceSpecification
 InteractionFragment <|-- UMLModel::StateInvariant
 InteractionUse <|-- UMLModel::PartDecomposition
-IntervalConstraint <|-- UMLModel::DurationConstraint
-IntervalConstraint <|-- UMLModel::TimeConstraint
 Interval <|-- UMLModel::DurationInterval
 Interval <|-- UMLModel::TimeInterval
+IntervalConstraint <|-- UMLModel::DurationConstraint
+IntervalConstraint <|-- UMLModel::TimeConstraint
 InvocationAction <|-- UMLModel::BroadcastSignalAction
 InvocationAction <|-- UMLModel::CallAction
 InvocationAction <|-- UMLModel::SendObjectAction
@@ -1390,12 +1390,12 @@ RedefinableElement <|-- UMLModel::State
 RedefinableElement <|-- UMLModel::Transition
 Relationship <|-- UMLModel::Association
 Relationship <|-- UMLModel::DirectedRelationship
-StateMachine <|-- UMLModel::ProtocolStateMachine
 State <|-- UMLModel::FinalState
+StateMachine <|-- UMLModel::ProtocolStateMachine
+StructuralFeature <|-- UMLModel::Property
 StructuralFeatureAction <|-- UMLModel::ClearStructuralFeatureAction
 StructuralFeatureAction <|-- UMLModel::ReadStructuralFeatureAction
 StructuralFeatureAction <|-- UMLModel::WriteStructuralFeatureAction
-StructuralFeature <|-- UMLModel::Property
 StructuredActivityNode <|-- UMLModel::ConditionalNode
 StructuredActivityNode <|-- UMLModel::ExpansionRegion
 StructuredActivityNode <|-- UMLModel::LoopNode
@@ -1441,78 +1441,78 @@ UMLModel::Action "0..9999" --* "1..1" UMLModel::Interaction : action141
 UMLModel::Gate "0..9999" --* "1..1" UMLModel::InteractionUse : actualGate151
 UMLModel::InputPin "0..9999" --* "1..1" UMLModel::InvocationAction : argument136
 UMLModel::Action "0..9999" --* "1..1" UMLModel::InteractionUse : argument153
-UMLModel::ValueSpecification "0..9999" --* "1..1" UMLModel::Message : argument183
-UMLModel::Gate "0..9999" --* "1..1" UMLModel::CombinedFragment : cfragmentGate86
+UMLModel::Message "1..1" *-- "0..9999" UMLModel::ValueSpecification : argument183
+UMLModel::CombinedFragment "1..1" *-- "0..9999" UMLModel::Gate : cfragmentGate86
 UMLModel::ChangeEvent "1..1" *-- "1..1" UMLModel::ValueSpecification : changeExpression62
 UMLModel::Clause "1..9999" --* "1..1" UMLModel::ConditionalNode : clause88
 UMLModel::Classifier "1..1" *-- "0..9999" UMLModel::CollaborationUse : collaborationUse74
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::ReduceAction : collection262
 UMLModel::Constraint "0..1" --* "1..1" UMLModel::Extend : condition115
-UMLModel::ParameterSet "1..1" *-- "0..9999" UMLModel::Constraint : condition220
-UMLModel::DeploymentSpecification "0..9999" --* "1..1" UMLModel::Deployment : configuration106
+UMLModel::Constraint "0..9999" --* "1..1" UMLModel::ParameterSet : condition220
+UMLModel::Deployment "1..1" *-- "0..9999" UMLModel::DeploymentSpecification : configuration106
 UMLModel::ProtocolConformance "0..9999" --* "1..1" UMLModel::ProtocolStateMachine : conformance229
 UMLModel::ConnectionPointReference "0..9999" --* "1..1" UMLModel::State : connection308
 UMLModel::Pseudostate "0..9999" --* "1..1" UMLModel::State : connectionPoint309
 UMLModel::Pseudostate "0..9999" --* "1..1" UMLModel::StateMachine : connectionPoint331
 UMLModel::ActivityEdge "0..9999" --* "1..1" UMLModel::ActivityGroup : containedEdge24
-UMLModel::ActivityNode "0..9999" --* "1..1" UMLModel::ActivityGroup : containedNode27
-UMLModel::ValueSpecification "0..1" --* "1..1" UMLModel::Parameter : defaultValue208
+UMLModel::ActivityGroup "1..1" *-- "0..9999" UMLModel::ActivityNode : containedNode27
+UMLModel::Parameter "1..1" *-- "0..1" UMLModel::ValueSpecification : defaultValue208
 UMLModel::Property "1..1" *-- "0..1" UMLModel::ValueSpecification : defaultValue223
 UMLModel::State "1..1" *-- "0..9999" UMLModel::Trigger : deferrableTrigger323
 UMLModel::Deployment "0..9999" --* "1..1" UMLModel::DeploymentTarget : deployment105
 UMLModel::Behavior "0..1" --* "1..1" UMLModel::State : doActivity320
-UMLModel::ActivityEdge "0..9999" --* "1..1" UMLModel::Activity : edge15
+UMLModel::Activity "1..1" *-- "0..9999" UMLModel::ActivityEdge : edge15
 UMLModel::ActivityEdge "0..9999" --* "1..1" UMLModel::StructuredActivityNode : edge298
 UMLModel::Behavior "0..1" --* "1..1" UMLModel::Transition : effect365
-UMLModel::Namespace "1..1" *-- "0..9999" UMLModel::ElementImport : elementImport192
-UMLModel::ConnectorEnd "2..9999" --* "1..1" UMLModel::Connector : end95
-UMLModel::LinkEndData "2..9999" --* "1..1" UMLModel::LinkAction : endData172
-UMLModel::State "1..1" *-- "0..1" UMLModel::Behavior : entry314
+UMLModel::ElementImport "0..9999" --* "1..1" UMLModel::Namespace : elementImport192
+UMLModel::Connector "1..1" *-- "2..9999" UMLModel::ConnectorEnd : end95
+UMLModel::LinkAction "1..1" *-- "2..9999" UMLModel::LinkEndData : endData172
+UMLModel::Behavior "0..1" --* "1..1" UMLModel::State : entry314
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::RaiseExceptionAction : exception231
-UMLModel::SequenceNode "1..1" *-- "0..9999" UMLModel::ExecutableNode : executableNode279
+UMLModel::ExecutableNode "0..9999" --* "1..1" UMLModel::SequenceNode : executableNode279
 UMLModel::Behavior "0..1" --* "1..1" UMLModel::State : exit317
-UMLModel::UseCase "1..1" *-- "0..9999" UMLModel::Extend : extend378
+UMLModel::Extend "0..9999" --* "1..1" UMLModel::UseCase : extend378
 UMLModel::ExtensionPoint "0..9999" --* "1..1" UMLModel::UseCase : extensionPoint381
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::TestIdentityAction : first355
 UMLModel::Gate "0..9999" --* "1..1" UMLModel::Interaction : formalGate144
-UMLModel::InteractionFragment "0..9999" --* "1..1" UMLModel::Interaction : fragment139
+UMLModel::Interaction "1..1" *-- "0..9999" UMLModel::InteractionFragment : fragment139
 UMLModel::InteractionFragment "0..9999" --* "1..1" UMLModel::InteractionOperand : fragment158
 UMLModel::Action "1..1" --* "1..1" UMLModel::ActionInputPin : fromAction10
 UMLModel::GeneralOrdering "0..9999" --* "1..1" UMLModel::InteractionFragment : generalOrdering149
 UMLModel::Classifier "1..1" *-- "0..9999" UMLModel::Generalization : generalization70
-UMLModel::ActivityGroup "0..9999" --* "1..1" UMLModel::Activity : group17
-UMLModel::InteractionOperand "1..1" *-- "0..1" UMLModel::InteractionConstraint : guard156
-UMLModel::ValueSpecification "1..1" --* "1..1" UMLModel::ActivityEdge : guard19
+UMLModel::Activity "1..1" *-- "0..9999" UMLModel::ActivityGroup : group17
+UMLModel::InteractionConstraint "0..1" --* "1..1" UMLModel::InteractionOperand : guard156
+UMLModel::ActivityEdge "1..1" *-- "1..1" UMLModel::ValueSpecification : guard19
 UMLModel::ExceptionHandler "0..9999" --* "1..1" UMLModel::ExecutableNode : handler114
 UMLModel::Image "0..9999" --* "1..1" UMLModel::Stereotype : icon339
-UMLModel::PackageableElement "1..1" --* "1..1" UMLModel::ElementImport : importedElement111
-UMLModel::PackageableElement "0..1" --* "1..1" UMLModel::PackageImport : importedPackage217
-UMLModel::UseCase "1..1" *-- "0..9999" UMLModel::Include : include376
+UMLModel::ElementImport "1..1" *-- "1..1" UMLModel::PackageableElement : importedElement111
+UMLModel::PackageImport "1..1" *-- "0..1" UMLModel::PackageableElement : importedPackage217
+UMLModel::Include "0..9999" --* "1..1" UMLModel::UseCase : include376
 UMLModel::InputPin "1..9999" --* "1..1" UMLModel::LinkAction : inputValue173
 UMLModel::InputPin "0..9999" --* "1..1" UMLModel::OpaqueAction : inputValue201
-UMLModel::InputPin "0..1" --* "1..1" UMLModel::AddStructuralFeatureValueAction : insertAt30
+UMLModel::AddStructuralFeatureValueAction "1..1" *-- "0..1" UMLModel::InputPin : insertAt30
 UMLModel::AddVariableValueAction "1..1" *-- "0..1" UMLModel::InputPin : insertAt31
-UMLModel::InterfaceRealization "0..9999" --* "1..1" UMLModel::BehavioredClassifier : interfaceRealization53
+UMLModel::BehavioredClassifier "1..1" *-- "0..9999" UMLModel::InterfaceRealization : interfaceRealization53
 UMLModel::Constraint "1..1" --* "1..1" UMLModel::StateInvariant : invariant284
-UMLModel::ValueSpecification "1..1" --* "1..1" UMLModel::JoinNode : joinSpec167
+UMLModel::JoinNode "1..1" *-- "1..1" UMLModel::ValueSpecification : joinSpec167
 UMLModel::Interaction "1..1" *-- "0..9999" UMLModel::Lifeline : lifeline138
-UMLModel::Constraint "0..9999" --* "1..1" UMLModel::Action : localPostcondition7
+UMLModel::Action "1..1" *-- "0..9999" UMLModel::Constraint : localPostcondition7
 UMLModel::Action "1..1" *-- "0..9999" UMLModel::Constraint : localPrecondition6
 UMLModel::InputPin "0..9999" --* "1..1" UMLModel::LoopNode : loopVariableInput180
-UMLModel::ValueSpecification "0..1" --* "1..1" UMLModel::MultiplicityElement : lowerValue188
-UMLModel::Manifestation "0..9999" --* "1..1" UMLModel::Artifact : manifestation35
-UMLModel::OpaqueExpression "0..1" --* "1..1" UMLModel::Abstraction : mapping0
-UMLModel::ValueSpecification "0..1" --* "1..1" UMLModel::InteractionConstraint : maxint164
+UMLModel::MultiplicityElement "1..1" *-- "0..1" UMLModel::ValueSpecification : lowerValue188
+UMLModel::Artifact "1..1" *-- "0..9999" UMLModel::Manifestation : manifestation35
+UMLModel::Abstraction "1..1" *-- "0..1" UMLModel::OpaqueExpression : mapping0
+UMLModel::InteractionConstraint "1..1" *-- "0..1" UMLModel::ValueSpecification : maxint164
 UMLModel::Interaction "1..1" *-- "0..9999" UMLModel::Message : message147
-UMLModel::ValueSpecification "0..1" --* "1..1" UMLModel::InteractionConstraint : minint161
-UMLModel::StringExpression "0..1" --* "1..1" UMLModel::NamedElement : nameExpression191
-UMLModel::Artifact "0..9999" --* "1..1" UMLModel::Artifact : nestedArtifact34
-UMLModel::Interface "1..1" *-- "0..9999" UMLModel::Classifier : nestedClassifier124
-UMLModel::Classifier "0..9999" --* "1..1" UMLModel::Class : nestedClassifier64
-UMLModel::Node "0..9999" --* "1..1" UMLModel::Node : nestedNode200
+UMLModel::InteractionConstraint "1..1" *-- "0..1" UMLModel::ValueSpecification : minint161
+UMLModel::NamedElement "1..1" *-- "0..1" UMLModel::StringExpression : nameExpression191
+UMLModel::Artifact "1..1" *-- "0..9999" UMLModel::Artifact : nestedArtifact34
+UMLModel::Classifier "0..9999" --* "1..1" UMLModel::Interface : nestedClassifier124
+UMLModel::Class "1..1" *-- "0..9999" UMLModel::Classifier : nestedClassifier64
+UMLModel::Node "1..1" *-- "0..9999" UMLModel::Node : nestedNode200
 UMLModel::Activity "1..1" *-- "0..9999" UMLModel::ActivityNode : node13
 UMLModel::ActivityNode "0..9999" --* "1..1" UMLModel::StructuredActivityNode : node301
-UMLModel::ReclassifyObjectAction "1..1" *-- "1..1" UMLModel::InputPin : object233
+UMLModel::InputPin "1..1" --* "1..1" UMLModel::ReclassifyObjectAction : object233
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::ReadIsClassifiedObjectAction : object237
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::ReadLinkObjectEndAction : object244
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::ReadLinkObjectEndQualifierAction : object249
@@ -1521,46 +1521,46 @@ UMLModel::InputPin "1..1" --* "1..1" UMLModel::StructuralFeatureAction : object3
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::UnmarshallAction : object373
 UMLModel::ClearAssociationAction "1..1" *-- "1..1" UMLModel::InputPin : object78
 UMLModel::Expression "1..1" *-- "0..9999" UMLModel::ValueSpecification : operand117
-UMLModel::InteractionOperand "1..9999" --* "1..1" UMLModel::CombinedFragment : operand85
+UMLModel::CombinedFragment "1..1" *-- "1..9999" UMLModel::InteractionOperand : operand85
 UMLModel::OpaqueAction "1..1" *-- "0..9999" UMLModel::OutputPin : outputValue203
 UMLModel::ParameterableElement "0..9999" --* "1..1" UMLModel::TemplateParameterSubstitution : ownedActual352
-UMLModel::Property "0..9999" --* "1..1" UMLModel::DataType : ownedAttribute100
-UMLModel::Property "0..9999" --* "1..1" UMLModel::Interface : ownedAttribute119
-UMLModel::Signal "1..1" *-- "0..9999" UMLModel::Property : ownedAttribute306
-UMLModel::StructuredClassifier "1..1" *-- "0..9999" UMLModel::Property : ownedAttribute334
-UMLModel::Property "0..9999" --* "1..1" UMLModel::Artifact : ownedAttribute39
-UMLModel::BehavioredClassifier "1..1" *-- "0..9999" UMLModel::Behavior : ownedBehavior51
+UMLModel::DataType "1..1" *-- "0..9999" UMLModel::Property : ownedAttribute100
+UMLModel::Interface "1..1" *-- "0..9999" UMLModel::Property : ownedAttribute119
+UMLModel::Property "0..9999" --* "1..1" UMLModel::Signal : ownedAttribute306
+UMLModel::Property "0..9999" --* "1..1" UMLModel::StructuredClassifier : ownedAttribute334
+UMLModel::Artifact "1..1" *-- "0..9999" UMLModel::Property : ownedAttribute39
+UMLModel::Behavior "0..9999" --* "1..1" UMLModel::BehavioredClassifier : ownedBehavior51
 UMLModel::Comment "0..9999" --* "1..1" UMLModel::Element : ownedComment110
-UMLModel::StructuredClassifier "1..1" *-- "0..9999" UMLModel::Connector : ownedConnector336
+UMLModel::Connector "0..9999" --* "1..1" UMLModel::StructuredClassifier : ownedConnector336
 UMLModel::ParameterableElement "0..1" --* "1..1" UMLModel::TemplateParameter : ownedDefault349
-UMLModel::Property "0..9999" --* "1..1" UMLModel::Association : ownedEnd41
+UMLModel::Association "1..1" *-- "0..9999" UMLModel::Property : ownedEnd41
 UMLModel::Enumeration "1..1" *-- "0..9999" UMLModel::EnumerationLiteral : ownedLiteral113
-UMLModel::Operation "0..9999" --* "1..1" UMLModel::DataType : ownedOperation102
-UMLModel::Operation "0..9999" --* "1..1" UMLModel::Interface : ownedOperation121
-UMLModel::Operation "0..9999" --* "1..1" UMLModel::Artifact : ownedOperation37
-UMLModel::Operation "0..9999" --* "1..1" UMLModel::Class : ownedOperation65
+UMLModel::DataType "1..1" *-- "0..9999" UMLModel::Operation : ownedOperation102
+UMLModel::Interface "1..1" *-- "0..9999" UMLModel::Operation : ownedOperation121
+UMLModel::Artifact "1..1" *-- "0..9999" UMLModel::Operation : ownedOperation37
+UMLModel::Class "1..1" *-- "0..9999" UMLModel::Operation : ownedOperation65
 UMLModel::TemplateParameter "0..9999" --* "1..1" UMLModel::TemplateSignature : ownedParameter345
 UMLModel::Behavior "1..1" *-- "0..9999" UMLModel::Parameter : ownedParameter43
-UMLModel::Parameter "0..9999" --* "1..1" UMLModel::BehavioralFeature : ownedParameter46
-UMLModel::ParameterSet "0..9999" --* "1..1" UMLModel::Behavior : ownedParameterSet44
-UMLModel::ParameterSet "0..9999" --* "1..1" UMLModel::BehavioralFeature : ownedParameterSet48
+UMLModel::BehavioralFeature "1..1" *-- "0..9999" UMLModel::Parameter : ownedParameter46
+UMLModel::Behavior "1..1" *-- "0..9999" UMLModel::ParameterSet : ownedParameterSet44
+UMLModel::BehavioralFeature "1..1" *-- "0..9999" UMLModel::ParameterSet : ownedParameterSet48
 UMLModel::ParameterableElement "0..1" --* "1..1" UMLModel::TemplateParameter : ownedParameteredElement347
-UMLModel::Reception "0..9999" --* "1..1" UMLModel::Interface : ownedReception127
-UMLModel::Reception "0..9999" --* "1..1" UMLModel::Class : ownedReception68
+UMLModel::Interface "1..1" *-- "0..9999" UMLModel::Reception : ownedReception127
+UMLModel::Class "1..1" *-- "0..9999" UMLModel::Reception : ownedReception68
 UMLModel::Constraint "0..9999" --* "1..1" UMLModel::Namespace : ownedRule196
 UMLModel::TemplateSignature "0..1" --* "1..1" UMLModel::TemplateableElement : ownedTemplateSignature341
-UMLModel::Trigger "0..9999" --* "1..1" UMLModel::BehavioredClassifier : ownedTrigger55
-UMLModel::UseCase "0..9999" --* "1..1" UMLModel::Classifier : ownedUseCase76
-UMLModel::PackageImport "0..9999" --* "1..1" UMLModel::Namespace : packageImport194
-UMLModel::PackageMerge "0..9999" --* "1..1" UMLModel::Package : packageMerge211
-UMLModel::PackageableElement "0..9999" --* "1..1" UMLModel::Package : packagedElement212
-UMLModel::PackageableElement "0..9999" --* "1..1" UMLModel::Component : packagedElement82
+UMLModel::BehavioredClassifier "1..1" *-- "0..9999" UMLModel::Trigger : ownedTrigger55
+UMLModel::Classifier "1..1" *-- "0..9999" UMLModel::UseCase : ownedUseCase76
+UMLModel::Namespace "1..1" *-- "0..9999" UMLModel::PackageImport : packageImport194
+UMLModel::Package "1..1" *-- "0..9999" UMLModel::PackageMerge : packageMerge211
+UMLModel::Package "1..1" *-- "0..9999" UMLModel::PackageableElement : packagedElement212
+UMLModel::Component "1..1" *-- "0..9999" UMLModel::PackageableElement : packagedElement82
 UMLModel::TemplateBinding "1..1" *-- "0..9999" UMLModel::TemplateParameterSubstitution : parameterSubstitution343
-UMLModel::ProfileApplication "0..9999" --* "1..1" UMLModel::Package : profileApplication215
-UMLModel::ProtocolStateMachine "0..1" --* "1..1" UMLModel::Interface : protocol130
-UMLModel::QualifierValue "0..9999" --* "1..1" UMLModel::LinkEndData : qualifier176
+UMLModel::Package "1..1" *-- "0..9999" UMLModel::ProfileApplication : profileApplication215
+UMLModel::Interface "1..1" *-- "0..1" UMLModel::ProtocolStateMachine : protocol130
+UMLModel::LinkEndData "1..1" *-- "0..9999" UMLModel::QualifierValue : qualifier176
 UMLModel::Property "0..9999" --* "1..1" UMLModel::Property : qualifier227
-UMLModel::ComponentRealization "0..9999" --* "1..1" UMLModel::Component : realization83
+UMLModel::Component "1..1" *-- "0..9999" UMLModel::ComponentRealization : realization83
 UMLModel::Region "0..9999" --* "1..1" UMLModel::State : region326
 UMLModel::Region "1..9999" --* "1..1" UMLModel::StateMachine : region329
 UMLModel::InputPin "0..1" --* "1..1" UMLModel::RemoveVariableValueAction : removeAt270
@@ -1568,52 +1568,52 @@ UMLModel::InputPin "0..1" --* "1..1" UMLModel::RemoveStructuralFeatureValueActio
 UMLModel::InputPin "0..9999" --* "1..1" UMLModel::ReplyAction : replyValue267
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::SendObjectAction : request290
 UMLModel::LoopNode "1..1" *-- "0..9999" UMLModel::OutputPin : result178
-UMLModel::OutputPin "0..9999" --* "1..1" UMLModel::AcceptEventAction : result2
+UMLModel::AcceptEventAction "1..1" *-- "0..9999" UMLModel::OutputPin : result2
 UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadIsClassifiedObjectAction : result235
-UMLModel::ReadExtentAction "1..1" *-- "1..1" UMLModel::OutputPin : result240
+UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadExtentAction : result240
 UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadLinkAction : result242
 UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadLinkObjectEndAction : result246
 UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadLinkObjectEndQualifierAction : result251
 UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadSelfAction : result254
-UMLModel::ReadStructuralFeatureAction "1..1" *-- "1..1" UMLModel::OutputPin : result256
+UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadStructuralFeatureAction : result256
 UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReadVariableAction : result258
-UMLModel::ReduceAction "1..1" *-- "1..1" UMLModel::OutputPin : result260
+UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ReduceAction : result260
 UMLModel::OutputPin "1..1" --* "1..1" UMLModel::TestIdentityAction : result360
 UMLModel::OutputPin "1..9999" --* "1..1" UMLModel::UnmarshallAction : result371
-UMLModel::ValueSpecificationAction "1..1" *-- "1..1" UMLModel::OutputPin : result387
-UMLModel::OutputPin "0..9999" --* "1..1" UMLModel::CallAction : result58
+UMLModel::OutputPin "1..1" --* "1..1" UMLModel::ValueSpecificationAction : result387
+UMLModel::CallAction "1..1" *-- "0..9999" UMLModel::OutputPin : result58
 UMLModel::ConditionalNode "1..1" *-- "0..9999" UMLModel::OutputPin : result89
-UMLModel::OutputPin "1..1" --* "1..1" UMLModel::CreateLinkObjectAction : result96
-UMLModel::OutputPin "1..1" --* "1..1" UMLModel::CreateObjectAction : result98
+UMLModel::CreateLinkObjectAction "1..1" *-- "1..1" UMLModel::OutputPin : result96
+UMLModel::CreateObjectAction "1..1" *-- "1..1" UMLModel::OutputPin : result98
 UMLModel::AcceptCallAction "1..1" *-- "1..1" UMLModel::OutputPin : returnInformation1
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::ReplyAction : returnInformation265
-UMLModel::Dependency "0..9999" --* "1..1" UMLModel::CollaborationUse : roleBinding80
-UMLModel::TestIdentityAction "1..1" *-- "1..1" UMLModel::InputPin : second357
-UMLModel::ValueSpecification "0..1" --* "1..1" UMLModel::Lifeline : selector169
+UMLModel::CollaborationUse "1..1" *-- "0..9999" UMLModel::Dependency : roleBinding80
+UMLModel::InputPin "1..1" --* "1..1" UMLModel::TestIdentityAction : second357
+UMLModel::Lifeline "1..1" *-- "0..1" UMLModel::ValueSpecification : selector169
 UMLModel::InstanceSpecification "1..1" *-- "0..9999" UMLModel::Slot : slot132
-UMLModel::ValueSpecification "0..1" --* "1..1" UMLModel::InstanceSpecification : specification133
-UMLModel::ValueSpecification "1..1" --* "1..1" UMLModel::Constraint : specification92
+UMLModel::InstanceSpecification "1..1" *-- "0..1" UMLModel::ValueSpecification : specification133
+UMLModel::Constraint "1..1" *-- "1..1" UMLModel::ValueSpecification : specification92
 UMLModel::Constraint "0..1" --* "1..1" UMLModel::State : stateInvariant311
 UMLModel::StringExpression "0..9999" --* "1..1" UMLModel::StringExpression : subExpression294
-UMLModel::Substitution "0..9999" --* "1..1" UMLModel::Classifier : substitution72
+UMLModel::Classifier "1..1" *-- "0..9999" UMLModel::Substitution : substitution72
 UMLModel::Region "1..1" *-- "0..9999" UMLModel::Vertex : subvertex274
 UMLModel::DestroyObjectAction "1..1" *-- "1..1" UMLModel::InputPin : target108
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::SendSignalAction : target277
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::SendObjectAction : target288
-UMLModel::InputPin "1..1" --* "1..1" UMLModel::CallOperationAction : target60
+UMLModel::CallOperationAction "1..1" *-- "1..1" UMLModel::InputPin : target60
 UMLModel::TemplateBinding "0..9999" --* "1..1" UMLModel::TemplateableElement : templateBinding340
-UMLModel::Transition "0..9999" --* "1..1" UMLModel::Region : transition275
-UMLModel::Trigger "0..9999" --* "1..1" UMLModel::Transition : trigger368
-UMLModel::Trigger "1..9999" --* "1..1" UMLModel::AcceptEventAction : trigger4
-UMLModel::ValueSpecification "1..1" --* "1..1" UMLModel::ObjectNode : upperBound206
+UMLModel::Region "1..1" *-- "0..9999" UMLModel::Transition : transition275
+UMLModel::Transition "1..1" *-- "0..9999" UMLModel::Trigger : trigger368
+UMLModel::AcceptEventAction "1..1" *-- "1..9999" UMLModel::Trigger : trigger4
+UMLModel::ObjectNode "1..1" *-- "1..1" UMLModel::ValueSpecification : upperBound206
 UMLModel::MultiplicityElement "1..1" *-- "0..1" UMLModel::ValueSpecification : upperValue186
-UMLModel::ValueSpecification "0..9999" --* "1..1" UMLModel::Slot : value281
-UMLModel::ValueSpecification "1..1" --* "1..1" UMLModel::ValuePin : value383
+UMLModel::Slot "1..1" *-- "0..9999" UMLModel::ValueSpecification : value281
+UMLModel::ValuePin "1..1" *-- "1..1" UMLModel::ValueSpecification : value383
 UMLModel::ValueSpecification "1..1" --* "1..1" UMLModel::ValueSpecificationAction : value385
-UMLModel::WriteVariableAction "1..1" *-- "1..1" UMLModel::InputPin : value390
+UMLModel::InputPin "1..1" --* "1..1" UMLModel::WriteVariableAction : value390
 UMLModel::InputPin "1..1" --* "1..1" UMLModel::WriteStructuralFeatureAction : value392
-UMLModel::Variable "0..9999" --* "1..1" UMLModel::Activity : variable12
+UMLModel::Activity "1..1" *-- "0..9999" UMLModel::Variable : variable12
 UMLModel::StructuredActivityNode "1..1" *-- "0..9999" UMLModel::Variable : variable296
 UMLModel::ActivityEdge "1..1" *-- "1..1" UMLModel::ValueSpecification : weight21
-UMLModel::ValueSpecification "1..1" --* "1..1" UMLModel::TimeEvent : when363
+UMLModel::TimeEvent "1..1" *-- "1..1" UMLModel::ValueSpecification : when363
 @enduml

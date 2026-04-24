@@ -48,13 +48,13 @@ Expression <|-- JAVA::TypeAccess
 NamedElement <|-- JAVA::BodyDeclaration
 NamedElement <|-- JAVA::Package
 NamedElement <|-- JAVA::Type
+Type <|-- JAVA::AbstractTypeDeclaration
 TypeDeclaration <|-- JAVA::ClassDeclaration
 TypeDeclaration <|-- JAVA::InterfaceDeclaration
-Type <|-- JAVA::AbstractTypeDeclaration
 JAVA::ClassDeclaration "1..1" *-- "0..9999" JAVA::FieldDeclaration : fields1
 JAVA::AbstractTypeDeclaration "0..9999" --* "1..1" JAVA::Package : ownedElements5
 JAVA::ClassDeclaration "1..1" *-- "0..1" JAVA::TypeAccess : superClass0
-JAVA::TypeAccess "0..9999" --* "1..1" JAVA::AbstractTypeDeclaration : superInterfaces6
-JAVA::TypeDeclaration "1..1" -- "1..1" JAVA::TypeAccess : type3
-JAVA::TypeAccess "1..1" --* "1..1" JAVA::FieldDeclaration : typeAccess9
+JAVA::AbstractTypeDeclaration "1..1" *-- "0..9999" JAVA::TypeAccess : superInterfaces6
+JAVA::TypeAccess "1..1" -- "1..1" JAVA::TypeDeclaration : type3
+JAVA::FieldDeclaration "1..1" *-- "1..1" JAVA::TypeAccess : typeAccess9
 @enduml

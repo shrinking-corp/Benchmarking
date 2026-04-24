@@ -1,0 +1,82 @@
+@startuml
+class TableContent {
+}
+class model::Book {
+  + pages : int
+  + title : str
+  + validate(context : any, diagnostic : any) : bool
+}
+class model::Computer {
+  + name : str
+}
+class model::Container {
+}
+class model::Content {
+  + secondAttribute : str
+  + uniqueAttribute : str
+}
+class model::Librarian {
+  + name : str
+  + validate(context : any, diagnostic : any) : bool
+}
+class model::Library {
+  + name : str
+  + validate(context : any, diagnostic : any) : bool
+}
+class model::Mainboard {
+  + name : str
+}
+class model::PowerBlock {
+  + name : str
+}
+abstract class model::TableContent {
+}
+class model::TableContentWithInnerChild {
+  + stuff : str
+}
+class model::TableContentWithInnerChild2 {
+}
+class model::TableContentWithValidation {
+  + name : str
+  + weight : int
+}
+class model::TableContentWithoutValidation {
+  + name : str
+  + weight : int
+}
+class model::TableWithMultiplicity {
+}
+class model::TableWithUnique {
+}
+class model::TableWithoutMultiplicity {
+}
+class model::TableWithoutMultiplicityConcrete {
+}
+class model::Writer {
+  + BirthDate : date
+  + EMail : str
+  + Pseudonym : bool
+  + firstName : str
+  + lastName : str
+  + validate(context : any, diagnostic : any) : bool
+}
+TableContent <|-- model::TableContentWithInnerChild
+TableContent <|-- model::TableContentWithInnerChild2
+TableContent <|-- model::TableContentWithValidation
+TableContent <|-- model::TableContentWithoutValidation
+model::Book "0..9999" --* "1..1" model::Library : books1
+model::Book "0..9999" -- "1..1" model::Writer : books4
+model::TableContent "1..9999" --* "1..1" model::TableWithMultiplicity : content13
+model::TableContent "0..9999" --* "1..1" model::TableWithoutMultiplicity : content14
+model::TableContent "0..9999" --* "1..1" model::TableWithUnique : content16
+model::TableContentWithInnerChild "0..9999" --* "1..1" model::TableWithoutMultiplicityConcrete : content22
+model::Container "1..1" *-- "0..9999" model::Content : contents12
+model::TableContent "0..1" --* "1..1" model::TableContentWithInnerChild2 : innerChild18
+model::TableContent "0..1" --* "1..1" model::TableContentWithInnerChild : innerChild20
+model::Librarian "0..1" --* "1..1" model::Library : librarian2
+model::Library "0..1" -- "1..1" model::Writer : library5
+model::Computer "1..1" *-- "0..1" model::Mainboard : mainboard9
+model::Computer "1..1" *-- "0..1" model::PowerBlock : powerBlock10
+model::Library "1..1" *-- "1..9999" model::Writer : writers0
+model::Book "1..1" -- "0..1" model::Writer : writers7
+@enduml

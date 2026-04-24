@@ -455,8 +455,6 @@ MethodContentElement <|-- spem::WorkProductDefinition
 MethodContentElement <|-- spem::WorkProductDefinitionRelationship
 MethodContentElement <|-- spem::uma::RoleSet
 MethodContentKind <|-- spem::WorkProductKind
-MethodContentPackageableElement <|-- spem::MethodContentElement
-MethodContentPackageableElement <|-- spem::MethodContentPackage
 MethodContentPackage <|-- spem::uma::CategoryPackage
 MethodContentPackage <|-- spem::uma::ConfigurationPackage
 MethodContentPackage <|-- spem::uma::DisciplinePackage
@@ -469,6 +467,8 @@ MethodContentPackage <|-- spem::uma::TaskDefinitionPackage
 MethodContentPackage <|-- spem::uma::ToolDefinitionPackage
 MethodContentPackage <|-- spem::uma::WorkProductDefinitionPackage
 MethodContentPackage <|-- spem::uma::WorkProductKindPackage
+MethodContentPackageableElement <|-- spem::MethodContentElement
+MethodContentPackageableElement <|-- spem::MethodContentPackage
 MethodContentUse <|-- spem::ProcessComponentUse
 MethodContentUse <|-- spem::RoleUse
 MethodContentUse <|-- spem::TaskUse
@@ -477,20 +477,20 @@ MethodLibraryPackageableElement <|-- spem::MethodConfiguration
 MethodLibraryPackageableElement <|-- spem::MethodPlugin
 MethodPluginPackageableElement <|-- spem::MethodContentPackage
 MethodPluginPackageableElement <|-- spem::ProcessPackage
+Process <|-- spem::uma::CapabilityPattern
+Process <|-- spem::uma::DeliveryProcess
+Process <|-- spem::uma::ProcessPlanningTemplate
 ProcessElement <|-- spem::BreakdownElement
 ProcessElement <|-- spem::PlanningData
 ProcessElement <|-- spem::ProcessKind
 ProcessElement <|-- spem::WorkProductPort
 ProcessElement <|-- spem::WorkProductPortConnector
-ProcessPackageableElement <|-- spem::ProcessElement
-ProcessPackageableElement <|-- spem::ProcessPackage
 ProcessPackage <|-- spem::ProcessComponent
 ProcessPackage <|-- spem::uma::CapabilityPatternPackage
 ProcessPackage <|-- spem::uma::DeliveryProcessPackage
 ProcessPackage <|-- spem::uma::ProcessComponentPackage
-Process <|-- spem::uma::CapabilityPattern
-Process <|-- spem::uma::DeliveryProcess
-Process <|-- spem::uma::ProcessPlanningTemplate
+ProcessPackageableElement <|-- spem::ProcessElement
+ProcessPackageableElement <|-- spem::ProcessPackage
 RoleUse <|-- spem::CompositeRole
 VariabilityElement <|-- spem::Activity
 VariabilityElement <|-- spem::MethodContentElement
@@ -499,72 +499,72 @@ VariabilityElement <|-- spem::Step
 WorkBreakdownElement <|-- spem::Activity
 WorkBreakdownElement <|-- spem::Milestone
 WorkBreakdownElement <|-- spem::TaskUse
-WorkDefinitionParameter <|-- spem::Default::TaskDefinitionParameter
-WorkDefinitionParameter <|-- spem::ProcessParameter
-WorkDefinitionPerformer <|-- spem::ProcessPerformer
 WorkDefinition <|-- spem::Activity
 WorkDefinition <|-- spem::Step
 WorkDefinition <|-- spem::TaskDefinition
+WorkDefinitionParameter <|-- spem::Default::TaskDefinitionParameter
+WorkDefinitionParameter <|-- spem::ProcessParameter
+WorkDefinitionPerformer <|-- spem::ProcessPerformer
 WorkProductUse <|-- spem::uma::Artifact
 WorkProductUse <|-- spem::uma::Deliverable
 WorkProductUse <|-- spem::uma::Outcome
-uma::spem::MethodPlugin "0..9999" --* "1..1" spem::uma::Root : MethodPlugin222
+spem::uma::Root "1..1" *-- "0..9999" uma::spem::MethodPlugin : MethodPlugin222
 spem::Category "0..9999" -- "1..1" spem::MethodConfiguration : addedCategory166
-spem::RoleDefinition "0..9999" -- "1..1" spem::CompositeRole : aggregatedRole135
+spem::CompositeRole "1..1" -- "0..9999" spem::RoleDefinition : aggregatedRole135
 spem::TaskDefinition "0..9999" -- "1..1" spem::TaskDefinition : alternative86
 spem::Activity "0..9999" -- "1..1" spem::Activity : alternatives29
 spem::EObject "0..9999" --* "1..1" spem::MethodLibrary : any200
 spem::MethodConfiguration "0..9999" -- "1..1" spem::MethodConfiguration : baseConfiguration156
-spem::MethodPlugin "1..1" -- "0..9999" spem::MethodPlugin : basePlugin185
+spem::MethodPlugin "0..9999" -- "1..1" spem::MethodPlugin : basePlugin185
 Process "0..9999" -- "1..1" spem::uma::ProcessPlanningTemplate : baseProcess230
 spem::Category "0..9999" -- "1..1" spem::DescribableElement : category68
-spem::uma::DeliveryProcess "1..1" -- "0..9999" SupportingMaterial : communicationMaterial212
-spem::MethodLibrary "1..1" *-- "0..1" ConfigurationPackage : configurationPackage198
+SupportingMaterial "0..9999" -- "1..1" spem::uma::DeliveryProcess : communicationMaterial212
+ConfigurationPackage "0..1" --* "1..1" spem::MethodLibrary : configurationPackage198
 spem::WorkProductPort "0..9999" -- "1..1" spem::WorkProductPortConnector : connectedPort205
 Artifact "0..9999" --* "1..1" spem::uma::Artifact : containedArtifact207
 spem::MethodConfiguration "1..1" -- "0..9999" spem::MethodContentPackage : contentPackageSelection163
 spem::uma::Practice "1..1" -- "0..9999" uma::spem::MethodContentElement : contentReference228
 spem::Activity "1..1" -- "0..1" spem::MethodConfiguration : defaultContext23
-spem::MethodConfiguration "1..1" -- "1..1" spem::Category : defaultView172
-uma::spem::WorkProductUse "0..9999" -- "1..1" spem::uma::Deliverable : deliveredProduct208
+spem::Category "1..1" -- "1..1" spem::MethodConfiguration : defaultView172
+spem::uma::Deliverable "1..1" -- "0..9999" uma::spem::WorkProductUse : deliveredProduct208
 SupportingMaterial "0..9999" -- "1..1" spem::uma::DeliveryProcess : educationalMaterial213
 EstimatingConsideration "0..9999" -- "1..1" spem::WorkProductDefinition : estimatingConsideration93
 spem::DescribableElement "1..1" -- "0..9999" spem::Guidance : guidance56
-uma::spem::WorkProductPortConnector "0..9999" --* "1..1" spem::uma::Process : includedConnector210
-spem::uma::Process "1..1" *-- "0..9999" CapabilityPattern : includedPattern209
-spem::DescribableElement "1..1" -- "0..9999" EstimatingConsideration : keyConsideration66
-spem::Kind "0..1" -- "1..1" spem::ExtensibleElement : kind0
-spem::WorkProductUse "1..1" *-- "0..1" spem::LifeCycleSpecification : lifeCycle46
-spem::WorkSequence "0..9999" -- "1..1" spem::WorkBreakdownElement : linkToPredecessor7
+spem::uma::Process "1..1" *-- "0..9999" uma::spem::WorkProductPortConnector : includedConnector210
+CapabilityPattern "0..9999" --* "1..1" spem::uma::Process : includedPattern209
+EstimatingConsideration "0..9999" -- "1..1" spem::DescribableElement : keyConsideration66
+spem::ExtensibleElement "1..1" -- "0..1" spem::Kind : kind0
+spem::LifeCycleSpecification "0..1" --* "1..1" spem::WorkProductUse : lifeCycle46
+spem::WorkBreakdownElement "1..1" -- "0..9999" spem::WorkSequence : linkToPredecessor7
 spem::WorkBreakdownElement "1..1" -- "0..9999" spem::WorkSequence : linkToSuccessor8
 spem::Activity "0..1" -- "1..1" spem::ProcessPerformer : linkedActivity32
 spem::Default::TaskDefinitionPerformer "1..1" -- "1..9999" spem::RoleDefinition : linkedRoleDefinition113
-spem::RoleDefinition "1..9999" -- "1..1" spem::Default::ResponsibilityAssignment : linkedRoleDefinition116
+spem::Default::ResponsibilityAssignment "1..1" -- "1..9999" spem::RoleDefinition : linkedRoleDefinition116
 spem::ProcessPerformer "1..1" -- "1..9999" spem::RoleUse : linkedRoleUse31
 spem::ProcessResponsibilityAssignment "1..1" -- "1..9999" spem::RoleUse : linkedRoleUse39
-spem::TaskDefinition "1..1" -- "1..1" spem::Default::TaskDefinitionPerformer : linkedTaskDefinition111
-spem::TaskUse "0..1" -- "1..1" spem::ProcessPerformer : linkedTaskUse35
-spem::WorkProductDefinition "1..1" -- "1..1" spem::Default::ResponsibilityAssignment : linkedWorkProductDefinition118
-spem::WorkProductUse "1..1" -- "1..1" spem::ProcessResponsibilityAssignment : linkedWorkProductUse41
-spem::WorkProductDefinition "0..9999" -- "1..1" spem::ToolDefinition : managedWorkProduct77
+spem::Default::TaskDefinitionPerformer "1..1" -- "1..1" spem::TaskDefinition : linkedTaskDefinition111
+spem::ProcessPerformer "1..1" -- "0..1" spem::TaskUse : linkedTaskUse35
+spem::Default::ResponsibilityAssignment "1..1" -- "1..1" spem::WorkProductDefinition : linkedWorkProductDefinition118
+spem::ProcessResponsibilityAssignment "1..1" -- "1..1" spem::WorkProductUse : linkedWorkProductUse41
+spem::ToolDefinition "1..1" -- "0..9999" spem::WorkProductDefinition : managedWorkProduct77
 spem::uma::Root "1..1" *-- "0..9999" uma::spem::MethodConfiguration : methodConfiguration219
 spem::MethodContentElement "1..1" -- "0..1" spem::MethodContentKind : methodContentKind75
-uma::spem::MethodLibrary "0..9999" --* "1..1" spem::uma::Root : methodLibrary220
-spem::MethodPlugin "1..9999" -- "1..1" spem::MethodConfiguration : methodPluginSelection158
-spem::Metric "0..9999" -- "1..1" spem::DescribableElement : metric58
-spem::BreakdownElement "0..9999" --* "1..1" spem::Activity : nestedBreakdownElement15
-uma::spem::MethodConfiguration "0..9999" --* "1..1" spem::uma::ConfigurationPackage : ownedConfiguration232
-spem::MethodContentPackageableElement "0..9999" --* "1..1" spem::MethodContentPackage : ownedMethodContentMember121
+spem::uma::Root "1..1" *-- "0..9999" uma::spem::MethodLibrary : methodLibrary220
+spem::MethodConfiguration "1..1" -- "1..9999" spem::MethodPlugin : methodPluginSelection158
+spem::DescribableElement "1..1" -- "0..9999" spem::Metric : metric58
+spem::Activity "1..1" *-- "0..9999" spem::BreakdownElement : nestedBreakdownElement15
+spem::uma::ConfigurationPackage "1..1" *-- "0..9999" uma::spem::MethodConfiguration : ownedConfiguration232
+spem::MethodContentPackage "1..1" *-- "0..9999" spem::MethodContentPackageableElement : ownedMethodContentMember121
 spem::MethodContentPackage "0..9999" --* "1..1" spem::MethodPlugin : ownedMethodContentPackage178
-spem::MethodPlugin "0..9999" --* "1..1" spem::MethodLibrary : ownedMethodPlugin190
-spem::WorkDefinitionParameter "0..9999" --* "1..1" spem::WorkDefinition : ownedParameter1
+spem::MethodLibrary "1..1" *-- "0..9999" spem::MethodPlugin : ownedMethodPlugin190
+spem::WorkDefinition "1..1" *-- "0..9999" spem::WorkDefinitionParameter : ownedParameter1
 spem::ProcessComponent "1..1" *-- "0..9999" spem::WorkProductPort : ownedPort148
-spem::ProcessPackageableElement "0..9999" --* "1..1" spem::ProcessPackage : ownedProcessMember125
-spem::ProcessPackage "0..9999" --* "1..1" spem::MethodPlugin : ownedProcessPackage181
+spem::ProcessPackage "1..1" *-- "0..9999" spem::ProcessPackageableElement : ownedProcessMember125
+spem::MethodPlugin "1..1" *-- "0..9999" spem::ProcessPackage : ownedProcessPackage181
 spem::ProcessParameter "0..9999" --* "1..1" spem::TaskUse : ownedProcessParameter129
-spem::ProcessParameter "0..9999" --* "1..1" spem::Activity : ownedProcessParameter21
-spem::WorkProductDefinition "0..1" -- "1..1" spem::WorkDefinitionParameter : parameterType2
-spem::PlanningData "0..1" --* "1..1" spem::BreakdownElement : planningData4
+spem::Activity "1..1" *-- "0..9999" spem::ProcessParameter : ownedProcessParameter21
+spem::WorkDefinitionParameter "1..1" -- "0..1" spem::WorkProductDefinition : parameterType2
+spem::BreakdownElement "1..1" *-- "0..1" spem::PlanningData : planningData4
 spem::WorkProductDefinition "0..1" -- "1..1" spem::WorkProductPort : portType202
 spem::WorkBreakdownElement "1..1" -- "1..1" spem::WorkSequence : predecessor10
 spem::Step "0..1" -- "1..1" spem::Step : predecessor91
@@ -573,22 +573,22 @@ spem::DescribableElement "0..1" -- "1..1" spem::DescribableElement : presentedAf
 spem::DescribableElement "0..1" -- "1..1" spem::DescribableElement : presentedBefore64
 spem::Activity "0..1" --* "1..1" spem::ProcessComponent : process146
 spem::ProcessComponent "1..1" -- "1..1" spem::ProcessComponentUse : processComponent150
-spem::ProcessKind "0..1" -- "1..1" spem::ProcessElement : processKind55
-spem::ProcessPackage "0..9999" -- "1..1" spem::MethodConfiguration : processPackageSelection160
+spem::ProcessElement "1..1" -- "0..1" spem::ProcessKind : processKind55
+spem::MethodConfiguration "1..1" -- "0..9999" spem::ProcessPackage : processPackageSelection160
 spem::Category "0..9999" -- "1..1" spem::MethodConfiguration : processView175
-uma::spem::Activity "0..9999" -- "1..1" spem::uma::Practice : referencedActivity226
+spem::uma::Practice "1..1" -- "0..9999" uma::spem::Activity : referencedActivity226
 spem::MethodPlugin "0..9999" -- "1..1" spem::MethodPlugin : referencedMethodPlugin188
-uma::spem::WorkProductDefinition "0..9999" -- "1..1" spem::uma::Domain : relatedProduct224
+spem::uma::Domain "1..1" -- "0..9999" uma::spem::WorkProductDefinition : relatedProduct224
 spem::uma::Discipline "1..1" -- "0..9999" uma::spem::TaskDefinition : relatedTask216
 Process "0..9999" -- "1..1" spem::uma::Discipline : relatedWorflow217
-spem::WorkProductDefinition "1..1" -- "0..9999" Report : report96
-spem::RoleDefinition "1..1" -- "0..9999" spem::Qualification : requiredQualification103
-spem::TaskDefinition "1..1" -- "0..9999" spem::Qualification : requiredQualification88
-spem::WorkProductUse "0..9999" -- "1..1" spem::Milestone : requiredResult53
+Report "0..9999" -- "1..1" spem::WorkProductDefinition : report96
+spem::Qualification "0..9999" -- "1..1" spem::RoleDefinition : requiredQualification103
+spem::Qualification "0..9999" -- "1..1" spem::TaskDefinition : requiredQualification88
+spem::Milestone "1..1" -- "0..9999" spem::WorkProductUse : requiredResult53
 spem::MethodContentPackage "0..9999" -- "1..1" spem::MethodContentPackage : reusedPackage123
-uma::spem::RoleDefinition "0..9999" -- "1..1" spem::uma::RoleSet : role234
+spem::uma::RoleSet "1..1" -- "0..9999" uma::spem::RoleDefinition : role234
 spem::RoleDefinition "0..1" -- "1..1" spem::RoleUse : role37
-spem::TaskUse "1..1" -- "0..9999" spem::Step : selectedStep132
+spem::Step "0..9999" -- "1..1" spem::TaskUse : selectedStep132
 spem::WorkProductDefinition "1..1" -- "1..1" spem::WorkProductDefinitionRelationship : source106
 spem::WorkProductUse "1..1" -- "1..1" spem::WorkProductUseRelationship : source48
 spem::Step "0..9999" --* "1..1" spem::TaskDefinition : step83
@@ -597,22 +597,22 @@ Practice "0..9999" --* "1..1" spem::uma::Practice : subPractice225
 spem::TeamProfile "1..1" *-- "0..9999" spem::TeamProfile : subTeam138
 spem::Category "0..9999" -- "1..1" spem::MethodConfiguration : substractedCategory169
 spem::WorkBreakdownElement "1..1" -- "1..1" spem::WorkSequence : successor11
-spem::TeamProfile "0..1" -- "1..1" spem::TeamProfile : superTeam140
-spem::BreakdownElement "0..9999" -- "1..1" spem::Activity : suppressedBreakdownElement18
-spem::MethodContentElement "0..9999" -- "1..1" spem::MethodContentElement : suppressedMethodContentElement74
+spem::TeamProfile "1..1" -- "0..1" spem::TeamProfile : superTeam140
+spem::Activity "1..1" -- "0..9999" spem::BreakdownElement : suppressedBreakdownElement18
+spem::MethodContentElement "1..1" -- "0..9999" spem::MethodContentElement : suppressedMethodContentElement74
 spem::WorkProductDefinition "1..9999" -- "1..1" spem::WorkProductDefinitionRelationship : target108
 spem::WorkProductUse "1..9999" -- "1..1" spem::WorkProductUseRelationship : target50
-spem::TaskUse "1..1" -- "0..1" spem::TaskDefinition : task126
+spem::TaskDefinition "0..1" -- "1..1" spem::TaskUse : task126
 spem::RoleUse "0..9999" -- "1..1" spem::TeamProfile : teamRole142
 Template "0..9999" -- "1..1" spem::WorkProductDefinition : template98
-spem::ToolDefinition "0..1" -- "1..1" spem::MethodLibrary : tool195
+spem::MethodLibrary "1..1" -- "0..1" spem::ToolDefinition : tool195
 ToolMentor "0..9999" -- "1..1" spem::WorkProductDefinition : toolMentor100
-spem::ToolDefinition "1..1" -- "0..9999" ToolMentor : toolMentor79
-spem::Guidance "0..1" -- "1..1" spem::BreakdownElement : usageGuidance5
+ToolMentor "0..9999" -- "1..1" spem::ToolDefinition : toolMentor79
+spem::BreakdownElement "1..1" -- "0..1" spem::Guidance : usageGuidance5
 spem::Activity "1..1" -- "0..1" spem::Activity : usedActivity14
-spem::WorkProductPort "0..9999" --* "1..1" spem::ProcessComponentUse : usedPort152
-spem::ToolDefinition "0..9999" -- "1..1" spem::TaskDefinition : usedTool81
-spem::MethodConfiguration "0..9999" -- "1..1" spem::Activity : validContext25
-spem::VariabilityElement "0..1" -- "1..1" spem::VariabilityElement : variabilityBasedOnElement145
+spem::ProcessComponentUse "1..1" *-- "0..9999" spem::WorkProductPort : usedPort152
+spem::TaskDefinition "1..1" -- "0..9999" spem::ToolDefinition : usedTool81
+spem::Activity "1..1" -- "0..9999" spem::MethodConfiguration : validContext25
+spem::VariabilityElement "1..1" -- "0..1" spem::VariabilityElement : variabilityBasedOnElement145
 spem::WorkProductDefinition "0..1" -- "1..1" spem::WorkProductUse : workProduct43
 @enduml

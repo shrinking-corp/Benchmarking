@@ -1,0 +1,195 @@
+@startuml
+class BasicType {
+}
+class CollectionType {
+}
+class MAssociation {
+}
+class MClass {
+}
+class MModelElement {
+}
+class MModelElementEx {
+}
+class Type {
+}
+class model::BagType {
+}
+class model::BasicType {
+}
+class model::BooleanType {
+}
+class model::CollectionType {
+}
+abstract class model::Comparable {
+}
+class model::EnumType {
+  + literals : str
+  + name : str
+  + addLiteral(literal : any) : void
+}
+class model::Expression {
+}
+class model::IntegerType {
+}
+class model::MAggregationKind {
+  + kind : int
+  + name : str
+}
+class model::MAssociation {
+  + addAssociationEnd(ae : any) : void
+  + processWithVisitor(v : any) : void
+}
+class model::MAssociationClass {
+  + processWithVisitor(v : any) : void
+}
+class model::MAssociationEnd {
+  + mClassName : str
+  + getExplicitNavigation() : bool
+  + getNavigation() : bool
+  + getOrdered() : bool
+}
+class model::MAttribute {
+  + processWithVisitor(v : any) : void
+}
+class model::MClass {
+  + addAssociation(a : any) : void
+  + addAttribute(attr : any) : void
+  + addChild(c : any) : void
+  + addOperation(op : any) : void
+  + addParent(c : any) : void
+  + getAbstract() : bool
+  + processWithVisitor(v : any) : void
+  + setAbstract(b : any) : void
+}
+class model::MClassInvariant {
+  + name : str
+  + positionInModel : int
+  + getHasVars() : bool
+  + getIsExistential() : bool
+}
+class model::MMVisitor {
+}
+class model::MModel {
+  + addClass(cls : any) : void
+  + addClassInvariant(inv : any) : void
+  + addPrePostCondition(ppc : any) : void
+  + processWithVisitor(v : any) : void
+}
+class model::MModelElement {
+  + name() : str
+  + processWithVisitor(v : any) : void
+}
+class model::MModelElementEx {
+  + name : str
+  + processWithVisitor(v : any) : void
+}
+class model::MMultiplicity {
+  + addRange(r : any) : void
+}
+class model::MNavigableElement {
+  + nameAsRolename : str
+  + getType(src : any) : Type
+}
+class model::MOperation {
+  + addVarDecl(vd : any) : void
+}
+class model::MPrePostCondition {
+  + positionInModel : int
+  + getIsPre() : bool
+  + setPre(b : any) : void
+}
+class model::MRange {
+  + lower : int
+  + upper : int
+}
+class model::ObjectType {
+}
+class model::OclAnyType {
+}
+class model::OrderedSetType {
+}
+class model::Part {
+  + name : str
+}
+class model::RealType {
+}
+class model::SequenceType {
+}
+class model::SetType {
+}
+class model::StringType {
+}
+class model::TupleType {
+  + parts : str
+}
+class model::Type {
+  + typeId : int
+  + typeName : str
+}
+class model::VarDecl {
+  + var : str
+}
+class model::VarDeclList {
+}
+class model::VoidType {
+}
+BasicType <|-- model::BooleanType
+BasicType <|-- model::IntegerType
+BasicType <|-- model::RealType
+BasicType <|-- model::StringType
+CollectionType <|-- model::BagType
+CollectionType <|-- model::OrderedSetType
+CollectionType <|-- model::SequenceType
+CollectionType <|-- model::SetType
+MAssociation <|-- model::MAssociationClass
+MClass <|-- model::MAssociationClass
+MModelElement <|-- model::MClassInvariant
+MModelElement <|-- model::MModelElementEx
+MModelElement <|-- model::MPrePostCondition
+MModelElementEx <|-- model::MAssociation
+MModelElementEx <|-- model::MAssociationEnd
+MModelElementEx <|-- model::MAttribute
+MModelElementEx <|-- model::MClass
+MModelElementEx <|-- model::MModel
+MModelElementEx <|-- model::MOperation
+Type <|-- model::BasicType
+Type <|-- model::CollectionType
+Type <|-- model::EnumType
+Type <|-- model::ObjectType
+Type <|-- model::OclAnyType
+Type <|-- model::TupleType
+Type <|-- model::VoidType
+model::MAggregationKind "0..1" --* "1..1" model::MAssociation : aggregationKind39
+model::MAssociation "0..1" -- "1..1" model::MAssociationEnd : association41
+model::MAssociation "0..1" -- "1..1" model::MNavigableElement : association56
+model::MAssociation "1..1" *-- "0..9999" model::MAssociationEnd : associationEnds37
+model::MAssociation "0..9999" --* "1..1" model::MClass : associations8
+model::MAttribute "0..9999" --* "1..1" model::MClass : attributes3
+model::Expression "0..1" --* "1..1" model::MClassInvariant : body64
+model::MClass "0..9999" -- "1..1" model::MClass : children14
+model::MClassInvariant "0..9999" --* "1..1" model::MModel : classInvariant18
+model::MClass "0..9999" --* "1..1" model::MModel : classes16
+model::MClass "0..1" -- "1..1" model::MNavigableElement : cls54
+model::MClass "0..1" -- "1..1" model::MClassInvariant : cls61
+model::CollectionType "1..1" *-- "0..1" model::Type : elemType33
+model::Expression "0..1" -- "1..1" model::MClassInvariant : expanded66
+model::Expression "0..1" --* "1..1" model::MPrePostCondition : expression72
+model::MAggregationKind "0..1" --* "1..1" model::MAssociationEnd : kind49
+model::MClass "0..1" -- "1..1" model::ObjectType : mClass35
+model::MAssociationEnd "1..1" -- "0..1" model::MClass : mClass44
+model::MAssociationEnd "1..1" *-- "0..1" model::MMultiplicity : mMultiplicity47
+model::MOperation "0..1" -- "1..1" model::MPrePostCondition : operation69
+model::MClass "1..1" *-- "0..9999" model::MOperation : operations6
+model::MAttribute "1..1" -- "0..1" model::MClass : owner0
+model::MClass "0..1" -- "1..1" model::MOperation : owner22
+model::MClass "0..9999" -- "1..1" model::MClass : parents11
+model::MModel "1..1" *-- "0..9999" model::MPrePostCondition : prePostCondition20
+model::MMultiplicity "1..1" *-- "0..9999" model::MRange : ranges52
+model::MOperation "1..1" *-- "0..1" model::Type : resultType25
+model::MAttribute "1..1" *-- "0..1" model::Type : type1
+model::Type "0..1" --* "1..1" model::VarDecl : type30
+model::Part "1..1" -- "0..1" model::Type : type75
+model::MOperation "1..1" *-- "0..9999" model::VarDecl : varDecls28
+model::MClassInvariant "1..1" -- "0..1" model::VarDeclList : vars59
+@enduml

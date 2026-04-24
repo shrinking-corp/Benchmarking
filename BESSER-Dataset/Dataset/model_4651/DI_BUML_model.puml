@@ -1,0 +1,61 @@
+@startuml
+class DiagramElement {
+}
+class Shape {
+}
+class di::Bounds {
+}
+class di::Color {
+}
+abstract class di::Diagram {
+  + documentation : str
+  + name : str
+  + resolution : str
+}
+abstract class di::DiagramElement {
+  + id : str
+}
+class di::EObject {
+}
+abstract class di::Edge {
+}
+class di::Fill {
+}
+class di::Point {
+}
+abstract class di::Shape {
+}
+abstract class di::Style {
+  + fillOpacity : str
+  + fontBold : str
+  + fontItalic : str
+  + fontName : str
+  + fontSize : str
+  + fontStrikeThrough : str
+  + fontUnderline : str
+  + strokeDashLength : str
+  + strokeOpacity : str
+  + strokeWidth : str
+  + valid_dash_length_size(context : any, diagnostics : any) : bool
+  + valid_fill_opacity(context : any, diagnostics : any) : bool
+  + valid_font_size(context : any, diagnostics : any) : bool
+  + valid_stroke_opacity(context : any, diagnostics : any) : bool
+  + valid_stroke_width(context : any, diagnostics : any) : bool
+}
+DiagramElement <|-- di::Edge
+DiagramElement <|-- di::Shape
+Shape <|-- di::Diagram
+di::Bounds "0..1" --* "1..1" di::Shape : bounds18
+di::Fill "0..1" -- "1..1" di::Style : fill19
+di::Color "0..1" --* "1..1" di::Style : fillColor21
+di::Color "0..1" --* "1..1" di::Style : fontColor26
+di::DiagramElement "1..1" *-- "0..1" di::Style : localStyle5
+di::DiagramElement "1..1" -- "0..9999" di::EObject : modelElement9
+di::DiagramElement "1..1" -- "0..9999" di::DiagramElement : ownedElement3
+di::DiagramElement "1..1" -- "0..1" di::DiagramElement : owningElement1
+di::DiagramElement "1..1" -- "0..1" di::Style : sharedStyle6
+di::DiagramElement "1..1" -- "1..1" di::Edge : source11
+di::Color "0..1" --* "1..1" di::Style : strokeColor23
+di::DiagramElement "1..1" -- "1..1" di::Edge : target13
+di::Edge "1..1" *-- "0..9999" di::Point : waypoint16
+@enduml

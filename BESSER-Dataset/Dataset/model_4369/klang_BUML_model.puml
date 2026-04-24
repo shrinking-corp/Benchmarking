@@ -1,0 +1,105 @@
+@startuml
+class ActorEvent {
+}
+class Event {
+}
+class GlobalEvent {
+}
+enum Keys {
+  A
+  B
+  C
+  D
+  DOWN
+  E
+  ENTER
+  F
+  G
+  H
+  I
+  J
+  K
+  L
+  LEFT
+  M
+  N
+  O
+  P
+  Q
+  R
+  RIGHT
+  S
+  SPACE
+  T
+  U
+  UP
+  V
+  W
+  X
+  Y
+  Z
+}
+abstract class klang::AbstractActor {
+  + name : str
+  + subject : str
+  + subjectType : str
+  + getVariableDeclaration(variableName : any) : str
+  + getVariableDeclarations(variableName : any) : void
+  + isInLocalScope(variableName : any) : bool
+  + isInParentScope(variableName : any) : bool
+  + isInScope(variableName : any) : bool
+}
+abstract class klang::ActorEvent {
+}
+class klang::ClickEvent {
+}
+class klang::CollisionEvent {
+}
+abstract class klang::Event {
+  + matchingEvent(other : any) : bool
+}
+class klang::EventHandler {
+}
+class klang::Expression {
+}
+class klang::GameStartEvent {
+}
+abstract class klang::GlobalEvent {
+}
+class klang::KeyPressEvent {
+  + key : str
+}
+class klang::MessageReceivedEvent {
+  + name : str
+}
+class klang::Program {
+}
+class klang::SceneActor {
+}
+class klang::SpriteActor {
+}
+class klang::Statement {
+}
+abstract class klang::TreeNode {
+}
+class klang::VariableDeclaration {
+  + name : str
+}
+ActorEvent <|-- klang::ClickEvent
+ActorEvent <|-- klang::CollisionEvent
+Event <|-- klang::ActorEvent
+Event <|-- klang::GlobalEvent
+GlobalEvent <|-- klang::GameStartEvent
+GlobalEvent <|-- klang::KeyPressEvent
+GlobalEvent <|-- klang::MessageReceivedEvent
+klang::AbstractActor "1..1" *-- "0..9999" klang::EventHandler : eventHandlers7
+klang::Expression "0..1" --* "1..1" klang::VariableDeclaration : expression6
+klang::AbstractActor "1..1" *-- "0..9999" klang::VariableDeclaration : localVariables8
+klang::Program "0..1" -- "1..1" klang::SceneActor : program0
+klang::Program "0..1" -- "1..1" klang::SpriteActor : program1
+klang::Event "0..1" --* "1..1" klang::EventHandler : referenceEvent4
+klang::Program "1..1" *-- "0..1" klang::SceneActor : sceneActor11
+klang::Program "1..1" *-- "0..9999" klang::SpriteActor : spriteActors12
+klang::EventHandler "1..1" *-- "0..9999" klang::Statement : statements3
+klang::CollisionEvent "1..1" -- "0..1" klang::SpriteActor : target10
+@enduml

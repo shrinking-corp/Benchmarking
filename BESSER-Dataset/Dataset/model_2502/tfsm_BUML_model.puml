@@ -54,12 +54,12 @@ class tfsm::UpperEqualClockConstraint {
 }
 BinaryClockConstraint <|-- tfsm::AndClockConstraint
 BinaryClockConstraint <|-- tfsm::OrClockConstraint
-ClockConstraintOperation <|-- tfsm::BinaryClockConstraint
-ClockConstraintOperation <|-- tfsm::ClockConstraint
 ClockConstraint <|-- tfsm::LowerClockConstraint
 ClockConstraint <|-- tfsm::LowerEqualClockConstraint
 ClockConstraint <|-- tfsm::UpperClockConstraint
 ClockConstraint <|-- tfsm::UpperEqualClockConstraint
+ClockConstraintOperation <|-- tfsm::BinaryClockConstraint
+ClockConstraintOperation <|-- tfsm::ClockConstraint
 FSM <|-- tfsm::TimedFSM
 FinalState <|-- tfsm::TimedFinalState
 InitialState <|-- tfsm::TimedInitialState
@@ -69,9 +69,9 @@ TimedState <|-- tfsm::TimedInitialState
 Transition <|-- tfsm::TimedTransition
 tfsm::Clock "1..1" -- "1..1" tfsm::ClockConstraint : clock6
 tfsm::Clock "1..1" -- "1..1" tfsm::ClockReset : clock8
-tfsm::TimedTransition "1..1" *-- "0..9999" tfsm::ClockReset : clockresets2
-tfsm::TimedFSM "1..1" *-- "0..9999" tfsm::Clock : clocks0
-tfsm::ClockConstraintOperation "1..1" --* "1..1" tfsm::BinaryClockConstraint : left11
+tfsm::ClockReset "0..9999" --* "1..1" tfsm::TimedTransition : clockresets2
+tfsm::Clock "0..9999" --* "1..1" tfsm::TimedFSM : clocks0
+tfsm::BinaryClockConstraint "1..1" *-- "1..1" tfsm::ClockConstraintOperation : left11
 tfsm::BinaryClockConstraint "1..1" *-- "1..1" tfsm::ClockConstraintOperation : right13
 tfsm::ClockConstraintOperation "0..1" --* "1..1" tfsm::TimedState : stateguard1
 tfsm::ClockConstraintOperation "0..1" --* "1..1" tfsm::TimedTransition : transitionguard3

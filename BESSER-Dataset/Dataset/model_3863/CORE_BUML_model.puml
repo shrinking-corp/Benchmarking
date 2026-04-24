@@ -42,10 +42,10 @@ abstract class core::COREStrategy {
 }
 CORECompositionSpecification <|-- core::COREBinding
 CORECompositionSpecification <|-- core::COREPattern
-COREModelElement <|-- core::COREFeature
-COREModelElement <|-- core::COREImpactModelElement
 COREModel <|-- core::COREFeatureModel
 COREModel <|-- core::COREImpactModel
+COREModelElement <|-- core::COREFeature
+COREModelElement <|-- core::COREImpactModelElement
 CORENamedElement <|-- core::COREConcern
 CORENamedElement <|-- core::COREConfiguration
 CORENamedElement <|-- core::COREModel
@@ -53,24 +53,24 @@ CORENamedElement <|-- core::COREModelElement
 CORENamedElement <|-- core::COREStrategy
 core::CORECompositionSpecification "0..9999" -- "1..1" core::COREReuse : compositions38
 core::COREConfiguration "0..9999" --* "1..1" core::COREFeature : configurations10
-core::COREStrategy "1..1" -- "0..9999" core::COREConfiguration : configurations21
-core::COREMapping "0..9999" -- "1..1" core::COREBinding : coreMappings12
-core::COREModelElement "0..9999" -- "1..1" core::COREInterface : customizable27
-core::COREInterface "1..1" -- "0..9999" core::COREImpactModelElement : impacted33
-core::COREInterface "1..1" --* "1..1" core::COREConcern : interface6
-core::COREModelElement "1..1" -- "1..1" core::COREMapping : mappedFrom18
-core::COREModelElement "1..1" -- "1..1" core::COREMapping : mappedTo15
-core::COREModelElement "0..9999" -- "1..1" core::COREModel : modelElements1
-core::COREModel "2..9999" -- "1..1" core::COREConcern : models4
-core::COREModel "0..9999" -- "1..1" core::COREFeature : realizedBy8
-core::COREModel "1..1" -- "0..9999" core::COREFeature : realizes3
+core::COREConfiguration "0..9999" -- "1..1" core::COREStrategy : configurations21
+core::COREBinding "1..1" -- "0..9999" core::COREMapping : coreMappings12
+core::COREInterface "1..1" -- "0..9999" core::COREModelElement : customizable27
+core::COREImpactModelElement "0..9999" -- "1..1" core::COREInterface : impacted33
+core::COREConcern "1..1" *-- "1..1" core::COREInterface : interface6
+core::COREMapping "1..1" -- "1..1" core::COREModelElement : mappedFrom18
+core::COREMapping "1..1" -- "1..1" core::COREModelElement : mappedTo15
+core::COREModel "1..1" -- "0..9999" core::COREModelElement : modelElements1
+core::COREConcern "1..1" -- "2..9999" core::COREModel : models4
+core::COREFeature "1..1" -- "0..9999" core::COREModel : realizedBy8
+core::COREFeature "0..9999" -- "1..1" core::COREModel : realizes3
 core::COREConcern "1..1" -- "1..1" core::COREReuse : reusedConcern35
-core::COREConfiguration "1..1" -- "0..9999" core::COREConcern : reusedConcern44
-core::COREReuse "0..9999" --* "1..1" core::COREModel : reuses0
+core::COREConcern "0..9999" -- "1..1" core::COREConfiguration : reusedConcern44
+core::COREModel "1..1" *-- "0..9999" core::COREReuse : reuses0
 core::COREFeature "0..9999" -- "1..1" core::COREInterface : selectable24
 core::COREFeature "1..9999" -- "1..1" core::COREReuse : selected41
-core::COREFeature "1..9999" -- "1..1" core::COREConfiguration : selected47
+core::COREConfiguration "1..1" -- "1..9999" core::COREFeature : selected47
 core::CORECompositionSpecification "1..1" -- "1..1" core::COREModel : source13
-core::COREStrategy "0..9999" --* "1..1" core::COREFeature : strategies9
-core::COREModelElement "0..9999" -- "1..1" core::COREInterface : usable30
+core::COREFeature "1..1" *-- "0..9999" core::COREStrategy : strategies9
+core::COREInterface "1..1" -- "0..9999" core::COREModelElement : usable30
 @enduml

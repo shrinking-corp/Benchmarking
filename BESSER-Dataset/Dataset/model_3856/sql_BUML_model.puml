@@ -315,6 +315,7 @@ ColumnOperation <|-- sql::column::ColumnOperationMax
 ColumnOperation <|-- sql::column::ColumnOperationMin
 ColumnOperation <|-- sql::column::ColumnOperationSome
 ColumnOperation <|-- sql::column::ColumnOperationSum
+Condition <|-- sql::condition::SimpleCondition
 ConditionOperation <|-- sql::condition::ConditionOperationEqual
 ConditionOperation <|-- sql::condition::ConditionOperationGreatEqual
 ConditionOperation <|-- sql::condition::ConditionOperationGreater
@@ -322,7 +323,6 @@ ConditionOperation <|-- sql::condition::ConditionOperationLessEqual
 ConditionOperation <|-- sql::condition::ConditionOperationLesser
 ConditionOperation <|-- sql::condition::ConditionOperationUnEqual
 ConditionOperation <|-- sql::condition::ConditionOperationUnEqual2
-Condition <|-- sql::condition::SimpleCondition
 DataType <|-- sql::sqlDataTypes::Boolean
 DataType <|-- sql::sqlDataTypes::Date
 DataType <|-- sql::sqlDataTypes::Double
@@ -331,9 +331,9 @@ DataType <|-- sql::sqlDataTypes::Integer
 DataType <|-- sql::sqlDataTypes::Real
 DataType <|-- sql::sqlDataTypes::String
 Date <|-- sql::sqlDataTypes::TimeStamp
+Expression <|-- sql::expression::SimpleExpression
 ExpressionOperation <|-- sql::expression::AndOrExpressionOperation
 ExpressionOperation <|-- sql::expression::ExpressionOperationNot
-Expression <|-- sql::expression::SimpleExpression
 JoinOperation <|-- sql::from::JoinOperationInner
 JoinOperation <|-- sql::from::JoinOperationLeft
 JoinOperation <|-- sql::from::JoinOperationOuter
@@ -365,18 +365,18 @@ Term <|-- sql::term::CountStarTerm
 Term <|-- sql::term::NullTerm
 Term <|-- sql::term::SimpleTerm
 Term <|-- sql::term::StarTerm
+Value <|-- sql::value::ConditionValue
+Value <|-- sql::value::FunctionValue
+Value <|-- sql::value::SimpleValue
 ValueFrontOperation <|-- sql::value::ValueFrontOperationMinus
 ValueFrontOperation <|-- sql::value::ValueFrontOperationPlus
 ValueOperation <|-- sql::value::ValueFrontOperation
 ValueOperation <|-- sql::value::ValueOperationDivide
 ValueOperation <|-- sql::value::ValueOperationMultiply
 ValueOperation <|-- sql::value::ValueOperationParallel
-Value <|-- sql::value::ConditionValue
-Value <|-- sql::value::FunctionValue
-Value <|-- sql::value::SimpleValue
-sql::term::ColumnTerm "1..1" *-- "0..1" column::Column : column88
+column::Column "0..1" --* "1..1" sql::term::ColumnTerm : column88
 column::SingleColumnExpression "1..9999" --* "1..1" sql::column::ColumnExpression : columnExpressions17
-sql::orderBy::OrderByColumnExpression "1..1" -- "1..1" column::Column : columnReference41
+column::Column "1..1" -- "1..1" sql::orderBy::OrderByColumnExpression : columnReference41
 column::Column "0..1" -- "1..1" sql::term::ColumnTerm : columnReference91
 column::ColumnExpression "1..1" --* "1..1" sql::select::SelectExpression : columns1
 condition::Condition "1..1" --* "1..1" sql::value::ConditionValue : condition82
@@ -386,7 +386,7 @@ expression::Expression "1..1" --* "1..1" sql::from::JoinTableExpression : expres
 expression::Expression "1..1" --* "1..1" sql::where::WhereExpression : expression38
 expression::Expression "1..9999" --* "1..1" sql::groupBy::GroupByExpression : expression44
 expression::Expression "1..1" --* "1..1" sql::having::HavingExpression : expression46
-sql::select::SelectExpression "1..1" *-- "1..1" from::FromExpression : from3
+from::FromExpression "1..1" --* "1..1" sql::select::SelectExpression : from3
 sql::value::SimpleValue "1..1" *-- "0..1" value::ValueFrontOperation : frontOperation80
 groupBy::GroupByExpression "0..1" --* "1..1" sql::select::SelectExpression : groupBy7
 having::HavingExpression "0..1" --* "1..1" sql::select::SelectExpression : having9
@@ -396,33 +396,33 @@ from::TableExpression "1..1" --* "1..1" sql::from::JoinTableExpression : joinTab
 limit::LimitExpression "0..1" --* "1..1" sql::select::SelectExpression : limit15
 expression::ExpressionOperationNot "0..1" --* "1..1" sql::expression::SimpleExpression : notOperation62
 column::ColumnOperation "0..1" --* "1..1" sql::column::SingleColumnExpression : operation19
-sql::condition::OperationCondition "1..1" *-- "1..1" condition::ConditionOperation : operation65
+condition::ConditionOperation "1..1" --* "1..1" sql::condition::OperationCondition : operation65
 expression::ExpressionOperationNot "0..1" --* "1..1" sql::condition::IsNullCondition : operationNot66
-sql::condition::InCondition "1..1" *-- "0..1" expression::ExpressionOperationNot : operationNot72
+expression::ExpressionOperationNot "0..1" --* "1..1" sql::condition::InCondition : operationNot72
 expression::ExpressionOperationNot "0..1" --* "1..1" sql::condition::LikeCondition : operationNot75
 expression::AndOrExpressionOperation "0..1" --* "1..1" sql::expression::SimpleExpression : operations59
-value::ValueOperation "0..1" --* "1..1" sql::value::SimpleValue : operations78
+sql::value::SimpleValue "1..1" *-- "0..1" value::ValueOperation : operations78
 orderBy::OrderByExpression "0..1" --* "1..1" sql::select::SelectExpression : orderBy13
-sql::select::SelectExpression "1..1" *-- "0..1" parameter::SelectParameter : parameter0
-sql::column::SingleColumnExpression "1..1" *-- "0..1" parameter::SelectParameter : parameter21
+parameter::SelectParameter "0..1" --* "1..1" sql::select::SelectExpression : parameter0
+parameter::SelectParameter "0..1" --* "1..1" sql::column::SingleColumnExpression : parameter21
 orderBy::OrderByParameter "0..1" --* "1..1" sql::orderBy::OrderByExpression : parameter40
-value::Value "0..9999" --* "1..1" sql::value::FunctionValue : parameters84
+sql::value::FunctionValue "1..1" *-- "0..9999" value::Value : parameters84
 SelectExpression "0..1" --* "1..1" sql::from::TableExpression : selectExpression25
 SelectExpression "1..1" --* "1..1" sql::orderBy::OrderBySelectExpression : selectExpression42
-sql::set::SetExpression "1..1" *-- "1..1" SelectExpression : selectExpression48
+SelectExpression "1..1" --* "1..1" sql::set::SetExpression : selectExpression48
 SelectExpression "1..1" --* "1..1" sql::condition::ExistsCondition : selectExpression68
 SelectExpression "0..1" --* "1..1" sql::condition::InCondition : selectExpression70
 parameter::SelectParameter "0..1" --* "1..1" sql::set::SetOperationUnion : selectParameter52
 parameter::SelectParameterDistinct "0..1" --* "1..1" sql::set::SetOperationMinus : selectParameter54
 parameter::SelectParameterDistinct "0..1" --* "1..1" sql::set::SetOperationExcept : selectParameter55
-sql::set::SetOperationIntersect "1..1" *-- "0..1" parameter::SelectParameterDistinct : selectParameter57
-sql::select::SelectExpression "1..1" *-- "0..1" set::SetExpression : set11
+parameter::SelectParameterDistinct "0..1" --* "1..1" sql::set::SetOperationIntersect : selectParameter57
+set::SetExpression "0..1" --* "1..1" sql::select::SelectExpression : set11
 set::SetOperation "1..1" --* "1..1" sql::set::SetExpression : setOperation50
-sql::from::TableExpression "1..1" *-- "0..1" from::Table : table26
+from::Table "0..1" --* "1..1" sql::from::TableExpression : table26
 from::TableExpression "1..1" --* "1..1" sql::from::TableListExpression : table28
 from::Table "0..1" -- "1..1" sql::term::ColumnTerm : tableReference86
 from::TableListExpression "1..9999" --* "1..1" sql::from::FromExpression : tables24
-term::Term "1..2" --* "1..1" sql::value::SimpleValue : terms77
+sql::value::SimpleValue "1..1" *-- "1..2" term::Term : terms77
 sql::condition::SimpleCondition "1..1" *-- "1..9999" value::Value : values64
-where::WhereExpression "0..1" --* "1..1" sql::select::SelectExpression : where5
+sql::select::SelectExpression "1..1" *-- "0..1" where::WhereExpression : where5
 @enduml

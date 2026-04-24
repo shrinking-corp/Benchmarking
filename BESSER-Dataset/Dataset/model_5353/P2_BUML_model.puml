@@ -1,0 +1,56 @@
+@startuml
+class ModelElement {
+}
+enum RepositoryType {
+  Artifact
+  Combined
+  Metadata
+}
+enum RequirementType {
+  FEATURE
+  NONE
+  PROJECT
+}
+enum VersionSegment {
+  Major
+  Micro
+  Minor
+  Qualifier
+}
+class p2::Configuration {
+  + arch : str
+  + oS : str
+  + wS : str
+}
+class p2::ProfileDefinition {
+  + includeSourceBundles : bool
+  + setRepositories(repositories : any) : void
+  + setRequirements(requirements : any) : void
+}
+class p2::Repository {
+  + type : str
+  + uRL : str
+}
+class p2::RepositoryList {
+  + name : str
+}
+class p2::Requirement {
+  + filter : str
+  + greedy : bool
+  + iD : str
+  + name : str
+  + namespace : str
+  + optional : bool
+  + type : str
+  + versionRange : str
+  + setVersionRange(segment : any, version : any) : void
+}
+ModelElement <|-- p2::Configuration
+ModelElement <|-- p2::ProfileDefinition
+ModelElement <|-- p2::Repository
+ModelElement <|-- p2::RepositoryList
+ModelElement <|-- p2::Requirement
+p2::ProfileDefinition "1..1" *-- "0..9999" p2::Repository : repositories1
+p2::Repository "0..9999" --* "1..1" p2::RepositoryList : repositories3
+p2::ProfileDefinition "1..1" *-- "0..9999" p2::Requirement : requirements0
+@enduml

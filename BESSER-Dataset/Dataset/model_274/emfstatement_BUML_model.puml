@@ -1,0 +1,148 @@
+@startuml
+class EClassifier {
+}
+class EDataType {
+}
+class EModelElement {
+}
+class ENamedElement {
+}
+class EStructuralFeature {
+}
+class ETypedElement {
+}
+class ecore::EAnnotation {
+  + source : str
+}
+class ecore::EAttribute {
+  + iD : bool
+}
+class ecore::EClass {
+  + abstract : bool
+  + interface : bool
+}
+abstract class ecore::EClassifier {
+}
+class ecore::EDataType {
+}
+class ecore::EEnum {
+}
+class ecore::EEnumLiteral {
+  + literal : str
+}
+class ecore::EFactory {
+  + convertToString(eDataType : any, instanceValue : any) : str
+  + create(eClass : any) : str
+  + createFromString(eDataType : any, literalValue : any) : str
+}
+class ecore::EGenericType {
+  + isInstance(object : any) : bool
+}
+abstract class ecore::EModelElement {
+  + getEAnnotation(source : any) : str
+}
+abstract class ecore::ENamedElement {
+  + name : str
+}
+class ecore::EObject {
+  + eAllContents() : void
+  + eClass() : str
+  + eContainer() : str
+  + eContainingFeature() : EStructuralFeature
+  + eContainmentFeature() : str
+  + eContents() : void
+  + eCrossReferences() : void
+  + eGet(feature : any, resolve : any) : str
+  + eInvoke(arguments : any, operation : any) : str
+  + eIsProxy() : bool
+  + eIsSet(feature : any) : bool
+  + eResource() : str
+  + eSet(feature : any, newValue : any) : void
+  + eUnset(feature : any) : void
+}
+class ecore::EOperation {
+}
+class ecore::EPackage {
+  + nsPrefix : str
+  + nsURI : str
+  + getEClassifier(name : any) : EClassifier
+}
+class ecore::EParameter {
+}
+class ecore::EReference {
+  + container : bool
+  + containment : bool
+  + resolveProxies : bool
+}
+class ecore::EStringToStringMapEntry {
+  + key : str
+  + value : str
+}
+abstract class ecore::EStructuralFeature {
+  + changeable : bool
+  + defaultValue : str
+  + defaultValueLiteral : str
+  + derived : bool
+  + transient : bool
+  + unsettable : bool
+  + volatile : bool
+}
+class ecore::ETypeParameter {
+}
+abstract class ecore::ETypedElement {
+  + lowerBound : int
+  + ordered : bool
+  + unique : bool
+  + upperBound : int
+}
+EClassifier <|-- ecore::EClass
+EClassifier <|-- ecore::EDataType
+EDataType <|-- ecore::EEnum
+EModelElement <|-- ecore::EAnnotation
+EModelElement <|-- ecore::EFactory
+EModelElement <|-- ecore::ENamedElement
+ENamedElement <|-- ecore::EClassifier
+ENamedElement <|-- ecore::EEnumLiteral
+ENamedElement <|-- ecore::EPackage
+ENamedElement <|-- ecore::ETypeParameter
+ENamedElement <|-- ecore::ETypedElement
+EStructuralFeature <|-- ecore::EAttribute
+EStructuralFeature <|-- ecore::EReference
+ETypedElement <|-- ecore::EOperation
+ETypedElement <|-- ecore::EParameter
+ETypedElement <|-- ecore::EStructuralFeature
+ecore::EAnnotation "1..1" *-- "0..9999" ecore::EObject : contents2
+ecore::EAnnotation "1..1" *-- "0..9999" ecore::EStringToStringMapEntry : details0
+ecore::EClass "1..1" -- "0..9999" ecore::EGenericType : eAllGenericSuperTypes14
+ecore::EAnnotation "0..9999" --* "1..1" ecore::EModelElement : eAnnotations22
+ecore::EGenericType "0..9999" --* "1..1" ecore::ETypeParameter : eBounds66
+ecore::EClassifier "0..1" -- "1..1" ecore::EGenericType : eClassifier63
+ecore::EClassifier "0..9999" --* "1..1" ecore::EPackage : eClassifiers30
+ecore::EClass "0..1" -- "1..1" ecore::EOperation : eContainingClass23
+ecore::EClass "0..1" -- "1..1" ecore::EStructuralFeature : eContainingClass42
+ecore::EEnum "0..1" -- "1..1" ecore::EEnumLiteral : eEnum19
+ecore::EFactory "1..1" -- "1..1" ecore::EPackage : eFactoryInstance29
+ecore::EGenericType "0..9999" --* "1..1" ecore::EOperation : eGenericExceptions26
+ecore::EClass "1..1" *-- "0..9999" ecore::EGenericType : eGenericSuperTypes12
+ecore::EGenericType "0..1" --* "1..1" ecore::ETypedElement : eGenericType45
+ecore::EEnum "1..1" *-- "0..9999" ecore::EEnumLiteral : eLiterals18
+ecore::EGenericType "0..1" --* "1..1" ecore::EGenericType : eLowerBound58
+ecore::EAnnotation "1..1" -- "0..1" ecore::EModelElement : eModelElement1
+ecore::EOperation "0..1" -- "1..1" ecore::EParameter : eOperation38
+ecore::EClass "1..1" *-- "0..9999" ecore::EOperation : eOperations9
+ecore::EReference "1..1" -- "0..1" ecore::EReference : eOpposite41
+ecore::EClassifier "1..1" -- "0..1" ecore::EPackage : ePackage17
+ecore::EFactory "1..1" -- "1..1" ecore::EPackage : ePackage20
+ecore::EOperation "1..1" *-- "0..9999" ecore::EParameter : eParameters25
+ecore::EClassifier "1..1" -- "1..1" ecore::EGenericType : eRawType54
+ecore::EClass "1..1" *-- "0..9999" ecore::EStructuralFeature : eStructuralFeatures10
+ecore::EPackage "1..1" *-- "0..9999" ecore::EPackage : eSubpackages33
+ecore::EPackage "1..1" -- "0..1" ecore::EPackage : eSuperPackage36
+ecore::EClass "1..1" -- "0..9999" ecore::EClass : eSuperTypes8
+ecore::EClassifier "0..1" -- "1..1" ecore::ETypedElement : eType44
+ecore::EGenericType "0..9999" --* "1..1" ecore::EGenericType : eTypeArguments52
+ecore::EGenericType "1..1" -- "0..1" ecore::ETypeParameter : eTypeParameter60
+ecore::EOperation "1..1" *-- "0..9999" ecore::ETypeParameter : eTypeParameters24
+ecore::EGenericType "0..1" --* "1..1" ecore::EGenericType : eUpperBound49
+ecore::EAnnotation "1..1" -- "0..9999" ecore::EObject : references4
+@enduml

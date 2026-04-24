@@ -381,9 +381,6 @@ DaoOperation <|-- dom::QueryOperation
 Dependant <|-- dom::Dao
 Dependant <|-- dom::Entity
 Dependant <|-- dom::Service
-ExpressionFlag <|-- dom::AvailableFlag
-ExpressionFlag <|-- dom::ReadOnlyFlag
-ExpressionFlag <|-- dom::RequiredFlag
 Expression <|-- dom::AggregateFunction
 Expression <|-- dom::AliasedExpression
 Expression <|-- dom::BetweenExpression
@@ -404,6 +401,9 @@ Expression <|-- dom::QueryParameterValue
 Expression <|-- dom::SubQuery
 Expression <|-- dom::TrimFunction
 Expression <|-- dom::UnaryExpression
+ExpressionFlag <|-- dom::AvailableFlag
+ExpressionFlag <|-- dom::ReadOnlyFlag
+ExpressionFlag <|-- dom::RequiredFlag
 FromRange <|-- dom::FromClass
 FromRange <|-- dom::InClass
 FromRange <|-- dom::InCollection
@@ -435,10 +435,10 @@ QlStatement <|-- dom::DeleteStatement
 QlStatement <|-- dom::InsertStatement
 QlStatement <|-- dom::SelectStatement
 QlStatement <|-- dom::UpdateStatement
+QueryParameter <|-- dom::Parameter
 QueryParameterReference <|-- dom::Attribute
 QueryParameterReference <|-- dom::IElementWithNoName
 QueryParameterReference <|-- dom::Parameter
-QueryParameter <|-- dom::Parameter
 ReferenceableByXmadslVariable <|-- dom::Attribute
 ReferenceableByXmadslVariable <|-- dom::IElementWithNoName
 ReferenceableByXmadslVariable <|-- dom::Property
@@ -448,150 +448,150 @@ SelectStatement <|-- dom::SelectProperties
 Type <|-- dom::ComplexType
 dom::AggregateFunction "1..1" *-- "0..1" dom::Expression : aggregateExpression288
 dom::Attribute "0..9999" -- "1..1" dom::ComplexType : allAttributes1
-dom::CaseExpression "1..1" *-- "0..9999" dom::AltWhenClause : altWhenClause305
+dom::AltWhenClause "0..9999" --* "1..1" dom::CaseExpression : altWhenClause305
 dom::Expression "0..9999" --* "1..1" dom::SelectClass : arguments265
 dom::Expression "0..9999" --* "1..1" dom::FunctionCall : arguments280
 dom::PropertyAssignment "0..9999" --* "1..1" dom::UpdateStatement : assignment235
-dom::AttributeProperty "0..9999" --* "1..1" dom::Attribute : attributProperties97
+dom::Attribute "1..1" *-- "0..9999" dom::AttributeProperty : attributProperties97
 dom::Attribute "0..1" -- "1..1" dom::AttributeSortOrder : attribute126
 dom::Attribute "0..1" -- "1..1" dom::DaoFeature : attribute129
-dom::QueryParameter "1..1" -- "0..1" dom::Attribute : attribute170
+dom::Attribute "0..1" -- "1..1" dom::QueryParameter : attribute170
 dom::Attribute "0..1" -- "1..1" dom::CallInputParameter : attribute212
 dom::Attribute "0..1" -- "1..1" dom::CallOutputParameter : attribute215
 dom::Attribute "0..1" -- "1..1" dom::QueryParameterValue : attribute293
 dom::Attribute "0..1" -- "1..1" dom::FeatureReference : attribute38
-dom::Entity "1..1" *-- "0..9999" dom::AttributeGroup : attributeGroups65
-dom::ComplexType "1..1" *-- "0..9999" dom::Attribute : attributes0
+dom::AttributeGroup "0..9999" --* "1..1" dom::Entity : attributeGroups65
+dom::Attribute "0..9999" --* "1..1" dom::ComplexType : attributes0
 dom::AttributeGroup "1..1" *-- "0..9999" dom::AttributeSortOrder : attributes121
 dom::Attribute "0..9999" -- "1..1" dom::DataBaseConstraint : attributes193
-dom::TrimFunction "1..1" *-- "0..1" dom::StringLiteralValue : character282
-dom::CollectionFunction "0..1" --* "1..1" dom::AggregateFunction : collection290
+dom::StringLiteralValue "0..1" --* "1..1" dom::TrimFunction : character282
+dom::AggregateFunction "1..1" *-- "0..1" dom::CollectionFunction : collection290
 dom::Column "1..1" -- "0..1" dom::Type : columnType176
-dom::Dao "1..1" *-- "0..9999" dom::Column : columns141
+dom::Column "0..9999" --* "1..1" dom::Dao : columns141
 dom::Column "0..9999" --* "1..1" dom::Column : columns180
-dom::ManyToOne "1..1" *-- "0..9999" dom::Column : columns187
+dom::Column "0..9999" --* "1..1" dom::ManyToOne : columns187
 dom::Column "0..9999" --* "1..1" dom::OneToMany : columns190
 dom::ApplicationSession "1..1" *-- "0..1" dom::ConditionsBlock : conditionsBlock203
 dom::ConditionsBlock "0..1" --* "1..1" dom::Entity : conditionsBlock67
 dom::AttributeValidationProperty "1..1" *-- "0..9999" dom::Constraint : constraints116
-dom::DataBaseConstraint "0..9999" --* "1..1" dom::Dao : dataBaseConstraints139
-dom::Type "0..1" -- "1..1" dom::Attribute : dataType103
+dom::Dao "1..1" *-- "0..9999" dom::DataBaseConstraint : dataBaseConstraints139
+dom::Attribute "1..1" -- "0..1" dom::Type : dataType103
 dom::DelegateOperation "0..1" -- "1..1" dom::Operation : delegate12
 dom::DelegateOperation "0..9999" --* "1..1" dom::Service : delegateOperations7
-dom::Service "1..1" -- "0..9999" dom::Dependant : dependencies4
-dom::Expression "0..1" --* "1..1" dom::CaseExpression : elseExpression299
+dom::Dependant "0..9999" -- "1..1" dom::Service : dependencies4
+dom::CaseExpression "1..1" *-- "0..1" dom::Expression : elseExpression299
 dom::Dao "1..1" -- "0..1" dom::Entity : entity131
 dom::Entity "0..1" -- "1..1" dom::InsertStatement : entity221
-dom::Entity "0..1" -- "1..1" dom::DeleteStatement : entity228
+dom::DeleteStatement "1..1" -- "0..1" dom::Entity : entity228
 dom::Entity "0..1" -- "1..1" dom::UpdateStatement : entity233
 dom::Entity "0..1" -- "1..1" dom::FromClass : entity267
-dom::JoinEntity "0..1" -- "1..1" dom::Join : entity269
+dom::Join "1..1" -- "0..1" dom::JoinEntity : entity269
 dom::Expression "0..1" --* "1..1" dom::LikeExpression : escape353
 dom::EqualityExpr "0..1" --* "1..1" dom::ExpressionFlag : expression112
 dom::BoolLiteral "0..1" --* "1..1" dom::DerivedFlag : expression113
 dom::BoolLiteral "0..1" --* "1..1" dom::TransientFlag : expression114
-dom::InsertStatement "1..1" *-- "0..9999" dom::Expression : expression223
+dom::Expression "0..9999" --* "1..1" dom::InsertStatement : expression223
 dom::Expression "0..1" --* "1..1" dom::PropertyAssignment : expression242
 dom::Expression "0..1" --* "1..1" dom::SortOrderElement : expression260
 dom::Expression "0..1" --* "1..1" dom::Join : expression274
 dom::Expression "0..1" --* "1..1" dom::QuantifiedExpression : expression296
-dom::Expression "0..1" --* "1..1" dom::CaseExpression : expression302
-dom::Expression "0..1" --* "1..1" dom::AliasedExpression : expression326
+dom::CaseExpression "1..1" *-- "0..1" dom::Expression : expression302
+dom::AliasedExpression "1..1" *-- "0..1" dom::Expression : expression326
 dom::Expression "0..1" --* "1..1" dom::NotExpression : expression333
-dom::InExpression "1..1" *-- "0..1" dom::Expression : expression335
+dom::Expression "0..1" --* "1..1" dom::InExpression : expression335
 dom::BetweenExpression "1..1" *-- "0..1" dom::Expression : expression340
 dom::Expression "0..1" --* "1..1" dom::LikeExpression : expression348
-dom::MemberOfExpression "1..1" *-- "0..1" dom::Expression : expression356
+dom::Expression "0..1" --* "1..1" dom::MemberOfExpression : expression356
 dom::Expression "0..1" --* "1..1" dom::UnaryExpression : expression358
 dom::Expression "0..9999" --* "1..1" dom::ParenthesizedExpression : expressions324
-dom::FeatureReference "0..9999" --* "1..1" dom::DataView : featureReferences34
+dom::DataView "1..1" *-- "0..9999" dom::FeatureReference : featureReferences34
 dom::DelegateOperation "1..1" *-- "0..1" dom::Expression : filter26
-dom::ValidatorReference "0..1" --* "1..1" dom::AttributeValidationProperty : format117
-dom::SelectStatement "1..1" *-- "0..9999" dom::FromRange : from245
+dom::AttributeValidationProperty "1..1" *-- "0..1" dom::ValidatorReference : format117
+dom::FromRange "0..9999" --* "1..1" dom::SelectStatement : from245
 dom::Expression "0..1" --* "1..1" dom::TrimFunction : from283
-dom::Expression "0..1" --* "1..1" dom::CastFunction : from286
-dom::Function "0..9999" --* "1..1" dom::ApplicationSession : functions201
-dom::SelectStatement "1..1" *-- "0..9999" dom::Expression : groupBy252
+dom::CastFunction "1..1" *-- "0..1" dom::Expression : from286
+dom::ApplicationSession "1..1" *-- "0..9999" dom::Function : functions201
+dom::Expression "0..9999" --* "1..1" dom::SelectStatement : groupBy252
 dom::Expression "0..1" --* "1..1" dom::SelectStatement : having255
 dom::Attribute "0..1" -- "1..1" dom::Entity : identifier78
 dom::Expression "0..1" --* "1..1" dom::InExpression : in337
-dom::CallableStatement "1..1" *-- "0..9999" dom::CallInputParameter : inParameter206
+dom::CallInputParameter "0..9999" --* "1..1" dom::CallableStatement : inParameter206
 dom::Attribute "1..1" *-- "0..1" dom::IncrementerReference : incrementerReference92
 dom::Expression "0..9999" --* "1..1" dom::PropertyValue : index277
 dom::Join "0..9999" --* "1..1" dom::SelectStatement : join247
-dom::Entity "1..1" -- "0..1" dom::AttributeGroup : key72
-dom::Expression "0..1" --* "1..1" dom::BinaryExpression : left328
-dom::Expression "0..1" --* "1..1" dom::BetweenExpression : left342
+dom::AttributeGroup "0..1" -- "1..1" dom::Entity : key72
+dom::BinaryExpression "1..1" *-- "0..1" dom::Expression : left328
+dom::BetweenExpression "1..1" *-- "0..1" dom::Expression : left342
 dom::ComplexType "0..1" -- "1..1" dom::Mapper : left49
-dom::PropertyMapping "1..1" -- "0..1" dom::Attribute : left56
+dom::Attribute "0..1" -- "1..1" dom::PropertyMapping : left56
 dom::Expression "0..1" --* "1..1" dom::LikeExpression : like350
 dom::Dao "1..1" *-- "0..9999" dom::ManyToMany : manyToManyAssociations149
-dom::ManyToOne "0..9999" --* "1..1" dom::Dao : manyToOneAssociations143
-dom::DataBaseConstraint "0..1" -- "1..1" dom::Dao : naturalKey163
+dom::Dao "1..1" *-- "0..9999" dom::ManyToOne : manyToOneAssociations143
+dom::Dao "1..1" -- "0..1" dom::DataBaseConstraint : naturalKey163
 dom::Column "0..9999" -- "1..1" dom::Dao : naturalKeyColumns154
 dom::Attribute "0..1" -- "1..1" dom::CallOutputParameter : nestedAttribute218
-dom::OneToMany "0..9999" --* "1..1" dom::Dao : oneToManyAssociations147
-dom::OneToOne "0..9999" --* "1..1" dom::Dao : oneToOneAssociations145
-dom::DelegateOperation "1..1" -- "0..1" dom::DaoOperation : operation21
-dom::Operation "0..9999" --* "1..1" dom::Dao : operations134
+dom::Dao "1..1" *-- "0..9999" dom::OneToMany : oneToManyAssociations147
+dom::Dao "1..1" *-- "0..9999" dom::OneToOne : oneToOneAssociations145
+dom::DaoOperation "0..1" -- "1..1" dom::DelegateOperation : operation21
+dom::Dao "1..1" *-- "0..9999" dom::Operation : operations134
 dom::Operation "0..9999" --* "1..1" dom::Service : operations5
 dom::Attribute "0..1" -- "1..1" dom::Attribute : opposite95
 dom::Attribute "0..1" -- "1..1" dom::Attribute : oppositeReference107
 dom::SelectStatement "1..1" *-- "0..9999" dom::SortOrderElement : orderBy258
 dom::CallOutputParameter "0..9999" --* "1..1" dom::CallableStatement : outParameter207
-dom::QueryParameter "0..1" -- "1..1" dom::CallInputParameter : parameter209
+dom::CallInputParameter "1..1" -- "0..1" dom::QueryParameter : parameter209
 dom::QueryParameterReference "0..1" -- "1..1" dom::QueryParameterValue : parameter292
-dom::Parameter "0..9999" --* "1..1" dom::Operation : parameters10
+dom::Operation "1..1" *-- "0..9999" dom::Parameter : parameters10
 dom::Dao "1..1" -- "0..1" dom::DataBaseConstraint : primaryKey160
 dom::Column "0..1" -- "1..1" dom::Dao : primaryKeyColumn151
-dom::Property "0..9999" --* "1..1" dom::ApplicationSession : properties199
-dom::SelectProperties "1..1" *-- "0..9999" dom::Expression : properties263
+dom::ApplicationSession "1..1" *-- "0..9999" dom::Property : properties199
+dom::Expression "0..9999" --* "1..1" dom::SelectProperties : properties263
 dom::AttributeProperty "0..9999" --* "1..1" dom::FeatureReference : properties44
-dom::PropertyValue "0..1" --* "1..1" dom::PropertyAssignment : property240
-dom::PropertyValue "0..1" --* "1..1" dom::CollectionFunction : property319
-dom::PropertyMapping "0..9999" --* "1..1" dom::Mapper : propertyMappings54
-dom::SubQuery "1..1" *-- "0..9999" dom::SelectStatement : queries322
-dom::QueryOperation "0..9999" --* "1..1" dom::Dao : queryOperation137
-dom::QueryParameter "0..9999" --* "1..1" dom::QueryOperation : queryParameters166
-dom::Join "1..1" -- "0..1" dom::Attribute : reference271
+dom::PropertyAssignment "1..1" *-- "0..1" dom::PropertyValue : property240
+dom::CollectionFunction "1..1" *-- "0..1" dom::PropertyValue : property319
+dom::Mapper "1..1" *-- "0..9999" dom::PropertyMapping : propertyMappings54
+dom::SelectStatement "0..9999" --* "1..1" dom::SubQuery : queries322
+dom::Dao "1..1" *-- "0..9999" dom::QueryOperation : queryOperation137
+dom::QueryOperation "1..1" *-- "0..9999" dom::QueryParameter : queryParameters166
+dom::Attribute "0..1" -- "1..1" dom::Join : reference271
 dom::Dao "0..1" -- "1..1" dom::DelegateOperation : repository19
 dom::Dao "0..1" -- "1..1" dom::Entity : repository69
 dom::Attribute "0..9999" -- "1..1" dom::Entity : requiredAttributes87
 dom::Attribute "0..9999" -- "1..1" dom::Entity : requiredReferences84
-dom::Attribute "1..1" -- "0..9999" dom::Attribute : resolvedAttributeList110
+dom::Attribute "0..9999" -- "1..1" dom::Attribute : resolvedAttributeList110
 dom::Attribute "0..9999" -- "1..1" dom::AttributeGroup : resolvedAttributeList123
 dom::Attribute "0..9999" -- "1..1" dom::DataBaseConstraint : resolvedAttributeList196
 dom::BinaryExpression "1..1" *-- "0..1" dom::Expression : right330
-dom::Expression "0..1" --* "1..1" dom::BetweenExpression : right345
+dom::BetweenExpression "1..1" *-- "0..1" dom::Expression : right345
 dom::ComplexType "0..1" -- "1..1" dom::Mapper : right51
 dom::Attribute "0..1" -- "1..1" dom::PropertyMapping : right59
-dom::SelectStatement "0..1" --* "1..1" dom::InsertStatement : selectStatement226
-dom::AttributeGroup "0..1" -- "1..1" dom::Attribute : sortOrder100
+dom::InsertStatement "1..1" *-- "0..1" dom::SelectStatement : selectStatement226
+dom::Attribute "1..1" -- "0..1" dom::AttributeGroup : sortOrder100
 dom::AttributeGroup "0..9999" -- "1..1" dom::Entity : sortOrders75
-dom::FeatureReference "1..1" -- "0..1" dom::Entity : source36
-dom::SqlType "0..1" -- "1..1" dom::ManyToOne : sqlType185
+dom::Entity "0..1" -- "1..1" dom::FeatureReference : source36
+dom::ManyToOne "1..1" -- "0..1" dom::SqlType : sqlType185
 dom::QlStatement "0..1" --* "1..1" dom::QueryOperation : statement168
 dom::DataView "0..1" -- "1..1" dom::DataView : superType32
 dom::Entity "0..1" -- "1..1" dom::Entity : superType63
-dom::FeatureReference "1..1" -- "0..1" dom::Attribute : target46
+dom::Attribute "0..1" -- "1..1" dom::FeatureReference : target46
 dom::Expression "0..1" --* "1..1" dom::WhenClause : thenExpression310
 dom::AltWhenClause "1..1" *-- "0..1" dom::Expression : thenExpression316
 dom::Parameter "1..1" -- "0..1" dom::Type : type15
-dom::Type "0..1" -- "1..1" dom::DaoOperation : type28
-dom::SimpleType "0..1" -- "1..1" dom::Property : type9
-dom::DataTypeAndTypeParameter "0..1" --* "1..1" dom::Attribute : type90
+dom::DaoOperation "1..1" -- "0..1" dom::Type : type28
+dom::Property "1..1" -- "0..1" dom::SimpleType : type9
+dom::Attribute "1..1" *-- "0..1" dom::DataTypeAndTypeParameter : type90
 dom::Attribute "0..1" -- "1..1" dom::AttributeTextProperty : unitAttribute119
-dom::DataTypeAndTypeParameter "0..1" --* "1..1" dom::Column : userType173
-dom::Type "0..1" -- "1..1" dom::ManyToOne : userType182
-dom::Entity "1..1" -- "0..1" dom::Attribute : version81
+dom::Column "1..1" *-- "0..1" dom::DataTypeAndTypeParameter : userType173
+dom::ManyToOne "1..1" -- "0..1" dom::Type : userType182
+dom::Attribute "0..1" -- "1..1" dom::Entity : version81
 dom::Column "0..1" -- "1..1" dom::Dao : versionColumn157
 dom::DataView "0..1" -- "1..1" dom::DelegateOperation : view17
 dom::DataView "0..1" -- "1..1" dom::FeatureReference : view41
 dom::DataView "0..1" -- "1..1" dom::DelegateOperation : viewParameter23
-dom::WhenClause "0..9999" --* "1..1" dom::CaseExpression : whenClause298
+dom::CaseExpression "1..1" *-- "0..9999" dom::WhenClause : whenClause298
 dom::Expression "0..1" --* "1..1" dom::WhenClause : whenExpression307
-dom::Expression "0..1" --* "1..1" dom::AltWhenClause : whenExpression313
-dom::Expression "0..1" --* "1..1" dom::DeleteStatement : where230
+dom::AltWhenClause "1..1" *-- "0..1" dom::Expression : whenExpression313
+dom::DeleteStatement "1..1" *-- "0..1" dom::Expression : where230
 dom::Expression "0..1" --* "1..1" dom::UpdateStatement : where237
 dom::Expression "0..1" --* "1..1" dom::SelectStatement : where249
 @enduml

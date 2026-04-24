@@ -1,0 +1,115 @@
+@startuml
+enum CourseWorkType {
+  LABHOUR
+  LECTURE
+}
+enum DeadlineEvaluation {
+  ASSIGNMENT
+  PROJECT
+}
+class Evaluation {
+}
+class PersonRole {
+}
+enum StudyProgramCode {
+  BIT
+  MIT
+  MTDT
+  MTIØT
+}
+class course::desc::Course {
+  + Code : str
+  + Content : str
+  + Credits : str
+  + name : str
+}
+class course::desc::CourseCoordinator {
+}
+class course::desc::CourseInstance {
+  + LabHours : float
+  + LectureHours : float
+  + Year : int
+}
+class course::desc::CoursePreconditions {
+  + isRecommended : bool
+  + isRequired : bool
+  + reductionPoints : float
+}
+class course::desc::CourseWork {
+  + Duration : int
+  + Room : str
+  + Type : str
+  + isMandatory : bool
+  + isRestricted : bool
+}
+class course::desc::Department {
+  + name : str
+}
+abstract class course::desc::Evaluation {
+  + Percentage : float
+}
+class course::desc::EvaluationWithDeadline {
+  + deadlineEvaluation : str
+}
+class course::desc::Exam {
+  + date : date
+  + duration : float
+  + place : str
+}
+class course::desc::Lecturer {
+}
+class course::desc::Person {
+  + fullName : str
+  + lastName : str
+  + name : str
+  + personNr : str
+}
+abstract class course::desc::PersonRole {
+}
+class course::desc::Student {
+  + totalStudyPoints : float
+  + cancelExam(exam : any) : bool
+  + signUpForExam(exam : any) : bool
+  + takeExam(exam : any) : bool
+}
+class course::desc::StudyProgram {
+  + studyCode : str
+}
+class course::desc::Timetable {
+}
+class course::desc::Univ {
+}
+Evaluation <|-- course::desc::EvaluationWithDeadline
+Evaluation <|-- course::desc::Exam
+PersonRole <|-- course::desc::CourseCoordinator
+PersonRole <|-- course::desc::Lecturer
+PersonRole <|-- course::desc::Student
+course::desc::Department "1..1" -- "1..1" course::desc::StudyProgram : belongs26
+course::desc::CourseInstance "0..1" -- "1..1" course::desc::Evaluation : belongsTo13
+course::desc::Course "1..1" -- "1..1" course::desc::CoursePreconditions : belongsTo20
+course::desc::CourseInstance "0..1" -- "1..1" course::desc::Lecturer : belongsTo32
+course::desc::CourseCoordinator "1..1" -- "0..1" course::desc::CourseInstance : belongsTo35
+course::desc::Exam "0..9999" -- "1..1" course::desc::Student : finishedExams31
+course::desc::CourseCoordinator "0..9999" --* "1..1" course::desc::CourseInstance : hasCourseCoordinator8
+course::desc::CourseWork "0..9999" --* "1..1" course::desc::Timetable : hasCourseWork16
+course::desc::Course "0..9999" --* "1..1" course::desc::Univ : hasCourses39
+course::desc::Department "0..9999" --* "1..1" course::desc::Univ : hasDepartment38
+course::desc::CourseInstance "1..1" *-- "1..9999" course::desc::Evaluation : hasEvaluations4
+course::desc::Exam "0..9999" -- "1..1" course::desc::Student : hasExams30
+course::desc::Course "1..1" -- "0..9999" course::desc::CourseInstance : hasInstance0
+course::desc::CourseInstance "1..1" *-- "0..9999" course::desc::Lecturer : hasLecturers6
+course::desc::Person "0..9999" --* "1..1" course::desc::Univ : hasPersons42
+course::desc::CoursePreconditions "0..9999" --* "1..1" course::desc::Univ : hasPrecond44
+course::desc::Course "1..1" -- "0..9999" course::desc::CoursePreconditions : hasPrecondition1
+course::desc::Exam "1..1" -- "0..9999" course::desc::Student : hasRegisteredStudents15
+course::desc::Person "1..1" -- "0..9999" course::desc::PersonRole : hasRole28
+course::desc::Student "0..9999" --* "1..1" course::desc::Univ : hasStudents47
+course::desc::CourseInstance "1..1" *-- "1..9999" course::desc::Timetable : hasTimetable2
+course::desc::Course "1..1" -- "1..1" course::desc::CourseInstance : instanceOfCourse3
+course::desc::CourseInstance "1..1" -- "1..1" course::desc::Department : isInstanceOf5
+course::desc::Person "0..1" -- "1..1" course::desc::PersonRole : linkedTo29
+course::desc::Department "1..1" *-- "1..9999" course::desc::StudyProgram : manages12
+course::desc::Course "0..9999" -- "1..1" course::desc::StudyProgram : offers23
+course::desc::StudyProgram "0..9999" -- "1..1" course::desc::Timetable : programs18
+course::desc::CourseInstance "0..9999" --* "1..1" course::desc::Department : responsible10
+@enduml

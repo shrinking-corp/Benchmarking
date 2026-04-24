@@ -1,0 +1,165 @@
+@startuml
+class Change {
+}
+class CommentContainer {
+}
+class Dated {
+}
+class Indexed {
+}
+class Location {
+}
+enum RequirementStatus {
+  Closed
+  Error
+  NotSatisfied
+  Optional
+  Rejected
+  Satisfied
+  Unknown
+}
+class ReviewItem {
+}
+enum ReviewStatus {
+  Abandoned
+  Draft
+  Merged
+  New
+  Submitted
+}
+class reviews::ApprovalType {
+  + key : str
+  + name : str
+}
+class reviews::ApprovalValueMap {
+  + value : str
+}
+class reviews::Change {
+  + id : str
+  + key : str
+  + message : str
+  + state : str
+  + subject : str
+}
+class reviews::Comment {
+  + description : str
+  + draft : bool
+  + id : str
+  + mine : bool
+  + title : str
+}
+abstract class reviews::CommentContainer {
+  + createComment(commentText : any, initalLocation : any) : str
+}
+class reviews::Commit {
+  + id : str
+  + subject : str
+}
+abstract class reviews::Dated {
+  + creationDate : date
+  + modificationDate : date
+}
+class reviews::FileItem {
+}
+class reviews::FileVersion {
+  + binaryContent : str
+  + content : str
+  + description : str
+  + fileRevision : str
+  + path : str
+}
+abstract class reviews::Indexed {
+  + index : str
+}
+class reviews::LineLocation {
+  + rangeMax : int
+  + rangeMin : int
+}
+class reviews::LineRange {
+  + end : int
+  + start : int
+}
+abstract class reviews::Location {
+}
+class reviews::Repository {
+  + description : str
+  + taskConnectorKind : str
+  + taskRepository : str
+  + taskRepositoryUrl : str
+}
+class reviews::RequirementEntry {
+  + status : str
+}
+class reviews::Review {
+}
+abstract class reviews::ReviewItem {
+  + id : str
+  + name : str
+  + reference : str
+}
+class reviews::ReviewItemSet {
+  + inNeedOfRetrieval : bool
+  + revision : str
+}
+class reviews::ReviewRequirementsMap {
+}
+class reviews::ReviewerEntry {
+}
+class reviews::User {
+  + displayName : str
+  + email : str
+  + id : str
+}
+class reviews::UserApprovalsMap {
+}
+Change <|-- reviews::Review
+CommentContainer <|-- reviews::Review
+CommentContainer <|-- reviews::ReviewItem
+Dated <|-- reviews::Change
+Dated <|-- reviews::Comment
+Dated <|-- reviews::ReviewItemSet
+Indexed <|-- reviews::Comment
+Indexed <|-- reviews::Location
+Location <|-- reviews::LineLocation
+ReviewItem <|-- reviews::FileItem
+ReviewItem <|-- reviews::FileVersion
+ReviewItem <|-- reviews::ReviewItemSet
+reviews::Repository "1..1" -- "1..1" reviews::User : account41
+reviews::ReviewItem "1..1" -- "1..1" reviews::User : addedBy32
+reviews::Comment "0..9999" -- "1..1" reviews::CommentContainer : allComments0
+reviews::Comment "0..9999" -- "1..1" reviews::CommentContainer : allDrafts2
+reviews::ApprovalType "0..9999" --* "1..1" reviews::Repository : approvalTypes40
+reviews::ApprovalValueMap "0..9999" --* "1..1" reviews::ReviewerEntry : approvals67
+reviews::Comment "1..1" -- "1..1" reviews::User : author20
+reviews::FileItem "1..1" *-- "0..1" reviews::FileVersion : base48
+reviews::RequirementEntry "1..1" -- "0..1" reviews::User : by72
+reviews::Change "0..9999" --* "1..1" reviews::Review : children13
+reviews::Comment "0..9999" --* "1..1" reviews::CommentContainer : comments1
+reviews::ReviewItem "1..1" -- "1..1" reviews::User : committedBy34
+reviews::Comment "0..9999" --* "1..1" reviews::CommentContainer : drafts5
+reviews::FileItem "0..1" -- "1..1" reviews::FileVersion : file59
+reviews::Comment "1..1" -- "0..1" reviews::CommentContainer : item31
+reviews::FileItem "0..9999" --* "1..1" reviews::ReviewItemSet : items54
+reviews::User "1..1" -- "1..1" reviews::UserApprovalsMap : key62
+reviews::ApprovalType "1..1" -- "1..1" reviews::ApprovalValueMap : key69
+reviews::ApprovalType "1..1" -- "1..1" reviews::ReviewRequirementsMap : key74
+reviews::Comment "1..1" *-- "0..9999" reviews::Location : locations26
+reviews::Change "1..1" -- "0..1" reviews::User : owner8
+reviews::Commit "0..9999" --* "1..1" reviews::ReviewItemSet : parentCommits57
+reviews::Review "1..1" -- "1..1" reviews::ReviewItemSet : parentReview55
+reviews::Change "0..9999" --* "1..1" reviews::Review : parents11
+reviews::LineLocation "1..1" *-- "0..9999" reviews::LineRange : ranges58
+reviews::Comment "0..9999" -- "1..1" reviews::Comment : replies24
+reviews::Repository "1..1" -- "1..1" reviews::Review : repository10
+reviews::Review "1..1" *-- "0..9999" reviews::ReviewRequirementsMap : requirements18
+reviews::Comment "1..1" -- "1..1" reviews::Review : review28
+reviews::Review "1..1" -- "1..1" reviews::ReviewItem : review37
+reviews::Review "1..1" *-- "0..9999" reviews::UserApprovalsMap : reviewerApprovals16
+reviews::Repository "1..1" *-- "0..9999" reviews::Review : reviews44
+reviews::FileItem "1..1" -- "0..1" reviews::ReviewItemSet : set52
+reviews::Review "1..1" *-- "0..9999" reviews::ReviewItemSet : sets9
+reviews::FileItem "1..1" *-- "0..1" reviews::FileVersion : target49
+reviews::Repository "1..1" *-- "0..9999" reviews::User : users45
+reviews::ReviewerEntry "1..1" --* "1..1" reviews::UserApprovalsMap : value65
+reviews::RequirementEntry "1..1" --* "1..1" reviews::ReviewRequirementsMap : value77
+@enduml

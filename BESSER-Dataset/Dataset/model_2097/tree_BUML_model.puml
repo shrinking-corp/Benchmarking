@@ -1,0 +1,263 @@
+@startuml
+class AbstractToolDescription {
+}
+class ColorDescription {
+}
+class ConditionalStyleDescription {
+}
+class ConditionalTreeItemStyleDescription {
+}
+class DRepresentation {
+}
+class DRepresentationElement {
+}
+class DSemanticDecorator {
+}
+class DTreeElement {
+}
+class DTreeElementUpdater {
+}
+class DTreeItemContainer {
+}
+class LabelStyle {
+}
+class PrecedingSiblingsVariables {
+}
+class RepresentationCreationDescription {
+}
+class RepresentationElementMapping {
+}
+class RepresentationNavigationDescription {
+}
+class Style {
+}
+class StyleUpdater {
+}
+class TreeDescription {
+}
+enum TreeDragSource {
+  BOTH
+  PROJECT_EXPLORER
+  TREE
+}
+class TreeItemContainerDropTool {
+}
+class TreeItemCreationTool {
+}
+class TreeItemDeletionTool {
+}
+class TreeItemDragTool {
+}
+class TreeItemEditionTool {
+}
+class TreeItemMapping {
+}
+class TreeItemMappingContainer {
+}
+class TreeItemStyleDescription {
+}
+class TreeItemTool {
+}
+class TreeItemUpdater {
+}
+class TreeMapping {
+}
+class TreePopupMenu {
+}
+class TreeVariable {
+}
+class description::RepresentationDescription {
+}
+class description::StyleUpdater {
+}
+class description::TreeItemMappingContainer {
+}
+class description::TreeItemTool {
+}
+class description::TreeItemUpdater {
+}
+class description::TreeMapping {
+}
+class style::LabelStyleDescription {
+}
+class style::StyleDescription {
+}
+class tool::AbstractVariable {
+}
+class tool::ContainerViewVariable {
+}
+class tool::DropContainerVariable {
+}
+class tool::EditMaskVariables {
+}
+class tool::ElementDropVariable {
+}
+class tool::MappingBasedToolDescription {
+}
+class tool::MenuItemOrRef {
+}
+class tool::ModelOperation {
+}
+class tool::RepresentationCreationDescription {
+}
+class tool::RepresentationNavigationDescription {
+}
+class tool::VariableContainer {
+}
+class tree::DTree {
+}
+class tree::DTreeElement {
+}
+class tree::DTreeElementSynchronizer {
+  + refresh(DTreeItem : any) : void
+}
+class tree::DTreeElementUpdater {
+  + activate(sync : any) : void
+  + deactivate() : void
+}
+class tree::DTreeItem {
+  + expanded : bool
+}
+abstract class tree::DTreeItemContainer {
+}
+class tree::EObject {
+}
+class tree::RGBValues {
+}
+class tree::TreeItemStyle {
+}
+class tree::description::ConditionalTreeItemStyleDescription {
+}
+class tree::description::PrecedingSiblingsVariables {
+}
+class tree::description::StyleUpdater {
+}
+class tree::description::TreeCreationDescription {
+}
+class tree::description::TreeDescription {
+  + domainClass : str
+  + preconditionExpression : str
+}
+class tree::description::TreeItemContainerDropTool {
+  + dragSource : str
+}
+class tree::description::TreeItemCreationTool {
+}
+class tree::description::TreeItemDeletionTool {
+}
+class tree::description::TreeItemDragTool {
+  + dragSourceType : str
+  + getBestTreeItemMapping() : str
+}
+class tree::description::TreeItemEditionTool {
+}
+class tree::description::TreeItemMapping {
+  + domainClass : str
+  + preconditionExpression : str
+  + semanticCandidatesExpression : str
+}
+abstract class tree::description::TreeItemMappingContainer {
+}
+class tree::description::TreeItemStyleDescription {
+}
+abstract class tree::description::TreeItemTool {
+}
+class tree::description::TreeItemUpdater {
+  + getCreateTreeItem() : str
+  + getLabelComputationExpression() : str
+}
+class tree::description::TreeMapping {
+  + semanticElements : str
+}
+class tree::description::TreeNavigationDescription {
+}
+class tree::description::TreePopupMenu {
+}
+class tree::description::TreeVariable {
+  + documentation : str
+}
+AbstractToolDescription <|-- tree::description::TreeItemTool
+AbstractToolDescription <|-- tree::description::TreePopupMenu
+ConditionalStyleDescription <|-- tree::description::ConditionalTreeItemStyleDescription
+DRepresentation <|-- tree::DTree
+DRepresentationElement <|-- tree::DTreeElement
+DSemanticDecorator <|-- tree::DTreeItemContainer
+DTreeElement <|-- tree::DTreeItem
+DTreeElementUpdater <|-- tree::DTree
+DTreeElementUpdater <|-- tree::DTreeItem
+DTreeItemContainer <|-- tree::DTree
+DTreeItemContainer <|-- tree::DTreeItem
+LabelStyle <|-- tree::TreeItemStyle
+RepresentationCreationDescription <|-- tree::description::TreeCreationDescription
+RepresentationElementMapping <|-- tree::description::TreeMapping
+RepresentationNavigationDescription <|-- tree::description::TreeNavigationDescription
+Style <|-- tree::TreeItemStyle
+TreeItemTool <|-- tree::description::TreeItemDeletionTool
+TreeItemTool <|-- tree::description::TreeItemEditionTool
+TreeVariable <|-- tree::description::PrecedingSiblingsVariables
+description::RepresentationDescription <|-- tree::description::TreeDescription
+description::StyleUpdater <|-- tree::description::TreeItemMapping
+description::TreeItemMappingContainer <|-- tree::description::TreeDescription
+description::TreeItemMappingContainer <|-- tree::description::TreeItemMapping
+description::TreeItemTool <|-- tree::description::TreeItemContainerDropTool
+description::TreeItemTool <|-- tree::description::TreeItemCreationTool
+description::TreeItemTool <|-- tree::description::TreeItemDragTool
+description::TreeItemUpdater <|-- tree::description::TreeItemMapping
+description::TreeMapping <|-- tree::description::TreeItemMapping
+style::LabelStyleDescription <|-- tree::description::TreeItemStyleDescription
+style::StyleDescription <|-- tree::description::TreeItemStyleDescription
+tool::AbstractVariable <|-- tree::description::TreeVariable
+tool::MappingBasedToolDescription <|-- tree::description::TreeItemContainerDropTool
+tool::MappingBasedToolDescription <|-- tree::description::TreeItemCreationTool
+tool::MappingBasedToolDescription <|-- tree::description::TreeItemDragTool
+tool::VariableContainer <|-- tree::description::TreeVariable
+TreeItemMapping "1..1" -- "1..1" tree::DTreeItem : actualMapping6
+TreeItemMapping "0..9999" -- "1..1" tree::description::TreeItemMapping : allSubMappings22
+tree::RGBValues "0..1" --* "1..1" tree::TreeItemStyle : backgroundColor13
+ColorDescription "1..1" -- "1..1" tree::description::TreeItemStyleDescription : backgroundColor36
+ConditionalTreeItemStyleDescription "0..9999" --* "1..1" tree::description::StyleUpdater : conditionalStyles88
+tree::DTreeItem "1..1" -- "0..1" tree::DTreeItemContainer : container8
+TreeItemMappingContainer "1..9999" -- "1..1" tree::description::TreeItemDragTool : containers49
+TreeItemCreationTool "0..9999" --* "1..1" tree::description::TreeItemMapping : create29
+TreeItemCreationTool "0..9999" --* "1..1" tree::description::TreeDescription : createTreeItem15
+TreeItemStyleDescription "1..1" --* "1..1" tree::description::StyleUpdater : defaultStyle86
+TreeItemDeletionTool "0..1" --* "1..1" tree::description::TreeItemMapping : delete28
+TreeDescription "1..1" -- "1..1" tree::DTree : description1
+TreeItemEditionTool "0..1" --* "1..1" tree::description::TreeItemUpdater : directEdit90
+TreeItemDragTool "0..9999" --* "1..1" tree::description::TreeItemMapping : dndTools32
+TreeItemContainerDropTool "0..9999" --* "1..1" tree::description::TreeItemMappingContainer : dropTools93
+tool::ElementDropVariable "1..1" --* "1..1" tree::description::TreeItemDragTool : element45
+tool::ElementDropVariable "1..1" --* "1..1" tree::description::TreeItemContainerDropTool : element58
+tool::ElementDropVariable "1..1" --* "1..1" tree::description::TreeItemEditionTool : element73
+tool::ModelOperation "0..1" --* "1..1" tree::description::TreeItemTool : firstModelOperation38
+TreeItemMapping "0..9999" -- "1..1" tree::description::TreeItemCreationTool : mapping67
+TreeItemMapping "0..9999" -- "1..1" tree::description::TreeItemEditionTool : mapping70
+TreeItemMapping "1..1" -- "1..1" tree::description::TreeItemDeletionTool : mapping79
+tool::EditMaskVariables "1..1" --* "1..1" tree::description::TreeItemEditionTool : mask69
+tool::MenuItemOrRef "0..9999" --* "1..1" tree::description::TreePopupMenu : menuItemDescriptions95
+tool::DropContainerVariable "1..1" --* "1..1" tree::description::TreeItemDragTool : newContainer42
+tool::DropContainerVariable "1..1" --* "1..1" tree::description::TreeItemContainerDropTool : newContainer55
+tool::ContainerViewVariable "1..1" --* "1..1" tree::description::TreeItemDragTool : newViewContainer47
+tool::ContainerViewVariable "1..1" --* "1..1" tree::description::TreeItemContainerDropTool : newViewContainer61
+tool::DropContainerVariable "1..1" --* "1..1" tree::description::TreeItemDragTool : oldContainer41
+tool::DropContainerVariable "1..1" --* "1..1" tree::description::TreeItemContainerDropTool : oldContainer53
+tool::RepresentationCreationDescription "0..9999" --* "1..1" tree::description::TreeDescription : ownedRepresentationCreationDescriptions16
+tool::RepresentationNavigationDescription "0..9999" --* "1..1" tree::description::TreeDescription : ownedRepresentationNavigationDescriptions18
+tree::DTreeItem "1..1" *-- "1..1" tree::TreeItemStyle : ownedStyle5
+tree::DTreeItem "0..9999" --* "1..1" tree::DTreeItemContainer : ownedTreeItems4
+TreePopupMenu "0..9999" --* "1..1" tree::description::TreeItemMapping : popupMenus34
+PrecedingSiblingsVariables "1..1" --* "1..1" tree::description::TreeItemDragTool : precedingSiblings51
+PrecedingSiblingsVariables "1..1" --* "1..1" tree::description::TreeItemContainerDropTool : precedingSiblings64
+TreeItemMapping "0..9999" -- "1..1" tree::description::TreeItemMapping : reusedTreeItemMappings20
+tool::ElementDropVariable "1..1" --* "1..1" tree::description::TreeItemEditionTool : root76
+tree::DTree "1..1" -- "0..9999" tree::EObject : semanticElements0
+TreeItemMapping "0..1" -- "1..1" tree::description::TreeItemMapping : specialize25
+TreeItemStyleDescription "0..1" --* "1..1" tree::description::ConditionalTreeItemStyleDescription : style37
+StyleUpdater "0..1" -- "1..1" tree::DTreeItem : styleUpdater9
+TreeItemMapping "0..9999" --* "1..1" tree::description::TreeItemMappingContainer : subItemMappings91
+TreeDescription "1..1" -- "1..1" tree::description::TreeCreationDescription : treeDescription82
+TreeDescription "1..1" -- "1..1" tree::description::TreeNavigationDescription : treeDescription84
+TreeMapping "0..1" -- "1..1" tree::DTreeElement : treeElementMapping3
+TreeItemUpdater "0..1" -- "1..1" tree::DTreeItem : updater11
+TreeVariable "0..9999" --* "1..1" tree::description::TreeItemTool : variables39
+@enduml

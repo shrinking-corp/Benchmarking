@@ -50,26 +50,26 @@ Address <|-- model1::Company
 Address <|-- model1::Customer
 Address <|-- model1::OrderAddress
 Address <|-- model1::Supplier
-OrderDetail <|-- model1::OrderAddress
 Order <|-- model1::OrderAddress
 Order <|-- model1::PurchaseOrder
 Order <|-- model1::SalesOrder
+OrderDetail <|-- model1::OrderAddress
 model1::Category "0..9999" --* "1..1" model1::Company : categories0
 model1::Category "0..9999" --* "1..1" model1::Category : categories20
 model1::Customer "1..1" -- "1..1" model1::SalesOrder : customer18
-model1::Customer "0..9999" --* "1..1" model1::Company : customers3
+model1::Company "1..1" *-- "0..9999" model1::Customer : customers3
 model1::Product1 "0..1" -- "1..1" model1::ProductToOrder : key26
-model1::OrderDetail "1..1" -- "1..1" model1::Order : order14
-model1::ProductToOrder "0..9999" --* "1..1" model1::Customer : orderByProduct11
-model1::OrderDetail "0..9999" --* "1..1" model1::Order : orderDetails13
+model1::Order "1..1" -- "1..1" model1::OrderDetail : order14
+model1::Customer "1..1" *-- "0..9999" model1::ProductToOrder : orderByProduct11
+model1::Order "1..1" *-- "0..9999" model1::OrderDetail : orderDetails13
 model1::OrderDetail "0..9999" -- "1..1" model1::Product1 : orderDetails24
-model1::Product1 "0..1" -- "1..1" model1::OrderDetail : product15
-model1::Product1 "0..9999" --* "1..1" model1::Category : products22
-model1::PurchaseOrder "0..9999" --* "1..1" model1::Company : purchaseOrders5
-model1::Supplier "1..1" -- "0..9999" model1::PurchaseOrder : purchaseOrders9
-model1::SalesOrder "0..9999" -- "1..1" model1::Customer : salesOrders10
+model1::OrderDetail "1..1" -- "0..1" model1::Product1 : product15
+model1::Category "1..1" *-- "0..9999" model1::Product1 : products22
+model1::Company "1..1" *-- "0..9999" model1::PurchaseOrder : purchaseOrders5
+model1::PurchaseOrder "0..9999" -- "1..1" model1::Supplier : purchaseOrders9
+model1::Customer "1..1" -- "0..9999" model1::SalesOrder : salesOrders10
 model1::Company "1..1" *-- "0..9999" model1::SalesOrder : salesOrders7
 model1::PurchaseOrder "1..1" -- "1..1" model1::Supplier : supplier17
-model1::Supplier "0..9999" --* "1..1" model1::Company : suppliers1
-model1::SalesOrder "0..1" -- "1..1" model1::ProductToOrder : value29
+model1::Company "1..1" *-- "0..9999" model1::Supplier : suppliers1
+model1::ProductToOrder "1..1" -- "0..1" model1::SalesOrder : value29
 @enduml

@@ -1,0 +1,56 @@
+@startuml
+class AbstractState {
+}
+class NamedElement {
+}
+class Pseudostate {
+}
+class State {
+}
+abstract class fsm::AbstractState {
+}
+class fsm::Block {
+  + evalStatement(context : any) : void
+}
+class fsm::FinalState {
+}
+class fsm::InitialState {
+}
+class fsm::NamedElement {
+  + name : str
+}
+abstract class fsm::Pseudostate {
+}
+class fsm::Region {
+}
+class fsm::State {
+}
+class fsm::StateMachine {
+}
+class fsm::Transition {
+}
+class fsm::Trigger {
+  + expression : str
+}
+AbstractState <|-- fsm::Pseudostate
+AbstractState <|-- fsm::State
+NamedElement <|-- fsm::AbstractState
+NamedElement <|-- fsm::Region
+NamedElement <|-- fsm::StateMachine
+NamedElement <|-- fsm::Transition
+Pseudostate <|-- fsm::InitialState
+State <|-- fsm::FinalState
+fsm::Block "0..1" --* "1..1" fsm::State : doAction10
+fsm::Block "0..1" --* "1..1" fsm::State : entryAction9
+fsm::Block "0..1" --* "1..1" fsm::State : exitAction13
+fsm::AbstractState "1..1" -- "0..9999" fsm::Transition : incoming4
+fsm::AbstractState "1..1" -- "0..9999" fsm::Transition : outgoing5
+fsm::AbstractState "1..1" -- "1..1" fsm::Region : ownerRegion7
+fsm::Region "1..1" -- "0..1" fsm::StateMachine : ownerStateMachine3
+fsm::Region "0..9999" --* "1..1" fsm::StateMachine : regions0
+fsm::AbstractState "1..1" -- "1..1" fsm::Transition : source20
+fsm::AbstractState "0..9999" --* "1..1" fsm::Region : subvertex1
+fsm::AbstractState "1..1" -- "1..1" fsm::Transition : target18
+fsm::Region "1..1" *-- "0..9999" fsm::Transition : transitions2
+fsm::Transition "1..1" *-- "0..1" fsm::Trigger : trigger16
+@enduml

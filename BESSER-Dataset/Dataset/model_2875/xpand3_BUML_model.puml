@@ -169,16 +169,16 @@ AbstractExpression <|-- xpand3::expression::UnaryOperation
 AbstractNamedDeclaration <|-- xpand3::declaration::Definition
 AbstractNamedDeclaration <|-- xpand3::declaration::Extension
 AbstractNamedDeclaration <|-- xpand3::declaration::JavaExtension
-AbstractStatementWithBody <|-- xpand3::statement::FileStatement
-AbstractStatementWithBody <|-- xpand3::statement::ForEachStatement
-AbstractStatementWithBody <|-- xpand3::statement::IfStatement
-AbstractStatementWithBody <|-- xpand3::statement::LetStatement
-AbstractStatementWithBody <|-- xpand3::statement::ProtectStatement
 AbstractStatement <|-- xpand3::statement::AbstractStatementWithBody
 AbstractStatement <|-- xpand3::statement::ErrorStatement
 AbstractStatement <|-- xpand3::statement::ExpandStatement
 AbstractStatement <|-- xpand3::statement::ExpressionStatement
 AbstractStatement <|-- xpand3::statement::TextStatement
+AbstractStatementWithBody <|-- xpand3::statement::FileStatement
+AbstractStatementWithBody <|-- xpand3::statement::ForEachStatement
+AbstractStatementWithBody <|-- xpand3::statement::IfStatement
+AbstractStatementWithBody <|-- xpand3::statement::LetStatement
+AbstractStatementWithBody <|-- xpand3::statement::ProtectStatement
 BinaryOperation <|-- xpand3::expression::BooleanOperation
 Extension <|-- xpand3::declaration::CreateExtension
 FeatureCall <|-- xpand3::expression::CollectionExpression
@@ -197,17 +197,17 @@ SyntaxElement <|-- xpand3::declaration::AbstractDeclaration
 SyntaxElement <|-- xpand3::expression::AbstractExpression
 SyntaxElement <|-- xpand3::expression::Case
 SyntaxElement <|-- xpand3::statement::AbstractStatement
-xpand3::declaration::Definition "1..1" *-- "0..9999" AbstractStatement : body136
+AbstractStatement "0..9999" --* "1..1" xpand3::declaration::Definition : body136
 AbstractExpression "1..1" --* "1..1" xpand3::declaration::Extension : body138
-xpand3::declaration::DefinitionAspect "1..1" *-- "0..9999" AbstractStatement : body147
+AbstractStatement "0..9999" --* "1..1" xpand3::declaration::DefinitionAspect : body147
 AbstractStatement "1..9999" --* "1..1" xpand3::statement::AbstractStatementWithBody : body95
 Case "0..9999" --* "1..1" xpand3::expression::SwitchExpression : cases61
-xpand3::expression::CollectionExpression "1..1" *-- "0..1" AbstractExpression : closure25
+AbstractExpression "0..1" --* "1..1" xpand3::expression::CollectionExpression : closure25
 AbstractExpression "0..1" --* "1..1" xpand3::statement::ProtectStatement : commentEnd123
 AbstractExpression "0..1" --* "1..1" xpand3::statement::ProtectStatement : commentStart121
-xpand3::statement::IfStatement "1..1" *-- "0..1" AbstractExpression : condition112
+AbstractExpression "0..1" --* "1..1" xpand3::statement::IfStatement : condition112
 AbstractExpression "0..1" --* "1..1" xpand3::expression::IfExpression : condition36
-xpand3::expression::Case "1..1" *-- "0..1" AbstractExpression : condition63
+AbstractExpression "0..1" --* "1..1" xpand3::expression::Case : condition63
 AbstractExpression "0..1" --* "1..1" xpand3::declaration::Check : constraint151
 AbstractDeclaration "1..9999" --* "1..1" xpand3::File : declarations1
 AbstractExpression "0..1" --* "1..1" xpand3::expression::SwitchExpression : defaultExpr58
@@ -215,57 +215,57 @@ statement::xpand3::Identifier "1..1" --* "1..1" xpand3::statement::ExpandStateme
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::CollectionExpression : eleName27
 AbstractExpression "0..9999" --* "1..1" xpand3::expression::ListLiteral : elements52
 IfStatement "0..1" --* "1..1" xpand3::statement::IfStatement : elseIf114
-xpand3::expression::IfExpression "1..1" *-- "0..1" AbstractExpression : elsePart41
+AbstractExpression "0..1" --* "1..1" xpand3::expression::IfExpression : elsePart41
 AbstractExpression "0..1" --* "1..1" xpand3::declaration::ExtensionAspect : expression145
 AbstractExpression "1..1" --* "1..1" xpand3::statement::ExpressionStatement : expression91
 AbstractExpression "0..1" --* "1..1" xpand3::statement::FileStatement : fileNameExpression96
 AbstractExpression "0..1" --* "1..1" xpand3::expression::ChainExpression : first13
-xpand3::expression::GlobalVarExpression "1..1" *-- "0..1" expression::xpand3::Identifier : globalVarName34
-xpand3::declaration::AbstractDeclaration "1..1" *-- "0..1" AbstractExpression : guard132
+expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::GlobalVarExpression : globalVarName34
+AbstractExpression "0..1" --* "1..1" xpand3::declaration::AbstractDeclaration : guard132
 AbstractExpression "0..1" --* "1..1" xpand3::statement::ProtectStatement : id126
-xpand3::ImportStatement "1..1" *-- "0..1" xpand3::Identifier : importedId3
-xpand3::ImportStatement "0..9999" --* "1..1" xpand3::File : imports0
+xpand3::Identifier "0..1" --* "1..1" xpand3::ImportStatement : importedId3
+xpand3::File "1..1" *-- "0..9999" xpand3::ImportStatement : imports0
 statement::xpand3::Identifier "0..1" --* "1..1" xpand3::statement::ForEachStatement : iteratorName109
-xpand3::declaration::JavaExtension "1..1" *-- "0..1" declaration::xpand3::Identifier : javaMethod158
+declaration::xpand3::Identifier "0..1" --* "1..1" xpand3::declaration::JavaExtension : javaMethod158
 declaration::xpand3::Identifier "0..9999" --* "1..1" xpand3::declaration::JavaExtension : javaParamTypes161
 declaration::xpand3::Identifier "0..1" --* "1..1" xpand3::declaration::JavaExtension : javaType156
-xpand3::expression::BinaryOperation "1..1" *-- "0..1" AbstractExpression : left68
+AbstractExpression "0..1" --* "1..1" xpand3::expression::BinaryOperation : left68
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::Literal : literalValue54
 AbstractExpression "1..1" --* "1..1" xpand3::statement::ErrorStatement : message93
 AbstractExpression "0..1" --* "1..1" xpand3::declaration::Check : msg149
 declaration::xpand3::Identifier "0..1" --* "1..1" xpand3::declaration::AbstractNamedDeclaration : name135
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::FeatureCall : name22
-xpand3::Identifier "0..1" --* "1..1" xpand3::DeclaredParameter : name5
-xpand3::expression::ChainExpression "1..1" *-- "0..1" AbstractExpression : next15
+xpand3::DeclaredParameter "1..1" *-- "0..1" xpand3::Identifier : name5
+AbstractExpression "0..1" --* "1..1" xpand3::expression::ChainExpression : next15
 AbstractExpression "0..1" -- "1..1" xpand3::expression::UnaryOperation : operand78
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::BinaryOperation : operator73
-xpand3::expression::UnaryOperation "1..1" *-- "0..1" expression::xpand3::Identifier : operator76
+expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::UnaryOperation : operator76
 statement::xpand3::Identifier "0..1" --* "1..1" xpand3::statement::FileStatement : outletNameIdentifier98
 declaration::xpand3::File "1..1" --* "1..1" xpand3::declaration::AbstractDeclaration : owner129
 AbstractExpression "0..9999" --* "1..1" xpand3::statement::ExpandStatement : parameters81
 declaration::xpand3::DeclaredParameter "0..9999" --* "1..1" xpand3::declaration::AbstractDeclaration : params130
 AbstractExpression "0..9999" --* "1..1" xpand3::expression::OperationCall : params30
 declaration::xpand3::Identifier "0..1" --* "1..1" xpand3::declaration::AbstractAspect : pointcut143
-xpand3::declaration::Extension "1..1" *-- "0..1" declaration::xpand3::Identifier : returnType140
+declaration::xpand3::Identifier "0..1" --* "1..1" xpand3::declaration::Extension : returnType140
 AbstractExpression "0..1" --* "1..1" xpand3::expression::BinaryOperation : right70
-xpand3::statement::ForEachStatement "1..1" *-- "0..1" AbstractExpression : separator103
-xpand3::statement::ExpandStatement "1..1" *-- "0..1" AbstractExpression : separator83
+AbstractExpression "0..1" --* "1..1" xpand3::statement::ForEachStatement : separator103
+AbstractExpression "0..1" --* "1..1" xpand3::statement::ExpandStatement : separator83
 AbstractExpression "0..1" --* "1..1" xpand3::expression::SwitchExpression : switchExpr56
 AbstractExpression "0..1" --* "1..1" xpand3::statement::ForEachStatement : target101
 AbstractExpression "0..1" --* "1..1" xpand3::expression::Cast : target11
 AbstractExpression "0..1" --* "1..1" xpand3::expression::FeatureCall : target20
-xpand3::statement::ExpandStatement "1..1" *-- "0..1" AbstractExpression : target86
-xpand3::expression::LetExpression "1..1" *-- "0..1" AbstractExpression : targetExpression46
+AbstractExpression "0..1" --* "1..1" xpand3::statement::ExpandStatement : target86
+AbstractExpression "0..1" --* "1..1" xpand3::expression::LetExpression : targetExpression46
 AbstractExpression "0..1" --* "1..1" xpand3::expression::IfExpression : thenPart38
 AbstractExpression "0..1" --* "1..1" xpand3::expression::Case : thenPart65
 declaration::xpand3::DeclaredParameter "0..1" -- "1..1" xpand3::declaration::CreateExtension : toBeCreated154
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::Cast : type10
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::ConstructorCallExpression : type18
-xpand3::Identifier "0..1" --* "1..1" xpand3::DeclaredParameter : type7
+xpand3::DeclaredParameter "1..1" *-- "0..1" xpand3::Identifier : type7
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::TypeSelectExpression : typeLiteral32
 AbstractExpression "0..1" --* "1..1" xpand3::expression::LetExpression : varExpression44
 statement::xpand3::Identifier "0..1" --* "1..1" xpand3::statement::LetStatement : varName116
 expression::xpand3::Identifier "0..1" --* "1..1" xpand3::expression::LetExpression : varName49
-xpand3::statement::LetStatement "1..1" *-- "0..1" AbstractExpression : varValue118
+AbstractExpression "0..1" --* "1..1" xpand3::statement::LetStatement : varValue118
 statement::xpand3::Identifier "0..1" --* "1..1" xpand3::statement::ForEachStatement : variable106
 @enduml

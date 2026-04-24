@@ -36,15 +36,15 @@ IWorkflowElement <|-- workflow::IWorkflow
 IWorkflowElement <|-- workflow::IWorkflowNode
 IWorkflowNode <|-- workflow::IWorkflowJob
 workflow::IInputPort "1..9999" --* "1..1" workflow::IWorkflowNode : inputs20
-workflow::IWorkflow "1..1" *-- "0..9999" workflow::ILink : links13
-workflow::ILink "0..9999" -- "1..1" workflow::IInputPort : links6
-workflow::IOutputPort "1..1" -- "0..9999" workflow::ILink : links9
-workflow::IWorkflowNode "1..1" -- "1..1" workflow::IInputPort : node5
-workflow::IWorkflowNode "1..1" -- "1..1" workflow::IOutputPort : node7
-workflow::IWorkflowNode "0..9999" --* "1..1" workflow::IWorkflow : nodes11
+workflow::ILink "0..9999" --* "1..1" workflow::IWorkflow : links13
+workflow::IInputPort "1..1" -- "0..9999" workflow::ILink : links6
+workflow::ILink "0..9999" -- "1..1" workflow::IOutputPort : links9
+workflow::IInputPort "1..1" -- "1..1" workflow::IWorkflowNode : node5
+workflow::IOutputPort "1..1" -- "1..1" workflow::IWorkflowNode : node7
+workflow::IWorkflow "1..1" *-- "0..9999" workflow::IWorkflowNode : nodes11
 workflow::IOutputPort "1..9999" --* "1..1" workflow::IWorkflowNode : outputs18
-workflow::IOutputPort "1..1" -- "1..1" workflow::ILink : source3
-workflow::ILink "1..1" -- "1..1" workflow::IInputPort : target1
-workflow::IWorkflow "1..1" -- "1..1" workflow::ILink : workflow0
+workflow::ILink "1..1" -- "1..1" workflow::IOutputPort : source3
+workflow::IInputPort "1..1" -- "1..1" workflow::ILink : target1
+workflow::ILink "1..1" -- "1..1" workflow::IWorkflow : workflow0
 workflow::IWorkflow "1..1" -- "1..1" workflow::IWorkflowNode : workflow16
 @enduml

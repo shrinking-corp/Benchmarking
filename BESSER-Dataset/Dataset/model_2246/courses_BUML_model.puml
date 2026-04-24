@@ -1,0 +1,163 @@
+@startuml
+enum Day {
+  Friday
+  Monday
+  Thursday
+  Tuesday
+  Wednesday
+}
+enum Department {
+  DepartmentofComputerScience
+  DepartmentofMathematicalSciences
+}
+enum HourEnd {
+  h0800
+  h0900
+  h1000
+  h1100
+  h1200
+  h1300
+  h1400
+  h1500
+  h1600
+  h1700
+  h1800
+  h1900
+  h2000
+}
+enum HourStart {
+  h0815
+  h0915
+  h1015
+  h1115
+  h1215
+  h1315
+  h1415
+  h1515
+  h1615
+  h1715
+  h1815
+  h1915
+}
+enum Location {
+  Trondheim
+}
+enum Semester {
+  Autumn2010
+  Autumn2011
+  Autumn2012
+  Autumn2013
+  Autumn2014
+  Autumn2015
+  Autumn2016
+  Autumn2017
+  Spring2011
+  Spring2012
+  Spring2013
+  Spring2014
+  Spring2015
+  Spring2016
+  Spring2017
+  Spring2018
+}
+enum TeachingLanguage {
+  English
+  Norwegian
+}
+class courses::ContactInfo {
+  + department : str
+  + phone : str
+}
+class courses::Content {
+}
+class courses::Course {
+  + code : str
+  + credit : float
+  + name : str
+}
+class courses::CourseHour {
+  + day : str
+  + endHour : str
+  + room : str
+  + startHour : str
+  + type : str
+}
+class courses::CourseInstance {
+}
+class courses::Coursework {
+  + instructionLanguage : str
+  + location : str
+  + numLabHour : int
+  + numLectHour : int
+  + numSpecHour : int
+  + teachingSemester : str
+  + termNumber : int
+}
+class courses::CreditsReduction {
+  + reduction : float
+}
+class courses::EvaluationForm {
+  + duration : str
+  + examAids : str
+  + type : str
+  + weighting : str
+}
+class courses::ExaminationArrangement {
+  + grade : str
+  + type : str
+}
+class courses::ExaminationPanel {
+  + date : str
+  + room : str
+  + time : str
+}
+class courses::Paragraph {
+  + description : str
+  + name : str
+}
+class courses::Person {
+  + Credits : float
+  + name : str
+  + CancelExam(course : any) : void
+  + PassingExam(course : any) : void
+  + SignUpExam(course : any) : void
+}
+class courses::StudyProgram {
+  + code : str
+}
+class courses::Timetable {
+}
+class courses::University {
+  + name : str
+  + StaffInscription(name : any) : void
+  + StudentInscription(name : any) : void
+}
+courses::ContactInfo "1..1" --* "1..1" courses::CourseInstance : contactInfo15
+courses::Course "0..9999" --* "1..1" courses::University : course0
+courses::Course "0..9999" -- "1..1" courses::Person : course54
+courses::Course "1..1" -- "1..1" courses::CreditsReduction : course59
+courses::Content "1..1" --* "1..1" courses::CourseInstance : courseContent17
+courses::ContactInfo "1..1" -- "0..1" courses::Person : courseCoordinator37
+courses::Course "0..9999" -- "1..1" courses::CourseInstance : courseRecommended29
+courses::Course "0..9999" -- "1..1" courses::CourseInstance : courseRequired26
+courses::Course "0..9999" -- "1..1" courses::StudyProgram : courses50
+courses::CourseInstance "1..1" *-- "1..1" courses::Coursework : coursework20
+courses::CourseInstance "1..1" *-- "0..9999" courses::CreditsReduction : creditsReduction32
+courses::EvaluationForm "0..9999" --* "1..1" courses::ExaminationPanel : evaluationForm48
+courses::ExaminationArrangement "1..1" -- "0..9999" courses::ExaminationPanel : evaluationForms34
+courses::Content "1..1" *-- "0..1" courses::ExaminationArrangement : examArrangement12
+courses::CourseInstance "1..1" *-- "1..1" courses::ExaminationPanel : examination24
+courses::CourseHour "0..9999" --* "1..1" courses::Timetable : listCourseHour43
+courses::Course "1..1" *-- "0..9999" courses::CourseInstance : listCourseInstance8
+courses::Content "1..1" *-- "0..9999" courses::Paragraph : paragraph13
+courses::CourseHour "1..1" -- "0..9999" courses::StudyProgram : plannedFor45
+courses::Person "0..9999" --* "1..1" courses::University : staff1
+courses::ContactInfo "1..1" -- "0..9999" courses::Person : staff40
+courses::Course "1..1" -- "0..9999" courses::Person : student11
+courses::Person "0..9999" -- "1..1" courses::StudyProgram : student51
+courses::Person "0..9999" --* "1..1" courses::University : students5
+courses::Course "1..1" -- "0..9999" courses::StudyProgram : studyProgram10
+courses::StudyProgram "0..9999" --* "1..1" courses::University : studyProgram3
+courses::Person "1..1" -- "0..1" courses::StudyProgram : studyProgram56
+courses::CourseInstance "1..1" *-- "1..1" courses::Timetable : timetable22
+@enduml

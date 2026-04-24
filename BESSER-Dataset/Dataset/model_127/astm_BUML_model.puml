@@ -686,10 +686,10 @@ class gastm::OtherSyntaxObject {
 AccessKind <|-- astm::gastm::Private
 AccessKind <|-- astm::gastm::Protected
 AccessKind <|-- astm::gastm::Public
-ActualParameterExpression <|-- astm::gastm::ByReferenceActualParameterExpression
-ActualParameterExpression <|-- astm::gastm::ByValueActualParameterExpression
 ActualParameter <|-- astm::gastm::ActualParameterExpression
 ActualParameter <|-- astm::gastm::MissingActualParameter
+ActualParameterExpression <|-- astm::gastm::ByReferenceActualParameterExpression
+ActualParameterExpression <|-- astm::gastm::ByValueActualParameterExpression
 AggregateType <|-- astm::gastm::AnnotationType
 AggregateType <|-- astm::gastm::ClassType
 AggregateType <|-- astm::gastm::StructureType
@@ -744,15 +744,11 @@ DataType <|-- astm::sastm::RDBTableSpaceType
 DataType <|-- astm::sastm::RDBTableType
 DataType <|-- astm::sastm::RDBUserType
 DataType <|-- astm::sastm::RDBViewType
-DeclarationOrDefinition <|-- astm::gastm::Declaration
-DeclarationOrDefinition <|-- astm::gastm::Definition
 Declaration <|-- astm::gastm::FormalParameterDeclaration
 Declaration <|-- astm::gastm::FunctionDeclaration
 Declaration <|-- astm::gastm::VariableDeclaration
-DefinitionObject <|-- astm::gastm::DeclarationOrDefinition
-DefinitionObject <|-- astm::gastm::LabelDefinition
-DefinitionObject <|-- astm::gastm::NameSpaceDefinition
-DefinitionObject <|-- astm::gastm::TypeDefinition
+DeclarationOrDefinition <|-- astm::gastm::Declaration
+DeclarationOrDefinition <|-- astm::gastm::Definition
 Definition <|-- astm::gastm::DataDefinition
 Definition <|-- astm::gastm::EntryDefinition
 Definition <|-- astm::gastm::EnumLiteralDefinition
@@ -765,6 +761,10 @@ Definition <|-- astm::sastm::RDBTableDefinition
 Definition <|-- astm::sastm::RDBTableSpaceDefinition
 Definition <|-- astm::sastm::RDBUserDefinition
 Definition <|-- astm::sastm::RDBViewDefinition
+DefinitionObject <|-- astm::gastm::DeclarationOrDefinition
+DefinitionObject <|-- astm::gastm::LabelDefinition
+DefinitionObject <|-- astm::gastm::NameSpaceDefinition
+DefinitionObject <|-- astm::gastm::TypeDefinition
 Expression <|-- astm::gastm::AggregateExpression
 Expression <|-- astm::gastm::AnnotationExpression
 Expression <|-- astm::gastm::ArrayAccess
@@ -899,14 +899,14 @@ StorageSpecification <|-- astm::gastm::NoDef
 StorageSpecification <|-- astm::gastm::PerClassMember
 SwitchCase <|-- astm::gastm::CaseBlock
 SwitchCase <|-- astm::gastm::DefaultBlock
-TypeDefinition <|-- astm::gastm::AggregateTypeDefinition
-TypeDefinition <|-- astm::gastm::NamedTypeDefinition
-TypeReference <|-- astm::gastm::NamedTypeReference
-TypeReference <|-- astm::gastm::UnnamedTypeReference
 Type <|-- astm::gastm::FunctionType
 Type <|-- astm::gastm::LabelType
 Type <|-- astm::gastm::NameSpaceType
 Type <|-- astm::gastm::TypeReference
+TypeDefinition <|-- astm::gastm::AggregateTypeDefinition
+TypeDefinition <|-- astm::gastm::NamedTypeDefinition
+TypeReference <|-- astm::gastm::NamedTypeReference
+TypeReference <|-- astm::gastm::UnnamedTypeReference
 UnaryOperator <|-- astm::gastm::AddressOf
 UnaryOperator <|-- astm::gastm::BitNot
 UnaryOperator <|-- astm::gastm::Decrement
@@ -929,19 +929,19 @@ IncludeUnit "0..1" --* "1..1" astm::sastm::RDBIndexColumn : Column265
 RDBColumnReference "0..9999" --* "1..1" astm::sastm::RDBUniqueKey : Column275
 RDBColumnReference "0..9999" --* "1..1" astm::sastm::RDBSelectExpression : Column309
 IncludeUnit "0..9999" --* "1..1" astm::sastm::RDBInsertStatement : Columns283
-astm::sastm::RDBConnectStatement "1..1" *-- "0..1" NamedTypeDefinition : ConnectString277
-astm::sastm::RDBTableDefinition "1..1" *-- "0..9999" RDBConstraint : Constraint250
+NamedTypeDefinition "0..1" --* "1..1" astm::sastm::RDBConnectStatement : ConnectString277
+RDBConstraint "0..9999" --* "1..1" astm::sastm::RDBTableDefinition : Constraint250
 Expression "0..1" --* "1..1" astm::sastm::RDBCursorStatement : Cursor296
 AggregateTypeDefinition "0..1" --* "1..1" astm::sastm::RDBViewDefinition : DefinedBy260
 RDBColumnReference "0..9999" --* "1..1" astm::sastm::RDBRefIntegrity : ForeignKey268
 RDBIndex "0..9999" --* "1..1" astm::sastm::RDBTableDefinition : Index252
 Name "0..9999" --* "1..1" astm::sastm::RDBIndex : IndexColumn263
-astm::sastm::RDBHostVariableReference "1..1" *-- "0..1" Expression : Indicator304
+Expression "0..1" --* "1..1" astm::sastm::RDBHostVariableReference : Indicator304
 RDBHostVariableReference "0..9999" --* "1..1" astm::sastm::RDBFetchCursorStatement : Into300
 NameSpaceDefinition "0..9999" --* "1..1" astm::sastm::RDBInsertStatement : IntoTable281
 RDBHostVariableReference "0..9999" --* "1..1" astm::sastm::RDBSelectStatement : IntoVariable279
 NameSpaceDefinition "0..9999" --* "1..1" astm::sastm::RDBUserDefinition : Owns244
-astm::sastm::RDBRefIntegrity "1..1" *-- "0..9999" RDBColumnReference : ParentKey270
+RDBColumnReference "0..9999" --* "1..1" astm::sastm::RDBRefIntegrity : ParentKey270
 RDBTableReference "0..1" --* "1..1" astm::sastm::RDBRefIntegrity : ParentTable273
 RDBColumnReference "0..9999" --* "1..1" astm::sastm::RDBTableDefinition : PrimKey247
 AggregateTypeDefinition "0..1" --* "1..1" astm::sastm::RDBCursorDefinition : SelectExpression261
@@ -949,21 +949,21 @@ RDBSelectExpression "0..1" --* "1..1" astm::sastm::RDBSelectStatement : SelectEx
 NameSpaceDefinition "0..9999" --* "1..1" astm::sastm::RDBTableSpaceDefinition : Table245
 NameSpaceDefinition "0..9999" --* "1..1" astm::sastm::RDBModifyStatement : Table289
 RDBTableReference "0..9999" --* "1..1" astm::sastm::RDBSelectExpression : Table307
-astm::sastm::RDBColumnReference "1..1" *-- "0..1" Expression : Table317
+Expression "0..1" --* "1..1" astm::sastm::RDBColumnReference : Table317
 RDBTableSpaceReference "0..9999" --* "1..1" astm::sastm::RDBDatabaseDefinition : TableSpace243
 RDBTrigger "0..9999" --* "1..1" astm::sastm::RDBTableDefinition : Trigger254
 Expression "0..9999" --* "1..1" astm::sastm::RDBInsertStatement : Values286
-astm::sastm::RDBUpdateStatement "1..1" *-- "0..9999" Expression : Values294
+Expression "0..9999" --* "1..1" astm::sastm::RDBUpdateStatement : Values294
 Expression "0..9999" --* "1..1" astm::sastm::RDBOpenCursorStatement : Values298
 Expression "0..1" --* "1..1" astm::sastm::RDBModifyStatement : Where291
 Expression "0..9999" --* "1..1" astm::sastm::RDBSelectExpression : Where312
-astm::gastm::DeclarationOrDefinition "1..1" *-- "0..1" OtherSyntaxObject : accessKind17
+OtherSyntaxObject "0..1" --* "1..1" astm::gastm::DeclarationOrDefinition : accessKind17
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::DerivesFrom : accessKind94
 ActualParameter "0..9999" --* "1..1" astm::gastm::FunctionCallExpression : actualParams222
 OtherSyntaxObject "0..9999" --* "1..1" astm::gastm::NewExpression : actualParams228
 TypeReference "0..9999" --* "1..1" astm::gastm::TypeQualifiedIdentifierReference : aggregateType182
 AggregateType "0..1" --* "1..1" astm::gastm::AggregateTypeDefinition : aggregateType58
-astm::gastm::AnnotationExpression "1..1" *-- "0..1" TypeReference : annotationType236
+TypeReference "0..1" --* "1..1" astm::gastm::AnnotationExpression : annotationType236
 AnnotationExpression "0..9999" --* "1..1" astm::gastm::GASTMSyntaxObject : annotations10
 Expression "0..1" --* "1..1" astm::gastm::ArrayAccess : arrayName173
 TypeReference "0..1" --* "1..1" astm::gastm::ConstructedType : baseType74
@@ -971,18 +971,18 @@ Expression "0..1" --* "1..1" astm::gastm::BitFieldDefinition : bitFieldSize51
 Statement "0..9999" --* "1..1" astm::gastm::SwitchCase : body136
 Statement "0..1" --* "1..1" astm::gastm::LoopStatement : body144
 Statement "0..1" --* "1..1" astm::gastm::CatchBlock : body159
-astm::gastm::SpecificTriggerDefinition "1..1" *-- "0..9999" Statement : body241
-astm::sastm::RDBTrigger "1..1" *-- "0..9999" Statement : body266
+Statement "0..9999" --* "1..1" astm::gastm::SpecificTriggerDefinition : body241
+Statement "0..9999" --* "1..1" astm::sastm::RDBTrigger : body266
 Statement "0..9999" --* "1..1" astm::gastm::FunctionDefinition : body37
 Statement "0..9999" --* "1..1" astm::gastm::EntryDefinition : body47
-astm::gastm::NameSpaceDefinition "1..1" *-- "0..9999" DefinitionObject : body61
-astm::gastm::NamedType "1..1" *-- "0..1" Type : body92
-astm::gastm::FunctionCallExpression "1..1" *-- "0..1" Expression : calledFunction220
+DefinitionObject "0..9999" --* "1..1" astm::gastm::NameSpaceDefinition : body61
+Type "0..1" --* "1..1" astm::gastm::NamedType : body92
+Expression "0..1" --* "1..1" astm::gastm::FunctionCallExpression : calledFunction220
 Expression "0..9999" --* "1..1" astm::gastm::CaseBlock : caseExpressions138
 SwitchCase "0..1" --* "1..1" astm::gastm::SwitchStatement : cases134
 TypeReference "0..1" -- "1..1" astm::gastm::CastExpression : castType187
-astm::gastm::TryStatement "1..1" *-- "0..9999" CatchBlock : catchBlocks154
-astm::gastm::Scope "1..1" *-- "0..9999" Scope : childScope5
+CatchBlock "0..9999" --* "1..1" astm::gastm::TryStatement : catchBlocks154
+Scope "0..9999" --* "1..1" astm::gastm::Scope : childScope5
 NamedType "0..1" --* "1..1" astm::gastm::DerivesFrom : className96
 Expression "0..1" --* "1..1" astm::gastm::IfStatement : condition124
 Expression "0..1" --* "1..1" astm::gastm::LoopStatement : condition142
@@ -995,13 +995,13 @@ DefinitionObject "0..9999" --* "1..1" astm::gastm::Scope : definitionObject4
 TypeReference "0..1" --* "1..1" astm::gastm::Definition : definitionType21
 NamedType "0..1" --* "1..1" astm::gastm::NamedTypeDefinition : definitionType57
 DerivesFrom "0..9999" --* "1..1" astm::gastm::ClassType : derivesFrom93
-astm::gastm::IfStatement "1..1" *-- "0..1" Statement : elseBody129
+Statement "0..1" --* "1..1" astm::gastm::IfStatement : elseBody129
 EnumLiteralDefinition "0..9999" --* "1..1" astm::gastm::EnumType : enumLiterals73
 Expression "0..1" --* "1..1" astm::gastm::ThrowStatement : exception164
-astm::gastm::VariableCatchBlock "1..1" *-- "0..1" DataDefinition : exceptionVariable163
+DataDefinition "0..1" --* "1..1" astm::gastm::VariableCatchBlock : exceptionVariable163
 Type "0..9999" --* "1..1" astm::gastm::TypesCatchBlock : exceptions161
 Expression "0..1" --* "1..1" astm::gastm::ExpressionStatement : expression109
-astm::gastm::CastExpression "1..1" *-- "0..1" Expression : expression189
+Expression "0..1" --* "1..1" astm::gastm::CastExpression : expression189
 TypeReference "0..1" --* "1..1" astm::gastm::Expression : expressionType166
 SourceFile "0..1" --* "1..1" astm::gastm::IncludeUnit : file70
 CompilationUnit "0..9999" --* "1..1" astm::gastm::Project : files1
@@ -1010,37 +1010,37 @@ FormalParameterDeclaration "0..9999" --* "1..1" astm::gastm::FunctionDeclaration
 FormalParameterDefinition "0..9999" --* "1..1" astm::gastm::FunctionDefinition : formalParameters35
 FormalParameterDefinition "0..9999" --* "1..1" astm::gastm::EntryDefinition : formalParameters45
 DefinitionObject "0..9999" --* "1..1" astm::gastm::CompilationUnit : fragments12
-astm::gastm::RangeExpression "1..1" *-- "0..1" Expression : fromExpression215
+Expression "0..1" --* "1..1" astm::gastm::RangeExpression : fromExpression215
 FunctionMemberAttributes "0..1" --* "1..1" astm::gastm::FunctionDeclaration : functionMemberAttributes31
 FunctionMemberAttributes "0..1" --* "1..1" astm::gastm::FunctionDefinition : functionMemberAttributes39
 Statement "0..1" --* "1..1" astm::gastm::TryStatement : guardedStatement152
-astm::gastm::Dimension "1..1" *-- "0..1" Expression : highBound83
+Expression "0..1" --* "1..1" astm::gastm::Dimension : highBound83
 Name "0..1" --* "1..1" astm::gastm::Definition : identifierName20
-astm::gastm::Declaration "1..1" *-- "0..1" Name : identifierName24
-astm::gastm::SourceLocation "1..1" *-- "0..1" SourceFile : inSourceFile0
+Name "0..1" --* "1..1" astm::gastm::Declaration : identifierName24
+SourceFile "0..1" --* "1..1" astm::gastm::SourceLocation : inSourceFile0
 Expression "0..1" --* "1..1" astm::gastm::ForStatement : initBody147
-astm::gastm::DataDefinition "1..1" *-- "0..1" Expression : initialValue50
+Expression "0..1" --* "1..1" astm::gastm::DataDefinition : initialValue50
 Expression "0..9999" --* "1..1" astm::gastm::ForStatement : iterationBody149
 LabelDefinition "0..1" --* "1..1" astm::gastm::LabeledStatement : label116
 Name "0..1" --* "1..1" astm::gastm::LabelDefinition : labelName66
-astm::gastm::LabelDefinition "1..1" *-- "0..1" LabelType : labelType68
+LabelType "0..1" --* "1..1" astm::gastm::LabelDefinition : labelType68
 Expression "0..1" --* "1..1" astm::gastm::BinaryExpression : leftOperand199
 SourceLocation "0..1" --* "1..1" astm::gastm::GASTMSyntaxObject : locationInfo7
-astm::gastm::Dimension "1..1" *-- "0..1" Expression : lowBound81
-astm::gastm::QualifiedIdentifierReference "1..1" *-- "0..1" IdentifierReference : member180
+Expression "0..1" --* "1..1" astm::gastm::Dimension : lowBound81
+IdentifierReference "0..1" --* "1..1" astm::gastm::QualifiedIdentifierReference : member180
 IdentifierReference "0..1" --* "1..1" astm::gastm::TypeQualifiedIdentifierReference : member184
 Expression "0..9999" --* "1..1" astm::gastm::AnnotationExpression : memberValues238
 DefinitionObject "0..9999" --* "1..1" astm::gastm::AggregateType : members76
 Name "0..1" --* "1..1" astm::gastm::NamedTypeReference : name101
 Name "0..1" --* "1..1" astm::gastm::NameReference : name168
 Name "0..1" --* "1..1" astm::gastm::LabelAccess : name231
-astm::sastm::RDBColumnDefinition "1..1" *-- "0..1" Name : name256
-astm::gastm::TypeDefinition "1..1" *-- "0..1" Name : name55
+Name "0..1" --* "1..1" astm::sastm::RDBColumnDefinition : name256
+Name "0..1" --* "1..1" astm::gastm::TypeDefinition : name55
 Name "0..1" --* "1..1" astm::gastm::NameSpaceDefinition : nameSpace59
 NameSpaceType "0..1" --* "1..1" astm::gastm::NameSpaceDefinition : nameSpaceType64
 TypeReference "0..1" --* "1..1" astm::gastm::NewExpression : newType226
 Expression "0..1" --* "1..1" astm::gastm::ConditionalExpression : onFalseOperand212
-astm::gastm::ConditionalExpression "1..1" *-- "0..1" Expression : onTrueOperand209
+Expression "0..1" --* "1..1" astm::gastm::ConditionalExpression : onTrueOperand209
 BlockScope "0..1" --* "1..1" astm::gastm::BlockStatement : opensScope122
 ProgramScope "0..1" --* "1..1" astm::gastm::CompilationUnit : opensScope14
 FunctionScope "0..1" --* "1..1" astm::gastm::FunctionDefinition : opensScope42
@@ -1052,30 +1052,30 @@ OtherSyntaxObject "0..1" --* "1..1" astm::gastm::BinaryExpression : operator197
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::OperatorAssign : operator205
 GlobalScope "0..1" --* "1..1" astm::gastm::Project : outerScope2
 FormalParameterType "0..9999" --* "1..1" astm::gastm::FunctionType : parameterTypes88
-astm::gastm::GASTMSyntaxObject "1..1" *-- "0..9999" PreprocessorElement : preProcessorElements8
+PreprocessorElement "0..9999" --* "1..1" astm::gastm::GASTMSyntaxObject : preProcessorElements8
 Expression "0..1" --* "1..1" astm::gastm::QualifiedIdentifierReference : qualifiers178
-astm::gastm::ArrayType "1..1" *-- "0..9999" Dimension : ranks80
-astm::gastm::NameReference "1..1" -- "0..1" DefinitionObject : refersTo170
+Dimension "0..9999" --* "1..1" astm::gastm::ArrayType : ranks80
+DefinitionObject "0..1" -- "1..1" astm::gastm::NameReference : refersTo170
 MacroDefinition "0..1" --* "1..1" astm::gastm::MacroCall : refersTo72
 TypeReference "0..1" --* "1..1" astm::gastm::FunctionDefinition : returnType33
 TypeReference "0..1" --* "1..1" astm::gastm::FunctionType : returnType86
-astm::gastm::ReturnStatement "1..1" *-- "0..1" Expression : returnValue140
+Expression "0..1" --* "1..1" astm::gastm::ReturnStatement : returnValue140
 Expression "0..1" --* "1..1" astm::gastm::BinaryExpression : rightOperand202
-astm::gastm::LabeledStatement "1..1" *-- "0..1" Statement : statement117
+Statement "0..1" --* "1..1" astm::gastm::LabeledStatement : statement117
 OtherSyntaxObject "0..1" --* "1..1" astm::gastm::DeclarationOrDefinition : storageSpecifiers16
-astm::gastm::BlockStatement "1..1" *-- "0..9999" Statement : subStatements120
+Statement "0..9999" --* "1..1" astm::gastm::BlockStatement : subStatements120
 Expression "0..9999" --* "1..1" astm::gastm::ArrayAccess : subscripts175
 Expression "0..1" --* "1..1" astm::gastm::SwitchStatement : switchExpression132
 Expression "0..1" --* "1..1" astm::gastm::JumpStatement : target111
 LabelAccess "0..1" --* "1..1" astm::gastm::BreakStatement : target113
-astm::gastm::ContinueStatement "1..1" *-- "0..1" LabelAccess : target114
+LabelAccess "0..1" --* "1..1" astm::gastm::ContinueStatement : target114
 Statement "0..1" --* "1..1" astm::gastm::IfStatement : thenBody126
 Expression "0..1" --* "1..1" astm::gastm::RangeExpression : toExpression217
 TypeDefinition "0..1" -- "1..1" astm::gastm::NamedTypeReference : type103
 RDBColumnType "0..1" --* "1..1" astm::sastm::RDBColumnDefinition : type258
 TypeReference "0..1" --* "1..1" astm::gastm::FormalParameterType : type90
-astm::gastm::UnnamedTypeReference "1..1" *-- "0..1" Type : type99
+Type "0..1" --* "1..1" astm::gastm::UnnamedTypeReference : type99
 Expression "0..1" --* "1..1" astm::gastm::ActualParameterExpression : value224
 Expression "0..1" --* "1..1" astm::gastm::EnumLiteralDefinition : value53
-astm::gastm::FunctionMemberAttributes "1..1" *-- "0..1" VirtualSpecification : virtualSpecifier44
+VirtualSpecification "0..1" --* "1..1" astm::gastm::FunctionMemberAttributes : virtualSpecifier44
 @enduml

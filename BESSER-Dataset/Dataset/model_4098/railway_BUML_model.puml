@@ -45,16 +45,16 @@ RailwayElement <|-- railway::TrackElement
 TrackElement <|-- railway::Segment
 TrackElement <|-- railway::Switch
 railway::TrackElement "1..1" -- "0..9999" railway::TrackElement : connectsTo2
-railway::Sensor "2..9999" --* "1..1" railway::Route : definedBy10
-railway::TrackElement "0..9999" --* "1..1" railway::Sensor : elements14
+railway::Route "1..1" *-- "2..9999" railway::Sensor : definedBy10
+railway::Sensor "1..1" *-- "0..9999" railway::TrackElement : elements14
 railway::Route "1..1" -- "1..1" railway::Semaphore : entry4
-railway::Semaphore "1..1" -- "1..1" railway::Route : exit7
-railway::SwitchPosition "0..9999" --* "1..1" railway::Route : follows5
-railway::RailwayElement "0..9999" --* "1..1" railway::RailwayContainer : invalids15
-railway::SwitchPosition "0..9999" -- "1..1" railway::Switch : positions3
+railway::Route "1..1" -- "1..1" railway::Semaphore : exit7
+railway::Route "1..1" *-- "0..9999" railway::SwitchPosition : follows5
+railway::RailwayContainer "1..1" *-- "0..9999" railway::RailwayElement : invalids15
+railway::Switch "1..1" -- "0..9999" railway::SwitchPosition : positions3
 railway::Route "1..1" -- "1..1" railway::SwitchPosition : route13
-railway::Route "0..9999" --* "1..1" railway::RailwayContainer : routes19
-railway::Semaphore "0..9999" --* "1..1" railway::RailwayContainer : semaphores16
+railway::RailwayContainer "1..1" *-- "0..9999" railway::Route : routes19
+railway::RailwayContainer "1..1" *-- "0..9999" railway::Semaphore : semaphores16
 railway::Sensor "0..1" -- "1..1" railway::TrackElement : sensor0
-railway::SwitchPosition "1..1" -- "1..1" railway::Switch : switch12
+railway::Switch "1..1" -- "1..1" railway::SwitchPosition : switch12
 @enduml

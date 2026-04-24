@@ -34,21 +34,21 @@ NamedElement <|-- mngr::Manager
 NamedElement <|-- mngr::ManagerParameter
 NamedElement <|-- mngr::ManagerState
 NamedElement <|-- mngr::ManagerTransition
-mngr::ManagerState "1..1" -- "0..9999" mngr::ManagerParameter : contextParameters16
-mngr::ManagerParameter "0..9999" --* "1..1" mngr::Manager : contextParameters5
-mngr::ManagerState "0..9999" -- "1..1" mngr::Manager : finalState2
-mngr::ManagerTransition "0..9999" -- "1..1" mngr::ManagerState : incomingTransition14
+mngr::ManagerParameter "0..9999" -- "1..1" mngr::ManagerState : contextParameters16
+mngr::Manager "1..1" *-- "0..9999" mngr::ManagerParameter : contextParameters5
+mngr::Manager "1..1" -- "0..9999" mngr::ManagerState : finalState2
+mngr::ManagerState "1..1" -- "0..9999" mngr::ManagerTransition : incomingTransition14
 mngr::Manager "1..1" -- "1..1" mngr::ManagerState : initialState1
 mngr::ManagedElement "1..9999" --* "1..1" mngr::Manager : managedElement7
-mngr::OpaqueExpression "0..9999" --* "1..1" mngr::ManagerParameter : opaqueExpressions26
-mngr::ManagerTransition "0..9999" -- "1..1" mngr::ManagerState : outgoingTransition12
-mngr::ManagerState "0..9999" --* "1..1" mngr::Manager : ownedState0
+mngr::ManagerParameter "1..1" *-- "0..9999" mngr::OpaqueExpression : opaqueExpressions26
+mngr::ManagerState "1..1" -- "0..9999" mngr::ManagerTransition : outgoingTransition12
+mngr::Manager "1..1" *-- "0..9999" mngr::ManagerState : ownedState0
 mngr::Manager "1..1" *-- "0..9999" mngr::ManagerTransition : ownedTransition9
 mngr::Manager "1..1" -- "1..1" mngr::ManagerState : owningManager11
 mngr::Manager "1..1" -- "1..1" mngr::ManagerTransition : owningManager18
-mngr::ManagerParameter "1..1" -- "1..1" mngr::Manager : owningManager27
-mngr::Manager "1..1" -- "1..1" mngr::ManagedElement : owningManager30
+mngr::Manager "1..1" -- "1..1" mngr::ManagerParameter : owningManager27
+mngr::ManagedElement "1..1" -- "1..1" mngr::Manager : owningManager30
 mngr::ManagerState "1..1" -- "1..1" mngr::ManagerTransition : source20
-mngr::ManagerState "0..9999" -- "1..1" mngr::ManagerParameter : state24
+mngr::ManagerParameter "1..1" -- "0..9999" mngr::ManagerState : state24
 mngr::ManagerState "1..1" -- "1..1" mngr::ManagerTransition : target22
 @enduml

@@ -25,10 +25,10 @@ class schemaprimerpo::USAddress {
   + street : str
   + zip : str
 }
-schemaprimerpo::USAddress "1..1" --* "1..1" schemaprimerpo::PurchaseOrder : billTo8
+schemaprimerpo::PurchaseOrder "1..1" *-- "1..1" schemaprimerpo::USAddress : billTo8
 schemaprimerpo::Item "0..9999" --* "1..1" schemaprimerpo::PurchaseOrder : items11
-schemaprimerpo::PurchaseOrder "0..9999" --* "1..1" schemaprimerpo::DocumentRoot : order4
-schemaprimerpo::USAddress "0..1" --* "1..1" schemaprimerpo::PurchaseOrder : shipTo6
-schemaprimerpo::EStringToStringMapEntry "0..9999" --* "1..1" schemaprimerpo::DocumentRoot : xMLNSPrefixMap0
+schemaprimerpo::DocumentRoot "1..1" *-- "0..9999" schemaprimerpo::PurchaseOrder : order4
+schemaprimerpo::PurchaseOrder "1..1" *-- "0..1" schemaprimerpo::USAddress : shipTo6
+schemaprimerpo::DocumentRoot "1..1" *-- "0..9999" schemaprimerpo::EStringToStringMapEntry : xMLNSPrefixMap0
 schemaprimerpo::DocumentRoot "1..1" *-- "0..9999" schemaprimerpo::EStringToStringMapEntry : xSISchemaLocation1
 @enduml

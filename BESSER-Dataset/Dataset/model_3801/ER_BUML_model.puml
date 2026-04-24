@@ -15,16 +15,16 @@ class ER::Relship {
 class ER::RelshipEnd {
   + name : str
 }
-ER::Entity "1..1" *-- "0..9999" ER::ERAttribute : attrs3
+ER::ERAttribute "0..9999" --* "1..1" ER::Entity : attrs3
 ER::ERAttribute "0..9999" --* "1..1" ER::Relship : attrs7
-ER::RelshipEnd "0..9999" -- "1..1" ER::Entity : ends4
-ER::RelshipEnd "2..9999" --* "1..1" ER::Relship : ends9
+ER::Entity "1..1" -- "0..9999" ER::RelshipEnd : ends4
+ER::Relship "1..1" *-- "2..9999" ER::RelshipEnd : ends9
 ER::ERSchema "1..1" *-- "1..9999" ER::Entity : entities0
 ER::Entity "1..1" -- "1..1" ER::RelshipEnd : entity16
-ER::Entity "0..1" -- "1..1" ER::ERAttribute : entity19
+ER::ERAttribute "1..1" -- "0..1" ER::Entity : entity19
 ER::Relship "1..1" -- "1..1" ER::RelshipEnd : relship14
-ER::Relship "0..1" -- "1..1" ER::ERAttribute : relship21
-ER::Relship "0..9999" --* "1..1" ER::ERSchema : relships1
-ER::Relship "1..1" -- "1..1" ER::ERSchema : schema12
+ER::ERAttribute "1..1" -- "0..1" ER::Relship : relship21
+ER::ERSchema "1..1" *-- "0..9999" ER::Relship : relships1
+ER::ERSchema "1..1" -- "1..1" ER::Relship : schema12
 ER::ERSchema "1..1" -- "1..1" ER::Entity : schema6
 @enduml

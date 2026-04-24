@@ -96,29 +96,29 @@ Instruction <|-- arduino::Control
 Instruction <|-- arduino::Delay
 Instruction <|-- arduino::ModuleSet
 Instruction <|-- arduino::WaitFor
-ModuleSet <|-- arduino::SetLed
 Module <|-- arduino::InputModule
 Module <|-- arduino::OutputModule
+ModuleSet <|-- arduino::SetLed
 NamedElement <|-- arduino::Board
 NamedElement <|-- arduino::Module
 NamedElement <|-- arduino::Project
 NamedElement <|-- arduino::Sketch
 OutputModule <|-- arduino::Led
-arduino::Sketch "1..1" *-- "1..1" arduino::Block : block5
+arduino::Block "1..1" --* "1..1" arduino::Sketch : block5
 arduino::Block "1..1" --* "1..1" arduino::Control : block9
 arduino::Board "1..1" --* "1..1" arduino::Project : board0
 arduino::Expression "1..1" --* "1..1" arduino::If : condition11
 arduino::Expression "1..1" --* "1..1" arduino::While : condition15
-arduino::If "1..1" *-- "0..1" arduino::Block : elseBlock12
-arduino::Instruction "0..9999" --* "1..1" arduino::Block : instructions7
+arduino::Block "0..1" --* "1..1" arduino::If : elseBlock12
+arduino::Block "1..1" *-- "0..9999" arduino::Instruction : instructions7
 arduino::Led "1..1" -- "1..1" arduino::SetLed : led19
-arduino::Expression "1..1" --* "1..1" arduino::BinaryExpression : left26
+arduino::BinaryExpression "1..1" *-- "1..1" arduino::Expression : left26
 arduino::Module "0..1" -- "1..1" arduino::WaitFor : module20
-arduino::ModuleGet "1..1" -- "1..1" arduino::Module : module31
+arduino::Module "1..1" -- "1..1" arduino::ModuleGet : module31
 arduino::Board "1..1" *-- "0..9999" arduino::Module : modules3
 arduino::Expression "1..1" --* "1..1" arduino::UnaryExpression : operand24
-arduino::Expression "0..1" --* "1..1" arduino::BinaryExpression : right28
-arduino::Sketch "1..1" --* "1..1" arduino::Project : sketch1
-arduino::ModuleSet "1..1" *-- "1..1" arduino::Expression : value17
+arduino::BinaryExpression "1..1" *-- "0..1" arduino::Expression : right28
+arduino::Project "1..1" *-- "1..1" arduino::Sketch : sketch1
+arduino::Expression "1..1" --* "1..1" arduino::ModuleSet : value17
 arduino::Constant "0..1" --* "1..1" arduino::WaitFor : value22
 @enduml

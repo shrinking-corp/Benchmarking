@@ -1,0 +1,129 @@
+@startuml
+class Vertex {
+}
+class graphgrammar::Derivation {
+}
+class graphgrammar::DerivationStep {
+}
+class graphgrammar::Edge {
+  + compareTo(other : any) : int
+}
+class graphgrammar::Grammar {
+  + name : str
+  + derives(next : any, prev : any, rhs : any, vertex : any) : str
+}
+class graphgrammar::Graph {
+  + edges(vertex : any) : str
+  + inEdges(vertex : any) : str
+  + isomorphicTo(other : any) : bool
+  + isomorphism(other : any) : str
+  + neighborhood(vertex : any) : str
+  + outEdges(vertex : any) : str
+}
+class graphgrammar::ParsingTree {
+  + derivation() : str
+}
+class graphgrammar::Resolution {
+}
+class graphgrammar::ResolutionStep {
+}
+class graphgrammar::Rule {
+  + id : str
+  + name : str
+  + apply(graph : any, pacs : any, vertex : any) : str
+  + derive(graph : any, vertex : any) : str
+  + embed(edges : any, graph : any, pacs : any, unifier : any, vertex : any) : str
+}
+class graphgrammar::StringToVertexMap {
+  + key : str
+}
+class graphgrammar::Symbol {
+  + name : str
+  + subscript : str
+  + superscript : str
+  + compareTo(other : any) : int
+  + equivalates(other : any) : bool
+}
+class graphgrammar::SymbolSymbolsPair {
+}
+class graphgrammar::TripleGrammar {
+  + name : str
+  + produce(derivationStep : any, forward : any, resolution : any, tripleGraph : any) : str
+  + resolve(forward : any, resolution : any, resolutionStep : any, tripleGraph : any) : void
+}
+class graphgrammar::TripleGraph {
+  + invMs(sourceVertex : any) : Vertex
+  + invMt(targetVertex : any) : Vertex
+}
+class graphgrammar::TripleRule {
+  + invMs(sourceVertex : any) : Vertex
+  + invMt(targetVertex : any) : Vertex
+}
+class graphgrammar::Vertex {
+  + id : str
+  + equivalates(other : any) : bool
+}
+class graphgrammar::VertexToStringMap {
+  + value : str
+}
+class graphgrammar::VertexToSymbolSymbolsPairMap {
+}
+class graphgrammar::VertexToVertexMap {
+}
+class graphgrammar::ZoneVertex {
+  + equivalates(other : any) : bool
+}
+Vertex <|-- graphgrammar::ZoneVertex
+graphgrammar::Grammar "1..1" *-- "0..9999" graphgrammar::Symbol : alphabet0
+graphgrammar::Symbol "0..9999" --* "1..1" graphgrammar::TripleGrammar : alphabet82
+graphgrammar::ParsingTree "0..9999" --* "1..1" graphgrammar::ParsingTree : children52
+graphgrammar::Graph "0..1" --* "1..1" graphgrammar::TripleGraph : corr112
+graphgrammar::Rule "0..1" --* "1..1" graphgrammar::TripleRule : corr98
+graphgrammar::DerivationStep "0..1" --* "1..1" graphgrammar::ParsingTree : derivationStep48
+graphgrammar::Symbol "0..1" --* "1..1" graphgrammar::SymbolSymbolsPair : edgeLabel21
+graphgrammar::Edge "0..9999" --* "1..1" graphgrammar::Graph : edges62
+graphgrammar::Rule "1..1" *-- "0..9999" graphgrammar::VertexToSymbolSymbolsPairMap : embedding17
+graphgrammar::Edge "1..1" -- "0..1" graphgrammar::Vertex : from73
+graphgrammar::Grammar "1..1" -- "0..1" graphgrammar::Symbol : initial9
+graphgrammar::Symbol "0..1" -- "1..1" graphgrammar::TripleGrammar : initial92
+graphgrammar::Vertex "0..1" -- "1..1" graphgrammar::VertexToVertexMap : key124
+graphgrammar::Vertex "0..1" -- "1..1" graphgrammar::VertexToStringMap : key130
+graphgrammar::Vertex "0..1" -- "1..1" graphgrammar::VertexToSymbolSymbolsPairMap : key26
+graphgrammar::Symbol "0..1" --* "1..1" graphgrammar::Vertex : label64
+graphgrammar::Edge "1..1" *-- "0..1" graphgrammar::Symbol : label79
+graphgrammar::Rule "1..1" *-- "0..1" graphgrammar::Symbol : lhs12
+graphgrammar::TripleRule "1..1" *-- "0..9999" graphgrammar::VertexToVertexMap : ms104
+graphgrammar::TripleGraph "1..1" *-- "0..9999" graphgrammar::VertexToVertexMap : ms118
+graphgrammar::TripleRule "1..1" *-- "0..9999" graphgrammar::VertexToVertexMap : mt107
+graphgrammar::TripleGraph "1..1" *-- "0..9999" graphgrammar::VertexToVertexMap : mt121
+graphgrammar::DerivationStep "1..1" *-- "0..1" graphgrammar::Graph : next40
+graphgrammar::Grammar "1..1" -- "0..9999" graphgrammar::Symbol : nonterminals4
+graphgrammar::Symbol "0..9999" -- "1..1" graphgrammar::TripleGrammar : nonterminals87
+graphgrammar::Rule "1..1" -- "0..9999" graphgrammar::Vertex : pac19
+graphgrammar::ResolutionStep "1..1" *-- "0..9999" graphgrammar::VertexToStringMap : pac54
+graphgrammar::Vertex "0..9999" --* "1..1" graphgrammar::ZoneVertex : pac70
+graphgrammar::DerivationStep "1..1" *-- "0..1" graphgrammar::Graph : previous37
+graphgrammar::Resolution "1..1" *-- "0..9999" graphgrammar::StringToVertexMap : referenceIds55
+graphgrammar::Graph "0..1" --* "1..1" graphgrammar::Rule : rhs15
+graphgrammar::DerivationStep "1..1" *-- "0..1" graphgrammar::Rule : rule32
+graphgrammar::Grammar "1..1" *-- "0..9999" graphgrammar::Rule : rules7
+graphgrammar::Graph "0..1" --* "1..1" graphgrammar::TripleGraph : source110
+graphgrammar::Rule "0..1" --* "1..1" graphgrammar::TripleRule : source95
+graphgrammar::Derivation "1..1" *-- "0..9999" graphgrammar::DerivationStep : steps45
+graphgrammar::Resolution "1..1" *-- "0..9999" graphgrammar::ResolutionStep : steps56
+graphgrammar::Rule "0..1" --* "1..1" graphgrammar::TripleRule : target101
+graphgrammar::Graph "0..1" --* "1..1" graphgrammar::TripleGraph : target115
+graphgrammar::Grammar "1..1" -- "0..9999" graphgrammar::Symbol : terminals1
+graphgrammar::Symbol "0..9999" -- "1..1" graphgrammar::TripleGrammar : terminals84
+graphgrammar::Edge "1..1" -- "0..1" graphgrammar::Vertex : to76
+graphgrammar::TripleGrammar "1..1" *-- "0..9999" graphgrammar::TripleRule : tripleRules90
+graphgrammar::DerivationStep "1..1" *-- "0..9999" graphgrammar::VertexToVertexMap : unifier43
+graphgrammar::Vertex "0..1" -- "1..1" graphgrammar::VertexToVertexMap : value127
+graphgrammar::StringToVertexMap "1..1" -- "0..1" graphgrammar::Vertex : value133
+graphgrammar::SymbolSymbolsPair "0..9999" --* "1..1" graphgrammar::VertexToSymbolSymbolsPairMap : value29
+graphgrammar::DerivationStep "1..1" *-- "0..1" graphgrammar::Vertex : vertex34
+graphgrammar::Symbol "0..9999" --* "1..1" graphgrammar::SymbolSymbolsPair : vertexLabels23
+graphgrammar::Graph "1..1" *-- "0..9999" graphgrammar::Vertex : vertices59
+graphgrammar::Vertex "0..9999" --* "1..1" graphgrammar::ZoneVertex : vertices67
+graphgrammar::ParsingTree "1..1" *-- "0..1" graphgrammar::ZoneVertex : zoneVertex47
+@enduml

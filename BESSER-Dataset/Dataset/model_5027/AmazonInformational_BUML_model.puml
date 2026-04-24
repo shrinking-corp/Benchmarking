@@ -22,15 +22,15 @@ class amazoninformational::Product {
 }
 class amazoninformational::Shipment {
 }
-amazoninformational::Order "1..1" -- "0..1" amazoninformational::Customer : customer6
+amazoninformational::Customer "0..1" -- "1..1" amazoninformational::Order : customer6
 amazoninformational::Invoice "0..1" --* "1..1" amazoninformational::Order : invoice2
-amazoninformational::Package "1..1" -- "1..1" amazoninformational::Order : order10
+amazoninformational::Order "1..1" -- "1..1" amazoninformational::Package : order10
 amazoninformational::Order "0..1" -- "1..1" amazoninformational::Shipment : order13
-amazoninformational::Order "1..1" -- "1..1" amazoninformational::Invoice : order15
+amazoninformational::Invoice "1..1" -- "1..1" amazoninformational::Order : order15
 amazoninformational::Package "1..9999" -- "1..1" amazoninformational::Shipment : package11
-amazoninformational::Package "0..9999" --* "1..1" amazoninformational::Order : packages4
+amazoninformational::Order "1..1" *-- "0..9999" amazoninformational::Package : packages4
 amazoninformational::Invoice "1..1" *-- "0..1" amazoninformational::Payment : payment17
-amazoninformational::Product "1..9999" --* "1..1" amazoninformational::Order : products0
-amazoninformational::Product "0..1" -- "1..1" amazoninformational::Package : products8
-amazoninformational::Shipment "0..1" --* "1..1" amazoninformational::Order : shipment1
+amazoninformational::Order "1..1" *-- "1..9999" amazoninformational::Product : products0
+amazoninformational::Package "1..1" -- "0..1" amazoninformational::Product : products8
+amazoninformational::Order "1..1" *-- "0..1" amazoninformational::Shipment : shipment1
 @enduml

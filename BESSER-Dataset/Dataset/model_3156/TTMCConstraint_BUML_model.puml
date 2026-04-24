@@ -357,6 +357,8 @@ TemporalPathExpression <|-- TTMCConstraint::ReleaseExpression
 TemporalPathExpression <|-- TTMCConstraint::UntilExpression
 TemporalStateExpression <|-- TTMCConstraint::TemporalExistsExpression
 TemporalStateExpression <|-- TTMCConstraint::TemporalForallExpression
+Type <|-- TTMCConstraint::TypeDefinition
+Type <|-- TTMCConstraint::TypeReference
 TypeDefinition <|-- TTMCConstraint::ArrayTypeDefinition
 TypeDefinition <|-- TTMCConstraint::BasicTypeDefinition
 TypeDefinition <|-- TTMCConstraint::EnumerationTypeDefinition
@@ -365,8 +367,6 @@ TypeDefinition <|-- TTMCConstraint::RecordTypeDefinition
 TypeDefinition <|-- TTMCConstraint::SubTypeDefinition
 TypeDefinition <|-- TTMCConstraint::SubrangeTypeDefinition
 TypeDefinition <|-- TTMCConstraint::TupleTypeDefinition
-Type <|-- TTMCConstraint::TypeDefinition
-Type <|-- TTMCConstraint::TypeReference
 UnaryExpression <|-- TTMCConstraint::ArrayLiteralExpression
 UnaryExpression <|-- TTMCConstraint::FinallyExpression
 UnaryExpression <|-- TTMCConstraint::FunctionLiteralExpression
@@ -383,40 +383,40 @@ UnaryExpression <|-- TTMCConstraint::UnaryPlusExpression
 TTMCConstraint::BasicConstraintDefinition "0..9999" --* "1..1" TTMCConstraint::ConstraintSpecification : basicConstraintDefinitions7
 TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::IfThenElseExpression : condition66
 TTMCConstraint::ConstantDeclaration "0..9999" --* "1..1" TTMCConstraint::ConstraintSpecification : constantDeclarations3
-TTMCConstraint::ReferenceExpression "1..1" -- "1..1" TTMCConstraint::Declaration : declaration64
+TTMCConstraint::Declaration "1..1" -- "1..1" TTMCConstraint::ReferenceExpression : declaration64
 TTMCConstraint::ArrayTypeDefinition "1..1" *-- "1..1" TTMCConstraint::Type : elementType35
 TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::IfThenElseExpression : else71
-TTMCConstraint::Expression "0..1" --* "1..1" TTMCConstraint::DefinableDeclaration : expression10
+TTMCConstraint::DefinableDeclaration "1..1" *-- "0..1" TTMCConstraint::Expression : expression10
 TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::SubTypeDefinition : expression24
-TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::ConstraintDefinition : expression41
+TTMCConstraint::ConstraintDefinition "1..1" *-- "1..1" TTMCConstraint::Expression : expression41
 TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::LetExpression : expression75
 TTMCConstraint::Expression "0..9999" --* "1..1" TTMCConstraint::TupleLiteralExpression : expressions62
-TTMCConstraint::RecordLiteralExpression "1..1" *-- "0..9999" TTMCConstraint::FieldAssignment : fieldAssignments56
+TTMCConstraint::FieldAssignment "0..9999" --* "1..1" TTMCConstraint::RecordLiteralExpression : fieldAssignments56
 TTMCConstraint::FieldDeclaration "0..9999" --* "1..1" TTMCConstraint::RecordTypeDefinition : fieldDeclarations40
-TTMCConstraint::FunctionDeclaration "0..9999" --* "1..1" TTMCConstraint::ConstraintSpecification : functionDeclarations5
-TTMCConstraint::Type "1..9999" --* "1..1" TTMCConstraint::ArrayTypeDefinition : indexTypes33
-TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::BinaryExpression : leftOperand45
-TTMCConstraint::LetExpression "1..1" *-- "0..9999" TTMCConstraint::LetDeclaration : letDeclarations74
-TTMCConstraint::EnumerationTypeDefinition "1..1" *-- "0..9999" TTMCConstraint::EnumerationLiteralDefinition : literals27
-TTMCConstraint::SubrangeTypeDefinition "1..1" *-- "0..1" TTMCConstraint::Expression : lowerBound17
-TTMCConstraint::UnaryExpression "1..1" *-- "1..1" TTMCConstraint::Expression : operand43
-TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::AccessExpression : operand52
+TTMCConstraint::ConstraintSpecification "1..1" *-- "0..9999" TTMCConstraint::FunctionDeclaration : functionDeclarations5
+TTMCConstraint::ArrayTypeDefinition "1..1" *-- "1..9999" TTMCConstraint::Type : indexTypes33
+TTMCConstraint::BinaryExpression "1..1" *-- "1..1" TTMCConstraint::Expression : leftOperand45
+TTMCConstraint::LetDeclaration "0..9999" --* "1..1" TTMCConstraint::LetExpression : letDeclarations74
+TTMCConstraint::EnumerationLiteralDefinition "0..9999" --* "1..1" TTMCConstraint::EnumerationTypeDefinition : literals27
+TTMCConstraint::Expression "0..1" --* "1..1" TTMCConstraint::SubrangeTypeDefinition : lowerBound17
+TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::UnaryExpression : operand43
+TTMCConstraint::AccessExpression "1..1" *-- "1..1" TTMCConstraint::Expression : operand52
 TTMCConstraint::Expression "0..9999" --* "1..1" TTMCConstraint::MultiaryExpression : operands50
 TTMCConstraint::ParameterDeclaration "1..1" --* "1..1" TTMCConstraint::SubTypeDefinition : parameterDeclaration22
 TTMCConstraint::ParameterDeclaration "0..9999" --* "1..1" TTMCConstraint::ParametricElement : parameterDeclarations0
-TTMCConstraint::Type "0..9999" --* "1..1" TTMCConstraint::FunctionTypeDefinition : parameterTypes28
+TTMCConstraint::FunctionTypeDefinition "1..1" *-- "0..9999" TTMCConstraint::Type : parameterTypes28
 TTMCConstraint::Expression "0..9999" --* "1..1" TTMCConstraint::ParametrizedElement : parameters1
 TTMCConstraint::TypeDeclaration "0..1" -- "1..1" TTMCConstraint::TypeReference : reference15
 TTMCConstraint::EnumerationLiteralDefinition "1..1" -- "1..1" TTMCConstraint::EnumerationLiteralExpression : reference60
-TTMCConstraint::Type "1..1" --* "1..1" TTMCConstraint::FunctionTypeDefinition : returnType30
-TTMCConstraint::Type "1..1" --* "1..1" TTMCConstraint::FunctionLiteralExpression : returnType54
+TTMCConstraint::FunctionTypeDefinition "1..1" *-- "1..1" TTMCConstraint::Type : returnType30
+TTMCConstraint::FunctionLiteralExpression "1..1" *-- "1..1" TTMCConstraint::Type : returnType54
 TTMCConstraint::BinaryExpression "1..1" *-- "1..1" TTMCConstraint::Expression : rightOperand47
 TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::IfThenElseExpression : then68
 TTMCConstraint::Type "1..1" --* "1..1" TTMCConstraint::TypeDeclaration : type12
-TTMCConstraint::Type "1..1" --* "1..1" TTMCConstraint::InExpression : type78
+TTMCConstraint::InExpression "1..1" *-- "1..1" TTMCConstraint::Type : type78
 TTMCConstraint::Declaration "1..1" *-- "1..1" TTMCConstraint::Type : type9
 TTMCConstraint::ConstraintSpecification "1..1" *-- "0..9999" TTMCConstraint::TypeDeclaration : typeDeclarations2
-TTMCConstraint::Type "0..9999" --* "1..1" TTMCConstraint::TupleTypeDefinition : types38
+TTMCConstraint::TupleTypeDefinition "1..1" *-- "0..9999" TTMCConstraint::Type : types38
 TTMCConstraint::Expression "0..1" --* "1..1" TTMCConstraint::SubrangeTypeDefinition : upperBound19
 TTMCConstraint::Expression "1..1" --* "1..1" TTMCConstraint::FieldAssignment : value57
 @enduml

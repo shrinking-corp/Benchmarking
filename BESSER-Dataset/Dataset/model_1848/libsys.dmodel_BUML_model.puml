@@ -116,15 +116,15 @@ Medium <|-- libsys::Magazine
 Medium <|-- libsys::Video
 libsys::Instance "0..9999" -- "1..1" libsys::UserAccount : borrowedInstances6
 libsys::BorrowedEntry "0..9999" --* "1..1" libsys::Instance : borrowingList3
-libsys::Medium "1..1" *-- "0..9999" libsys::Instance : instances0
+libsys::Instance "0..9999" --* "1..1" libsys::Medium : instances0
 libsys::Librarian "0..9999" --* "1..1" libsys::Library : librarians18
-libsys::Medium "0..9999" --* "1..1" libsys::Library : media16
+libsys::Library "1..1" *-- "0..9999" libsys::Medium : media16
 libsys::MediaAdministration "1..1" -- "0..9999" libsys::Medium : mediaEntries14
-libsys::ReservationEntry "0..9999" --* "1..1" libsys::Instance : reservationList1
-libsys::UserAccount "1..1" -- "0..9999" libsys::Instance : reservationList9
+libsys::Instance "1..1" *-- "0..9999" libsys::ReservationEntry : reservationList1
+libsys::Instance "0..9999" -- "1..1" libsys::UserAccount : reservationList9
 libsys::BorrowedEntry "1..1" -- "1..1" libsys::User : user23
-libsys::User "1..1" -- "1..1" libsys::ReservationEntry : user26
-libsys::UserAccount "1..1" --* "1..1" libsys::User : userAccount5
+libsys::ReservationEntry "1..1" -- "1..1" libsys::User : user26
+libsys::User "1..1" *-- "1..1" libsys::UserAccount : userAccount5
 libsys::UserAccount "0..9999" -- "1..1" libsys::UserAdministration : userAccounts12
-libsys::User "0..1" --* "1..1" libsys::Library : users20
+libsys::Library "1..1" *-- "0..1" libsys::User : users20
 @enduml

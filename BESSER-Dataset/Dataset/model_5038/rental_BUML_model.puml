@@ -1,0 +1,55 @@
+@startuml
+enum StreetType {
+  Road
+  Street
+}
+class rental::Address {
+  + city : str
+  + number : int
+  + streetName : str
+  + streetType : str
+  + zipCode : str
+}
+class rental::Customer {
+  + firstName : str
+  + lastName : str
+  + getDisplayName() : str
+}
+class rental::License {
+  + number : int
+  + validityDate : date
+}
+class rental::Rental {
+  + endDate : date
+  + startDate : date
+  + end() : int
+  + nbDaysBooked() : int
+  + nbDaysRented() : int
+  + start() : int
+}
+class rental::RentalAgency {
+  + name : str
+  + addCustomer(customer : any) : void
+  + addObject(object : any) : void
+  + book(customer : any, from : any, rentedObject : any, to : any) : str
+}
+class rental::RentalObject {
+  + ID : str
+  + name : str
+  + picture : str
+  + isAvailable() : bool
+  + rent(customer : any) : str
+}
+rental::Address "1..1" --* "1..1" rental::Customer : address0
+rental::Address "1..1" --* "1..1" rental::RentalAgency : address3
+rental::Customer "1..1" -- "1..1" rental::Rental : customer14
+rental::Customer "0..9999" --* "1..1" rental::RentalAgency : customers6
+rental::Customer "1..1" *-- "0..9999" rental::License : licenses1
+rental::RentalAgency "1..1" *-- "0..9999" rental::RentalObject : objectsToRent5
+rental::Customer "0..1" -- "1..1" rental::License : owner12
+rental::RentalAgency "1..1" -- "1..1" rental::RentalObject : parentAgency10
+rental::Rental "1..1" -- "1..1" rental::RentalAgency : parentAgency19
+rental::Customer "1..1" -- "1..1" rental::RentalAgency : parentAgency2
+rental::Rental "0..9999" --* "1..1" rental::RentalAgency : rentals8
+rental::Rental "1..1" -- "0..1" rental::RentalObject : rentedObject17
+@enduml

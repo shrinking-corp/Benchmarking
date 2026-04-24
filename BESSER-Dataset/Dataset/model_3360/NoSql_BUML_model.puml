@@ -46,20 +46,20 @@ class nosql::PK {
 class nosql::Row {
 }
 ColumnFamily <|-- nosql::Row
-nosql::Options "0..1" -- "1..1" nosql::KeySpace : EReference03
-nosql::PK "1..1" --* "1..1" nosql::ColumnFamily : PK18
+nosql::KeySpace "1..1" -- "0..1" nosql::Options : EReference03
+nosql::ColumnFamily "1..1" *-- "1..1" nosql::PK : PK18
 nosql::Column "1..9999" --* "1..1" nosql::Row : additionalColumns34
-nosql::Index "1..1" *-- "0..1" nosql::Column : applyTo10
+nosql::Column "0..1" --* "1..1" nosql::Index : applyTo10
 nosql::Cell "1..9999" --* "1..1" nosql::Row : cells32
 nosql::Cell "1..1" -- "1..1" nosql::Column : column37
-nosql::ColumnFamily "0..1" -- "1..1" nosql::Column : columnFamily26
+nosql::Column "1..1" -- "0..1" nosql::ColumnFamily : columnFamily26
 nosql::Column "1..9999" --* "1..1" nosql::ColumnFamily : columns12
 nosql::Column "1..9999" -- "1..1" nosql::PK : columns29
-nosql::KeySpace "1..1" *-- "1..9999" nosql::ColumnFamily : families1
+nosql::ColumnFamily "1..9999" --* "1..1" nosql::KeySpace : families1
 nosql::KeySpace "1..1" *-- "0..9999" nosql::PK : hasPK8
 nosql::Index "0..9999" --* "1..1" nosql::KeySpace : idexes0
-nosql::KeySpace "1..1" --* "1..1" nosql::ColumnFamily : keyspace23
-nosql::Options "0..9999" --* "1..1" nosql::ColumnFamily : options15
-nosql::Options "0..9999" --* "1..1" nosql::KeySpace : options5
-nosql::Row "0..9999" -- "1..1" nosql::ColumnFamily : rows21
+nosql::ColumnFamily "1..1" *-- "1..1" nosql::KeySpace : keyspace23
+nosql::ColumnFamily "1..1" *-- "0..9999" nosql::Options : options15
+nosql::KeySpace "1..1" *-- "0..9999" nosql::Options : options5
+nosql::ColumnFamily "1..1" -- "0..9999" nosql::Row : rows21
 @enduml

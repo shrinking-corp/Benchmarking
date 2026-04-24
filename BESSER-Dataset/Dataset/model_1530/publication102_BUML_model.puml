@@ -61,26 +61,26 @@ Named <|-- publication102::Paragraph
 Named <|-- publication102::Position
 Named <|-- publication102::PublicationStructure
 Named <|-- publication102::ReviewNote
-publication102::KnowledgeManager "1..1" *-- "0..9999" publication102::Keyword : allkeywords40
-publication102::Researcher "0..9999" -- "1..1" publication102::Paper : authors11
-publication102::Paper "1..1" -- "0..1" publication102::Paper : citedBy15
-publication102::Paper "0..1" -- "1..1" publication102::Collaboration : col_paper46
+publication102::Keyword "0..9999" --* "1..1" publication102::KnowledgeManager : allkeywords40
+publication102::Paper "1..1" -- "0..9999" publication102::Researcher : authors11
+publication102::Paper "0..1" -- "1..1" publication102::Paper : citedBy15
+publication102::Collaboration "1..1" -- "0..1" publication102::Paper : col_paper46
 publication102::Collaboration "0..9999" --* "1..1" publication102::Researcher : collaborations8
 publication102::Keyword "0..1" -- "1..1" publication102::PaperKeyword : keyword43
-publication102::PaperKeyword "0..9999" --* "1..1" publication102::Paper : keywords12
-publication102::PublicationStructure "1..1" *-- "0..1" publication102::KnowledgeManager : knowledgeMan30
-publication102::Paper "0..9999" -- "1..1" publication102::Keyword : kpapers38
+publication102::Paper "1..1" *-- "0..9999" publication102::PaperKeyword : keywords12
+publication102::KnowledgeManager "0..1" --* "1..1" publication102::PublicationStructure : knowledgeMan30
+publication102::Keyword "1..1" -- "0..9999" publication102::Paper : kpapers38
 publication102::Paper "0..9999" --* "1..1" publication102::PublicationStructure : papers27
-publication102::Write "1..1" -- "0..1" publication102::Paragraph : paragraph19
+publication102::Paragraph "0..1" -- "1..1" publication102::Write : paragraph19
 publication102::Paper "1..1" *-- "0..9999" publication102::Paragraph : paragraphs10
 publication102::Position "0..1" -- "1..1" publication102::Position : parent36
 publication102::Position "0..9999" --* "1..1" publication102::PublicationStructure : positions32
 publication102::Paper "0..9999" -- "1..1" publication102::Researcher : res_papers3
 publication102::Position "0..1" -- "1..1" publication102::Researcher : res_position6
-publication102::Researcher "0..9999" --* "1..1" publication102::PublicationStructure : researchers25
-publication102::ReviewNote "0..1" -- "1..1" publication102::Review : reviewNote22
+publication102::PublicationStructure "1..1" *-- "0..9999" publication102::Researcher : researchers25
+publication102::Review "1..1" -- "0..1" publication102::ReviewNote : reviewNote22
 publication102::Researcher "1..1" *-- "0..9999" publication102::Review : reviews1
-publication102::ReviewNote "0..9999" --* "1..1" publication102::Paragraph : reviews17
-publication102::Skill "0..9999" --* "1..1" publication102::Researcher : skills4
-publication102::Write "0..9999" --* "1..1" publication102::Researcher : writes0
+publication102::Paragraph "1..1" *-- "0..9999" publication102::ReviewNote : reviews17
+publication102::Researcher "1..1" *-- "0..9999" publication102::Skill : skills4
+publication102::Researcher "1..1" *-- "0..9999" publication102::Write : writes0
 @enduml

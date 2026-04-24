@@ -103,31 +103,31 @@ PackageMember <|-- types::Declaration
 PackageMember <|-- types::Type
 ParameterizedType <|-- types::ComplexType
 PrimitiveType <|-- types::EnumerationType
+Type <|-- types::ParameterizedType
+Type <|-- types::PrimitiveType
+Type <|-- types::TypeAlias
+Type <|-- types::TypeParameter
 TypeConstraint <|-- types::RangeConstraint
 TypeSpecifier <|-- types::ArrayTypeSpecifier
 TypedElement <|-- types::Declaration
 TypedElement <|-- types::Parameter
 TypedElement <|-- types::TypeAlias
-Type <|-- types::ParameterizedType
-Type <|-- types::PrimitiveType
-Type <|-- types::TypeAlias
-Type <|-- types::TypeParameter
-types::Annotation "0..9999" -- "1..1" types::AnnotatableElement : annotations34
-types::PrimitiveType "0..1" -- "1..1" types::PrimitiveType : baseType21
+types::AnnotatableElement "1..1" -- "0..9999" types::Annotation : annotations34
+types::PrimitiveType "1..1" -- "0..1" types::PrimitiveType : baseType21
 types::Type "0..1" -- "1..1" types::TypeParameter : bound27
-types::TypeConstraint "0..9999" --* "1..1" types::Type : constraint6
-types::Package "1..1" *-- "0..1" types::Domain : domain1
-types::Enumerator "0..9999" --* "1..1" types::EnumerationType : enumerator19
-types::Declaration "0..9999" --* "1..1" types::ComplexType : features22
+types::Type "1..1" *-- "0..9999" types::TypeConstraint : constraint6
+types::Domain "0..1" --* "1..1" types::Package : domain1
+types::EnumerationType "1..1" *-- "0..9999" types::Enumerator : enumerator19
+types::ComplexType "1..1" *-- "0..9999" types::Declaration : features22
 types::Package "0..9999" -- "1..1" types::Package : import4
-types::PackageMember "0..9999" --* "1..1" types::Package : member0
+types::Package "1..1" *-- "0..9999" types::PackageMember : member0
 types::EnumerationType "0..1" -- "1..1" types::Enumerator : owningEnumeration26
-types::Parameter "1..1" -- "0..1" types::Operation : owningOperation8
+types::Operation "0..1" -- "1..1" types::Parameter : owningOperation8
 types::ParameterizedType "1..1" *-- "0..9999" types::TypeParameter : parameter29
-types::Parameter "0..9999" --* "1..1" types::Operation : parameters7
+types::Operation "1..1" *-- "0..9999" types::Parameter : parameters7
 types::Annotation "1..1" *-- "0..9999" types::Property : properties31
 types::ComplexType "0..9999" -- "1..1" types::ComplexType : superTypes24
-types::EObject "0..9999" -- "1..1" types::Annotation : targets32
+types::Annotation "1..1" -- "0..9999" types::EObject : targets32
 types::Type "0..1" -- "1..1" types::TypeSpecifier : type13
 types::Type "0..1" -- "1..1" types::TypedElement : type9
 types::TypeSpecifier "0..9999" --* "1..1" types::TypeSpecifier : typeArguments17

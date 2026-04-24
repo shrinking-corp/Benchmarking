@@ -86,22 +86,22 @@ NamedElement <|-- company106::Action
 NamedElement <|-- company106::Flow
 NamedElement <|-- company106::Function
 NamedElement <|-- company106::Workstation
-company106::ObjectiveReach "1..1" *-- "0..1" company106::Action : actions41
+company106::Action "0..1" --* "1..1" company106::ObjectiveReach : actions41
 company106::Agency "0..9999" --* "1..1" company106::Company : agencies0
-company106::Department "0..9999" --* "1..1" company106::Agency : departments27
-company106::Employee "0..9999" --* "1..1" company106::Agency : employees30
-company106::Flow "0..1" -- "1..1" company106::Action : flow46
+company106::Agency "1..1" *-- "0..9999" company106::Department : departments27
+company106::Agency "1..1" *-- "0..9999" company106::Employee : employees30
+company106::Action "1..1" -- "0..1" company106::Flow : flow46
 company106::Flow "0..9999" --* "1..1" company106::Function : flows43
-company106::HierarchyLink "1..1" -- "0..1" company106::Employee : fromEmployee13
-company106::Function "0..1" -- "1..1" company106::Flow : fromFunction4
-company106::Goal "0..9999" --* "1..1" company106::Company : goals1
-company106::HierarchyLink "0..9999" --* "1..1" company106::Employee : hierarchies8
-company106::Workstation "0..1" -- "1..1" company106::Employee : inChargeOf12
-company106::Objective "0..9999" --* "1..1" company106::Goal : objectives25
+company106::Employee "0..1" -- "1..1" company106::HierarchyLink : fromEmployee13
+company106::Flow "1..1" -- "0..1" company106::Function : fromFunction4
+company106::Company "1..1" *-- "0..9999" company106::Goal : goals1
+company106::Employee "1..1" *-- "0..9999" company106::HierarchyLink : hierarchies8
+company106::Employee "1..1" -- "0..1" company106::Workstation : inChargeOf12
+company106::Goal "1..1" *-- "0..9999" company106::Objective : objectives25
 company106::Employee "0..9999" -- "1..1" company106::Workstation : owners24
 company106::Room "0..9999" -- "1..1" company106::Room : parent20
 company106::Agency "1..1" *-- "0..9999" company106::ObjectiveReach : reacheds33
-company106::Room "0..1" -- "1..1" company106::Employee : responsibleOf9
+company106::Employee "1..1" -- "0..1" company106::Room : responsibleOf9
 company106::Department "1..1" *-- "0..9999" company106::Room : rooms3
 company106::Agency "0..1" -- "1..1" company106::ObjectiveReach : srcAgency38
 company106::Employee "0..1" -- "1..1" company106::HierarchyLink : toEmployee16

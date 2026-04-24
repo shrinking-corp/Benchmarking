@@ -1,0 +1,150 @@
+@startuml
+class Address {
+}
+class Booking {
+}
+class BookingHandler {
+}
+class Classes::BuisnessLogicLayer::PaymentHandler {
+  + makePayment(booking : any, paymentInfo : any) : void
+}
+class Classes::BuisnessLogicLayer::PaymentInfo {
+  + CVV : int
+  + CreditCard : int
+  + ExpiryDate : int
+  + PaymentComplete : bool
+}
+class Classes::Buissnesslayer::Address {
+  + city : str
+  + country : str
+  + postalNumber : int
+  + street : str
+}
+class Classes::Buissnesslayer::Booking {
+  + bookingID : int
+  + checkedIn : bool
+  + checkedOut : bool
+  + endDate : str
+  + extras : str
+  + guest : int
+  + nrOfGuests : int
+  + parkings : str
+  + payment : str
+  + paymentComplete : bool
+  + startDate : str
+}
+class Classes::Buissnesslayer::BookingHandler {
+  + CalculatePayment(booking : any) : int
+  + attemptBookRoom(booking : any) : bool
+  + cancelBooking(booking : any) : void
+  + changeBooking(booking : any) : void
+  + checkIn(booking : any) : void
+  + checkOut(booking : any) : void
+  + displayPaymentOptions() : str
+  + fetchAvailability(endDate : any, nrOfGuests : any, roomType : any, startDate : any) : str
+  + fetchAvailableExtras() : str
+  + fetchBooking(bookingID : any) : str
+  + sendErrorMsg() : void
+}
+class Classes::Buissnesslayer::Employee {
+  + ID : int
+  + Password : str
+}
+class Classes::Buissnesslayer::Guest {
+  + wrokAround : int
+}
+class Classes::Buissnesslayer::Room {
+  + roomType : int
+}
+abstract class Classes::Buissnesslayer::User {
+  + Email : str
+  + Name : str
+  + attemptCheckIn(booking : any) : void
+  + attemptCheckOut(booking : any) : void
+  + bookRoom(booking : any) : bool
+  + cancelBooking(booking : any) : void
+  + changeBooking(newBooking : any, oldBooking : any) : void
+}
+class Classes::Buissnesslayer::UserHandler {
+  + Users : str
+  + AddNewGuest(email : any) : str
+  + CreateEmployee(ID : any) : str
+  + identifyUser(email : any) : str
+  + isEmailValid(email : any) : bool
+  + sendEmailVerification(email : any) : void
+}
+class Classes::Datalayer::Database {
+  + extrasDB : str
+}
+class Classes::Interactionlayer::GUI {
+}
+class Classes::Interactionlayer::GUIController {
+  + displayBookingCancelled() : void
+  + displayBookingsByIDintbookingID(bookingID : any) : void
+  + displayDateOptions() : void
+  + displayError() : void
+  + displayExtras(extras : any) : void
+  + displayParkings(parkings : any) : void
+  + displayPaymentOption() : void
+  + displayRoomTypes() : int
+  + displayRoomsByID(bookingID : any) : void
+  + displayRoomsGrid(roomType : any) : void
+  + showAvailableRooms(endDate : any, nrOfGuests : any, roomType : any, startDate : any) : int
+}
+class Classes::Interactionlayer::LoginController {
+  + loginCreateGuest(email : any) : str
+  + loginEmployee(ID : any) : bool
+  + loginGuest(bookingID : any) : bool
+}
+class Classes::Interactionlayer::LoginController::DataType1 {
+}
+class Database {
+}
+class Employee {
+}
+class GUI {
+}
+class GUIController {
+}
+class Guest {
+}
+class LoginController {
+}
+class PaymentHandler {
+}
+class Room {
+}
+class User {
+}
+class UserHandler {
+}
+User <|-- Classes::Buissnesslayer::Employee
+User <|-- Classes::Buissnesslayer::Guest
+Booking "1..1" -- "1..1" Classes::Buissnesslayer::BookingHandler : Bookings15
+Classes::Buissnesslayer::Booking "1..1" -- "0..9999" Room : Rooms10
+Classes::Buissnesslayer::BookingHandler "1..1" -- "1..9999" User : User18
+Address "1..1" -- "1..1" Classes::Buissnesslayer::User : address29
+Booking "1..1" -- "1..1" Classes::Buissnesslayer::BookingHandler : booking13
+Booking "0..9999" -- "1..1" Classes::Datalayer::Database : bookingDB4
+BookingHandler "1..1" -- "1..1" Classes::Buissnesslayer::User : bookinghandler31
+BookingHandler "1..1" -- "1..1" Classes::Interactionlayer::GUIController : bookinghandler42
+Classes::Interactionlayer::LoginController "1..1" -- "1..1" User : currentUser48
+Classes::Buissnesslayer::BookingHandler "1..1" -- "1..1" Database : database20
+Classes::Buissnesslayer::UserHandler "1..1" -- "1..1" Database : database33
+Classes::Interactionlayer::GUIController "1..1" -- "1..1" GUI : display38
+Classes::Datalayer::Database "1..1" -- "0..9999" Employee : employeeDB2
+Classes::Interactionlayer::GUI "1..1" -- "1..1" GUIController : guicontroller37
+Classes::Interactionlayer::LoginController "1..1" -- "1..1" GUIController : guicontroller45
+Classes::Buissnesslayer::User "1..1" -- "1..1" LoginController : logincontroller25
+Classes::Buissnesslayer::UserHandler "1..1" -- "1..1" LoginController : logincontroller35
+Classes::Interactionlayer::GUIController "1..1" -- "1..1" LoginController : logincontroller39
+Classes::Interactionlayer::LoginController "1..1" -- "1..1" PaymentHandler : paymenthandler50
+Classes::BuisnessLogicLayer::PaymentInfo "1..1" -- "1..1" PaymentHandler : paymenthandler55
+Classes::Buissnesslayer::Booking "1..1" -- "1..9999" Room : room8
+Classes::Datalayer::Database "1..1" -- "0..9999" Room : roomDB6
+Classes::Datalayer::Database "1..1" -- "0..9999" Guest : userDB0
+Classes::Datalayer::Database "1..1" -- "1..1" UserHandler : userhandler1
+Classes::Buissnesslayer::BookingHandler "1..1" -- "1..1" UserHandler : userhandler22
+Classes::Buissnesslayer::User "1..1" -- "1..1" UserHandler : userhandler26
+Classes::Interactionlayer::LoginController "1..1" -- "1..1" UserHandler : userhandler52
+@enduml

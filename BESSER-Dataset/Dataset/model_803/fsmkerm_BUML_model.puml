@@ -1,0 +1,39 @@
+@startuml
+class FSMException {
+}
+class fsmkerm::FSM {
+  + reset() : void
+  + run() : void
+}
+class fsmkerm::FSMException {
+}
+class fsmkerm::NoInitialStateException {
+}
+class fsmkerm::NoTransition {
+}
+class fsmkerm::NonDeterminism {
+}
+class fsmkerm::State {
+  + name : str
+  + step(c : any) : void
+}
+class fsmkerm::Transition {
+  + input : str
+  + output : str
+  + fire() : void
+}
+FSMException <|-- fsmkerm::NoInitialStateException
+FSMException <|-- fsmkerm::NoTransition
+FSMException <|-- fsmkerm::NonDeterminism
+fsmkerm::FSM "1..1" -- "0..1" fsmkerm::State : currentState2
+fsmkerm::FSM "1..1" -- "1..9999" fsmkerm::State : finalState5
+fsmkerm::FSM "1..1" *-- "0..1" fsmkerm::FSMException : fsmException10
+fsmkerm::State "1..1" -- "0..9999" fsmkerm::Transition : incomingTransition14
+fsmkerm::FSM "1..1" -- "1..1" fsmkerm::State : initialState1
+fsmkerm::State "1..1" -- "0..9999" fsmkerm::Transition : outgoingTransition13
+fsmkerm::FSM "1..1" *-- "0..9999" fsmkerm::State : ownedState0
+fsmkerm::FSM "1..1" -- "1..1" fsmkerm::State : owningFSM12
+fsmkerm::State "1..1" -- "1..1" fsmkerm::Transition : source16
+fsmkerm::State "1..1" -- "1..1" fsmkerm::Transition : target18
+fsmkerm::FSM "1..1" *-- "0..9999" fsmkerm::Transition : transition8
+@enduml

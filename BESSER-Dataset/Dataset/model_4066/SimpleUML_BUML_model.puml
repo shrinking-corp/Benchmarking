@@ -1,0 +1,76 @@
+@startuml
+class Classifier {
+}
+class DataType {
+}
+class ModelElement {
+}
+class Package {
+}
+class Packageable {
+}
+class Type {
+}
+class simpleuml::Association {
+}
+class simpleuml::Class {
+  + abstract : bool
+}
+abstract class simpleuml::Classifier {
+}
+class simpleuml::DataType {
+}
+class simpleuml::Enumeration {
+}
+class simpleuml::EnumerationLiteral {
+  + name : str
+}
+class simpleuml::Generalization {
+  + isSubstitutable : bool
+}
+class simpleuml::Model {
+  + getCustomProperty(name : any) : str
+}
+abstract class simpleuml::ModelElement {
+  + name : str
+  + stereotype : str
+}
+class simpleuml::Package {
+}
+abstract class simpleuml::Packageable {
+}
+class simpleuml::PrimitiveType {
+}
+class simpleuml::Property {
+}
+class simpleuml::TaggedValue {
+  + name : str
+  + value : str
+}
+abstract class simpleuml::Type {
+}
+Classifier <|-- simpleuml::Package
+Classifier <|-- simpleuml::Type
+DataType <|-- simpleuml::Class
+ModelElement <|-- simpleuml::Association
+ModelElement <|-- simpleuml::Classifier
+ModelElement <|-- simpleuml::Property
+Package <|-- simpleuml::Model
+Packageable <|-- simpleuml::Association
+Packageable <|-- simpleuml::Package
+Packageable <|-- simpleuml::Type
+Type <|-- simpleuml::DataType
+Type <|-- simpleuml::Enumeration
+Type <|-- simpleuml::PrimitiveType
+simpleuml::DataType "1..1" *-- "0..9999" simpleuml::Property : attributes9
+simpleuml::Class "0..1" -- "1..1" simpleuml::Generalization : general13
+simpleuml::Class "1..1" *-- "0..9999" simpleuml::Generalization : generalizations1
+simpleuml::Package "1..1" *-- "0..9999" simpleuml::Packageable : ownedElements0
+simpleuml::Enumeration "1..1" *-- "0..9999" simpleuml::EnumerationLiteral : ownedLiteral11
+simpleuml::Package "0..1" -- "1..1" simpleuml::Packageable : owner16
+simpleuml::DataType "1..1" -- "1..1" simpleuml::Property : owner3
+simpleuml::Association "1..1" -- "1..1" simpleuml::Class : source4
+simpleuml::ModelElement "1..1" *-- "0..9999" simpleuml::TaggedValue : taggedValue12
+simpleuml::Association "1..1" -- "1..1" simpleuml::Class : target6
+simpleuml::Property "1..1" -- "1..1" simpleuml::Type : type2
+@enduml

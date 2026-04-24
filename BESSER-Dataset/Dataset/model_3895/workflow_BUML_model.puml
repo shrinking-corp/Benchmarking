@@ -91,10 +91,10 @@ TypedElement <|-- workflow::TaskOutput
 workflow::BaseTask "1..1" --* "1..1" workflow::Workflow : baseTask10
 workflow::AbstractTask "0..9999" --* "1..1" workflow::BaseTask : children3
 workflow::LibraryFunction "0..9999" --* "1..1" workflow::Workflow : functions12
-workflow::TaskInput "0..9999" --* "1..1" workflow::AbstractTask : inputs0
-workflow::LibraryFunction "1..1" *-- "0..9999" workflow::Input : inputs6
+workflow::AbstractTask "1..1" *-- "0..9999" workflow::TaskInput : inputs0
+workflow::Input "0..9999" --* "1..1" workflow::LibraryFunction : inputs6
 workflow::LibraryFunction "1..1" -- "1..1" workflow::LibraryTask : libraryfunction8
 workflow::AbstractTask "1..1" *-- "0..9999" workflow::TaskOutput : outputs1
-workflow::Output "0..9999" --* "1..1" workflow::LibraryFunction : outputs5
-workflow::TaskOutput "0..1" -- "1..1" workflow::Connection : taskoutput15
+workflow::LibraryFunction "1..1" *-- "0..9999" workflow::Output : outputs5
+workflow::Connection "1..1" -- "0..1" workflow::TaskOutput : taskoutput15
 @enduml

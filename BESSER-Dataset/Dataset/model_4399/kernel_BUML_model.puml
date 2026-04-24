@@ -175,20 +175,13 @@ commons::Variable <|-- kernel::dataitems::DataItem
 members::Member <|-- kernel::dataitems::DataItem
 members::Member <|-- kernel::procedures::Procedure
 members::Member <|-- kernel::statements::Statement
-procedures::ProcedureCall <|-- kernel::statements::ProcedureCall
 procedures::Procedure <|-- kernel::procedures::Procedure
+procedures::ProcedureCall <|-- kernel::statements::ProcedureCall
 references::ElementReference <|-- kernel::statements::ProcedureCall
 references::ReferenceableElement <|-- kernel::dataitems::DataItem
 references::ReferenceableElement <|-- kernel::procedures::Procedure
 statements::Conditional <|-- kernel::statements::Condition
 statements::Conditional <|-- kernel::statements::WhileLoop
-statements::StatementContainer <|-- kernel::statements::Condition
-statements::StatementContainer <|-- kernel::statements::ExceptionHandlerStatement
-statements::StatementContainer <|-- kernel::statements::StatementWithException
-statements::StatementContainer <|-- kernel::statements::WhileLoop
-statements::StatementListContainer <|-- kernel::statements::Block
-statements::StatementListContainer <|-- kernel::statements::NonDeterministicBlock
-statements::StatementListContainer <|-- kernel::statements::ParallelBlock
 statements::Statement <|-- kernel::statements::Block
 statements::Statement <|-- kernel::statements::Condition
 statements::Statement <|-- kernel::statements::NonDeterministicBlock
@@ -196,28 +189,35 @@ statements::Statement <|-- kernel::statements::ParallelBlock
 statements::Statement <|-- kernel::statements::ProcedureCall
 statements::Statement <|-- kernel::statements::StatementWithException
 statements::Statement <|-- kernel::statements::WhileLoop
+statements::StatementContainer <|-- kernel::statements::Condition
+statements::StatementContainer <|-- kernel::statements::ExceptionHandlerStatement
+statements::StatementContainer <|-- kernel::statements::StatementWithException
+statements::StatementContainer <|-- kernel::statements::WhileLoop
+statements::StatementListContainer <|-- kernel::statements::Block
+statements::StatementListContainer <|-- kernel::statements::NonDeterministicBlock
+statements::StatementListContainer <|-- kernel::statements::ParallelBlock
 Argument "0..9999" --* "1..1" kernel::statements::ProcedureCall : arguments8
 ProcedureCall "0..9999" -- "1..1" kernel::procedures::Procedure : callers16
 SubExpression "0..9999" --* "1..1" kernel::expressions::Expression : children30
 Expression "1..1" --* "1..1" kernel::statements::Conditional : condition7
-kernel::containers::CompilationUnit "1..1" *-- "0..9999" Member : declarations33
+Member "0..9999" --* "1..1" kernel::containers::CompilationUnit : declarations33
 Statement "0..1" --* "1..1" kernel::statements::Condition : elseStatement3
 End "1..1" --* "1..1" kernel::procedures::Procedure : end20
-kernel::procedures::MainProcedure "1..1" *-- "1..1" End : end27
+End "1..1" --* "1..1" kernel::procedures::MainProcedure : end27
 End "1..1" --* "1..1" kernel::containers::CompilationUnit : end39
 ExceptionHandlerStatement "1..9999" --* "1..1" kernel::statements::StatementWithException : exceptionStatements6
-kernel::statements::ExpressionStatement "1..1" *-- "1..1" Expression : expression11
+Expression "1..1" --* "1..1" kernel::statements::ExpressionStatement : expression11
 MainProcedure "1..1" --* "1..1" kernel::containers::CompilationUnit : mainProcedure32
 Member "0..9999" --* "1..1" kernel::procedures::Procedure : members13
 Member "0..9999" --* "1..1" kernel::procedures::MainProcedure : members22
 Parameter "0..9999" --* "1..1" kernel::procedures::Procedure : parameters14
-kernel::expressions::Definition "1..1" -- "0..9999" Usage : reaches31
+Usage "0..9999" -- "1..1" kernel::expressions::Definition : reaches31
 ReturnSite "1..1" --* "1..1" kernel::statements::ProcedureCall : returnSite9
-kernel::procedures::Procedure "1..1" *-- "1..1" Start : start18
+Start "1..1" --* "1..1" kernel::procedures::Procedure : start18
 Start "1..1" --* "1..1" kernel::procedures::MainProcedure : start24
 Start "1..1" --* "1..1" kernel::containers::CompilationUnit : start36
 Statement "1..1" --* "1..1" kernel::statements::StatementContainer : statement1
-kernel::statements::StatementListContainer "1..1" *-- "0..9999" Statement : statements0
+Statement "0..9999" --* "1..1" kernel::statements::StatementListContainer : statements0
 ReferenceableElement "1..1" -- "1..1" kernel::references::ElementReference : target42
 LabellableElement "1..1" -- "1..1" kernel::statements::Jump : target5
 @enduml

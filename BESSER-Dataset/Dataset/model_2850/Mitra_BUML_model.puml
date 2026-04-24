@@ -340,18 +340,12 @@ MetamodelFeature <|-- mitra::FeatureField
 MetamodelFeature <|-- mitra::FeatureMethodInvocation
 MethodInvocation <|-- mitra::FeatureMethodInvocation
 MethodInvocation <|-- mitra::NativeOperationInvocation
-ParameterReference <|-- mitra::QualifiedParameterReference
-ParameterReference <|-- mitra::SimpleParameterReference
 Parameter <|-- mitra::FormalParameter
 Parameter <|-- mitra::ReturnParameter
+ParameterReference <|-- mitra::QualifiedParameterReference
+ParameterReference <|-- mitra::SimpleParameterReference
 RuleReference <|-- mitra::QualifiedRuleReference
 RuleReference <|-- mitra::SimpleRuleReference
-StatementExpression <|-- mitra::Assignment
-StatementExpression <|-- mitra::ClassInstanceCreationExpression
-StatementExpression <|-- mitra::RuleInvocation
-StatementExpression <|-- mitra::RuleInvocationSuper
-StatementExpression <|-- mitra::StaticAccess
-StatementExpression <|-- mitra::VariableAccess
 Statement <|-- mitra::Block
 Statement <|-- mitra::BreakStatement
 Statement <|-- mitra::DoStatement
@@ -363,6 +357,12 @@ Statement <|-- mitra::ReturnStatement
 Statement <|-- mitra::ThrowStatement
 Statement <|-- mitra::TryStatement
 Statement <|-- mitra::WhileStatement
+StatementExpression <|-- mitra::Assignment
+StatementExpression <|-- mitra::ClassInstanceCreationExpression
+StatementExpression <|-- mitra::RuleInvocation
+StatementExpression <|-- mitra::RuleInvocationSuper
+StatementExpression <|-- mitra::StaticAccess
+StatementExpression <|-- mitra::VariableAccess
 TerminalExpression <|-- mitra::ClassInstanceCreationExpression
 TerminalExpression <|-- mitra::Literal
 TerminalExpression <|-- mitra::RuleInvocation
@@ -384,21 +384,21 @@ mitra::Expression "0..9999" --* "1..1" mitra::MethodInvocation : arguments148
 mitra::Block "0..1" --* "1..1" mitra::Catch : block135
 mitra::Block "0..1" --* "1..1" mitra::RuleDeclaration : body30
 mitra::Catch "0..9999" --* "1..1" mitra::TryStatement : catches127
-mitra::AnnotationDecl "0..1" -- "1..1" mitra::Annotation : decl183
+mitra::Annotation "1..1" -- "0..1" mitra::AnnotationDecl : decl183
 mitra::AnnotationProperty "1..1" -- "0..1" mitra::AnnotationPropertyDecl : decl191
 mitra::Expression "0..1" --* "1..1" mitra::VariableAccess : default158
-mitra::Literal "0..1" --* "1..1" mitra::AnnotationDecl : default173
-mitra::Literal "0..1" --* "1..1" mitra::AnnotationPropertyDecl : default180
+mitra::AnnotationDecl "1..1" *-- "0..1" mitra::Literal : default173
+mitra::AnnotationPropertyDecl "1..1" *-- "0..1" mitra::Literal : default180
 mitra::EClassifier "0..1" -- "1..1" mitra::ReferenceType : eClassifier65
-mitra::Statement "0..1" --* "1..1" mitra::IfStatement : elseStatement87
-mitra::SimpleRuleReference "0..9999" --* "1..1" mitra::RuleDeclaration : excludingRules23
+mitra::IfStatement "1..1" *-- "0..1" mitra::Statement : elseStatement87
+mitra::RuleDeclaration "1..1" *-- "0..9999" mitra::SimpleRuleReference : excludingRules23
 mitra::Expression "0..1" --* "1..1" mitra::ForStatement : expression108
-mitra::ThrowStatement "1..1" *-- "0..1" mitra::Expression : expression123
+mitra::Expression "0..1" --* "1..1" mitra::ThrowStatement : expression123
 mitra::Expression "0..1" --* "1..1" mitra::FeatureMethodInvocation : expression150
-mitra::FeatureField "1..1" *-- "0..1" mitra::Expression : expression152
+mitra::Expression "0..1" --* "1..1" mitra::FeatureField : expression152
 mitra::Expression "0..1" --* "1..1" mitra::StaticAccess : expression161
-mitra::Expression "0..1" --* "1..1" mitra::Assignment : expression199
-mitra::IteratorExpression "1..1" *-- "0..1" mitra::Expression : expression204
+mitra::Assignment "1..1" *-- "0..1" mitra::Expression : expression199
+mitra::Expression "0..1" --* "1..1" mitra::IteratorExpression : expression204
 mitra::Expression "0..1" --* "1..1" mitra::UnaryCastExpression : expression229
 mitra::Expression "0..1" --* "1..1" mitra::UnaryBooleanExpression : expression232
 mitra::Expression "0..1" --* "1..1" mitra::UnaryMathExpression : expression234
@@ -407,72 +407,72 @@ mitra::Expression "0..1" --* "1..1" mitra::LocalVariableDeclaration : expression
 mitra::Expression "0..1" --* "1..1" mitra::ReturnStatement : expression81
 mitra::Expression "0..1" --* "1..1" mitra::IfStatement : expression83
 mitra::Expression "0..1" --* "1..1" mitra::WhileStatement : expression90
-mitra::Expression "0..1" --* "1..1" mitra::DoStatement : expression97
+mitra::DoStatement "1..1" *-- "0..1" mitra::Expression : expression97
 mitra::Feature "0..9999" --* "1..1" mitra::VariableAccess : features156
 mitra::Feature "0..9999" --* "1..1" mitra::StaticAccess : features166
 mitra::Block "0..1" --* "1..1" mitra::TryStatement : finallyBlock129
 mitra::ForInit "0..1" --* "1..1" mitra::ForStatement : forInit111
 mitra::ForStatement "1..1" *-- "0..1" mitra::ForUpdate : forUpdate114
 mitra::Catch "1..1" *-- "0..1" mitra::FormalParameter : formalParameter132
-mitra::RuleDeclaration "1..1" *-- "0..9999" mitra::FormalParameter : formalParameters14
-mitra::SimpleRuleReference "0..9999" --* "1..1" mitra::RuleDeclaration : implementedRules18
+mitra::FormalParameter "0..9999" --* "1..1" mitra::RuleDeclaration : formalParameters14
+mitra::RuleDeclaration "1..1" *-- "0..9999" mitra::SimpleRuleReference : implementedRules18
 mitra::Module "1..1" *-- "0..9999" mitra::ModuleReference : imports0
 mitra::JavaSpec "0..1" --* "1..1" mitra::RuleDeclaration : javaSpec28
-mitra::VariableAccess "0..9999" --* "1..1" mitra::Assignment : lhs197
-mitra::Expression "0..1" --* "1..1" mitra::BooleanExpression : lhs207
+mitra::Assignment "1..1" *-- "0..9999" mitra::VariableAccess : lhs197
+mitra::BooleanExpression "1..1" *-- "0..1" mitra::Expression : lhs207
 mitra::EqualityExpression "1..1" *-- "0..1" mitra::Expression : lhs212
-mitra::RelationalExpression "1..1" *-- "0..1" mitra::Expression : lhs217
+mitra::Expression "0..1" --* "1..1" mitra::RelationalExpression : lhs217
 mitra::Expression "0..1" --* "1..1" mitra::MathExpression : lhs222
 mitra::LocalVariableDeclaration "0..1" --* "1..1" mitra::LocalVariableDeclarationStatement : localVariableDeclaration71
 mitra::ForStatement "1..1" *-- "0..1" mitra::LoopVariable : loopVariable107
 mitra::MetamodelDeclaration "0..1" -- "1..1" mitra::ReferenceType : metamodelDeclaration63
 mitra::MetamodelDeclaration "0..9999" --* "1..1" mitra::Module : metamodelDeclarations1
 mitra::Module "0..1" -- "1..1" mitra::ModuleReference : module7
-mitra::SimpleRuleReference "0..1" --* "1..1" mitra::RuleDeclaration : overriddenRule20
+mitra::RuleDeclaration "1..1" *-- "0..1" mitra::SimpleRuleReference : overriddenRule20
 mitra::SimpleParameterReference "0..9999" --* "1..1" mitra::SimpleRuleReference : parameterReferences34
-mitra::QualifiedRuleReference "1..1" *-- "0..9999" mitra::QualifiedParameterReference : parameterReferences39
-mitra::Property "0..9999" --* "1..1" mitra::MetamodelDeclaration : properties10
-mitra::AnnotationProperty "0..9999" --* "1..1" mitra::Annotation : properties189
+mitra::QualifiedParameterReference "0..9999" --* "1..1" mitra::QualifiedRuleReference : parameterReferences39
+mitra::MetamodelDeclaration "1..1" *-- "0..9999" mitra::Property : properties10
+mitra::Annotation "1..1" *-- "0..9999" mitra::AnnotationProperty : properties189
 mitra::JavaSpec "1..1" *-- "0..9999" mitra::Property : properties55
-mitra::AnnotationPropertyDecl "0..9999" --* "1..1" mitra::AnnotationDecl : propertyDecls175
+mitra::AnnotationDecl "1..1" *-- "0..9999" mitra::AnnotationPropertyDecl : propertyDecls175
 mitra::ReturnParameter "0..9999" --* "1..1" mitra::RuleDeclaration : returnParameters16
-mitra::SimpleRuleReference "1..1" *-- "0..9999" mitra::SimpleParameterReference : returnReferences36
+mitra::SimpleParameterReference "0..9999" --* "1..1" mitra::SimpleRuleReference : returnReferences36
 mitra::QualifiedParameterReference "0..9999" --* "1..1" mitra::QualifiedRuleReference : returnReferences40
-mitra::Expression "0..1" --* "1..1" mitra::BooleanExpression : rhs209
-mitra::Expression "0..1" --* "1..1" mitra::EqualityExpression : rhs214
+mitra::BooleanExpression "1..1" *-- "0..1" mitra::Expression : rhs209
+mitra::EqualityExpression "1..1" *-- "0..1" mitra::Expression : rhs214
 mitra::Expression "0..1" --* "1..1" mitra::RelationalExpression : rhs219
 mitra::Expression "0..1" --* "1..1" mitra::MathExpression : rhs224
 mitra::RuleDeclaration "0..1" -- "1..1" mitra::RuleInvocation : ruleDeclaration143
 mitra::RuleDeclaration "0..1" -- "1..1" mitra::RuleReference : ruleDeclaration32
-mitra::RuleDeclaration "0..9999" --* "1..1" mitra::Module : ruleDeclarations5
-mitra::Statement "0..1" --* "1..1" mitra::ForStatement : statement117
-mitra::WhileStatement "1..1" *-- "0..1" mitra::Statement : statement92
-mitra::Statement "0..1" --* "1..1" mitra::DoStatement : statement95
-mitra::StatementExpression "0..9999" --* "1..1" mitra::ForUpdate : statementExpression105
-mitra::StatementExpression "0..1" --* "1..1" mitra::ExpressionStatement : statementExpression80
-mitra::StatementExpression "0..9999" --* "1..1" mitra::ForInit : statementExpressions100
+mitra::Module "1..1" *-- "0..9999" mitra::RuleDeclaration : ruleDeclarations5
+mitra::ForStatement "1..1" *-- "0..1" mitra::Statement : statement117
+mitra::Statement "0..1" --* "1..1" mitra::WhileStatement : statement92
+mitra::DoStatement "1..1" *-- "0..1" mitra::Statement : statement95
+mitra::ForUpdate "1..1" *-- "0..9999" mitra::StatementExpression : statementExpression105
+mitra::ExpressionStatement "1..1" *-- "0..1" mitra::StatementExpression : statementExpression80
+mitra::ForInit "1..1" *-- "0..9999" mitra::StatementExpression : statementExpressions100
 mitra::Block "1..1" *-- "0..9999" mitra::BlockStatement : statements69
-mitra::Trigger "0..1" --* "1..1" mitra::RuleDeclaration : trigger26
+mitra::RuleDeclaration "1..1" *-- "0..1" mitra::Trigger : trigger26
 mitra::QualifiedRuleReference "0..9999" --* "1..1" mitra::Trigger : triggerRules47
-mitra::Statement "0..1" --* "1..1" mitra::IfStatement : trueStatement85
+mitra::IfStatement "1..1" *-- "0..1" mitra::Statement : trueStatement85
 mitra::Block "0..1" --* "1..1" mitra::TryStatement : tryBlock125
-mitra::Type "0..1" --* "1..1" mitra::ClassInstanceCreationExpression : type138
-mitra::Type "0..1" --* "1..1" mitra::StaticAccess : type163
+mitra::ClassInstanceCreationExpression "1..1" *-- "0..1" mitra::Type : type138
+mitra::StaticAccess "1..1" *-- "0..1" mitra::Type : type163
 mitra::AnnotationPropertyDecl "1..1" *-- "0..1" mitra::PrimitiveType : type177
-mitra::UnaryCastExpression "1..1" *-- "0..1" mitra::Type : type227
-mitra::Type "0..1" --* "1..1" mitra::InstanceOfExpression : type238
-mitra::Type "0..1" --* "1..1" mitra::SimpleParameterReference : type43
-mitra::VarDeclaration "1..1" *-- "0..1" mitra::Type : type78
-mitra::Type "0..1" --* "1..1" mitra::CollectionType : typePar67
-mitra::Literal "0..1" --* "1..1" mitra::AnnotationProperty : value194
-mitra::Literal "0..9999" --* "1..1" mitra::Annotation : values186
-mitra::PrimitiveType "0..1" --* "1..1" mitra::AnnotationDecl : valuetype171
-mitra::LocalVariableDeclaration "0..9999" --* "1..1" mitra::ForInit : varDeclarations102
-mitra::VarDeclaration "0..1" --* "1..1" mitra::LoopVariable : vardecl120
+mitra::Type "0..1" --* "1..1" mitra::UnaryCastExpression : type227
+mitra::InstanceOfExpression "1..1" *-- "0..1" mitra::Type : type238
+mitra::SimpleParameterReference "1..1" *-- "0..1" mitra::Type : type43
+mitra::Type "0..1" --* "1..1" mitra::VarDeclaration : type78
+mitra::CollectionType "1..1" *-- "0..1" mitra::Type : typePar67
+mitra::AnnotationProperty "1..1" *-- "0..1" mitra::Literal : value194
+mitra::Annotation "1..1" *-- "0..9999" mitra::Literal : values186
+mitra::AnnotationDecl "1..1" *-- "0..1" mitra::PrimitiveType : valuetype171
+mitra::ForInit "1..1" *-- "0..9999" mitra::LocalVariableDeclaration : varDeclarations102
+mitra::LoopVariable "1..1" *-- "0..1" mitra::VarDeclaration : vardecl120
 mitra::QualifiedParameterReference "1..1" *-- "0..1" mitra::TypedVarDeclaration : vardecl45
-mitra::TypedVarDeclaration "0..1" --* "1..1" mitra::Parameter : vardecl60
-mitra::TypedVarDeclaration "0..1" --* "1..1" mitra::LocalVariableDeclaration : vardecl72
-mitra::VariableAccess "1..1" -- "0..1" mitra::VarDeclaration : variable154
+mitra::Parameter "1..1" *-- "0..1" mitra::TypedVarDeclaration : vardecl60
+mitra::LocalVariableDeclaration "1..1" *-- "0..1" mitra::TypedVarDeclaration : vardecl72
+mitra::VarDeclaration "0..1" -- "1..1" mitra::VariableAccess : variable154
 mitra::IteratorExpression "1..1" *-- "0..1" mitra::LoopVariable : variable202
 mitra::Expression "0..1" --* "1..1" mitra::Trigger : when53
 mitra::Block "0..1" --* "1..1" mitra::Trigger : with50

@@ -148,10 +148,10 @@ class view::rdbmdl::Column {
 }
 class view::rdbmdl::NamedColumnSet {
 }
-ColumnRefConstraint <|-- rdbmdl::constraints::ForeignKey
-ColumnRefConstraint <|-- rdbmdl::constraints::UniqueConstraint
 Column <|-- rdbmdl::TableColumn
 Column <|-- rdbmdl::view::ViewColumn
+ColumnRefConstraint <|-- rdbmdl::constraints::ForeignKey
+ColumnRefConstraint <|-- rdbmdl::constraints::UniqueConstraint
 Constraint <|-- rdbmdl::constraints::CheckConstraint
 Constraint <|-- rdbmdl::constraints::ColumnRefConstraint
 Constraint <|-- rdbmdl::constraints::Index
@@ -173,24 +173,24 @@ UniqueConstraint <|-- rdbmdl::constraints::PrimaryKey
 ViewColumn <|-- rdbmdl::view::ReferencedViewColumn
 ViewColumn <|-- rdbmdl::view::ViewExpressionColumn
 datatypes::PrimitiveDataType <|-- rdbmdl::datatypes::Domain
-rdbmdl::Table "1..1" *-- "0..9999" CheckConstraint : checks14
+CheckConstraint "0..9999" --* "1..1" rdbmdl::Table : checks14
 ViewColumn "1..9999" --* "1..1" rdbmdl::view::View : columns28
 rdbmdl::Table "1..1" *-- "1..9999" rdbmdl::TableColumn : columns5
 Domain "0..1" -- "1..1" rdbmdl::TableColumn : domain16
-rdbmdl::SchemaElement "0..9999" --* "1..1" rdbmdl::Schema : elements3
+rdbmdl::Schema "1..1" *-- "0..9999" rdbmdl::SchemaElement : elements3
 ForeignKey "0..9999" --* "1..1" rdbmdl::Table : foreignKeys10
 constraints::rdbmdl::TableColumn "1..9999" -- "1..1" rdbmdl::constraints::ColumnRefConstraint : includedColumns20
-rdbmdl::constraints::Index "1..1" *-- "0..9999" IndexedColumn : indexedColumns23
+IndexedColumn "0..9999" --* "1..1" rdbmdl::constraints::Index : indexedColumns23
 Index "0..9999" --* "1..1" rdbmdl::Table : indices12
 rdbmdl::Element "1..1" -- "0..1" rdbmdl::Element : parent1
 Domain "0..1" -- "1..1" rdbmdl::datatypes::Domain : parentDomain26
 PrimaryKey "0..1" --* "1..1" rdbmdl::Table : primaryKey6
 constraints::rdbmdl::TableColumn "1..1" -- "1..1" rdbmdl::constraints::IndexedColumn : refColumn24
-view::rdbmdl::Column "1..1" -- "1..1" rdbmdl::view::ReferencedViewColumn : refColumn32
-view::rdbmdl::NamedColumnSet "1..1" -- "1..1" rdbmdl::view::ViewAlias : referencedTableOrView31
-rdbmdl::view::View "1..1" *-- "0..9999" ViewAlias : referencedTablesAndViews29
+rdbmdl::view::ReferencedViewColumn "1..1" -- "1..1" view::rdbmdl::Column : refColumn32
+rdbmdl::view::ViewAlias "1..1" -- "1..1" view::rdbmdl::NamedColumnSet : referencedTableOrView31
+ViewAlias "0..9999" --* "1..1" rdbmdl::view::View : referencedTablesAndViews29
 UniqueConstraint "1..1" -- "1..1" rdbmdl::constraints::ForeignKey : referredUC21
-rdbmdl::Schema "0..9999" --* "1..1" rdbmdl::Model : schemas2
+rdbmdl::Model "1..1" *-- "0..9999" rdbmdl::Schema : schemas2
 PrimitiveDataType "0..1" --* "1..1" rdbmdl::TableColumn : type18
-rdbmdl::Table "1..1" *-- "0..9999" UniqueConstraint : uniqueConstraints8
+UniqueConstraint "0..9999" --* "1..1" rdbmdl::Table : uniqueConstraints8
 @enduml

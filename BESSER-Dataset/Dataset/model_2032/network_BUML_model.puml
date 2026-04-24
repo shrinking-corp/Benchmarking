@@ -29,11 +29,11 @@ AbstractElement <|-- network::Network
 AbstractElement <|-- network::State
 AbstractElement <|-- network::Statemachine
 network::Channel "1..9999" --* "1..1" network::Network : channel1
-network::Transition "1..1" -- "1..1" network::Channel : channel16
-network::Statemachine "1..1" -- "1..1" network::State : initState5
+network::Channel "1..1" -- "1..1" network::Transition : channel16
+network::State "1..1" -- "1..1" network::Statemachine : initState5
 network::State "1..1" -- "1..1" network::Transition : source10
 network::State "1..9999" --* "1..1" network::Statemachine : state3
-network::Statemachine "1..9999" --* "1..1" network::Network : statemachine0
+network::Network "1..1" *-- "1..9999" network::Statemachine : statemachine0
 network::State "1..1" -- "1..1" network::Transition : target13
 network::Statemachine "1..1" *-- "1..9999" network::Transition : transition8
 @enduml

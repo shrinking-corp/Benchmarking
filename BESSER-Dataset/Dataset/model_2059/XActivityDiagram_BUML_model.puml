@@ -1,0 +1,254 @@
+@startuml
+class Action {
+}
+class ActivityEdge {
+}
+class ActivityNode {
+}
+enum BooleanBinaryOperator {
+  AND
+  OR
+}
+class BooleanExpression {
+}
+enum BooleanUnaryOperator {
+  NOT
+}
+class ControlNode {
+}
+class Expression {
+}
+class FinalNode {
+}
+enum IntegerCalculationOperator {
+  ADD
+  SUBRACT
+}
+enum IntegerComparisonOperator {
+  EQUALS
+  GREATER
+  GREATER_EQUALS
+  SMALLER
+  SMALLER_EQUALS
+}
+class IntegerExpression {
+}
+class NamedElement {
+}
+class Value {
+}
+class Variable {
+}
+class VariableAssignment {
+}
+class activitydiagram::AcceptEventAction {
+  + accept(event : any) : void
+  + canAccept(event : any) : void
+  + execute() : void
+  + hasOffers() : void
+  + sendOffer(token : any) : void
+  + waitForEvent() : void
+}
+abstract class activitydiagram::Action {
+}
+class activitydiagram::Activity {
+  + execute() : void
+  + initializeModel(args : any) : void
+  + main() : void
+}
+abstract class activitydiagram::ActivityEdge {
+  + hasOffer() : void
+  + sendOffer(token : any) : void
+  + takeOfferedToken() : str
+}
+class activitydiagram::ActivityFinalNode {
+  + execute() : void
+}
+abstract class activitydiagram::ActivityNode {
+  + running : bool
+  + addToken(token : any) : void
+  + canAddToken(token : any) : void
+  + execute() : void
+  + hasOffers() : void
+  + isReady() : void
+  + removeToken(token : any) : void
+  + terminate() : void
+}
+class activitydiagram::BooleanBinaryExpression {
+  + operator : bool
+  + evaluate() : void
+}
+abstract class activitydiagram::BooleanExpression {
+  + evaluate() : void
+}
+class activitydiagram::BooleanUnaryExpression {
+  + operator : bool
+  + evaluate() : void
+}
+class activitydiagram::BooleanValue {
+  + value : bool
+}
+class activitydiagram::BooleanVariable {
+  + currentValue : bool
+  + initialValue : bool
+  + evaluate() : void
+  + init() : void
+}
+class activitydiagram::BooleanVariableAssignment {
+  + execute() : void
+}
+class activitydiagram::ControlFlow {
+}
+abstract class activitydiagram::ControlNode {
+}
+class activitydiagram::ControlToken {
+  + isWithdrawn() : void
+}
+class activitydiagram::DecisionNode {
+  + execute() : void
+  + hasOffers() : void
+}
+class activitydiagram::Event {
+}
+abstract class activitydiagram::Expression {
+}
+abstract class activitydiagram::FinalNode {
+  + execute() : void
+  + hasOffers() : void
+}
+class activitydiagram::FlowFinalNode {
+  + execute() : void
+}
+class activitydiagram::ForkNode {
+  + execute() : void
+  + hasOffers() : void
+}
+class activitydiagram::InitialNode {
+  + execute() : void
+  + sendOffer(token : any) : void
+}
+class activitydiagram::IntegerBinaryExpression {
+  + operator : bool
+  + evaluate() : void
+}
+class activitydiagram::IntegerComparisonExpression {
+  + operator : bool
+  + evaluate() : void
+}
+abstract class activitydiagram::IntegerExpression {
+  + evaluate() : void
+}
+class activitydiagram::IntegerValue {
+  + value : int
+}
+class activitydiagram::IntegerVariable {
+  + currentValue : bool
+  + initialValue : int
+  + evaluate() : void
+  + init() : void
+}
+class activitydiagram::IntegerVariableAssignment {
+  + execute() : void
+}
+class activitydiagram::JoinNode {
+  + execute() : void
+  + hasOffers() : void
+}
+class activitydiagram::MergeNode {
+  + execute() : void
+  + hasOffers() : void
+}
+abstract class activitydiagram::NamedElement {
+  + name : bool
+  + execute() : void
+}
+class activitydiagram::Offer {
+}
+class activitydiagram::OpaqueAction {
+  + execute() : void
+  + hasOffers() : void
+  + sendOffer(token : any) : void
+}
+abstract class activitydiagram::Value {
+}
+abstract class activitydiagram::Variable {
+  + name : int
+  + init() : void
+}
+abstract class activitydiagram::VariableAssignment {
+  + execute() : void
+}
+Action <|-- activitydiagram::OpaqueAction
+ActivityEdge <|-- activitydiagram::ControlFlow
+ActivityNode <|-- activitydiagram::AcceptEventAction
+ActivityNode <|-- activitydiagram::Action
+ActivityNode <|-- activitydiagram::ControlNode
+BooleanExpression <|-- activitydiagram::BooleanBinaryExpression
+BooleanExpression <|-- activitydiagram::BooleanUnaryExpression
+BooleanExpression <|-- activitydiagram::BooleanValue
+BooleanExpression <|-- activitydiagram::BooleanVariable
+BooleanExpression <|-- activitydiagram::IntegerComparisonExpression
+ControlNode <|-- activitydiagram::DecisionNode
+ControlNode <|-- activitydiagram::FinalNode
+ControlNode <|-- activitydiagram::ForkNode
+ControlNode <|-- activitydiagram::InitialNode
+ControlNode <|-- activitydiagram::JoinNode
+ControlNode <|-- activitydiagram::MergeNode
+Expression <|-- activitydiagram::BooleanExpression
+Expression <|-- activitydiagram::IntegerBinaryExpression
+Expression <|-- activitydiagram::IntegerExpression
+Expression <|-- activitydiagram::Value
+Expression <|-- activitydiagram::Variable
+FinalNode <|-- activitydiagram::ActivityFinalNode
+FinalNode <|-- activitydiagram::FlowFinalNode
+IntegerExpression <|-- activitydiagram::IntegerBinaryExpression
+IntegerExpression <|-- activitydiagram::IntegerValue
+IntegerExpression <|-- activitydiagram::IntegerVariable
+NamedElement <|-- activitydiagram::Activity
+NamedElement <|-- activitydiagram::ActivityEdge
+NamedElement <|-- activitydiagram::ActivityNode
+NamedElement <|-- activitydiagram::Event
+Value <|-- activitydiagram::BooleanValue
+Value <|-- activitydiagram::IntegerValue
+Variable <|-- activitydiagram::BooleanVariable
+Variable <|-- activitydiagram::IntegerVariable
+VariableAssignment <|-- activitydiagram::BooleanVariableAssignment
+VariableAssignment <|-- activitydiagram::IntegerVariableAssignment
+activitydiagram::Activity "1..1" -- "1..1" activitydiagram::ActivityNode : activity15
+activitydiagram::BooleanVariable "1..1" -- "1..1" activitydiagram::BooleanVariableAssignment : assignee74
+activitydiagram::IntegerVariable "1..1" -- "1..1" activitydiagram::IntegerVariableAssignment : assignee79
+activitydiagram::OpaqueAction "1..1" *-- "0..9999" activitydiagram::VariableAssignment : assignments26
+activitydiagram::Activity "1..1" *-- "0..9999" activitydiagram::ActivityEdge : edges3
+activitydiagram::AcceptEventAction "1..1" -- "1..1" activitydiagram::Event : eventType27
+activitydiagram::Activity "1..1" *-- "0..9999" activitydiagram::Event : events0
+activitydiagram::BooleanExpression "0..1" --* "1..1" activitydiagram::BooleanVariableAssignment : expression76
+activitydiagram::IntegerExpression "0..1" --* "1..1" activitydiagram::IntegerVariableAssignment : expression80
+activitydiagram::BooleanVariable "0..1" -- "1..1" activitydiagram::ControlFlow : guard14
+activitydiagram::ActivityNode "1..1" *-- "0..9999" activitydiagram::ControlToken : heldTokens18
+activitydiagram::Action "1..1" -- "1..1" activitydiagram::ActivityEdge : incoming21
+activitydiagram::AcceptEventAction "1..1" -- "0..1" activitydiagram::ActivityEdge : incoming29
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::DecisionNode : incoming37
+activitydiagram::ActivityEdge "0..9999" -- "1..1" activitydiagram::MergeNode : incoming42
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::ForkNode : incoming47
+activitydiagram::ActivityEdge "0..9999" -- "1..1" activitydiagram::JoinNode : incoming52
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::FinalNode : incoming57
+activitydiagram::Activity "1..1" *-- "0..9999" activitydiagram::Variable : locals5
+activitydiagram::Activity "1..1" *-- "0..9999" activitydiagram::ActivityNode : nodes1
+activitydiagram::ActivityEdge "1..1" *-- "0..9999" activitydiagram::ControlToken : offeredTokens12
+activitydiagram::IntegerBinaryExpression "1..1" -- "0..1" activitydiagram::IntegerExpression : operand159
+activitydiagram::IntegerComparisonExpression "1..1" -- "0..1" activitydiagram::IntegerExpression : operand163
+activitydiagram::BooleanBinaryExpression "1..1" -- "1..1" activitydiagram::BooleanExpression : operand169
+activitydiagram::IntegerBinaryExpression "1..1" -- "0..1" activitydiagram::IntegerExpression : operand260
+activitydiagram::IntegerComparisonExpression "1..1" -- "0..1" activitydiagram::IntegerExpression : operand265
+activitydiagram::BooleanBinaryExpression "1..1" -- "1..1" activitydiagram::BooleanExpression : operand271
+activitydiagram::BooleanExpression "1..1" -- "1..1" activitydiagram::BooleanUnaryExpression : operand68
+activitydiagram::Action "1..1" -- "1..1" activitydiagram::ActivityEdge : outgoing23
+activitydiagram::AcceptEventAction "1..1" -- "1..1" activitydiagram::ActivityEdge : outgoing32
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::InitialNode : outgoing35
+activitydiagram::ActivityEdge "0..9999" -- "1..1" activitydiagram::DecisionNode : outgoing39
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::MergeNode : outgoing44
+activitydiagram::ActivityEdge "0..9999" -- "1..1" activitydiagram::ForkNode : outgoing49
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::JoinNode : outgoing54
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::ActivityNode : source7
+activitydiagram::ActivityEdge "1..1" -- "1..1" activitydiagram::ActivityNode : target9
+@enduml

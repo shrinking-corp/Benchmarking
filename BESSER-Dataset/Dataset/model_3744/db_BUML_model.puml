@@ -1,0 +1,220 @@
+@startuml
+class DBResource {
+}
+enum QueryType {
+  SPSelect
+  SPUpdate
+  Select
+  Update
+}
+enum RSHoldabilityMode {
+  CloseCursorsOverCommit
+  HoldCursorsOverCommit
+}
+enum RSScrollMode {
+  ForwardOnly
+  ScrollInsensitive
+  ScrollSensitive
+}
+enum SQLDataType {
+  Array
+  Blob
+  Boolean
+  Clob
+  Date
+  DateTime
+  Double
+  Integer
+  Long
+  Object
+  Text
+  Time
+}
+class ServerResource {
+}
+enum SynchMode {
+  ReadOnly
+  Synch
+}
+enum TransactionMode {
+  None
+  ReadCommitted
+  ReadUncommitted
+  RepeatableRead
+  Serializable
+}
+enum VariableScope {
+  Global
+  Local
+  Runtime
+}
+enum VariableType {
+  Array
+  Boolean
+  Date
+  Datetime
+  Decimal
+  Integer
+  Object
+  Text
+  Time
+}
+class config::Entitlement {
+}
+class config::Prompt {
+}
+class config::Role {
+}
+class config::SafiServer {
+}
+class config::Saflet {
+}
+class config::SafletProject {
+}
+class config::User {
+}
+class db::DBConnection {
+  + acquireIncrement : int
+  + loginTimeout : int
+  + maxIdleTime : int
+  + maxPoolSize : int
+  + minPoolSize : int
+  + password : str
+  + properties : str
+  + transactionMode : str
+  + url : str
+  + user : str
+  + getQuery(name : any) : str
+}
+class db::DBDriver {
+  + default : bool
+  + defaultPort : int
+  + driverClassName : str
+  + exampleUrl : str
+  + guideUrl : str
+  + jars : str
+  + pooling : bool
+  + urlRegexPattern : str
+  + websiteUrl : str
+  + getConnection(name : any) : str
+}
+abstract class db::DBResource {
+  + id : int
+  + lastModified : date
+  + lastUpdated : date
+  + name : str
+}
+class db::Query {
+  + catalog : str
+  + querySql : str
+  + queryType : str
+  + getParameter(index : any) : str
+  + getResultSet(name : any) : str
+}
+class db::QueryParameter {
+  + dataType : str
+}
+class db::SafiDriverManager {
+  + getDriver(name : any) : str
+}
+class db::SafiResultSet {
+  + holdabilityMode : str
+  + readOnly : bool
+  + scrollMode : str
+  + scrollable : bool
+  + useCache : bool
+}
+class db::Variable {
+  + defaultValue : str
+  + name : str
+  + scope : str
+  + type : str
+}
+class db::config::Entitlement {
+}
+class db::config::Prompt {
+  + extension : str
+  + system : bool
+}
+class db::config::Role {
+}
+abstract class db::config::SFTPInfo {
+  + sftpPassword : str
+  + sftpPort : int
+  + sftpUser : str
+}
+class db::config::SafiServer {
+  + bindIP : str
+  + dbPort : int
+  + debug : bool
+  + managementPort : int
+  + running : bool
+}
+class db::config::Saflet {
+  + code : str
+  + subsystemId : str
+}
+class db::config::SafletProject {
+  + enabled : bool
+}
+class db::config::ServerResource {
+  + description : str
+  + id : int
+  + lastModified : date
+  + lastUpdated : date
+  + name : str
+}
+class db::config::TelephonySubsystem {
+  + enabled : bool
+  + hostname : str
+  + managerName : str
+  + managerPassword : str
+  + managerPort : int
+  + platformId : str
+  + private : bool
+  + promptDirectory : str
+  + running : bool
+  + versionId : str
+  + visibleSafiServerIP : str
+}
+class db::config::User {
+  + firstname : str
+  + lastname : str
+  + password : str
+}
+DBResource <|-- db::DBConnection
+DBResource <|-- db::DBDriver
+DBResource <|-- db::Query
+DBResource <|-- db::QueryParameter
+DBResource <|-- db::SafiDriverManager
+DBResource <|-- db::SafiResultSet
+ServerResource <|-- db::config::Entitlement
+ServerResource <|-- db::config::Prompt
+ServerResource <|-- db::config::Role
+ServerResource <|-- db::config::SafiServer
+ServerResource <|-- db::config::Saflet
+ServerResource <|-- db::config::SafletProject
+ServerResource <|-- db::config::TelephonySubsystem
+ServerResource <|-- db::config::User
+db::DBConnection "0..1" -- "1..1" db::Query : connection5
+db::DBConnection "0..9999" --* "1..1" db::DBDriver : connections2
+config::User "0..1" -- "1..1" db::config::ServerResource : createdBy15
+db::DBConnection "1..1" -- "0..1" db::DBDriver : driver0
+db::DBDriver "1..1" -- "0..1" db::SafiDriverManager : driverManager3
+db::DBDriver "0..9999" --* "1..1" db::SafiDriverManager : drivers11
+config::Entitlement "0..9999" -- "1..1" db::config::Role : entitlements24
+config::User "0..1" -- "1..1" db::config::ServerResource : modifiedBy16
+db::Query "1..1" *-- "0..9999" db::QueryParameter : parameters4
+config::SafletProject "0..1" -- "1..1" db::config::Saflet : project26
+config::SafletProject "0..1" -- "1..1" db::config::Prompt : project33
+config::Prompt "0..9999" --* "1..1" db::config::SafletProject : prompts30
+db::DBConnection "1..1" *-- "0..9999" db::Query : queries1
+db::Query "0..1" -- "1..1" db::SafiResultSet : query13
+db::Query "0..1" -- "1..1" db::QueryParameter : query9
+db::Query "1..1" *-- "0..9999" db::SafiResultSet : resultSets7
+config::Role "0..9999" -- "1..1" db::config::User : roles25
+config::SafiServer "0..1" -- "1..1" db::config::TelephonySubsystem : safiServer36
+config::Saflet "0..9999" --* "1..1" db::config::SafletProject : saflets27
+config::User "0..1" --* "1..1" db::config::SafiServer : user19
+config::User "0..9999" --* "1..1" db::config::SafiServer : users21
+@enduml

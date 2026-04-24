@@ -32,16 +32,16 @@ class model::Semester {
   + year : str
 }
 model::CourseAllocation "0..9999" --* "1..1" model::CourseInstance : allocations15
-model::Person "1..1" -- "0..9999" model::CourseAllocation : allocations7
+model::CourseAllocation "0..9999" -- "1..1" model::Person : allocations7
 model::Course "0..1" -- "1..1" model::CourseInstance : course12
-model::CourseInstance "0..1" -- "1..1" model::CourseAllocation : course20
-model::Department "1..1" *-- "0..9999" model::Course : courses1
+model::CourseAllocation "1..1" -- "0..1" model::CourseInstance : course20
+model::Course "0..9999" --* "1..1" model::Department : courses1
 model::CourseInstance "0..9999" --* "1..1" model::Semester : courses11
-model::Person "0..9999" --* "1..1" model::Department : employees0
-model::Person "0..1" -- "1..1" model::CourseAllocation : person17
-model::Role "0..9999" -- "1..1" model::Course : requiredRoles8
+model::Department "1..1" *-- "0..9999" model::Person : employees0
+model::CourseAllocation "1..1" -- "0..1" model::Person : person17
+model::Course "1..1" -- "0..9999" model::Role : requiredRoles8
 model::CourseAllocation "1..1" -- "0..1" model::Role : role18
 model::Department "1..1" *-- "0..9999" model::Role : roles3
 model::CourseInstance "1..1" -- "0..1" model::Semester : semester14
-model::Semester "0..9999" --* "1..1" model::Department : semesters5
+model::Department "1..1" *-- "0..9999" model::Semester : semesters5
 @enduml

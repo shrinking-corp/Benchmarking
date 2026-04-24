@@ -1,0 +1,221 @@
+@startuml
+class Action {
+}
+class Actor {
+}
+class BinaryOperation {
+}
+class BooleanActor {
+}
+class BooleanSensor {
+}
+enum Comparator {
+  GE
+  GT
+  LE
+  LT
+}
+class Extendable {
+}
+class Extension {
+}
+class FloatActor {
+}
+class FloatSensor {
+}
+class HouseMountable {
+}
+class RoomMountable {
+}
+class Sensor {
+}
+class Statement {
+}
+class ValueExpression {
+}
+abstract class majordomo::Action {
+}
+class majordomo::ActionSetReference {
+}
+abstract class majordomo::Actor {
+}
+class majordomo::BinaryAndOperation {
+}
+abstract class majordomo::BinaryOperation {
+}
+class majordomo::BinaryOrOperation {
+}
+class majordomo::BoilerActor {
+}
+class majordomo::BooleanAction {
+  + value : bool
+}
+abstract class majordomo::BooleanActor {
+  + setValue(value : any) : void
+}
+abstract class majordomo::BooleanSensor {
+  + getValue() : bool
+}
+class majordomo::BooleanSensorStatement {
+}
+class majordomo::ClockSensor {
+}
+class majordomo::CoffeeActor {
+}
+class majordomo::CompareOperation {
+  + comparator : str
+}
+class majordomo::ConstantValue {
+  + value : float
+}
+abstract class majordomo::Extendable {
+}
+abstract class majordomo::Extension {
+  + name : str
+}
+class majordomo::FloatAction {
+  + value : float
+}
+abstract class majordomo::FloatActor {
+  + setValue(value : any) : void
+}
+abstract class majordomo::FloatSensor {
+  + getValue() : float
+}
+class majordomo::House {
+}
+abstract class majordomo::HouseMountable {
+}
+class majordomo::LampActor {
+}
+class majordomo::LightSensor {
+}
+class majordomo::Majordomo {
+  + name : str
+}
+class majordomo::NotOperation {
+}
+class majordomo::NumberSensor {
+}
+class majordomo::PreparedActionSet {
+  + name : str
+}
+class majordomo::PreparedStatement {
+  + name : str
+}
+class majordomo::PreparedValue {
+  + name : str
+}
+class majordomo::Program {
+}
+class majordomo::RadiatorActor {
+}
+class majordomo::RainSensor {
+}
+class majordomo::RollerActor {
+}
+class majordomo::RoofWindowActor {
+}
+class majordomo::Room {
+  + name : str
+}
+abstract class majordomo::RoomMountable {
+}
+class majordomo::Rule {
+}
+abstract class majordomo::Sensor {
+}
+class majordomo::SensorValue {
+}
+abstract class majordomo::Statement {
+}
+class majordomo::StatementReference {
+}
+class majordomo::SwitchSensor {
+}
+class majordomo::TemperatureSensor {
+}
+abstract class majordomo::ValueExpression {
+}
+class majordomo::ValueReference {
+}
+Action <|-- majordomo::ActionSetReference
+Action <|-- majordomo::BooleanAction
+Action <|-- majordomo::FloatAction
+Actor <|-- majordomo::BooleanActor
+Actor <|-- majordomo::FloatActor
+BinaryOperation <|-- majordomo::BinaryAndOperation
+BinaryOperation <|-- majordomo::BinaryOrOperation
+BooleanActor <|-- majordomo::BoilerActor
+BooleanActor <|-- majordomo::CoffeeActor
+BooleanActor <|-- majordomo::RadiatorActor
+BooleanActor <|-- majordomo::RollerActor
+BooleanActor <|-- majordomo::RoofWindowActor
+BooleanSensor <|-- majordomo::RainSensor
+BooleanSensor <|-- majordomo::SwitchSensor
+Extendable <|-- majordomo::House
+Extendable <|-- majordomo::Room
+Extension <|-- majordomo::Actor
+Extension <|-- majordomo::Sensor
+FloatActor <|-- majordomo::LampActor
+FloatSensor <|-- majordomo::ClockSensor
+FloatSensor <|-- majordomo::LightSensor
+FloatSensor <|-- majordomo::NumberSensor
+FloatSensor <|-- majordomo::TemperatureSensor
+HouseMountable <|-- majordomo::BoilerActor
+HouseMountable <|-- majordomo::ClockSensor
+HouseMountable <|-- majordomo::LampActor
+HouseMountable <|-- majordomo::LightSensor
+HouseMountable <|-- majordomo::RainSensor
+HouseMountable <|-- majordomo::TemperatureSensor
+RoomMountable <|-- majordomo::CoffeeActor
+RoomMountable <|-- majordomo::LampActor
+RoomMountable <|-- majordomo::LightSensor
+RoomMountable <|-- majordomo::NumberSensor
+RoomMountable <|-- majordomo::RadiatorActor
+RoomMountable <|-- majordomo::RollerActor
+RoomMountable <|-- majordomo::RoofWindowActor
+RoomMountable <|-- majordomo::SwitchSensor
+RoomMountable <|-- majordomo::TemperatureSensor
+Sensor <|-- majordomo::BooleanSensor
+Sensor <|-- majordomo::FloatSensor
+Statement <|-- majordomo::BinaryOperation
+Statement <|-- majordomo::BooleanSensorStatement
+Statement <|-- majordomo::CompareOperation
+Statement <|-- majordomo::NotOperation
+Statement <|-- majordomo::StatementReference
+ValueExpression <|-- majordomo::ConstantValue
+ValueExpression <|-- majordomo::SensorValue
+ValueExpression <|-- majordomo::ValueReference
+majordomo::Action "1..9999" --* "1..1" majordomo::Rule : actions12
+majordomo::Action "1..9999" --* "1..1" majordomo::PreparedActionSet : actions45
+majordomo::FloatAction "1..1" -- "1..1" majordomo::FloatActor : actor14
+majordomo::BooleanAction "1..1" -- "1..1" majordomo::BooleanActor : actor15
+majordomo::Actor "0..9999" --* "1..1" majordomo::Extendable : actors6
+majordomo::PreparedValue "0..9999" --* "1..1" majordomo::Program : constants30
+majordomo::PreparedStatement "1..1" -- "1..1" majordomo::Program : ctx39
+majordomo::PreparedActionSet "1..1" -- "1..1" majordomo::Program : ctx43
+majordomo::PreparedValue "1..1" -- "1..1" majordomo::Program : ctx49
+majordomo::Extendable "1..1" -- "1..1" majordomo::Sensor : ctx8
+majordomo::Actor "1..1" -- "1..1" majordomo::Extendable : ctx9
+majordomo::House "0..1" --* "1..1" majordomo::Majordomo : house0
+majordomo::BinaryOperation "1..1" *-- "1..1" majordomo::Statement : left16
+majordomo::CompareOperation "1..1" *-- "1..1" majordomo::ValueExpression : left23
+majordomo::PreparedActionSet "0..9999" --* "1..1" majordomo::Program : preparedActionSets34
+majordomo::PreparedStatement "0..9999" --* "1..1" majordomo::Program : preparedStatements32
+majordomo::Majordomo "1..1" *-- "1..1" majordomo::Program : program3
+majordomo::PreparedStatement "1..1" -- "1..1" majordomo::StatementReference : ref29
+majordomo::ActionSetReference "1..1" -- "1..1" majordomo::PreparedActionSet : ref47
+majordomo::PreparedValue "1..1" -- "1..1" majordomo::ValueReference : ref53
+majordomo::BinaryOperation "1..1" *-- "1..1" majordomo::Statement : right18
+majordomo::CompareOperation "1..1" *-- "1..1" majordomo::ValueExpression : right24
+majordomo::Majordomo "1..1" *-- "0..9999" majordomo::Room : rooms1
+majordomo::Program "1..1" *-- "0..9999" majordomo::Rule : rules36
+majordomo::BooleanSensor "1..1" -- "1..1" majordomo::BooleanSensorStatement : sensor27
+majordomo::FloatSensor "1..1" -- "1..1" majordomo::SensorValue : sensor28
+majordomo::Extendable "1..1" *-- "0..9999" majordomo::Sensor : sensors5
+majordomo::Rule "1..1" *-- "1..1" majordomo::Statement : statement11
+majordomo::NotOperation "1..1" *-- "1..1" majordomo::Statement : statement21
+majordomo::PreparedStatement "1..1" *-- "1..1" majordomo::Statement : statement40
+majordomo::PreparedValue "1..1" *-- "1..1" majordomo::ValueExpression : value51
+@enduml

@@ -221,10 +221,6 @@ ConnectableElement <|-- model::Rhombus
 ConnectableElement <|-- model::Triangle
 DiagramElement <|-- model::Link
 DiagramElement <|-- model::Node
-FeatureContainer <|-- model::Arrow
-FeatureContainer <|-- model::ConnectableElement
-FeatureContainer <|-- model::Line
-FeatureContainer <|-- model::Link
 Feature <|-- model::Anchor
 Feature <|-- model::ColorFeature
 Feature <|-- model::Contains
@@ -240,37 +236,41 @@ Feature <|-- model::TextAlign
 Feature <|-- model::TextValue
 Feature <|-- model::Transparency
 Feature <|-- model::Visible
+FeatureContainer <|-- model::Arrow
+FeatureContainer <|-- model::ConnectableElement
+FeatureContainer <|-- model::Line
+FeatureContainer <|-- model::Link
 Value <|-- model::BooleanValue
 Value <|-- model::DoubleValue
 Value <|-- model::EnumValue
 Value <|-- model::IntValue
 Value <|-- model::StringValue
-model::FeatureContainer "0..9999" --* "1..1" model::ConnectableElement : children42
+model::ConnectableElement "1..1" *-- "0..9999" model::FeatureContainer : children42
 model::Color "0..1" --* "1..1" model::ColorFeature : color53
-model::CustomColor "0..9999" --* "1..1" model::Colors : colors38
-model::FeatureConditional "0..1" --* "1..1" model::Feature : conditional16
-model::Diagram "1..1" *-- "0..9999" model::Contains : contains11
-model::CustomColor "0..1" -- "1..1" model::Color : custom40
+model::Colors "1..1" *-- "0..9999" model::CustomColor : colors38
+model::Feature "1..1" *-- "0..1" model::FeatureConditional : conditional16
+model::Contains "0..9999" --* "1..1" model::Diagram : contains11
+model::Color "1..1" -- "0..1" model::CustomColor : custom40
 model::Colors "0..1" --* "1..1" model::XDiagram : customColors3
-model::Link "1..1" *-- "0..9999" model::Decorator : decorators31
+model::Decorator "0..9999" --* "1..1" model::Link : decorators31
 model::Diagram "0..1" --* "1..1" model::XDiagram : diagram1
-model::FeatureContainer "0..1" --* "1..1" model::Decorator : element33
-model::CustomFigure "1..1" *-- "0..1" model::ConnectableElement : element45
+model::Decorator "1..1" *-- "0..1" model::FeatureContainer : element33
+model::ConnectableElement "0..1" --* "1..1" model::CustomFigure : element45
 model::DiagramElement "0..9999" --* "1..1" model::XDiagram : elements5
 model::Feature "0..9999" --* "1..1" model::FeatureContainer : features17
-model::CustomFigure "0..1" -- "1..1" model::Custom : figure48
-model::XDiagram "1..1" *-- "0..9999" model::CustomFigure : figures7
-model::XDiagram "1..1" *-- "0..1" model::MetaModel : metamodel0
-model::FeatureConditional "1..1" -- "0..1" model::EAttribute : modelAttribute19
+model::Custom "1..1" -- "0..1" model::CustomFigure : figure48
+model::CustomFigure "0..9999" --* "1..1" model::XDiagram : figures7
+model::MetaModel "0..1" --* "1..1" model::XDiagram : metamodel0
+model::EAttribute "0..1" -- "1..1" model::FeatureConditional : modelAttribute19
 model::EAttribute "0..1" -- "1..1" model::TextPart : modelAttribute56
-model::EClass "0..1" -- "1..1" model::DiagramElement : modelClass13
-model::EClass "0..1" -- "1..1" model::Diagram : modelClass9
+model::DiagramElement "1..1" -- "0..1" model::EClass : modelClass13
+model::Diagram "1..1" -- "0..1" model::EClass : modelClass9
 model::EReference "0..1" -- "1..1" model::Link : modelReference24
-model::EReference "0..1" -- "1..1" model::Anchor : modelReference36
-model::EReference "0..1" -- "1..1" model::Contains : modelReference50
-model::TextValue "1..1" *-- "0..9999" model::TextPart : parts55
+model::Anchor "1..1" -- "0..1" model::EReference : modelReference36
+model::Contains "1..1" -- "0..1" model::EReference : modelReference50
+model::TextPart "0..9999" --* "1..1" model::TextValue : parts55
 model::ConnectableElement "0..1" --* "1..1" model::Node : rootFigure23
-model::Link "1..1" -- "0..1" model::EReference : sourceReference25
+model::EReference "0..1" -- "1..1" model::Link : sourceReference25
 model::EReference "0..1" -- "1..1" model::Link : targetReference28
-model::Value "0..1" --* "1..1" model::FeatureConditional : value21
+model::FeatureConditional "1..1" *-- "0..1" model::Value : value21
 @enduml

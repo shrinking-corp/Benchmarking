@@ -13,14 +13,14 @@ class ocldriven::Media {
 class ocldriven::Member {
   + name : str
 }
-ocldriven::Media "0..1" -- "1..1" ocldriven::Dependancy : after16
-ocldriven::Media "0..1" -- "1..1" ocldriven::Dependancy : before13
+ocldriven::Dependancy "1..1" -- "0..1" ocldriven::Media : after16
+ocldriven::Dependancy "1..1" -- "0..1" ocldriven::Media : before13
 ocldriven::Dependancy "0..9999" --* "1..1" ocldriven::Library : dependancies4
-ocldriven::Member "1..1" -- "0..1" ocldriven::Library : library11
+ocldriven::Library "0..1" -- "1..1" ocldriven::Member : library11
 ocldriven::Library "0..1" -- "1..1" ocldriven::Media : library6
-ocldriven::Loans "0..9999" --* "1..1" ocldriven::Library : loans3
-ocldriven::Media "1..1" -- "1..1" ocldriven::Loans : media9
-ocldriven::Media "0..9999" --* "1..1" ocldriven::Library : medias0
+ocldriven::Library "1..1" *-- "0..9999" ocldriven::Loans : loans3
+ocldriven::Loans "1..1" -- "1..1" ocldriven::Media : media9
+ocldriven::Library "1..1" *-- "0..9999" ocldriven::Media : medias0
 ocldriven::Loans "1..1" -- "1..1" ocldriven::Member : member7
-ocldriven::Member "0..9999" --* "1..1" ocldriven::Library : members1
+ocldriven::Library "1..1" *-- "0..9999" ocldriven::Member : members1
 @enduml

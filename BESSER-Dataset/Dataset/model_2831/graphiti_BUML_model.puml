@@ -235,16 +235,14 @@ AbstractText <|-- mm::algorithms::MultiText
 AbstractText <|-- mm::algorithms::Text
 AdvancedAnchor <|-- mm::pictograms::BoxRelativeAnchor
 AdvancedAnchor <|-- mm::pictograms::FixPointAnchor
-AnchorContainer <|-- mm::pictograms::Connection
-AnchorContainer <|-- mm::pictograms::Shape
 Anchor <|-- mm::pictograms::AdvancedAnchor
 Anchor <|-- mm::pictograms::ChopboxAnchor
+AnchorContainer <|-- mm::pictograms::Connection
+AnchorContainer <|-- mm::pictograms::Shape
 Connection <|-- mm::pictograms::CompositeConnection
 Connection <|-- mm::pictograms::CurvedConnection
 Connection <|-- mm::pictograms::FreeFormConnection
 Connection <|-- mm::pictograms::ManhattanConnection
-GraphicsAlgorithmContainer <|-- mm::algorithms::GraphicsAlgorithm
-GraphicsAlgorithmContainer <|-- mm::pictograms::PictogramElement
 GraphicsAlgorithm <|-- mm::algorithms::AbstractText
 GraphicsAlgorithm <|-- mm::algorithms::Ellipse
 GraphicsAlgorithm <|-- mm::algorithms::Image
@@ -252,6 +250,8 @@ GraphicsAlgorithm <|-- mm::algorithms::PlatformGraphicsAlgorithm
 GraphicsAlgorithm <|-- mm::algorithms::Polyline
 GraphicsAlgorithm <|-- mm::algorithms::Rectangle
 GraphicsAlgorithm <|-- mm::algorithms::RoundedRectangle
+GraphicsAlgorithmContainer <|-- mm::algorithms::GraphicsAlgorithm
+GraphicsAlgorithmContainer <|-- mm::pictograms::PictogramElement
 PictogramElement <|-- mm::pictograms::Anchor
 PictogramElement <|-- mm::pictograms::AnchorContainer
 Polyline <|-- mm::algorithms::Polygon
@@ -264,47 +264,47 @@ StyleContainer <|-- mm::styles::Style
 pictograms::ContainerShape <|-- mm::pictograms::Diagram
 styles::AbstractStyle <|-- mm::algorithms::GraphicsAlgorithm
 styles::AbstractStyle <|-- mm::styles::Style
-styles::AdaptedGradientColoredAreas "0..1" --* "1..1" mm::styles::RenderingStyle : adaptedGradientColoredAreas64
-styles::GradientColoredAreas "0..9999" --* "1..1" mm::styles::AdaptedGradientColoredAreas : adaptedGradientColoredAreas83
+mm::styles::RenderingStyle "1..1" *-- "0..1" styles::AdaptedGradientColoredAreas : adaptedGradientColoredAreas64
+mm::styles::AdaptedGradientColoredAreas "1..1" *-- "0..9999" styles::GradientColoredAreas : adaptedGradientColoredAreas83
 Anchor "0..9999" --* "1..1" mm::pictograms::AnchorContainer : anchors36
-styles::Color "0..1" -- "1..1" mm::styles::AbstractStyle : background69
-styles::Point "0..9999" --* "1..1" mm::pictograms::FreeFormConnection : bendpoints43
+mm::styles::AbstractStyle "1..1" -- "0..1" styles::Color : background69
+mm::pictograms::FreeFormConnection "1..1" *-- "0..9999" styles::Point : bendpoints43
 mm::pictograms::PictogramLink "1..1" -- "0..9999" pictograms::mm::EObject : businessObjects47
 Shape "0..9999" --* "1..1" mm::pictograms::ContainerShape : children3
 CurvedConnection "0..9999" -- "1..1" mm::pictograms::CompositeConnection : children49
-styles::Color "1..1" --* "1..1" mm::styles::GradientColoredLocation : color76
-styles::Color "0..9999" --* "1..1" mm::pictograms::Diagram : colors7
+mm::styles::GradientColoredLocation "1..1" *-- "1..1" styles::Color : color76
+mm::pictograms::Diagram "1..1" *-- "0..9999" styles::Color : colors7
 Connection "1..1" -- "1..1" mm::pictograms::ConnectionDecorator : connection40
-mm::pictograms::Connection "1..1" *-- "0..9999" ConnectionDecorator : connectionDecorators24
+ConnectionDecorator "0..9999" --* "1..1" mm::pictograms::Connection : connectionDecorators24
 Connection "0..9999" --* "1..1" mm::pictograms::Diagram : connections5
-mm::pictograms::Shape "1..1" -- "0..1" ContainerShape : container2
-styles::PrecisionPoint "0..9999" --* "1..1" mm::pictograms::CurvedConnection : controlPoints48
+ContainerShape "0..1" -- "1..1" mm::pictograms::Shape : container2
+mm::pictograms::CurvedConnection "1..1" *-- "0..9999" styles::PrecisionPoint : controlPoints48
 Anchor "1..1" -- "1..1" mm::pictograms::Connection : end19
 mm::styles::GradientColoredArea "1..1" *-- "0..1" styles::GradientColoredLocation : end79
-styles::Font "0..1" -- "1..1" mm::algorithms::AbstractText : font62
+mm::algorithms::AbstractText "1..1" -- "0..1" styles::Font : font62
 mm::styles::Style "1..1" -- "0..1" styles::Font : font65
 mm::pictograms::Diagram "1..1" *-- "0..9999" styles::Font : fonts8
 mm::styles::AbstractStyle "1..1" -- "0..1" styles::Color : foreground71
-styles::GradientColoredArea "0..9999" --* "1..1" mm::styles::GradientColoredAreas : gradientColor82
+mm::styles::GradientColoredAreas "1..1" *-- "0..9999" styles::GradientColoredArea : gradientColor82
 GraphicsAlgorithm "0..1" --* "1..1" mm::pictograms::PictogramElement : graphicsAlgorithm12
 GraphicsAlgorithm "0..9999" --* "1..1" mm::algorithms::GraphicsAlgorithm : graphicsAlgorithmChildren50
 Connection "0..9999" -- "1..1" mm::pictograms::Anchor : incomingConnections31
-mm::pictograms::PictogramElement "1..1" *-- "0..1" PictogramLink : link14
-styles::Point "1..1" --* "1..1" mm::pictograms::FixPointAnchor : location39
+PictogramLink "0..1" --* "1..1" mm::pictograms::PictogramElement : link14
+mm::pictograms::FixPointAnchor "1..1" *-- "1..1" styles::Point : location39
 Connection "0..9999" -- "1..1" mm::pictograms::Anchor : outgoingConnections28
 Diagram "1..1" -- "1..1" mm::pictograms::Connection : parent22
 AnchorContainer "1..1" -- "1..1" mm::pictograms::Anchor : parent26
-mm::algorithms::GraphicsAlgorithm "1..1" -- "0..1" GraphicsAlgorithm : parentGraphicsAlgorithm53
+GraphicsAlgorithm "0..1" -- "1..1" mm::algorithms::GraphicsAlgorithm : parentGraphicsAlgorithm53
 PictogramElement "0..1" -- "1..1" mm::pictograms::PictogramLink : pictogramElement45
 PictogramElement "0..1" -- "1..1" mm::algorithms::GraphicsAlgorithm : pictogramElement56
 PictogramLink "0..9999" -- "1..1" mm::pictograms::Diagram : pictogramLinks10
-styles::Point "0..9999" --* "1..1" mm::algorithms::Polyline : points60
-mm::PropertyContainer "1..1" *-- "0..9999" mm::Property : properties0
-mm::pictograms::Anchor "1..1" -- "0..1" GraphicsAlgorithm : referencedGraphicsAlgorithm34
-styles::RenderingStyle "0..1" --* "1..1" mm::styles::AbstractStyle : renderingStyle74
+mm::algorithms::Polyline "1..1" *-- "0..9999" styles::Point : points60
+mm::Property "0..9999" --* "1..1" mm::PropertyContainer : properties0
+GraphicsAlgorithm "0..1" -- "1..1" mm::pictograms::Anchor : referencedGraphicsAlgorithm34
+mm::styles::AbstractStyle "1..1" *-- "0..1" styles::RenderingStyle : renderingStyle74
 Anchor "1..1" -- "1..1" mm::pictograms::Connection : start17
-styles::GradientColoredLocation "0..1" --* "1..1" mm::styles::GradientColoredArea : start78
+mm::styles::GradientColoredArea "1..1" *-- "0..1" styles::GradientColoredLocation : start78
 mm::algorithms::GraphicsAlgorithm "1..1" -- "0..1" styles::Style : style59
-styles::mm::StyleContainer "1..1" -- "1..1" mm::styles::Style : styleContainer67
-styles::Style "0..9999" --* "1..1" mm::StyleContainer : styles1
+mm::styles::Style "1..1" -- "1..1" styles::mm::StyleContainer : styleContainer67
+mm::StyleContainer "1..1" *-- "0..9999" styles::Style : styles1
 @enduml

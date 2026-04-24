@@ -62,20 +62,20 @@ class rdb::View {
 }
 ERDInfo <|-- rdb::DB
 Table <|-- rdb::View
-rdb::UserComment "0..1" -- "1..1" rdb::DB : DBComment3
-rdb::UserComment "0..1" -- "1..1" rdb::Table : UserCommentReference12
+rdb::DB "1..1" -- "0..1" rdb::UserComment : DBComment3
+rdb::Table "1..1" -- "0..1" rdb::UserComment : UserCommentReference12
 rdb::Column "1..9999" --* "1..1" rdb::Table : columns6
 rdb::DB "1..1" -- "1..1" rdb::Relation : db20
 rdb::DB "1..1" -- "1..1" rdb::Style : db25
-rdb::Table "1..1" -- "1..1" rdb::DB : db7
+rdb::DB "1..1" -- "1..1" rdb::Table : db7
 rdb::Relation "0..9999" -- "1..1" rdb::Table : incomingLinks8
-rdb::Table "1..1" -- "0..9999" rdb::Relation : outgoingLinks10
-rdb::Relation "0..9999" --* "1..1" rdb::DB : references1
+rdb::Relation "0..9999" -- "1..1" rdb::Table : outgoingLinks10
+rdb::DB "1..1" *-- "0..9999" rdb::Relation : references1
 rdb::Relation "1..1" -- "0..1" rdb::Table : source16
-rdb::Style "1..1" -- "1..1" rdb::ERDInfo : style24
+rdb::ERDInfo "1..1" -- "1..1" rdb::Style : style24
 rdb::DB "1..1" *-- "0..9999" rdb::Style : styledReference4
-rdb::Table "1..1" -- "1..1" rdb::Column : table14
+rdb::Column "1..1" -- "1..1" rdb::Table : table14
 rdb::Table "1..1" -- "1..1" rdb::View : tableName22
-rdb::Table "0..9999" --* "1..1" rdb::DB : tables0
-rdb::Table "0..1" -- "1..1" rdb::Relation : target18
+rdb::DB "1..1" *-- "0..9999" rdb::Table : tables0
+rdb::Relation "1..1" -- "0..1" rdb::Table : target18
 @enduml

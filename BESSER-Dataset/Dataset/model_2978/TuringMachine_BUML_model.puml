@@ -32,19 +32,19 @@ class machine::Transition {
 class machine::TuringMachine {
 }
 machine::Current "0..1" --* "1..1" machine::Machine : current7
-machine::Machine "1..1" *-- "0..9999" machine::Final : finals5
-machine::Machine "1..1" *-- "0..1" machine::Head : head15
+machine::Final "0..9999" --* "1..1" machine::Machine : finals5
+machine::Head "0..1" --* "1..1" machine::Machine : head15
 machine::Initial "0..1" --* "1..1" machine::Machine : initial4
 machine::Machine "0..1" --* "1..1" machine::TuringMachine : machine24
 machine::Symbol "0..1" -- "1..1" machine::Symbol : next33
 machine::State "0..1" -- "1..1" machine::Transition : source0
-machine::State "0..1" -- "1..1" machine::Current : state17
-machine::State "0..1" -- "1..1" machine::Initial : state20
-machine::State "0..1" -- "1..1" machine::Final : state29
-machine::State "0..9999" --* "1..1" machine::Machine : states9
+machine::Current "1..1" -- "0..1" machine::State : state17
+machine::Initial "1..1" -- "0..1" machine::State : state20
+machine::Final "1..1" -- "0..1" machine::State : state29
+machine::Machine "1..1" *-- "0..9999" machine::State : states9
 machine::Head "1..1" -- "0..1" machine::Symbol : symbol35
-machine::Tape "1..1" *-- "0..9999" machine::Symbol : symbols23
+machine::Symbol "0..9999" --* "1..1" machine::Tape : symbols23
 machine::Tape "0..1" --* "1..1" machine::TuringMachine : tape26
 machine::State "0..1" -- "1..1" machine::Transition : target1
-machine::Transition "0..9999" --* "1..1" machine::Machine : transitions12
+machine::Machine "1..1" *-- "0..9999" machine::Transition : transitions12
 @enduml

@@ -1,0 +1,54 @@
+@startuml
+class JSFLibrary {
+}
+enum JSFVersion {
+  UNKNOWN
+  v1_1
+  v1_2
+}
+class jsflibraryregistry::ArchiveFile {
+  + RelativeDestLocation : str
+  + RelativeToWorkspace : bool
+  + SourceLocation : str
+  + copyTo(baseDestLocation : any) : bool
+  + equals(object : any) : bool
+  + exists() : bool
+  + getName() : str
+  + getPath() : str
+  + getResolvedSourceLocation() : str
+  + hashCode() : int
+}
+class jsflibraryregistry::JSFLibrary {
+  + Deployed : bool
+  + ID : str
+  + Implementation : bool
+  + JSFVersion : str
+  + Name : str
+  + containsArchiveFile(fullPath : any) : bool
+  + copyTo(baseDestLocation : any) : bool
+  + getLabel() : str
+  + getWorkingCopy() : str
+  + updateValues(otherLibrary : any) : void
+}
+class jsflibraryregistry::JSFLibraryRegistry {
+  + DefaultImplementationID : str
+  + addJSFLibrary(library : any) : bool
+  + getAllJSFLibraries() : str
+  + getDefaultImplementation() : str
+  + getImplJSFLibraries() : str
+  + getJSFLibrariesByName(name : any) : str
+  + getJSFLibraryByID(ID : any) : str
+  + getNonImplJSFLibraries() : str
+  + removeJSFLibrary(library : any) : bool
+  + setDefaultImplementation(implementation : any) : void
+}
+class jsflibraryregistry::PluginProvidedJSFLibrary {
+  + Label : str
+  + pluginID : str
+}
+JSFLibrary <|-- jsflibraryregistry::PluginProvidedJSFLibrary
+jsflibraryregistry::ArchiveFile "0..9999" --* "1..1" jsflibraryregistry::JSFLibrary : ArchiveFiles3
+jsflibraryregistry::JSFLibrary "0..9999" --* "1..1" jsflibraryregistry::JSFLibraryRegistry : JSFLibraries0
+jsflibraryregistry::ArchiveFile "1..1" -- "1..1" jsflibraryregistry::JSFLibrary : JSFLibrary4
+jsflibraryregistry::JSFLibraryRegistry "1..1" *-- "0..9999" jsflibraryregistry::PluginProvidedJSFLibrary : PluginProvidedJSFLibraries1
+@enduml

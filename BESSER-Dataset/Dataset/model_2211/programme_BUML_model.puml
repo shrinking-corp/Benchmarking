@@ -26,14 +26,14 @@ class StudyProgramme::Semester {
 class StudyProgramme::Specialization {
   + name : str
 }
-StudyProgramme::Department "1..1" *-- "0..9999" StudyProgramme::Course : course21
-StudyProgramme::Semester "1..1" *-- "1..2" StudyProgramme::CourseGroup : courseGroups5
+StudyProgramme::Course "0..9999" --* "1..1" StudyProgramme::Department : course21
+StudyProgramme::CourseGroup "1..2" --* "1..1" StudyProgramme::Semester : courseGroups5
 StudyProgramme::Course "0..9999" -- "1..1" StudyProgramme::Semester : courseList3
 StudyProgramme::Course "1..9999" -- "1..1" StudyProgramme::CourseGroup : coursesInGroup16
-StudyProgramme::Semester "0..9999" --* "1..1" StudyProgramme::Programme : programmeSemester0
-StudyProgramme::Specialization "0..9999" --* "1..1" StudyProgramme::Programme : programmeSpecializaton1
-StudyProgramme::Programme "0..9999" --* "1..1" StudyProgramme::Department : programmes19
-StudyProgramme::Specialization "1..1" *-- "0..9999" StudyProgramme::Semester : semesters10
+StudyProgramme::Programme "1..1" *-- "0..9999" StudyProgramme::Semester : programmeSemester0
+StudyProgramme::Programme "1..1" *-- "0..9999" StudyProgramme::Specialization : programmeSpecializaton1
+StudyProgramme::Department "1..1" *-- "0..9999" StudyProgramme::Programme : programmes19
+StudyProgramme::Semester "0..9999" --* "1..1" StudyProgramme::Specialization : semesters10
 StudyProgramme::Course "0..1" -- "1..1" StudyProgramme::Specialization : specializationCourse7
 StudyProgramme::Specialization "0..9999" --* "1..1" StudyProgramme::Specialization : specializations14
 @enduml

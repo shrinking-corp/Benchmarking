@@ -727,7 +727,7 @@ class Parameter(TypedElement):
         metadata (Metadata): Metadata information for the parameter (None as default).
     """
 
-    def __init__(self, name: str, type: Type, default_value: Any = None, timestamp: datetime = None,
+    def __init__(self, name: str, type: Type = AnyType, default_value: Any = None, timestamp: datetime = None,
                  metadata: Metadata = None, is_derived: bool = False, uncertainty: float = 0.0):
         super().__init__(name, type, timestamp, metadata, is_derived=is_derived, uncertainty=uncertainty)
         self.default_value: Any = default_value
@@ -1811,6 +1811,14 @@ class DomainModel(Model):
             ValueError: if there are two types with the same name.
             TypeError: if any element in types is not a Type instance.
         """
+        if types is None:
+            types = set()
+        elif isinstance(types, dict):
+            # Legacy generators sometimes emit `{}` or name->type maps.
+            types = set(types.values())
+        elif not isinstance(types, set):
+            types = set(types)
+
         # Type checking: ensure all elements are Type instances
         for type_ in types:
             if not isinstance(type_, Type):

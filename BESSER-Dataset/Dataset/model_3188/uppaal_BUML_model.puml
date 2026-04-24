@@ -373,12 +373,12 @@ BinaryExpression <|-- uppaal::expressions::BitwiseExpression
 BinaryExpression <|-- uppaal::expressions::CompareExpression
 BinaryExpression <|-- uppaal::expressions::LogicalExpression
 BinaryExpression <|-- uppaal::expressions::MinMaxExpression
-Declarations <|-- uppaal::declarations::GlobalDeclarations
-Declarations <|-- uppaal::declarations::LocalDeclarations
-Declarations <|-- uppaal::declarations::SystemDeclarations
 Declaration <|-- uppaal::declarations::TypeDeclaration
 Declaration <|-- uppaal::global::ChannelPriorityDeclaration
 Declaration <|-- uppaal::system::TemplateDeclaration
+Declarations <|-- uppaal::declarations::GlobalDeclarations
+Declarations <|-- uppaal::declarations::LocalDeclarations
+Declarations <|-- uppaal::declarations::SystemDeclarations
 Expression <|-- uppaal::expressions::BinaryExpression
 Expression <|-- uppaal::expressions::ChannelPrefixExpression
 Expression <|-- uppaal::expressions::ConditionExpression
@@ -408,13 +408,13 @@ Statement <|-- uppaal::statements::ForLoop
 Statement <|-- uppaal::statements::IfStatement
 Statement <|-- uppaal::statements::ReturnStatement
 Statement <|-- uppaal::statements::WhileLoop
+Type <|-- uppaal::types::DeclaredType
+Type <|-- uppaal::types::PredefinedType
 TypeExpression <|-- uppaal::types::RangeTypeSpecification
 TypeExpression <|-- uppaal::types::ScalarTypeSpecification
 TypeExpression <|-- uppaal::types::StructTypeSpecification
 TypedElementContainer <|-- uppaal::declarations::ParameterContainer
 TypedElementContainer <|-- uppaal::templates::Selection
-Type <|-- uppaal::types::DeclaredType
-Type <|-- uppaal::types::PredefinedType
 Variable <|-- uppaal::declarations::Parameter
 core::CommentableElement <|-- uppaal::NTA
 core::CommentableElement <|-- uppaal::templates::Edge
@@ -438,32 +438,32 @@ visuals::PlanarElement <|-- uppaal::templates::Location
 Expression "0..9999" --* "1..1" uppaal::expressions::FunctionCallExpression : argument158
 Expression "0..9999" --* "1..1" uppaal::system::TemplateDeclaration : argument47
 Point "0..9999" --* "1..1" uppaal::visuals::LinearElement : bendPoint177
-uppaal::declarations::Function "1..1" *-- "1..1" Block : block26
+Block "1..1" --* "1..1" uppaal::declarations::Function : block26
 IntegerBounds "1..1" --* "1..1" uppaal::types::RangeTypeSpecification : bounds14
-uppaal::global::ChannelItem "1..1" *-- "1..1" IdentifierExpression : channelExpression45
+IdentifierExpression "1..1" --* "1..1" uppaal::global::ChannelItem : channelExpression45
 IdentifierExpression "1..1" --* "1..1" uppaal::templates::Synchronization : channelExpression96
 global::ChannelPriorityDeclaration "0..1" --* "1..1" uppaal::declarations::GlobalDeclarations : channelPriority22
 Type "1..1" -- "1..1" uppaal::expressions::ChannelPrefixExpression : channelType173
-uppaal::statements::ForLoop "1..1" *-- "1..1" Expression : condition104
+Expression "1..1" --* "1..1" uppaal::statements::ForLoop : condition104
 Expression "1..1" --* "1..1" uppaal::expressions::PlusExpression : confirmedExpression139
-uppaal::core::TypedElement "1..1" -- "0..1" TypedElementContainer : container5
+TypedElementContainer "0..1" -- "1..1" uppaal::core::TypedElement : container5
 Expression "1..1" --* "1..1" uppaal::expressions::DataPrefixExpression : dataTypeExpression174
-uppaal::types::StructTypeSpecification "1..1" *-- "1..9999" TypedDeclaration : declaration13
-uppaal::declarations::Declarations "1..1" *-- "0..9999" Declaration : declaration21
-uppaal::templates::RedefinedTemplate "1..1" -- "1..1" system::TemplateDeclaration : declaration65
+TypedDeclaration "1..9999" --* "1..1" uppaal::types::StructTypeSpecification : declaration13
+Declaration "0..9999" --* "1..1" uppaal::declarations::Declarations : declaration21
+system::TemplateDeclaration "1..1" -- "1..1" uppaal::templates::RedefinedTemplate : declaration65
 LocalDeclarations "0..1" --* "1..1" uppaal::templates::Template : declarations55
 LocalDeclarations "0..1" --* "1..1" uppaal::statements::Block : declarations98
-uppaal::system::TemplateDeclaration "1..1" *-- "1..1" RedefinedTemplate : declaredTemplate46
+RedefinedTemplate "1..1" --* "1..1" uppaal::system::TemplateDeclaration : declaredTemplate46
 Edge "0..9999" --* "1..1" uppaal::templates::Template : edge58
 TypedElement "1..9999" --* "1..1" uppaal::declarations::TypedElementContainer : elements38
 Expression "1..1" --* "1..1" uppaal::expressions::ConditionExpression : elseExpression166
 Statement "0..1" --* "1..1" uppaal::statements::IfStatement : elseStatement130
 Expression "1..1" --* "1..1" uppaal::statements::WhileLoop : expression115
 Expression "1..1" --* "1..1" uppaal::statements::DoWhileLoop : expression122
-uppaal::statements::ExpressionStatement "1..1" *-- "1..1" Expression : expression135
-uppaal::expressions::QuantificationExpression "1..1" *-- "1..1" Expression : expression169
-uppaal::expressions::IncrementDecrementExpression "1..1" *-- "1..1" Expression : expression171
-uppaal::declarations::ExpressionInitializer "1..1" *-- "1..1" Expression : expression39
+Expression "1..1" --* "1..1" uppaal::statements::ExpressionStatement : expression135
+Expression "1..1" --* "1..1" uppaal::expressions::QuantificationExpression : expression169
+Expression "1..1" --* "1..1" uppaal::expressions::IncrementDecrementExpression : expression171
+Expression "1..1" --* "1..1" uppaal::declarations::ExpressionInitializer : expression39
 Expression "1..9999" --* "1..1" uppaal::system::ProgressMeasure : expression51
 Expression "1..1" --* "1..1" uppaal::expressions::BinaryExpression : firstExpr143
 Function "1..1" -- "1..1" uppaal::expressions::FunctionCallExpression : function157
@@ -472,18 +472,18 @@ global::ChannelPriorityGroup "1..9999" --* "1..1" uppaal::global::ChannelPriorit
 Expression "0..1" --* "1..1" uppaal::templates::Edge : guard87
 NamedElement "1..1" -- "1..1" uppaal::expressions::IdentifierExpression : identifier148
 IdentifierExpression "1..1" --* "1..1" uppaal::expressions::ScopedIdentifierExpression : identifier154
-uppaal::statements::IfStatement "1..1" *-- "1..1" Expression : ifExpression125
+Expression "1..1" --* "1..1" uppaal::statements::IfStatement : ifExpression125
 Expression "1..1" --* "1..1" uppaal::expressions::ConditionExpression : ifExpression161
-uppaal::templates::Location "1..1" -- "0..9999" Edge : incomingEdges72
-uppaal::expressions::IdentifierExpression "1..1" *-- "0..9999" Expression : index149
-uppaal::declarations::Variable "1..1" *-- "0..9999" Expression : index32
-uppaal::templates::Template "1..1" -- "1..1" Location : init60
+Edge "0..9999" -- "1..1" uppaal::templates::Location : incomingEdges72
+Expression "0..9999" --* "1..1" uppaal::expressions::IdentifierExpression : index149
+Expression "0..9999" --* "1..1" uppaal::declarations::Variable : index32
+Location "1..1" -- "1..1" uppaal::templates::Template : init60
 Expression "1..1" --* "1..1" uppaal::statements::ForLoop : initialization102
 Initializer "0..1" --* "1..1" uppaal::declarations::Variable : initializer34
 Initializer "1..9999" --* "1..1" uppaal::declarations::ArrayInitializer : initializer41
 system::InstantiationList "1..9999" --* "1..1" uppaal::system::System : instantiationList49
 Expression "0..1" --* "1..1" uppaal::templates::Location : invariant70
-uppaal::expressions::MinusExpression "1..1" *-- "1..1" Expression : invertedExpression141
+Expression "1..1" --* "1..1" uppaal::expressions::MinusExpression : invertedExpression141
 global::PriorityItem "1..9999" --* "1..1" uppaal::global::ChannelPriorityGroup : items44
 Expression "1..1" --* "1..1" uppaal::statements::ForLoop : iteration107
 Location "1..9999" --* "1..1" uppaal::templates::Template : location56
@@ -494,16 +494,16 @@ ParameterContainer "0..9999" --* "1..1" uppaal::declarations::Function : paramet
 ParameterContainer "0..9999" --* "1..1" uppaal::templates::AbstractTemplate : parameter53
 Template "1..1" -- "1..1" uppaal::templates::Location : parentTemplate67
 Template "1..1" -- "1..1" uppaal::templates::Edge : parentTemplate84
-uppaal::visuals::PlanarElement "1..1" *-- "0..1" Point : position176
+Point "0..1" --* "1..1" uppaal::visuals::PlanarElement : position176
 system::ProgressMeasure "0..1" --* "1..1" uppaal::declarations::SystemDeclarations : progressMeasure24
 AbstractTemplate "1..1" -- "1..1" uppaal::templates::RedefinedTemplate : referredTemplate63
 Expression "0..1" --* "1..1" uppaal::statements::ReturnStatement : returnExpression133
-uppaal::expressions::ScopedIdentifierExpression "1..1" *-- "1..1" Expression : scope152
+Expression "1..1" --* "1..1" uppaal::expressions::ScopedIdentifierExpression : scope152
 Expression "1..1" --* "1..1" uppaal::expressions::BinaryExpression : secondExpr145
 Selection "0..9999" --* "1..1" uppaal::templates::Edge : selection94
 Expression "1..1" --* "1..1" uppaal::types::ScalarTypeSpecification : sizeExpression11
 Location "1..1" -- "1..1" uppaal::templates::Edge : source78
-uppaal::statements::Block "1..1" *-- "1..9999" Statement : statement100
+Statement "1..9999" --* "1..1" uppaal::statements::Block : statement100
 Statement "1..1" --* "1..1" uppaal::statements::ForLoop : statement110
 Statement "1..1" --* "1..1" uppaal::statements::Iteration : statement113
 Statement "1..1" --* "1..1" uppaal::statements::WhileLoop : statement117
@@ -511,18 +511,18 @@ Statement "1..1" --* "1..1" uppaal::statements::DoWhileLoop : statement120
 Synchronization "0..1" --* "1..1" uppaal::templates::Edge : synchronization92
 system::System "1..1" --* "1..1" uppaal::declarations::SystemDeclarations : system23
 SystemDeclarations "1..1" --* "1..1" uppaal::NTA : systemDeclarations3
-uppaal::templates::Edge "1..1" -- "1..1" Location : target81
-uppaal::NTA "1..1" *-- "1..9999" Template : template1
+Location "1..1" -- "1..1" uppaal::templates::Edge : target81
+Template "1..9999" --* "1..1" uppaal::NTA : template1
 AbstractTemplate "1..9999" -- "1..1" uppaal::system::InstantiationList : template50
 Expression "1..1" --* "1..1" uppaal::expressions::ConditionExpression : thenExpression163
 Statement "1..1" --* "1..1" uppaal::statements::IfStatement : thenStatement127
 DeclaredType "1..9999" --* "1..1" uppaal::declarations::TypeDeclaration : type29
-uppaal::types::DeclaredType "1..1" -- "1..1" TypeDeclaration : typeDeclaration7
+TypeDeclaration "1..1" -- "1..1" uppaal::types::DeclaredType : typeDeclaration7
 Expression "1..1" --* "1..1" uppaal::declarations::TypeDeclaration : typeDefinition30
 Expression "1..1" --* "1..1" uppaal::declarations::TypedElementContainer : typeDefinition36
 Expression "0..1" -- "1..1" uppaal::core::TypedElement : typeDefinition6
 Expression "1..1" -- "1..1" uppaal::types::DeclaredType : typeDefinition9
-uppaal::types::Library "1..1" *-- "0..9999" PredefinedType : types20
-uppaal::templates::Edge "1..1" *-- "0..9999" Expression : update89
+PredefinedType "0..9999" --* "1..1" uppaal::types::Library : types20
+Expression "0..9999" --* "1..1" uppaal::templates::Edge : update89
 Expression "1..1" --* "1..1" uppaal::types::IntegerBounds : upperBound17
 @enduml

@@ -1,0 +1,140 @@
+@startuml
+class Attributable {
+}
+class Type {
+}
+class Variable {
+}
+class dataflow::Action {
+  + name : str
+  + getGuard(tag : any) : str
+}
+class dataflow::Actor {
+  + name : str
+  + getAction(name : any) : str
+  + getInputPort(name : any) : str
+  + getOutputPort(name : any) : str
+  + getProcedure(name : any) : str
+  + getSharedVariable(tag : any) : str
+  + getVariable(name : any) : str
+}
+class dataflow::ActorClass {
+  + name : str
+  + nameSpace : str
+  + sourceCode : str
+  + sourceFile : str
+}
+class dataflow::Buffer {
+}
+class dataflow::Guard {
+  + tag : str
+}
+class dataflow::Network {
+  + name : str
+  + project : str
+  + sourceFile : str
+  + getActor(name : any) : str
+  + getActorClass(name : any) : str
+  + getInputPort(name : any) : str
+  + getOutputPort(name : any) : str
+  + getSharedVariables(tag : any) : str
+}
+class dataflow::Port {
+  + name : str
+}
+class dataflow::Procedure {
+  + name : str
+}
+class dataflow::SharedVariable {
+  + tag : str
+}
+abstract class dataflow::Type {
+  + bits : int
+  + etype : str
+}
+class dataflow::TypeBoolean {
+  + size : int
+}
+class dataflow::TypeDouble {
+  + size : int
+}
+class dataflow::TypeInt {
+  + size : int
+}
+class dataflow::TypeList {
+  + elements : int
+}
+class dataflow::TypeString {
+  + size : int
+}
+class dataflow::TypeUint {
+  + size : int
+}
+class dataflow::TypeUndefined {
+  + size : int
+}
+class dataflow::Variable {
+  + name : str
+  + shared : bool
+}
+class dataflow::Version {
+}
+Attributable <|-- dataflow::Action
+Attributable <|-- dataflow::Actor
+Attributable <|-- dataflow::ActorClass
+Attributable <|-- dataflow::Buffer
+Attributable <|-- dataflow::Guard
+Attributable <|-- dataflow::Network
+Attributable <|-- dataflow::Port
+Attributable <|-- dataflow::Procedure
+Attributable <|-- dataflow::Variable
+Type <|-- dataflow::TypeBoolean
+Type <|-- dataflow::TypeDouble
+Type <|-- dataflow::TypeInt
+Type <|-- dataflow::TypeList
+Type <|-- dataflow::TypeString
+Type <|-- dataflow::TypeUint
+Type <|-- dataflow::TypeUndefined
+Variable <|-- dataflow::SharedVariable
+dataflow::Action "0..9999" --* "1..1" dataflow::Actor : actions30
+dataflow::Actor "1..1" -- "1..1" dataflow::ActorClass : actorClass29
+dataflow::ActorClass "0..9999" --* "1..1" dataflow::Network : actorClasses1
+dataflow::Actor "0..9999" --* "1..1" dataflow::Network : actors0
+dataflow::Actor "0..9999" -- "1..1" dataflow::ActorClass : actors14
+dataflow::Buffer "0..9999" --* "1..1" dataflow::Network : buffers3
+dataflow::Actor "1..1" -- "0..9999" dataflow::Buffer : buffers37
+dataflow::Action "1..1" *-- "0..9999" dataflow::Guard : guards55
+dataflow::Actor "1..1" -- "0..9999" dataflow::Buffer : incomingBuffers40
+dataflow::Buffer "0..1" -- "1..1" dataflow::Port : input74
+dataflow::Actor "1..1" *-- "0..9999" dataflow::Port : inputPorts21
+dataflow::Network "1..1" *-- "0..9999" dataflow::Port : inputPorts5
+dataflow::Action "1..1" -- "0..9999" dataflow::Port : inputPorts52
+dataflow::Type "0..1" --* "1..1" dataflow::TypeList : listType93
+dataflow::Actor "1..1" -- "0..9999" dataflow::Buffer : outgoingBuffers43
+dataflow::Actor "1..1" *-- "0..9999" dataflow::Port : outputPorts24
+dataflow::Action "1..1" -- "0..9999" dataflow::Port : outputPorts53
+dataflow::Network "1..1" *-- "0..9999" dataflow::Port : outputPorts7
+dataflow::Buffer "0..9999" -- "1..1" dataflow::Port : outputs75
+dataflow::ActorClass "1..1" -- "0..1" dataflow::Network : owner18
+dataflow::Actor "1..1" -- "0..1" dataflow::Network : owner34
+dataflow::Action "1..1" -- "0..1" dataflow::Actor : owner57
+dataflow::Actor "0..1" -- "1..1" dataflow::Procedure : owner63
+dataflow::Actor "0..1" -- "1..1" dataflow::Variable : owner68
+dataflow::Actor "0..1" -- "1..1" dataflow::Port : owner77
+dataflow::Buffer "1..1" -- "0..1" dataflow::Network : owner87
+dataflow::Action "0..1" -- "1..1" dataflow::Guard : owner90
+dataflow::Actor "0..9999" -- "1..1" dataflow::Actor : predecessors47
+dataflow::Actor "1..1" *-- "0..9999" dataflow::Procedure : procedures32
+dataflow::Action "0..9999" -- "1..1" dataflow::Port : readers72
+dataflow::Network "1..1" -- "0..9999" dataflow::SharedVariable : sharedVariables10
+dataflow::Buffer "1..1" -- "1..1" dataflow::Port : source80
+dataflow::Actor "0..9999" -- "1..1" dataflow::Actor : successors50
+dataflow::Buffer "1..1" -- "1..1" dataflow::Port : target82
+dataflow::Type "1..1" --* "1..1" dataflow::Variable : type66
+dataflow::Buffer "1..1" *-- "1..1" dataflow::Type : type84
+dataflow::Actor "1..1" *-- "0..9999" dataflow::Variable : variables27
+dataflow::Procedure "1..1" -- "0..9999" dataflow::Variable : variables60
+dataflow::Network "1..1" *-- "0..1" dataflow::Version : version12
+dataflow::ActorClass "1..1" *-- "0..1" dataflow::Version : version15
+dataflow::Action "0..9999" -- "1..1" dataflow::Port : writers71
+@enduml

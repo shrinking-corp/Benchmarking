@@ -1,0 +1,79 @@
+@startuml
+enum Gender {
+  Female
+  Male
+}
+enum TournamentType {
+  Amateur
+  Pro
+}
+class bowling::Area {
+}
+class bowling::Fan {
+  + dateOfBirth : date
+  + eMails : str
+  + gender : str
+  + hasSeasonTicket : bool
+  + moneySpentOnTickets : float
+  + name : str
+  + numberOfTournamentsVisited : int
+}
+class bowling::Game {
+  + frames : int
+}
+class bowling::League {
+  + name : str
+}
+class bowling::Matchup {
+  + nrSpectators : str
+}
+class bowling::Merchandise {
+  + name : str
+  + price : str
+  + serialNumber : str
+}
+class bowling::Player {
+  + dateOfBirth : date
+  + eMails : str
+  + gender : str
+  + height : float
+  + isProfessional : bool
+  + name : str
+  + numberOfVictories : int
+  + playedTournamentTypes : str
+  + winLossRatio : str
+  + validate(chain : any, context : any) : bool
+}
+class bowling::PlayerToPointsMap {
+  + value : str
+}
+class bowling::Referee {
+  + dateOfBirth : str
+}
+class bowling::RefereeToGamesMap {
+}
+class bowling::Tournament {
+  + matchDays : date
+  + priceMoney : float
+  + receivesTrophy : bool
+  + type : str
+}
+bowling::Area "1..1" *-- "0..9999" bowling::Area : areas25
+bowling::Fan "1..1" *-- "0..9999" bowling::Merchandise : fanMerchandise31
+bowling::Fan "1..1" *-- "0..1" bowling::Merchandise : favouriteMerchandise33
+bowling::Fan "1..1" -- "0..1" bowling::Player : favouritePlayer29
+bowling::Game "2..2" --* "1..1" bowling::Matchup : games9
+bowling::Player "0..1" -- "1..1" bowling::PlayerToPointsMap : key13
+bowling::Referee "0..1" --* "1..1" bowling::RefereeToGamesMap : key18
+bowling::League "0..1" -- "1..1" bowling::Referee : league16
+bowling::Game "1..1" -- "1..1" bowling::Matchup : matchup10
+bowling::Matchup "0..9999" --* "1..1" bowling::Tournament : matchups1
+bowling::Game "1..1" -- "0..1" bowling::Player : player11
+bowling::PlayerToPointsMap "0..9999" --* "1..1" bowling::Tournament : playerPoints2
+bowling::League "1..1" *-- "0..9999" bowling::Player : players0
+bowling::Player "0..9999" -- "1..1" bowling::Tournament : players4
+bowling::RefereeToGamesMap "0..9999" --* "1..1" bowling::Tournament : referees7
+bowling::Area "1..1" *-- "0..9999" bowling::Tournament : tournaments26
+bowling::Game "0..1" -- "1..1" bowling::RefereeToGamesMap : value21
+bowling::Fan "1..1" -- "0..9999" bowling::Tournament : visitedTournaments36
+@enduml
