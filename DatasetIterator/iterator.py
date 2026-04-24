@@ -37,8 +37,8 @@ class DatasetIterator(Iterator[Tuple[str, str]]):
         model_name = self._models[self._index]
         self._index += 1
 
-        puml_path, buml_path = self._resolve_model_files(model_name)
-        return puml_path.read_text(encoding="utf-8"), buml_path.read_text(encoding="utf-8")
+        python_code_path, puml_path = self._resolve_model_files(model_name)
+        return python_code_path.read_text(encoding="utf-8"), puml_path.read_text(encoding="utf-8")
 
     def is_done(self) -> bool:
         return self._index >= len(self._models)
@@ -56,8 +56,8 @@ class DatasetIterator(Iterator[Tuple[str, str]]):
             raise FileNotFoundError(f"Model directory not found: {model_dir}")
 
         puml_path = self._pick_puml_file(model_dir)
-        buml_path = self._pick_buml_file(model_dir, puml_path)
-        return puml_path, buml_path
+        python_code_path = self._pick_python_code_file(model_dir)
+        return python_code_path, puml_path
 
     @staticmethod
     def _pick_puml_file(model_dir: Path) -> Path:
@@ -77,34 +77,18 @@ class DatasetIterator(Iterator[Tuple[str, str]]):
         )
 
     @staticmethod
-    def _pick_buml_file(model_dir: Path, puml_path: Path) -> Path:
-        py_candidates = sorted(model_dir.glob("*.py"))
-        if not py_candidates:
-            raise FileNotFoundError(f"No .py file found in: {model_dir}")
-
-        same_name = model_dir / f"{puml_path.stem}.py"
-        if same_name.is_file():
-            return same_name
-
-        filtered = [p for p in py_candidates if p.name != "python_code.py"]
-        preferred = [p for p in filtered if p.name.endswith("_BUML_model.py")]
-
-        if len(preferred) == 1:
-            return preferred[0]
-
-        if len(filtered) == 1:
-            return filtered[0]
-
-        raise FileNotFoundError(
-            f"Unable to pick a single BUML .py file in {model_dir}. Candidates: {[p.name for p in py_candidates]}"
-        )
+    def _pick_python_code_file(model_dir: Path) -> Path:
+        python_code_path = model_dir / "python_code.py"
+        if not python_code_path.is_file():
+            raise FileNotFoundError(f"python_code.py not found in: {model_dir}")
+        return python_code_path
 
 
 if __name__ == "__main__":
     print("TRAIN subset:")
-    for puml_content, buml_content in DatasetIterator(DatasetSplit.TRAIN):
-        print(f"PUML: {puml_content[:100]!r} | BUML: {buml_content[:100]!r}")
+    for python_code_content, puml_content in DatasetIterator(DatasetSplit.TRAIN):
+        print(f"PYTHON: {python_code_content[:100]!r} | PUML: {puml_content[:100]!r}")
 
     print("\nVALIDATION subset:")
-    for puml_content, buml_content in DatasetIterator(DatasetSplit.VALIDATION):
-        print(f"PUML: {puml_content[:100]!r} | BUML: {buml_content[:100]!r}")
+    for python_code_content, puml_content in DatasetIterator(DatasetSplit.VALIDATION):
+        print(f"PYTHON: {python_code_content[:100]!r} | PUML: {puml_content[:100]!r}")
